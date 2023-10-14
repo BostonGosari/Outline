@@ -14,17 +14,17 @@ final class LocationManager: NSObject, CLLocationManagerDelegate, ObservableObje
     
     var locationManager: CLLocationManager?
     
-    func checkIfLocationServicesEnabled() {
+    func checkLocationAuthorization() {
         locationManager = CLLocationManager()
         locationManager?.delegate = self
         locationManager?.desiredAccuracy = kCLLocationAccuracyBest
     }
     
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-        checkLocationAuthorization()
+        checkLocationAuthorizationStatus()
     }
     
-    private func checkLocationAuthorization() {
+    private func checkLocationAuthorizationStatus() {
         guard let locationManager = locationManager else { return }
         
         switch locationManager.authorizationStatus {
