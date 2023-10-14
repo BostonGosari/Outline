@@ -11,7 +11,7 @@ import SwiftUI
 struct OutlineApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            RecommendedCoursesView()
         }
     }
 }
