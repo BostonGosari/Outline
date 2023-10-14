@@ -27,7 +27,7 @@ struct TabBar: View {
                             Text(item.text)
                                 .font(.system(size: tabTextSize))
                         }
-                        .foregroundStyle(selectedTab == item.tab ? .purple : .gray)
+                        .foregroundStyle(selectedTab == item.tab ? Color("First") : Color("Gray400"))
                     }
                     .buttonStyle(TabButtonStyle())
                     .frame(maxWidth: .infinity)
@@ -38,7 +38,7 @@ struct TabBar: View {
             .background(
                 RoundedRectangle(cornerRadius: 30, style: .continuous)
                     .foregroundStyle(.thinMaterial)
-                    .shadow(color: .white, radius: 0.6, y: -0.5)
+                    .shadow(color: .white, radius: 1, y: -0.5)
             )
         }
     }

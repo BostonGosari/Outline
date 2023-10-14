@@ -26,7 +26,6 @@ struct TabView: View {
                         }
                     }
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .padding(.bottom, 50)
                     
                     TabBar(selectedTab: $selectedTab)
                         .frame(maxHeight: .infinity, alignment: .bottom)
