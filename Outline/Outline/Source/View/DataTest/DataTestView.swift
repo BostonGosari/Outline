@@ -13,8 +13,10 @@ struct DataTestView: View {
     var body: some View {
         VStack {
             Text("hello")
-            Text("\(fireStoreManager.nickName)")
-            Text("\(fireStoreManager.height)")
+            ForEach(fireStoreManager.userList, id: \.id) { user in
+                Text("\(user.nickname)")
+                Text("\(user.height)")
+            }
         }
     }
 }
