@@ -10,6 +10,8 @@
 		F01FDB992ADABB6100BDA633 /* TabModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01FDB982ADABB6100BDA633 /* TabModel.swift */; };
 		F01FDB9C2ADABC4600BDA633 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01FDB9B2ADABC4600BDA633 /* TabBar.swift */; };
 		F01FDB9E2ADABD3D00BDA633 /* TabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01FDB9D2ADABD3D00BDA633 /* TabView.swift */; };
+		F05C97172ADA879100D5D959 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05C97162ADA879100D5D959 /* LocationManager.swift */; };
+		F05C97192ADA87B800D5D959 /* LocationAuthorizationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05C97182ADA87B800D5D959 /* LocationAuthorizationView.swift */; };
 		F0AC8A9D2AD94C1F0061612C /* OutlineApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0AC8A9C2AD94C1F0061612C /* OutlineApp.swift */; };
 		F0AC8A9F2AD94C1F0061612C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0AC8A9E2AD94C1F0061612C /* ContentView.swift */; };
 		F0AC8AA12AD94C200061612C /* Color.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F0AC8AA02AD94C200061612C /* Color.xcassets */; };
@@ -66,6 +68,8 @@
 		F01FDB982ADABB6100BDA633 /* TabModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabModel.swift; sourceTree = "<group>"; };
 		F01FDB9B2ADABC4600BDA633 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 		F01FDB9D2ADABD3D00BDA633 /* TabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabView.swift; sourceTree = "<group>"; };
+		F05C97162ADA879100D5D959 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		F05C97182ADA87B800D5D959 /* LocationAuthorizationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationAuthorizationView.swift; sourceTree = "<group>"; };
 		F0AC8A992AD94C1F0061612C /* Outline.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Outline.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0AC8A9C2AD94C1F0061612C /* OutlineApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutlineApp.swift; sourceTree = "<group>"; };
 		F0AC8A9E2AD94C1F0061612C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -121,6 +125,14 @@
 				F01FDB9B2ADABC4600BDA633 /* TabBar.swift */,
 			);
 			path = Tab;
+			sourceTree = "<group>";
+		};
+		F05C97152ADA877A00D5D959 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				F05C97162ADA879100D5D959 /* LocationManager.swift */,
+			);
+			path = Manager;
 			sourceTree = "<group>";
 		};
 		F0AC8A902AD94C1F0061612C = {
@@ -183,6 +195,7 @@
 			children = (
 				F01FDB9A2ADABC2C00BDA633 /* Tab */,
 				F0AC8B002AD964AE0061612C /* View.swift */,
+				F05C97182ADA87B800D5D959 /* LocationAuthorizationView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -203,6 +216,7 @@
 				F0AC8AFA2AD963600061612C /* View */,
 				F0AC8AFB2AD963690061612C /* ViewModel */,
 				F0AC8B052AD965290061612C /* Model */,
+				F05C97152ADA877A00D5D959 /* Manager */,
 				F0AC8B082AD965470061612C /* DesignSystem */,
 			);
 			path = Source;
@@ -491,7 +505,9 @@
 			files = (
 				F0AC8B382AD96AE10061612C /* ViewExtension.swift in Sources */,
 				F0AC8B112AD965A70061612C /* Modifier.swift in Sources */,
+				F05C97172ADA879100D5D959 /* LocationManager.swift in Sources */,
 				F0AC8B072AD965390061612C /* Model.swift in Sources */,
+				F05C97192ADA87B800D5D959 /* LocationAuthorizationView.swift in Sources */,
 				F0AC8B0D2AD965950061612C /* Component.swift in Sources */,
 				F0AC8B0F2AD9659D0061612C /* ColorExtension.swift in Sources */,
 				F0AC8B012AD964AE0061612C /* View.swift in Sources */,
@@ -725,6 +741,8 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = Outline;
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "당신의 위치는 러닝을 기록하는데 사용됩니다. 운동 중에 백그라운드에서도 위치 서비스를 사용합니다.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "당신의 위치는 러닝을 기록하는데 사용됩니다. 운동 중에 백그라운드에서도 위치 서비스를 사용합니다.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -759,6 +777,8 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = Outline;
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "당신의 위치는 러닝을 기록하는데 사용됩니다. 운동 중에 백그라운드에서도 위치 서비스를 사용합니다.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "당신의 위치는 러닝을 기록하는데 사용됩니다. 운동 중에 백그라운드에서도 위치 서비스를 사용합니다.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
