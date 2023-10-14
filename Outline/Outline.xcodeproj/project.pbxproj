@@ -17,6 +17,7 @@
 		95E2EF6B2ADA3D740083ADEE /* FirebaseFirestoreCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 95E2EF6A2ADA3D740083ADEE /* FirebaseFirestoreCombine-Community */; };
 		95E2EF6D2ADA3D740083ADEE /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 95E2EF6C2ADA3D740083ADEE /* FirebaseFirestoreSwift */; };
 		95E2EF6F2ADA3E160083ADEE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 95E2EF6E2ADA3E160083ADEE /* GoogleService-Info.plist */; };
+		95E2EF712ADA6F230083ADEE /* GPSArtCourseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E2EF702ADA6F230083ADEE /* GPSArtCourseModel.swift */; };
 		F0AC8A9D2AD94C1F0061612C /* OutlineApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0AC8A9C2AD94C1F0061612C /* OutlineApp.swift */; };
 		F0AC8A9F2AD94C1F0061612C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0AC8A9E2AD94C1F0061612C /* ContentView.swift */; };
 		F0AC8AA12AD94C200061612C /* Color.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F0AC8AA02AD94C200061612C /* Color.xcassets */; };
@@ -28,7 +29,7 @@
 		F0AC8AB62AD94C210061612C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F0AC8AB52AD94C210061612C /* Preview Assets.xcassets */; };
 		F0AC8B012AD964AE0061612C /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0AC8B002AD964AE0061612C /* View.swift */; };
 		F0AC8B042AD964EF0061612C /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0AC8B032AD964EF0061612C /* ViewModel.swift */; };
-		F0AC8B072AD965390061612C /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0AC8B062AD965390061612C /* Model.swift */; };
+		F0AC8B072AD965390061612C /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0AC8B062AD965390061612C /* UserModel.swift */; };
 		F0AC8B0D2AD965950061612C /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0AC8B0C2AD965950061612C /* Component.swift */; };
 		F0AC8B0F2AD9659D0061612C /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0AC8B0E2AD9659D0061612C /* ColorExtension.swift */; };
 		F0AC8B112AD965A70061612C /* Modifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0AC8B102AD965A70061612C /* Modifier.swift */; };
@@ -75,6 +76,7 @@
 		959D90602ADA3A1000748BFB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		95B5FFC62ADA223800485CAD /* FireStoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireStoreManager.swift; sourceTree = "<group>"; };
 		95E2EF6E2ADA3E160083ADEE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		95E2EF702ADA6F230083ADEE /* GPSArtCourseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPSArtCourseModel.swift; sourceTree = "<group>"; };
 		F0AC8A992AD94C1F0061612C /* Outline.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Outline.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0AC8A9C2AD94C1F0061612C /* OutlineApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutlineApp.swift; sourceTree = "<group>"; };
 		F0AC8A9E2AD94C1F0061612C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -88,7 +90,7 @@
 		F0AC8AC42AD9514C0061612C /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		F0AC8B002AD964AE0061612C /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		F0AC8B032AD964EF0061612C /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
-		F0AC8B062AD965390061612C /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		F0AC8B062AD965390061612C /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		F0AC8B0C2AD965950061612C /* Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Component.swift; sourceTree = "<group>"; };
 		F0AC8B0E2AD9659D0061612C /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 		F0AC8B102AD965A70061612C /* Modifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Modifier.swift; sourceTree = "<group>"; };
@@ -269,7 +271,8 @@
 			isa = PBXGroup;
 			children = (
 				95B5FFC52ADA221F00485CAD /* FireStore */,
-				F0AC8B062AD965390061612C /* Model.swift */,
+				F0AC8B062AD965390061612C /* UserModel.swift */,
+				95E2EF702ADA6F230083ADEE /* GPSArtCourseModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -530,13 +533,14 @@
 			files = (
 				F0AC8B382AD96AE10061612C /* ViewExtension.swift in Sources */,
 				F0AC8B112AD965A70061612C /* Modifier.swift in Sources */,
-				F0AC8B072AD965390061612C /* Model.swift in Sources */,
+				F0AC8B072AD965390061612C /* UserModel.swift in Sources */,
 				95B5FFC72ADA223800485CAD /* FireStoreManager.swift in Sources */,
 				F0AC8B0D2AD965950061612C /* Component.swift in Sources */,
 				F0AC8B0F2AD9659D0061612C /* ColorExtension.swift in Sources */,
 				F0AC8B012AD964AE0061612C /* View.swift in Sources */,
 				959D90262ADA35F100748BFB /* DataTestView.swift in Sources */,
 				F0AC8A9F2AD94C1F0061612C /* ContentView.swift in Sources */,
+				95E2EF712ADA6F230083ADEE /* GPSArtCourseModel.swift in Sources */,
 				F0AC8B042AD964EF0061612C /* ViewModel.swift in Sources */,
 				F0AC8A9D2AD94C1F0061612C /* OutlineApp.swift in Sources */,
 			);
