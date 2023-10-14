@@ -22,8 +22,6 @@ final class LocationManager: NSObject, CLLocationManagerDelegate, ObservableObje
     
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         checkLocationAuthorization()
-        print(isNext.description)
-        print(isAuthorized.description)
     }
     
     private func checkLocationAuthorization() {
@@ -33,14 +31,11 @@ final class LocationManager: NSObject, CLLocationManagerDelegate, ObservableObje
             
         case .notDetermined:
             locationManager.requestWhenInUseAuthorization()
-            print("not determined")
             isAuthorized = false
         case .restricted, .denied:
-            print("denied")
             isAuthorized = false
             isNext = true
         case .authorizedAlways, .authorizedWhenInUse:
-            print("authorized")
             isAuthorized = true
             isNext = true
         @unknown default:
