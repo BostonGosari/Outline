@@ -16,6 +16,8 @@
 		95B5FFC02ADA216100485CAD /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 95B5FFBF2ADA216100485CAD /* FirebaseFirestore */; };
 		95B5FFC22ADA216100485CAD /* FirebaseFirestoreCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 95B5FFC12ADA216100485CAD /* FirebaseFirestoreCombine-Community */; };
 		95B5FFC42ADA216100485CAD /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 95B5FFC32ADA216100485CAD /* FirebaseFirestoreSwift */; };
+		95B5FFC72ADA223800485CAD /* FireStoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B5FFC62ADA223800485CAD /* FireStoreManager.swift */; };
+		95B5FFC82ADA223800485CAD /* FireStoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B5FFC62ADA223800485CAD /* FireStoreManager.swift */; };
 		F0AC8A9D2AD94C1F0061612C /* OutlineApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0AC8A9C2AD94C1F0061612C /* OutlineApp.swift */; };
 		F0AC8A9F2AD94C1F0061612C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0AC8A9E2AD94C1F0061612C /* ContentView.swift */; };
 		F0AC8AA12AD94C200061612C /* Color.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F0AC8AA02AD94C200061612C /* Color.xcassets */; };
@@ -70,6 +72,7 @@
 
 /* Begin PBXFileReference section */
 		95B5FFAC2ADA1E1F00485CAD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		95B5FFC62ADA223800485CAD /* FireStoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireStoreManager.swift; sourceTree = "<group>"; };
 		F0AC8A992AD94C1F0061612C /* Outline.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Outline.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0AC8A9C2AD94C1F0061612C /* OutlineApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutlineApp.swift; sourceTree = "<group>"; };
 		F0AC8A9E2AD94C1F0061612C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -125,6 +128,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		95B5FFC52ADA221F00485CAD /* FireStore */ = {
+			isa = PBXGroup;
+			children = (
+				95B5FFC62ADA223800485CAD /* FireStoreManager.swift */,
+			);
+			path = FireStore;
+			sourceTree = "<group>";
+		};
 		F0AC8A902AD94C1F0061612C = {
 			isa = PBXGroup;
 			children = (
@@ -244,6 +255,7 @@
 		F0AC8B052AD965290061612C /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				95B5FFC52ADA221F00485CAD /* FireStore */,
 				F0AC8B062AD965390061612C /* Model.swift */,
 			);
 			path = Model;
@@ -507,6 +519,7 @@
 				F0AC8B382AD96AE10061612C /* ViewExtension.swift in Sources */,
 				F0AC8B112AD965A70061612C /* Modifier.swift in Sources */,
 				F0AC8B072AD965390061612C /* Model.swift in Sources */,
+				95B5FFC72ADA223800485CAD /* FireStoreManager.swift in Sources */,
 				F0AC8B0D2AD965950061612C /* Component.swift in Sources */,
 				F0AC8B0F2AD9659D0061612C /* ColorExtension.swift in Sources */,
 				F0AC8B012AD964AE0061612C /* View.swift in Sources */,
@@ -523,6 +536,7 @@
 				F0AC8B2A2AD967490061612C /* Modifier.swift in Sources */,
 				F0AC8B1D2AD966990061612C /* Model.swift in Sources */,
 				F0AC8B242AD9670A0061612C /* Component.swift in Sources */,
+				95B5FFC82ADA223800485CAD /* FireStoreManager.swift in Sources */,
 				F0AC8B272AD967330061612C /* Extension.swift in Sources */,
 				F0AC8AB12AD94C200061612C /* ContentView.swift in Sources */,
 				F0AC8AAF2AD94C200061612C /* OutlineApp.swift in Sources */,
