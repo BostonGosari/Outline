@@ -14,6 +14,7 @@ struct TabView: View {
     var body: some View {
         NavigationStack {
             ZStack {
+                Color("Gray900").ignoresSafeArea()
                 ZStack(alignment: .bottom) {
                     Group {
                         switch selectedTab {
