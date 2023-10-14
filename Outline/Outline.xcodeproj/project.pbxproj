@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		95B5FFAD2ADA1E1F00485CAD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 95B5FFAC2ADA1E1F00485CAD /* GoogleService-Info.plist */; };
+		95B5FFAE2ADA1E1F00485CAD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 95B5FFAC2ADA1E1F00485CAD /* GoogleService-Info.plist */; };
 		F0AC8A9D2AD94C1F0061612C /* OutlineApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0AC8A9C2AD94C1F0061612C /* OutlineApp.swift */; };
 		F0AC8A9F2AD94C1F0061612C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0AC8A9E2AD94C1F0061612C /* ContentView.swift */; };
 		F0AC8AA12AD94C200061612C /* Color.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F0AC8AA02AD94C200061612C /* Color.xcassets */; };
@@ -60,6 +62,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		95B5FFAC2ADA1E1F00485CAD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F0AC8A992AD94C1F0061612C /* Outline.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Outline.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0AC8A9C2AD94C1F0061612C /* OutlineApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutlineApp.swift; sourceTree = "<group>"; };
 		F0AC8A9E2AD94C1F0061612C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -195,6 +198,7 @@
 		F0AC8AFD2AD9638C0061612C /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				95B5FFAC2ADA1E1F00485CAD /* GoogleService-Info.plist */,
 				F0AC8B2F2AD968FD0061612C /* Image */,
 				F0AC8AA02AD94C200061612C /* Color.xcassets */,
 			);
@@ -427,6 +431,7 @@
 			files = (
 				F0AC8AA42AD94C200061612C /* Preview Assets.xcassets in Resources */,
 				F0AC8B2C2AD967E30061612C /* Image.xcassets in Resources */,
+				95B5FFAD2ADA1E1F00485CAD /* GoogleService-Info.plist in Resources */,
 				F0AC8B2E2AD968A20061612C /* Icon.xcassets in Resources */,
 				F0AC8AA12AD94C200061612C /* Color.xcassets in Resources */,
 			);
@@ -438,6 +443,7 @@
 			files = (
 				F0AC8AB62AD94C210061612C /* Preview Assets.xcassets in Resources */,
 				F0AC8AB32AD94C210061612C /* Image.xcassets in Resources */,
+				95B5FFAE2ADA1E1F00485CAD /* GoogleService-Info.plist in Resources */,
 				F0AC8B362AD96A3D0061612C /* Icon.xcassets in Resources */,
 				F0AC8B352AD96A360061612C /* Color.xcassets in Resources */,
 			);
