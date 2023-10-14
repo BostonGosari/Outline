@@ -38,7 +38,7 @@ struct TabBar: View {
             .background(
                 RoundedRectangle(cornerRadius: 30, style: .continuous)
                     .foregroundStyle(.thinMaterial)
-                    .shadow(color: .white, radius: 1, y: -0.5)
+                    .shadow(color: .white, radius: 0.5, y: -0.5)
             )
         }
     }
