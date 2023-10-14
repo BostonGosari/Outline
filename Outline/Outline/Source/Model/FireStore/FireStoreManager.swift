@@ -19,13 +19,14 @@ class FireStoreManager: ObservableObject {
     }
 
     func fetchData() {
-        let docRef = db.collection("users").document("4JACo00t3iuK8dfyDiFx")
+        print("fetch data")
+        let docRef = db.collection("userList").document("4JACo00t3iuK8dfyDiFx")
         docRef.getDocument { (document, error) in
             guard error == nil else {
                 print("error", error ?? "")
                 return
             }
-
+            
             if let document = document, document.exists {
                 let data = document.data()
                 if let data = data {
