@@ -149,6 +149,8 @@
 				BB52392A2ADAF7BD00646494 /* WorkoutManager.swift */,
 			);
 			path = Shared;
+			sourceTree = "<group>";
+		};
 		F01FDB9A2ADABC2C00BDA633 /* Tab */ = {
 			isa = PBXGroup;
 			children = (
