@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		BB5239372ADBD99F00646494 /* GPSArtHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5239362ADBD99F00646494 /* GPSArtHomeView.swift */; };
+		BB5239542ADC32F400646494 /* ViewOffsetKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5239532ADC32F400646494 /* ViewOffsetKey.swift */; };
+		BB5239582ADC396300646494 /* BackgroundBlur.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5239572ADC396300646494 /* BackgroundBlur.swift */; };
 		F01FDB992ADABB6100BDA633 /* TabModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01FDB982ADABB6100BDA633 /* TabModel.swift */; };
 		F01FDB9C2ADABC4600BDA633 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01FDB9B2ADABC4600BDA633 /* TabBar.swift */; };
 		F01FDB9E2ADABD3D00BDA633 /* TabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01FDB9D2ADABD3D00BDA633 /* TabView.swift */; };
@@ -67,6 +69,8 @@
 
 /* Begin PBXFileReference section */
 		BB5239362ADBD99F00646494 /* GPSArtHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPSArtHomeView.swift; sourceTree = "<group>"; };
+		BB5239532ADC32F400646494 /* ViewOffsetKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewOffsetKey.swift; sourceTree = "<group>"; };
+		BB5239572ADC396300646494 /* BackgroundBlur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundBlur.swift; sourceTree = "<group>"; };
 		F01FDB982ADABB6100BDA633 /* TabModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabModel.swift; sourceTree = "<group>"; };
 		F01FDB9B2ADABC4600BDA633 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 		F01FDB9D2ADABD3D00BDA633 /* TabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabView.swift; sourceTree = "<group>"; };
@@ -133,6 +137,7 @@
 			children = (
 				F01FDB9D2ADABD3D00BDA633 /* TabView.swift */,
 				F01FDB9B2ADABC4600BDA633 /* TabBar.swift */,
+				BB5239532ADC32F400646494 /* ViewOffsetKey.swift */,
 			);
 			path = Tab;
 			sourceTree = "<group>";
@@ -295,6 +300,7 @@
 			isa = PBXGroup;
 			children = (
 				F06B93602ADB836600387DEB /* Component.swift */,
+				BB5239572ADC396300646494 /* BackgroundBlur.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -522,10 +528,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BB5239582ADC396300646494 /* BackgroundBlur.swift in Sources */,
 				BB5239372ADBD99F00646494 /* GPSArtHomeView.swift in Sources */,
 				F06B93632ADB847900387DEB /* Component.swift in Sources */,
 				F06B93622ADB847500387DEB /* ContentView.swift in Sources */,
 				F0AC8B382AD96AE10061612C /* ViewExtension.swift in Sources */,
+				BB5239542ADC32F400646494 /* ViewOffsetKey.swift in Sources */,
 				F0AC8B112AD965A70061612C /* Modifier.swift in Sources */,
 				F05C97172ADA879100D5D959 /* LocationManager.swift in Sources */,
 				F05C97192ADA87B800D5D959 /* LocationAuthorizationView.swift in Sources */,
