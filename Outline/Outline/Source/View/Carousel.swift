@@ -27,7 +27,7 @@ struct Carousel<Content: View>: View {
     ) {
         self.pageCount = pageCount
         self.edgeSpace = edgeSpace
-        self.spacing = spacing
+        self.spacing = edgeSpace - spacing
         self._currentIndex = currentIndex
         self.content = content
     }
@@ -87,7 +87,7 @@ struct Carousel<Content: View>: View {
     // MARK: - 스케일 계산
     
     private func calculateScale(pageIndex: Int, pageWidth: CGFloat) -> CGFloat {
-        let minScale: CGFloat = 0.9
+        let minScale: CGFloat = 0.8
         let maxScale: CGFloat = 1.0
         let distanceToCurrent = abs(pageIndex - currentIndex)
         let dragDistance = abs(dragOffset)
