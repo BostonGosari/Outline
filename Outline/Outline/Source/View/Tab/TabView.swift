@@ -21,7 +21,7 @@ struct TabView: View {
                         case .freeRunning:
                             Text("자유러닝 뷰")
                         case .GPSArtRunning:
-                            Text("GPS 아트러닝 뷰")
+                            GPSArtHomeView()
                         case .myRecord:
                             Text("나의기록 뷰")
                         }
