@@ -59,12 +59,12 @@ struct Record {
     var mapScale: Double
 }
 
-struct Coordinate {
+struct Coordinate: Codable {
     var longitude: Double
     var latitude: Double
 }
 
-struct RunningData {
+struct RunningData: Codable {
     var currentTime: Double
     var currentLocation: Double
     var paceList: [Int]

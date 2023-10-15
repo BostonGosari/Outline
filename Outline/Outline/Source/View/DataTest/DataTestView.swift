@@ -9,9 +9,10 @@ import SwiftUI
 
 struct DataTestView: View {
     let userModel = UserModel()
+    let couseModel = CourseModel()
     @State private var userInfo: UserInfo?
     
-    private let uid = "cfU1R5dJiooxbi7MbN4d"
+    private let uid = "41FE5C46-A040-4137-BB54-EA50AE748812"
     
     var body: some View {
         VStack {
@@ -22,63 +23,78 @@ struct DataTestView: View {
             Text("birthday: \(userInfo?.birthday.description ?? "")")
             Spacer()
             Button {
-                Task {
-                    await userModel.readUserInfo(uid: uid) { result in
-                        switch result {
-                        case .success(let userInfo):
-                            print(userInfo)
-                            self.userInfo = userInfo
-                        case .failure(let error):
-                            print(error)
-                        }
+                userModel.readUserInfo(uid: uid) { result in
+                    switch result {
+                    case .success(let userInfo):
+                        print(userInfo)
+                        self.userInfo = userInfo
+                    case .failure(let error):
+                        print(error)
                     }
                 }
             } label: {
                 Text("readUserInfo")
             }
             Button {
-                Task {
-                    await userModel.updateUserInfo(uid: uid, userInfo: UserInfo(nickname: "moon", birthday: Date(), height: 120, weight: 100)) { result in
-                        switch result {
-                        case .success(let isSuccess):
-                            print("\(isSuccess)")
-                        case .failure(let error):
-                            print(error)
-                        }
+                userModel.updateUserInfo(uid: uid, userInfo: UserInfo(nickname: "moon", birthday: Date(), height: 120, weight: 100)) { result in
+                    switch result {
+                    case .success(let isSuccess):
+                        print("\(isSuccess)")
+                    case .failure(let error):
+                        print(error)
                     }
                 }
             } label: {
                 Text("updatedUserInfo")
             }
             Button {
-                Task {
-                    userModel.createUser(nickname: "joyce") { result in
-                        switch result {
-                        case .success(let isSuccess):
-                            print("\(isSuccess)")
-                        case .failure(let error):
-                            print(error)
-                        }
+                userModel.createUser(nickname: "joyce") { result in
+                    switch result {
+                    case .success(let isSuccess):
+                        print("\(isSuccess)")
+                    case .failure(let error):
+                        print(error)
                     }
                 }
             } label: {
                 Text("createUserInfo")
             }
             Button {
-                Task {
-                    userModel.deleteUser(uid: "cfU1R5dJiooxbi7MbN4d") { result in
-                        switch result {
-                        case .success(let isSuccess):
-                            print("\(isSuccess)")
-                        case .failure(let error):
-                            print(error)
-                        }
+                userModel.deleteUser(uid: uid) { result in
+                    switch result {
+                    case .success(let isSuccess):
+                        print("\(isSuccess)")
+                    case .failure(let error):
+                        print(error)
                     }
                 }
             } label: {
                 Text("deleteUser")
             }
-            
+            Button {
+                couseModel.readAllCourses { result in
+                    switch result {
+                    case .success(let courseList):
+                        print(courseList)
+                    case .failure(let error):
+                        print(error)
+                    }
+                }
+            } label: {
+                Text("readAllCourses")
+            }
+            Button {
+                couseModel.readCourse(id: "an3yE14Ue1xsUKlDwUZu") { result in
+                    switch result {
+                    case .success(let courseList):
+                        print(courseList)
+                    case .failure(let error):
+                        print(error)
+                    }
+                }
+            } label: {
+                Text("readAllCourses")
+            }
         }
     }
 }

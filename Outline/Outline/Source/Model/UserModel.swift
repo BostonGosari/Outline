@@ -21,7 +21,7 @@ enum ReadDataError: Error {
 struct UserModel: UserModelProtocol {
     private let userListRef = Firestore.firestore().collection("userList")
     
-    func readUserInfo(uid: String, completion: @escaping (Result<UserInfo, ReadDataError>) -> Void) async {
+    func readUserInfo(uid: String, completion: @escaping (Result<UserInfo, ReadDataError>) -> Void) {
         userListRef.document(uid).getDocument { (snapshot, error) in
             guard let snapshot = snapshot, snapshot.exists, error == nil else {
                 completion(.failure(.noData))
@@ -53,16 +53,13 @@ struct UserModel: UserModelProtocol {
             try userListRef.document(UUID().uuidString).setData(from: newUserInfo)
             completion(.success(true))
         } catch {
-            completion(. failure(.noData))
+            completion(.failure(.noData))
         }
     }
+    
     func deleteUser(uid: String, completion: @escaping (Result<Bool, ReadDataError>) -> Void) {
-        do {
-            userListRef.document(uid).delete()
-            completion(.success(true))
-        } catch {
-            completion(. failure(.noData))
-        }
+        userListRef.document(uid).delete()
+        completion(.success(true))
     }
     
     func readUserRecords() {}
