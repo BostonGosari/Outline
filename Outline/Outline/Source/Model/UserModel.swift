@@ -53,10 +53,17 @@ struct UserModel: UserModelProtocol {
             try userListRef.document(UUID().uuidString).setData(from: newUserInfo)
             completion(.success(true))
         } catch {
-            completion(.failure(.noData))
+            completion(. failure(.noData))
         }
     }
-    func deleteUser(uid: String) {}
+    func deleteUser(uid: String, completion: @escaping (Result<Bool, ReadDataError>) -> Void) {
+        do {
+            userListRef.document(uid).delete()
+            completion(.success(true))
+        } catch {
+            completion(. failure(.noData))
+        }
+    }
     
     func readUserRecords() {}
     func readUserRecord(id: String) {}

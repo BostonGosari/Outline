@@ -64,6 +64,21 @@ struct DataTestView: View {
             } label: {
                 Text("createUserInfo")
             }
+            Button {
+                Task {
+                    userModel.deleteUser(uid: "cfU1R5dJiooxbi7MbN4d") { result in
+                        switch result {
+                        case .success(let isSuccess):
+                            print("\(isSuccess)")
+                        case .failure(let error):
+                            print(error)
+                        }
+                    }
+                }
+            } label: {
+                Text("deleteUser")
+            }
+            
         }
     }
 }
