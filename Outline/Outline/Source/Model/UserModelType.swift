@@ -15,13 +15,12 @@ struct User {
     var userData: UserData
 }
 
-struct UserInfo {
+struct UserInfo: Hashable, Codable {
     var nickname: String
     var birthday: Date
     var height: Int
     var weight: Int
     var gender: Gender = .notSetted
-    var imageURL: String
 }
 
 struct UserData {
@@ -29,7 +28,7 @@ struct UserData {
     var currentRunningData: RunningData
 }
 
-enum Gender: String {
+enum Gender: String, Codable {
     case notSetted
     case man
     case woman

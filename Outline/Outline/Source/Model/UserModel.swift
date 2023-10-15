@@ -12,21 +12,25 @@ import SwiftUI
 protocol UserModelProtocol {
     
 }
+
 enum ReadDataError: Error {
-    case notFinded
+    case notFound
+    case noData
 }
 
 struct UserModel: UserModelProtocol {
     private let userListRef = Firestore.firestore().collection("userList")
     
-    func readUserInfo(uid: String) throws{
+    func readUserInfo(uid: String, completion: @escaping (Result<UserInfo, ReadDataError>) -> Void) async {
         userListRef.document(uid).getDocument { (snapshot, error) in
-            guard error == nil else { return }
-            guard let snapshot = snapshot else { return }
-
+            guard let snapshot = snapshot, snapshot.exists, error == nil else { return }
             
-            let data = snapshot.data()
-            print(data)
+            do {
+                let userInfo = try snapshot.data(as: UserInfo.self)
+                completion(.success(userInfo))
+            } catch {
+                completion(.failure(.noData))
+            }
         }
     }
     
