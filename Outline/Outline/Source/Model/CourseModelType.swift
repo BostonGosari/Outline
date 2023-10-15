@@ -11,7 +11,7 @@ import SwiftUI
 
 typealias AllGPSArtCourses = [GPSArtCourse]
 
-struct GPSArtCourse: Codable{
+struct GPSArtCourse: Codable {
     var id: String
     var courseName: String
     var locationInfo: Placemark

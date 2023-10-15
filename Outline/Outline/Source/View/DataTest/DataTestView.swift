@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct DataTestView: View {
-    let userModel = UserModel()
+    let userInfoModel = UserInfoModel()
     let couseModel = CourseModel()
     @State private var userInfo: UserInfo?
     
@@ -23,7 +23,7 @@ struct DataTestView: View {
             Text("birthday: \(userInfo?.birthday.description ?? "")")
             Spacer()
             Button {
-                userModel.readUserInfo(uid: uid) { result in
+                userInfoModel.readUserInfo(uid: uid) { result in
                     switch result {
                     case .success(let userInfo):
                         print(userInfo)
@@ -36,7 +36,7 @@ struct DataTestView: View {
                 Text("readUserInfo")
             }
             Button {
-                userModel.updateUserInfo(uid: uid, userInfo: UserInfo(nickname: "moon", birthday: Date(), height: 120, weight: 100)) { result in
+                userInfoModel.updateUserInfo(uid: uid, userInfo: UserInfo(nickname: "moon", birthday: Date(), height: 120, weight: 100)) { result in
                     switch result {
                     case .success(let isSuccess):
                         print("\(isSuccess)")
@@ -48,7 +48,7 @@ struct DataTestView: View {
                 Text("updatedUserInfo")
             }
             Button {
-                userModel.createUser(nickname: "joyce") { result in
+                userInfoModel.createUser(nickname: "joyce") { result in
                     switch result {
                     case .success(let isSuccess):
                         print("\(isSuccess)")
@@ -60,7 +60,7 @@ struct DataTestView: View {
                 Text("createUserInfo")
             }
             Button {
-                userModel.deleteUser(uid: uid) { result in
+                userInfoModel.deleteUser(uid: uid) { result in
                     switch result {
                     case .success(let isSuccess):
                         print("\(isSuccess)")

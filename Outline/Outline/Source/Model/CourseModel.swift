@@ -9,7 +9,10 @@ import Firebase
 import FirebaseFirestoreSwift
 import SwiftUI
 
-protocol CourseModelProtocol {}
+protocol CourseModelProtocol {
+    func readAllCourses(completion: @escaping (Result<AllGPSArtCourses, GPSArtError>) -> Void)
+    func readCourse(id: String, completion: @escaping (Result<GPSArtCourse, DecodingError>) -> Void)
+}
 
 enum GPSArtError: Error {
     case noCourses

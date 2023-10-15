@@ -10,7 +10,10 @@ import FirebaseFirestoreSwift
 import SwiftUI
 
 protocol UserModelProtocol {
-    
+    func readUserInfo(uid: String, completion: @escaping (Result<UserInfo, ReadDataError>) -> Void)
+    func updateUserInfo(uid: String, userInfo: UserInfo, completion: @escaping (Result<Bool, ReadDataError>) -> Void)
+    func createUser(nickname: String?, completion: @escaping (Result<Bool, ReadDataError>) -> Void)
+    func deleteUser(uid: String, completion: @escaping (Result<Bool, ReadDataError>) -> Void)
 }
 
 enum ReadDataError: Error {
@@ -18,7 +21,7 @@ enum ReadDataError: Error {
     case noData
 }
 
-struct UserModel: UserModelProtocol {
+struct UserInfoModel: UserModelProtocol {
     private let userListRef = Firestore.firestore().collection("userList")
     
     func readUserInfo(uid: String, completion: @escaping (Result<UserInfo, ReadDataError>) -> Void) {
