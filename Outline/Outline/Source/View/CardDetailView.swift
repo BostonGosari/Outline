@@ -9,38 +9,44 @@ import SwiftUI
 
 struct CardDetailView: View {
     
-    @Namespace var namespace
-    @State private var isShow = true
-
+    @Binding var isShow: Bool
+    var namespace: Namespace.ID
+    var currentIndex: Int
+    
     @State private var appear = [false, false, false]
     @State private var viewSize = 0.0
     @State private var scrollViewOffset: CGFloat = 0
     @State private var dragState: CGSize = .zero
+    @State private var isDraggable = true
     
     private let fadeInOffset: CGFloat = 10
     private let dragStartRange: CGFloat = 60
-    private let scrollStartRange: CGFloat = 5
+    private let scrollStartRange: CGFloat = 10
     private let dragLimit: CGFloat = 60
     private let scrollLimit: CGFloat = 40
     
     var body: some View {
         ScrollView {
             ZStack {
-                Color.clear
+                Color(UIColor.systemBackground)
                     .onScrollViewOffsetChanged { value in
                         handleScrollViewOffset(value)
                     }
                 
                 VStack {
                     ZStack {
-                        mapImage
-                        mapInformation
+                        courseImage
+                        courseInformation
                     }
-                    detailInformation
+                    CardDetailInformationView()
+                        .opacity(appear[2] ? 1 : 0)
+                        .offset(y: appear[2] ? 0 : fadeInOffset)
                 }
-                .mask(RoundedRectangle(cornerRadius: viewSize / 3, style: .continuous))
+                .mask(
+                    RoundedRectangle(cornerRadius: viewSize / 2, style: .continuous)
+                )
                 .scaleEffect(viewSize / -600 + 1)
-                .gesture(drag)
+                .gesture(isDraggable ? drag : nil)
             }
             .onChange(of: isShow) { _ in
                 fadeOut()
@@ -52,43 +58,61 @@ struct CardDetailView: View {
         .overlay {
             closeButton
         }
+        .scrollIndicators(scrollViewOffset > scrollStartRange ? .hidden : .automatic)
         .ignoresSafeArea(edges: .top)
         .statusBarHidden()
     }
-}
-
-// MARK: View Components
-
-extension CardDetailView {
     
-    private var mapImage: some View {
-        Image("MapSample")
-            .resizable()
-            .scaledToFit()
-            .roundedCorners(40, corners: [.bottomLeft, .bottomRight])
-            .matchedGeometryEffect(id: "map", in: namespace)
+    // MARK: - View Components
+    
+    private var courseImage: some View {
+        Rectangle()
+            .frame(height: 575)
+            .foregroundColor(.gray900Color)
+            .roundedCorners(45, corners: [.bottomLeft])
+            .shadow(color: .white, radius: 1, y: -0.5)
+            .matchedGeometryEffect(id: "courseImage\(currentIndex)", in: namespace)
     }
     
-    private var mapInformation: some View {
+    private var courseInformation: some View {
         VStack(alignment: .leading) {
-            VStack(alignment: .leading, spacing: 10) {
-                Text("오리런")
-                    .font(.title)
+            VStack(alignment: .leading, spacing: 0) {
+                Text("시티런 \(currentIndex)")
+                    .font(.largeTitle)
                     .bold()
-                    .matchedGeometryEffect(id: "title", in: namespace)
+                    .padding(.bottom, 8)
                 HStack {
-                    Image(systemName: "map.fill")
-                    Text("건국대학교")
+                    Image(systemName: "mappin")
+                    Text("서울시 동작구 • 내 위치에서 5km")
                 }
-                .matchedGeometryEffect(id: "subtitle", in: namespace)
+                .font(.caption)
+                .fontWeight(.semibold)
+                .padding(.bottom, 16)
+                HStack {
+                    Text("#5km")
+                        .frame(width: 70, height: 23)
+                        .background {
+                            Capsule()
+                                .stroke()
+                        }
+                    Text("#2h39m")
+                        .frame(width: 70, height: 23)
+                        .background {
+                            Capsule()
+                                .stroke()
+                        }
+                }
+                .font(.caption)
             }
-            .padding(.top, 20)
+            .padding(.top, 100)
+            .opacity(appear[0] ? 1 : 0)
+            .offset(y: appear[0] ? 0 : fadeInOffset)
             
             Spacer()
             
             Button {
             } label: {
-                Text("시작하기")
+                Text("밀어서 시작하기")
                     .frame(maxWidth: .infinity)
                     .padding()
                     .background {
@@ -100,65 +124,30 @@ extension CardDetailView {
             .offset(y: appear[1] ? 0 : fadeInOffset)
             .padding(-10)
         }
-        .foregroundStyle(.white)
         .padding(40)
     }
     
     private var closeButton: some View {
         Button {
             withAnimation(.closeCard) {
-                isShow = false
+                isShow.toggle()
             }
         } label: {
             Image(systemName: "xmark.circle.fill")
                 .font(.title)
-                .foregroundStyle(viewSize > 15 ? .clear : scrollViewOffset < -200 ? .black : .gray)
+                .foregroundColor(viewSize > 15 ? .clear : .firstColor)
         }
-        .animation(.easeInOut, value: scrollViewOffset)
+        .animation(.easeInOut, value: viewSize)
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
         .padding(30)
-        .opacity(appear[0] ? 1 : 0)
-        .offset(y: appear[0] ? 0 : fadeInOffset)
-    }
-    
-    private var detailInformation: some View {
-        VStack(alignment: .leading, spacing: 10) {
-            Text("난이도 상, 골목길 가파름")
-                .font(.title3)
-                .bold()
-            Text("안녕하세요 어쩌구 하이 고래 귀엽\n마리오 슈퍼마리오 스파게티")
-            
-            Divider()
-            Text("뷰에 사용되는 값들")
-                .font(.title3)
-                .bold()
-            HStack {
-                VStack(alignment: .leading) {
-                    Text("viewSize")
-                    Text("scrollViewOffset")
-                    Text("dragState.width")
-                }
-                .font(.headline)
-                Spacer()
-                VStack(alignment: .trailing) {
-                    Text("\(viewSize)")
-                    Text("\(scrollViewOffset)")
-                    Text("\(dragState.width)")
-                }
-            }
-        }
-        .opacity(appear[2] ? 1 : 0)
-        .offset(y: appear[2] ? 0 : fadeInOffset)
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(.top)
-        .padding(.horizontal, 40)
+        .opacity(appear[1] ? 1 : 0)
+        .offset(y: appear[1] ? 0 : fadeInOffset)
     }
 }
 
 // MARK: Drag Gesture
 
 extension CardDetailView {
-        
     var drag: some Gesture {
         DragGesture(minimumDistance: 20, coordinateSpace: .local)
             .onChanged { value in
@@ -168,7 +157,6 @@ extension CardDetailView {
                             dragState = value.translation
                             viewSize = dragState.width
                         }
-                        
                         if viewSize > dragLimit {
                             withAnimation(.closeCard) {
                                 isShow = false
@@ -187,6 +175,7 @@ extension CardDetailView {
                             withAnimation(.closeCard) {
                                 isShow = false
                                 dragState = .zero
+                                viewSize = 0.0
                             }
                         }
                     }
@@ -211,6 +200,18 @@ extension CardDetailView {
 // MARK: View Functions
 
 extension CardDetailView {
+    
+    private func close() {
+        withAnimation(.closeCard.delay(0.3)) {
+            isShow = false
+        }
+        
+        withAnimation(.closeCard) {
+            viewSize = .zero
+        }
+        
+        isDraggable = false
+    }
     
     private func fadeIn() {
         withAnimation(.easeOut.delay(0.3)) {
@@ -237,7 +238,7 @@ extension CardDetailView {
             scrollViewOffset = value
             
             if scrollViewOffset > scrollStartRange {
-                viewSize = scrollViewOffset
+                viewSize = scrollViewOffset - scrollStartRange
                 
                 if scrollViewOffset > scrollLimit {
                     withAnimation(.closeCard) {
@@ -283,11 +284,6 @@ extension View {
     }
 }
 
-extension Animation {
-    static let openCard = Animation.spring(response: 0.4, dampingFraction: 0.6)
-    static let closeCard = Animation.spring(response: 0.4, dampingFraction: 0.5)
-}
-
 #Preview {
-    CardDetailView()
+    CarouselView()
 }

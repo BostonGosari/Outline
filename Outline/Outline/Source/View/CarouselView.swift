@@ -9,11 +9,13 @@ import SwiftUI
 
 struct CarouselView: View {
     
+    @Namespace var namespace
     @State var currentIndex = 0
-
+    @State var isShow = false
+    
     let pageCount = 3
     let edgeSpace: CGFloat = 36
-    let spacing: CGFloat = 10
+    let spacing: CGFloat = 16
     
     let cardWidth: CGFloat = 318
     let cardHeight: CGFloat = 484
@@ -21,19 +23,40 @@ struct CarouselView: View {
     let indexHeight: CGFloat = 3
     
     var body: some View {
-        VStack(spacing: 16) {
-            Carousel(pageCount: pageCount, edgeSpace: edgeSpace, spacing: spacing, currentIndex: $currentIndex) { _ in
-                CardView()
-            }
-            .frame(height: cardHeight)
-            
-            HStack {
-                ForEach(0..<pageCount, id: \.self) { pageIndex in
-                    Rectangle()
-                        .frame(width: indexWidth, height: indexHeight)
-                        .foregroundColor(currentIndex == pageIndex ? .firstColor : .white)
-                        .animation(.spring, value: currentIndex)
+        ZStack {
+            VStack(spacing: 16) {
+                Carousel(pageCount: pageCount, edgeSpace: edgeSpace, spacing: spacing, currentIndex: $currentIndex) { pageIndex in
+                    if !isShow {
+                        CardView(isShow: $isShow, namespace: namespace, pageIndex: pageIndex)
+                    }
                 }
+                .frame(height: cardHeight)
+                
+                HStack {
+                    ForEach(0..<pageCount, id: \.self) { pageIndex in
+                        Rectangle()
+                            .frame(width: indexWidth, height: indexHeight)
+                            .foregroundColor(currentIndex == pageIndex ? .firstColor : .white)
+                            .animation(.easeInOut, value: currentIndex)
+                    }
+                }
+            }
+            .transition(
+                .asymmetric(
+                    insertion: .opacity.animation(.easeInOut(duration: 0.1)),
+                    removal: .opacity.animation(.easeInOut(duration: 0.3).delay(0.2))
+                )
+            )
+            
+            if isShow {
+                CardDetailView(isShow: $isShow, namespace: namespace, currentIndex: currentIndex)
+                    .zIndex(1)
+                    .transition(
+                        .asymmetric(
+                            insertion: .opacity.animation(.easeInOut(duration: 0.1)),
+                            removal: .opacity.animation(.easeInOut(duration: 0.3).delay(0.2))
+                        )
+                    )
             }
         }
     }
