@@ -23,13 +23,7 @@ struct CarouselView: View {
     var body: some View {
         VStack(spacing: 16) {
             Carousel(pageCount: pageCount, edgeSpace: edgeSpace, spacing: spacing, currentIndex: $currentIndex) { _ in
-                Rectangle()
-                    .frame(width: cardWidth, height: cardHeight)
-                    .foregroundColor(.black)
-                    .roundedCorners(10, corners: [.topLeft])
-                    .roundedCorners(70, corners: [.topRight])
-                    .roundedCorners(45, corners: [.bottomLeft, .bottomRight])
-                    .shadow(color: .white, radius: 1, y: -0.5)
+                CardView()
             }
             .frame(height: cardHeight)
             
