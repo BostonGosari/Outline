@@ -17,7 +17,7 @@ struct LocationAuthorizationView: View {
                 .multilineTextAlignment(.center)
                 .padding(.top, 100)
                 .onAppear {
-                    locationManager.checkLocationAuthorization()
+                    locationManager.requestLocation()
                 }
             Spacer()
         }
