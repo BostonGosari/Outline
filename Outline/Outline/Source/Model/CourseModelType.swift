@@ -1,5 +1,5 @@
 //
-//  GPSArtCourseModel.swift
+//  CourseModelType.swift
 //  Outline
 //
 //  Created by Seungui Moon on 10/14/23.

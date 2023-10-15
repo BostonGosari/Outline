@@ -8,15 +8,20 @@
 import SwiftUI
 
 struct DataTestView: View {
-    @StateObject private var firestoreManager = FirstoreManager()
+    let userModel = UserModel()
     
     var body: some View {
         VStack {
             Text("hello")
-            Button{
-                firestoreManager.writeUserData(nickname: "austin")
+            Button {
+                do {
+                    try userModel.readUserInfo(uid: "cfU1R5dJiooxbi7MbN4d")
+                } catch {
+                    print(error)
+                }
+                
             } label: {
-                Text("write")
+                Text("read user data")
             }
         }
     }

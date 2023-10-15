@@ -12,6 +12,6 @@ class FirstoreManager: ObservableObject {
     
     func writeUserData(nickname: String) {
         let newUser = User(nickname: nickname, birthday: Date(), height: 180, weight: 70, imageURL: "url", records: [], currentRunningData: RunningData(currentTime: 10.0, currentLocation: 10.0, paceList: [], bpmList: []))
-        userModel.writeUserData(user: newUser)
+//        userModel.writeUserData(user: newUser)
     }
 }

@@ -1,65 +1,78 @@
 //
-//  Model.swift
+//  UserModel.swift
 //  Outline
 //
-//  Created by Hyunjun Kim on 10/13/23.
+//  Created by Seungui Moon on 10/14/23.
 //
 
-import Foundation
+import Firebase
+import FirebaseFirestoreSwift
+import SwiftUI
 
-typealias UserList = [User]
-
-struct User {
-    let uid = UUID().uuidString
-    var nickname: String
-    var birthday: Date
-    var height: Int
-    var weight: Int
-    var gender: Gender = .notSetted
-    var imageURL: String
-    var records: [Record]
-    var currentRunningData: RunningData
+protocol UserModelProtocol {
+    
+}
+enum ReadDataError: Error {
+    case notFinded
 }
 
-enum Gender: String {
-    case notSetted
-    case man
-    case woman
-    case undefined
+struct UserModel: UserModelProtocol {
+    private let userListRef = Firestore.firestore().collection("userList")
+    
+    func readUserInfo(uid: String) throws{
+        userListRef.document(uid).getDocument { (snapshot, error) in
+            guard error == nil else { return }
+            guard let snapshot = snapshot else { return }
+
+            
+            let data = snapshot.data()
+            print(data)
+        }
+    }
+    
+    func updateUserInfo(uid: String, nickname: String?, birthday: String?, height: String?, weight: String?, gender: Gender?) {}
+    func readUserRecords() {}
+    func readUserRecord(id: String) {}
+    func updateOrCreateUserRecord(id: String, record: Record) {}
+    func deleteUserRecord(id: String) {}
+    func createUser(nickname: String?) {}
+    func deleteUser(uid: String) {}
 }
 
-enum RunningType: String {
-    case free
-    case gpsArt
-}
-
-struct Record {
-    var id = UUID().uuidString
-    var courseName: String
-    var runningType: RunningType
-    var runningDate: Date
-    var startTime: Date
-    var endTime: Date
-    var runningDuration: Date
-    var courseLength: Double
-    var runningLength: Double
-    var averagePace: Date
-    var calorie: Int
-    var bpm: Int
-    var cadence: Int
-    var coursePaths: Coordinate
-    var heading: Double
-    var mapScale: Double
-}
-
-struct Coordinate {
-    var longitude: Double
-    var latitude: Double
-}
-
-struct RunningData {
-    var currentTime: Double
-    var currentLocation: Double
-    var paceList: [Int]
-    var bpmList: [Int]
-}
+//struct UserModel {
+//    private let userListRef = Firestore.firestore().collection("userList")
+//    
+//    func writeUserData(user: User) {
+//        let userRef = userListRef.document(user.uid)
+//        userListRef.updateData([
+//            "uid": user.uid,
+//            "nickname": user.nickname,
+//            "height": user.height,
+//            "weight": user.weight,
+//            "gender": user.gender.rawValue,
+//            "imageURL": "",
+//            "records": [],
+//            "currentRunningData": []
+//        ]) { error in
+//            guard let error = error else {
+//                return
+//            }
+//            print("error")
+//        }
+//    }
+    
+//        userListRef.getDocuments { (snapshot, error) in
+//            guard error == nil else {
+//                print("error", error ?? "")
+//                return
+//            }
+//            guard let snapshot = snapshot else {return}
+//
+//            for document in snapshot.documents {
+//                let data = document.data()
+//
+//                let name = data["nickname"] as? String ?? ""
+//                let heightTemp = data["height"] as? Int ?? 0
+//                self.userList.append(User(nickname: name, height: heightTemp))
+//            }
+//        }
