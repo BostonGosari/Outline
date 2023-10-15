@@ -10,7 +10,7 @@ import Foundation
 typealias UserList = [User]
 
 struct User {
-    let id = UUID().uuidString
+    let uid = UUID().uuidString
     var nickname: String
     var birthday: Date
     var height: Int
@@ -21,14 +21,14 @@ struct User {
     var currentRunningData: RunningData
 }
 
-enum Gender {
+enum Gender: String {
     case notSetted
     case man
     case woman
     case undefined
 }
 
-enum RunningType {
+enum RunningType: String {
     case free
     case gpsArt
 }

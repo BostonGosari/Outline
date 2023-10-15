@@ -8,14 +8,15 @@
 import SwiftUI
 
 struct DataTestView: View {
-    @EnvironmentObject var fireStoreManager: FireStoreManager
+    @StateObject private var firestoreManager = FirstoreManager()
     
     var body: some View {
         VStack {
             Text("hello")
-            ForEach(fireStoreManager.userList, id: \.id) { user in
-                Text("\(user.nickname)")
-                Text("\(user.height)")
+            Button{
+                firestoreManager.writeUserData(nickname: "austin")
+            } label: {
+                Text("write")
             }
         }
     }
