@@ -6,11 +6,12 @@
 //
 
 import SwiftUI
+import MapKit
 
 struct CardDetailView: View {
     
-    @Binding var isShow: Bool
     var namespace: Namespace.ID
+    @Binding var isShow: Bool
     var currentIndex: Int
     
     @State private var appear = [false, false, false]
@@ -24,6 +25,8 @@ struct CardDetailView: View {
     private let scrollStartRange: CGFloat = 10
     private let dragLimit: CGFloat = 60
     private let scrollLimit: CGFloat = 40
+    
+    private let cardHeight: CGFloat = 575
     
     var body: some View {
         ScrollView {
@@ -48,7 +51,7 @@ struct CardDetailView: View {
                 .scaleEffect(viewSize / -600 + 1)
                 .gesture(isDraggable ? drag : nil)
             }
-            .onChange(of: isShow) { _ in
+            .onChange(of: isShow) { _, _ in
                 fadeOut()
             }
             .onAppear {
@@ -63,15 +66,15 @@ struct CardDetailView: View {
         .statusBarHidden()
     }
     
-    // MARK: - View Components
+// MARK: - View Components
     
     private var courseImage: some View {
-        Rectangle()
-            .frame(height: 575)
+Rectangle()
             .foregroundColor(.gray900Color)
             .roundedCorners(45, corners: [.bottomLeft])
-            .shadow(color: .white, radius: 1, y: -0.5)
+            .shadow(color: .white, radius: 0.5, y: 0.5)
             .matchedGeometryEffect(id: "courseImage\(currentIndex)", in: namespace)
+            .frame(height: cardHeight)
     }
     
     private var courseInformation: some View {
@@ -88,6 +91,7 @@ struct CardDetailView: View {
                 .font(.caption)
                 .fontWeight(.semibold)
                 .padding(.bottom, 16)
+                
                 HStack {
                     Text("#5km")
                         .frame(width: 70, height: 23)
@@ -110,16 +114,7 @@ struct CardDetailView: View {
             
             Spacer()
             
-            Button {
-            } label: {
-                Text("밀어서 시작하기")
-                    .frame(maxWidth: .infinity)
-                    .padding()
-                    .background {
-                        RoundedRectangle(cornerRadius: 20, style: .continuous)
-                            .foregroundStyle(.ultraThinMaterial)
-                    }
-            }
+            SlideToUnlock()
             .opacity(appear[1] ? 1 : 0)
             .offset(y: appear[1] ? 0 : fadeInOffset)
             .padding(-10)
@@ -145,7 +140,7 @@ struct CardDetailView: View {
     }
 }
 
-// MARK: Drag Gesture
+// MARK: - Drag Gesture
 
 extension CardDetailView {
     var drag: some Gesture {
@@ -182,7 +177,7 @@ extension CardDetailView {
                 }
             }
             .onEnded { _ in
-                if viewSize > dragLimit {
+                if viewSize >= dragLimit {
                     withAnimation(.closeCard) {
                         isShow = false
                         viewSize = 0.0
@@ -197,7 +192,7 @@ extension CardDetailView {
     }
 }
 
-// MARK: View Functions
+// MARK: - View Functions
 
 extension CardDetailView {
     
@@ -249,38 +244,6 @@ extension CardDetailView {
                 viewSize = 0
             }
         }
-    }
-}
-
-struct ScrollViewOffsetPreferenceKey: PreferenceKey {
-    static var defaultValue: CGFloat = 0
-    
-    static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
-        value = nextValue()
-    }
-}
-
-extension View {
-
-    /// ```swift
-    /// @State private var scrollViewOffset: CGFloat = 0
-    ///
-    /// .onScrollViewOffsetChanged { value
-    ///    in scrollViewOffset = value
-    /// }
-    /// ```
-    /// scrollViewOffset 변수 선언을 해준뒤 함수를 사용하여 scrollViewOffset 의 변화를 추적
-    func onScrollViewOffsetChanged(action: @escaping (_ offset: CGFloat) -> Void) -> some View {
-        self
-            .background(
-                GeometryReader {geo in
-                    Text("")
-                        .preference(key: ScrollViewOffsetPreferenceKey.self, value: geo.frame(in: .global).minY)
-                }
-            )
-            .onPreferenceChange(ScrollViewOffsetPreferenceKey.self) { value in
-                action(value)
-            }
     }
 }
 

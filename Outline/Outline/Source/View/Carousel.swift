@@ -36,7 +36,7 @@ struct Carousel<Content: View>: View {
         GeometryReader { proxy in
             carouselHStack(in: proxy)
                 .offset(x: offsetX(in: proxy))
-                .gesture(dragGesture(in: proxy))
+                .simultaneousGesture(dragGesture(in: proxy))
                 .animation(.spring(), value: dragOffset)
         }
     }

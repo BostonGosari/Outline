@@ -27,7 +27,13 @@ struct CarouselView: View {
             VStack(spacing: 16) {
                 Carousel(pageCount: pageCount, edgeSpace: edgeSpace, spacing: spacing, currentIndex: $currentIndex) { pageIndex in
                     if !isShow {
-                        CardView(isShow: $isShow, namespace: namespace, pageIndex: pageIndex)
+                        CardView(namespace: namespace, isShow: $isShow, currentIndex: $currentIndex, pageIndex: pageIndex)
+                            .transition(
+                                .asymmetric(
+                                    insertion: .opacity.animation(.easeInOut(duration: 0.1)),
+                                    removal: .opacity.animation(.easeInOut(duration: 0.3).delay(0.2))
+                                )
+                            )
                     }
                 }
                 .frame(height: cardHeight)
@@ -41,15 +47,9 @@ struct CarouselView: View {
                     }
                 }
             }
-            .transition(
-                .asymmetric(
-                    insertion: .opacity.animation(.easeInOut(duration: 0.1)),
-                    removal: .opacity.animation(.easeInOut(duration: 0.3).delay(0.2))
-                )
-            )
             
             if isShow {
-                CardDetailView(isShow: $isShow, namespace: namespace, currentIndex: currentIndex)
+                CardDetailView(namespace: namespace, isShow: $isShow, currentIndex: currentIndex)
                     .zIndex(1)
                     .transition(
                         .asymmetric(
