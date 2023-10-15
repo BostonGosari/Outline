@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct OutlineApp: App {
+    private let workoutManager = WorkoutManager.shared
     var body: some Scene {
         WindowGroup {
-            ContentView()
+//            ContentView()
+            InputUserInfoView()
+                .environmentObject(workoutManager)
         }
     }
 }
