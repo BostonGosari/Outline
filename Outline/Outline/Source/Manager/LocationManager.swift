@@ -9,15 +9,21 @@ import MapKit
 
 final class LocationManager: NSObject, CLLocationManagerDelegate, ObservableObject {
     
+    @Published var userLocation: CLLocationCoordinate2D?
     @Published var isAuthorized = false
     @Published var isNext = false
     
-    var locationManager: CLLocationManager?
+    private var locationManager = CLLocationManager()
     
-    func checkLocationAuthorization() {
-        locationManager = CLLocationManager()
-        locationManager?.delegate = self
-        locationManager?.desiredAccuracy = kCLLocationAccuracyBest
+    override init() {
+        super.init()
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+    }
+    
+    func requestLocation() {
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
     }
     
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
@@ -25,10 +31,7 @@ final class LocationManager: NSObject, CLLocationManagerDelegate, ObservableObje
     }
     
     private func checkLocationAuthorizationStatus() {
-        guard let locationManager = locationManager else { return }
-        
         switch locationManager.authorizationStatus {
-            
         case .notDetermined:
             locationManager.requestWhenInUseAuthorization()
             isAuthorized = false
@@ -40,6 +43,12 @@ final class LocationManager: NSObject, CLLocationManagerDelegate, ObservableObje
             isNext = true
         @unknown default:
             break
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let location = locations.last {
+            userLocation = location.coordinate
         }
     }
     
