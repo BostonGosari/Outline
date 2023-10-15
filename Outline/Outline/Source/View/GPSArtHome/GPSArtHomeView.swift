@@ -9,15 +9,7 @@ import SwiftUI
 
 struct GPSArtHomeView: View {
     @State private var scrollOffset: CGFloat = 0
-    
-    struct ViewOffsetKey: PreferenceKey {
-         static var defaultValue: CGFloat = 0
-         
-         static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
-             value = max(value, nextValue())
-         }
-    }
-     
+
     var body: some View {
         NavigationStack {
             ZStack(alignment: .top) {
@@ -53,13 +45,7 @@ struct GPSArtHomeView: View {
                 .frame(height: 60)
             }
             .background(
-                Rectangle()
-                    .foregroundColor(.clear)
-                    .frame(width: 289, height: 289)
-                    .background(Color(red: 0.9, green: 0.75, blue: 1))
-                    .cornerRadius(289)
-                    .blur(radius: 150)
-                    .padding(.top, 500)
+                BackgroundBlur()
             )
         }
         
