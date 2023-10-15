@@ -6,11 +6,13 @@
 //
 
 import SwiftUI
+import MapKit
 
 struct CardView: View {
     
-    @Binding var isShow: Bool
     var namespace: Namespace.ID
+    @Binding var isShow: Bool
+    @Binding var currentIndex: Int
     var pageIndex: Int
     
     let cardWidth: CGFloat = 318
@@ -18,15 +20,16 @@ struct CardView: View {
     
     var body: some View {
         courseImage
-            .overlay(alignment: .bottomLeading) {
-                if !isShow {
-                    courseInformation
-                }
-            }
             .onTapGesture {
                 withAnimation(.openCard) {
                     isShow = true
                 }
+            }
+            .overlay(alignment: .bottomLeading) {
+                courseInformation
+                    .opacity(currentIndex == pageIndex && !isShow ? 1 : 0)
+                    .offset(y: currentIndex == pageIndex && !isShow ? 0 : 10)
+                    .animation(.easeInOut(duration: 0.7), value: currentIndex == pageIndex)
             }
     }
     
@@ -39,7 +42,7 @@ struct CardView: View {
             .roundedCorners(10, corners: [.topLeft])
             .roundedCorners(70, corners: [.topRight])
             .roundedCorners(45, corners: [.bottomLeft, .bottomRight])
-            .shadow(color: .white, radius: 1, y: -0.5)
+            .shadow(color: .white, radius: 0.5, y: -0.5)
             .matchedGeometryEffect(id: "courseImage\(pageIndex)", in: namespace)
     }
     
@@ -55,6 +58,7 @@ struct CardView: View {
             }
             .font(.caption)
             .padding(.bottom, 16)
+            
             HStack {
                 Text("#5km")
                     .frame(width: 70, height: 23)
