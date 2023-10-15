@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BB5239372ADBD99F00646494 /* GPSArtHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5239362ADBD99F00646494 /* GPSArtHomeView.swift */; };
 		F01FDB992ADABB6100BDA633 /* TabModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01FDB982ADABB6100BDA633 /* TabModel.swift */; };
 		F01FDB9C2ADABC4600BDA633 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01FDB9B2ADABC4600BDA633 /* TabBar.swift */; };
 		F01FDB9E2ADABD3D00BDA633 /* TabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01FDB9D2ADABD3D00BDA633 /* TabView.swift */; };
@@ -65,6 +66,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		BB5239362ADBD99F00646494 /* GPSArtHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPSArtHomeView.swift; sourceTree = "<group>"; };
 		F01FDB982ADABB6100BDA633 /* TabModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabModel.swift; sourceTree = "<group>"; };
 		F01FDB9B2ADABC4600BDA633 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 		F01FDB9D2ADABD3D00BDA633 /* TabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabView.swift; sourceTree = "<group>"; };
@@ -118,6 +120,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BB5239352ADBD95300646494 /* GPSArtHome */ = {
+			isa = PBXGroup;
+			children = (
+				BB5239362ADBD99F00646494 /* GPSArtHomeView.swift */,
+			);
+			path = GPSArtHome;
+			sourceTree = "<group>";
+		};
 		F01FDB9A2ADABC2C00BDA633 /* Tab */ = {
 			isa = PBXGroup;
 			children = (
@@ -202,6 +212,7 @@
 		F0AC8AFA2AD963600061612C /* View */ = {
 			isa = PBXGroup;
 			children = (
+				BB5239352ADBD95300646494 /* GPSArtHome */,
 				F06B93572ADAEC8500387DEB /* RecomendedCourses */,
 				F01FDB9A2ADABC2C00BDA633 /* Tab */,
 				F05C97182ADA87B800D5D959 /* LocationAuthorizationView.swift */,
@@ -511,6 +522,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BB5239372ADBD99F00646494 /* GPSArtHomeView.swift in Sources */,
 				F06B93632ADB847900387DEB /* Component.swift in Sources */,
 				F06B93622ADB847500387DEB /* ContentView.swift in Sources */,
 				F0AC8B382AD96AE10061612C /* ViewExtension.swift in Sources */,
@@ -680,7 +692,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Outline Watch/Preview Content\"";
-				DEVELOPMENT_TEAM = 77745NX67K;
+				DEVELOPMENT_TEAM = 8H945XJJGA;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -711,7 +723,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Outline Watch/Preview Content\"";
-				DEVELOPMENT_TEAM = 77745NX67K;
+				DEVELOPMENT_TEAM = 8H945XJJGA;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -744,7 +756,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Outline/Preview Content\"";
-				DEVELOPMENT_TEAM = 77745NX67K;
+				DEVELOPMENT_TEAM = 8H945XJJGA;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -780,7 +792,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Outline/Preview Content\"";
-				DEVELOPMENT_TEAM = 77745NX67K;
+				DEVELOPMENT_TEAM = 8H945XJJGA;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
