@@ -113,7 +113,7 @@ extension InputUserInfoView {
                 Text("신장")
                 Spacer()
                 Text("\(viewModel.height)cm")
-                    .foregroundStyle(viewModel.listTextColor(.gender))
+                    .foregroundStyle(viewModel.listTextColor(.height))
                     .onTapGesture {
                         viewModel.currentPicker = .height
                     }
