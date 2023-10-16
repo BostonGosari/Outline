@@ -86,5 +86,5 @@ struct GPSArtHomeView: View {
 }
 
 #Preview {
-    TabView()
+    HomeTabView()
 }

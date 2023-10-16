@@ -249,5 +249,5 @@ extension CardDetailView {
 }
 
 #Preview {
-    TabView()
+    HomeTabView()
 }
