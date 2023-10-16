@@ -26,6 +26,7 @@
 		BB1D531A2ADDBCAB0073771F /* Pretendard-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BB1D53192ADDBCAB0073771F /* Pretendard-Regular.ttf */; };
 		BB1D531C2ADDBCB20073771F /* Pretendard-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BB1D531B2ADDBCB20073771F /* Pretendard-SemiBold.ttf */; };
 		BB1D531E2ADDBCB90073771F /* Pretendard-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BB1D531D2ADDBCB90073771F /* Pretendard-Thin.ttf */; };
+		BB1D53212ADDC8D50073771F /* RunningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1D53202ADDC8D50073771F /* RunningView.swift */; };
 		BB5238FC2ADAF1CE00646494 /* InputUserInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5238FB2ADAF1CE00646494 /* InputUserInfoView.swift */; };
 		BB5239292ADAF75C00646494 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5239272ADAF72A00646494 /* Logger.swift */; };
 		BB52392B2ADAF7BD00646494 /* WorkoutManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB52392A2ADAF7BD00646494 /* WorkoutManager.swift */; };
@@ -33,7 +34,7 @@
 		BB5239582ADC396300646494 /* BackgroundBlur.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5239572ADC396300646494 /* BackgroundBlur.swift */; };
 		F01FDB992ADABB6100BDA633 /* TabModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01FDB982ADABB6100BDA633 /* TabModel.swift */; };
 		F01FDB9C2ADABC4600BDA633 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01FDB9B2ADABC4600BDA633 /* TabBar.swift */; };
-		F01FDB9E2ADABD3D00BDA633 /* TabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01FDB9D2ADABD3D00BDA633 /* TabView.swift */; };
+		F01FDB9E2ADABD3D00BDA633 /* HomeTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01FDB9D2ADABD3D00BDA633 /* HomeTabView.swift */; };
 		F0492E1D2ADD2AE900F6EADD /* Header.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0492E1C2ADD2AE900F6EADD /* Header.swift */; };
 		F05C7D562ADC565E006842DB /* PreferenceKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05C7D552ADC565E006842DB /* PreferenceKey.swift */; };
 		F05C97172ADA879100D5D959 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05C97162ADA879100D5D959 /* LocationManager.swift */; };
@@ -129,6 +130,7 @@
 		BB1D531B2ADDBCB20073771F /* Pretendard-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.ttf"; sourceTree = "<group>"; };
 		BB1D531D2ADDBCB90073771F /* Pretendard-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Thin.ttf"; sourceTree = "<group>"; };
 		BB1D531F2ADDBCE20073771F /* Outline.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Outline.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BB1D53202ADDC8D50073771F /* RunningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningView.swift; sourceTree = "<group>"; };
 		BB5238FB2ADAF1CE00646494 /* InputUserInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputUserInfoView.swift; sourceTree = "<group>"; };
 		BB5239272ADAF72A00646494 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		BB52392A2ADAF7BD00646494 /* WorkoutManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutManager.swift; sourceTree = "<group>"; };
@@ -138,7 +140,7 @@
 		BB5239572ADC396300646494 /* BackgroundBlur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundBlur.swift; sourceTree = "<group>"; };
 		F01FDB982ADABB6100BDA633 /* TabModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabModel.swift; sourceTree = "<group>"; };
 		F01FDB9B2ADABC4600BDA633 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
-		F01FDB9D2ADABD3D00BDA633 /* TabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabView.swift; sourceTree = "<group>"; };
+		F01FDB9D2ADABD3D00BDA633 /* HomeTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabView.swift; sourceTree = "<group>"; };
 		F0492E1C2ADD2AE900F6EADD /* Header.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Header.swift; sourceTree = "<group>"; };
 		F05C7D552ADC565E006842DB /* PreferenceKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferenceKey.swift; sourceTree = "<group>"; };
 		F05C97162ADA879100D5D959 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
@@ -221,6 +223,7 @@
 			isa = PBXGroup;
 			children = (
 				BB1D53082ADDB27B0073771F /* WorkoutDataView.swift */,
+				BB1D53202ADDC8D50073771F /* RunningView.swift */,
 			);
 			path = Running;
 			sourceTree = "<group>";
@@ -266,7 +269,7 @@
 		F01FDB9A2ADABC2C00BDA633 /* Tab */ = {
 			isa = PBXGroup;
 			children = (
-				F01FDB9D2ADABD3D00BDA633 /* TabView.swift */,
+				F01FDB9D2ADABD3D00BDA633 /* HomeTabView.swift */,
 				F01FDB9B2ADABC4600BDA633 /* TabBar.swift */,
 			);
 			path = Tab;
@@ -715,6 +718,7 @@
 				F0AC8B0F2AD9659D0061612C /* ColorExtension.swift in Sources */,
 				F09697512ADC069E00C38AF4 /* AnimationExtension.swift in Sources */,
 				BB5238FC2ADAF1CE00646494 /* InputUserInfoView.swift in Sources */,
+				BB1D53212ADDC8D50073771F /* RunningView.swift in Sources */,
 				F06B93592ADAECA800387DEB /* RecommendedCourseView.swift in Sources */,
 				F05C7D562ADC565E006842DB /* PreferenceKey.swift in Sources */,
 				F05C971C2ADAE6E200D5D959 /* RecomendedCourseMap.swift in Sources */,
@@ -723,7 +727,7 @@
 				F096974B2ADBD73A00C38AF4 /* CardView.swift in Sources */,
 				F0492E1D2ADD2AE900F6EADD /* Header.swift in Sources */,
 				F0AC8A9D2AD94C1F0061612C /* OutlineApp.swift in Sources */,
-				F01FDB9E2ADABD3D00BDA633 /* TabView.swift in Sources */,
+				F01FDB9E2ADABD3D00BDA633 /* HomeTabView.swift in Sources */,
 				F01FDB992ADABB6100BDA633 /* TabModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
