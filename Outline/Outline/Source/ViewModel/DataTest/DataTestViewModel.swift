@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 let userInfoDefault = UserInfo(nickname: "austin", birthday: Date(), height: 175, weight: 70)
 
 let coordinatesDefaults = [
@@ -15,9 +14,9 @@ let coordinatesDefaults = [
 ]
 let recordsDefault = [
     Record(courseName: "댕댕런", runningType: .gpsArt, runningDate: Date(), startTime: Date(), endTime: Date(), runningDuration: Date(), courseLength: 5.2, runningLength: 5.0, averagePace: Date(), calorie: 300, bpm: 200, cadence: 200, coursePaths: coordinatesDefaults, heading: 30, mapScale: 1.5),
-    Record(courseName: "오리런", runningType: .gpsArt, runningDate: Date(), startTime: Date(), endTime: Date(), runningDuration: Date(), courseLength: 2.2, runningLength: 2.0, averagePace: Date(), calorie: 100, bpm: 100, cadence: 100, coursePaths: coordinatesDefaults, heading: 10, mapScale: 1.1),
+    Record(courseName: "오리런", runningType: .gpsArt, runningDate: Date(), startTime: Date(), endTime: Date(), runningDuration: Date(), courseLength: 2.2, runningLength: 2.0, averagePace: Date(), calorie: 100, bpm: 100, cadence: 100, coursePaths: coordinatesDefaults, heading: 10, mapScale: 1.1)
 ]
-let runningDataDefault = RunningData(currentTime: 20, currentLocation: 20, paceList: [2,3], bpmList: [200,100])
+let runningDataDefault = RunningData(currentTime: 20, currentLocation: 20, paceList: [2,3], bpmList: [200, 100])
 let userDataDefault = UserData(records: recordsDefault, currentRunningData: runningDataDefault)
 
 class FirstoreManager: ObservableObject {
@@ -27,18 +26,18 @@ class FirstoreManager: ObservableObject {
     let userInfoModel = UserInfoModel()
     let courseModel = CourseModel()
     
-    func readUserInfo(uid: String){
+    func readUserInfo(uid: String) {
         userInfoModel.readUserInfo(uid: uid) { result in
             switch result {
             case .success(let userInfo):
                 self.user = User(userInfo: userInfo, userData: self.user.userData)
-            case .failure(_):
-                break
+            case .failure(let error):
+                print(error)
             }
         }
     }
     
-    func updateUserInfo(uid: String, userInfo: UserInfo){
+    func updateUserInfo(uid: String, userInfo: UserInfo) {
         userInfoModel.updateUserInfo(uid: uid, userInfo: UserInfo(nickname: "moon", birthday: Date(), height: 120, weight: 100)) { result in
             switch result {
             case .success(let isSuccess):
