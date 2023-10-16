@@ -41,15 +41,14 @@ extension WorkoutDataView {
 
 extension WorkoutDataView {
     private func workoutDataItem(value: String, label: String) -> some View {
-        VStack (spacing: 4){
+        VStack(spacing: 4) {
             Text(value)
                 .foregroundColor(.white)
                 .font(
-                    Font.custom("Pretendard", size: 36)
-                        .weight(.semibold)
+                    Font.custom("Pretendard-SemiBold", size: 36)
                 )
             Text(label)
-                .font(Font.custom("Pretendard", size: 16))
+                .font(Font.custom("Pretendard-Regular", size: 16))
                 .foregroundColor(Color.gray500)
         }
     }
