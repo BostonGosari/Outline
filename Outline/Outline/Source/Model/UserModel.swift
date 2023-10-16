@@ -12,7 +12,7 @@ import SwiftUI
 protocol UserModelProtocol {
     func readUserInfo(uid: String, completion: @escaping (Result<UserInfo, ReadDataError>) -> Void)
     func updateUserInfo(uid: String, userInfo: UserInfo, completion: @escaping (Result<Bool, ReadDataError>) -> Void)
-    func createUser(nickname: String?, completion: @escaping (Result<Bool, ReadDataError>) -> Void)
+    func createUser(nickname: String?, completion: @escaping (Result<String, ReadDataError>) -> Void)
     func deleteUser(uid: String, completion: @escaping (Result<Bool, ReadDataError>) -> Void)
 }
 
@@ -22,6 +22,7 @@ enum ReadDataError: Error {
 }
 
 struct UserInfoModel: UserModelProtocol {
+    
     private let userListRef = Firestore.firestore().collection("userList")
     
     func readUserInfo(uid: String, completion: @escaping (Result<UserInfo, ReadDataError>) -> Void) {
@@ -49,12 +50,13 @@ struct UserInfoModel: UserModelProtocol {
         }
     }
     
-    func createUser(nickname: String?, completion: @escaping (Result<Bool, ReadDataError>) -> Void) {
+    func createUser(nickname: String?, completion: @escaping (Result<String, ReadDataError>) -> Void) {
         let newUserInfo = UserInfo(nickname: nickname ?? "default", birthday: Date(), height: 175, weight: 70)
+        let uid = UUID().uuidString
         
         do {
-            try userListRef.document(UUID().uuidString).setData(from: newUserInfo)
-            completion(.success(true))
+            try userListRef.document(uid).setData(from: newUserInfo)
+            completion(.success(uid))
         } catch {
             completion(.failure(.noData))
         }

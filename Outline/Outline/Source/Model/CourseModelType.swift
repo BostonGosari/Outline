@@ -24,6 +24,7 @@ struct GPSArtCourse: Codable {
     var coursePathes: [Coordinate]
     var heading: Double
     var mapScale: Double
+    var thumbnail: String
 }
 
 struct Placemark: Codable, Hashable {

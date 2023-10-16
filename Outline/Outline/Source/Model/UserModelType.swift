@@ -54,7 +54,7 @@ struct Record {
     var calorie: Int
     var bpm: Int
     var cadence: Int
-    var coursePaths: Coordinate
+    var coursePaths: [Coordinate]
     var heading: Double
     var mapScale: Double
 }
