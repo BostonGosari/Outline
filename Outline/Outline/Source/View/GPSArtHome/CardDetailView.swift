@@ -31,7 +31,7 @@ struct CardDetailView: View {
     var body: some View {
         ScrollView {
             ZStack {
-                Color(UIColor.systemBackground)
+                Color.gray900Color
                     .onScrollViewOffsetChanged { value in
                         handleScrollViewOffset(value)
                     }
@@ -66,11 +66,11 @@ struct CardDetailView: View {
         .statusBarHidden()
     }
     
-// MARK: - View Components
+    // MARK: - View Components
     
     private var courseImage: some View {
-Rectangle()
-            .foregroundColor(.gray900Color)
+        Rectangle()
+            .foregroundColor(.gray800)
             .roundedCorners(45, corners: [.bottomLeft])
             .shadow(color: .white, radius: 0.5, y: 0.5)
             .matchedGeometryEffect(id: "courseImage\(currentIndex)", in: namespace)
@@ -115,9 +115,9 @@ Rectangle()
             Spacer()
             
             SlideToUnlock()
-            .opacity(appear[1] ? 1 : 0)
-            .offset(y: appear[1] ? 0 : fadeInOffset)
-            .padding(-10)
+                .opacity(appear[1] ? 1 : 0)
+                .offset(y: appear[1] ? 0 : fadeInOffset)
+                .padding(-10)
         }
         .padding(40)
     }
@@ -248,5 +248,5 @@ extension CardDetailView {
 }
 
 #Preview {
-    CarouselView()
+    TabView()
 }

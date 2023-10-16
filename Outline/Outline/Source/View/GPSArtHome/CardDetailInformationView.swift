@@ -99,6 +99,7 @@ struct CardDetailInformationView: View {
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(.vertical, 20)
         .padding(.horizontal)
+        .padding(.bottom, 100)
     }
 }
 

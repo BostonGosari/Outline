@@ -82,5 +82,5 @@ struct CardView: View {
 }
 
 #Preview {
-    CarouselView()
+    TabView()
 }

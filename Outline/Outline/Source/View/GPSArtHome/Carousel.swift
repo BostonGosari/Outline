@@ -62,7 +62,7 @@ struct Carousel<Content: View>: View {
     }
     
     private func pageWidth(in proxy: GeometryProxy) -> CGFloat {
-        proxy.size.width - (edgeSpace + spacing) * 2
+        max(0, proxy.size.width - (edgeSpace + spacing) * 2)
     }
     
     // MARK: - 제스처
