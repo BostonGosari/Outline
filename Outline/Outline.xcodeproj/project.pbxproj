@@ -16,8 +16,33 @@
 		95EB1ECC2ADD5FDD00B47984 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 95EB1ECB2ADD5FDD00B47984 /* FirebaseFirestore */; };
 		95EB1ECE2ADD5FDD00B47984 /* FirebaseFirestoreCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 95EB1ECD2ADD5FDD00B47984 /* FirebaseFirestoreCombine-Community */; };
 		95EB1ED02ADD5FDD00B47984 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 95EB1ECF2ADD5FDD00B47984 /* FirebaseFirestoreSwift */; };
+		BB5238FC2ADAF1CE00646494 /* InputUserInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5238FB2ADAF1CE00646494 /* InputUserInfoView.swift */; };
+		BB5239292ADAF75C00646494 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5239272ADAF72A00646494 /* Logger.swift */; };
+		BB52392B2ADAF7BD00646494 /* WorkoutManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB52392A2ADAF7BD00646494 /* WorkoutManager.swift */; };
+		BB5239372ADBD99F00646494 /* GPSArtHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5239362ADBD99F00646494 /* GPSArtHomeView.swift */; };
+		BB5239582ADC396300646494 /* BackgroundBlur.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5239572ADC396300646494 /* BackgroundBlur.swift */; };
+		F01FDB992ADABB6100BDA633 /* TabModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01FDB982ADABB6100BDA633 /* TabModel.swift */; };
+		F01FDB9C2ADABC4600BDA633 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01FDB9B2ADABC4600BDA633 /* TabBar.swift */; };
+		F01FDB9E2ADABD3D00BDA633 /* TabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01FDB9D2ADABD3D00BDA633 /* TabView.swift */; };
+		F0492E1D2ADD2AE900F6EADD /* Header.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0492E1C2ADD2AE900F6EADD /* Header.swift */; };
+		F05C7D562ADC565E006842DB /* PreferenceKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05C7D552ADC565E006842DB /* PreferenceKey.swift */; };
+		F05C97172ADA879100D5D959 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05C97162ADA879100D5D959 /* LocationManager.swift */; };
+		F05C97192ADA87B800D5D959 /* LocationAuthorizationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05C97182ADA87B800D5D959 /* LocationAuthorizationView.swift */; };
+		F05C971C2ADAE6E200D5D959 /* RecomendedCourseMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05C971B2ADAE6E200D5D959 /* RecomendedCourseMap.swift */; };
+		F06B93592ADAECA800387DEB /* RecommendedCourseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06B93582ADAECA800387DEB /* RecommendedCourseView.swift */; };
+		F06B93622ADB847500387DEB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0AC8A9E2AD94C1F0061612C /* ContentView.swift */; };
+		F06B93632ADB847900387DEB /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06B93602ADB836600387DEB /* Component.swift */; };
+		F06B936A2ADC23DF00387DEB /* WorkoutManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB52392A2ADAF7BD00646494 /* WorkoutManager.swift */; };
+		F06B936B2ADC23E100387DEB /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5239272ADAF72A00646494 /* Logger.swift */; };
+		F06B936C2ADC245700387DEB /* RecommendedCoursesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0AC8B032AD964EF0061612C /* RecommendedCoursesViewModel.swift */; };
+		F06B936E2ADC279100387DEB /* SlideToUnlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06B936D2ADC279100387DEB /* SlideToUnlock.swift */; };
+		F09697432ADBC1D200C38AF4 /* Carousel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09697422ADBC1D200C38AF4 /* Carousel.swift */; };
+		F09697472ADBCD6000C38AF4 /* Shape.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09697462ADBCD6000C38AF4 /* Shape.swift */; };
+		F096974B2ADBD73A00C38AF4 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F096974A2ADBD73A00C38AF4 /* CardView.swift */; };
+		F096974D2ADBDBB000C38AF4 /* CardDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F096974C2ADBDBB000C38AF4 /* CardDetailView.swift */; };
+		F096974F2ADBEE9F00C38AF4 /* CardDetailInformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F096974E2ADBEE9F00C38AF4 /* CardDetailInformationView.swift */; };
+		F09697512ADC069E00C38AF4 /* AnimationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09697502ADC069E00C38AF4 /* AnimationExtension.swift */; };
 		F0AC8A9D2AD94C1F0061612C /* OutlineApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0AC8A9C2AD94C1F0061612C /* OutlineApp.swift */; };
-		F0AC8A9F2AD94C1F0061612C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0AC8A9E2AD94C1F0061612C /* ContentView.swift */; };
 		F0AC8AA12AD94C200061612C /* Color.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F0AC8AA02AD94C200061612C /* Color.xcassets */; };
 		F0AC8AA42AD94C200061612C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F0AC8AA32AD94C200061612C /* Preview Assets.xcassets */; };
 		F0AC8AAA2AD94C200061612C /* Outline Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = F0AC8AA92AD94C200061612C /* Outline Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -55,6 +80,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		BB5239252ADAF6EA00646494 /* Embed ExtensionKit Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(EXTENSIONS_FOLDER_PATH)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			name = "Embed ExtensionKit Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F0AC8ABC2AD94C210061612C /* Embed Watch Content */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -77,6 +112,30 @@
 		95E2EF732ADA75AA0083ADEE /* DataTestViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTestViewModel.swift; sourceTree = "<group>"; };
 		95E2EF762ADB8DD30083ADEE /* UserModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModelType.swift; sourceTree = "<group>"; };
 		95E2EF872ADBA5C70083ADEE /* CourseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseModel.swift; sourceTree = "<group>"; };
+		BB5238FB2ADAF1CE00646494 /* InputUserInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputUserInfoView.swift; sourceTree = "<group>"; };
+		BB5239272ADAF72A00646494 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
+		BB52392A2ADAF7BD00646494 /* WorkoutManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutManager.swift; sourceTree = "<group>"; };
+		BB52392D2ADAF93D00646494 /* Outline Watch App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Outline Watch App.entitlements"; sourceTree = "<group>"; };
+		BB52392E2ADAFB2E00646494 /* Outline.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Outline.entitlements; sourceTree = "<group>"; };
+		BB5239362ADBD99F00646494 /* GPSArtHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPSArtHomeView.swift; sourceTree = "<group>"; };
+		BB5239572ADC396300646494 /* BackgroundBlur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundBlur.swift; sourceTree = "<group>"; };
+		F01FDB982ADABB6100BDA633 /* TabModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabModel.swift; sourceTree = "<group>"; };
+		F01FDB9B2ADABC4600BDA633 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
+		F01FDB9D2ADABD3D00BDA633 /* TabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabView.swift; sourceTree = "<group>"; };
+		F0492E1C2ADD2AE900F6EADD /* Header.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Header.swift; sourceTree = "<group>"; };
+		F05C7D552ADC565E006842DB /* PreferenceKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferenceKey.swift; sourceTree = "<group>"; };
+		F05C97162ADA879100D5D959 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		F05C97182ADA87B800D5D959 /* LocationAuthorizationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationAuthorizationView.swift; sourceTree = "<group>"; };
+		F05C971B2ADAE6E200D5D959 /* RecomendedCourseMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecomendedCourseMap.swift; sourceTree = "<group>"; };
+		F06B93582ADAECA800387DEB /* RecommendedCourseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedCourseView.swift; sourceTree = "<group>"; };
+		F06B93602ADB836600387DEB /* Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Component.swift; sourceTree = "<group>"; };
+		F06B936D2ADC279100387DEB /* SlideToUnlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideToUnlock.swift; sourceTree = "<group>"; };
+		F09697422ADBC1D200C38AF4 /* Carousel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Carousel.swift; sourceTree = "<group>"; };
+		F09697462ADBCD6000C38AF4 /* Shape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shape.swift; sourceTree = "<group>"; };
+		F096974A2ADBD73A00C38AF4 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		F096974C2ADBDBB000C38AF4 /* CardDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetailView.swift; sourceTree = "<group>"; };
+		F096974E2ADBEE9F00C38AF4 /* CardDetailInformationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetailInformationView.swift; sourceTree = "<group>"; };
+		F09697502ADC069E00C38AF4 /* AnimationExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationExtension.swift; sourceTree = "<group>"; };
 		F0AC8A992AD94C1F0061612C /* Outline.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Outline.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0AC8A9C2AD94C1F0061612C /* OutlineApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutlineApp.swift; sourceTree = "<group>"; };
 		F0AC8A9E2AD94C1F0061612C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -92,6 +151,7 @@
 		F0AC8B032AD964EF0061612C /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		F0AC8B062AD965390061612C /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		F0AC8B0C2AD965950061612C /* Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Component.swift; sourceTree = "<group>"; };
+		F0AC8B032AD964EF0061612C /* RecommendedCoursesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedCoursesViewModel.swift; sourceTree = "<group>"; };
 		F0AC8B0E2AD9659D0061612C /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 		F0AC8B102AD965A70061612C /* Modifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Modifier.swift; sourceTree = "<group>"; };
 		F0AC8B152AD9660D0061612C /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
@@ -142,11 +202,59 @@
 				95E2EF732ADA75AA0083ADEE /* DataTestViewModel.swift */,
 			);
 			path = DataTest;
+		BB5239262ADAF70A00646494 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				BB5239272ADAF72A00646494 /* Logger.swift */,
+				BB52392A2ADAF7BD00646494 /* WorkoutManager.swift */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		BB5239352ADBD95300646494 /* GPSArtHome */ = {
+			isa = PBXGroup;
+			children = (
+				BB5239362ADBD99F00646494 /* GPSArtHomeView.swift */,
+				F0492E1C2ADD2AE900F6EADD /* Header.swift */,
+				F096974A2ADBD73A00C38AF4 /* CardView.swift */,
+				F096974C2ADBDBB000C38AF4 /* CardDetailView.swift */,
+				F096974E2ADBEE9F00C38AF4 /* CardDetailInformationView.swift */,
+				F09697422ADBC1D200C38AF4 /* Carousel.swift */,
+			);
+			path = GPSArtHome;
+			sourceTree = "<group>";
+		};
+		F01FDB9A2ADABC2C00BDA633 /* Tab */ = {
+			isa = PBXGroup;
+			children = (
+				F01FDB9D2ADABD3D00BDA633 /* TabView.swift */,
+				F01FDB9B2ADABC4600BDA633 /* TabBar.swift */,
+			);
+			path = Tab;
+			sourceTree = "<group>";
+		};
+		F05C97152ADA877A00D5D959 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				F05C97162ADA879100D5D959 /* LocationManager.swift */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
+		F06B93572ADAEC8500387DEB /* RecomendedCourses */ = {
+			isa = PBXGroup;
+			children = (
+				F06B93582ADAECA800387DEB /* RecommendedCourseView.swift */,
+				F05C971B2ADAE6E200D5D959 /* RecomendedCourseMap.swift */,
+			);
+			path = RecomendedCourses;
 			sourceTree = "<group>";
 		};
 		F0AC8A902AD94C1F0061612C = {
 			isa = PBXGroup;
 			children = (
+				BB52392D2ADAF93D00646494 /* Outline Watch App.entitlements */,
+				BB5239262ADAF70A00646494 /* Shared */,
 				F0AC8A9B2AD94C1F0061612C /* Outline */,
 				F0AC8AAD2AD94C200061612C /* Outline Watch */,
 				F0AC8AC42AD9514C0061612C /* .swiftlint.yml */,
@@ -168,6 +276,7 @@
 			children = (
 				959D90602ADA3A1000748BFB /* Info.plist */,
 				95E2EF6E2ADA3E160083ADEE /* GoogleService-Info.plist */,
+				BB52392E2ADAFB2E00646494 /* Outline.entitlements */,
 				F0AC8AFC2AD9637A0061612C /* Source */,
 				F0AC8AFD2AD9638C0061612C /* Resource */,
 				F0AC8AA22AD94C200061612C /* Preview Content */,
@@ -206,6 +315,11 @@
 			children = (
 				959D90242ADA35E600748BFB /* DataTest */,
 				F0AC8B002AD964AE0061612C /* View.swift */,
+				BB5239352ADBD95300646494 /* GPSArtHome */,
+				F06B93572ADAEC8500387DEB /* RecomendedCourses */,
+				F01FDB9A2ADABC2C00BDA633 /* Tab */,
+				F05C97182ADA87B800D5D959 /* LocationAuthorizationView.swift */,
+				BB5238FB2ADAF1CE00646494 /* InputUserInfoView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -215,6 +329,7 @@
 			children = (
 				95E2EF722ADA759B0083ADEE /* DataTest */,
 				F0AC8B032AD964EF0061612C /* ViewModel.swift */,
+				F0AC8B032AD964EF0061612C /* RecommendedCoursesViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -228,6 +343,7 @@
 				F0AC8AFA2AD963600061612C /* View */,
 				F0AC8AFB2AD963690061612C /* ViewModel */,
 				F0AC8B052AD965290061612C /* Model */,
+				F05C97152ADA877A00D5D959 /* Manager */,
 				F0AC8B082AD965470061612C /* DesignSystem */,
 			);
 			path = Source;
@@ -271,6 +387,7 @@
 				95E2EF762ADB8DD30083ADEE /* UserModelType.swift */,
 				95E2EF872ADBA5C70083ADEE /* CourseModel.swift */,
 				95E2EF702ADA6F230083ADEE /* CourseModelType.swift */,
+				F01FDB982ADABB6100BDA633 /* TabModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -288,7 +405,11 @@
 		F0AC8B092AD965520061612C /* Component */ = {
 			isa = PBXGroup;
 			children = (
-				F0AC8B0C2AD965950061612C /* Component.swift */,
+				F06B93602ADB836600387DEB /* Component.swift */,
+				F06B936D2ADC279100387DEB /* SlideToUnlock.swift */,
+				F09697462ADBCD6000C38AF4 /* Shape.swift */,
+				F05C7D552ADC565E006842DB /* PreferenceKey.swift */,
+				BB5239572ADC396300646494 /* BackgroundBlur.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -298,6 +419,7 @@
 			children = (
 				F0AC8B0E2AD9659D0061612C /* ColorExtension.swift */,
 				F0AC8B372AD96AE10061612C /* ViewExtension.swift */,
+				F09697502ADC069E00C38AF4 /* AnimationExtension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -398,6 +520,7 @@
 				F0AC8A962AD94C1F0061612C /* Frameworks */,
 				F0AC8A972AD94C1F0061612C /* Resources */,
 				F0AC8ABC2AD94C210061612C /* Embed Watch Content */,
+				BB5239252ADAF6EA00646494 /* Embed ExtensionKit Extensions */,
 			);
 			buildRules = (
 			);
@@ -526,7 +649,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				95E2EF772ADB8DD30083ADEE /* UserModelType.swift in Sources */,
+				F06B936C2ADC245700387DEB /* RecommendedCoursesViewModel.swift in Sources */,
+				F096974F2ADBEE9F00C38AF4 /* CardDetailInformationView.swift in Sources */,
+				BB5239582ADC396300646494 /* BackgroundBlur.swift in Sources */,
+				BB5239372ADBD99F00646494 /* GPSArtHomeView.swift in Sources */,
+				F06B93632ADB847900387DEB /* Component.swift in Sources */,
+				F06B93622ADB847500387DEB /* ContentView.swift in Sources */,
+				F09697472ADBCD6000C38AF4 /* Shape.swift in Sources */,
 				F0AC8B382AD96AE10061612C /* ViewExtension.swift in Sources */,
+				F09697432ADBC1D200C38AF4 /* Carousel.swift in Sources */,
+				F06B936E2ADC279100387DEB /* SlideToUnlock.swift in Sources */,
 				F0AC8B112AD965A70061612C /* Modifier.swift in Sources */,
 				F0AC8B072AD965390061612C /* UserModel.swift in Sources */,
 				F0AC8B0D2AD965950061612C /* Component.swift in Sources */,
@@ -539,6 +671,23 @@
 				F0AC8B042AD964EF0061612C /* ViewModel.swift in Sources */,
 				F0AC8A9D2AD94C1F0061612C /* OutlineApp.swift in Sources */,
 				95E2EF742ADA75AA0083ADEE /* DataTestViewModel.swift in Sources */,
+				BB52392B2ADAF7BD00646494 /* WorkoutManager.swift in Sources */,
+				F05C97172ADA879100D5D959 /* LocationManager.swift in Sources */,
+				F096974D2ADBDBB000C38AF4 /* CardDetailView.swift in Sources */,
+				F05C97192ADA87B800D5D959 /* LocationAuthorizationView.swift in Sources */,
+				F0AC8B0F2AD9659D0061612C /* ColorExtension.swift in Sources */,
+				F09697512ADC069E00C38AF4 /* AnimationExtension.swift in Sources */,
+				BB5238FC2ADAF1CE00646494 /* InputUserInfoView.swift in Sources */,
+				F06B93592ADAECA800387DEB /* RecommendedCourseView.swift in Sources */,
+				F05C7D562ADC565E006842DB /* PreferenceKey.swift in Sources */,
+				F05C971C2ADAE6E200D5D959 /* RecomendedCourseMap.swift in Sources */,
+				F01FDB9C2ADABC4600BDA633 /* TabBar.swift in Sources */,
+				F06B936B2ADC23E100387DEB /* Logger.swift in Sources */,
+				F096974B2ADBD73A00C38AF4 /* CardView.swift in Sources */,
+				F0492E1D2ADD2AE900F6EADD /* Header.swift in Sources */,
+				F0AC8A9D2AD94C1F0061612C /* OutlineApp.swift in Sources */,
+				F01FDB9E2ADABD3D00BDA633 /* TabView.swift in Sources */,
+				F01FDB992ADABB6100BDA633 /* TabModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -550,8 +699,10 @@
 				F0AC8B1D2AD966990061612C /* Model.swift in Sources */,
 				F0AC8B242AD9670A0061612C /* Component.swift in Sources */,
 				F0AC8B272AD967330061612C /* Extension.swift in Sources */,
+				BB5239292ADAF75C00646494 /* Logger.swift in Sources */,
 				F0AC8AB12AD94C200061612C /* ContentView.swift in Sources */,
 				F0AC8AAF2AD94C200061612C /* OutlineApp.swift in Sources */,
+				F06B936A2ADC23DF00387DEB /* WorkoutManager.swift in Sources */,
 				F0AC8B1C2AD966930061612C /* ViewModel.swift in Sources */,
 				F0AC8B1B2AD966890061612C /* View.swift in Sources */,
 			);
@@ -620,12 +771,14 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
 			};
 			name = Debug;
 		};
@@ -675,10 +828,12 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
 			};
 			name = Release;
 		};
@@ -687,6 +842,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CODE_SIGN_ENTITLEMENTS = "Outline Watch App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Outline Watch/Preview Content\"";
@@ -696,20 +853,20 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = Outline;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.bostongosari.Outline;
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = hyunjun;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.bostongosari.Outline.watchkitapp;
+				PRODUCT_BUNDLE_IDENTIFIER = hyunjun.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 9.6;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
 			};
 			name = Debug;
 		};
@@ -718,6 +875,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CODE_SIGN_ENTITLEMENTS = "Outline Watch App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Outline Watch/Preview Content\"";
@@ -727,13 +886,13 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = Outline;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.bostongosari.Outline;
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = hyunjun;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.bostongosari.Outline.watchkitapp;
+				PRODUCT_BUNDLE_IDENTIFIER = hyunjun.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -741,7 +900,7 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
 				VALIDATE_PRODUCT = YES;
-				WATCHOS_DEPLOYMENT_TARGET = 9.6;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
 			};
 			name = Release;
 		};
@@ -751,6 +910,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Outline/Outline.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Outline/Preview Content\"";
@@ -761,18 +921,22 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Outline/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Outline;
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "애플 워치를 이용하여 당신의 워크아웃 기록을 트래킹하여 운동에 저장하기 위하여 사용됩니다. ";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "러닝을 하며 운동 데이터를 확인하는 데에 건강정보를 사용합니다. ";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "당신의 러닝 데이터를 저장하기 위하여 사용됩니다. ";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "당신의 위치는 러닝을 기록하는데 사용됩니다. 운동 중에 백그라운드에서도 위치 서비스를 사용합니다.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.bostongosari.Outline;
+				PRODUCT_BUNDLE_IDENTIFIER = hyunjun;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -787,6 +951,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Outline/Outline.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Outline/Preview Content\"";
@@ -797,18 +962,22 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Outline/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Outline;
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "애플 워치를 이용하여 당신의 워크아웃 기록을 트래킹하여 운동에 저장하기 위하여 사용됩니다. ";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "러닝을 하며 운동 데이터를 확인하는 데에 건강정보를 사용합니다. ";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "당신의 러닝 데이터를 저장하기 위하여 사용됩니다. ";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "당신의 위치는 러닝을 기록하는데 사용됩니다. 운동 중에 백그라운드에서도 위치 서비스를 사용합니다.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.bostongosari.Outline;
+				PRODUCT_BUNDLE_IDENTIFIER = hyunjun;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SWIFT_EMIT_LOC_STRINGS = YES;
