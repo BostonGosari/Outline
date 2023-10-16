@@ -10,11 +10,11 @@ import SwiftUI
 struct GPSArtHomeView: View {
     
     @State private var scrollOffset: CGFloat = 0
+    @State var currentIndex: Int = 0
     
     // 받아오는 변수
-    var namespace: Namespace.ID
     @Binding var isShow: Bool
-    @Binding var currentIndex: Int
+    var namespace: Namespace.ID
     
     // Carousel 에 필요한 변수들
     let pageCount = 3
@@ -63,6 +63,19 @@ struct GPSArtHomeView: View {
                 }
                 .overlay(alignment: .top) {
                     InlineHeader(scrollOffset: scrollOffset)
+                }
+                
+                if isShow {
+                    Color.gray900Color.ignoresSafeArea()
+                    CardDetailView(isShow: $isShow, currentIndex: currentIndex, namespace: namespace)
+                        .zIndex(1)
+                        .transition(
+                            .asymmetric(
+                                insertion: .opacity.animation(.easeInOut(duration: 0.1)),
+                                removal: .opacity.animation(.easeInOut(duration: 0.3).delay(0.2))
+                            )
+                        )
+                        .ignoresSafeArea()
                 }
             }
             .background(
