@@ -8,19 +8,21 @@
 import SwiftUI
 
 struct GPSArtHomeView: View {
-    @State private var scrollOffset: CGFloat = 0
-    let scroll = 0
     
+    @State private var scrollOffset: CGFloat = 0
+    
+    // 받아오는 변수
     var namespace: Namespace.ID
     @Binding var isShow: Bool
     @Binding var currentIndex: Int
     
+    // Carousel 에 필요한 변수들
     let pageCount = 3
     let edgeSpace: CGFloat = 36
     let spacing: CGFloat = 20
     
-    let cardWidth: CGFloat = 318
-    let cardHeight: CGFloat = 484
+    // 뷰에 있는 요소들의 사이즈 조정
+    let carouselFrameHeight: CGFloat = 484
     let indexWidth: CGFloat = 25
     let indexHeight: CGFloat = 3
     
@@ -38,7 +40,7 @@ struct GPSArtHomeView: View {
                     VStack(spacing: 16) {
                         Carousel(pageCount: pageCount, edgeSpace: edgeSpace, spacing: spacing, currentIndex: $currentIndex) { pageIndex in
                             if !isShow {
-                                CardView(namespace: namespace, isShow: $isShow, currentIndex: $currentIndex, pageIndex: pageIndex)
+                                CardView(isShow: $isShow, currentIndex: $currentIndex, namespace: namespace, pageIndex: pageIndex)
                                     .transition(
                                         .asymmetric(
                                             insertion: .opacity.animation(.easeInOut(duration: 0.1)),
@@ -47,7 +49,7 @@ struct GPSArtHomeView: View {
                                     )
                             }
                         }
-                        .frame(height: cardHeight)
+                        .frame(height: carouselFrameHeight)
                         
                         HStack {
                             ForEach(0..<pageCount, id: \.self) { pageIndex in

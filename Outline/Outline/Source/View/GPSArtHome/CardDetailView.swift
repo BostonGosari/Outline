@@ -10,9 +10,9 @@ import MapKit
 
 struct CardDetailView: View {
     
-    var namespace: Namespace.ID
     @Binding var isShow: Bool
     var currentIndex: Int
+    var namespace: Namespace.ID
     
     @State private var appear = [false, false, false]
     @State private var viewSize = 0.0
@@ -26,6 +26,7 @@ struct CardDetailView: View {
     private let dragLimit: CGFloat = 60
     private let scrollLimit: CGFloat = 40
     
+    // 커진 카드의 크기
     private let cardHeight: CGFloat = 575
     
     var body: some View {

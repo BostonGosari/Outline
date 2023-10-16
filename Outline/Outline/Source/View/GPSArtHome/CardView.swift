@@ -10,11 +10,12 @@ import MapKit
 
 struct CardView: View {
     
-    var namespace: Namespace.ID
     @Binding var isShow: Bool
     @Binding var currentIndex: Int
+    var namespace: Namespace.ID
     var pageIndex: Int
     
+    // 작은 카드의 사이즈
     let cardWidth: CGFloat = 318
     let cardHeight: CGFloat = 484
     

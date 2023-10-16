@@ -37,7 +37,7 @@ struct TabView: View {
                     
                     if isShow {
                         Color.gray900Color.ignoresSafeArea()
-                        CardDetailView(namespace: namespace, isShow: $isShow, currentIndex: currentIndex)
+                        CardDetailView(isShow: $isShow, currentIndex: currentIndex, namespace: namespace)
                             .zIndex(1)
                             .transition(
                                 .asymmetric(
