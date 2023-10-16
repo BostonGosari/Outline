@@ -9,15 +9,8 @@ import SwiftUI
 import HealthKit
 import HealthKitUI
 
-enum PickerType {
-    case date
-    case gender
-    case height
-    case weight
-    case none
-}
-
 struct InputUserInfoView: View {
+   
     @EnvironmentObject var workoutManager: WorkoutManager
     @StateObject var viewModel = InputUserInfoViewModel()
 

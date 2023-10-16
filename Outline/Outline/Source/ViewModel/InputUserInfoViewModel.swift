@@ -7,21 +7,28 @@
 
 import SwiftUI
 
+enum PickerType {
+    case date
+    case gender
+    case height
+    case weight
+    case none
+}
+
 class InputUserInfoViewModel: ObservableObject {
+    
     @Published var birthday: Date = {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy.MM.dd"
         return dateFormatter.date(from: "2000.01.01")!
     }()
-    
     @Published var gender = "설정 안 됨"
     @Published var height = 160
     @Published var weight = 50
-    
     @Published var currentPicker: PickerType = .none
     @Published var isDefault = false
     
-    var defaultButtonImage:String {
+    var defaultButtonImage: String {
         isDefault ? "checkmark.square" : "square"
     }
     
