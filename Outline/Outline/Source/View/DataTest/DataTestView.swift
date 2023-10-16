@@ -8,12 +8,33 @@
 import SwiftUI
 
 struct DataTestView: View {
-    @StateObject var firstoreManager = FirstoreManager()
+    @StateObject private var firstoreManager = FirstoreManager()
     
-    private let uid = "41FE5C46-A040-4137-BB54-EA50AE748812"
+    private let uid = "9CB37801-A45F-4260-94D6-D9DC1853E4AB"
+    private let courseId = "an3yE14Ue1xsUKlDwUZu"
     
     var body: some View {
         VStack {
+            Text("user")
+                .font(.title)
+            Text("nickname: \(firstoreManager.user.userInfo.nickname)")
+            Text("weight: \(firstoreManager.user.userInfo.weight)")
+            Text("height: \(firstoreManager.user.userInfo.height)")
+            Text("gender: \(firstoreManager.user.userInfo.gender.rawValue)")
+            Text("course")
+                .font(.title)
+            ForEach(firstoreManager.courses, id: \.id) { course in
+                Text("courseName: \(course.courseName)")
+                Text("courseDuration: \(course.courseDuration)")
+                Text("courseLength: \(course.courseLength)")
+                Text("distance: \(course.distance)")
+                Text("heading: \(course.heading)")
+                Text("mapScale: \(course.mapScale)")
+                Text("alley: \(course.alley.rawValue)")
+                Text("centerLocation: \(course.centerLocation.latitude), \(course.centerLocation.longitude), ")
+                Text("level: \(course.level.rawValue)")
+                Text("thumanail: \(course.thumbnail)")
+            }
             Spacer()
             Button {
                 firstoreManager.readUserInfo(uid: uid)
@@ -21,7 +42,7 @@ struct DataTestView: View {
                 Text("readUserInfo")
             }
             Button {
-                firstoreManager.updateUserInfo(uid: uid, userInfo: UserInfo(nickname: "austin", birthday: Date(), height: 170, weight: 50))
+                firstoreManager.updateUserInfo(uid: uid, userInfo: UserInfo(nickname: "austin", birthday: Date(), height: 120, weight: 10))
             } label: {
                 Text("updatedUserInfo")
             }
@@ -41,7 +62,7 @@ struct DataTestView: View {
                 Text("readAllCourses")
             }
             Button {
-                firstoreManager.readCourse(id: "")
+                firstoreManager.readCourse(id: courseId)
             } label: {
                 Text("readAllCourses")
             }
