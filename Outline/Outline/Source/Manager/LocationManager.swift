@@ -9,7 +9,7 @@ import MapKit
 
 final class LocationManager: NSObject, CLLocationManagerDelegate, ObservableObject {
     
-    @Published var userLocation: CLLocationCoordinate2D?
+//    @Published var userLocation: CLLocationCoordinate2D?
     @Published var isAuthorized = false
     @Published var isNext = false
     
@@ -23,7 +23,7 @@ final class LocationManager: NSObject, CLLocationManagerDelegate, ObservableObje
     
     func requestLocation() {
         locationManager.requestWhenInUseAuthorization()
-        locationManager.startUpdatingLocation()
+//        locationManager.startUpdatingLocation()
     }
     
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
@@ -46,11 +46,11 @@ final class LocationManager: NSObject, CLLocationManagerDelegate, ObservableObje
         }
     }
     
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if let location = locations.last {
-            userLocation = location.coordinate
-        }
-    }
+//    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+//        if let location = locations.last {
+//            userLocation = location.coordinate
+//        }
+//    }
     
     func openAppSetting() {
         if let url = URL(string: UIApplication.openSettingsURLString) {
