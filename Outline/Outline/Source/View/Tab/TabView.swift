@@ -11,6 +11,10 @@ struct TabView: View {
     
     @State var selectedTab: Tab = .GPSArtRunning
     
+    @Namespace var namespace
+    @State var currentIndex = 0
+    @State var isShow = false
+    
     var body: some View {
         NavigationStack {
             ZStack {
@@ -21,7 +25,7 @@ struct TabView: View {
                         case .freeRunning:
                             Text("자유러닝 뷰")
                         case .GPSArtRunning:
-                            GPSArtHomeView()
+                            GPSArtHomeView(isShow: $isShow, namespace: namespace)
                         case .myRecord:
                             Text("나의기록 뷰")
                         }
@@ -30,6 +34,7 @@ struct TabView: View {
                     
                     TabBar(selectedTab: $selectedTab)
                         .frame(maxHeight: .infinity, alignment: .bottom)
+                        .opacity(isShow ? 0 : 1)
                 }
             }
         }

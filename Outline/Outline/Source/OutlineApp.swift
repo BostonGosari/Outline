@@ -12,9 +12,7 @@ struct OutlineApp: App {
     private let workoutManager = WorkoutManager.shared
     var body: some Scene {
         WindowGroup {
-//            ContentView()
-            InputUserInfoView()
-                .environmentObject(workoutManager)
+            ContentView()
         }
     }
 }

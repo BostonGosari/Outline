@@ -7,21 +7,32 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		BB5239372ADBD99F00646494 /* GPSArtHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5239362ADBD99F00646494 /* GPSArtHomeView.swift */; };
-		BB5239542ADC32F400646494 /* ViewOffsetKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5239532ADC32F400646494 /* ViewOffsetKey.swift */; };
-		BB5239582ADC396300646494 /* BackgroundBlur.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5239572ADC396300646494 /* BackgroundBlur.swift */; };
 		BB5238FC2ADAF1CE00646494 /* InputUserInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5238FB2ADAF1CE00646494 /* InputUserInfoView.swift */; };
 		BB5239292ADAF75C00646494 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5239272ADAF72A00646494 /* Logger.swift */; };
 		BB52392B2ADAF7BD00646494 /* WorkoutManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB52392A2ADAF7BD00646494 /* WorkoutManager.swift */; };
+		BB5239372ADBD99F00646494 /* GPSArtHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5239362ADBD99F00646494 /* GPSArtHomeView.swift */; };
+		BB5239582ADC396300646494 /* BackgroundBlur.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5239572ADC396300646494 /* BackgroundBlur.swift */; };
 		F01FDB992ADABB6100BDA633 /* TabModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01FDB982ADABB6100BDA633 /* TabModel.swift */; };
 		F01FDB9C2ADABC4600BDA633 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01FDB9B2ADABC4600BDA633 /* TabBar.swift */; };
 		F01FDB9E2ADABD3D00BDA633 /* TabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01FDB9D2ADABD3D00BDA633 /* TabView.swift */; };
+		F0492E1D2ADD2AE900F6EADD /* Header.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0492E1C2ADD2AE900F6EADD /* Header.swift */; };
+		F05C7D562ADC565E006842DB /* PreferenceKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05C7D552ADC565E006842DB /* PreferenceKey.swift */; };
 		F05C97172ADA879100D5D959 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05C97162ADA879100D5D959 /* LocationManager.swift */; };
 		F05C97192ADA87B800D5D959 /* LocationAuthorizationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05C97182ADA87B800D5D959 /* LocationAuthorizationView.swift */; };
 		F05C971C2ADAE6E200D5D959 /* RecomendedCourseMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05C971B2ADAE6E200D5D959 /* RecomendedCourseMap.swift */; };
 		F06B93592ADAECA800387DEB /* RecommendedCourseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06B93582ADAECA800387DEB /* RecommendedCourseView.swift */; };
 		F06B93622ADB847500387DEB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0AC8A9E2AD94C1F0061612C /* ContentView.swift */; };
 		F06B93632ADB847900387DEB /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06B93602ADB836600387DEB /* Component.swift */; };
+		F06B936A2ADC23DF00387DEB /* WorkoutManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB52392A2ADAF7BD00646494 /* WorkoutManager.swift */; };
+		F06B936B2ADC23E100387DEB /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5239272ADAF72A00646494 /* Logger.swift */; };
+		F06B936C2ADC245700387DEB /* RecommendedCoursesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0AC8B032AD964EF0061612C /* RecommendedCoursesViewModel.swift */; };
+		F06B936E2ADC279100387DEB /* SlideToUnlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06B936D2ADC279100387DEB /* SlideToUnlock.swift */; };
+		F09697432ADBC1D200C38AF4 /* Carousel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09697422ADBC1D200C38AF4 /* Carousel.swift */; };
+		F09697472ADBCD6000C38AF4 /* Shape.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09697462ADBCD6000C38AF4 /* Shape.swift */; };
+		F096974B2ADBD73A00C38AF4 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F096974A2ADBD73A00C38AF4 /* CardView.swift */; };
+		F096974D2ADBDBB000C38AF4 /* CardDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F096974C2ADBDBB000C38AF4 /* CardDetailView.swift */; };
+		F096974F2ADBEE9F00C38AF4 /* CardDetailInformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F096974E2ADBEE9F00C38AF4 /* CardDetailInformationView.swift */; };
+		F09697512ADC069E00C38AF4 /* AnimationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09697502ADC069E00C38AF4 /* AnimationExtension.swift */; };
 		F0AC8A9D2AD94C1F0061612C /* OutlineApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0AC8A9C2AD94C1F0061612C /* OutlineApp.swift */; };
 		F0AC8AA12AD94C200061612C /* Color.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F0AC8AA02AD94C200061612C /* Color.xcassets */; };
 		F0AC8AA42AD94C200061612C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F0AC8AA32AD94C200061612C /* Preview Assets.xcassets */; };
@@ -30,10 +41,6 @@
 		F0AC8AB12AD94C200061612C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0AC8AB02AD94C200061612C /* ContentView.swift */; };
 		F0AC8AB32AD94C210061612C /* Image.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F0AC8AB22AD94C210061612C /* Image.xcassets */; };
 		F0AC8AB62AD94C210061612C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F0AC8AB52AD94C210061612C /* Preview Assets.xcassets */; };
-		F0AC8B042AD964EF0061612C /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0AC8B032AD964EF0061612C /* ViewModel.swift */; };
-		F0AC8B072AD965390061612C /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0AC8B062AD965390061612C /* Model.swift */; };
-		F0AC8B0D2AD965950061612C /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0AC8B0C2AD965950061612C /* Component.swift */; };
-		F0AC8B042AD964EF0061612C /* RecommendedCoursesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0AC8B032AD964EF0061612C /* RecommendedCoursesViewModel.swift */; };
 		F0AC8B0F2AD9659D0061612C /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0AC8B0E2AD9659D0061612C /* ColorExtension.swift */; };
 		F0AC8B112AD965A70061612C /* Modifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0AC8B102AD965A70061612C /* Modifier.swift */; };
 		F0AC8B1B2AD966890061612C /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0AC8B192AD9661F0061612C /* View.swift */; };
@@ -84,22 +91,30 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		BB5239362ADBD99F00646494 /* GPSArtHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPSArtHomeView.swift; sourceTree = "<group>"; };
-		BB5239532ADC32F400646494 /* ViewOffsetKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewOffsetKey.swift; sourceTree = "<group>"; };
-		BB5239572ADC396300646494 /* BackgroundBlur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundBlur.swift; sourceTree = "<group>"; };
 		BB5238FB2ADAF1CE00646494 /* InputUserInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputUserInfoView.swift; sourceTree = "<group>"; };
 		BB5239272ADAF72A00646494 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		BB52392A2ADAF7BD00646494 /* WorkoutManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutManager.swift; sourceTree = "<group>"; };
 		BB52392D2ADAF93D00646494 /* Outline Watch App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Outline Watch App.entitlements"; sourceTree = "<group>"; };
 		BB52392E2ADAFB2E00646494 /* Outline.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Outline.entitlements; sourceTree = "<group>"; };
+		BB5239362ADBD99F00646494 /* GPSArtHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPSArtHomeView.swift; sourceTree = "<group>"; };
+		BB5239572ADC396300646494 /* BackgroundBlur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundBlur.swift; sourceTree = "<group>"; };
 		F01FDB982ADABB6100BDA633 /* TabModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabModel.swift; sourceTree = "<group>"; };
 		F01FDB9B2ADABC4600BDA633 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 		F01FDB9D2ADABD3D00BDA633 /* TabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabView.swift; sourceTree = "<group>"; };
+		F0492E1C2ADD2AE900F6EADD /* Header.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Header.swift; sourceTree = "<group>"; };
+		F05C7D552ADC565E006842DB /* PreferenceKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferenceKey.swift; sourceTree = "<group>"; };
 		F05C97162ADA879100D5D959 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		F05C97182ADA87B800D5D959 /* LocationAuthorizationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationAuthorizationView.swift; sourceTree = "<group>"; };
 		F05C971B2ADAE6E200D5D959 /* RecomendedCourseMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecomendedCourseMap.swift; sourceTree = "<group>"; };
 		F06B93582ADAECA800387DEB /* RecommendedCourseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedCourseView.swift; sourceTree = "<group>"; };
 		F06B93602ADB836600387DEB /* Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Component.swift; sourceTree = "<group>"; };
+		F06B936D2ADC279100387DEB /* SlideToUnlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideToUnlock.swift; sourceTree = "<group>"; };
+		F09697422ADBC1D200C38AF4 /* Carousel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Carousel.swift; sourceTree = "<group>"; };
+		F09697462ADBCD6000C38AF4 /* Shape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shape.swift; sourceTree = "<group>"; };
+		F096974A2ADBD73A00C38AF4 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		F096974C2ADBDBB000C38AF4 /* CardDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetailView.swift; sourceTree = "<group>"; };
+		F096974E2ADBEE9F00C38AF4 /* CardDetailInformationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetailInformationView.swift; sourceTree = "<group>"; };
+		F09697502ADC069E00C38AF4 /* AnimationExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationExtension.swift; sourceTree = "<group>"; };
 		F0AC8A992AD94C1F0061612C /* Outline.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Outline.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0AC8A9C2AD94C1F0061612C /* OutlineApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutlineApp.swift; sourceTree = "<group>"; };
 		F0AC8A9E2AD94C1F0061612C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -111,9 +126,6 @@
 		F0AC8AB22AD94C210061612C /* Image.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Image.xcassets; sourceTree = "<group>"; };
 		F0AC8AB52AD94C210061612C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		F0AC8AC42AD9514C0061612C /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
-		F0AC8B032AD964EF0061612C /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
-		F0AC8B062AD965390061612C /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
-		F0AC8B0C2AD965950061612C /* Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Component.swift; sourceTree = "<group>"; };
 		F0AC8B032AD964EF0061612C /* RecommendedCoursesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedCoursesViewModel.swift; sourceTree = "<group>"; };
 		F0AC8B0E2AD9659D0061612C /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 		F0AC8B102AD965A70061612C /* Modifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Modifier.swift; sourceTree = "<group>"; };
@@ -148,12 +160,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		BB5239352ADBD95300646494 /* GPSArtHome */ = {
-			isa = PBXGroup;
-			children = (
-				BB5239362ADBD99F00646494 /* GPSArtHomeView.swift */,
-			);
-			path = GPSArtHome;
 		BB5239262ADAF70A00646494 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
@@ -163,12 +169,24 @@
 			path = Shared;
 			sourceTree = "<group>";
 		};
+		BB5239352ADBD95300646494 /* GPSArtHome */ = {
+			isa = PBXGroup;
+			children = (
+				BB5239362ADBD99F00646494 /* GPSArtHomeView.swift */,
+				F0492E1C2ADD2AE900F6EADD /* Header.swift */,
+				F096974A2ADBD73A00C38AF4 /* CardView.swift */,
+				F096974C2ADBDBB000C38AF4 /* CardDetailView.swift */,
+				F096974E2ADBEE9F00C38AF4 /* CardDetailInformationView.swift */,
+				F09697422ADBC1D200C38AF4 /* Carousel.swift */,
+			);
+			path = GPSArtHome;
+			sourceTree = "<group>";
+		};
 		F01FDB9A2ADABC2C00BDA633 /* Tab */ = {
 			isa = PBXGroup;
 			children = (
 				F01FDB9D2ADABD3D00BDA633 /* TabView.swift */,
 				F01FDB9B2ADABC4600BDA633 /* TabBar.swift */,
-				BB5239532ADC32F400646494 /* ViewOffsetKey.swift */,
 			);
 			path = Tab;
 			sourceTree = "<group>";
@@ -335,6 +353,9 @@
 			isa = PBXGroup;
 			children = (
 				F06B93602ADB836600387DEB /* Component.swift */,
+				F06B936D2ADC279100387DEB /* SlideToUnlock.swift */,
+				F09697462ADBCD6000C38AF4 /* Shape.swift */,
+				F05C7D552ADC565E006842DB /* PreferenceKey.swift */,
 				BB5239572ADC396300646494 /* BackgroundBlur.swift */,
 			);
 			path = Component;
@@ -345,6 +366,7 @@
 			children = (
 				F0AC8B0E2AD9659D0061612C /* ColorExtension.swift */,
 				F0AC8B372AD96AE10061612C /* ViewExtension.swift */,
+				F09697502ADC069E00C38AF4 /* AnimationExtension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -564,25 +586,31 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F06B936C2ADC245700387DEB /* RecommendedCoursesViewModel.swift in Sources */,
+				F096974F2ADBEE9F00C38AF4 /* CardDetailInformationView.swift in Sources */,
 				BB5239582ADC396300646494 /* BackgroundBlur.swift in Sources */,
 				BB5239372ADBD99F00646494 /* GPSArtHomeView.swift in Sources */,
 				F06B93632ADB847900387DEB /* Component.swift in Sources */,
 				F06B93622ADB847500387DEB /* ContentView.swift in Sources */,
+				F09697472ADBCD6000C38AF4 /* Shape.swift in Sources */,
 				F0AC8B382AD96AE10061612C /* ViewExtension.swift in Sources */,
-				BB5239542ADC32F400646494 /* ViewOffsetKey.swift in Sources */,
+				F09697432ADBC1D200C38AF4 /* Carousel.swift in Sources */,
+				F06B936E2ADC279100387DEB /* SlideToUnlock.swift in Sources */,
 				F0AC8B112AD965A70061612C /* Modifier.swift in Sources */,
 				BB52392B2ADAF7BD00646494 /* WorkoutManager.swift in Sources */,
 				F05C97172ADA879100D5D959 /* LocationManager.swift in Sources */,
+				F096974D2ADBDBB000C38AF4 /* CardDetailView.swift in Sources */,
 				F05C97192ADA87B800D5D959 /* LocationAuthorizationView.swift in Sources */,
 				F0AC8B0F2AD9659D0061612C /* ColorExtension.swift in Sources */,
+				F09697512ADC069E00C38AF4 /* AnimationExtension.swift in Sources */,
 				BB5238FC2ADAF1CE00646494 /* InputUserInfoView.swift in Sources */,
-				F0AC8A9F2AD94C1F0061612C /* ContentView.swift in Sources */,
-				F0AC8B042AD964EF0061612C /* ViewModel.swift in Sources */,
-				BB5239282ADAF72A00646494 /* Logger.swift in Sources */,
-				F0AC8B042AD964EF0061612C /* RecommendedCoursesViewModel.swift in Sources */,
 				F06B93592ADAECA800387DEB /* RecommendedCourseView.swift in Sources */,
+				F05C7D562ADC565E006842DB /* PreferenceKey.swift in Sources */,
 				F05C971C2ADAE6E200D5D959 /* RecomendedCourseMap.swift in Sources */,
 				F01FDB9C2ADABC4600BDA633 /* TabBar.swift in Sources */,
+				F06B936B2ADC23E100387DEB /* Logger.swift in Sources */,
+				F096974B2ADBD73A00C38AF4 /* CardView.swift in Sources */,
+				F0492E1D2ADD2AE900F6EADD /* Header.swift in Sources */,
 				F0AC8A9D2AD94C1F0061612C /* OutlineApp.swift in Sources */,
 				F01FDB9E2ADABD3D00BDA633 /* TabView.swift in Sources */,
 				F01FDB992ADABB6100BDA633 /* TabModel.swift in Sources */,
@@ -600,7 +628,7 @@
 				BB5239292ADAF75C00646494 /* Logger.swift in Sources */,
 				F0AC8AB12AD94C200061612C /* ContentView.swift in Sources */,
 				F0AC8AAF2AD94C200061612C /* OutlineApp.swift in Sources */,
-				BB52392C2ADAF7BD00646494 /* WorkoutManager.swift in Sources */,
+				F06B936A2ADC23DF00387DEB /* WorkoutManager.swift in Sources */,
 				F0AC8B1C2AD966930061612C /* ViewModel.swift in Sources */,
 				F0AC8B1B2AD966890061612C /* View.swift in Sources */,
 			);
@@ -669,14 +697,14 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				WATCHOS_DEPLOYMENT_TARGET = 9.0;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
 			};
 			name = Debug;
 		};
@@ -726,12 +754,12 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
-				WATCHOS_DEPLOYMENT_TARGET = 9.0;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
 			};
 			name = Release;
 		};
@@ -740,23 +768,24 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = "Outline Watch App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Outline Watch/Preview Content\"";
-				DEVELOPMENT_TEAM = 8H945XJJGA;
+				DEVELOPMENT_TEAM = 77745NX67K;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = Outline;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.bostongosari.Outline;
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = hyunjun;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.bostongosari.Outline.watchkitapp;
+				PRODUCT_BUNDLE_IDENTIFIER = hyunjun.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -772,23 +801,24 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = "Outline Watch App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Outline Watch/Preview Content\"";
-				DEVELOPMENT_TEAM = 8H945XJJGA;
+				DEVELOPMENT_TEAM = 77745NX67K;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = Outline;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.bostongosari.Outline;
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = hyunjun;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.bostongosari.Outline.watchkitapp;
+				PRODUCT_BUNDLE_IDENTIFIER = hyunjun.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -810,7 +840,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Outline/Preview Content\"";
-				DEVELOPMENT_TEAM = 8H945XJJGA;
+				DEVELOPMENT_TEAM = 77745NX67K;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -830,7 +860,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.bostongosari.Outline;
+				PRODUCT_BUNDLE_IDENTIFIER = hyunjun;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -849,7 +879,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Outline/Preview Content\"";
-				DEVELOPMENT_TEAM = 8H945XJJGA;
+				DEVELOPMENT_TEAM = 77745NX67K;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -869,7 +899,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.bostongosari.Outline;
+				PRODUCT_BUNDLE_IDENTIFIER = hyunjun;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SWIFT_EMIT_LOC_STRINGS = YES;
