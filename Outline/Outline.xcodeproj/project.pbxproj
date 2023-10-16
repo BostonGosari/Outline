@@ -16,6 +16,16 @@
 		BB1D53022ADDB0310073771F /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = BB1D53012ADDB0310073771F /* FirebaseFirestore */; };
 		BB1D53042ADDB0310073771F /* FirebaseFirestoreCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = BB1D53032ADDB0310073771F /* FirebaseFirestoreCombine-Community */; };
 		BB1D53062ADDB0310073771F /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = BB1D53052ADDB0310073771F /* FirebaseFirestoreSwift */; };
+		BB1D53092ADDB27B0073771F /* WorkoutDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1D53082ADDB27B0073771F /* WorkoutDataView.swift */; };
+		BB1D530C2ADDBC560073771F /* Pretendard-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BB1D530B2ADDBC560073771F /* Pretendard-Black.ttf */; };
+		BB1D530E2ADDBC620073771F /* Pretendard-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BB1D530D2ADDBC620073771F /* Pretendard-Bold.ttf */; };
+		BB1D53102ADDBC690073771F /* Pretendard-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BB1D530F2ADDBC690073771F /* Pretendard-ExtraBold.ttf */; };
+		BB1D53142ADDBC790073771F /* Pretendard-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BB1D53132ADDBC790073771F /* Pretendard-ExtraLight.ttf */; };
+		BB1D53162ADDBC900073771F /* Pretendard-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BB1D53152ADDBC900073771F /* Pretendard-Light.ttf */; };
+		BB1D53182ADDBCA20073771F /* Pretendard-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BB1D53172ADDBCA20073771F /* Pretendard-Medium.ttf */; };
+		BB1D531A2ADDBCAB0073771F /* Pretendard-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BB1D53192ADDBCAB0073771F /* Pretendard-Regular.ttf */; };
+		BB1D531C2ADDBCB20073771F /* Pretendard-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BB1D531B2ADDBCB20073771F /* Pretendard-SemiBold.ttf */; };
+		BB1D531E2ADDBCB90073771F /* Pretendard-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BB1D531D2ADDBCB90073771F /* Pretendard-Thin.ttf */; };
 		BB5238FC2ADAF1CE00646494 /* InputUserInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5238FB2ADAF1CE00646494 /* InputUserInfoView.swift */; };
 		BB5239292ADAF75C00646494 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5239272ADAF72A00646494 /* Logger.swift */; };
 		BB52392B2ADAF7BD00646494 /* WorkoutManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB52392A2ADAF7BD00646494 /* WorkoutManager.swift */; };
@@ -108,6 +118,17 @@
 		95E2EF762ADB8DD30083ADEE /* UserModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModelType.swift; sourceTree = "<group>"; };
 		95E2EF872ADBA5C70083ADEE /* CourseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseModel.swift; sourceTree = "<group>"; };
 		BB1D52F62ADDA8260073771F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		BB1D53082ADDB27B0073771F /* WorkoutDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutDataView.swift; sourceTree = "<group>"; };
+		BB1D530B2ADDBC560073771F /* Pretendard-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Black.ttf"; sourceTree = "<group>"; };
+		BB1D530D2ADDBC620073771F /* Pretendard-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.ttf"; sourceTree = "<group>"; };
+		BB1D530F2ADDBC690073771F /* Pretendard-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraBold.ttf"; sourceTree = "<group>"; };
+		BB1D53132ADDBC790073771F /* Pretendard-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Pretendard-ExtraLight.ttf"; path = "../../../../../Apple/MC1/8_eighting.swiftpm/Media.xcassets/Fonts/Pretendard-ExtraLight.dataset/Pretendard-ExtraLight.ttf"; sourceTree = "<group>"; };
+		BB1D53152ADDBC900073771F /* Pretendard-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Light.ttf"; sourceTree = "<group>"; };
+		BB1D53172ADDBCA20073771F /* Pretendard-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Medium.ttf"; sourceTree = "<group>"; };
+		BB1D53192ADDBCAB0073771F /* Pretendard-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.ttf"; sourceTree = "<group>"; };
+		BB1D531B2ADDBCB20073771F /* Pretendard-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.ttf"; sourceTree = "<group>"; };
+		BB1D531D2ADDBCB90073771F /* Pretendard-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Thin.ttf"; sourceTree = "<group>"; };
+		BB1D531F2ADDBCE20073771F /* Outline.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Outline.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB5238FB2ADAF1CE00646494 /* InputUserInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputUserInfoView.swift; sourceTree = "<group>"; };
 		BB5239272ADAF72A00646494 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		BB52392A2ADAF7BD00646494 /* WorkoutManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutManager.swift; sourceTree = "<group>"; };
@@ -132,7 +153,6 @@
 		F096974C2ADBDBB000C38AF4 /* CardDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetailView.swift; sourceTree = "<group>"; };
 		F096974E2ADBEE9F00C38AF4 /* CardDetailInformationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetailInformationView.swift; sourceTree = "<group>"; };
 		F09697502ADC069E00C38AF4 /* AnimationExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationExtension.swift; sourceTree = "<group>"; };
-		F0AC8A992AD94C1F0061612C /* Outline.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = Outline.app; path = "/Users/haeunkim/Desktop/Outline/Outline/build/Debug-iphoneos/Outline.app"; sourceTree = "<absolute>"; };
 		F0AC8A9C2AD94C1F0061612C /* OutlineApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutlineApp.swift; sourceTree = "<group>"; };
 		F0AC8A9E2AD94C1F0061612C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		F0AC8AA02AD94C200061612C /* Color.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Color.xcassets; sourceTree = "<group>"; };
@@ -197,6 +217,30 @@
 			path = DataTest;
 			sourceTree = "<group>";
 		};
+		BB1D53072ADDB24A0073771F /* Running */ = {
+			isa = PBXGroup;
+			children = (
+				BB1D53082ADDB27B0073771F /* WorkoutDataView.swift */,
+			);
+			path = Running;
+			sourceTree = "<group>";
+		};
+		BB1D530A2ADDBC430073771F /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				BB1D530B2ADDBC560073771F /* Pretendard-Black.ttf */,
+				BB1D530F2ADDBC690073771F /* Pretendard-ExtraBold.ttf */,
+				BB1D530D2ADDBC620073771F /* Pretendard-Bold.ttf */,
+				BB1D531B2ADDBCB20073771F /* Pretendard-SemiBold.ttf */,
+				BB1D53172ADDBCA20073771F /* Pretendard-Medium.ttf */,
+				BB1D53192ADDBCAB0073771F /* Pretendard-Regular.ttf */,
+				BB1D531D2ADDBCB90073771F /* Pretendard-Thin.ttf */,
+				BB1D53152ADDBC900073771F /* Pretendard-Light.ttf */,
+				BB1D53132ADDBC790073771F /* Pretendard-ExtraLight.ttf */,
+			);
+			path = Font;
+			sourceTree = "<group>";
+		};
 		BB5239262ADAF70A00646494 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
@@ -253,6 +297,7 @@
 				F0AC8A9B2AD94C1F0061612C /* Outline */,
 				F0AC8AAD2AD94C200061612C /* Outline Watch */,
 				F0AC8AC42AD9514C0061612C /* .swiftlint.yml */,
+				BB1D531F2ADDBCE20073771F /* Outline.app */,
 			);
 			sourceTree = "<group>";
 		};
@@ -298,6 +343,7 @@
 		F0AC8AFA2AD963600061612C /* View */ = {
 			isa = PBXGroup;
 			children = (
+				BB1D53072ADDB24A0073771F /* Running */,
 				959D90242ADA35E600748BFB /* DataTest */,
 				BB5239352ADBD95300646494 /* GPSArtHome */,
 				F06B93572ADAEC8500387DEB /* RecomendedCourses */,
@@ -335,6 +381,7 @@
 		F0AC8AFD2AD9638C0061612C /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				BB1D530A2ADDBC430073771F /* Font */,
 				F0AC8B2F2AD968FD0061612C /* Image */,
 				F0AC8AA02AD94C200061612C /* Color.xcassets */,
 			);
@@ -517,7 +564,7 @@
 				BB1D53052ADDB0310073771F /* FirebaseFirestoreSwift */,
 			);
 			productName = Outline;
-			productReference = F0AC8A992AD94C1F0061612C /* Outline.app */;
+			productReference = BB1D531F2ADDBCE20073771F /* Outline.app */;
 			productType = "com.apple.product-type.application";
 		};
 		F0AC8AA82AD94C200061612C /* Outline Watch App */ = {
@@ -585,9 +632,18 @@
 			files = (
 				F0AC8AA42AD94C200061612C /* Preview Assets.xcassets in Resources */,
 				F0AC8B2C2AD967E30061612C /* Image.xcassets in Resources */,
+				BB1D531A2ADDBCAB0073771F /* Pretendard-Regular.ttf in Resources */,
 				BB1D52F72ADDA8260073771F /* GoogleService-Info.plist in Resources */,
 				F0AC8B2E2AD968A20061612C /* Icon.xcassets in Resources */,
 				F0AC8AA12AD94C200061612C /* Color.xcassets in Resources */,
+				BB1D531E2ADDBCB90073771F /* Pretendard-Thin.ttf in Resources */,
+				BB1D530C2ADDBC560073771F /* Pretendard-Black.ttf in Resources */,
+				BB1D53142ADDBC790073771F /* Pretendard-ExtraLight.ttf in Resources */,
+				BB1D530E2ADDBC620073771F /* Pretendard-Bold.ttf in Resources */,
+				BB1D53182ADDBCA20073771F /* Pretendard-Medium.ttf in Resources */,
+				BB1D53162ADDBC900073771F /* Pretendard-Light.ttf in Resources */,
+				BB1D53102ADDBC690073771F /* Pretendard-ExtraBold.ttf in Resources */,
+				BB1D531C2ADDBCB20073771F /* Pretendard-SemiBold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -643,6 +699,7 @@
 				F09697432ADBC1D200C38AF4 /* Carousel.swift in Sources */,
 				F06B936E2ADC279100387DEB /* SlideToUnlock.swift in Sources */,
 				F0AC8B112AD965A70061612C /* Modifier.swift in Sources */,
+				BB1D53092ADDB27B0073771F /* WorkoutDataView.swift in Sources */,
 				F0AC8B072AD965390061612C /* UserModel.swift in Sources */,
 				F0AC8B0F2AD9659D0061612C /* ColorExtension.swift in Sources */,
 				95E2EF882ADBA5C70083ADEE /* CourseModel.swift in Sources */,
