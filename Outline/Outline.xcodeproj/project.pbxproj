@@ -30,7 +30,6 @@
 		F06B936B2ADC23E100387DEB /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5239272ADAF72A00646494 /* Logger.swift */; };
 		F06B936C2ADC245700387DEB /* RecommendedCoursesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0AC8B032AD964EF0061612C /* RecommendedCoursesViewModel.swift */; };
 		F06B936E2ADC279100387DEB /* SlideToUnlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06B936D2ADC279100387DEB /* SlideToUnlock.swift */; };
-		F0864A3A2ADD6D8D00498DBA /* MapWatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0864A382ADD6CFA00498DBA /* MapWatchView.swift */; };
 		F09697432ADBC1D200C38AF4 /* Carousel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09697422ADBC1D200C38AF4 /* Carousel.swift */; };
 		F09697472ADBCD6000C38AF4 /* Shape.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09697462ADBCD6000C38AF4 /* Shape.swift */; };
 		F096974B2ADBD73A00C38AF4 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F096974A2ADBD73A00C38AF4 /* CardView.swift */; };
@@ -57,6 +56,7 @@
 		F0AC8B352AD96A360061612C /* WatchColor.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F0AC8B322AD969FD0061612C /* WatchColor.xcassets */; };
 		F0AC8B362AD96A3D0061612C /* WatchIcon.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F0AC8B302AD969DA0061612C /* WatchIcon.xcassets */; };
 		F0AC8B382AD96AE10061612C /* ViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0AC8B372AD96AE10061612C /* ViewExtension.swift */; };
+		F0E6481A2ADDA683002F9FAA /* MapWatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0864A382ADD6CFA00498DBA /* MapWatchView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -644,7 +644,7 @@
 				F0AC8B272AD967330061612C /* WatchExtension.swift in Sources */,
 				BB5239292ADAF75C00646494 /* Logger.swift in Sources */,
 				F0AC8AB12AD94C200061612C /* ContentWatchView.swift in Sources */,
-				F0864A3A2ADD6D8D00498DBA /* MapWatchView.swift in Sources */,
+				F0E6481A2ADDA683002F9FAA /* MapWatchView.swift in Sources */,
 				F0AC8AAF2AD94C200061612C /* OutlineWatchApp.swift in Sources */,
 				F06B936A2ADC23DF00387DEB /* WorkoutManager.swift in Sources */,
 				F0AC8B1C2AD966930061612C /* ViewModel.swift in Sources */,
