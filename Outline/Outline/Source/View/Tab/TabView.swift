@@ -25,7 +25,7 @@ struct TabView: View {
                         case .freeRunning:
                             Text("자유러닝 뷰")
                         case .GPSArtRunning:
-                            GPSArtHomeView(namespace: namespace, isShow: $isShow, currentIndex: $currentIndex)
+                            GPSArtHomeView(isShow: $isShow, namespace: namespace)
                         case .myRecord:
                             Text("나의기록 뷰")
                         }
@@ -34,19 +34,7 @@ struct TabView: View {
                     
                     TabBar(selectedTab: $selectedTab)
                         .frame(maxHeight: .infinity, alignment: .bottom)
-                    
-                    if isShow {
-                        Color.gray900Color.ignoresSafeArea()
-                        CardDetailView(isShow: $isShow, currentIndex: currentIndex, namespace: namespace)
-                            .zIndex(1)
-                            .transition(
-                                .asymmetric(
-                                    insertion: .opacity.animation(.easeInOut(duration: 0.1)),
-                                    removal: .opacity.animation(.easeInOut(duration: 0.3).delay(0.2))
-                                )
-                            )
-                            .ignoresSafeArea()
-                    }
+                        .opacity(isShow ? 0 : 1)
                 }
             }
         }
