@@ -11,7 +11,7 @@ struct WatchTabView: View {
     var body: some View {
         TabView {
             Text("Control View")
-            Text("Map View")
+            MapWatchView()
             Text("Running View")
         }
     }
