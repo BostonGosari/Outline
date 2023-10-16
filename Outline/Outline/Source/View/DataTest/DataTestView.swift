@@ -23,17 +23,21 @@ struct DataTestView: View {
             Text("gender: \(firstoreManager.user.userInfo.gender.rawValue)")
             Text("course")
                 .font(.title)
-            ForEach(firstoreManager.courses, id: \.id) { course in
-                Text("courseName: \(course.courseName)")
-                Text("courseDuration: \(course.courseDuration)")
-                Text("courseLength: \(course.courseLength)")
-                Text("distance: \(course.distance)")
-                Text("heading: \(course.heading)")
-                Text("mapScale: \(course.mapScale)")
-                Text("alley: \(course.alley.rawValue)")
-                Text("centerLocation: \(course.centerLocation.latitude), \(course.centerLocation.longitude), ")
-                Text("level: \(course.level.rawValue)")
-                Text("thumanail: \(course.thumbnail)")
+            VStack {
+                ScrollView {
+                    ForEach(firstoreManager.courses, id: \.id) { course in
+                        Text("courseName: \(course.courseName)")
+                        Text("courseDuration: \(course.courseDuration)")
+                        Text("courseLength: \(course.courseLength)")
+                        Text("distance: \(course.distance)")
+                        Text("heading: \(course.heading)")
+                        Text("mapScale: \(course.mapScale)")
+                        Text("alley: \(course.alley.rawValue)")
+                        Text("centerLocation: \(course.centerLocation.latitude), \(course.centerLocation.longitude), ")
+                        Text("level: \(course.level.rawValue)")
+                        Text("thumanail: \(course.thumbnail)")
+                    }
+                }
             }
             Spacer()
             Button {

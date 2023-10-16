@@ -67,7 +67,6 @@ struct UserInfoModel: UserModelProtocol {
         completion(.success(true))
     }
     
-    // TODO: CoreData 연결 후 기능 구현
     func readUserRecords() {}
     func readUserRecord(id: String) {}
     func updateOrCreateUserRecord(id: String, record: Record) {}

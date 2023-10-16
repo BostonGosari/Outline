@@ -37,6 +37,7 @@ struct Placemark: Codable, Hashable {
     var throughfare: String
     var subThroughfare: String
 }
+
 enum CourseLevel: String, Codable, Hashable {
     case easy
     case normal

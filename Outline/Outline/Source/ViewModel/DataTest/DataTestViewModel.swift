@@ -16,7 +16,7 @@ let recordsDummy = [
     Record(courseName: "댕댕런", runningType: .gpsArt, runningDate: Date(), startTime: Date(), endTime: Date(), runningDuration: Date(), courseLength: 5.2, runningLength: 5.0, averagePace: Date(), calorie: 300, bpm: 200, cadence: 200, coursePaths: coordinatesDummy, heading: 30, mapScale: 1.5),
     Record(courseName: "오리런", runningType: .gpsArt, runningDate: Date(), startTime: Date(), endTime: Date(), runningDuration: Date(), courseLength: 2.2, runningLength: 2.0, averagePace: Date(), calorie: 100, bpm: 100, cadence: 100, coursePaths: coordinatesDummy, heading: 10, mapScale: 1.1)
 ]
-let runningDataDummy = RunningData(currentTime: 20, currentLocation: 20, paceList: [2,3], bpmList: [200, 100])
+let runningDataDummy = RunningData(currentTime: 20, currentLocation: 20, paceList: [2, 3], bpmList: [200, 100])
 let userDataDummy = UserData(records: recordsDummy, currentRunningData: runningDataDummy)
 
 class FirstoreManager: ObservableObject {
@@ -75,6 +75,7 @@ class FirstoreManager: ObservableObject {
         courseModel.readAllCourses { result in
             switch result {
             case .success(let courseList):
+                self.courses = courseList
                 print(courseList)
             case .failure(let error):
                 print(error)
@@ -85,8 +86,9 @@ class FirstoreManager: ObservableObject {
     func readCourse(id: String) {
         courseModel.readCourse(id: id) { result in
             switch result {
-            case .success(let courseList):
-                print(courseList)
+            case .success(let course):
+                self.courses.append(course)
+                print(course)
             case .failure(let error):
                 print(error)
             }
