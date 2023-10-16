@@ -69,13 +69,11 @@ class InputNicknameViewModel: ObservableObject {
 
 extension InputNicknameViewModel {
     private func checkDuplication() -> Bool {
-        currentState = .duplication
         /*중복이면 false*/
         return true
     }
     
     private func checkCount() -> Bool {
-        currentState = .outOfCount
         return nickname.count >= 2 && nickname.count <= 16
     }
     
