@@ -28,7 +28,7 @@ extension View {
     func onScrollViewOffsetChanged(action: @escaping (_ offset: CGFloat) -> Void) -> some View {
         self
             .background(
-                GeometryReader {geo in
+                GeometryReader { geo in
                     Text("")
                         .preference(key: ScrollViewOffsetPreferenceKey.self, value: geo.frame(in: .global).minY)
                 }
