@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentWatchView: View {
     var body: some View {
-        WatchTabView()
+        CourseListWatchView()
     }
 }
 
