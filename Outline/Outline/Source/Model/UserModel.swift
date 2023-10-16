@@ -17,8 +17,8 @@ protocol UserModelProtocol {
 }
 
 enum ReadDataError: Error {
-    case notFound
-    case noData
+    case dataNotFound
+    case typeError
 }
 
 struct UserInfoModel: UserModelProtocol {
@@ -28,7 +28,7 @@ struct UserInfoModel: UserModelProtocol {
     func readUserInfo(uid: String, completion: @escaping (Result<UserInfo, ReadDataError>) -> Void) {
         userListRef.document(uid).getDocument { (snapshot, error) in
             guard let snapshot = snapshot, snapshot.exists, error == nil else {
-                completion(.failure(.noData))
+                completion(.failure(.dataNotFound))
                 return
             }
             
@@ -36,7 +36,7 @@ struct UserInfoModel: UserModelProtocol {
                 let userInfo = try snapshot.data(as: UserInfo.self)
                 completion(.success(userInfo))
             } catch {
-                completion(.failure(.noData))
+                completion(.failure(.typeError))
             }
         }
     }
@@ -46,7 +46,7 @@ struct UserInfoModel: UserModelProtocol {
             try userListRef.document(uid).setData(from: userInfo)
             completion(.success(true))
         } catch {
-            completion(.failure(.noData))
+            completion(.failure(.typeError))
         }
     }
     
@@ -58,7 +58,7 @@ struct UserInfoModel: UserModelProtocol {
             try userListRef.document(uid).setData(from: newUserInfo)
             completion(.success(uid))
         } catch {
-            completion(.failure(.noData))
+            completion(.failure(.typeError))
         }
     }
     

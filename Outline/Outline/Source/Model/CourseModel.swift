@@ -11,12 +11,12 @@ import SwiftUI
 
 protocol CourseModelProtocol {
     func readAllCourses(completion: @escaping (Result<AllGPSArtCourses, GPSArtError>) -> Void)
-    func readCourse(id: String, completion: @escaping (Result<GPSArtCourse, DecodingError>) -> Void)
+    func readCourse(id: String, completion: @escaping (Result<GPSArtCourse, GPSArtError>) -> Void)
 }
 
 enum GPSArtError: Error {
-    case noCourses
-    case networkError
+    case dataNotFound
+    case typeError
 }
 
 struct CourseModel: CourseModelProtocol {
@@ -25,7 +25,7 @@ struct CourseModel: CourseModelProtocol {
     func readAllCourses(completion: @escaping (Result<AllGPSArtCourses, GPSArtError>) -> Void) {
         courseListRef.getDocuments { (snapshot, error) in
             guard let snapshot = snapshot, error == nil else {
-                completion(.failure(.noCourses))
+                completion(.failure(.dataNotFound))
                 return
             }
             do {
@@ -36,15 +36,15 @@ struct CourseModel: CourseModelProtocol {
                 }
                 completion(.success(courseList))
             } catch {
-                completion(.failure(.networkError))
+                completion(.failure(.typeError))
             }
         }
     }
     
-    func readCourse(id: String, completion: @escaping (Result<GPSArtCourse, DecodingError>) -> Void) {
+    func readCourse(id: String, completion: @escaping (Result<GPSArtCourse, GPSArtError>) -> Void) {
         courseListRef.document(id).getDocument { (snapshot, error) in
             guard let snapshot = snapshot, snapshot.exists, error == nil else {
-                print("not found")
+                completion(.failure(.dataNotFound))
                 return
             }
             
@@ -52,18 +52,7 @@ struct CourseModel: CourseModelProtocol {
                 let courseInfo = try snapshot.data(as: GPSArtCourse.self)
                 completion(.success(courseInfo))
             } catch {
-                switch error {
-                case DecodingError.valueNotFound(_, let context):
-                    print(context)
-                case DecodingError.dataCorrupted(let context):
-                    print(context)
-                case DecodingError.typeMismatch(_, let context):
-                    print(context)
-                case DecodingError.keyNotFound(_, let context):
-                    print(context)
-                default:
-                    print("error")
-                }
+                completion(.failure(.typeError))
             }
         }
     }

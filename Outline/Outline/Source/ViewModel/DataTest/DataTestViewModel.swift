@@ -22,6 +22,7 @@ let userDataDummy = UserData(records: recordsDummy, currentRunningData: runningD
 class FirstoreManager: ObservableObject {
     @Published var user = User(userInfo: userInfoDummy, userData: userDataDummy)
     @Published var courses: AllGPSArtCourses = []
+    @Published var uid = ""
     
     let userInfoModel = UserInfoModel()
     let courseModel = CourseModel()
@@ -52,8 +53,8 @@ class FirstoreManager: ObservableObject {
     func createUser(nickname: String = "") {
         userInfoModel.createUser(nickname: "austin") { result in
             switch result {
-            case .success(let isSuccess):
-                print("\(isSuccess)")
+            case .success(let uid):
+                self.uid = uid
             case .failure(let error):
                 print(error)
             }

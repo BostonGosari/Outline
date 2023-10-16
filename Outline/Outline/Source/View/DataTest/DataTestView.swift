@@ -10,7 +10,6 @@ import SwiftUI
 struct DataTestView: View {
     @StateObject private var firstoreManager = FirstoreManager()
     
-    private let uid = "9CB37801-A45F-4260-94D6-D9DC1853E4AB"
     private let courseId = "an3yE14Ue1xsUKlDwUZu"
     
     var body: some View {
@@ -41,12 +40,12 @@ struct DataTestView: View {
             }
             Spacer()
             Button {
-                firstoreManager.readUserInfo(uid: uid)
+                firstoreManager.readUserInfo(uid: firstoreManager.uid)
             } label: {
                 Text("readUserInfo")
             }
             Button {
-                firstoreManager.updateUserInfo(uid: uid, userInfo: UserInfo(nickname: "austin", birthday: Date(), height: 120, weight: 10))
+                firstoreManager.updateUserInfo(uid: firstoreManager.uid, userInfo: UserInfo(nickname: "austin", birthday: Date(), height: 120, weight: 10))
             } label: {
                 Text("updatedUserInfo")
             }
@@ -56,7 +55,7 @@ struct DataTestView: View {
                 Text("createUserInfo")
             }
             Button {
-                firstoreManager.deleteUser(uid: uid)
+                firstoreManager.deleteUser(uid: firstoreManager.uid)
             } label: {
                 Text("deleteUser")
             }
