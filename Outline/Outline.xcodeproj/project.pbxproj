@@ -13,6 +13,7 @@
 		95E2EF772ADB8DD30083ADEE /* UserModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E2EF762ADB8DD30083ADEE /* UserModelType.swift */; };
 		95E2EF882ADBA5C70083ADEE /* CourseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E2EF872ADBA5C70083ADEE /* CourseModel.swift */; };
 		95EB1EE62ADDB38000B47984 /* CoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 95EB1EE42ADDB38000B47984 /* CoreDataModel.xcdatamodeld */; };
+		95EB1EE92ADDC43400B47984 /* PersistentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EB1EE82ADDC43400B47984 /* PersistentController.swift */; };
 		BB1D52F72ADDA8260073771F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BB1D52F62ADDA8260073771F /* GoogleService-Info.plist */; };
 		BB1D53022ADDB0310073771F /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = BB1D53012ADDB0310073771F /* FirebaseFirestore */; };
 		BB1D53042ADDB0310073771F /* FirebaseFirestoreCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = BB1D53032ADDB0310073771F /* FirebaseFirestoreCombine-Community */; };
@@ -111,6 +112,7 @@
 		95EB1EDE2ADDB23B00B47984 /* Outline.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = Outline.app; path = "/Users/seunguimoon/Desktop/projects/MacC/Outline/Outline/build/Debug-iphoneos/Outline.app"; sourceTree = "<absolute>"; };
 		95EB1EDF2ADDB23B00B47984 /* Outline Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = "Outline Watch App.app"; path = "/Users/seunguimoon/Desktop/projects/MacC/Outline/Outline/build/Debug-watchos/Outline Watch App.app"; sourceTree = "<absolute>"; };
 		95EB1EE52ADDB38000B47984 /* CoreDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataModel.xcdatamodel; sourceTree = "<group>"; };
+		95EB1EE82ADDC43400B47984 /* PersistentController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentController.swift; sourceTree = "<group>"; };
 		BB1D52F62ADDA8260073771F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		BB5238FB2ADAF1CE00646494 /* InputUserInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputUserInfoView.swift; sourceTree = "<group>"; };
 		BB5239272ADAF72A00646494 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
@@ -197,6 +199,14 @@
 				95E2EF732ADA75AA0083ADEE /* DataTestViewModel.swift */,
 			);
 			path = DataTest;
+			sourceTree = "<group>";
+		};
+		95EB1EE72ADDC42000B47984 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				95EB1EE82ADDC43400B47984 /* PersistentController.swift */,
+			);
+			path = CoreData;
 			sourceTree = "<group>";
 		};
 		BB5239262ADAF70A00646494 /* Shared */ = {
@@ -368,6 +378,7 @@
 		F0AC8B052AD965290061612C /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				95EB1EE72ADDC42000B47984 /* CoreData */,
 				F0AC8B062AD965390061612C /* UserModel.swift */,
 				95E2EF762ADB8DD30083ADEE /* UserModelType.swift */,
 				95E2EF872ADBA5C70083ADEE /* CourseModel.swift */,
@@ -668,6 +679,7 @@
 				F01FDB9C2ADABC4600BDA633 /* TabBar.swift in Sources */,
 				F06B936B2ADC23E100387DEB /* Logger.swift in Sources */,
 				F096974B2ADBD73A00C38AF4 /* CardView.swift in Sources */,
+				95EB1EE92ADDC43400B47984 /* PersistentController.swift in Sources */,
 				F0492E1D2ADD2AE900F6EADD /* Header.swift in Sources */,
 				F0AC8A9D2AD94C1F0061612C /* OutlineApp.swift in Sources */,
 				F01FDB9E2ADABD3D00BDA633 /* TabView.swift in Sources */,
