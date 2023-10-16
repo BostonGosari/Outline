@@ -9,6 +9,7 @@ import SwiftUI
 
 struct DataTestView: View {
     @StateObject private var firstoreManager = FirstoreManager()
+    @Environment(\.managedObjectContext) var managedObjectContext 
     
     private let courseId = "an3yE14Ue1xsUKlDwUZu"
     
