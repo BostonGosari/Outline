@@ -10,6 +10,8 @@ import MapKit
 
 struct RecomendedCourseMap: UIViewRepresentable {
     
+    @Binding var userLocation: CLLocationCoordinate2D?
+    
     var camera: MKMapCamera
     var coordinates: [CLLocationCoordinate2D] = []
     
@@ -50,6 +52,10 @@ struct RecomendedCourseMap: UIViewRepresentable {
                 return renderer
             }
             return MKOverlayRenderer()
+        }
+        
+        func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
+            parent.userLocation = userLocation.coordinate
         }
     }
 }
