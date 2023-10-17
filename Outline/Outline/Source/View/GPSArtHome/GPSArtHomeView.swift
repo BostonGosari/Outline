@@ -59,6 +59,7 @@ struct GPSArtHomeView: View {
                                     .animation(.easeInOut, value: currentIndex)
                             }
                         }
+                        BottomScrollView()
                     }
                 }
                 .overlay(alignment: .top) {
@@ -86,5 +87,5 @@ struct GPSArtHomeView: View {
 }
 
 #Preview {
-    TabView()
+    HomeTabView()
 }

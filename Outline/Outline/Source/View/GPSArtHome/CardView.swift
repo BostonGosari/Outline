@@ -83,5 +83,5 @@ struct CardView: View {
 }
 
 #Preview {
-    TabView()
+    HomeTabView()
 }
