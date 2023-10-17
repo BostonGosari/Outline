@@ -11,6 +11,12 @@ import CoreData
 import SwiftUI
 
 let userInfoDummy = UserInfo(nickname: "austin", birthday: Date(), height: 175, weight: 70)
+let dummyCourseData = CourseData(courseName: "오리런", runningDate: Date(), startTime: Date(), endTime: Date(), heading: 1.4, distance: 200, coursePathes: [
+    CLLocationCoordinate2D(latitude: 26, longitude: 152),
+    CLLocationCoordinate2D(latitude: 16, longitude: 122)
+], courseLength: 5
+)
+let dummyHealthData = HealthData(totalTime: "40", averageCyclingCadence: "20", totalRunningDistance: "5", totalEnergy: "500", averageHeartRate: "150", averagePace: "5")
 
 class DataTestViewModel: ObservableObject {
     
@@ -99,10 +105,3 @@ class DataTestViewModel: ObservableObject {
         userDataModel.deleteRunningRecord(record)
     }
 }
-
-let dummyCourseData = CourseData(courseName: "오리런", runningDate: Date(), startTime: Date(), endTime: Date(), heading: 1.4, distance: 200, coursePathes: [
-    CLLocationCoordinate2D(latitude: 26, longitude: 152),
-    CLLocationCoordinate2D(latitude: 16, longitude: 122)
-], courseLength: 5
-)
-let dummyHealthData = HealthData(totalTime: "40", averageCyclingCadence: "20", totalRunningDistance: "5", totalEnergy: "500", averageHeartRate: "150", averagePace: "5")

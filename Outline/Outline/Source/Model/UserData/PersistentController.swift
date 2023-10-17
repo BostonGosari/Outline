@@ -14,7 +14,6 @@ struct PersistenceController {
   let container: NSPersistentContainer
 
     init(inMemory: Bool = false) {
-        // 여기 name은 .xcdatamodeld의 파일명과 같이야 한다.
         container = NSPersistentContainer(name: "UserCoreDataModel")
         container.loadPersistentStores { _, error in
           if let error = error as NSError? {
@@ -22,7 +21,7 @@ struct PersistenceController {
           }
         }
     }
-    // context 변화에 대해 저장하는 method 생성
+
     func saveContext() {
         let context = container.viewContext
         if context.hasChanges {
