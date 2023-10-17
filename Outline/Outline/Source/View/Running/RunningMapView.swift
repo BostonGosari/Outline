@@ -94,7 +94,7 @@ extension RunningMapView {
                         )
                         .scaleEffect(isLongPressed ? 1.5 : 1)
                         .simultaneousGesture(
-                            LongPressGesture(minimumDuration: 3.0)
+                            LongPressGesture(minimumDuration: 2.0)
                                 .updating($isLongPressed) { currentState, gestureState, _ in
                                     gestureState = currentState
                                 }
