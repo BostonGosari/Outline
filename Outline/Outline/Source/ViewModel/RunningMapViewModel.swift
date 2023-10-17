@@ -22,6 +22,7 @@ enum CurrentMapType {
 class RunningMapViewModel: ObservableObject {
     @Published var runningType: CurrentRunningType = .running
     @Published var mapType: CurrentMapType = .gpsArtRun
+    @Published var isUserLocationCenter = false
     
     let coordinates: [CLLocationCoordinate2D] = {
         if let kmlFilePath = Bundle.main.path(forResource: "test", ofType: "kml") {
@@ -33,5 +34,9 @@ class RunningMapViewModel: ObservableObject {
     
     func moveToUserLocation() {
         
+    }
+    
+    func setUserLocationCenter() {
+        isUserLocationCenter = true
     }
 }
