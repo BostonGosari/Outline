@@ -9,7 +9,7 @@ import SwiftUI
 
 struct RunningMapView: View {
     @StateObject var locationManager = LocationManager()
-    @StateObject private var viewModel = RunningViewModel()
+    @StateObject private var viewModel = RunningMapViewModel()
 
     var body: some View {
         ZStack {

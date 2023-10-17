@@ -1,5 +1,5 @@
 //
-//  RunningViewModel.swift
+//  RunningMapViewModel.swift
 //  Outline
 //
 //  Created by hyebin on 10/17/23.
@@ -19,7 +19,7 @@ enum CurrentMapType {
     case freeRun
 }
 
-class RunningViewModel: ObservableObject {
+class RunningMapViewModel: ObservableObject {
     @Published var runningType: CurrentRunningType = .running
     @Published var mapType: CurrentMapType = .gpsArt
 }
