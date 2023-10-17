@@ -15,7 +15,7 @@ struct PersistenceController {
 
     init(inMemory: Bool = false) {
         // 여기 name은 .xcdatamodeld의 파일명과 같이야 한다.
-        container = NSPersistentContainer(name: "CoreDataModel")
+        container = NSPersistentContainer(name: "UserCoreDataModel")
         container.loadPersistentStores { _, error in
           if let error = error as NSError? {
             fatalError("Unresolved error \(error), \(error.userInfo)")

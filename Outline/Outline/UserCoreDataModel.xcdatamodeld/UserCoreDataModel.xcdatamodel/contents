@@ -1,35 +1,39 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22222" systemVersion="23A344" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
-    <entity name="CourseData" representedClassName=".CourseData" syncable="YES" codeGenerationType="class">
-        <attribute name="courseLength" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+    <entity name="CoreCoordinate" representedClassName="CoreCoordinate" syncable="YES" codeGenerationType="class">
+        <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+    </entity>
+    <entity name="CoreCourseData" representedClassName=".CoreCourseData" syncable="YES" codeGenerationType="class">
+        <attribute name="courseLength" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="courseName" attributeType="String"/>
         <attribute name="distance" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="endTime" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="heading" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <attribute name="mapScale" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="runningDate" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="runningDuration" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="runningLength" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="startTime" attributeType="Date" usesScalarValueType="NO"/>
-        <relationship name="parentRecord" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="RunningRecord" inverseName="courseData" inverseEntity="RunningRecord"/>
+        <relationship name="parentRecord" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CoreRunningRecord" inverseName="courseData" inverseEntity="CoreRunningRecord"/>
     </entity>
-    <entity name="HealthData" representedClassName=".HealthData" syncable="YES" codeGenerationType="class">
+    <entity name="CoreHealthData" representedClassName=".CoreHealthData" syncable="YES" codeGenerationType="class">
         <attribute name="averageCyclingCadence" attributeType="String"/>
         <attribute name="averageHeartRate" attributeType="String"/>
         <attribute name="averagePace" attributeType="String"/>
         <attribute name="totalEnergy" attributeType="String"/>
         <attribute name="totalRunningDistance" attributeType="String"/>
         <attribute name="totalTime" attributeType="String"/>
-        <relationship name="recordHeathData" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="RunningRecord" inverseName="healthData" inverseEntity="RunningRecord"/>
+        <relationship name="recordHeathData" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CoreRunningRecord" inverseName="healthData" inverseEntity="CoreRunningRecord"/>
     </entity>
-    <entity name="RunningRecord" representedClassName=".RunningRecord" syncable="YES" codeGenerationType="class">
+    <entity name="CoreRunningRecord" representedClassName=".CoreRunningRecord" syncable="YES" codeGenerationType="class">
         <attribute name="id" attributeType="String"/>
         <attribute name="runningType" attributeType="String"/>
-        <relationship name="courseData" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CourseData" inverseName="parentRecord" inverseEntity="CourseData"/>
-        <relationship name="healthData" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="HealthData" inverseName="recordHeathData" inverseEntity="HealthData"/>
-        <relationship name="parentUserData" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="UserData" inverseName="records" inverseEntity="UserData"/>
+        <relationship name="courseData" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CoreCourseData" inverseName="parentRecord" inverseEntity="CoreCourseData"/>
+        <relationship name="healthData" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CoreHealthData" inverseName="recordHeathData" inverseEntity="CoreHealthData"/>
+        <relationship name="parentUserData" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CoreUserData" inverseName="records" inverseEntity="CoreUserData"/>
     </entity>
-    <entity name="UserData" representedClassName="UserData" syncable="YES" codeGenerationType="class">
-        <relationship name="records" toMany="YES" deletionRule="Nullify" destinationEntity="RunningRecord" inverseName="parentUserData" inverseEntity="RunningRecord"/>
+    <entity name="CoreUserData" representedClassName=".CoreUserData" syncable="YES" codeGenerationType="class">
+        <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <relationship name="records" toMany="YES" deletionRule="Nullify" destinationEntity="CoreRunningRecord" inverseName="parentUserData" inverseEntity="CoreRunningRecord"/>
     </entity>
 </model>

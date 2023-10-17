@@ -6,26 +6,19 @@
 //
 
 import Foundation
+import CoreLocation
+import SwiftUI
 
 let userInfoDummy = UserInfo(nickname: "austin", birthday: Date(), height: 175, weight: 70)
 
-//let coordinatesDummy = [
-//    Coordinate(longitude: 37, latitude: 120)
-//]
-//let recordsDummy = [
-//    Record(courseName: "댕댕런", runningType: .gpsArt, runningDate: Date(), startTime: Date(), endTime: Date(), runningDuration: Date(), courseLength: 5.2, runningLength: 5.0, averagePace: Date(), calorie: 300, bpm: 200, cadence: 200, coursePaths: coordinatesDummy, heading: 30, mapScale: 1.5),
-//    Record(courseName: "오리런", runningType: .gpsArt, runningDate: Date(), startTime: Date(), endTime: Date(), runningDuration: Date(), courseLength: 2.2, runningLength: 2.0, averagePace: Date(), calorie: 100, bpm: 100, cadence: 100, coursePaths: coordinatesDummy, heading: 10, mapScale: 1.1)
-//]
-//let runningDataDummy = RunningData(currentTime: 20, currentLocation: 20, paceList: [2, 3], bpmList: [200, 100])
-//let userDataDummy = UserData(records: recordsDummy, currentRunningData: runningDataDummy)
-
-class FirstoreManager: ObservableObject {
+class DataTestViewModel: ObservableObject {
     @Published var userInfo: UserInfo = userInfoDummy
     @Published var courses: AllGPSArtCourses = []
     @Published var uid = ""
     
     let userInfoModel = UserInfoModel()
     let courseModel = CourseModel()
+    let userDataModel = UserDataModel()
     
     func readUserInfo(uid: String) {
         userInfoModel.readUserInfo(uid: uid) { result in
@@ -77,7 +70,6 @@ class FirstoreManager: ObservableObject {
             switch result {
             case .success(let courseList):
                 self.courses = courseList
-                print(courseList)
             case .failure(let error):
                 print(error)
             }
@@ -95,4 +87,20 @@ class FirstoreManager: ObservableObject {
             }
         }
     }
+    
+    func addRunningRecord() {
+        let newRunningRecord = RunningRecord(id: UUID().uuidString, runningType: .free, courseData: dummyCourseData, healthData: dummyHealthData)
+        userDataModel.createRunningRecord(record: newRunningRecord)
+    }
+    func addCoordinate() {
+        let newCoordinate = CLLocationCoordinate2D(latitude: 32.0, longitude: 154.0)
+        userDataModel.createCoordinate(coordinate: newCoordinate)
+    }
 }
+
+let dummyCourseData = CourseData(courseName: "오리런", runningDate: Date(), startTime: Date(), endTime: Date(), heading: 1.4, distance: 200, coursePathes: [
+    CLLocationCoordinate2D(latitude: 26, longitude: 152),
+    CLLocationCoordinate2D(latitude: 16, longitude: 122)
+], courseLength: 5
+)
+let dummyHealthData = HealthData(totalTime: "40", averageCyclingCadence: "20", totalRunningDistance: "5", totalEnergy: "500", averageHeartRate: "150", averagePace: "5")
