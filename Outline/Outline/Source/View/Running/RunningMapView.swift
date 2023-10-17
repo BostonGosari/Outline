@@ -2,66 +2,116 @@
 //  RunningMapView.swift
 //  Outline
 //
-//  Created by hyebin on 10/17/23.
+//  Created by 김하은 on 10/17/23.
 //
 
-import MapKit
 import SwiftUI
 
-struct RunningMapView: UIViewRepresentable {
-    
-    @ObservedObject var locationManager: LocationManager
-    
-    private let mapView = MKMapView()
-    
-    func makeUIView(context: Context) -> MKMapView {
-        mapView.delegate = context.coordinator
-        mapView.showsUserLocation = true
-        return mapView
+struct RunningMapView: View {
+    @StateObject var locationManager = LocationManager()
+    @StateObject private var viewModel = RunningViewModel()
+
+    var body: some View {
+        ZStack {
+            RunningMap(locationManager: locationManager)
+                .ignoresSafeArea()
+                .preferredColorScheme(.dark)
+            
+            VStack(spacing: 0) {
+                /*running Guid View*/
+                Spacer()
+                runningButtonView
+                    .frame(maxWidth: .infinity)
+                    .padding(.bottom, 80)
+            }
+        }
+        .onAppear {
+            locationManager.requestLocation()
+        }
     }
-    
-    func updateUIView(_ uiView: MKMapView, context: Context) {
-        uiView.removeOverlays(uiView.overlays)
-        
-        if !locationManager.userLocations.isEmpty {
-            let polyline = MKPolyline(
-                coordinates: locationManager.userLocations,
-                count: locationManager.userLocations.count
+}
+
+extension RunningMapView {
+    private var runningButtonView: AnyView {
+        switch viewModel.runningType {
+        case .running:
+            AnyView(
+                HStack(alignment: .center) {
+                    Spacer()
+                    
+                    Button(action: {
+                        viewModel.runningType = .pause
+                    }, label: {
+                        Image(systemName: "pause.fill")
+                            .font(.system(size: 24))
+                            .foregroundStyle(Color.black0Color)
+                            .padding(24)
+                            .background(
+                                Circle()
+                                    .fill(Color.firstColor)
+                                    .stroke(.white0, style: .init())
+                            )
+                    })
+                    .padding(.trailing, 64)
+                    
+                    Button(action: {
+                        
+                    }, label: {
+                        Image(systemName: "scope")
+                            .foregroundStyle(Color.black0Color)
+                            .padding(19)
+                            .background(
+                                Circle()
+                                    .fill(Color.white)
+                            )
+
+                    })
+                    .padding(.trailing, 32)
+                }
             )
-            uiView.addOverlay(polyline)
+        case .pause:
+            AnyView(
+                HStack {
+                    /*longPress stop*/
+                    Button(action: {
+                        
+                    }, label: {
+                        Image(systemName: "stop.fill")
+                            .font(.system(size: 24))
+                            .foregroundStyle(Color.black0Color)
+                            .padding(24)
+                            .background(
+                                Circle()
+                                    .fill(Color.white0Color)
+                            )
+                    })
+                    
+                    Spacer()
+                    
+                    Button(action: {
+                        viewModel.runningType = .running
+                    }, label: {
+                        Image(systemName: "play.fill")
+                            .font(.system(size: 24))
+                            .foregroundStyle(Color.black0Color)
+                            .padding(24)
+                            .background(
+                                Circle()
+                                    .fill(Color.firstColor)
+                                    .stroke(.white0, style: .init())
+                            )
+                    })
+                }
+                    .padding(.horizontal, 64)
+            )
+        case .stop:
+            AnyView(
+                EmptyView()
+            )
         }
     }
-    
-    func makeCoordinator() -> Coordinator {
-        Coordinator(self)
-    }
-    
-    class Coordinator: NSObject, MKMapViewDelegate {
-        var parent: RunningMapView
-        
-        init(_ parent: RunningMapView) {
-            self.parent = parent
-        }
-        
-        func mapViewDidFinishLoadingMap(_ mapView: MKMapView) {
-            if let userLocation = mapView.userLocation.location {
-                let region = MKCoordinateRegion(
-                    center: userLocation.coordinate,
-                    latitudinalMeters: 500,
-                    longitudinalMeters: 500
-                )
-                mapView.setRegion(region, animated: true)
-            }
-        }
-        
-        func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-            if let polyline = overlay as? MKPolyline {
-                let renderer = MKPolylineRenderer(polyline: polyline)
-                renderer.strokeColor = .first
-                renderer.lineWidth = 15
-                return renderer
-            }
-            return MKOverlayRenderer(overlay: overlay)
-        }
-    }
+}
+
+#Preview {
+    RunningMapView()
 }
