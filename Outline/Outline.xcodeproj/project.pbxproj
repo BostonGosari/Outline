@@ -9,15 +9,15 @@
 /* Begin PBXBuildFile section */
 		29AE76AC2ADE0D9100A46742 /* OutlineApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0AC8A9C2AD94C1F0061612C /* OutlineApp.swift */; };
 		29AE76AD2ADE0D9500A46742 /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0AC8B0E2AD9659D0061612C /* ColorExtension.swift */; };
+		29AE76B92ADE180300A46742 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 29AE76B82ADE180300A46742 /* FirebaseFirestore */; };
+		29AE76BB2ADE180300A46742 /* FirebaseFirestoreCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 29AE76BA2ADE180300A46742 /* FirebaseFirestoreCombine-Community */; };
+		29AE76BD2ADE180300A46742 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 29AE76BC2ADE180300A46742 /* FirebaseFirestoreSwift */; };
 		959D90262ADA35F100748BFB /* DataTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959D90252ADA35F100748BFB /* DataTestView.swift */; };
 		95E2EF712ADA6F230083ADEE /* CourseModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E2EF702ADA6F230083ADEE /* CourseModelType.swift */; };
 		95E2EF742ADA75AA0083ADEE /* DataTestViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E2EF732ADA75AA0083ADEE /* DataTestViewModel.swift */; };
 		95E2EF772ADB8DD30083ADEE /* UserModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E2EF762ADB8DD30083ADEE /* UserModelType.swift */; };
 		95E2EF882ADBA5C70083ADEE /* CourseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E2EF872ADBA5C70083ADEE /* CourseModel.swift */; };
 		BB1D52F72ADDA8260073771F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BB1D52F62ADDA8260073771F /* GoogleService-Info.plist */; };
-		BB1D53022ADDB0310073771F /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = BB1D53012ADDB0310073771F /* FirebaseFirestore */; };
-		BB1D53042ADDB0310073771F /* FirebaseFirestoreCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = BB1D53032ADDB0310073771F /* FirebaseFirestoreCombine-Community */; };
-		BB1D53062ADDB0310073771F /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = BB1D53052ADDB0310073771F /* FirebaseFirestoreSwift */; };
 		BB5238FC2ADAF1CE00646494 /* InputUserInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5238FB2ADAF1CE00646494 /* InputUserInfoView.swift */; };
 		BB5239292ADAF75C00646494 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5239272ADAF72A00646494 /* Logger.swift */; };
 		BB52392B2ADAF7BD00646494 /* WorkoutManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB52392A2ADAF7BD00646494 /* WorkoutManager.swift */; };
@@ -102,9 +102,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		29AE76AA2ADE0CA900A46742 /* Outline.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Outline.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		29AE76AB2ADE0CA900A46742 /* Outline Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Outline Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		29AE76AA2ADE0CA900A46742 /* Outline.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = Outline.app; path = "/Users/hyunjun/Desktop/Outline/Outline/build/Debug-iphoneos/Outline.app"; sourceTree = "<absolute>"; };
 		29AE76AE2ADE0DEB00A46742 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		29AE76BE2ADE21FA00A46742 /* Outline Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Outline Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		959D90252ADA35F100748BFB /* DataTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTestView.swift; sourceTree = "<group>"; };
 		959D90282ADA38AF00748BFB /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		959D90602ADA3A1000748BFB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -170,9 +170,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BB1D53022ADDB0310073771F /* FirebaseFirestore in Frameworks */,
-				BB1D53042ADDB0310073771F /* FirebaseFirestoreCombine-Community in Frameworks */,
-				BB1D53062ADDB0310073771F /* FirebaseFirestoreSwift in Frameworks */,
+				29AE76B92ADE180300A46742 /* FirebaseFirestore in Frameworks */,
+				29AE76BB2ADE180300A46742 /* FirebaseFirestoreCombine-Community in Frameworks */,
+				29AE76BD2ADE180300A46742 /* FirebaseFirestoreSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -259,8 +259,7 @@
 				F0AC8A9B2AD94C1F0061612C /* Outline */,
 				F0AC8AAD2AD94C200061612C /* Outline Watch */,
 				F0AC8AC42AD9514C0061612C /* .swiftlint.yml */,
-				29AE76AA2ADE0CA900A46742 /* Outline.app */,
-				29AE76AB2ADE0CA900A46742 /* Outline Watch App.app */,
+				29AE76BE2ADE21FA00A46742 /* Outline Watch App.app */,
 			);
 			sourceTree = "<group>";
 		};
@@ -522,9 +521,9 @@
 			);
 			name = Outline;
 			packageProductDependencies = (
-				BB1D53012ADDB0310073771F /* FirebaseFirestore */,
-				BB1D53032ADDB0310073771F /* FirebaseFirestoreCombine-Community */,
-				BB1D53052ADDB0310073771F /* FirebaseFirestoreSwift */,
+				29AE76B82ADE180300A46742 /* FirebaseFirestore */,
+				29AE76BA2ADE180300A46742 /* FirebaseFirestoreCombine-Community */,
+				29AE76BC2ADE180300A46742 /* FirebaseFirestoreSwift */,
 			);
 			productName = Outline;
 			productReference = 29AE76AA2ADE0CA900A46742 /* Outline.app */;
@@ -544,7 +543,7 @@
 			);
 			name = "Outline Watch App";
 			productName = "Outline Watch App";
-			productReference = 29AE76AB2ADE0CA900A46742 /* Outline Watch App.app */;
+			productReference = 29AE76BE2ADE21FA00A46742 /* Outline Watch App.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -576,7 +575,7 @@
 			);
 			mainGroup = F0AC8A902AD94C1F0061612C;
 			packageReferences = (
-				BB1D53002ADDB0310073771F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				29AE76B72ADE180300A46742 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = F0AC8A902AD94C1F0061612C;
 			projectDirPath = "";
@@ -851,11 +850,12 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = hyunjun.watchkit;
+				PRODUCT_BUNDLE_IDENTIFIER = hyunjun.watch;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_INTEROP_MODE = objc;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
 				WATCHOS_DEPLOYMENT_TARGET = 10.0;
@@ -886,11 +886,12 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = hyunjun.watchkit;
+				PRODUCT_BUNDLE_IDENTIFIER = hyunjun.watch;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_INTEROP_MODE = objc;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
 				VALIDATE_PRODUCT = YES;
@@ -1014,9 +1015,9 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		BB1D53002ADDB0310073771F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+		29AE76B72ADE180300A46742 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 10.16.0;
@@ -1025,19 +1026,19 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		BB1D53012ADDB0310073771F /* FirebaseFirestore */ = {
+		29AE76B82ADE180300A46742 /* FirebaseFirestore */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = BB1D53002ADDB0310073771F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = 29AE76B72ADE180300A46742 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestore;
 		};
-		BB1D53032ADDB0310073771F /* FirebaseFirestoreCombine-Community */ = {
+		29AE76BA2ADE180300A46742 /* FirebaseFirestoreCombine-Community */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = BB1D53002ADDB0310073771F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = 29AE76B72ADE180300A46742 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = "FirebaseFirestoreCombine-Community";
 		};
-		BB1D53052ADDB0310073771F /* FirebaseFirestoreSwift */ = {
+		29AE76BC2ADE180300A46742 /* FirebaseFirestoreSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = BB1D53002ADDB0310073771F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = 29AE76B72ADE180300A46742 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestoreSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
