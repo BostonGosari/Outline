@@ -27,7 +27,7 @@ struct CourseData {
     var endTime: Date
     var heading: Double
     var distance: Double
-    var coursePathes: [CLLocationCoordinate2D]
+    var coursePaths: [CLLocationCoordinate2D]
     var courseLength: Double?
 }
 

@@ -20,7 +20,7 @@ struct DataTestView: View {
         VStack {
             ScrollView {
                 ForEach(runningRecords, id: \.id) { record in
-                    Text("\(record.id ?? "default")")
+                    Text("\(record.courseData?.coursePaths ?? [])")
                         .padding(.bottom, 20)
                         .onTapGesture {
                             firstoreManager.deleteRunningRecord(record)
