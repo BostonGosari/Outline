@@ -12,6 +12,7 @@ import SwiftUI
 let userInfoDummy = UserInfo(nickname: "austin", birthday: Date(), height: 175, weight: 70)
 
 class DataTestViewModel: ObservableObject {
+    
     @Published var userInfo: UserInfo = userInfoDummy
     @Published var courses: AllGPSArtCourses = []
     @Published var uid = ""
@@ -91,10 +92,6 @@ class DataTestViewModel: ObservableObject {
     func addRunningRecord() {
         let newRunningRecord = RunningRecord(id: UUID().uuidString, runningType: .free, courseData: dummyCourseData, healthData: dummyHealthData)
         userDataModel.createRunningRecord(record: newRunningRecord)
-    }
-    func addCoordinate() {
-        let newCoordinate = CLLocationCoordinate2D(latitude: 32.0, longitude: 154.0)
-        userDataModel.createCoordinate(coordinate: newCoordinate)
     }
 }
 

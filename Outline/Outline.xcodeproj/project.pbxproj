@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		9528EFE92ADE9E870056CCC6 /* UserCoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 95EB1EF62ADE251100B47984 /* UserCoreDataModel.xcdatamodeld */; };
 		9528EFEA2ADE9E870056CCC6 /* UserCoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 95EB1EF62ADE251100B47984 /* UserCoreDataModel.xcdatamodeld */; };
+		9528EFEC2ADEC7CF0056CCC6 /* UserDataModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9528EFEB2ADEC7CF0056CCC6 /* UserDataModelType.swift */; };
+		9528EFED2ADEC7CF0056CCC6 /* UserDataModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9528EFEB2ADEC7CF0056CCC6 /* UserDataModelType.swift */; };
 		959D90262ADA35F100748BFB /* DataTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959D90252ADA35F100748BFB /* DataTestView.swift */; };
 		95E2EF712ADA6F230083ADEE /* CourseModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E2EF702ADA6F230083ADEE /* CourseModelType.swift */; };
 		95E2EF742ADA75AA0083ADEE /* DataTestViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E2EF732ADA75AA0083ADEE /* DataTestViewModel.swift */; };
@@ -104,6 +106,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		9528EFEB2ADEC7CF0056CCC6 /* UserDataModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataModelType.swift; sourceTree = "<group>"; };
 		959D90252ADA35F100748BFB /* DataTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTestView.swift; sourceTree = "<group>"; };
 		959D90602ADA3A1000748BFB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		95E2EF702ADA6F230083ADEE /* CourseModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseModelType.swift; sourceTree = "<group>"; };
@@ -226,6 +229,7 @@
 			children = (
 				95EB1EE82ADDC43400B47984 /* PersistentController.swift */,
 				95EB1EEB2ADDC66B00B47984 /* UserDataModel.swift */,
+				9528EFEB2ADEC7CF0056CCC6 /* UserDataModelType.swift */,
 			);
 			path = UserData;
 			sourceTree = "<group>";
@@ -695,6 +699,7 @@
 				BB5238FC2ADAF1CE00646494 /* InputUserInfoView.swift in Sources */,
 				F06B93592ADAECA800387DEB /* RecommendedCourseView.swift in Sources */,
 				F05C7D562ADC565E006842DB /* PreferenceKey.swift in Sources */,
+				9528EFEC2ADEC7CF0056CCC6 /* UserDataModelType.swift in Sources */,
 				F05C971C2ADAE6E200D5D959 /* RecomendedCourseMap.swift in Sources */,
 				F01FDB9C2ADABC4600BDA633 /* TabBar.swift in Sources */,
 				95EB1EEC2ADDC66B00B47984 /* UserDataModel.swift in Sources */,
@@ -714,6 +719,7 @@
 			files = (
 				F0AC8B2A2AD967490061612C /* Modifier.swift in Sources */,
 				9528EFEA2ADE9E870056CCC6 /* UserCoreDataModel.xcdatamodeld in Sources */,
+				9528EFED2ADEC7CF0056CCC6 /* UserDataModelType.swift in Sources */,
 				F0AC8B1D2AD966990061612C /* Model.swift in Sources */,
 				F0AC8B242AD9670A0061612C /* Component.swift in Sources */,
 				F0AC8B272AD967330061612C /* Extension.swift in Sources */,
