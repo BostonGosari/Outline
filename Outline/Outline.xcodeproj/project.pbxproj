@@ -27,6 +27,9 @@
 		BB1D531C2ADDBCB20073771F /* Pretendard-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BB1D531B2ADDBCB20073771F /* Pretendard-SemiBold.ttf */; };
 		BB1D531E2ADDBCB90073771F /* Pretendard-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BB1D531D2ADDBCB90073771F /* Pretendard-Thin.ttf */; };
 		BB1D53212ADDC8D50073771F /* RunningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1D53202ADDC8D50073771F /* RunningView.swift */; };
+		BB1D53232ADDDD210073771F /* RunningMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1D53222ADDDD210073771F /* RunningMapView.swift */; };
+		BB1D53252ADDDE600073771F /* RunningViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1D53242ADDDE600073771F /* RunningViewModel.swift */; };
+		BB1D53272ADDDF000073771F /* RunningMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1D53262ADDDF000073771F /* RunningMap.swift */; };
 		BB5238FC2ADAF1CE00646494 /* InputUserInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5238FB2ADAF1CE00646494 /* InputUserInfoView.swift */; };
 		BB5239292ADAF75C00646494 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5239272ADAF72A00646494 /* Logger.swift */; };
 		BB52392B2ADAF7BD00646494 /* WorkoutManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB52392A2ADAF7BD00646494 /* WorkoutManager.swift */; };
@@ -131,6 +134,9 @@
 		BB1D531D2ADDBCB90073771F /* Pretendard-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Thin.ttf"; sourceTree = "<group>"; };
 		BB1D531F2ADDBCE20073771F /* Outline.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Outline.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB1D53202ADDC8D50073771F /* RunningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningView.swift; sourceTree = "<group>"; };
+		BB1D53222ADDDD210073771F /* RunningMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningMapView.swift; sourceTree = "<group>"; };
+		BB1D53242ADDDE600073771F /* RunningViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RunningViewModel.swift; sourceTree = "<group>"; };
+		BB1D53262ADDDF000073771F /* RunningMap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RunningMap.swift; sourceTree = "<group>"; };
 		BB5238FB2ADAF1CE00646494 /* InputUserInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputUserInfoView.swift; sourceTree = "<group>"; };
 		BB5239272ADAF72A00646494 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		BB52392A2ADAF7BD00646494 /* WorkoutManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutManager.swift; sourceTree = "<group>"; };
@@ -222,8 +228,10 @@
 		BB1D53072ADDB24A0073771F /* Running */ = {
 			isa = PBXGroup;
 			children = (
-				BB1D53082ADDB27B0073771F /* WorkoutDataView.swift */,
 				BB1D53202ADDC8D50073771F /* RunningView.swift */,
+				BB1D53262ADDDF000073771F /* RunningMap.swift */,
+				BB1D53082ADDB27B0073771F /* WorkoutDataView.swift */,
+				BB1D53222ADDDD210073771F /* RunningMapView.swift */,
 			);
 			path = Running;
 			sourceTree = "<group>";
@@ -362,6 +370,7 @@
 			children = (
 				95E2EF722ADA759B0083ADEE /* DataTest */,
 				F0AC8B032AD964EF0061612C /* RecommendedCoursesViewModel.swift */,
+				BB1D53242ADDDE600073771F /* RunningViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -690,6 +699,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BB1D53272ADDDF000073771F /* RunningMap.swift in Sources */,
 				95E2EF772ADB8DD30083ADEE /* UserModelType.swift in Sources */,
 				F06B936C2ADC245700387DEB /* RecommendedCoursesViewModel.swift in Sources */,
 				F096974F2ADBEE9F00C38AF4 /* CardDetailInformationView.swift in Sources */,
@@ -715,12 +725,14 @@
 				F05C97172ADA879100D5D959 /* LocationManager.swift in Sources */,
 				F096974D2ADBDBB000C38AF4 /* CardDetailView.swift in Sources */,
 				F05C97192ADA87B800D5D959 /* LocationAuthorizationView.swift in Sources */,
+				BB1D53232ADDDD210073771F /* RunningMapView.swift in Sources */,
 				F0AC8B0F2AD9659D0061612C /* ColorExtension.swift in Sources */,
 				F09697512ADC069E00C38AF4 /* AnimationExtension.swift in Sources */,
 				BB5238FC2ADAF1CE00646494 /* InputUserInfoView.swift in Sources */,
 				BB1D53212ADDC8D50073771F /* RunningView.swift in Sources */,
 				F06B93592ADAECA800387DEB /* RecommendedCourseView.swift in Sources */,
 				F05C7D562ADC565E006842DB /* PreferenceKey.swift in Sources */,
+				BB1D53252ADDDE600073771F /* RunningViewModel.swift in Sources */,
 				F05C971C2ADAE6E200D5D959 /* RecomendedCourseMap.swift in Sources */,
 				F01FDB9C2ADABC4600BDA633 /* TabBar.swift in Sources */,
 				F06B936B2ADC23E100387DEB /* Logger.swift in Sources */,
