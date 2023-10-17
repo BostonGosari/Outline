@@ -15,7 +15,7 @@ struct DataTestView: View {
     ) var runningRecords: FetchedResults<CoreRunningRecord>
     
     private let courseId = "an3yE14Ue1xsUKlDwUZu"
-    //9B015973-2DCC-4752-9548-CAA43264DF92
+    
     var body: some View {
         VStack {
             ScrollView {

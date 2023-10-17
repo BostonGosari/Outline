@@ -11,7 +11,6 @@ import CoreLocation
 
 struct UserDataModel {
     let persistenceController = PersistenceController.shared
-    var records: FetchRequest<CoreRunningRecord>
     
     private func saveContext() {
         do {
@@ -19,9 +18,6 @@ struct UserDataModel {
         } catch {
           print("Error saving managed object context: \(error)")
         }
-    }
-    init() {
-        records = FetchRequest<CoreRunningRecord>(entity: CoreRunningRecord.entity(), sortDescriptors: [])
     }
     
     func createRunningRecord(record: RunningRecord) {
@@ -64,13 +60,32 @@ struct UserDataModel {
         saveContext()
     }
     
+    func updateRunnningRecord(_ record: NSManagedObject, courseData: CourseData, healthData: HealthData) {
+        guard let record = record as? CoreRunningRecord else {
+            return
+        }
+        record.healthData?.setValue(healthData.totalTime, forKey: "totalTime")
+        
+        record.healthData?.setValue(healthData.averageCyclingCadence, forKey: "averageCyclingCadence")
+        record.healthData?.setValue(healthData.totalRunningDistance, forKey: "totalRunningDistance")
+        record.healthData?.setValue(healthData.totalEnergy, forKey: "totalEnergy")
+        record.healthData?.setValue(healthData.averageHeartRate, forKey: "averageHeartRate")
+        record.healthData?.setValue(healthData.averagePace, forKey: "averagePace")
+        
+        record.courseData?.setValue(courseData.courseName, forKey: "courseName")
+        record.courseData?.setValue(courseData.runningDate, forKey: "runningDate")
+        record.courseData?.setValue(courseData.startTime, forKey: "startTime")
+        record.courseData?.setValue(courseData.endTime, forKey: "endTime")
+        record.courseData?.setValue(courseData.heading, forKey: "heading")
+        record.courseData?.setValue(courseData.distance, forKey: "distance")
+        record.courseData?.setValue(courseData.courseLength ?? 0, forKey: "courseLength")
+        record.courseData?.setValue(courseData.heading, forKey: "heading")
+        
+        saveContext()
+    }
+    
     func deleteRunningRecord(_ object: NSManagedObject) {
         persistenceController.container.viewContext.delete(object)
         saveContext()
     }
-    
-//    func readUserRecords() {}
-//    func readUserRecord(id: String) {}
-//    func updateOrCreateUserRecord(id: String, record: Record) {}
-//    func deleteUserRecord(id: String) {}
 }
