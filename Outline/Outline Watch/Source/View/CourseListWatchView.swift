@@ -48,9 +48,6 @@ struct CourseListWatchView: View {
                                     .frame(maxWidth: .infinity, alignment: .leading)
                                     .overlay(alignment: .trailing) {
                                         Button {
-                                            
-                                            // TODO: 터치박스 조정 필요
-                                            
                                             detailViewNavigate = true
                                             print("ellipsis clicked")
                                         } label: {
