@@ -15,11 +15,23 @@ enum CurrentRunningType {
 }
 
 enum CurrentMapType {
-    case gpsArt
+    case gpsArtRun
     case freeRun
 }
 
 class RunningMapViewModel: ObservableObject {
     @Published var runningType: CurrentRunningType = .running
-    @Published var mapType: CurrentMapType = .gpsArt
+    @Published var mapType: CurrentMapType = .gpsArtRun
+    
+    let coordinates: [CLLocationCoordinate2D] = {
+        if let kmlFilePath = Bundle.main.path(forResource: "test", ofType: "kml") {
+            let kmlParser = KMLParserManager()
+            return kmlParser.parseKMLFile(atPath: kmlFilePath)
+        }
+        return []
+    }()
+    
+    func moveToUserLocation() {
+        
+    }
 }

@@ -13,15 +13,27 @@ struct RunningMap: UIViewRepresentable {
     @ObservedObject var locationManager: LocationManager
     
     private let mapView = MKMapView()
+    var coordinates: [CLLocationCoordinate2D]
     
     func makeUIView(context: Context) -> MKMapView {
         mapView.delegate = context.coordinator
         mapView.showsUserLocation = true
+        
+        mapView.setUserTrackingMode(.followWithHeading, animated: true)
+        mapView.isZoomEnabled = true
+        mapView.showsCompass = false
+        
+        let polyline = MKPolyline(coordinates: coordinates, count: coordinates.count)
+        mapView.addOverlay(polyline)
+        
         return mapView
     }
     
     func updateUIView(_ uiView: MKMapView, context: Context) {
-        uiView.removeOverlays(uiView.overlays)
+        if uiView.overlays.count >= 2,
+           let overlay = uiView.overlays.last {
+            uiView.removeOverlay(overlay)
+        }
         
         if !locationManager.userLocations.isEmpty {
             let polyline = MKPolyline(
@@ -43,21 +55,10 @@ struct RunningMap: UIViewRepresentable {
             self.parent = parent
         }
         
-        func mapViewDidFinishLoadingMap(_ mapView: MKMapView) {
-            if let userLocation = mapView.userLocation.location {
-                let region = MKCoordinateRegion(
-                    center: userLocation.coordinate,
-                    latitudinalMeters: 500,
-                    longitudinalMeters: 500
-                )
-                mapView.setRegion(region, animated: true)
-            }
-        }
-        
         func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
             if let polyline = overlay as? MKPolyline {
                 let renderer = MKPolylineRenderer(polyline: polyline)
-                renderer.strokeColor = .first
+                renderer.strokeColor = (mapView.overlays.count == 1) ? .gray600 : .first
                 renderer.lineWidth = 15
                 return renderer
             }
