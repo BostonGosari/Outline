@@ -15,12 +15,15 @@ struct RecommendedCoursesView: View {
     
     var body: some View {
         VStack {
-            RecomendedCourseMap(camera: viewModel.camera)
+            RecomendedCourseMap(
+                userLocation: $viewModel.userLocation,
+                camera: viewModel.camera
+            )
                 .frame(width: 400, height: 400)
                 .onAppear {
                     locationManager.requestLocation()
                 }
-            if let userLocation = locationManager.userLocation {
+            if let userLocation = viewModel.userLocation {
                 Text("\(userLocation.latitude)")
                 Text("\(userLocation.longitude)")
                 Text("\(viewModel.distance(userLocation: userLocation, coordinate: CLLocationCoordinate2D(latitude: 36.01404, longitude: 129.32594)))m")
