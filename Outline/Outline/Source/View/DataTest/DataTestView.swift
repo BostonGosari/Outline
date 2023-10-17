@@ -15,12 +15,16 @@ struct DataTestView: View {
     ) var runningRecords: FetchedResults<CoreRunningRecord>
     
     private let courseId = "an3yE14Ue1xsUKlDwUZu"
-    
+    //9B015973-2DCC-4752-9548-CAA43264DF92
     var body: some View {
         VStack {
             ScrollView {
                 ForEach(runningRecords, id: \.id) { record in
-                    Text("\(record.courseData?.courseName ?? "default")")
+                    Text("\(record.id ?? "default")")
+                        .padding(.bottom, 20)
+                        .onTapGesture {
+                            firstoreManager.deleteRunningRecord(record)
+                        }
                 }
             }
             Text("user")
@@ -87,11 +91,6 @@ struct DataTestView: View {
                 
             } label: {
                 Text("read Records")
-            }
-            Button {
-                firstoreManager.addCoordinate()
-            } label: {
-                Text("add coordinate")
             }
         }
     }

@@ -7,6 +7,7 @@
 
 import Foundation
 import CoreLocation
+import CoreData
 import SwiftUI
 
 let userInfoDummy = UserInfo(nickname: "austin", birthday: Date(), height: 175, weight: 70)
@@ -92,6 +93,10 @@ class DataTestViewModel: ObservableObject {
     func addRunningRecord() {
         let newRunningRecord = RunningRecord(id: UUID().uuidString, runningType: .free, courseData: dummyCourseData, healthData: dummyHealthData)
         userDataModel.createRunningRecord(record: newRunningRecord)
+    }
+    
+    func deleteRunningRecord(_ record: NSManagedObject) {
+        userDataModel.deleteRunningRecord(record)
     }
 }
 
