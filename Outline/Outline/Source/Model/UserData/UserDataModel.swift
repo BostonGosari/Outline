@@ -9,18 +9,41 @@ import CoreData
 import SwiftUI
 import CoreLocation
 
-struct UserDataModel {
+protocol UserDataModelProtocol {
+    func createRunningRecord(
+        record: RunningRecord,
+        completion: @escaping (Result<Bool, CoreDataError>) -> Void
+    )
+    func updateRunnningRecord(
+        _ record: NSManagedObject,
+        courseData: CourseData,
+        healthData: HealthData,
+        completion: @escaping (Result<Bool, CoreDataError>) -> Void
+    )
+    func deleteRunningRecord(
+        _ object: NSManagedObject,
+        completion: @escaping (Result<Bool, CoreDataError>) -> Void
+    )
+}
+enum CoreDataError: Error {
+    case saveFailed
+}
+
+struct UserDataModel: UserDataModelProtocol {
     let persistenceController = PersistenceController.shared
     
-    private func saveContext() {
+    private func saveContext() throws {
         do {
             try persistenceController.container.viewContext.save()
         } catch {
-          print("Error saving managed object context: \(error)")
+            throw CoreDataError.saveFailed
         }
     }
     
-    func createRunningRecord(record: RunningRecord) {
+    func createRunningRecord(
+        record: RunningRecord,
+        completion: @escaping (Result<Bool, CoreDataError>) -> Void
+    ) {
         let newRunningRecord = CoreRunningRecord(context: persistenceController.container.viewContext)
         newRunningRecord.runningType = "free"
         newRunningRecord.id = UUID().uuidString
@@ -57,10 +80,20 @@ struct UserDataModel {
         
         newHealthData.recordHeathData = newRunningRecord
         
-        saveContext()
+        do {
+            try saveContext()
+            completion(.success(true))
+        } catch {
+            completion(.failure(.saveFailed))
+        }
     }
     
-    func updateRunnningRecord(_ record: NSManagedObject, courseData: CourseData, healthData: HealthData) {
+    func updateRunnningRecord(
+        _ record: NSManagedObject,
+        courseData: CourseData,
+        healthData: HealthData,
+        completion: @escaping (Result<Bool, CoreDataError>) -> Void
+    ) {
         guard let record = record as? CoreRunningRecord else {
             return
         }
@@ -81,11 +114,25 @@ struct UserDataModel {
         record.courseData?.setValue(courseData.courseLength ?? 0, forKey: "courseLength")
         record.courseData?.setValue(courseData.heading, forKey: "heading")
         
-        saveContext()
+        do {
+            try saveContext()
+            completion(.success(true))
+        } catch {
+            completion(.failure(.saveFailed))
+        }
     }
     
-    func deleteRunningRecord(_ object: NSManagedObject) {
+    func deleteRunningRecord(
+        _ object: NSManagedObject,
+        completion: @escaping (Result<Bool, CoreDataError>) -> Void
+    ) {
         persistenceController.container.viewContext.delete(object)
-        saveContext()
+        
+        do {
+            try saveContext()
+            completion(.success(true))
+        } catch {
+            completion(.failure(.saveFailed))
+        }
     }
 }
