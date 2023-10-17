@@ -49,3 +49,8 @@ enum Alley: String, Codable, Hashable {
     case few
     case lots
 }
+
+struct Coordinate: Codable {
+    var longitude: Double
+    var latitude: Double
+}

@@ -9,18 +9,18 @@ import Foundation
 
 let userInfoDummy = UserInfo(nickname: "austin", birthday: Date(), height: 175, weight: 70)
 
-let coordinatesDummy = [
-    Coordinate(longitude: 37, latitude: 120)
-]
-let recordsDummy = [
-    Record(courseName: "댕댕런", runningType: .gpsArt, runningDate: Date(), startTime: Date(), endTime: Date(), runningDuration: Date(), courseLength: 5.2, runningLength: 5.0, averagePace: Date(), calorie: 300, bpm: 200, cadence: 200, coursePaths: coordinatesDummy, heading: 30, mapScale: 1.5),
-    Record(courseName: "오리런", runningType: .gpsArt, runningDate: Date(), startTime: Date(), endTime: Date(), runningDuration: Date(), courseLength: 2.2, runningLength: 2.0, averagePace: Date(), calorie: 100, bpm: 100, cadence: 100, coursePaths: coordinatesDummy, heading: 10, mapScale: 1.1)
-]
-let runningDataDummy = RunningData(currentTime: 20, currentLocation: 20, paceList: [2, 3], bpmList: [200, 100])
-let userDataDummy = UserData(records: recordsDummy, currentRunningData: runningDataDummy)
+//let coordinatesDummy = [
+//    Coordinate(longitude: 37, latitude: 120)
+//]
+//let recordsDummy = [
+//    Record(courseName: "댕댕런", runningType: .gpsArt, runningDate: Date(), startTime: Date(), endTime: Date(), runningDuration: Date(), courseLength: 5.2, runningLength: 5.0, averagePace: Date(), calorie: 300, bpm: 200, cadence: 200, coursePaths: coordinatesDummy, heading: 30, mapScale: 1.5),
+//    Record(courseName: "오리런", runningType: .gpsArt, runningDate: Date(), startTime: Date(), endTime: Date(), runningDuration: Date(), courseLength: 2.2, runningLength: 2.0, averagePace: Date(), calorie: 100, bpm: 100, cadence: 100, coursePaths: coordinatesDummy, heading: 10, mapScale: 1.1)
+//]
+//let runningDataDummy = RunningData(currentTime: 20, currentLocation: 20, paceList: [2, 3], bpmList: [200, 100])
+//let userDataDummy = UserData(records: recordsDummy, currentRunningData: runningDataDummy)
 
 class FirstoreManager: ObservableObject {
-    @Published var user = User(userInfo: userInfoDummy, userData: userDataDummy)
+    @Published var userInfo: UserInfo = userInfoDummy
     @Published var courses: AllGPSArtCourses = []
     @Published var uid = ""
     
@@ -31,7 +31,7 @@ class FirstoreManager: ObservableObject {
         userInfoModel.readUserInfo(uid: uid) { result in
             switch result {
             case .success(let userInfo):
-                self.user = User(userInfo: userInfo, userData: self.user.userData)
+                self.userInfo = userInfo
             case .failure(let error):
                 print(error)
             }

@@ -1,12 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22222" systemVersion="23A344" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
-    <entity name="Coordinate" representedClassName="Coordinate" syncable="YES">
-        <attribute name="latitude" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <attribute name="longitude" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <relationship name="coursePathes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CourseData" inverseName="coursePathes" inverseEntity="CourseData"/>
-        <relationship name="userCurrentLocation" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="RunningData" inverseName="currentLocation" inverseEntity="RunningData"/>
-    </entity>
-    <entity name="CourseData" representedClassName="CourseData" syncable="YES">
+    <entity name="CourseData" representedClassName="CourseData" syncable="YES" codeGenerationType="class">
         <attribute name="courseLength" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="courseName" attributeType="String"/>
         <attribute name="endTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
@@ -16,11 +10,10 @@
         <attribute name="runningDuration" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="runningLength" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="startTime" attributeType="Date" usesScalarValueType="NO"/>
-        <relationship name="coursePathes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Coordinate" inverseName="coursePathes" inverseEntity="Coordinate"/>
         <relationship name="recordCourseData" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Record" inverseName="courseData" inverseEntity="Record"/>
         <relationship name="runningCourseData" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="RunningData" inverseName="courseData" inverseEntity="RunningData"/>
     </entity>
-    <entity name="HealthData" representedClassName="HealthData" syncable="YES">
+    <entity name="HealthData" representedClassName="HealthData" syncable="YES" codeGenerationType="class">
         <attribute name="averageCyclingCadence" attributeType="String"/>
         <attribute name="averageHeartRate" attributeType="String"/>
         <attribute name="averagePace" attributeType="String"/>
@@ -30,21 +23,20 @@
         <relationship name="recordHealthData" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Record" inverseName="healthData" inverseEntity="Record"/>
         <relationship name="runningHealthData" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="RunningData" inverseName="healthData" inverseEntity="RunningData"/>
     </entity>
-    <entity name="Record" representedClassName="Record" syncable="YES">
+    <entity name="Record" representedClassName="Record" syncable="YES" codeGenerationType="class">
         <attribute name="id" attributeType="String"/>
         <attribute name="runningType" optional="YES" attributeType="String"/>
         <relationship name="courseData" maxCount="1" deletionRule="Nullify" destinationEntity="CourseData" inverseName="recordCourseData" inverseEntity="CourseData"/>
         <relationship name="healthData" maxCount="1" deletionRule="Nullify" destinationEntity="HealthData" inverseName="recordHealthData" inverseEntity="HealthData"/>
         <relationship name="records" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="UserData" inverseName="records" inverseEntity="UserData"/>
     </entity>
-    <entity name="RunningData" representedClassName="RunningData" syncable="YES">
+    <entity name="RunningData" representedClassName="RunningData" syncable="YES" codeGenerationType="class">
         <attribute name="runningType" attributeType="String"/>
         <relationship name="courseData" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CourseData" inverseName="runningCourseData" inverseEntity="CourseData"/>
-        <relationship name="currentLocation" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Coordinate" inverseName="userCurrentLocation" inverseEntity="Coordinate"/>
         <relationship name="healthData" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="HealthData" inverseName="runningHealthData" inverseEntity="HealthData"/>
         <relationship name="runningData" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="UserData" inverseName="runningData" inverseEntity="UserData"/>
     </entity>
-    <entity name="UserData" representedClassName="UserData" syncable="YES">
+    <entity name="UserData" representedClassName="UserData" syncable="YES" codeGenerationType="class">
         <relationship name="records" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Record" inverseName="records" inverseEntity="Record"/>
         <relationship name="runningData" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="RunningData" inverseName="runningData" inverseEntity="RunningData"/>
     </entity>

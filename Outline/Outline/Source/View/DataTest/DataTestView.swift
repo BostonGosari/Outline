@@ -9,7 +9,6 @@ import SwiftUI
 
 struct DataTestView: View {
     @StateObject private var firstoreManager = FirstoreManager()
-    @Environment(\.managedObjectContext) var managedObjectContext 
     
     private let courseId = "an3yE14Ue1xsUKlDwUZu"
     
@@ -17,10 +16,10 @@ struct DataTestView: View {
         VStack {
             Text("user")
                 .font(.title)
-            Text("nickname: \(firstoreManager.user.userInfo.nickname)")
-            Text("weight: \(firstoreManager.user.userInfo.weight)")
-            Text("height: \(firstoreManager.user.userInfo.height)")
-            Text("gender: \(firstoreManager.user.userInfo.gender.rawValue)")
+            Text("nickname: \(firstoreManager.userInfo.nickname)")
+            Text("weight: \(firstoreManager.userInfo.weight)")
+            Text("height: \(firstoreManager.userInfo.height)")
+            Text("gender: \(firstoreManager.userInfo.gender.rawValue)")
             Text("course")
                 .font(.title)
             VStack {
