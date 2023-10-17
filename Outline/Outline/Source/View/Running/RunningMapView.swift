@@ -13,7 +13,7 @@ struct RunningMapView: View {
 
     var body: some View {
         ZStack {
-            RunningMap(locationManager: locationManager)
+            RunningMap(locationManager: locationManager, coordinates: viewModel.coordinates)
                 .ignoresSafeArea()
                 .preferredColorScheme(.dark)
             
