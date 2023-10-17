@@ -52,7 +52,7 @@ struct CardDetailView: View {
                 .scaleEffect(viewSize / -600 + 1)
                 .gesture(isDraggable ? drag : nil)
             }
-            .onChange(of: isShow) { _ in
+            .onChange(of: isShow) { _, _ in
                 fadeOut()
             }
             .onAppear {
