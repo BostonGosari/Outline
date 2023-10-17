@@ -11,6 +11,7 @@ import SwiftUI
 struct RunningMap: UIViewRepresentable {
     
     @ObservedObject var locationManager: LocationManager
+    @ObservedObject var viewModel: RunningMapViewModel
     
     private let mapView = MKMapView()
     var coordinates: [CLLocationCoordinate2D]
@@ -30,17 +31,34 @@ struct RunningMap: UIViewRepresentable {
     }
     
     func updateUIView(_ uiView: MKMapView, context: Context) {
-        if uiView.overlays.count >= 2,
-           let overlay = uiView.overlays.last {
-            uiView.removeOverlay(overlay)
+        if viewModel.runningType == .running {
+            if uiView.overlays.count >= 2,
+               let overlay = uiView.overlays.last {
+                uiView.removeOverlay(overlay)
+            }
+            
+            if !locationManager.userLocations.isEmpty {
+                let polyline = MKPolyline(
+                    coordinates: locationManager.userLocations,
+                    count: locationManager.userLocations.count
+                )
+                uiView.addOverlay(polyline)
+            }
         }
         
-        if !locationManager.userLocations.isEmpty {
-            let polyline = MKPolyline(
-                coordinates: locationManager.userLocations,
-                count: locationManager.userLocations.count
+        if viewModel.isUserLocationCenter {
+            let userLocation = uiView.userLocation
+
+            let region = MKCoordinateRegion(
+                center: userLocation.coordinate,
+                latitudinalMeters: 200,
+                longitudinalMeters: 200
             )
-            uiView.addOverlay(polyline)
+            uiView.setRegion(region, animated: true)
+            uiView.setUserTrackingMode(.followWithHeading, animated: true)
+            uiView.isZoomEnabled = true
+            
+            viewModel.isUserLocationCenter = false
         }
     }
     
