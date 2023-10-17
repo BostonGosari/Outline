@@ -3,6 +3,7 @@
     <entity name="CoreCoordinate" representedClassName="CoreCoordinate" syncable="YES" codeGenerationType="class">
         <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <relationship name="parentCourse" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CoreCourseData" inverseName="coursePathes" inverseEntity="CoreCourseData"/>
     </entity>
     <entity name="CoreCourseData" representedClassName=".CoreCourseData" syncable="YES" codeGenerationType="class">
         <attribute name="courseLength" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
@@ -13,6 +14,7 @@
         <attribute name="runningDate" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="runningLength" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="startTime" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="coursePathes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CoreCoordinate" inverseName="parentCourse" inverseEntity="CoreCoordinate"/>
         <relationship name="parentRecord" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CoreRunningRecord" inverseName="courseData" inverseEntity="CoreRunningRecord"/>
     </entity>
     <entity name="CoreHealthData" representedClassName=".CoreHealthData" syncable="YES" codeGenerationType="class">
@@ -29,11 +31,5 @@
         <attribute name="runningType" attributeType="String"/>
         <relationship name="courseData" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CoreCourseData" inverseName="parentRecord" inverseEntity="CoreCourseData"/>
         <relationship name="healthData" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CoreHealthData" inverseName="recordHeathData" inverseEntity="CoreHealthData"/>
-        <relationship name="parentUserData" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CoreUserData" inverseName="records" inverseEntity="CoreUserData"/>
-    </entity>
-    <entity name="CoreUserData" representedClassName=".CoreUserData" syncable="YES" codeGenerationType="class">
-        <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <relationship name="records" toMany="YES" deletionRule="Nullify" destinationEntity="CoreRunningRecord" inverseName="parentUserData" inverseEntity="CoreRunningRecord"/>
     </entity>
 </model>
