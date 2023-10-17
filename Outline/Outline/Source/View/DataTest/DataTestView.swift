@@ -8,12 +8,21 @@
 import SwiftUI
 
 struct DataTestView: View {
-    @StateObject private var firstoreManager = FirstoreManager()
+    @ObservedObject private var firstoreManager = DataTestViewModel()
+    
+    @FetchRequest (
+        entity: CoreRunningRecord.entity(), sortDescriptors: []
+    ) var runningRecords: FetchedResults<CoreRunningRecord>
     
     private let courseId = "an3yE14Ue1xsUKlDwUZu"
     
     var body: some View {
         VStack {
+            ScrollView {
+                ForEach(runningRecords, id: \.id) { record in
+                    Text("\(record.courseData?.courseName ?? "default")")
+                }
+            }
             Text("user")
                 .font(.title)
             Text("nickname: \(firstoreManager.userInfo.nickname)")
@@ -68,6 +77,21 @@ struct DataTestView: View {
                 firstoreManager.readCourse(id: courseId)
             } label: {
                 Text("readAllCourses")
+            }
+            Button {
+                firstoreManager.addRunningRecord()
+            } label: {
+                Text("add new Record")
+            }
+            Button {
+                
+            } label: {
+                Text("read Records")
+            }
+            Button {
+                firstoreManager.addCoordinate()
+            } label: {
+                Text("add coordinate")
             }
         }
     }
