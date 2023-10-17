@@ -51,4 +51,23 @@ class RunningMapViewModel: ObservableObject {
         }
         return []
     }()
+    
+    // 위도 경도로 거리를 계산하는 함수, 추후 업데이트 예정
+    func calculateDistance(startCoordinate: CLLocationCoordinate2D, endCoordinate: CLLocationCoordinate2D) -> Double {
+        let earthRadius = 6371000.0 // Earth's radius in meters
+        
+        let lat1 = startCoordinate.latitude * .pi / 180.0
+        let lon1 = startCoordinate.longitude * .pi / 180.0
+        let lat2 = endCoordinate.latitude * .pi / 180.0
+        let lon2 = endCoordinate.longitude * .pi / 180.0
+
+        let dLat = lat2 - lat1
+        let dLon = lon2 - lon1
+
+        let first = sin(dLat / 2) * sin(dLat / 2) + cos(lat1) * cos(lat2) * sin(dLon / 2) * sin(dLon / 2)
+        let second = 2 * atan2(sqrt(first), sqrt(1 - first))
+
+        let distance = earthRadius * second
+        return distance
+    }
 }
