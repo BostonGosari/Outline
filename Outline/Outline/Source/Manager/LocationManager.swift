@@ -56,9 +56,11 @@ final class LocationManager: NSObject, CLLocationManagerDelegate, ObservableObje
         }
     }
     
+    #if os(iOS)
     func openAppSetting() {
         if let url = URL(string: UIApplication.openSettingsURLString) {
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
         }
     }
+    #endif
 }

@@ -11,7 +11,7 @@ import SwiftUI
 struct OutlineWatchApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentWatchView()
         }
     }
 }
