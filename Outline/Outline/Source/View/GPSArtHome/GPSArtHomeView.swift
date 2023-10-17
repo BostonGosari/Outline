@@ -59,6 +59,7 @@ struct GPSArtHomeView: View {
                                     .animation(.easeInOut, value: currentIndex)
                             }
                         }
+                        BottomScrollView()
                     }
                 }
                 .overlay(alignment: .top) {
