@@ -98,10 +98,39 @@ class DataTestViewModel: ObservableObject {
     
     func addRunningRecord() {
         let newRunningRecord = RunningRecord(id: UUID().uuidString, runningType: .free, courseData: dummyCourseData, healthData: dummyHealthData)
-        userDataModel.createRunningRecord(record: newRunningRecord)
+        userDataModel.createRunningRecord(record: newRunningRecord) { result in
+            switch result {
+            case .success(let isSaved):
+                print(isSaved)
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    func updateRunningRecord(_ record: NSManagedObject, courseData: CourseData, healthData: HealthData) {
+        userDataModel.updateRunnningRecord(
+            record,
+            courseData: courseData,
+            healthData: healthData
+        ) { result in
+            switch result {
+            case .success(let isSaved):
+                print(isSaved)
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
     
     func deleteRunningRecord(_ record: NSManagedObject) {
-        userDataModel.deleteRunningRecord(record)
+        userDataModel.deleteRunningRecord(record) { result in
+            switch result {
+            case .success(let isSaved):
+                print(isSaved)
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
 }
