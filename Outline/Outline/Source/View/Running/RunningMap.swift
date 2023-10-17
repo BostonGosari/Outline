@@ -31,12 +31,16 @@ struct RunningMap: UIViewRepresentable {
     }
     
     func updateUIView(_ uiView: MKMapView, context: Context) {
+        /*일시 중지 상태에서는 위치는 추적하지만 라인 그리는 것은 멈춤*/
         if viewModel.runningType == .running {
+            
+            /* 첫 번째 overlay인 kml 경로를 제외하고 마지막 overlay 삭제 */
             if uiView.overlays.count >= 2,
                let overlay = uiView.overlays.last {
                 uiView.removeOverlay(overlay)
             }
             
+            /* 사용자의 위치가 바꼈다면 polyline을 그림 */
             if !locationManager.userLocations.isEmpty {
                 let polyline = MKPolyline(
                     coordinates: locationManager.userLocations,
@@ -46,6 +50,7 @@ struct RunningMap: UIViewRepresentable {
             }
         }
         
+        /* 상위 View의 버튼이 클릭되면 현재 사용자 위치를 center로 위도, 경도 200미터 범위로 region을 변경 */
         if viewModel.isUserLocationCenter {
             let userLocation = uiView.userLocation
 
