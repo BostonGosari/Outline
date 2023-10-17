@@ -13,7 +13,11 @@ struct RunningMapView: View {
 
     var body: some View {
         ZStack {
-            RunningMap(locationManager: locationManager, coordinates: viewModel.coordinates)
+            RunningMap(
+                locationManager: locationManager,
+                viewModel: viewModel,
+                coordinates: viewModel.coordinates
+            )
                 .ignoresSafeArea()
                 .preferredColorScheme(.dark)
             
@@ -36,37 +40,55 @@ extension RunningMapView {
         switch viewModel.runningType {
         case .running:
             AnyView(
-                HStack(alignment: .center) {
-                    Spacer()
-                    
-                    Button(action: {
-                        viewModel.runningType = .pause
-                    }, label: {
-                        Image(systemName: "pause.fill")
-                            .font(.system(size: 24))
-                            .foregroundStyle(Color.black0Color)
-                            .padding(24)
-                            .background(
-                                Circle()
-                                    .fill(Color.firstColor)
-                                    .stroke(.white0, style: .init())
-                            )
-                    })
-                    .padding(.trailing, 64)
-                    
-                    Button(action: {
-                        
-                    }, label: {
-                        Image(systemName: "scope")
-                            .foregroundStyle(Color.black0Color)
-                            .padding(19)
-                            .background(
-                                Circle()
-                                    .fill(Color.white)
-                            )
-
-                    })
+                VStack {
+                    HStack {
+                        Spacer()
+                        Button(action: {
+                            viewModel.isUserLocationCenter = true
+                        }, label: {
+                            Image(systemName: "scope")
+                                .foregroundStyle(Color.black0Color)
+                                .padding(19)
+                                .background(
+                                    Circle()
+                                        .fill(Color.white)
+                                )
+                        })
+                    }
                     .padding(.trailing, 32)
+                    
+                    HStack {
+                        Spacer()
+                        
+                        Button(action: {
+                            viewModel.runningType = .pause
+                        }, label: {
+                            Image(systemName: "pause.fill")
+                                .font(.system(size: 24))
+                                .foregroundStyle(Color.black0Color)
+                                .padding(24)
+                                .background(
+                                    Circle()
+                                        .fill(Color.firstColor)
+                                        .stroke(.white0, style: .init())
+                                )
+                        })
+                        .padding(.trailing, 64)
+                        
+                        Button(action: {
+                            /*moveTo WorkoutDataView*/
+                        }, label: {
+                            Image(systemName: "list.bullet.rectangle.portrait")
+                                .foregroundStyle(Color.black0Color)
+                                .padding(19)
+                                .background(
+                                    Circle()
+                                        .fill(Color.first)
+                                )
+                            
+                        })
+                        .padding(.trailing, 32)
+                    }
                 }
             )
         case .pause:
