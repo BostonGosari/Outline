@@ -9,7 +9,7 @@ import Firebase
 import FirebaseFirestoreSwift
 import SwiftUI
 
-protocol UserModelProtocol {
+protocol UserInfoModelProtocol {
     func readUserInfo(uid: String, completion: @escaping (Result<UserInfo, ReadDataError>) -> Void)
     func updateUserInfo(uid: String, userInfo: UserInfo, completion: @escaping (Result<Bool, ReadDataError>) -> Void)
     func createUser(nickname: String?, completion: @escaping (Result<String, ReadDataError>) -> Void)
@@ -21,7 +21,7 @@ enum ReadDataError: Error {
     case typeError
 }
 
-struct UserInfoModel: UserModelProtocol {
+struct UserInfoModel: UserInfoModelProtocol {
     
     private let userListRef = Firestore.firestore().collection("userList")
     
@@ -66,9 +66,4 @@ struct UserInfoModel: UserModelProtocol {
         userListRef.document(uid).delete()
         completion(.success(true))
     }
-    
-    func readUserRecords() {}
-    func readUserRecord(id: String) {}
-    func updateOrCreateUserRecord(id: String, record: Record) {}
-    func deleteUserRecord(id: String) {}
 }
