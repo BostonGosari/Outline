@@ -97,6 +97,9 @@ extension RunningMapView {
                             LongPressGesture(minimumDuration: 2.0)
                                 .updating($isLongPressed) { currentState, gestureState, _ in
                                     gestureState = currentState
+                                    if currentState {
+                                        giveHapticFeedback()
+                                    }
                                 }
                                 .onEnded { _ in
                                     /* move To FinishView */
@@ -127,6 +130,12 @@ extension RunningMapView {
                 EmptyView()
             )
         }
+    }
+    
+    private func giveHapticFeedback() {
+        let impactFeedbackgenerator = UIImpactFeedbackGenerator(style: .medium)
+        impactFeedbackgenerator.prepare()
+        impactFeedbackgenerator.impactOccurred()
     }
 }
 
