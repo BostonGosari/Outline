@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct CourseListWatchView: View {
+    
+    @State private var detailViewNavigate = false
+    
     var body: some View {
         NavigationStack {
             ScrollView {
@@ -35,7 +38,7 @@ struct CourseListWatchView: View {
                     }
                     .padding(.bottom, 8)
                     
-                    ForEach(0..<5) { _ in
+                    ForEach(0..<5) {_ in
                         Button {
                             print("button clicked")
                         } label: {
@@ -45,7 +48,7 @@ struct CourseListWatchView: View {
                                     .frame(maxWidth: .infinity, alignment: .leading)
                                     .overlay(alignment: .trailing) {
                                         Button {
-                                            print("ellipsis clicked")
+                                            detailViewNavigate.toggle()
                                         } label: {
                                             Image(systemName: "ellipsis")
                                                 .font(.system(size: 24))
@@ -77,6 +80,9 @@ struct CourseListWatchView: View {
                 }
             }
             .navigationTitle("러닝")
+            .navigationDestination(isPresented: $detailViewNavigate) {
+                Text("DetailView")
+            }
         }
     }
 }

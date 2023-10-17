@@ -33,8 +33,8 @@ struct MapWatchView: View {
                         Circle().foregroundStyle(.white).frame(width: 24)
                         Circle().foregroundStyle(.green).frame(width: 18)
                     }
-                    .onAppear {
-                        if let user = userlocation.location {
+                    .onChange(of: userlocation.location) { _, userlocation in
+                        if let user = userlocation {
                             userLocations.append(user.coordinate)
                         }
                     }
@@ -45,29 +45,13 @@ struct MapWatchView: View {
                     .stroke(.green, lineWidth: 8)
             }
             .mapControls {
-                MapCompass()
                 MapUserLocationButton()
             }
             .onAppear {
                 locationManager.requestWhenInUseAuthorization()
+                locationManager.startUpdatingLocation()
             }
             .tint(.green)
-            //            .overlay(alignment: .bottomTrailing) {
-            //                Button {
-            //
-            //                } label: {
-            //                    Image(systemName: "scope")
-            //                        .font(.title2)
-            //                        .foregroundStyle(.green)
-            //                        .padding(4)
-            //                        .background {
-            //                            Circle()
-            //                                .foregroundStyle(.black)
-            //                        }
-            //                }
-            //                .buttonStyle(.plain)
-            //                .padding(.horizontal)
-            //            }
             .overlay(alignment: .topLeading) {
                 Text("시티런")
                     .bold()

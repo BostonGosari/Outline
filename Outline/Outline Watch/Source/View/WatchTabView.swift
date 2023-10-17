@@ -10,9 +10,9 @@ import SwiftUI
 struct WatchTabView: View {
     var body: some View {
         TabView {
-            Text("Control View")
+            Text("Control View") // 뷰를 넣어주세요
             MapWatchView()
-            Text("Running View")
+            Text("Running View") // 뷰를 넣어주세요
         }
     }
 }
