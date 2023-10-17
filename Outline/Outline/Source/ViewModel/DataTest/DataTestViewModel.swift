@@ -11,7 +11,7 @@ import CoreData
 import SwiftUI
 
 let userInfoDummy = UserInfo(nickname: "austin", birthday: Date(), height: 175, weight: 70)
-let dummyCourseData = CourseData(courseName: "오리런", runningDate: Date(), startTime: Date(), endTime: Date(), heading: 1.4, distance: 200, coursePathes: [
+let dummyCourseData = CourseData(courseName: "오리런", runningDate: Date(), startTime: Date(), endTime: Date(), heading: 1.4, distance: 200, coursePaths: [
     CLLocationCoordinate2D(latitude: 26, longitude: 152),
     CLLocationCoordinate2D(latitude: 16, longitude: 122)
 ], courseLength: 5

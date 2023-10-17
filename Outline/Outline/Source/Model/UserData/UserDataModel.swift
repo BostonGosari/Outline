@@ -36,15 +36,15 @@ struct UserDataModel {
         newCourseData.setValue(record.courseData.courseLength ?? 0, forKey: "courseLength")
         newCourseData.setValue(record.courseData.heading, forKey: "heading")
         
-//        var pathList: [CoreCoordinate] = []
-//        for path in record.courseData.coursePathes {
-//            let newPath = CoreCoordinate(entity: CoreCoordinate.entity(), insertInto: persistenceController.container.viewContext)
-//            newPath.latitude = path.latitude
-//            newPath.longitude = path.longitude
-//            pathList.append(newPath)
-//        }
-//        
-//        newCourseData.coursePathes = NSSet(object: pathList)
+        var pathList: [CoreCoordinate] = []
+        for path in record.courseData.coursePaths {
+            let newPath = CoreCoordinate(entity: CoreCoordinate.entity(), insertInto: persistenceController.container.viewContext)
+            newPath.latitude = path.latitude
+            newPath.longitude = path.longitude
+            pathList.append(newPath)
+        }
+        
+        newCourseData.coursePaths = NSSet(array: pathList)
         newCourseData.parentRecord = newRunningRecord
         
         let newHealthData = CoreHealthData(context: persistenceController.container.viewContext)
