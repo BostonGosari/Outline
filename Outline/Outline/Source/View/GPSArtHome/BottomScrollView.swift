@@ -16,22 +16,21 @@ struct BottomScrollView: View {
           
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack {
-                        ForEach(1...10, id: \.self) { index in
+                        ForEach(1...10, id: \.self) { _ in
                             Rectangle()
                                 .frame(width: 164, height: 236)
                                 .background(
-                                    ZStack{
+                                    ZStack {
                                         Image("Sample")
                                         LinearGradient(
                                             stops: [
                                                 Gradient.Stop(color: .black, location: 0.00),
-                                                Gradient.Stop(color: .black.opacity(0), location: 1.00),
-                                                
+                                                Gradient.Stop(color: .black.opacity(0), location: 1.00)
                                             ],
                                             startPoint: UnitPoint(x: 0.5, y: 0.9),
                                             endPoint: UnitPoint(x: 0.5, y: 0)
                                         )
-                                        VStack(alignment: .leading){
+                                        VStack(alignment: .leading) {
                                             Spacer()
                                             Text("오리런")
                                                 .font(Font.system(size: 20).weight(.semibold))
@@ -61,7 +60,7 @@ struct BottomScrollView: View {
                                           cornerRadiusBottomLeft: 29,
                                           cornerRadiusBottomRight: 29
                                       )
-                                    .offset(x:1, y:1)
+                                    .offset(x: 1, y: 1)
                                     .frame(width: 166, height: 238)
                                 )
                                 
