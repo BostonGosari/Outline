@@ -43,7 +43,6 @@ struct DataTestView: View {
                         Text("courseLength: \(course.courseLength)")
                         Text("distance: \(course.distance)")
                         Text("heading: \(course.heading)")
-                        Text("mapScale: \(course.mapScale)")
                         Text("alley: \(course.alley.rawValue)")
                         Text("centerLocation: \(course.centerLocation.latitude), \(course.centerLocation.longitude), ")
                         Text("level: \(course.level.rawValue)")
