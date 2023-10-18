@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct TabView: View {
+struct HomeTabView: View {
     
     @State var selectedTab: Tab = .GPSArtRunning
     
@@ -42,5 +42,5 @@ struct TabView: View {
 }
 
 #Preview {
-    TabView()
+    HomeTabView()
 }
