@@ -8,36 +8,22 @@
 import SwiftUI
 
 struct DataTestView: View {
-    @ObservedObject private var firstoreManager = DataTestViewModel()
-    
-    @FetchRequest (
-        entity: CoreRunningRecord.entity(), sortDescriptors: []
-    ) var runningRecords: FetchedResults<CoreRunningRecord>
-    
+    @ObservedObject private var dataTestViewModel = DataTestViewModel()
     private let courseId = "an3yE14Ue1xsUKlDwUZu"
     
     var body: some View {
         VStack {
-            ScrollView {
-                ForEach(runningRecords, id: \.id) { record in
-                    Text("\(record.courseData?.coursePaths ?? [])")
-                        .padding(.bottom, 20)
-                        .onTapGesture {
-                            firstoreManager.updateRunningRecord(record, courseName: "문어런")
-                        }
-                }
-            }
             Text("user")
                 .font(.title)
-            Text("nickname: \(firstoreManager.userInfo.nickname)")
-            Text("weight: \(firstoreManager.userInfo.weight)")
-            Text("height: \(firstoreManager.userInfo.height)")
-            Text("gender: \(firstoreManager.userInfo.gender.rawValue)")
+            Text("nickname: \(dataTestViewModel.userInfo.nickname)")
+            Text("weight: \(dataTestViewModel.userInfo.weight)")
+            Text("height: \(dataTestViewModel.userInfo.height)")
+            Text("gender: \(dataTestViewModel.userInfo.gender.rawValue)")
             Text("course")
                 .font(.title)
             VStack {
                 ScrollView {
-                    ForEach(firstoreManager.courses, id: \.id) { course in
+                    ForEach(dataTestViewModel.courses, id: \.id) { course in
                         Text("courseName: \(course.courseName)")
                         Text("courseDuration: \(course.courseDuration)")
                         Text("courseLength: \(course.courseLength)")
@@ -52,42 +38,42 @@ struct DataTestView: View {
             }
             Spacer()
             Button {
-                firstoreManager.readUserInfo(uid: firstoreManager.uid)
+                dataTestViewModel.readUserInfo(uid: dataTestViewModel.uid)
             } label: {
                 Text("readUserInfo")
             }
             Button {
-                firstoreManager.updateUserInfo(uid: firstoreManager.uid, userInfo: UserInfo(nickname: "austin", birthday: Date(), height: 120, weight: 10))
+                dataTestViewModel.updateUserInfo(uid: dataTestViewModel.uid, userInfo: UserInfo(nickname: "austin", birthday: Date(), height: 120, weight: 10))
             } label: {
                 Text("updatedUserInfo")
             }
             Button {
-                firstoreManager.createUser(nickname: "newName")
+                dataTestViewModel.createUser(nickname: "newName")
             } label: {
                 Text("createUserInfo")
             }
             Button {
-                firstoreManager.deleteUser(uid: firstoreManager.uid)
+                dataTestViewModel.deleteUser(uid: dataTestViewModel.uid)
             } label: {
                 Text("deleteUser")
             }
             Button {
-                firstoreManager.readAllCourses()
+                dataTestViewModel.readAllCourses()
             } label: {
                 Text("readAllCourses")
             }
             Button {
-                firstoreManager.readCourse(id: courseId)
+                dataTestViewModel.readCourse(id: courseId)
             } label: {
                 Text("readCourse")
             }
             Button {
-                firstoreManager.readUserNameSet()
+                dataTestViewModel.readUserNameSet()
             } label: {
                 Text("readUserNameSet")
             }
             Button {
-                firstoreManager.updateUserNameSet(userNameFrom: "문의", userNameTo: "오스틴")
+                dataTestViewModel.updateUserNameSet(userNameFrom: "문의", userNameTo: "오스틴")
             } label: {
                 Text("updateNameSet")
             }

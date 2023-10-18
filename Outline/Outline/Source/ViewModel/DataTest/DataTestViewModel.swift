@@ -22,8 +22,8 @@ class DataTestViewModel: ObservableObject {
     @Published var userInfo: UserInfo = userInfoDummy
     @Published var courses: AllGPSArtCourses = []
     @Published var uid = ""
-    var userNameSet: [String] = []
     
+    var userNameSet: [String] = []
     let userInfoModel = UserInfoModel()
     let courseModel = CourseModel()
     let userDataModel = UserDataModel()
