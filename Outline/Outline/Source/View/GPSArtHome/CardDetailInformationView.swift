@@ -17,7 +17,7 @@ struct CardDetailInformationView: View {
                         Capsule()
                             .stroke()
                     }
-                    .foregroundColor(.firstColor)
+                    .foregroundColor(.primaryColor)
                 Text("#5km")
                     .frame(width: 70, height: 23)
                     .background {
@@ -53,7 +53,7 @@ struct CardDetailInformationView: View {
                         Image(systemName: "flag")
                         Text("추천 시작 위치")
                     }
-                    .foregroundColor(.firstColor)
+                    .foregroundColor(.primaryColor)
                     Text("포항시 남구 효자로")
                 }
                 HStack {
@@ -61,7 +61,7 @@ struct CardDetailInformationView: View {
                         Image(systemName: "location")
                         Text("거리")
                     }
-                    .foregroundColor(.firstColor)
+                    .foregroundColor(.primaryColor)
                     Text("9km")
                 }
                 HStack {
@@ -69,7 +69,7 @@ struct CardDetailInformationView: View {
                         Image(systemName: "clock")
                         Text("예상 소요 시간")
                     }
-                    .foregroundColor(.firstColor)
+                    .foregroundColor(.primaryColor)
                     Text("2h 39m")
                 }
                 HStack {
@@ -77,7 +77,7 @@ struct CardDetailInformationView: View {
                         Image(systemName: "arrow.triangle.turn.up.right.diamond")
                         Text("골목길")
                     }
-                    .foregroundColor(.firstColor)
+                    .foregroundColor(.primaryColor)
                     Text("많음")
                 }
             }
