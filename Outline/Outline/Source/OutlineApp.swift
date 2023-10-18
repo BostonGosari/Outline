@@ -20,7 +20,7 @@ struct OutlineApp: App {
   
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            PathDrawingTestView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
 
         }
