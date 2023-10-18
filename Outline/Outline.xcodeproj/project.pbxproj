@@ -371,6 +371,8 @@
 				9528EFEB2ADEC7CF0056CCC6 /* UserDataModelType.swift */,
 			);
 			path = UserData;
+			sourceTree = "<group>";
+		};
 		BB1D53072ADDB24A0073771F /* Running */ = {
 			isa = PBXGroup;
 			children = (
