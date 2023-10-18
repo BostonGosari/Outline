@@ -14,10 +14,9 @@ protocol UserDataModelProtocol {
         record: RunningRecord,
         completion: @escaping (Result<Bool, CoreDataError>) -> Void
     )
-    func updateRunnningRecord(
+    func updateRunningRecordCourseName(
         _ record: NSManagedObject,
-        courseData: CourseData,
-        healthData: HealthData,
+        newCourseName: String,
         completion: @escaping (Result<Bool, CoreDataError>) -> Void
     )
     func deleteRunningRecord(
@@ -25,11 +24,14 @@ protocol UserDataModelProtocol {
         completion: @escaping (Result<Bool, CoreDataError>) -> Void
     )
 }
+
 enum CoreDataError: Error {
     case saveFailed
+    case dataNotFound
 }
 
 struct UserDataModel: UserDataModelProtocol {
+    
     let persistenceController = PersistenceController.shared
     
     private func saveContext() throws {
@@ -51,12 +53,9 @@ struct UserDataModel: UserDataModelProtocol {
         let context = persistenceController.container.viewContext
         let newCourseData = CoreCourseData(context: context)
         newCourseData.setValue(record.courseData.courseName, forKey: "courseName")
-        newCourseData.setValue(record.courseData.runningDate, forKey: "runningDate")
-        newCourseData.setValue(record.courseData.startTime, forKey: "startTime")
-        newCourseData.setValue(record.courseData.endTime, forKey: "endTime")
+        newCourseData.setValue(record.courseData.runningLength, forKey: "runningLength")
         newCourseData.setValue(record.courseData.heading, forKey: "heading")
         newCourseData.setValue(record.courseData.distance, forKey: "distance")
-        newCourseData.setValue(record.courseData.courseLength ?? 0, forKey: "courseLength")
         newCourseData.setValue(record.courseData.heading, forKey: "heading")
         
         var pathList: [CoreCoordinate] = []
@@ -72,11 +71,13 @@ struct UserDataModel: UserDataModelProtocol {
         
         let newHealthData = CoreHealthData(context: persistenceController.container.viewContext)
         newHealthData.setValue(record.healthData.totalTime, forKey: "totalTime")
-        newHealthData.setValue(record.healthData.averageCyclingCadence, forKey: "averageCyclingCadence")
+        newHealthData.setValue(record.healthData.averageCadence, forKey: "averageCadence")
         newHealthData.setValue(record.healthData.totalRunningDistance, forKey: "totalRunningDistance")
         newHealthData.setValue(record.healthData.totalEnergy, forKey: "totalEnergy")
         newHealthData.setValue(record.healthData.averageHeartRate, forKey: "averageHeartRate")
         newHealthData.setValue(record.healthData.averagePace, forKey: "averagePace")
+        newHealthData.setValue(record.healthData.startDate, forKey: "startDate")
+        newHealthData.setValue(record.healthData.endDate, forKey: "endDate")
         
         newHealthData.recordHeathData = newRunningRecord
         
@@ -88,31 +89,17 @@ struct UserDataModel: UserDataModelProtocol {
         }
     }
     
-    func updateRunnningRecord(
+    func updateRunningRecordCourseName(
         _ record: NSManagedObject,
-        courseData: CourseData,
-        healthData: HealthData,
+        newCourseName: String,
         completion: @escaping (Result<Bool, CoreDataError>) -> Void
     ) {
         guard let record = record as? CoreRunningRecord else {
+            completion(.failure(.dataNotFound))
             return
         }
-        record.healthData?.setValue(healthData.totalTime, forKey: "totalTime")
         
-        record.healthData?.setValue(healthData.averageCyclingCadence, forKey: "averageCyclingCadence")
-        record.healthData?.setValue(healthData.totalRunningDistance, forKey: "totalRunningDistance")
-        record.healthData?.setValue(healthData.totalEnergy, forKey: "totalEnergy")
-        record.healthData?.setValue(healthData.averageHeartRate, forKey: "averageHeartRate")
-        record.healthData?.setValue(healthData.averagePace, forKey: "averagePace")
-        
-        record.courseData?.setValue(courseData.courseName, forKey: "courseName")
-        record.courseData?.setValue(courseData.runningDate, forKey: "runningDate")
-        record.courseData?.setValue(courseData.startTime, forKey: "startTime")
-        record.courseData?.setValue(courseData.endTime, forKey: "endTime")
-        record.courseData?.setValue(courseData.heading, forKey: "heading")
-        record.courseData?.setValue(courseData.distance, forKey: "distance")
-        record.courseData?.setValue(courseData.courseLength ?? 0, forKey: "courseLength")
-        record.courseData?.setValue(courseData.heading, forKey: "heading")
+        record.courseData?.setValue(newCourseName, forKey: "courseName")
         
         do {
             try saveContext()
