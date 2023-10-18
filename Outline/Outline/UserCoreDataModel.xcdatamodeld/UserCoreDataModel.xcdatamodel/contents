@@ -6,14 +6,10 @@
         <relationship name="parentCoursePaths" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CoreCourseData" inverseName="coursePaths" inverseEntity="CoreCourseData"/>
     </entity>
     <entity name="CoreCourseData" representedClassName=".CoreCourseData" syncable="YES" codeGenerationType="class">
-        <attribute name="courseLength" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="courseName" attributeType="String"/>
         <attribute name="distance" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <attribute name="endTime" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="heading" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <attribute name="runningDate" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="runningLength" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <attribute name="startTime" attributeType="Date" usesScalarValueType="NO"/>
         <relationship name="coursePaths" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CoreCoordinate" inverseName="parentCoursePaths" inverseEntity="CoreCoordinate"/>
         <relationship name="parentRecord" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CoreRunningRecord" inverseName="courseData" inverseEntity="CoreRunningRecord"/>
     </entity>
@@ -21,6 +17,8 @@
         <attribute name="averageCyclingCadence" attributeType="String"/>
         <attribute name="averageHeartRate" attributeType="String"/>
         <attribute name="averagePace" attributeType="String"/>
+        <attribute name="endDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="startDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="totalEnergy" attributeType="String"/>
         <attribute name="totalRunningDistance" attributeType="String"/>
         <attribute name="totalTime" attributeType="String"/>

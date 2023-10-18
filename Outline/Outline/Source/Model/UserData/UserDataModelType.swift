@@ -23,12 +23,9 @@ struct RunningRecord {
 struct CourseData {
     var courseName: String
     var runningDate: Date
-    var startTime: Date
-    var endTime: Date
     var heading: Double
     var distance: Double
     var coursePaths: [CLLocationCoordinate2D]
-    var courseLength: Double?
 }
 
 struct HealthData {
@@ -38,4 +35,6 @@ struct HealthData {
     var totalEnergy: String
     var averageHeartRate: String
     var averagePace: String
+    var startDate: Date
+    var endDate: Date
 }
