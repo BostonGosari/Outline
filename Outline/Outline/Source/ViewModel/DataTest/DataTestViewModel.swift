@@ -22,6 +22,7 @@ class DataTestViewModel: ObservableObject {
     @Published var userInfo: UserInfo = userInfoDummy
     @Published var courses: AllGPSArtCourses = []
     @Published var uid = ""
+    var userNameSet: [String] = []
     
     let userInfoModel = UserInfoModel()
     let courseModel = CourseModel()
@@ -120,6 +121,35 @@ class DataTestViewModel: ObservableObject {
     
     func deleteRunningRecord(_ record: NSManagedObject) {
         userDataModel.deleteRunningRecord(record) { result in
+            switch result {
+            case .success(let isSaved):
+                print(isSaved)
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    func readUserNameSet() {
+        userInfoModel.readUserNameSet { result in
+            switch result {
+            case .success(let userList):
+                self.userNameSet = userList
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    func updateUserNameSet(userNameFrom: String, userNameTo: String) {
+        self.readUserNameSet()
+        if !self.userNameSet.contains(userNameFrom) {
+            print("nickname error")
+            return
+        }
+        var newUserList = self.userNameSet.filter({ $0 != userNameFrom })
+        newUserList.append(userNameTo)
+        userInfoModel.updateUserNameSet(newUserNames: newUserList) { result in
             switch result {
             case .success(let isSaved):
                 print(isSaved)
