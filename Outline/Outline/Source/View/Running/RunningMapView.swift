@@ -46,7 +46,7 @@ struct RunningMapView: View {
 extension RunningMapView {
     private var runningButtonView: AnyView {
         switch viewModel.runningType {
-        case .running:
+        case .start:
             AnyView(
                 VStack {
                     RunningStateButton(
@@ -116,7 +116,7 @@ extension RunningMapView {
                         color: .firstColor,
                         size: 24
                     ) {
-                        viewModel.runningType = .running
+                        viewModel.runningType = .start
                     }
                 }
                 .frame(maxWidth: .infinity, alignment: .center)
