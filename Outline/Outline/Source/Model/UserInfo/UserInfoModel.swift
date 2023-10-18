@@ -9,7 +9,7 @@ import Firebase
 import FirebaseFirestoreSwift
 import SwiftUI
 
-protocol UserModelProtocol {
+protocol UserInfoModelProtocol {
     func readUserInfo(uid: String, completion: @escaping (Result<UserInfo, ReadDataError>) -> Void)
     func updateUserInfo(uid: String, userInfo: UserInfo, completion: @escaping (Result<Bool, ReadDataError>) -> Void)
     func createUser(nickname: String?, completion: @escaping (Result<String, ReadDataError>) -> Void)
@@ -21,9 +21,10 @@ enum ReadDataError: Error {
     case typeError
 }
 
-struct UserInfoModel: UserModelProtocol {
+struct UserInfoModel: UserInfoModelProtocol {
     
     private let userListRef = Firestore.firestore().collection("userList")
+    private let userUtilRef = Firestore.firestore().collection("util")
     
     func readUserInfo(uid: String, completion: @escaping (Result<UserInfo, ReadDataError>) -> Void) {
         userListRef.document(uid).getDocument { (snapshot, error) in
@@ -67,8 +68,30 @@ struct UserInfoModel: UserModelProtocol {
         completion(.success(true))
     }
     
-    func readUserRecords() {}
-    func readUserRecord(id: String) {}
-    func updateOrCreateUserRecord(id: String, record: Record) {}
-    func deleteUserRecord(id: String) {}
+    func readUserNameSet(completion: @escaping (Result<[String], ReadDataError>) -> Void) {
+        userUtilRef.document("userNameSet").getDocument { (snapshot, error) in
+            guard let snapshot = snapshot, error == nil else {
+                completion(.failure(.dataNotFound))
+                return
+            }
+            do {
+                let userNameSet = try snapshot.data(as: UserNameSet.self)
+                completion(.success(userNameSet.userNames))
+            } catch {
+                completion(.failure(.typeError))
+            }
+        }
+    }
+    
+    func updateUserNameSet(newUserNames:[String], completion: @escaping (Result<Bool, ReadDataError>) -> Void) {
+        if newUserNames.isEmpty {
+            completion(.failure(.dataNotFound))
+        }
+        do {
+            try userUtilRef.document("userNameSet").setData(from: UserNameSet(userNames: newUserNames))
+            completion(.success(true))
+        } catch {
+            completion(.failure(.typeError))
+        }
+    }
 }
