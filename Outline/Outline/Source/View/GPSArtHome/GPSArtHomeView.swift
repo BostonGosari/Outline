@@ -55,10 +55,11 @@ struct GPSArtHomeView: View {
                             ForEach(0..<pageCount, id: \.self) { pageIndex in
                                 Rectangle()
                                     .frame(width: indexWidth, height: indexHeight)
-                                    .foregroundColor(currentIndex == pageIndex ? .firstColor : .white)
+                                    .foregroundColor(currentIndex == pageIndex ? .primaryColor : .white)
                                     .animation(.easeInOut, value: currentIndex)
                             }
                         }
+                        BottomScrollView()
                     }
                 }
                 .overlay(alignment: .top) {
@@ -86,5 +87,5 @@ struct GPSArtHomeView: View {
 }
 
 #Preview {
-    TabView()
+    HomeTabView()
 }
