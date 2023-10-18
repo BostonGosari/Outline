@@ -14,16 +14,48 @@ struct MetricsView: View {
     var body: some View {
         TimelineView(MetricsTimelineSchedule(from: workoutManager.builder?.startDate ?? Date(),
                                              isPaused: workoutManager.session?.state == .paused)) { context in
-            VStack(alignment: .leading) {
+            VStack(alignment: .center) {
+                Spacer()
                 ElapsedTimeView(elapsedTime: workoutManager.builder?.elapsedTime(at: context.date) ?? 0, showSubseconds: context.cadence == .live)
-                    .foregroundStyle(.yellow)
-                Text(Measurement(value: workoutManager.activeEnergy, unit: UnitEnergy.kilocalories)
-                        .formatted(.measurement(width: .abbreviated, usage: .workout, numberFormatStyle: .number.precision(.fractionLength(0)))))
-                Text(workoutManager.heartRate.formatted(.number.precision(.fractionLength(0))) + " bpm")
-                Text(Measurement(value: workoutManager.distance, unit: UnitLength.meters).formatted(.measurement(width: .abbreviated, usage: .road)))
+                Spacer()
+                HStack {
+                    VStack {
+                        Text("\(workoutManager.activeEnergy.formatted(.number.precision(.fractionLength(0))))")
+
+                            .font(
+                                Font.custom("SF Pro Display", size: 32)
+                                    .weight(.medium)
+                                )
+                            .foregroundColor(.white)
+                        Text("킬로미터")
+                            .font(Font.custom("SF Pro Display", size: 11))
+                            .multilineTextAlignment(.center)
+                            .foregroundColor(Color.gray500)
+
+                    }
+                    Spacer()
+                    VStack {
+                        Text("\(workoutManager.pace.formatted(.number.precision(.fractionLength(0))))")
+                        .font(
+                            Font.custom("SF Pro Display", size: 32)
+                                .weight(.medium)
+                            )
+                        .foregroundColor(.white)
+                        Text("페이스")
+                            .font(Font.custom("SF Pro Display", size: 11))
+                            .multilineTextAlignment(.center)
+                            .foregroundColor(Color.gray500)
+
+                    }
+                   
+                }
+                Spacer()
+               
+//                Text(workoutManager.heartRate.formatted(.number.precision(.fractionLength(0))) + " bpm")
+//                Text(Measurement(value: workoutManager.distance, unit: UnitLength.meters).formatted(.measurement(width: .abbreviated, usage: .road)))
             }
             .font(.system(.title, design: .rounded).monospacedDigit().lowercaseSmallCaps())
-            .frame(maxWidth: .infinity, alignment: .leading)
+            .frame(maxWidth: .infinity)
             .ignoresSafeArea(edges: .bottom)
             .scenePadding()
         }
