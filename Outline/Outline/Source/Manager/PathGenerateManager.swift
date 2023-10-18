@@ -19,15 +19,7 @@ struct CanvasData {
 final class PathGenerateManager {
     static let shared = PathGenerateManager()
     private init() {}
-    
-//    let testCoordinates: [CLLocationCoordinate2D] = {
-//        if let kmlFilePath = Bundle.main.path(forResource: "duckRun", ofType: "kml") {
-//            let kmlParser = KMLParserManager()
-//            return kmlParser.parseKMLFile(atPath: kmlFilePath)
-//        }
-//        return []
-//    }()
-//    
+
     func caculateLines(width: Double, height: Double, coordinates: [CLLocationCoordinate2D]) -> some Shape {
         let canvasData = calculateCanvaData(coordinates: coordinates, width: width, height: height)
         var path = Path()
