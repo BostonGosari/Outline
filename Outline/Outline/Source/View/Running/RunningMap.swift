@@ -32,7 +32,7 @@ struct RunningMap: UIViewRepresentable {
     
     func updateUIView(_ uiView: MKMapView, context: Context) {
         /*일시 중지 상태에서는 위치는 추적하지만 라인 그리는 것은 멈춤*/
-        if viewModel.runningType == .running {
+        if viewModel.runningType == .start {
             
             /* 첫 번째 overlay인 kml 경로를 제외하고 마지막 overlay 삭제 */
             if uiView.overlays.count >= 2,
@@ -81,7 +81,7 @@ struct RunningMap: UIViewRepresentable {
         func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
             if let polyline = overlay as? MKPolyline {
                 let renderer = MKPolylineRenderer(polyline: polyline)
-                renderer.strokeColor = (mapView.overlays.count == 1) ? .gray600 : .first
+                renderer.strokeColor = (mapView.overlays.count == 1) ? .gray600 : .primary
                 renderer.lineWidth = 15
                 return renderer
             }
