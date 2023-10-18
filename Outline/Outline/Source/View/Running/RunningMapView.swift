@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct RunningMapView: View {
-    @StateObject var locationManager = LocationManager()
     @StateObject private var viewModel = RunningMapViewModel()
+    @StateObject var locationManager = LocationManager()
     
     @GestureState var isLongPressed = false
 
@@ -88,10 +88,7 @@ extension RunningMapView {
                         .font(.system(size: 24))
                         .foregroundStyle(Color.black0Color)
                         .padding(24)
-                        .background(
-                            Circle()
-                                .fill(Color.white0Color)
-                        )
+                        .background(Circle().fill(Color.white0Color))
                         .scaleEffect(isLongPressed ? 1.5 : 1)
                         .simultaneousGesture(
                             LongPressGesture(minimumDuration: 2.0)

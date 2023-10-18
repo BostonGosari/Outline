@@ -9,7 +9,7 @@ import CoreLocation
 import SwiftUI
 
 enum CurrentRunningType {
-    case running
+    case start
     case pause
     case stop
 }
@@ -20,7 +20,7 @@ enum CurrentMapType {
 }
 
 class RunningMapViewModel: ObservableObject {
-    @Published var runningType: CurrentRunningType = .running
+    @Published var runningType: CurrentRunningType = .start
     @Published var mapType: CurrentMapType = .gpsArtRun
     @Published var isUserLocationCenter = false
    
@@ -35,12 +35,13 @@ class RunningMapViewModel: ObservableObject {
     }
     
     var popupText: String {
-        if runningType == .pause {
-            "일시정지를 3초동안 누르면 러닝이 종료돼요"
-        } else if runningType == .running {
-            "도착점이 10m 이내에 있어요"
-        } else {
-            ""
+        switch runningType {
+        case .pause:
+            return "일시정지를 3초동안 누르면 러닝이 종료돼요"
+        case .start:
+            return "도착점이 10m 이내에 있어요"
+        default:
+            return ""
         }
     }
     
