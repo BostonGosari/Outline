@@ -23,6 +23,8 @@
 		2998035B2AE0181900A9A134 /* ConfettiShapes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299803592AE0181900A9A134 /* ConfettiShapes.swift */; };
 		2998035C2AE0181900A9A134 /* Confetti.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2998035A2AE0181900A9A134 /* Confetti.swift */; };
 		2998035E2AE0182100A9A134 /* ConfettiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2998035D2AE0182100A9A134 /* ConfettiView.swift */; };
+		299803602AE0240100A9A134 /* ConfettiShapes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299803592AE0181900A9A134 /* ConfettiShapes.swift */; };
+		299803612AE0240300A9A134 /* Confetti.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2998035A2AE0181900A9A134 /* Confetti.swift */; };
 		29AE76AC2ADE0D9100A46742 /* OutlineApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0AC8A9C2AD94C1F0061612C /* OutlineApp.swift */; };
 		29AE76AD2ADE0D9500A46742 /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0AC8B0E2AD9659D0061612C /* ColorExtension.swift */; };
 		29AE76D72ADE2A2200A46742 /* InputNicknameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AE76D52ADE2A2200A46742 /* InputNicknameView.swift */; };
@@ -861,6 +863,8 @@
 				F0AC8B2A2AD967490061612C /* WatchModifier.swift in Sources */,
 				F0492E232ADD545200F6EADD /* CourseListWatchView.swift in Sources */,
 				F0AC8B1D2AD966990061612C /* Model.swift in Sources */,
+				299803602AE0240100A9A134 /* ConfettiShapes.swift in Sources */,
+				299803612AE0240300A9A134 /* Confetti.swift in Sources */,
 				F0AC8B242AD9670A0061612C /* WatchComponent.swift in Sources */,
 				F0492E1E2ADD515100F6EADD /* LocationManager.swift in Sources */,
 				F0AC8B272AD967330061612C /* WatchExtension.swift in Sources */,
