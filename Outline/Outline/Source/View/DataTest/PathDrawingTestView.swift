@@ -21,13 +21,16 @@ struct PathDrawingTestView: View {
         return []
     }()
     
+    let settedWidth: Double = 300
+    let settedHeight: Double = 300
+    
     var body: some View {
         ZStack {
             Color.fourth
             pathManager
-                .caculateLines(width: 300, height: 300, coordinates: testCoordinates)
+                .caculateLines(width: settedWidth, height: settedHeight, coordinates: testCoordinates)
                 .stroke(Color.gradient3, style: StrokeStyle(lineWidth: 4, lineCap: .round))
-                .frame(width: 300, height: 300)
+                .frame(width: settedWidth, height: settedHeight)
                 .rotationEffect(Angle(degrees: 90))
         }
         .ignoresSafeArea()
