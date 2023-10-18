@@ -51,7 +51,7 @@ extension RunningMapView {
                 VStack {
                     RunningStateButton(
                         imageName: "scope",
-                        color: Color.white0Color,
+                        color: Color.whiteColor,
                         size: 18
                     ) {
                         viewModel.isUserLocationCenter = true
@@ -62,7 +62,7 @@ extension RunningMapView {
                     HStack {
                         RunningStateButton(
                             imageName: "pause.fill",
-                            color: .firstColor,
+                            color: .primaryColor,
                             size: 24
                         ) {
                             viewModel.runningType = .pause
@@ -71,7 +71,7 @@ extension RunningMapView {
                         
                         RunningStateButton(
                             imageName: "list.bullet.rectangle.portrait",
-                            color: .firstColor,
+                            color: .primaryColor,
                             size: 19
                         ) {
                             /*moveTo WorkoutDataView*/
@@ -86,9 +86,9 @@ extension RunningMapView {
                 HStack {
                     Image(systemName: "stop.fill")
                         .font(.system(size: 24))
-                        .foregroundStyle(Color.black0Color)
+                        .foregroundStyle(Color.blackColor)
                         .padding(24)
-                        .background(Circle().fill(Color.white0Color))
+                        .background(Circle().fill(Color.whiteColor))
                         .scaleEffect(isLongPressed ? 1.5 : 1)
                         .simultaneousGesture(
                             LongPressGesture(minimumDuration: 2.0)
@@ -113,7 +113,7 @@ extension RunningMapView {
                     
                     RunningStateButton(
                         imageName: "play.fill",
-                        color: .firstColor,
+                        color: .primaryColor,
                         size: 24
                     ) {
                         viewModel.runningType = .start
@@ -148,12 +148,12 @@ struct RunningStateButton: View {
         }  label: {
             Image(systemName: "\(imageName)")
                 .font(.system(size: size))
-                .foregroundStyle(Color.black0Color)
+                .foregroundStyle(Color.blackColor)
                 .padding(size)
                 .background(
                     Circle()
                         .fill(color)
-                        .stroke(.white0, style: .init())
+                        .stroke(.white, style: .init())
                 )
         }
     }
