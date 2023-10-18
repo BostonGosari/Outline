@@ -14,7 +14,7 @@ struct RunningPopup: View {
     var body: some View {
         RoundedRectangle(cornerRadius: 50)
             .fill(Color.black70)
-            .strokeBorder(Color.first)
+            .strokeBorder(Color.primaryColor)
             .frame(height: 54)
             .padding(.horizontal, 24)
             .overlay {

@@ -32,7 +32,7 @@ struct SlideToUnlock: View {
         Capsule()
             .fill(
                 LinearGradient(
-                    colors: [.firstColor, .purple],
+                    colors: [.primaryColor, .purple],
                     startPoint: .leading,
                     endPoint: .trailing
                 )
@@ -56,7 +56,7 @@ struct SlideToUnlock: View {
             Capsule()
                 .foregroundStyle(.thinMaterial)
             LinearGradient(
-                colors: [.firstColor, .white],
+                colors: [.primaryColor, .white],
                 startPoint: .leading,
                 endPoint: .trailing
             )
