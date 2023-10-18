@@ -23,7 +23,7 @@ struct DataTestView: View {
                     Text("\(record.courseData?.coursePaths ?? [])")
                         .padding(.bottom, 20)
                         .onTapGesture {
-                            firstoreManager.deleteRunningRecord(record)
+                            firstoreManager.updateRunningRecord(record, courseData: dummyCourseData, healthData: dummyHealthData)
                         }
                 }
             }
@@ -86,11 +86,6 @@ struct DataTestView: View {
                 firstoreManager.addRunningRecord()
             } label: {
                 Text("add new Record")
-            }
-            Button {
-                
-            } label: {
-                Text("read Records")
             }
         }
     }
