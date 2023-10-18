@@ -11,12 +11,11 @@ import CoreData
 import SwiftUI
 
 let userInfoDummy = UserInfo(nickname: "austin", birthday: Date(), height: 175, weight: 70)
-let dummyCourseData = CourseData(courseName: "오리런", runningDate: Date(), startTime: Date(), endTime: Date(), heading: 1.4, distance: 200, coursePaths: [
+let dummyCourseData = CourseData(courseName: "댕댕런", runningLength: 5, heading: 1.3, distance: 400, coursePaths: [
     CLLocationCoordinate2D(latitude: 26, longitude: 152),
     CLLocationCoordinate2D(latitude: 16, longitude: 122)
-], courseLength: 5
-)
-let dummyHealthData = HealthData(totalTime: "40", averageCyclingCadence: "20", totalRunningDistance: "5", totalEnergy: "500", averageHeartRate: "150", averagePace: "5")
+])
+let dummyHealthData = HealthData(totalTime: 40, averageCadence: 20, totalRunningDistance: 50, totalEnergy: 200, averageHeartRate: 150, averagePace: 5, startDate: Date(), endDate: Date())
 
 class DataTestViewModel: ObservableObject {
     
@@ -108,12 +107,8 @@ class DataTestViewModel: ObservableObject {
         }
     }
     
-    func updateRunningRecord(_ record: NSManagedObject, courseData: CourseData, healthData: HealthData) {
-        userDataModel.updateRunnningRecord(
-            record,
-            courseData: courseData,
-            healthData: healthData
-        ) { result in
+    func updateRunningRecord(_ record: NSManagedObject, courseName: String) {
+        userDataModel.updateRunningRecordCourseName(record, newCourseName: courseName) { result in
             switch result {
             case .success(let isSaved):
                 print(isSaved)

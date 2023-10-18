@@ -14,14 +14,14 @@
         <relationship name="parentRecord" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CoreRunningRecord" inverseName="courseData" inverseEntity="CoreRunningRecord"/>
     </entity>
     <entity name="CoreHealthData" representedClassName=".CoreHealthData" syncable="YES" codeGenerationType="class">
-        <attribute name="averageCyclingCadence" attributeType="String"/>
-        <attribute name="averageHeartRate" attributeType="String"/>
-        <attribute name="averagePace" attributeType="String"/>
+        <attribute name="averageCadence" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="averageHeartRate" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="averagePace" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="endDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="startDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="totalEnergy" attributeType="String"/>
-        <attribute name="totalRunningDistance" attributeType="String"/>
-        <attribute name="totalTime" attributeType="String"/>
+        <attribute name="totalEnergy" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="totalRunningDistance" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="totalTime" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <relationship name="recordHeathData" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CoreRunningRecord" inverseName="healthData" inverseEntity="CoreRunningRecord"/>
     </entity>
     <entity name="CoreRunningRecord" representedClassName=".CoreRunningRecord" syncable="YES" codeGenerationType="class">
