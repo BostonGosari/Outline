@@ -81,7 +81,7 @@ struct RunningMap: UIViewRepresentable {
         func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
             if let polyline = overlay as? MKPolyline {
                 let renderer = MKPolylineRenderer(polyline: polyline)
-                renderer.strokeColor = (mapView.overlays.count == 1) ? .gray600 : .first
+                renderer.strokeColor = (mapView.overlays.count == 1) ? .gray600 : .primary
                 renderer.lineWidth = 15
                 return renderer
             }
