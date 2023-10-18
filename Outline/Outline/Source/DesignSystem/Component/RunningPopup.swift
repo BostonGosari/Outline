@@ -13,7 +13,7 @@ struct RunningPopup: View {
     
     var body: some View {
         RoundedRectangle(cornerRadius: 50)
-            .fill(Color.black70)
+            .fill(Color.black70Color)
             .strokeBorder(Color.primaryColor)
             .frame(height: 54)
             .padding(.horizontal, 24)
