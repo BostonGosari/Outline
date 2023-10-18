@@ -17,6 +17,12 @@
 		0E29F65C2ADF6CA000F5EF5C /* RunningMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E29F6582ADF6CA000F5EF5C /* RunningMapView.swift */; };
 		0E29F65D2ADF6CA000F5EF5C /* WorkoutDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E29F6592ADF6CA000F5EF5C /* WorkoutDataView.swift */; };
 		0E29F65F2ADF6CDD00F5EF5C /* RunningMapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E29F65E2ADF6CDD00F5EF5C /* RunningMapViewModel.swift */; };
+		299803572AE00C9B00A9A134 /* HapticManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299803562AE00C9B00A9A134 /* HapticManager.swift */; };
+		2998035B2AE0181900A9A134 /* ConfettiShapes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299803592AE0181900A9A134 /* ConfettiShapes.swift */; };
+		2998035C2AE0181900A9A134 /* Confetti.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2998035A2AE0181900A9A134 /* Confetti.swift */; };
+		2998035E2AE0182100A9A134 /* ConfettiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2998035D2AE0182100A9A134 /* ConfettiView.swift */; };
+		299803602AE0240100A9A134 /* ConfettiShapes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299803592AE0181900A9A134 /* ConfettiShapes.swift */; };
+		299803612AE0240300A9A134 /* Confetti.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2998035A2AE0181900A9A134 /* Confetti.swift */; };
 		0EE92E682AE00A11003192FF /* FinishRunningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE92E672AE00A11003192FF /* FinishRunningView.swift */; };
 		0EE92E6A2AE00A2B003192FF /* FinishRunningMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE92E692AE00A2B003192FF /* FinishRunningMap.swift */; };
 		0EE92E6C2AE00A33003192FF /* FinishRunningViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE92E6B2AE00A33003192FF /* FinishRunningViewModel.swift */; };
@@ -143,6 +149,11 @@
 		0E29F6582ADF6CA000F5EF5C /* RunningMapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RunningMapView.swift; sourceTree = "<group>"; };
 		0E29F6592ADF6CA000F5EF5C /* WorkoutDataView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkoutDataView.swift; sourceTree = "<group>"; };
 		0E29F65E2ADF6CDD00F5EF5C /* RunningMapViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RunningMapViewModel.swift; sourceTree = "<group>"; };
+		299803512ADED6B700A9A134 /* Outline Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Outline Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		299803562AE00C9B00A9A134 /* HapticManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticManager.swift; sourceTree = "<group>"; };
+		299803592AE0181900A9A134 /* ConfettiShapes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfettiShapes.swift; sourceTree = "<group>"; };
+		2998035A2AE0181900A9A134 /* Confetti.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Confetti.swift; sourceTree = "<group>"; };
+		2998035D2AE0182100A9A134 /* ConfettiView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfettiView.swift; sourceTree = "<group>"; };
 		0EE92E672AE00A11003192FF /* FinishRunningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishRunningView.swift; sourceTree = "<group>"; };
 		0EE92E692AE00A2B003192FF /* FinishRunningMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishRunningMap.swift; sourceTree = "<group>"; };
 		0EE92E6B2AE00A33003192FF /* FinishRunningViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishRunningViewModel.swift; sourceTree = "<group>"; };
@@ -254,6 +265,16 @@
 			);
 			path = KML;
 			sourceTree = "<group>";
+		};
+		299803582AE0181900A9A134 /* Confetti */ = {
+			isa = PBXGroup;
+			children = (
+				2998035D2AE0182100A9A134 /* ConfettiView.swift */,
+				299803592AE0181900A9A134 /* ConfettiShapes.swift */,
+				2998035A2AE0181900A9A134 /* Confetti.swift */,
+			);
+			path = Confetti;
+		sourceTree = "<group>";
 		};
 		0EE92E662AE00A02003192FF /* FininshRunning */ = {
 			isa = PBXGroup;
@@ -369,6 +390,7 @@
 			children = (
 				F05C97162ADA879100D5D959 /* LocationManager.swift */,
 				0E29F6542ADF6C7D00F5EF5C /* KMLParserManager.swift */,
+				299803562AE00C9B00A9A134 /* HapticManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -543,6 +565,7 @@
 				BB5239572ADC396300646494 /* BackgroundBlur.swift */,
 				BB52396C2ADD6DBB00646494 /* CustomRoundedRectangle.swift */,
 				0E29F6522ADF6C3A00F5EF5C /* RunningPopup.swift */,
+				299803582AE0181900A9A134 /* Confetti */,
 				0EE92E6D2AE00AE5003192FF /* CompleteButton.swift */,
 			);
 			path = Component;
@@ -823,12 +846,15 @@
 				F0AC8B072AD965390061612C /* UserModel.swift in Sources */,
 				95E2EF882ADBA5C70083ADEE /* CourseModel.swift in Sources */,
 				959D90262ADA35F100748BFB /* DataTestView.swift in Sources */,
+				2998035B2AE0181900A9A134 /* ConfettiShapes.swift in Sources */,
 				29AE76D82ADE2A2200A46742 /* InputUserInfoView.swift in Sources */,
+				299803572AE00C9B00A9A134 /* HapticManager.swift in Sources */,
 				0E29F64B2ADF653000F5EF5C /* FontExtension.swift in Sources */,
 				0E29F6532ADF6C3A00F5EF5C /* RunningPopup.swift in Sources */,
 				95E2EF712ADA6F230083ADEE /* CourseModelType.swift in Sources */,
 				95E2EF742ADA75AA0083ADEE /* DataTestViewModel.swift in Sources */,
 				299803552ADF5F1000A9A134 /* HealthKitManager.swift in Sources */,
+				2998035E2AE0182100A9A134 /* ConfettiView.swift in Sources */,
 				BB52392B2ADAF7BD00646494 /* WorkoutManager.swift in Sources */,
 				0E29F65A2ADF6CA000F5EF5C /* RunningMap.swift in Sources */,
 				F05C97172ADA879100D5D959 /* LocationManager.swift in Sources */,
@@ -847,6 +873,7 @@
 				29AE76E02ADE2BC700A46742 /* DateExtention.swift in Sources */,
 				0EE92E6A2AE00A2B003192FF /* FinishRunningMap.swift in Sources */,
 				F096974B2ADBD73A00C38AF4 /* CardView.swift in Sources */,
+				2998035C2AE0181900A9A134 /* Confetti.swift in Sources */,
 				29AE76DC2ADE2A5300A46742 /* InputUserInfoViewModel.swift in Sources */,
 				F0492E1D2ADD2AE900F6EADD /* Header.swift in Sources */,
 				29AE76D72ADE2A2200A46742 /* InputNicknameView.swift in Sources */,
@@ -861,6 +888,8 @@
 				F0AC8B2A2AD967490061612C /* WatchModifier.swift in Sources */,
 				F0492E232ADD545200F6EADD /* CourseListWatchView.swift in Sources */,
 				F0AC8B1D2AD966990061612C /* Model.swift in Sources */,
+				299803602AE0240100A9A134 /* ConfettiShapes.swift in Sources */,
+				299803612AE0240300A9A134 /* Confetti.swift in Sources */,
 				F0AC8B242AD9670A0061612C /* WatchComponent.swift in Sources */,
 				F0492E1E2ADD515100F6EADD /* LocationManager.swift in Sources */,
 				F0AC8B272AD967330061612C /* WatchExtension.swift in Sources */,
