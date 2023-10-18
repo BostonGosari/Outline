@@ -19,7 +19,7 @@ struct ShareMainView: View {
                 
                 TabView {
                     CustomShareView(viewModel: viewModel)
-                    ImageShareView()
+                    ImageShareView(viewModel: viewModel)
                 }
                 .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
                 
@@ -53,7 +53,7 @@ struct ShareMainView: View {
             .preferredColorScheme(.dark)
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
-                    Text("< 홈으로")
+                    (Text(Image(systemName: "chevron.left")) + Text("홈으로"))
                         .foregroundStyle(Color.primaryColor)
                 }
             }
