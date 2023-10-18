@@ -6,6 +6,7 @@
 //
 
 import Firebase
+import FirebaseFirestore
 import FirebaseFirestoreSwift
 import SwiftUI
 
@@ -83,7 +84,7 @@ struct UserInfoModel: UserInfoModelProtocol {
         }
     }
     
-    func updateUserNameSet(newUserNames:[String], completion: @escaping (Result<Bool, ReadDataError>) -> Void) {
+    func updateUserNameSet(newUserNames: [String], completion: @escaping (Result<Bool, ReadDataError>) -> Void) {
         if newUserNames.isEmpty {
             completion(.failure(.dataNotFound))
         }
