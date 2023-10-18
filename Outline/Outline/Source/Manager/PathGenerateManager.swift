@@ -26,7 +26,6 @@ final class PathGenerateManager {
         path.move(to: CGPoint(x: 0, y: 0))
         for coordinate in coordinates {
             let position = calculateRelativePoint(coordinate: coordinate, canvasData: canvasData)
-            print(position)
             path.addLine(to: CGPoint(x: position[0], y: position[1]))
         }
         path.closeSubpath()
