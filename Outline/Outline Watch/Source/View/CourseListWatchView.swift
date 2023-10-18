@@ -6,38 +6,43 @@
 //
 
 import SwiftUI
+import HealthKit
 
 struct CourseListWatchView: View {
-    
+    @EnvironmentObject var workoutManager: WatchWorkoutManager
+    var workoutTypes: [HKWorkoutActivityType] = [.running]
+
     @State private var detailViewNavigate = false
     
     var body: some View {
         NavigationStack {
             ScrollView {
                 VStack(spacing: -5) {
-                    Button {
-                        // action here
-                    } label: {
-                        HStack {
-                            Image(systemName: "play.circle")
-                            Text("자유코스")
+                    NavigationLink(destination: WatchTabView(), tag: workoutTypes[0], selection: $workoutManager.selectedWorkout) {
+                        Button {
+                            // Action when the workoutType button is tapped
+                            workoutManager.selectedWorkout = workoutTypes[0]
+                        } label: {
+                            HStack {
+                                Image(systemName: "play.circle")
+                                Text("자유러닝")
+                            }
+                            .foregroundColor(.black)
+                            .frame(height: 48)
+                            .frame(maxWidth: .infinity)
+                            .background {
+                                RoundedRectangle(cornerRadius: 12, style: .continuous)
+                                    .foregroundStyle(.green)
+                            }
                         }
-                        .foregroundColor(.black)
-                        .frame(height: 48)
-                        .frame(maxWidth: .infinity)
-                        .background {
-                            RoundedRectangle(cornerRadius: 12, style: .continuous)
-                                .foregroundStyle(.green)
+                        .buttonStyle(.plain)
+                        .scrollTransition { content, phase in
+                            content
+                                .scaleEffect(phase.isIdentity ? 1 : 0.8)
+                                .opacity(phase.isIdentity ? 1 : 0.8)
                         }
+                        .padding(.bottom, 8)
                     }
-                    .buttonStyle(.plain)
-                    .scrollTransition { content, phase in
-                        content
-                            .scaleEffect(phase.isIdentity ? 1 : 0.8)
-                            .opacity(phase.isIdentity ? 1 : 0.8)
-                    }
-                    .padding(.bottom, 8)
-                    
                     ForEach(0..<5) {_ in
                         Button {
                             print("button clicked")
@@ -84,6 +89,24 @@ struct CourseListWatchView: View {
             .navigationDestination(isPresented: $detailViewNavigate) {
                 Text("DetailView")
             }
+            .onAppear {
+                workoutManager.requestAuthorization()
+            }
+        }
+    }
+}
+
+extension HKWorkoutActivityType: Identifiable {
+    public var id: UInt {
+        rawValue
+    }
+
+    var name: String {
+        switch self {
+        case .running:
+            return "Run"
+        default:
+            return ""
         }
     }
 }

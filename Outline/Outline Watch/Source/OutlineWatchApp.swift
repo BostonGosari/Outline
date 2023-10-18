@@ -9,9 +9,11 @@ import SwiftUI
 
 @main
 struct OutlineWatchApp: App {
+    @StateObject private var workoutManager = WatchWorkoutManager()
     var body: some Scene {
         WindowGroup {
             ContentWatchView()
+               
         }
     }
 }
