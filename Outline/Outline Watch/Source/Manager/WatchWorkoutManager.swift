@@ -66,11 +66,13 @@ class WatchWorkoutManager: NSObject, ObservableObject {
         ]
 
         // The quantity types to read from the health store.
+        // 거리 시간 심박수 칼로리 페이스 케이던스
         let typesToRead: Set = [
+            HKQuantityType.quantityType(forIdentifier: .distanceWalkingRunning)!,
             HKQuantityType.quantityType(forIdentifier: .heartRate)!,
             HKQuantityType.quantityType(forIdentifier: .activeEnergyBurned)!,
-            HKQuantityType.quantityType(forIdentifier: .distanceWalkingRunning)!,
-            HKQuantityType.quantityType(forIdentifier: .distanceCycling)!,
+            
+            HKQuantityType.quantityType(forIdentifier: .cyclingCadence)!,
             HKObjectType.activitySummaryType()
         ]
 
@@ -92,7 +94,7 @@ class WatchWorkoutManager: NSObject, ObservableObject {
 
     // The app's workout state.
     @Published var running = false
-
+    
     func togglePause() {
         if running == true {
             self.pause()
@@ -110,17 +112,27 @@ class WatchWorkoutManager: NSObject, ObservableObject {
     }
 
     func endWorkout() {
-        
+        session?.end()
         showingSummaryView = true
     }
-
+    
     // MARK: - Workout Metrics
+    @Published var distance: Double = 0
     @Published var averageHeartRate: Double = 0
     @Published var heartRate: Double = 0
     @Published var activeEnergy: Double = 0
-    @Published var distance: Double = 0
+    @Published var pace: Double = 0
     @Published var workout: HKWorkout?
 
+    func updatePace(distance: Double, duration: TimeInterval) {
+        if distance > 0 && duration > 0 {
+            let pace = duration / distance
+            self.pace = pace
+        } else {
+            self.pace = 0
+        }
+    }
+    
     func updateForStatistics(_ statistics: HKStatistics?) {
         guard let statistics = statistics else { return }
 
@@ -136,6 +148,9 @@ class WatchWorkoutManager: NSObject, ObservableObject {
             case HKQuantityType.quantityType(forIdentifier: .distanceWalkingRunning), HKQuantityType.quantityType(forIdentifier: .distanceCycling):
                 let meterUnit = HKUnit.meter()
                 self.distance = statistics.sumQuantity()?.doubleValue(for: meterUnit) ?? 0
+                
+                let duration = self.builder?.elapsedTime ?? 0
+                         self.updatePace(distance: self.distance, duration: duration)
             default:
                 return
             }
