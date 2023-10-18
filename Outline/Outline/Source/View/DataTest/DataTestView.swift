@@ -79,7 +79,17 @@ struct DataTestView: View {
             Button {
                 firstoreManager.readCourse(id: courseId)
             } label: {
-                Text("readAllCourses")
+                Text("readCourse")
+            }
+            Button {
+                firstoreManager.readUserNameSet()
+            } label: {
+                Text("readUserNameSet")
+            }
+            Button {
+                firstoreManager.updateUserNameSet(userNameFrom: "문의", userNameTo: "오스틴")
+            } label: {
+                Text("updateNameSet")
             }
         }
     }

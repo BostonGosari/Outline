@@ -20,3 +20,7 @@ enum Gender: String, Codable {
     case woman
     case undefined
 }
+
+struct UserNameSet: Codable {
+    var userNames: [String]
+}
