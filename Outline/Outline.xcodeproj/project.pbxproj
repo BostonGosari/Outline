@@ -22,6 +22,7 @@
 		0E9A5D442AE058FC00C19FF3 /* ImageShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9A5D432AE058FC00C19FF3 /* ImageShareView.swift */; };
 		0E9A5D462AE05DF200C19FF3 /* ShareMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9A5D452AE05DF200C19FF3 /* ShareMap.swift */; };
 		0E9A5D482AE065A100C19FF3 /* ShareViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9A5D472AE065A100C19FF3 /* ShareViewModel.swift */; };
+		0E9A5D4B2AE07C2900C19FF3 /* ImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9A5D4A2AE07C2900C19FF3 /* ImagePickerView.swift */; };
 		0EE92E682AE00A11003192FF /* FinishRunningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE92E672AE00A11003192FF /* FinishRunningView.swift */; };
 		0EE92E6A2AE00A2B003192FF /* FinishRunningMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE92E692AE00A2B003192FF /* FinishRunningMap.swift */; };
 		0EE92E6C2AE00A33003192FF /* FinishRunningViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE92E6B2AE00A33003192FF /* FinishRunningViewModel.swift */; };
@@ -167,6 +168,7 @@
 		0E9A5D432AE058FC00C19FF3 /* ImageShareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageShareView.swift; sourceTree = "<group>"; };
 		0E9A5D452AE05DF200C19FF3 /* ShareMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareMap.swift; sourceTree = "<group>"; };
 		0E9A5D472AE065A100C19FF3 /* ShareViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewModel.swift; sourceTree = "<group>"; };
+		0E9A5D4A2AE07C2900C19FF3 /* ImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerView.swift; sourceTree = "<group>"; };
 		0EE92E672AE00A11003192FF /* FinishRunningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishRunningView.swift; sourceTree = "<group>"; };
 		0EE92E692AE00A2B003192FF /* FinishRunningMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishRunningMap.swift; sourceTree = "<group>"; };
 		0EE92E6B2AE00A33003192FF /* FinishRunningViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishRunningViewModel.swift; sourceTree = "<group>"; };
@@ -293,6 +295,7 @@
 				0E9A5D412AE058EF00C19FF3 /* CustomShareView.swift */,
 				0E9A5D432AE058FC00C19FF3 /* ImageShareView.swift */,
 				0E9A5D452AE05DF200C19FF3 /* ShareMap.swift */,
+				0E9A5D4A2AE07C2900C19FF3 /* ImagePickerView.swift */,
 			);
 			path = Share;
 			sourceTree = "<group>";
@@ -885,6 +888,7 @@
 				9528EFF42AE006F40056CCC6 /* UserDataTestView.swift in Sources */,
 				29AE76E12ADE2C1700A46742 /* HomeTabView.swift in Sources */,
 				0E9A5D482AE065A100C19FF3 /* ShareViewModel.swift in Sources */,
+				0E9A5D4B2AE07C2900C19FF3 /* ImagePickerView.swift in Sources */,
 				29AE76AD2ADE0D9500A46742 /* ColorExtension.swift in Sources */,
 				29AE76AC2ADE0D9100A46742 /* OutlineApp.swift in Sources */,
 				0E29F65D2ADF6CA000F5EF5C /* WorkoutDataView.swift in Sources */,
@@ -1203,11 +1207,13 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Outline/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Outline;
+				INFOPLIST_KEY_NSCameraUsageDescription = "러닝 화면을 꾸밀 수 있도록 사진을 선택해보세요!\n사진을 선택해보세요!";
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "애플 워치를 이용하여 당신의 워크아웃 기록을 트래킹하여 운동에 저장하기 위하여 사용됩니다. ";
 				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "러닝을 하며 운동 데이터를 확인하는 데에 건강정보를 사용합니다. ";
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "당신의 러닝 데이터를 저장하기 위하여 사용됩니다. ";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "당신의 위치는 러닝을 기록하는데 사용됩니다. 운동 중에 백그라운드에서도 위치 서비스를 사용합니다.";
 				INFOPLIST_KEY_NSMotionUsageDescription = "";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "러닝 화면을 꾸밀 수 있도록 사진을 선택해보세요!";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -1247,11 +1253,13 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Outline/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Outline;
+				INFOPLIST_KEY_NSCameraUsageDescription = "러닝 화면을 꾸밀 수 있도록 사진을 선택해보세요!\n사진을 선택해보세요!";
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "애플 워치를 이용하여 당신의 워크아웃 기록을 트래킹하여 운동에 저장하기 위하여 사용됩니다. ";
 				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "러닝을 하며 운동 데이터를 확인하는 데에 건강정보를 사용합니다. ";
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "당신의 러닝 데이터를 저장하기 위하여 사용됩니다. ";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "당신의 위치는 러닝을 기록하는데 사용됩니다. 운동 중에 백그라운드에서도 위치 서비스를 사용합니다.";
 				INFOPLIST_KEY_NSMotionUsageDescription = "";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "러닝 화면을 꾸밀 수 있도록 사진을 선택해보세요!";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

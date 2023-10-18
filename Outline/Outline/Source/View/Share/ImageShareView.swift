@@ -12,7 +12,9 @@ struct ImageShareView: View {
     @ObservedObject var viewModel: ShareViewModel
     
     @State private var isPhotoMode = false
-    @State private var showingSheet = false
+    @State private var showSheet = false
+    
+    @State private var image: UIImage?
     
     var body: some View {
         ZStack {
@@ -21,10 +23,10 @@ struct ImageShareView: View {
             
             VStack(spacing: 0) {
                 ZStack {
-                    Button {
-                        showingSheet = true
-                    } label: {
-                        Rectangle()
+                    if isPhotoMode {
+                        selectPhotoMode
+                    } else {
+                        blackShareImageMode
                     }
                 }
                 .aspectRatio(1080/1920, contentMode: .fit)
@@ -35,21 +37,53 @@ struct ImageShareView: View {
                 selectModeView
             }
         }
-        .confirmationDialog("이미지 선택", isPresented: $showingSheet) {
+        .confirmationDialog("이미지 선택", isPresented: $showSheet) {
             Button("사진 찍기") {
-                
+                viewModel.checkCameraPermission()
             }
             Button("이미지 선택") {
-                
+                viewModel.checkAlbumPermission()
             }
             
             Button("Cancel", role: .cancel) {}
         }
         
+        .fullScreenCover(isPresented: $viewModel.showCamera) {
+            ImagePickerView(selectedImage: $image, sourceType: .camera)
+        }
+        .sheet(isPresented: $viewModel.showImagePicker) {
+            ImagePickerView(selectedImage: $image)
+        }
+        .alert(viewModel.alertMessage, isPresented: $viewModel.permissionDenied) {
+            Button("설정으로", role: .cancel) {
+                // move to 설정
+            }
+        }
     }
 }
 
 extension ImageShareView {
+    private var selectPhotoMode: AnyView {
+        if let img = image {
+            AnyView(
+                Image(uiImage: img)
+                    .resizable()
+            )
+        } else {
+            AnyView(
+                Button {
+                    showSheet = true
+                } label: {
+                    Rectangle()
+                }
+            )
+        }
+    }
+    
+    private var blackShareImageMode: some View {
+        Rectangle()
+    }
+    
     private var pageIndicator: some View {
         HStack(spacing: 0) {
             Rectangle()
