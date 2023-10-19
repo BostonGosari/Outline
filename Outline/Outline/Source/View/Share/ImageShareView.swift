@@ -13,7 +13,6 @@ struct ImageShareView: View {
     
     @State private var isPhotoMode = false
     @State private var showSheet = false
-    
     @State private var image: UIImage?
     
     var body: some View {
@@ -31,9 +30,8 @@ struct ImageShareView: View {
                 }
                 .aspectRatio(1080/1920, contentMode: .fit)
                 .padding(EdgeInsets(top: 20, leading: 49, bottom: 16, trailing: 49))
-                
+              
                 pageIndicator
-                
                 selectModeView
             }
         }
@@ -66,8 +64,12 @@ extension ImageShareView {
     private var selectPhotoMode: AnyView {
         if let img = image {
             AnyView(
-                Image(uiImage: img)
+                Image(uiImage: image!)
                     .resizable()
+                    .mask {
+                        Rectangle()
+                            .aspectRatio(1080/1920, contentMode: .fit)
+                    }
             )
         } else {
             AnyView(

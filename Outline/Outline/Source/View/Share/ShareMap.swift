@@ -20,6 +20,11 @@ struct ShareMap: UIViewRepresentable {
         let polyline = MKPolyline(coordinates: userLocations, count: userLocations.count)
         mapView.addOverlay(polyline)
         
+        if !userLocations.isEmpty {
+            let region = MKCoordinateRegion(polyline.boundingMapRect)
+            mapView.setRegion(region, animated: true)
+        }
+        
         return mapView
     }
     
