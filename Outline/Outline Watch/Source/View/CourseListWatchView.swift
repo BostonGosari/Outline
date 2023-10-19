@@ -11,7 +11,7 @@ import HealthKit
 struct CourseListWatchView: View {
     @EnvironmentObject var workoutManager: WatchWorkoutManager
     var workoutTypes: [HKWorkoutActivityType] = [.running]
-
+    
     @State private var detailViewNavigate = false
     
     var body: some View {
@@ -19,11 +19,7 @@ struct CourseListWatchView: View {
             ScrollView {
                 VStack(spacing: -5) {
                     Button {
-                        // Action when the workoutType button is tapped
                         workoutManager.selectedWorkout = workoutTypes[0]
-
-                        // Perform any additional actions if needed before navigation
-
                     } label: {
                         NavigationLink(destination: WatchTabView(), tag: workoutTypes[0], selection: $workoutManager.selectedWorkout) {
                             HStack {
@@ -58,7 +54,8 @@ struct CourseListWatchView: View {
                                         NavigationLink(value: course) {
                                             Image(systemName: "ellipsis")
                                                 .font(.system(size: 24))
-                                                .frame(width: 48, height: 48)
+                                                .contentShape(Rectangle())
+                                                .padding(20)
                                         }
                                         .buttonStyle(.plain)
                                         .padding(.trailing, -4)
@@ -101,7 +98,7 @@ extension HKWorkoutActivityType: Identifiable {
     public var id: UInt {
         rawValue
     }
-
+    
     var name: String {
         switch self {
         case .running:
@@ -176,7 +173,7 @@ struct DetailView: View {
         
         return listBox(systemName: systemName, context: formattedString)
     }
-
+    
 }
 
 struct SampleCourePath: Shape {
