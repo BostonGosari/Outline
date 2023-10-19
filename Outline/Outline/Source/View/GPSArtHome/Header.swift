@@ -21,7 +21,7 @@ struct Header: View {
             Button { } label: {
                 Image(systemName: "person.crop.circle")
                     .font(.title)
-                    .foregroundColor(Color.first)
+                    .foregroundColor(Color.primaryColor)
             }
         }
         .padding(.horizontal)
@@ -45,7 +45,7 @@ struct InlineHeader: View {
             Button { } label: {
                 Image(systemName: "person.crop.circle")
                     .font(.title)
-                    .foregroundColor(Color.first)
+                    .foregroundColor(Color.primaryColor)
             }
         }
         .padding(.horizontal)
