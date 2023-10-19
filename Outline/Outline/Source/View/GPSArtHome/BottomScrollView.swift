@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct BottomScrollView: View {
+    
+    @ObservedObject var viewModel: GPSArtHomeViewModel
+    
     var body: some View {
         VStack(alignment: .leading) {
             Text("이런 코스도 있어요.")
@@ -16,7 +19,7 @@ struct BottomScrollView: View {
             
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack {
-                    ForEach(1...10, id: \.self) { index in
+                    ForEach(viewModel.withoutRecommendedCourses, id: \.id) { course in
                         NavigationLink {
                             CourseDetailView()
                         } label: {
@@ -35,7 +38,7 @@ struct BottomScrollView: View {
                                         )
                                         VStack(alignment: .leading) {
                                             Spacer()
-                                            Text("\(index)")
+                                            Text("\(course.course.courseName)")
                                                 .font(Font.system(size: 20).weight(.semibold))
                                                 .foregroundColor(.white)
                                             HStack(spacing: 0) {
@@ -250,7 +253,7 @@ struct BottomScrollDetailView: View {
         Text("1")
     }
 }
-
-#Preview {
-    BottomScrollView()
-}
+//
+//#Preview {
+//    BottomScrollView()
+//}

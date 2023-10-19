@@ -9,6 +9,8 @@ import SwiftUI
 
 struct GPSArtHomeView: View {
     
+    @StateObject private var viewModel = GPSArtHomeViewModel()
+
     @State private var scrollOffset: CGFloat = 0
     @State var currentIndex: Int = 0
     
@@ -39,7 +41,7 @@ struct GPSArtHomeView: View {
                 VStack(spacing: 16) {
                     Carousel(pageCount: pageCount, edgeSpace: edgeSpace, spacing: spacing, currentIndex: $currentIndex) { pageIndex in
                         if !isShow {
-                            CardView(isShow: $isShow, currentIndex: $currentIndex, namespace: namespace, pageIndex: pageIndex)
+                            CardView(viewModel: viewModel, isShow: $isShow, currentIndex: $currentIndex, namespace: namespace, pageIndex: pageIndex)
                                 .transition(
                                     .asymmetric(
                                         insertion: .opacity.animation(.easeInOut(duration: 0.1)),
@@ -58,7 +60,7 @@ struct GPSArtHomeView: View {
                                 .animation(.easeInOut, value: currentIndex)
                         }
                     }
-                    BottomScrollView()
+                    BottomScrollView(viewModel: viewModel)
                 }
             }
             .overlay(alignment: .top) {
