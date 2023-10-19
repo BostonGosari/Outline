@@ -19,8 +19,9 @@ struct MetricsView: View {
                 ElapsedTimeView(elapsedTime: workoutManager.builder?.elapsedTime(at: context.date) ?? 0, showSubseconds: context.cadence == .live)
                 Spacer()
                 HStack {
+                    Spacer()
                     VStack {
-                        Text("\(workoutManager.activeEnergy.formatted(.number.precision(.fractionLength(0))))")
+                        Text("\(workoutManager.distance.formatted(.number.precision(.fractionLength(0))))")
 
                             .font(
                                 Font.custom("SF Pro Display", size: 32)
@@ -47,6 +48,7 @@ struct MetricsView: View {
                             .foregroundColor(Color.gray500)
 
                     }
+                    Spacer()
                    
                 }
                 Spacer()
