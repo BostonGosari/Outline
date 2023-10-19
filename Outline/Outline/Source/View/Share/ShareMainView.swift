@@ -46,6 +46,7 @@ struct ShareMainView: View {
                     
                     CompleteButton(text: "공유하기") {
                         viewModel.tapShareButton = true
+                        viewModel.shareToInstagram()
                     }
                     .padding(.leading, -8)
                 }

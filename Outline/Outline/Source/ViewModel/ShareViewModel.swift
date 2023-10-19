@@ -15,10 +15,12 @@ class ShareViewModel: ObservableObject {
     @Published var showCamera = false
     @Published var showImagePicker = false
     @Published var permissionDenied = false
-    @Published var shareImage = UIImage()
+    @Published var shareImage: UIImage?
     
     @Published var tapSaveButton = false
     @Published var tapShareButton = false
+    
+    @Published var isShowInstaAler = false
     
     @Published var isShowPopup = false {
         didSet {
@@ -65,6 +67,21 @@ class ShareViewModel: ObservableObject {
     }
     
     func shareToInstagram() {
+        shareImage = UIImage(named: "ShareVinyl")
+        guard let url = URL(string: "instagram-stories://share?source_application=helia"),
+              let image = shareImage,
+              let imageData = image.pngData() else { return }
+
+        if UIApplication.shared.canOpenURL(url) {
+            let pasteboardItems: [String: Any] = ["com.instagram.sharedSticker.stickerImage": imageData]
+            let pasteboardOptions = [UIPasteboard.OptionsKey.expirationDate: Date().addingTimeInterval(300)]
+
+            UIPasteboard.general.setItems([pasteboardItems], options: pasteboardOptions)
+            UIApplication.shared.open(url)
+        } else {
+            print("인스타그램이 설치되어 있지 않습니다.")
+            isShowInstaAler = true
+        }
     }
     
     func saveImage() {
