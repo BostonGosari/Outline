@@ -16,6 +16,7 @@ struct CustomRoundedRectangle: View {
     var body: some View {
         GeometryReader { geometry in
             Path { path in
+                
                 path.move(to: CGPoint(x: cornerRadiusTopLeft, y: -0.5))
                 path.addLine(to: CGPoint(x: geometry.size.width - cornerRadiusTopRight, y: -0.5))
                     
