@@ -18,31 +18,36 @@ struct CourseListWatchView: View {
         NavigationStack {
             ScrollView {
                 VStack(spacing: -5) {
-                    NavigationLink(destination: WatchTabView(), tag: workoutTypes[0], selection: $workoutManager.selectedWorkout) {
-                        Button {
-                            // Action when the workoutType button is tapped
-                            workoutManager.selectedWorkout = workoutTypes[0]
-                        } label: {
+                    Button {
+                        // Action when the workoutType button is tapped
+                        workoutManager.selectedWorkout = workoutTypes[0]
+
+                        // Perform any additional actions if needed before navigation
+
+                    } label: {
+                        NavigationLink(destination: WatchTabView(), tag: workoutTypes[0], selection: $workoutManager.selectedWorkout) {
                             HStack {
                                 Image(systemName: "play.circle")
                                 Text("자유러닝")
+                                    .foregroundColor(.black)
                             }
-                            .foregroundColor(.black)
                             .frame(height: 48)
                             .frame(maxWidth: .infinity)
-                            .background {
+                            .background(
                                 RoundedRectangle(cornerRadius: 12, style: .continuous)
-                                    .foregroundStyle(.green)
-                            }
+                                    .foregroundColor(.green)
+                            )
                         }
-                        .buttonStyle(.plain)
-                        .scrollTransition { content, phase in
-                            content
-                                .scaleEffect(phase.isIdentity ? 1 : 0.8)
-                                .opacity(phase.isIdentity ? 1 : 0.8)
-                        }
-                        .padding(.bottom, 8)
                     }
+                    .buttonStyle(.plain)
+                    .scrollTransition { content, phase in
+                        content
+                            .scaleEffect(phase.isIdentity ? 1 : 0.8)
+                            .opacity(phase.isIdentity ? 1 : 0.8)
+                    }
+                    
+                    .padding(.bottom, 8)
+
                     ForEach(0..<5) {_ in
                         Button {
                             print("button clicked")

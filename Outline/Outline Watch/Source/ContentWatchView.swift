@@ -20,6 +20,7 @@ struct ContentWatchView: View {
             .onAppear {
                 workoutManager.requestAuthorization()
             }
+//        SummaryView()
     }
 }
 

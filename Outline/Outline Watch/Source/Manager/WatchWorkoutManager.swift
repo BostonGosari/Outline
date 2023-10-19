@@ -148,7 +148,6 @@ class WatchWorkoutManager: NSObject, ObservableObject {
             case HKQuantityType.quantityType(forIdentifier: .distanceWalkingRunning), HKQuantityType.quantityType(forIdentifier: .distanceCycling):
                 let meterUnit = HKUnit.meter()
                 self.distance = statistics.sumQuantity()?.doubleValue(for: meterUnit) ?? 0
-                
                 let duration = self.builder?.elapsedTime ?? 0
                          self.updatePace(distance: self.distance, duration: duration)
             default:

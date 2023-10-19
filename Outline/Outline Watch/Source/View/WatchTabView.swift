@@ -19,7 +19,7 @@ struct WatchTabView: View {
     var body: some View {
         TabView(selection: $selection) {
             ControlsView().tag(Tab.controls)
-//            MapWatchView().tag(Tab.map)
+            MapWatchView().tag(Tab.map)
             MetricsView().tag(Tab.metrics)
         }
         .navigationBarBackButtonHidden(true)
