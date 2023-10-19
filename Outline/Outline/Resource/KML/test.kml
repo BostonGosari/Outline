@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>test</name>
+    <Style id="line-000000-1200-nodesc-normal">
+      <LineStyle>
+        <color>ff000000</color>
+        <width>1.2</width>
+      </LineStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="line-000000-1200-nodesc-highlight">
+      <LineStyle>
+        <color>ff000000</color>
+        <width>1.8</width>
+      </LineStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="line-000000-1200-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#line-000000-1200-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#line-000000-1200-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Placemark>
+      <name>선 1</name>
+      <styleUrl>#line-000000-1200-nodesc</styleUrl>
+      <LineString>
+        <tessellate>1</tessellate>
+        <coordinates>
+          129.3471313,36.0141253,0
+          129.3444276,36.0154791,0
+          129.3394495,36.0102547,0
+          129.3391061,36.0097687,0
+          129.3358231,36.008276,0
+          129.3332911,36.0071998,0
+          129.3303729,36.0064534,0
+          129.3298364,36.0065402,0
+          129.328034,36.006193,0
+          129.326017,36.0080503,0
+          129.3257809,36.0086926,0
+          129.3259526,36.0092306,0
+          129.3249226,36.0108102,0
+          129.3236137,36.0135005,0
+          129.3263302,36.0124124,0
+        </coordinates>
+      </LineString>
+    </Placemark>
+  </Document>
+</kml>

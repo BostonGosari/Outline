@@ -34,7 +34,7 @@ class InputUserInfoViewModel: ObservableObject {
     
     func listTextColor(_ pickerType: PickerType) -> Color {
         if currentPicker == pickerType {
-            Color.firstColor
+            Color.primaryColor
         } else {
             Color.gray100Color
         }
