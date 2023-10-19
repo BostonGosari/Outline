@@ -7,6 +7,9 @@
 import SwiftUI
 
 struct RunningView: View {
+    
+    @State var selection = 0
+    
     init() {
         UIPageControl.appearance().currentPageIndicatorTintColor = UIColor.primary
         UIPageControl.appearance().pageIndicatorTintColor = UIColor.white
@@ -15,9 +18,11 @@ struct RunningView: View {
     var body: some View {
         ZStack(alignment: .bottom) {
             Color("Gray900").ignoresSafeArea()
-            TabView {
-                RunningMapView()
+            TabView(selection: $selection) {
+                RunningMapView(selection: $selection)
+                    .tag(0)
                 WorkoutDataView()
+                    .tag(1)
             }
             .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
             .edgesIgnoringSafeArea(.all)

@@ -10,7 +10,8 @@ import MapKit
 
 struct CardDetailView: View {
     
-    @ObservedObject var vm: GPSArtHomeViewModel
+    @State var start = false
+    @ObservedObject var vm: HomeTabViewModel
     
     @Binding var isShow: Bool
     var currentIndex: Int
@@ -117,7 +118,7 @@ struct CardDetailView: View {
             
             Spacer()
             
-            SlideToUnlock()
+            SlideToUnlock(isUnlocked: $vm.start)
                 .opacity(appear[1] ? 1 : 0)
                 .offset(y: appear[1] ? 0 : fadeInOffset)
                 .padding(-10)
