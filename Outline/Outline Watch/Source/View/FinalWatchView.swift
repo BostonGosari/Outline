@@ -10,7 +10,7 @@ import SwiftUI
 struct FinalWatchView: View {
     
     @State var counter = 0
-    @Namespace var bottomID
+    @Namespace var topID
     
     var body: some View {
         NavigationStack {
@@ -26,13 +26,13 @@ struct FinalWatchView: View {
                     Button("완료") {
                         // finish action
                     }
-                    .id(bottomID)
+                    .id(topID)
                 }
                 .frame(maxWidth: .infinity)
                 .onAppear {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                         withAnimation {
-                            proxy.scrollTo(bottomID, anchor: .top)
+                            proxy.scrollTo(topID, anchor: .top)
                         }
                     }
                 }
