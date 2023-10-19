@@ -25,6 +25,8 @@
 		29111E392AE0CA46009833C7 /* FinalWatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29111E382AE0CA46009833C7 /* FinalWatchView.swift */; };
 		29111E3B2AE0CA89009833C7 /* SheetWatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29111E3A2AE0CA89009833C7 /* SheetWatchView.swift */; };
 		29111E3F2AE0CD0C009833C7 /* ConfettiWatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29111E3E2AE0CD0C009833C7 /* ConfettiWatchView.swift */; };
+		0EE92E7D2AE02DDC003192FF /* FreeRunningHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE92E7C2AE02DDC003192FF /* FreeRunningHomeView.swift */; };
+		0EE92E7F2AE02DF2003192FF /* FreeRunningMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE92E7E2AE02DF2003192FF /* FreeRunningMap.swift */; };
 		295324802AE037E700085120 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 2953247F2AE037E700085120 /* FirebaseFirestore */; };
 		295324822AE037E700085120 /* FirebaseFirestoreCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 295324812AE037E700085120 /* FirebaseFirestoreCombine-Community */; };
 		295324842AE037E700085120 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 295324832AE037E700085120 /* FirebaseFirestoreSwift */; };
@@ -51,6 +53,9 @@
 		9528EFEA2ADE9E870056CCC6 /* UserCoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 95EB1EF62ADE251100B47984 /* UserCoreDataModel.xcdatamodeld */; };
 		9528EFEC2ADEC7CF0056CCC6 /* UserDataModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9528EFEB2ADEC7CF0056CCC6 /* UserDataModelType.swift */; };
 		9528EFF42AE006F40056CCC6 /* UserDataTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9528EFF32AE006F40056CCC6 /* UserDataTestView.swift */; };
+		9528F0062AE0B37B0056CCC6 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9528F0052AE0B37B0056CCC6 /* LoginView.swift */; };
+		9528F0002AE042570056CCC6 /* PathGenerateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9528EFFF2AE042570056CCC6 /* PathGenerateManager.swift */; };
+		9528F0022AE046DF0056CCC6 /* PathDrawingTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9528F0012AE046DF0056CCC6 /* PathDrawingTestView.swift */; };
 		959D90262ADA35F100748BFB /* DataTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959D90252ADA35F100748BFB /* DataTestView.swift */; };
 		95E2EF712ADA6F230083ADEE /* CourseModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E2EF702ADA6F230083ADEE /* CourseModelType.swift */; };
 		95E2EF742ADA75AA0083ADEE /* DataTestViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E2EF732ADA75AA0083ADEE /* DataTestViewModel.swift */; };
@@ -169,6 +174,9 @@
 		29111E382AE0CA46009833C7 /* FinalWatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalWatchView.swift; sourceTree = "<group>"; };
 		29111E3A2AE0CA89009833C7 /* SheetWatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetWatchView.swift; sourceTree = "<group>"; };
 		29111E3E2AE0CD0C009833C7 /* ConfettiWatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfettiWatchView.swift; sourceTree = "<group>"; };
+		0EE92E7C2AE02DDC003192FF /* FreeRunningHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeRunningHomeView.swift; sourceTree = "<group>"; };
+		0EE92E7E2AE02DF2003192FF /* FreeRunningMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeRunningMap.swift; sourceTree = "<group>"; };
+		299803512ADED6B700A9A134 /* Outline Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = "Outline Watch App.app"; path = "/Users/hyunjun/Desktop/Outline/Outline/build/Debug-watchos/Outline Watch App.app"; sourceTree = "<absolute>"; };
 		299803522ADF1DC200A9A134 /* CoreMotionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreMotionViewModel.swift; sourceTree = "<group>"; };
 		299803542ADF5F1000A9A134 /* HealthKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitManager.swift; sourceTree = "<group>"; };
 		299803562AE00C9B00A9A134 /* HapticManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticManager.swift; sourceTree = "<group>"; };
@@ -184,6 +192,11 @@
 		29C9198C2ADE9B5B00AB0B5A /* CoreMotionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreMotionView.swift; sourceTree = "<group>"; };
 		9528EFEB2ADEC7CF0056CCC6 /* UserDataModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataModelType.swift; sourceTree = "<group>"; };
 		9528EFF32AE006F40056CCC6 /* UserDataTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataTestView.swift; sourceTree = "<group>"; };
+		9528F0052AE0B37B0056CCC6 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		9528EFFD2AE040360056CCC6 /* Outline.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Outline.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9528EFFE2AE040360056CCC6 /* Outline Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Outline Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9528EFFF2AE042570056CCC6 /* PathGenerateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathGenerateManager.swift; sourceTree = "<group>"; };
+		9528F0012AE046DF0056CCC6 /* PathDrawingTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathDrawingTestView.swift; sourceTree = "<group>"; };
 		959D90252ADA35F100748BFB /* DataTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTestView.swift; sourceTree = "<group>"; };
 		959D90602ADA3A1000748BFB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		95E2EF702ADA6F230083ADEE /* CourseModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseModelType.swift; sourceTree = "<group>"; };
@@ -293,6 +306,15 @@
 			path = FininshRunning;
 			sourceTree = "<group>";
 		};
+		0EE92E7B2AE02DCB003192FF /* FreeRunning */ = {
+			isa = PBXGroup;
+			children = (
+				0EE92E7C2AE02DDC003192FF /* FreeRunningHomeView.swift */,
+				0EE92E7E2AE02DF2003192FF /* FreeRunningMap.swift */,
+			);
+			path = FreeRunning;
+			sourceTree = "<group>";
+		};
 		299803582AE0181900A9A134 /* Confetti */ = {
 			isa = PBXGroup;
 			children = (
@@ -308,6 +330,7 @@
 			children = (
 				29AE76D52ADE2A2200A46742 /* InputNicknameView.swift */,
 				29AE76D62ADE2A2200A46742 /* InputUserInfoView.swift */,
+				9528F0052AE0B37B0056CCC6 /* LoginView.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -327,6 +350,7 @@
 			children = (
 				959D90252ADA35F100748BFB /* DataTestView.swift */,
 				9528EFF32AE006F40056CCC6 /* UserDataTestView.swift */,
+				9528F0012AE046DF0056CCC6 /* PathDrawingTestView.swift */,
 			);
 			path = DataTest;
 			sourceTree = "<group>";
@@ -370,9 +394,9 @@
 		BB1D53072ADDB24A0073771F /* Running */ = {
 			isa = PBXGroup;
 			children = (
+				0E29F6572ADF6CA000F5EF5C /* RunningView.swift */,
 				0E29F6562ADF6CA000F5EF5C /* RunningMap.swift */,
 				0E29F6582ADF6CA000F5EF5C /* RunningMapView.swift */,
-				0E29F6572ADF6CA000F5EF5C /* RunningView.swift */,
 				0E29F6592ADF6CA000F5EF5C /* WorkoutDataView.swift */,
 			);
 			path = Running;
@@ -431,6 +455,7 @@
 				F05C97162ADA879100D5D959 /* LocationManager.swift */,
 				0E29F6542ADF6C7D00F5EF5C /* KMLParserManager.swift */,
 				299803562AE00C9B00A9A134 /* HapticManager.swift */,
+				9528EFFF2AE042570056CCC6 /* PathGenerateManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -498,6 +523,7 @@
 		F0AC8AFA2AD963600061612C /* View */ = {
 			isa = PBXGroup;
 			children = (
+				0EE92E7B2AE02DCB003192FF /* FreeRunning */,
 				0EE92E662AE00A02003192FF /* FininshRunning */,
 				29C9198B2ADE9B4400AB0B5A /* CoreMotion */,
 				29AE76D42ADE2A2200A46742 /* Onboarding */,
@@ -867,6 +893,7 @@
 				29AE76AC2ADE0D9100A46742 /* OutlineApp.swift in Sources */,
 				0E29F65D2ADF6CA000F5EF5C /* WorkoutDataView.swift in Sources */,
 				BB52396B2ADD385700646494 /* BottomScrollView.swift in Sources */,
+				9528F0002AE042570056CCC6 /* PathGenerateManager.swift in Sources */,
 				F06B936C2ADC245700387DEB /* RecommendedCoursesViewModel.swift in Sources */,
 				29C9198D2ADE9B5B00AB0B5A /* CoreMotionView.swift in Sources */,
 				0E29F65C2ADF6CA000F5EF5C /* RunningMapView.swift in Sources */,
@@ -883,14 +910,17 @@
 				0EE92E682AE00A11003192FF /* FinishRunningView.swift in Sources */,
 				0E29F65B2ADF6CA000F5EF5C /* RunningView.swift in Sources */,
 				F06B936E2ADC279100387DEB /* SlideToUnlock.swift in Sources */,
+				9528F0062AE0B37B0056CCC6 /* LoginView.swift in Sources */,
 				F0AC8B112AD965A70061612C /* Modifier.swift in Sources */,
 				0EE92E6E2AE00AE5003192FF /* CompleteButton.swift in Sources */,
 				95E2EF882ADBA5C70083ADEE /* CourseModel.swift in Sources */,
+				0EE92E7F2AE02DF2003192FF /* FreeRunningMap.swift in Sources */,
 				959D90262ADA35F100748BFB /* DataTestView.swift in Sources */,
 				2998035B2AE0181900A9A134 /* ConfettiShapes.swift in Sources */,
 				29AE76D82ADE2A2200A46742 /* InputUserInfoView.swift in Sources */,
 				299803572AE00C9B00A9A134 /* HapticManager.swift in Sources */,
 				0E29F64B2ADF653000F5EF5C /* FontExtension.swift in Sources */,
+				9528F0022AE046DF0056CCC6 /* PathDrawingTestView.swift in Sources */,
 				0E29F6532ADF6C3A00F5EF5C /* RunningPopup.swift in Sources */,
 				95E2EF712ADA6F230083ADEE /* CourseModelType.swift in Sources */,
 				95EB1EF12ADE228A00B47984 /* UserInfoModelType.swift in Sources */,
@@ -905,6 +935,7 @@
 				BB52396D2ADD6DBB00646494 /* CustomRoundedRectangle.swift in Sources */,
 				F096974D2ADBDBB000C38AF4 /* CardDetailView.swift in Sources */,
 				F05C97192ADA87B800D5D959 /* LocationAuthorizationView.swift in Sources */,
+				0EE92E7D2AE02DDC003192FF /* FreeRunningHomeView.swift in Sources */,
 				F09697512ADC069E00C38AF4 /* AnimationExtension.swift in Sources */,
 				F06B93592ADAECA800387DEB /* RecommendedCourseView.swift in Sources */,
 				F05C7D562ADC565E006842DB /* PreferenceKey.swift in Sources */,
@@ -1099,7 +1130,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Outline Watch/Preview Content\"";
-				DEVELOPMENT_TEAM = 77745NX67K;
+				DEVELOPMENT_TEAM = HQS8MXQ7B5;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1107,14 +1138,14 @@
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "당신의 러닝 데이터를 저장하기 위하여 사용됩니다. ";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "당신의 위치는 러닝을 기록하는데 사용됩니다. 운동 중에 백그라운드에서도 위치 서비스를 사용합니다.";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = hyunjun;
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = helia;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
 				OTHER_LDFLAGS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = hyunjun.watch;
+				PRODUCT_BUNDLE_IDENTIFIER = helia.watch;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -1136,7 +1167,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Outline Watch/Preview Content\"";
-				DEVELOPMENT_TEAM = 77745NX67K;
+				DEVELOPMENT_TEAM = HQS8MXQ7B5;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1144,14 +1175,14 @@
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "당신의 러닝 데이터를 저장하기 위하여 사용됩니다. ";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "당신의 위치는 러닝을 기록하는데 사용됩니다. 운동 중에 백그라운드에서도 위치 서비스를 사용합니다.";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = hyunjun;
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = helia;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
 				OTHER_LDFLAGS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = hyunjun.watch;
+				PRODUCT_BUNDLE_IDENTIFIER = helia.watch;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -1174,7 +1205,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Outline/Preview Content\"";
-				DEVELOPMENT_TEAM = 77745NX67K;
+				DEVELOPMENT_TEAM = HQS8MXQ7B5;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				"EXCLUDED_ARCHS[sdk=*]" = "";
@@ -1198,7 +1229,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				OTHER_LDFLAGS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = hyunjun;
+				PRODUCT_BUNDLE_IDENTIFIER = helia;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1217,7 +1248,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Outline/Preview Content\"";
-				DEVELOPMENT_TEAM = 77745NX67K;
+				DEVELOPMENT_TEAM = HQS8MXQ7B5;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				"EXCLUDED_ARCHS[sdk=*]" = "";
@@ -1241,7 +1272,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				OTHER_LDFLAGS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = hyunjun;
+				PRODUCT_BUNDLE_IDENTIFIER = helia;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SWIFT_EMIT_LOC_STRINGS = YES;
