@@ -21,7 +21,7 @@ struct LoginView: View {
             VStack(spacing: 16) {
                 Spacer()
                 Image("logoOutline")
-                    .padding(.top, 60)
+                    .padding(.top, 70)
                 ZStack {
                     Rectangle()
                         .fill(.black.opacity(0.3))
@@ -37,9 +37,8 @@ struct LoginView: View {
 
                 Spacer()
                     
-                Button
-                {
-                    loginWithApple()
+                Button {
+                    // Navigate to onboarding view
                 } label: {
                     HStack {
                         Spacer()
@@ -58,7 +57,7 @@ struct LoginView: View {
                 }
                 
                 Button {
-                    loginWithApple()
+                    // Navigate to onboarding view
                 } label: {
                     HStack {
                         Spacer()
@@ -89,7 +88,7 @@ struct LoginView: View {
                 }
                 .padding(.vertical, 5)
                 Button {
-                    
+                    // Navigate to Main
                 } label: {
                     Text("둘러보기")
                         .foregroundStyle(.white)
@@ -97,11 +96,8 @@ struct LoginView: View {
                         .fontWeight(.medium)
                 }
             }
+            .padding(16)
         }
-    }
-    
-    private func loginWithApple() {
-        
     }
 }
 
