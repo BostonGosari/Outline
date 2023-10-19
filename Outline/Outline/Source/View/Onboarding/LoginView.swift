@@ -50,8 +50,10 @@ struct LoginView: View {
                             .frame(width: .infinity, height: 60)
                         Spacer()
                     }
+                    .background(.ultraThinMaterial.opacity(0.7))
+                    .cornerRadius(60)
                     .overlay {
-                        overlayRectangle
+                        borderRectangle
                     }
                 }
                 
@@ -67,9 +69,13 @@ struct LoginView: View {
                             .frame(width: .infinity, height: 60)
                         Spacer()
                     }
+                    .background(.ultraThinMaterial.opacity(0.7))
+                    .cornerRadius(60)
                     .overlay {
-                        overlayRectangle
+                        borderRectangle
                     }
+                    
+                    
                 }
                 HStack {
                     Rectangle()
@@ -100,17 +106,11 @@ struct LoginView: View {
 }
 
 extension LoginView {
-    var overlayRectangle: some View {
-        Rectangle()
-        .foregroundColor(.clear)
-        .frame(width: .infinity, height: 60)
-        .background(.white.opacity(0.2))
-        .cornerRadius(60)
-        .overlay(
-            RoundedRectangle(cornerRadius: 60)
-            .inset(by: 0.5)
-            .stroke(.white, lineWidth: 1)
-        )
+    private var borderRectangle: some View {
+        RoundedRectangle(cornerRadius: 60)
+            .stroke(LinearGradient(colors: [Color.white, .black.opacity(0.5)], startPoint: .top, endPoint: .bottom), lineWidth: 1)
+            .foregroundColor(.clear)
+            .frame(width: .infinity, height: 60)
     }
 }
 
