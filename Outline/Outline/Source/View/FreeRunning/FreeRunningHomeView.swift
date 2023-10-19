@@ -1,13 +1,70 @@
 //
-//  SwiftUIView.swift
+//  FreeRunningHomeView.swift
 //  Outline
 //
-//  Created by 김하은 on 10/16/23.
+//  Created by hyebin on 10/19/23.
 //
 
 import SwiftUI
 
-struct CustomRoundedRectangle: View {
+struct FreeRunningHomeView: View {
+    
+    @StateObject var locationManager = LocationManager()
+    @State var userLocation = ""
+    
+    var body: some View {
+        ZStack {
+            FreeRunningMap(userLocation: $userLocation)
+                .ignoresSafeArea()
+            
+            VStack(spacing: 0) {
+                Header(scrollOffset: 20)
+                    .padding(.top, 8)
+                Spacer()
+                
+                cardView
+                   .overlay {
+                       VStack(alignment: .leading) {
+                           Text("자유 코스")
+                               .font(.headline)
+                               .padding(.bottom, 8)
+                           
+                           HStack {
+                               Image(systemName: "mappin")
+                               Text(userLocation)
+                           }
+                           .font(.subBody)
+                           
+                           Spacer()
+                           SlideToUnlock()
+                       }
+                       .padding(EdgeInsets(top: 58, leading: 24, bottom: 24, trailing: 16))
+                   }
+                   .padding(EdgeInsets(top: 8, leading: 16, bottom: 80, trailing: 20))
+            }
+        }
+        .preferredColorScheme(.dark)
+
+    }
+}
+
+extension FreeRunningHomeView {
+    private var cardView: some View {
+        Rectangle()
+            .fill(
+                LinearGradient(colors: [.white20Color, .white20Color.opacity(0)], startPoint: .topLeading, endPoint: .bottomTrailing)
+            )
+            .roundedCorners(10, corners: [.topLeft])
+            .roundedCorners(70, corners: [.topRight])
+            .roundedCorners(45, corners: [.bottomLeft, .bottomRight])
+            .overlay(
+                CardBorder(cornerRadiusTopLeft: 10, cornerRadiusTopRight: 79, cornerRadiusBottomLeft: 45, cornerRadiusBottomRight: 45)
+            )
+        
+    }
+}
+
+private struct CardBorder: View {
     let cornerRadiusTopLeft: CGFloat
     let cornerRadiusTopRight: CGFloat
     let cornerRadiusBottomLeft: CGFloat
@@ -16,7 +73,6 @@ struct CustomRoundedRectangle: View {
     var body: some View {
         GeometryReader { geometry in
             Path { path in
-                
                 path.move(to: CGPoint(x: cornerRadiusTopLeft, y: -0.5))
                 path.addLine(to: CGPoint(x: geometry.size.width - cornerRadiusTopRight, y: -0.5))
                     
@@ -52,10 +108,12 @@ struct CustomRoundedRectangle: View {
                     clockwise: false
                 )
             }
-            .stroke(Color.white.opacity(0.5), lineWidth: 1.5)
+            .stroke(Color.white, lineWidth: 1.5)
             
         }
-        .aspectRatio(166.0/238.0, contentMode: .fit)
-               .frame(width: 164, height: 238)
     }
+}
+
+#Preview {
+    FreeRunningHomeView()
 }
