@@ -28,14 +28,16 @@ struct FinishWatchView: View {
     
     private var fullyCompletedView: some View {
         ZStack {
-            strokeText(text: "PERFECT", width: 2)
+            Text("PERFECT")
                 .font(.system(size: 40))
+                .foregroundStyle(.green)
                 .bold()
                 .offset(y: -40)
             Text("🎉")
                 .font(.system(size: 64))
-            strokeText(text: "DRAWING", width: 2)
+            Text("DRAWING")
                 .font(.system(size: 40))
+                .foregroundStyle(.green)
                 .bold()
                 .offset(y: 40)
         }
@@ -43,14 +45,16 @@ struct FinishWatchView: View {
     
     private var halfOrMoreCompletedView: some View {
         ZStack {
-            strokeText(text: "오늘은", width: 2)
+            Text("오늘은")
                 .font(.system(size: 40))
+                .foregroundStyle(.green)
                 .bold()
                 .offset(y: -40)
             Text("👋")
                 .font(.system(size: 64))
-            strokeText(text: "여기까지", width: 2)
+            Text("여기까지")
                 .font(.system(size: 40))
+                .foregroundStyle(.green)
                 .bold()
                 .offset(y: 40)
         }
@@ -58,35 +62,18 @@ struct FinishWatchView: View {
     
     private var lessThanTenPercentCompletedView: some View {
         ZStack {
-            strokeText(text: "열심히", width: 2)
+            Text("열심히")
                 .font(.system(size: 40))
+                .foregroundStyle(.green)
                 .bold()
                 .offset(y: -40)
             Text("❤️‍🔥")
                 .font(.system(size: 64))
-            strokeText(text: "달렸네요", width: 2)
+            Text("달렸네요")
                 .font(.system(size: 40))
+                .foregroundStyle(.green)
                 .bold()
                 .offset(y: 40)
-        }
-    }
-    
-    @ViewBuilder
-    private func strokeText(text: String, width: CGFloat) -> some View {
-        ZStack {
-            ZStack {
-                Text(text).offset(x: width, y: width)
-                Text(text).offset(x: -width, y: -width)
-                Text(text).offset(x: -width, y: width)
-                Text(text).offset(x: width, y: -width)
-                Text(text).offset(x: 0, y: width)
-                Text(text).offset(x: 0, y: -width)
-                Text(text).offset(x: width, y: 0)
-                Text(text).offset(x: -width, y: 0)
-            }
-            .foregroundColor(.green)
-            Text(text)
-                .foregroundColor(.black)
         }
     }
 }
