@@ -9,7 +9,7 @@ import SwiftUI
 
 struct BottomScrollView: View {
     
-    @ObservedObject var viewModel: GPSArtHomeViewModel
+    @ObservedObject var vm: GPSArtHomeViewModel
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -19,42 +19,43 @@ struct BottomScrollView: View {
             
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack {
-                    ForEach(viewModel.withoutRecommendedCourses, id: \.id) { course in
+                    ForEach(vm.withoutRecommendedCourses, id: \.id) { currnetCourse in
                         NavigationLink {
-                            CourseDetailView()
+                            CourseDetailView(course: currnetCourse)
                         } label: {
-                            Rectangle()
+                            AsyncImage(url: URL(string: currnetCourse.course.thumbnail))
+                                .fixedSize()
                                 .frame(width: 164, height: 236)
-                                .background(
-                                    ZStack {
-                                        Image("Sample")
-                                        LinearGradient(
-                                            stops: [
-                                                Gradient.Stop(color: .black, location: 0.00),
-                                                Gradient.Stop(color: .black.opacity(0), location: 1.00)
-                                            ],
-                                            startPoint: UnitPoint(x: 0.5, y: 0.9),
-                                            endPoint: UnitPoint(x: 0.5, y: 0)
-                                        )
-                                        VStack(alignment: .leading) {
-                                            Spacer()
-                                            Text("\(course.course.courseName)")
-                                                .font(Font.system(size: 20).weight(.semibold))
-                                                .foregroundColor(.white)
-                                            HStack(spacing: 0) {
-                                                Image(systemName: "mappin")
-                                                    .foregroundColor(.gray600)
-                                                Text("서울시 동작구")
-                                                    .foregroundColor(.gray600)
-                                            }
-                                            .font(.caption)
-                                            .padding(.bottom, 16)
-                                        }
-                                        .frame(width: 164)
-                                        .offset(x: -15)
-                                    }
+                                .scaledToFit()
+                                .overlay {
+                                    LinearGradient(
+                                        stops: [
+                                            Gradient.Stop(color: .black, location: 0.00),
+                                            Gradient.Stop(color: .black.opacity(0), location: 1.00)
+                                        ],
+                                        startPoint: UnitPoint(x: 0.5, y: 0.9),
+                                        endPoint: UnitPoint(x: 0.5, y: 0)
+                                    )
                                     
-                                )
+                                }
+                                .overlay {
+                                    VStack(alignment: .leading) {
+                                        Spacer()
+                                        Text("\(currnetCourse.course.courseName)")
+                                            .font(Font.system(size: 20).weight(.semibold))
+                                            .foregroundColor(.white)
+                                        HStack(spacing: 0) {
+                                            Image(systemName: "mappin")
+                                                .foregroundColor(.gray600)
+                                            Text("\(currnetCourse.course.locationInfo.locality) \(currnetCourse.course.locationInfo.subLocality)")
+                                                .foregroundColor(.gray600)
+                                        }
+                                        .font(.caption)
+                                        .padding(.bottom, 16)
+                                    }
+                                    .frame(width: 164)
+                                    .offset(x: -15)
+                                }
                                 .roundedCorners(5, corners: [.topLeft])
                                 .roundedCorners(30, corners: [.bottomLeft, .bottomRight, .topRight])
                                 .foregroundColor(.clear)
@@ -88,27 +89,30 @@ struct BottomScrollView: View {
 }
 
 struct CourseDetailView: View {
+    
+    var course: CourseWithDistance
+    
     var body: some View {
         ZStack {
             Color.gray900.ignoresSafeArea()
             ScrollView {
-                CourseBannerView()
+                CourseBannerView(course: course)
                 VStack(alignment: .leading, spacing: 24) {
                     HStack {
-                        Text("#어려움")
+                        Text("#\(stringForCourseLevel(course.course.level))")
                             .frame(width: 70, height: 23)
                             .background {
                                 Capsule()
                                     .stroke()
                             }
                             .foregroundColor(.primaryColor)
-                        Text("#5km")
+                        Text("#\(course.course.courseLength, specifier: "%.0f")km")
                             .frame(width: 70, height: 23)
                             .background {
                                 Capsule()
                                     .stroke()
                             }
-                        Text("#2h39m")
+                        Text("#\(formatDuration(course.course.courseDuration))")
                             .frame(width: 70, height: 23)
                             .background {
                                 Capsule()
@@ -119,10 +123,10 @@ struct CourseDetailView: View {
                     .font(.caption)
                     
                     VStack(alignment: .leading, spacing: 8) {
-                        Text("경상북도 포항시 남구 효자로")
+                        Text("\(course.course.locationInfo.administrativeArea) \(course.course.locationInfo.locality) \(course.course.locationInfo.subLocality)")
                             .font(.title3)
                             .bold()
-                        Text("포항의 야경을 바라보며 뛸 수 있는 러닝코스")
+                        Text("--")
                             .foregroundStyle(.gray)
                     }
                     
@@ -134,19 +138,11 @@ struct CourseDetailView: View {
                     VStack(alignment: .leading, spacing: 17) {
                         HStack {
                             HStack {
-                                Image(systemName: "flag")
-                                Text("추천 시작 위치")
-                            }
-                            .foregroundColor(.primaryColor)
-                            Text("포항시 남구 효자로")
-                        }
-                        HStack {
-                            HStack {
                                 Image(systemName: "location")
                                 Text("거리")
                             }
                             .foregroundColor(.primaryColor)
-                            Text("9km")
+                            Text("\(course.course.courseLength, specifier: "%.0f")km")
                         }
                         HStack {
                             HStack {
@@ -154,7 +150,7 @@ struct CourseDetailView: View {
                                 Text("예상 소요 시간")
                             }
                             .foregroundColor(.primaryColor)
-                            Text("2h 39m")
+                            Text("\(formatDuration(course.course.courseDuration))")
                         }
                         HStack {
                             HStack {
@@ -162,7 +158,7 @@ struct CourseDetailView: View {
                                 Text("골목길")
                             }
                             .foregroundColor(.primaryColor)
-                            Text("많음")
+                            Text("\(stringForAlley(course.course.alley))")
                         }
                     }
                     .padding(.horizontal, 10)
@@ -191,6 +187,9 @@ struct CourseDetailView: View {
 }
 
 struct CourseBannerView: View {
+    
+    var course: CourseWithDistance
+
     var body: some View {
             ZStack {
                 courseImage
@@ -209,26 +208,26 @@ struct CourseBannerView: View {
     private var courseInformation: some View {
         VStack(alignment: .leading) {
             VStack(alignment: .leading, spacing: 0) {
-                Text("시티런")
+                Text(course.course.courseName)
                     .font(.largeTitle)
                     .bold()
                     .padding(.bottom, 8)
                 HStack {
                     Image(systemName: "mappin")
-                    Text("서울시 동작구 • 내 위치에서 5km")
+                    Text("\(course.course.locationInfo.locality) \(course.course.locationInfo.subLocality) • 내 위치에서 \(course.distance/1000, specifier: "%.0f")km")
                 }
                 .font(.caption)
                 .fontWeight(.semibold)
                 .padding(.bottom, 16)
                 
                 HStack {
-                    Text("#5km")
+                    Text("\(course.course.courseLength, specifier: "%.0f")km")
                         .frame(width: 70, height: 23)
                         .background {
                             Capsule()
                                 .stroke()
                         }
-                    Text("#2h39m")
+                    Text("\(course.course.courseLength, specifier: "%.0f")km")
                         .frame(width: 70, height: 23)
                         .background {
                             Capsule()
@@ -253,7 +252,3 @@ struct BottomScrollDetailView: View {
         Text("1")
     }
 }
-//
-//#Preview {
-//    BottomScrollView()
-//}
