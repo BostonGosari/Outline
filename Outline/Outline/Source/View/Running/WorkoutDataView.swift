@@ -5,7 +5,7 @@ struct WorkoutDataView: View {
         ZStack {
             Color("Gray900").ignoresSafeArea()
             VStack {
-                strokeText(text: "00:20.53", width: 2, color: Color.first)
+                strokeText(text: "00:20.53", width: 2, color: Color.primaryColor)
                     .font(
                         Font.custom("Pretendard-ExtraBold", size: 64)
                     )

@@ -6,32 +6,33 @@
 //
 
 import Foundation
+import CoreLocation
+import CoreData
+import SwiftUI
 
 let userInfoDummy = UserInfo(nickname: "austin", birthday: Date(), height: 175, weight: 70)
+let dummyCourseData = CourseData(courseName: "댕댕런", runningLength: 5, heading: 1.3, distance: 400, coursePaths: [
+    CLLocationCoordinate2D(latitude: 26, longitude: 152),
+    CLLocationCoordinate2D(latitude: 16, longitude: 122)
+])
+let dummyHealthData = HealthData(totalTime: 40, averageCadence: 20, totalRunningDistance: 50, totalEnergy: 200, averageHeartRate: 150, averagePace: 5, startDate: Date(), endDate: Date())
 
-let coordinatesDummy = [
-    Coordinate(longitude: 37, latitude: 120)
-]
-let recordsDummy = [
-    Record(courseName: "댕댕런", runningType: .gpsArt, runningDate: Date(), startTime: Date(), endTime: Date(), runningDuration: Date(), courseLength: 5.2, runningLength: 5.0, averagePace: Date(), calorie: 300, bpm: 200, cadence: 200, coursePaths: coordinatesDummy, heading: 30, mapScale: 1.5),
-    Record(courseName: "오리런", runningType: .gpsArt, runningDate: Date(), startTime: Date(), endTime: Date(), runningDuration: Date(), courseLength: 2.2, runningLength: 2.0, averagePace: Date(), calorie: 100, bpm: 100, cadence: 100, coursePaths: coordinatesDummy, heading: 10, mapScale: 1.1)
-]
-let runningDataDummy = RunningData(currentTime: 20, currentLocation: 20, paceList: [2, 3], bpmList: [200, 100])
-let userDataDummy = UserData(records: recordsDummy, currentRunningData: runningDataDummy)
-
-class FirstoreManager: ObservableObject {
-    @Published var user = User(userInfo: userInfoDummy, userData: userDataDummy)
+class DataTestViewModel: ObservableObject {
+    
+    @Published var userInfo: UserInfo = userInfoDummy
     @Published var courses: AllGPSArtCourses = []
     @Published var uid = ""
     
+    var userNameSet: [String] = []
     let userInfoModel = UserInfoModel()
     let courseModel = CourseModel()
+    let userDataModel = UserDataModel()
     
     func readUserInfo(uid: String) {
         userInfoModel.readUserInfo(uid: uid) { result in
             switch result {
             case .success(let userInfo):
-                self.user = User(userInfo: userInfo, userData: self.user.userData)
+                self.userInfo = userInfo
             case .failure(let error):
                 print(error)
             }
@@ -77,7 +78,6 @@ class FirstoreManager: ObservableObject {
             switch result {
             case .success(let courseList):
                 self.courses = courseList
-                print(courseList)
             case .failure(let error):
                 print(error)
             }
@@ -90,6 +90,69 @@ class FirstoreManager: ObservableObject {
             case .success(let course):
                 self.courses.append(course)
                 print(course)
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    func addRunningRecord() {
+        let newRunningRecord = RunningRecord(id: UUID().uuidString, runningType: .free, courseData: dummyCourseData, healthData: dummyHealthData)
+        userDataModel.createRunningRecord(record: newRunningRecord) { result in
+            switch result {
+            case .success(let isSaved):
+                print(isSaved)
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    func updateRunningRecord(_ record: NSManagedObject, courseName: String) {
+        userDataModel.updateRunningRecordCourseName(record, newCourseName: courseName) { result in
+            switch result {
+            case .success(let isSaved):
+                print(isSaved)
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    func deleteRunningRecord(_ record: NSManagedObject) {
+        userDataModel.deleteRunningRecord(record) { result in
+            switch result {
+            case .success(let isSaved):
+                print(isSaved)
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    func readUserNameSet() {
+        userInfoModel.readUserNameSet { result in
+            switch result {
+            case .success(let userList):
+                self.userNameSet = userList
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    func updateUserNameSet(userNameFrom: String, userNameTo: String) {
+        self.readUserNameSet()
+        if !self.userNameSet.contains(userNameFrom) {
+            print("nickname error")
+            return
+        }
+        var newUserList = self.userNameSet.filter({ $0 != userNameFrom })
+        newUserList.append(userNameTo)
+        userInfoModel.updateUserNameSet(newUserNames: newUserList) { result in
+            switch result {
+            case .success(let isSaved):
+                print(isSaved)
             case .failure(let error):
                 print(error)
             }

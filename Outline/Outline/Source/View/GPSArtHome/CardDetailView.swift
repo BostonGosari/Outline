@@ -131,7 +131,7 @@ struct CardDetailView: View {
         } label: {
             Image(systemName: "xmark.circle.fill")
                 .font(.title)
-                .foregroundColor(viewSize > 15 ? .clear : .firstColor)
+                .foregroundColor(viewSize > 15 ? .clear : .primaryColor)
         }
         .animation(.easeInOut, value: viewSize)
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)

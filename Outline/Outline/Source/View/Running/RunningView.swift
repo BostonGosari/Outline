@@ -8,7 +8,7 @@ import SwiftUI
 
 struct RunningView: View {
     init() {
-        UIPageControl.appearance().currentPageIndicatorTintColor = UIColor.first
+        UIPageControl.appearance().currentPageIndicatorTintColor = UIColor.primary
         UIPageControl.appearance().pageIndicatorTintColor = UIColor.white
     }
     
