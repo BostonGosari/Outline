@@ -10,6 +10,7 @@ import SwiftUI
 
 class ShareViewModel: ObservableObject {
     
+    @Published var runningData = ShareModel()
     @Published var currentPage = 0
     @Published var showCamera = false
     @Published var showImagePicker = false
@@ -18,6 +19,16 @@ class ShareViewModel: ObservableObject {
     
     @Published var tapSaveButton = false
     @Published var tapShareButton = false
+    
+    @Published var isShowPopup = false {
+        didSet {
+            if isShowPopup {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                    self.isShowPopup = false
+                }
+            }
+        }
+    }
     
     var alertTitle = ""
     var alertMessage = ""
@@ -57,5 +68,6 @@ class ShareViewModel: ObservableObject {
     }
     
     func saveImage() {
+        isShowPopup = true
     }
 }
