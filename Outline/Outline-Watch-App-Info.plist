@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>NSHealthClinicalHealthRecordsShareUsageDescription</key>
+	<string>운동 데이터를 측정하기 위해 필요합니다. </string>
+	<key>NSHealthUpdateUsageDescription</key>
+	<string>운동 데이터를 보여주기 위해 필요합니다. </string>
+	<key>NSHealthShareUsageDescription</key>
+	<string>운동 데이터를 측정하기 위해 필요합니다. </string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string></string>
+	</array>
+	<key>WKBackgroundModes</key>
+	<array>
+		<string></string>
+		<string>workout-processing</string>
+	</array>
+</dict>
+</plist>
