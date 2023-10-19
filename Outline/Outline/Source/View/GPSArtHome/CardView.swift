@@ -10,7 +10,8 @@ import MapKit
 
 struct CardView: View {
     
-    @ObservedObject var viewModel: GPSArtHomeViewModel
+    @ObservedObject var vm: GPSArtHomeViewModel
+    
     @Binding var isShow: Bool
     @Binding var currentIndex: Int
     var namespace: Namespace.ID
@@ -24,7 +25,9 @@ struct CardView: View {
         courseImage
             .onTapGesture {
                 withAnimation(.openCard) {
-                    isShow = true
+                    if vm.recommendedCoures.count == 3 {
+                        isShow = true
+                    }
                 }
             }
             .overlay(alignment: .bottomLeading) {
@@ -50,26 +53,26 @@ struct CardView: View {
     
     private var courseInformation: some View {
         VStack(alignment: .leading, spacing: 0) {
-            if viewModel.recommendedCoures.count == 3 {
-                Text("\(viewModel.recommendedCoures[pageIndex].course.courseName)")
+            if vm.recommendedCoures.count == 3 {
+                Text("\(vm.recommendedCoures[pageIndex].course.courseName)")
                     .font(.largeTitle)
                     .bold()
                     .padding(.bottom, 8)
                 HStack {
                     Image(systemName: "mappin")
-                    Text("\(viewModel.recommendedCoures[pageIndex].course.locationInfo.locality) \(viewModel.recommendedCoures[pageIndex].course.locationInfo.subLocality) • 내 위치에서 \(viewModel.recommendedCoures[pageIndex].distance/1000, specifier: "%.1f")km")
+                    Text("\(vm.recommendedCoures[pageIndex].course.locationInfo.locality) \(vm.recommendedCoures[pageIndex].course.locationInfo.subLocality) • 내 위치에서 \(vm.recommendedCoures[pageIndex].distance/1000, specifier: "%.1f")km")
                 }
                 .font(.caption)
                 .padding(.bottom, 16)
                 
                 HStack {
-                    Text("#\(viewModel.recommendedCoures[pageIndex].course.courseLength, specifier: "%.1f")")
+                    Text("#\(vm.recommendedCoures[pageIndex].course.courseLength, specifier: "%.0f")km")
                         .frame(width: 70, height: 23)
                         .background {
                             Capsule()
                                 .stroke()
                         }
-                    Text("#2h39m")
+                    Text("#\(formatDuration(vm.recommendedCoures[pageIndex].course.courseDuration))")
                         .frame(width: 70, height: 23)
                         .background {
                             Capsule()

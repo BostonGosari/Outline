@@ -10,6 +10,8 @@ import MapKit
 
 struct CardDetailView: View {
     
+    @ObservedObject var vm: GPSArtHomeViewModel
+    
     @Binding var isShow: Bool
     var currentIndex: Int
     var namespace: Namespace.ID
@@ -42,7 +44,7 @@ struct CardDetailView: View {
                         courseImage
                         courseInformation
                     }
-                    CardDetailInformationView()
+                    CardDetailInformationView(vm: vm, currentIndex: currentIndex)
                         .opacity(appear[2] ? 1 : 0)
                         .offset(y: appear[2] ? 0 : fadeInOffset)
                 }
@@ -81,26 +83,26 @@ struct CardDetailView: View {
     private var courseInformation: some View {
         VStack(alignment: .leading) {
             VStack(alignment: .leading, spacing: 0) {
-                Text("시티런 \(currentIndex)")
+                Text("\(vm.recommendedCoures[currentIndex].course.courseName)")
                     .font(.largeTitle)
                     .bold()
                     .padding(.bottom, 8)
                 HStack {
                     Image(systemName: "mappin")
-                    Text("서울시 동작구 • 내 위치에서 5km")
+                    Text("\(vm.recommendedCoures[currentIndex].course.locationInfo.locality) \(vm.recommendedCoures[currentIndex].course.locationInfo.subLocality) • 내 위치에서 \(vm.recommendedCoures[currentIndex].distance/1000, specifier: "%.1f")km")
                 }
                 .font(.caption)
                 .fontWeight(.semibold)
                 .padding(.bottom, 16)
                 
                 HStack {
-                    Text("#5km")
+                    Text("#\(vm.recommendedCoures[currentIndex].course.courseLength, specifier: "%.0f")km")
                         .frame(width: 70, height: 23)
                         .background {
                             Capsule()
                                 .stroke()
                         }
-                    Text("#2h39m")
+                    Text("#\(formatDuration(vm.recommendedCoures[currentIndex].course.courseDuration))")
                         .frame(width: 70, height: 23)
                         .background {
                             Capsule()
