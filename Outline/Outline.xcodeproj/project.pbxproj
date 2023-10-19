@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		0E29F64B2ADF653000F5EF5C /* FontExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E29F64A2ADF653000F5EF5C /* FontExtension.swift */; };
 		0E29F6502ADF681E00F5EF5C /* test.kml in Resources */ = {isa = PBXBuildFile; fileRef = 0E29F64E2ADF681E00F5EF5C /* test.kml */; };
-		0E29F6512ADF681E00F5EF5C /* duckRun.kml in Resources */ = {isa = PBXBuildFile; fileRef = 0E29F64F2ADF681E00F5EF5C /* duckRun.kml */; };
+		0E29F6512ADF681E00F5EF5C /* seoulDuckRun.kml in Resources */ = {isa = PBXBuildFile; fileRef = 0E29F64F2ADF681E00F5EF5C /* seoulDuckRun.kml */; };
 		0E29F6532ADF6C3A00F5EF5C /* RunningPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E29F6522ADF6C3A00F5EF5C /* RunningPopup.swift */; };
 		0E29F6552ADF6C7D00F5EF5C /* KMLParserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E29F6542ADF6C7D00F5EF5C /* KMLParserManager.swift */; };
 		0E29F65A2ADF6CA000F5EF5C /* RunningMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E29F6562ADF6CA000F5EF5C /* RunningMap.swift */; };
@@ -49,9 +49,20 @@
 		9528EFEA2ADE9E870056CCC6 /* UserCoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 95EB1EF62ADE251100B47984 /* UserCoreDataModel.xcdatamodeld */; };
 		9528EFEC2ADEC7CF0056CCC6 /* UserDataModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9528EFEB2ADEC7CF0056CCC6 /* UserDataModelType.swift */; };
 		9528EFF42AE006F40056CCC6 /* UserDataTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9528EFF32AE006F40056CCC6 /* UserDataTestView.swift */; };
-		9528F0062AE0B37B0056CCC6 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9528F0052AE0B37B0056CCC6 /* LoginView.swift */; };
 		9528F0002AE042570056CCC6 /* PathGenerateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9528EFFF2AE042570056CCC6 /* PathGenerateManager.swift */; };
 		9528F0022AE046DF0056CCC6 /* PathDrawingTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9528F0012AE046DF0056CCC6 /* PathDrawingTestView.swift */; };
+		9528F0062AE0B37B0056CCC6 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9528F0052AE0B37B0056CCC6 /* LoginView.swift */; };
+		954FFF6C2AE12F0B00D27537 /* seoulCamelRun.kml in Resources */ = {isa = PBXBuildFile; fileRef = 954FFF672AE12F0B00D27537 /* seoulCamelRun.kml */; };
+		954FFF6D2AE12F0B00D27537 /* seoulCamelRun.kml in Resources */ = {isa = PBXBuildFile; fileRef = 954FFF672AE12F0B00D27537 /* seoulCamelRun.kml */; };
+		954FFF6E2AE12F0B00D27537 /* pohangDangDangRun.kml in Resources */ = {isa = PBXBuildFile; fileRef = 954FFF682AE12F0B00D27537 /* pohangDangDangRun.kml */; };
+		954FFF6F2AE12F0B00D27537 /* pohangDangDangRun.kml in Resources */ = {isa = PBXBuildFile; fileRef = 954FFF682AE12F0B00D27537 /* pohangDangDangRun.kml */; };
+		954FFF702AE12F0B00D27537 /* seoulOctopusRun.kml in Resources */ = {isa = PBXBuildFile; fileRef = 954FFF692AE12F0B00D27537 /* seoulOctopusRun.kml */; };
+		954FFF712AE12F0B00D27537 /* seoulOctopusRun.kml in Resources */ = {isa = PBXBuildFile; fileRef = 954FFF692AE12F0B00D27537 /* seoulOctopusRun.kml */; };
+		954FFF722AE12F0B00D27537 /* pohangDuckRun.kml in Resources */ = {isa = PBXBuildFile; fileRef = 954FFF6A2AE12F0B00D27537 /* pohangDuckRun.kml */; };
+		954FFF732AE12F0B00D27537 /* pohangDuckRun.kml in Resources */ = {isa = PBXBuildFile; fileRef = 954FFF6A2AE12F0B00D27537 /* pohangDuckRun.kml */; };
+		954FFF742AE12F0B00D27537 /* pohangCrocodileRun.kml in Resources */ = {isa = PBXBuildFile; fileRef = 954FFF6B2AE12F0B00D27537 /* pohangCrocodileRun.kml */; };
+		954FFF752AE12F0B00D27537 /* pohangCrocodileRun.kml in Resources */ = {isa = PBXBuildFile; fileRef = 954FFF6B2AE12F0B00D27537 /* pohangCrocodileRun.kml */; };
+		954FFF762AE12F1500D27537 /* seoulDuckRun.kml in Resources */ = {isa = PBXBuildFile; fileRef = 0E29F64F2ADF681E00F5EF5C /* seoulDuckRun.kml */; };
 		959D90262ADA35F100748BFB /* DataTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959D90252ADA35F100748BFB /* DataTestView.swift */; };
 		95E2EF712ADA6F230083ADEE /* CourseModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E2EF702ADA6F230083ADEE /* CourseModelType.swift */; };
 		95E2EF742ADA75AA0083ADEE /* DataTestViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E2EF732ADA75AA0083ADEE /* DataTestViewModel.swift */; };
@@ -152,7 +163,7 @@
 /* Begin PBXFileReference section */
 		0E29F64A2ADF653000F5EF5C /* FontExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontExtension.swift; sourceTree = "<group>"; };
 		0E29F64E2ADF681E00F5EF5C /* test.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = test.kml; sourceTree = "<group>"; };
-		0E29F64F2ADF681E00F5EF5C /* duckRun.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = duckRun.kml; sourceTree = "<group>"; };
+		0E29F64F2ADF681E00F5EF5C /* seoulDuckRun.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = seoulDuckRun.kml; sourceTree = "<group>"; };
 		0E29F6522ADF6C3A00F5EF5C /* RunningPopup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RunningPopup.swift; sourceTree = "<group>"; };
 		0E29F6542ADF6C7D00F5EF5C /* KMLParserManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KMLParserManager.swift; sourceTree = "<group>"; };
 		0E29F6562ADF6CA000F5EF5C /* RunningMap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RunningMap.swift; sourceTree = "<group>"; };
@@ -166,7 +177,6 @@
 		0EE92E6D2AE00AE5003192FF /* CompleteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteButton.swift; sourceTree = "<group>"; };
 		0EE92E7C2AE02DDC003192FF /* FreeRunningHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeRunningHomeView.swift; sourceTree = "<group>"; };
 		0EE92E7E2AE02DF2003192FF /* FreeRunningMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeRunningMap.swift; sourceTree = "<group>"; };
-		299803512ADED6B700A9A134 /* Outline Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = "Outline Watch App.app"; path = "/Users/hyunjun/Desktop/Outline/Outline/build/Debug-watchos/Outline Watch App.app"; sourceTree = "<absolute>"; };
 		299803522ADF1DC200A9A134 /* CoreMotionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreMotionViewModel.swift; sourceTree = "<group>"; };
 		299803542ADF5F1000A9A134 /* HealthKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitManager.swift; sourceTree = "<group>"; };
 		299803562AE00C9B00A9A134 /* HapticManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticManager.swift; sourceTree = "<group>"; };
@@ -182,11 +192,16 @@
 		29C9198C2ADE9B5B00AB0B5A /* CoreMotionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreMotionView.swift; sourceTree = "<group>"; };
 		9528EFEB2ADEC7CF0056CCC6 /* UserDataModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataModelType.swift; sourceTree = "<group>"; };
 		9528EFF32AE006F40056CCC6 /* UserDataTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataTestView.swift; sourceTree = "<group>"; };
-		9528F0052AE0B37B0056CCC6 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		9528EFFD2AE040360056CCC6 /* Outline.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Outline.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9528EFFE2AE040360056CCC6 /* Outline Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Outline Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9528EFFF2AE042570056CCC6 /* PathGenerateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathGenerateManager.swift; sourceTree = "<group>"; };
 		9528F0012AE046DF0056CCC6 /* PathDrawingTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathDrawingTestView.swift; sourceTree = "<group>"; };
+		9528F0052AE0B37B0056CCC6 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		954FFF672AE12F0B00D27537 /* seoulCamelRun.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = seoulCamelRun.kml; path = ../../../../../../../../Downloads/seoulCamelRun.kml; sourceTree = "<group>"; };
+		954FFF682AE12F0B00D27537 /* pohangDangDangRun.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = pohangDangDangRun.kml; path = ../../../../../../../../Downloads/pohangDangDangRun.kml; sourceTree = "<group>"; };
+		954FFF692AE12F0B00D27537 /* seoulOctopusRun.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = seoulOctopusRun.kml; path = ../../../../../../../../Downloads/seoulOctopusRun.kml; sourceTree = "<group>"; };
+		954FFF6A2AE12F0B00D27537 /* pohangDuckRun.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = pohangDuckRun.kml; path = ../../../../../../../../Downloads/pohangDuckRun.kml; sourceTree = "<group>"; };
+		954FFF6B2AE12F0B00D27537 /* pohangCrocodileRun.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = pohangCrocodileRun.kml; path = ../../../../../../../../Downloads/pohangCrocodileRun.kml; sourceTree = "<group>"; };
 		959D90252ADA35F100748BFB /* DataTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTestView.swift; sourceTree = "<group>"; };
 		959D90602ADA3A1000748BFB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		95E2EF702ADA6F230083ADEE /* CourseModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseModelType.swift; sourceTree = "<group>"; };
@@ -282,7 +297,12 @@
 			isa = PBXGroup;
 			children = (
 				0E29F64E2ADF681E00F5EF5C /* test.kml */,
-				0E29F64F2ADF681E00F5EF5C /* duckRun.kml */,
+				954FFF682AE12F0B00D27537 /* pohangDangDangRun.kml */,
+				954FFF6B2AE12F0B00D27537 /* pohangCrocodileRun.kml */,
+				954FFF6A2AE12F0B00D27537 /* pohangDuckRun.kml */,
+				954FFF672AE12F0B00D27537 /* seoulCamelRun.kml */,
+				954FFF692AE12F0B00D27537 /* seoulOctopusRun.kml */,
+				0E29F64F2ADF681E00F5EF5C /* seoulDuckRun.kml */,
 			);
 			path = KML;
 			sourceTree = "<group>";
@@ -826,18 +846,23 @@
 			files = (
 				29C9197E2ADE8F7F00AB0B5A /* GoogleService-Info.plist in Resources */,
 				0E29F6502ADF681E00F5EF5C /* test.kml in Resources */,
+				954FFF6C2AE12F0B00D27537 /* seoulCamelRun.kml in Resources */,
 				F0AC8AA42AD94C200061612C /* Preview Assets.xcassets in Resources */,
 				F0AC8B2C2AD967E30061612C /* Image.xcassets in Resources */,
 				BB1D531A2ADDBCAB0073771F /* Pretendard-Regular.ttf in Resources */,
 				F0AC8B2E2AD968A20061612C /* Icon.xcassets in Resources */,
+				954FFF702AE12F0B00D27537 /* seoulOctopusRun.kml in Resources */,
 				F0AC8AA12AD94C200061612C /* Color.xcassets in Resources */,
+				954FFF722AE12F0B00D27537 /* pohangDuckRun.kml in Resources */,
 				BB1D531E2ADDBCB90073771F /* Pretendard-Thin.ttf in Resources */,
 				BB1D530C2ADDBC560073771F /* Pretendard-Black.ttf in Resources */,
-				0E29F6512ADF681E00F5EF5C /* duckRun.kml in Resources */,
+				0E29F6512ADF681E00F5EF5C /* seoulDuckRun.kml in Resources */,
+				954FFF6E2AE12F0B00D27537 /* pohangDangDangRun.kml in Resources */,
 				BB1D530E2ADDBC620073771F /* Pretendard-Bold.ttf in Resources */,
 				BB1D53182ADDBCA20073771F /* Pretendard-Medium.ttf in Resources */,
 				BB1D53162ADDBC900073771F /* Pretendard-Light.ttf in Resources */,
 				BB1D53102ADDBC690073771F /* Pretendard-ExtraBold.ttf in Resources */,
+				954FFF742AE12F0B00D27537 /* pohangCrocodileRun.kml in Resources */,
 				BB1D531C2ADDBCB20073771F /* Pretendard-SemiBold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -846,7 +871,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				954FFF6D2AE12F0B00D27537 /* seoulCamelRun.kml in Resources */,
+				954FFF752AE12F0B00D27537 /* pohangCrocodileRun.kml in Resources */,
+				954FFF762AE12F1500D27537 /* seoulDuckRun.kml in Resources */,
+				954FFF6F2AE12F0B00D27537 /* pohangDangDangRun.kml in Resources */,
 				F0AC8AB62AD94C210061612C /* Preview Assets.xcassets in Resources */,
+				954FFF712AE12F0B00D27537 /* seoulOctopusRun.kml in Resources */,
+				954FFF732AE12F0B00D27537 /* pohangDuckRun.kml in Resources */,
 				F0AC8AB32AD94C210061612C /* WatchImage.xcassets in Resources */,
 				F0AC8B362AD96A3D0061612C /* WatchIcon.xcassets in Resources */,
 				F0AC8B352AD96A360061612C /* WatchColor.xcassets in Resources */,
