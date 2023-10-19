@@ -39,17 +39,16 @@
 		BB1D53482ADE9D780073771F /* MetricsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1D53472ADE9D770073771F /* MetricsView.swift */; };
 		BB1D534A2ADE9DC40073771F /* ElapsedTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1D53492ADE9DC40073771F /* ElapsedTimeView.swift */; };
 		BB1D534C2ADEA6F90073771F /* SummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1D534B2ADEA6F90073771F /* SummaryView.swift */; };
+		BB493CF42AE0A22E009D3699 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = BB493CF32AE0A22E009D3699 /* FirebaseFirestore */; };
+		BB493CF62AE0A2BA009D3699 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = BB493CF52AE0A2BA009D3699 /* FirebaseFirestoreSwift */; };
 		BB5239292ADAF75C00646494 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5239272ADAF72A00646494 /* Logger.swift */; };
 		BB5239372ADBD99F00646494 /* GPSArtHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5239362ADBD99F00646494 /* GPSArtHomeView.swift */; };
 		BB5239582ADC396300646494 /* BackgroundBlur.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5239572ADC396300646494 /* BackgroundBlur.swift */; };
 		BB52396B2ADD385700646494 /* BottomScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB52396A2ADD385700646494 /* BottomScrollView.swift */; };
 		BB52396D2ADD6DBB00646494 /* CustomRoundedRectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB52396C2ADD6DBB00646494 /* CustomRoundedRectangle.swift */; };
 		BBD6955E2ADF32A2007AA6D9 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBD6955D2ADF32A2007AA6D9 /* HealthKit.framework */; };
-		BBD6955F2ADF3433007AA6D9 /* Outline-Watch-App-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BBD6955B2ADF3275007AA6D9 /* Outline-Watch-App-Info.plist */; };
 		BBD695602ADF3456007AA6D9 /* Outline Watch App.app in Resources */ = {isa = PBXBuildFile; fileRef = 29AE76BE2ADE21FA00A46742 /* Outline Watch App.app */; };
-		BBD695632ADF783A007AA6D9 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = BBD695622ADF783A007AA6D9 /* FirebaseFirestore */; };
-		BBD695652ADF783A007AA6D9 /* FirebaseFirestoreCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = BBD695642ADF783A007AA6D9 /* FirebaseFirestoreCombine-Community */; };
-		BBD695672ADF783A007AA6D9 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = BBD695662ADF783A007AA6D9 /* FirebaseFirestoreSwift */; };
+		BBD6956C2ADFBFA1007AA6D9 /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD6956A2ADFBB9E007AA6D9 /* ComplicationController.swift */; };
 		F01FDB992ADABB6100BDA633 /* TabModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01FDB982ADABB6100BDA633 /* TabModel.swift */; };
 		F01FDB9C2ADABC4600BDA633 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01FDB9B2ADABC4600BDA633 /* TabBar.swift */; };
 		F0492E1D2ADD2AE900F6EADD /* Header.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0492E1C2ADD2AE900F6EADD /* Header.swift */; };
@@ -160,6 +159,7 @@
 		BB1D53472ADE9D770073771F /* MetricsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetricsView.swift; sourceTree = "<group>"; };
 		BB1D53492ADE9DC40073771F /* ElapsedTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElapsedTimeView.swift; sourceTree = "<group>"; };
 		BB1D534B2ADEA6F90073771F /* SummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryView.swift; sourceTree = "<group>"; };
+		BB493CEB2ADFD592009D3699 /* Outline-Watch-App-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Outline-Watch-App-Info.plist"; sourceTree = "<group>"; };
 		BB5239272ADAF72A00646494 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		BB52392D2ADAF93D00646494 /* Outline Watch App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Outline Watch App.entitlements"; sourceTree = "<group>"; };
 		BB52392E2ADAFB2E00646494 /* Outline.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Outline.entitlements; sourceTree = "<group>"; };
@@ -167,8 +167,8 @@
 		BB5239572ADC396300646494 /* BackgroundBlur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundBlur.swift; sourceTree = "<group>"; };
 		BB52396A2ADD385700646494 /* BottomScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomScrollView.swift; sourceTree = "<group>"; };
 		BB52396C2ADD6DBB00646494 /* CustomRoundedRectangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomRoundedRectangle.swift; sourceTree = "<group>"; };
-		BBD6955B2ADF3275007AA6D9 /* Outline-Watch-App-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Outline-Watch-App-Info.plist"; sourceTree = "<group>"; };
 		BBD6955D2ADF32A2007AA6D9 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS10.0.sdk/System/Library/Frameworks/HealthKit.framework; sourceTree = DEVELOPER_DIR; };
+		BBD6956A2ADFBB9E007AA6D9 /* ComplicationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplicationController.swift; sourceTree = "<group>"; };
 		F01FDB982ADABB6100BDA633 /* TabModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabModel.swift; sourceTree = "<group>"; };
 		F01FDB9B2ADABC4600BDA633 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 		F01FDB9D2ADABD3D00BDA633 /* HomeTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabView.swift; sourceTree = "<group>"; };
@@ -219,9 +219,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BBD695632ADF783A007AA6D9 /* FirebaseFirestore in Frameworks */,
-				BBD695652ADF783A007AA6D9 /* FirebaseFirestoreCombine-Community in Frameworks */,
-				BBD695672ADF783A007AA6D9 /* FirebaseFirestoreSwift in Frameworks */,
+				BB493CF42AE0A22E009D3699 /* FirebaseFirestore in Frameworks */,
+				BB493CF62AE0A2BA009D3699 /* FirebaseFirestoreSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -354,7 +353,9 @@
 		F0AC8A902AD94C1F0061612C = {
 			isa = PBXGroup;
 			children = (
+				29AE76AE2ADE0DEB00A46742 /* GoogleService-Info.plist */,
 				BB52392D2ADAF93D00646494 /* Outline Watch App.entitlements */,
+				BB493CEB2ADFD592009D3699 /* Outline-Watch-App-Info.plist */,
 				BB5239262ADAF70A00646494 /* Shared */,
 				F0AC8A9B2AD94C1F0061612C /* Outline */,
 				F0AC8AAD2AD94C200061612C /* Outline Watch */,
@@ -389,8 +390,6 @@
 		F0AC8AAD2AD94C200061612C /* Outline Watch */ = {
 			isa = PBXGroup;
 			children = (
-				BBD6955B2ADF3275007AA6D9 /* Outline-Watch-App-Info.plist */,
-				29AE76AE2ADE0DEB00A46742 /* GoogleService-Info.plist */,
 				F0AC8AFE2AD964650061612C /* Source */,
 				F0AC8AFF2AD964710061612C /* Resource */,
 				F0AC8AB42AD94C210061612C /* Preview Content */,
@@ -459,11 +458,12 @@
 		F0AC8AFE2AD964650061612C /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				BB1D53442ADE9CEC0073771F /* Manager */,
 				F0AC8AAE2AD94C200061612C /* OutlineWatchApp.swift */,
 				F0AC8AB02AD94C200061612C /* ContentWatchView.swift */,
+				BBD6956A2ADFBB9E007AA6D9 /* ComplicationController.swift */,
 				F0AC8B122AD965E80061612C /* View */,
 				F0AC8B132AD965F10061612C /* ViewModel */,
+				BB1D53442ADE9CEC0073771F /* Manager */,
 				F0AC8B142AD965FD0061612C /* Model */,
 				F0AC8B1E2AD966E10061612C /* DesignSystem */,
 			);
@@ -636,9 +636,8 @@
 			);
 			name = Outline;
 			packageProductDependencies = (
-				BBD695622ADF783A007AA6D9 /* FirebaseFirestore */,
-				BBD695642ADF783A007AA6D9 /* FirebaseFirestoreCombine-Community */,
-				BBD695662ADF783A007AA6D9 /* FirebaseFirestoreSwift */,
+				BB493CF32AE0A22E009D3699 /* FirebaseFirestore */,
+				BB493CF52AE0A2BA009D3699 /* FirebaseFirestoreSwift */,
 			);
 			productName = Outline;
 			productReference = BB1D531F2ADDBCE20073771F /* Outline.app */;
@@ -657,6 +656,8 @@
 			dependencies = (
 			);
 			name = "Outline Watch App";
+			packageProductDependencies = (
+			);
 			productName = "Outline Watch App";
 			productReference = 29AE76BE2ADE21FA00A46742 /* Outline Watch App.app */;
 			productType = "com.apple.product-type.application";
@@ -690,7 +691,7 @@
 			);
 			mainGroup = F0AC8A902AD94C1F0061612C;
 			packageReferences = (
-				BBD695612ADF783A007AA6D9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				BB493CF22AE0A22E009D3699 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = F0AC8A902AD94C1F0061612C;
 			projectDirPath = "";
@@ -732,7 +733,6 @@
 				F0AC8AB32AD94C210061612C /* WatchImage.xcassets in Resources */,
 				F0AC8B362AD96A3D0061612C /* WatchIcon.xcassets in Resources */,
 				F0AC8B352AD96A360061612C /* WatchColor.xcassets in Resources */,
-				BBD6955F2ADF3433007AA6D9 /* Outline-Watch-App-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -827,6 +827,7 @@
 				BB5239292ADAF75C00646494 /* Logger.swift in Sources */,
 				F0AC8AB12AD94C200061612C /* ContentWatchView.swift in Sources */,
 				BB1D53432ADE9C7D0073771F /* ControlsView.swift in Sources */,
+				BBD6956C2ADFBFA1007AA6D9 /* ComplicationController.swift in Sources */,
 				BB1D534C2ADEA6F90073771F /* SummaryView.swift in Sources */,
 				BB1D53482ADE9D780073771F /* MetricsView.swift in Sources */,
 				F0E6481A2ADDA683002F9FAA /* MapWatchView.swift in Sources */,
@@ -981,13 +982,14 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Outline-Watch-App-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = Outline;
-				INFOPLIST_KEY_NSHealthClinicalHealthRecordsShareUsageDescription = "Workouts tracked by MyWorkouts on Apple Watch will be saved to HealthKit.";
-				INFOPLIST_KEY_NSHealthShareUsageDescription = "Your workout related data will be used to display your saved workouts in MyWorkouts.";
-				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Workouts tracked by MyWorkouts on Apple Watch will be saved to HealthKit.";
+				INFOPLIST_KEY_NSHealthClinicalHealthRecordsShareUsageDescription = "운동 데이터를 측정하기 위해 필요합니다. ";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "운동 데이터를 측정하기 위해 필요합니다. ";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "운동 데이터를 보여주기 위해 필요합니다. ";
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "당신의 러닝 데이터를 저장하기 위하여 사용됩니다. ";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "당신의 위치는 러닝을 기록하는데 사용됩니다. 운동 중에 백그라운드에서도 위치 서비스를 사용합니다.";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = hani.app;
+				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = NO;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1022,13 +1024,14 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Outline-Watch-App-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = Outline;
-				INFOPLIST_KEY_NSHealthClinicalHealthRecordsShareUsageDescription = "Workouts tracked by MyWorkouts on Apple Watch will be saved to HealthKit.";
-				INFOPLIST_KEY_NSHealthShareUsageDescription = "Your workout related data will be used to display your saved workouts in MyWorkouts.";
-				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Workouts tracked by MyWorkouts on Apple Watch will be saved to HealthKit.";
+				INFOPLIST_KEY_NSHealthClinicalHealthRecordsShareUsageDescription = "운동 데이터를 측정하기 위해 필요합니다. ";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "운동 데이터를 측정하기 위해 필요합니다. ";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "운동 데이터를 보여주기 위해 필요합니다. ";
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "당신의 러닝 데이터를 저장하기 위하여 사용됩니다. ";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "당신의 위치는 러닝을 기록하는데 사용됩니다. 운동 중에 백그라운드에서도 위치 서비스를 사용합니다.";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = hani.app;
+				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = NO;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1164,7 +1167,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		BBD695612ADF783A007AA6D9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+		BB493CF22AE0A22E009D3699 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
 			requirement = {
@@ -1175,19 +1178,14 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		BBD695622ADF783A007AA6D9 /* FirebaseFirestore */ = {
+		BB493CF32AE0A22E009D3699 /* FirebaseFirestore */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = BBD695612ADF783A007AA6D9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = BB493CF22AE0A22E009D3699 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestore;
 		};
-		BBD695642ADF783A007AA6D9 /* FirebaseFirestoreCombine-Community */ = {
+		BB493CF52AE0A2BA009D3699 /* FirebaseFirestoreSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = BBD695612ADF783A007AA6D9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = "FirebaseFirestoreCombine-Community";
-		};
-		BBD695662ADF783A007AA6D9 /* FirebaseFirestoreSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = BBD695612ADF783A007AA6D9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = BB493CF22AE0A22E009D3699 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestoreSwift;
 		};
 /* End XCSwiftPackageProductDependency section */

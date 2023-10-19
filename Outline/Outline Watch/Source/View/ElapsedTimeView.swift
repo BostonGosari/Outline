@@ -13,7 +13,7 @@ struct ElapsedTimeView: View {
     @State private var timeFormatter = ElapsedTimeFormatter()
 
     var body: some View {
-        ZStack{
+        ZStack {
             ZStack {
                 Text(NSNumber(value: elapsedTime), formatter: timeFormatter).offset(x: 2, y: 2)
                 Text(NSNumber(value: elapsedTime), formatter: timeFormatter).offset(x: -2, y: -2)
@@ -25,7 +25,7 @@ struct ElapsedTimeView: View {
                 .foregroundColor(Color("Gray900"))
         } 
         .font(
-            Font.custom("Pretendard-ExtraBold", size: 40)
+            Font.custom("SF Pro Display", size: 40)
         )
         .onChange(of: showSubseconds) { value, _ in
             timeFormatter.showSubseconds = value
@@ -60,7 +60,6 @@ class ElapsedTimeFormatter: Formatter {
         return formattedString
     }
 }
-
 
 #Preview {
     ElapsedTimeView()
