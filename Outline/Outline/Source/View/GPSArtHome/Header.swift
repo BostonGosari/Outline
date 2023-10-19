@@ -13,14 +13,15 @@ struct Header: View {
     
     var body: some View {
         HStack {
-            Image("logo")
+            Image("HeaderLogo")
                 .resizable()
                 .scaledToFit()
-                .frame(height: 50)
+                .frame(height: 36)
             Spacer()
             Button { } label: {
                 Image(systemName: "person.crop.circle")
                     .font(.title)
+                    .fontWeight(.light)
                     .foregroundColor(Color.primaryColor)
             }
         }
@@ -37,18 +38,20 @@ struct InlineHeader: View {
     
     var body: some View {
         HStack {
-            Image("logo")
+            Image("HeaderLogo")
                 .resizable()
                 .scaledToFit()
-                .frame(height: 50)
+                .frame(height: 36)
             Spacer()
             Button { } label: {
                 Image(systemName: "person.crop.circle")
                     .font(.title)
+                    .fontWeight(.light)
                     .foregroundColor(Color.primaryColor)
             }
         }
         .padding(.horizontal)
+        .padding(.bottom, 10)
         .frame(maxWidth: .infinity, alignment: .leading)
         .background(
             Rectangle()
