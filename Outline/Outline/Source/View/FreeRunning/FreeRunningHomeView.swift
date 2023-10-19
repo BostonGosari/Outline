@@ -9,8 +9,10 @@ import SwiftUI
 
 struct FreeRunningHomeView: View {
     
+    @ObservedObject var vm: HomeTabViewModel
     @StateObject var locationManager = LocationManager()
     @State var userLocation = ""
+    @State var start = false
     
     var body: some View {
         ZStack {
@@ -36,7 +38,7 @@ struct FreeRunningHomeView: View {
                            .font(.subBody)
                            
                            Spacer()
-                           SlideToUnlock()
+                           SlideToUnlock(isUnlocked: $vm.start)
                        }
                        .padding(EdgeInsets(top: 58, leading: 24, bottom: 24, trailing: 16))
                    }
@@ -112,8 +114,4 @@ private struct CardBorder: View {
             
         }
     }
-}
-
-#Preview {
-    FreeRunningHomeView()
 }

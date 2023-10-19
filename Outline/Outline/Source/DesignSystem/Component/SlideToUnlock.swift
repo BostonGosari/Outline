@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SlideToUnlock: View {
     
-    @State var isUnlocked = false
+    @Binding var isUnlocked: Bool
     
     private let maxWidth: CGFloat = 320
     private let minWidth: CGFloat = 70
@@ -75,7 +75,7 @@ struct SlideToUnlock: View {
                 .foregroundColor(.white)
             if isUnlocked {
                 ProgressView()
-                    .tint(.purple)
+                    .tint(.primaryColor)
                     .controlSize(.large)
             } else {
                 Image(systemName: "paintbrush.fill")
@@ -109,5 +109,5 @@ struct SlideToUnlock: View {
 }
 
 #Preview {
-    SlideToUnlock()
+    SlideToUnlock(isUnlocked: .constant(false))
 }

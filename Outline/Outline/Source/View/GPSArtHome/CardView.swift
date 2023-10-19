@@ -10,7 +10,7 @@ import MapKit
 
 struct CardView: View {
     
-    @ObservedObject var vm: GPSArtHomeViewModel
+    @ObservedObject var vm: HomeTabViewModel
     
     @Binding var isShow: Bool
     @Binding var currentIndex: Int

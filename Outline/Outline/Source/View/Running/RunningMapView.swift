@@ -12,6 +12,8 @@ struct RunningMapView: View {
     @StateObject var locationManager = LocationManager()
     
     @GestureState var isLongPressed = false
+    
+    @Binding var selection: Int
 
     var body: some View {
         ZStack {
@@ -74,7 +76,9 @@ extension RunningMapView {
                             color: .primaryColor,
                             size: 19
                         ) {
-                            /*moveTo WorkoutDataView*/
+                            withAnimation {
+                                selection = 1
+                            }
                         }
                     }
                     .frame(maxWidth: .infinity, alignment: .trailing)
@@ -157,8 +161,4 @@ struct RunningStateButton: View {
                 )
         }
     }
-}
-
-#Preview {
-    RunningMapView()
 }
