@@ -35,9 +35,11 @@ struct HomeTabView: View {
                     TabBar(selectedTab: $selectedTab)
                         .frame(maxHeight: .infinity, alignment: .bottom)
                         .opacity(isShow ? 0 : 1)
+                        .ignoresSafeArea()
                 }
             }
         }
+        .tint(.primaryColor)
     }
 }
 

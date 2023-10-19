@@ -11,7 +11,6 @@ import HealthKitUI
 
 struct InputUserInfoView: View {
    
-    @EnvironmentObject var workoutManager: WorkoutManager
     @StateObject var viewModel = InputUserInfoViewModel()
 
     private let genderList = ["설정 안 됨", "여성", "남성", "기타"]
