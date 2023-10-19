@@ -23,7 +23,7 @@ struct HomeTabView: View {
                     Group {
                         switch selectedTab {
                         case .freeRunning:
-                            Text("자유러닝 뷰")
+                            FreeRunningHomeView()
                         case .GPSArtRunning:
                             GPSArtHomeView(isShow: $isShow, namespace: namespace)
                         case .myRecord:
