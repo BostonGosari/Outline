@@ -21,12 +21,12 @@ struct InputNicknameView: View {
                     Text("안녕하세요!\n어떻게 불러드릴까요?")
                         .font(.title)
                         .fontWeight(.semibold)
-                        .foregroundStyle(Color.white0Color)
+                        .foregroundStyle(Color.whiteColor)
                         .padding(.top, 60)
                     
                     HStack {
                         Text("닉네임")
-                            .foregroundStyle(Color.white0Color)
+                            .foregroundStyle(Color.whiteColor)
                         
                         Text("한글, 영어, 숫자 사용가능")
                             .foregroundStyle(Color.gray400Color)
@@ -37,7 +37,7 @@ struct InputNicknameView: View {
                     HStack {
                         TextField("", text: $viewModel.nickname, 
                                   prompt: Text(viewModel.defaultNickname).foregroundStyle(Color.gray400Color))
-                            .foregroundStyle(Color.white0Color)
+                            .foregroundStyle(Color.whiteColor)
                             .padding(.vertical, 13)
                             .padding(.horizontal, 16)
                             .background(Color.gray700Color)
@@ -73,7 +73,7 @@ extension InputNicknameView {
         Button("완료") {
             viewModel.doneButtonTapped()
         }
-        .foregroundStyle(Color.firstColor)
+        .foregroundStyle(Color.primaryColor)
     }
     
 }

@@ -9,10 +9,18 @@ import SwiftUI
 
 extension Color {
     /*KeyColor*/
-    static let firstColor = Color("First")
-    static let secondColor = Color("Second")
+    static let primaryColor = Color("Primary")
+    static let secondaryColor = Color("Secondary")
     static let thirdColor = Color("Third")
     static let fourthColor = Color("Fourth")
+    static let whiteColor = Color("White")
+    static let blackColor = Color("Black")
+    static let greenColor = Color("Green")
+    static let redColor = Color("Red")
+    
+    static let gradient1Color = Color("Gradient1")
+    static let gradient2Color = Color("Gradient2")
+    static let gradient3Color = Color("Gradient3")
     
     /*Opacity*/
     static let grayHeaderColor = Color("GrayHeader")
@@ -31,13 +39,11 @@ extension Color {
     static let gray900Color = Color("Gray900")
     
     /*white*/
-    static let white0Color = Color("White0")
     static let white7Color = Color("White7")
     static let white20Color = Color("White20")
     static let white30Color = Color("White30")
     
     /*Black*/
-    static let black0Color = Color("Black0")
     static let black10Color = Color("Black10")
     static let black20Color = Color("Black20")
     static let black50Color = Color("Black50")

@@ -10,6 +10,7 @@ import SwiftUI
 
 @main
 struct OutlineApp: App {
+    let persistenceController = PersistenceController.shared
 
     init() {
         FirebaseApp.configure()
@@ -19,7 +20,9 @@ struct OutlineApp: App {
   
     var body: some Scene {
         WindowGroup {
-            DataTestView()
+            ContentView()
+                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+
         }
     }
 }
