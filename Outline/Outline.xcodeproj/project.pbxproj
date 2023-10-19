@@ -21,6 +21,10 @@
 		0EE92E6A2AE00A2B003192FF /* FinishRunningMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE92E692AE00A2B003192FF /* FinishRunningMap.swift */; };
 		0EE92E6C2AE00A33003192FF /* FinishRunningViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE92E6B2AE00A33003192FF /* FinishRunningViewModel.swift */; };
 		0EE92E6E2AE00AE5003192FF /* CompleteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE92E6D2AE00AE5003192FF /* CompleteButton.swift */; };
+		29111E372AE0C9CA009833C7 /* FinishWatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29111E362AE0C9CA009833C7 /* FinishWatchView.swift */; };
+		29111E392AE0CA46009833C7 /* FinalWatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29111E382AE0CA46009833C7 /* FinalWatchView.swift */; };
+		29111E3B2AE0CA89009833C7 /* SheetWatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29111E3A2AE0CA89009833C7 /* SheetWatchView.swift */; };
+		29111E3F2AE0CD0C009833C7 /* ConfettiWatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29111E3E2AE0CD0C009833C7 /* ConfettiWatchView.swift */; };
 		295324802AE037E700085120 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 2953247F2AE037E700085120 /* FirebaseFirestore */; };
 		295324822AE037E700085120 /* FirebaseFirestoreCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 295324812AE037E700085120 /* FirebaseFirestoreCombine-Community */; };
 		295324842AE037E700085120 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 295324832AE037E700085120 /* FirebaseFirestoreSwift */; };
@@ -159,7 +163,12 @@
 		0EE92E692AE00A2B003192FF /* FinishRunningMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishRunningMap.swift; sourceTree = "<group>"; };
 		0EE92E6B2AE00A33003192FF /* FinishRunningViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishRunningViewModel.swift; sourceTree = "<group>"; };
 		0EE92E6D2AE00AE5003192FF /* CompleteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteButton.swift; sourceTree = "<group>"; };
-		299803512ADED6B700A9A134 /* Outline Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = "Outline Watch App.app"; path = "/Users/hyunjun/Desktop/Outline/Outline/build/Debug-watchos/Outline Watch App.app"; sourceTree = "<absolute>"; };
+		29111E342AE0C882009833C7 /* Outline.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Outline.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		29111E352AE0C882009833C7 /* Outline Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Outline Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		29111E362AE0C9CA009833C7 /* FinishWatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishWatchView.swift; sourceTree = "<group>"; };
+		29111E382AE0CA46009833C7 /* FinalWatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalWatchView.swift; sourceTree = "<group>"; };
+		29111E3A2AE0CA89009833C7 /* SheetWatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetWatchView.swift; sourceTree = "<group>"; };
+		29111E3E2AE0CD0C009833C7 /* ConfettiWatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfettiWatchView.swift; sourceTree = "<group>"; };
 		299803522ADF1DC200A9A134 /* CoreMotionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreMotionViewModel.swift; sourceTree = "<group>"; };
 		299803542ADF5F1000A9A134 /* HealthKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitManager.swift; sourceTree = "<group>"; };
 		299803562AE00C9B00A9A134 /* HapticManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticManager.swift; sourceTree = "<group>"; };
@@ -172,7 +181,6 @@
 		29AE76D92ADE2A5300A46742 /* InputNicknameViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InputNicknameViewModel.swift; path = Outline/Source/ViewModel/InputNicknameViewModel.swift; sourceTree = SOURCE_ROOT; };
 		29AE76DA2ADE2A5300A46742 /* InputUserInfoViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InputUserInfoViewModel.swift; path = Outline/Source/ViewModel/InputUserInfoViewModel.swift; sourceTree = SOURCE_ROOT; };
 		29AE76DF2ADE2BC700A46742 /* DateExtention.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtention.swift; sourceTree = "<group>"; };
-		29C9198A2ADE942D00AB0B5A /* Outline.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = Outline.app; path = "/Users/hyunjun/Desktop/Outline/Outline/build/Debug-iphoneos/Outline.app"; sourceTree = "<absolute>"; };
 		29C9198C2ADE9B5B00AB0B5A /* CoreMotionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreMotionView.swift; sourceTree = "<group>"; };
 		9528EFEB2ADEC7CF0056CCC6 /* UserDataModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataModelType.swift; sourceTree = "<group>"; };
 		9528EFF32AE006F40056CCC6 /* UserDataTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataTestView.swift; sourceTree = "<group>"; };
@@ -453,6 +461,8 @@
 				F0AC8AAD2AD94C200061612C /* Outline Watch */,
 				F0AC8AC42AD9514C0061612C /* .swiftlint.yml */,
 				29C919872ADE90CF00AB0B5A /* Frameworks */,
+				29111E342AE0C882009833C7 /* Outline.app */,
+				29111E352AE0C882009833C7 /* Outline Watch App.app */,
 			);
 			sourceTree = "<group>";
 		};
@@ -634,6 +644,10 @@
 				F0492E222ADD545200F6EADD /* CourseListWatchView.swift */,
 				F0492E202ADD52E900F6EADD /* WatchTabView.swift */,
 				F0864A382ADD6CFA00498DBA /* MapWatchView.swift */,
+				29111E362AE0C9CA009833C7 /* FinishWatchView.swift */,
+				29111E382AE0CA46009833C7 /* FinalWatchView.swift */,
+				29111E3A2AE0CA89009833C7 /* SheetWatchView.swift */,
+				29111E3E2AE0CD0C009833C7 /* ConfettiWatchView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -732,7 +746,7 @@
 				295324832AE037E700085120 /* FirebaseFirestoreSwift */,
 			);
 			productName = Outline;
-			productReference = 29C9198A2ADE942D00AB0B5A /* Outline.app */;
+			productReference = 29111E342AE0C882009833C7 /* Outline.app */;
 			productType = "com.apple.product-type.application";
 		};
 		F0AC8AA82AD94C200061612C /* Outline Watch App */ = {
@@ -749,7 +763,7 @@
 			);
 			name = "Outline Watch App";
 			productName = "Outline Watch App";
-			productReference = 299803512ADED6B700A9A134 /* Outline Watch App.app */;
+			productReference = 29111E352AE0C882009833C7 /* Outline Watch App.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -933,7 +947,9 @@
 				F0AC8B1D2AD966990061612C /* Model.swift in Sources */,
 				299803602AE0240100A9A134 /* ConfettiShapes.swift in Sources */,
 				299803612AE0240300A9A134 /* Confetti.swift in Sources */,
+				29111E372AE0C9CA009833C7 /* FinishWatchView.swift in Sources */,
 				F0AC8B242AD9670A0061612C /* WatchComponent.swift in Sources */,
+				29111E3F2AE0CD0C009833C7 /* ConfettiWatchView.swift in Sources */,
 				F0492E1E2ADD515100F6EADD /* LocationManager.swift in Sources */,
 				F0AC8B272AD967330061612C /* WatchExtension.swift in Sources */,
 				BB5239292ADAF75C00646494 /* Logger.swift in Sources */,
@@ -942,6 +958,8 @@
 				F0AC8AAF2AD94C200061612C /* OutlineWatchApp.swift in Sources */,
 				F06B936A2ADC23DF00387DEB /* WorkoutManager.swift in Sources */,
 				F0AC8B1C2AD966930061612C /* ViewModel.swift in Sources */,
+				29111E3B2AE0CA89009833C7 /* SheetWatchView.swift in Sources */,
+				29111E392AE0CA46009833C7 /* FinalWatchView.swift in Sources */,
 				F0492E212ADD52E900F6EADD /* WatchTabView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
