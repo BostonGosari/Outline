@@ -6,9 +6,12 @@
 //
 
 import SwiftUI
+import HealthKit
 
 struct CourseListWatchView: View {
-    
+    @EnvironmentObject var workoutManager: WatchWorkoutManager
+    var workoutTypes: [HKWorkoutActivityType] = [.running]
+
     @State private var detailViewNavigate = false
     
     var body: some View {
@@ -16,18 +19,24 @@ struct CourseListWatchView: View {
             ScrollView {
                 VStack(spacing: -5) {
                     Button {
-                        // action here
+                        // Action when the workoutType button is tapped
+                        workoutManager.selectedWorkout = workoutTypes[0]
+
+                        // Perform any additional actions if needed before navigation
+
                     } label: {
-                        HStack {
-                            Image(systemName: "play.circle")
-                            Text("자유코스")
-                        }
-                        .foregroundColor(.black)
-                        .frame(height: 48)
-                        .frame(maxWidth: .infinity)
-                        .background {
-                            RoundedRectangle(cornerRadius: 12, style: .continuous)
-                                .foregroundStyle(.green)
+                        NavigationLink(destination: WatchTabView(), tag: workoutTypes[0], selection: $workoutManager.selectedWorkout) {
+                            HStack {
+                                Image(systemName: "play.circle")
+                                Text("자유러닝")
+                                    .foregroundColor(.black)
+                            }
+                            .frame(height: 48)
+                            .frame(maxWidth: .infinity)
+                            .background(
+                                RoundedRectangle(cornerRadius: 12, style: .continuous)
+                                    .foregroundColor(.green)
+                            )
                         }
                     }
                     .buttonStyle(.plain)
@@ -36,8 +45,9 @@ struct CourseListWatchView: View {
                             .scaleEffect(phase.isIdentity ? 1 : 0.8)
                             .opacity(phase.isIdentity ? 1 : 0.8)
                     }
-                    .padding(.bottom, 8)
                     
+                    .padding(.bottom, 8)
+
                     ForEach(0..<5) {_ in
                         Button {
                             print("button clicked")
@@ -84,6 +94,24 @@ struct CourseListWatchView: View {
             .navigationDestination(isPresented: $detailViewNavigate) {
                 Text("DetailView")
             }
+            .onAppear {
+                workoutManager.requestAuthorization()
+            }
+        }
+    }
+}
+
+extension HKWorkoutActivityType: Identifiable {
+    public var id: UInt {
+        rawValue
+    }
+
+    var name: String {
+        switch self {
+        case .running:
+            return "Run"
+        default:
+            return ""
         }
     }
 }
