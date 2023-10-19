@@ -21,9 +21,8 @@ struct GPSArtCourse: Codable {
     var distance: Double
     var level: CourseLevel
     var alley: Alley
-    var coursePathes: [Coordinate]
+    var coursePaths: [Coordinate]
     var heading: Double
-    var mapScale: Double
     var thumbnail: String
 }
 
@@ -48,4 +47,9 @@ enum Alley: String, Codable, Hashable {
     case none
     case few
     case lots
+}
+
+struct Coordinate: Codable {
+    var longitude: Double
+    var latitude: Double
 }
