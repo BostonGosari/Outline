@@ -21,12 +21,12 @@
 		0EE92E6A2AE00A2B003192FF /* FinishRunningMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE92E692AE00A2B003192FF /* FinishRunningMap.swift */; };
 		0EE92E6C2AE00A33003192FF /* FinishRunningViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE92E6B2AE00A33003192FF /* FinishRunningViewModel.swift */; };
 		0EE92E6E2AE00AE5003192FF /* CompleteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE92E6D2AE00AE5003192FF /* CompleteButton.swift */; };
+		0EE92E7D2AE02DDC003192FF /* FreeRunningHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE92E7C2AE02DDC003192FF /* FreeRunningHomeView.swift */; };
+		0EE92E7F2AE02DF2003192FF /* FreeRunningMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE92E7E2AE02DF2003192FF /* FreeRunningMap.swift */; };
 		29111E372AE0C9CA009833C7 /* FinishWatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29111E362AE0C9CA009833C7 /* FinishWatchView.swift */; };
 		29111E392AE0CA46009833C7 /* FinalWatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29111E382AE0CA46009833C7 /* FinalWatchView.swift */; };
 		29111E3B2AE0CA89009833C7 /* SheetWatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29111E3A2AE0CA89009833C7 /* SheetWatchView.swift */; };
 		29111E3F2AE0CD0C009833C7 /* ConfettiWatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29111E3E2AE0CD0C009833C7 /* ConfettiWatchView.swift */; };
-		0EE92E7D2AE02DDC003192FF /* FreeRunningHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE92E7C2AE02DDC003192FF /* FreeRunningHomeView.swift */; };
-		0EE92E7F2AE02DF2003192FF /* FreeRunningMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE92E7E2AE02DF2003192FF /* FreeRunningMap.swift */; };
 		295324802AE037E700085120 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 2953247F2AE037E700085120 /* FirebaseFirestore */; };
 		295324822AE037E700085120 /* FirebaseFirestoreCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 295324812AE037E700085120 /* FirebaseFirestoreCombine-Community */; };
 		295324842AE037E700085120 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 295324832AE037E700085120 /* FirebaseFirestoreSwift */; };
@@ -53,9 +53,9 @@
 		9528EFEA2ADE9E870056CCC6 /* UserCoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 95EB1EF62ADE251100B47984 /* UserCoreDataModel.xcdatamodeld */; };
 		9528EFEC2ADEC7CF0056CCC6 /* UserDataModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9528EFEB2ADEC7CF0056CCC6 /* UserDataModelType.swift */; };
 		9528EFF42AE006F40056CCC6 /* UserDataTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9528EFF32AE006F40056CCC6 /* UserDataTestView.swift */; };
-		9528F0062AE0B37B0056CCC6 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9528F0052AE0B37B0056CCC6 /* LoginView.swift */; };
 		9528F0002AE042570056CCC6 /* PathGenerateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9528EFFF2AE042570056CCC6 /* PathGenerateManager.swift */; };
 		9528F0022AE046DF0056CCC6 /* PathDrawingTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9528F0012AE046DF0056CCC6 /* PathDrawingTestView.swift */; };
+		9528F0062AE0B37B0056CCC6 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9528F0052AE0B37B0056CCC6 /* LoginView.swift */; };
 		959D90262ADA35F100748BFB /* DataTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959D90252ADA35F100748BFB /* DataTestView.swift */; };
 		95E2EF712ADA6F230083ADEE /* CourseModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E2EF702ADA6F230083ADEE /* CourseModelType.swift */; };
 		95E2EF742ADA75AA0083ADEE /* DataTestViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E2EF732ADA75AA0083ADEE /* DataTestViewModel.swift */; };
@@ -168,15 +168,12 @@
 		0EE92E692AE00A2B003192FF /* FinishRunningMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishRunningMap.swift; sourceTree = "<group>"; };
 		0EE92E6B2AE00A33003192FF /* FinishRunningViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishRunningViewModel.swift; sourceTree = "<group>"; };
 		0EE92E6D2AE00AE5003192FF /* CompleteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteButton.swift; sourceTree = "<group>"; };
-		29111E342AE0C882009833C7 /* Outline.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = Outline.app; path = "/Users/hyunjun/Desktop/Outline/Outline/build/Debug-iphoneos/Outline.app"; sourceTree = "<absolute>"; };
-		29111E352AE0C882009833C7 /* Outline Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = "Outline Watch App.app"; path = "/Users/hyunjun/Desktop/Outline/Outline/build/Debug-watchos/Outline Watch App.app"; sourceTree = "<absolute>"; };
+		0EE92E7C2AE02DDC003192FF /* FreeRunningHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeRunningHomeView.swift; sourceTree = "<group>"; };
+		0EE92E7E2AE02DF2003192FF /* FreeRunningMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeRunningMap.swift; sourceTree = "<group>"; };
 		29111E362AE0C9CA009833C7 /* FinishWatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishWatchView.swift; sourceTree = "<group>"; };
 		29111E382AE0CA46009833C7 /* FinalWatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalWatchView.swift; sourceTree = "<group>"; };
 		29111E3A2AE0CA89009833C7 /* SheetWatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetWatchView.swift; sourceTree = "<group>"; };
 		29111E3E2AE0CD0C009833C7 /* ConfettiWatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfettiWatchView.swift; sourceTree = "<group>"; };
-		0EE92E7C2AE02DDC003192FF /* FreeRunningHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeRunningHomeView.swift; sourceTree = "<group>"; };
-		0EE92E7E2AE02DF2003192FF /* FreeRunningMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeRunningMap.swift; sourceTree = "<group>"; };
-		299803512ADED6B700A9A134 /* Outline Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = "Outline Watch App.app"; path = "/Users/hyunjun/Desktop/Outline/Outline/build/Debug-watchos/Outline Watch App.app"; sourceTree = "<absolute>"; };
 		299803522ADF1DC200A9A134 /* CoreMotionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreMotionViewModel.swift; sourceTree = "<group>"; };
 		299803542ADF5F1000A9A134 /* HealthKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitManager.swift; sourceTree = "<group>"; };
 		299803562AE00C9B00A9A134 /* HapticManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticManager.swift; sourceTree = "<group>"; };
@@ -192,11 +189,9 @@
 		29C9198C2ADE9B5B00AB0B5A /* CoreMotionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreMotionView.swift; sourceTree = "<group>"; };
 		9528EFEB2ADEC7CF0056CCC6 /* UserDataModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataModelType.swift; sourceTree = "<group>"; };
 		9528EFF32AE006F40056CCC6 /* UserDataTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataTestView.swift; sourceTree = "<group>"; };
-		9528F0052AE0B37B0056CCC6 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
-		9528EFFD2AE040360056CCC6 /* Outline.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Outline.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		9528EFFE2AE040360056CCC6 /* Outline Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Outline Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9528EFFF2AE042570056CCC6 /* PathGenerateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathGenerateManager.swift; sourceTree = "<group>"; };
 		9528F0012AE046DF0056CCC6 /* PathDrawingTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathDrawingTestView.swift; sourceTree = "<group>"; };
+		9528F0052AE0B37B0056CCC6 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		959D90252ADA35F100748BFB /* DataTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTestView.swift; sourceTree = "<group>"; };
 		959D90602ADA3A1000748BFB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		95E2EF702ADA6F230083ADEE /* CourseModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseModelType.swift; sourceTree = "<group>"; };
@@ -265,6 +260,8 @@
 		F0AC8B302AD969DA0061612C /* WatchIcon.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = WatchIcon.xcassets; sourceTree = "<group>"; };
 		F0AC8B322AD969FD0061612C /* WatchColor.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = WatchColor.xcassets; sourceTree = "<group>"; };
 		F0AC8B372AD96AE10061612C /* ViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtension.swift; sourceTree = "<group>"; };
+		F0DCEF2F2AE12B820083C4F2 /* Outline.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = Outline.app; path = "/Users/hyunjunkim/Desktop/Project/Team/Outline/Outline/build/Debug-iphoneos/Outline.app"; sourceTree = "<absolute>"; };
+		F0DCEF302AE12B820083C4F2 /* Outline Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = "Outline Watch App.app"; path = "/Users/hyunjunkim/Desktop/Project/Team/Outline/Outline/build/Debug-watchos/Outline Watch App.app"; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -762,7 +759,7 @@
 				295324832AE037E700085120 /* FirebaseFirestoreSwift */,
 			);
 			productName = Outline;
-			productReference = 29111E342AE0C882009833C7 /* Outline.app */;
+			productReference = F0DCEF2F2AE12B820083C4F2 /* Outline.app */;
 			productType = "com.apple.product-type.application";
 		};
 		F0AC8AA82AD94C200061612C /* Outline Watch App */ = {
@@ -779,7 +776,7 @@
 			);
 			name = "Outline Watch App";
 			productName = "Outline Watch App";
-			productReference = 29111E352AE0C882009833C7 /* Outline Watch App.app */;
+			productReference = F0DCEF302AE12B820083C4F2 /* Outline Watch App.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
