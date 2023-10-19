@@ -52,6 +52,11 @@ struct ImageShareView: View {
                     .onAppear {
                         self.size = CGSize(width: geo.size.width-98, height: geo.size.height-36)
                     }
+                    .mask {
+                        Rectangle()
+                            .frame(maxWidth: .infinity, alignment: .center)
+                            .aspectRatio(1080.0/1920.0, contentMode: .fit)
+                    }
                 }
                 pageIndicator
                 selectModeView
