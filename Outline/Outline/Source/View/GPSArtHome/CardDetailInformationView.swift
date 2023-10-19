@@ -6,10 +6,11 @@
 //
 
 import SwiftUI
+import MapKit
 
 struct CardDetailInformationView: View {
     
-    @ObservedObject var vm: GPSArtHomeViewModel
+    @ObservedObject var vm: HomeTabViewModel
     var currentIndex: Int
     
     var body: some View {
@@ -37,7 +38,7 @@ struct CardDetailInformationView: View {
             }
             .fontWeight(.semibold)
             .font(.caption)
-                        
+            
             VStack(alignment: .leading, spacing: 8) {
                 Text("\(vm.recommendedCoures[currentIndex].course.locationInfo.administrativeArea) \(vm.recommendedCoures[currentIndex].course.locationInfo.locality) \(vm.recommendedCoures[currentIndex].course.locationInfo.subLocality)")
                     .font(.title3)
@@ -85,9 +86,12 @@ struct CardDetailInformationView: View {
                 .font(.title3)
                 .bold()
             VStack(alignment: .leading) {
-                Rectangle()
-                    .frame(height: 200)
-                    .foregroundStyle(.thinMaterial)
+                MapInfoView(camera: MKMapCamera(
+                    lookingAtCenter: convertToCLLocationCoordinate(vm.recommendedCoures[currentIndex].course.centerLocation),
+                    fromDistance: 1000, pitch: 0, heading: 0), coordinates: convertToCLLocationCoordinates(vm.recommendedCoures[currentIndex].course.coursePaths)
+                )
+                .frame(height: 200)
+                .foregroundStyle(.thinMaterial)
                 Text("경로 제작 고사리님 @alsgiwc")
                     .foregroundStyle(.gray)
             }

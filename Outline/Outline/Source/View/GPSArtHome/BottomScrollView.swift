@@ -6,10 +6,11 @@
 //
 
 import SwiftUI
+import MapKit
 
 struct BottomScrollView: View {
     
-    @ObservedObject var vm: GPSArtHomeViewModel
+    @ObservedObject var vm: HomeTabViewModel
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -21,7 +22,7 @@ struct BottomScrollView: View {
                 HStack {
                     ForEach(vm.withoutRecommendedCourses, id: \.id) { currnetCourse in
                         NavigationLink {
-                            CourseDetailView(course: currnetCourse)
+                            CourseDetailView(vm: vm, course: currnetCourse)
                         } label: {
                             AsyncImage(url: URL(string: currnetCourse.course.thumbnail))
                                 .fixedSize()
@@ -90,13 +91,14 @@ struct BottomScrollView: View {
 
 struct CourseDetailView: View {
     
+    @ObservedObject var vm: HomeTabViewModel
     var course: CourseWithDistance
     
     var body: some View {
         ZStack {
             Color.gray900.ignoresSafeArea()
             ScrollView {
-                CourseBannerView(course: course)
+                CourseBannerView(vm: vm, course: course)
                 VStack(alignment: .leading, spacing: 24) {
                     HStack {
                         Text("#\(stringForCourseLevel(course.course.level))")
@@ -169,9 +171,13 @@ struct CourseDetailView: View {
                         .font(.title3)
                         .bold()
                     VStack(alignment: .leading) {
-                        Rectangle()
-                            .frame(height: 200)
-                            .foregroundStyle(.thinMaterial)
+                        MapInfoView(
+                            camera: MKMapCamera(lookingAtCenter: convertToCLLocationCoordinate(course.course.centerLocation),
+                                                fromDistance: 1000, pitch: 0, heading: 0), 
+                            coordinates: convertToCLLocationCoordinates(course.course.coursePaths)
+                        )
+                        .frame(height: 200)
+                        .foregroundStyle(.thinMaterial)
                         Text("경로 제작 고사리님 @alsgiwc")
                             .foregroundStyle(.gray)
                     }
@@ -188,13 +194,14 @@ struct CourseDetailView: View {
 
 struct CourseBannerView: View {
     
+    @ObservedObject var vm: HomeTabViewModel
     var course: CourseWithDistance
-
+    
     var body: some View {
-            ZStack {
-                courseImage
-                courseInformation
-            }
+        ZStack {
+            courseImage
+            courseInformation
+        }
     }
     
     private var courseImage: some View {
@@ -240,7 +247,7 @@ struct CourseBannerView: View {
             
             Spacer()
             
-            SlideToUnlock()
+            SlideToUnlock(isUnlocked: $vm.start)
                 .padding(-10)
         }
         .padding(40)

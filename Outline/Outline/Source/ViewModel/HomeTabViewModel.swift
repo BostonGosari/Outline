@@ -16,12 +16,16 @@ struct CourseWithDistance: Identifiable {
     var distance: Double
 }
 
-class GPSArtHomeViewModel: ObservableObject {
+class HomeTabViewModel: ObservableObject {
     
     @Published var courses: AllGPSArtCourses = []
     @Published var recommendedCoures: [CourseWithDistance] = []
     @Published var withoutRecommendedCourses: [CourseWithDistance] = []
     @Published var currentLocation: CLLocationCoordinate2D?
+    
+    @Published var startCourse: GPSArtCourse?
+    @Published var start = false
+    @Published var running = false
         
     let courseModel = CourseModel()
     let locationManager = CLLocationManager()
@@ -62,5 +66,9 @@ class GPSArtHomeViewModel: ObservableObject {
             self.recommendedCoures = Array(courseDistances.prefix(3))
             self.withoutRecommendedCourses = Array(courseDistances.dropFirst(3))
         }
+    }
+    
+    func start(course: GPSArtCourse) {
+        startCourse = course
     }
 }

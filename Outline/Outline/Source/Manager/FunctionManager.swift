@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreLocation
 
 func formatDuration(_ durationInMinutes: Double) -> String {
     let hours = Int(durationInMinutes) / 60
@@ -33,4 +34,12 @@ func stringForAlley(_ alley: Alley) -> String {
     case .lots:
         return "많음"
     }
+}
+
+func convertToCLLocationCoordinates(_ coordinates: [Coordinate]) -> [CLLocationCoordinate2D] {
+    return coordinates.map { CLLocationCoordinate2D(latitude: $0.latitude, longitude: $0.longitude) }
+}
+
+func convertToCLLocationCoordinate(_ coordinate: Coordinate) -> CLLocationCoordinate2D {
+    return CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: coordinate.longitude)
 }
