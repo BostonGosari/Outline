@@ -45,7 +45,7 @@ struct InputUserInfoView: View {
                             viewModel.defaultButtonTapped()
                         }, label: {
                             Image(systemName: viewModel.defaultButtonImage)
-                                .foregroundStyle(Color.firstColor)
+                                .foregroundStyle(Color.primaryColor)
                         })
                         
                         Text("기본값 사용")
@@ -66,12 +66,12 @@ struct InputUserInfoView: View {
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
                 
             }
-            .foregroundStyle(Color.white0Color)
+            .foregroundStyle(Color.whiteColor)
             .toolbar {
                 Button("다음") {
                     
                 }
-                .foregroundStyle(Color.firstColor)
+                .foregroundStyle(Color.primaryColor)
             }
             .navigationBarBackButtonHidden()
             .onAppear {

@@ -8,12 +8,18 @@
 import SwiftUI
 
 struct RunningMapView: View {
+    @StateObject private var viewModel = RunningMapViewModel()
     @StateObject var locationManager = LocationManager()
-    @StateObject private var viewModel = RunningViewModel()
+    
+    @GestureState var isLongPressed = false
 
     var body: some View {
         ZStack {
-            RunningMap(locationManager: locationManager)
+            RunningMap(
+                locationManager: locationManager,
+                viewModel: viewModel,
+                coordinates: viewModel.coordinates
+            )
                 .ignoresSafeArea()
                 .preferredColorScheme(.dark)
             
@@ -25,6 +31,12 @@ struct RunningMapView: View {
                     .padding(.bottom, 80)
             }
         }
+        .overlay {
+            if viewModel.isShowPopup {
+                RunningPopup(text: viewModel.popupText)
+                    .frame(maxHeight: .infinity, alignment: .bottom)
+            }
+        }
         .onAppear {
             locationManager.requestLocation()
         }
@@ -34,80 +46,115 @@ struct RunningMapView: View {
 extension RunningMapView {
     private var runningButtonView: AnyView {
         switch viewModel.runningType {
-        case .running:
+        case .start:
             AnyView(
-                HStack(alignment: .center) {
-                    Spacer()
-                    
-                    Button(action: {
-                        viewModel.runningType = .pause
-                    }, label: {
-                        Image(systemName: "pause.fill")
-                            .font(.system(size: 24))
-                            .foregroundStyle(Color.black0Color)
-                            .padding(24)
-                            .background(
-                                Circle()
-                                    .fill(Color.firstColor)
-                                    .stroke(.white0, style: .init())
-                            )
-                    })
-                    .padding(.trailing, 64)
-                    
-                    Button(action: {
-                        
-                    }, label: {
-                        Image(systemName: "scope")
-                            .foregroundStyle(Color.black0Color)
-                            .padding(19)
-                            .background(
-                                Circle()
-                                    .fill(Color.white)
-                            )
-
-                    })
+                VStack {
+                    RunningStateButton(
+                        imageName: "scope",
+                        color: Color.whiteColor,
+                        size: 18
+                    ) {
+                        viewModel.isUserLocationCenter = true
+                    }
+                    .frame(maxWidth: .infinity, alignment: .trailing)
                     .padding(.trailing, 32)
+                    
+                    HStack {
+                        RunningStateButton(
+                            imageName: "pause.fill",
+                            color: .primaryColor,
+                            size: 24
+                        ) {
+                            viewModel.runningType = .pause
+                        }
+                        .padding(.trailing, 64)
+                        
+                        RunningStateButton(
+                            imageName: "list.bullet.rectangle.portrait",
+                            color: .primaryColor,
+                            size: 19
+                        ) {
+                            /*moveTo WorkoutDataView*/
+                        }
+                    }
+                    .frame(maxWidth: .infinity, alignment: .trailing)
+                    .padding(.horizontal, 32)
                 }
             )
         case .pause:
             AnyView(
                 HStack {
-                    /*longPress stop*/
-                    Button(action: {
-                        
-                    }, label: {
-                        Image(systemName: "stop.fill")
-                            .font(.system(size: 24))
-                            .foregroundStyle(Color.black0Color)
-                            .padding(24)
-                            .background(
-                                Circle()
-                                    .fill(Color.white0Color)
-                            )
-                    })
+                    Image(systemName: "stop.fill")
+                        .font(.system(size: 24))
+                        .foregroundStyle(Color.blackColor)
+                        .padding(24)
+                        .background(Circle().fill(Color.whiteColor))
+                        .scaleEffect(isLongPressed ? 1.5 : 1)
+                        .simultaneousGesture(
+                            LongPressGesture(minimumDuration: 2.0)
+                                .updating($isLongPressed) { currentState, gestureState, _ in
+                                    gestureState = currentState
+                                    if currentState {
+                                        giveHapticFeedback()
+                                    }
+                                }
+                                .onEnded { _ in
+                                    /* move To FinishView */
+                                }
+                        )
+                        .highPriorityGesture(
+                            TapGesture()
+                                .onEnded { _ in
+                                    viewModel.isShowPopup = true
+                                }
+                        )
                     
                     Spacer()
                     
-                    Button(action: {
-                        viewModel.runningType = .running
-                    }, label: {
-                        Image(systemName: "play.fill")
-                            .font(.system(size: 24))
-                            .foregroundStyle(Color.black0Color)
-                            .padding(24)
-                            .background(
-                                Circle()
-                                    .fill(Color.firstColor)
-                                    .stroke(.white0, style: .init())
-                            )
-                    })
+                    RunningStateButton(
+                        imageName: "play.fill",
+                        color: .primaryColor,
+                        size: 24
+                    ) {
+                        viewModel.runningType = .start
+                    }
                 }
-                    .padding(.horizontal, 64)
+                .frame(maxWidth: .infinity, alignment: .center)
+                .padding(.horizontal, 64)
             )
         case .stop:
             AnyView(
                 EmptyView()
             )
+        }
+    }
+    
+    private func giveHapticFeedback() {
+        let impactFeedbackgenerator = UIImpactFeedbackGenerator(style: .medium)
+        impactFeedbackgenerator.prepare()
+        impactFeedbackgenerator.impactOccurred()
+    }
+}
+
+struct RunningStateButton: View {
+    let imageName: String
+    let color: Color
+    let size: CGFloat
+    let action: () -> Void
+    
+    var body: some View {
+        Button {
+            self.action()
+        }  label: {
+            Image(systemName: "\(imageName)")
+                .font(.system(size: size))
+                .foregroundStyle(Color.blackColor)
+                .padding(size)
+                .background(
+                    Circle()
+                        .fill(color)
+                        .stroke(.white, style: .init())
+                )
         }
     }
 }
