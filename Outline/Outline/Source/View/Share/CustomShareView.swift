@@ -5,16 +5,26 @@
 //  Created by hyebin on 10/19/23.
 //
 
+import CoreLocation
 import SwiftUI
 
 struct CustomShareView: View {
     
+    @StateObject var locationManager = LocationManager()
     @ObservedObject var viewModel: ShareViewModel
 
-    @State private var isShowBPM = false
-    @State private var isShowCal = false
-    @State private var isShowPace = false
-    @State private var isShowDistance = false
+    @State private var isShowBPM = true
+    @State private var isShowCal = true
+    @State private var isShowPace = true
+    @State private var isShowDistance = true
+    
+    let userLocations: [CLLocationCoordinate2D] = [
+        CLLocationCoordinate2D(latitude: 36.0141253, longitude: 129.3471313),
+        CLLocationCoordinate2D(latitude: 36.0154791, longitude: 129.3444276),
+        CLLocationCoordinate2D(latitude: 36.0102547, longitude: 129.3394495),
+        CLLocationCoordinate2D(latitude: 36.0097687, longitude: 129.3391061),
+        CLLocationCoordinate2D(latitude: 36.008276, longitude: 129.3358231)
+    ]
     
     var body: some View {
         ZStack {
@@ -22,15 +32,10 @@ struct CustomShareView: View {
                 .ignoresSafeArea()
             
             VStack(spacing: 0) {
-                ZStack {
-                    ShareMap(userLocations: [])
-                    runningInfo
-                }
-                .aspectRatio(1080/1920, contentMode: .fit)
-                .padding(EdgeInsets(top: 20, leading: 49, bottom: 16, trailing: 49))
-
+                customImageView
+                    .padding(EdgeInsets(top: 20, leading: 49, bottom: 16, trailing: 49))
+                    
                 pageIndicator
-                
                 tagView
             }
         }
@@ -38,6 +43,15 @@ struct CustomShareView: View {
 }
 
 extension CustomShareView {
+    private var customImageView: some View {
+        ZStack {
+            ShareMap(userLocations: userLocations)
+            runningInfo
+        }
+        .aspectRatio(1080.0/1920.0, contentMode: .fit)
+        
+    }
+    
     private var runningInfo: some View {
         VStack(alignment: .leading, spacing: 0) {
             Text("고래런")

@@ -10,22 +10,25 @@ import SwiftUI
 struct ShareMainView: View {
     
     @StateObject private var viewModel = ShareViewModel()
-    @State private var shareImage = UIImage()
+    let runningData: ShareModel
     
     var body: some View {
         NavigationStack {
             ZStack {
                 Color.gray900Color
+                    .ignoresSafeArea()
                 
-                TabView {
+                TabView(selection: $viewModel.currentPage) {
                     CustomShareView(viewModel: viewModel)
+                        .tag(0)
                     ImageShareView(viewModel: viewModel)
+                        .tag(1)
                 }
                 .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
                 
                 HStack(spacing: 0) {
                     Button {
-                        viewModel.saveImage()
+                        viewModel.tapSaveButton = true
                     }  label: {
                         Image(systemName: "square.and.arrow.down")
                             .foregroundStyle(Color.black)
@@ -40,7 +43,7 @@ struct ShareMainView: View {
                     .padding(.leading, 16)
                     
                     CompleteButton(text: "공유하기") {
-                        viewModel.shareToInstagram()
+                        viewModel.tapShareButton = true
                     }
                     .padding(.leading, -8)
                 }
@@ -57,11 +60,19 @@ struct ShareMainView: View {
                         .foregroundStyle(Color.primaryColor)
                 }
             }
-    
         }
     }
 }
 
 #Preview {
-    ShareMainView()
+    ShareMainView(runningData: ShareModel(
+        courseName: "고래런",
+        runningDate: "2023.10.19",
+        runningregion: "경상북도 포항시 지곡동",
+        distance: "11km",
+        cal: "127kcal",
+        pace: "5’55\"",
+        bpm: "132 BPM",
+        time: "2hourse"
+    ))
 }

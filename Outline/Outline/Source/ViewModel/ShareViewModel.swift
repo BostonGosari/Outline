@@ -10,16 +10,17 @@ import SwiftUI
 
 class ShareViewModel: ObservableObject {
     
+    @Published var currentPage = 0
     @Published var showCamera = false
     @Published var showImagePicker = false
     @Published var permissionDenied = false
+    @Published var shareImage = UIImage()
+    
+    @Published var tapSaveButton = false
+    @Published var tapShareButton = false
     
     var alertTitle = ""
     var alertMessage = ""
-    
-    // image Render
-    
-    // instagram share
     
     func checkCameraPermission() {
         AVCaptureDevice.requestAccess(for: .video) { granted in
@@ -53,14 +54,8 @@ class ShareViewModel: ObservableObject {
     }
     
     func shareToInstagram() {
-        
     }
     
     func saveImage() {
-        
-    }
-    
-    private func imageRender() {
-        
     }
 }
