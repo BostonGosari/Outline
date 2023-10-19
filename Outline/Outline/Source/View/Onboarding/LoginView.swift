@@ -13,18 +13,42 @@ struct LoginView: View {
             Image("loginBackground")
                 .resizable()
                 .frame(width: .infinity, height: .infinity)
-            Image("loginLines")
-            VStack(spacing: 40) {
+                .ignoresSafeArea()
+            VStack {
+                Image("loginLines")
+                Spacer()
+            }
+            VStack(spacing: 16) {
+                Spacer()
                 Image("logoOutline")
-                
+                    .padding(.top, 60)
+                ZStack {
+                    Rectangle()
+                        .fill(.black.opacity(0.3))
+                        .frame(width: 300, height: 80)
+                        .blur(radius: 10, opaque: false)
+                    Text("발걸음으로 나만의 유니크한 \n그림을 그려봐요.")
+                        .foregroundStyle(.white)
+                        .multilineTextAlignment(.center)
+                        .font(.title3)
+                        .fontWeight(.semibold)
+                }
+                .padding(.top, 0)
+
+                Spacer()
                     
-                Button {
+                Button
+                {
                     loginWithApple()
                 } label: {
                     HStack {
+                        Spacer()
                         Image("logoApple")
+                            .padding(.trailing, 36)
                         Text("애플아이디로 계속하기")
                             .foregroundColor(.white)
+                            .frame(width: .infinity, height: 60)
+                        Spacer()
                     }
                     .overlay {
                         overlayRectangle
@@ -35,25 +59,39 @@ struct LoginView: View {
                     loginWithApple()
                 } label: {
                     HStack {
+                        Spacer()
                         Image("logoKakaotalk")
+                            .padding(.trailing, 36)
                         Text("카카오톡으로 계속하기")
                             .foregroundColor(.white)
+                            .frame(width: .infinity, height: 60)
+                        Spacer()
                     }
                     .overlay {
                         overlayRectangle
                     }
                 }
-                Text("또는")
-                    .foregroundStyle(.white)
+                HStack {
+                    Rectangle()
+                        .fill(.white.opacity(0.7))
+                        .frame(width: .infinity, height: 1)
+                    Text("또는")
+                        .foregroundStyle(.white)
+                    Rectangle()
+                        .fill(.white.opacity(0.7))
+                        .frame(width: .infinity, height: 1)
+                }
+                .padding(.vertical, 5)
                 Button {
                     
                 } label: {
                     Text("둘러보기")
                         .foregroundStyle(.white)
+                        .font(.subtitle2)
+                        .fontWeight(.medium)
                 }
             }
         }
-        .ignoresSafeArea()
     }
     
     private func loginWithApple() {
