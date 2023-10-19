@@ -8,23 +8,27 @@
 import SwiftUI
 
 struct CardDetailInformationView: View {
+    
+    @ObservedObject var vm: GPSArtHomeViewModel
+    var currentIndex: Int
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 24) {
             HStack {
-                Text("#어려움")
+                Text("#\(stringForCourseLevel(vm.recommendedCoures[currentIndex].course.level))")
                     .frame(width: 70, height: 23)
                     .background {
                         Capsule()
                             .stroke()
                     }
                     .foregroundColor(.primaryColor)
-                Text("#5km")
+                Text("\(vm.recommendedCoures[currentIndex].course.courseLength, specifier: "%.0f")km")
                     .frame(width: 70, height: 23)
                     .background {
                         Capsule()
                             .stroke()
                     }
-                Text("#2h39m")
+                Text("\(formatDuration(vm.recommendedCoures[currentIndex].course.courseDuration))")
                     .frame(width: 70, height: 23)
                     .background {
                         Capsule()
@@ -35,10 +39,10 @@ struct CardDetailInformationView: View {
             .font(.caption)
                         
             VStack(alignment: .leading, spacing: 8) {
-                Text("경상북도 포항시 남구 효자로")
+                Text("\(vm.recommendedCoures[currentIndex].course.locationInfo.administrativeArea) \(vm.recommendedCoures[currentIndex].course.locationInfo.locality) \(vm.recommendedCoures[currentIndex].course.locationInfo.subLocality)")
                     .font(.title3)
                     .bold()
-                Text("포항의 야경을 바라보며 뛸 수 있는 러닝코스")
+                Text("--")
                     .foregroundStyle(.gray)
             }
             
@@ -50,19 +54,11 @@ struct CardDetailInformationView: View {
             VStack(alignment: .leading, spacing: 17) {
                 HStack {
                     HStack {
-                        Image(systemName: "flag")
-                        Text("추천 시작 위치")
-                    }
-                    .foregroundColor(.primaryColor)
-                    Text("포항시 남구 효자로")
-                }
-                HStack {
-                    HStack {
                         Image(systemName: "location")
                         Text("거리")
                     }
                     .foregroundColor(.primaryColor)
-                    Text("9km")
+                    Text("\(vm.recommendedCoures[currentIndex].course.courseLength, specifier: "%.0f")km")
                 }
                 HStack {
                     HStack {
@@ -70,7 +66,7 @@ struct CardDetailInformationView: View {
                         Text("예상 소요 시간")
                     }
                     .foregroundColor(.primaryColor)
-                    Text("2h 39m")
+                    Text("\(formatDuration(vm.recommendedCoures[currentIndex].course.courseDuration))")
                 }
                 HStack {
                     HStack {
@@ -78,7 +74,7 @@ struct CardDetailInformationView: View {
                         Text("골목길")
                     }
                     .foregroundColor(.primaryColor)
-                    Text("많음")
+                    Text(stringForAlley(vm.recommendedCoures[currentIndex].course.alley))
                 }
             }
             .padding(.horizontal, 10)
@@ -101,8 +97,4 @@ struct CardDetailInformationView: View {
         .padding(.horizontal)
         .padding(.bottom, 100)
     }
-}
-
-#Preview {
-    CardDetailInformationView()
 }

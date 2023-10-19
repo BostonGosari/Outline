@@ -32,7 +32,7 @@ struct SlideToUnlock: View {
         Capsule()
             .fill(
                 LinearGradient(
-                    colors: [.primaryColor, .purple],
+                    colors: [.primaryColor, .secondaryColor],
                     startPoint: .leading,
                     endPoint: .trailing
                 )
@@ -42,7 +42,7 @@ struct SlideToUnlock: View {
                 dragCircle
             }
             .simultaneousGesture(drag)
-            .animation(.spring(response: 0.5, dampingFraction: 1, blendDuration: 0), value: width)
+            .animation(.spring(), value: width)
             .hueRotation(.degrees(hueRotation ? 10 : -10))
             .onAppear {
                 withAnimation(.linear(duration: 3).repeatForever(autoreverses: true)) {
@@ -56,7 +56,7 @@ struct SlideToUnlock: View {
             Capsule()
                 .foregroundStyle(.thinMaterial)
             LinearGradient(
-                colors: [.primaryColor, .white],
+                colors: [.secondaryColor, .white],
                 startPoint: .leading,
                 endPoint: .trailing
             )
@@ -79,7 +79,7 @@ struct SlideToUnlock: View {
                     .controlSize(.large)
             } else {
                 Image(systemName: "paintbrush.fill")
-                    .foregroundColor(.purple)
+                    .foregroundColor(.secondaryColor)
                     .font(.title)
             }
         }
