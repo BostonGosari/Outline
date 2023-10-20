@@ -9,7 +9,6 @@ import SwiftUI
 
 struct FinalWatchView: View {
     
-    @State var counter = 0
     @Namespace var topID
     
     var body: some View {
@@ -30,8 +29,8 @@ struct FinalWatchView: View {
                 }
                 .frame(maxWidth: .infinity)
                 .onAppear {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                        withAnimation {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                        withAnimation(.easeInOut(duration: 2)) {
                             proxy.scrollTo(topID, anchor: .top)
                         }
                     }
