@@ -11,8 +11,9 @@ import HealthKit
 struct CourseListWatchView: View {
     @EnvironmentObject var workoutManager: WatchWorkoutManager
     var workoutTypes: [HKWorkoutActivityType] = [.running]
-    
+    @State private var countdownSeconds = 3 
     @State private var detailViewNavigate = false
+    @Binding var navigate: Bool
     
     var body: some View {
         NavigationStack {
@@ -20,27 +21,34 @@ struct CourseListWatchView: View {
                 VStack(spacing: -5) {
                     Button {
                         workoutManager.selectedWorkout = workoutTypes[0]
+                        navigate.toggle()
                     } label: {
-                        NavigationLink(destination: WatchTabView(), tag: workoutTypes[0], selection: $workoutManager.selectedWorkout) {
-                            HStack {
-                                Image(systemName: "play.circle")
-                                Text("자유러닝")
-                                    .foregroundColor(.black)
-                            }
-                            .frame(height: 48)
-                            .frame(maxWidth: .infinity)
-                            .background(
-                                RoundedRectangle(cornerRadius: 12, style: .continuous)
-                                    .foregroundColor(.green)
-                            )
-                        }
-                    }
+                           HStack {
+                               Image(systemName: "play.circle")
+                               Text("자유러닝")
+                                   .foregroundColor(.black)
+                           }
+                           .frame(height: 48)
+                           .frame(maxWidth: .infinity)
+                           .background(
+                               RoundedRectangle(cornerRadius: 12, style: .continuous)
+                                   .foregroundColor(.green)
+                           )
+                       }
                     .buttonStyle(.plain)
+                    .navigationDestination(isPresented: $navigate, destination: {
+                        countdownView()
+                            .onAppear {
+                                countdownSeconds = 3
+                            }
+                    })
+
                     .scrollTransition { content, phase in
                         content
                             .scaleEffect(phase.isIdentity ? 1 : 0.8)
                             .opacity(phase.isIdentity ? 1 : 0.8)
                     }
+                    .padding(.bottom, 8)
                     
                     ForEach(testCourses) {course in
                         Button {
@@ -92,6 +100,27 @@ struct CourseListWatchView: View {
             }
         }
     }
+    private func countdownView() -> some View {
+       VStack {
+           if countdownSeconds > 0 {
+               Image("Count\(countdownSeconds)")
+                   .resizable()
+                   .scaledToFit()
+                   .frame(maxWidth: .infinity, maxHeight: .infinity)  
+                   .onAppear {
+                       Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
+                           countdownSeconds -= 1
+                           if countdownSeconds == 0 {
+                               timer.invalidate()
+                               workoutManager.selectedWorkout = .running
+                           }
+                       }
+                   }
+           } else {
+               WatchTabView() // 카운트다운이 끝나면 WatchTabView로 이동
+           }
+       }.navigationBarBackButtonHidden()
+   }
 }
 
 extension HKWorkoutActivityType: Identifiable {
@@ -195,5 +224,8 @@ struct SampleCourePath: Shape {
 }
 
 #Preview {
-    CourseListWatchView()
+    CourseListWatchView(navigate: .constant(true))
 }
+//destination: countdownView(), // 변경된 부분
+//tag: workoutTypes[0],
+//selection: $workoutManager.selectedWorkout
