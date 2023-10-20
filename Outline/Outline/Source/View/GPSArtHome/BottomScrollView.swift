@@ -11,6 +11,7 @@ import MapKit
 struct BottomScrollView: View {
     
     @ObservedObject var vm: HomeTabViewModel
+    @State private var showDetail = false
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -21,55 +22,60 @@ struct BottomScrollView: View {
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack {
                     ForEach(vm.withoutRecommendedCourses, id: \.id) { currnetCourse in
-                        NavigationLink {
-                            CourseDetailView(vm: vm, course: currnetCourse)
-                        } label: {
-                            AsyncImage(url: URL(string: currnetCourse.course.thumbnail))
-                                .fixedSize()
-                                .frame(width: 164, height: 236)
-                                .scaledToFit()
-                                .overlay {
-                                    LinearGradient(
-                                        stops: [
-                                            Gradient.Stop(color: .black, location: 0.00),
-                                            Gradient.Stop(color: .black.opacity(0), location: 1.00)
-                                        ],
-                                        startPoint: UnitPoint(x: 0.5, y: 0.9),
-                                        endPoint: UnitPoint(x: 0.5, y: 0)
-                                    )
-                                    
-                                }
-                                .overlay {
-                                    VStack(alignment: .leading) {
-                                        Spacer()
-                                        Text("\(currnetCourse.course.courseName)")
-                                            .font(Font.system(size: 20).weight(.semibold))
-                                            .foregroundColor(.white)
-                                        HStack(spacing: 0) {
-                                            Image(systemName: "mappin")
-                                                .foregroundColor(.gray600)
-                                            Text("\(currnetCourse.course.locationInfo.locality) \(currnetCourse.course.locationInfo.subLocality)")
-                                                .foregroundColor(.gray600)
-                                        }
-                                        .font(.caption)
-                                        .padding(.bottom, 16)
+                        VStack {
+                            Button {
+                                showDetail = true
+                            } label: {
+                                AsyncImage(url: URL(string: currnetCourse.course.thumbnail))
+                                    .fixedSize()
+                                    .frame(width: 164, height: 236)
+                                    .scaledToFit()
+                                    .overlay {
+                                        LinearGradient(
+                                            stops: [
+                                                Gradient.Stop(color: .black, location: 0.00),
+                                                Gradient.Stop(color: .black.opacity(0), location: 1.00)
+                                            ],
+                                            startPoint: UnitPoint(x: 0.5, y: 0.9),
+                                            endPoint: UnitPoint(x: 0.5, y: 0)
+                                        )
+                                        
                                     }
-                                    .frame(width: 164)
-                                    .offset(x: -15)
-                                }
-                                .roundedCorners(5, corners: [.topLeft])
-                                .roundedCorners(30, corners: [.bottomLeft, .bottomRight, .topRight])
-                                .foregroundColor(.clear)
-                                .overlay(
-                                    CustomRoundedRectangle(
-                                        cornerRadiusTopLeft: 5,
-                                        cornerRadiusTopRight: 29,
-                                        cornerRadiusBottomLeft: 29,
-                                        cornerRadiusBottomRight: 29
+                                    .overlay {
+                                        VStack(alignment: .leading) {
+                                            Spacer()
+                                            Text("\(currnetCourse.course.courseName)")
+                                                .font(Font.system(size: 20).weight(.semibold))
+                                                .foregroundColor(.white)
+                                            HStack(spacing: 0) {
+                                                Image(systemName: "mappin")
+                                                    .foregroundColor(.gray600)
+                                                Text("\(currnetCourse.course.locationInfo.locality) \(currnetCourse.course.locationInfo.subLocality)")
+                                                    .foregroundColor(.gray600)
+                                            }
+                                            .font(.caption)
+                                            .padding(.bottom, 16)
+                                        }
+                                        .frame(width: 164)
+                                        .offset(x: -15)
+                                    }
+                                    .roundedCorners(5, corners: [.topLeft])
+                                    .roundedCorners(30, corners: [.bottomLeft, .bottomRight, .topRight])
+                                    .foregroundColor(.clear)
+                                    .overlay(
+                                        CustomRoundedRectangle(
+                                            cornerRadiusTopLeft: 5,
+                                            cornerRadiusTopRight: 29,
+                                            cornerRadiusBottomLeft: 29,
+                                            cornerRadiusBottomRight: 29
+                                        )
+                                        .offset(x: 1, y: 1)
+                                        .frame(width: 166, height: 238)
                                     )
-                                    .offset(x: 1, y: 1)
-                                    .frame(width: 166, height: 238)
-                                )
+                            }
+                        }
+                        .fullScreenCover(isPresented: $showDetail) {
+                            CourseDetailView(vm: vm, course: currnetCourse)
                         }
                     }
                 }
@@ -93,6 +99,7 @@ struct CourseDetailView: View {
     
     @ObservedObject var vm: HomeTabViewModel
     var course: CourseWithDistance
+    @Environment(\.dismiss) var dismiss
     
     var body: some View {
         ZStack {
@@ -173,7 +180,7 @@ struct CourseDetailView: View {
                     VStack(alignment: .leading) {
                         MapInfoView(
                             camera: MKMapCamera(lookingAtCenter: convertToCLLocationCoordinate(course.course.centerLocation),
-                                                fromDistance: 1000, pitch: 0, heading: 0), 
+                                                fromDistance: 1000, pitch: 0, heading: 0),
                             coordinates: convertToCLLocationCoordinates(course.course.coursePaths)
                         )
                         .frame(height: 200)
@@ -187,8 +194,26 @@ struct CourseDetailView: View {
                 .padding(.horizontal)
                 .padding(.bottom, 100)
             }
+            .overlay {
+                closeButton
+            }
             .ignoresSafeArea()
         }
+        .statusBarHidden()
+    }
+    
+    private var closeButton: some View {
+        Button {
+            withAnimation(.closeCard) {
+                dismiss()
+            }
+        } label: {
+            Image(systemName: "xmark.circle.fill")
+                .font(.title)
+                .foregroundColor(.primaryColor)
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
+        .padding(30)
     }
 }
 
