@@ -48,7 +48,6 @@ struct HomeTabView: View {
                         vm.fetchRecommendedCourses()
                     }
                 }
-                .tint(.primaryColor)
             }
 
             if vm.start {
@@ -56,9 +55,10 @@ struct HomeTabView: View {
             }
             
             if vm.running {
-                RunningView()
+                RunningView(vm: vm)
             }
         }
+        .tint(.primaryColor)
     }
 }
 
