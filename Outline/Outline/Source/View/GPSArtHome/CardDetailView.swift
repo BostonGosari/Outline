@@ -119,6 +119,9 @@ struct CardDetailView: View {
             Spacer()
             
             SlideToUnlock(isUnlocked: $vm.start)
+                .onChange(of: vm.start) { _ in
+                    vm.startCourse = vm.recommendedCoures[currentIndex].course
+                }
                 .opacity(appear[1] ? 1 : 0)
                 .offset(y: appear[1] ? 0 : fadeInOffset)
                 .padding(-10)

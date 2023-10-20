@@ -248,6 +248,9 @@ struct CourseBannerView: View {
             Spacer()
             
             SlideToUnlock(isUnlocked: $vm.start)
+                .onChange(of: vm.start) { _ in
+                    vm.startCourse = course.course
+                }
                 .padding(-10)
         }
         .padding(40)
