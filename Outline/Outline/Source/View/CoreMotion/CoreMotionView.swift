@@ -40,7 +40,7 @@ struct CoreMotionView: View {
                     Text("평균 페이스 : \(viewModel.avgPace / 60 * 1000) minute")
                     Text("칼로리 : 약 \(viewModel.kilocalorie) kcal")
                 }
-                .onChange(of: viewModel.distance) { distance in
+                .onChange(of: viewModel.distance) { _, distance in
                     viewModel.kilocalorie = weight * distance / 1000 * 1.036
                 }
                 
