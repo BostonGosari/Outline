@@ -21,35 +21,28 @@ struct MetricsView: View {
                 HStack {
                     Spacer()
                     VStack {
-                        Text("\(workoutManager.distance.formatted(.number.precision(.fractionLength(0))))")
-
-                            .font(
-                                Font.custom("SF Pro Display", size: 32)
-                                    .weight(.medium)
-                                )
+                        Text("\((workoutManager.distance/1000).formatted(.number.precision(.fractionLength(2))))")
+                            .font(.system(size: 28).weight(.semibold))
                             .foregroundColor(.white)
                         Text("킬로미터")
-                            .font(Font.custom("SF Pro Display", size: 11))
+                            .font(.system(size: 11))
                             .multilineTextAlignment(.center)
                             .foregroundColor(Color.gray500)
 
                     }
                     Spacer()
                     VStack {
-                        Text("\(workoutManager.pace.formatted(.number.precision(.fractionLength(0))))")
-                        .font(
-                            Font.custom("SF Pro Display", size: 32)
-                                .weight(.medium)
-                            )
-                        .foregroundColor(.white)
+                        Text(workoutManager.pace > 0 ? String(format: "%02d’%02d’’", Int(workoutManager.pace) / 60, Int(workoutManager.pace) % 60) : "-’--’’")
+
+                            .font(.system(size: 28).weight(.semibold))
+                            .foregroundColor(.white)
                         Text("페이스")
-                            .font(Font.custom("SF Pro Display", size: 11))
+                            .font(.system(size: 11))
                             .multilineTextAlignment(.center)
                             .foregroundColor(Color.gray500)
-
                     }
+                    .padding(.leading, 20)
                     Spacer()
-                   
                 }
                 Spacer()
                
@@ -84,6 +77,7 @@ private struct MetricsTimelineSchedule: TimelineSchedule {
         }
     }
 }
+
 
 #Preview {
     MetricsView().environmentObject(WatchWorkoutManager())
