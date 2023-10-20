@@ -17,6 +17,13 @@
 		0E29F65C2ADF6CA000F5EF5C /* RunningMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E29F6582ADF6CA000F5EF5C /* RunningMapView.swift */; };
 		0E29F65D2ADF6CA000F5EF5C /* WorkoutDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E29F6592ADF6CA000F5EF5C /* WorkoutDataView.swift */; };
 		0E29F65F2ADF6CDD00F5EF5C /* RunningMapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E29F65E2ADF6CDD00F5EF5C /* RunningMapViewModel.swift */; };
+		0E9A5D3F2AE058D500C19FF3 /* ShareMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9A5D3E2AE058D500C19FF3 /* ShareMainView.swift */; };
+		0E9A5D422AE058EF00C19FF3 /* CustomShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9A5D412AE058EF00C19FF3 /* CustomShareView.swift */; };
+		0E9A5D442AE058FC00C19FF3 /* ImageShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9A5D432AE058FC00C19FF3 /* ImageShareView.swift */; };
+		0E9A5D462AE05DF200C19FF3 /* ShareMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9A5D452AE05DF200C19FF3 /* ShareMap.swift */; };
+		0E9A5D482AE065A100C19FF3 /* ShareViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9A5D472AE065A100C19FF3 /* ShareViewModel.swift */; };
+		0E9A5D4B2AE07C2900C19FF3 /* ImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9A5D4A2AE07C2900C19FF3 /* ImagePickerView.swift */; };
+		0E9A5D4F2AE0B8C800C19FF3 /* ShareModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9A5D4E2AE0B8C800C19FF3 /* ShareModel.swift */; };
 		0EE92E682AE00A11003192FF /* FinishRunningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE92E672AE00A11003192FF /* FinishRunningView.swift */; };
 		0EE92E6A2AE00A2B003192FF /* FinishRunningMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE92E692AE00A2B003192FF /* FinishRunningMap.swift */; };
 		0EE92E6C2AE00A33003192FF /* FinishRunningViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE92E6B2AE00A33003192FF /* FinishRunningViewModel.swift */; };
@@ -73,6 +80,7 @@
 		BB1D53482ADE9D780073771F /* MetricsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1D53472ADE9D770073771F /* MetricsView.swift */; };
 		BB1D534A2ADE9DC40073771F /* ElapsedTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1D53492ADE9DC40073771F /* ElapsedTimeView.swift */; };
 		BB1D534C2ADEA6F90073771F /* SummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1D534B2ADEA6F90073771F /* SummaryView.swift */; };
+		BB493CF82AE0CA55009D3699 /* ElapsedTimeFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB493CF72AE0CA55009D3699 /* ElapsedTimeFormatter.swift */; };
 		BB5239292ADAF75C00646494 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5239272ADAF72A00646494 /* Logger.swift */; };
 		BB5239372ADBD99F00646494 /* GPSArtHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5239362ADBD99F00646494 /* GPSArtHomeView.swift */; };
 		BB5239582ADC396300646494 /* BackgroundBlur.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5239572ADC396300646494 /* BackgroundBlur.swift */; };
@@ -170,6 +178,15 @@
 		0E29F6582ADF6CA000F5EF5C /* RunningMapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RunningMapView.swift; sourceTree = "<group>"; };
 		0E29F6592ADF6CA000F5EF5C /* WorkoutDataView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkoutDataView.swift; sourceTree = "<group>"; };
 		0E29F65E2ADF6CDD00F5EF5C /* RunningMapViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RunningMapViewModel.swift; sourceTree = "<group>"; };
+		0E9A5D3C2AE058C100C19FF3 /* Outline.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Outline.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0E9A5D3D2AE058C100C19FF3 /* Outline Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Outline Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0E9A5D3E2AE058D500C19FF3 /* ShareMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareMainView.swift; sourceTree = "<group>"; };
+		0E9A5D412AE058EF00C19FF3 /* CustomShareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomShareView.swift; sourceTree = "<group>"; };
+		0E9A5D432AE058FC00C19FF3 /* ImageShareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageShareView.swift; sourceTree = "<group>"; };
+		0E9A5D452AE05DF200C19FF3 /* ShareMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareMap.swift; sourceTree = "<group>"; };
+		0E9A5D472AE065A100C19FF3 /* ShareViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewModel.swift; sourceTree = "<group>"; };
+		0E9A5D4A2AE07C2900C19FF3 /* ImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerView.swift; sourceTree = "<group>"; };
+		0E9A5D4E2AE0B8C800C19FF3 /* ShareModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareModel.swift; sourceTree = "<group>"; };
 		0EE92E672AE00A11003192FF /* FinishRunningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishRunningView.swift; sourceTree = "<group>"; };
 		0EE92E692AE00A2B003192FF /* FinishRunningMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishRunningMap.swift; sourceTree = "<group>"; };
 		0EE92E6B2AE00A33003192FF /* FinishRunningViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishRunningViewModel.swift; sourceTree = "<group>"; };
@@ -221,6 +238,7 @@
 		BB1D53492ADE9DC40073771F /* ElapsedTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElapsedTimeView.swift; sourceTree = "<group>"; };
 		BB1D534B2ADEA6F90073771F /* SummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryView.swift; sourceTree = "<group>"; };
 		BB493CEB2ADFD592009D3699 /* Outline-Watch-App-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Outline-Watch-App-Info.plist"; sourceTree = "<group>"; };
+		BB493CF72AE0CA55009D3699 /* ElapsedTimeFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElapsedTimeFormatter.swift; sourceTree = "<group>"; };
 		BB5239272ADAF72A00646494 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		BB52392D2ADAF93D00646494 /* Outline Watch App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Outline Watch App.entitlements"; sourceTree = "<group>"; };
 		BB52392E2ADAFB2E00646494 /* Outline.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Outline.entitlements; sourceTree = "<group>"; };
@@ -306,6 +324,18 @@
 				0E29F64F2ADF681E00F5EF5C /* duckRun.kml */,
 			);
 			path = KML;
+			sourceTree = "<group>";
+		};
+		0E9A5D402AE058D900C19FF3 /* Share */ = {
+			isa = PBXGroup;
+			children = (
+				0E9A5D3E2AE058D500C19FF3 /* ShareMainView.swift */,
+				0E9A5D412AE058EF00C19FF3 /* CustomShareView.swift */,
+				0E9A5D432AE058FC00C19FF3 /* ImageShareView.swift */,
+				0E9A5D452AE05DF200C19FF3 /* ShareMap.swift */,
+				0E9A5D4A2AE07C2900C19FF3 /* ImagePickerView.swift */,
+			);
+			path = Share;
 			sourceTree = "<group>";
 		};
 		0EE92E662AE00A02003192FF /* FininshRunning */ = {
@@ -553,6 +583,7 @@
 		F0AC8AFA2AD963600061612C /* View */ = {
 			isa = PBXGroup;
 			children = (
+				0E9A5D402AE058D900C19FF3 /* Share */,
 				0EE92E7B2AE02DCB003192FF /* FreeRunning */,
 				0EE92E662AE00A02003192FF /* FininshRunning */,
 				29C9198B2ADE9B4400AB0B5A /* CoreMotion */,
@@ -576,6 +607,7 @@
 				F0AC8B032AD964EF0061612C /* RecommendedCoursesViewModel.swift */,
 				0E29F65E2ADF6CDD00F5EF5C /* RunningMapViewModel.swift */,
 				0EE92E6B2AE00A33003192FF /* FinishRunningViewModel.swift */,
+				0E9A5D472AE065A100C19FF3 /* ShareViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -636,6 +668,7 @@
 				95EB1EF52ADE22C600B47984 /* UserData */,
 				95EB1EF32ADE229200B47984 /* UserInfo */,
 				F01FDB982ADABB6100BDA633 /* TabModel.swift */,
+				0E9A5D4E2AE0B8C800C19FF3 /* ShareModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -734,6 +767,7 @@
 			isa = PBXGroup;
 			children = (
 				F0AC8B222AD967080061612C /* WatchComponent.swift */,
+				BB493CF72AE0CA55009D3699 /* ElapsedTimeFormatter.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -814,8 +848,6 @@
 			dependencies = (
 			);
 			name = "Outline Watch App";
-			packageProductDependencies = (
-			);
 			productName = "Outline Watch App";
 			productReference = F0781D532AE134720084ADD7 /* Outline Watch App.app */;
 			productType = "com.apple.product-type.application";
@@ -928,6 +960,8 @@
 				295324852AE038EE00085120 /* UserInfoModel.swift in Sources */,
 				9528EFF42AE006F40056CCC6 /* UserDataTestView.swift in Sources */,
 				29AE76E12ADE2C1700A46742 /* HomeTabView.swift in Sources */,
+				0E9A5D482AE065A100C19FF3 /* ShareViewModel.swift in Sources */,
+				0E9A5D4B2AE07C2900C19FF3 /* ImagePickerView.swift in Sources */,
 				29AE76AD2ADE0D9500A46742 /* ColorExtension.swift in Sources */,
 				29AE76AC2ADE0D9100A46742 /* OutlineApp.swift in Sources */,
 				0E29F65D2ADF6CA000F5EF5C /* WorkoutDataView.swift in Sources */,
@@ -949,6 +983,7 @@
 				0EE92E682AE00A11003192FF /* FinishRunningView.swift in Sources */,
 				0E29F65B2ADF6CA000F5EF5C /* RunningView.swift in Sources */,
 				F06B936E2ADC279100387DEB /* SlideToUnlock.swift in Sources */,
+				0E9A5D4F2AE0B8C800C19FF3 /* ShareModel.swift in Sources */,
 				9528F0062AE0B37B0056CCC6 /* LoginView.swift in Sources */,
 				F0AC8B112AD965A70061612C /* Modifier.swift in Sources */,
 				0EE92E6E2AE00AE5003192FF /* CompleteButton.swift in Sources */,
@@ -967,6 +1002,8 @@
 				95E2EF742ADA75AA0083ADEE /* DataTestViewModel.swift in Sources */,
 				299803552ADF5F1000A9A134 /* HealthKitManager.swift in Sources */,
 				2998035E2AE0182100A9A134 /* ConfettiView.swift in Sources */,
+				0E9A5D462AE05DF200C19FF3 /* ShareMap.swift in Sources */,
+				BB52392B2ADAF7BD00646494 /* WorkoutManager.swift in Sources */,
 				0E29F65A2ADF6CA000F5EF5C /* RunningMap.swift in Sources */,
 				F05C97172ADA879100D5D959 /* LocationManager.swift in Sources */,
 				0E29F65F2ADF6CDD00F5EF5C /* RunningMapViewModel.swift in Sources */,
@@ -977,11 +1014,13 @@
 				F09697512ADC069E00C38AF4 /* AnimationExtension.swift in Sources */,
 				F06B93592ADAECA800387DEB /* RecommendedCourseView.swift in Sources */,
 				F05C7D562ADC565E006842DB /* PreferenceKey.swift in Sources */,
+				0E9A5D3F2AE058D500C19FF3 /* ShareMainView.swift in Sources */,
 				9528EFEC2ADEC7CF0056CCC6 /* UserDataModelType.swift in Sources */,
 				29AE76DB2ADE2A5300A46742 /* InputNicknameViewModel.swift in Sources */,
 				0EE92E6C2AE00A33003192FF /* FinishRunningViewModel.swift in Sources */,
 				F05C971C2ADAE6E200D5D959 /* RecomendedCourseMap.swift in Sources */,
 				F01FDB9C2ADABC4600BDA633 /* TabBar.swift in Sources */,
+				0E9A5D442AE058FC00C19FF3 /* ImageShareView.swift in Sources */,
 				95EB1EEC2ADDC66B00B47984 /* UserDataModel.swift in Sources */,
 				F06B936B2ADC23E100387DEB /* Logger.swift in Sources */,
 				29AE76E02ADE2BC700A46742 /* DateExtention.swift in Sources */,
@@ -991,6 +1030,7 @@
 				2998035C2AE0181900A9A134 /* Confetti.swift in Sources */,
 				29AE76DC2ADE2A5300A46742 /* InputUserInfoViewModel.swift in Sources */,
 				F0492E1D2ADD2AE900F6EADD /* Header.swift in Sources */,
+				0E9A5D422AE058EF00C19FF3 /* CustomShareView.swift in Sources */,
 				29AE76D72ADE2A2200A46742 /* InputNicknameView.swift in Sources */,
 				F01FDB992ADABB6100BDA633 /* TabModel.swift in Sources */,
 			);
@@ -1024,6 +1064,7 @@
 				F0AC8B1C2AD966930061612C /* ViewModel.swift in Sources */,
 				29111E3B2AE0CA89009833C7 /* SheetWatchView.swift in Sources */,
 				29111E392AE0CA46009833C7 /* FinalWatchView.swift in Sources */,
+				BB493CF82AE0CA55009D3699 /* ElapsedTimeFormatter.swift in Sources */,
 				F0492E212ADD52E900F6EADD /* WatchTabView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1091,8 +1132,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
-				LD_QUOTE_LINKER_ARGUMENTS_FOR_COMPILER_DRIVER = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -1151,8 +1191,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
-				LD_QUOTE_LINKER_ARGUMENTS_FOR_COMPILER_DRIVER = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -1265,16 +1304,19 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Outline/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Outline;
+				INFOPLIST_KEY_NSCameraUsageDescription = "러닝 화면을 꾸밀 수 있도록 사진을 선택해보세요!\n사진을 선택해보세요!";
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "애플 워치를 이용하여 당신의 워크아웃 기록을 트래킹하여 운동에 저장하기 위하여 사용됩니다. ";
 				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "러닝을 하며 운동 데이터를 확인하는 데에 건강정보를 사용합니다. ";
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "당신의 러닝 데이터를 저장하기 위하여 사용됩니다. ";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "당신의 위치는 러닝을 기록하는데 사용됩니다. 운동 중에 백그라운드에서도 위치 서비스를 사용합니다.";
 				INFOPLIST_KEY_NSMotionUsageDescription = "";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "러닝 화면을 꾸밀 수 있도록 사진을 선택해보세요!";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Dark;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1307,16 +1349,19 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Outline/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Outline;
+				INFOPLIST_KEY_NSCameraUsageDescription = "러닝 화면을 꾸밀 수 있도록 사진을 선택해보세요!\n사진을 선택해보세요!";
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "애플 워치를 이용하여 당신의 워크아웃 기록을 트래킹하여 운동에 저장하기 위하여 사용됩니다. ";
 				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "러닝을 하며 운동 데이터를 확인하는 데에 건강정보를 사용합니다. ";
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "당신의 러닝 데이터를 저장하기 위하여 사용됩니다. ";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "당신의 위치는 러닝을 기록하는데 사용됩니다. 운동 중에 백그라운드에서도 위치 서비스를 사용합니다.";
 				INFOPLIST_KEY_NSMotionUsageDescription = "";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "러닝 화면을 꾸밀 수 있도록 사진을 선택해보세요!";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Dark;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

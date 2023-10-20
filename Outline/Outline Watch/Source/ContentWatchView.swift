@@ -8,13 +8,15 @@
 import SwiftUI
 
 struct ContentWatchView: View {
+    
+    @State private var navigate = false
     @StateObject private var workoutManager = WatchWorkoutManager()
 
     var body: some View {
 //        WatchTabView()
-        CourseListWatchView()
+        CourseListWatchView(navigate: $navigate)
             .sheet(isPresented: $workoutManager.showingSummaryView) {
-                SummaryView()
+                SummaryView(navigate: $navigate)
             }
             .environmentObject(workoutManager)
             .onAppear {
