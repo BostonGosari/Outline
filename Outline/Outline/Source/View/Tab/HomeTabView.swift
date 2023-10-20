@@ -42,6 +42,7 @@ struct HomeTabView: View {
                         }
                     }
                     .onAppear {
+                        vm.locationManager.requestWhenInUseAuthorization()
                         vm.readAllCourses()
                     }
                     .refreshable {
