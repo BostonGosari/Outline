@@ -24,7 +24,9 @@ struct WatchTabView: View {
         }
         .navigationBarBackButtonHidden(true)
         .onChange(of: workoutManager.running) { _ in
+            workoutManager.running ?
             displayMetricsView()
+            : displayControlsView()
         }
         .tabViewStyle(PageTabViewStyle(indexDisplayMode: isLuminanceReduced ? .never : .automatic))
         .onChange(of: isLuminanceReduced) { _ in
@@ -32,6 +34,11 @@ struct WatchTabView: View {
         }
     }
     private func displayMetricsView() {
+        withAnimation {
+            selection = .metrics
+        }
+    }
+    private func displayControlsView() {
         withAnimation {
             selection = .controls
         }
