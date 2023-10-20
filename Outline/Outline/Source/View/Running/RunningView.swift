@@ -8,9 +8,11 @@ import SwiftUI
 
 struct RunningView: View {
     
+    @ObservedObject var vm: HomeTabViewModel
     @State var selection = 0
     
-    init() {
+    init(vm: HomeTabViewModel) {
+        self.vm = vm
         UIPageControl.appearance().currentPageIndicatorTintColor = UIColor.primary
         UIPageControl.appearance().pageIndicatorTintColor = UIColor.white
     }
@@ -19,7 +21,7 @@ struct RunningView: View {
         ZStack(alignment: .bottom) {
             Color("Gray900").ignoresSafeArea()
             TabView(selection: $selection) {
-                RunningMapView(selection: $selection)
+                RunningMapView(vm: vm, selection: $selection)
                     .tag(0)
                 WorkoutDataView()
                     .tag(1)
@@ -28,8 +30,4 @@ struct RunningView: View {
             .edgesIgnoringSafeArea(.all)
         }
     }
-}
-
-#Preview {
-    RunningView()
 }

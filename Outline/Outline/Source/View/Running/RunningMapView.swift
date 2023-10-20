@@ -11,19 +11,27 @@ struct RunningMapView: View {
     @StateObject private var viewModel = RunningMapViewModel()
     @StateObject var locationManager = LocationManager()
     
+    @ObservedObject var vm: HomeTabViewModel
+    
     @GestureState var isLongPressed = false
     
     @Binding var selection: Int
-
+    
     var body: some View {
         ZStack {
-            RunningMap(
-                locationManager: locationManager,
-                viewModel: viewModel,
-                coordinates: viewModel.coordinates
-            )
+            if let course = vm.startCourse {
+                RunningMap(
+                    locationManager: locationManager,
+                    viewModel: viewModel,
+                    coordinates: convertToCLLocationCoordinates(course.coursePaths)
+                )
                 .ignoresSafeArea()
                 .preferredColorScheme(.dark)
+            } else {
+                RunningMap(locationManager: locationManager, viewModel: viewModel, coordinates: viewModel.coordinates)
+                    .ignoresSafeArea()
+                    .preferredColorScheme(.dark)
+            }
             
             VStack(spacing: 0) {
                 /*running Guid View*/
@@ -52,7 +60,7 @@ extension RunningMapView {
             AnyView(
                 VStack {
                     RunningStateButton(
-                        imageName: "scope",
+                        imageName: "aim",
                         color: Color.whiteColor,
                         size: 18
                     ) {
@@ -123,8 +131,8 @@ extension RunningMapView {
                         viewModel.runningType = .start
                     }
                 }
-                .frame(maxWidth: .infinity, alignment: .center)
-                .padding(.horizontal, 64)
+                    .frame(maxWidth: .infinity, alignment: .center)
+                    .padding(.horizontal, 64)
             )
         case .stop:
             AnyView(
@@ -150,15 +158,29 @@ struct RunningStateButton: View {
         Button {
             self.action()
         }  label: {
-            Image(systemName: "\(imageName)")
-                .font(.system(size: size))
-                .foregroundStyle(Color.blackColor)
-                .padding(size)
-                .background(
-                    Circle()
-                        .fill(color)
-                        .stroke(.white, style: .init())
-                )
+            if imageName == "aim" {
+                Image("\(imageName)")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: size)
+                    .foregroundStyle(Color.blackColor)
+                    .padding(size)
+                    .background(
+                        Circle()
+                            .fill(color)
+                            .stroke(.white, style: .init())
+                    )
+            } else {
+                Image(systemName: imageName)
+                    .font(.system(size: size))
+                    .foregroundStyle(Color.blackColor)
+                    .padding(size)
+                    .background(
+                        Circle()
+                            .fill(color)
+                            .stroke(.white, style: .init())
+                    )
+            }
         }
     }
 }
