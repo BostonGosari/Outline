@@ -23,13 +23,13 @@ struct WatchTabView: View {
             MetricsView().tag(Tab.metrics)
         }
         .navigationBarBackButtonHidden(true)
-        .onChange(of: workoutManager.running) { _ in
+        .onChange(of: workoutManager.running) { _, _ in
             workoutManager.running ?
             displayMetricsView()
             : displayControlsView()
         }
         .tabViewStyle(PageTabViewStyle(indexDisplayMode: isLuminanceReduced ? .never : .automatic))
-        .onChange(of: isLuminanceReduced) { _ in
+        .onChange(of: isLuminanceReduced) { _, _ in
             displayMetricsView()
         }
     }
