@@ -9,6 +9,8 @@ import SwiftUI
 struct RunningView: View {
     
     @ObservedObject var vm: HomeTabViewModel
+    
+    @StateObject var runningViewModel = RunningViewModel()
     @State var selection = 0
     
     init(vm: HomeTabViewModel) {
@@ -21,13 +23,16 @@ struct RunningView: View {
         ZStack(alignment: .bottom) {
             Color("Gray900").ignoresSafeArea()
             TabView(selection: $selection) {
-                RunningMapView(vm: vm, selection: $selection)
+                RunningMapView(runningViewModel: runningViewModel, vm: vm, selection: $selection)
                     .tag(0)
-                WorkoutDataView()
+                WorkoutDataView(runningViewModel: runningViewModel)
                     .tag(1)
             }
             .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
             .edgesIgnoringSafeArea(.all)
+        }
+        .onAppear {
+            runningViewModel.toggleTracking()
         }
     }
 }

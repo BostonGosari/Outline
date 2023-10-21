@@ -11,6 +11,7 @@ struct RunningMapView: View {
     @StateObject private var viewModel = RunningMapViewModel()
     @StateObject var locationManager = LocationManager()
     
+    @ObservedObject var runningViewModel: RunningViewModel
     @ObservedObject var vm: HomeTabViewModel
     
     @GestureState var isLongPressed = false
@@ -27,10 +28,6 @@ struct RunningMapView: View {
                 )
                 .ignoresSafeArea()
                 .preferredColorScheme(.dark)
-            } else {
-                RunningMap(locationManager: locationManager, viewModel: viewModel, coordinates: viewModel.coordinates)
-                    .ignoresSafeArea()
-                    .preferredColorScheme(.dark)
             }
             
             VStack(spacing: 0) {
@@ -76,6 +73,7 @@ extension RunningMapView {
                             size: 24
                         ) {
                             viewModel.runningType = .pause
+                            runningViewModel.toggleTracking()
                         }
                         .padding(.trailing, 64)
                         
@@ -85,7 +83,11 @@ extension RunningMapView {
                             size: 19
                         ) {
                             withAnimation {
-                                selection = 1
+                                if selection == 0 {
+                                    selection = 1
+                                } else {
+                                    selection = 0
+                                }
                             }
                         }
                     }
@@ -111,7 +113,7 @@ extension RunningMapView {
                                     }
                                 }
                                 .onEnded { _ in
-                                    /* move To FinishView */
+                                    runningViewModel.toggleTracking()
                                 }
                         )
                         .highPriorityGesture(
@@ -129,6 +131,7 @@ extension RunningMapView {
                         size: 24
                     ) {
                         viewModel.runningType = .start
+                        runningViewModel.toggleTracking()
                     }
                 }
                     .frame(maxWidth: .infinity, alignment: .center)
