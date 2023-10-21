@@ -12,6 +12,7 @@ struct CardDetailView: View {
     
     @State var start = false
     @ObservedObject var vm: HomeTabViewModel
+    @Environment(\.dismiss) var dismiss
     
     @Binding var isShow: Bool
     var currentIndex: Int
@@ -121,6 +122,7 @@ struct CardDetailView: View {
             SlideToUnlock(isUnlocked: $vm.start)
                 .onChange(of: vm.start) { _, _ in
                     vm.startCourse = vm.recommendedCoures[currentIndex].course
+                    isShow = false
                 }
                 .opacity(appear[1] ? 1 : 0)
                 .offset(y: appear[1] ? 0 : fadeInOffset)

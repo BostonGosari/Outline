@@ -220,6 +220,7 @@ struct CourseDetailView: View {
 struct CourseBannerView: View {
     
     @ObservedObject var vm: HomeTabViewModel
+    @Environment(\.dismiss) var dismiss
     var course: CourseWithDistance
     
     var body: some View {
@@ -275,6 +276,7 @@ struct CourseBannerView: View {
             SlideToUnlock(isUnlocked: $vm.start)
                 .onChange(of: vm.start) { _, _ in
                     vm.startCourse = course.course
+                    dismiss()
                 }
                 .padding(-10)
         }
