@@ -4,27 +4,25 @@ struct WorkoutDataView: View {
     
     @ObservedObject var runningViewModel: RunningViewModel
     let weight: Double = 60
-
+    
     var body: some View {
         ZStack {
             Color("Gray900").ignoresSafeArea()
             VStack {
-                if let start = runningViewModel.start, let end = runningViewModel.end {
-                    strokeText(text: "\(runningViewModel.previousTime + end.timeIntervalSince(start))", width: 2, color: Color.primaryColor)
-                        .font(
-                            Font.custom("Pretendard-ExtraBold", size: 64)
-                        )
-                }
+                strokeText(text: "\(runningViewModel.totalTime + runningViewModel.time)", width: 2, color: Color.primaryColor)
+                    .font(
+                        Font.custom("Pretendard-ExtraBold", size: 64)
+                    )
                 Spacer()
                 LazyVGrid(columns: Array(repeating: GridItem(), count: 2), spacing: 36) {
-                    workoutDataItem(value: "\(runningViewModel.previousDistance + runningViewModel.distance)", label: "킬로미터")
-                    workoutDataItem(value: "\((runningViewModel.previousSteps + runningViewModel.steps) / (runningViewModel.previousDistance + runningViewModel.distance))", label: "평균 페이스")
+                    workoutDataItem(value: "\(runningViewModel.totalDistance + runningViewModel.distance)", label: "킬로미터")
+                    workoutDataItem(value: "\((runningViewModel.totalTime + runningViewModel.time) / (runningViewModel.totalDistance + runningViewModel.distance) * 1000)", label: "평균 페이스")
                     workoutDataItem(value: "\(runningViewModel.kilocalorie)", label: "칼로리")
                     workoutDataItem(value: "--", label: "BPM")
                 }
             }
             .onChange(of: runningViewModel.distance) { _, _ in
-                runningViewModel.kilocalorie = weight * (runningViewModel.previousDistance + runningViewModel.distance) / 1000 * 1.036
+                runningViewModel.kilocalorie = weight * (runningViewModel.totalDistance + runningViewModel.distance) / 1000 * 1.036
             }
             .frame(height: 300)
             .padding()
