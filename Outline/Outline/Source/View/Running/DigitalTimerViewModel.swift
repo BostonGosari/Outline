@@ -16,7 +16,7 @@ class DigitalTimerViewModel: ObservableObject {
     private var timer: AnyCancellable?
     
     func startTimer() {
-        timer = Timer.publish(every: 0.01, on: .main, in: .common)
+        timer = Timer.publish(every: 1, on: .current, in: .common)
             .autoconnect()
             .sink { _ in
                 self.counter += 1
@@ -33,12 +33,11 @@ extension DigitalTimerViewModel {
     
     /// 0.01 초 단위로 올라간 숫자를 00:00:00 타이머 형태로 변환해주는 함수입니다.
     /// - Parameter counter: Int 값을 넣어주세요
-    /// - Returns: 00:00:00 타이머 형태
+    /// - Returns: 00:00 타이머 형태
     func formattedTime(_ counter: Int) -> String {
-        let minutes = counter / 6000
-        let seconds = counter / 100 % 60
-        let milliseconds = counter % 100
+        let minutes = counter / 60
+        let seconds = counter % 60
         
-        return String(format: "%02d:%02d:%02d", minutes, seconds, milliseconds)
+        return String(format: "%02d:%02d", minutes, seconds)
     }
 }

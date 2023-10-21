@@ -71,6 +71,28 @@ class HealthKitManager {
         }
     }
     
+    func pauseWorkout() {
+        guard let builder = workoutBuilder else { return }
+        builder.addWorkoutEvents([HKWorkoutEvent(type: .pause, dateInterval: DateInterval(start: Date(), duration: 0), metadata: [:])]) { success, error in
+            if success {
+                print("workout paused")
+            } else if let error = error {
+                print("Error : \(error.localizedDescription)")
+            }
+        }
+    }
+    
+    func resumeWorkout() {
+        guard let builder = workoutBuilder else { return }
+        builder.addWorkoutEvents([HKWorkoutEvent(type: .resume, dateInterval: DateInterval(start: Date(), duration: 0), metadata: [:])]) { success, error in
+            if success {
+                print("workout resumed")
+            } else if let error = error {
+                print("Error : \(error.localizedDescription)")
+            }
+        }
+    }
+    
     func endWorkout(steps: Double, distance: Double, energy: Double) {
         workoutEndDate = Date()
         
@@ -96,7 +118,7 @@ class HealthKitManager {
         
         // builder에 samples 추가
         let samples = [activeEnergyBurned, distanceWalkingRunning, stepCount]
-        
+                
         builder.add(samples) { success, error in
             if success {
                 print("Sample added successfully")

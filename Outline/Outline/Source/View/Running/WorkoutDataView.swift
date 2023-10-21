@@ -3,7 +3,7 @@ import SwiftUI
 struct WorkoutDataView: View {
     
     @ObservedObject var runningViewModel: RunningViewModel
-    @StateObject var digitalTimerViewModel: DigitalTimerViewModel
+    @ObservedObject var digitalTimerViewModel: DigitalTimerViewModel
     let weight: Double = 60
     
     var body: some View {
