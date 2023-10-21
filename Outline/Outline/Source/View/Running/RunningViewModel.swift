@@ -11,6 +11,15 @@ import HealthKit
 
 class RunningViewModel: ObservableObject {
     
+    // 전송용 데이터
+    @Published var totalTime = 0.0
+    @Published var totalSteps = 0.0
+    @Published var totalDistance = 0.0
+    
+    @Published var previousTime = 0.0
+    @Published var previousSteps = 0.0
+    @Published var previousDistance = 0.0
+    
     @Published var steps = 0.0
     @Published var distance = 0.0
     @Published var pace = 0.0
@@ -43,9 +52,30 @@ class RunningViewModel: ObservableObject {
         stopPedometerUpdates()
     }
     
-    func stopPedometerUpdates() {
+    func pauseRunning() {
+        previousSteps = steps
+        previousDistance = distance
+        if let end = end, let start = start {
+            previousTime = end.timeIntervalSince(start)
+        }
+        steps = 0.0
+        distance = 0.0
         pedometer.stopUpdates()
-        healthKitManager.endWorkout(steps: self.steps, distance: self.distance, energy: self.kilocalorie)
+    }
+    
+    func resumeRunning() {
+        startPedometerDataUpdates()
+    }
+    
+    func stopPedometerUpdates() {
+        if let end = end, let start = start {
+            totalTime = previousTime + end.timeIntervalSince(start)
+        }
+        totalSteps = previousSteps + steps
+        totalDistance = previousDistance + distance
+        pedometer.stopUpdates()
+        healthKitManager.endWorkout(steps: self.totalSteps, distance: self.totalDistance, energy: self.kilocalorie)
+        resetStepsAndDistance()
     }
     
     func startPedometerUpdates() {
@@ -71,7 +101,7 @@ class RunningViewModel: ObservableObject {
             if let data = data {
                 DispatchQueue.main.async {
                     self.steps = data.numberOfSteps.doubleValue
-                    self.distance = data.distance?.doubleValue ?? 0
+                    self.distance = data.distance?.doubleValue ?? 0.0
                     self.pace = data.currentPace?.doubleValue ?? 0.0
                     self.cadence = data.currentCadence?.doubleValue ?? 0.0
                     self.avgPace = data.averageActivePace?.doubleValue ?? 0.0
@@ -81,5 +111,13 @@ class RunningViewModel: ObservableObject {
                 }
             }
         }
+    }
+    
+    private func resetStepsAndDistance() {
+        steps = 0.0
+        distance = 0.0
+        previousTime = 0.0
+        previousSteps = 0.0
+        previousDistance = 0.0
     }
 }
