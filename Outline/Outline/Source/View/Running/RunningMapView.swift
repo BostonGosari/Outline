@@ -19,6 +19,8 @@ struct RunningMapView: View {
     
     @Binding var selection: Int
     
+    @State var navigateToFinishRunningView = false
+    
     var body: some View {
         ZStack {
             if let course = vm.startCourse {
@@ -109,13 +111,15 @@ extension RunningMapView {
                         .animation(.easeInOut(duration: 1), value: isLongPressed)
                         .simultaneousGesture(
                             LongPressGesture(minimumDuration: 2.0)
-                                .updating($isLongPressed) { _, _, _ in
+                                .updating($isLongPressed) { currentState, gestureState, _ in
+                                    gestureState = currentState
                                 }
                                 .onEnded { _ in
                                     print("Long press ended")
                                     HapticManager.impact(style: .medium)
                                     runningViewModel.stopRunning()
                                     digitalTimerViewModel.counter = 0
+                                    navigateToFinishRunningView = true
                                 }
                         )
                         .highPriorityGesture(
@@ -125,6 +129,10 @@ extension RunningMapView {
                                     viewModel.isShowPopup = true
                                 }
                         )
+                        .navigationDestination(isPresented: $navigateToFinishRunningView) {
+                            FinishRunningView(vm: vm)
+                                .navigationBarBackButtonHidden()
+                        }
                     
                     Spacer()
                     

@@ -65,6 +65,10 @@ class HomeTabViewModel: ObservableObject {
             // 가장 가까운 세 개의 코스와 그 외의 코스로 분리
             self.recommendedCoures = Array(courseDistances.prefix(3))
             self.withoutRecommendedCourses = Array(courseDistances.dropFirst(3))
+        } else {
+            // 위치 정보가 없을 경우 앞의 세 코스를 추천 코스로 표시하고 나머지는 추천되지 않은 코스로 표시
+            self.recommendedCoures = self.courses.prefix(3).map { CourseWithDistance(course: $0, distance: 0) }
+            self.withoutRecommendedCourses = Array(self.courses.dropFirst(3)).map { CourseWithDistance(course: $0, distance: 0) }
         }
     }
     

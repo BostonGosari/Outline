@@ -21,20 +21,24 @@ struct RunningView: View {
     }
     
     var body: some View {
-        ZStack(alignment: .bottom) {
-            Color("Gray900").ignoresSafeArea()
-            TabView(selection: $selection) {
-                RunningMapView(runningViewModel: runningViewModel, digitalTimerViewModel: digitalTimerViewModel, vm: vm, selection: $selection)
-                    .tag(0)
-                WorkoutDataView(runningViewModel: runningViewModel, digitalTimerViewModel: digitalTimerViewModel)
-                    .tag(1)
+        NavigationStack {
+            ZStack(alignment: .bottom) {
+                Color("Gray900").ignoresSafeArea()
+                TabView(selection: $selection) {
+                    RunningMapView(runningViewModel: runningViewModel, digitalTimerViewModel: digitalTimerViewModel, vm: vm, selection: $selection)
+                        .tag(0)
+                    WorkoutDataView(runningViewModel: runningViewModel, digitalTimerViewModel: digitalTimerViewModel)
+                        .tag(1)
+                }
+                .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
+                .edgesIgnoringSafeArea(.all)
+                .onAppear {
+                    if vm.running == true {
+                        runningViewModel.startRunning()
+                        digitalTimerViewModel.startTimer()
+                    }
+                }
             }
-            .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
-            .edgesIgnoringSafeArea(.all)
-        }
-        .onAppear {
-            runningViewModel.startRunning()
-            digitalTimerViewModel.startTimer()
         }
     }
 }

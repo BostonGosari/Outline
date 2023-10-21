@@ -18,39 +18,37 @@ struct HomeTabView: View {
     
     var body: some View {
         ZStack {
-            if !vm.start && !vm.running {
-                NavigationStack {
-                    ZStack {
-                        Color("Gray900").ignoresSafeArea()
-                        ZStack(alignment: .bottom) {
-                            Group {
-                                switch selectedTab {
-                                case .freeRunning:
-                                    FreeRunningHomeView(vm: vm)
-                                case .GPSArtRunning:
-                                    GPSArtHomeView(vm: vm, isShow: $isShow, namespace: namespace)
-                                case .myRecord:
-                                    Text("나의기록 뷰")
-                                }
+            NavigationStack {
+                ZStack {
+                    Color("Gray900").ignoresSafeArea()
+                    ZStack(alignment: .bottom) {
+                        Group {
+                            switch selectedTab {
+                            case .freeRunning:
+                                FreeRunningHomeView(vm: vm)
+                            case .GPSArtRunning:
+                                GPSArtHomeView(vm: vm, isShow: $isShow, namespace: namespace)
+                            case .myRecord:
+                                Text("나의기록 뷰")
                             }
-                            .frame(maxWidth: .infinity, maxHeight: .infinity)
-                            
-                            TabBar(selectedTab: $selectedTab)
-                                .frame(maxHeight: .infinity, alignment: .bottom)
-                                .opacity(isShow ? 0 : 1)
-                                .ignoresSafeArea()
                         }
-                    }
-                    .onAppear {
-                        vm.locationManager.requestWhenInUseAuthorization()
-                        vm.readAllCourses()
-                    }
-                    .refreshable {
-                        vm.fetchRecommendedCourses()
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        
+                        TabBar(selectedTab: $selectedTab)
+                            .frame(maxHeight: .infinity, alignment: .bottom)
+                            .opacity(isShow ? 0 : 1)
+                            .ignoresSafeArea()
                     }
                 }
+                .onAppear {
+                    vm.locationManager.requestWhenInUseAuthorization()
+                    vm.readAllCourses()
+                }
+                .refreshable {
+                    vm.fetchRecommendedCourses()
+                }
             }
-
+            
             if vm.start {
                 CountDown(running: $vm.running, start: $vm.start)
             }

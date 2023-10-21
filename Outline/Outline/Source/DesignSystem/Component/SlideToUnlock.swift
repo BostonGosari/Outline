@@ -15,8 +15,7 @@ struct SlideToUnlock: View {
     private let minWidth: CGFloat = 70
     @State private var width: CGFloat = 70
     
-    @State private var hueRotation = false
-    @State private var isButtonPressed = false
+    @State private var isReached = false
     
     var body: some View {
         ZStack(alignment: .leading) {
@@ -43,12 +42,6 @@ struct SlideToUnlock: View {
             }
             .simultaneousGesture(drag)
             .animation(.spring(), value: width)
-            .hueRotation(.degrees(hueRotation ? 10 : -10))
-            .onAppear {
-                withAnimation(.linear(duration: 3).repeatForever(autoreverses: true)) {
-                    hueRotation.toggle()
-                }
-            }
     }
     
     var backGround: some View {
@@ -73,9 +66,9 @@ struct SlideToUnlock: View {
         ZStack {
             Circle()
                 .foregroundColor(.white)
-            if isUnlocked {
+            if isReached {
                 ProgressView()
-                    .tint(.primaryColor)
+                    .tint(.secondaryColor)
                     .controlSize(.large)
             } else {
                 Image(systemName: "paintbrush.fill")
@@ -101,7 +94,12 @@ struct SlideToUnlock: View {
                     width = minWidth
                 } else {
                     withAnimation(.spring().delay(0.5)) {
-                        isUnlocked = true
+                        isReached = true
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                            isUnlocked = true
+                            width = minWidth
+                            isReached = false
+                        }
                     }
                 }
             }
