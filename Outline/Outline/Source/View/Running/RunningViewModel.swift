@@ -58,10 +58,12 @@ class RunningViewModel: ObservableObject {
         steps = 0.0
         distance = 0.0
         pedometer.stopUpdates()
+        healthKitManager.pauseWorkout()
     }
     
     func resumeRunning() {
         startPedometerDataUpdates()
+        healthKitManager.resumeWorkout()
     }
     
     func stopPedometerUpdates() {

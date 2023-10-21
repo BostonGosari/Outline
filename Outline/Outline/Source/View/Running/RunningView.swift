@@ -38,3 +38,7 @@ struct RunningView: View {
         }
     }
 }
+
+#Preview {
+    RunningView(vm: HomeTabViewModel())
+}

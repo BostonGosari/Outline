@@ -9,7 +9,7 @@ import SwiftUI
 
 struct DigitalTimerView: View {
     
-    @StateObject var digitalTimerViewModel: DigitalTimerViewModel
+    @ObservedObject var digitalTimerViewModel: DigitalTimerViewModel
 
     var body: some View {
         let timer = digitalTimerViewModel.counter
