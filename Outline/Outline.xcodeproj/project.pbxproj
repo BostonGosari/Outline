@@ -85,6 +85,7 @@
 		BBD6956C2ADFBFA1007AA6D9 /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD6956A2ADFBB9E007AA6D9 /* ComplicationController.swift */; };
 		F01FDB992ADABB6100BDA633 /* TabModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01FDB982ADABB6100BDA633 /* TabModel.swift */; };
 		F01FDB9C2ADABC4600BDA633 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01FDB9B2ADABC4600BDA633 /* TabBar.swift */; };
+		F03524102AE35AF800CCD8A6 /* RunningViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F035240F2AE35AF800CCD8A6 /* RunningViewModel.swift */; };
 		F0492E1D2ADD2AE900F6EADD /* Header.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0492E1C2ADD2AE900F6EADD /* Header.swift */; };
 		F0492E1E2ADD515100F6EADD /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05C97162ADA879100D5D959 /* LocationManager.swift */; };
 		F0492E212ADD52E900F6EADD /* WatchTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0492E202ADD52E900F6EADD /* WatchTabView.swift */; };
@@ -242,8 +243,9 @@
 		F01FDB982ADABB6100BDA633 /* TabModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabModel.swift; sourceTree = "<group>"; };
 		F01FDB9B2ADABC4600BDA633 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 		F01FDB9D2ADABD3D00BDA633 /* HomeTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabView.swift; sourceTree = "<group>"; };
-		F035240B2AE2DD1D00CCD8A6 /* Outline.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = Outline.app; path = "/Users/hyunjunkim/Desktop/Project/Team/Outline/Outline/build/Debug-iphoneos/Outline.app"; sourceTree = "<absolute>"; };
-		F035240C2AE2DD1D00CCD8A6 /* Outline Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = "Outline Watch App.app"; path = "/Users/hyunjunkim/Desktop/Project/Team/Outline/Outline/build/Debug-watchos/Outline Watch App.app"; sourceTree = "<absolute>"; };
+		F035240D2AE2E19D00CCD8A6 /* Outline.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Outline.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F035240E2AE2E19D00CCD8A6 /* Outline Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Outline Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F035240F2AE35AF800CCD8A6 /* RunningViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningViewModel.swift; sourceTree = "<group>"; };
 		F0492E1C2ADD2AE900F6EADD /* Header.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Header.swift; sourceTree = "<group>"; };
 		F0492E202ADD52E900F6EADD /* WatchTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchTabView.swift; sourceTree = "<group>"; };
 		F0492E222ADD545200F6EADD /* CourseListWatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseListWatchView.swift; sourceTree = "<group>"; };
@@ -433,6 +435,7 @@
 				0E29F6562ADF6CA000F5EF5C /* RunningMap.swift */,
 				0E29F6582ADF6CA000F5EF5C /* RunningMapView.swift */,
 				0E29F6592ADF6CA000F5EF5C /* WorkoutDataView.swift */,
+				F035240F2AE35AF800CCD8A6 /* RunningViewModel.swift */,
 			);
 			path = Running;
 			sourceTree = "<group>";
@@ -523,6 +526,8 @@
 				F0AC8A9B2AD94C1F0061612C /* Outline */,
 				F0AC8AAD2AD94C200061612C /* Outline Watch */,
 				F0AC8AC42AD9514C0061612C /* .swiftlint.yml */,
+				F035240D2AE2E19D00CCD8A6 /* Outline.app */,
+				F035240E2AE2E19D00CCD8A6 /* Outline Watch App.app */,
 			);
 			sourceTree = "<group>";
 		};
@@ -815,7 +820,7 @@
 				F0781D5B2AE14C590084ADD7 /* FirebaseFirestoreSwift */,
 			);
 			productName = Outline;
-			productReference = F035240B2AE2DD1D00CCD8A6 /* Outline.app */;
+			productReference = F035240D2AE2E19D00CCD8A6 /* Outline.app */;
 			productType = "com.apple.product-type.application";
 		};
 		F0AC8AA82AD94C200061612C /* Outline Watch App */ = {
@@ -832,7 +837,7 @@
 			);
 			name = "Outline Watch App";
 			productName = "Outline Watch App";
-			productReference = F035240C2AE2DD1D00CCD8A6 /* Outline Watch App.app */;
+			productReference = F035240E2AE2E19D00CCD8A6 /* Outline Watch App.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -961,6 +966,7 @@
 				299803532ADF1DC200A9A134 /* CoreMotionViewModel.swift in Sources */,
 				F06B93622ADB847500387DEB /* ContentView.swift in Sources */,
 				F09697472ADBCD6000C38AF4 /* Shape.swift in Sources */,
+				F03524102AE35AF800CCD8A6 /* RunningViewModel.swift in Sources */,
 				0E29F6552ADF6C7D00F5EF5C /* KMLParserManager.swift in Sources */,
 				F0AC8B382AD96AE10061612C /* ViewExtension.swift in Sources */,
 				F09697432ADBC1D200C38AF4 /* Carousel.swift in Sources */,
