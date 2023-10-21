@@ -37,6 +37,7 @@ class HealthKitManager {
             HKQuantityType(.distanceWalkingRunning),
             HKQuantityType(.stepCount),
             HKQuantityType(.runningSpeed),
+            HKQuantityType(.appleExerciseTime),
             HKQuantityType.workoutType()
         ]
         
@@ -81,21 +82,18 @@ class HealthKitManager {
         
         guard let activeEnergyBurnedquantityType = HKQuantityType.quantityType(forIdentifier: .activeEnergyBurned),
               let distanceWalkingRunningQuantityType = HKQuantityType.quantityType(forIdentifier: .distanceWalkingRunning),
-              let stepcountQuantityType = HKQuantityType.quantityType(forIdentifier: .stepCount),
-              let appleExerciseTimeQuantityType = HKQuantityType.quantityType(forIdentifier: .appleExerciseTime)
+              let stepcountQuantityType = HKQuantityType.quantityType(forIdentifier: .stepCount)
         else { return }
         
         // Quantity 생성
         let activeEnergyBurnedQuantity = HKQuantity(unit: HKUnit.kilocalorie(), doubleValue: energy)
         let distanceWalkingRunningQuantity = HKQuantity(unit: HKUnit.meter(), doubleValue: distance)
         let stepcountQuantity = HKQuantity(unit: .count(), doubleValue: steps)
-        let appleExerciseTimeQuantity = HKQuantity(unit: .second(), doubleValue: 10.0)
         
         // Samples 생성
         let activeEnergyBurned = HKCumulativeQuantitySample(type: activeEnergyBurnedquantityType, quantity: activeEnergyBurnedQuantity, start: startDate, end: endDate)
         let distanceWalkingRunning = HKCumulativeQuantitySample(type: distanceWalkingRunningQuantityType, quantity: distanceWalkingRunningQuantity, start: startDate, end: endDate)
         let stepCount = HKCumulativeQuantitySample(type: stepcountQuantityType, quantity: stepcountQuantity, start: startDate, end: endDate)
-        let appleExerciseTime = HKCumulativeQuantitySample(type: appleExerciseTimeQuantityType, quantity: appleExerciseTimeQuantity, start: startDate, end: endDate)
         
         // builder에 samples 추가
         let samples = [activeEnergyBurned, distanceWalkingRunning, stepCount]

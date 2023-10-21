@@ -73,6 +73,7 @@ extension RunningMapView {
                             size: 24
                         ) {
                             viewModel.runningType = .pause
+                            runningViewModel.pauseRunning()
                         }
                         .padding(.trailing, 64)
                         
@@ -113,6 +114,7 @@ extension RunningMapView {
                                 }
                                 .onEnded { _ in
                                     print("Long press ended")
+                                    runningViewModel.stopRunnning()
                                 }
                         )
                         .highPriorityGesture(
@@ -131,6 +133,7 @@ extension RunningMapView {
                         size: 24
                     ) {
                         viewModel.runningType = .start
+                        runningViewModel.resumeRunning()
                     }
                 }
                     .frame(maxWidth: .infinity, alignment: .center)
