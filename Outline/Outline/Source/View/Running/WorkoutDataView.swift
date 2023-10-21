@@ -3,16 +3,14 @@ import SwiftUI
 struct WorkoutDataView: View {
     
     @ObservedObject var runningViewModel: RunningViewModel
+    @StateObject var digitalTimerViewModel: DigitalTimerViewModel
     let weight: Double = 60
     
     var body: some View {
         ZStack {
             Color("Gray900").ignoresSafeArea()
             VStack {
-                strokeText(text: "\(runningViewModel.totalTime + runningViewModel.time)", width: 2, color: Color.primaryColor)
-                    .font(
-                        Font.custom("Pretendard-ExtraBold", size: 64)
-                    )
+                DigitalTimerView(digitalTimerViewModel: digitalTimerViewModel)
                 Spacer()
                 LazyVGrid(columns: Array(repeating: GridItem(), count: 2), spacing: 36) {
                     workoutDataItem(value: "\(runningViewModel.totalDistance + runningViewModel.distance)", label: "킬로미터")
@@ -26,22 +24,6 @@ struct WorkoutDataView: View {
             }
             .frame(height: 300)
             .padding()
-        }
-    }
-}
-
-extension WorkoutDataView {
-    private func strokeText(text: String, width: CGFloat, color: Color) -> some View {
-        ZStack {
-            ZStack {
-                Text(text).offset(x: width, y: width)
-                Text(text).offset(x: -width, y: -width)
-                Text(text).offset(x: -width, y: width)
-                Text(text).offset(x: width, y: -width)
-            }
-            .foregroundColor(color)
-            Text(text)
-                .foregroundColor(Color("Gray900"))
         }
     }
 }
@@ -63,6 +45,6 @@ extension WorkoutDataView {
 
 struct WorkoutDataView_Previews: PreviewProvider {
     static var previews: some View {
-        WorkoutDataView(runningViewModel: RunningViewModel())
+        WorkoutDataView(runningViewModel: RunningViewModel(), digitalTimerViewModel: DigitalTimerViewModel())
     }
 }

@@ -12,6 +12,7 @@ struct RunningMapView: View {
     @StateObject var locationManager = LocationManager()
     
     @ObservedObject var runningViewModel: RunningViewModel
+    @StateObject var digitalTimerViewModel: DigitalTimerViewModel
     @ObservedObject var vm: HomeTabViewModel
     
     @GestureState var isLongPressed = false
@@ -74,6 +75,7 @@ extension RunningMapView {
                         ) {
                             viewModel.runningType = .pause
                             runningViewModel.pauseRunning()
+                            digitalTimerViewModel.stopTimer()
                         }
                         .padding(.trailing, 64)
                         
@@ -115,6 +117,7 @@ extension RunningMapView {
                                 .onEnded { _ in
                                     print("Long press ended")
                                     runningViewModel.stopRunnning()
+                                    digitalTimerViewModel.counter = 0
                                 }
                         )
                         .highPriorityGesture(
@@ -134,6 +137,7 @@ extension RunningMapView {
                     ) {
                         viewModel.runningType = .start
                         runningViewModel.resumeRunning()
+                        digitalTimerViewModel.startTimer()
                     }
                 }
                     .frame(maxWidth: .infinity, alignment: .center)
