@@ -73,7 +73,6 @@ extension RunningMapView {
                             size: 24
                         ) {
                             viewModel.runningType = .pause
-                            runningViewModel.toggleTracking()
                         }
                         .padding(.trailing, 64)
                         
@@ -113,12 +112,13 @@ extension RunningMapView {
                                     }
                                 }
                                 .onEnded { _ in
-                                    runningViewModel.toggleTracking()
+                                    print("Long press ended")
                                 }
                         )
                         .highPriorityGesture(
                             TapGesture()
                                 .onEnded { _ in
+                                    print("Tap gesture")
                                     viewModel.isShowPopup = true
                                 }
                         )
@@ -131,7 +131,6 @@ extension RunningMapView {
                         size: 24
                     ) {
                         viewModel.runningType = .start
-                        runningViewModel.toggleTracking()
                     }
                 }
                     .frame(maxWidth: .infinity, alignment: .center)
