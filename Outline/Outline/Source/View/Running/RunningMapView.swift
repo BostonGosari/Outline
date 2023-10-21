@@ -12,7 +12,7 @@ struct RunningMapView: View {
     @StateObject var locationManager = LocationManager()
     
     @ObservedObject var runningViewModel: RunningViewModel
-    @StateObject var digitalTimerViewModel: DigitalTimerViewModel
+    @ObservedObject var digitalTimerViewModel: DigitalTimerViewModel
     @ObservedObject var vm: HomeTabViewModel
     
     @GestureState var isLongPressed = false
