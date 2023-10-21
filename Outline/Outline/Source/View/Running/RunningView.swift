@@ -32,7 +32,7 @@ struct RunningView: View {
             .edgesIgnoringSafeArea(.all)
         }
         .onAppear {
-            runningViewModel.toggleTracking()
+            runningViewModel.startRunning()
         }
     }
 }

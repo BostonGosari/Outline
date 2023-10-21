@@ -31,6 +31,7 @@
 		0EE92E7D2AE02DDC003192FF /* FreeRunningHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE92E7C2AE02DDC003192FF /* FreeRunningHomeView.swift */; };
 		0EE92E7F2AE02DF2003192FF /* FreeRunningMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE92E7E2AE02DF2003192FF /* FreeRunningMap.swift */; };
 		295324852AE038EE00085120 /* UserInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0AC8B062AD965390061612C /* UserInfoModel.swift */; };
+		2975F0962AE3E1790046C00B /* CornerRectangleModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2975F0952AE3E1790046C00B /* CornerRectangleModifier.swift */; };
 		299803532ADF1DC200A9A134 /* CoreMotionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299803522ADF1DC200A9A134 /* CoreMotionViewModel.swift */; };
 		299803552ADF5F1000A9A134 /* HealthKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299803542ADF5F1000A9A134 /* HealthKitManager.swift */; };
 		299803572AE00C9B00A9A134 /* HapticManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299803562AE00C9B00A9A134 /* HapticManager.swift */; };
@@ -190,6 +191,7 @@
 		0EE92E6D2AE00AE5003192FF /* CompleteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteButton.swift; sourceTree = "<group>"; };
 		0EE92E7C2AE02DDC003192FF /* FreeRunningHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeRunningHomeView.swift; sourceTree = "<group>"; };
 		0EE92E7E2AE02DF2003192FF /* FreeRunningMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeRunningMap.swift; sourceTree = "<group>"; };
+		2975F0952AE3E1790046C00B /* CornerRectangleModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CornerRectangleModifier.swift; sourceTree = "<group>"; };
 		299803522ADF1DC200A9A134 /* CoreMotionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreMotionViewModel.swift; sourceTree = "<group>"; };
 		299803542ADF5F1000A9A134 /* HealthKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitManager.swift; sourceTree = "<group>"; };
 		299803562AE00C9B00A9A134 /* HapticManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticManager.swift; sourceTree = "<group>"; };
@@ -243,8 +245,8 @@
 		F01FDB982ADABB6100BDA633 /* TabModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabModel.swift; sourceTree = "<group>"; };
 		F01FDB9B2ADABC4600BDA633 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 		F01FDB9D2ADABD3D00BDA633 /* HomeTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabView.swift; sourceTree = "<group>"; };
-		F035240D2AE2E19D00CCD8A6 /* Outline.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Outline.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		F035240E2AE2E19D00CCD8A6 /* Outline Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Outline Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F035240D2AE2E19D00CCD8A6 /* Outline.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = Outline.app; path = "/Users/hyunjun/Desktop/Outline/Outline/build/Debug-iphoneos/Outline.app"; sourceTree = "<absolute>"; };
+		F035240E2AE2E19D00CCD8A6 /* Outline Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = "Outline Watch App.app"; path = "/Users/hyunjun/Desktop/Outline/Outline/build/Debug-watchos/Outline Watch App.app"; sourceTree = "<absolute>"; };
 		F035240F2AE35AF800CCD8A6 /* RunningViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningViewModel.swift; sourceTree = "<group>"; };
 		F0492E1C2ADD2AE900F6EADD /* Header.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Header.swift; sourceTree = "<group>"; };
 		F0492E202ADD52E900F6EADD /* WatchTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchTabView.swift; sourceTree = "<group>"; };
@@ -526,8 +528,6 @@
 				F0AC8A9B2AD94C1F0061612C /* Outline */,
 				F0AC8AAD2AD94C200061612C /* Outline Watch */,
 				F0AC8AC42AD9514C0061612C /* .swiftlint.yml */,
-				F035240D2AE2E19D00CCD8A6 /* Outline.app */,
-				F035240E2AE2E19D00CCD8A6 /* Outline Watch App.app */,
 			);
 			sourceTree = "<group>";
 		};
@@ -706,6 +706,7 @@
 		F0AC8B0B2AD965650061612C /* Modifier */ = {
 			isa = PBXGroup;
 			children = (
+				2975F0952AE3E1790046C00B /* CornerRectangleModifier.swift */,
 				F0AC8B102AD965A70061612C /* Modifier.swift */,
 			);
 			path = Modifier;
@@ -962,6 +963,7 @@
 				BB5239582ADC396300646494 /* BackgroundBlur.swift in Sources */,
 				BB5239372ADBD99F00646494 /* GPSArtHomeView.swift in Sources */,
 				F06B93632ADB847900387DEB /* Component.swift in Sources */,
+				2975F0962AE3E1790046C00B /* CornerRectangleModifier.swift in Sources */,
 				F06298A92AE18A50007AB2D3 /* FunctionManager.swift in Sources */,
 				299803532ADF1DC200A9A134 /* CoreMotionViewModel.swift in Sources */,
 				F06B93622ADB847500387DEB /* ContentView.swift in Sources */,

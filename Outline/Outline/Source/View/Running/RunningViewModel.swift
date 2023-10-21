@@ -11,7 +11,6 @@ import HealthKit
 
 class RunningViewModel: ObservableObject {
     
-    @Published var isTracking: Bool = false
     @Published var steps = 0.0
     @Published var distance = 0.0
     @Published var pace = 0.0
@@ -36,18 +35,16 @@ class RunningViewModel: ObservableObject {
         self.healthKitManager = HealthKitManager()
     }
     
-    func toggleTracking() {
-        if isTracking {
-            stopPedometerUpdates()
-        } else {
-            startPedometerUpdates()
-            isTracking = true
-        }
+    func startRunning() {
+        startPedometerUpdates()
+    }
+    
+    func stopRunnning() {
+        stopPedometerUpdates()
     }
     
     func stopPedometerUpdates() {
         pedometer.stopUpdates()
-        isTracking = false
         healthKitManager.endWorkout(steps: self.steps, distance: self.distance, energy: self.kilocalorie)
     }
     
