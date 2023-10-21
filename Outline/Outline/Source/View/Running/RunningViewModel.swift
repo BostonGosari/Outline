@@ -7,45 +7,47 @@
 
 import SwiftUI
 import CoreMotion
-import HealthKit
 
 class RunningViewModel: ObservableObject {
     
-    // 전송용 데이터
+    // MARK: - Published Properties
+    
     @Published var totalTime = 0.0
+    
+    // 전송용 데이터
     @Published var totalSteps = 0.0
     @Published var totalDistance = 0.0
+    @Published var kilocalorie = 0.0
     
+    // pedometer 측정값
     @Published var steps = 0.0
     @Published var distance = 0.0
     @Published var pace = 0.0
     @Published var avgPace = 0.0
     @Published var cadence = 0.0
     @Published var time = 0.0
-    
-    // 시작, 종료 추적
     @Published var start: Date?
     @Published var end: Date?
-    @Published var isPaused: Bool = false
+        
+    // MARK: - Private Properties
     
-    // 계산한 키로칼로리 -> 건강앱 데이터 전송용
-    @Published var kilocalorie = 0.0
+    private let pedometer: CMPedometer
+    private let healthKitManager: HealthKitManager
     
-    private var pedometer: CMPedometer
-    private var motionManager: CMMotionManager
-    private var healthKitManager: HealthKitManager
+    // MARK: - Initialization
     
     init() {
         self.pedometer = CMPedometer()
-        self.motionManager = CMMotionManager()
         self.healthKitManager = HealthKitManager()
     }
+    
+    // MARK: - Public Methods
     
     func startRunning() {
         startPedometerUpdates()
     }
     
-    func stopRunnning() {
+    func stopRunning() {
         stopPedometerUpdates()
     }
     
@@ -54,7 +56,6 @@ class RunningViewModel: ObservableObject {
         totalDistance += distance
         totalTime += time
         time = 0.0
-        print(totalTime)
         steps = 0.0
         distance = 0.0
         pedometer.stopUpdates()
@@ -66,23 +67,15 @@ class RunningViewModel: ObservableObject {
         healthKitManager.resumeWorkout()
     }
     
-    func stopPedometerUpdates() {
-        totalTime += time
-        print(totalTime)
-        totalSteps += steps
-        totalDistance += distance
-        pedometer.stopUpdates()
-        healthKitManager.endWorkout(steps: self.totalSteps, distance: self.totalDistance, energy: self.kilocalorie)
-        reset()
-    }
+    // MARK: - Private Methods
     
-    func startPedometerUpdates() {
+    private func startPedometerUpdates() {
         healthKitManager.requestAuthorization { [weak self] (authorized) in
             guard let self = self else { return }
             
             if authorized {
                 self.startPedometerDataUpdates()
-                healthKitManager.startWorkout()
+                self.healthKitManager.startWorkout()
             } else {
                 print("HealthKit authorization was denied.")
             }
@@ -95,21 +88,34 @@ class RunningViewModel: ObservableObject {
             return
         }
         
-        self.pedometer.startUpdates(from: Date()) { (data, _) in
-            if let data = data {
-                DispatchQueue.main.async {
-                    self.steps = data.numberOfSteps.doubleValue
-                    self.distance = data.distance?.doubleValue ?? 0.0
-                    self.pace = data.currentPace?.doubleValue ?? 0.0
-                    self.cadence = data.currentCadence?.doubleValue ?? 0.0
-                    self.avgPace = data.averageActivePace?.doubleValue ?? 0.0
-                    
-                    self.start = data.startDate
-                    self.end = data.endDate
-                    self.time = data.endDate.timeIntervalSince(data.startDate)
-                }
+        pedometer.startUpdates(from: Date()) { [weak self] (data, _) in
+            guard let self = self, let data = data else { return }
+            
+            DispatchQueue.main.async {
+                self.updatePedometerData(data)
             }
         }
+    }
+    
+    private func updatePedometerData(_ data: CMPedometerData) {
+        steps = data.numberOfSteps.doubleValue
+        distance = data.distance?.doubleValue ?? 0.0
+        pace = data.currentPace?.doubleValue ?? 0.0
+        cadence = data.currentCadence?.doubleValue ?? 0.0
+        avgPace = data.averageActivePace?.doubleValue ?? 0.0
+        
+        start = data.startDate
+        end = data.endDate
+        time = data.endDate.timeIntervalSince(data.startDate)
+    }
+    
+    private func stopPedometerUpdates() {
+        totalTime += time
+        totalSteps += steps
+        totalDistance += distance
+        pedometer.stopUpdates()
+        healthKitManager.endWorkout(steps: totalSteps, distance: totalDistance, energy: kilocalorie)
+        reset()
     }
     
     private func reset() {
