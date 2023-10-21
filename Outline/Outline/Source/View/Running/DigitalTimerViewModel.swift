@@ -24,7 +24,6 @@ class DigitalTimerViewModel: ObservableObject {
     }
     
     func stopTimer() {
-        /// 옵셔널 체이닝, nil 이 아닌 경우에만 호출
         timer?.cancel()
     }
 }

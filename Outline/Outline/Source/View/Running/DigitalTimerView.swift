@@ -15,9 +15,7 @@ struct DigitalTimerView: View {
         let timer = digitalTimerViewModel.counter
         
         Text(digitalTimerViewModel.formattedTime(timer))
-            .font(
-                Font.custom("Pretendard-ExtraBold", size: 64)
-            )
+            .font(Font.custom("Pretendard-ExtraBold", size: 70))
             .foregroundColor(.primaryColor)
             .monospacedDigit()
             .minimumScaleFactor(0.5)
