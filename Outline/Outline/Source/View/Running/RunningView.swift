@@ -11,6 +11,7 @@ struct RunningView: View {
     @ObservedObject var vm: HomeTabViewModel
     
     @StateObject var runningViewModel = RunningViewModel()
+    @StateObject var digitalTimerViewModel = DigitalTimerViewModel()
     @State var selection = 0
     
     init(vm: HomeTabViewModel) {
@@ -23,9 +24,9 @@ struct RunningView: View {
         ZStack(alignment: .bottom) {
             Color("Gray900").ignoresSafeArea()
             TabView(selection: $selection) {
-                RunningMapView(runningViewModel: runningViewModel, vm: vm, selection: $selection)
+                RunningMapView(runningViewModel: runningViewModel, digitalTimerViewModel: digitalTimerViewModel, vm: vm, selection: $selection)
                     .tag(0)
-                WorkoutDataView(runningViewModel: runningViewModel)
+                WorkoutDataView(runningViewModel: runningViewModel, digitalTimerViewModel: digitalTimerViewModel)
                     .tag(1)
             }
             .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
@@ -33,6 +34,7 @@ struct RunningView: View {
         }
         .onAppear {
             runningViewModel.startRunning()
+            digitalTimerViewModel.startTimer()
         }
     }
 }
