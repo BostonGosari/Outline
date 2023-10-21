@@ -15,6 +15,7 @@ struct CountDown: View {
     
     var body: some View {
         ZStack {
+            Color.gray900.ignoresSafeArea()
             Group {
                 switch count {
                 case 3:

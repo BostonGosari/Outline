@@ -9,8 +9,10 @@ import SwiftUI
 
 struct FinishRunningView: View {
     @StateObject var viewModel = FinishRunningViewModel()
-    private var gradientColors: [Color] = [.blackColor, .blackColor, .blackColor, .blackColor, .black50Color, .blackColor.opacity(0)]
+    var gradientColors: [Color] = [.blackColor, .blackColor, .blackColor, .blackColor, .black50Color, .blackColor.opacity(0)]
     
+    @ObservedObject var vm: HomeTabViewModel
+
     var body: some View {
         NavigationStack {
             ZStack {
@@ -44,7 +46,7 @@ struct FinishRunningView: View {
                     .padding(.bottom, 16)
                     
                     Button(action: {
-                        
+                        vm.running = false
                     }, label: {
                         Text("나중에 자랑하기")
                             .underline(pattern: .solid)
@@ -113,7 +115,7 @@ extension FinishRunningView {
         }
     }
 }
-
-#Preview {
-    FinishRunningView()
-}
+//
+//#Preview {
+//    FinishRunningView(vm: HomeTabViewModel())
+//}
