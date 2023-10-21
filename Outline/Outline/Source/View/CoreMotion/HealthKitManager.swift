@@ -37,7 +37,6 @@ class HealthKitManager {
             HKQuantityType(.distanceWalkingRunning),
             HKQuantityType(.stepCount),
             HKQuantityType(.runningSpeed),
-            HKQuantityType(.appleExerciseTime),
             HKQuantityType.workoutType()
         ]
         
@@ -97,6 +96,7 @@ class HealthKitManager {
         
         // builder에 samples 추가
         let samples = [activeEnergyBurned, distanceWalkingRunning, stepCount]
+        
         builder.add(samples) { success, error in
             if success {
                 print("Sample added successfully")

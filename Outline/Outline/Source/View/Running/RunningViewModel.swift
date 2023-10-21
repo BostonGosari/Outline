@@ -16,15 +16,12 @@ class RunningViewModel: ObservableObject {
     @Published var totalSteps = 0.0
     @Published var totalDistance = 0.0
     
-    @Published var previousTime = 0.0
-    @Published var previousSteps = 0.0
-    @Published var previousDistance = 0.0
-    
     @Published var steps = 0.0
     @Published var distance = 0.0
     @Published var pace = 0.0
     @Published var avgPace = 0.0
     @Published var cadence = 0.0
+    @Published var time = 0.0
     
     // 시작, 종료 추적
     @Published var start: Date?
@@ -53,11 +50,11 @@ class RunningViewModel: ObservableObject {
     }
     
     func pauseRunning() {
-        previousSteps = steps
-        previousDistance = distance
-        if let end = end, let start = start {
-            previousTime = end.timeIntervalSince(start)
-        }
+        totalSteps += steps
+        totalDistance += distance
+        totalTime += time
+        time = 0.0
+        print(totalTime)
         steps = 0.0
         distance = 0.0
         pedometer.stopUpdates()
@@ -68,22 +65,16 @@ class RunningViewModel: ObservableObject {
     }
     
     func stopPedometerUpdates() {
-        if let end = end, let start = start {
-            totalTime = previousTime + end.timeIntervalSince(start)
-        }
-        totalSteps = previousSteps + steps
-        totalDistance = previousDistance + distance
+        totalTime += time
+        print(totalTime)
+        totalSteps += steps
+        totalDistance += distance
         pedometer.stopUpdates()
         healthKitManager.endWorkout(steps: self.totalSteps, distance: self.totalDistance, energy: self.kilocalorie)
-        resetStepsAndDistance()
+        reset()
     }
     
     func startPedometerUpdates() {
-        guard CMPedometer.isStepCountingAvailable() else {
-            print("Step counting is not available.")
-            return
-        }
-        
         healthKitManager.requestAuthorization { [weak self] (authorized) in
             guard let self = self else { return }
             
@@ -97,6 +88,11 @@ class RunningViewModel: ObservableObject {
     }
     
     private func startPedometerDataUpdates() {
+        guard CMPedometer.isStepCountingAvailable() else {
+            print("Step counting is not available.")
+            return
+        }
+        
         self.pedometer.startUpdates(from: Date()) { (data, _) in
             if let data = data {
                 DispatchQueue.main.async {
@@ -108,16 +104,21 @@ class RunningViewModel: ObservableObject {
                     
                     self.start = data.startDate
                     self.end = data.endDate
+                    self.time = data.endDate.timeIntervalSince(data.startDate)
                 }
             }
         }
     }
     
-    private func resetStepsAndDistance() {
+    private func reset() {
+        totalTime = 0.0
+        totalSteps = 0.0
+        totalDistance = 0.0
         steps = 0.0
         distance = 0.0
-        previousTime = 0.0
-        previousSteps = 0.0
-        previousDistance = 0.0
+        pace = 0.0
+        avgPace = 0.0
+        cadence = 0.0
+        time = 0.0
     }
 }
