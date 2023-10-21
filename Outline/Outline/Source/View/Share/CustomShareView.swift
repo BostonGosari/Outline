@@ -18,14 +18,6 @@ struct CustomShareView: View {
     @State private var isShowPace = true
     @State private var isShowDistance = true
     
-    let userLocations: [CLLocationCoordinate2D] = [
-        CLLocationCoordinate2D(latitude: 36.0141253, longitude: 129.3471313),
-        CLLocationCoordinate2D(latitude: 36.0154791, longitude: 129.3444276),
-        CLLocationCoordinate2D(latitude: 36.0102547, longitude: 129.3394495),
-        CLLocationCoordinate2D(latitude: 36.0097687, longitude: 129.3391061),
-        CLLocationCoordinate2D(latitude: 36.008276, longitude: 129.3358231)
-    ]
-    
     var body: some View {
         ZStack {
             Color.gray900Color
@@ -34,7 +26,7 @@ struct CustomShareView: View {
             VStack(spacing: 0) {
                 customImageView
                     .padding(EdgeInsets(top: 20, leading: 49, bottom: 16, trailing: 49))
-                    
+        
                 pageIndicator
                 tagView
             }
@@ -45,7 +37,10 @@ struct CustomShareView: View {
 extension CustomShareView {
     private var customImageView: some View {
         ZStack {
-            ShareMap(userLocations: userLocations)
+            ShareMap(userLocations: viewModel.runningData.userLocations)
+                .overlay {
+                    LinearGradient(colors: [.black.opacity(0), .black], startPoint: .center, endPoint: .bottom)
+                }
             runningInfo
         }
         .aspectRatio(1080.0/1920.0, contentMode: .fit)
@@ -54,30 +49,30 @@ extension CustomShareView {
     
     private var runningInfo: some View {
         VStack(alignment: .leading, spacing: 0) {
-            Text("고래런")
+            Text(viewModel.runningData.courseName)
                 .font(.headline)
                 .foregroundStyle(Color.primaryColor)
-            Text("20204.10.18")
+            Text(viewModel.runningData.runningDate)
                 .font(.body)
             
             Spacer()
             
             HStack {
                 VStack(alignment: .leading) {
-                    Text("11Km")
+                    Text(viewModel.runningData.distance)
                         .opacity(isShowDistance ? 1 : 0)
                         .font(.body)
-                    Text("127BPM")
+                    Text(viewModel.runningData.bpm)
                         .opacity(isShowBPM ? 1 : 0)
                         .font(.body)
                 }
                 Spacer()
                 
                 VStack(alignment: .trailing) {
-                    Text("5’55”")
+                    Text(viewModel.runningData.pace)
                         .opacity(isShowPace ? 1 : 0)
                         .font(.body)
-                    Text("127Kcal")
+                    Text(viewModel.runningData.cal)
                         .opacity(isShowCal ? 1 : 0)
                         .font(.body)
                 }
@@ -104,20 +99,17 @@ extension CustomShareView {
     
     private var tagView: some View {
         HStack {
+            TagButton(text: "거리", isShow: isShowDistance) {
+                isShowDistance.toggle()
+            }
             TagButton(text: "BPM", isShow: isShowBPM) {
                 isShowBPM.toggle()
             }
-            
-            TagButton(text: "칼로리", isShow: isShowCal) {
-                isShowCal.toggle()
-            }
-            
             TagButton(text: "평균 페이스", isShow: isShowPace) {
                 isShowPace.toggle()
             }
-            
-            TagButton(text: "거리", isShow: isShowDistance) {
-                isShowDistance.toggle()
+            TagButton(text: "칼로리", isShow: isShowCal) {
+                isShowCal.toggle()
             }
         }
         .frame(maxWidth: .infinity, alignment: .center)
