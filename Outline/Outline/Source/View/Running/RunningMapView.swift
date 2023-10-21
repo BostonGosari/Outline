@@ -106,17 +106,15 @@ extension RunningMapView {
                         .padding(24)
                         .background(Circle().fill(Color.whiteColor))
                         .scaleEffect(isLongPressed ? 1.5 : 1)
+                        .animation(.easeInOut(duration: 1), value: isLongPressed)
                         .simultaneousGesture(
                             LongPressGesture(minimumDuration: 2.0)
-                                .updating($isLongPressed) { currentState, gestureState, _ in
-                                    gestureState = currentState
-                                    if currentState {
-                                        giveHapticFeedback()
-                                    }
+                                .updating($isLongPressed) { _, _, _ in
                                 }
                                 .onEnded { _ in
                                     print("Long press ended")
-                                    runningViewModel.stopRunnning()
+                                    HapticManager.impact(style: .medium)
+                                    runningViewModel.stopRunning()
                                     digitalTimerViewModel.counter = 0
                                 }
                         )
@@ -148,12 +146,6 @@ extension RunningMapView {
                 EmptyView()
             )
         }
-    }
-    
-    private func giveHapticFeedback() {
-        let impactFeedbackgenerator = UIImpactFeedbackGenerator(style: .medium)
-        impactFeedbackgenerator.prepare()
-        impactFeedbackgenerator.impactOccurred()
     }
 }
 
