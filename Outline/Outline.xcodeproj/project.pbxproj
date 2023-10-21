@@ -48,6 +48,8 @@
 		29AE76DC2ADE2A5300A46742 /* InputUserInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AE76DA2ADE2A5300A46742 /* InputUserInfoViewModel.swift */; };
 		29AE76E02ADE2BC700A46742 /* DateExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AE76DF2ADE2BC700A46742 /* DateExtention.swift */; };
 		29AE76E12ADE2C1700A46742 /* HomeTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01FDB9D2ADABD3D00BDA633 /* HomeTabView.swift */; };
+		29C631542AE418E3005ECF55 /* DigitalTimerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C631532AE418E3005ECF55 /* DigitalTimerViewModel.swift */; };
+		29C631562AE418F1005ECF55 /* DigitalTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C631552AE418F1005ECF55 /* DigitalTimerView.swift */; };
 		29C9197E2ADE8F7F00AB0B5A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 29AE76AE2ADE0DEB00A46742 /* GoogleService-Info.plist */; };
 		29C9198D2ADE9B5B00AB0B5A /* CoreMotionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C9198C2ADE9B5B00AB0B5A /* CoreMotionView.swift */; };
 		9528EFE92ADE9E870056CCC6 /* UserCoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 95EB1EF62ADE251100B47984 /* UserCoreDataModel.xcdatamodeld */; };
@@ -206,6 +208,8 @@
 		29AE76D92ADE2A5300A46742 /* InputNicknameViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InputNicknameViewModel.swift; path = Outline/Source/ViewModel/InputNicknameViewModel.swift; sourceTree = SOURCE_ROOT; };
 		29AE76DA2ADE2A5300A46742 /* InputUserInfoViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InputUserInfoViewModel.swift; path = Outline/Source/ViewModel/InputUserInfoViewModel.swift; sourceTree = SOURCE_ROOT; };
 		29AE76DF2ADE2BC700A46742 /* DateExtention.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtention.swift; sourceTree = "<group>"; };
+		29C631532AE418E3005ECF55 /* DigitalTimerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DigitalTimerViewModel.swift; sourceTree = "<group>"; };
+		29C631552AE418F1005ECF55 /* DigitalTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DigitalTimerView.swift; sourceTree = "<group>"; };
 		29C9198C2ADE9B5B00AB0B5A /* CoreMotionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreMotionView.swift; sourceTree = "<group>"; };
 		9528EFEB2ADEC7CF0056CCC6 /* UserDataModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataModelType.swift; sourceTree = "<group>"; };
 		9528EFF32AE006F40056CCC6 /* UserDataTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataTestView.swift; sourceTree = "<group>"; };
@@ -438,6 +442,8 @@
 				0E29F6582ADF6CA000F5EF5C /* RunningMapView.swift */,
 				0E29F6592ADF6CA000F5EF5C /* WorkoutDataView.swift */,
 				F035240F2AE35AF800CCD8A6 /* RunningViewModel.swift */,
+				29C631532AE418E3005ECF55 /* DigitalTimerViewModel.swift */,
+				29C631552AE418F1005ECF55 /* DigitalTimerView.swift */,
 			);
 			path = Running;
 			sourceTree = "<group>";
@@ -967,6 +973,7 @@
 				F06B93632ADB847900387DEB /* Component.swift in Sources */,
 				2975F0962AE3E1790046C00B /* CornerRectangleModifier.swift in Sources */,
 				F06298A92AE18A50007AB2D3 /* FunctionManager.swift in Sources */,
+				29C631562AE418F1005ECF55 /* DigitalTimerView.swift in Sources */,
 				299803532ADF1DC200A9A134 /* CoreMotionViewModel.swift in Sources */,
 				F06B93622ADB847500387DEB /* ContentView.swift in Sources */,
 				F09697472ADBCD6000C38AF4 /* Shape.swift in Sources */,
@@ -1003,6 +1010,7 @@
 				F05C97172ADA879100D5D959 /* LocationManager.swift in Sources */,
 				0E29F65F2ADF6CDD00F5EF5C /* RunningMapViewModel.swift in Sources */,
 				BB52396D2ADD6DBB00646494 /* CustomRoundedRectangle.swift in Sources */,
+				29C631542AE418E3005ECF55 /* DigitalTimerViewModel.swift in Sources */,
 				F096974D2ADBDBB000C38AF4 /* CardDetailView.swift in Sources */,
 				F05C97192ADA87B800D5D959 /* LocationAuthorizationView.swift in Sources */,
 				0EE92E7D2AE02DDC003192FF /* FreeRunningHomeView.swift in Sources */,
