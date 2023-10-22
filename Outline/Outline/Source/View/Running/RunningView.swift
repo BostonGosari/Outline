@@ -8,14 +8,16 @@ import SwiftUI
 
 struct RunningView: View {
     
-    @ObservedObject var vm: HomeTabViewModel
+    @ObservedObject var homeTabViewModel: HomeTabViewModel
     
-    @StateObject var runningViewModel = RunningViewModel()
+    @StateObject var runningViewModel: RunningViewModel
     @StateObject var digitalTimerViewModel = DigitalTimerViewModel()
     @State var selection = 0
     
-    init(vm: HomeTabViewModel) {
-        self.vm = vm
+    init(homeTabViewModel: HomeTabViewModel) {
+        self.homeTabViewModel = homeTabViewModel
+        self._runningViewModel = StateObject(wrappedValue: RunningViewModel(homeTabViewModel: homeTabViewModel))
+
         UIPageControl.appearance().currentPageIndicatorTintColor = UIColor.primary
         UIPageControl.appearance().pageIndicatorTintColor = UIColor.white
     }
@@ -25,7 +27,7 @@ struct RunningView: View {
             ZStack(alignment: .bottom) {
                 Color("Gray900").ignoresSafeArea()
                 TabView(selection: $selection) {
-                    RunningMapView(runningViewModel: runningViewModel, digitalTimerViewModel: digitalTimerViewModel, vm: vm, selection: $selection)
+                    RunningMapView(runningViewModel: runningViewModel, digitalTimerViewModel: digitalTimerViewModel, homeTabViewModel: homeTabViewModel, selection: $selection)
                         .tag(0)
                     WorkoutDataView(runningViewModel: runningViewModel, digitalTimerViewModel: digitalTimerViewModel)
                         .tag(1)
@@ -33,7 +35,7 @@ struct RunningView: View {
                 .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
                 .edgesIgnoringSafeArea(.all)
                 .onAppear {
-                    if vm.running == true {
+                    if homeTabViewModel.running == true {
                         runningViewModel.startRunning()
                         digitalTimerViewModel.startTimer()
                     }
@@ -44,5 +46,5 @@ struct RunningView: View {
 }
 
 #Preview {
-    RunningView(vm: HomeTabViewModel())
+    RunningView(homeTabViewModel: HomeTabViewModel())
 }

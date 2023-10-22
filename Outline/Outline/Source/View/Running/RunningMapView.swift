@@ -13,7 +13,7 @@ struct RunningMapView: View {
     
     @ObservedObject var runningViewModel: RunningViewModel
     @ObservedObject var digitalTimerViewModel: DigitalTimerViewModel
-    @ObservedObject var vm: HomeTabViewModel
+    @ObservedObject var homeTabViewModel: HomeTabViewModel
     
     @GestureState var isLongPressed = false
     
@@ -23,7 +23,7 @@ struct RunningMapView: View {
     
     var body: some View {
         ZStack {
-            if let course = vm.startCourse {
+            if let course = homeTabViewModel.startCourse {
                 RunningMap(
                     locationManager: locationManager,
                     viewModel: viewModel,
@@ -130,7 +130,7 @@ extension RunningMapView {
                                 }
                         )
                         .navigationDestination(isPresented: $navigateToFinishRunningView) {
-                            FinishRunningView(vm: vm)
+                            FinishRunningView(vm: homeTabViewModel)
                                 .navigationBarBackButtonHidden()
                         }
                     
