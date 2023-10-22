@@ -23,4 +23,6 @@ extension Font {
     static let tag2 = Font.custom("Pretendard-Medium", size: 13)
     static let tab = Font.custom("Pretendard-Regular", size: 10)
     static let timeTitle = Font.custom("Pretendard-ExtraBold", size: 64)
+    static let shareTitle = Font.custom("Pretendard-SemiBold", size: 25)
+    static let shareData = Font.system(size: 39, weight: .bold)
 }

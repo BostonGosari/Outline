@@ -10,6 +10,8 @@ import MapKit
 
 struct CardView: View {
     
+    @ObservedObject var homeTabViewModel: HomeTabViewModel
+    
     @Binding var isShow: Bool
     @Binding var currentIndex: Int
     var namespace: Namespace.ID
@@ -23,7 +25,9 @@ struct CardView: View {
         courseImage
             .onTapGesture {
                 withAnimation(.openCard) {
-                    isShow = true
+                    if homeTabViewModel.recommendedCoures.count == 3 {
+                        isShow = true
+                    }
                 }
             }
             .overlay(alignment: .bottomLeading) {
@@ -49,33 +53,35 @@ struct CardView: View {
     
     private var courseInformation: some View {
         VStack(alignment: .leading, spacing: 0) {
-            Text("시티런 \(pageIndex)")
-                .font(.largeTitle)
-                .bold()
-                .padding(.bottom, 8)
-            HStack {
-                Image(systemName: "mappin")
-                Text("서울시 동작구 • 내 위치에서 5km")
+            if homeTabViewModel.recommendedCoures.count == 3 {
+                Text("\(homeTabViewModel.recommendedCoures[pageIndex].course.courseName)")
+                    .font(.largeTitle)
+                    .bold()
+                    .padding(.bottom, 8)
+                HStack {
+                    Image(systemName: "mappin")
+                    Text("\(homeTabViewModel.recommendedCoures[pageIndex].course.locationInfo.locality) \(homeTabViewModel.recommendedCoures[pageIndex].course.locationInfo.subLocality) • 내 위치에서 \(homeTabViewModel.recommendedCoures[pageIndex].distance/1000, specifier: "%.1f")km")
+                }
+                .font(.caption)
+                .padding(.bottom, 16)
+                
+                HStack {
+                    Text("#\(homeTabViewModel.recommendedCoures[pageIndex].course.courseLength, specifier: "%.0f")km")
+                        .frame(width: 70, height: 23)
+                        .background {
+                            Capsule()
+                                .stroke()
+                        }
+                    Text("#\(formatDuration(homeTabViewModel.recommendedCoures[pageIndex].course.courseDuration))")
+                        .frame(width: 70, height: 23)
+                        .background {
+                            Capsule()
+                                .stroke()
+                        }
+                }
+                .font(.caption)
+                .fontWeight(.semibold)
             }
-            .font(.caption)
-            .padding(.bottom, 16)
-            
-            HStack {
-                Text("#5km")
-                    .frame(width: 70, height: 23)
-                    .background {
-                        Capsule()
-                            .stroke()
-                    }
-                Text("#2h39m")
-                    .frame(width: 70, height: 23)
-                    .background {
-                        Capsule()
-                            .stroke()
-                    }
-            }
-            .font(.caption)
-            .fontWeight(.semibold)
         }
         .padding(.horizontal, 17)
         .padding(.bottom, 36)
