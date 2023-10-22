@@ -34,7 +34,6 @@
 		29111E392AE0CA46009833C7 /* FinalWatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29111E382AE0CA46009833C7 /* FinalWatchView.swift */; };
 		29111E3B2AE0CA89009833C7 /* SheetWatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29111E3A2AE0CA89009833C7 /* SheetWatchView.swift */; };
 		29111E3F2AE0CD0C009833C7 /* ConfettiWatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29111E3E2AE0CD0C009833C7 /* ConfettiWatchView.swift */; };
-		2937B1702AE4E1F800BB807E /* CornerRectangleModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2937B16F2AE4E1F800BB807E /* CornerRectangleModifier.swift */; };
 		295324852AE038EE00085120 /* UserInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0AC8B062AD965390061612C /* UserInfoModel.swift */; };
 		2975F0962AE3E1790046C00B /* CornerRectangleModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2975F0952AE3E1790046C00B /* CornerRectangleModifier.swift */; };
 		299803532ADF1DC200A9A134 /* CoreMotionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299803522ADF1DC200A9A134 /* CoreMotionViewModel.swift */; };
@@ -64,6 +63,11 @@
 		9528F0002AE042570056CCC6 /* PathGenerateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9528EFFF2AE042570056CCC6 /* PathGenerateManager.swift */; };
 		9528F0022AE046DF0056CCC6 /* PathDrawingTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9528F0012AE046DF0056CCC6 /* PathDrawingTestView.swift */; };
 		9528F0062AE0B37B0056CCC6 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9528F0052AE0B37B0056CCC6 /* LoginView.swift */; };
+		954CB2922AE5131B005EB2E9 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 954CB2912AE5131B005EB2E9 /* FirebaseFirestore */; };
+		954CB2942AE5131B005EB2E9 /* FirebaseFirestoreCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 954CB2932AE5131B005EB2E9 /* FirebaseFirestoreCombine-Community */; };
+		954CB2962AE5131B005EB2E9 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 954CB2952AE5131B005EB2E9 /* FirebaseFirestoreSwift */; };
+		954CB29A2AE514D3005EB2E9 /* ConnectingWatchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954CB2992AE514D3005EB2E9 /* ConnectingWatchModel.swift */; };
+		954CB29B2AE514D5005EB2E9 /* ConnectingWatchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954CB2992AE514D3005EB2E9 /* ConnectingWatchModel.swift */; };
 		954FFF6C2AE12F0B00D27537 /* seoulCamelRun.kml in Resources */ = {isa = PBXBuildFile; fileRef = 954FFF672AE12F0B00D27537 /* seoulCamelRun.kml */; };
 		954FFF6D2AE12F0B00D27537 /* seoulCamelRun.kml in Resources */ = {isa = PBXBuildFile; fileRef = 954FFF672AE12F0B00D27537 /* seoulCamelRun.kml */; };
 		954FFF6E2AE12F0B00D27537 /* pohangDangDangRun.kml in Resources */ = {isa = PBXBuildFile; fileRef = 954FFF682AE12F0B00D27537 /* pohangDangDangRun.kml */; };
@@ -103,7 +107,6 @@
 		BB5239582ADC396300646494 /* BackgroundBlur.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5239572ADC396300646494 /* BackgroundBlur.swift */; };
 		BB52396B2ADD385700646494 /* BottomScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB52396A2ADD385700646494 /* BottomScrollView.swift */; };
 		BB52396D2ADD6DBB00646494 /* CustomRoundedRectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB52396C2ADD6DBB00646494 /* CustomRoundedRectangle.swift */; };
-		BBD6955E2ADF32A2007AA6D9 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBD6955D2ADF32A2007AA6D9 /* HealthKit.framework */; };
 		BBD6956C2ADFBFA1007AA6D9 /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD6956A2ADFBB9E007AA6D9 /* ComplicationController.swift */; };
 		F01FDB992ADABB6100BDA633 /* TabModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01FDB982ADABB6100BDA633 /* TabModel.swift */; };
 		F01FDB9C2ADABC4600BDA633 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01FDB9B2ADABC4600BDA633 /* TabBar.swift */; };
@@ -125,9 +128,6 @@
 		F06B936B2ADC23E100387DEB /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5239272ADAF72A00646494 /* Logger.swift */; };
 		F06B936C2ADC245700387DEB /* RecommendedCoursesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0AC8B032AD964EF0061612C /* RecommendedCoursesViewModel.swift */; };
 		F06B936E2ADC279100387DEB /* SlideToUnlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06B936D2ADC279100387DEB /* SlideToUnlock.swift */; };
-		F0781D582AE14C590084ADD7 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = F0781D572AE14C590084ADD7 /* FirebaseFirestore */; };
-		F0781D5A2AE14C590084ADD7 /* FirebaseFirestoreCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = F0781D592AE14C590084ADD7 /* FirebaseFirestoreCombine-Community */; };
-		F0781D5C2AE14C590084ADD7 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = F0781D5B2AE14C590084ADD7 /* FirebaseFirestoreSwift */; };
 		F0781D602AE163E00084ADD7 /* HomeTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0781D5F2AE163E00084ADD7 /* HomeTabViewModel.swift */; };
 		F09697432ADBC1D200C38AF4 /* Carousel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09697422ADBC1D200C38AF4 /* Carousel.swift */; };
 		F09697472ADBCD6000C38AF4 /* Shape.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09697462ADBCD6000C38AF4 /* Shape.swift */; };
@@ -212,12 +212,11 @@
 		0EE92E6D2AE00AE5003192FF /* CompleteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteButton.swift; sourceTree = "<group>"; };
 		0EE92E7C2AE02DDC003192FF /* FreeRunningHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeRunningHomeView.swift; sourceTree = "<group>"; };
 		0EE92E7E2AE02DF2003192FF /* FreeRunningMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeRunningMap.swift; sourceTree = "<group>"; };
-		2975F0952AE3E1790046C00B /* CornerRectangleModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CornerRectangleModifier.swift; sourceTree = "<group>"; };
-		2975F0972AE3E2010046C00B /* Outline.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = Outline.app; path = "/Users/hyunjun/Desktop/Outline/Outline/build/Debug-iphoneos/Outline.app"; sourceTree = "<absolute>"; };
 		29111E362AE0C9CA009833C7 /* FinishWatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishWatchView.swift; sourceTree = "<group>"; };
 		29111E382AE0CA46009833C7 /* FinalWatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalWatchView.swift; sourceTree = "<group>"; };
 		29111E3A2AE0CA89009833C7 /* SheetWatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetWatchView.swift; sourceTree = "<group>"; };
 		29111E3E2AE0CD0C009833C7 /* ConfettiWatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfettiWatchView.swift; sourceTree = "<group>"; };
+		2975F0952AE3E1790046C00B /* CornerRectangleModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CornerRectangleModifier.swift; sourceTree = "<group>"; };
 		299803522ADF1DC200A9A134 /* CoreMotionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreMotionViewModel.swift; sourceTree = "<group>"; };
 		299803542ADF5F1000A9A134 /* HealthKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitManager.swift; sourceTree = "<group>"; };
 		299803562AE00C9B00A9A134 /* HapticManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticManager.swift; sourceTree = "<group>"; };
@@ -232,10 +231,15 @@
 		29AE76DF2ADE2BC700A46742 /* DateExtention.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtention.swift; sourceTree = "<group>"; };
 		29C631532AE418E3005ECF55 /* DigitalTimerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DigitalTimerViewModel.swift; sourceTree = "<group>"; };
 		29C631552AE418F1005ECF55 /* DigitalTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DigitalTimerView.swift; sourceTree = "<group>"; };
-		29C631592AE4BBA0005ECF55 /* Outline Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = "Outline Watch App.app"; path = "/Users/hyunjun/Desktop/Outline/Outline/build/Debug-watchos/Outline Watch App.app"; sourceTree = "<absolute>"; };
 		29C9198C2ADE9B5B00AB0B5A /* CoreMotionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreMotionView.swift; sourceTree = "<group>"; };
 		9528EFEB2ADEC7CF0056CCC6 /* UserDataModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataModelType.swift; sourceTree = "<group>"; };
 		9528EFF32AE006F40056CCC6 /* UserDataTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataTestView.swift; sourceTree = "<group>"; };
+		9528EFFF2AE042570056CCC6 /* PathGenerateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathGenerateManager.swift; sourceTree = "<group>"; };
+		9528F0012AE046DF0056CCC6 /* PathDrawingTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathDrawingTestView.swift; sourceTree = "<group>"; };
+		9528F0052AE0B37B0056CCC6 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		954CB28E2AE51264005EB2E9 /* Outline.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Outline.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		954CB28F2AE51264005EB2E9 /* Outline Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Outline Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		954CB2992AE514D3005EB2E9 /* ConnectingWatchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectingWatchModel.swift; sourceTree = "<group>"; };
 		954FFF672AE12F0B00D27537 /* seoulCamelRun.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = seoulCamelRun.kml; path = ../../../../../../../../Downloads/seoulCamelRun.kml; sourceTree = "<group>"; };
 		954FFF682AE12F0B00D27537 /* pohangDangDangRun.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = pohangDangDangRun.kml; path = ../../../../../../../../Downloads/pohangDangDangRun.kml; sourceTree = "<group>"; };
 		954FFF692AE12F0B00D27537 /* seoulOctopusRun.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = seoulOctopusRun.kml; path = ../../../../../../../../Downloads/seoulOctopusRun.kml; sourceTree = "<group>"; };
@@ -243,9 +247,6 @@
 		954FFF6B2AE12F0B00D27537 /* pohangCrocodileRun.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = pohangCrocodileRun.kml; path = ../../../../../../../../Downloads/pohangCrocodileRun.kml; sourceTree = "<group>"; };
 		954FFF772AE132D100D27537 /* CourseDataUploadManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseDataUploadManager.swift; sourceTree = "<group>"; };
 		954FFF7A2AE136CA00D27537 /* CourseDataUploadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseDataUploadView.swift; sourceTree = "<group>"; };
-		9528EFFF2AE042570056CCC6 /* PathGenerateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathGenerateManager.swift; sourceTree = "<group>"; };
-		9528F0012AE046DF0056CCC6 /* PathDrawingTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathDrawingTestView.swift; sourceTree = "<group>"; };
-		9528F0052AE0B37B0056CCC6 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		959D90252ADA35F100748BFB /* DataTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTestView.swift; sourceTree = "<group>"; };
 		959D90602ADA3A1000748BFB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		95E2EF702ADA6F230083ADEE /* CourseModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseModelType.swift; sourceTree = "<group>"; };
@@ -296,8 +297,6 @@
 		F06B93602ADB836600387DEB /* Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Component.swift; sourceTree = "<group>"; };
 		F06B936D2ADC279100387DEB /* SlideToUnlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideToUnlock.swift; sourceTree = "<group>"; };
 		F0781D5F2AE163E00084ADD7 /* HomeTabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabViewModel.swift; sourceTree = "<group>"; };
-		F0781D522AE134690084ADD7 /* Outline.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Outline.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		F0781D532AE134720084ADD7 /* Outline Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Outline Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0864A382ADD6CFA00498DBA /* MapWatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapWatchView.swift; sourceTree = "<group>"; };
 		F09697422ADBC1D200C38AF4 /* Carousel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Carousel.swift; sourceTree = "<group>"; };
 		F09697462ADBCD6000C38AF4 /* Shape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shape.swift; sourceTree = "<group>"; };
@@ -335,9 +334,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F0781D582AE14C590084ADD7 /* FirebaseFirestore in Frameworks */,
-				F0781D5A2AE14C590084ADD7 /* FirebaseFirestoreCombine-Community in Frameworks */,
-				F0781D5C2AE14C590084ADD7 /* FirebaseFirestoreSwift in Frameworks */,
+				954CB2922AE5131B005EB2E9 /* FirebaseFirestore in Frameworks */,
+				954CB2942AE5131B005EB2E9 /* FirebaseFirestoreCombine-Community in Frameworks */,
+				954CB2962AE5131B005EB2E9 /* FirebaseFirestoreSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -561,14 +560,6 @@
 			path = RecomendedCourses;
 			sourceTree = "<group>";
 		};
-		F0781D482AE132BB0084ADD7 /* Recovered References */ = {
-			isa = PBXGroup;
-			children = (
-				BBD6955D2ADF32A2007AA6D9 /* HealthKit.framework */,
-			);
-			name = "Recovered References";
-			sourceTree = "<group>";
-		};
 		F0AC8A902AD94C1F0061612C = {
 			isa = PBXGroup;
 			children = (
@@ -579,6 +570,8 @@
 				F0AC8A9B2AD94C1F0061612C /* Outline */,
 				F0AC8AAD2AD94C200061612C /* Outline Watch */,
 				F0AC8AC42AD9514C0061612C /* .swiftlint.yml */,
+				954CB28E2AE51264005EB2E9 /* Outline.app */,
+				954CB28F2AE51264005EB2E9 /* Outline Watch App.app */,
 			);
 			sourceTree = "<group>";
 		};
@@ -713,6 +706,7 @@
 				95EB1EF32ADE229200B47984 /* UserInfo */,
 				F01FDB982ADABB6100BDA633 /* TabModel.swift */,
 				0E9A5D4E2AE0B8C800C19FF3 /* ShareModel.swift */,
+				954CB2992AE514D3005EB2E9 /* ConnectingWatchModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -761,7 +755,6 @@
 			children = (
 				2975F0952AE3E1790046C00B /* CornerRectangleModifier.swift */,
 				F0AC8B102AD965A70061612C /* Modifier.swift */,
-				2937B16F2AE4E1F800BB807E /* CornerRectangleModifier.swift */,
 			);
 			path = Modifier;
 			sourceTree = "<group>";
@@ -874,12 +867,12 @@
 			);
 			name = Outline;
 			packageProductDependencies = (
-				F0781D572AE14C590084ADD7 /* FirebaseFirestore */,
-				F0781D592AE14C590084ADD7 /* FirebaseFirestoreCombine-Community */,
-				F0781D5B2AE14C590084ADD7 /* FirebaseFirestoreSwift */,
+				954CB2912AE5131B005EB2E9 /* FirebaseFirestore */,
+				954CB2932AE5131B005EB2E9 /* FirebaseFirestoreCombine-Community */,
+				954CB2952AE5131B005EB2E9 /* FirebaseFirestoreSwift */,
 			);
 			productName = Outline;
-			productReference = 2975F0972AE3E2010046C00B /* Outline.app */;
+			productReference = 954CB28E2AE51264005EB2E9 /* Outline.app */;
 			productType = "com.apple.product-type.application";
 		};
 		F0AC8AA82AD94C200061612C /* Outline Watch App */ = {
@@ -896,7 +889,7 @@
 			);
 			name = "Outline Watch App";
 			productName = "Outline Watch App";
-			productReference = 29C631592AE4BBA0005ECF55 /* Outline Watch App.app */;
+			productReference = 954CB28F2AE51264005EB2E9 /* Outline Watch App.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -928,7 +921,7 @@
 			);
 			mainGroup = F0AC8A902AD94C1F0061612C;
 			packageReferences = (
-				F0781D562AE14C590084ADD7 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				954CB2902AE5131B005EB2E9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = F0AC8A902AD94C1F0061612C;
 			projectDirPath = "";
@@ -1067,6 +1060,7 @@
 				95E2EF742ADA75AA0083ADEE /* DataTestViewModel.swift in Sources */,
 				299803552ADF5F1000A9A134 /* HealthKitManager.swift in Sources */,
 				2998035E2AE0182100A9A134 /* ConfettiView.swift in Sources */,
+				954CB29A2AE514D3005EB2E9 /* ConnectingWatchModel.swift in Sources */,
 				0E9A5D462AE05DF200C19FF3 /* ShareMap.swift in Sources */,
 				0E29F65A2ADF6CA000F5EF5C /* RunningMap.swift in Sources */,
 				F05C97172ADA879100D5D959 /* LocationManager.swift in Sources */,
@@ -1123,6 +1117,7 @@
 				F0AC8AB12AD94C200061612C /* ContentWatchView.swift in Sources */,
 				BB1D53432ADE9C7D0073771F /* ControlsView.swift in Sources */,
 				BBD6956C2ADFBFA1007AA6D9 /* ComplicationController.swift in Sources */,
+				954CB29B2AE514D5005EB2E9 /* ConnectingWatchModel.swift in Sources */,
 				BB1D534C2ADEA6F90073771F /* SummaryView.swift in Sources */,
 				BB1D53482ADE9D780073771F /* MetricsView.swift in Sources */,
 				F0E6481A2ADDA683002F9FAA /* MapWatchView.swift in Sources */,
@@ -1481,9 +1476,9 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		F0781D562AE14C590084ADD7 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+		954CB2902AE5131B005EB2E9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 10.16.0;
@@ -1492,19 +1487,19 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		F0781D572AE14C590084ADD7 /* FirebaseFirestore */ = {
+		954CB2912AE5131B005EB2E9 /* FirebaseFirestore */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = F0781D562AE14C590084ADD7 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = 954CB2902AE5131B005EB2E9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestore;
 		};
-		F0781D592AE14C590084ADD7 /* FirebaseFirestoreCombine-Community */ = {
+		954CB2932AE5131B005EB2E9 /* FirebaseFirestoreCombine-Community */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = F0781D562AE14C590084ADD7 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = 954CB2902AE5131B005EB2E9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = "FirebaseFirestoreCombine-Community";
 		};
-		F0781D5B2AE14C590084ADD7 /* FirebaseFirestoreSwift */ = {
+		954CB2952AE5131B005EB2E9 /* FirebaseFirestoreSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = F0781D562AE14C590084ADD7 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = 954CB2902AE5131B005EB2E9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestoreSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
