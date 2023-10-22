@@ -12,7 +12,7 @@ struct OutlineWatchApp: App {
     
     var body: some Scene {
         WindowGroup {
-            SheetWatchView()
+            ContentWatchView()
         }
     }
 }
