@@ -57,8 +57,8 @@ extension FreeRunningHomeView {
             .roundedCorners(10, corners: [.topLeft])
             .roundedCorners(70, corners: [.topRight])
             .roundedCorners(45, corners: [.bottomLeft, .bottomRight])
-            .overlay(
-                CardBorder(cornerRadiusTopLeft: 10, cornerRadiusTopRight: 79, cornerRadiusBottomLeft: 45, cornerRadiusBottomRight: 45)
+            .modifier(
+                CornerRectangleModifier(topLeft: 10, topRight: 79, bottom: 45)
             )
         
     }
