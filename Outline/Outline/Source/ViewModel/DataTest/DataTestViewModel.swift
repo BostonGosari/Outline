@@ -14,7 +14,7 @@ let userInfoDummy = UserInfo(nickname: "austin", birthday: Date(), height: 175, 
 let dummyCourseData = CourseData(courseName: "댕댕런", runningLength: 5, heading: 1.3, distance: 400, coursePaths: [
     CLLocationCoordinate2D(latitude: 26, longitude: 152),
     CLLocationCoordinate2D(latitude: 16, longitude: 122)
-])
+], runningCourseId: "courseId")
 let dummyHealthData = HealthData(totalTime: 40, averageCadence: 20, totalRunningDistance: 50, totalEnergy: 200, averageHeartRate: 150, averagePace: 5, startDate: Date(), endDate: Date())
 
 class DataTestViewModel: ObservableObject {
