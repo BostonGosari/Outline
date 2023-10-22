@@ -15,8 +15,6 @@ struct OutlineApp: App {
     init() {
         FirebaseApp.configure()
     }
-
-    private let workoutManager = WorkoutManager.shared
   
     var body: some Scene {
         WindowGroup {
