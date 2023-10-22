@@ -8,16 +8,16 @@
 import Foundation
 
 struct ConnectingWatchModel {
-    private let courseModel = CourseModel()
-    
-    func readCourses() {
-        courseModel.readAllCourses { result in
-            switch result {
-            case .success(let success):
-                print(success)
-            case .failure(let failure):
-                print(failure)
-            }
-        }
-    }
+//    private let courseModel = CourseModel()
+//    
+//    func readCourses() {
+//        courseModel.readAllCourses { result in
+//            switch result {
+//            case .success(let success):
+//                print(success)
+//            case .failure(let failure):
+//                print(failure)
+//            }
+//        }
+//    }
 }
