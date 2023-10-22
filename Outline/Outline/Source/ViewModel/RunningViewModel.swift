@@ -144,7 +144,7 @@ class RunningViewModel: ObservableObject {
     private func saveRunning() {
         guard let course = homeTabViewModel.startCourse else { return }
         
-        let courseData = CourseData(courseName: course.courseName, runningLength: course.courseLength, heading: course.heading, distance: course.distance, coursePaths: convertToCLLocationCoordinates(course.coursePaths))
+        let courseData = CourseData(courseName: course.courseName, runningLength: course.courseLength, heading: course.heading, distance: course.distance, coursePaths: convertToCLLocationCoordinates(course.coursePaths), runningCourseId: course.id)
 
         let healthData = HealthData(totalTime: totalTime, averageCadence: totalSteps / totalDistance, totalRunningDistance: totalDistance / 1000, totalEnergy: kilocalorie, averageHeartRate: 0.0, averagePace: totalTime / totalDistance * 1000 / 60, startDate: RunningStartDate, endDate: RunningEndDate)
         
