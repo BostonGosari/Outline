@@ -11,7 +11,7 @@ struct FinishRunningView: View {
     @StateObject var viewModel = FinishRunningViewModel()
     var gradientColors: [Color] = [.blackColor, .blackColor, .blackColor, .blackColor, .black50Color, .blackColor.opacity(0)]
     
-    @ObservedObject var vm: HomeTabViewModel
+    @ObservedObject var homeTabViewModel: HomeTabViewModel
 
     var body: some View {
         NavigationStack {
@@ -46,7 +46,7 @@ struct FinishRunningView: View {
                     .padding(.bottom, 16)
                     
                     Button(action: {
-                        vm.running = false
+                        homeTabViewModel.running = false
                     }, label: {
                         Text("나중에 자랑하기")
                             .underline(pattern: .solid)
@@ -115,7 +115,3 @@ extension FinishRunningView {
         }
     }
 }
-//
-//#Preview {
-//    FinishRunningView(vm: HomeTabViewModel())
-//}

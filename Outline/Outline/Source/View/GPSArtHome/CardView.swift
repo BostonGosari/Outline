@@ -10,7 +10,7 @@ import MapKit
 
 struct CardView: View {
     
-    @ObservedObject var vm: HomeTabViewModel
+    @ObservedObject var homeTabViewModel: HomeTabViewModel
     
     @Binding var isShow: Bool
     @Binding var currentIndex: Int
@@ -25,7 +25,7 @@ struct CardView: View {
         courseImage
             .onTapGesture {
                 withAnimation(.openCard) {
-                    if vm.recommendedCoures.count == 3 {
+                    if homeTabViewModel.recommendedCoures.count == 3 {
                         isShow = true
                     }
                 }
@@ -53,26 +53,26 @@ struct CardView: View {
     
     private var courseInformation: some View {
         VStack(alignment: .leading, spacing: 0) {
-            if vm.recommendedCoures.count == 3 {
-                Text("\(vm.recommendedCoures[pageIndex].course.courseName)")
+            if homeTabViewModel.recommendedCoures.count == 3 {
+                Text("\(homeTabViewModel.recommendedCoures[pageIndex].course.courseName)")
                     .font(.largeTitle)
                     .bold()
                     .padding(.bottom, 8)
                 HStack {
                     Image(systemName: "mappin")
-                    Text("\(vm.recommendedCoures[pageIndex].course.locationInfo.locality) \(vm.recommendedCoures[pageIndex].course.locationInfo.subLocality) • 내 위치에서 \(vm.recommendedCoures[pageIndex].distance/1000, specifier: "%.1f")km")
+                    Text("\(homeTabViewModel.recommendedCoures[pageIndex].course.locationInfo.locality) \(homeTabViewModel.recommendedCoures[pageIndex].course.locationInfo.subLocality) • 내 위치에서 \(homeTabViewModel.recommendedCoures[pageIndex].distance/1000, specifier: "%.1f")km")
                 }
                 .font(.caption)
                 .padding(.bottom, 16)
                 
                 HStack {
-                    Text("#\(vm.recommendedCoures[pageIndex].course.courseLength, specifier: "%.0f")km")
+                    Text("#\(homeTabViewModel.recommendedCoures[pageIndex].course.courseLength, specifier: "%.0f")km")
                         .frame(width: 70, height: 23)
                         .background {
                             Capsule()
                                 .stroke()
                         }
-                    Text("#\(formatDuration(vm.recommendedCoures[pageIndex].course.courseDuration))")
+                    Text("#\(formatDuration(homeTabViewModel.recommendedCoures[pageIndex].course.courseDuration))")
                         .frame(width: 70, height: 23)
                         .background {
                             Capsule()
