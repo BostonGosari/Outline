@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		0E29F64B2ADF653000F5EF5C /* FontExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E29F64A2ADF653000F5EF5C /* FontExtension.swift */; };
-		0E29F6502ADF681E00F5EF5C /* test.kml in Resources */ = {isa = PBXBuildFile; fileRef = 0E29F64E2ADF681E00F5EF5C /* test.kml */; };
-		0E29F6512ADF681E00F5EF5C /* seoulDuckRun.kml in Resources */ = {isa = PBXBuildFile; fileRef = 0E29F64F2ADF681E00F5EF5C /* seoulDuckRun.kml */; };
 		0E29F6532ADF6C3A00F5EF5C /* RunningPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E29F6522ADF6C3A00F5EF5C /* RunningPopup.swift */; };
 		0E29F6552ADF6C7D00F5EF5C /* KMLParserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E29F6542ADF6C7D00F5EF5C /* KMLParserManager.swift */; };
 		0E29F65A2ADF6CA000F5EF5C /* RunningMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E29F6562ADF6CA000F5EF5C /* RunningMap.swift */; };
@@ -71,17 +69,18 @@
 		954CB29C2AE51619005EB2E9 /* PersistentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EB1EE82ADDC43400B47984 /* PersistentController.swift */; };
 		954CB29D2AE5161B005EB2E9 /* UserDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EB1EEB2ADDC66B00B47984 /* UserDataModel.swift */; };
 		954CB29E2AE5161D005EB2E9 /* UserDataModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9528EFEB2ADEC7CF0056CCC6 /* UserDataModelType.swift */; };
-		954FFF6C2AE12F0B00D27537 /* seoulCamelRun.kml in Resources */ = {isa = PBXBuildFile; fileRef = 954FFF672AE12F0B00D27537 /* seoulCamelRun.kml */; };
-		954FFF6D2AE12F0B00D27537 /* seoulCamelRun.kml in Resources */ = {isa = PBXBuildFile; fileRef = 954FFF672AE12F0B00D27537 /* seoulCamelRun.kml */; };
-		954FFF6E2AE12F0B00D27537 /* pohangDangDangRun.kml in Resources */ = {isa = PBXBuildFile; fileRef = 954FFF682AE12F0B00D27537 /* pohangDangDangRun.kml */; };
-		954FFF6F2AE12F0B00D27537 /* pohangDangDangRun.kml in Resources */ = {isa = PBXBuildFile; fileRef = 954FFF682AE12F0B00D27537 /* pohangDangDangRun.kml */; };
-		954FFF702AE12F0B00D27537 /* seoulOctopusRun.kml in Resources */ = {isa = PBXBuildFile; fileRef = 954FFF692AE12F0B00D27537 /* seoulOctopusRun.kml */; };
-		954FFF712AE12F0B00D27537 /* seoulOctopusRun.kml in Resources */ = {isa = PBXBuildFile; fileRef = 954FFF692AE12F0B00D27537 /* seoulOctopusRun.kml */; };
-		954FFF722AE12F0B00D27537 /* pohangDuckRun.kml in Resources */ = {isa = PBXBuildFile; fileRef = 954FFF6A2AE12F0B00D27537 /* pohangDuckRun.kml */; };
-		954FFF732AE12F0B00D27537 /* pohangDuckRun.kml in Resources */ = {isa = PBXBuildFile; fileRef = 954FFF6A2AE12F0B00D27537 /* pohangDuckRun.kml */; };
-		954FFF742AE12F0B00D27537 /* pohangCrocodileRun.kml in Resources */ = {isa = PBXBuildFile; fileRef = 954FFF6B2AE12F0B00D27537 /* pohangCrocodileRun.kml */; };
-		954FFF752AE12F0B00D27537 /* pohangCrocodileRun.kml in Resources */ = {isa = PBXBuildFile; fileRef = 954FFF6B2AE12F0B00D27537 /* pohangCrocodileRun.kml */; };
-		954FFF762AE12F1500D27537 /* seoulDuckRun.kml in Resources */ = {isa = PBXBuildFile; fileRef = 0E29F64F2ADF681E00F5EF5C /* seoulDuckRun.kml */; };
+		954CB2A52AE5457B005EB2E9 /* pohangCrocodileRun.kml in Resources */ = {isa = PBXBuildFile; fileRef = 954CB29F2AE5457A005EB2E9 /* pohangCrocodileRun.kml */; };
+		954CB2A62AE5457B005EB2E9 /* pohangCrocodileRun.kml in Resources */ = {isa = PBXBuildFile; fileRef = 954CB29F2AE5457A005EB2E9 /* pohangCrocodileRun.kml */; };
+		954CB2A72AE5457B005EB2E9 /* seoulOctopusRun.kml in Resources */ = {isa = PBXBuildFile; fileRef = 954CB2A02AE5457A005EB2E9 /* seoulOctopusRun.kml */; };
+		954CB2A82AE5457B005EB2E9 /* seoulOctopusRun.kml in Resources */ = {isa = PBXBuildFile; fileRef = 954CB2A02AE5457A005EB2E9 /* seoulOctopusRun.kml */; };
+		954CB2A92AE5457B005EB2E9 /* pohangDangDangRun.kml in Resources */ = {isa = PBXBuildFile; fileRef = 954CB2A12AE5457A005EB2E9 /* pohangDangDangRun.kml */; };
+		954CB2AA2AE5457B005EB2E9 /* pohangDangDangRun.kml in Resources */ = {isa = PBXBuildFile; fileRef = 954CB2A12AE5457A005EB2E9 /* pohangDangDangRun.kml */; };
+		954CB2AB2AE5457B005EB2E9 /* flightRun.kml in Resources */ = {isa = PBXBuildFile; fileRef = 954CB2A22AE5457A005EB2E9 /* flightRun.kml */; };
+		954CB2AC2AE5457B005EB2E9 /* flightRun.kml in Resources */ = {isa = PBXBuildFile; fileRef = 954CB2A22AE5457A005EB2E9 /* flightRun.kml */; };
+		954CB2AD2AE5457B005EB2E9 /* pohangDuckRun.kml in Resources */ = {isa = PBXBuildFile; fileRef = 954CB2A32AE5457B005EB2E9 /* pohangDuckRun.kml */; };
+		954CB2AE2AE5457B005EB2E9 /* pohangDuckRun.kml in Resources */ = {isa = PBXBuildFile; fileRef = 954CB2A32AE5457B005EB2E9 /* pohangDuckRun.kml */; };
+		954CB2AF2AE5457B005EB2E9 /* seoulCamelRun.kml in Resources */ = {isa = PBXBuildFile; fileRef = 954CB2A42AE5457B005EB2E9 /* seoulCamelRun.kml */; };
+		954CB2B02AE5457B005EB2E9 /* seoulCamelRun.kml in Resources */ = {isa = PBXBuildFile; fileRef = 954CB2A42AE5457B005EB2E9 /* seoulCamelRun.kml */; };
 		954FFF782AE132D100D27537 /* CourseDataUploadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954FFF772AE132D100D27537 /* CourseDataUploadManager.swift */; };
 		954FFF7B2AE136CA00D27537 /* CourseDataUploadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954FFF7A2AE136CA00D27537 /* CourseDataUploadView.swift */; };
 		959D90262ADA35F100748BFB /* DataTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959D90252ADA35F100748BFB /* DataTestView.swift */; };
@@ -193,8 +192,6 @@
 
 /* Begin PBXFileReference section */
 		0E29F64A2ADF653000F5EF5C /* FontExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontExtension.swift; sourceTree = "<group>"; };
-		0E29F64E2ADF681E00F5EF5C /* test.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = test.kml; sourceTree = "<group>"; };
-		0E29F64F2ADF681E00F5EF5C /* seoulDuckRun.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = seoulDuckRun.kml; sourceTree = "<group>"; };
 		0E29F6522ADF6C3A00F5EF5C /* RunningPopup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RunningPopup.swift; sourceTree = "<group>"; };
 		0E29F6542ADF6C7D00F5EF5C /* KMLParserManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KMLParserManager.swift; sourceTree = "<group>"; };
 		0E29F6562ADF6CA000F5EF5C /* RunningMap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RunningMap.swift; sourceTree = "<group>"; };
@@ -243,11 +240,12 @@
 		954CB28E2AE51264005EB2E9 /* Outline.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Outline.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		954CB28F2AE51264005EB2E9 /* Outline Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Outline Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		954CB2992AE514D3005EB2E9 /* ConnectingWatchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectingWatchModel.swift; sourceTree = "<group>"; };
-		954FFF672AE12F0B00D27537 /* seoulCamelRun.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = seoulCamelRun.kml; path = ../../../../../../../../Downloads/seoulCamelRun.kml; sourceTree = "<group>"; };
-		954FFF682AE12F0B00D27537 /* pohangDangDangRun.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = pohangDangDangRun.kml; path = ../../../../../../../../Downloads/pohangDangDangRun.kml; sourceTree = "<group>"; };
-		954FFF692AE12F0B00D27537 /* seoulOctopusRun.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = seoulOctopusRun.kml; path = ../../../../../../../../Downloads/seoulOctopusRun.kml; sourceTree = "<group>"; };
-		954FFF6A2AE12F0B00D27537 /* pohangDuckRun.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = pohangDuckRun.kml; path = ../../../../../../../../Downloads/pohangDuckRun.kml; sourceTree = "<group>"; };
-		954FFF6B2AE12F0B00D27537 /* pohangCrocodileRun.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = pohangCrocodileRun.kml; path = ../../../../../../../../Downloads/pohangCrocodileRun.kml; sourceTree = "<group>"; };
+		954CB29F2AE5457A005EB2E9 /* pohangCrocodileRun.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = pohangCrocodileRun.kml; sourceTree = "<group>"; };
+		954CB2A02AE5457A005EB2E9 /* seoulOctopusRun.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = seoulOctopusRun.kml; sourceTree = "<group>"; };
+		954CB2A12AE5457A005EB2E9 /* pohangDangDangRun.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = pohangDangDangRun.kml; sourceTree = "<group>"; };
+		954CB2A22AE5457A005EB2E9 /* flightRun.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = flightRun.kml; sourceTree = "<group>"; };
+		954CB2A32AE5457B005EB2E9 /* pohangDuckRun.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = pohangDuckRun.kml; sourceTree = "<group>"; };
+		954CB2A42AE5457B005EB2E9 /* seoulCamelRun.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = seoulCamelRun.kml; sourceTree = "<group>"; };
 		954FFF772AE132D100D27537 /* CourseDataUploadManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseDataUploadManager.swift; sourceTree = "<group>"; };
 		954FFF7A2AE136CA00D27537 /* CourseDataUploadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseDataUploadView.swift; sourceTree = "<group>"; };
 		959D90252ADA35F100748BFB /* DataTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTestView.swift; sourceTree = "<group>"; };
@@ -356,13 +354,12 @@
 		0E29F64D2ADF681E00F5EF5C /* KML */ = {
 			isa = PBXGroup;
 			children = (
-				0E29F64E2ADF681E00F5EF5C /* test.kml */,
-				954FFF682AE12F0B00D27537 /* pohangDangDangRun.kml */,
-				954FFF6B2AE12F0B00D27537 /* pohangCrocodileRun.kml */,
-				954FFF6A2AE12F0B00D27537 /* pohangDuckRun.kml */,
-				954FFF672AE12F0B00D27537 /* seoulCamelRun.kml */,
-				954FFF692AE12F0B00D27537 /* seoulOctopusRun.kml */,
-				0E29F64F2ADF681E00F5EF5C /* seoulDuckRun.kml */,
+				954CB2A22AE5457A005EB2E9 /* flightRun.kml */,
+				954CB29F2AE5457A005EB2E9 /* pohangCrocodileRun.kml */,
+				954CB2A12AE5457A005EB2E9 /* pohangDangDangRun.kml */,
+				954CB2A32AE5457B005EB2E9 /* pohangDuckRun.kml */,
+				954CB2A42AE5457B005EB2E9 /* seoulCamelRun.kml */,
+				954CB2A02AE5457A005EB2E9 /* seoulOctopusRun.kml */,
 			);
 			path = KML;
 			sourceTree = "<group>";
@@ -942,24 +939,23 @@
 			buildActionMask = 2147483647;
 			files = (
 				29C9197E2ADE8F7F00AB0B5A /* GoogleService-Info.plist in Resources */,
-				0E29F6502ADF681E00F5EF5C /* test.kml in Resources */,
-				954FFF6C2AE12F0B00D27537 /* seoulCamelRun.kml in Resources */,
+				954CB2AB2AE5457B005EB2E9 /* flightRun.kml in Resources */,
+				954CB2A72AE5457B005EB2E9 /* seoulOctopusRun.kml in Resources */,
 				F0AC8AA42AD94C200061612C /* Preview Assets.xcassets in Resources */,
 				F0AC8B2C2AD967E30061612C /* Image.xcassets in Resources */,
 				BB1D531A2ADDBCAB0073771F /* Pretendard-Regular.ttf in Resources */,
+				954CB2A52AE5457B005EB2E9 /* pohangCrocodileRun.kml in Resources */,
 				F0AC8B2E2AD968A20061612C /* Icon.xcassets in Resources */,
-				954FFF702AE12F0B00D27537 /* seoulOctopusRun.kml in Resources */,
+				954CB2AD2AE5457B005EB2E9 /* pohangDuckRun.kml in Resources */,
 				F0AC8AA12AD94C200061612C /* Color.xcassets in Resources */,
-				954FFF722AE12F0B00D27537 /* pohangDuckRun.kml in Resources */,
+				954CB2AF2AE5457B005EB2E9 /* seoulCamelRun.kml in Resources */,
 				BB1D531E2ADDBCB90073771F /* Pretendard-Thin.ttf in Resources */,
 				BB1D530C2ADDBC560073771F /* Pretendard-Black.ttf in Resources */,
-				0E29F6512ADF681E00F5EF5C /* seoulDuckRun.kml in Resources */,
-				954FFF6E2AE12F0B00D27537 /* pohangDangDangRun.kml in Resources */,
 				BB1D530E2ADDBC620073771F /* Pretendard-Bold.ttf in Resources */,
 				BB1D53182ADDBCA20073771F /* Pretendard-Medium.ttf in Resources */,
 				BB1D53162ADDBC900073771F /* Pretendard-Light.ttf in Resources */,
+				954CB2A92AE5457B005EB2E9 /* pohangDangDangRun.kml in Resources */,
 				BB1D53102ADDBC690073771F /* Pretendard-ExtraBold.ttf in Resources */,
-				954FFF742AE12F0B00D27537 /* pohangCrocodileRun.kml in Resources */,
 				BB1D531C2ADDBCB20073771F /* Pretendard-SemiBold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -968,16 +964,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				954FFF6D2AE12F0B00D27537 /* seoulCamelRun.kml in Resources */,
-				954FFF752AE12F0B00D27537 /* pohangCrocodileRun.kml in Resources */,
-				954FFF762AE12F1500D27537 /* seoulDuckRun.kml in Resources */,
-				954FFF6F2AE12F0B00D27537 /* pohangDangDangRun.kml in Resources */,
+				954CB2B02AE5457B005EB2E9 /* seoulCamelRun.kml in Resources */,
 				F0AC8AB62AD94C210061612C /* Preview Assets.xcassets in Resources */,
-				954FFF712AE12F0B00D27537 /* seoulOctopusRun.kml in Resources */,
-				954FFF732AE12F0B00D27537 /* pohangDuckRun.kml in Resources */,
+				954CB2A82AE5457B005EB2E9 /* seoulOctopusRun.kml in Resources */,
+				954CB2AC2AE5457B005EB2E9 /* flightRun.kml in Resources */,
 				F0AC8AB32AD94C210061612C /* WatchImage.xcassets in Resources */,
 				F0AC8B362AD96A3D0061612C /* WatchIcon.xcassets in Resources */,
+				954CB2A62AE5457B005EB2E9 /* pohangCrocodileRun.kml in Resources */,
+				954CB2AA2AE5457B005EB2E9 /* pohangDangDangRun.kml in Resources */,
 				F0AC8B352AD96A360061612C /* WatchColor.xcassets in Resources */,
+				954CB2AE2AE5457B005EB2E9 /* pohangDuckRun.kml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
