@@ -54,7 +54,7 @@ struct HomeTabView: View {
             }
             
             if vm.running {
-                RunningView(vm: vm)
+                RunningView(homeTabViewModel: vm)
             }
         }
         .tint(.primaryColor)
