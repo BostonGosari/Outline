@@ -11,8 +11,8 @@ import MapKit
 struct BottomScrollView: View {
     
     @ObservedObject var homeTabViewModel: HomeTabViewModel
-    @State private var showDetail = false
-    
+    @State private var selectedCourse: CourseWithDistance?
+
     var body: some View {
         VStack(alignment: .leading) {
             Text("이런 코스도 있어요.")
@@ -21,12 +21,12 @@ struct BottomScrollView: View {
             
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack {
-                    ForEach(homeTabViewModel.withoutRecommendedCourses, id: \.id) { currnetCourse in
+                    ForEach(homeTabViewModel.withoutRecommendedCourses, id: \.id) { currentCourse in
                         VStack {
                             Button {
-                                showDetail = true
+                                selectedCourse = currentCourse
                             } label: {
-                                AsyncImage(url: URL(string: currnetCourse.course.thumbnail))
+                                AsyncImage(url: URL(string: currentCourse.course.thumbnail))
                                     .fixedSize()
                                     .frame(width: 164, height: 236)
                                     .scaledToFit()
@@ -44,13 +44,13 @@ struct BottomScrollView: View {
                                     .overlay {
                                         VStack(alignment: .leading) {
                                             Spacer()
-                                            Text("\(currnetCourse.course.courseName)")
+                                            Text("\(currentCourse.course.courseName)")
                                                 .font(Font.system(size: 20).weight(.semibold))
                                                 .foregroundColor(.white)
                                             HStack(spacing: 0) {
                                                 Image(systemName: "mappin")
                                                     .foregroundColor(.gray600)
-                                                Text("\(currnetCourse.course.locationInfo.locality) \(currnetCourse.course.locationInfo.subLocality)")
+                                                Text("\(currentCourse.course.locationInfo.locality) \(currentCourse.course.locationInfo.subLocality)")
                                                     .foregroundColor(.gray600)
                                             }
                                             .font(.caption)
@@ -74,8 +74,8 @@ struct BottomScrollView: View {
                                     )
                             }
                         }
-                        .fullScreenCover(isPresented: $showDetail) {
-                            CourseDetailView(homeTabViewModel: homeTabViewModel, course: currnetCourse)
+                        .fullScreenCover(item: $selectedCourse) { course in
+                            CourseDetailView(homeTabViewModel: homeTabViewModel, course: course)
                         }
                     }
                 }
