@@ -46,7 +46,6 @@ struct FreeRunningHomeView: View {
             }
         }
         .preferredColorScheme(.dark)
-
     }
 }
 

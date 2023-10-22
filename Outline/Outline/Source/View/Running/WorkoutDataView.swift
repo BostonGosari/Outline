@@ -64,5 +64,5 @@ extension Double {
 }
 
 #Preview {
-    WorkoutDataView(runningViewModel: RunningViewModel(), digitalTimerViewModel: DigitalTimerViewModel())
+    WorkoutDataView(runningViewModel: RunningViewModel(homeTabViewModel: HomeTabViewModel()), digitalTimerViewModel: DigitalTimerViewModel())
 }

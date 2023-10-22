@@ -10,6 +10,8 @@ import CoreMotion
 
 class RunningViewModel: ObservableObject {
     
+    @ObservedObject var homeTabViewModel: HomeTabViewModel
+    
     // MARK: - Published Properties
     
     @Published var totalTime = 0.0
@@ -28,15 +30,21 @@ class RunningViewModel: ObservableObject {
     @Published var time = 0.0
     @Published var start: Date?
     @Published var end: Date?
-        
+    
     // MARK: - Private Properties
     
     private let pedometer: CMPedometer
     private let healthKitManager: HealthKitManager
     
+    private let userDataModel = UserDataModel()
+    
+    private var RunningStartDate = Date()
+    private var RunningEndDate = Date()
+    
     // MARK: - Initialization
     
-    init() {
+    init(homeTabViewModel: HomeTabViewModel) {
+        self.homeTabViewModel = homeTabViewModel
         self.pedometer = CMPedometer()
         self.healthKitManager = HealthKitManager()
     }
@@ -44,10 +52,12 @@ class RunningViewModel: ObservableObject {
     // MARK: - Public Methods
     
     func startRunning() {
+        RunningStartDate = Date()
         startPedometerUpdates()
     }
     
     func stopRunning() {
+        RunningEndDate = Date()
         stopPedometerUpdates()
     }
     
@@ -115,6 +125,7 @@ class RunningViewModel: ObservableObject {
         totalDistance += distance
         pedometer.stopUpdates()
         healthKitManager.endWorkout(steps: totalSteps, distance: totalDistance, energy: kilocalorie)
+        saveRunning()
         reset()
     }
     
@@ -128,5 +139,25 @@ class RunningViewModel: ObservableObject {
         avgPace = 0.0
         cadence = 0.0
         time = 0.0
+    }
+    
+    private func saveRunning() {
+        guard let course = homeTabViewModel.startCourse else { return }
+        
+        let courseData = CourseData(courseName: course.courseName, runningLength: course.courseLength, heading: course.heading, distance: course.distance, coursePaths: convertToCLLocationCoordinates(course.coursePaths))
+
+        let healthData = HealthData(totalTime: totalTime, averageCadence: totalSteps / totalDistance, totalRunningDistance: totalDistance / 1000, totalEnergy: kilocalorie, averageHeartRate: 0.0, averagePace: totalTime / totalDistance * 1000 / 60, startDate: RunningStartDate, endDate: RunningEndDate)
+        
+        let newRunningRecord = RunningRecord(id: UUID().uuidString, runningType: .free, courseData: courseData, healthData: healthData)
+        
+        userDataModel.createRunningRecord(record: newRunningRecord) { result in
+            switch result {
+            case .success:
+                print("saved")
+                print(newRunningRecord)
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
 }
