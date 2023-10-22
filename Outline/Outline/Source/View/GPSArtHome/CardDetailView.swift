@@ -11,7 +11,7 @@ import MapKit
 struct CardDetailView: View {
     
     @State var start = false
-    @ObservedObject var vm: HomeTabViewModel
+    @ObservedObject var homeTabViewModel: HomeTabViewModel
     @Environment(\.dismiss) var dismiss
     
     @Binding var isShow: Bool
@@ -46,7 +46,7 @@ struct CardDetailView: View {
                         courseImage
                         courseInformation
                     }
-                    CardDetailInformationView(vm: vm, currentIndex: currentIndex)
+                    CardDetailInformationView(homeTabViewModel: homeTabViewModel, currentIndex: currentIndex)
                         .opacity(appear[2] ? 1 : 0)
                         .offset(y: appear[2] ? 0 : fadeInOffset)
                 }
@@ -85,26 +85,26 @@ struct CardDetailView: View {
     private var courseInformation: some View {
         VStack(alignment: .leading) {
             VStack(alignment: .leading, spacing: 0) {
-                Text("\(vm.recommendedCoures[currentIndex].course.courseName)")
+                Text("\(homeTabViewModel.recommendedCoures[currentIndex].course.courseName)")
                     .font(.largeTitle)
                     .bold()
                     .padding(.bottom, 8)
                 HStack {
                     Image(systemName: "mappin")
-                    Text("\(vm.recommendedCoures[currentIndex].course.locationInfo.locality) \(vm.recommendedCoures[currentIndex].course.locationInfo.subLocality) • 내 위치에서 \(vm.recommendedCoures[currentIndex].distance/1000, specifier: "%.1f")km")
+                    Text("\(homeTabViewModel.recommendedCoures[currentIndex].course.locationInfo.locality) \(homeTabViewModel.recommendedCoures[currentIndex].course.locationInfo.subLocality) • 내 위치에서 \(homeTabViewModel.recommendedCoures[currentIndex].distance/1000, specifier: "%.1f")km")
                 }
                 .font(.caption)
                 .fontWeight(.semibold)
                 .padding(.bottom, 16)
                 
                 HStack {
-                    Text("#\(vm.recommendedCoures[currentIndex].course.courseLength, specifier: "%.0f")km")
+                    Text("#\(homeTabViewModel.recommendedCoures[currentIndex].course.courseLength, specifier: "%.0f")km")
                         .frame(width: 70, height: 23)
                         .background {
                             Capsule()
                                 .stroke()
                         }
-                    Text("#\(formatDuration(vm.recommendedCoures[currentIndex].course.courseDuration))")
+                    Text("#\(formatDuration(homeTabViewModel.recommendedCoures[currentIndex].course.courseDuration))")
                         .frame(width: 70, height: 23)
                         .background {
                             Capsule()
@@ -119,9 +119,9 @@ struct CardDetailView: View {
             
             Spacer()
             
-            SlideToUnlock(isUnlocked: $vm.start)
-                .onChange(of: vm.start) { _, _ in
-                    vm.startCourse = vm.recommendedCoures[currentIndex].course
+            SlideToUnlock(isUnlocked: $homeTabViewModel.start)
+                .onChange(of: homeTabViewModel.start) { _, _ in
+                    homeTabViewModel.startCourse = homeTabViewModel.recommendedCoures[currentIndex].course
                     isShow = false
                 }
                 .opacity(appear[1] ? 1 : 0)

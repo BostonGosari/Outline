@@ -10,7 +10,7 @@ import MapKit
 
 struct BottomScrollView: View {
     
-    @ObservedObject var vm: HomeTabViewModel
+    @ObservedObject var homeTabViewModel: HomeTabViewModel
     @State private var showDetail = false
     
     var body: some View {
@@ -21,7 +21,7 @@ struct BottomScrollView: View {
             
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack {
-                    ForEach(vm.withoutRecommendedCourses, id: \.id) { currnetCourse in
+                    ForEach(homeTabViewModel.withoutRecommendedCourses, id: \.id) { currnetCourse in
                         VStack {
                             Button {
                                 showDetail = true
@@ -75,7 +75,7 @@ struct BottomScrollView: View {
                             }
                         }
                         .fullScreenCover(isPresented: $showDetail) {
-                            CourseDetailView(vm: vm, course: currnetCourse)
+                            CourseDetailView(homeTabViewModel: homeTabViewModel, course: currnetCourse)
                         }
                     }
                 }
@@ -97,7 +97,7 @@ struct BottomScrollView: View {
 
 struct CourseDetailView: View {
     
-    @ObservedObject var vm: HomeTabViewModel
+    @ObservedObject var homeTabViewModel: HomeTabViewModel
     var course: CourseWithDistance
     @Environment(\.dismiss) var dismiss
     
@@ -105,7 +105,7 @@ struct CourseDetailView: View {
         ZStack {
             Color.gray900.ignoresSafeArea()
             ScrollView {
-                CourseBannerView(vm: vm, course: course)
+                CourseBannerView(homeTabViewModel: homeTabViewModel, course: course)
                 VStack(alignment: .leading, spacing: 24) {
                     HStack {
                         Text("#\(stringForCourseLevel(course.course.level))")
@@ -219,7 +219,7 @@ struct CourseDetailView: View {
 
 struct CourseBannerView: View {
     
-    @ObservedObject var vm: HomeTabViewModel
+    @ObservedObject var homeTabViewModel: HomeTabViewModel
     @Environment(\.dismiss) var dismiss
     var course: CourseWithDistance
     
@@ -273,9 +273,9 @@ struct CourseBannerView: View {
             
             Spacer()
             
-            SlideToUnlock(isUnlocked: $vm.start)
-                .onChange(of: vm.start) { _, _ in
-                    vm.startCourse = course.course
+            SlideToUnlock(isUnlocked: $homeTabViewModel.start)
+                .onChange(of: homeTabViewModel.start) { _, _ in
+                    homeTabViewModel.startCourse = course.course
                     dismiss()
                 }
                 .padding(-10)

@@ -10,26 +10,26 @@ import MapKit
 
 struct CardDetailInformationView: View {
     
-    @ObservedObject var vm: HomeTabViewModel
+    @ObservedObject var homeTabViewModel: HomeTabViewModel
     var currentIndex: Int
     
     var body: some View {
         VStack(alignment: .leading, spacing: 24) {
             HStack {
-                Text("#\(stringForCourseLevel(vm.recommendedCoures[currentIndex].course.level))")
+                Text("#\(stringForCourseLevel(homeTabViewModel.recommendedCoures[currentIndex].course.level))")
                     .frame(width: 70, height: 23)
                     .background {
                         Capsule()
                             .stroke()
                     }
                     .foregroundColor(.primaryColor)
-                Text("\(vm.recommendedCoures[currentIndex].course.courseLength, specifier: "%.0f")km")
+                Text("\(homeTabViewModel.recommendedCoures[currentIndex].course.courseLength, specifier: "%.0f")km")
                     .frame(width: 70, height: 23)
                     .background {
                         Capsule()
                             .stroke()
                     }
-                Text("\(formatDuration(vm.recommendedCoures[currentIndex].course.courseDuration))")
+                Text("\(formatDuration(homeTabViewModel.recommendedCoures[currentIndex].course.courseDuration))")
                     .frame(width: 70, height: 23)
                     .background {
                         Capsule()
@@ -40,7 +40,7 @@ struct CardDetailInformationView: View {
             .font(.caption)
             
             VStack(alignment: .leading, spacing: 8) {
-                Text("\(vm.recommendedCoures[currentIndex].course.locationInfo.administrativeArea) \(vm.recommendedCoures[currentIndex].course.locationInfo.locality) \(vm.recommendedCoures[currentIndex].course.locationInfo.subLocality)")
+                Text("\(homeTabViewModel.recommendedCoures[currentIndex].course.locationInfo.administrativeArea) \(homeTabViewModel.recommendedCoures[currentIndex].course.locationInfo.locality) \(homeTabViewModel.recommendedCoures[currentIndex].course.locationInfo.subLocality)")
                     .font(.title3)
                     .bold()
                 Text("--")
@@ -59,7 +59,7 @@ struct CardDetailInformationView: View {
                         Text("거리")
                     }
                     .foregroundColor(.primaryColor)
-                    Text("\(vm.recommendedCoures[currentIndex].course.courseLength, specifier: "%.0f")km")
+                    Text("\(homeTabViewModel.recommendedCoures[currentIndex].course.courseLength, specifier: "%.0f")km")
                 }
                 HStack {
                     HStack {
@@ -67,7 +67,7 @@ struct CardDetailInformationView: View {
                         Text("예상 소요 시간")
                     }
                     .foregroundColor(.primaryColor)
-                    Text("\(formatDuration(vm.recommendedCoures[currentIndex].course.courseDuration))")
+                    Text("\(formatDuration(homeTabViewModel.recommendedCoures[currentIndex].course.courseDuration))")
                 }
                 HStack {
                     HStack {
@@ -75,7 +75,7 @@ struct CardDetailInformationView: View {
                         Text("골목길")
                     }
                     .foregroundColor(.primaryColor)
-                    Text(stringForAlley(vm.recommendedCoures[currentIndex].course.alley))
+                    Text(stringForAlley(homeTabViewModel.recommendedCoures[currentIndex].course.alley))
                 }
             }
             .padding(.horizontal, 10)
@@ -87,8 +87,8 @@ struct CardDetailInformationView: View {
                 .bold()
             VStack(alignment: .leading) {
                 MapInfoView(camera: MKMapCamera(
-                    lookingAtCenter: convertToCLLocationCoordinate(vm.recommendedCoures[currentIndex].course.centerLocation),
-                    fromDistance: 1000, pitch: 0, heading: 0), coordinates: convertToCLLocationCoordinates(vm.recommendedCoures[currentIndex].course.coursePaths)
+                    lookingAtCenter: convertToCLLocationCoordinate(homeTabViewModel.recommendedCoures[currentIndex].course.centerLocation),
+                    fromDistance: 1000, pitch: 0, heading: 0), coordinates: convertToCLLocationCoordinates(homeTabViewModel.recommendedCoures[currentIndex].course.coursePaths)
                 )
                 .frame(height: 200)
                 .foregroundStyle(.thinMaterial)

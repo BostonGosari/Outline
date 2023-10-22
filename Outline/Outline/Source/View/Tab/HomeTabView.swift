@@ -9,7 +9,7 @@ import SwiftUI
 
 struct HomeTabView: View {
     
-    @StateObject private var vm = HomeTabViewModel()
+    @StateObject private var homeTabViewModel = HomeTabViewModel()
     @State var selectedTab: Tab = .GPSArtRunning
     
     @Namespace var namespace
@@ -25,9 +25,9 @@ struct HomeTabView: View {
                         Group {
                             switch selectedTab {
                             case .freeRunning:
-                                FreeRunningHomeView(vm: vm)
+                                FreeRunningHomeView(homeTabViewModel: homeTabViewModel)
                             case .GPSArtRunning:
-                                GPSArtHomeView(vm: vm, isShow: $isShow, namespace: namespace)
+                                GPSArtHomeView(homeTabViewModel: homeTabViewModel, isShow: $isShow, namespace: namespace)
                             case .myRecord:
                                 Text("나의기록 뷰")
                             }
@@ -41,20 +41,20 @@ struct HomeTabView: View {
                     }
                 }
                 .onAppear {
-                    vm.locationManager.requestWhenInUseAuthorization()
-                    vm.readAllCourses()
+                    homeTabViewModel.locationManager.requestWhenInUseAuthorization()
+                    homeTabViewModel.readAllCourses()
                 }
                 .refreshable {
-                    vm.fetchRecommendedCourses()
+                    homeTabViewModel.fetchRecommendedCourses()
                 }
             }
             
-            if vm.start {
-                CountDown(running: $vm.running, start: $vm.start)
+            if homeTabViewModel.start {
+                CountDown(running: $homeTabViewModel.running, start: $homeTabViewModel.start)
             }
             
-            if vm.running {
-                RunningView(homeTabViewModel: vm)
+            if homeTabViewModel.running {
+                RunningView(homeTabViewModel: homeTabViewModel)
             }
         }
         .tint(.primaryColor)
