@@ -1,40 +1,35 @@
 import SwiftUI
 
 struct WorkoutDataView: View {
+    
+    @ObservedObject var runningViewModel: RunningViewModel
+    @ObservedObject var digitalTimerViewModel: DigitalTimerViewModel
+    let weight: Double = 60
+    
     var body: some View {
         ZStack {
             Color("Gray900").ignoresSafeArea()
             VStack {
-                strokeText(text: "00:20.53", width: 2, color: Color.primaryColor)
-                    .font(
-                        Font.custom("Pretendard-ExtraBold", size: 64)
-                    )
+                DigitalTimerView(digitalTimerViewModel: digitalTimerViewModel)
                 Spacer()
-                LazyVGrid(columns: Array(repeating: GridItem(), count: 2), spacing: 36) {
-                    workoutDataItem(value: "1.22/5", label: "킬로미터")
-                    workoutDataItem(value: "--", label: "평균 페이스")
-                    workoutDataItem(value: "232", label: "칼로리")
-                    workoutDataItem(value: "102", label: "BPM")
-                }
+                workOutDataGrid
+            }
+            .onChange(of: runningViewModel.distance) { _, _ in
+                runningViewModel.kilocalorie = weight * (runningViewModel.totalDistance + runningViewModel.distance) / 1000 * 1.036
             }
             .frame(height: 300)
             .padding()
         }
     }
-}
-
-extension WorkoutDataView {
-    private func strokeText(text: String, width: CGFloat, color: Color) -> some View {
-        ZStack {
-            ZStack {
-                Text(text).offset(x: width, y: width)
-                Text(text).offset(x: -width, y: -width)
-                Text(text).offset(x: -width, y: width)
-                Text(text).offset(x: width, y: -width)
-            }
-            .foregroundColor(color)
-            Text(text)
-                .foregroundColor(Color("Gray900"))
+    
+    private var workOutDataGrid: some View {
+        LazyVGrid(columns: Array(repeating: GridItem(), count: 2), spacing: 36) {
+            let averagePace = (runningViewModel.totalTime + runningViewModel.time) / (runningViewModel.totalDistance + runningViewModel.distance) * 1000
+            
+            workoutDataItem(value: String(format: "%.2f", (runningViewModel.totalDistance + runningViewModel.distance) / 1000), label: "킬로미터")
+            workoutDataItem(value: averagePace.formattedAveragePace(), label: "평균 페이스")
+            workoutDataItem(value: String(format: "%.0f", runningViewModel.kilocalorie), label: "칼로리")
+            workoutDataItem(value: "--", label: "BPM")
         }
     }
 }
@@ -54,8 +49,6 @@ extension WorkoutDataView {
     }
 }
 
-struct WorkoutDataView_Previews: PreviewProvider {
-    static var previews: some View {
-        WorkoutDataView()
-    }
+#Preview {
+    WorkoutDataView(runningViewModel: RunningViewModel(homeTabViewModel: HomeTabViewModel()), digitalTimerViewModel: DigitalTimerViewModel())
 }
