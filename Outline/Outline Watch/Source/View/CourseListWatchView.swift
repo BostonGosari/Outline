@@ -226,6 +226,3 @@ struct SampleCourePath: Shape {
 #Preview {
     CourseListWatchView(navigate: .constant(true))
 }
-//destination: countdownView(), // 변경된 부분
-//tag: workoutTypes[0],
-//selection: $workoutManager.selectedWorkout

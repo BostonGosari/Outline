@@ -12,7 +12,7 @@ struct BackgroundBlur: View {
         Rectangle()
             .foregroundColor(.clear)
             .frame(width: 289, height: 289)
-            .background(Color(red: 0.9, green: 0.75, blue: 1))
+            .background(Color.primaryColor)
             .cornerRadius(289)
             .blur(radius: 150)
             .padding(.top, 500)

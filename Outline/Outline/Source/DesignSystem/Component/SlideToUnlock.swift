@@ -9,14 +9,13 @@ import SwiftUI
 
 struct SlideToUnlock: View {
     
-    @State var isUnlocked = false
+    @Binding var isUnlocked: Bool
     
     private let maxWidth: CGFloat = 320
     private let minWidth: CGFloat = 70
     @State private var width: CGFloat = 70
     
-    @State private var hueRotation = false
-    @State private var isButtonPressed = false
+    @State private var isReached = false
     
     var body: some View {
         ZStack(alignment: .leading) {
@@ -32,7 +31,7 @@ struct SlideToUnlock: View {
         Capsule()
             .fill(
                 LinearGradient(
-                    colors: [.primaryColor, .purple],
+                    colors: [.primaryColor, .secondaryColor],
                     startPoint: .leading,
                     endPoint: .trailing
                 )
@@ -42,13 +41,7 @@ struct SlideToUnlock: View {
                 dragCircle
             }
             .simultaneousGesture(drag)
-            .animation(.spring(response: 0.5, dampingFraction: 1, blendDuration: 0), value: width)
-            .hueRotation(.degrees(hueRotation ? 10 : -10))
-            .onAppear {
-                withAnimation(.linear(duration: 3).repeatForever(autoreverses: true)) {
-                    hueRotation.toggle()
-                }
-            }
+            .animation(.spring(), value: width)
     }
     
     var backGround: some View {
@@ -56,7 +49,7 @@ struct SlideToUnlock: View {
             Capsule()
                 .foregroundStyle(.thinMaterial)
             LinearGradient(
-                colors: [.primaryColor, .white],
+                colors: [.secondaryColor, .white],
                 startPoint: .leading,
                 endPoint: .trailing
             )
@@ -73,13 +66,13 @@ struct SlideToUnlock: View {
         ZStack {
             Circle()
                 .foregroundColor(.white)
-            if isUnlocked {
+            if isReached {
                 ProgressView()
-                    .tint(.purple)
+                    .tint(.secondaryColor)
                     .controlSize(.large)
             } else {
                 Image(systemName: "paintbrush.fill")
-                    .foregroundColor(.purple)
+                    .foregroundColor(.secondaryColor)
                     .font(.title)
             }
         }
@@ -101,7 +94,12 @@ struct SlideToUnlock: View {
                     width = minWidth
                 } else {
                     withAnimation(.spring().delay(0.5)) {
-                        isUnlocked = true
+                        isReached = true
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                            isUnlocked = true
+                            width = minWidth
+                            isReached = false
+                        }
                     }
                 }
             }
@@ -109,5 +107,5 @@ struct SlideToUnlock: View {
 }
 
 #Preview {
-    SlideToUnlock()
+    SlideToUnlock(isUnlocked: .constant(false))
 }
