@@ -26,6 +26,7 @@ struct CourseData {
     var heading: Double
     var distance: Double
     var coursePaths: [CLLocationCoordinate2D]
+    var runningCourseId: String
 }
 
 struct HealthData {
