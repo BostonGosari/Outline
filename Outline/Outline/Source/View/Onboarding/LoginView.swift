@@ -42,28 +42,7 @@ struct LoginView: View {
                 } label: {
                     HStack {
                         Spacer()
-                        Image("logoApple")
-                            .padding(.trailing, 36)
-                        Text("애플아이디로 계속하기")
-                            .foregroundColor(.white)
-                            .frame(width: .infinity, height: 60)
-                        Spacer()
-                    }
-                    .background(.ultraThinMaterial.opacity(0.7))
-                    .cornerRadius(60)
-                    .overlay {
-                        borderRectangle
-                    }
-                }
-                
-                Button {
-                    // Navigate to onboarding view
-                } label: {
-                    HStack {
-                        Spacer()
-                        Image("logoKakaotalk")
-                            .padding(.trailing, 36)
-                        Text("카카오톡으로 계속하기")
+                        Text("시작하기")
                             .foregroundColor(.white)
                             .frame(width: .infinity, height: 60)
                         Spacer()
