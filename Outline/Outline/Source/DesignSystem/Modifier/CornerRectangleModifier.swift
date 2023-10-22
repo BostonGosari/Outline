@@ -14,9 +14,6 @@ struct CornerRectangleModifier: ViewModifier {
     
     func body(content: Content) -> some View {
         content
-            .overlay(
-              CardBorder(cornerRadiusTopLeft: topLeft, cornerRadiusTopRight: topRight, cornerRadiusBottomLeft: bottom, cornerRadiusBottomRight: bottom)
-            )
             .roundedCorners(topLeft, corners: [.topLeft])
             .roundedCorners(topRight, corners: [.topRight])
             .roundedCorners(bottom, corners: [.bottomLeft, .bottomRight])
