@@ -34,6 +34,7 @@
 		29111E392AE0CA46009833C7 /* FinalWatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29111E382AE0CA46009833C7 /* FinalWatchView.swift */; };
 		29111E3B2AE0CA89009833C7 /* SheetWatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29111E3A2AE0CA89009833C7 /* SheetWatchView.swift */; };
 		29111E3F2AE0CD0C009833C7 /* ConfettiWatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29111E3E2AE0CD0C009833C7 /* ConfettiWatchView.swift */; };
+		2937B1702AE4E1F800BB807E /* CornerRectangleModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2937B16F2AE4E1F800BB807E /* CornerRectangleModifier.swift */; };
 		295324852AE038EE00085120 /* UserInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0AC8B062AD965390061612C /* UserInfoModel.swift */; };
 		299803532ADF1DC200A9A134 /* CoreMotionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299803522ADF1DC200A9A134 /* CoreMotionViewModel.swift */; };
 		299803552ADF5F1000A9A134 /* HealthKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299803542ADF5F1000A9A134 /* HealthKitManager.swift */; };
@@ -178,8 +179,6 @@
 		0E29F6582ADF6CA000F5EF5C /* RunningMapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RunningMapView.swift; sourceTree = "<group>"; };
 		0E29F6592ADF6CA000F5EF5C /* WorkoutDataView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkoutDataView.swift; sourceTree = "<group>"; };
 		0E29F65E2ADF6CDD00F5EF5C /* RunningMapViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RunningMapViewModel.swift; sourceTree = "<group>"; };
-		0E9A5D3C2AE058C100C19FF3 /* Outline.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Outline.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		0E9A5D3D2AE058C100C19FF3 /* Outline Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Outline Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E9A5D3E2AE058D500C19FF3 /* ShareMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareMainView.swift; sourceTree = "<group>"; };
 		0E9A5D412AE058EF00C19FF3 /* CustomShareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomShareView.swift; sourceTree = "<group>"; };
 		0E9A5D432AE058FC00C19FF3 /* ImageShareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageShareView.swift; sourceTree = "<group>"; };
@@ -197,6 +196,7 @@
 		29111E382AE0CA46009833C7 /* FinalWatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalWatchView.swift; sourceTree = "<group>"; };
 		29111E3A2AE0CA89009833C7 /* SheetWatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetWatchView.swift; sourceTree = "<group>"; };
 		29111E3E2AE0CD0C009833C7 /* ConfettiWatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfettiWatchView.swift; sourceTree = "<group>"; };
+		2937B16F2AE4E1F800BB807E /* CornerRectangleModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CornerRectangleModifier.swift; sourceTree = "<group>"; };
 		299803522ADF1DC200A9A134 /* CoreMotionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreMotionViewModel.swift; sourceTree = "<group>"; };
 		299803542ADF5F1000A9A134 /* HealthKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitManager.swift; sourceTree = "<group>"; };
 		299803562AE00C9B00A9A134 /* HapticManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticManager.swift; sourceTree = "<group>"; };
@@ -715,6 +715,7 @@
 			isa = PBXGroup;
 			children = (
 				F0AC8B102AD965A70061612C /* Modifier.swift */,
+				2937B16F2AE4E1F800BB807E /* CornerRectangleModifier.swift */,
 			);
 			path = Modifier;
 			sourceTree = "<group>";
@@ -974,6 +975,7 @@
 				BB5239582ADC396300646494 /* BackgroundBlur.swift in Sources */,
 				BB5239372ADBD99F00646494 /* GPSArtHomeView.swift in Sources */,
 				F06B93632ADB847900387DEB /* Component.swift in Sources */,
+				2937B1702AE4E1F800BB807E /* CornerRectangleModifier.swift in Sources */,
 				299803532ADF1DC200A9A134 /* CoreMotionViewModel.swift in Sources */,
 				F06B93622ADB847500387DEB /* ContentView.swift in Sources */,
 				F09697472ADBCD6000C38AF4 /* Shape.swift in Sources */,
@@ -1003,7 +1005,6 @@
 				299803552ADF5F1000A9A134 /* HealthKitManager.swift in Sources */,
 				2998035E2AE0182100A9A134 /* ConfettiView.swift in Sources */,
 				0E9A5D462AE05DF200C19FF3 /* ShareMap.swift in Sources */,
-				BB52392B2ADAF7BD00646494 /* WorkoutManager.swift in Sources */,
 				0E29F65A2ADF6CA000F5EF5C /* RunningMap.swift in Sources */,
 				F05C97172ADA879100D5D959 /* LocationManager.swift in Sources */,
 				0E29F65F2ADF6CDD00F5EF5C /* RunningMapViewModel.swift in Sources */,
