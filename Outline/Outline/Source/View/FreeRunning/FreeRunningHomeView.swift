@@ -9,8 +9,10 @@ import SwiftUI
 
 struct FreeRunningHomeView: View {
     
+    @ObservedObject var homeTabViewModel: HomeTabViewModel
     @StateObject var locationManager = LocationManager()
     @State var userLocation = ""
+    @State var start = false
     
     var body: some View {
         ZStack {
@@ -36,7 +38,7 @@ struct FreeRunningHomeView: View {
                            .font(.subBody)
                            
                            Spacer()
-                           SlideToUnlock()
+                           SlideToUnlock(isUnlocked: $homeTabViewModel.start)
                        }
                        .padding(EdgeInsets(top: 58, leading: 24, bottom: 24, trailing: 16))
                    }
@@ -44,7 +46,6 @@ struct FreeRunningHomeView: View {
             }
         }
         .preferredColorScheme(.dark)
-
     }
 }
 
@@ -57,13 +58,9 @@ extension FreeRunningHomeView {
             .roundedCorners(10, corners: [.topLeft])
             .roundedCorners(70, corners: [.topRight])
             .roundedCorners(45, corners: [.bottomLeft, .bottomRight])
-            .modifier(
-                CornerRectangleModifier(topLeft: 10, topRight: 79, bottom: 45)
+            .overlay(
+                CustomRoundedRectangle(cornerRadiusTopLeft: 10, cornerRadiusTopRight: 79, cornerRadiusBottomLeft: 45, cornerRadiusBottomRight: 45)
             )
         
     }
-}
-
-#Preview {
-    FreeRunningHomeView()
 }

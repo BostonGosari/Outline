@@ -53,7 +53,7 @@ class WatchWorkoutManager: NSObject, ObservableObject {
         // Start the workout session and begin data collection.
         let startDate = Date()
         session?.startActivity(with: startDate)
-        builder?.beginCollection(withStart: startDate) {(success, error) in
+        builder?.beginCollection(withStart: startDate) { _, _ in
             // The workout has started.
         }
     }
@@ -188,8 +188,8 @@ extension WatchWorkoutManager: HKWorkoutSessionDelegate {
 
         // Wait for the session to transition states before ending the builder.
         if toState == .ended {
-            builder?.endCollection(withEnd: date) {(success, error) in
-                self.builder?.finishWorkout {(workout, error) in
+            builder?.endCollection(withEnd: date) { _, _ in
+                self.builder?.finishWorkout { workout, _ in
                     DispatchQueue.main.async {
                         self.workout = workout
                     }

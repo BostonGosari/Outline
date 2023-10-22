@@ -7,24 +7,44 @@
 import SwiftUI
 
 struct RunningView: View {
-    init() {
+    
+    @ObservedObject var homeTabViewModel: HomeTabViewModel
+    
+    @StateObject var runningViewModel: RunningViewModel
+    @StateObject var digitalTimerViewModel = DigitalTimerViewModel()
+    @State var selection = 0
+    
+    init(homeTabViewModel: HomeTabViewModel) {
+        self.homeTabViewModel = homeTabViewModel
+        self._runningViewModel = StateObject(wrappedValue: RunningViewModel(homeTabViewModel: homeTabViewModel))
+
         UIPageControl.appearance().currentPageIndicatorTintColor = UIColor.primary
         UIPageControl.appearance().pageIndicatorTintColor = UIColor.white
     }
     
     var body: some View {
-        ZStack(alignment: .bottom) {
-            Color("Gray900").ignoresSafeArea()
-            TabView {
-                RunningMapView()
-                WorkoutDataView()
+        NavigationStack {
+            ZStack(alignment: .bottom) {
+                Color("Gray900").ignoresSafeArea()
+                TabView(selection: $selection) {
+                    RunningMapView(runningViewModel: runningViewModel, digitalTimerViewModel: digitalTimerViewModel, homeTabViewModel: homeTabViewModel, selection: $selection)
+                        .tag(0)
+                    WorkoutDataView(runningViewModel: runningViewModel, digitalTimerViewModel: digitalTimerViewModel)
+                        .tag(1)
+                }
+                .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
+                .edgesIgnoringSafeArea(.all)
+                .onAppear {
+                    if homeTabViewModel.running == true {
+                        runningViewModel.startRunning()
+                        digitalTimerViewModel.startTimer()
+                    }
+                }
             }
-            .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
-            .edgesIgnoringSafeArea(.all)
         }
     }
 }
 
 #Preview {
-    RunningView()
+    RunningView(homeTabViewModel: HomeTabViewModel())
 }

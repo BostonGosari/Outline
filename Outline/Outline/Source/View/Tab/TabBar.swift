@@ -27,17 +27,18 @@ struct TabBar: View {
                             Text(item.text)
                                 .font(.system(size: tabTextSize))
                         }
-                        .foregroundStyle(selectedTab == item.tab ? Color("First") : Color("Gray400"))
+                        .foregroundStyle(selectedTab == item.tab ? .primaryColor : Color("Gray400"))
                     }
                     .buttonStyle(TabButtonStyle())
                     .frame(maxWidth: .infinity)
                 }
             }
             .padding(.top, 11)
-            .padding(.bottom, 18)
+            .padding(.bottom, 40)
             .background(
                 RoundedRectangle(cornerRadius: 30, style: .continuous)
                     .foregroundStyle(.ultraThinMaterial)
+                    .shadow(color: .white, radius: 2, x: 0, y: 2)
             )
         }
     }

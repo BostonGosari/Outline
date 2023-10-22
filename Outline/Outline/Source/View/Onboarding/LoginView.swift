@@ -73,8 +73,6 @@ struct LoginView: View {
                     .overlay {
                         borderRectangle
                     }
-                    
-                    
                 }
                 HStack {
                     Rectangle()
