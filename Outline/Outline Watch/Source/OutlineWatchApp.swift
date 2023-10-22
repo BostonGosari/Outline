@@ -13,7 +13,6 @@ struct OutlineWatchApp: App {
     var body: some Scene {
         WindowGroup {
             ContentWatchView()
-           
         }
     }
 }
