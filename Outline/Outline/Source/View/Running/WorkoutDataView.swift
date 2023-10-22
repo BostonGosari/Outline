@@ -49,20 +49,6 @@ extension WorkoutDataView {
     }
 }
 
-// MARK: - Double Extension 페이스를 표시하기 위한 함수
-extension Double {
-    /// 초단위의 Double 을 페이스 형식으로 바꿔주는 Extension
-    /// - Returns: -'--'' 형식의 String
-    func formattedAveragePace() -> String {
-        if self.isNaN {
-            return "-'--''"
-        }
-        let minutes = Int(self / 60)
-        let seconds = Int(self) % 60
-        return String(format: "%02d'%02d''", minutes, seconds)
-    }
-}
-
 #Preview {
     WorkoutDataView(runningViewModel: RunningViewModel(homeTabViewModel: HomeTabViewModel()), digitalTimerViewModel: DigitalTimerViewModel())
 }
