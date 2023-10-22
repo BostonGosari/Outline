@@ -22,6 +22,7 @@ class CoreMotionViewModel: ObservableObject {
     // 시작, 종료 추적
     @Published var start: Date?
     @Published var end: Date?
+    @Published var isPaused: Bool = false
     
     // 계산한 키로칼로리 -> 건강앱 데이터 전송용
     @Published var kilocalorie = 0.0

@@ -11,17 +11,27 @@ struct RunningMapView: View {
     @StateObject private var viewModel = RunningMapViewModel()
     @StateObject var locationManager = LocationManager()
     
+    @ObservedObject var runningViewModel: RunningViewModel
+    @ObservedObject var digitalTimerViewModel: DigitalTimerViewModel
+    @ObservedObject var homeTabViewModel: HomeTabViewModel
+    
     @GestureState var isLongPressed = false
-
+    
+    @Binding var selection: Int
+    
+    @State var navigateToFinishRunningView = false
+    
     var body: some View {
         ZStack {
-            RunningMap(
-                locationManager: locationManager,
-                viewModel: viewModel,
-                coordinates: viewModel.coordinates
-            )
+            if let course = homeTabViewModel.startCourse {
+                RunningMap(
+                    locationManager: locationManager,
+                    viewModel: viewModel,
+                    coordinates: convertToCLLocationCoordinates(course.coursePaths)
+                )
                 .ignoresSafeArea()
                 .preferredColorScheme(.dark)
+            }
             
             VStack(spacing: 0) {
                 /*running Guid View*/
@@ -50,7 +60,7 @@ extension RunningMapView {
             AnyView(
                 VStack {
                     RunningStateButton(
-                        imageName: "scope",
+                        imageName: "aim",
                         color: Color.whiteColor,
                         size: 18
                     ) {
@@ -66,6 +76,8 @@ extension RunningMapView {
                             size: 24
                         ) {
                             viewModel.runningType = .pause
+                            runningViewModel.pauseRunning()
+                            digitalTimerViewModel.stopTimer()
                         }
                         .padding(.trailing, 64)
                         
@@ -74,7 +86,13 @@ extension RunningMapView {
                             color: .primaryColor,
                             size: 19
                         ) {
-                            /*moveTo WorkoutDataView*/
+                            withAnimation {
+                                if selection == 0 {
+                                    selection = 1
+                                } else {
+                                    selection = 0
+                                }
+                            }
                         }
                     }
                     .frame(maxWidth: .infinity, alignment: .trailing)
@@ -90,24 +108,31 @@ extension RunningMapView {
                         .padding(24)
                         .background(Circle().fill(Color.whiteColor))
                         .scaleEffect(isLongPressed ? 1.5 : 1)
+                        .animation(.easeInOut(duration: 1), value: isLongPressed)
                         .simultaneousGesture(
                             LongPressGesture(minimumDuration: 2.0)
                                 .updating($isLongPressed) { currentState, gestureState, _ in
                                     gestureState = currentState
-                                    if currentState {
-                                        giveHapticFeedback()
-                                    }
                                 }
                                 .onEnded { _ in
-                                    /* move To FinishView */
+                                    print("Long press ended")
+                                    HapticManager.impact(style: .medium)
+                                    runningViewModel.stopRunning()
+                                    digitalTimerViewModel.counter = 0
+                                    navigateToFinishRunningView = true
                                 }
                         )
                         .highPriorityGesture(
                             TapGesture()
                                 .onEnded { _ in
+                                    print("Tap gesture")
                                     viewModel.isShowPopup = true
                                 }
                         )
+                        .navigationDestination(isPresented: $navigateToFinishRunningView) {
+                            FinishRunningView(homeTabViewModel: homeTabViewModel)
+                                .navigationBarBackButtonHidden()
+                        }
                     
                     Spacer()
                     
@@ -117,22 +142,18 @@ extension RunningMapView {
                         size: 24
                     ) {
                         viewModel.runningType = .start
+                        runningViewModel.resumeRunning()
+                        digitalTimerViewModel.startTimer()
                     }
                 }
-                .frame(maxWidth: .infinity, alignment: .center)
-                .padding(.horizontal, 64)
+                    .frame(maxWidth: .infinity, alignment: .center)
+                    .padding(.horizontal, 64)
             )
         case .stop:
             AnyView(
                 EmptyView()
             )
         }
-    }
-    
-    private func giveHapticFeedback() {
-        let impactFeedbackgenerator = UIImpactFeedbackGenerator(style: .medium)
-        impactFeedbackgenerator.prepare()
-        impactFeedbackgenerator.impactOccurred()
     }
 }
 
@@ -146,19 +167,29 @@ struct RunningStateButton: View {
         Button {
             self.action()
         }  label: {
-            Image(systemName: "\(imageName)")
-                .font(.system(size: size))
-                .foregroundStyle(Color.blackColor)
-                .padding(size)
-                .background(
-                    Circle()
-                        .fill(color)
-                        .stroke(.white, style: .init())
-                )
+            if imageName == "aim" {
+                Image("\(imageName)")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: size)
+                    .foregroundStyle(Color.blackColor)
+                    .padding(size)
+                    .background(
+                        Circle()
+                            .fill(color)
+                            .stroke(.white, style: .init())
+                    )
+            } else {
+                Image(systemName: imageName)
+                    .font(.system(size: size))
+                    .foregroundStyle(Color.blackColor)
+                    .padding(size)
+                    .background(
+                        Circle()
+                            .fill(color)
+                            .stroke(.white, style: .init())
+                    )
+            }
         }
     }
-}
-
-#Preview {
-    RunningMapView()
 }
