@@ -130,7 +130,7 @@ extension RunningMapView {
                                 }
                         )
                         .navigationDestination(isPresented: $navigateToFinishRunningView) {
-                            FinishRunningView(vm: homeTabViewModel)
+                            FinishRunningView(homeTabViewModel: homeTabViewModel)
                                 .navigationBarBackButtonHidden()
                         }
                     

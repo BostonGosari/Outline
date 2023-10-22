@@ -9,7 +9,7 @@ import SwiftUI
 
 struct FreeRunningHomeView: View {
     
-    @ObservedObject var vm: HomeTabViewModel
+    @ObservedObject var homeTabViewModel: HomeTabViewModel
     @StateObject var locationManager = LocationManager()
     @State var userLocation = ""
     @State var start = false
@@ -38,7 +38,7 @@ struct FreeRunningHomeView: View {
                            .font(.subBody)
                            
                            Spacer()
-                           SlideToUnlock(isUnlocked: $vm.start)
+                           SlideToUnlock(isUnlocked: $homeTabViewModel.start)
                        }
                        .padding(EdgeInsets(top: 58, leading: 24, bottom: 24, trailing: 16))
                    }

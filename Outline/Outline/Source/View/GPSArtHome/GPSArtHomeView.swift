@@ -9,7 +9,7 @@ import SwiftUI
 
 struct GPSArtHomeView: View {
     
-    @ObservedObject var vm: HomeTabViewModel
+    @ObservedObject var homeTabViewModel: HomeTabViewModel
 
     @State private var scrollOffset: CGFloat = 0
     @State var currentIndex: Int = 0
@@ -41,7 +41,7 @@ struct GPSArtHomeView: View {
                 VStack(spacing: 16) {
                     Carousel(pageCount: pageCount, edgeSpace: edgeSpace, spacing: spacing, currentIndex: $currentIndex) { pageIndex in
                         if !isShow {
-                            CardView(vm: vm, isShow: $isShow, currentIndex: $currentIndex, namespace: namespace, pageIndex: pageIndex)
+                            CardView(homeTabViewModel: homeTabViewModel, isShow: $isShow, currentIndex: $currentIndex, namespace: namespace, pageIndex: pageIndex)
                                 .transition(
                                     .asymmetric(
                                         insertion: .opacity.animation(.easeInOut(duration: 0.1)),
@@ -60,7 +60,7 @@ struct GPSArtHomeView: View {
                                 .animation(.easeInOut, value: currentIndex)
                         }
                     }
-                    BottomScrollView(vm: vm)
+                    BottomScrollView(homeTabViewModel: homeTabViewModel)
                 }
             }
             .overlay(alignment: .top) {
@@ -69,7 +69,7 @@ struct GPSArtHomeView: View {
             
             if isShow {
                 Color.gray900Color.ignoresSafeArea()
-                CardDetailView(vm: vm, isShow: $isShow, currentIndex: currentIndex, namespace: namespace)
+                CardDetailView(homeTabViewModel: homeTabViewModel, isShow: $isShow, currentIndex: currentIndex, namespace: namespace)
                     .zIndex(1)
                     .transition(
                         .asymmetric(
