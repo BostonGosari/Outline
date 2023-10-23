@@ -92,23 +92,3 @@ struct NavigationModifier: ViewModifier {
             }
     }
 }
-
-//#Preview {
-//    ShareMainView(runningData: ShareModel(
-//        courseName: "고래런",
-//        runningDate: "2023.10.19",
-//        runningRegion: "경상북도 포항시 지곡동",
-//        distance: "11km",
-//        cal: "127kcal",
-//        pace: "5’55\"",
-//        bpm: "132 BPM",
-//        time: "2hourse",
-//        userLocations: [
-//            CLLocationCoordinate2D(latitude: 36.0141253, longitude: 129.3471313),
-//            CLLocationCoordinate2D(latitude: 36.0154791, longitude: 129.3444276),
-//            CLLocationCoordinate2D(latitude: 36.0102547, longitude: 129.3394495),
-//            CLLocationCoordinate2D(latitude: 36.0097687, longitude: 129.3391061),
-//            CLLocationCoordinate2D(latitude: 36.008276, longitude: 129.3358231)
-//        ]
-//    ))
-//}
