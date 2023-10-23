@@ -9,8 +9,7 @@ import CoreLocation
 import SwiftUI
 
 struct OnboardingLocationAuthView: View {
-    private let locationManager = CLLocationManager()
-    
+    @StateObject var locationManager = LocationManager()
     @State private var isResponsed = false
 
     var body: some View {
@@ -21,18 +20,13 @@ struct OnboardingLocationAuthView: View {
                 .font(.subBody)
             Spacer()
         }
+        .padding(.top, 80)
+        .navigationBarBackButtonHidden()
         .onAppear {
-            locationManager.requestWhenInUseAuthorization()
+            locationManager.requestLocation()
         }
-        .toolbar {
-            ToolbarItem(placement: .topBarTrailing) {
-                NavigationLink {
-                    OnboardingNotificationAuthView()
-                } label: {
-                    Text("다음")
-                }
-
-            }
+        .navigationDestination(isPresented: $locationManager.isNext) {
+            OnboardingNotificationAuthView()
         }
     }
 }
