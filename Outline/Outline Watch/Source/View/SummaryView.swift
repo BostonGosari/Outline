@@ -22,25 +22,41 @@ struct SummaryView: View {
     }()
     
     @Binding var navigate: Bool
+    @State private var isShowingFinishView = true
+    @Namespace var topID
     
     var body: some View {
         if workoutManager.workout == nil {
             ProgressView("Saving Workout")
                 .navigationBarHidden(true)
+        } else if isShowingFinishView {
+            FinishWatchView(completionPercentage: 100)
+                .onAppear {
+                   scheduleTimerToHideFinishView()
+                }
+                .navigationBarHidden(true)
         } else {
-            ScrollView {
+            ScrollViewReader { proxy in
+                ScrollView {
+                    ConfettiWatchView()
+                    RoundedRectangle(cornerRadius: 20, style: .continuous)
+                        .stroke(lineWidth: 2)
+                        .frame(width: 120, height: 120)
+                        .padding()
+                    Text("그림을 완성했어요!")
+                        .padding(.bottom)
                     Text(NSNumber(value: workoutManager.builder?.elapsedTime ?? 0), formatter: timeFormatter)
-                    .foregroundColor(Color.first)
-                    .font(.system(size: 40, weight: .bold))
+                        .id(topID)
+                        .foregroundColor(Color.first)
+                        .font(.system(size: 40, weight: .bold))
+                      
                     Text("총시간")
                         .font(.system(size: 11))
                         .foregroundColor(Color.gray500)
                         .padding(.bottom, 32)
-//                        .padding(.top, 3)
-                    
                     LazyVGrid(columns: Array(repeating: GridItem(), count: 2), spacing: 33) {
                         workoutDataItem(value: "\((workoutManager.distance/1000).formatted(.number.precision(.fractionLength(2))))", label: "킬로미터")
-                        workoutDataItem(value: workoutManager.pace > 0 
+                        workoutDataItem(value: workoutManager.pace > 0
                                         ? String(format: "%02d’%02d’’", Int(workoutManager.pace) / 60, Int(workoutManager.pace) % 60)
                                         : "-’--’’",
                                         label: "평균 페이스")
@@ -59,10 +75,27 @@ struct SummaryView: View {
                     } label: {
                         Text("완료")
                     }
-                
-            }   .navigationBarHidden(true)
-         
+                    .frame(maxWidth: .infinity)
+                    .onAppear {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                            withAnimation(.easeInOut(duration: 2)) {
+                                proxy.scrollTo(topID, anchor: .top)
+                            }
+                        }
+                    }
+                }
+                .navigationBarHidden(true)
+               
+            }
+            
         }
+    }
+    private func scheduleTimerToHideFinishView() {
+           Timer.scheduledTimer(withTimeInterval: 3.0, repeats: false) { _ in
+               withAnimation {
+                   isShowingFinishView = false
+               }
+           }
     }
 }
 
