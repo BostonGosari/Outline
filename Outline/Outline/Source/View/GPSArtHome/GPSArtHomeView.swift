@@ -10,7 +10,7 @@ import SwiftUI
 struct GPSArtHomeView: View {
     
     @ObservedObject var homeTabViewModel: HomeTabViewModel
-
+    
     @State private var scrollOffset: CGFloat = 0
     @State var currentIndex: Int = 0
     
@@ -84,4 +84,8 @@ struct GPSArtHomeView: View {
             BackgroundBlur()
         )
     }
+}
+
+#Preview {
+    HomeTabView()
 }
