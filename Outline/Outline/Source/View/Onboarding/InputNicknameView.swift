@@ -85,10 +85,19 @@ extension InputNicknameView {
         }
     }
     private var doneButton: some View {
-        Button("완료") {
-            viewModel.doneButtonTapped()
+        return Group {
+            if viewModel.currentState == .success {
+                NavigationLink {
+                    InputUserInfoView()
+                } label: {
+                    Text("완료")
+                        .foregroundStyle(Color.primaryColor)
+                }
+            } else {
+                Text("완료")
+                .foregroundStyle(Color.primaryColor)
+            }
         }
-        .foregroundStyle(Color.primaryColor)
     }
     
 }
