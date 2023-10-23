@@ -10,6 +10,7 @@ import SwiftUI
 struct ImageShareView: View {
     
     @ObservedObject var viewModel: ShareViewModel
+    @Binding var shareImage: UIImage?
     
     @State private var selectPhotoMode = false
     @State private var showSheet = false
@@ -39,25 +40,13 @@ struct ImageShareView: View {
                 .ignoresSafeArea()
             
             VStack(spacing: 0) {
-                GeometryReader { geo in
-                    ZStack {
-                        if selectPhotoMode {
-                            selectPhotoView
-                        } else {
-                            blackImageView
-                        }
-                    }
-                    .aspectRatio(1080/1920, contentMode: .fit)
+                mainImageView
                     .padding(EdgeInsets(top: 20, leading: 49, bottom: 16, trailing: 49))
-                    .onAppear {
-                        self.size = CGSize(width: geo.size.width-98, height: geo.size.height-36)
-                    }
                     .mask {
                         Rectangle()
                             .frame(maxWidth: .infinity, alignment: .center)
                             .aspectRatio(1080.0/1920.0, contentMode: .fit)
                     }
-                }
                 pageIndicator
                 selectModeView
             }
@@ -71,10 +60,46 @@ struct ImageShareView: View {
             lastAngle = .degrees(0)
         }
         .modifier(SheetModifier(viewModel: viewModel, showSheet: $showSheet, image: $image))
+        .onChange(of: viewModel.currentPage, {
+            if viewModel.currentPage == 1 {
+                renderImage()
+            }
+        })
+        .onChange(of: selectPhotoMode, {
+            renderImage()
+        })
+        .onChange(of: image) { 
+            renderImage()
+        }
     }
 }
 
 extension ImageShareView {
+    
+    private func renderImage() {
+        shareImage = mainImageView.asImage(size: size)
+    }
+    
+    private var mainImageView: some View {
+        Group {
+            ZStack {
+                if selectPhotoMode {
+                    selectPhotoView
+                } else {
+                    blackImageView
+                }
+                GeometryReader { proxy in
+                    HStack {}
+                        .onAppear {
+                            size = CGSize(width: proxy.size.width, height: proxy.size.height)
+                            print(proxy.size)
+                    }
+                }
+            }
+            .aspectRatio(1080/1920, contentMode: .fit)
+        }
+    }
+    
     private var selectPhotoView: AnyView {
         if let img = image {
             AnyView(
