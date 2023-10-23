@@ -12,7 +12,7 @@ struct BottomScrollView: View {
     
     @ObservedObject var homeTabViewModel: HomeTabViewModel
     @State private var selectedCourse: CourseWithDistance?
-
+    
     var body: some View {
         VStack(alignment: .leading) {
             Text("이런 코스도 있어요.")
@@ -26,52 +26,56 @@ struct BottomScrollView: View {
                             Button {
                                 selectedCourse = currentCourse
                             } label: {
-                                AsyncImage(url: URL(string: currentCourse.course.thumbnail))
-                                    .fixedSize()
-                                    .frame(width: 164, height: 236)
-                                    .scaledToFit()
-                                    .overlay {
-                                        LinearGradient(
-                                            stops: [
-                                                Gradient.Stop(color: .black, location: 0.00),
-                                                Gradient.Stop(color: .black.opacity(0), location: 1.00)
-                                            ],
-                                            startPoint: UnitPoint(x: 0.5, y: 0.9),
-                                            endPoint: UnitPoint(x: 0.5, y: 0)
-                                        )
-                                        
-                                    }
-                                    .overlay {
-                                        VStack(alignment: .leading) {
-                                            Spacer()
-                                            Text("\(currentCourse.course.courseName)")
-                                                .font(Font.system(size: 20).weight(.semibold))
-                                                .foregroundColor(.white)
-                                            HStack(spacing: 0) {
-                                                Image(systemName: "mappin")
-                                                    .foregroundColor(.gray600)
-                                                Text("\(currentCourse.course.locationInfo.locality) \(currentCourse.course.locationInfo.subLocality)")
-                                                    .foregroundColor(.gray600)
-                                            }
-                                            .font(.caption)
-                                            .padding(.bottom, 16)
-                                        }
-                                        .frame(width: 164)
-                                        .offset(x: -15)
-                                    }
-                                    .roundedCorners(5, corners: [.topLeft])
-                                    .roundedCorners(30, corners: [.bottomLeft, .bottomRight, .topRight])
-                                    .foregroundColor(.clear)
-                                    .overlay(
-                                        CustomRoundedRectangle(
-                                            cornerRadiusTopLeft: 5,
-                                            cornerRadiusTopRight: 29,
-                                            cornerRadiusBottomLeft: 29,
-                                            cornerRadiusBottomRight: 29
-                                        )
-                                        .offset(x: 1, y: 1)
-                                        .frame(width: 166, height: 238)
+                                AsyncImage(url: URL(string: currentCourse.course.thumbnail)) { image in
+                                    image
+                                        .resizable()
+                                        .scaledToFill()
+                                } placeholder: {
+                                    Rectangle()
+                                }
+                                .frame(width: 164, height: 236)
+                                .overlay {
+                                    LinearGradient(
+                                        stops: [
+                                            Gradient.Stop(color: .black, location: 0.00),
+                                            Gradient.Stop(color: .black.opacity(0), location: 1.00)
+                                        ],
+                                        startPoint: UnitPoint(x: 0.5, y: 0.9),
+                                        endPoint: UnitPoint(x: 0.5, y: 0)
                                     )
+                                    
+                                }
+                                .overlay {
+                                    VStack(alignment: .leading) {
+                                        Spacer()
+                                        Text("\(currentCourse.course.courseName)")
+                                            .font(Font.system(size: 20).weight(.semibold))
+                                            .foregroundColor(.white)
+                                        HStack(spacing: 0) {
+                                            Image(systemName: "mappin")
+                                                .foregroundColor(.gray600)
+                                            Text("\(currentCourse.course.locationInfo.locality) \(currentCourse.course.locationInfo.subLocality)")
+                                                .foregroundColor(.gray600)
+                                        }
+                                        .font(.caption)
+                                        .padding(.bottom, 16)
+                                    }
+                                    .frame(width: 164)
+                                    .offset(x: -15)
+                                }
+                                .roundedCorners(5, corners: [.topLeft])
+                                .roundedCorners(30, corners: [.bottomLeft, .bottomRight, .topRight])
+                                .foregroundColor(.clear)
+                                .overlay(
+                                    CustomRoundedRectangle(
+                                        cornerRadiusTopLeft: 5,
+                                        cornerRadiusTopRight: 29,
+                                        cornerRadiusBottomLeft: 29,
+                                        cornerRadiusBottomRight: 29
+                                    )
+                                    .offset(x: 1, y: 1)
+                                    .frame(width: 166, height: 238)
+                                )
                             }
                         }
                         .fullScreenCover(item: $selectedCourse) { course in
@@ -227,11 +231,18 @@ struct CourseBannerView: View {
     }
     
     private var courseImage: some View {
-        Rectangle()
-            .foregroundColor(.gray800)
-            .roundedCorners(45, corners: [.bottomLeft])
-            .shadow(color: .white, radius: 0.5, y: 0.5)
-            .frame(height: 575)
+        AsyncImage(url: URL(string: course.course.thumbnail)) { image in
+            image
+                .resizable()
+                .scaledToFill()
+        } placeholder: {
+            Rectangle()
+                .scaledToFit()
+        }
+        .foregroundColor(.gray800)
+        .roundedCorners(45, corners: [.bottomLeft])
+        .shadow(color: .white, radius: 0.5, y: 0.5)
+        .frame(height: 575)
     }
     
     private var courseInformation: some View {
@@ -284,4 +295,8 @@ struct BottomScrollDetailView: View {
     var body: some View {
         Text("1")
     }
+}
+
+#Preview {
+    HomeTabView()
 }
