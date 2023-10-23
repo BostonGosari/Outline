@@ -66,7 +66,7 @@ struct UserDataModel: UserDataModelProtocol {
             pathList.append(newPath)
         }
         
-        newCourseData.coursePaths = NSSet(array: pathList)
+        newCourseData.coursePaths = NSOrderedSet(array: pathList)
         newCourseData.parentRecord = newRunningRecord
         
         let newHealthData = CoreHealthData(context: persistenceController.container.viewContext)
