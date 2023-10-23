@@ -10,19 +10,22 @@ import MapKit
 
 struct MapInfoView: UIViewRepresentable {
     
-    var camera: MKMapCamera
     var coordinates: [CLLocationCoordinate2D]
     
     func makeUIView(context: Context) -> MKMapView {
         let mapView = MKMapView()
         mapView.delegate = context.coordinator
-        mapView.camera = camera
         
         mapView.isUserInteractionEnabled = true
         mapView.showsUserLocation = true
         
         let polyline = MKPolyline(coordinates: coordinates, count: coordinates.count)
         mapView.addOverlay(polyline)
+        
+        if !coordinates.isEmpty {
+            let region = MKCoordinateRegion(polyline.boundingMapRect)
+            mapView.setRegion(region, animated: true)
+        }
         
         return mapView
     }
