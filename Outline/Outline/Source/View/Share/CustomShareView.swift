@@ -35,14 +35,6 @@ struct CustomShareView: View {
                 VStack(spacing: 0) {
                     customImageView
                         .padding(EdgeInsets(top: 20, leading: 49, bottom: 16, trailing: 49))
-                    if let renderedImage = renderedImage {
-                        Image(uiImage: renderedImage)
-                    }
-                    Button {
-                        renderLayerImage()
-                    } label: {
-                        Text("render Image")
-                    }
                     pageIndicator
                     tagView
                 }
@@ -232,7 +224,7 @@ extension PathGenerateManager {
         return path
     }
     
-    private func calculateCanvaDataInRect(width: Double, height: Double, region: MKCoordinateRegion) -> CanvasData {
+    private func calculateCanvaDataInRect(width: Double, height: Double, region: MKCoordinateRegion) -> CanvasDataForShare {
         let minLon = region.center.longitude - region.span.longitudeDelta / 2
 //        let maxLon = region.center.longitude + region.span.longitudeDelta / 2
 //        let minLat = region.center.latitude - region.span.latitudeDelta / 2
@@ -241,14 +233,16 @@ extension PathGenerateManager {
         let calculatedHeight = region.span.latitudeDelta * 1000000
         let calculatedWidth = region.span.longitudeDelta * 1000000
         
-        let relativeScale: Double = height / calculatedHeight
+        let relativeWidthScale: Double = width / calculatedWidth
+        let relativeHeightScale: Double = height / calculatedHeight
         
-        let fittedWidth = calculatedWidth * relativeScale
-        let fittedHeight = calculatedHeight * relativeScale
-        return CanvasData(
+        let fittedWidth = calculatedWidth * relativeWidthScale
+        let fittedHeight = calculatedHeight * relativeHeightScale
+        return CanvasDataForShare(
             width: Int(fittedWidth),
             height: Int(fittedHeight),
-            scale: relativeScale,
+            widthScale: relativeWidthScale,
+            heightScale: relativeHeightScale,
             zeroX: minLon,
             zeroY: maxLat
             )
@@ -322,9 +316,9 @@ extension PathGenerateManager {
         return MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: centerLatitude, longitude: centerLongitude), span: MKCoordinateSpan(latitudeDelta: latitudeDelta, longitudeDelta: longitudeDelta))
     }
     
-    private func calculateRelativePoint(coordinate: CLLocationCoordinate2D, canvasData: CanvasData) -> [Int] {
-        let posX = Int((coordinate.longitude - canvasData.zeroX) * canvasData.scale * 1000000)
-        let posY = Int((coordinate.latitude - canvasData.zeroY) * canvasData.scale * 1000000)
+    private func calculateRelativePoint(coordinate: CLLocationCoordinate2D, canvasData: CanvasDataForShare) -> [Int] {
+        let posX = Int((coordinate.longitude - canvasData.zeroX) * canvasData.widthScale * 1000000)
+        let posY = Int((coordinate.latitude - canvasData.zeroY) * canvasData.heightScale * 1000000)
         return [posX, posY]
     }
 }
