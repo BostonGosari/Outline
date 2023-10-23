@@ -20,7 +20,7 @@ struct OnboardingLocationAuthView: View {
                 .font(.subBody)
             Spacer()
         }
-        .padding(.top, 120)
+        .padding(.top, 80)
         .navigationBarBackButtonHidden()
         .onAppear {
             locationManager.requestLocation()
