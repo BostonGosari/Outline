@@ -31,15 +31,20 @@ struct CustomShareView: View {
         ZStack {
             Color.gray900Color
                 .ignoresSafeArea()
-            ScrollView {
-                VStack(spacing: 0) {
-                    customImageView
-                        .padding(EdgeInsets(top: 20, leading: 49, bottom: 16, trailing: 49))
-                    pageIndicator
-                    tagView
-                }
+            
+            VStack(spacing: 0) {
+                customImageView
+                    .padding(EdgeInsets(top: 20, leading: 49, bottom: 16, trailing: 49))
+                pageIndicator
+                tagView
             }
+            
         }
+        .onChange(of: viewModel.currentPage, {
+            if viewModel.currentPage == 0 {
+                renderLayerImage()
+            }
+        })
         .onAppear {
             renderLayerImage()
         }
