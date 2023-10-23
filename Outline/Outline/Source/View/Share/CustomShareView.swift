@@ -19,18 +19,19 @@ struct CustomShareView: View {
     @State private var isShowPace = true
     @State private var isShowDistance = true
     
+    // handle Image
     @State private var renderedImage: UIImage?
     @State private var mapView = MKMapView()
     @State private var imageWidth: CGFloat = 0
+    @State private var imageHeight: CGFloat = 0
     
     private let pathManager = PathGenerateManager.shared
-    
     
     var body: some View {
         ZStack {
             Color.gray900Color
                 .ignoresSafeArea()
-            ScrollView{
+            ScrollView {
                 VStack(spacing: 0) {
                     customImageView
                         .padding(EdgeInsets(top: 20, leading: 49, bottom: 16, trailing: 49))
@@ -52,7 +53,7 @@ struct CustomShareView: View {
 
 extension CustomShareView {
     private func renderLayerImage() {
-        renderMapViewAsImage(width: Int(imageWidth))
+        renderMapViewAsImage(width: Int(imageWidth), height: Int(imageHeight))
     }
 }
 
@@ -60,6 +61,7 @@ extension CustomShareView {
     private var customImageView: some View {
         ZStack {
             ShareMap(mapView: $mapView, userLocations: viewModel.runningData.userLocations)
+                .frame(width: imageWidth, height: imageHeight)
                 .overlay {
                     LinearGradient(colors: [.black.opacity(0), .black], startPoint: .center, endPoint: .bottom)
                 }
@@ -67,12 +69,12 @@ extension CustomShareView {
             GeometryReader { proxy in
                 HStack {}
                     .onAppear {
-                        imageWidth = proxy.size.width - 98
+                        imageWidth = proxy.size.width
+                        imageHeight = proxy.size.height
                 }
             }
         }
         .aspectRatio(1080.0/1920.0, contentMode: .fit)
-        
     }
     
     private var runningInfo: some View {
@@ -170,10 +172,10 @@ struct TagButton: View {
 }
 
 extension CustomShareView {
-    func renderMapViewAsImage(width: Int) {
+    func renderMapViewAsImage(width: Int, height: Int) {
         let options: MKMapSnapshotter.Options = .init()
         options.region = mapView.region
-        options.size = CGSize(width: width, height: Int(width * 1920 / 1080) )
+        options.size = CGSize(width: width, height: height)
         options.mapType = .standard
         options.showsBuildings = true
         
@@ -183,7 +185,7 @@ extension CustomShareView {
         snapshotter.start { snapshot, error in
            if let snapshot = snapshot {
                let renderedMapImage = snapshot.image
-               renderedImage = overlayMapInfo(renderdImage: renderedMapImage).asImage(size: CGSize(width: width, height: Int(width * 1920 / 1080 )))
+               renderedImage = overlayMapInfo(renderdImage: renderedMapImage).asImage(size: CGSize(width: width, height: height))
            } else if let error = error {
               print(error)
            }
@@ -191,15 +193,23 @@ extension CustomShareView {
     }
     func overlayMapInfo(renderdImage: UIImage) -> some View {
         ZStack {
-            Image(uiImage: renderdImage)
-            runningInfo
-            pathManager.caculateLinesInRect(width: imageWidth, height: Double(Int(imageWidth * 1920 / 1080)), coordinates: viewModel.runningData.userLocations, region: mapView.region)
-                .stroke(lineWidth: 6)
+            Group {
+                Group {
+                    Image(uiImage: renderdImage)
+                        
+                    pathManager.caculateLinesInRect(width: imageWidth, height: Double(imageWidth * 1920 / 1080), coordinates: viewModel.runningData.userLocations, region: mapView.region)
+                        .stroke(style: StrokeStyle(lineWidth: 15, lineCap: .round, lineJoin: .round))
+                }
+                .overlay {
+                    LinearGradient(colors: [.black.opacity(0), .black], startPoint: .center, endPoint: .bottom)
+                }
+                runningInfo
+            }
+            .offset(y: -30)
         }
-        .aspectRatio(1080.0/1920.0, contentMode: .fit)
+        .frame(width: imageWidth, height: imageHeight)
     }
 }
-
 
 extension PathGenerateManager {
     func caculateLinesInRect(
@@ -209,7 +219,6 @@ extension PathGenerateManager {
         region: MKCoordinateRegion
     ) -> some Shape {
         let canvasData = calculateCanvaDataInRect(width: width, height: height, region: region)
-        print(canvasData)
         var path = Path()
         
         let startPosition = calculateRelativePoint(coordinate: coordinates[0], canvasData: canvasData)
@@ -225,8 +234,8 @@ extension PathGenerateManager {
     
     private func calculateCanvaDataInRect(width: Double, height: Double, region: MKCoordinateRegion) -> CanvasData {
         let minLon = region.center.longitude - region.span.longitudeDelta / 2
-        let maxLon = region.center.longitude + region.span.longitudeDelta / 2
-        let minLat = region.center.latitude - region.span.latitudeDelta / 2
+//        let maxLon = region.center.longitude + region.span.longitudeDelta / 2
+//        let minLat = region.center.latitude - region.span.latitudeDelta / 2
         let maxLat = region.center.latitude + region.span.latitudeDelta / 2
         
         let calculatedHeight = region.span.latitudeDelta * 1000000
