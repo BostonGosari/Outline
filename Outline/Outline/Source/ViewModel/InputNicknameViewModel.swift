@@ -15,7 +15,7 @@ class InputNicknameViewModel: ObservableObject {
     @Published var moveToInputUserInfoView = false
     @Published var isSuccess = false
     
-    @Published var defaultNickname = "아웃라인메이트123"
+    @Published var defaultNickname = "아웃라인메이트"
     @Published var userNames = [String]()
     
     func checkNicname() {
@@ -35,7 +35,6 @@ class InputNicknameViewModel: ObservableObject {
 
 extension InputNicknameViewModel {
     private func checkDuplication() {
-        print(userNames)
         if userNames.contains(nickname) {
             checkNicnameDuplication = false
         } else {
