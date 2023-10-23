@@ -9,6 +9,7 @@ import SwiftUI
 
 struct CompleteButton: View {
     let text: String
+    let isActive: Bool
     let action: () -> Void
 
     var body: some View {
@@ -16,20 +17,21 @@ struct CompleteButton: View {
             self.action()
         }  label: {
             RoundedRectangle(cornerRadius: 15)
-                .fill(Color.primaryColor)
+                .fill(isActive ? Color.primaryColor : Color.gray700Color)
                 .frame(height: 55)
                 .padding(.horizontal, 16)
                 .overlay {
                     Text(text)
-                        .foregroundStyle(Color.black)
+                        .foregroundStyle(isActive ? Color.black : Color.whiteColor)
                         .font(.button)
                 }
         }
+        .disabled(!isActive)
     }
 }
 
 #Preview {
-    CompleteButton(text: "자랑하기") {
+    CompleteButton(text: "자랑하기", isActive: true) {
         
     }
 }

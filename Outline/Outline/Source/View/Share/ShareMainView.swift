@@ -44,7 +44,7 @@ struct ShareMainView: View {
                     }
                     .padding(.leading, 16)
                     
-                    CompleteButton(text: "공유하기") {
+                    CompleteButton(text: "공유하기", isActive: true) {
                         viewModel.tapShareButton = true
                         if viewModel.shareToInstagram() {
                             homeTabViewModel.running = false
