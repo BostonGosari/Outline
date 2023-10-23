@@ -47,7 +47,6 @@ class FinishRunningViewModel: ObservableObject {
             let courseData = data.courseData,
             let healthData = data.healthData {
             courseName = courseData.courseName ?? ""
-            courseRegion = ""
             
             if let startDate = healthData.startDate {
                 startTime = startDate.timeToString()
@@ -70,6 +69,7 @@ class FinishRunningViewModel: ObservableObject {
             runningData[3].data  = "\(healthData.averageHeartRate)"
             runningData[4].data  = "\(healthData.totalEnergy)"
             runningData[5].data = "\(healthData.averageCadence)"
+            
             if let paths = courseData.coursePaths {
                 var datas = [Coordinate]()
                 paths.forEach { elem in
@@ -80,6 +80,23 @@ class FinishRunningViewModel: ObservableObject {
                 print(datas)
                 userLocations = convertToCLLocationCoordinates(datas)
                 print(userLocations)
+            }
+            
+            let geocoder = CLGeocoder()
+            
+            if let first = userLocations.first {
+                let start = CLLocation(latitude: first.latitude, longitude: first.longitude)
+                geocoder.reverseGeocodeLocation(start) { placemarks, error in
+                    if let error = error {
+                        print("Reverse geocoding error: \(error.localizedDescription)")
+                    } else if let placemark = placemarks?.first {
+                        let area = placemark.administrativeArea ?? ""
+                        let city = placemark.locality ?? ""
+                        let town = placemark.subLocality ?? ""
+                        
+                        self.courseRegion = "\(area) \(city) \(town)"
+                    }
+                }
             }
         } else {
             courseName = ""
