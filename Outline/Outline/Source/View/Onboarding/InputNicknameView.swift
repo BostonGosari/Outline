@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct InputNicknameView: View {
-
+    @Environment(\.dismiss) private var dismiss
     @StateObject var viewModel = InputNicknameViewModel()
     
     var body: some View {
@@ -60,6 +60,9 @@ struct InputNicknameView: View {
                 .padding()
             }
             .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    dismissButton
+                }
                 ToolbarItem(placement: .topBarTrailing) {
                     doneButton
                 }
@@ -69,11 +72,32 @@ struct InputNicknameView: View {
 }
 
 extension InputNicknameView {
-    private var doneButton: some View {
-        Button("완료") {
-            viewModel.doneButtonTapped()
+    private var dismissButton: some View {
+        Button {
+            dismiss()
+        } label: {
+            HStack {
+               Image(systemName: "chevron.backward")
+               Text("다시 로그인")
+            }
+            .foregroundStyle(Color.primaryColor)
+            .navigationBarBackButtonHidden(true)
         }
-        .foregroundStyle(Color.primaryColor)
+    }
+    private var doneButton: some View {
+        return Group {
+            if viewModel.currentState == .success {
+                NavigationLink {
+                    InputUserInfoView()
+                } label: {
+                    Text("완료")
+                        .foregroundStyle(Color.primaryColor)
+                }
+            } else {
+                Text("완료")
+                .foregroundStyle(Color.primaryColor)
+            }
+        }
     }
     
 }
