@@ -32,6 +32,9 @@ final class PathGenerateManager {
     func caculateLines(width: Double, height: Double, coordinates: [CLLocationCoordinate2D]) -> some Shape {
         let canvasData = calculateCanvaData(coordinates: coordinates, width: width, height: height)
         var path = Path()
+        if coordinates.isEmpty {
+            return path
+        }
         
         let position = calculateRelativePoint(coordinate: coordinates[0], canvasData: canvasData)
         path.move(to: CGPoint(x: position[0], y: -position[1]))
