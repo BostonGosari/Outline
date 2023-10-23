@@ -18,6 +18,9 @@ class FinishRunningViewModel: ObservableObject {
             }
         }
     }
+    @Published var navigateToShareMainView = false
+    
+    private var runningDate = Date()
 
     var courseName: String = ""
     var courseRegion: String = ""
@@ -35,6 +38,8 @@ class FinishRunningViewModel: ObservableObject {
         RunningDataItem(text: "케이던스", data: "")
     ]
     
+    var shareData = ShareModel()
+    
     var userLocations: [CLLocationCoordinate2D] = []
   
     func readData(runningRecord: FetchedResults<CoreRunningRecord>) {
@@ -47,6 +52,7 @@ class FinishRunningViewModel: ObservableObject {
             if let startDate = healthData.startDate {
                 startTime = startDate.timeToString()
                 date = startDate.dateToString()
+                runningDate = startDate
             } else {
                 startTime = ""
                 date = ""
@@ -94,6 +100,22 @@ class FinishRunningViewModel: ObservableObject {
             
             userLocations = []
         }
+    }
+    
+    func saveShareData() {
+        shareData = ShareModel(
+            courseName: courseName,
+            runningDate: runningDate.dateToShareString(),
+            runningRegion: courseRegion,
+            distance: "\(runningData[0].data)km",
+            cal: "\(runningData[4].data)Kcal",
+            pace: "\(runningData[2].data)",
+            bpm: "\(runningData[3].data)BPM",
+            time: "\(runningData[1].data)km",
+            userLocations: userLocations
+        )
+        
+        navigateToShareMainView = true
     }
 }
 
