@@ -10,6 +10,8 @@ import SwiftUI
 
 struct OnboardingLocationAuthView: View {
     private let locationManager = CLLocationManager()
+    
+    @State private var isResponsed = false
 
     var body: some View {
         VStack {
@@ -21,6 +23,16 @@ struct OnboardingLocationAuthView: View {
         }
         .onAppear {
             locationManager.requestWhenInUseAuthorization()
+        }
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                NavigationLink {
+                    OnboardingNotificationAuthView()
+                } label: {
+                    Text("다음")
+                }
+
+            }
         }
     }
 }
