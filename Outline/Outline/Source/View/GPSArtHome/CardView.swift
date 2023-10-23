@@ -39,16 +39,36 @@ struct CardView: View {
     }
     
     // MARK: - View Components
-    
     private var courseImage: some View {
-        Rectangle()
-            .frame(width: cardWidth, height: cardHeight)
-            .foregroundColor(.gray900Color)
-            .roundedCorners(10, corners: [.topLeft])
-            .roundedCorners(70, corners: [.topRight])
-            .roundedCorners(45, corners: [.bottomLeft, .bottomRight])
-            .shadow(color: .white, radius: 0.5, y: -0.5)
-            .matchedGeometryEffect(id: "courseImage\(pageIndex)", in: namespace)
+        if pageIndex < homeTabViewModel.recommendedCoures.count {
+            return AnyView(
+                AsyncImage(url: URL(string: homeTabViewModel.recommendedCoures[pageIndex].course.thumbnail)) { image in
+                    image
+                        .resizable()
+                        .scaledToFill()
+                } placeholder: {
+                    Rectangle()
+                        .foregroundColor(.gray900Color)
+                }
+                .frame(width: cardWidth, height: cardHeight)
+                .roundedCorners(10, corners: [.topLeft])
+                .roundedCorners(70, corners: [.topRight])
+                .roundedCorners(45, corners: [.bottomLeft, .bottomRight])
+                .shadow(color: .white, radius: 0.5, y: -0.5)
+                .matchedGeometryEffect(id: "courseImage\(pageIndex)", in: namespace)
+            )
+        } else {
+            return AnyView(
+                Rectangle()
+                    .frame(width: cardWidth, height: cardHeight)
+                    .foregroundColor(.gray900Color)
+                    .roundedCorners(10, corners: [.topLeft])
+                    .roundedCorners(70, corners: [.topRight])
+                    .roundedCorners(45, corners: [.bottomLeft, .bottomRight])
+                    .shadow(color: .white, radius: 0.5, y: -0.5)
+                    .matchedGeometryEffect(id: "courseImage\(pageIndex)", in: namespace)
+            )
+        }
     }
     
     private var courseInformation: some View {
