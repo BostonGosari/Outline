@@ -8,10 +8,14 @@
 import SwiftUI
 
 struct FinishRunningView: View {
-    @StateObject var viewModel = FinishRunningViewModel()
+    @StateObject private var locationManager = LocationManager()
+    @StateObject private var viewModel = FinishRunningViewModel()
     var gradientColors: [Color] = [.blackColor, .blackColor, .blackColor, .blackColor, .black50Color, .blackColor.opacity(0)]
     
     @ObservedObject var homeTabViewModel: HomeTabViewModel
+    
+    @FetchRequest (entity: CoreRunningRecord.entity(), sortDescriptors: [])
+    var runningRecord: FetchedResults<CoreRunningRecord>
 
     var body: some View {
         NavigationStack {
@@ -20,7 +24,7 @@ struct FinishRunningView: View {
                     .ignoresSafeArea()
                 VStack {
                     ZStack(alignment: .topLeading) {
-                        FinishRunningMap(userLocations: viewModel.userLocations)
+                        FinishRunningMap(userLocations: $viewModel.userLocations)
                             .roundedCorners(45, corners: .bottomLeft)
                             .shadow(color: .whiteColor, radius: 1.5)
 
@@ -41,7 +45,7 @@ struct FinishRunningView: View {
                         .padding(.horizontal, 16)
                     
                     CompleteButton(text: "자랑하기") {
-                        // MoveTo shareView
+                        viewModel.saveShareData()
                     }
                     .padding(.bottom, 16)
                     
@@ -65,9 +69,13 @@ struct FinishRunningView: View {
                     .frame(maxHeight: .infinity, alignment: .bottom)
             }
         }
+        .navigationDestination(isPresented: $viewModel.navigateToShareMainView) {
+            ShareMainView(homeTabViewModel: homeTabViewModel, runningData: viewModel.shareData)
+                .navigationBarBackButtonHidden()
+        }
         .onAppear {
             viewModel.isShowPopup = true
-            viewModel.readRunningData()
+            viewModel.readData(runningRecord: runningRecord)
         }
     }
 }
@@ -103,11 +111,11 @@ extension FinishRunningView {
         let columns: [GridItem] = Array(repeating: .init(.flexible()), count: 3)
         
         return LazyVGrid(columns: columns) {
-            ForEach((0...5), id: \.self) { _ in
+            ForEach(viewModel.runningData, id: \.self) { runningData in
                 VStack(alignment: .center) {
-                    Text("\(viewModel.time)")
+                    Text("\(runningData.data)")
                         .font(.title2)
-                    Text("시간")
+                    Text(runningData.text)
                         .font(.subBody)
                 }
                 .padding(.bottom, 16)

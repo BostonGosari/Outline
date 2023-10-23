@@ -20,7 +20,7 @@ class ShareViewModel: ObservableObject {
     @Published var tapSaveButton = false
     @Published var tapShareButton = false
     
-    @Published var isShowInstaAler = false
+    @Published var isShowInstaAlert = false
     
     @Published var isShowPopup = false {
         didSet {
@@ -66,11 +66,11 @@ class ShareViewModel: ObservableObject {
         }
     }
     
-    func shareToInstagram() {
+    func shareToInstagram() -> Bool {
         shareImage = UIImage(named: "ShareVinyl")
         guard let url = URL(string: "instagram-stories://share?source_application=helia"),
               let image = shareImage,
-              let imageData = image.pngData() else { return }
+              let imageData = image.pngData() else { return false }
 
         if UIApplication.shared.canOpenURL(url) {
             let pasteboardItems: [String: Any] = ["com.instagram.sharedSticker.stickerImage": imageData]
@@ -78,13 +78,32 @@ class ShareViewModel: ObservableObject {
 
             UIPasteboard.general.setItems([pasteboardItems], options: pasteboardOptions)
             UIApplication.shared.open(url)
+            return true
         } else {
             print("인스타그램이 설치되어 있지 않습니다.")
-            isShowInstaAler = true
+            isShowInstaAlert = true
+            
+            return false
         }
     }
     
     func saveImage() {
-        isShowPopup = true
+        if let image = shareImage {
+            let imageSaver = ImageSaver()
+            imageSaver.writeToPhotoAlbum(image: image)
+            
+            isShowPopup = true
+        }
     }
 }
+
+class ImageSaver: NSObject {
+    func writeToPhotoAlbum(image: UIImage) {
+        UIImageWriteToSavedPhotosAlbum(image, self, #selector(saveCompleted), nil)
+    }
+
+    @objc func saveCompleted(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
+        print("Save finished!")
+    }
+}
+

@@ -18,24 +18,124 @@ class FinishRunningViewModel: ObservableObject {
             }
         }
     }
+    @Published var navigateToShareMainView = false
+    
+    private var runningDate = Date()
 
-    var courseName = "고래런"
-    var courseRegion = "서울시 동작구"
+    var courseName: String = ""
+    var courseRegion: String = ""
     
-    var startTime = "오후 12:47"
-    var endTime = "오후 4:50"
-    var date = "10월 9일 (월)"
+    var startTime: String = ""
+    var endTime: String = ""
+    var date: String = ""
     
-    var kilometer = "1.22/5"
-    var time = "47:02"
-    var pace = "-'--"
-    var bpm = "102"
-    var cal = "232"
-    var cadence = "128"
+    var runningData: [RunningDataItem] = [
+        RunningDataItem(text: "킬로미터", data: ""),
+        RunningDataItem(text: "시간", data: ""),
+        RunningDataItem(text: "평균 페이스", data: ""),
+        RunningDataItem(text: "BPM", data: ""),
+        RunningDataItem(text: "칼로리", data: ""),
+        RunningDataItem(text: "케이던스", data: "")
+    ]
+    
+    var shareData = ShareModel()
     
     var userLocations: [CLLocationCoordinate2D] = []
-    
-    func readRunningData() {
-        // coreData에서 읽어오기
+  
+    func readData(runningRecord: FetchedResults<CoreRunningRecord>) {
+        if let data = runningRecord.last,
+            let courseData = data.courseData,
+            let healthData = data.healthData {
+            courseName = courseData.courseName ?? ""
+            
+            if let startDate = healthData.startDate {
+                startTime = startDate.timeToString()
+                date = startDate.dateToString()
+                runningDate = startDate
+            } else {
+                startTime = ""
+                date = ""
+            }
+            
+            if let endDate = healthData.endDate {
+               endTime = endDate.timeToString()
+            } else {
+                endTime = ""
+            }
+            
+            runningData[0].data = "\(healthData.totalRunningDistance)"
+            runningData[1].data = "\(healthData.totalTime)"
+            runningData[2].data = healthData.averagePace == 0 ? "-'--" : "\(healthData.averagePace)"
+            runningData[3].data  = "\(healthData.averageHeartRate)"
+            runningData[4].data  = "\(healthData.totalEnergy)"
+            runningData[5].data = "\(healthData.averageCadence)"
+            
+            if let paths = courseData.coursePaths {
+                var datas = [Coordinate]()
+                paths.forEach { elem in
+                    if let data = elem as? CoreCoordinate {
+                        datas.append(Coordinate(longitude: data.longitude, latitude: data.latitude))
+                    }
+                }
+                userLocations = convertToCLLocationCoordinates(datas)
+            }
+            
+            let geocoder = CLGeocoder()
+            
+            if let first = userLocations.first {
+                let start = CLLocation(latitude: first.latitude, longitude: first.longitude)
+                geocoder.reverseGeocodeLocation(start) { placemarks, error in
+                    if let error = error {
+                        print("Reverse geocoding error: \(error.localizedDescription)")
+                    } else if let placemark = placemarks?.first {
+                        let area = placemark.administrativeArea ?? ""
+                        let city = placemark.locality ?? ""
+                        let town = placemark.subLocality ?? ""
+                        
+                        self.courseRegion = "\(area) \(city) \(town)"
+                    }
+                }
+            }
+        } else {
+            courseName = ""
+            courseRegion = ""
+            
+            startTime = ""
+            endTime = ""
+            date = ""
+            
+            runningData = [
+                RunningDataItem(text: "킬로미터", data: ""),
+                RunningDataItem(text: "시간", data: ""),
+                RunningDataItem(text: "평균 페이스", data: ""),
+                RunningDataItem(text: "BPM", data: ""),
+                RunningDataItem(text: "칼로리", data: ""),
+                RunningDataItem(text: "케이던스", data: "")
+            ]
+            
+            userLocations = []
+        }
     }
+    
+    func saveShareData() {
+        shareData = ShareModel(
+            courseName: courseName,
+            runningDate: runningDate.dateToShareString(),
+            runningRegion: courseRegion,
+            distance: "\(runningData[0].data)km",
+            cal: "\(runningData[4].data)Kcal",
+            pace: "\(runningData[2].data)",
+            bpm: "\(runningData[3].data)BPM",
+            time: "\(runningData[1].data)km",
+            userLocations: userLocations
+        )
+        
+        navigateToShareMainView = true
+    }
+}
+
+struct RunningDataItem: Hashable {
+    var id = UUID()
+    var text: String
+    var data: String
 }
