@@ -39,6 +39,9 @@ struct FreeRunningHomeView: View {
                            
                            Spacer()
                            SlideToUnlock(isUnlocked: $homeTabViewModel.start)
+                               .onChange(of: homeTabViewModel.start) { _, _ in
+                                   homeTabViewModel.runningType = .free
+                               }
                        }
                        .padding(EdgeInsets(top: 58, leading: 24, bottom: 24, trailing: 16))
                    }
