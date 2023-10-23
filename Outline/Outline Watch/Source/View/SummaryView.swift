@@ -22,10 +22,17 @@ struct SummaryView: View {
     }()
     
     @Binding var navigate: Bool
+    @State private var isShowingFinishView = true
     
     var body: some View {
         if workoutManager.workout == nil {
             ProgressView("Saving Workout")
+                .navigationBarHidden(true)
+        } else if isShowingFinishView {
+            FinishWatchView(completionPercentage: 100)
+                .onAppear {
+                   scheduleTimerToHideFinishView()
+                }
                 .navigationBarHidden(true)
         } else {
             ScrollView {
@@ -59,10 +66,15 @@ struct SummaryView: View {
                     } label: {
                         Text("완료")
                     }
-                
             }   .navigationBarHidden(true)
-         
         }
+    }
+    private func scheduleTimerToHideFinishView() {
+           Timer.scheduledTimer(withTimeInterval: 3.0, repeats: false) { _ in
+               withAnimation {
+                   isShowingFinishView = false
+               }
+           }
     }
 }
 
