@@ -10,9 +10,10 @@ import HealthKit
 import HealthKitUI
 
 struct InputUserInfoView: View {
-   
+    
     @StateObject var viewModel = InputUserInfoViewModel()
-
+    @StateObject var healthKitManager = HealthKitManager()
+    
     private let genderList = ["설정 안 됨", "여성", "남성", "기타"]
     
     var body: some View {
@@ -57,24 +58,36 @@ struct InputUserInfoView: View {
                         .font(.caption)
                         .foregroundStyle(Color.gray400Color)
                         .padding(.bottom, 36)
+                    
+                    NavigationLink {
+                        OnboardingLocationAuthView()
+                    } label: {
+                        Text("다음")
+                            .padding()
+                            .frame(maxWidth: .infinity)
+                            .background {
+                                RoundedRectangle(cornerRadius: 15)
+                                    .foregroundStyle(.gray700)
+                            }
+                    }
+                    .padding(.horizontal)
                 }
-                .padding(.top, 150)
+                .padding(.top, 120)
                 
                 pickerView
                     .zIndex(1)
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
-                
             }
             .foregroundStyle(Color.whiteColor)
-            .toolbar {
-                Button("다음") {
-                    
-                }
-                .foregroundStyle(Color.primaryColor)
-            }
             .navigationBarBackButtonHidden()
             .onAppear {
-                //                workoutManager.requestAuthorization()
+            }
+            .onAppear {
+                healthKitManager.requestAuthorization { success in
+                    if success {
+                        print("health authorization allowed")
+                    }
+                }
             }
         }
     }
@@ -141,14 +154,14 @@ extension InputUserInfoView {
     private var pickerView: AnyView {
         switch viewModel.currentPicker {
         case .date:
-             AnyView(
+            AnyView(
                 DatePicker("", selection: $viewModel.birthday, displayedComponents: .date)
                     .datePickerStyle(WheelDatePickerStyle())
                     .labelsHidden()
                     .padding(.horizontal, 30)
                     .background(Color.gray800Color)
                     .preferredColorScheme(.dark)
-                    
+                
             )
         case .gender:
             AnyView(

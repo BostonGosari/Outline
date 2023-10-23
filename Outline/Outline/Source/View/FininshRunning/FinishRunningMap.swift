@@ -9,7 +9,7 @@ import MapKit
 import SwiftUI
 
 struct FinishRunningMap: UIViewRepresentable {
-    let userLocations: [CLLocationCoordinate2D]
+    @Binding var userLocations: [CLLocationCoordinate2D]
     
     func makeUIView(context: Context) -> MKMapView {
         let mapView = MKMapView()
@@ -19,10 +19,23 @@ struct FinishRunningMap: UIViewRepresentable {
         let polyline = MKPolyline(coordinates: userLocations, count: userLocations.count)
         mapView.addOverlay(polyline)
         
+        if !userLocations.isEmpty {
+            let region = MKCoordinateRegion(polyline.boundingMapRect)
+            mapView.setRegion(region, animated: true)
+        }
+        
         return mapView
     }
     
     func updateUIView(_ uiView: MKMapView, context: Context) {
+        uiView.removeOverlays(uiView.overlays)
+        let polyline = MKPolyline(coordinates: userLocations, count: userLocations.count)
+        uiView.addOverlay(polyline)
+        
+        if !userLocations.isEmpty {
+            let region = MKCoordinateRegion(polyline.boundingMapRect)
+            uiView.setRegion(region, animated: true)
+        }
     }
     
     func makeCoordinator() -> Coordinator {
@@ -44,7 +57,7 @@ struct FinishRunningMap: UIViewRepresentable {
                     UIColor(red: 100, green: 120, blue: 255, alpha: 1),
                     UIColor(red: 219, green: 251, blue: 108, alpha: 1)
                 ], locations: [])
-                renderer.lineWidth = 15
+                renderer.lineWidth = 10
                 return renderer
             }
             return MKOverlayRenderer(overlay: overlay)
