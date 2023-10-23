@@ -26,6 +26,7 @@ class HomeTabViewModel: ObservableObject {
     @Published var startCourse: GPSArtCourse?
     @Published var start = false
     @Published var running = false
+    @Published var runningType: RunningType = .gpsArt
         
     let courseModel = CourseModel()
     let locationManager = CLLocationManager()
