@@ -6,6 +6,7 @@
 //
 
 import CoreLocation
+import MapKit
 import SwiftUI
 
 struct CustomShareView: View {
@@ -18,6 +19,9 @@ struct CustomShareView: View {
     @State private var isShowPace = true
     @State private var isShowDistance = true
     
+    @State private var renderedImage: UIImage?
+    @State private var mapView = MKMapView()
+    
     var body: some View {
         ZStack {
             Color.gray900Color
@@ -26,7 +30,14 @@ struct CustomShareView: View {
             VStack(spacing: 0) {
                 customImageView
                     .padding(EdgeInsets(top: 20, leading: 49, bottom: 16, trailing: 49))
-        
+                if let renderedImage = renderedImage {
+                    Image(uiImage: renderedImage)
+                }
+                Button {
+                    renderLayerImage()
+                } label: {
+                    Text("render Image")
+                }
                 pageIndicator
                 tagView
             }
@@ -35,9 +46,15 @@ struct CustomShareView: View {
 }
 
 extension CustomShareView {
+    private func renderLayerImage(){
+        
+    }
+}
+
+extension CustomShareView {
     private var customImageView: some View {
         ZStack {
-            ShareMap(userLocations: viewModel.runningData.userLocations)
+            ShareMap(mapView: $mapView, userLocations: viewModel.runningData.userLocations)
                 .overlay {
                     LinearGradient(colors: [.black.opacity(0), .black], startPoint: .center, endPoint: .bottom)
                 }
@@ -140,3 +157,5 @@ struct TagButton: View {
         }
     }
 }
+
+
