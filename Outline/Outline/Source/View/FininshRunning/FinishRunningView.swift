@@ -45,7 +45,7 @@ struct FinishRunningView: View {
                         .padding(.horizontal, 16)
                     
                     CompleteButton(text: "자랑하기") {
-                        // MoveTo shareView
+                        viewModel.saveShareData()
                     }
                     .padding(.bottom, 16)
                     
@@ -68,6 +68,10 @@ struct FinishRunningView: View {
                 RunningPopup(text: "기록이 저장되었어요.")
                     .frame(maxHeight: .infinity, alignment: .bottom)
             }
+        }
+        .navigationDestination(isPresented: $viewModel.navigateToShareMainView) {
+            ShareMainView(homeTabViewModel: homeTabViewModel, runningData: viewModel.shareData)
+                .navigationBarBackButtonHidden()
         }
         .onAppear {
             viewModel.isShowPopup = true
