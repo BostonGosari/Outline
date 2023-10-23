@@ -15,7 +15,9 @@ enum AuthState: String {
 }
 
 struct ContentView: View {
-    @State private var authState: AuthState = .onboarding
+    
+    @AppStorage("authState") var authState: AuthState = .onboarding
+    
     var body: some View {
         Group {
             switch authState {
@@ -28,10 +30,6 @@ struct ContentView: View {
             case .login:
                 HomeTabView()
             }
-        }
-        .onAppear {
-            let authStateUserDefaults = UserDefaults.standard.string(forKey: "authState")
-            self.authState = AuthState(rawValue: authStateUserDefaults ?? "onboarding") ?? .onboarding
         }
     }
 }
