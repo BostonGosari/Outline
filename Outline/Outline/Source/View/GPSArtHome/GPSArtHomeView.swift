@@ -81,7 +81,7 @@ struct GPSArtHomeView: View {
             }
         }
         .background(
-            BackgroundBlur()
+            BackgroundBlur(color: Color.primaryColor, padding: 500)
         )
     }
 }
