@@ -21,6 +21,7 @@ struct OnboardingNotificationAuthView: View {
                 .font(.subBody)
             Spacer()
         }
+        .padding(.top, 80)
         .alert(isPresented: $showNotificationAlert, content: {
             Alert(
                 title: Text("‘OUTLINE’에서 알림을\n보내고자합니다."),
@@ -31,6 +32,7 @@ struct OnboardingNotificationAuthView: View {
                     authState = .login
                 }))
         })
+        .navigationBarBackButtonHidden()
     }
 }
 

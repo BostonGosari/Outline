@@ -9,8 +9,7 @@ import SwiftUI
 import CoreMotion
 import HealthKit
 
-class HealthKitManager {
-    
+class HealthKitManager: ObservableObject {
     private var healthStore: HKHealthStore?
     private var workoutConfiguration: HKWorkoutConfiguration?
     private var workoutBuilder: HKWorkoutBuilder?
