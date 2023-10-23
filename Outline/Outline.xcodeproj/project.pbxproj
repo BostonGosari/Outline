@@ -61,6 +61,9 @@
 		9528F0002AE042570056CCC6 /* PathGenerateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9528EFFF2AE042570056CCC6 /* PathGenerateManager.swift */; };
 		9528F0022AE046DF0056CCC6 /* PathDrawingTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9528F0012AE046DF0056CCC6 /* PathDrawingTestView.swift */; };
 		9528F0062AE0B37B0056CCC6 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9528F0052AE0B37B0056CCC6 /* LoginView.swift */; };
+		954CB2B62AE63E79005EB2E9 /* OnboardingHealthAuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954CB2B52AE63E79005EB2E9 /* OnboardingHealthAuthView.swift */; };
+		954CB2B82AE6492B005EB2E9 /* OnboardingLocationAuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954CB2B72AE6492B005EB2E9 /* OnboardingLocationAuthView.swift */; };
+		954CB2BA2AE654BA005EB2E9 /* OnboardingNotificationAuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954CB2B92AE654BA005EB2E9 /* OnboardingNotificationAuthView.swift */; };
 		954CB2922AE5131B005EB2E9 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 954CB2912AE5131B005EB2E9 /* FirebaseFirestore */; };
 		954CB2942AE5131B005EB2E9 /* FirebaseFirestoreCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 954CB2932AE5131B005EB2E9 /* FirebaseFirestoreCombine-Community */; };
 		954CB2962AE5131B005EB2E9 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 954CB2952AE5131B005EB2E9 /* FirebaseFirestoreSwift */; };
@@ -239,6 +242,9 @@
 		9528EFFF2AE042570056CCC6 /* PathGenerateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathGenerateManager.swift; sourceTree = "<group>"; };
 		9528F0012AE046DF0056CCC6 /* PathDrawingTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathDrawingTestView.swift; sourceTree = "<group>"; };
 		9528F0052AE0B37B0056CCC6 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		954CB2B52AE63E79005EB2E9 /* OnboardingHealthAuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingHealthAuthView.swift; sourceTree = "<group>"; };
+		954CB2B72AE6492B005EB2E9 /* OnboardingLocationAuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingLocationAuthView.swift; sourceTree = "<group>"; };
+		954CB2B92AE654BA005EB2E9 /* OnboardingNotificationAuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingNotificationAuthView.swift; sourceTree = "<group>"; };
 		954CB28E2AE51264005EB2E9 /* Outline.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Outline.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		954CB28F2AE51264005EB2E9 /* Outline Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Outline Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		954CB2992AE514D3005EB2E9 /* ConnectingWatchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectingWatchModel.swift; sourceTree = "<group>"; };
@@ -414,6 +420,9 @@
 				29AE76D52ADE2A2200A46742 /* InputNicknameView.swift */,
 				29AE76D62ADE2A2200A46742 /* InputUserInfoView.swift */,
 				9528F0052AE0B37B0056CCC6 /* LoginView.swift */,
+				954CB2B52AE63E79005EB2E9 /* OnboardingHealthAuthView.swift */,
+				954CB2B72AE6492B005EB2E9 /* OnboardingLocationAuthView.swift */,
+				954CB2B92AE654BA005EB2E9 /* OnboardingNotificationAuthView.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -1032,7 +1041,9 @@
 				BB5239372ADBD99F00646494 /* GPSArtHomeView.swift in Sources */,
 				F06B93632ADB847900387DEB /* Component.swift in Sources */,
 				2975F0962AE3E1790046C00B /* CornerRectangleModifier.swift in Sources */,
+				954CB2B82AE6492B005EB2E9 /* OnboardingLocationAuthView.swift in Sources */,
 				F06298A92AE18A50007AB2D3 /* FunctionManager.swift in Sources */,
+				954CB2BA2AE654BA005EB2E9 /* OnboardingNotificationAuthView.swift in Sources */,
 				29C631562AE418F1005ECF55 /* DigitalTimerView.swift in Sources */,
 				299803532ADF1DC200A9A134 /* CoreMotionViewModel.swift in Sources */,
 				F06B93622ADB847500387DEB /* ContentView.swift in Sources */,
@@ -1055,6 +1066,7 @@
 				29AE76D82ADE2A2200A46742 /* InputUserInfoView.swift in Sources */,
 				299803572AE00C9B00A9A134 /* HapticManager.swift in Sources */,
 				0E29F64B2ADF653000F5EF5C /* FontExtension.swift in Sources */,
+				954CB2B62AE63E79005EB2E9 /* OnboardingHealthAuthView.swift in Sources */,
 				9528F0022AE046DF0056CCC6 /* PathDrawingTestView.swift in Sources */,
 				F06298AB2AE1998D007AB2D3 /* MapInfoView.swift in Sources */,
 				0E29F6532ADF6C3A00F5EF5C /* RunningPopup.swift in Sources */,
@@ -1324,7 +1336,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Outline Watch/Preview Content\"";
-				DEVELOPMENT_TEAM = 77745NX67K;
+				DEVELOPMENT_TEAM = 333J2S2AQK;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1414,7 +1426,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Outline/Preview Content\"";
-				DEVELOPMENT_TEAM = 77745NX67K;
+				DEVELOPMENT_TEAM = 333J2S2AQK;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				"EXCLUDED_ARCHS[sdk=*]" = "";
