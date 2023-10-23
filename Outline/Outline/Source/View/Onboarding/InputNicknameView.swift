@@ -9,6 +9,7 @@ import SwiftUI
 
 struct InputNicknameView: View {
     @Environment(\.dismiss) private var dismiss
+    @StateObject var dataTestViewModel = DataTestViewModel()
     @StateObject var viewModel = InputNicknameViewModel()
     
     var body: some View {
@@ -22,42 +23,44 @@ struct InputNicknameView: View {
                         .font(.title)
                         .fontWeight(.semibold)
                         .foregroundStyle(Color.whiteColor)
-                        .padding(.top, 60)
+                        .padding(.top, 30)
                     
-                    HStack {
-                        Text("닉네임")
-                            .foregroundStyle(Color.whiteColor)
-                        
-                        Text("한글, 영어, 숫자 사용가능")
-                            .foregroundStyle(Color.gray400Color)
-                            .font(.caption)
-                    }
-                    .padding(.top, 45)
+                    Text("닉네임")
+                        .padding(.top, 43)
                     
-                    HStack {
-                        TextField("", text: $viewModel.nickname, 
-                                  prompt: Text(viewModel.defaultNickname).foregroundStyle(Color.gray400Color))
-                            .foregroundStyle(Color.whiteColor)
-                            .padding(.vertical, 13)
-                            .padding(.horizontal, 16)
-                            .background(Color.gray700Color)
-                            .clipShape(RoundedRectangle(cornerRadius: 10), style: /*@START_MENU_TOKEN@*/FillStyle()/*@END_MENU_TOKEN@*/)
-                            .onChange(of: viewModel.nickname) {
-                                viewModel.checkNicname()
-                            }
-                        
-                        Image(systemName: viewModel.checkImage)
-                            .foregroundStyle(viewModel.currentState == .success ? Color.green : Color.thirdColor)
-                            .font(.system(size: 20))
-                    }
-                    .padding(.top, 8)
+                    TextField("", text: $viewModel.nickname,
+                              prompt: Text(viewModel.defaultNickname).foregroundStyle(Color.gray400Color))
+                        .foregroundStyle(Color.whiteColor)
+                        .padding(.vertical, 13)
+                        .padding(.horizontal, 16)
+                        .background(Color.gray700Color)
+                        .clipShape(RoundedRectangle(cornerRadius: 10), style: /*@START_MENU_TOKEN@*/FillStyle()/*@END_MENU_TOKEN@*/)
+                        .onChange(of: viewModel.nickname) {
+                            viewModel.checkNicname()
+                        }
+                        .padding(.top, 8)
+                        .padding(.bottom, 16)
                    
-                    Text(viewModel.wrongText)
-                        .foregroundStyle(Color.third)
-                        .padding(.top, 6)
-                        .padding(.leading, 16)
+                    checkView("2자리 이상 16자리 이하", viewModel.checkInputCount)
+                        .padding(.bottom, 16)
+                    
+                    checkView("특수 문자 제외", viewModel.checkInputWord)
+                        .padding(.bottom, 16)
+                    
+                    checkView("닉네임 중복 제외", viewModel.checkNicnameDuplication)
+                    
+                    CompleteButton(text: "다음", isActive: viewModel.isSuccess) {
+                        if viewModel.isSuccess {
+                            viewModel.moveToInputUserInfoView = true
+                        }
+                    }
+                    .frame(maxHeight: .infinity, alignment: .bottom)
                 }
                 .padding()
+            }
+            .ignoresSafeArea(.keyboard)
+            .navigationDestination(isPresented: $viewModel.moveToInputUserInfoView) {
+                InputUserInfoView()
             }
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
@@ -67,6 +70,11 @@ struct InputNicknameView: View {
                     doneButton
                 }
             }
+        }
+        .onAppear {
+            dataTestViewModel.readUserNameSet()
+            viewModel.userNames = dataTestViewModel.userNameSet
+            viewModel.defaultNickname = "아웃라인메이트\(viewModel.userNames.count)"
         }
     }
 }
@@ -85,21 +93,24 @@ extension InputNicknameView {
         }
     }
     private var doneButton: some View {
-        return Group {
-            if viewModel.currentState == .success {
-                NavigationLink {
-                    InputUserInfoView()
-                } label: {
-                    Text("완료")
-                        .foregroundStyle(Color.primaryColor)
-                }
-            } else {
-                Text("완료")
-                .foregroundStyle(Color.primaryColor)
-            }
+        Button("완료") {
+            dismissKeyboard()
+        }
+        .foregroundStyle(Color.primaryColor)
+    }
+    
+    @ViewBuilder
+    private func checkView(_ text: String, _ isTrue: Bool) -> some View {
+        HStack {
+            Image(systemName: isTrue ? "checkmark" : "xmark")
+                .foregroundStyle(isTrue ? Color.greenColor : Color.redColor)
+            Text(text)
         }
     }
     
+    private func dismissKeyboard() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
 }
 
 #Preview {

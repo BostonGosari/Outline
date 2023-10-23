@@ -62,12 +62,12 @@ struct InputUserInfoView: View {
                     NavigationLink {
                         OnboardingLocationAuthView()
                     } label: {
-                        Text("다음")
+                        Text("완료")
                             .padding()
                             .frame(maxWidth: .infinity)
                             .background {
                                 RoundedRectangle(cornerRadius: 15)
-                                    .foregroundStyle(.gray700)
+                                    .foregroundStyle(Color.primaryColor)
                             }
                     }
                     .padding(.horizontal)
