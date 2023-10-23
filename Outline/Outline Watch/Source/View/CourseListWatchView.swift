@@ -15,6 +15,8 @@ struct CourseListWatchView: View {
     @State private var detailViewNavigate = false
     @Binding var navigate: Bool
     
+    @StateObject var watchConnectivityManager = WatchConnectivityManager.shared
+    
     var body: some View {
         NavigationStack {
             ScrollView {
@@ -50,7 +52,7 @@ struct CourseListWatchView: View {
                     }
                     .padding(.bottom, 8)
                     
-                    ForEach(testCourses) {course in
+                    ForEach(watchConnectivityManager.allCourses, id: \.id) {course in
                         Button {
                             print("button clicked")
                         } label: {
@@ -68,7 +70,7 @@ struct CourseListWatchView: View {
                                         .buttonStyle(.plain)
                                         .padding(.trailing, -4)
                                     }
-                                SampleCourePath()
+                                PathGenerateManager.shared.caculateLines(width: 75, height: 75, coordinates: convertToCLLocationCoordinates(course.coursePaths))
                                     .stroke(lineWidth: 4)
                                     .scaledToFit()
                                     .frame(height: 75)
