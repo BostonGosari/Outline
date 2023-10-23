@@ -77,9 +77,7 @@ class FinishRunningViewModel: ObservableObject {
                         datas.append(Coordinate(longitude: data.longitude, latitude: data.latitude))
                     }
                 }
-                print(datas)
                 userLocations = convertToCLLocationCoordinates(datas)
-                print(userLocations)
             }
             
             let geocoder = CLGeocoder()
