@@ -20,7 +20,7 @@ struct CustomShareView: View {
     @State private var isShowDistance = true
     
     // handle Image
-    @State private var renderedImage: UIImage?
+    @Binding var renderedImage: UIImage?
     @State private var mapView = MKMapView()
     @State private var imageWidth: CGFloat = 0
     @State private var imageHeight: CGFloat = 0
@@ -39,6 +39,9 @@ struct CustomShareView: View {
                     tagView
                 }
             }
+        }
+        .onAppear {
+            renderLayerImage()
         }
     }
 }

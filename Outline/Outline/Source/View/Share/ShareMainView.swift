@@ -11,6 +11,8 @@ import SwiftUI
 struct ShareMainView: View {
     @ObservedObject var homeTabViewModel: HomeTabViewModel
     @StateObject private var viewModel = ShareViewModel()
+    @State private var renderedImage: UIImage?
+    
     let runningData: ShareModel
     
     var body: some View {
@@ -20,7 +22,7 @@ struct ShareMainView: View {
                     .ignoresSafeArea()
                 
                 TabView(selection: $viewModel.currentPage) {
-                    CustomShareView(viewModel: viewModel)
+                    CustomShareView(viewModel: viewModel, renderedImage: $renderedImage)
                         .tag(0)
                     ImageShareView(viewModel: viewModel)
                         .tag(1)
@@ -30,7 +32,10 @@ struct ShareMainView: View {
                 HStack(spacing: 0) {
                     Button {
                         viewModel.tapSaveButton = true
-                        viewModel.saveImage()
+                        if let renderedImage = renderedImage {
+                            // share image
+                        }
+//                        viewModel.saveImage()
                     }  label: {
                         Image(systemName: "square.and.arrow.down")
                             .foregroundStyle(Color.black)
