@@ -32,12 +32,14 @@ class HomeTabViewModel: ObservableObject {
 
     let courseModel = CourseModel()
     let locationManager = CLLocationManager()
+    let watchConnectivityManager = WatchConnectivityManager.shared
     
     func readAllCourses() {
         courseModel.readAllCourses { result in
             switch result {
             case .success(let courseList):
                 self.courses = courseList
+                self.watchConnectivityManager.sendGPSArtCoursesToWatch(self.courses)
                 self.fetchRecommendedCourses()
             case .failure(let error):
                 print(error)
