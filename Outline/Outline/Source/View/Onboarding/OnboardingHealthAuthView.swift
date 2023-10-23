@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct OnboardingHealthAuthView: View {
+    
+    @State private var showHealthAuthentication = true
+
     var body: some View {
         ZStack {
             VStack {
@@ -24,6 +27,16 @@ struct OnboardingHealthAuthView: View {
                     .multilineTextAlignment(.center)
             }
             .navigationBarBackButtonHidden(true)
+        }
+        .alert(isPresented: $showHealthAuthentication) {
+            Alert(
+                title: Text("알림"),
+                message: Text("APPLE 건강앱을 동기화하면,\n앱 이외의 활동 및 건강을\n추적할 수 있습니다."),
+                primaryButton: .default(Text("취소"), action: {
+                    // cancel reaction
+                }), secondaryButton: .default(Text("확인"), action: {
+                    // authentication
+                }))
         }
     }
 }
