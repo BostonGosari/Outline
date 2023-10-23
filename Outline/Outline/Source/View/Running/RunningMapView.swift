@@ -122,6 +122,7 @@ extension RunningMapView {
                                     print("Long press ended")
                                     HapticManager.impact(style: .medium)
                                     locationManager.stopUpdateLocation()
+                                    homeTabViewModel.userLocations = locationManager.userLocations
                                     runningViewModel.stopRunning()
                                     digitalTimerViewModel.counter = 0
                                     showCustomSheet = true
