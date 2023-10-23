@@ -69,7 +69,7 @@ struct InputUserInfoView: View {
             .foregroundStyle(Color.whiteColor)
             .toolbar {
                 NavigationLink {
-                    
+                    OnboardingLocationAuthView()
                 } label: {
                     Text("다음")
                         .foregroundStyle(Color.primaryColor)
@@ -86,7 +86,7 @@ struct InputUserInfoView: View {
                     primaryButton: .default(Text("취소"), action: {
                         // cancel reaction
                     }), secondaryButton: .default(Text("확인"), action: {
-                        // authentication 
+                        // authentication
                     }))
             }
         }

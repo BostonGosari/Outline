@@ -64,6 +64,7 @@
 		9528F0022AE046DF0056CCC6 /* PathDrawingTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9528F0012AE046DF0056CCC6 /* PathDrawingTestView.swift */; };
 		9528F0062AE0B37B0056CCC6 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9528F0052AE0B37B0056CCC6 /* LoginView.swift */; };
 		954CB2B62AE63E79005EB2E9 /* OnboardingHealthAuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954CB2B52AE63E79005EB2E9 /* OnboardingHealthAuthView.swift */; };
+		954CB2B82AE6492B005EB2E9 /* OnboardingLocationAuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954CB2B72AE6492B005EB2E9 /* OnboardingLocationAuthView.swift */; };
 		954FFF762AE12F1500D27537 /* seoulDuckRun.kml in Resources */ = {isa = PBXBuildFile; fileRef = 0E29F64F2ADF681E00F5EF5C /* seoulDuckRun.kml */; };
 		954FFF782AE132D100D27537 /* CourseDataUploadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954FFF772AE132D100D27537 /* CourseDataUploadManager.swift */; };
 		954FFF7B2AE136CA00D27537 /* CourseDataUploadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954FFF7A2AE136CA00D27537 /* CourseDataUploadView.swift */; };
@@ -229,6 +230,7 @@
 		954CB2B32AE5504F005EB2E9 /* Outline.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Outline.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		954CB2B42AE5504F005EB2E9 /* Outline Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Outline Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		954CB2B52AE63E79005EB2E9 /* OnboardingHealthAuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingHealthAuthView.swift; sourceTree = "<group>"; };
+		954CB2B72AE6492B005EB2E9 /* OnboardingLocationAuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingLocationAuthView.swift; sourceTree = "<group>"; };
 		954FFF772AE132D100D27537 /* CourseDataUploadManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseDataUploadManager.swift; sourceTree = "<group>"; };
 		954FFF7A2AE136CA00D27537 /* CourseDataUploadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseDataUploadView.swift; sourceTree = "<group>"; };
 		959D90252ADA35F100748BFB /* DataTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTestView.swift; sourceTree = "<group>"; };
@@ -390,6 +392,7 @@
 				29AE76D62ADE2A2200A46742 /* InputUserInfoView.swift */,
 				9528F0052AE0B37B0056CCC6 /* LoginView.swift */,
 				954CB2B52AE63E79005EB2E9 /* OnboardingHealthAuthView.swift */,
+				954CB2B72AE6492B005EB2E9 /* OnboardingLocationAuthView.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -996,6 +999,7 @@
 				BB5239372ADBD99F00646494 /* GPSArtHomeView.swift in Sources */,
 				F06B93632ADB847900387DEB /* Component.swift in Sources */,
 				2975F0962AE3E1790046C00B /* CornerRectangleModifier.swift in Sources */,
+				954CB2B82AE6492B005EB2E9 /* OnboardingLocationAuthView.swift in Sources */,
 				F06298A92AE18A50007AB2D3 /* FunctionManager.swift in Sources */,
 				29C631562AE418F1005ECF55 /* DigitalTimerView.swift in Sources */,
 				299803532ADF1DC200A9A134 /* CoreMotionViewModel.swift in Sources */,
