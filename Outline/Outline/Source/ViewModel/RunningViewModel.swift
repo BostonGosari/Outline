@@ -80,16 +80,8 @@ class RunningViewModel: ObservableObject {
     // MARK: - Private Methods
     
     private func startPedometerUpdates() {
-        healthKitManager.requestAuthorization { [weak self] (authorized) in
-            guard let self = self else { return }
-            
-            if authorized {
-                self.startPedometerDataUpdates()
-                self.healthKitManager.startWorkout()
-            } else {
-                print("HealthKit authorization was denied.")
-            }
-        }
+        startPedometerDataUpdates()
+        healthKitManager.startWorkout()
     }
     
     private func startPedometerDataUpdates() {
@@ -145,7 +137,7 @@ class RunningViewModel: ObservableObject {
         guard let course = homeTabViewModel.startCourse else { return }
         
         let courseData = CourseData(courseName: course.courseName, runningLength: course.courseLength, heading: course.heading, distance: course.distance, coursePaths: homeTabViewModel.userLocations, runningCourseId: "")
-
+        
         let healthData = HealthData(totalTime: totalTime, averageCadence: totalSteps / totalDistance, totalRunningDistance: totalDistance / 1000, totalEnergy: kilocalorie, averageHeartRate: 0.0, averagePace: totalTime / totalDistance * 1000 / 60, startDate: RunningStartDate, endDate: RunningEndDate)
         
         let newRunningRecord = RunningRecord(id: UUID().uuidString, runningType: .free, courseData: courseData, healthData: healthData)
