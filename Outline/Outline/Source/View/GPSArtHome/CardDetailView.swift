@@ -74,12 +74,19 @@ struct CardDetailView: View {
     // MARK: - View Components
     
     private var courseImage: some View {
-        Rectangle()
-            .foregroundColor(.gray800)
-            .roundedCorners(45, corners: [.bottomLeft])
-            .shadow(color: .white, radius: 0.5, y: 0.5)
-            .matchedGeometryEffect(id: "courseImage\(currentIndex)", in: namespace)
-            .frame(height: cardHeight)
+        AsyncImage(url: URL(string: homeTabViewModel.recommendedCoures[currentIndex].course.thumbnail)) { image in
+            image
+                .resizable()
+                .scaledToFill()
+        } placeholder: {
+            Rectangle()
+                .scaledToFit()
+        }
+        .foregroundColor(.gray800)
+        .roundedCorners(45, corners: [.bottomLeft])
+        .shadow(color: .white, radius: 0.5, y: 0.5)
+        .matchedGeometryEffect(id: "courseImage\(currentIndex)", in: namespace)
+        .frame(height: cardHeight)
     }
     
     private var courseInformation: some View {
