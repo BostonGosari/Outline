@@ -182,11 +182,7 @@ struct CourseDetailView: View {
                         .font(.title3)
                         .bold()
                     VStack(alignment: .leading) {
-                        MapInfoView(
-                            camera: MKMapCamera(lookingAtCenter: convertToCLLocationCoordinate(course.course.centerLocation),
-                                                fromDistance: 1000, pitch: 0, heading: 0),
-                            coordinates: convertToCLLocationCoordinates(course.course.coursePaths)
-                        )
+                        MapInfoView(coordinates: convertToCLLocationCoordinates(course.course.coursePaths))
                         .frame(height: 200)
                         .foregroundStyle(.thinMaterial)
                         Text("경로 제작 고사리님 @alsgiwc")

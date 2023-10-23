@@ -12,6 +12,7 @@ import HealthKitUI
 struct InputUserInfoView: View {
    
     @StateObject var viewModel = InputUserInfoViewModel()
+    @State private var showHealthAuthentication = true
 
     private let genderList = ["설정 안 됨", "여성", "남성", "기타"]
     
@@ -67,14 +68,26 @@ struct InputUserInfoView: View {
             }
             .foregroundStyle(Color.whiteColor)
             .toolbar {
-                Button("다음") {
-                    
+                NavigationLink {
+                    OnboardingLocationAuthView()
+                } label: {
+                    Text("다음")
+                        .foregroundStyle(Color.primaryColor)
                 }
-                .foregroundStyle(Color.primaryColor)
             }
             .navigationBarBackButtonHidden()
             .onAppear {
                 //                workoutManager.requestAuthorization()
+            }
+            .alert(isPresented: $showHealthAuthentication) {
+                Alert(
+                    title: Text("알림"),
+                    message: Text("APPLE 건강앱을 동기화하면,\n앱 이외의 활동 및 건강을\n추적할 수 있습니다."),
+                    primaryButton: .default(Text("취소"), action: {
+                        // cancel reaction
+                    }), secondaryButton: .default(Text("확인"), action: {
+                        // authentication
+                    }))
             }
         }
     }
