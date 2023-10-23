@@ -9,7 +9,7 @@ import CoreLocation
 import SwiftUI
 
 struct ShareMainView: View {
-    
+    @ObservedObject var homeTabViewModel: HomeTabViewModel
     @StateObject private var viewModel = ShareViewModel()
     let runningData: ShareModel
     
@@ -46,7 +46,9 @@ struct ShareMainView: View {
                     
                     CompleteButton(text: "공유하기") {
                         viewModel.tapShareButton = true
-                        viewModel.shareToInstagram()
+                        if viewModel.shareToInstagram() {
+                            homeTabViewModel.running = false
+                        }
                     }
                     .padding(.leading, -8)
                 }
@@ -54,9 +56,10 @@ struct ShareMainView: View {
                 .padding(.bottom, 42)
             }
             .ignoresSafeArea()
-            .modifier(NavigationModifier())
+            .modifier(NavigationModifier(homeTabViewModel: homeTabViewModel))
             .onAppear {
                 viewModel.runningData = runningData
+                print(runningData)
             }
             .overlay {
                 if viewModel.isShowPopup {
@@ -70,6 +73,8 @@ struct ShareMainView: View {
 }
 
 struct NavigationModifier: ViewModifier {
+    @ObservedObject var homeTabViewModel: HomeTabViewModel
+    
     func body(content: Content) -> some View {
         content
             .navigationTitle("공유")
@@ -77,29 +82,33 @@ struct NavigationModifier: ViewModifier {
             .preferredColorScheme(.dark)
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
-                    (Text(Image(systemName: "chevron.left")) + Text("홈으로"))
-                        .foregroundStyle(Color.primaryColor)
+                    Button {
+                        homeTabViewModel.running = false
+                    } label: {
+                        (Text(Image(systemName: "chevron.left")) + Text("홈으로"))
+                            .foregroundStyle(Color.primaryColor)
+                    }
                 }
             }
     }
 }
 
-#Preview {
-    ShareMainView(runningData: ShareModel(
-        courseName: "고래런",
-        runningDate: "2023.10.19",
-        runningRegion: "경상북도 포항시 지곡동",
-        distance: "11km",
-        cal: "127kcal",
-        pace: "5’55\"",
-        bpm: "132 BPM",
-        time: "2hourse",
-        userLocations: [
-            CLLocationCoordinate2D(latitude: 36.0141253, longitude: 129.3471313),
-            CLLocationCoordinate2D(latitude: 36.0154791, longitude: 129.3444276),
-            CLLocationCoordinate2D(latitude: 36.0102547, longitude: 129.3394495),
-            CLLocationCoordinate2D(latitude: 36.0097687, longitude: 129.3391061),
-            CLLocationCoordinate2D(latitude: 36.008276, longitude: 129.3358231)
-        ]
-    ))
-}
+//#Preview {
+//    ShareMainView(runningData: ShareModel(
+//        courseName: "고래런",
+//        runningDate: "2023.10.19",
+//        runningRegion: "경상북도 포항시 지곡동",
+//        distance: "11km",
+//        cal: "127kcal",
+//        pace: "5’55\"",
+//        bpm: "132 BPM",
+//        time: "2hourse",
+//        userLocations: [
+//            CLLocationCoordinate2D(latitude: 36.0141253, longitude: 129.3471313),
+//            CLLocationCoordinate2D(latitude: 36.0154791, longitude: 129.3444276),
+//            CLLocationCoordinate2D(latitude: 36.0102547, longitude: 129.3394495),
+//            CLLocationCoordinate2D(latitude: 36.0097687, longitude: 129.3391061),
+//            CLLocationCoordinate2D(latitude: 36.008276, longitude: 129.3358231)
+//        ]
+//    ))
+//}
