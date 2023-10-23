@@ -16,6 +16,15 @@ struct CanvasData {
     var zeroY: Double
 }
 
+struct CanvasDataForShare {
+    var width: Int
+    var height: Int
+    var widthScale: Double
+    var heightScale: Double
+    var zeroX: Double
+    var zeroY: Double
+}
+
 final class PathGenerateManager {
     static let shared = PathGenerateManager()
     private init() {}
