@@ -63,6 +63,7 @@ struct InputUserInfoView: View {
                         OnboardingLocationAuthView()
                     } label: {
                         Text("완료")
+                            .foregroundStyle(Color.blackColor)
                             .padding()
                             .frame(maxWidth: .infinity)
                             .background {
