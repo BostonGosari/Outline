@@ -86,10 +86,7 @@ struct CardDetailInformationView: View {
                 .font(.title3)
                 .bold()
             VStack(alignment: .leading) {
-                MapInfoView(camera: MKMapCamera(
-                    lookingAtCenter: convertToCLLocationCoordinate(homeTabViewModel.recommendedCoures[currentIndex].course.centerLocation),
-                    fromDistance: 1000, pitch: 0, heading: 0), coordinates: convertToCLLocationCoordinates(homeTabViewModel.recommendedCoures[currentIndex].course.coursePaths)
-                )
+                MapInfoView(coordinates: convertToCLLocationCoordinates(homeTabViewModel.recommendedCoures[currentIndex].course.coursePaths))
                 .frame(height: 200)
                 .foregroundStyle(.thinMaterial)
                 Text("경로 제작 고사리님 @alsgiwc")
