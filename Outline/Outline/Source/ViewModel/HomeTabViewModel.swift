@@ -28,7 +28,7 @@ class HomeTabViewModel: ObservableObject {
     @Published var running = false
     
     @Published var userLocations = [CLLocationCoordinate2D]()
-        
+
     let courseModel = CourseModel()
     let locationManager = CLLocationManager()
     
