@@ -94,8 +94,8 @@ struct CourseListWatchView: View {
                 }
             }
             .navigationTitle("러닝")
-            .navigationDestination(for: CourseInfo.self) { course in
-                DetailView(courseInfo: course)
+            .navigationDestination(for: GPSArtCourse.self) { course in
+                DetailView(course: course)
             }
             .onAppear {
                 workoutManager.requestAuthorization()
@@ -159,18 +159,27 @@ let testCourses: [CourseInfo] = [
 
 struct DetailView: View {
     
-    var courseInfo: CourseInfo
+    var course: GPSArtCourse
     
     var body: some View {
         List {
-            listBox(systemName: "flag", context: courseInfo.locationInfo)
-            listBox(systemName: "location", context: courseInfo.courseLength, specifier: "%.0f", unit: "km")
-            listBox(systemName: "clock", duration: courseInfo.courseDuration)
-            listBox(systemName: "arrow.triangle.turn.up.right.diamond", context: courseInfo.alley)
+            listBox(systemName: "flag", context: course.locationInfo.locality)
+            listBox(systemName: "location", context: course.courseLength, specifier: "%.0f", unit: "km")
+            listBox(systemName: "clock", duration: course.courseDuration)
+            listBox(systemName: "arrow.triangle.turn.up.right.diamond", alley: course.alley)
         }
         .navigationTitle {
-            Text(courseInfo.courseName)
+            Text(course.courseName)
                 .foregroundStyle(.green)
+        }
+    }
+    
+    @ViewBuilder private func listBox(systemName: String, location: Placemark) -> some View {
+        HStack {
+            Image(systemName: systemName)
+                .foregroundStyle(.green)
+                .padding(.horizontal, 5)
+            Text("\(location.administrativeArea) \(location.locality) \(location.subLocality)")
         }
     }
     
@@ -180,6 +189,22 @@ struct DetailView: View {
                 .foregroundStyle(.green)
                 .padding(.horizontal, 5)
             Text(context)
+        }
+    }
+    
+    @ViewBuilder private func listBox(systemName: String, alley: Alley) -> some View {
+        HStack {
+            Image(systemName: systemName)
+                .foregroundStyle(.green)
+                .padding(.horizontal, 5)
+            switch alley {
+            case .few:
+                Text("적음")
+            case .lots:
+                Text("많음")
+            case .none:
+                Text("없음")
+            }
         }
     }
     
