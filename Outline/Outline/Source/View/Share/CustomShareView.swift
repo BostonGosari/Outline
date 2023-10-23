@@ -55,6 +55,43 @@ extension CustomShareView {
     private func renderLayerImage() {
         renderMapViewAsImage(width: Int(imageWidth), height: Int(imageHeight))
     }
+    private func renderMapViewAsImage(width: Int, height: Int) {
+        let options: MKMapSnapshotter.Options = .init()
+        options.region = mapView.region
+        options.size = CGSize(width: width, height: height)
+        options.mapType = .standard
+        options.showsBuildings = true
+        
+        let snapshotter = MKMapSnapshotter(
+            options: options
+        )
+        snapshotter.start { snapshot, error in
+           if let snapshot = snapshot {
+               let renderedMapImage = snapshot.image
+               renderedImage = overlayMapInfo(renderdImage: renderedMapImage).asImage(size: CGSize(width: width, height: height))
+           } else if let error = error {
+              print(error)
+           }
+        }
+    }
+    private func overlayMapInfo(renderdImage: UIImage) -> some View {
+        ZStack {
+            Group {
+                Group {
+                    Image(uiImage: renderdImage)
+                        
+                    pathManager.caculateLinesInRect(width: imageWidth, height: Double(imageWidth * 1920 / 1080), coordinates: viewModel.runningData.userLocations, region: mapView.region)
+                        .stroke(style: StrokeStyle(lineWidth: 15, lineCap: .round, lineJoin: .round))
+                }
+                .overlay {
+                    LinearGradient(colors: [.black.opacity(0), .black], startPoint: .center, endPoint: .bottom)
+                }
+                runningInfo
+            }
+            .offset(y: -30)
+        }
+        .frame(width: imageWidth, height: imageHeight)
+    }
 }
 
 extension CustomShareView {
@@ -171,162 +208,4 @@ struct TagButton: View {
     }
 }
 
-extension CustomShareView {
-    func renderMapViewAsImage(width: Int, height: Int) {
-        let options: MKMapSnapshotter.Options = .init()
-        options.region = mapView.region
-        options.size = CGSize(width: width, height: height)
-        options.mapType = .standard
-        options.showsBuildings = true
-        
-        let snapshotter = MKMapSnapshotter(
-            options: options
-        )
-        snapshotter.start { snapshot, error in
-           if let snapshot = snapshot {
-               let renderedMapImage = snapshot.image
-               renderedImage = overlayMapInfo(renderdImage: renderedMapImage).asImage(size: CGSize(width: width, height: height))
-           } else if let error = error {
-              print(error)
-           }
-        }
-    }
-    func overlayMapInfo(renderdImage: UIImage) -> some View {
-        ZStack {
-            Group {
-                Group {
-                    Image(uiImage: renderdImage)
-                        
-                    pathManager.caculateLinesInRect(width: imageWidth, height: Double(imageWidth * 1920 / 1080), coordinates: viewModel.runningData.userLocations, region: mapView.region)
-                        .stroke(style: StrokeStyle(lineWidth: 15, lineCap: .round, lineJoin: .round))
-                }
-                .overlay {
-                    LinearGradient(colors: [.black.opacity(0), .black], startPoint: .center, endPoint: .bottom)
-                }
-                runningInfo
-            }
-            .offset(y: -30)
-        }
-        .frame(width: imageWidth, height: imageHeight)
-    }
-}
 
-extension PathGenerateManager {
-    func caculateLinesInRect(
-        width: Double,
-        height: Double,
-        coordinates: [CLLocationCoordinate2D],
-        region: MKCoordinateRegion
-    ) -> some Shape {
-        let canvasData = calculateCanvaDataInRect(width: width, height: height, region: region)
-        var path = Path()
-        
-        let startPosition = calculateRelativePoint(coordinate: coordinates[0], canvasData: canvasData)
-        path.move(to: CGPoint(x: startPosition[0], y: -startPosition[1]))
-
-        for coordinate in coordinates {
-            let position = calculateRelativePoint(coordinate: coordinate, canvasData: canvasData)
-            path.addLine(to: CGPoint(x: position[0], y: -position[1]))
-        }
-        
-        return path
-    }
-    
-    private func calculateCanvaDataInRect(width: Double, height: Double, region: MKCoordinateRegion) -> CanvasDataForShare {
-        let minLon = region.center.longitude - region.span.longitudeDelta / 2
-//        let maxLon = region.center.longitude + region.span.longitudeDelta / 2
-//        let minLat = region.center.latitude - region.span.latitudeDelta / 2
-        let maxLat = region.center.latitude + region.span.latitudeDelta / 2
-        
-        let calculatedHeight = region.span.latitudeDelta * 1000000
-        let calculatedWidth = region.span.longitudeDelta * 1000000
-        
-        let relativeWidthScale: Double = width / calculatedWidth
-        let relativeHeightScale: Double = height / calculatedHeight
-        
-        let fittedWidth = calculatedWidth * relativeWidthScale
-        let fittedHeight = calculatedHeight * relativeHeightScale
-        return CanvasDataForShare(
-            width: Int(fittedWidth),
-            height: Int(fittedHeight),
-            widthScale: relativeWidthScale,
-            heightScale: relativeHeightScale,
-            zeroX: minLon,
-            zeroY: maxLat
-            )
-    }
-    
-    private func calculateCanvaData(coordinates: [CLLocationCoordinate2D], width: Double, height: Double) -> CanvasData {
-        var minLat: Double = 90
-        var maxLat: Double = -90
-        var minLon: Double = 180
-        var maxLon: Double = -180
-        for coordinate in coordinates {
-            if coordinate.latitude < minLat {
-                minLat = coordinate.latitude
-            }
-            if coordinate.latitude > maxLat {
-                maxLat = coordinate.latitude
-            }
-            if coordinate.longitude < minLon {
-                minLon = coordinate.longitude
-            }
-            if coordinate.longitude > maxLon {
-                maxLon = coordinate.longitude
-            }
-        }
-        let calculatedHeight = (maxLat - minLat) * 1000000
-        let calculatedWidth = (maxLon - minLon) * 1000000
-        
-        var relativeScale: Double = 0
-        
-        if calculatedWidth > calculatedHeight {
-            relativeScale = width / calculatedWidth
-        } else {
-            relativeScale = height / calculatedHeight
-        }
-        let fittedWidth = calculatedWidth * relativeScale
-        let fittedHeight = calculatedHeight * relativeScale
-        
-        return CanvasData(
-            width: Int(fittedWidth),
-            height: Int(fittedHeight),
-            scale: relativeScale,
-            zeroX: minLon,
-            zeroY: maxLat
-            )
-    }
-    
-    func calculateDeltaAndCenter(coordinates: [CLLocationCoordinate2D]) -> MKCoordinateRegion {
-        var minLat: Double = 90
-        var maxLat: Double = -90
-        var minLon: Double = 180
-        var maxLon: Double = -180
-        for coordinate in coordinates {
-            if coordinate.latitude < minLat {
-                minLat = coordinate.latitude
-            }
-            if coordinate.latitude > maxLat {
-                maxLat = coordinate.latitude
-            }
-            if coordinate.longitude < minLon {
-                minLon = coordinate.longitude
-            }
-            if coordinate.longitude > maxLon {
-                maxLon = coordinate.longitude
-            }
-        }
-        let latitudeDelta = maxLat - minLat
-        let longitudeDelta = maxLon - minLon
-        let centerLatitude = (maxLat + minLat) / 2
-        let centerLongitude = (maxLon + minLon) / 2
-        
-        return MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: centerLatitude, longitude: centerLongitude), span: MKCoordinateSpan(latitudeDelta: latitudeDelta, longitudeDelta: longitudeDelta))
-    }
-    
-    private func calculateRelativePoint(coordinate: CLLocationCoordinate2D, canvasData: CanvasDataForShare) -> [Int] {
-        let posX = Int((coordinate.longitude - canvasData.zeroX) * canvasData.widthScale * 1000000)
-        let posY = Int((coordinate.latitude - canvasData.zeroY) * canvasData.heightScale * 1000000)
-        return [posX, posY]
-    }
-}
