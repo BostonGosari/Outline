@@ -5,13 +5,15 @@
 //  Created by Seungui Moon on 10/14/23.
 //
 
+#if os(iOS)
 import Firebase
 import FirebaseFirestoreSwift
+#endif
 import SwiftUI
 
 typealias AllGPSArtCourses = [GPSArtCourse]
 
-struct GPSArtCourse: Codable {
+struct GPSArtCourse: Codable, Hashable {
     var id: String
     var courseName: String
     var locationInfo: Placemark
@@ -24,6 +26,35 @@ struct GPSArtCourse: Codable {
     var coursePaths: [Coordinate]
     var heading: Double
     var thumbnail: String
+    
+    init(id: String, courseName: String, locationInfo: Placemark, courseLength: Double, courseDuration: Double, centerLocation: Coordinate, distance: Double, level: CourseLevel, alley: Alley, coursePaths: [Coordinate], heading: Double, thumbnail: String) {
+        self.id = id
+        self.courseName = courseName
+        self.locationInfo = locationInfo
+        self.courseLength = courseLength
+        self.courseDuration = courseDuration
+        self.centerLocation = centerLocation
+        self.distance = distance
+        self.level = level
+        self.alley = alley
+        self.coursePaths = coursePaths
+        self.heading = heading
+        self.thumbnail = thumbnail
+    }
+    init() {
+        self.id = ""
+        self.courseName = ""
+        self.locationInfo = Placemark(name: "", isoCountryCode: "", administrativeArea: "", subAdministrativeArea: "", locality: "", subLocality: "", throughfare: "", subThroughfare: "")
+        self.courseLength = 0
+        self.courseDuration = 0
+        self.centerLocation = Coordinate(longitude: 0, latitude: 0)
+        self.distance = 0
+        self.level = .easy
+        self.alley = .none
+        self.coursePaths = []
+        self.heading = 0
+        self.thumbnail = ""
+    }
 }
 
 struct Placemark: Codable, Hashable {
