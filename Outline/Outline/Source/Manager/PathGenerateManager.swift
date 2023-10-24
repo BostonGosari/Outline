@@ -48,8 +48,18 @@ final class PathGenerateManager {
         return path
     }
     private func calculateRelativePoint(coordinate: CLLocationCoordinate2D, canvasData: CanvasData) -> [Int] {
-        let posX = Int((coordinate.longitude - canvasData.zeroX) * canvasData.scale * 1000000)
-        let posY = Int((coordinate.latitude - canvasData.zeroY) * canvasData.scale * 1000000)
+        var posX: Int = 0
+        var posY: Int = 0
+        var tempX = (coordinate.longitude - canvasData.zeroX) * canvasData.scale * 1000000
+        var tempY = (coordinate.latitude - canvasData.zeroY) * canvasData.scale * 1000000
+        if !(tempX.isNaN || tempX.isInfinite || tempY.isNaN || tempY.isInfinite) {
+            posX = Int(tempX)
+            posY = Int(tempY)
+        } else {
+            posX = 0
+            posY = 0
+        }
+            
         return [posX, posY]
     }
     private func calculateCanvaData(coordinates: [CLLocationCoordinate2D], width: Double, height: Double) -> CanvasData {
@@ -85,9 +95,9 @@ final class PathGenerateManager {
         let fittedHeight = calculatedHeight * relativeScale
         
         return CanvasData(
-            width: Int(fittedWidth),
-            height: Int(fittedHeight),
-            scale: relativeScale,
+            width: Int(fittedWidth > 0 ? fittedWidth : 200),
+            height: Int(fittedHeight > 0 ? fittedHeight : 200),
+            scale: relativeScale > 0 ? relativeScale : 2,
             zeroX: minLon,
             zeroY: maxLat
             )

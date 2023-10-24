@@ -32,6 +32,14 @@ struct RunningMapView: View {
                 )
                 .ignoresSafeArea()
                 .preferredColorScheme(.dark)
+            } else {
+                RunningMap(
+                    locationManager: locationManager,
+                    viewModel: viewModel,
+                    coordinates: []
+                )
+                .ignoresSafeArea()
+                .preferredColorScheme(.dark)
             }
             
             VStack(spacing: 0) {
