@@ -63,13 +63,16 @@ class FinishRunningViewModel: ObservableObject {
                 endTime = ""
             }
             
-            runningData[0].data = "\(healthData.totalRunningDistance)"
-            runningData[1].data = "\(healthData.totalTime)"
-            runningData[2].data = healthData.averagePace == 0 ? "-'--" : "\(healthData.averagePace)"
-            runningData[3].data  = "\(healthData.averageHeartRate)"
-            runningData[4].data  = "\(healthData.totalEnergy)"
-            runningData[5].data = "\(healthData.averageCadence)"
-            
+            runningData[0].data = String(format: "%.1f", healthData.totalRunningDistance/1000)
+            runningData[1].data = formatDuration(healthData.totalTime)
+            runningData[2].data = healthData.averagePace.formattedAveragePace()
+            runningData[3].data  = "\(Int(healthData.averageHeartRate))"
+            runningData[4].data  = "\(Int(healthData.totalEnergy))"
+            if healthData.averageCadence > 0 {
+                runningData[5].data = "\(Int(healthData.averageCadence))"
+            } else {
+                runningData[5].data = "0"
+            }
             if let paths = courseData.coursePaths {
                 var datas = [Coordinate]()
                 paths.forEach { elem in
