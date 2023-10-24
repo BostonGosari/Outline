@@ -11,13 +11,7 @@ import MapKit
 struct MapWatchView: View {
     
     let locationManager = CLLocationManager()
-    
-    @State private var coordinates = [
-        CLLocationCoordinate2D(latitude: 36.01440, longitude: 129.34640),
-        CLLocationCoordinate2D(latitude: 36.01378, longitude: 129.34770),
-        CLLocationCoordinate2D(latitude: 36.01324, longitude: 129.34728),
-        CLLocationCoordinate2D(latitude: 36.01390, longitude: 129.34603)
-    ]
+    var course: [CLLocationCoordinate2D] = []
     
     @State var position: MapCameraPosition = .userLocation(followsHeading: true, fallback: .automatic)
     
@@ -39,7 +33,7 @@ struct MapWatchView: View {
                         }
                     }
                 }
-                MapPolyline(coordinates: coordinates)
+                MapPolyline(coordinates: course)
                     .stroke(.gray.opacity(0.5), lineWidth: 8)
                 MapPolyline(coordinates: userLocations)
                     .stroke(.green, lineWidth: 8)

@@ -15,6 +15,10 @@ struct CourseListWatchView: View {
     @State private var detailViewNavigate = false
     @Binding var navigate: Bool
     
+    @State private var startCourse: GPSArtCourse = GPSArtCourse()
+    
+    @StateObject var watchConnectivityManager = WatchConnectivityManager.shared
+    
     var body: some View {
         NavigationStack {
             ScrollView {
@@ -50,9 +54,15 @@ struct CourseListWatchView: View {
                     }
                     .padding(.bottom, 8)
                     
-                    ForEach(testCourses) {course in
+                    if watchConnectivityManager.allCourses.isEmpty {
+                        Text("경로를 받으시려면 Outline 앱을 켜주세요")
+                    }
+                    
+                    ForEach(watchConnectivityManager.allCourses, id: \.id) {course in
                         Button {
                             print("button clicked")
+                            startCourse = course
+                            navigate = true
                         } label: {
                             VStack {
                                 Text(course.courseName)
@@ -68,7 +78,7 @@ struct CourseListWatchView: View {
                                         .buttonStyle(.plain)
                                         .padding(.trailing, -4)
                                     }
-                                SampleCourePath()
+                                PathGenerateManager.shared.caculateLines(width: 75, height: 75, coordinates: convertToCLLocationCoordinates(course.coursePaths))
                                     .stroke(lineWidth: 4)
                                     .scaledToFit()
                                     .frame(height: 75)
@@ -92,8 +102,8 @@ struct CourseListWatchView: View {
                 }
             }
             .navigationTitle("러닝")
-            .navigationDestination(for: CourseInfo.self) { course in
-                DetailView(courseInfo: course)
+            .navigationDestination(for: GPSArtCourse.self) { course in
+                DetailView(course: course)
             }
             .onAppear {
                 workoutManager.requestAuthorization()
@@ -117,7 +127,7 @@ struct CourseListWatchView: View {
                        }
                    }
            } else {
-               WatchTabView() // 카운트다운이 끝나면 WatchTabView로 이동
+               WatchTabView(startCourse: startCourse) // 카운트다운이 끝나면 WatchTabView로 이동
            }
        }.navigationBarBackButtonHidden()
    }
@@ -138,37 +148,29 @@ extension HKWorkoutActivityType: Identifiable {
     }
 }
 
-struct CourseInfo: Hashable, Identifiable {
-    let id = UUID().uuidString
-    var locationInfo: String
-    var courseName: String
-    var courseLength: Double
-    var courseDuration: Double
-    var alley: String
-}
-
-let testCourses: [CourseInfo] = [
-    CourseInfo(locationInfo: "포항시 남구 효자로1", courseName: "시티런", courseLength: 1, courseDuration: 30, alley: "많음"),
-    CourseInfo(locationInfo: "포항시 남구 효자로2", courseName: "오리런", courseLength: 2, courseDuration: 40, alley: "적음"),
-    CourseInfo(locationInfo: "포항시 남구 지곡로3", courseName: "보스런", courseLength: 3, courseDuration: 60, alley: "많음"),
-    CourseInfo(locationInfo: "포항시 남구 효자로4", courseName: "턴고런", courseLength: 4, courseDuration: 70, alley: "보통"),
-    CourseInfo(locationInfo: "포항시 남구 효자로5", courseName: "사리런", courseLength: 5, courseDuration: 80, alley: "많음")
-]
-
 struct DetailView: View {
     
-    var courseInfo: CourseInfo
+    var course: GPSArtCourse
     
     var body: some View {
         List {
-            listBox(systemName: "flag", context: courseInfo.locationInfo)
-            listBox(systemName: "location", context: courseInfo.courseLength, specifier: "%.0f", unit: "km")
-            listBox(systemName: "clock", duration: courseInfo.courseDuration)
-            listBox(systemName: "arrow.triangle.turn.up.right.diamond", context: courseInfo.alley)
+            listBox(systemName: "flag", context: course.locationInfo.locality)
+            listBox(systemName: "location", context: course.courseLength, specifier: "%.0f", unit: "km")
+            listBox(systemName: "clock", duration: course.courseDuration)
+            listBox(systemName: "arrow.triangle.turn.up.right.diamond", alley: course.alley)
         }
         .navigationTitle {
-            Text(courseInfo.courseName)
+            Text(course.courseName)
                 .foregroundStyle(.green)
+        }
+    }
+    
+    @ViewBuilder private func listBox(systemName: String, location: Placemark) -> some View {
+        HStack {
+            Image(systemName: systemName)
+                .foregroundStyle(.green)
+                .padding(.horizontal, 5)
+            Text("\(location.administrativeArea) \(location.locality) \(location.subLocality)")
         }
     }
     
@@ -178,6 +180,22 @@ struct DetailView: View {
                 .foregroundStyle(.green)
                 .padding(.horizontal, 5)
             Text(context)
+        }
+    }
+    
+    @ViewBuilder private func listBox(systemName: String, alley: Alley) -> some View {
+        HStack {
+            Image(systemName: systemName)
+                .foregroundStyle(.green)
+                .padding(.horizontal, 5)
+            switch alley {
+            case .few:
+                Text("적음")
+            case .lots:
+                Text("많음")
+            case .none:
+                Text("없음")
+            }
         }
     }
     
@@ -203,24 +221,6 @@ struct DetailView: View {
         return listBox(systemName: systemName, context: formattedString)
     }
     
-}
-
-struct SampleCourePath: Shape {
-    func path(in rect: CGRect) -> Path {
-        var path = Path()
-        let width = rect.size.width
-        let height = rect.size.height
-        path.move(to: CGPoint(x: 0.68307*width, y: 0.03416*height))
-        path.addCurve(to: CGPoint(x: 0.42506*width, y: 0.44577*height), control1: CGPoint(x: 0.48813*width, y: -0.03248*height), control2: CGPoint(x: 0.42984*width, y: 0.2808*height))
-        path.addCurve(to: CGPoint(x: 0.0237*width, y: 0.61729*height), control1: CGPoint(x: 0.27097*width, y: 0.38861*height), control2: CGPoint(x: -0.02503*width, y: 0.34288*height))
-        path.addCurve(to: CGPoint(x: 0.54969*width, y: 0.97047*height), control1: CGPoint(x: 0.06702*width, y: 0.86118*height), control2: CGPoint(x: 0.36077*width, y: 0.95024*height))
-        path.addCurve(to: CGPoint(x: 0.66651*width, y: 0.91992*height), control1: CGPoint(x: 0.59191*width, y: 0.97499*height), control2: CGPoint(x: 0.63319*width, y: 0.95554*height))
-        path.addLine(to: CGPoint(x: 0.91485*width, y: 0.65442*height))
-        path.addCurve(to: CGPoint(x: 0.96734*width, y: 0.40077*height), control1: CGPoint(x: 0.97216*width, y: 0.59316*height), control2: CGPoint(x: 0.99871*width, y: 0.49034*height))
-        path.addCurve(to: CGPoint(x: 0.68307*width, y: 0.03416*height), control1: CGPoint(x: 0.91588*width, y: 0.25382*height), control2: CGPoint(x: 0.82298*width, y: 0.08199*height))
-        path.closeSubpath()
-        return path
-    }
 }
 
 #Preview {

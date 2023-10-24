@@ -8,7 +8,12 @@
 import SwiftUI
 
 struct ControlsView: View {
+    
     @EnvironmentObject var workoutManager: WatchWorkoutManager
+    @StateObject var watchConnectivityManager = WatchConnectivityManager.shared
+    
+    let startCourse: GPSArtCourse
+        
     var body: some View {
         if workoutManager.running {
             VStack {
@@ -27,6 +32,12 @@ struct ControlsView: View {
                 HStack(spacing: 14) {
                     Button {
                         workoutManager.endWorkout()
+                        
+                        let courseData = CourseData(courseName: startCourse.courseName, runningLength: startCourse.courseLength, heading: startCourse.heading, distance: startCourse.distance, coursePaths: convertToCLLocationCoordinates(startCourse.coursePaths), runningCourseId: "")
+                        
+                        let healthData = HealthData(totalTime: 0.0, averageCadence: workoutManager.cadence, totalRunningDistance: workoutManager.distance, totalEnergy: workoutManager.calorie, averageHeartRate: workoutManager.heartRate, averagePace: workoutManager.pace, startDate: Date(), endDate: Date())
+                        
+                        watchConnectivityManager.sendRunningRecordToPhone(RunningRecord(id: UUID().uuidString, runningType: .gpsArt, courseData: courseData, healthData: healthData))
                     } label: {
                         Image(systemName: "stop.fill")
                             .font(.system(size: 24))
@@ -164,7 +175,7 @@ extension ControlsView {
         }
     }
 }
-
-#Preview {
-    ControlsView().environmentObject(WatchWorkoutManager())
-}
+//
+//#Preview {
+//    ControlsView().environmentObject(WatchWorkoutManager())
+//}

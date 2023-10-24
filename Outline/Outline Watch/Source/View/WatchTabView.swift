@@ -11,15 +11,16 @@ struct WatchTabView: View {
     @EnvironmentObject var workoutManager: WatchWorkoutManager
     @Environment(\.isLuminanceReduced) var isLuminanceReduced
     @State private var selection: Tab = .metrics
-
+    let startCourse: GPSArtCourse
+    
     enum Tab {
         case controls, map, metrics
     }
     
     var body: some View {
         TabView(selection: $selection) {
-            ControlsView().tag(Tab.controls)
-            MapWatchView().tag(Tab.map)
+            ControlsView(startCourse: startCourse).tag(Tab.controls)
+            MapWatchView(course: convertToCLLocationCoordinates(startCourse.coursePaths)).tag(Tab.map)
             MetricsView().tag(Tab.metrics)
         }
         .navigationBarBackButtonHidden(true)
@@ -43,8 +44,4 @@ struct WatchTabView: View {
             selection = .controls
         }
     }
-}
-
-#Preview {
-    WatchTabView()
 }
