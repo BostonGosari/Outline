@@ -43,12 +43,17 @@ class RecordDetailViewModel: ObservableObject {
                 endTime = ""
             }
             
-            runningData["킬로미터"] = "\(healthData.totalRunningDistance)"
-            runningData["시간"] = "\(formattedTime(Int(healthData.totalTime)))"
-            runningData["평균 페이스"] = healthData.averagePace == 0 ? "-'--" : "\(healthData.averagePace)"
-            runningData["BPM"] = "\(healthData.averageHeartRate)"
+            runningData["킬로미터"] = String(format: "%.1f", healthData.totalRunningDistance/1000)
+            runningData["시간"] = formatDuration(healthData.totalTime)
+            runningData["평균 페이스"] = healthData.averagePace.formattedAveragePace()
+            runningData["BPM"] = "\(Int(healthData.averageHeartRate))"
             runningData["칼로리"] = "\(healthData.totalEnergy)"
-            runningData["케이던스"] = "\(healthData.averageCadence)"
+
+            if healthData.averageCadence > 0 {
+                runningData["케이던스"] = "\(Int(healthData.averageCadence))"
+            } else {
+                runningData["케이던스"] = "0"
+            }
             
             if let paths = courseData.coursePaths {
                 var datas = [Coordinate]()
