@@ -145,21 +145,19 @@ struct RecordItem: View {
                     .scale(0.5)
                     .foregroundStyle(Color.primaryColor)
                     .padding(.horizontal, 16)
-                
             }
             HStack {
-                VStack(alignment: .leading) {
-                      Spacer()
+                VStack(alignment: .leading, spacing: 4) {
                       if let courseName = record.courseData?.courseName {
                           Text(courseName)
                               .font(Font.title2)
                               .foregroundColor(Color.white)
                       }
-                    if let distance = record.healthData?.totalRunningDistance {
-                        Text(String(distance))
-                                .font(Font.title2)
-                                .foregroundColor(Color.white)
-                        }
+//                    if let distance = record.healthData?.totalRunningDistance {
+//                        Text(String(distance))
+//                                .font(Font.title2)
+//                                .foregroundColor(Color.white)
+//                        }
                     HStack {
                         Image(systemName: "calendar")
                             .font(Font.caption)
@@ -168,31 +166,32 @@ struct RecordItem: View {
                             Text(formatDate(startDate))
                                 .font(Font.caption)
                                 .foregroundColor(Color.gray200)
-                         
                         }
-                        
                     }
-                    
-                  }
+                }
+                .padding(.horizontal, 24)
+                .padding(.vertical, 24)
+               
                 Spacer()
             }
-            .padding(.horizontal, 24)
-            .padding(.vertical, 12)
-           
-        }
-        .frame(maxWidth: .infinity, maxHeight: 176)
-        .background(Color.clear)
-        .cornerRadius(8)
-        .background(
-            LinearGradient(
-                stops: [
-                    Gradient.Stop(color: .black.opacity(0), location: 0.00),
-                    Gradient.Stop(color: .black.opacity(0.4), location: 1.00),
-                ],
-                startPoint: UnitPoint(x: 0.5, y: -0.43),
-                endPoint: UnitPoint(x: 0.5, y: 1)
+            .foregroundColor(.clear)
+            .frame(width: 358, height: 77)
+            .background(
+                LinearGradient(
+                    stops: [
+                        Gradient.Stop(color: .black.opacity(0), location: 0.00),
+                        Gradient.Stop(color: .black.opacity(0.4), location: 1.00)
+                    ],
+                    startPoint: UnitPoint(x: 0.5, y: -0.43),
+                    endPoint: UnitPoint(x: 0.5, y: 1)
+                )
             )
-        )
+            .padding(.top, 100)
+        }
+       
+        .frame(maxWidth: .infinity, maxHeight: 176)
+        .background(.black.opacity(0.1))
+        .cornerRadius(8)
         .overlay(
             RoundedRectangle(cornerRadius: 8)
                 .stroke(Color.white, lineWidth: 1)
@@ -203,7 +202,7 @@ struct RecordItem: View {
     private func formatDate(_ date: Date) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .short
-        dateFormatter.timeStyle = .short
+//        dateFormatter.timeStyle = .short
         return dateFormatter.string(from: date)
     }
     
