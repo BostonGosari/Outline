@@ -1,51 +1,31 @@
 //
-//  FinishRunningViewModel.swift
+//  RecordDetailViewModel.swift
 //  Outline
 //
-//  Created by hyebin on 10/18/23.
+//  Created by hyebin on 10/24/23.
 //
 
 import CoreLocation
 import SwiftUI
 
-class FinishRunningViewModel: ObservableObject {
-    @Published var isShowPopup = false {
-        didSet {
-            if isShowPopup {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                    self.isShowPopup = false
-                }
-            }
-        }
-    }
+class RecordDetailViewModel: ObservableObject {
     @Published var navigateToShareMainView = false
+    @Published var courseRegion: String = ""
+    @Published var runningData = ["킬로미터": "", "시간": "", "평균 페이스": "", "BPM": "", "칼로리": "", "케이던스": ""]
     
     private var runningDate = Date()
-
     var courseName: String = ""
-    var courseRegion: String = ""
-    
     var startTime: String = ""
     var endTime: String = ""
     var date: String = ""
     
-    var runningData: [RunningDataItem] = [
-        RunningDataItem(text: "킬로미터", data: ""),
-        RunningDataItem(text: "시간", data: ""),
-        RunningDataItem(text: "평균 페이스", data: ""),
-        RunningDataItem(text: "BPM", data: ""),
-        RunningDataItem(text: "칼로리", data: ""),
-        RunningDataItem(text: "케이던스", data: "")
-    ]
-    
     var shareData = ShareModel()
     
     var userLocations: [CLLocationCoordinate2D] = []
-  
-    func readData(runningRecord: FetchedResults<CoreRunningRecord>) {
-        if let data = runningRecord.last,
-            let courseData = data.courseData,
-            let healthData = data.healthData {
+    
+    func readData(runningRecord: CoreRunningRecord) {
+        if let courseData = runningRecord.courseData,
+           let healthData = runningRecord.healthData {
             courseName = courseData.courseName ?? ""
             
             if let startDate = healthData.startDate {
@@ -63,16 +43,18 @@ class FinishRunningViewModel: ObservableObject {
                 endTime = ""
             }
             
-            runningData[0].data = String(format: "%.1f", healthData.totalRunningDistance/1000)
-            runningData[1].data = formatDuration(healthData.totalTime)
-            runningData[2].data = healthData.averagePace.formattedAveragePace()
-            runningData[3].data  = "\(Int(healthData.averageHeartRate))"
-            runningData[4].data  = "\(Int(healthData.totalEnergy))"
+            runningData["킬로미터"] = String(format: "%.1f", healthData.totalRunningDistance/1000)
+            runningData["시간"] = formatDuration(healthData.totalTime)
+            runningData["평균 페이스"] = healthData.averagePace.formattedAveragePace()
+            runningData["BPM"] = "\(Int(healthData.averageHeartRate))"
+            runningData["칼로리"] = "\(healthData.totalEnergy)"
+
             if healthData.averageCadence > 0 {
-                runningData[5].data = "\(Int(healthData.averageCadence))"
+                runningData["케이던스"] = "\(Int(healthData.averageCadence))"
             } else {
-                runningData[5].data = "0"
+                runningData["케이던스"] = "0"
             }
+            
             if let paths = courseData.coursePaths {
                 var datas = [Coordinate]()
                 paths.forEach { elem in
@@ -107,14 +89,7 @@ class FinishRunningViewModel: ObservableObject {
             endTime = ""
             date = ""
             
-            runningData = [
-                RunningDataItem(text: "킬로미터", data: ""),
-                RunningDataItem(text: "시간", data: ""),
-                RunningDataItem(text: "평균 페이스", data: ""),
-                RunningDataItem(text: "BPM", data: ""),
-                RunningDataItem(text: "칼로리", data: ""),
-                RunningDataItem(text: "케이던스", data: "")
-            ]
+            runningData = ["킬로미터": "", "시간": "", "평균 페이스": "", "BPM": "", "칼로리": "", "케이던스": ""]
             
             userLocations = []
         }
@@ -125,20 +100,21 @@ class FinishRunningViewModel: ObservableObject {
             courseName: courseName,
             runningDate: runningDate.dateToShareString(),
             runningRegion: courseRegion,
-            distance: "\(runningData[0].data)km",
-            cal: "\(runningData[4].data)Kcal",
-            pace: "\(runningData[2].data)",
-            bpm: "\(runningData[3].data)BPM",
-            time: "\(runningData[1].data)km",
+            distance: "\(runningData["킬로미터"] ?? "0")km",
+            cal: "\(runningData["칼로리"] ?? "0")Kcal",
+            pace: "\(runningData["평균 페이스"] ?? "-'--")",
+            bpm: "\(runningData["BPM"] ?? "0")BPM",
+            time: "\(runningData["시간"] ?? "0")",
             userLocations: userLocations
         )
         
         navigateToShareMainView = true
     }
-}
-
-struct RunningDataItem: Hashable {
-    var id = UUID()
-    var text: String
-    var data: String
+    
+    private func formattedTime(_ counter: Int) -> String {
+        let minutes = counter / 60
+        let seconds = counter % 60
+        
+        return String(format: "%02d:%02d", minutes, seconds)
+    }
 }

@@ -44,7 +44,7 @@ struct FinishRunningView: View {
                         .padding(.bottom, 16)
                         .padding(.horizontal, 16)
                     
-                    CompleteButton(text: "자랑하기") {
+                    CompleteButton(text: "자랑하기", isActive: true) {
                         viewModel.saveShareData()
                     }
                     .padding(.bottom, 16)
