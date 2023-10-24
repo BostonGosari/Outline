@@ -15,7 +15,7 @@ struct FreeRunningMap: UIViewRepresentable {
     func makeUIView(context: Context) -> MKMapView {
         let mapView = MKMapView()
         mapView.showsUserLocation = true
-        mapView.userTrackingMode = .followWithHeading
+        mapView.userTrackingMode = .follow
         mapView.showsCompass = false
         mapView.delegate = context.coordinator
         mapView.isUserInteractionEnabled = false
