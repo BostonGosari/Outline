@@ -6,6 +6,7 @@
 //
 
 import CoreLocation
+import MapKit
 import SwiftUI
 
 struct CustomShareView: View {
@@ -18,6 +19,14 @@ struct CustomShareView: View {
     @State private var isShowPace = true
     @State private var isShowDistance = true
     
+    // handle Image
+    @Binding var renderedImage: UIImage?
+    @State private var mapView = MKMapView()
+    @State private var imageWidth: CGFloat = 0
+    @State private var imageHeight: CGFloat = 0
+    
+    private let pathManager = PathGenerateManager.shared
+    
     var body: some View {
         ZStack {
             Color.gray900Color
@@ -26,25 +35,83 @@ struct CustomShareView: View {
             VStack(spacing: 0) {
                 customImageView
                     .padding(EdgeInsets(top: 20, leading: 49, bottom: 16, trailing: 49))
-        
                 pageIndicator
                 tagView
             }
+            
         }
+        .onChange(of: viewModel.currentPage, {
+            if viewModel.currentPage == 0 {
+                renderLayerImage()
+            }
+        })
+        .onAppear {
+            renderLayerImage()
+        }
+    }
+}
+
+extension CustomShareView {
+    private func renderLayerImage() {
+        renderMapViewAsImage(width: Int(imageWidth), height: Int(imageHeight))
+    }
+    private func renderMapViewAsImage(width: Int, height: Int) {
+        let options: MKMapSnapshotter.Options = .init()
+        options.region = mapView.region
+        options.size = CGSize(width: width, height: height)
+        options.mapType = .standard
+        options.showsBuildings = true
+        
+        let snapshotter = MKMapSnapshotter(
+            options: options
+        )
+        snapshotter.start { snapshot, error in
+           if let snapshot = snapshot {
+               let renderedMapImage = snapshot.image
+               renderedImage = overlayMapInfo(renderdImage: renderedMapImage).asImage(size: CGSize(width: width, height: height))
+           } else if let error = error {
+              print(error)
+           }
+        }
+    }
+    private func overlayMapInfo(renderdImage: UIImage) -> some View {
+        ZStack {
+            Group {
+                Group {
+                    Image(uiImage: renderdImage)
+                        
+                    pathManager.caculateLinesInRect(width: imageWidth, height: Double(imageWidth * 1920 / 1080), coordinates: viewModel.runningData.userLocations, region: mapView.region)
+                        .stroke(style: StrokeStyle(lineWidth: 15, lineCap: .round, lineJoin: .round))
+                }
+                .overlay {
+                    LinearGradient(colors: [.black.opacity(0), .black], startPoint: .center, endPoint: .bottom)
+                }
+                runningInfo
+            }
+            .offset(y: -30)
+        }
+        .frame(width: imageWidth, height: imageHeight)
     }
 }
 
 extension CustomShareView {
     private var customImageView: some View {
         ZStack {
-            ShareMap(userLocations: viewModel.runningData.userLocations)
+            ShareMap(mapView: $mapView, userLocations: viewModel.runningData.userLocations)
+                .frame(width: imageWidth, height: imageHeight)
                 .overlay {
                     LinearGradient(colors: [.black.opacity(0), .black], startPoint: .center, endPoint: .bottom)
                 }
             runningInfo
+            GeometryReader { proxy in
+                HStack {}
+                    .onAppear {
+                        imageWidth = proxy.size.width
+                        imageHeight = proxy.size.height
+                }
+            }
         }
         .aspectRatio(1080.0/1920.0, contentMode: .fit)
-        
     }
     
     private var runningInfo: some View {
@@ -140,3 +207,5 @@ struct TagButton: View {
         }
     }
 }
+
+

@@ -67,7 +67,6 @@ class ShareViewModel: ObservableObject {
     }
     
     func shareToInstagram() -> Bool {
-        shareImage = UIImage(named: "ShareVinyl")
         guard let url = URL(string: "instagram-stories://share?source_application=helia"),
               let image = shareImage,
               let imageData = image.pngData() else { return false }
@@ -89,6 +88,7 @@ class ShareViewModel: ObservableObject {
     
     func saveImage() {
         if let image = shareImage {
+            print(currentPage)
             let imageSaver = ImageSaver()
             imageSaver.writeToPhotoAlbum(image: image)
             
@@ -106,4 +106,3 @@ class ImageSaver: NSObject {
         print("Save finished!")
     }
 }
-

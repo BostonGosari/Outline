@@ -10,10 +10,10 @@ import SwiftUI
 
 struct ShareMap: UIViewRepresentable {
     
+    @Binding var mapView: MKMapView
     let userLocations: [CLLocationCoordinate2D]
     
     func makeUIView(context: Context) -> MKMapView {
-        let mapView = MKMapView()
         mapView.delegate = context.coordinator
         mapView.isUserInteractionEnabled = false
         
