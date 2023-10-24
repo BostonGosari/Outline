@@ -13,6 +13,8 @@ class WatchConnectivityManager: NSObject, WCSessionDelegate, ObservableObject {
     @Published var allCourses: [GPSArtCourse] = []
     
     static let shared = WatchConnectivityManager()
+    
+    private let userDataModel = UserDataModel()
     let session = WCSession.default
 
     override init() {
@@ -48,6 +50,17 @@ class WatchConnectivityManager: NSObject, WCSessionDelegate, ObservableObject {
             print("Failed to encode GPSArtCourses: \(error)")
         }
     }
+    
+    func sendRunningRecordToPhone(_ record: RunningRecord) {
+        do {
+            let encoder = JSONEncoder()
+            let data = try encoder.encode(record)
+            let userInfo = ["newRunningRecord": data]
+            session.transferUserInfo(userInfo)
+        } catch {
+            print("Failed to encode RunningReecord")
+        }
+    }
 
     func session(_ session: WCSession, didReceiveMessage message: [String: Any]) {
         DispatchQueue.main.async {
@@ -57,6 +70,7 @@ class WatchConnectivityManager: NSObject, WCSessionDelegate, ObservableObject {
 
     func session(_ session: WCSession, didReceiveUserInfo userInfo: [String: Any]) {
         DispatchQueue.main.async {
+            // watchOS
             if let data = userInfo["gpsArtCourses"] as? Data {
                 let decoder = JSONDecoder()
                 do {
@@ -65,6 +79,24 @@ class WatchConnectivityManager: NSObject, WCSessionDelegate, ObservableObject {
                     print("received all courses")
                 } catch {
                     print("Failed to decode GPSArtCourses: \(error)")
+                }
+            }
+            
+            // iOS
+            if let data = userInfo["newRunningRecord"] as? Data {
+                let decoder = JSONDecoder()
+                do {
+                    let newRunningRecord = try decoder.decode(RunningRecord.self, from: data)
+                    self.userDataModel.createRunningRecord(record: newRunningRecord) { result in
+                        switch result {
+                        case .success:
+                            print("saved")
+                        case .failure(let error):
+                            print(error)
+                        }
+                    }
+                } catch {
+                    
                 }
             }
         }
