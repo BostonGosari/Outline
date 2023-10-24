@@ -11,6 +11,7 @@ import SwiftUI
 struct ShareMainView: View {
     @ObservedObject var homeTabViewModel: HomeTabViewModel
     @StateObject private var viewModel = ShareViewModel()
+    
     let runningData: ShareModel
     
     var body: some View {
@@ -20,9 +21,9 @@ struct ShareMainView: View {
                     .ignoresSafeArea()
                 
                 TabView(selection: $viewModel.currentPage) {
-                    CustomShareView(viewModel: viewModel)
+                    CustomShareView(viewModel: viewModel, renderedImage: $viewModel.shareImage)
                         .tag(0)
-                    ImageShareView(viewModel: viewModel)
+                    ImageShareView(viewModel: viewModel, shareImage: $viewModel.shareImage)
                         .tag(1)
                 }
                 .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
