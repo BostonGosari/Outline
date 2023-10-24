@@ -177,7 +177,7 @@ extension RunningMapView {
                 .frame(width: 120, height: 120)
                 .padding(.bottom, 45)
             
-            CompleteButton(text: "결과 페이지로") {
+            CompleteButton(text: "결과 페이지로", isActive: true) {
                 showCustomSheet = false
                 navigateToFinishRunningView = true
             }
