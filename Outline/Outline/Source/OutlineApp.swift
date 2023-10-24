@@ -6,6 +6,7 @@
 //
 
 import Firebase
+import CoreLocation
 import SwiftUI
 
 @main
