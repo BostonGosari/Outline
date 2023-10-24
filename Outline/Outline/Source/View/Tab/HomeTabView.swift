@@ -29,7 +29,7 @@ struct HomeTabView: View {
                             case .GPSArtRunning:
                                 GPSArtHomeView(homeTabViewModel: homeTabViewModel, isShow: $isShow, namespace: namespace)
                             case .myRecord:
-                                Text("나의기록 뷰")
+                                RecordView(homeTabViewModel: homeTabViewModel)
                             }
                         }
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
