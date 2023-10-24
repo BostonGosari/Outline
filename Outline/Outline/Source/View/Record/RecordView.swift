@@ -10,6 +10,7 @@ import CoreLocation
 
 struct RecordView: View {
     @State var selectedIndex: Int = 0
+    @ObservedObject var homeTabViewModel: HomeTabViewModel
     @ObservedObject private var dataTestViewModel = DataTestViewModel()
     @FetchRequest (entity: CoreRunningRecord.entity(), sortDescriptors: [])
     var runningRecord: FetchedResults<CoreRunningRecord>
@@ -66,7 +67,7 @@ struct RecordView: View {
                         .padding(.bottom, 16)
                         ForEach(filteredRecords, id: \.id) { record in
                             NavigationLink {
-                                RecordDetailView(record: record)
+                                RecordDetailView(homeTabViewModel: homeTabViewModel, record: record)
                                 
                             } label: {
                                 RecordItem(record: record)
@@ -135,14 +136,17 @@ struct RecordItem: View {
     private let pathManager = PathGenerateManager.shared
     var body: some View {
 
-          
         ZStack {
-//            if let coordinateSet = record.courseData?.coursePaths  {
-//                pathManager.caculateLines(width: .infinity, height: 176, coordinates: coordinateSet)
-//                    .stroke(Color.gradient3, style: StrokeStyle(lineWidth: 4, lineCap: .round))
-//                      .frame(width: .infinity, height: 176)
-//                      .rotationEffect(Angle(degrees: 90))
-//              }
+            if let coursePath = record.courseData?.coursePaths,
+               let data = pathToCoordinate(coursePath) {
+                pathManager
+                    .caculateLines(width: 358, height: 176, coordinates: data)
+                    .stroke(lineWidth: 5)
+                    .scale(0.5)
+                    .foregroundStyle(Color.primaryColor)
+                    .padding(.horizontal, 16)
+                
+            }
             HStack {
                 VStack(alignment: .leading) {
                       Spacer()
@@ -202,6 +206,17 @@ struct RecordItem: View {
         dateFormatter.timeStyle = .short
         return dateFormatter.string(from: date)
     }
+    
+    private func pathToCoordinate(_ paths: NSOrderedSet) -> [CLLocationCoordinate2D]? {
+        var datas = [Coordinate]()
+        paths.forEach { elem in
+            if let data = elem as? CoreCoordinate {
+                datas.append(Coordinate(longitude: data.longitude, latitude: data.latitude))
+            }
+        }
+        
+        return convertToCLLocationCoordinates(datas)
+    }
 }
 
 struct ChipItem: View {
@@ -232,7 +247,4 @@ enum SortOption {
     case oldest
     case longestDistance
     case shortestDistance
-}
-#Preview {
-    RecordView()
 }
