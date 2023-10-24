@@ -55,7 +55,6 @@ struct CustomRoundedRectangle: View {
             .stroke(Color.white.opacity(0.5), lineWidth: 1.5)
             
         }
-        .aspectRatio(166.0/238.0, contentMode: .fit)
-               .frame(width: 164, height: 238)
+        .padding(.vertical, 2)
     }
 }

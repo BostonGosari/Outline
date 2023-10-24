@@ -20,6 +20,7 @@ struct RunningMapView: View {
     @Binding var selection: Int
     
     @State var navigateToFinishRunningView = false
+    @State var showCustomSheet = false
     
     var body: some View {
         ZStack {
@@ -28,6 +29,14 @@ struct RunningMapView: View {
                     locationManager: locationManager,
                     viewModel: viewModel,
                     coordinates: convertToCLLocationCoordinates(course.coursePaths)
+                )
+                .ignoresSafeArea()
+                .preferredColorScheme(.dark)
+            } else {
+                RunningMap(
+                    locationManager: locationManager,
+                    viewModel: viewModel,
+                    coordinates: []
                 )
                 .ignoresSafeArea()
                 .preferredColorScheme(.dark)
@@ -40,6 +49,9 @@ struct RunningMapView: View {
                     .frame(maxWidth: .infinity)
                     .padding(.bottom, 80)
             }
+        }
+        .sheet(isPresented: $showCustomSheet) {
+            customSheet
         }
         .overlay {
             if viewModel.isShowPopup {
@@ -117,10 +129,11 @@ extension RunningMapView {
                                 .onEnded { _ in
                                     print("Long press ended")
                                     HapticManager.impact(style: .medium)
+                                    locationManager.stopUpdateLocation()
                                     homeTabViewModel.userLocations = locationManager.userLocations
                                     runningViewModel.stopRunning()
                                     digitalTimerViewModel.counter = 0
-                                    navigateToFinishRunningView = true
+                                    showCustomSheet = true
                                 }
                         )
                         .highPriorityGesture(
@@ -155,6 +168,31 @@ extension RunningMapView {
                 EmptyView()
             )
         }
+    }
+    
+    private var customSheet: some View {
+        VStack(spacing: 0) {
+            Text("오늘은, 여기까지")
+                .font(.title2)
+                .padding(.top, 56)
+                .padding(.bottom, 8)
+            Text("즐거운 러닝이었나요? 다음에 또 만나요! ")
+                .font(.subBody)
+                .padding(.bottom, 24)
+            
+            Image("Finish10")
+                .resizable()
+                .frame(width: 120, height: 120)
+                .padding(.bottom, 45)
+            
+            CompleteButton(text: "결과 페이지로", isActive: true) {
+                showCustomSheet = false
+                navigateToFinishRunningView = true
+            }
+        }
+        .presentationDetents([.height(420)])
+        .presentationCornerRadius(35)
+        .interactiveDismissDisabled()
     }
 }
 

@@ -51,8 +51,19 @@ final class LocationManager: NSObject, CLLocationManagerDelegate, ObservableObje
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if let location = locations.last?.coordinate {
-            userLocations.append(location)
+        if let currentLocation = locations.last?.coordinate {
+            let distance: CLLocationDistance = 10
+            let  location = CLLocation(latitude: currentLocation.latitude, longitude: currentLocation.longitude)
+            
+            if userLocations.isEmpty {
+                userLocations.append(currentLocation)
+            } else if let lastUserLocation = userLocations.last {
+                let lastLocation = CLLocation(latitude: lastUserLocation.latitude, longitude: lastUserLocation.longitude)
+                
+                if  location.distance(from: lastLocation) >= distance {
+                    userLocations.append(currentLocation)
+                }
+            }
         }
     }
     
