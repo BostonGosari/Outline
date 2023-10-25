@@ -12,6 +12,7 @@ struct CardDetailView: View {
     
     @State var start = false
     @ObservedObject var homeTabViewModel: HomeTabViewModel
+    @StateObject var runningManager = RunningManager.shared
     @Environment(\.dismiss) var dismiss
     
     @Binding var isShow: Bool
@@ -126,9 +127,10 @@ struct CardDetailView: View {
             
             Spacer()
             
-            SlideToUnlock(isUnlocked: $homeTabViewModel.start)
-                .onChange(of: homeTabViewModel.start) { _, _ in
-                    homeTabViewModel.startCourse = homeTabViewModel.recommendedCoures[currentIndex].course
+            SlideToUnlock(isUnlocked: $runningManager.start)
+                .onChange(of: runningManager.start) { _, _ in
+                    runningManager.startCourse = homeTabViewModel.recommendedCoures[currentIndex].course
+                    runningManager.startGPSArtRun()
                     isShow = false
                 }
                 .opacity(appear[1] ? 1 : 0)

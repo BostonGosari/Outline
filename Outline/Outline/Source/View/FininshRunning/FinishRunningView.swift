@@ -9,6 +9,7 @@ import SwiftUI
 
 struct FinishRunningView: View {
     @StateObject private var locationManager = LocationManager()
+    @StateObject private var runningManager = RunningManager.shared
     @StateObject private var viewModel = FinishRunningViewModel()
     var gradientColors: [Color] = [.blackColor, .blackColor, .blackColor, .blackColor, .black50Color, .blackColor.opacity(0)]
     
@@ -50,7 +51,7 @@ struct FinishRunningView: View {
                     .padding(.bottom, 16)
                     
                     Button(action: {
-                        homeTabViewModel.running = false
+                        runningManager.running = false
                     }, label: {
                         Text("나중에 자랑하기")
                             .underline(pattern: .solid)
