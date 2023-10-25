@@ -15,9 +15,9 @@ struct TabItem: Identifiable {
 }
 
 var tabItems = [
-    TabItem(text: "자유러닝", icon: "map.fill", tab: .freeRunning),
-    TabItem(text: "GPS 아트러닝", icon: "paintpalette.fill", tab: .GPSArtRunning),
-    TabItem(text: "나의기록", icon: "doc.text.fill", tab: .myRecord)
+    TabItem(text: "자유러닝", icon: "Tab1", tab: .freeRunning),
+    TabItem(text: "GPS 아트러닝", icon: "Tab2", tab: .GPSArtRunning),
+    TabItem(text: "나의기록", icon: "Tab3", tab: .myRecord)
 ]
 
 enum Tab: String {
