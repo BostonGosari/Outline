@@ -10,37 +10,80 @@ import SwiftUI
 struct TabBar: View {
     
     @Binding var selectedTab: Tab
-        
-    private let tabIconSize: CGFloat = 18
-    private let tabTextSize: CGFloat = 10
     
     var body: some View {
         VStack {
             HStack {
                 ForEach(tabItems) { item in
-                    Button {
-                        selectedTab = item.tab
-                    } label: {
-                        VStack(spacing: 5) {
-                            Image(systemName: item.icon)
-                                .font(.system(size: tabIconSize))
-                            Text(item.text)
-                                .font(.system(size: tabTextSize))
-                        }
-                        .foregroundStyle(selectedTab == item.tab ? .primaryColor : Color("Gray400"))
-                    }
-                    .buttonStyle(TabButtonStyle())
-                    .frame(maxWidth: .infinity)
+                    TabBarButton(selectedTab: $selectedTab, item: item)
+                        .frame(maxWidth: .infinity)
                 }
             }
             .padding(.top, 11)
-            .padding(.bottom, 40)
+            .padding(.bottom, 34)
             .background(
-                RoundedRectangle(cornerRadius: 30, style: .continuous)
+                RoundedRectangle(cornerRadius: 15, style: .continuous)
                     .foregroundStyle(.ultraThinMaterial)
-                    .shadow(color: .white, radius: 2, x: 0, y: 2)
+                    .background(
+                        RoundedRectangle(cornerRadius: 15, style: .continuous)
+                            .stroke(Color.gray400Color, lineWidth: 1)
+                    )
             )
         }
+    }
+}
+
+struct TabBarButton: View {
+    
+    @Binding var selectedTab: Tab
+    let item: TabItem
+    
+    var body: some View {
+        Button {
+            selectedTab = item.tab
+        } label: {
+            VStack(spacing: 5) {
+                TabBarIcon(selectedTab: $selectedTab, item: item)
+                Text(item.text)
+                    .font(.caption2)
+                    .foregroundColor(selectedTab == item.tab ? .primaryColor : .gray400Color)
+            }
+        }
+        .buttonStyle(TabButtonStyle())
+    }
+}
+
+struct TabBarIcon: View {
+    
+    @Binding var selectedTab: Tab
+    let item: TabItem
+    
+    var body: some View {
+        Image(item.icon)
+            .resizable()
+            .scaledToFit()
+            .frame(width: 32)
+            .background {
+                RoundedRectangle(cornerRadius: 12, style: .continuous)
+                    .frame(width: 32)
+                    .foregroundStyle(.ultraThinMaterial)
+            }
+            .background {
+                RoundedRectangle(cornerRadius: 8, style: .continuous)
+                    .fill(
+                        LinearGradient(
+                            gradient: Gradient(
+                                colors: [Color.primaryColor, Color.primaryColor.opacity(0.5)]
+                            ),
+                            startPoint: .bottomLeading,
+                            endPoint: .topTrailing
+                        )
+                    )
+                    .frame(width: 26)
+                    .opacity(selectedTab == item.tab ? 1 : 0)
+                    .rotationEffect(selectedTab == item.tab ? .degrees(15) : .degrees(0), anchor: .bottomTrailing)
+                    .animation(.bouncy, value: selectedTab)
+            }
     }
 }
 
@@ -48,10 +91,10 @@ struct TabButtonStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .scaleEffect(configuration.isPressed ? 0.97 : 1)
-            .animation(.easeInOut, value: configuration.isPressed)
+            .animation(.easeInOut(duration: 0.2), value: configuration.isPressed)
     }
 }
 
 #Preview {
-    TabBar(selectedTab: .constant(Tab.GPSArtRunning))
+    HomeTabView()
 }
