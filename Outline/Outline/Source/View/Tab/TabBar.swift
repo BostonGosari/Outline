@@ -24,7 +24,7 @@ struct TabBar: View {
             .background(
                 RoundedRectangle(cornerRadius: 15, style: .continuous)
                     .foregroundStyle(.ultraThinMaterial)
-                    .overlay(
+                    .background(
                         RoundedRectangle(cornerRadius: 15, style: .continuous)
                             .stroke(Color.gray400Color, lineWidth: 1)
                     )
