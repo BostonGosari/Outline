@@ -46,7 +46,7 @@ struct TabBarButton: View {
                 TabBarIcon(selectedTab: $selectedTab, item: item)
                 Text(item.text)
                     .font(.caption2)
-                    .foregroundColor(selectedTab == item.tab ? Color.primaryColor : Color("Gray400"))
+                    .foregroundColor(selectedTab == item.tab ? .primaryColor : .gray400Color)
             }
         }
         .buttonStyle(TabButtonStyle())
