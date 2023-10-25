@@ -11,8 +11,8 @@ struct FreeRunningHomeView: View {
     
     @ObservedObject var homeTabViewModel: HomeTabViewModel
     @StateObject var locationManager = LocationManager()
+    @StateObject var runningManager = RunningManager.shared
     @State var userLocation = ""
-    @State var start = false
     
     var body: some View {
         ZStack {
@@ -38,9 +38,9 @@ struct FreeRunningHomeView: View {
                            .font(.subBody)
                            
                            Spacer()
-                           SlideToUnlock(isUnlocked: $homeTabViewModel.start)
-                               .onChange(of: homeTabViewModel.start) { _, _ in
-                                   homeTabViewModel.runningType = .free
+                           SlideToUnlock(isUnlocked: $runningManager.start)
+                               .onChange(of: runningManager.start) { _, _ in
+                                   runningManager.startFreeRun()
                                }
                        }
                        .padding(EdgeInsets(top: 58, leading: 24, bottom: 24, trailing: 16))
