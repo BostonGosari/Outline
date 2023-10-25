@@ -10,17 +10,11 @@ import SwiftUI
 
 struct CourseGuidView: View {
     // homeTabViewModel 불러와서 path 정보 표시
-    private let pathManager = PathGenerateManager.shared
-    
     @Binding var showBigGuid: Bool
     
-    let testCoordinates: [CLLocationCoordinate2D] = {
-        if let kmlFilePath = Bundle.main.path(forResource: "pohangDuckRun", ofType: "kml") {
-            let kmlParser = KMLParserManager()
-            return kmlParser.parseKMLFile(atPath: kmlFilePath)
-        }
-        return []
-    }()
+    private let pathManager = PathGenerateManager.shared
+    let coursePathCoordinates: [CLLocationCoordinate2D]
+    let courseRotate: Double
     
     var width: Double {
         return showBigGuid ? 320 : 113
@@ -29,6 +23,14 @@ struct CourseGuidView: View {
     var height: Double {
         return showBigGuid ? 480 : 168
     }
+    
+    let testCoordinates: [CLLocationCoordinate2D] = {
+        if let kmlFilePath = Bundle.main.path(forResource: "pohangDuckRun", ofType: "kml") {
+            let kmlParser = KMLParserManager()
+            return kmlParser.parseKMLFile(atPath: kmlFilePath)
+        }
+        return []
+    }()
     
     var body: some View {
         ZStack(alignment: showBigGuid ? .top : .topTrailing) {
@@ -43,7 +45,7 @@ struct CourseGuidView: View {
                 .overlay {
                     coursePath
                         .overlay {
-                            userPath
+//                            userPath
                         }
                         .scaleEffect(0.8)
                 }
@@ -53,6 +55,7 @@ struct CourseGuidView: View {
         }
         .onTapGesture {
             showBigGuid.toggle()
+            // TODO: 햅틱 추가
         }
     }
 }
@@ -60,10 +63,10 @@ struct CourseGuidView: View {
 extension CourseGuidView {
     private var coursePath: some View {
         pathManager
-            .caculateLines(width: width, height: height, coordinates: testCoordinates)
+            .caculateLines(width: width, height: height, coordinates: coursePathCoordinates)
             .stroke(lineWidth: showBigGuid ? 15 : 7)
             .scaledToFit()
-            .rotationEffect(Angle(degrees: 90))
+            .rotationEffect(Angle(degrees: courseRotate))
             .foregroundStyle(Color.blackColor.opacity(0.5))
             .frame(width: width, height: height, alignment: .center)
     }
@@ -73,12 +76,8 @@ extension CourseGuidView {
             .caculateLines(width: width, height: height, coordinates: testCoordinates)
             .stroke(lineWidth: showBigGuid ? 15 : 7)
             .scaledToFit()
-            .rotationEffect(Angle(degrees: 90))
+            .rotationEffect(Angle(degrees: courseRotate))
             .foregroundStyle(Color.primaryColor)
             .frame(width: width, height: height, alignment: .center)
     }
-}
-
-#Preview {
-    CourseGuidView(showBigGuid: .constant(true))
 }
