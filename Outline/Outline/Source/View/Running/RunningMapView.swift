@@ -51,12 +51,15 @@ struct RunningMapView: View {
                     .padding(.bottom, 80)
             }
             
-            CourseGuidView(showBigGuid: $showBigGuid)
-                .onTapGesture {
-                    showBigGuid.toggle()
-                }
-//                .animation(.easeInOut, value: showBigGuid)
-                .animation(.openCard, value: showBigGuid)
+            if let course = homeTabViewModel.startCourse {
+                CourseGuidView(showBigGuid: $showBigGuid, coursePathCoordinates: convertToCLLocationCoordinates(course.coursePaths), courseRotate: course.heading)
+                    .onTapGesture {
+                        showBigGuid.toggle()
+                        // TODO: 햅틱 추가
+                    }
+                //                .animation(.easeInOut, value: showBigGuid)
+                    .animation(.openCard, value: showBigGuid)
+            }
         }
         .sheet(isPresented: $showCustomSheet) {
             customSheet
