@@ -43,7 +43,7 @@ struct GPSArtCourse: Codable, Hashable {
     }
     init() {
         self.id = ""
-        self.courseName = ""
+        self.courseName = "자유러닝"
         self.locationInfo = Placemark(name: "", isoCountryCode: "", administrativeArea: "", subAdministrativeArea: "", locality: "", subLocality: "", throughfare: "", subThroughfare: "")
         self.courseLength = 0
         self.courseDuration = 0

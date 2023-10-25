@@ -10,6 +10,7 @@ import SwiftUI
 struct RunningMapView: View {
     @StateObject private var viewModel = RunningMapViewModel()
     @StateObject var locationManager = LocationManager()
+    @StateObject var runningManager = RunningManager.shared
     
     @ObservedObject var runningViewModel: RunningViewModel
     @ObservedObject var digitalTimerViewModel: DigitalTimerViewModel
@@ -24,7 +25,7 @@ struct RunningMapView: View {
     
     var body: some View {
         ZStack {
-            if let course = homeTabViewModel.startCourse {
+            if let course = runningManager.startCourse {
                 RunningMap(
                     locationManager: locationManager,
                     viewModel: viewModel,
