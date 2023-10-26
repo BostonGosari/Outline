@@ -24,6 +24,10 @@ struct ImageShareView: View {
     @State private var angle: Angle = .degrees(0)
     @State private var lastAngle: Angle = .degrees(0)
     
+    @State private var pathWidth: CGFloat = 0
+    @State private var pathHeight: CGFloat = 0
+    
+    private let imageSize: CGFloat = 200
     private let gradientColors = [
         Color.white,
         Color.white.opacity(0.1),
@@ -70,6 +74,11 @@ struct ImageShareView: View {
         })
         .onChange(of: image) { 
             renderImage()
+        }
+        .onAppear {
+            let canvasSize = pathManager.calculateCanvaData(coordinates: viewModel.runningData.userLocations, width: imageSize, height: imageSize)
+            self.pathWidth = CGFloat(canvasSize.width)
+            self.pathHeight = CGFloat(canvasSize.height)
         }
     }
 }
@@ -132,15 +141,17 @@ extension ImageShareView {
 
                     selectShareData
                         .padding(.top, 43)
-                    
-                    userPath
-                        .scaleEffect(scale)
-                        .offset(offset)
-                        .rotationEffect(angle)
+                    Group {
+                        userPath
+                            .scaleEffect(scale)
+                            .offset(offset)
+                            .rotationEffect(lastAngle + angle)
+                    }
+                    .padding(30)
+                    .gesture(dragGesture)
+                    .gesture(rotationGesture)
+                    .simultaneousGesture(magnificationGesture)
                 }
-                .gesture(dragGesture)
-                .gesture(rotationGesture)
-                .simultaneousGesture(magnificationGesture)
             )
         } else {
             AnyView(
@@ -177,15 +188,18 @@ extension ImageShareView {
             blackShareData
                 .padding(.top, 166)
                 .padding(.leading, 8)
-            
-            userPath
-                .scaleEffect(scale)
-                .offset(offset)
-                .rotationEffect(angle)
+            ZStack {
+                Color.black.opacity(0.001)
+                userPath
+            }
+            .frame(width: pathWidth + 30, height: pathHeight + 30)
+            .scaleEffect(scale)
+            .offset(offset)
+            .rotationEffect(lastAngle + angle)
+            .gesture(dragGesture)
+            .gesture(rotationGesture)
+            .simultaneousGesture(magnificationGesture)
         }
-        .gesture(dragGesture)
-        .gesture(rotationGesture)
-        .simultaneousGesture(magnificationGesture)
     }
     
     private var blackShareData: some View {
@@ -266,7 +280,7 @@ extension ImageShareView {
 extension ImageShareView {
     private var userPath: some View {
         pathManager
-            .caculateLines(width: size.width, height: size.height, coordinates: viewModel.runningData.userLocations)
+            .caculateLines(width: imageSize, height: imageSize, coordinates: viewModel.runningData.userLocations)
             .stroke(lineWidth: 5)
             .scale(0.5)
             .foregroundStyle(selectPhotoMode ? Color.primaryColor : Color.white)
@@ -289,13 +303,14 @@ extension ImageShareView {
     private var rotationGesture: some Gesture {
         return RotationGesture()
             .onChanged { value in
-                angle = lastAngle+value
+                angle = value
             }
-         .onEnded { _ in
-             withAnimation(.spring) {
-                 lastAngle = angle
+             .onEnded { _ in
+                 withAnimation(.spring) {
+                     lastAngle += angle
+                     angle = .zero
+                 }
              }
-         }
     }
     
     private var magnificationGesture: some Gesture {
