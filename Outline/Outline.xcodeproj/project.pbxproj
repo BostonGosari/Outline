@@ -118,6 +118,8 @@
 		BB397D092AE6408A00F92A43 /* RecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB397D082AE6408A00F92A43 /* RecordView.swift */; };
 		BB397D0B2AE640A800F92A43 /* RecordDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB397D0A2AE640A800F92A43 /* RecordDetailView.swift */; };
 		BB397D0D2AE65AF800F92A43 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB397D0C2AE65AF800F92A43 /* MapView.swift */; };
+		BB397D132AEAB48300F92A43 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB397D122AEAB48300F92A43 /* AppDelegate.swift */; };
+		BB397D142AEAB48300F92A43 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB397D122AEAB48300F92A43 /* AppDelegate.swift */; };
 		BB493CF82AE0CA55009D3699 /* ElapsedTimeFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB493CF72AE0CA55009D3699 /* ElapsedTimeFormatter.swift */; };
 		BB5239292ADAF75C00646494 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5239272ADAF72A00646494 /* Logger.swift */; };
 		BB5239372ADBD99F00646494 /* GPSArtHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5239362ADBD99F00646494 /* GPSArtHomeView.swift */; };
@@ -295,6 +297,7 @@
 		BB397D082AE6408A00F92A43 /* RecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordView.swift; sourceTree = "<group>"; };
 		BB397D0A2AE640A800F92A43 /* RecordDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordDetailView.swift; sourceTree = "<group>"; };
 		BB397D0C2AE65AF800F92A43 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		BB397D122AEAB48300F92A43 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BB493CEB2ADFD592009D3699 /* Outline-Watch-App-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Outline-Watch-App-Info.plist"; sourceTree = "<group>"; };
 		BB493CF72AE0CA55009D3699 /* ElapsedTimeFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElapsedTimeFormatter.swift; sourceTree = "<group>"; };
 		BB5239272ADAF72A00646494 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
@@ -548,6 +551,7 @@
 			children = (
 				BB5239272ADAF72A00646494 /* Logger.swift */,
 				293C97DE2AE6C454007821F5 /* WatchConnectivityManager.swift */,
+				BB397D122AEAB48300F92A43 /* AppDelegate.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -1116,6 +1120,7 @@
 				0E9A5D3F2AE058D500C19FF3 /* ShareMainView.swift in Sources */,
 				9528EFEC2ADEC7CF0056CCC6 /* UserDataModelType.swift in Sources */,
 				29AE76DB2ADE2A5300A46742 /* InputNicknameViewModel.swift in Sources */,
+				BB397D132AEAB48300F92A43 /* AppDelegate.swift in Sources */,
 				0EE92E6C2AE00A33003192FF /* FinishRunningViewModel.swift in Sources */,
 				F01FDB9C2ADABC4600BDA633 /* TabBar.swift in Sources */,
 				0E9A5D442AE058FC00C19FF3 /* ImageShareView.swift in Sources */,
@@ -1170,6 +1175,7 @@
 				29111E3B2AE0CA89009833C7 /* SheetWatchView.swift in Sources */,
 				29111E392AE0CA46009833C7 /* FinalWatchView.swift in Sources */,
 				BB493CF82AE0CA55009D3699 /* ElapsedTimeFormatter.swift in Sources */,
+				BB397D142AEAB48300F92A43 /* AppDelegate.swift in Sources */,
 				F0492E212ADD52E900F6EADD /* WatchTabView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1317,7 +1323,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Outline Watch/Preview Content\"";
-				DEVELOPMENT_TEAM = 333J2S2AQK;
+				DEVELOPMENT_TEAM = 8H945XJJGA;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1330,7 +1336,7 @@
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "당신의 러닝 데이터를 저장하기 위하여 사용됩니다. ";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "당신의 위치는 러닝을 기록하는데 사용됩니다. 운동 중에 백그라운드에서도 위치 서비스를 사용합니다.";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = austin.developer.outline;
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = hani.iosapp;
 				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = NO;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1338,7 +1344,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				OTHER_LDFLAGS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = austin.developer.outline.watchapp;
+				PRODUCT_BUNDLE_IDENTIFIER = hani.iosapp.watch;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -1360,7 +1366,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Outline Watch/Preview Content\"";
-				DEVELOPMENT_TEAM = 333J2S2AQK;
+				DEVELOPMENT_TEAM = 8H945XJJGA;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1373,7 +1379,7 @@
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "당신의 러닝 데이터를 저장하기 위하여 사용됩니다. ";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "당신의 위치는 러닝을 기록하는데 사용됩니다. 운동 중에 백그라운드에서도 위치 서비스를 사용합니다.";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = austin.developer.outline;
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = hani.iosapp;
 				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = NO;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1381,7 +1387,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				OTHER_LDFLAGS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = austin.developer.outline.watchapp;
+				PRODUCT_BUNDLE_IDENTIFIER = hani.iosapp.watch;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -1404,7 +1410,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Outline/Preview Content\"";
-				DEVELOPMENT_TEAM = 333J2S2AQK;
+				DEVELOPMENT_TEAM = 8H945XJJGA;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				"EXCLUDED_ARCHS[sdk=*]" = "";
@@ -1431,7 +1437,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				OTHER_LDFLAGS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = austin.developer.outline;
+				PRODUCT_BUNDLE_IDENTIFIER = hani.iosapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1450,7 +1456,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Outline/Preview Content\"";
-				DEVELOPMENT_TEAM = 333J2S2AQK;
+				DEVELOPMENT_TEAM = 8H945XJJGA;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				"EXCLUDED_ARCHS[sdk=*]" = "";
@@ -1477,7 +1483,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				OTHER_LDFLAGS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = austin.developer.outline;
+				PRODUCT_BUNDLE_IDENTIFIER = hani.iosapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SWIFT_EMIT_LOC_STRINGS = YES;
