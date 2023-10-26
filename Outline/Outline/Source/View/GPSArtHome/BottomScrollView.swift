@@ -219,6 +219,7 @@ struct CourseDetailView: View {
 
 struct CourseBannerView: View {
     
+    @StateObject var runningManager = RunningManager.shared
     @ObservedObject var homeTabViewModel: HomeTabViewModel
     @Environment(\.dismiss) var dismiss
     var course: CourseWithDistance
@@ -280,9 +281,10 @@ struct CourseBannerView: View {
             
             Spacer()
             
-            SlideToUnlock(isUnlocked: $homeTabViewModel.start)
-                .onChange(of: homeTabViewModel.start) { _, _ in
-                    homeTabViewModel.startCourse = course.course
+            SlideToUnlock(isUnlocked: $runningManager.start)
+                .onChange(of: runningManager.start) { _, _ in
+                    runningManager.startCourse = course.course
+                    runningManager.startGPSArtRun()
                     dismiss()
                 }
                 .padding(-10)

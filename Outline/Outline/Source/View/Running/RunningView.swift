@@ -9,7 +9,8 @@ import SwiftUI
 struct RunningView: View {
     
     @ObservedObject var homeTabViewModel: HomeTabViewModel
-    
+
+    @StateObject var runningManager = RunningManager.shared
     @StateObject var runningViewModel: RunningViewModel
     @StateObject var digitalTimerViewModel = DigitalTimerViewModel()
     @State var selection = 0
@@ -35,7 +36,7 @@ struct RunningView: View {
                 .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
                 .edgesIgnoringSafeArea(.all)
                 .onAppear {
-                    if homeTabViewModel.running == true {
+                    if runningManager.running == true {
                         runningViewModel.startRunning()
                         digitalTimerViewModel.startTimer()
                     }
