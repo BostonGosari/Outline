@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0E1D1B292AE95AF2005282A2 /* CourseGuidView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1D1B282AE95AF2005282A2 /* CourseGuidView.swift */; };
+		0E1D1B2B2AE95E1C005282A2 /* test.kml in Resources */ = {isa = PBXBuildFile; fileRef = 0E1D1B2A2AE95E1C005282A2 /* test.kml */; };
 		0E29F64B2ADF653000F5EF5C /* FontExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E29F64A2ADF653000F5EF5C /* FontExtension.swift */; };
 		0E29F6532ADF6C3A00F5EF5C /* RunningPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E29F6522ADF6C3A00F5EF5C /* RunningPopup.swift */; };
 		0E29F6552ADF6C7D00F5EF5C /* KMLParserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E29F6542ADF6C7D00F5EF5C /* KMLParserManager.swift */; };
@@ -204,6 +206,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0E1D1B282AE95AF2005282A2 /* CourseGuidView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseGuidView.swift; sourceTree = "<group>"; };
+		0E1D1B2A2AE95E1C005282A2 /* test.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = test.kml; sourceTree = "<group>"; };
 		0E29F64A2ADF653000F5EF5C /* FontExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontExtension.swift; sourceTree = "<group>"; };
 		0E29F6522ADF6C3A00F5EF5C /* RunningPopup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RunningPopup.swift; sourceTree = "<group>"; };
 		0E29F6542ADF6C7D00F5EF5C /* KMLParserManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KMLParserManager.swift; sourceTree = "<group>"; };
@@ -376,6 +380,7 @@
 		0E29F64D2ADF681E00F5EF5C /* KML */ = {
 			isa = PBXGroup;
 			children = (
+				0E1D1B2A2AE95E1C005282A2 /* test.kml */,
 				954CB2A22AE5457A005EB2E9 /* flightRun.kml */,
 				954CB29F2AE5457A005EB2E9 /* pohangCrocodileRun.kml */,
 				954CB2A12AE5457A005EB2E9 /* pohangDangDangRun.kml */,
@@ -503,6 +508,7 @@
 				0E29F6582ADF6CA000F5EF5C /* RunningMapView.swift */,
 				0E29F6592ADF6CA000F5EF5C /* WorkoutDataView.swift */,
 				29C631552AE418F1005ECF55 /* DigitalTimerView.swift */,
+				0E1D1B282AE95AF2005282A2 /* CourseGuidView.swift */,
 			);
 			path = Running;
 			sourceTree = "<group>";
@@ -979,6 +985,7 @@
 			files = (
 				29C9197E2ADE8F7F00AB0B5A /* GoogleService-Info.plist in Resources */,
 				954CB2AB2AE5457B005EB2E9 /* flightRun.kml in Resources */,
+				0E1D1B2B2AE95E1C005282A2 /* test.kml in Resources */,
 				954CB2A72AE5457B005EB2E9 /* seoulOctopusRun.kml in Resources */,
 				F0AC8AA42AD94C200061612C /* Preview Assets.xcassets in Resources */,
 				F0AC8B2C2AD967E30061612C /* Image.xcassets in Resources */,
@@ -1097,6 +1104,7 @@
 				954CB2B62AE63E79005EB2E9 /* OnboardingHealthAuthView.swift in Sources */,
 				9528F0022AE046DF0056CCC6 /* PathDrawingTestView.swift in Sources */,
 				F06298AB2AE1998D007AB2D3 /* MapInfoView.swift in Sources */,
+				0E1D1B292AE95AF2005282A2 /* CourseGuidView.swift in Sources */,
 				293C97DF2AE6C454007821F5 /* WatchConnectivityManager.swift in Sources */,
 				0E29F6532ADF6C3A00F5EF5C /* RunningPopup.swift in Sources */,
 				95E2EF712ADA6F230083ADEE /* CourseModelType.swift in Sources */,
