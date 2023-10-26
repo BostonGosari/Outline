@@ -62,7 +62,7 @@ final class PathGenerateManager {
             
         return [posX, posY]
     }
-    private func calculateCanvaData(coordinates: [CLLocationCoordinate2D], width: Double, height: Double) -> CanvasData {
+    func calculateCanvaData(coordinates: [CLLocationCoordinate2D], width: Double, height: Double) -> CanvasData {
         var minLat: Double = 90
         var maxLat: Double = -90
         var minLon: Double = 180
