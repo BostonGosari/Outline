@@ -11,7 +11,6 @@ import SwiftUI
 
 struct CustomShareView: View {
     
-    @StateObject var locationManager = LocationManager()
     @ObservedObject var viewModel: ShareViewModel
 
     @State private var isShowBPM = true
@@ -207,5 +206,3 @@ struct TagButton: View {
         }
     }
 }
-
-

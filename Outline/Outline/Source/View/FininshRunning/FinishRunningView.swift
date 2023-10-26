@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct FinishRunningView: View {
-    @StateObject private var locationManager = LocationManager()
     @StateObject private var runningManager = RunningManager.shared
     @StateObject private var viewModel = FinishRunningViewModel()
     var gradientColors: [Color] = [.blackColor, .blackColor, .blackColor, .blackColor, .black50Color, .blackColor.opacity(0)]
