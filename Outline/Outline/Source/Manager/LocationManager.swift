@@ -14,6 +14,8 @@ final class LocationManager: NSObject, CLLocationManagerDelegate, ObservableObje
     @Published var isAuthorized = false
     @Published var isNext = false
     
+    @Published var checkDistance = true
+    
     var startLocation: CLLocationCoordinate2D?
     
     private var locationManager = CLLocationManager()
@@ -69,6 +71,17 @@ final class LocationManager: NSObject, CLLocationManagerDelegate, ObservableObje
                 if location.distance(from: lastLocation) >= distance {
                     userLocations.append(currentLocation)
                 }
+                
+                #if os(iOS)
+                if checkDistance == true {
+                    let runningManager = RunningManager.shared
+                    
+                    if let startCourse = runningManager.startCourse {
+                        self.checkDistance = runningManager.checkDistance(userLocation: lastUserLocation, course: startCourse.coursePaths)
+                        print(checkDistance)
+                    }
+                }
+                #endif
             }
         }
     }
