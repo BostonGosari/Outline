@@ -59,7 +59,7 @@ class RunningManager: ObservableObject {
             print("can't find user location")
             return false
         }
-        return shortestDistance <= 50.0
+        return shortestDistance <= 2000
     }
 }
 

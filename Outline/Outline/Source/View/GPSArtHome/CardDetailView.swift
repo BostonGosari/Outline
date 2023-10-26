@@ -14,7 +14,7 @@ struct CardDetailView: View {
     @State private var showAlert = false
     @ObservedObject var homeTabViewModel: HomeTabViewModel
     @StateObject var runningManager = RunningManager.shared
-    @StateObject var locationManager = LocationManager()
+    private let locationManager = CLLocationManager()
     @Environment(\.dismiss) var dismiss
     
     @Binding var isShow: Bool
@@ -59,6 +59,8 @@ struct CardDetailView: View {
                     )
                     .scaleEffect(viewSize / -600 + 1)
                     .gesture(isDraggable ? drag : nil)
+                    
+                    closeButton
                 }
                 .onChange(of: isShow) { _, _ in
                     fadeOut()
@@ -66,9 +68,6 @@ struct CardDetailView: View {
                 .onAppear {
                     fadeIn()
                 }
-            }
-            .overlay {
-                closeButton
             }
             .scrollIndicators(scrollViewOffset > scrollStartRange ? .hidden : .automatic)
             .ignoresSafeArea(edges: .top)
@@ -194,7 +193,7 @@ struct CardDetailView: View {
             SlideToUnlock(isUnlocked: $isUnlocked)
                 .onChange(of: isUnlocked) { _, newValue in
                     if newValue {
-                        let userLocation = locationManager.currentLocation
+                        let userLocation = locationManager.location?.coordinate
                         let course = homeTabViewModel.recommendedCoures[currentIndex].course.coursePaths
                         
                         if let userLocation = userLocation, runningManager.checkDistance(userLocation: userLocation, course: course) {
@@ -225,12 +224,12 @@ struct CardDetailView: View {
             }
         } label: {
             Image(systemName: "xmark.circle.fill")
-                .font(.title)
+                .font(.system(size: 30))
                 .foregroundColor(viewSize > 15 ? .clear : .primaryColor)
         }
         .animation(.easeInOut, value: viewSize)
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
-        .padding(30)
+        .padding(20)
         .opacity(appear[1] ? 1 : 0)
         .offset(y: appear[1] ? 0 : fadeInOffset)
     }
