@@ -42,8 +42,8 @@ struct MapWatchView: View {
                 MapUserLocationButton()
             }
             .onAppear {
-                locationManager.requestWhenInUseAuthorization()
-                locationManager.startUpdatingLocation()
+//                locationManager.requestWhenInUseAuthorization()
+//                locationManager.startUpdatingLocation()
             }
             .tint(.green)
             .overlay(alignment: .topLeading) {
