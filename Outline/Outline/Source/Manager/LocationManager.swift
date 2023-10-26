@@ -13,6 +13,8 @@ final class LocationManager: NSObject, CLLocationManagerDelegate, ObservableObje
     @Published var isAuthorized = false
     @Published var isNext = false
     
+    var startLocation: CLLocationCoordinate2D?
+    
     private var locationManager = CLLocationManager()
     
     override init() {
@@ -53,9 +55,10 @@ final class LocationManager: NSObject, CLLocationManagerDelegate, ObservableObje
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let currentLocation = locations.last?.coordinate {
             let distance: CLLocationDistance = 10
-            let  location = CLLocation(latitude: currentLocation.latitude, longitude: currentLocation.longitude)
+            let location = CLLocation(latitude: currentLocation.latitude, longitude: currentLocation.longitude)
             
             if userLocations.isEmpty {
+                startLocation = currentLocation
                 userLocations.append(currentLocation)
             } else if let lastUserLocation = userLocations.last {
                 let lastLocation = CLLocation(latitude: lastUserLocation.latitude, longitude: lastUserLocation.longitude)
