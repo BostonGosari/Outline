@@ -114,13 +114,14 @@ extension RunningMapView {
                     .frame(maxWidth: .infinity, alignment: .trailing)
                     .padding(.horizontal, 32)
                 }
+                    .transition(AnyTransition.opacity.animation(.easeInOut))
             )
         case .pause:
             AnyView(
                 HStack(spacing: 0) {
                     Image(systemName: "stop.fill")
                         .buttonModifier(color: Color.white, size: 24, padding: 26)
-                        .scaleEffect(isLongPressed ? 1.5 : 1)
+                        .scaleEffect(isLongPressed ? 1.6 : 1)
                         .animation(.easeInOut(duration: 0.5), value: isLongPressed)
                         .gesture(
                             LongPressGesture(minimumDuration: 2)
@@ -160,6 +161,7 @@ extension RunningMapView {
                 }
                 .frame(maxWidth: .infinity, alignment: .center)
                 .padding(.horizontal, 64)
+                .transition(AnyTransition.opacity.animation(.easeInOut))
             )
         case .stop:
             AnyView(
@@ -191,10 +193,6 @@ extension RunningMapView {
         .presentationDetents([.height(420)])
         .presentationCornerRadius(35)
         .interactiveDismissDisabled()
-    }
-    
-    private let longPressGesture: Gesture {
-        
     }
 }
 
