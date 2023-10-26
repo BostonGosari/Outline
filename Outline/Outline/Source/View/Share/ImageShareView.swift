@@ -141,13 +141,15 @@ extension ImageShareView {
 
                     selectShareData
                         .padding(.top, 43)
-                    Group {
+                    
+                    ZStack {
+                        Color.black.opacity(0.001)
                         userPath
-                            .scaleEffect(scale)
-                            .offset(offset)
-                            .rotationEffect(lastAngle + angle)
                     }
-                    .padding(30)
+                    .frame(width: pathWidth + 30, height: pathHeight + 30)
+                    .scaleEffect(scale)
+                    .offset(offset)
+                    .rotationEffect(lastAngle + angle)
                     .gesture(dragGesture)
                     .gesture(rotationGesture)
                     .simultaneousGesture(magnificationGesture)
