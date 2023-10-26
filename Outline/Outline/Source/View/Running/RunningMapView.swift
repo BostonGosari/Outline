@@ -26,19 +26,11 @@ struct RunningMapView: View {
     
     var body: some View {
         ZStack(alignment: .topTrailing) {
-            if let course = homeTabViewModel.startCourse {
+            if let course = runningManager.startCourse {
                 RunningMap(
                     locationManager: locationManager,
                     viewModel: viewModel,
                     coordinates: convertToCLLocationCoordinates(course.coursePaths)
-                )
-                .ignoresSafeArea()
-                .preferredColorScheme(.dark)
-            } else {
-                RunningMap(
-                    locationManager: locationManager,
-                    viewModel: viewModel,
-                    coordinates: []
                 )
                 .ignoresSafeArea()
                 .preferredColorScheme(.dark)
@@ -52,7 +44,7 @@ struct RunningMapView: View {
                     .padding(.bottom, 80)
             }
             
-            if let course = homeTabViewModel.startCourse {
+            if let course = runningManager.startCourse {
                 CourseGuidView(
                     userLocations: $locationManager.userLocations,
                     showBigGuid: $showBigGuid,
