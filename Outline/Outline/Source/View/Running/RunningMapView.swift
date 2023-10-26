@@ -114,7 +114,7 @@ extension RunningMapView {
                     .frame(maxWidth: .infinity, alignment: .trailing)
                     .padding(.horizontal, 32)
                 }
-                    .transition(AnyTransition.opacity.animation(.easeInOut))
+                    .transition(.slide)
             )
         case .pause:
             AnyView(
@@ -161,7 +161,7 @@ extension RunningMapView {
                 }
                 .frame(maxWidth: .infinity, alignment: .center)
                 .padding(.horizontal, 64)
-                .transition(AnyTransition.opacity.animation(.easeInOut))
+                .transition(.slide)
             )
         case .stop:
             AnyView(
