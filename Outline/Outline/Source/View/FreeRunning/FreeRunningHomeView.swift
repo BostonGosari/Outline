@@ -10,7 +10,6 @@ import SwiftUI
 struct FreeRunningHomeView: View {
     
     @ObservedObject var homeTabViewModel: HomeTabViewModel
-    @StateObject var locationManager = LocationManager()
     @StateObject var runningManager = RunningManager.shared
     @State var userLocation = ""
     
