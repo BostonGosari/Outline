@@ -114,93 +114,95 @@ struct CourseDetailView: View {
             Color.gray900.ignoresSafeArea()
             ZStack {
                 ScrollView {
-                    CourseBannerView(isUnlocked: $isUnlocked, showAlert: $showAlert, homeTabViewModel: homeTabViewModel, course: course)
-                    VStack(alignment: .leading, spacing: 24) {
-                        HStack {
-                            Text("#\(stringForCourseLevel(course.course.level))")
-                                .frame(width: 70, height: 23)
-                                .background {
-                                    Capsule()
-                                        .stroke()
-                                }
-                                .foregroundColor(.primaryColor)
-                            Text("#\(course.course.courseLength, specifier: "%.0f")km")
-                                .frame(width: 70, height: 23)
-                                .background {
-                                    Capsule()
-                                        .stroke()
-                                }
-                            Text("#\(formatDuration(course.course.courseDuration))")
-                                .frame(width: 70, height: 23)
-                                .background {
-                                    Capsule()
-                                        .stroke()
-                                }
-                        }
-                        .fontWeight(.semibold)
-                        .font(.caption)
-                        
-                        VStack(alignment: .leading, spacing: 8) {
-                            Text("\(course.course.locationInfo.administrativeArea) \(course.course.locationInfo.locality) \(course.course.locationInfo.subLocality)")
-                                .font(.title3)
-                                .bold()
-                            Text("--")
-                                .foregroundStyle(.gray)
-                        }
-                        
-                        Divider()
-                        
-                        Text("경로 정보")
-                            .font(.title3)
-                            .bold()
-                        VStack(alignment: .leading, spacing: 17) {
-                            HStack {
+                    ZStack {
+                        VStack {
+                            CourseBannerView(isUnlocked: $isUnlocked, showAlert: $showAlert, homeTabViewModel: homeTabViewModel, course: course)
+                            VStack(alignment: .leading, spacing: 24) {
                                 HStack {
-                                    Image(systemName: "location")
-                                    Text("거리")
+                                    Text("#\(stringForCourseLevel(course.course.level))")
+                                        .frame(width: 70, height: 23)
+                                        .background {
+                                            Capsule()
+                                                .stroke()
+                                        }
+                                        .foregroundColor(.primaryColor)
+                                    Text("#\(course.course.courseLength, specifier: "%.0f")km")
+                                        .frame(width: 70, height: 23)
+                                        .background {
+                                            Capsule()
+                                                .stroke()
+                                        }
+                                    Text("#\(formatDuration(course.course.courseDuration))")
+                                        .frame(width: 70, height: 23)
+                                        .background {
+                                            Capsule()
+                                                .stroke()
+                                        }
                                 }
-                                .foregroundColor(.primaryColor)
-                                Text("\(course.course.courseLength, specifier: "%.0f")km")
-                            }
-                            HStack {
-                                HStack {
-                                    Image(systemName: "clock")
-                                    Text("예상 소요 시간")
+                                .fontWeight(.semibold)
+                                .font(.caption)
+                                
+                                VStack(alignment: .leading, spacing: 8) {
+                                    Text("\(course.course.locationInfo.administrativeArea) \(course.course.locationInfo.locality) \(course.course.locationInfo.subLocality)")
+                                        .font(.title3)
+                                        .bold()
+                                    Text("--")
+                                        .foregroundStyle(.gray)
                                 }
-                                .foregroundColor(.primaryColor)
-                                Text("\(formatDuration(course.course.courseDuration))")
-                            }
-                            HStack {
-                                HStack {
-                                    Image(systemName: "arrow.triangle.turn.up.right.diamond")
-                                    Text("골목길")
+                                
+                                Divider()
+                                
+                                Text("경로 정보")
+                                    .font(.title3)
+                                    .bold()
+                                VStack(alignment: .leading, spacing: 17) {
+                                    HStack {
+                                        HStack {
+                                            Image(systemName: "location")
+                                            Text("거리")
+                                        }
+                                        .foregroundColor(.primaryColor)
+                                        Text("\(course.course.courseLength, specifier: "%.0f")km")
+                                    }
+                                    HStack {
+                                        HStack {
+                                            Image(systemName: "clock")
+                                            Text("예상 소요 시간")
+                                        }
+                                        .foregroundColor(.primaryColor)
+                                        Text("\(formatDuration(course.course.courseDuration))")
+                                    }
+                                    HStack {
+                                        HStack {
+                                            Image(systemName: "arrow.triangle.turn.up.right.diamond")
+                                            Text("골목길")
+                                        }
+                                        .foregroundColor(.primaryColor)
+                                        Text("\(stringForAlley(course.course.alley))")
+                                    }
                                 }
-                                .foregroundColor(.primaryColor)
-                                Text("\(stringForAlley(course.course.alley))")
+                                .padding(.horizontal, 10)
+                                
+                                Divider()
+                                
+                                Text("경로 지도")
+                                    .font(.title3)
+                                    .bold()
+                                VStack(alignment: .leading) {
+                                    MapInfoView(coordinates: convertToCLLocationCoordinates(course.course.coursePaths))
+                                        .frame(height: 200)
+                                        .foregroundStyle(.thinMaterial)
+                                    Text("경로 제작 고사리님 @alsgiwc")
+                                        .foregroundStyle(.gray)
+                                }
                             }
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding(.vertical, 20)
+                            .padding(.horizontal)
+                            .padding(.bottom, 100)
                         }
-                        .padding(.horizontal, 10)
-                        
-                        Divider()
-                        
-                        Text("경로 지도")
-                            .font(.title3)
-                            .bold()
-                        VStack(alignment: .leading) {
-                            MapInfoView(coordinates: convertToCLLocationCoordinates(course.course.coursePaths))
-                                .frame(height: 200)
-                                .foregroundStyle(.thinMaterial)
-                            Text("경로 제작 고사리님 @alsgiwc")
-                                .foregroundStyle(.gray)
-                        }
+                        closeButton
                     }
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.vertical, 20)
-                    .padding(.horizontal)
-                    .padding(.bottom, 100)
-                }
-                .overlay {
-                    closeButton
                 }
                 ZStack {
                     if showAlert {
@@ -274,11 +276,11 @@ struct CourseDetailView: View {
             }
         } label: {
             Image(systemName: "xmark.circle.fill")
-                .font(.title)
+                .font(.system(size: 30))
                 .foregroundColor(.primaryColor)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
-        .padding(30)
+        .padding(20)
     }
 }
 
@@ -287,7 +289,7 @@ struct CourseBannerView: View {
     @Binding var isUnlocked: Bool
     @Binding var showAlert: Bool
     
-    @StateObject var locationManager = LocationManager()
+    private let locationManager = CLLocationManager()
     @StateObject var runningManager = RunningManager.shared
     @ObservedObject var homeTabViewModel: HomeTabViewModel
     @Environment(\.dismiss) var dismiss
@@ -329,22 +331,6 @@ struct CourseBannerView: View {
                 .font(.caption)
                 .fontWeight(.semibold)
                 .padding(.bottom, 16)
-                
-                HStack {
-                    Text("\(course.course.courseLength, specifier: "%.0f")km")
-                        .frame(width: 70, height: 23)
-                        .background {
-                            Capsule()
-                                .stroke()
-                        }
-                    Text("\(course.course.courseLength, specifier: "%.0f")km")
-                        .frame(width: 70, height: 23)
-                        .background {
-                            Capsule()
-                                .stroke()
-                        }
-                }
-                .font(.caption)
             }
             .padding(.top, 100)
             
@@ -353,7 +339,7 @@ struct CourseBannerView: View {
             SlideToUnlock(isUnlocked: $isUnlocked)
                 .onChange(of: isUnlocked) { _, newValue in
                     if newValue {
-                        let userLocation = locationManager.currentLocation
+                        let userLocation = locationManager.location?.coordinate
                         let coursePaths = course.course.coursePaths
                         if let userLocation = userLocation, runningManager.checkDistance(userLocation: userLocation, course: coursePaths) {
                             runningManager.startCourse = course.course
