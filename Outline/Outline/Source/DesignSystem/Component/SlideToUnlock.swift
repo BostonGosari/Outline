@@ -41,7 +41,7 @@ struct SlideToUnlock: View {
                 dragCircle
             }
             .simultaneousGesture(drag)
-            .animation(.spring(), value: width)
+            .animation(.bouncy, value: width)
     }
     
     var backGround: some View {
@@ -93,7 +93,7 @@ struct SlideToUnlock: View {
                 if width < maxWidth {
                     width = minWidth
                 } else {
-                    withAnimation(.spring().delay(0.5)) {
+                    withAnimation(.bouncy) {
                         isReached = true
                         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                             isUnlocked = true
