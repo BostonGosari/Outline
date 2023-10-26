@@ -41,6 +41,8 @@ class RunningViewModel: ObservableObject {
     private var RunningStartDate = Date()
     private var RunningEndDate = Date()
     
+    private let runningManger = RunningManager.shared
+    
     // MARK: - Initialization
     
     init(homeTabViewModel: HomeTabViewModel) {
@@ -134,13 +136,13 @@ class RunningViewModel: ObservableObject {
     }
     
     private func saveRunning() {
-        guard let course = homeTabViewModel.startCourse else { return }
+        guard let course = runningManger.startCourse else { return }
         
         let courseData = CourseData(courseName: course.courseName, runningLength: course.courseLength, heading: course.heading, distance: course.distance, coursePaths: homeTabViewModel.userLocations, runningCourseId: "")
         
         let healthData = HealthData(totalTime: totalTime, averageCadence: totalSteps / totalDistance, totalRunningDistance: totalDistance / 1000, totalEnergy: kilocalorie, averageHeartRate: 0.0, averagePace: totalTime / totalDistance * 1000 / 60, startDate: RunningStartDate, endDate: RunningEndDate)
         
-        let newRunningRecord = RunningRecord(id: UUID().uuidString, runningType: .free, courseData: courseData, healthData: healthData)
+        let newRunningRecord = RunningRecord(id: UUID().uuidString, runningType: runningManger.runningType, courseData: courseData, healthData: healthData)
         
         userDataModel.createRunningRecord(record: newRunningRecord) { result in
             switch result {
