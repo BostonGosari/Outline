@@ -31,7 +31,6 @@ struct RunningMapView: View {
                     coordinates: convertToCLLocationCoordinates(course.coursePaths)
                 )
                 .ignoresSafeArea()
-                .preferredColorScheme(.dark)
             } else {
                 RunningMap(
                     locationManager: locationManager,
@@ -39,7 +38,6 @@ struct RunningMapView: View {
                     coordinates: []
                 )
                 .ignoresSafeArea()
-                .preferredColorScheme(.dark)
             }
             
             VStack(spacing: 0) {
