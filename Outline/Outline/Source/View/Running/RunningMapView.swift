@@ -52,7 +52,12 @@ struct RunningMapView: View {
             }
             
             if let course = homeTabViewModel.startCourse {
-                CourseGuidView(showBigGuid: $showBigGuid, coursePathCoordinates: convertToCLLocationCoordinates(course.coursePaths), courseRotate: course.heading)
+                CourseGuidView(
+                    userLocations: $locationManager.userLocations,
+                    showBigGuid: $showBigGuid,
+                    coursePathCoordinates: convertToCLLocationCoordinates(course.coursePaths),
+                    courseRotate: course.heading
+                )
                     .onTapGesture {
                         showBigGuid.toggle()
                         // TODO: 햅틱 추가
