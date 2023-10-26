@@ -80,7 +80,7 @@ struct ImageShareView: View {
 extension ImageShareView {
     
     private func renderImage() {
-        shareImage = mainImageView.asImage(size: size)
+        shareImage = mainImageView.offset(y: -30).asImage(size: size)
     }
     
     private var mainImageView: some View {
@@ -92,7 +92,7 @@ extension ImageShareView {
                 blackImageView
             }
         }
-        .aspectRatio(1080/1920, contentMode: .fit)
+        .aspectRatio(1080/1920, contentMode: .fill)
     }
     
     private var selectPhotoView: AnyView {
@@ -189,7 +189,6 @@ extension ImageShareView {
                 HStack {}
                     .onAppear {
                         size = CGSize(width: proxy.size.width, height: proxy.size.height)
-                        print(proxy.size)
                 }
             }
         }
