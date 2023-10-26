@@ -136,7 +136,6 @@ extension ImageShareView {
                         HStack {}
                             .onAppear {
                                 size = CGSize(width: proxy.size.width, height: proxy.size.height)
-                                print(proxy.size)
                         }
                     }
                 }

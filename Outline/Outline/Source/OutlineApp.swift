@@ -19,7 +19,7 @@ struct OutlineApp: App {
   
     var body: some Scene {
         WindowGroup {
-            ShareMainView(homeTabViewModel: HomeTabViewModel(), runningData: ShareModel(courseName: "댕댕런", runningDate: "2022.10.23", runningRegion: "효자동", distance: "5.2", cal: "400", pace: "5.5", bpm: "150", time: "30", userLocations: [
+            ShareMainView(homeTabViewModel: HomeTabViewModel(), runningData: ShareModel(courseName: "댕댕런", runningDate: "2022.10.23", runningRegion: "효자동", distance: "5.2km", cal: "400cal", pace: "5.5", bpm: "150bpm", time: "30분20초", userLocations: [
                 CLLocationCoordinate2D(latitude: 36, longitude: 129),
                 CLLocationCoordinate2D(latitude: 36.0214, longitude: 129.1),
                 CLLocationCoordinate2D(latitude: 36.214, longitude: 129.1),
