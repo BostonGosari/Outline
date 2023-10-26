@@ -71,8 +71,7 @@ struct FinishRunningView: View {
         .overlay {
             if viewModel.isShowPopup {
                 RunningPopup(text: "기록이 저장되었어요.")
-                    .frame(maxHeight: .infinity, alignment: .bottom)
-                    .padding(.bottom, 712)
+                    .frame(maxHeight: .infinity, alignment: .top)
                     .transition(.move(edge: .top))
             }
         }
