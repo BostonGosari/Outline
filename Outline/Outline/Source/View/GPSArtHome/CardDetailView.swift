@@ -10,9 +10,11 @@ import MapKit
 
 struct CardDetailView: View {
     
-    @State var start = false
+    @State private var isUnlocked = false
+    @State private var showAlert = false
     @ObservedObject var homeTabViewModel: HomeTabViewModel
     @StateObject var runningManager = RunningManager.shared
+    @StateObject var locationManager = LocationManager()
     @Environment(\.dismiss) var dismiss
     
     @Binding var isShow: Bool
@@ -35,41 +37,103 @@ struct CardDetailView: View {
     private let cardHeight: CGFloat = 575
     
     var body: some View {
-        ScrollView {
-            ZStack {
-                Color.gray900Color
-                    .onScrollViewOffsetChanged { value in
-                        handleScrollViewOffset(value)
+        ZStack {
+            ScrollView {
+                ZStack {
+                    Color.gray900Color
+                        .onScrollViewOffsetChanged { value in
+                            handleScrollViewOffset(value)
+                        }
+                    
+                    VStack {
+                        ZStack {
+                            courseImage
+                            courseInformation
+                        }
+                        CardDetailInformationView(homeTabViewModel: homeTabViewModel, currentIndex: currentIndex)
+                            .opacity(appear[2] ? 1 : 0)
+                            .offset(y: appear[2] ? 0 : fadeInOffset)
                     }
-                
-                VStack {
-                    ZStack {
-                        courseImage
-                        courseInformation
-                    }
-                    CardDetailInformationView(homeTabViewModel: homeTabViewModel, currentIndex: currentIndex)
-                        .opacity(appear[2] ? 1 : 0)
-                        .offset(y: appear[2] ? 0 : fadeInOffset)
+                    .mask(
+                        RoundedRectangle(cornerRadius: viewSize / 2, style: .continuous)
+                    )
+                    .scaleEffect(viewSize / -600 + 1)
+                    .gesture(isDraggable ? drag : nil)
                 }
-                .mask(
-                    RoundedRectangle(cornerRadius: viewSize / 2, style: .continuous)
-                )
-                .scaleEffect(viewSize / -600 + 1)
-                .gesture(isDraggable ? drag : nil)
+                .onChange(of: isShow) { _, _ in
+                    fadeOut()
+                }
+                .onAppear {
+                    fadeIn()
+                }
             }
-            .onChange(of: isShow) { _, _ in
-                fadeOut()
+            .overlay {
+                closeButton
             }
-            .onAppear {
-                fadeIn()
+            .scrollIndicators(scrollViewOffset > scrollStartRange ? .hidden : .automatic)
+            .ignoresSafeArea(edges: .top)
+            .statusBarHidden()
+            
+            ZStack {
+                if showAlert {
+                    Color.black.opacity(0.5)
+                        .onTapGesture {
+                            withAnimation {
+                                showAlert = false
+                            }
+                        }
+                }
+                VStack(spacing: 10) {
+                    Text("자유코스로 변경할까요?")
+                        .font(.title2)
+                    Text("앗! 현재 루트와 멀리 떨어져 있어요.")
+                        .font(.subBody)
+                        .foregroundColor(.gray300Color)
+                    Image("AnotherLocation")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 120)
+                    Button {
+                        showAlert = false
+                        isShow = false
+                        runningManager.start = true
+                        runningManager.startFreeRun()
+                    } label: {
+                        Text("자유코스로 변경하기")
+                            .font(.button)
+                            .foregroundStyle(Color.blackColor)
+                            .padding()
+                            .frame(maxWidth: .infinity)
+                            .background {
+                                RoundedRectangle(cornerRadius: 15, style: .continuous)
+                                    .foregroundStyle(Color.primaryColor)
+                            }
+                    }
+                    .padding()
+                    Button {
+                        withAnimation {
+                            showAlert = false
+                            isShow = false
+                        }
+                    } label: {
+                        Text("홈으로 돌아가기")
+                            .font(.button)
+                            .bold()
+                            .foregroundStyle(Color.whiteColor)
+                    }
+                }
+                .frame(height: UIScreen.main.bounds.height / 2)
+                .frame(maxWidth: .infinity)
+                .background {
+                    RoundedRectangle(cornerRadius: 30, style: .continuous)
+                        .stroke(Color.primaryColor, lineWidth: 2)
+                    RoundedRectangle(cornerRadius: 30, style: .continuous)
+                        .foregroundStyle(Color.gray900Color)
+                }
+                .frame(maxHeight: .infinity, alignment: .bottom)
+                .offset(y: showAlert ? 0 : UIScreen.main.bounds.height / 2 + 2)
             }
         }
-        .overlay {
-            closeButton
-        }
-        .scrollIndicators(scrollViewOffset > scrollStartRange ? .hidden : .automatic)
-        .ignoresSafeArea(edges: .top)
-        .statusBarHidden()
     }
     
     // MARK: - View Components
@@ -127,11 +191,25 @@ struct CardDetailView: View {
             
             Spacer()
             
-            SlideToUnlock(isUnlocked: $runningManager.start)
-                .onChange(of: runningManager.start) { _, _ in
-                    runningManager.startCourse = homeTabViewModel.recommendedCoures[currentIndex].course
-                    runningManager.startGPSArtRun()
-                    isShow = false
+            SlideToUnlock(isUnlocked: $isUnlocked)
+                .onChange(of: isUnlocked) { _, newValue in
+                    if newValue {
+                        let userLocation = locationManager.currentLocation
+                        let course = homeTabViewModel.recommendedCoures[currentIndex].course.coursePaths
+                        
+                        if let userLocation = userLocation, runningManager.checkDistance(userLocation: userLocation, course: course) {
+                            runningManager.startCourse = homeTabViewModel.recommendedCoures[currentIndex].course
+                            runningManager.startGPSArtRun()
+                            isShow = false
+                            runningManager.start = true
+                            isUnlocked = false
+                        } else {
+                            isUnlocked = false
+                            withAnimation {
+                                showAlert = true
+                            }
+                        }
+                    }
                 }
                 .opacity(appear[1] ? 1 : 0)
                 .offset(y: appear[1] ? 0 : fadeInOffset)
