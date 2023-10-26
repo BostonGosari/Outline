@@ -44,7 +44,8 @@ struct RunningMapView: View {
                     .padding(.bottom, 80)
             }
             
-            if let course = runningManager.startCourse {
+            if let course = runningManager.startCourse,
+               runningManager.runningType == .gpsArt {
                 CourseGuidView(
                     userLocations: $locationManager.userLocations,
                     showBigGuid: $showBigGuid,
