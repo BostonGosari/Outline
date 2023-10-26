@@ -14,7 +14,7 @@ struct FinishRunningMap: UIViewRepresentable {
     func makeUIView(context: Context) -> MKMapView {
         let mapView = MKMapView()
         mapView.delegate = context.coordinator
-        mapView.isUserInteractionEnabled = false
+        mapView.isUserInteractionEnabled = true
         
         let polyline = MKPolyline(coordinates: userLocations, count: userLocations.count)
         mapView.addOverlay(polyline)
@@ -50,17 +50,30 @@ struct FinishRunningMap: UIViewRepresentable {
         }
         
         func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-            if let polyline = overlay as? MKPolyline {
-                let renderer = MKGradientPolylineRenderer(polyline: polyline)
-                renderer.setColors([
-                    UIColor(red: 30, green: 30, blue: 32, alpha: 1),
-                    UIColor(red: 100, green: 120, blue: 255, alpha: 1),
-                    UIColor(red: 219, green: 251, blue: 108, alpha: 1)
-                ], locations: [])
-                renderer.lineWidth = 10
-                return renderer
-            }
-            return MKOverlayRenderer(overlay: overlay)
+            let renderer = MKGradientPolylineRenderer(overlay: overlay)
+            renderer.setColors([
+                UIColor(hex: "#333349"),
+                UIColor(hex: "#6478FF"),
+                UIColor(hex: "#DBFB6C")
+            ], locations: [])
+            renderer.lineCap = .round
+            renderer.lineWidth = 10
+            return renderer
         }
     }
+}
+
+extension UIColor {
+    convenience init(hex: String) {
+        let scanner = Scanner(string: hex)
+        _ = scanner.scanString("#")
+        
+        var rgb: UInt64 = 0
+        scanner.scanHexInt64(&rgb)
+        
+        let r = Double((rgb >> 16) & 0xFF) / 255.0
+        let g = Double((rgb >>  8) & 0xFF) / 255.0
+        let b = Double((rgb >>  0) & 0xFF) / 255.0
+        self.init(red: r, green: g, blue: b, alpha: 1.00)
+      }
 }
