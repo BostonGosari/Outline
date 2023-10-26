@@ -47,8 +47,6 @@ class RunningManager: ObservableObject {
                     let town = placemark.subLocality ?? ""
                     
                     self.startCourse?.courseName = "\(city) \(town)런"
-                    print(city)
-                    print(town)
                 }
             }
         }
@@ -56,7 +54,9 @@ class RunningManager: ObservableObject {
     
     func checkDistance(userLocation: CLLocationCoordinate2D, course: [Coordinate]) -> Bool {
         guard let shortestDistance = calculateShortestDistance(from: userLocation, to: convertToCLLocationCoordinates(course)) else {
-            print("can't find user location")
+            print("can't calculate user location")
+            print(userLocation)
+            print(course)
             return false
         }
         return shortestDistance <= 2000
