@@ -71,33 +71,28 @@ struct ImageShareView: View {
         .onChange(of: image) { 
             renderImage()
         }
+        .onAppear {
+            renderImage()
+        }
     }
 }
 
 extension ImageShareView {
     
     private func renderImage() {
-        shareImage = mainImageView.asImage(size: size)
+        shareImage = mainImageView.offset(y: -30).asImage(size: size)
     }
     
     private var mainImageView: some View {
-        Group {
-            ZStack {
-                if selectPhotoMode {
-                    selectPhotoView
-                } else {
-                    blackImageView
-                }
-                GeometryReader { proxy in
-                    HStack {}
-                        .onAppear {
-                            size = CGSize(width: proxy.size.width, height: proxy.size.height)
-                            print(proxy.size)
-                    }
-                }
+        
+        ZStack {
+            if selectPhotoMode {
+                selectPhotoView
+            } else {
+                blackImageView
             }
-            .aspectRatio(1080/1920, contentMode: .fit)
         }
+        .aspectRatio(1080/1920, contentMode: .fill)
     }
     
     private var selectPhotoView: AnyView {
@@ -106,6 +101,8 @@ extension ImageShareView {
                 ZStack {
                     Image(uiImage: img)
                         .resizable()
+                        .scaledToFill()
+                        .frame(width: size.width, height: size.height)
                         .mask {
                             Rectangle()
                                 .aspectRatio(1080.0/1920.0, contentMode: .fit)
@@ -131,12 +128,18 @@ extension ImageShareView {
                         .resizable()
 
                     selectShareData
-                        .padding(.top, 43)
+                        .padding(.top, 44)
                     
                     userPath
                         .scaleEffect(scale)
                         .offset(offset)
                         .rotationEffect(angle)
+                    GeometryReader { proxy in
+                        HStack {}
+                            .onAppear {
+                                size = CGSize(width: proxy.size.width, height: proxy.size.height)
+                        }
+                    }
                 }
                 .gesture(dragGesture)
                 .gesture(rotationGesture)
@@ -159,14 +162,15 @@ extension ImageShareView {
             Text(viewModel.runningData.distance)
                 .font(.shareData)
                 .fontWeight(.bold)
-                .padding(.bottom, 14)
+                .padding(.bottom, 17)
             
             Text(viewModel.runningData.pace)
                 .font(.shareData)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-        .padding(.leading, 18)
+        .padding(.leading, 16)
     }
+    
 }
 extension ImageShareView {
     private var blackImageView: some View {
@@ -182,10 +186,17 @@ extension ImageShareView {
                 .scaleEffect(scale)
                 .offset(offset)
                 .rotationEffect(angle)
+            GeometryReader { proxy in
+                HStack {}
+                    .onAppear {
+                        size = CGSize(width: proxy.size.width, height: proxy.size.height)
+                }
+            }
         }
         .gesture(dragGesture)
         .gesture(rotationGesture)
         .simultaneousGesture(magnificationGesture)
+        .aspectRatio(1080/1920, contentMode: .fit)
     }
     
     private var blackShareData: some View {

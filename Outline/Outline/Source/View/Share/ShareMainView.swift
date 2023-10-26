@@ -61,7 +61,6 @@ struct ShareMainView: View {
             .modifier(NavigationModifier())
             .onAppear {
                 viewModel.runningData = runningData
-                print(runningData)
             }
             .overlay {
                 if viewModel.isShowPopup {
