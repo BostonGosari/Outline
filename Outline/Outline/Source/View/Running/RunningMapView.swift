@@ -21,9 +21,10 @@ struct RunningMapView: View {
     
     @State var navigateToFinishRunningView = false
     @State var showCustomSheet = false
+    @State var showBigGuid = false
     
     var body: some View {
-        ZStack {
+        ZStack(alignment: .topTrailing) {
             if let course = homeTabViewModel.startCourse {
                 RunningMap(
                     locationManager: locationManager,
@@ -41,13 +42,28 @@ struct RunningMapView: View {
                 .ignoresSafeArea()
                 .preferredColorScheme(.dark)
             }
-            
+                
             VStack(spacing: 0) {
                 /*running Guid View*/
                 Spacer()
                 runningButtonView
                     .frame(maxWidth: .infinity)
                     .padding(.bottom, 80)
+            }
+            
+            if let course = homeTabViewModel.startCourse {
+                CourseGuidView(
+                    userLocations: $locationManager.userLocations,
+                    showBigGuid: $showBigGuid,
+                    coursePathCoordinates: convertToCLLocationCoordinates(course.coursePaths),
+                    courseRotate: course.heading
+                )
+                    .onTapGesture {
+                        showBigGuid.toggle()
+                        // TODO: 햅틱 추가
+                    }
+                //                .animation(.easeInOut, value: showBigGuid)
+                    .animation(.openCard, value: showBigGuid)
             }
         }
         .sheet(isPresented: $showCustomSheet) {
