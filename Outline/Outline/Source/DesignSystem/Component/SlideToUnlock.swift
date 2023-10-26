@@ -84,7 +84,7 @@ struct SlideToUnlock: View {
     var drag: some Gesture {
         DragGesture()
             .onChanged { value in
-                if value.translation.width > 0 {
+                if value.translation.width >= 0 {
                     width = min(max(value.translation.width + minWidth, minWidth), maxWidth)
                 }
             }
@@ -93,7 +93,7 @@ struct SlideToUnlock: View {
                 if width < maxWidth {
                     width = minWidth
                 } else {
-                    withAnimation(.bouncy) {
+                    withAnimation {
                         isReached = true
                         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                             isUnlocked = true
