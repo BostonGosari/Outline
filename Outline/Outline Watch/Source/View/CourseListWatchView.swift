@@ -79,7 +79,7 @@ struct CourseListWatchView: View {
                                         .padding(.trailing, -4)
                                     }
                                 PathGenerateManager.shared.caculateLines(width: 75, height: 75, coordinates: convertToCLLocationCoordinates(course.coursePaths))
-                                    .stroke(lineWidth: 4)
+                                    .stroke(style: StrokeStyle(lineWidth: 4, lineCap: .round, lineJoin: .round))
                                     .scaledToFit()
                                     .frame(height: 75)
                                     .foregroundColor(.green)
