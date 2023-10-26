@@ -47,11 +47,28 @@ final class PathGenerateManager {
         
         return path
     }
+    func caculateLines(width: Double, height: Double, coordinates: [CLLocationCoordinate2D], canvasData: CanvasData) -> some Shape {
+        var path = Path()
+        if coordinates.isEmpty {
+            return path
+        }
+        
+        let position = calculateRelativePoint(coordinate: coordinates[0], canvasData: canvasData)
+        path.move(to: CGPoint(x: position[0], y: -position[1]))
+        
+        for coordinate in coordinates {
+            let position = calculateRelativePoint(coordinate: coordinate, canvasData: canvasData)
+            path.addLine(to: CGPoint(x: position[0], y: -position[1]))
+        }
+        
+        return path
+    }
+    
     private func calculateRelativePoint(coordinate: CLLocationCoordinate2D, canvasData: CanvasData) -> [Int] {
         var posX: Int = 0
         var posY: Int = 0
-        var tempX = (coordinate.longitude - canvasData.zeroX) * canvasData.scale * 1000000
-        var tempY = (coordinate.latitude - canvasData.zeroY) * canvasData.scale * 1000000
+        let tempX = (coordinate.longitude - canvasData.zeroX) * canvasData.scale * 1000000
+        let tempY = (coordinate.latitude - canvasData.zeroY) * canvasData.scale * 1000000
         if !(tempX.isNaN || tempX.isInfinite || tempY.isNaN || tempY.isInfinite) {
             posX = Int(tempX)
             posY = Int(tempY)
@@ -62,7 +79,7 @@ final class PathGenerateManager {
             
         return [posX, posY]
     }
-    private func calculateCanvaData(coordinates: [CLLocationCoordinate2D], width: Double, height: Double) -> CanvasData {
+    func calculateCanvaData(coordinates: [CLLocationCoordinate2D], width: Double, height: Double) -> CanvasData {
         var minLat: Double = 90
         var maxLat: Double = -90
         var minLon: Double = 180

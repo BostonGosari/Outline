@@ -10,6 +10,7 @@ import SwiftUI
 struct RunningMapView: View {
     @StateObject private var viewModel = RunningMapViewModel()
     @StateObject var locationManager = LocationManager()
+    @StateObject var runningManager = RunningManager.shared
     
     @ObservedObject var runningViewModel: RunningViewModel
     @ObservedObject var digitalTimerViewModel: DigitalTimerViewModel
@@ -19,12 +20,13 @@ struct RunningMapView: View {
     
     @Binding var selection: Int
     
-    @State private var navigateToFinishRunningView = false
-    @State private var showCustomSheet = false
-
+    @State var navigateToFinishRunningView = false
+    @State var showCustomSheet = false
+    @State var showBigGuid = false
+    
     var body: some View {
-        ZStack {
-            if let course = homeTabViewModel.startCourse {
+        ZStack(alignment: .topTrailing) {
+            if let course = runningManager.startCourse {
                 RunningMap(
                     locationManager: locationManager,
                     viewModel: viewModel,
@@ -32,21 +34,29 @@ struct RunningMapView: View {
                 )
                 .ignoresSafeArea()
                 .preferredColorScheme(.dark)
-            } else {
-                RunningMap(
-                    locationManager: locationManager,
-                    viewModel: viewModel,
-                    coordinates: []
-                )
-                .ignoresSafeArea()
-                .preferredColorScheme(.dark)
             }
-            
+                
             VStack(spacing: 0) {
                 Spacer()
                 runningButtonView
                     .frame(maxWidth: .infinity)
                     .padding(.bottom, 80)
+            }
+            
+            if let course = runningManager.startCourse,
+               runningManager.runningType == .gpsArt {
+                CourseGuidView(
+                    userLocations: $locationManager.userLocations,
+                    showBigGuid: $showBigGuid,
+                    coursePathCoordinates: convertToCLLocationCoordinates(course.coursePaths),
+                    courseRotate: course.heading
+                )
+                    .onTapGesture {
+                        showBigGuid.toggle()
+                        // TODO: 햅틱 추가
+                    }
+                //                .animation(.easeInOut, value: showBigGuid)
+                    .animation(.openCard, value: showBigGuid)
             }
         }
         .sheet(isPresented: $showCustomSheet) {
