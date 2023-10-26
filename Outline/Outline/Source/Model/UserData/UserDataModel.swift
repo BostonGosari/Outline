@@ -47,7 +47,7 @@ struct UserDataModel: UserDataModelProtocol {
         completion: @escaping (Result<Bool, CoreDataError>) -> Void
     ) {
         let newRunningRecord = CoreRunningRecord(context: persistenceController.container.viewContext)
-        newRunningRecord.runningType = "free"
+        newRunningRecord.runningType = record.runningType.rawValue
         newRunningRecord.id = UUID().uuidString
         
         let context = persistenceController.container.viewContext
