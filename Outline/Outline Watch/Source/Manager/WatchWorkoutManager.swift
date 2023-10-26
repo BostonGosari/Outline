@@ -67,7 +67,8 @@ class WatchWorkoutManager: NSObject, ObservableObject {
             HKQuantityType(.distanceWalkingRunning),
             HKQuantityType(.heartRate),
             HKQuantityType(.activeEnergyBurned),
-            HKQuantityType(.cyclingCadence)
+            HKQuantityType(.cyclingCadence),
+            HKQuantityType(.runningSpeed),
         ]
 
         // The quantity types to read from the health store.
@@ -77,6 +78,7 @@ class WatchWorkoutManager: NSObject, ObservableObject {
             HKQuantityType(.heartRate),
             HKQuantityType(.activeEnergyBurned),
             HKQuantityType(.cyclingCadence),
+            HKQuantityType(.runningSpeed),
             HKObjectType.activitySummaryType()
         ]
 
@@ -126,12 +128,22 @@ class WatchWorkoutManager: NSObject, ObservableObject {
     @Published var heartRate: Double = 0
     @Published var calorie: Double = 0
     @Published var pace: Double = 0
+    @Published var averagePace: Double = 0
     @Published var cadence: Double = 0
     @Published var workout: HKWorkout?
 
-    func updatePace(distance: Double, duration: TimeInterval) {
+    func calculateAveragePace(distance: Double, duration: TimeInterval) {
         if distance > 0 && duration > 0 {
-            let pace = duration / distance
+            let pace = (duration / 60) / (distance / 1000)
+            self.pace = pace
+        } else {
+            self.pace = 0
+        }
+    }
+
+    func calculatePaceFromSpeed(speed: Double) {
+        if speed > 0 {
+            let pace = 60 / (speed * 1000)
             self.pace = pace
         } else {
             self.pace = 0
@@ -140,7 +152,7 @@ class WatchWorkoutManager: NSObject, ObservableObject {
     
     func updateForStatistics(_ statistics: HKStatistics?) {
         guard let statistics = statistics else { return }
-
+        
         DispatchQueue.main.async {
             switch statistics.quantityType {
             case HKQuantityType.quantityType(forIdentifier: .heartRate):
@@ -150,15 +162,18 @@ class WatchWorkoutManager: NSObject, ObservableObject {
             case HKQuantityType.quantityType(forIdentifier: .activeEnergyBurned):
                 let energyUnit = HKUnit.kilocalorie()
                 self.calorie = statistics.sumQuantity()?.doubleValue(for: energyUnit) ?? 0
-            case HKQuantityType.quantityType(forIdentifier: .distanceWalkingRunning), HKQuantityType.quantityType(forIdentifier: .distanceCycling):
-                let meterUnit = HKUnit.meter()
-                self.distance = statistics.sumQuantity()?.doubleValue(for: meterUnit) ?? 0
-                let duration = self.builder?.elapsedTime ?? 0
-                         self.updatePace(distance: self.distance, duration: duration)
-            case HKQuantityType.quantityType(forIdentifier: .cyclingCadence):
-                let cadenceUnit = HKUnit(from: "count/min")
-                self.cadence = statistics.averageQuantity()?.doubleValue(for: cadenceUnit) ?? 0
-
+            case HKQuantityType.quantityType(forIdentifier: .distanceWalkingRunning):
+                  let meterUnit = HKUnit.meter()
+                  self.distance = statistics.sumQuantity()?.doubleValue(for: meterUnit) ?? 0
+                  let duration = self.builder?.elapsedTime ?? 0
+                  self.calculateAveragePace(distance: self.distance, duration: duration)
+              case HKQuantityType.quantityType(forIdentifier: .runningSpeed):
+                  let meterPerSecondUnit = HKUnit.meter().unitDivided(by: HKUnit.second())
+                  let speed = statistics.mostRecentQuantity()?.doubleValue(for: meterPerSecondUnit) ?? 0
+                  self.calculatePaceFromSpeed(speed: speed)
+              case HKQuantityType.quantityType(forIdentifier: .cyclingCadence):
+                  let cadenceUnit = HKUnit(from: "count/min")
+                  self.cadence = statistics.averageQuantity()?.doubleValue(for: cadenceUnit) ?? 0
             default:
                 return
             }
