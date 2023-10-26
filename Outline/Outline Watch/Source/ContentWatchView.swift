@@ -11,18 +11,17 @@ struct ContentWatchView: View {
     
     @State private var navigate = false
     @StateObject private var workoutManager = WatchWorkoutManager()
-
+    @State private var userLocations: [CLLocationCoordinate2D] = []
+    
     var body: some View {
-//        WatchTabView()
-        CourseListWatchView(navigate: $navigate)
+        CourseListWatchView(userLocations: $userLocations, navigate: $navigate)
             .sheet(isPresented: $workoutManager.showingSummaryView) {
-                SummaryView(navigate: $navigate)
+                SummaryView(userLocations: userLocations, navigate: $navigate)
             }
             .environmentObject(workoutManager)
             .onAppear {
                 workoutManager.requestAuthorization()
             }
-//        SummaryView()
     }
 }
 
