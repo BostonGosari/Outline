@@ -101,6 +101,8 @@ extension ImageShareView {
                 ZStack {
                     Image(uiImage: img)
                         .resizable()
+                        .scaledToFill()
+                        .frame(width: size.width, height: size.height)
                         .mask {
                             Rectangle()
                                 .aspectRatio(1080.0/1920.0, contentMode: .fit)
@@ -126,7 +128,7 @@ extension ImageShareView {
                         .resizable()
 
                     selectShareData
-                        .padding(.top, 43)
+                        .padding(.top, 44)
                     
                     userPath
                         .scaleEffect(scale)
@@ -160,13 +162,13 @@ extension ImageShareView {
             Text(viewModel.runningData.distance)
                 .font(.shareData)
                 .fontWeight(.bold)
-                .padding(.bottom, 14)
+                .padding(.bottom, 17)
             
             Text(viewModel.runningData.pace)
                 .font(.shareData)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-        .padding(.leading, 18)
+        .padding(.leading, 16)
     }
     
 }
