@@ -25,10 +25,18 @@ struct FinishRunningView: View {
                 VStack {
                     ZStack(alignment: .topLeading) {
                         FinishRunningMap(userLocations: $viewModel.userLocations)
-                            .roundedCorners(45, corners: .bottomLeft)
+                            .roundedCorners(45, corners: .bottomRight)
                             .shadow(color: .whiteColor, radius: 1.5)
 
-                        courseInfo
+                        VStack(spacing: 0) {
+                            Text("\(viewModel.date)")
+                                .font(.date)
+                                .foregroundStyle(Color.white)
+                                .frame(maxWidth: .infinity, alignment: .center)
+                                .padding(.top, 64)
+                            
+                            courseInfo
+                        }
                             .background(
                                 LinearGradient(
                                     colors: gradientColors,
@@ -59,14 +67,13 @@ struct FinishRunningView: View {
                     .padding(.bottom, 8)
                 }
             }
-            .navigationTitle("\(viewModel.date)")
-            .navigationBarTitleDisplayMode(.inline)
-            .preferredColorScheme(.dark)
         }
         .overlay {
             if viewModel.isShowPopup {
                 RunningPopup(text: "기록이 저장되었어요.")
                     .frame(maxHeight: .infinity, alignment: .bottom)
+                    .padding(.bottom, 712)
+                    .transition(.move(edge: .top))
             }
         }
         .navigationDestination(isPresented: $viewModel.navigateToShareMainView) {
@@ -103,7 +110,7 @@ extension FinishRunningView {
             .font(.subBody)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(.top, 100)
+        .padding(.top, 24)
         .padding(.leading, 16)
     }
     
