@@ -9,7 +9,7 @@ import CoreLocation
 import SwiftUI
 
 struct CourseGuidView: View {
-    // homeTabViewModel 불러와서 path 정보 표시
+    @Binding var userLocations: [CLLocationCoordinate2D]
     @Binding var showBigGuid: Bool
     
     private let pathManager = PathGenerateManager.shared
@@ -25,7 +25,7 @@ struct CourseGuidView: View {
     }
     
     let testCoordinates: [CLLocationCoordinate2D] = {
-        if let kmlFilePath = Bundle.main.path(forResource: "pohangDuckRun", ofType: "kml") {
+        if let kmlFilePath = Bundle.main.path(forResource: "test", ofType: "kml") {
             let kmlParser = KMLParserManager()
             return kmlParser.parseKMLFile(atPath: kmlFilePath)
         }
@@ -45,9 +45,11 @@ struct CourseGuidView: View {
                 .overlay {
                     coursePath
                         .overlay {
-//                            userPath
+                            userPath
                         }
-                        .scaleEffect(0.8)
+                        .scaledToFit()
+                        .rotationEffect(Angle(degrees: courseRotate))
+                        .frame(width: width, height: height, alignment: .center)
                 }
                 .frame(width: width, height: height)
                 .padding(.top, showBigGuid ? 100 : 16)
@@ -65,19 +67,16 @@ extension CourseGuidView {
         pathManager
             .caculateLines(width: width, height: height, coordinates: coursePathCoordinates)
             .stroke(lineWidth: showBigGuid ? 15 : 7)
-            .scaledToFit()
-            .rotationEffect(Angle(degrees: courseRotate))
+            .scaleEffect(0.8)
             .foregroundStyle(Color.blackColor.opacity(0.5))
-            .frame(width: width, height: height, alignment: .center)
+            
     }
     
     private var userPath: some View {
         pathManager
-            .caculateLines(width: width, height: height, coordinates: testCoordinates)
+            .caculateLines(width: width, height: height, coordinates: userLocations)
             .stroke(lineWidth: showBigGuid ? 15 : 7)
-            .scaledToFit()
-            .rotationEffect(Angle(degrees: courseRotate))
+            .scaleEffect(0.8)
             .foregroundStyle(Color.primaryColor)
-            .frame(width: width, height: height, alignment: .center)
     }
 }
