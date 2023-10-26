@@ -9,6 +9,7 @@ import CoreLocation
 import SwiftUI
 
 struct ShareMainView: View {
+    @StateObject var runningManager = RunningManager.shared
     @ObservedObject var homeTabViewModel: HomeTabViewModel
     @StateObject private var viewModel = ShareViewModel()
     
@@ -48,7 +49,7 @@ struct ShareMainView: View {
                     CompleteButton(text: "공유하기", isActive: true) {
                         viewModel.tapShareButton = true
                         if viewModel.shareToInstagram() {
-                            homeTabViewModel.running = false
+                            runningManager.running = false
                         }
                     }
                     .padding(.leading, -8)
@@ -57,7 +58,7 @@ struct ShareMainView: View {
                 .padding(.bottom, 42)
             }
             .ignoresSafeArea()
-            .modifier(NavigationModifier(homeTabViewModel: homeTabViewModel))
+            .modifier(NavigationModifier())
             .onAppear {
                 viewModel.runningData = runningData
                 print(runningData)
@@ -74,7 +75,7 @@ struct ShareMainView: View {
 }
 
 struct NavigationModifier: ViewModifier {
-    @ObservedObject var homeTabViewModel: HomeTabViewModel
+    @StateObject var runningManager = RunningManager.shared
     
     func body(content: Content) -> some View {
         content
@@ -84,7 +85,7 @@ struct NavigationModifier: ViewModifier {
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
                     Button {
-                        homeTabViewModel.running = false
+                        runningManager.running = false
                     } label: {
                         (Text(Image(systemName: "chevron.left")) + Text("홈으로"))
                             .foregroundStyle(Color.primaryColor)
