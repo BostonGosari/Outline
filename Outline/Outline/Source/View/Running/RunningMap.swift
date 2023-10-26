@@ -27,7 +27,12 @@ struct RunningMap: UIViewRepresentable {
         mapView.setUserTrackingMode(.follow, animated: true)
         
         let tapGesture = UITapGestureRecognizer(target: context.coordinator, action: #selector(context.coordinator.handleTapGesture(_:)))
+        let panGesture = UIPanGestureRecognizer(target: context.coordinator, action: #selector(context.coordinator.handlePanGesture(_:)))
+        let longPressGesture = UILongPressGestureRecognizer(target: context.coordinator, action: #selector(context.coordinator.handleLongPressGesture(_:)))
+        
+        mapView.addGestureRecognizer(panGesture)
         mapView.addGestureRecognizer(tapGesture)
+        mapView.addGestureRecognizer(longPressGesture)
         
         let polyline = MKPolyline(coordinates: coordinates, count: coordinates.count)
         mapView.addOverlay(polyline)
@@ -91,6 +96,18 @@ struct RunningMap: UIViewRepresentable {
         
         @objc func handleTapGesture(_ gesture: UITapGestureRecognizer) {
             if gesture.state == .ended {
+                parent.userMoveMap = true
+            }
+        }
+        
+        @objc func handlePanGesture(_ gesture: UIPanGestureRecognizer) {
+            if gesture.state == .began {
+                parent.userMoveMap = true
+            }
+        }
+        
+        @objc func handleLongPressGesture(_ gesture: UILongPressGestureRecognizer) {
+            if gesture.state == .began {
                 parent.userMoveMap = true
             }
         }
