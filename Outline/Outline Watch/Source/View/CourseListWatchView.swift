@@ -16,9 +16,10 @@ struct CourseListWatchView: View {
     var workoutTypes: [HKWorkoutActivityType] = [.running]
     @State private var countdownSeconds = 3 
     @State private var detailViewNavigate = false
+    @Binding var userLocations: [CLLocationCoordinate2D]
     @Binding var navigate: Bool
     
-    @State private var startCourse: GPSArtCourse = GPSArtCourse()
+    @State var startCourse: GPSArtCourse = GPSArtCourse()
     
     @StateObject var watchConnectivityManager = WatchConnectivityManager.shared
     
@@ -147,7 +148,7 @@ struct CourseListWatchView: View {
                        }
                    }
            } else {
-               WatchTabView(startCourse: startCourse) // 카운트다운이 끝나면 WatchTabView로 이동
+               WatchTabView(userLocations: $userLocations, startCourse: startCourse) // 카운트다운이 끝나면 WatchTabView로 이동
            }
        }.navigationBarBackButtonHidden()
    }
@@ -242,4 +243,3 @@ struct DetailView: View {
     }
     
 }
-
