@@ -10,12 +10,11 @@ import MapKit
 
 struct MapWatchView: View {
     
-    let locationManager = CLLocationManager()
     var course: [CLLocationCoordinate2D] = []
     
     @State var position: MapCameraPosition = .userLocation(followsHeading: true, fallback: .automatic)
     
-    @State private var userLocations: [CLLocationCoordinate2D] = []
+    @Binding var userLocations: [CLLocationCoordinate2D]
     
     @State private var userCoordinate: CLLocationCoordinate2D?
     
@@ -38,13 +37,7 @@ struct MapWatchView: View {
                 MapPolyline(coordinates: userLocations)
                     .stroke(.green, lineWidth: 8)
             }
-            .mapControls {
-                MapUserLocationButton()
-            }
-            .onAppear {
-                locationManager.requestWhenInUseAuthorization()
-                locationManager.startUpdatingLocation()
-            }
+            .mapControlVisibility(.hidden)
             .tint(.green)
             .overlay(alignment: .topLeading) {
                 Text("시티런")
@@ -62,8 +55,4 @@ struct MapWatchView: View {
             }
         }
     }
-}
-
-#Preview {
-    MapWatchView()
 }

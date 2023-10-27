@@ -10,8 +10,13 @@ import MapKit
 final class LocationManager: NSObject, CLLocationManagerDelegate, ObservableObject {
     
     @Published var userLocations: [CLLocationCoordinate2D] = []
+    @Published var currentLocation: CLLocationCoordinate2D?
     @Published var isAuthorized = false
     @Published var isNext = false
+    
+    @Published var checkDistance = true
+    
+    var startLocation: CLLocationCoordinate2D?
     
     private var locationManager = CLLocationManager()
     
@@ -34,7 +39,7 @@ final class LocationManager: NSObject, CLLocationManagerDelegate, ObservableObje
         checkLocationAuthorizationStatus()
     }
     
-    private func checkLocationAuthorizationStatus() {
+    func checkLocationAuthorizationStatus() {
         switch locationManager.authorizationStatus {
         case .notDetermined:
             locationManager.requestWhenInUseAuthorization()
@@ -54,24 +59,39 @@ final class LocationManager: NSObject, CLLocationManagerDelegate, ObservableObje
         if let currentLocation = locations.last?.coordinate {
             let distance: CLLocationDistance = 5
             let  location = CLLocation(latitude: currentLocation.latitude, longitude: currentLocation.longitude)
+            self.currentLocation = currentLocation
+
             
             if userLocations.isEmpty {
+                startLocation = currentLocation
                 userLocations.append(currentLocation)
             } else if let lastUserLocation = userLocations.last {
                 let lastLocation = CLLocation(latitude: lastUserLocation.latitude, longitude: lastUserLocation.longitude)
                 
-                if  location.distance(from: lastLocation) >= distance {
+                if location.distance(from: lastLocation) >= distance {
                     userLocations.append(currentLocation)
                 }
+                
+                #if os(iOS)
+                if checkDistance == true {
+                    let runningManager = RunningManager.shared
+                    
+                    if let startCourse = runningManager.startCourse {
+                        self.checkDistance = runningManager.checkDistance(userLocation: lastUserLocation, course: startCourse.coursePaths)
+                        print(checkDistance)
+                    }
+                }
+                #endif
             }
         }
     }
     
-    #if os(iOS)
+#if os(iOS)
     func openAppSetting() {
         if let url = URL(string: UIApplication.openSettingsURLString) {
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
         }
     }
-    #endif
+#endif
+    
 }

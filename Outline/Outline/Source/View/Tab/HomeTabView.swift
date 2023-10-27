@@ -10,6 +10,7 @@ import SwiftUI
 struct HomeTabView: View {
     
     @StateObject private var homeTabViewModel = HomeTabViewModel()
+    @StateObject private var runningManager = RunningManager.shared
     @State var selectedTab: Tab = .GPSArtRunning
     
     @Namespace var namespace
@@ -49,11 +50,11 @@ struct HomeTabView: View {
                 }
             }
             
-            if homeTabViewModel.start {
-                CountDown(running: $homeTabViewModel.running, start: $homeTabViewModel.start)
+            if runningManager.start {
+                CountDown(running: $runningManager.running, start: $runningManager.start)
             }
             
-            if homeTabViewModel.running {
+            if runningManager.running {
                 RunningView(homeTabViewModel: homeTabViewModel)
             }
         }

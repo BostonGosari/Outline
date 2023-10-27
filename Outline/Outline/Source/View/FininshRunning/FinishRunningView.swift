@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct FinishRunningView: View {
-    @StateObject private var locationManager = LocationManager()
+    @StateObject private var runningManager = RunningManager.shared
     @StateObject private var viewModel = FinishRunningViewModel()
     var gradientColors: [Color] = [.blackColor, .blackColor, .blackColor, .blackColor, .black50Color, .blackColor.opacity(0)]
     
@@ -25,10 +25,18 @@ struct FinishRunningView: View {
                 VStack {
                     ZStack(alignment: .topLeading) {
                         FinishRunningMap(userLocations: $viewModel.userLocations)
-                            .roundedCorners(45, corners: .bottomLeft)
+                            .roundedCorners(45, corners: .bottomRight)
                             .shadow(color: .whiteColor, radius: 1.5)
 
-                        courseInfo
+                        VStack(spacing: 0) {
+                            Text("\(viewModel.date)")
+                                .font(.date)
+                                .foregroundStyle(Color.white)
+                                .frame(maxWidth: .infinity, alignment: .center)
+                                .padding(.top, 64)
+                            
+                            courseInfo
+                        }
                             .background(
                                 LinearGradient(
                                     colors: gradientColors,
@@ -50,7 +58,7 @@ struct FinishRunningView: View {
                     .padding(.bottom, 16)
                     
                     Button(action: {
-                        homeTabViewModel.running = false
+                        runningManager.running = false
                     }, label: {
                         Text("나중에 자랑하기")
                             .underline(pattern: .solid)
@@ -59,14 +67,12 @@ struct FinishRunningView: View {
                     .padding(.bottom, 8)
                 }
             }
-            .navigationTitle("\(viewModel.date)")
-            .navigationBarTitleDisplayMode(.inline)
-            .preferredColorScheme(.dark)
         }
         .overlay {
             if viewModel.isShowPopup {
                 RunningPopup(text: "기록이 저장되었어요.")
-                    .frame(maxHeight: .infinity, alignment: .bottom)
+                    .frame(maxHeight: .infinity, alignment: .top)
+                    .transition(.move(edge: .top))
             }
         }
         .navigationDestination(isPresented: $viewModel.navigateToShareMainView) {
@@ -103,7 +109,7 @@ extension FinishRunningView {
             .font(.subBody)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(.top, 100)
+        .padding(.top, 24)
         .padding(.leading, 16)
     }
     
