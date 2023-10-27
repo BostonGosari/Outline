@@ -11,8 +11,11 @@ struct FreeRunningHomeView: View {
     
     @ObservedObject var homeTabViewModel: HomeTabViewModel
     @StateObject var runningManager = RunningManager.shared
+    @StateObject var locationManager = LocationManager()
+    @ObservedObject var healthKitManager = HealthKitManager()
+    @State var isPermissionSheetPresented: Bool = false
     @State var userLocation = ""
-    
+    @State var isUnlocked: Bool = false
     var body: some View {
         ZStack {
             FreeRunningMap(userLocation: $userLocation)
@@ -37,9 +40,21 @@ struct FreeRunningHomeView: View {
                            .font(.subBody)
                            
                            Spacer()
-                           SlideToUnlock(isUnlocked: $runningManager.start)
-                               .onChange(of: runningManager.start) { _, _ in
-                                   runningManager.startFreeRun()
+                           SlideToUnlock(isUnlocked: $isUnlocked)
+                               .onChange(of: isUnlocked) { _, _ in
+                                   if !locationManager.isAuthorized ||  !healthKitManager.isAuthorized {
+                                       isPermissionSheetPresented = true
+                                   } else {
+                                       runningManager.startFreeRun()
+                                       }
+                                   }
+                               }
+                               .padding(-10)
+                               .sheet(isPresented: $isPermissionSheetPresented) {
+                                   if !locationManager.isAuthorized {
+                                       PermissionSheetView(type: "location", ispresented: $isPermissionSheetPresented)
+                                   } else {
+                                       PermissionSheetView(type: "health", ispresented:  $isPermissionSheetPresented)
                                }
                        }
                        .padding(EdgeInsets(top: 58, leading: 24, bottom: 24, trailing: 16))

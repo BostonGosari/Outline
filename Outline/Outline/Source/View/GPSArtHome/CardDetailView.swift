@@ -13,6 +13,9 @@ struct CardDetailView: View {
     @State var start = false
     @ObservedObject var homeTabViewModel: HomeTabViewModel
     @StateObject var runningManager = RunningManager.shared
+    @StateObject var locationManager = LocationManager()
+    @ObservedObject var healthKitManager = HealthKitManager()
+    @State var isPermissionSheetPresented : Bool = false
     @Environment(\.dismiss) var dismiss
     
     @Binding var isShow: Bool
@@ -34,6 +37,7 @@ struct CardDetailView: View {
     // 커진 카드의 크기
     private let cardHeight: CGFloat = 575
     
+    @State var isUnlocked: Bool = false
     var body: some View {
         ScrollView {
             ZStack {
@@ -126,16 +130,27 @@ struct CardDetailView: View {
             .offset(y: appear[0] ? 0 : fadeInOffset)
             
             Spacer()
-            
-            SlideToUnlock(isUnlocked: $runningManager.start)
-                .onChange(of: runningManager.start) { _, _ in
-                    runningManager.startCourse = homeTabViewModel.recommendedCoures[currentIndex].course
-                    runningManager.startGPSArtRun()
-                    isShow = false
-                }
+            SlideToUnlock(isUnlocked: $isUnlocked)
+                .onChange(of: isUnlocked) { _, _ in
+                    if !locationManager.isAuthorized || !healthKitManager.isAuthorized {
+                        isPermissionSheetPresented = true
+                    } else {
+                        runningManager.startCourse = homeTabViewModel.recommendedCoures[currentIndex].course
+                        runningManager.startGPSArtRun()
+                        isShow = false
+                        }
+                    }
                 .opacity(appear[1] ? 1 : 0)
                 .offset(y: appear[1] ? 0 : fadeInOffset)
                 .padding(-10)
+            }
+            .padding(-10)
+            .sheet(isPresented: $isPermissionSheetPresented) {
+                if !locationManager.isAuthorized {
+                    PermissionSheetView(type: "location", ispresented: $isPermissionSheetPresented)
+                } else {
+                    PermissionSheetView(type: "health", ispresented:  $isPermissionSheetPresented)
+            }
         }
         .padding(40)
     }

@@ -218,10 +218,13 @@ struct CourseDetailView: View {
 }
 
 struct CourseBannerView: View {
-    
     @StateObject var runningManager = RunningManager.shared
+    @StateObject var locationManager = LocationManager()
+    @ObservedObject var healthKitManager = HealthKitManager()
+    @State var isPermissionSheetPresented: Bool = false
     @ObservedObject var homeTabViewModel: HomeTabViewModel
     @Environment(\.dismiss) var dismiss
+    @State var isUnlocked: Bool = false
     var course: CourseWithDistance
     
     var body: some View {
@@ -281,13 +284,25 @@ struct CourseBannerView: View {
             
             Spacer()
             
-            SlideToUnlock(isUnlocked: $runningManager.start)
-                .onChange(of: runningManager.start) { _, _ in
-                    runningManager.startCourse = course.course
-                    runningManager.startGPSArtRun()
-                    dismiss()
+            SlideToUnlock(isUnlocked: $isUnlocked)
+                .onChange(of: isUnlocked) { _, _ in
+                    if !locationManager.isAuthorized || !healthKitManager.isAuthorized {
+                        isPermissionSheetPresented = true
+                    } else {
+                            runningManager.start = true
+                            runningManager.startCourse = course.course
+                            runningManager.startGPSArtRun()
+                            dismiss()
+                        }
+                    }
                 }
                 .padding(-10)
+                .sheet(isPresented: $isPermissionSheetPresented) {
+                    if !locationManager.isAuthorized {
+                        PermissionSheetView(type: "location", ispresented: $isPermissionSheetPresented)
+                    } else {
+                        PermissionSheetView(type: "health", ispresented: $isPermissionSheetPresented)
+                }
         }
         .padding(40)
     }

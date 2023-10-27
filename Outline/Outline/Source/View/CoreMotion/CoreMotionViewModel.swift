@@ -31,6 +31,8 @@ class CoreMotionViewModel: ObservableObject {
     private var motionManager: CMMotionManager
     private var healthKitManager: HealthKitManager
     
+    @Published var isHealthKitAuthorizationDenied = false
+    
     init() {
         self.pedometer = CMPedometer()
         self.motionManager = CMMotionManager()
@@ -65,7 +67,7 @@ class CoreMotionViewModel: ObservableObject {
                 self.startPedometerDataUpdates()
                 healthKitManager.startWorkout()
             } else {
-                print("HealthKit authorization was denied.")
+                self.isHealthKitAuthorizationDenied = true
             }
         }
     }
