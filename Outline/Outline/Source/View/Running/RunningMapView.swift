@@ -9,9 +9,9 @@ import SwiftUI
 
 struct RunningMapView: View {
     @StateObject private var viewModel = RunningMapViewModel()
-    @StateObject var locationManager = LocationManager()
     @StateObject var runningManager = RunningManager.shared
     
+    @ObservedObject var locationManager: LocationManager
     @ObservedObject var runningViewModel: RunningViewModel
     @ObservedObject var digitalTimerViewModel: DigitalTimerViewModel
     @ObservedObject var homeTabViewModel: HomeTabViewModel
