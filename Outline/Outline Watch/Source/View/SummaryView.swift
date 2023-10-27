@@ -21,6 +21,8 @@ struct SummaryView: View {
         return formatter
     }()
     
+    var userLocations: [CLLocationCoordinate2D]
+    
     @Binding var navigate: Bool
     @State private var isShowingFinishView = true
     @Namespace var topID
@@ -39,10 +41,12 @@ struct SummaryView: View {
             ScrollViewReader { proxy in
                 ScrollView {
                     ConfettiWatchView()
-                    RoundedRectangle(cornerRadius: 20, style: .continuous)
-                        .stroke(lineWidth: 2)
+                    PathGenerateManager.shared.caculateLines(width: 80, height: 80, coordinates: userLocations)
+                        .stroke(style: StrokeStyle(lineWidth: 8, lineCap: .round, lineJoin: .round))
+                        .scaledToFit()
+                        .foregroundStyle(.first)
                         .frame(width: 120, height: 120)
-                        .padding()
+
                     Text("그림을 완성했어요!")
                         .padding(.bottom)
                     Text(NSNumber(value: workoutManager.builder?.elapsedTime ?? 0), formatter: timeFormatter)
@@ -132,8 +136,4 @@ private struct MetricsTimelineSchedule: TimelineSchedule {
             return baseSchedule.next()
         }
     }
-}
-
-#Preview {
-    SummaryView(navigate: .constant(true))
 }

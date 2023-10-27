@@ -9,8 +9,9 @@ import SwiftUI
 
 struct RunningMapView: View {
     @StateObject private var viewModel = RunningMapViewModel()
-    @StateObject var locationManager = LocationManager()
+    @StateObject var runningManager = RunningManager.shared
     
+    @ObservedObject var locationManager: LocationManager
     @ObservedObject var runningViewModel: RunningViewModel
     @ObservedObject var digitalTimerViewModel: DigitalTimerViewModel
     @ObservedObject var homeTabViewModel: HomeTabViewModel
@@ -21,31 +22,40 @@ struct RunningMapView: View {
     
     @State var navigateToFinishRunningView = false
     @State var showCustomSheet = false
+    @State var showBigGuid = false
     
     var body: some View {
-        ZStack {
-            if let course = homeTabViewModel.startCourse {
+        ZStack(alignment: .topTrailing) {
+            if let course = runningManager.startCourse {
                 RunningMap(
                     locationManager: locationManager,
                     viewModel: viewModel,
                     coordinates: convertToCLLocationCoordinates(course.coursePaths)
                 )
                 .ignoresSafeArea()
-            } else {
-                RunningMap(
-                    locationManager: locationManager,
-                    viewModel: viewModel,
-                    coordinates: []
-                )
-                .ignoresSafeArea()
-            }
-            
+            } 
+                
             VStack(spacing: 0) {
-                /*running Guid View*/
                 Spacer()
                 runningButtonView
                     .frame(maxWidth: .infinity)
                     .padding(.bottom, 80)
+            }
+            
+            if let course = runningManager.startCourse,
+               runningManager.runningType == .gpsArt {
+                CourseGuidView(
+                    userLocations: $locationManager.userLocations,
+                    showBigGuid: $showBigGuid,
+                    coursePathCoordinates: convertToCLLocationCoordinates(course.coursePaths),
+                    courseRotate: course.heading
+                )
+                    .onTapGesture {
+                        showBigGuid.toggle()
+                        // TODO: 햅틱 추가
+                    }
+                //                .animation(.easeInOut, value: showBigGuid)
+                    .animation(.openCard, value: showBigGuid)
             }
         }
         .sheet(isPresented: $showCustomSheet) {
@@ -60,6 +70,10 @@ struct RunningMapView: View {
         .onAppear {
             locationManager.requestLocation()
         }
+        .navigationDestination(isPresented: $navigateToFinishRunningView) {
+            FinishRunningView(homeTabViewModel: homeTabViewModel)
+                .navigationBarBackButtonHidden()
+        }
     }
 }
 
@@ -68,34 +82,32 @@ extension RunningMapView {
         switch viewModel.runningType {
         case .start:
             AnyView(
-                VStack {
-                    RunningStateButton(
-                        imageName: "aim",
-                        color: Color.whiteColor,
-                        size: 18
-                    ) {
+                VStack(spacing: 0) {
+                    Button {
+                        HapticManager.impact(style: .medium)
                         viewModel.isUserLocationCenter = true
+                    } label: {
+                        Image("aim")
+                            .imageButtonModifier(color: Color.white, size: 22, padding: 19)
                     }
                     .frame(maxWidth: .infinity, alignment: .trailing)
                     .padding(.trailing, 32)
+                    .padding(.bottom, 14)
                     
                     HStack {
-                        RunningStateButton(
-                            imageName: "pause.fill",
-                            color: .primaryColor,
-                            size: 24
-                        ) {
+                        Button {
+                            HapticManager.impact(style: .medium)
                             viewModel.runningType = .pause
                             runningViewModel.pauseRunning()
                             digitalTimerViewModel.stopTimer()
+                        } label: {
+                            Image(systemName: "pause.fill")
+                                .buttonModifier(color: Color.primaryColor, size: 29, padding: 29)
+                            
                         }
                         .padding(.trailing, 64)
                         
-                        RunningStateButton(
-                            imageName: "list.bullet.rectangle.portrait",
-                            color: .primaryColor,
-                            size: 19
-                        ) {
+                        Button {
                             withAnimation {
                                 if selection == 0 {
                                     selection = 1
@@ -103,63 +115,62 @@ extension RunningMapView {
                                     selection = 0
                                 }
                             }
+                        } label: {
+                            Image("Data")
+                                .imageButtonModifier(color: Color.primaryColor, size: 24, padding: 18)
                         }
                     }
                     .frame(maxWidth: .infinity, alignment: .trailing)
                     .padding(.horizontal, 32)
                 }
+                    .transition(.slide)
             )
         case .pause:
             AnyView(
-                HStack {
+                HStack(spacing: 0) {
                     Image(systemName: "stop.fill")
-                        .font(.system(size: 24))
-                        .foregroundStyle(Color.blackColor)
-                        .padding(24)
-                        .background(Circle().fill(Color.whiteColor))
-                        .scaleEffect(isLongPressed ? 1.5 : 1)
-                        .animation(.easeInOut(duration: 1), value: isLongPressed)
-                        .simultaneousGesture(
-                            LongPressGesture(minimumDuration: 2.0)
+                        .buttonModifier(color: Color.white, size: 24, padding: 26)
+                        .scaleEffect(isLongPressed ? 1.6 : 1)
+                        .animation(.easeInOut(duration: 0.5), value: isLongPressed)
+                        .gesture(
+                            LongPressGesture(minimumDuration: 2)
                                 .updating($isLongPressed) { currentState, gestureState, _ in
                                     gestureState = currentState
-                                }
-                                .onEnded { _ in
-                                    print("Long press ended")
                                     HapticManager.impact(style: .medium)
-                                    locationManager.stopUpdateLocation()
-                                    homeTabViewModel.userLocations = locationManager.userLocations
-                                    runningViewModel.stopRunning()
-                                    digitalTimerViewModel.counter = 0
-                                    showCustomSheet = true
+
+                                    if !isLongPressed {
+                                        DispatchQueue.main.async {
+                                            viewModel.isShowPopup = true
+                                        }
+                                    }
                                 }
-                        )
-                        .highPriorityGesture(
-                            TapGesture()
                                 .onEnded { _ in
-                                    print("Tap gesture")
-                                    viewModel.isShowPopup = true
+                                    HapticManager.impact(style: .heavy)
+                                    DispatchQueue.main.async {
+                                        locationManager.stopUpdateLocation()
+                                        homeTabViewModel.userLocations = locationManager.userLocations
+                                        runningViewModel.stopRunning()
+                                        digitalTimerViewModel.counter = 0
+                                        showCustomSheet = true
+                                    }
                                 }
                         )
-                        .navigationDestination(isPresented: $navigateToFinishRunningView) {
-                            FinishRunningView(homeTabViewModel: homeTabViewModel)
-                                .navigationBarBackButtonHidden()
-                        }
-                    
+            
                     Spacer()
                     
-                    RunningStateButton(
-                        imageName: "play.fill",
-                        color: .primaryColor,
-                        size: 24
-                    ) {
+                    Button {
+                        HapticManager.impact(style: .medium)
                         viewModel.runningType = .start
                         runningViewModel.resumeRunning()
                         digitalTimerViewModel.startTimer()
+                    } label: {
+                        Image(systemName: "play.fill")
+                            .buttonModifier(color: Color.primaryColor, size: 24, padding: 26)
                     }
                 }
-                    .frame(maxWidth: .infinity, alignment: .center)
-                    .padding(.horizontal, 64)
+                .frame(maxWidth: .infinity, alignment: .center)
+                .padding(.horizontal, 64)
+                .transition(.slide)
             )
         case .stop:
             AnyView(
@@ -194,39 +205,29 @@ extension RunningMapView {
     }
 }
 
-struct RunningStateButton: View {
-    let imageName: String
-    let color: Color
-    let size: CGFloat
-    let action: () -> Void
+extension Image {
+    func imageButtonModifier(color: Color, size: CGFloat, padding: CGFloat) -> some View {
+        self
+            .resizable()
+            .scaledToFit()
+            .frame(width: size)
+            .foregroundStyle(Color.blackColor)
+            .padding(padding)
+            .background(
+                Circle()
+                    .fill(color)
+            )
+    }
     
-    var body: some View {
-        Button {
-            self.action()
-        }  label: {
-            if imageName == "aim" {
-                Image("\(imageName)")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: size)
-                    .foregroundStyle(Color.blackColor)
-                    .padding(size)
-                    .background(
-                        Circle()
-                            .fill(color)
-                            .stroke(.white, style: .init())
-                    )
-            } else {
-                Image(systemName: imageName)
-                    .font(.system(size: size))
-                    .foregroundStyle(Color.blackColor)
-                    .padding(size)
-                    .background(
-                        Circle()
-                            .fill(color)
-                            .stroke(.white, style: .init())
-                    )
-            }
-        }
+    func buttonModifier(color: Color, size: CGFloat, padding: CGFloat) -> some View {
+        self
+            .font(.system(size: size))
+            .foregroundStyle(Color.blackColor)
+            .padding(padding)
+            .background(
+                Circle()
+                    .fill(color)
+                    .stroke(.white, style: .init())
+            )
     }
 }
