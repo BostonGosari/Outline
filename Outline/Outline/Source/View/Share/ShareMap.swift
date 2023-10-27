@@ -11,6 +11,7 @@ import SwiftUI
 struct ShareMap: UIViewRepresentable {
     
     @Binding var mapView: MKMapView
+    @Binding var mapViewRegion: MKCoordinateRegion
     let userLocations: [CLLocationCoordinate2D]
     
     func makeUIView(context: Context) -> MKMapView {
@@ -22,6 +23,7 @@ struct ShareMap: UIViewRepresentable {
         
         if !userLocations.isEmpty {
             let region = MKCoordinateRegion(polyline.boundingMapRect)
+            mapViewRegion = region
             mapView.setRegion(region, animated: true)
         }
         
