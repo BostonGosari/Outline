@@ -11,7 +11,9 @@ struct WatchTabView: View {
     @EnvironmentObject var workoutManager: WatchWorkoutManager
     @Environment(\.isLuminanceReduced) var isLuminanceReduced
     @State private var selection: Tab = .metrics
+    @Binding var userLocations: [CLLocationCoordinate2D]
     let startCourse: GPSArtCourse
+    private let locationManager = CLLocationManager()
     
     enum Tab {
         case controls, map, metrics
@@ -20,8 +22,12 @@ struct WatchTabView: View {
     var body: some View {
         TabView(selection: $selection) {
             ControlsView(startCourse: startCourse).tag(Tab.controls)
-            MapWatchView(course: convertToCLLocationCoordinates(startCourse.coursePaths)).tag(Tab.map)
+            MapWatchView(course: convertToCLLocationCoordinates(startCourse.coursePaths), userLocations: $userLocations).tag(Tab.map)
             MetricsView().tag(Tab.metrics)
+        }
+        .onAppear {
+            locationManager.requestWhenInUseAuthorization()
+            locationManager.startUpdatingLocation()
         }
         .navigationBarBackButtonHidden(true)
         .onChange(of: workoutManager.running) { _, _ in
@@ -44,4 +50,8 @@ struct WatchTabView: View {
             selection = .controls
         }
     }
+}
+
+func convertToCLLocationCoordinates(_ coordinates: [Coordinate]) -> [CLLocationCoordinate2D] {
+    return coordinates.map { CLLocationCoordinate2D(latitude: $0.latitude, longitude: $0.longitude) }
 }
