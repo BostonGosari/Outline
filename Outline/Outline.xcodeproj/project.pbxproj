@@ -1334,7 +1334,7 @@
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "당신의 러닝 데이터를 저장하기 위하여 사용됩니다. ";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "당신의 위치는 러닝을 기록하는데 사용됩니다. 운동 중에 백그라운드에서도 위치 서비스를 사용합니다.";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = hyun.outline;
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.hyunjun.outline;
 				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = NO;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1342,7 +1342,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				OTHER_LDFLAGS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = hyun.outline.watchkitapp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hyunjun.outline.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -1377,7 +1377,7 @@
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "당신의 러닝 데이터를 저장하기 위하여 사용됩니다. ";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "당신의 위치는 러닝을 기록하는데 사용됩니다. 운동 중에 백그라운드에서도 위치 서비스를 사용합니다.";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = hyun.outline;
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.hyunjun.outline;
 				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = NO;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1385,7 +1385,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				OTHER_LDFLAGS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = hyun.outline.watchkitapp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hyunjun.outline.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -1435,7 +1435,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				OTHER_LDFLAGS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = hyun.outline;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hyunjun.outline;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1481,7 +1481,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				OTHER_LDFLAGS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = hyun.outline;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hyunjun.outline;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SWIFT_EMIT_LOC_STRINGS = YES;
