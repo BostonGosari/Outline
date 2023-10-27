@@ -104,98 +104,165 @@ struct CourseDetailView: View {
     @ObservedObject var homeTabViewModel: HomeTabViewModel
     var course: CourseWithDistance
     @Environment(\.dismiss) var dismiss
+    @StateObject var runningManager = RunningManager.shared
+    
+    @State private var isUnlocked = false
+    @State private var showAlert = false
     
     var body: some View {
         ZStack {
             Color.gray900.ignoresSafeArea()
-            ScrollView {
-                CourseBannerView(homeTabViewModel: homeTabViewModel, course: course)
-                VStack(alignment: .leading, spacing: 24) {
-                    HStack {
-                        Text("#\(stringForCourseLevel(course.course.level))")
-                            .frame(width: 70, height: 23)
-                            .background {
-                                Capsule()
-                                    .stroke()
+            ZStack {
+                ScrollView {
+                    ZStack {
+                        VStack {
+                            CourseBannerView(isUnlocked: $isUnlocked, showAlert: $showAlert, homeTabViewModel: homeTabViewModel, course: course)
+                            VStack(alignment: .leading, spacing: 24) {
+                                HStack {
+                                    Text("#\(stringForCourseLevel(course.course.level))")
+                                        .frame(width: 70, height: 23)
+                                        .background {
+                                            Capsule()
+                                                .stroke()
+                                        }
+                                        .foregroundColor(.primaryColor)
+                                    Text("#\(course.course.courseLength, specifier: "%.0f")km")
+                                        .frame(width: 70, height: 23)
+                                        .background {
+                                            Capsule()
+                                                .stroke()
+                                        }
+                                    Text("#\(formatDuration(course.course.courseDuration))")
+                                        .frame(width: 70, height: 23)
+                                        .background {
+                                            Capsule()
+                                                .stroke()
+                                        }
+                                }
+                                .fontWeight(.semibold)
+                                .font(.caption)
+                                
+                                VStack(alignment: .leading, spacing: 8) {
+                                    Text("\(course.course.locationInfo.administrativeArea) \(course.course.locationInfo.locality) \(course.course.locationInfo.subLocality)")
+                                        .font(.title3)
+                                        .bold()
+                                    Text("--")
+                                        .foregroundStyle(.gray)
+                                }
+                                
+                                Divider()
+                                
+                                Text("경로 정보")
+                                    .font(.title3)
+                                    .bold()
+                                VStack(alignment: .leading, spacing: 17) {
+                                    HStack {
+                                        HStack {
+                                            Image(systemName: "location")
+                                            Text("거리")
+                                        }
+                                        .foregroundColor(.primaryColor)
+                                        Text("\(course.course.courseLength, specifier: "%.0f")km")
+                                    }
+                                    HStack {
+                                        HStack {
+                                            Image(systemName: "clock")
+                                            Text("예상 소요 시간")
+                                        }
+                                        .foregroundColor(.primaryColor)
+                                        Text("\(formatDuration(course.course.courseDuration))")
+                                    }
+                                    HStack {
+                                        HStack {
+                                            Image(systemName: "arrow.triangle.turn.up.right.diamond")
+                                            Text("골목길")
+                                        }
+                                        .foregroundColor(.primaryColor)
+                                        Text("\(stringForAlley(course.course.alley))")
+                                    }
+                                }
+                                .padding(.horizontal, 10)
+                                
+                                Divider()
+                                
+                                Text("경로 지도")
+                                    .font(.title3)
+                                    .bold()
+                                VStack(alignment: .leading) {
+                                    MapInfoView(coordinates: convertToCLLocationCoordinates(course.course.coursePaths))
+                                        .frame(height: 200)
+                                        .foregroundStyle(.thinMaterial)
+                                    Text("경로 제작 고사리님 @alsgiwc")
+                                        .foregroundStyle(.gray)
+                                }
                             }
-                            .foregroundColor(.primaryColor)
-                        Text("#\(course.course.courseLength, specifier: "%.0f")km")
-                            .frame(width: 70, height: 23)
-                            .background {
-                                Capsule()
-                                    .stroke()
-                            }
-                        Text("#\(formatDuration(course.course.courseDuration))")
-                            .frame(width: 70, height: 23)
-                            .background {
-                                Capsule()
-                                    .stroke()
-                            }
-                    }
-                    .fontWeight(.semibold)
-                    .font(.caption)
-                    
-                    VStack(alignment: .leading, spacing: 8) {
-                        Text("\(course.course.locationInfo.administrativeArea) \(course.course.locationInfo.locality) \(course.course.locationInfo.subLocality)")
-                            .font(.title3)
-                            .bold()
-                        Text("--")
-                            .foregroundStyle(.gray)
-                    }
-                    
-                    Divider()
-                    
-                    Text("경로 정보")
-                        .font(.title3)
-                        .bold()
-                    VStack(alignment: .leading, spacing: 17) {
-                        HStack {
-                            HStack {
-                                Image(systemName: "location")
-                                Text("거리")
-                            }
-                            .foregroundColor(.primaryColor)
-                            Text("\(course.course.courseLength, specifier: "%.0f")km")
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding(.vertical, 20)
+                            .padding(.horizontal)
+                            .padding(.bottom, 100)
                         }
-                        HStack {
-                            HStack {
-                                Image(systemName: "clock")
-                                Text("예상 소요 시간")
-                            }
-                            .foregroundColor(.primaryColor)
-                            Text("\(formatDuration(course.course.courseDuration))")
-                        }
-                        HStack {
-                            HStack {
-                                Image(systemName: "arrow.triangle.turn.up.right.diamond")
-                                Text("골목길")
-                            }
-                            .foregroundColor(.primaryColor)
-                            Text("\(stringForAlley(course.course.alley))")
-                        }
-                    }
-                    .padding(.horizontal, 10)
-                    
-                    Divider()
-                    
-                    Text("경로 지도")
-                        .font(.title3)
-                        .bold()
-                    VStack(alignment: .leading) {
-                        MapInfoView(coordinates: convertToCLLocationCoordinates(course.course.coursePaths))
-                        .frame(height: 200)
-                        .foregroundStyle(.thinMaterial)
-                        Text("경로 제작 고사리님 @alsgiwc")
-                            .foregroundStyle(.gray)
+                        closeButton
                     }
                 }
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.vertical, 20)
-                .padding(.horizontal)
-                .padding(.bottom, 100)
-            }
-            .overlay {
-                closeButton
+                ZStack {
+                    if showAlert {
+                        Color.black.opacity(0.5)
+                            .onTapGesture {
+                                withAnimation {
+                                    showAlert = false
+                                }
+                            }
+                    }
+                    VStack(spacing: 10) {
+                        Text("자유코스로 변경할까요?")
+                            .font(.title2)
+                        Text("앗! 현재 루트와 멀리 떨어져 있어요.")
+                            .font(.subBody)
+                            .foregroundColor(.gray300Color)
+                        Image("AnotherLocation")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 120)
+                        Button {
+                            showAlert = false
+                            dismiss()
+                            runningManager.start = true
+                            runningManager.startFreeRun()
+                        } label: {
+                            Text("자유코스로 변경하기")
+                                .font(.button)
+                                .foregroundStyle(Color.blackColor)
+                                .padding()
+                                .frame(maxWidth: .infinity)
+                                .background {
+                                    RoundedRectangle(cornerRadius: 15, style: .continuous)
+                                        .foregroundStyle(Color.primaryColor)
+                                }
+                        }
+                        .padding()
+                        Button {
+                            withAnimation {
+                                showAlert = false
+                                dismiss()
+                            }
+                        } label: {
+                            Text("홈으로 돌아가기")
+                                .font(.button)
+                                .bold()
+                                .foregroundStyle(Color.whiteColor)
+                        }
+                    }
+                    .frame(height: UIScreen.main.bounds.height / 2)
+                    .frame(maxWidth: .infinity)
+                    .background {
+                        RoundedRectangle(cornerRadius: 30, style: .continuous)
+                            .stroke(Color.primaryColor, lineWidth: 2)
+                        RoundedRectangle(cornerRadius: 30, style: .continuous)
+                            .foregroundStyle(Color.gray900Color)
+                    }
+                    .frame(maxHeight: .infinity, alignment: .bottom)
+                    .offset(y: showAlert ? 0 : UIScreen.main.bounds.height / 2 + 2)
+                }
             }
             .ignoresSafeArea()
         }
@@ -209,16 +276,20 @@ struct CourseDetailView: View {
             }
         } label: {
             Image(systemName: "xmark.circle.fill")
-                .font(.title)
+                .font(.system(size: 30))
                 .foregroundColor(.primaryColor)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
-        .padding(30)
+        .padding(20)
     }
 }
 
 struct CourseBannerView: View {
     
+    @Binding var isUnlocked: Bool
+    @Binding var showAlert: Bool
+    
+    private let locationManager = CLLocationManager()
     @StateObject var runningManager = RunningManager.shared
     @ObservedObject var homeTabViewModel: HomeTabViewModel
     @Environment(\.dismiss) var dismiss
@@ -260,32 +331,28 @@ struct CourseBannerView: View {
                 .font(.caption)
                 .fontWeight(.semibold)
                 .padding(.bottom, 16)
-                
-                HStack {
-                    Text("\(course.course.courseLength, specifier: "%.0f")km")
-                        .frame(width: 70, height: 23)
-                        .background {
-                            Capsule()
-                                .stroke()
-                        }
-                    Text("\(course.course.courseLength, specifier: "%.0f")km")
-                        .frame(width: 70, height: 23)
-                        .background {
-                            Capsule()
-                                .stroke()
-                        }
-                }
-                .font(.caption)
             }
             .padding(.top, 100)
             
             Spacer()
             
-            SlideToUnlock(isUnlocked: $runningManager.start)
-                .onChange(of: runningManager.start) { _, _ in
-                    runningManager.startCourse = course.course
-                    runningManager.startGPSArtRun()
-                    dismiss()
+            SlideToUnlock(isUnlocked: $isUnlocked)
+                .onChange(of: isUnlocked) { _, newValue in
+                    if newValue {
+                        let userLocation = locationManager.location?.coordinate
+                        let coursePaths = course.course.coursePaths
+                        if let userLocation = userLocation, runningManager.checkDistance(userLocation: userLocation, course: coursePaths) {
+                            runningManager.startCourse = course.course
+                            runningManager.startGPSArtRun()
+                            runningManager.start = true
+                            isUnlocked = false
+                        } else {
+                            isUnlocked = false
+                            withAnimation {
+                                showAlert = true
+                            }
+                        }
+                    }
                 }
                 .padding(-10)
         }
