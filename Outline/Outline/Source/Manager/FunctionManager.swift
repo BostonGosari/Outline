@@ -14,6 +14,19 @@ func formatDuration(_ durationInMinutes: Double) -> String {
     return String(format: "%dh%02dm", hours, minutes)
 }
 
+func formatMinuteSeconds(_ durationInMinutes: Double) -> String {
+    let minutes = Int(durationInMinutes) / 60
+    let seconds = Int(durationInMinutes) % 60
+    return String(format: "%d:%02d", minutes, seconds)
+}
+
+func formatHourMinuteSeconds(_ durationInMinutes: Double) -> String {
+    let hour = (Int(durationInMinutes) / 60) / 60
+    let minutes = (Int(durationInMinutes) / 60) % 60
+    let seconds = Int(durationInMinutes) % 60
+    return String(format: "%2d:%2d:%02d", minutes, seconds)
+}
+
 func stringForCourseLevel(_ level: CourseLevel) -> String {
     switch level {
     case .easy:
