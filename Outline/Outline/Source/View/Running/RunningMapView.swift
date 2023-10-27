@@ -33,8 +33,7 @@ struct RunningMapView: View {
                     coordinates: convertToCLLocationCoordinates(course.coursePaths)
                 )
                 .ignoresSafeArea()
-                .preferredColorScheme(.dark)
-            }
+            } 
                 
             VStack(spacing: 0) {
                 Spacer()

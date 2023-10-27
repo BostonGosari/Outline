@@ -13,16 +13,26 @@ struct RunningMap: UIViewRepresentable {
     @ObservedObject var locationManager: LocationManager
     @ObservedObject var viewModel: RunningMapViewModel
     
+    @State private var userMoveMap = false
+    
     private let mapView = MKMapView()
     var coordinates: [CLLocationCoordinate2D]
-    
+   
     func makeUIView(context: Context) -> MKMapView {
         mapView.delegate = context.coordinator
         mapView.showsUserLocation = true
-        
-        mapView.setUserTrackingMode(.followWithHeading, animated: true)
+
         mapView.isZoomEnabled = true
         mapView.showsCompass = false
+        mapView.setUserTrackingMode(.follow, animated: true)
+        
+        let tapGesture = UITapGestureRecognizer(target: context.coordinator, action: #selector(context.coordinator.handleTapGesture(_:)))
+        let panGesture = UIPanGestureRecognizer(target: context.coordinator, action: #selector(context.coordinator.handlePanGesture(_:)))
+        let longPressGesture = UILongPressGestureRecognizer(target: context.coordinator, action: #selector(context.coordinator.handleLongPressGesture(_:)))
+        
+        mapView.addGestureRecognizer(panGesture)
+        mapView.addGestureRecognizer(tapGesture)
+        mapView.addGestureRecognizer(longPressGesture)
         
         let polyline = MKPolyline(coordinates: coordinates, count: coordinates.count)
         mapView.addOverlay(polyline)
@@ -31,16 +41,13 @@ struct RunningMap: UIViewRepresentable {
     }
     
     func updateUIView(_ uiView: MKMapView, context: Context) {
-        /*일시 중지 상태에서는 위치는 추적하지만 라인 그리는 것은 멈춤*/
         if viewModel.runningType == .start {
             
-            /* 첫 번째 overlay인 kml 경로를 제외하고 마지막 overlay 삭제 */
             if uiView.overlays.count >= 2,
                let overlay = uiView.overlays.last {
                 uiView.removeOverlay(overlay)
             }
             
-            /* 사용자의 위치가 바꼈다면 polyline을 그림 */
             if !locationManager.userLocations.isEmpty {
                 let polyline = MKPolyline(
                     coordinates: locationManager.userLocations,
@@ -49,20 +56,13 @@ struct RunningMap: UIViewRepresentable {
                 uiView.addOverlay(polyline)
             }
         }
-        
-        /* 상위 View의 버튼이 클릭되면 현재 사용자 위치를 center로 위도, 경도 200미터 범위로 region을 변경 */
+       
         if viewModel.isUserLocationCenter {
-            let userLocation = uiView.userLocation
-
-            let region = MKCoordinateRegion(
-                center: userLocation.coordinate,
-                latitudinalMeters: 200,
-                longitudinalMeters: 200
-            )
-            uiView.setRegion(region, animated: true)
-            uiView.setUserTrackingMode(.followWithHeading, animated: true)
+            uiView.setUserTrackingMode(.follow, animated: true)
             uiView.isZoomEnabled = true
-            
+            DispatchQueue.main.async {
+                userMoveMap = false
+            }
             viewModel.isUserLocationCenter = false
         }
     }
@@ -82,10 +82,34 @@ struct RunningMap: UIViewRepresentable {
             if let polyline = overlay as? MKPolyline {
                 let renderer = MKPolylineRenderer(polyline: polyline)
                 renderer.strokeColor = (mapView.overlays.count == 1) ? .gray600 : .primary
-                renderer.lineWidth = 10
+                renderer.lineWidth = 7
                 return renderer
             }
             return MKOverlayRenderer(overlay: overlay)
+        }
+        
+        func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+            if !parent.userMoveMap {
+                mapView.setUserTrackingMode(.follow, animated: true)
+            }
+        }
+        
+        @objc func handleTapGesture(_ gesture: UITapGestureRecognizer) {
+            if gesture.state == .ended {
+                parent.userMoveMap = true
+            }
+        }
+        
+        @objc func handlePanGesture(_ gesture: UIPanGestureRecognizer) {
+            if gesture.state == .began {
+                parent.userMoveMap = true
+            }
+        }
+        
+        @objc func handleLongPressGesture(_ gesture: UILongPressGestureRecognizer) {
+            if gesture.state == .began {
+                parent.userMoveMap = true
+            }
         }
     }
 }

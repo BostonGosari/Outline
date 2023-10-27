@@ -57,10 +57,10 @@ final class LocationManager: NSObject, CLLocationManagerDelegate, ObservableObje
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let currentLocation = locations.last?.coordinate {
+            let distance: CLLocationDistance = 5
+            let  location = CLLocation(latitude: currentLocation.latitude, longitude: currentLocation.longitude)
             self.currentLocation = currentLocation
-            
-            let distance: CLLocationDistance = 10
-            let location = CLLocation(latitude: currentLocation.latitude, longitude: currentLocation.longitude)
+
             
             if userLocations.isEmpty {
                 startLocation = currentLocation
