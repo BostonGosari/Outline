@@ -23,11 +23,6 @@ class HomeTabViewModel: ObservableObject {
     @Published var withoutRecommendedCourses: [CourseWithDistance] = []
     @Published var currentLocation: CLLocationCoordinate2D?
     
-    @Published var startCourse: GPSArtCourse?
-    @Published var start = false
-    @Published var running = false
-    @Published var runningType: RunningType = .gpsArt
-    
     @Published var userLocations = [CLLocationCoordinate2D]()
 
     let courseModel = CourseModel()
@@ -75,9 +70,5 @@ class HomeTabViewModel: ObservableObject {
             self.recommendedCoures = self.courses.prefix(3).map { CourseWithDistance(course: $0, distance: 0) }
             self.withoutRecommendedCourses = Array(self.courses.dropFirst(3)).map { CourseWithDistance(course: $0, distance: 0) }
         }
-    }
-    
-    func start(course: GPSArtCourse) {
-        startCourse = course
     }
 }
