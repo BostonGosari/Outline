@@ -21,8 +21,11 @@ struct CustomShareView: View {
     // handle Image
     @Binding var renderedImage: UIImage?
     @State private var mapView = MKMapView()
+    @State private var mapViewRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 29, longitude: 136), span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
+    
     @State private var imageWidth: CGFloat = 0
     @State private var imageHeight: CGFloat = 0
+    
     
     private let pathManager = PathGenerateManager.shared
     
@@ -56,7 +59,7 @@ extension CustomShareView {
     }
     private func renderMapViewAsImage(width: Int, height: Int) {
         let options: MKMapSnapshotter.Options = .init()
-        options.region = mapView.region
+        options.region = mapViewRegion
         options.size = CGSize(width: width, height: height)
         options.mapType = .standard
         options.showsBuildings = true
@@ -80,7 +83,7 @@ extension CustomShareView {
                     Image(uiImage: renderdImage)
                         
                     pathManager.caculateLinesInRect(width: imageWidth, height: Double(imageWidth * 1920 / 1080), coordinates: viewModel.runningData.userLocations, region: mapView.region)
-                        .stroke(style: StrokeStyle(lineWidth: 15, lineCap: .round, lineJoin: .round))
+                        .stroke(style: StrokeStyle(lineWidth: 5, lineCap: .round, lineJoin: .round))
                 }
                 .overlay {
                     LinearGradient(colors: [.black.opacity(0), .black], startPoint: .center, endPoint: .bottom)
@@ -96,7 +99,7 @@ extension CustomShareView {
 extension CustomShareView {
     private var customImageView: some View {
         ZStack {
-            ShareMap(mapView: $mapView, userLocations: viewModel.runningData.userLocations)
+            ShareMap(mapView: $mapView, mapViewRegion: $mapViewRegion, userLocations: viewModel.runningData.userLocations)
                 .frame(width: imageWidth, height: imageHeight)
                 .overlay {
                     LinearGradient(colors: [.black.opacity(0), .black], startPoint: .center, endPoint: .bottom)
