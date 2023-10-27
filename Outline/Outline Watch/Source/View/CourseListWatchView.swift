@@ -7,9 +7,12 @@
 
 import SwiftUI
 import HealthKit
+import UIKit
 
 struct CourseListWatchView: View {
     @EnvironmentObject var workoutManager: WatchWorkoutManager
+    @StateObject var locationManager = LocationManager()
+
     var workoutTypes: [HKWorkoutActivityType] = [.running]
     @State private var countdownSeconds = 3 
     @State private var detailViewNavigate = false
@@ -25,21 +28,29 @@ struct CourseListWatchView: View {
             ScrollView {
                 VStack(spacing: -5) {
                     Button {
-                        workoutManager.selectedWorkout = workoutTypes[0]
-                        navigate.toggle()
+                        if workoutManager.isHealthKitAuthorized && locationManager.isAuthorized {
+                              workoutManager.selectedWorkout = workoutTypes[0]
+                              navigate.toggle()
+                          } else {
+                              if !workoutManager.isHealthKitAuthorized {
+                                  workoutManager.requestAuthorization()
+                              } else if !locationManager.isAuthorized {
+                                  locationManager.checkLocationAuthorizationStatus()
+                              }
+                          }
                     } label: {
-                           HStack {
-                               Image(systemName: "play.circle")
-                               Text("자유러닝")
-                                   .foregroundColor(.black)
-                           }
-                           .frame(height: 48)
-                           .frame(maxWidth: .infinity)
-                           .background(
-                               RoundedRectangle(cornerRadius: 12, style: .continuous)
-                                   .foregroundColor(.green)
-                           )
-                       }
+                        HStack {
+                            Image(systemName: "play.circle")
+                            Text("자유러닝")
+                                .foregroundColor(.black)
+                        }
+                        .frame(height: 48)
+                        .frame(maxWidth: .infinity)
+                        .background(
+                            RoundedRectangle(cornerRadius: 12, style: .continuous)
+                                .foregroundColor(.green)
+                        )
+                    }
                     .buttonStyle(.plain)
                     .navigationDestination(isPresented: $navigate, destination: {
                         countdownView()
@@ -47,6 +58,7 @@ struct CourseListWatchView: View {
                                 countdownSeconds = 3
                             }
                     })
+
 
                     .scrollTransition { content, phase in
                         content
@@ -61,9 +73,17 @@ struct CourseListWatchView: View {
                     
                     ForEach(watchConnectivityManager.allCourses, id: \.id) {course in
                         Button {
-                            print("button clicked")
-                            startCourse = course
-                            navigate = true
+                            if workoutManager.isHealthKitAuthorized && locationManager.isAuthorized {
+                                  workoutManager.selectedWorkout = workoutTypes[0]
+                                  startCourse = course
+                                  navigate.toggle()
+                              } else {
+                                  if !workoutManager.isHealthKitAuthorized {
+                                      workoutManager.requestAuthorization()
+                                  } else if !locationManager.isAuthorized {
+                                      locationManager.checkLocationAuthorizationStatus()
+                                  }
+                              }
                         } label: {
                             VStack {
                                 Text(course.courseName)
@@ -80,7 +100,7 @@ struct CourseListWatchView: View {
                                         .padding(.trailing, -4)
                                     }
                                 PathGenerateManager.shared.caculateLines(width: 75, height: 75, coordinates: convertToCLLocationCoordinates(course.coursePaths))
-                                    .stroke(lineWidth: 4)
+                                    .stroke(style: StrokeStyle(lineWidth: 4, lineCap: .round, lineJoin: .round))
                                     .scaledToFit()
                                     .frame(height: 75)
                                     .foregroundColor(.green)
