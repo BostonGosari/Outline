@@ -13,12 +13,15 @@ final class LocationManager: NSObject, CLLocationManagerDelegate, ObservableObje
     @Published var currentLocation: CLLocationCoordinate2D?
     @Published var isAuthorized = false
     @Published var isNext = false
+    @Published var nearStartLocation = false
+    @Published var isShowCompleteSheet = false
     
     @Published var checkDistance = true
     
     var startLocation: CLLocationCoordinate2D?
     
     private var locationManager = CLLocationManager()
+    private var firstLocation = CLLocation()
     
     override init() {
         super.init()
@@ -61,10 +64,10 @@ final class LocationManager: NSObject, CLLocationManagerDelegate, ObservableObje
             let  location = CLLocation(latitude: currentLocation.latitude, longitude: currentLocation.longitude)
             self.currentLocation = currentLocation
 
-            
             if userLocations.isEmpty {
                 startLocation = currentLocation
                 userLocations.append(currentLocation)
+                firstLocation = CLLocation(latitude: currentLocation.latitude, longitude: currentLocation.longitude)
             } else if let lastUserLocation = userLocations.last {
                 let lastLocation = CLLocation(latitude: lastUserLocation.latitude, longitude: lastUserLocation.longitude)
                 
@@ -81,12 +84,35 @@ final class LocationManager: NSObject, CLLocationManagerDelegate, ObservableObje
                         print(checkDistance)
                     }
                 }
+                
+                if checkAccuracy() >= 95.0 {
+                    let startToDistance = location.distance(from: firstLocation)
+                    if startToDistance <= 5 {
+                        isShowCompleteSheet = true
+                    } else if  startToDistance <= 30 {
+                        nearStartLocation = true
+                    } else {
+                        nearStartLocation = false
+                    }
+                }
                 #endif
             }
         }
     }
     
 #if os(iOS)
+    private func checkAccuracy() -> Double {
+        let runningManager = RunningManager.shared
+        
+        if let course = runningManager.startCourse?.coursePaths {
+            let guideCourse = convertToCLLocationCoordinates(course)
+            let progressManager = CourseProgressManager(guideCourse: guideCourse, userCourse: userLocations)
+            progressManager.calculate()
+            return progressManager.getProgress()
+        }
+        return 0
+    }
+    
     func openAppSetting() {
         if let url = URL(string: UIApplication.openSettingsURLString) {
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
