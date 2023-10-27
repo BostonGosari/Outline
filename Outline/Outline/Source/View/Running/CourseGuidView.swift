@@ -24,14 +24,6 @@ struct CourseGuidView: View {
         return showBigGuid ? 480 : 168
     }
     
-    let testCoordinates: [CLLocationCoordinate2D] = {
-        if let kmlFilePath = Bundle.main.path(forResource: "test", ofType: "kml") {
-            let kmlParser = KMLParserManager()
-            return kmlParser.parseKMLFile(atPath: kmlFilePath)
-        }
-        return []
-    }()
-    
     var body: some View {
         ZStack(alignment: showBigGuid ? .top : .topTrailing) {
             if showBigGuid {
@@ -73,8 +65,10 @@ extension CourseGuidView {
     }
     
     private var userPath: some View {
-        pathManager
-            .caculateLines(width: width, height: height, coordinates: userLocations)
+        let canvasData = pathManager.calculateCanvaData(coordinates: coursePathCoordinates, width: width, height: height)
+        
+        return pathManager
+            .caculateLines(width: width, height: height, coordinates: userLocations, canvasData: canvasData)
             .stroke(lineWidth: showBigGuid ? 15 : 7)
             .scaleEffect(0.8)
             .foregroundStyle(Color.primaryColor)
