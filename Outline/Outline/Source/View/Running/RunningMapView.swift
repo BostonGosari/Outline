@@ -23,6 +23,8 @@ struct RunningMapView: View {
     @State var navigateToFinishRunningView = false
     @State var showCustomSheet = false
     @State var showBigGuid = false
+    @State private var showCompleteSheet = false
+    @State private var moveToFinishView = false
     
     var body: some View {
         ZStack(alignment: .topTrailing) {
@@ -64,6 +66,17 @@ struct RunningMapView: View {
         .overlay {
             if viewModel.isShowPopup {
                 RunningPopup(text: viewModel.popupText)
+                    .frame(maxHeight: .infinity, alignment: .bottom)
+            }
+        }
+        .overlay {
+            if showCompleteSheet {
+                runningFinishSheet()
+            }
+        }
+        .overlay {
+            if locationManager.nearStartLocation {
+                RunningPopup(text: "도착 지점까지 30m 남았어요.")
                     .frame(maxHeight: .infinity, alignment: .bottom)
             }
         }
@@ -202,6 +215,51 @@ extension RunningMapView {
         .presentationDetents([.height(420)])
         .presentationCornerRadius(35)
         .interactiveDismissDisabled()
+    }
+    
+    @ViewBuilder
+    private func runningFinishSheet() -> some View {
+        ZStack {
+            RoundedRectangle(cornerRadius: 25)
+                .stroke(Color.primaryColor)
+                .fill(Color.black70Color)
+            
+            VStack(alignment: .center, spacing: 0) {
+                Text("그림을 완성했어요!")
+                    .font(.title2)
+                    .padding(.top, 73)
+                    .padding(.bottom, 20)
+                
+                Text("5m이내에 도착지점이 있어요")
+                    .font(.subBody)
+                    .foregroundStyle(Color.gray300Color)
+                
+                Text("러닝을 완료할까요?")
+                    .font(.subBody)
+                    .foregroundStyle(Color.gray300Color)
+                    .padding(.bottom, 41)
+                
+                CompleteButton(text: "완료하기", isActive: true) {
+                    moveToFinishView = true
+                }
+                .padding(.bottom, 24)
+                
+                Button {
+                    locationManager.isShowCompleteSheet = false
+                } label: {
+                    Text("조금 더 진행하기")
+                        .foregroundStyle(Color.white)
+                        .font(.button)
+                        .padding(.bottom, 37)
+                }
+            }
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
+        .padding(EdgeInsets(top: 422, leading: 8, bottom: 34, trailing: 8))
+        .navigationDestination(isPresented: $moveToFinishView) {
+            FinishRunningView(homeTabViewModel: homeTabViewModel)
+                .navigationBarBackButtonHidden()
+        }
     }
 }
 
