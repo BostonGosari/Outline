@@ -10,8 +10,11 @@ import MapKit
 final class LocationManager: NSObject, CLLocationManagerDelegate, ObservableObject {
     
     @Published var userLocations: [CLLocationCoordinate2D] = []
+    @Published var currentLocation: CLLocationCoordinate2D?
     @Published var isAuthorized = false
     @Published var isNext = false
+    
+    @Published var checkDistance = true
     
     var startLocation: CLLocationCoordinate2D?
     
@@ -54,6 +57,8 @@ final class LocationManager: NSObject, CLLocationManagerDelegate, ObservableObje
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let currentLocation = locations.last?.coordinate {
+            self.currentLocation = currentLocation
+            
             let distance: CLLocationDistance = 10
             let location = CLLocation(latitude: currentLocation.latitude, longitude: currentLocation.longitude)
             
@@ -63,18 +68,30 @@ final class LocationManager: NSObject, CLLocationManagerDelegate, ObservableObje
             } else if let lastUserLocation = userLocations.last {
                 let lastLocation = CLLocation(latitude: lastUserLocation.latitude, longitude: lastUserLocation.longitude)
                 
-                if  location.distance(from: lastLocation) >= distance {
+                if location.distance(from: lastLocation) >= distance {
                     userLocations.append(currentLocation)
                 }
+                
+                #if os(iOS)
+                if checkDistance == true {
+                    let runningManager = RunningManager.shared
+                    
+                    if let startCourse = runningManager.startCourse {
+                        self.checkDistance = runningManager.checkDistance(userLocation: lastUserLocation, course: startCourse.coursePaths)
+                        print(checkDistance)
+                    }
+                }
+                #endif
             }
         }
     }
     
-    #if os(iOS)
+#if os(iOS)
     func openAppSetting() {
         if let url = URL(string: UIApplication.openSettingsURLString) {
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
         }
     }
-    #endif
+#endif
+    
 }
