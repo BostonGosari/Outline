@@ -59,7 +59,6 @@ struct CourseListWatchView: View {
                             }
                     })
 
-
                     .scrollTransition { content, phase in
                         content
                             .scaleEffect(phase.isIdentity ? 1 : 0.8)
