@@ -42,14 +42,19 @@ struct LoginView: View {
                         InputNicknameView()
                     } label: {
                         HStack {
+                            
                             Spacer()
-                            Text("시작하기")
+                            Image("logoApple")
+                                .resizable()
+                                .frame(width: 24, height: 29)
+                                .scaledToFit()
+                                .padding(.trailing, 37)
+                            Text("애플아이디로 계속하기")
                                 .foregroundColor(.white)
-                                .frame(maxWidth: .infinity)
                                 .frame(height: 60)
                             Spacer()
                         }
-                        .background(.ultraThinMaterial.opacity(0.7))
+                        .background(.ultraThinMaterial.opacity(0.9))
                         .cornerRadius(60)
                         .overlay {
                             borderRectangle
