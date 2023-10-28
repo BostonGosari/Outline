@@ -12,7 +12,7 @@ struct WatchTabView: View {
     @Environment(\.isLuminanceReduced) var isLuminanceReduced
     @State private var selection: Tab = .metrics
     @Binding var userLocations: [CLLocationCoordinate2D]
-    let startCourse: GPSArtCourse
+    var startCourse: GPSArtCourse
     private let locationManager = CLLocationManager()
     
     enum Tab {
@@ -24,10 +24,6 @@ struct WatchTabView: View {
             ControlsView(startCourse: startCourse).tag(Tab.controls)
             MapWatchView(course: convertToCLLocationCoordinates(startCourse.coursePaths), userLocations: $userLocations).tag(Tab.map)
             MetricsView().tag(Tab.metrics)
-        }
-        .onAppear {
-            locationManager.requestWhenInUseAuthorization()
-            locationManager.startUpdatingLocation()
         }
         .navigationBarBackButtonHidden(true)
         .onChange(of: workoutManager.running) { _, _ in
