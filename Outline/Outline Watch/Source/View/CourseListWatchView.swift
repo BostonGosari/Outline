@@ -104,6 +104,7 @@ struct CourseListWatchView: View {
                         .buttonStyle(.plain)
                         .overlay(alignment: .topTrailing) {
                             Button {
+                                startCourse = course
                                 navigateDetailView.toggle()
                             } label: {
                                 VStack {
@@ -117,9 +118,6 @@ struct CourseListWatchView: View {
                             .foregroundStyle(.first)
                             .buttonStyle(.plain)
                             .padding(.trailing, -4)
-                            .navigationDestination(isPresented: $navigateDetailView) {
-                                DetailView(course: course)
-                            }
                         }
                         .scrollTransition { content, phase in
                             content
@@ -128,6 +126,9 @@ struct CourseListWatchView: View {
                         }
                     }
                 }
+            }
+            .navigationDestination(isPresented: $navigateDetailView) {
+                DetailView(course: startCourse)
             }
             .navigationDestination(isPresented: $navigate) {
                 countdownView()
