@@ -18,11 +18,11 @@ struct BottomScrollView: View {
             Text("이런 코스도 있어요.")
                 .font(Font.system(size: 20).weight(.semibold))
                 .foregroundColor(.white)
-            
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack {
+     
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack {
                     ForEach(homeTabViewModel.withoutRecommendedCourses, id: \.id) { currentCourse in
-                        VStack {
+                        ZStack {
                             Button {
                                 selectedCourse = currentCourse
                             } label: {
@@ -33,7 +33,7 @@ struct BottomScrollView: View {
                                 } placeholder: {
                                     Rectangle()
                                 }
-                                .frame(width: 164, height: 236)
+                            
                                 .overlay {
                                     LinearGradient(
                                         stops: [
@@ -41,50 +41,44 @@ struct BottomScrollView: View {
                                             Gradient.Stop(color: .black.opacity(0), location: 1.00)
                                         ],
                                         startPoint: UnitPoint(x: 0.5, y: 0.9),
-                                        endPoint: UnitPoint(x: 0.5, y: 0)
+                                        endPoint: UnitPoint(x: 0.5, y: 0.1)
                                     )
                                     
                                 }
-                                .overlay {
-                                    VStack(alignment: .leading) {
-                                        Spacer()
-                                        Text("\(currentCourse.course.courseName)")
-                                            .font(Font.system(size: 20).weight(.semibold))
-                                            .foregroundColor(.white)
-                                        HStack(spacing: 0) {
-                                            Image(systemName: "mappin")
-                                                .foregroundColor(.gray600)
-                                            Text("\(currentCourse.course.locationInfo.locality) \(currentCourse.course.locationInfo.subLocality)")
-                                                .foregroundColor(.gray600)
-                                        }
-                                        .font(.caption)
-                                        .padding(.bottom, 16)
-                                    }
-                                    .frame(width: 164)
-                                    .offset(x: -15)
-                                }
-                                .roundedCorners(5, corners: [.topLeft])
-                                .roundedCorners(30, corners: [.bottomLeft, .bottomRight, .topRight])
-                                .foregroundColor(.clear)
-                                .overlay(
-                                    CustomRoundedRectangle(
-                                        cornerRadiusTopLeft: 5,
-                                        cornerRadiusTopRight: 29,
-                                        cornerRadiusBottomLeft: 29,
-                                        cornerRadiusBottomRight: 29
-                                    )
-                                    .offset(x: 1, y: 1)
-                                    .frame(width: 166, height: 238)
-                                )
                             }
+                            VStack(alignment: .leading, spacing: 4) {
+                                Spacer()
+                                Text("\(currentCourse.course.courseName)")
+                                    .font(Font.system(size: 20).weight(.semibold))
+                                    .foregroundColor(.white)
+                                HStack(spacing: 0) {
+                                    Image(systemName: "mappin")
+                                        .foregroundColor(.gray600)
+                                    Text("\(currentCourse.course.locationInfo.locality) \(currentCourse.course.locationInfo.subLocality)")
+                                        .foregroundColor(.gray600)
+                                }
+                                .font(.caption)
+                                .padding(.bottom, 21)
+                            }
+                            .frame(width: 164, height: 235)
+                            .offset(x: -20)
                         }
+                        .frame(width: 164, height: 236)
+                        .roundedCorners(5, corners: [.topLeft])
+                        .roundedCorners(30, corners: [.topRight, .bottomLeft, .bottomRight])
                         .fullScreenCover(item: $selectedCourse) { course in
                             CourseDetailView(homeTabViewModel: homeTabViewModel, course: course)
                         }
+                        .frame(width: 164, height: 237)
+                        .shadow(color: .white, radius: 0.5, x: 0, y: -0.5)
+                        .shadow(color: .white, radius: 0.5, x: 0.5, y: 0)
+                        .shadow(color: .white, radius: 0.5, x: 0, y: 0.5)
+                        .shadow(color: .white, radius: 0.5, x: -0.5, y: 0)
                     }
                 }
+                .frame(height: 238)
             }
-            .padding(.top, 16)
+            .padding(.top, 10)
             .padding(.bottom, 106)
         }
         .padding(.top, 33)
