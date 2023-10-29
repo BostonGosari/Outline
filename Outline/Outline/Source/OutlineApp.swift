@@ -17,7 +17,7 @@ struct OutlineApp: App {
 
     init() {
         FirebaseApp.configure()
-        KakaoSDK.initSDK(appKey: "NATIVE_APP_KEY")
+        KakaoSDK.initSDK(appKey: "f5f877543f22328d2dfadcc5fdd05569")
     }
   
     var body: some Scene {

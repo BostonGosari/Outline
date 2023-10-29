@@ -10,7 +10,7 @@ import CryptoKit
 import FirebaseAuth
 import SwiftUI
 
-class AppleAuthCoordinator: NSObject {
+class AppleAuthModel: NSObject {
     
     var currentNonce: String?
     let window: UIWindow?
@@ -83,7 +83,7 @@ class AppleAuthCoordinator: NSObject {
     }
 }
 
-extension AppleAuthCoordinator: ASAuthorizationControllerDelegate {
+extension AppleAuthModel: ASAuthorizationControllerDelegate {
     // 로그인 진행 및 결과 handling
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
         
@@ -129,7 +129,7 @@ extension AppleAuthCoordinator: ASAuthorizationControllerDelegate {
     }
 }
 
-extension AppleAuthCoordinator: ASAuthorizationControllerPresentationContextProviding {
+extension AppleAuthModel: ASAuthorizationControllerPresentationContextProviding {
     public func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
         window!
     }
