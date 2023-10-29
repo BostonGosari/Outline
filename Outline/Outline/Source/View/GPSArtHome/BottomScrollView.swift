@@ -95,6 +95,8 @@ struct CourseDetailView: View {
     @ObservedObject var homeTabViewModel: HomeTabViewModel
     @Environment(\.dismiss) var dismiss
     @StateObject var runningManager = RunningManager.shared
+    
+    @State private var progress: Double = 0.0
     @State private var isUnlocked = false
     @State private var showAlert = false
     var course: CourseWithDistance
@@ -106,7 +108,7 @@ struct CourseDetailView: View {
                 ScrollView {
                     ZStack {
                         VStack {
-                            CourseBannerView(isUnlocked: $isUnlocked, showAlert: $showAlert, homeTabViewModel: homeTabViewModel, course: course)
+                            CourseBannerView(isUnlocked: $isUnlocked, showAlert: $showAlert, progress: $progress, homeTabViewModel: homeTabViewModel, course: course)
                             VStack(alignment: .leading, spacing: 24) {
                                 HStack {
                                     Text("#\(stringForCourseLevel(course.course.level))")
@@ -192,6 +194,8 @@ struct CourseDetailView: View {
                             .padding(.bottom, 100)
                         }
                         closeButton
+                        Color.black.opacity(progress * 0.8)
+                            .animation(.easeInOut, value: progress)
                     }
                 }
                 ZStack {
@@ -200,6 +204,7 @@ struct CourseDetailView: View {
                             .onTapGesture {
                                 withAnimation {
                                     showAlert = false
+                                    progress = 0.0
                                 }
                             }
                     }
@@ -278,7 +283,8 @@ struct CourseBannerView: View {
     
     @Binding var isUnlocked: Bool
     @Binding var showAlert: Bool
-    
+    @Binding var progress: Double
+
     private let locationManager = CLLocationManager()
     @StateObject var runningManager = RunningManager.shared
     @ObservedObject var homeTabViewModel: HomeTabViewModel
@@ -326,7 +332,7 @@ struct CourseBannerView: View {
             
             Spacer()
             
-            SlideToUnlock(isUnlocked: $isUnlocked)
+            SlideToUnlock(isUnlocked: $isUnlocked, progress: $progress)
                 .onChange(of: isUnlocked) { _, newValue in
                     if newValue {
                         let userLocation = locationManager.location?.coordinate
