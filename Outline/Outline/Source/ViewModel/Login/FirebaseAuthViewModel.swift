@@ -8,11 +8,17 @@
 import SwiftUI
 
 class FirebaseAuthViewModel: ObservableObject {
-    @Published private var appleLoginCoordinator: AppleAuthCoordinator?
+    @Published var appleAuthCoordinator: AppleAuthCoordinator?
+    @Published var kakaoAuthCoordinator: KakaoAuthCoordinator?
     
     func handleAppleLogin(window: UIWindow?) {
-        appleLoginCoordinator = AppleAuthCoordinator(window: window)
-        appleLoginCoordinator?.startAppleLogin()
+        appleAuthCoordinator = AppleAuthCoordinator(window: window)
+        appleAuthCoordinator?.startAppleLogin()
+    }
+    
+    func handleKaKaoSignUp(){
+        kakaoAuthCoordinator = KakaoAuthCoordinator()
+        kakaoAuthCoordinator?.kakaoAuthSignIn()
     }
 
 }

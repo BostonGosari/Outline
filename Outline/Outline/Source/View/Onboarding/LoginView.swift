@@ -63,6 +63,27 @@ struct LoginView: View {
                             borderRectangle
                         }
                     }
+                    Button {
+                        firebaseAuthViewModel.handleKaKaoSignUp()
+                    } label: {
+                        HStack {
+                            Spacer()
+                            Image("logoKakaotalk")
+                                .resizable()
+                                .frame(width: 24, height: 29)
+                                .scaledToFit()
+                                .padding(.trailing, 37)
+                            Text("카카오아이디로 계속하기")
+                                .foregroundColor(.white)
+                                .frame(height: 60)
+                            Spacer()
+                        }
+                        .background(.ultraThinMaterial.opacity(0.9))
+                        .cornerRadius(60)
+                        .overlay {
+                            borderRectangle
+                        }
+                    }
 
                     HStack {
                         Rectangle()
