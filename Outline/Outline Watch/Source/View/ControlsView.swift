@@ -21,7 +21,7 @@ struct ControlsView: View {
                 VStack {
                     Text("시티런")
                         .bold()
-                        .foregroundStyle(.green)
+                        .foregroundStyle(.first)
                         .padding()
                         .padding(.top, 5)
                         .padding(.leading, 20)
@@ -136,11 +136,10 @@ struct ControlsView: View {
                     .padding(.bottom, 20)
                     Spacer()
                 }
-                .navigationBarBackButtonHidden()
                 .overlay(alignment: .topLeading) {
                     Text("일시정지됨")
                         .bold()
-                        .foregroundStyle(.green)
+                        .foregroundStyle(.first)
                         .padding()
                         .padding(.top, 5)
                         .padding(.leading, 20)
@@ -151,6 +150,7 @@ struct ControlsView: View {
                         }
                         .ignoresSafeArea()
                 }
+                .toolbar(.hidden, for: .automatic)
             }
         }
         .overlay {

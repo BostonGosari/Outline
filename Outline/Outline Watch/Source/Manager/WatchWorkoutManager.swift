@@ -72,7 +72,7 @@ class WatchWorkoutManager: NSObject, ObservableObject {
             HKQuantityType(.heartRate),
             HKQuantityType(.activeEnergyBurned),
             HKQuantityType(.cyclingCadence),
-            HKQuantityType(.runningSpeed),
+            HKQuantityType(.runningSpeed)
         ]
 
         // The quantity types to read from the health store.
