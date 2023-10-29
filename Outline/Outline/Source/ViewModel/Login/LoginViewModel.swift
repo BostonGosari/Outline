@@ -24,6 +24,7 @@ class LoginViewModel: ObservableObject {
     }
     
     func signOut() {
+        authModel.handleSignOut()
     }
     
     func setLoginState() {
