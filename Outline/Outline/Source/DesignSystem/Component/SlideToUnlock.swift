@@ -10,6 +10,7 @@ import SwiftUI
 struct SlideToUnlock: View {
     
     @Binding var isUnlocked: Bool
+    @Binding var progress: Double
     
     private let maxWidth: CGFloat = 320
     private let minWidth: CGFloat = 70
@@ -19,7 +20,7 @@ struct SlideToUnlock: View {
     
     var body: some View {
         ZStack(alignment: .leading) {
-            backGround
+            background
             slideButton
         }
         .frame(width: 320, height: minWidth)
@@ -31,7 +32,7 @@ struct SlideToUnlock: View {
         Capsule()
             .fill(
                 LinearGradient(
-                    colors: [.primaryColor, .secondaryColor],
+                    colors: [width > 70 ? .primaryColor : .clear, .clear],
                     startPoint: .leading,
                     endPoint: .trailing
                 )
@@ -44,39 +45,44 @@ struct SlideToUnlock: View {
             .animation(.bouncy, value: width)
     }
     
-    var backGround: some View {
+    var background: some View {
         ZStack(alignment: .leading) {
             Capsule()
-                .foregroundStyle(.thinMaterial)
-            LinearGradient(
-                colors: [.secondaryColor, .white],
-                startPoint: .leading,
-                endPoint: .trailing
-            )
-            .mask(
-                Text("밀어서 시작하기")
-                    .font(.title3)
-                    .bold()
-            )
-            .frame(maxWidth: .infinity)
+                .foregroundStyle(.ultraThinMaterial.opacity(0.8))
+            Capsule()
+                .foregroundStyle(.white.opacity(0.1))
+            Capsule()
+                .stroke(LinearGradient(colors: [.gray500, .gray750], startPoint: .top, endPoint: .bottom), lineWidth: 0.5)
+            
+            Text("밀어서 그리기")
+                .font(.title3)
+                .bold()
+                .shimmer(color: .white20, highlight: .primaryColor)
+//                .foregroundStyle(
+//                    LinearGradient(
+//                        colors: [.primaryColor, .white, .white20],
+//                        startPoint: .leading,
+//                        endPoint: .trailing
+//                    )
+//                )
+                .frame(maxWidth: .infinity)
         }
     }
     
     var dragCircle: some View {
         ZStack {
             Circle()
-                .foregroundColor(.white)
+                .foregroundColor(.primaryColor)
             if isReached {
                 ProgressView()
-                    .tint(.secondaryColor)
-                    .controlSize(.large)
+                    .tint(.black)
             } else {
                 Image(systemName: "paintbrush.fill")
-                    .foregroundColor(.secondaryColor)
-                    .font(.title)
+                    .foregroundColor(.gray750)
+                    .font(.system(size: 20))
             }
         }
-        .scaleEffect(0.9)
+        .scaleEffect(0.85)
     }
     
     // MARK: - Drag Gesture
@@ -86,12 +92,16 @@ struct SlideToUnlock: View {
             .onChanged { value in
                 if value.translation.width >= 0 {
                     width = min(max(value.translation.width + minWidth, minWidth), maxWidth)
+                    
+                    let range = maxWidth - minWidth
+                    progress = Double(width - minWidth) / Double(range)
                 }
             }
             .onEnded { _ in
                 guard !isUnlocked else { return }
                 if width < maxWidth {
                     width = minWidth
+                    progress = 0
                 } else {
                     withAnimation {
                         isReached = true
@@ -107,5 +117,5 @@ struct SlideToUnlock: View {
 }
 
 #Preview {
-    SlideToUnlock(isUnlocked: .constant(false))
+    SlideToUnlock(isUnlocked: .constant(false), progress: .constant(0.0))
 }
