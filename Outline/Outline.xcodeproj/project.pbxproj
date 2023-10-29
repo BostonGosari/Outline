@@ -94,6 +94,9 @@
 		954CB2BA2AE654BA005EB2E9 /* OnboardingNotificationAuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954CB2B92AE654BA005EB2E9 /* OnboardingNotificationAuthView.swift */; };
 		954FFF782AE132D100D27537 /* CourseDataUploadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954FFF772AE132D100D27537 /* CourseDataUploadManager.swift */; };
 		954FFF7B2AE136CA00D27537 /* CourseDataUploadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954FFF7A2AE136CA00D27537 /* CourseDataUploadView.swift */; };
+		959BB20E2AEE380200B5B10B /* KakaoSDKAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 959BB20D2AEE380200B5B10B /* KakaoSDKAuth */; };
+		959BB2102AEE380200B5B10B /* KakaoSDKCommon in Frameworks */ = {isa = PBXBuildFile; productRef = 959BB20F2AEE380200B5B10B /* KakaoSDKCommon */; };
+		959BB2122AEE380200B5B10B /* KakaoSDKUser in Frameworks */ = {isa = PBXBuildFile; productRef = 959BB2112AEE380200B5B10B /* KakaoSDKUser */; };
 		959D90262ADA35F100748BFB /* DataTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959D90252ADA35F100748BFB /* DataTestView.swift */; };
 		95B8F45A2AED27C400D9F35B /* FirebaseAuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B8F4592AED27C400D9F35B /* FirebaseAuthViewModel.swift */; };
 		95B8F45C2AED35E100D9F35B /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 95B8F45B2AED35E100D9F35B /* FirebaseAuth */; };
@@ -365,10 +368,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				954CB2922AE5131B005EB2E9 /* FirebaseFirestore in Frameworks */,
+				959BB2102AEE380200B5B10B /* KakaoSDKCommon in Frameworks */,
 				954CB2942AE5131B005EB2E9 /* FirebaseFirestoreCombine-Community in Frameworks */,
 				954CB2962AE5131B005EB2E9 /* FirebaseFirestoreSwift in Frameworks */,
+				959BB2122AEE380200B5B10B /* KakaoSDKUser in Frameworks */,
 				95B8F45C2AED35E100D9F35B /* FirebaseAuth in Frameworks */,
 				95B8F45E2AED35E100D9F35B /* FirebaseAuthCombine-Community in Frameworks */,
+				959BB20E2AEE380200B5B10B /* KakaoSDKAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -922,6 +928,9 @@
 				954CB2952AE5131B005EB2E9 /* FirebaseFirestoreSwift */,
 				95B8F45B2AED35E100D9F35B /* FirebaseAuth */,
 				95B8F45D2AED35E100D9F35B /* FirebaseAuthCombine-Community */,
+				959BB20D2AEE380200B5B10B /* KakaoSDKAuth */,
+				959BB20F2AEE380200B5B10B /* KakaoSDKCommon */,
+				959BB2112AEE380200B5B10B /* KakaoSDKUser */,
 			);
 			productName = Outline;
 			productReference = 297B80F92AE73C4500AF7219 /* Outline.app */;
@@ -974,6 +983,7 @@
 			mainGroup = F0AC8A902AD94C1F0061612C;
 			packageReferences = (
 				954CB2902AE5131B005EB2E9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				959BB20C2AEE380200B5B10B /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */,
 			);
 			productRefGroup = F0AC8A902AD94C1F0061612C;
 			projectDirPath = "";
@@ -1552,6 +1562,14 @@
 				minimumVersion = 10.16.0;
 			};
 		};
+		959BB20C2AEE380200B5B10B /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kakao/kakao-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.18.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1569,6 +1587,21 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 954CB2902AE5131B005EB2E9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestoreSwift;
+		};
+		959BB20D2AEE380200B5B10B /* KakaoSDKAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 959BB20C2AEE380200B5B10B /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
+			productName = KakaoSDKAuth;
+		};
+		959BB20F2AEE380200B5B10B /* KakaoSDKCommon */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 959BB20C2AEE380200B5B10B /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
+			productName = KakaoSDKCommon;
+		};
+		959BB2112AEE380200B5B10B /* KakaoSDKUser */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 959BB20C2AEE380200B5B10B /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
+			productName = KakaoSDKUser;
 		};
 		95B8F45B2AED35E100D9F35B /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
