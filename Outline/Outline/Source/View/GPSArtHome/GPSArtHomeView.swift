@@ -37,8 +37,7 @@ struct GPSArtHomeView: View {
                     }
                 Header(scrollOffset: scrollOffset)
                     .padding(.bottom)
-                
-                VStack(spacing: 16) {
+                VStack {
                     Carousel(pageCount: pageCount, edgeSpace: edgeSpace, spacing: spacing, currentIndex: $currentIndex) { pageIndex in
                         if !isShow {
                             CardView(homeTabViewModel: homeTabViewModel, isShow: $isShow, currentIndex: $currentIndex, namespace: namespace, pageIndex: pageIndex)
@@ -51,7 +50,7 @@ struct GPSArtHomeView: View {
                         }
                     }
                     .frame(height: carouselFrameHeight)
-                    
+                    .padding(.bottom, 16)
                     HStack {
                         ForEach(0..<pageCount, id: \.self) { pageIndex in
                             Rectangle()
@@ -80,6 +79,9 @@ struct GPSArtHomeView: View {
                     .ignoresSafeArea()
             }
         }
+        .background(
+            BackgroundBlur(color: Color.thirdColor, padding: 0)
+        )
         .background(
             BackgroundBlur(color: Color.primaryColor, padding: 500)
         )

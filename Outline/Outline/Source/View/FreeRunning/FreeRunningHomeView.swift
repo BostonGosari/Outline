@@ -15,9 +15,27 @@ struct FreeRunningHomeView: View {
     @State private var progress: Double = 0.0
     
     var body: some View {
-        ZStack {
+        ZStack(alignment: .top) {
             FreeRunningMap(userLocation: $userLocation)
                 .ignoresSafeArea()
+            
+            Rectangle()
+                .foregroundColor(.clear)
+                .frame(maxWidth: .infinity, maxHeight: 358)
+                .background(
+                    LinearGradient(
+                        stops: [
+                            Gradient.Stop(color: Color(red: 0.02, green: 0.01, blue: 0.15).opacity(0.4), location: 0.00),
+                            Gradient.Stop(color: Color(red: 0.09, green: 0.07, blue: 0.39).opacity(0), location: 1.00)
+                        ],
+                        startPoint: UnitPoint(x: 0.5, y: 0),
+                        endPoint: UnitPoint(x: 0.5, y: 1)
+                    )
+                )
+            Rectangle()
+                .foregroundColor(.clear)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .background(.black.opacity(0.6))
             
             VStack(spacing: 0) {
                 Header(scrollOffset: 20)
@@ -27,7 +45,7 @@ struct FreeRunningHomeView: View {
                 cardView
                    .overlay {
                        VStack(alignment: .leading) {
-                           Text("자유 코스")
+                           Text("자유코스")
                                .font(.headline)
                                .padding(.bottom, 8)
                            
