@@ -94,6 +94,7 @@ struct CardDetailView: View {
                         .onTapGesture {
                             withAnimation {
                                 showAlert = false
+                                progress = 0.0
                             }
                         }
                 }
