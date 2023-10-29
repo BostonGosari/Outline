@@ -52,7 +52,7 @@ class AppleAuthCoordinator: NSObject{
     // Firebase 제공 코드
     private func randomNonceString(length: Int = 32) -> String {
         precondition(length > 0)
-        let charset: Array<Character> =
+        let charset: [Character] =
                 Array("0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._")
         var result = ""
         var remainingLength = length
@@ -107,16 +107,24 @@ extension AppleAuthCoordinator: ASAuthorizationControllerDelegate {
               idToken: idTokenString,
               rawNonce: nonce)
 
+            print(credential)
+            
             //Firebase 작업
             Auth.auth().signIn(with: credential) { (authResult, error) in
-                if (error != nil) {
+                if let error = error {
                     // Error. If error.code == .MissingOrInvalidNonce, make sure
                     // you're sending the SHA256-hashed nonce as a hex string with
                     // your request to Apple.
+                    print(error)
                     return
                 }
                 // User is signed in to Firebase with Apple.
-                // ...
+                // authResult?.user.uid을 key 값으로 데이터 저장
+                if let userId = authResult?.user.uid {
+                    // handle userId
+                } else {
+                    // login failed
+                }
             }
         }
     }
@@ -127,7 +135,6 @@ extension AppleAuthCoordinator: ASAuthorizationControllerPresentationContextProv
         window!
     }
 }
-
 
 struct WindowKey: EnvironmentKey {
   struct Value {
@@ -147,4 +154,3 @@ extension EnvironmentValues {
     }
   }
 }
-
