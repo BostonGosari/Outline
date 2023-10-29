@@ -58,13 +58,6 @@ struct SlideToUnlock: View {
                 .font(.title3)
                 .bold()
                 .shimmer(color: .white20, highlight: .primaryColor)
-//                .foregroundStyle(
-//                    LinearGradient(
-//                        colors: [.primaryColor, .white, .white20],
-//                        startPoint: .leading,
-//                        endPoint: .trailing
-//                    )
-//                )
                 .frame(maxWidth: .infinity)
         }
     }

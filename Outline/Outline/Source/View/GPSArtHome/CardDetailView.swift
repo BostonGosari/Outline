@@ -71,11 +71,6 @@ struct CardDetailView: View {
                     Color.black
                         .opacity(progress * 0.8)
                         .animation(.easeInOut, value: progress)
-                    
-//                    Circle()
-//                        .trim(from: 0.0, to: progress)
-//                        .foregroundStyle(Color.primaryColor)
-//                        .animation(.easeInOut, value: progress)
                 }
                 .onChange(of: isShow) { _, _ in
                     fadeOut()
@@ -189,8 +184,6 @@ struct CardDetailView: View {
             .offset(y: appear[0] ? 0 : fadeInOffset)
             
             Spacer()
-            
-//            slideToUnlock
         }
         .padding(40)
     }
