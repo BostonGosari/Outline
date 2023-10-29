@@ -23,8 +23,9 @@ struct MapWatchView: View {
             Map(position: $position, interactionModes: .zoom) {
                 UserAnnotation(anchor: .center) { userlocation in
                     ZStack {
-                        Circle().foregroundStyle(.white).frame(width: 24)
-                        Circle().foregroundStyle(.green).frame(width: 18)
+                        Circle().foregroundStyle(.white).frame(width: 22)
+                        Circle().foregroundStyle(.first).frame(width: 17)
+                        Circle().foregroundStyle(.black).frame(width: 15)
                     }
                     .onChange(of: userlocation.location) { _, userlocation in
                         if let user = userlocation {
@@ -35,14 +36,14 @@ struct MapWatchView: View {
                 MapPolyline(coordinates: course)
                     .stroke(.gray.opacity(0.5), lineWidth: 8)
                 MapPolyline(coordinates: userLocations)
-                    .stroke(.green, lineWidth: 8)
+                    .stroke(.first, lineWidth: 8)
             }
             .mapControlVisibility(.hidden)
-            .tint(.green)
+            .tint(.first)
             .overlay(alignment: .topLeading) {
                 Text("시티런")
                     .bold()
-                    .foregroundStyle(.green)
+                    .foregroundStyle(.first)
                     .padding()
                     .padding(.top, 5)
                     .padding(.leading, 20)

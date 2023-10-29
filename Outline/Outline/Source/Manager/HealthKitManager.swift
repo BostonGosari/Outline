@@ -35,6 +35,7 @@ class HealthKitManager: ObservableObject {
             HKQuantityType(.activeEnergyBurned),
             HKQuantityType(.distanceWalkingRunning),
             HKQuantityType(.stepCount),
+            HKQuantityType(.cyclingCadence),
             HKQuantityType(.runningSpeed),
             HKQuantityType.workoutType()
         ]

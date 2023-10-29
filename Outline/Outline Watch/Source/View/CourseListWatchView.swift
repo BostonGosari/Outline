@@ -11,11 +11,11 @@ import UIKit
 
 struct CourseListWatchView: View {
     @EnvironmentObject var workoutManager: WatchWorkoutManager
-    @StateObject var locationManager = LocationManager()
+    @EnvironmentObject var locationManager: LocationManager
 
     var workoutTypes: [HKWorkoutActivityType] = [.running]
     @State private var countdownSeconds = 3 
-    @State private var detailViewNavigate = false
+    @State private var navigateDetailView = false
     @Binding var userLocations: [CLLocationCoordinate2D]
     @Binding var navigate: Bool
     
@@ -37,29 +37,22 @@ struct CourseListWatchView: View {
                               } else if !locationManager.isAuthorized {
                                   locationManager.checkLocationAuthorizationStatus()
                               }
+                              print("error")
                           }
                     } label: {
                         HStack {
                             Image(systemName: "play.circle")
                             Text("자유러닝")
-                                .foregroundColor(.black)
                         }
+                        .foregroundColor(.black)
                         .frame(height: 48)
                         .frame(maxWidth: .infinity)
                         .background(
                             RoundedRectangle(cornerRadius: 12, style: .continuous)
-                                .foregroundColor(.green)
+                                .foregroundStyle(.first)
                         )
                     }
                     .buttonStyle(.plain)
-                    .navigationDestination(isPresented: $navigate, destination: {
-                        countdownView()
-                            .onAppear {
-                                countdownSeconds = 3
-                            }
-                    })
-
-
                     .scrollTransition { content, phase in
                         content
                             .scaleEffect(phase.isIdentity ? 1 : 0.8)
@@ -68,7 +61,11 @@ struct CourseListWatchView: View {
                     .padding(.bottom, 8)
                     
                     if watchConnectivityManager.allCourses.isEmpty {
-                        Text("경로를 받으시려면 Outline 앱을 켜주세요")
+                        Text("OUTLINE iPhone을\n실행해서 경로를 제공받으세요.")
+                            .multilineTextAlignment(.center)
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                            .padding(.top, 32)
                     }
                     
                     ForEach(watchConnectivityManager.allCourses, id: \.id) {course in
@@ -83,27 +80,18 @@ struct CourseListWatchView: View {
                                   } else if !locationManager.isAuthorized {
                                       locationManager.checkLocationAuthorizationStatus()
                                   }
+                                  print("error")
                               }
                         } label: {
                             VStack {
                                 Text(course.courseName)
                                     .padding(.leading, 4)
                                     .frame(maxWidth: .infinity, alignment: .leading)
-                                    .overlay(alignment: .trailing) {
-                                        NavigationLink(value: course) {
-                                            Image(systemName: "ellipsis")
-                                                .font(.system(size: 24))
-                                                .contentShape(Rectangle())
-                                                .padding(20)
-                                        }
-                                        .buttonStyle(.plain)
-                                        .padding(.trailing, -4)
-                                    }
                                 PathGenerateManager.shared.caculateLines(width: 75, height: 75, coordinates: convertToCLLocationCoordinates(course.coursePaths))
                                     .stroke(style: StrokeStyle(lineWidth: 4, lineCap: .round, lineJoin: .round))
                                     .scaledToFit()
                                     .frame(height: 75)
-                                    .foregroundColor(.green)
+                                    .foregroundStyle(.first)
                             }
                             .padding(.vertical, 16)
                             .padding(.horizontal, 8)
@@ -114,6 +102,23 @@ struct CourseListWatchView: View {
                             }
                         }
                         .buttonStyle(.plain)
+                        .overlay(alignment: .topTrailing) {
+                            Button {
+                                startCourse = course
+                                navigateDetailView.toggle()
+                            } label: {
+                                VStack {
+                                    Image(systemName: "ellipsis")
+                                        .font(.system(size: 24))
+                                        .padding(20)
+                                    Spacer()
+                                }
+                                .contentShape(Rectangle())
+                            }
+                            .foregroundStyle(.first)
+                            .buttonStyle(.plain)
+                            .padding(.trailing, -4)
+                        }
                         .scrollTransition { content, phase in
                             content
                                 .scaleEffect(phase.isIdentity ? 1 : 0.8)
@@ -122,13 +127,16 @@ struct CourseListWatchView: View {
                     }
                 }
             }
+            .navigationDestination(isPresented: $navigateDetailView) {
+                DetailView(course: startCourse)
+            }
+            .navigationDestination(isPresented: $navigate) {
+                countdownView()
+                    .onAppear {
+                        countdownSeconds = 3
+                    }
+            }
             .navigationTitle("러닝")
-            .navigationDestination(for: GPSArtCourse.self) { course in
-                DetailView(course: course)
-            }
-            .onAppear {
-                workoutManager.requestAuthorization()
-            }
         }
     }
     private func countdownView() -> some View {
@@ -182,14 +190,14 @@ struct DetailView: View {
         }
         .navigationTitle {
             Text(course.courseName)
-                .foregroundStyle(.green)
+                .foregroundStyle(.first)
         }
     }
     
     @ViewBuilder private func listBox(systemName: String, location: Placemark) -> some View {
         HStack {
             Image(systemName: systemName)
-                .foregroundStyle(.green)
+                .foregroundStyle(.first)
                 .padding(.horizontal, 5)
             Text("\(location.administrativeArea) \(location.locality) \(location.subLocality)")
         }
@@ -198,7 +206,7 @@ struct DetailView: View {
     @ViewBuilder private func listBox(systemName: String, context: String) -> some View {
         HStack {
             Image(systemName: systemName)
-                .foregroundStyle(.green)
+                .foregroundStyle(.first)
                 .padding(.horizontal, 5)
             Text(context)
         }
@@ -207,7 +215,7 @@ struct DetailView: View {
     @ViewBuilder private func listBox(systemName: String, alley: Alley) -> some View {
         HStack {
             Image(systemName: systemName)
-                .foregroundStyle(.green)
+                .foregroundStyle(.first)
                 .padding(.horizontal, 5)
             switch alley {
             case .few:
