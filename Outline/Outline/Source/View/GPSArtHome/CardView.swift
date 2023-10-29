@@ -30,11 +30,12 @@ struct CardView: View {
                     }
                 }
             }
-            .overlay(alignment: .bottomLeading) {
+            .overlay(alignment: .bottom) {
                 courseInformation
                     .opacity(currentIndex == pageIndex && !isShow ? 1 : 0)
                     .offset(y: currentIndex == pageIndex && !isShow ? 0 : 10)
                     .animation(.easeInOut(duration: 0.7), value: currentIndex == pageIndex)
+                   
             }
     }
     
@@ -78,35 +79,57 @@ struct CardView: View {
                     .font(.largeTitle)
                     .bold()
                     .padding(.bottom, 8)
+                    .padding(.top, 47)
+                    .offset(x: -20) // corner radius가 들어간 도형 안에 컨텐츠를 넣게 되면, 자동으로 왼쪽에 padding이 그만큼 들어가기 때문에, offset을 이용하여 왼쪽으로 이동시켜주는 것이 필요합니다.
                 HStack {
                     Image(systemName: "mappin")
                     Text("\(homeTabViewModel.recommendedCoures[pageIndex].course.locationInfo.locality) \(homeTabViewModel.recommendedCoures[pageIndex].course.locationInfo.subLocality) • 내 위치에서 \(homeTabViewModel.recommendedCoures[pageIndex].distance/1000, specifier: "%.1f")km")
                 }
                 .font(.caption)
                 .padding(.bottom, 16)
-                
+                .offset(x: -20)
                 HStack {
-                    Text("#\(homeTabViewModel.recommendedCoures[pageIndex].course.courseLength, specifier: "%.0f")km")
+                    Text("#\(homeTabViewModel.recommendedCoures[currentIndex].course.courseLength, specifier: "%.0f")km")
+                        .font(.tag2)
+                        .foregroundColor(Color.primaryColor)
                         .frame(width: 70, height: 23)
                         .background {
                             Capsule()
                                 .stroke()
-                                .foregroundStyle(Color.primaryColor)
+                                .foregroundColor(Color.primaryColor)
                         }
-                        .foregroundStyle(Color.primaryColor)
-                    Text("#\(formatDuration(homeTabViewModel.recommendedCoures[pageIndex].course.courseDuration))")
+                    Text("#\(formatDuration(homeTabViewModel.recommendedCoures[currentIndex].course.courseDuration))")
                         .frame(width: 70, height: 23)
+                        .font(.tag2)
                         .background {
                             Capsule()
                                 .stroke()
                         }
                 }
-                .font(.caption)
+                .padding(.bottom, 36)
+                .offset(x: -20)
             }
+            
         }
-        .padding(.horizontal, 17)
-        .padding(.bottom, 36)
+        .background {
+            Rectangle()
+                .foregroundColor(.clear)
+                .frame(width: 318, height: 187)
+                .background(
+                    LinearGradient(
+                        stops: [
+                            Gradient.Stop(color: .black.opacity(0), location: 0.00),
+                            Gradient.Stop(color: .black.opacity(0.7), location: 0.33),
+                            Gradient.Stop(color: .black.opacity(0.8), location: 1.00)
+                        ],
+                        startPoint: UnitPoint(x: 0.5, y: 0),
+                        endPoint: UnitPoint(x: 0.5, y: 1)
+                    )
+                )
+                .roundedCorners(45, corners: [.bottomLeft, .bottomRight])
+        }
     }
+    
 }
 
 #Preview {
