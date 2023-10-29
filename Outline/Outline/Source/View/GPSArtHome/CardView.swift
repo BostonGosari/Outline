@@ -84,6 +84,24 @@ struct CardView: View {
                 }
                 .font(.caption)
                 .padding(.bottom, 16)
+                
+                HStack {
+                    Text("#\(homeTabViewModel.recommendedCoures[pageIndex].course.courseLength, specifier: "%.0f")km")
+                        .frame(width: 70, height: 23)
+                        .background {
+                            Capsule()
+                                .stroke()
+                                .foregroundStyle(Color.primaryColor)
+                        }
+                        .foregroundStyle(Color.primaryColor)
+                    Text("#\(formatDuration(homeTabViewModel.recommendedCoures[pageIndex].course.courseDuration))")
+                        .frame(width: 70, height: 23)
+                        .background {
+                            Capsule()
+                                .stroke()
+                        }
+                }
+                .font(.caption)
             }
         }
         .padding(.horizontal, 17)

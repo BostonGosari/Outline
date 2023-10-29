@@ -12,6 +12,7 @@ struct FreeRunningHomeView: View {
     @ObservedObject var homeTabViewModel: HomeTabViewModel
     @StateObject var runningManager = RunningManager.shared
     @State var userLocation = ""
+    @State private var progress: Double = 0.0
     
     var body: some View {
         ZStack {
@@ -37,7 +38,7 @@ struct FreeRunningHomeView: View {
                            .font(.subBody)
                            
                            Spacer()
-                           SlideToUnlock(isUnlocked: $runningManager.start)
+                           SlideToUnlock(isUnlocked: $runningManager.start, progress: $progress)
                                .onChange(of: runningManager.start) { _, _ in
                                    runningManager.startFreeRun()
                                }
