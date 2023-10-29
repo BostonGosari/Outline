@@ -16,6 +16,7 @@ struct Header: View {
             Image("HeaderLogo")
                 .resizable()
                 .scaledToFit()
+                .padding(.leading, 36)
                 .frame(height: 36)
             Spacer()
             Button { } label: {
@@ -25,7 +26,7 @@ struct Header: View {
                     .foregroundColor(Color.primaryColor)
             }
         }
-        .padding(.horizontal)
+        .padding(.trailing)
         .padding(.top)
         .frame(maxWidth: .infinity, alignment: .leading)
         .opacity(scrollOffset >= 20 ? 1 : 0)
