@@ -10,7 +10,7 @@ import SwiftUI
 struct LoginView: View {
     @Environment(\.window) var window: UIWindow?
 
-    @StateObject private var firebaseAuthViewModel = FirebaseAuthViewModel()
+    @StateObject private var loginViewModel = LoginViewModel()
     
     var body: some View {
         NavigationStack {
@@ -43,7 +43,7 @@ struct LoginView: View {
                     Spacer()
                         
                     Button {
-                        firebaseAuthViewModel.handleAppleLogin(window: window)
+                        loginViewModel.loginWithApple(window: window)
                     } label: {
                         HStack {
                             Spacer()
@@ -64,7 +64,7 @@ struct LoginView: View {
                         }
                     }
                     Button {
-                        firebaseAuthViewModel.handleKaKaoSignUp()
+                        loginViewModel.loginWithKakao()
                     } label: {
                         HStack {
                             Spacer()
@@ -74,6 +74,28 @@ struct LoginView: View {
                                 .scaledToFit()
                                 .padding(.trailing, 37)
                             Text("카카오아이디로 계속하기")
+                                .foregroundColor(.white)
+                                .frame(height: 60)
+                            Spacer()
+                        }
+                        .background(.ultraThinMaterial.opacity(0.9))
+                        .cornerRadius(60)
+                        .overlay {
+                            borderRectangle
+                        }
+                    }
+                    
+                    Button {
+                        loginViewModel.logOut()
+                    } label: {
+                        HStack {
+                            Spacer()
+                            Image("logoKakaotalk")
+                                .resizable()
+                                .frame(width: 24, height: 29)
+                                .scaledToFit()
+                                .padding(.trailing, 37)
+                            Text("logout")
                                 .foregroundColor(.white)
                                 .frame(height: 60)
                             Spacer()
