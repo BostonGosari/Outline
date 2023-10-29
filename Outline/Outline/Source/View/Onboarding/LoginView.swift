@@ -8,6 +8,10 @@
 import SwiftUI
 
 struct LoginView: View {
+    @Environment(\.window) var window: UIWindow?
+
+    @StateObject private var firebaseAuthViewModel = FirebaseAuthViewModel()
+    
     var body: some View {
         NavigationStack {
             ZStack {
@@ -38,11 +42,10 @@ struct LoginView: View {
 
                     Spacer()
                         
-                    NavigationLink {
-                        InputNicknameView()
+                    Button {
+                        firebaseAuthViewModel.handleAppleLogin(window: window)
                     } label: {
                         HStack {
-                            
                             Spacer()
                             Image("logoApple")
                                 .resizable()
