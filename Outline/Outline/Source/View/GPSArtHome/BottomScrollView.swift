@@ -213,6 +213,7 @@ struct CourseDetailView: View {
                             .onTapGesture {
                                 withAnimation {
                                     showAlert = false
+                                    progress = 0.0
                                 }
                             }
                     }
