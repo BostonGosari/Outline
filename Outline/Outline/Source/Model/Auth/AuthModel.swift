@@ -34,6 +34,7 @@ class AuthModel{
         if Auth.auth().currentUser != nil {
             do {
                 try Auth.auth().signOut()
+                print("logout success")
             } catch {
                 print("error in sign out")
             }
@@ -44,13 +45,16 @@ class AuthModel{
     
     func handleSignOut() {
         let user = Auth.auth().currentUser
-
-        user?.delete { error in
-          if let error = error {
-            print("유저 삭제 실패")
-          } else {
-            print("유저 삭제 완료")
-          }
+        if let user = user {
+            user.delete { error in
+              if let _ = error {
+                print("유저 삭제 실패")
+              } else {
+                print("유저 삭제 완료")
+              }
+            }
+        } else {
+            print("로그인된 유저가 없습니다")
         }
     }
 }
