@@ -55,7 +55,7 @@ class KakaoAuthModel: NSObject {
     
     private func loadingInfoDidKakaoAuth() {  // 사용자 정보 불러오기
         UserApi.shared.me { kakaoUser, error in
-            if let error = error {
+            if let _ = error {
                 print("카카오톡 사용자 정보 불러오는데 실패했습니다.")
                 return
             }
@@ -76,7 +76,7 @@ class KakaoAuthModel: NSObject {
         completion: (() -> Void)?
     ) {
     Auth.auth().createUser(withEmail: email, password: password) { result, error in
-            if let error = error {
+            if let _ = error {
                 self.emailAuthSignIn(email: email, password: password) {
                     print("login success")
                 }
@@ -94,10 +94,10 @@ class KakaoAuthModel: NSObject {
         email: String,
         password: String,
         completion: (() -> Void)?
-    ){
+    ) {
         Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
-            guard let error = error else {
-                print(error?.localizedDescription ?? "kakao signIn error")
+            if let error = error {
+                print(error)
                 return
             }
             guard let authResult = authResult else {
