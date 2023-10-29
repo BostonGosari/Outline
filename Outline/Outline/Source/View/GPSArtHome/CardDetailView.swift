@@ -26,6 +26,7 @@ struct CardDetailView: View {
     @State private var scrollViewOffset: CGFloat = 0
     @State private var dragState: CGSize = .zero
     @State private var isDraggable = true
+    @State private var progress: Double = 0.0
     
     private let fadeInOffset: CGFloat = 10
     private let dragStartRange: CGFloat = 60
@@ -60,7 +61,16 @@ struct CardDetailView: View {
                     .scaleEffect(viewSize / -600 + 1)
                     .gesture(isDraggable ? drag : nil)
                     
+                    slideToUnlock
+                        .padding(.top, 485)
+                        .frame(maxHeight: .infinity, alignment: .top)
+                        .zIndex(1)
+                    
                     closeButton
+                    
+                    Color.black
+                        .opacity(progress * 0.8)
+                        .animation(.easeInOut, value: progress)
                 }
                 .onChange(of: isShow) { _, _ in
                     fadeOut()
@@ -72,13 +82,14 @@ struct CardDetailView: View {
             .scrollIndicators(scrollViewOffset > scrollStartRange ? .hidden : .automatic)
             .ignoresSafeArea(edges: .top)
             .statusBarHidden()
-            
+                        
             ZStack {
                 if showAlert {
                     Color.black.opacity(0.5)
                         .onTapGesture {
                             withAnimation {
                                 showAlert = false
+                                progress = 0.0
                             }
                         }
                 }
@@ -167,54 +178,40 @@ struct CardDetailView: View {
                 .font(.caption)
                 .fontWeight(.semibold)
                 .padding(.bottom, 16)
-                
-                HStack {
-                    Text("#\(homeTabViewModel.recommendedCoures[currentIndex].course.courseLength, specifier: "%.0f")km")
-                        .frame(width: 70, height: 23)
-                        .background {
-                            Capsule()
-                                .stroke()
-                        }
-                    Text("#\(formatDuration(homeTabViewModel.recommendedCoures[currentIndex].course.courseDuration))")
-                        .frame(width: 70, height: 23)
-                        .background {
-                            Capsule()
-                                .stroke()
-                        }
-                }
-                .font(.caption)
             }
             .padding(.top, 100)
             .opacity(appear[0] ? 1 : 0)
             .offset(y: appear[0] ? 0 : fadeInOffset)
             
             Spacer()
-            
-            SlideToUnlock(isUnlocked: $isUnlocked)
-                .onChange(of: isUnlocked) { _, newValue in
-                    if newValue {
-                        let userLocation = locationManager.location?.coordinate
-                        let course = homeTabViewModel.recommendedCoures[currentIndex].course.coursePaths
-                        
-                        if let userLocation = userLocation, runningManager.checkDistance(userLocation: userLocation, course: course) {
-                            runningManager.startCourse = homeTabViewModel.recommendedCoures[currentIndex].course
-                            runningManager.startGPSArtRun()
-                            isShow = false
-                            runningManager.start = true
-                            isUnlocked = false
-                        } else {
-                            isUnlocked = false
-                            withAnimation {
-                                showAlert = true
-                            }
+        }
+        .padding(40)
+    }
+    
+    private var slideToUnlock: some View {
+        SlideToUnlock(isUnlocked: $isUnlocked, progress: $progress)
+            .onChange(of: isUnlocked) { _, newValue in
+                if newValue {
+                    let userLocation = locationManager.location?.coordinate
+                    let course = homeTabViewModel.recommendedCoures[currentIndex].course.coursePaths
+                    
+                    if let userLocation = userLocation, runningManager.checkDistance(userLocation: userLocation, course: course) {
+                        runningManager.startCourse = homeTabViewModel.recommendedCoures[currentIndex].course
+                        runningManager.startGPSArtRun()
+                        isShow = false
+                        runningManager.start = true
+                        isUnlocked = false
+                    } else {
+                        isUnlocked = false
+                        withAnimation {
+                            showAlert = true
                         }
                     }
                 }
-                .opacity(appear[1] ? 1 : 0)
-                .offset(y: appear[1] ? 0 : fadeInOffset)
-                .padding(-10)
-        }
-        .padding(40)
+            }
+            .opacity(appear[1] ? 1 : 0)
+            .offset(y: appear[1] ? 0 : fadeInOffset)
+            .padding(-10)
     }
     
     private var closeButton: some View {
