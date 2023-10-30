@@ -13,3 +13,10 @@ struct ScrollViewOffsetPreferenceKey: PreferenceKey {
         value = nextValue()
     }
 }
+
+struct ScrollViewXOffsetPreferenceKey: PreferenceKey {
+    static var defaultValue: CGFloat = 0
+    static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
+        value = nextValue()
+    }
+}
