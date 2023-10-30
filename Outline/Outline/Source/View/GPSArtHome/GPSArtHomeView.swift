@@ -12,19 +12,17 @@ struct GPSArtHomeView: View {
     @ObservedObject var homeTabViewModel: HomeTabViewModel
     
     @State private var scrollOffset: CGFloat = 0
+    @State private var scrollXOffset: CGFloat = 0
+    
     @State var currentIndex: Int = 0
+    @State private var loading = true
+    @State private var selectedCourse: GPSArtCourse?
+    @State private var showDetailView = false
     
     // 받아오는 변수
     @Binding var isShow: Bool
     var namespace: Namespace.ID
     
-    // Carousel 에 필요한 변수들
-    let pageCount = 3
-    let edgeSpace: CGFloat = 36
-    let spacing: CGFloat = 20
-    
-    // 뷰에 있는 요소들의 사이즈 조정
-    let carouselFrameHeight: CGFloat = 484
     let indexWidth: CGFloat = 25
     let indexHeight: CGFloat = 3
     
@@ -35,48 +33,82 @@ struct GPSArtHomeView: View {
                     .onScrollViewOffsetChanged { offset in
                         scrollOffset = offset
                     }
-                Header(scrollOffset: scrollOffset)
-                    .padding(.bottom)
+                Header(loading: loading, scrollOffset: scrollOffset)
+                
                 VStack {
-                    Carousel(pageCount: pageCount, edgeSpace: edgeSpace, spacing: spacing, currentIndex: $currentIndex) { pageIndex in
-                        if !isShow {
-                            CardView(homeTabViewModel: homeTabViewModel, isShow: $isShow, currentIndex: $currentIndex, namespace: namespace, pageIndex: pageIndex)
-                                .transition(
-                                    .asymmetric(
-                                        insertion: .opacity.animation(.easeInOut(duration: 0.1)),
-                                        removal: .opacity.animation(.easeInOut(duration: 0.3).delay(0.2))
-                                    )
-                                )
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        getCurrentOffsetView
+                        
+                        HStack(spacing: 0) {
+                            ForEach(homeTabViewModel.recommendedCoures.indices, id: \.self) { index in
+                                Button {
+                                    withAnimation(.openCard) {
+                                        selectedCourse = homeTabViewModel.recommendedCoures[index].course
+                                        showDetailView = true
+                                    }
+                                } label: {
+                                    BigCardView(course: homeTabViewModel.recommendedCoures[index], loading: $loading, index: index, currentIndex: currentIndex, namespace: namespace, isShow: isShow)
+                                        .scaleEffect(selectedCourse?.id == homeTabViewModel.recommendedCoures[index].course.id ? 0.96 : 1)
+                                }
+                                .buttonStyle(CardButton())
+                                .disabled(loading)
+                                .scrollTransition { content, phase in
+                                    content
+                                        .scaleEffect(phase.isIdentity ? 1 : 0.9)
+                                }
+                            }
                         }
+                        .scrollTargetLayout()
                     }
-                    .frame(height: carouselFrameHeight)
-                    .padding(.bottom, 16)
+                    .contentMargins(UIScreen.main.bounds.width * 0.09, for: .scrollContent)
+                    .scrollTargetBehavior(.viewAligned)
+                    .padding(.vertical, -20)
+                    
+                    if homeTabViewModel.courses.isEmpty {
+                        Rectangle()
+                            .frame(
+                                width: UIScreen.main.bounds.width * 0.82,
+                                height: UIScreen.main.bounds.height * 0.55
+                            )
+                            .foregroundColor(.gray700Color)
+                            .padding(.vertical, -20)
+                    }
+                    
                     HStack {
-                        ForEach(0..<pageCount, id: \.self) { pageIndex in
+                        ForEach(0..<3) { index in
                             Rectangle()
                                 .frame(width: indexWidth, height: indexHeight)
-                                .foregroundColor(currentIndex == pageIndex ? .primaryColor : .white)
-                                .animation(.easeInOut, value: currentIndex)
+                                .foregroundColor(loading ? .gray700 : currentIndex == index ? .primaryColor : .white)
+                                .animation(.bouncy, value: currentIndex)
                         }
                     }
+                    
                     BottomScrollView(homeTabViewModel: homeTabViewModel)
                 }
+                .transition(
+                    .asymmetric(
+                        insertion: .opacity.animation(.easeInOut(duration: 0.1)),
+                        removal: .opacity.animation(.easeInOut(duration: 0.3).delay(0.2))
+                    )
+                )
             }
             .overlay(alignment: .top) {
-                InlineHeader(scrollOffset: scrollOffset)
+                InlineHeader(loading: loading, scrollOffset: scrollOffset)
             }
             
-            if isShow {
-                Color.gray900Color.ignoresSafeArea()
-                CardDetailView(homeTabViewModel: homeTabViewModel, isShow: $isShow, currentIndex: currentIndex, namespace: namespace)
-                    .zIndex(1)
-                    .transition(
-                        .asymmetric(
-                            insertion: .opacity.animation(.easeInOut(duration: 0.1)),
-                            removal: .opacity.animation(.easeInOut(duration: 0.3).delay(0.2))
+            .overlay {
+                if let selectedCourse, showDetailView {
+                    Color.gray900Color.ignoresSafeArea()
+                    CardDetailView(homeTabViewModel: homeTabViewModel, isShow: $showDetailView, course: selectedCourse, currentIndex: currentIndex, namespace: namespace)
+                        .zIndex(1)
+                        .transition(
+                            .asymmetric(
+                                insertion: .opacity.animation(.easeInOut(duration: 0.1)),
+                                removal: .opacity.animation(.easeInOut(duration: 0.3).delay(0.2))
+                            )
                         )
-                    )
-                    .ignoresSafeArea()
+                        .ignoresSafeArea()
+                }
             }
         }
         .background(
@@ -85,6 +117,27 @@ struct GPSArtHomeView: View {
         .background(
             BackgroundBlur(color: Color.primaryColor, padding: 500)
         )
+    }
+    
+    private var getCurrentOffsetView: some View {
+        Color.clear
+            .onScrollViewXOffsetChanged { offset in
+                scrollXOffset = -offset + UIScreen.main.bounds.width * 0.09
+            }
+            .onChange(of: scrollXOffset) { _, newValue in
+                withAnimation(.bouncy(duration: 1)) {
+                    switch newValue {
+                    case ..<200:
+                        currentIndex = 0
+                    case 200..<500:
+                        currentIndex = 1
+                    case 500...:
+                        currentIndex = 2
+                    default:
+                        break
+                    }
+                }
+            }
     }
 }
 

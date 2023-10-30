@@ -18,6 +18,7 @@ struct CardDetailView: View {
     @Environment(\.dismiss) var dismiss
     
     @Binding var isShow: Bool
+    var course: GPSArtCourse
     var currentIndex: Int
     var namespace: Namespace.ID
     
@@ -149,31 +150,36 @@ struct CardDetailView: View {
     // MARK: - View Components
     
     private var courseImage: some View {
-        AsyncImage(url: URL(string: homeTabViewModel.recommendedCoures[currentIndex].course.thumbnail)) { image in
+        AsyncImage(url: URL(string: course.thumbnail)) { image in
             image
                 .resizable()
-                .scaledToFill()
+                .scaledToFit()
+                .roundedCorners(45, corners: [.bottomRight])
+                .shadow(color: .white, radius: 0.5, y: 0.5)
+                .matchedGeometryEffect(id: "courseImage\(currentIndex)", in: namespace)
+                .transition(
+                    .asymmetric(
+                        insertion: .opacity.animation(.easeInOut(duration: 0.1)),
+                        removal: .opacity.animation(.easeInOut(duration: 0.3).delay(0.2))
+                    )
+                )
         } placeholder: {
             Rectangle()
-                .scaledToFit()
+                .foregroundColor(.gray700Color)
         }
-        .foregroundColor(.gray800)
-        .roundedCorners(45, corners: [.bottomLeft])
-        .shadow(color: .white, radius: 0.5, y: 0.5)
-        .matchedGeometryEffect(id: "courseImage\(currentIndex)", in: namespace)
-        .frame(height: cardHeight)
+        .frame(height: UIScreen.main.bounds.height * 0.68)
     }
     
     private var courseInformation: some View {
         VStack(alignment: .leading) {
             VStack(alignment: .leading, spacing: 0) {
-                Text("\(homeTabViewModel.recommendedCoures[currentIndex].course.courseName)")
+                Text("\(course.courseName)")
                     .font(.largeTitle)
                     .bold()
                     .padding(.bottom, 8)
                 HStack {
                     Image(systemName: "mappin")
-                    Text("\(homeTabViewModel.recommendedCoures[currentIndex].course.locationInfo.locality) \(homeTabViewModel.recommendedCoures[currentIndex].course.locationInfo.subLocality) • 내 위치에서 \(homeTabViewModel.recommendedCoures[currentIndex].distance/1000, specifier: "%.1f")km")
+                    Text("\(course.locationInfo.locality) \(course.locationInfo.subLocality) • 내 위치에서 \(homeTabViewModel.recommendedCoures[currentIndex].distance/1000, specifier: "%.1f")km")
                 }
                 .font(.caption)
                 .fontWeight(.semibold)
@@ -186,6 +192,7 @@ struct CardDetailView: View {
             Spacer()
         }
         .padding(40)
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
     
     private var slideToUnlock: some View {
@@ -193,7 +200,7 @@ struct CardDetailView: View {
             .onChange(of: isUnlocked) { _, newValue in
                 if newValue {
                     let userLocation = locationManager.location?.coordinate
-                    let course = homeTabViewModel.recommendedCoures[currentIndex].course.coursePaths
+                    let course = course.coursePaths
                     
                     if let userLocation = userLocation, runningManager.checkDistance(userLocation: userLocation, course: course) {
                         runningManager.startCourse = homeTabViewModel.recommendedCoures[currentIndex].course
