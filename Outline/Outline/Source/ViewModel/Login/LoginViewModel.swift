@@ -26,7 +26,7 @@ class LoginViewModel: ObservableObject {
         authModel.handleKakaoSignUp { res in
             switch res {
             case .success(let uid):
-                print("login success")
+                print("login success", uid )
             case .failure(let error):
                 print("login failed")
                 print(error.localizedDescription)
@@ -37,8 +37,8 @@ class LoginViewModel: ObservableObject {
     func logOut() {
         authModel.handleLogout { res in
             switch res {
-            case .success(let _):
-                print("logout success")
+            case .success(let isSuccess):
+                print(isSuccess ? "logout success" : "logout failed")
             case .failure(let error):
                 print("logout failed")
                 print(error.localizedDescription)
@@ -49,8 +49,8 @@ class LoginViewModel: ObservableObject {
     func signOut() {
         authModel.handleSignOut { res in
             switch res {
-            case .success(let _):
-                print("signout success")
+            case .success(let isSuccess):
+                print(isSuccess ? "signout success" : "signout failed")
             case .failure(let error):
                 print("signout failed")
                 print(error.localizedDescription)
