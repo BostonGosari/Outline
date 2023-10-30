@@ -143,6 +143,21 @@ struct LoginView: View {
                 }
                 .padding(16)
             }
+            .navigationDestination(item: $loginViewModel.userId) { res in
+                VStack {
+                    Text(res)
+                    Button {
+                        loginViewModel.logOut()
+                    } label: {
+                        Text("logout")
+                    }
+                    Button {
+                        loginViewModel.signOut()
+                    } label: {
+                        Text("signout")
+                    }
+                }
+            }
         }
     }
 }

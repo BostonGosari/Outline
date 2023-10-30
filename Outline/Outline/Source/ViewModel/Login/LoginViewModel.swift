@@ -8,16 +8,19 @@
 import SwiftUI
 
 class LoginViewModel: ObservableObject {
-    @State var userId: String?
+    @Published var userId: String?
+    @AppStorage("authState") var authState: AuthState = .onboarding
+    
     private let authModel = AuthModel()
     
     func loginWithApple(window: UIWindow?) {
         authModel.handleAppleLogin(window: window) { res in
             switch res {
-            case .success(let success):
-                print(success)
-            case .failure(let error):
-                print(error)
+            case .success(let uid):
+                self.userId = uid
+                self.authState = .login
+            case .failure(_):
+                self.authState = .logout
             }
         }
     }
@@ -26,10 +29,10 @@ class LoginViewModel: ObservableObject {
         authModel.handleKakaoSignUp { res in
             switch res {
             case .success(let uid):
-                print("login success", uid )
-            case .failure(let error):
-                print("login failed")
-                print(error.localizedDescription)
+                self.userId = uid
+                self.authState = .login
+            case .failure(_):
+                self.authState = .logout
             }
         }
     }
@@ -37,11 +40,11 @@ class LoginViewModel: ObservableObject {
     func logOut() {
         authModel.handleLogout { res in
             switch res {
-            case .success(let isSuccess):
-                print(isSuccess ? "logout success" : "logout failed")
-            case .failure(let error):
+            case .success(_):
+                self.authState = .logout
+                self.userId = ""
+            case .failure(_):
                 print("logout failed")
-                print(error.localizedDescription)
             }
         }
     }
@@ -49,11 +52,11 @@ class LoginViewModel: ObservableObject {
     func signOut() {
         authModel.handleSignOut { res in
             switch res {
-            case .success(let isSuccess):
-                print(isSuccess ? "signout success" : "signout failed")
-            case .failure(let error):
+            case .success(_):
+                self.authState = .logout
+                self.userId = ""
+            case .failure(_):
                 print("signout failed")
-                print(error.localizedDescription)
             }
         }
     }
@@ -63,8 +66,10 @@ class LoginViewModel: ObservableObject {
             switch res {
             case .success(let uid):
                 self.userId = uid
-            case .failure(let error):
-                print(error.localizedDescription)
+                self.authState = .login
+            case .failure(_):
+                print("user not found")
+                self.authState = .logout
             }
         }
     }
