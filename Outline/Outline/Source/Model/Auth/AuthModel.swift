@@ -57,7 +57,11 @@ class AuthModel: AuthModelProtocol {
     }
     
     func handleCheckLoginState(completion: @escaping (Result<String?, AuthError>) -> Void){
-        completion(.success(Auth.auth().currentUser?.uid))
+        if let userId = Auth.auth().currentUser?.uid {
+            completion(.success(userId))
+        } else {
+            completion(.failure(.userNotFound))
+        }
     }
     
     func handleLogout(completion: @escaping (Result<Bool, AuthError>) -> Void) {
