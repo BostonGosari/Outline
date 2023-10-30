@@ -14,14 +14,16 @@ class AppleAuthModel: NSObject {
     
     var currentNonce: String?
     let window: UIWindow?
+    var completion: ((Result<String, AuthError>) -> Void)?
     
     init(window: UIWindow?) {
         self.window = window
     }
     
-    func startAppleLogin() {
+    func startAppleLogin(completion: @escaping (Result<String, AuthError>) -> Void) {
         // nonce는 매번 로그인을 요청할 때마다 새롭게 만들어내 Firebase에서 받는 nonce 값과, Apple에서 제공하는 값을 비교하기 용이하게 한다.
         // request 구현
+        self.completion = completion
         let nonce = randomNonceString()
         currentNonce = nonce
         //
@@ -62,7 +64,9 @@ class AppleAuthModel: NSObject {
            var random: UInt8 = 0
            let errorCode = SecRandomCopyBytes(kSecRandomDefault, 1, &random)
            if errorCode != errSecSuccess {
-             fatalError("Unable to generate nonce. SecRandomCopyBytes failed with OSStatus \(errorCode)")
+               if let completion = completion {
+                   completion(.failure(.failToMakeNonce))
+               }
            }
            return random
          }
@@ -89,13 +93,22 @@ extension AppleAuthModel: ASAuthorizationControllerDelegate {
         
         if let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential {
             guard let nonce = currentNonce else {
+                if let completion = completion {
+                    completion(.failure(.failToMakeNonce))
+                }
                 fatalError("Invalid state: A login callback was received, but no login request was sent.")
             }
             guard let appleIDToken = appleIDCredential.identityToken else {
+                if let completion = completion {
+                    completion(.failure(.invalidToken))
+                }
                 print("Unable to fetch identity token")
                 return
             }
             guard let idTokenString = String(data: appleIDToken, encoding: .utf8) else {
+                if let completion = completion {
+                    completion(.failure(.invalidToken))
+                }
                 print("Unable to serialize token string from data: \(appleIDToken.debugDescription)")
                 return
             }
@@ -105,8 +118,6 @@ extension AppleAuthModel: ASAuthorizationControllerDelegate {
             let credential = OAuthProvider.credential(withProviderID: "apple.com",
               idToken: idTokenString,
               rawNonce: nonce)
-
-            print(credential)
             
             //Firebase 작업
             Auth.auth().signIn(with: credential) { (authResult, error) in
@@ -114,15 +125,22 @@ extension AppleAuthModel: ASAuthorizationControllerDelegate {
                     // Error. If error.code == .MissingOrInvalidNonce, make sure
                     // you're sending the SHA256-hashed nonce as a hex string with
                     // your request to Apple.
-                    print(error)
+                    if let completion = self.completion {
+                        completion(.failure(.failToMakeNonce))
+                    }
                     return
                 }
                 // User is signed in to Firebase with Apple.
                 // authResult?.user.uid을 key 값으로 데이터 저장
                 if let userId = authResult?.user.uid {
-                    // handle userId
+                    if let completion = self.completion {
+                        completion(.success(userId))
+                    }
                 } else {
                     // login failed
+                    if let completion = self.completion {
+                        completion(.failure(.failToLogin))
+                    }
                 }
             }
         }
