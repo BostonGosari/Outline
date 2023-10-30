@@ -16,6 +16,8 @@ enum AuthError: Error {
     case failToLogin
     case failToLoadUser
     case failToFindUserId
+    case failToMakeNonce
+    case invalidToken
 }
 
 protocol AuthModelProtocol {
@@ -32,7 +34,14 @@ class AuthModel: AuthModelProtocol {
     
     func handleAppleLogin(window: UIWindow?, completion: @escaping (Result<String, AuthError>) -> Void) {
         appleAuthCoordinator = AppleAuthModel(window: window)
-        appleAuthCoordinator?.startAppleLogin()
+        appleAuthCoordinator?.startAppleLogin(completion: { res in
+            switch res {
+            case .success(let uid):
+                completion(.success(uid))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        })
     }
     
     func handleKakaoSignUp(completion: @escaping (Result<String, AuthError>) -> Void) {
