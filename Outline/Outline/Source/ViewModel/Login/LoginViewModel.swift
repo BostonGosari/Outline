@@ -12,26 +12,60 @@ class LoginViewModel: ObservableObject {
     private let authModel = AuthModel()
     
     func loginWithApple(window: UIWindow?) {
-        authModel.handleAppleLogin(window: window)
+        authModel.handleAppleLogin(window: window) { res in
+            switch res {
+            case .success(let success):
+                print(success)
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
     
     func loginWithKakao() {
-        authModel.handleKakaoSignUp()
+        authModel.handleKakaoSignUp { res in
+            switch res {
+            case .success(let uid):
+                print("login success")
+            case .failure(let error):
+                print("login failed")
+                print(error.localizedDescription)
+            }
+        }
     }
     
     func logOut() {
-        authModel.handleLogout()
+        authModel.handleLogout { res in
+            switch res {
+            case .success(let _):
+                print("logout success")
+            case .failure(let error):
+                print("logout failed")
+                print(error.localizedDescription)
+            }
+        }
     }
     
     func signOut() {
-        authModel.handleSignOut()
+        authModel.handleSignOut { res in
+            switch res {
+            case .success(let _):
+                print("signout success")
+            case .failure(let error):
+                print("signout failed")
+                print(error.localizedDescription)
+            }
+        }
     }
     
     func setLoginState() {
-        guard let uid = authModel.handleCheckLoginState() else {
-            print("logout or user not created")
-            return
+        authModel.handleCheckLoginState { res in
+            switch res {
+            case .success(let uid):
+                self.userId = uid
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
         }
-        self.userId = uid
     }
 }
