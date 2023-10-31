@@ -26,7 +26,6 @@ class RunningManager: ObservableObject {
     func startFreeRun() {
         startCourse = GPSArtCourse()
         runningType = .free
-        locationManager.requestLocation()
         getFreeRunningName()
     }
     
