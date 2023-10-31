@@ -30,7 +30,7 @@ class LoginViewModel: ObservableObject {
             switch res {
             case .success(let uid):
                 self.userId = uid
-                self.authState = .login
+                self.authState = .login 
             case .failure(_):
                 self.authState = .logout
             }

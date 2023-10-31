@@ -12,12 +12,12 @@ enum AuthError: Error {
     case userNotFound
     case userAlreadySignOut
     case errorInSignOut
+    case invalidToken
     case failToDeleteUser
     case failToLogin
     case failToLoadUser
     case failToFindUserId
     case failToMakeNonce
-    case invalidToken
 }
 
 protocol AuthModelProtocol {
