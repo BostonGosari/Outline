@@ -132,6 +132,10 @@ extension PathGenerateManager {
         let canvasData = calculateCanvaDataInRect(width: width, height: height, region: region)
         var path = Path()
         
+        if coordinates.isEmpty {
+            return path
+        }
+        
         let startPosition = calculateRelativePoint(coordinate: coordinates[0], canvasData: canvasData)
         path.move(to: CGPoint(x: startPosition[0], y: -startPosition[1]))
 
