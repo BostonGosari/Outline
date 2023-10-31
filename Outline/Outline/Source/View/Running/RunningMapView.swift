@@ -11,8 +11,7 @@ import SwiftUI
 struct RunningMapView: View {
     @StateObject private var viewModel = RunningMapViewModel()
     @StateObject var runningManager = RunningManager.shared
-    
-    @ObservedObject var runningViewModel: RunningViewModel
+    @StateObject var runningDataManager = RunningDataManager.shared
     
     @GestureState var isLongPressed = false
     
@@ -78,7 +77,7 @@ struct RunningMapView: View {
                 )
                 .onTapGesture {
                     showBigGuide.toggle()
-                    // TODO: 햅틱 추가
+                    HapticManager.impact(style: .soft)
                 }
                 .animation(.openCard, value: showBigGuide)
             }
@@ -132,7 +131,7 @@ extension RunningMapView {
                         Button {
                             HapticManager.impact(style: .medium)
                             viewModel.runningType = .pause
-                            runningViewModel.pauseRunning()
+                            runningDataManager.pauseRunning()
                             runningManager.stopTimer()
                         } label: {
                             Image(systemName: "pause.fill")
@@ -180,8 +179,7 @@ extension RunningMapView {
                                     HapticManager.impact(style: .heavy)
                                     DispatchQueue.main.async {
                                         checkUserLocation = false
-                                        viewModel.saveData(course: runningManager.startCourse)
-                                        runningViewModel.stopRunning()
+                                        runningDataManager.stopRunning()
                                         runningManager.counter = 0
                                         showCustomSheet = true
                                     }
@@ -193,7 +191,7 @@ extension RunningMapView {
                     Button {
                         HapticManager.impact(style: .medium)
                         viewModel.runningType = .start
-                        runningViewModel.resumeRunning()
+                        runningDataManager.resumeRunning()
                         runningManager.startTimer()
                     } label: {
                         Image(systemName: "play.fill")

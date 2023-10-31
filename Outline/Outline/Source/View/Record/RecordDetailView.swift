@@ -169,7 +169,7 @@ struct RecordDetailView: View {
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 Button {
-                    //dataModel.deleteRunningRecord(record)
+                    // dataModel.deleteRunningRecord(record)
                     dismiss()
                 } label: {
                     Image(systemName: "trash.fill")

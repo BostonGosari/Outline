@@ -62,27 +62,6 @@ class RunningMapViewModel: ObservableObject {
         }
     }
     
-    func saveData(course: GPSArtCourse?) {
-        guard let course = course else { return }
-        
-        let courseData = CourseData(courseName: course.courseName, runningLength: course.courseLength, heading: course.heading, distance: course.distance, coursePaths: userLocations, runningCourseId: "")
-        
-        //TODO: healthData는 어떻게 저장해야할지 모르겠어요ㅜㅠ
-//        let healthData = HealthData(totalTime: totalTime, averageCadence: totalSteps / totalDistance, totalRunningDistance: totalDistance / 1000, totalEnergy: kilocalorie, averageHeartRate: 0.0, averagePace: totalTime / totalDistance * 1000 / 60, startDate: RunningStartDate, endDate: RunningEndDate)
-//        
-//        let newRunningRecord = RunningRecord(id: UUID().uuidString, runningType: runningManger.runningType, courseData: courseData, healthData: healthData)
-//        
-//        userDataModel.createRunningRecord(record: newRunningRecord) { result in
-//            switch result {
-//            case .success:
-//                print("saved")
-//                print(newRunningRecord)
-//            case .failure(let error):
-//                print(error)
-//            }
-//        }
-    }
-    
     private func checkAccuracy() -> Double {
         let runningManager = RunningManager.shared
         

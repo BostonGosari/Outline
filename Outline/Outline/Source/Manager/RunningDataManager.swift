@@ -8,7 +8,7 @@
 import SwiftUI
 import CoreMotion
 
-class RunningViewModel: ObservableObject {
+class RunningDataManager: ObservableObject {
     // 전송용 데이터
     @Published var totalTime = 0.0
     @Published var totalSteps = 0.0
@@ -27,8 +27,8 @@ class RunningViewModel: ObservableObject {
     
     // MARK: - Private Properties
     
-    private let pedometer: CMPedometer
-    private let healthKitManager: HealthKitManager
+    private let pedometer = CMPedometer()
+    private let healthKitManager = HealthKitManager()
     
     private let userDataModel = UserDataModel()
     
@@ -37,15 +37,10 @@ class RunningViewModel: ObservableObject {
     
     private let runningManger = RunningManager.shared
     
-    // MARK: - Initialization
+    static let shared = RunningDataManager()
     
-    init() {
-        self.pedometer = CMPedometer()
-        self.healthKitManager = HealthKitManager()
-    }
-    
-    // MARK: - Public Methods
-    
+    private init() { }
+
     func startRunning() {
         RunningStartDate = Date()
         startPedometerUpdates()
@@ -71,8 +66,6 @@ class RunningViewModel: ObservableObject {
         startPedometerDataUpdates()
         healthKitManager.resumeWorkout()
     }
-    
-    // MARK: - Private Methods
     
     private func startPedometerUpdates() {
         startPedometerDataUpdates()

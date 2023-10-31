@@ -49,7 +49,7 @@ struct CourseGuideView: View {
         }
         .onTapGesture {
             showBigGuide.toggle()
-            // TODO: 햅틱 추가
+            HapticManager.impact(style: .soft)
         }
     }
 }

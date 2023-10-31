@@ -18,6 +18,7 @@ struct FreeRunningHomeView: View {
     var body: some View {
         ZStack(alignment: .top) {
             Map(position: $position)
+                .tint(.customPrimary)
         
             Rectangle()
                 .foregroundColor(.clear)

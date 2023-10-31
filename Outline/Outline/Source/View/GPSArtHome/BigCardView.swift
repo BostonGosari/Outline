@@ -21,7 +21,6 @@ struct BigCardView: View {
             if !showDetailView {
                 image
                     .resizable()
-                    .scaledToFill()
                     .roundedCorners(10, corners: [.topLeft])
                     .roundedCorners(70, corners: [.topRight])
                     .roundedCorners(45, corners: [.bottomLeft, .bottomRight])
@@ -42,7 +41,6 @@ struct BigCardView: View {
             width: UIScreen.main.bounds.width * 0.84,
             height: UIScreen.main.bounds.height * 0.55
         )
-        .transition(.identity)
         .overlay(alignment: .bottom) {
             if !loading {
                 courseInformation
@@ -63,7 +61,6 @@ struct BigCardView: View {
                             )
                             .roundedCorners(45, corners: [.bottomLeft, .bottomRight])
                             .opacity(index == currentIndex ? 1 : 0)
-                            .offset(y: 10)
                     }
             }
         }
