@@ -193,10 +193,9 @@ struct CardDetailView: View {
         SlideToUnlock(isUnlocked: $isUnlocked, progress: $progress)
             .onChange(of: isUnlocked) { _, newValue in
                 if newValue {
-                    let userLocation = locationManager.location?.coordinate
                     let course = selectedCourse.course.coursePaths
                     
-                    if let userLocation = userLocation, runningManager.checkDistance(userLocation: userLocation, course: course) {
+                    if runningManager.checkDistance(course: course) {
                         runningManager.startCourse = selectedCourse.course
                         runningManager.startGPSArtRun()
                         showDetailView = false

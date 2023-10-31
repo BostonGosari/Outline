@@ -288,4 +288,3 @@ enum SortOption {
     case longestDistance
     case shortestDistance
 }
-
