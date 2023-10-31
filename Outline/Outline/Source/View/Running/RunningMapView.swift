@@ -5,37 +5,55 @@
 //  Created by 김하은 on 10/17/23.
 //
 
+import MapKit
 import SwiftUI
 
 struct RunningMapView: View {
     @StateObject private var viewModel = RunningMapViewModel()
     @StateObject var runningManager = RunningManager.shared
     
-    @ObservedObject var locationManager: LocationManager
     @ObservedObject var runningViewModel: RunningViewModel
     @ObservedObject var digitalTimerViewModel: DigitalTimerViewModel
-    @ObservedObject var homeTabViewModel: HomeTabViewModel
     
     @GestureState var isLongPressed = false
     
+    @State private var moveToFinishRunningView = false
+    @State private var showCustomSheet = false
+    @State private var showBigGuid = false
+    
+    @State private var checkUserLocation = true
+    
+    @State private var position: MapCameraPosition = .userLocation(followsHeading: true, fallback: .automatic)
+    
     @Binding var selection: Int
     
-    @State var navigateToFinishRunningView = false
-    @State var showCustomSheet = false
-    @State var showBigGuid = false
-    @State private var showCompleteSheet = false
-    @State private var moveToFinishView = false
+    var courses: [CLLocationCoordinate2D] = []
     
     var body: some View {
         ZStack(alignment: .topTrailing) {
-            if let course = runningManager.startCourse {
-                RunningMap(
-                    locationManager: locationManager,
-                    viewModel: viewModel,
-                    coordinates:   ConvertCoordinateManager.convertToCLLocationCoordinates(course.coursePaths)
-                )
-                .ignoresSafeArea()
-            } 
+            Map(position: $position, interactionModes: .zoom) {
+                UserAnnotation(anchor: .center) { userlocation in
+                    ZStack {
+                        Circle().foregroundStyle(.white).frame(width: 22)
+                        Circle().foregroundStyle(.customPrimary).frame(width: 17)
+                    }
+                    .onChange(of: userlocation.location) { _, userlocation in
+                        if let user = userlocation {
+                            if viewModel.userLocations.isEmpty {
+                                viewModel.startLocation = CLLocation(latitude: user.coordinate.latitude, longitude: user.coordinate.longitude)
+                            }
+                            viewModel.userLocations.append(user.coordinate)
+                            viewModel.checkEndDistance()
+                        }
+                    }
+                }
+                MapPolyline(coordinates: ConvertCoordinateManager.convertToCLLocationCoordinates(runningManager.startCourse?.coursePaths ?? []))
+                    .stroke(.white.opacity(0.5), lineWidth: 8)
+                
+                MapPolyline(coordinates: viewModel.userLocations)
+                    .stroke(.customPrimary, lineWidth: 8)
+                
+            }
                 
             VStack(spacing: 0) {
                 Spacer()
@@ -47,7 +65,7 @@ struct RunningMapView: View {
             if let course = runningManager.startCourse,
                runningManager.runningType == .gpsArt {
                 CourseGuidView(
-                    userLocations: $locationManager.userLocations,
+                    userLocations: $viewModel.userLocations,
                     showBigGuid: $showBigGuid,
                     coursePathCoordinates: ConvertCoordinateManager.convertToCLLocationCoordinates(course.coursePaths),
                     courseRotate: course.heading
@@ -56,7 +74,6 @@ struct RunningMapView: View {
                         showBigGuid.toggle()
                         // TODO: 햅틱 추가
                     }
-                //                .animation(.easeInOut, value: showBigGuid)
                     .animation(.openCard, value: showBigGuid)
             }
         }
@@ -70,20 +87,17 @@ struct RunningMapView: View {
             }
         }
         .overlay {
-            if showCompleteSheet {
+            if viewModel.isShowComplteSheet {
                 runningFinishSheet()
             }
         }
         .overlay {
-            if locationManager.nearStartLocation {
+            if viewModel.isNearEndLocation {
                 RunningPopup(text: "도착 지점까지 30m 남았어요.")
                     .frame(maxHeight: .infinity, alignment: .bottom)
             }
         }
-        .onAppear {
-            locationManager.requestLocation()
-        }
-        .navigationDestination(isPresented: $navigateToFinishRunningView) {
+        .navigationDestination(isPresented: $moveToFinishRunningView) {
             FinishRunningView()
                 .navigationBarBackButtonHidden()
         }
@@ -160,8 +174,8 @@ extension RunningMapView {
                                 .onEnded { _ in
                                     HapticManager.impact(style: .heavy)
                                     DispatchQueue.main.async {
-                                        locationManager.stopUpdateLocation()
-                                        homeTabViewModel.userLocations = locationManager.userLocations
+                                        checkUserLocation = false
+                                        viewModel.saveData(course: runningManager.startCourse)
                                         runningViewModel.stopRunning()
                                         digitalTimerViewModel.counter = 0
                                         showCustomSheet = true
@@ -209,7 +223,7 @@ extension RunningMapView {
             
             CompleteButton(text: "결과 페이지로", isActive: true) {
                 showCustomSheet = false
-                navigateToFinishRunningView = true
+                moveToFinishRunningView = true
             }
         }
         .presentationDetents([.height(420)])
@@ -240,12 +254,12 @@ extension RunningMapView {
                     .padding(.bottom, 41)
                 
                 CompleteButton(text: "완료하기", isActive: true) {
-                    moveToFinishView = true
+                    moveToFinishRunningView = true
                 }
                 .padding(.bottom, 24)
                 
                 Button {
-                    locationManager.isShowCompleteSheet = false
+                    viewModel.isShowComplteSheet = false
                 } label: {
                     Text("조금 더 진행하기")
                         .foregroundStyle(Color.white)
@@ -256,10 +270,6 @@ extension RunningMapView {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
         .padding(EdgeInsets(top: 422, leading: 8, bottom: 34, trailing: 8))
-        .navigationDestination(isPresented: $moveToFinishView) {
-            FinishRunningView()
-                .navigationBarBackButtonHidden()
-        }
     }
 }
 

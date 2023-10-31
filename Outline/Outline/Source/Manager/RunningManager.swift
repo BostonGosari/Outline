@@ -10,13 +10,14 @@ import CoreLocation
 
 class RunningManager: ObservableObject {
     
-    private let locationManager = LocationManager()
+    private let locationManager = CLLocationManager()
     
     @Published var start = false
     @Published var running = false
     
     var startCourse: GPSArtCourse?
     var runningType: RunningType = .gpsArt
+    var startLocation: CLLocationCoordinate2D?
     
     static let shared = RunningManager()
     
@@ -36,7 +37,7 @@ class RunningManager: ObservableObject {
     func getFreeRunningName() {
         let geocoder = CLGeocoder()
         
-        if let startLocation = locationManager.startLocation {
+        if let startLocation = startLocation {
             let start = CLLocation(latitude: startLocation.latitude, longitude: startLocation.longitude)
             geocoder.reverseGeocodeLocation(start) { placemarks, error in
                 if let error = error {
