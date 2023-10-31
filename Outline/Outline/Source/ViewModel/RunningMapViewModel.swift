@@ -14,15 +14,12 @@ enum CurrentRunningType {
     case stop
 }
 
-enum CurrentMapType {
-    case gpsArtRun
-    case freeRun
-}
-
 class RunningMapViewModel: ObservableObject {
     @Published var runningType: CurrentRunningType = .start
-    @Published var mapType: CurrentMapType = .gpsArtRun
     @Published var isUserLocationCenter = false
+    
+    @Published var userLocations: [CLLocationCoordinate2D] = []
+    @Published var startLocation = CLLocation()
    
     @Published var isShowPopup = false {
         didSet {
@@ -33,6 +30,9 @@ class RunningMapViewModel: ObservableObject {
             }
         }
     }
+    
+    @Published var isShowComplteSheet = false
+    @Published var isNearEndLocation = false
     
     var popupText: String {
         switch runningType {
@@ -45,30 +45,53 @@ class RunningMapViewModel: ObservableObject {
         }
     }
     
-    let coordinates: [CLLocationCoordinate2D] = {
-        if let kmlFilePath = Bundle.main.path(forResource: "test", ofType: "kml") {
-            let kmlParser = KMLParserManager()
-            return kmlParser.parseKMLFile(atPath: kmlFilePath)
+    func checkEndDistance() {
+        if checkAccuracy() >= 90 {
+            if let lastLocation = userLocations.last {
+                let location = CLLocation(latitude: lastLocation.latitude, longitude: lastLocation.longitude)
+                let startToDistance = location.distance(from: startLocation)
+                
+                if startToDistance <= 5 {
+                    isShowComplteSheet = true
+                } else if startToDistance <= 30 {
+                    isNearEndLocation = true
+                } else {
+                    isNearEndLocation = false
+                }
+            }
         }
-        return []
-    }()
+    }
     
-    // 위도 경도로 거리를 계산하는 함수, 추후 업데이트 예정
-    func calculateDistance(startCoordinate: CLLocationCoordinate2D, endCoordinate: CLLocationCoordinate2D) -> Double {
-        let earthRadius = 6371000.0 // Earth's radius in meters
+    func saveData(course: GPSArtCourse?) {
+        guard let course = course else { return }
         
-        let lat1 = startCoordinate.latitude * .pi / 180.0
-        let lon1 = startCoordinate.longitude * .pi / 180.0
-        let lat2 = endCoordinate.latitude * .pi / 180.0
-        let lon2 = endCoordinate.longitude * .pi / 180.0
-
-        let dLat = lat2 - lat1
-        let dLon = lon2 - lon1
-
-        let first = sin(dLat / 2) * sin(dLat / 2) + cos(lat1) * cos(lat2) * sin(dLon / 2) * sin(dLon / 2)
-        let second = 2 * atan2(sqrt(first), sqrt(1 - first))
-
-        let distance = earthRadius * second
-        return distance
+        let courseData = CourseData(courseName: course.courseName, runningLength: course.courseLength, heading: course.heading, distance: course.distance, coursePaths: userLocations, runningCourseId: "")
+        
+        //TODO: healthData는 어떻게 저장해야할지 모르겠어요ㅜㅠ
+//        let healthData = HealthData(totalTime: totalTime, averageCadence: totalSteps / totalDistance, totalRunningDistance: totalDistance / 1000, totalEnergy: kilocalorie, averageHeartRate: 0.0, averagePace: totalTime / totalDistance * 1000 / 60, startDate: RunningStartDate, endDate: RunningEndDate)
+//        
+//        let newRunningRecord = RunningRecord(id: UUID().uuidString, runningType: runningManger.runningType, courseData: courseData, healthData: healthData)
+//        
+//        userDataModel.createRunningRecord(record: newRunningRecord) { result in
+//            switch result {
+//            case .success:
+//                print("saved")
+//                print(newRunningRecord)
+//            case .failure(let error):
+//                print(error)
+//            }
+//        }
+    }
+    
+    private func checkAccuracy() -> Double {
+        let runningManager = RunningManager.shared
+        
+        if let course = runningManager.startCourse?.coursePaths {
+            let guideCourse = ConvertCoordinateManager.convertToCLLocationCoordinates(course)
+            let progressManager = CourseProgressManager(guideCourse: guideCourse, userCourse: userLocations)
+            progressManager.calculate()
+            return progressManager.getProgress()
+        }
+        return 0
     }
 }
