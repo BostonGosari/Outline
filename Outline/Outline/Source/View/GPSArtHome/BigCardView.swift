@@ -33,10 +33,13 @@ struct BigCardView: View {
                 .onDisappear {
                     loading = false
                 }
+                .roundedCorners(10, corners: [.topLeft])
+                .roundedCorners(70, corners: [.topRight])
+                .roundedCorners(45, corners: [.bottomLeft, .bottomRight])
         }
         .matchedGeometryEffect(id: course.id, in: namespace)
         .frame(
-            width: UIScreen.main.bounds.width * 0.82,
+            width: UIScreen.main.bounds.width * 0.84,
             height: UIScreen.main.bounds.height * 0.55
         )
         .transition(.identity)
@@ -47,7 +50,7 @@ struct BigCardView: View {
                     .offset(y: index == currentIndex ? 0 : 10)
                     .background {
                         Rectangle()
-                            .frame(width: UIScreen.main.bounds.width * 0.82)
+                            .frame(width: UIScreen.main.bounds.width * 0.84)
                             .foregroundStyle(
                                 LinearGradient(
                                     stops: [
