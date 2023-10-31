@@ -10,8 +10,6 @@ import CoreLocation
 
 struct RecordView: View {
     @State var selectedIndex: Int = 0
-    @ObservedObject var homeTabViewModel: HomeTabViewModel
-    @ObservedObject private var dataTestViewModel = DataTestViewModel()
     @FetchRequest (entity: CoreRunningRecord.entity(), sortDescriptors: [])
     var runningRecord: FetchedResults<CoreRunningRecord>
     @State private var records: [CoreRunningRecord] = []
@@ -24,7 +22,7 @@ struct RecordView: View {
             ZStack(alignment: .top) {
                 Color.gray900
                     .ignoresSafeArea()
-                BackgroundBlur(color: Color.secondaryColor, padding: 50)
+                BackgroundBlur(color: Color.customSecondary, padding: 50)
                 ScrollView {
                     VStack(alignment: .leading) {
                         HStack(spacing: 8) {
@@ -67,7 +65,7 @@ struct RecordView: View {
                         .padding(.bottom, 16)
                         ForEach(filteredRecords, id: \.id) { record in
                             NavigationLink {
-                                RecordDetailView(homeTabViewModel: homeTabViewModel, record: record)
+                                RecordDetailView(record: record)
                                 
                             } label: {
                                 RecordItem(record: record)
@@ -131,7 +129,6 @@ struct RecordView: View {
 }
 
 struct RecordItem: View {
-    @ObservedObject private var dataTestViewModel = DataTestViewModel()
     var record: CoreRunningRecord
     private let pathManager = PathGenerateManager.shared
     var body: some View {
@@ -143,7 +140,7 @@ struct RecordItem: View {
                     .caculateLines(width: 358, height: 176, coordinates: data)
                     .stroke(lineWidth: 5)
                     .scale(0.5)
-                    .foregroundStyle(Color.primaryColor)
+                    .foregroundStyle(Color.customPrimary)
                     .padding(.horizontal, 16)
             }
             HStack {
@@ -214,7 +211,7 @@ struct RecordItem: View {
             }
         }
         
-        return convertToCLLocationCoordinates(datas)
+        return ConvertCoordinateManager.convertToCLLocationCoordinates(datas)
     }
 }
 
@@ -228,7 +225,7 @@ struct ChipItem: View {
             .lineLimit(1)
             .padding(.horizontal, 15)
             .padding(.vertical, 6)
-            .background(isSelected ? Color.primaryColor : .clear)
+            .background(isSelected ? Color.customPrimary : .clear)
             .foregroundColor(isSelected ? Color.gray900 : Color.white)
             .cornerRadius(40)
             .onTapGesture {
@@ -236,7 +233,7 @@ struct ChipItem: View {
             }
             .overlay(
                 RoundedRectangle(cornerRadius: 40)
-                    .stroke(isSelected ? Color.primaryColor : Color.white, lineWidth: 1)
+                    .stroke(isSelected ? Color.customPrimary : Color.white, lineWidth: 1)
             )
     }
 }

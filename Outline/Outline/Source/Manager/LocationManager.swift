@@ -105,7 +105,7 @@ final class LocationManager: NSObject, CLLocationManagerDelegate, ObservableObje
         let runningManager = RunningManager.shared
         
         if let course = runningManager.startCourse?.coursePaths {
-            let guideCourse = convertToCLLocationCoordinates(course)
+            let guideCourse = ConvertCoordinateManager.convertToCLLocationCoordinates(course)
             let progressManager = CourseProgressManager(guideCourse: guideCourse, userCourse: userLocations)
             progressManager.calculate()
             return progressManager.getProgress()
