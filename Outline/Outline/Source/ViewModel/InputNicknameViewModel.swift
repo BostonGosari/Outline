@@ -11,7 +11,7 @@ class InputNicknameViewModel: ObservableObject {
     @Published var nickname = ""
     @Published var checkInputCount = false
     @Published var checkInputWord = false
-    @Published var checkNicnameDuplication = false
+    @Published var checkNicnameDuplication = true
     @Published var moveToInputUserInfoView = false
     @Published var isSuccess = false
     
@@ -19,7 +19,7 @@ class InputNicknameViewModel: ObservableObject {
     @Published var userNames = [String]()
     
     func checkNicname() {
-        checkDuplication()
+//        checkDuplication()
         checkCount()
         checkSymbol()
         
