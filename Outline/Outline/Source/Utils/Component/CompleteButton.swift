@@ -17,12 +17,12 @@ struct CompleteButton: View {
             self.action()
         }  label: {
             RoundedRectangle(cornerRadius: 15)
-                .fill(isActive ? Color.primaryColor : Color.gray700Color)
+                .fill(isActive ? Color.customPrimary : Color.gray700)
                 .frame(height: 55)
                 .padding(.horizontal, 16)
                 .overlay {
                     Text(text)
-                        .foregroundStyle(isActive ? Color.black : Color.whiteColor)
+                        .foregroundStyle(isActive ? Color.black : Color.customWhite)
                         .font(.button)
                 }
         }
