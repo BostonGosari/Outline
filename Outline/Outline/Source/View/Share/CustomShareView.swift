@@ -26,6 +26,8 @@ struct CustomShareView: View {
     @State private var imageWidth: CGFloat = 0
     @State private var imageHeight: CGFloat = 0
     
+    @State private var position: MapCameraPosition = .userLocation(followsHeading: true, fallback: .automatic)
+    
     private let pathManager = PathGenerateManager.shared
     
     var body: some View {
@@ -98,11 +100,15 @@ extension CustomShareView {
 extension CustomShareView {
     private var customImageView: some View {
         ZStack {
-            ShareMap(mapView: $mapView, mapViewRegion: $mapViewRegion, userLocations: viewModel.runningData.userLocations)
-                .frame(width: imageWidth, height: imageHeight)
-                .overlay {
-                    LinearGradient(colors: [.black.opacity(0), .black], startPoint: .center, endPoint: .bottom)
-                }
+            Map(position: $position) {
+                MapPolyline(coordinates: viewModel.runningData.userLocations)
+                    .stroke(.customPrimary, lineWidth: 8)
+            }
+            .frame(width: imageWidth, height: imageHeight)
+            .overlay {
+                LinearGradient(colors: [.black.opacity(0), .black], startPoint: .center, endPoint: .bottom)
+            }
+            
             runningInfo
             GeometryReader { proxy in
                 HStack {}
