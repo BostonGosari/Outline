@@ -5,18 +5,20 @@
 //  Created by hyebin on 10/19/23.
 //
 
+import MapKit
 import SwiftUI
 
 struct FreeRunningHomeView: View {
     @StateObject var runningManager = RunningManager.shared
-    @State var userLocation = ""
-    @State private var progress: Double = 0.0
     
+    @State private var userLocation = ""
+    @State private var progress: Double = 0.0
+    @State private var position: MapCameraPosition = .userLocation(fallback: .automatic)
+   
     var body: some View {
         ZStack(alignment: .top) {
-            FreeRunningMap(userLocation: $userLocation)
-                .ignoresSafeArea()
-            
+            Map(position: $position)
+        
             Rectangle()
                 .foregroundColor(.clear)
                 .frame(maxWidth: .infinity, maxHeight: 358)
@@ -64,7 +66,9 @@ struct FreeRunningHomeView: View {
                    .padding(EdgeInsets(top: 8, leading: 16, bottom: 80, trailing: 20))
             }
         }
-        .preferredColorScheme(.dark)
+        .onAppear {
+            userLocationToString()
+        }
     }
 }
 
@@ -80,6 +84,22 @@ extension FreeRunningHomeView {
             .overlay(
                 CustomRoundedRectangle(cornerRadiusTopLeft: 10, cornerRadiusTopRight: 79, cornerRadiusBottomLeft: 45, cornerRadiusBottomRight: 45)
             )
-        
+    }
+    
+    private func userLocationToString() {
+        let locationManger = CLLocationManager()
+        if let location = locationManger.location {
+            CLGeocoder().reverseGeocodeLocation(location) { placemarks, error in
+                if let error = error {
+                    print("Reverse geocoding error: \(error.localizedDescription)")
+                } else if let placemark = placemarks?.first {
+                    let area = placemark.administrativeArea ?? ""
+                    let city = placemark.locality ?? ""
+                    let town = placemark.subLocality ?? ""
+                    
+                    self.userLocation = "\(area) \(city) \(town)"
+                }
+            }
+        }
     }
 }

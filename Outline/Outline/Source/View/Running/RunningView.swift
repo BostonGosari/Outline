@@ -10,7 +10,6 @@ struct RunningView: View {
     @StateObject var runningManager = RunningManager.shared
     @StateObject var runningViewModel: RunningViewModel
     @StateObject var digitalTimerViewModel = DigitalTimerViewModel()
-    @StateObject var locationManager = LocationManager()
     
     @State var checkRunning = true
     @State var selection = 0
@@ -27,7 +26,7 @@ struct RunningView: View {
             ZStack(alignment: .bottom) {
                 Color("Gray900").ignoresSafeArea()
                 TabView(selection: $selection) {
-                    RunningMapView(locationManager: locationManager, runningViewModel: runningViewModel, digitalTimerViewModel: digitalTimerViewModel, selection: $selection)
+                    RunningMapView(runningViewModel: runningViewModel, digitalTimerViewModel: digitalTimerViewModel, selection: $selection)
                         .tag(0)
                     WorkoutDataView(runningViewModel: runningViewModel, digitalTimerViewModel: digitalTimerViewModel)
                         .tag(1)
@@ -42,9 +41,10 @@ struct RunningView: View {
                 }
                 
                     ZStack {
-                        if !locationManager.checkDistance && checkRunning {
-                            Color.black.opacity(0.5)
-                        }
+                        //TODO: Distance Check
+//                        if !locationManager.checkDistance && checkRunning {
+//                            Color.black.opacity(0.5)
+//                        }
                         VStack(spacing: 10) {
                             Text("자유코스로 변경할까요?")
                                 .font(.title2)
@@ -80,8 +80,9 @@ struct RunningView: View {
                                 .foregroundStyle(Color.gray900)
                         }
                         .frame(maxHeight: .infinity, alignment: .bottom)
-                        .offset(y: !locationManager.checkDistance && checkRunning ? 0 : UIScreen.main.bounds.height / 2 + 2)
-                        .animation(.easeInOut, value: locationManager.checkDistance)
+                        //TODO: Check Distace
+//                        .offset(y: !locationManager.checkDistance && checkRunning ? 0 : UIScreen.main.bounds.height / 2 + 2)
+//                        .animation(.easeInOut, value: locationManager.checkDistance)
                     .ignoresSafeArea()
                 }
             }
