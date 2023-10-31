@@ -9,7 +9,7 @@ import SwiftUI
 import MapKit
 
 struct BottomScrollView: View {
-    @ObservedObject var homeTabViewModel: HomeTabViewModel
+    @ObservedObject var viewModel: GPSArtHomeViewModel
     @State private var loading = true
     @Binding var selectedCourse: CourseWithDistance?
     @Binding var showDetailView: Bool
@@ -30,7 +30,7 @@ struct BottomScrollView: View {
             }
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 8) {
-                    ForEach(homeTabViewModel.withoutRecommendedCourses, id: \.id) { currentCourse in
+                    ForEach(viewModel.withoutRecommendedCourses, id: \.id) { currentCourse in
                         ZStack {
                             Button {
                                 withAnimation(.openCard) {

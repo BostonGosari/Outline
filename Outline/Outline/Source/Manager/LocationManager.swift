@@ -11,8 +11,6 @@ final class LocationManager: NSObject, CLLocationManagerDelegate, ObservableObje
     
     @Published var userLocations: [CLLocationCoordinate2D] = []
     @Published var currentLocation: CLLocationCoordinate2D?
-    @Published var isAuthorized = false
-    @Published var isNext = false
     @Published var nearStartLocation = false
     @Published var isShowCompleteSheet = false
     
@@ -37,26 +35,6 @@ final class LocationManager: NSObject, CLLocationManagerDelegate, ObservableObje
     func stopUpdateLocation() {
         locationManager.stopUpdatingLocation()
     }
-    
-//    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-//        checkLocationAuthorizationStatus()
-//    }
-//    
-//    func checkLocationAuthorizationStatus() {
-//        switch locationManager.authorizationStatus {
-//        case .notDetermined:
-//            locationManager.requestWhenInUseAuthorization()
-//            isAuthorized = false
-//        case .restricted, .denied:
-//            isAuthorized = false
-//            isNext = true
-//        case .authorizedAlways, .authorizedWhenInUse:
-//            isAuthorized = true
-//            isNext = true
-//        @unknown default:
-//            break
-//        }
-//    }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let currentLocation = locations.last?.coordinate {

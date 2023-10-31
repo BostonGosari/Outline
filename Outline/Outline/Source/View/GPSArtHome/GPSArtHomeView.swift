@@ -8,8 +8,7 @@
 import SwiftUI
 
 struct GPSArtHomeView: View {
-    
-    @ObservedObject var homeTabViewModel: HomeTabViewModel
+    @StateObject private var viewModel = GPSArtHomeViewModel()
     
     @State private var scrollOffset: CGFloat = 0
     @State private var scrollXOffset: CGFloat = 0
@@ -17,10 +16,9 @@ struct GPSArtHomeView: View {
     @State var currentIndex: Int = 0
     @State private var loading = true
     @State private var selectedCourse: CourseWithDistance?
-    @State private var showDetailView = false
     
     // 받아오는 변수
-    @Binding var isShow: Bool
+    @Binding var showDetailView: Bool
     @Namespace private var namespace
     
     let indexWidth: CGFloat = 25
@@ -41,15 +39,15 @@ struct GPSArtHomeView: View {
                         getCurrentOffsetView
                         
                         HStack(spacing: 0) {
-                            ForEach(homeTabViewModel.recommendedCoures.indices, id: \.self) { index in
+                            ForEach(viewModel.recommendedCoures.indices, id: \.self) { index in
                                 Button {
                                     withAnimation(.openCard) {
-                                        selectedCourse = homeTabViewModel.recommendedCoures[index]
+                                        selectedCourse = viewModel.recommendedCoures[index]
                                         showDetailView = true
                                     }
                                 } label: {
-                                    BigCardView(course: homeTabViewModel.recommendedCoures[index], loading: $loading, index: index, currentIndex: currentIndex, namespace: namespace, isShow: isShow)
-                                        .scaleEffect(selectedCourse?.id == homeTabViewModel.recommendedCoures[index].course.id ? 0.96 : 1)
+                                    BigCardView(course: viewModel.recommendedCoures[index], loading: $loading, index: index, currentIndex: currentIndex, namespace: namespace, showDetailView: showDetailView)
+                                        .scaleEffect(selectedCourse?.id == viewModel.recommendedCoures[index].course.id ? 0.96 : 1)
                                 }
                                 .buttonStyle(CardButton())
                                 .disabled(loading)
@@ -65,7 +63,7 @@ struct GPSArtHomeView: View {
                     .scrollTargetBehavior(.viewAligned)
                     .padding(.vertical, -20)
                     
-                    if homeTabViewModel.courses.isEmpty {
+                    if viewModel.courses.isEmpty {
                         Rectangle()
                             .frame(
                                 width: UIScreen.main.bounds.width * 0.84,
@@ -84,11 +82,17 @@ struct GPSArtHomeView: View {
                         }
                     }
                     
-                    BottomScrollView(homeTabViewModel: homeTabViewModel, selectedCourse: $selectedCourse, showDetailView: $showDetailView, namespace: namespace)
+                    BottomScrollView(viewModel: viewModel, selectedCourse: $selectedCourse, showDetailView: $showDetailView, namespace: namespace)
                 }
             }
             .overlay(alignment: .top) {
                 InlineHeader(loading: loading, scrollOffset: scrollOffset)
+            }
+            .onAppear {
+                viewModel.getAllCoursesFromFirebase()
+            }
+            .refreshable {
+                viewModel.fetchRecommendedCourses()
             }
             
             if let selectedCourse, showDetailView {

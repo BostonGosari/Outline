@@ -8,13 +8,8 @@
 import SwiftUI
 
 struct HomeTabView: View {
-    
-    @StateObject private var homeTabViewModel = HomeTabViewModel()
     @StateObject private var runningManager = RunningManager.shared
-    @State var selectedTab: Tab = .GPSArtRunning
-    
-    @Namespace var namespace
-    @State var currentIndex = 0
+    @State private var selectedTab: Tab = .GPSArtRunning
     @State private var showDetailView = false
     
     var body: some View {
@@ -28,7 +23,7 @@ struct HomeTabView: View {
                             case .freeRunning:
                                 FreeRunningHomeView()
                             case .GPSArtRunning:
-                                GPSArtHomeView(homeTabViewModel: homeTabViewModel, isShow: $showDetailView)
+                                GPSArtHomeView(showDetailView: $showDetailView)
                             case .myRecord:
                                 RecordView()
                             }
@@ -41,13 +36,6 @@ struct HomeTabView: View {
                             .ignoresSafeArea()
                     }
                 }
-                .onAppear {
-                    homeTabViewModel.locationManager.requestWhenInUseAuthorization()
-                    homeTabViewModel.getAllCoursesFromFirebase()
-                }
-                .refreshable {
-                    homeTabViewModel.fetchRecommendedCourses()
-                }
             }
             
             if runningManager.start {
@@ -58,7 +46,6 @@ struct HomeTabView: View {
                 RunningView()
             }
         }
-        .tint(.customPrimary)
     }
 }
 
