@@ -84,7 +84,7 @@ struct RunningMapView: View {
             locationManager.requestLocation()
         }
         .navigationDestination(isPresented: $navigateToFinishRunningView) {
-            FinishRunningView(homeTabViewModel: homeTabViewModel)
+            FinishRunningView()
                 .navigationBarBackButtonHidden()
         }
     }
@@ -257,7 +257,7 @@ extension RunningMapView {
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
         .padding(EdgeInsets(top: 422, leading: 8, bottom: 34, trailing: 8))
         .navigationDestination(isPresented: $moveToFinishView) {
-            FinishRunningView(homeTabViewModel: homeTabViewModel)
+            FinishRunningView()
                 .navigationBarBackButtonHidden()
         }
     }

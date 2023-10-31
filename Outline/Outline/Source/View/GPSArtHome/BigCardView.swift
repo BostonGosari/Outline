@@ -89,7 +89,7 @@ struct BigCardView: View {
                             .stroke()
                             .foregroundColor(Color.primaryColor)
                     }
-                Text("#\(formatDuration(course.course.courseDuration))")
+                Text("#\(course.course.courseDuration.formatDuration())")
                     .frame(width: 70, height: 23)
                     .font(.tag2)
                     .background {
