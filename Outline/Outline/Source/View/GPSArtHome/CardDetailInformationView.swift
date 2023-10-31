@@ -21,7 +21,7 @@ struct CardDetailInformationView: View {
                         Capsule()
                             .stroke()
                     }
-                    .foregroundColor(.primaryColor)
+                    .foregroundColor(.customPrimary)
                 Text("\(selectedCourse.course.courseLength, specifier: "%.0f")km")
                     .frame(width: 70, height: 23)
                     .background {
@@ -57,7 +57,7 @@ struct CardDetailInformationView: View {
                         Image(systemName: "location")
                         Text("거리")
                     }
-                    .foregroundColor(.primaryColor)
+                    .foregroundColor(.customPrimary)
                     Text("\(selectedCourse.course.courseLength, specifier: "%.0f")km")
                 }
                 HStack {
@@ -65,7 +65,7 @@ struct CardDetailInformationView: View {
                         Image(systemName: "clock")
                         Text("예상 소요 시간")
                     }
-                    .foregroundColor(.primaryColor)
+                    .foregroundColor(.customPrimary)
                     Text("\(selectedCourse.course.courseDuration.formatDuration())")
                 }
                 HStack {
@@ -73,7 +73,7 @@ struct CardDetailInformationView: View {
                         Image(systemName: "arrow.triangle.turn.up.right.diamond")
                         Text("골목길")
                     }
-                    .foregroundColor(.primaryColor)
+                    .foregroundColor(.customPrimary)
                     Text(stringForAlley(selectedCourse.course.alley))
                 }
             }

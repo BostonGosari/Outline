@@ -38,7 +38,7 @@ struct CardDetailView: View {
         ZStack {
             ScrollView {
                 ZStack {
-                    Color.gray900Color
+                    Color.gray
                         .onScrollViewOffsetChanged { value in
                             handleScrollViewOffset(value)
                         }
@@ -95,7 +95,7 @@ struct CardDetailView: View {
                         .font(.title2)
                     Text("앗! 현재 루트와 멀리 떨어져 있어요.")
                         .font(.subBody)
-                        .foregroundColor(.gray300Color)
+                        .foregroundColor(.gray300)
                     Image("AnotherLocation")
                         .resizable()
                         .scaledToFit()
@@ -108,12 +108,12 @@ struct CardDetailView: View {
                     } label: {
                         Text("자유코스로 변경하기")
                             .font(.button)
-                            .foregroundStyle(Color.blackColor)
+                            .foregroundStyle(Color.customBlack)
                             .padding()
                             .frame(maxWidth: .infinity)
                             .background {
                                 RoundedRectangle(cornerRadius: 15, style: .continuous)
-                                    .foregroundStyle(Color.primaryColor)
+                                    .foregroundStyle(Color.customPrimary)
                             }
                     }
                     .padding()
@@ -126,16 +126,16 @@ struct CardDetailView: View {
                         Text("홈으로 돌아가기")
                             .font(.button)
                             .bold()
-                            .foregroundStyle(Color.whiteColor)
+                            .foregroundStyle(Color.customWhite)
                     }
                 }
                 .frame(height: UIScreen.main.bounds.height / 2)
                 .frame(maxWidth: .infinity)
                 .background {
                     RoundedRectangle(cornerRadius: 30, style: .continuous)
-                        .stroke(Color.primaryColor, lineWidth: 2)
+                        .stroke(Color.customPrimary, lineWidth: 2)
                     RoundedRectangle(cornerRadius: 30, style: .continuous)
-                        .foregroundStyle(Color.gray900Color)
+                        .foregroundStyle(Color.gray900)
                 }
                 .frame(maxHeight: .infinity, alignment: .bottom)
                 .offset(y: showAlert ? 0 : UIScreen.main.bounds.height / 2 + 2)
@@ -154,7 +154,7 @@ struct CardDetailView: View {
                 .shadow(color: .white, radius: 0.5, y: 0.5)
         } placeholder: {
             Rectangle()
-                .foregroundColor(.gray700Color)
+                .foregroundColor(.gray700)
         }
         .matchedGeometryEffect(id: selectedCourse.id, in: namespace)
         .frame(
@@ -223,7 +223,7 @@ struct CardDetailView: View {
         } label: {
             Image(systemName: "xmark.circle.fill")
                 .font(.system(size: 30))
-                .foregroundColor(viewSize > 15 ? .clear : .primaryColor)
+                .foregroundColor(viewSize > 15 ? .clear : .customPrimary)
         }
         .animation(.easeInOut, value: viewSize)
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
