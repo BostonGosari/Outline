@@ -16,82 +16,86 @@ struct BottomScrollView: View {
     var namespace: Namespace.ID
     
     var body: some View {
-        VStack(alignment: .leading) {
+        VStack(alignment: .leading, spacing: 0) {
             Text("이런 코스도 있어요.")
+                .padding(.leading, 16)
                 .font(.subtitle)
                 .foregroundColor(.white)
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack {
-                ForEach(homeTabViewModel.withoutRecommendedCourses, id: \.id) { currentCourse in
-                    ZStack {
-                        Button {
-                            withAnimation(.openCard) {
-                                selectedCourse = currentCourse
-                                showDetailView = true
-                            }
-                        } label: {
-                            AsyncImage(url: URL(string: currentCourse.course.thumbnail)) { image in
-                                image
-                                    .resizable()
-                                    .scaledToFill()
-                            } placeholder: {
-                                Rectangle()
-                                    .foregroundColor(.gray700Color)
-                            }
-                            .matchedGeometryEffect(id: currentCourse.id, in: namespace)
-                            .overlay {
-                                LinearGradient(
-                                    stops: [
-                                        Gradient.Stop(color: .black, location: 0.00),
-                                        Gradient.Stop(color: .black.opacity(0), location: 1.00)
-                                    ],
-                                    startPoint: UnitPoint(x: 0.5, y: 0.9),
-                                    endPoint: UnitPoint(x: 0.5, y: 0.1)
+                    ForEach(homeTabViewModel.withoutRecommendedCourses, id: \.id) { currentCourse in
+                        ZStack {
+                            Button {
+                                withAnimation(.openCard) {
+                                    selectedCourse = currentCourse
+                                    showDetailView = true
+                                }
+                            } label: {
+                                ZStack {
+                                    AsyncImage(url: URL(string: currentCourse.course.thumbnail)) { image in
+                                        image
+                                            .resizable()
+                                            .scaledToFill()
+                                    } placeholder: {
+                                        Rectangle()
+                                            .foregroundColor(.gray700Color)
+                                    }
+                                    .matchedGeometryEffect(id: currentCourse.id, in: namespace)
+                                    .overlay {
+                                        LinearGradient(
+                                            stops: [
+                                                Gradient.Stop(color: .black, location: 0.00),
+                                                Gradient.Stop(color: .black.opacity(0), location: 1.00)
+                                            ],
+                                            startPoint: UnitPoint(x: 0.5, y: 0.9),
+                                            endPoint: UnitPoint(x: 0.5, y: 0.1)
+                                        )
+                                        
+                                    }
+                                    
+                                    VStack(alignment: .leading, spacing: 4) {
+                                        Spacer()
+                                        Text("\(currentCourse.course.courseName)")
+                                            .font(Font.system(size: 20).weight(.semibold))
+                                            .foregroundColor(.white)
+                                        HStack(spacing: 0) {
+                                            Image(systemName: "mappin")
+                                                .foregroundColor(.gray600)
+                                            Text("\(currentCourse.course.locationInfo.locality) \(currentCourse.course.locationInfo.subLocality)")
+                                                .foregroundColor(.gray600)
+                                        }
+                                        .font(.caption)
+                                        .padding(.bottom, 21)
+                                    }
+                                    .padding(.leading, 20)
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                }
+                                .frame(
+                                    width: UIScreen.main.bounds.width * 0.4,
+                                    height: UIScreen.main.bounds.height * 0.25
                                 )
-                                
+                                .roundedCorners(5, corners: [.topLeft])
+                                .roundedCorners(30, corners: [.topRight, .bottomLeft, .bottomRight])
+                                .frame(
+                                    width: UIScreen.main.bounds.width * 0.4,
+                                    height: UIScreen.main.bounds.height * 0.25 + 1
+                                )
+                                .shadow(color: .white, radius: 0.5, x: 0, y: -0.5)
+                                .shadow(color: .white, radius: 0.5, x: 0.5, y: 0)
+                                .shadow(color: .white, radius: 0.5, x: 0, y: 0.5)
+                                .shadow(color: .white, radius: 0.5, x: -0.5, y: 0)
                             }
+                            .buttonStyle(CardButton())
                         }
-                        VStack(alignment: .leading, spacing: 4) {
-                            Spacer()
-                            Text("\(currentCourse.course.courseName)")
-                                .font(Font.system(size: 20).weight(.semibold))
-                                .foregroundColor(.white)
-                            HStack(spacing: 0) {
-                                Image(systemName: "mappin")
-                                    .foregroundColor(.gray600)
-                                Text("\(currentCourse.course.locationInfo.locality) \(currentCourse.course.locationInfo.subLocality)")
-                                    .foregroundColor(.gray600)
-                            }
-                            .font(.caption)
-                            .padding(.bottom, 21)
-                        }
-                        .frame(width: 164, height: 235)
-                        .offset(x: -20)
                     }
-                    .frame(width: 164, height: 236)
-                    .roundedCorners(5, corners: [.topLeft])
-                    .roundedCorners(30, corners: [.topRight, .bottomLeft, .bottomRight])
-                    .frame(width: 164, height: 237)
-                    .shadow(color: .white, radius: 0.5, x: 0, y: -0.5)
-                    .shadow(color: .white, radius: 0.5, x: 0.5, y: 0)
-                    .shadow(color: .white, radius: 0.5, x: 0, y: 0.5)
-                    .shadow(color: .white, radius: 0.5, x: -0.5, y: 0)
                 }
+                .scrollTargetLayout()
             }
-            .frame(height: 238)
+            .scrollTargetBehavior(.viewAligned)
+            .contentMargins(UIScreen.main.bounds.width * 0.05)
         }
-            .padding(.top, 10)
-            .padding(.bottom, 106)
-        }
-        .padding(.top, 33)
-        .safeAreaInset(edge: .leading) {
-            Color.clear
-                .frame(width: 16)
-        }
-        .safeAreaInset(edge: .trailing) {
-            Color.clear
-                .frame(width: 16)
-        }
+        .padding(.top, 30)
+        .padding(.bottom, 70)
     }
 }
 
