@@ -55,10 +55,10 @@ struct SummaryView: View {
                         .font(.system(size: 40, weight: .bold))
                       
                     Text("총시간")
-                        .font(.system(size: 11))
+                        .font(.system(size: 14))
                         .foregroundColor(Color.gray500)
-                        .padding(.bottom, 32)
-                    LazyVGrid(columns: Array(repeating: GridItem(), count: 2), spacing: 33) {
+                        .padding(.bottom, 24)
+                    LazyVGrid(columns: Array(repeating: GridItem(), count: 2), spacing: 24) {
                         workoutDataItem(value: "\((workoutManager.distance/1000).formatted(.number.precision(.fractionLength(2))))", label: "킬로미터")
                         workoutDataItem(value: workoutManager.pace > 0
                                         ? String(format: "%02d’%02d’’", Int(workoutManager.pace) / 60, Int(workoutManager.pace) % 60)
@@ -67,7 +67,7 @@ struct SummaryView: View {
                         workoutDataItem(value: "\(workoutManager.calorie.formatted(.number.precision(.fractionLength(0))))", label: "칼로리")
                         workoutDataItem(value: "\(workoutManager.averageHeartRate.formatted(.number.precision(.fractionLength(0))))", label: "BPM")
                     }
-                    .padding(.bottom, 20)
+                    .padding(.bottom, 36)
                     Spacer()
                     Text("Outline 앱에서 전체 활동 기록을 확인하세요.")
                         .font(.system(size: 10))
@@ -111,7 +111,7 @@ extension SummaryView {
                 .font(.system(size: 24, weight: .semibold))
                 .foregroundColor(.white)
             Text(label)
-                .font(.system(size: 11))
+                .font(.system(size: 14))
                 .foregroundColor(Color.gray500)
         }
     }
