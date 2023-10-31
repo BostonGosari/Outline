@@ -205,7 +205,7 @@ extension ControlsView {
                 Button {
                     showingConfirmation = false
                     workoutManager.endWorkout()
-                    let courseData = CourseData(courseName: startCourse.courseName, runningLength: startCourse.courseLength, heading: startCourse.heading, distance: startCourse.distance, coursePaths: convertToCLLocationCoordinates(startCourse.coursePaths), runningCourseId: "")
+                    let courseData = CourseData(courseName: startCourse.courseName, runningLength: startCourse.courseLength, heading: startCourse.heading, distance: startCourse.distance, coursePaths: ConvertCoordinateManager.convertToCLLocationCoordinates(startCourse.coursePaths), runningCourseId: "")
 
                     let healthData = HealthData(totalTime: 0.0, averageCadence: workoutManager.cadence, totalRunningDistance: workoutManager.distance, totalEnergy: workoutManager.calorie, averageHeartRate: workoutManager.heartRate, averagePace: workoutManager.pace, startDate: Date(), endDate: Date())
 

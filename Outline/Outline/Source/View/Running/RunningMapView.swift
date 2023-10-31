@@ -32,7 +32,7 @@ struct RunningMapView: View {
                 RunningMap(
                     locationManager: locationManager,
                     viewModel: viewModel,
-                    coordinates: convertToCLLocationCoordinates(course.coursePaths)
+                    coordinates:   ConvertCoordinateManager.convertToCLLocationCoordinates(course.coursePaths)
                 )
                 .ignoresSafeArea()
             } 
@@ -49,7 +49,7 @@ struct RunningMapView: View {
                 CourseGuidView(
                     userLocations: $locationManager.userLocations,
                     showBigGuid: $showBigGuid,
-                    coursePathCoordinates: convertToCLLocationCoordinates(course.coursePaths),
+                    coursePathCoordinates: ConvertCoordinateManager.convertToCLLocationCoordinates(course.coursePaths),
                     courseRotate: course.heading
                 )
                     .onTapGesture {
