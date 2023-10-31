@@ -26,7 +26,7 @@ struct HomeTabView: View {
                         Group {
                             switch selectedTab {
                             case .freeRunning:
-                                FreeRunningHomeView(homeTabViewModel: homeTabViewModel)
+                                FreeRunningHomeView()
                             case .GPSArtRunning:
                                 GPSArtHomeView(homeTabViewModel: homeTabViewModel, isShow: $showDetailView)
                             case .myRecord:
