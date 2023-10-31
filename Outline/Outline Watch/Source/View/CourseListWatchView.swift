@@ -88,7 +88,7 @@ struct CourseListWatchView: View {
                                 Text(course.courseName)
                                     .padding(.leading, 4)
                                     .frame(maxWidth: .infinity, alignment: .leading)
-                                PathGenerateManager.shared.caculateLines(width: 75, height: 75, coordinates: convertToCLLocationCoordinates(course.coursePaths))
+                                PathGenerateManager.shared.caculateLines(width: 75, height: 75, coordinates: ConvertCoordinateManager.convertToCLLocationCoordinates(course.coursePaths))
                                     .stroke(style: StrokeStyle(lineWidth: 4, lineCap: .round, lineJoin: .round))
                                     .scaledToFit()
                                     .frame(height: 75)

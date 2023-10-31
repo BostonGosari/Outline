@@ -32,7 +32,7 @@ struct SlideToUnlock: View {
         Capsule()
             .fill(
                 LinearGradient(
-                    colors: [width > 70 ? .primaryColor : .clear, .clear],
+                    colors: [width > 70 ? .customPrimary : .clear, .clear],
                     startPoint: .leading,
                     endPoint: .trailing
                 )
@@ -57,7 +57,7 @@ struct SlideToUnlock: View {
             Text("밀어서 그리기")
                 .font(.title3)
                 .bold()
-                .shimmer(color: .white20, highlight: .primaryColor)
+                .shimmer(color: .white20, highlight: .customPrimary)
                 .frame(maxWidth: .infinity)
         }
     }
@@ -65,7 +65,7 @@ struct SlideToUnlock: View {
     var dragCircle: some View {
         ZStack {
             Circle()
-                .foregroundColor(.primaryColor)
+                .foregroundColor(.customPrimary)
             if isReached {
                 ProgressView()
                     .tint(.black)

@@ -22,7 +22,7 @@ struct RunningView: View {
         self.homeTabViewModel = homeTabViewModel
         self._runningViewModel = StateObject(wrappedValue: RunningViewModel(homeTabViewModel: homeTabViewModel))
         
-        UIPageControl.appearance().currentPageIndicatorTintColor = UIColor.primary
+        UIPageControl.appearance().currentPageIndicatorTintColor = UIColor.customBlack
         UIPageControl.appearance().pageIndicatorTintColor = UIColor.white
     }
     
@@ -54,7 +54,7 @@ struct RunningView: View {
                                 .font(.title2)
                             Text("앗! 현재 루트와 멀리 떨어져 있어요.")
                                 .font(.subBody)
-                                .foregroundColor(.gray300Color)
+                                .foregroundColor(.gray300)
                             Image("AnotherLocation")
                                 .resizable()
                                 .scaledToFit()
@@ -65,12 +65,12 @@ struct RunningView: View {
                             } label: {
                                 Text("자유코스로 변경하기")
                                     .font(.button)
-                                    .foregroundStyle(Color.blackColor)
+                                    .foregroundStyle(Color.customBlack)
                                     .padding()
                                     .frame(maxWidth: .infinity)
                                     .background {
                                         RoundedRectangle(cornerRadius: 15, style: .continuous)
-                                            .foregroundStyle(Color.primaryColor)
+                                            .foregroundStyle(Color.customPrimary)
                                     }
                             }
                             .padding()
@@ -79,9 +79,9 @@ struct RunningView: View {
                         .frame(maxWidth: .infinity)
                         .background {
                             RoundedRectangle(cornerRadius: 30, style: .continuous)
-                                .stroke(Color.primaryColor, lineWidth: 2)
+                                .stroke(Color.customPrimary, lineWidth: 2)
                             RoundedRectangle(cornerRadius: 30, style: .continuous)
-                                .foregroundStyle(Color.gray900Color)
+                                .foregroundStyle(Color.gray900)
                         }
                         .frame(maxHeight: .infinity, alignment: .bottom)
                         .offset(y: !locationManager.checkDistance && checkRunning ? 0 : UIScreen.main.bounds.height / 2 + 2)
