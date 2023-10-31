@@ -25,7 +25,6 @@ struct MapWatchView: View {
                     ZStack {
                         Circle().foregroundStyle(.white).frame(width: 22)
                         Circle().foregroundStyle(.first).frame(width: 17)
-                        Circle().foregroundStyle(.black).frame(width: 15)
                     }
                     .onChange(of: userlocation.location) { _, userlocation in
                         if let user = userlocation {
@@ -34,7 +33,7 @@ struct MapWatchView: View {
                     }
                 }
                 MapPolyline(coordinates: course)
-                    .stroke(.gray.opacity(0.5), lineWidth: 8)
+                    .stroke(.white.opacity(0.5), lineWidth: 8)
                 MapPolyline(coordinates: userLocations)
                     .stroke(.first, lineWidth: 8)
             }
