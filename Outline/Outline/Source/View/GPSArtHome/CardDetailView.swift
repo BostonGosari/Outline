@@ -38,7 +38,7 @@ struct CardDetailView: View {
         ZStack {
             ScrollView {
                 ZStack {
-                    Color.gray
+                    Color.gray900
                         .onScrollViewOffsetChanged { value in
                             handleScrollViewOffset(value)
                         }
