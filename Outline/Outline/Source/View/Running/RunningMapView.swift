@@ -14,7 +14,6 @@ struct RunningMapView: View {
     @ObservedObject var locationManager: LocationManager
     @ObservedObject var runningViewModel: RunningViewModel
     @ObservedObject var digitalTimerViewModel: DigitalTimerViewModel
-    @ObservedObject var homeTabViewModel: HomeTabViewModel
     
     @GestureState var isLongPressed = false
     
@@ -161,7 +160,6 @@ extension RunningMapView {
                                     HapticManager.impact(style: .heavy)
                                     DispatchQueue.main.async {
                                         locationManager.stopUpdateLocation()
-                                        homeTabViewModel.userLocations = locationManager.userLocations
                                         runningViewModel.stopRunning()
                                         digitalTimerViewModel.counter = 0
                                         showCustomSheet = true

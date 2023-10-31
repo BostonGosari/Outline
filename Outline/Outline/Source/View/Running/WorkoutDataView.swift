@@ -50,5 +50,5 @@ extension WorkoutDataView {
 }
 
 #Preview {
-    WorkoutDataView(runningViewModel: RunningViewModel(homeTabViewModel: HomeTabViewModel()), digitalTimerViewModel: DigitalTimerViewModel())
+    WorkoutDataView(runningViewModel: RunningViewModel(), digitalTimerViewModel: DigitalTimerViewModel())
 }
