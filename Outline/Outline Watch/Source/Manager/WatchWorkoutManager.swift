@@ -188,7 +188,6 @@ class WatchWorkoutManager: NSObject, ObservableObject {
            }
        }
     
-
     func resetWorkout() {
         selectedWorkout = nil
         builder = nil
@@ -221,7 +220,7 @@ extension WatchWorkoutManager: HKWorkoutSessionDelegate {
             }
         }
     }
-
+    
     func workoutSession(_ workoutSession: HKWorkoutSession, didFailWithError error: Error) {
 
     }

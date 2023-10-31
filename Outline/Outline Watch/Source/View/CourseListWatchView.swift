@@ -10,6 +10,7 @@ import HealthKit
 import UIKit
 
 struct CourseListWatchView: View {
+    
     @EnvironmentObject var workoutManager: WatchWorkoutManager
     @EnvironmentObject var locationManager: LocationManager
 
@@ -41,7 +42,7 @@ struct CourseListWatchView: View {
                           }
                     } label: {
                         HStack {
-                            Image(systemName: "play.circle")
+                            Image(systemName: "play.circle.fill")
                             Text("자유러닝")
                         }
                         .foregroundColor(.black)
@@ -64,7 +65,7 @@ struct CourseListWatchView: View {
                         Text("OUTLINE iPhone을\n실행해서 경로를 제공받으세요.")
                             .multilineTextAlignment(.center)
                             .font(.caption)
-                            .foregroundStyle(.secondary)
+                            .foregroundStyle(.gray600)
                             .padding(.top, 32)
                     }
                     
@@ -108,9 +109,11 @@ struct CourseListWatchView: View {
                                 navigateDetailView.toggle()
                             } label: {
                                 VStack {
-                                    Image(systemName: "ellipsis")
-                                        .font(.system(size: 24))
-                                        .padding(20)
+                                    Image(systemName: "ellipsis.circle")
+                                        .foregroundStyle(.first, .clear)
+                                        .font(.system(size: 30))
+                                        .bold()
+                                        .padding(8)
                                     Spacer()
                                 }
                                 .contentShape(Rectangle())
@@ -137,8 +140,10 @@ struct CourseListWatchView: View {
                     }
             }
             .navigationTitle("러닝")
+            .tint(.first)
         }
     }
+    
     private func countdownView() -> some View {
        VStack {
            if countdownSeconds > 0 {
