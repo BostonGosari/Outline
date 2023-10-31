@@ -25,14 +25,7 @@ struct BigCardView: View {
                     .roundedCorners(10, corners: [.topLeft])
                     .roundedCorners(70, corners: [.topRight])
                     .roundedCorners(45, corners: [.bottomLeft, .bottomRight])
-                    .matchedGeometryEffect(id: "courseImage\(index)", in: namespace)
                     .shadow(color: .white, radius: 1, y: -1)
-                    .transition(
-                        .asymmetric(
-                            insertion: .opacity.animation(.easeInOut(duration: 0.1)),
-                            removal: .opacity.animation(.easeInOut(duration: 0.3).delay(0.2))
-                        )
-                    )
             }
         } placeholder: {
             Rectangle()
@@ -41,10 +34,12 @@ struct BigCardView: View {
                     loading = false
                 }
         }
+        .matchedGeometryEffect(id: course.id, in: namespace)
         .frame(
             width: UIScreen.main.bounds.width * 0.82,
             height: UIScreen.main.bounds.height * 0.55
         )
+        .transition(.identity)
         .overlay(alignment: .bottom) {
             if !loading {
                 courseInformation
