@@ -9,6 +9,7 @@ import SwiftUI
 
 struct Header: View {
     
+    var loading: Bool
     var scrollOffset: CGFloat
     
     var body: some View {
@@ -16,17 +17,22 @@ struct Header: View {
             Image("HeaderLogo")
                 .resizable()
                 .scaledToFit()
-                .padding(.leading, 36)
                 .frame(height: 36)
             Spacer()
-            Button { } label: {
-                Image(systemName: "person.crop.circle")
-                    .font(.title)
-                    .fontWeight(.light)
-                    .foregroundColor(Color.primaryColor)
+            if loading {
+                Circle()
+                    .foregroundColor(.gray700)
+                    .frame(width: 30)
+            } else {
+                Button { } label: {
+                    Image(systemName: "person.crop.circle")
+                        .font(.system(size: 30))
+                        .fontWeight(.light)
+                        .foregroundColor(Color.customPrimary)
+                }
             }
         }
-        .padding(.trailing)
+        .padding(.horizontal)
         .padding(.top)
         .frame(maxWidth: .infinity, alignment: .leading)
         .opacity(scrollOffset >= 20 ? 1 : 0)
@@ -35,6 +41,7 @@ struct Header: View {
 
 struct InlineHeader: View {
     
+    var loading: Bool
     var scrollOffset: CGFloat
     
     var body: some View {
@@ -44,11 +51,17 @@ struct InlineHeader: View {
                 .scaledToFit()
                 .frame(height: 36)
             Spacer()
-            Button { } label: {
-                Image(systemName: "person.crop.circle")
-                    .font(.title)
-                    .fontWeight(.light)
-                    .foregroundColor(Color.primaryColor)
+            if loading {
+                Circle()
+                    .foregroundColor(.gray700)
+                    .frame(width: 30)
+            } else {
+                Button { } label: {
+                    Image(systemName: "person.crop.circle")
+                        .font(.system(size: 30))
+                        .fontWeight(.light)
+                        .foregroundColor(Color.customPrimary)
+                }
             }
         }
         .padding(.horizontal)

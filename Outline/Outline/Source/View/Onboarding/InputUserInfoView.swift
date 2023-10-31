@@ -4,7 +4,7 @@
 //
 //  Created by 김하은 on 10/15/23.
 //
-import os
+
 import SwiftUI
 import HealthKit
 import HealthKitUI
@@ -19,7 +19,7 @@ struct InputUserInfoView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                Color.gray900Color
+                Color.gray900
                     .ignoresSafeArea()
                     .onTapGesture {
                         viewModel.currentPicker = .none
@@ -45,30 +45,30 @@ struct InputUserInfoView: View {
                             viewModel.defaultButtonTapped()
                         }, label: {
                             Image(systemName: viewModel.defaultButtonImage)
-                                .foregroundStyle(Color.primaryColor)
+                                .foregroundStyle(Color.customPrimary)
                         })
                         
                         Text("기본값 사용")
-                            .foregroundStyle(Color.gray400Color)
+                            .foregroundStyle(Color.gray400)
                     }
                     .padding(.bottom, 24)
                     
                     Text("정보를 입력하고 싶지 않은 경우, 기본값 사용을 선택해주세요.\n기본값을 바탕으로 러닝을 시작합니다.")
                         .multilineTextAlignment(.center)
                         .font(.caption)
-                        .foregroundStyle(Color.gray400Color)
+                        .foregroundStyle(Color.gray400)
                         .padding(.bottom, 36)
                     
                     NavigationLink {
                         OnboardingLocationAuthView()
                     } label: {
                         Text("완료")
-                            .foregroundStyle(Color.blackColor)
+                            .foregroundStyle(Color.customBlack)
                             .padding()
                             .frame(maxWidth: .infinity)
                             .background {
                                 RoundedRectangle(cornerRadius: 15)
-                                    .foregroundStyle(Color.primaryColor)
+                                    .foregroundStyle(Color.customPrimary)
                             }
                     }
                     .padding(.horizontal)
@@ -79,16 +79,10 @@ struct InputUserInfoView: View {
                     .zIndex(1)
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
             }
-            .foregroundStyle(Color.whiteColor)
+            .foregroundStyle(Color.customWhite)
             .navigationBarBackButtonHidden()
             .onAppear {
-            }
-            .onAppear {
-                healthKitManager.requestAuthorization { success in
-                    if success {
-                        print("health authorization allowed")
-                    }
-                }
+                viewModel.requestHealthAuthorization()
             }
         }
     }
@@ -107,8 +101,8 @@ extension InputUserInfoView {
                     }
                 
             }
-            .listRowBackground(Color.gray750Color)
-            .listRowSeparatorTint(Color.gray700Color)
+            .listRowBackground(Color.gray750)
+            .listRowSeparatorTint(Color.gray700)
             
             HStack {
                 Text("성별")
@@ -119,8 +113,8 @@ extension InputUserInfoView {
                         viewModel.currentPicker = .gender
                     }
             }
-            .listRowBackground(Color.gray750Color)
-            .listRowSeparatorTint(Color.gray700Color)
+            .listRowBackground(Color.gray750)
+            .listRowSeparatorTint(Color.gray700)
             
             HStack {
                 Text("신장")
@@ -131,8 +125,8 @@ extension InputUserInfoView {
                         viewModel.currentPicker = .height
                     }
             }
-            .listRowBackground(Color.gray750Color)
-            .listRowSeparatorTint(Color.gray700Color)
+            .listRowBackground(Color.gray750)
+            .listRowSeparatorTint(Color.gray700)
             
             HStack {
                 Text("체중")
@@ -143,8 +137,8 @@ extension InputUserInfoView {
                         viewModel.currentPicker = .weight
                     }
             }
-            .listRowBackground(Color.gray750Color)
-            .listRowSeparatorTint(Color.gray700Color)
+            .listRowBackground(Color.gray750)
+            .listRowSeparatorTint(Color.gray700)
         }
         .scrollDisabled(true)
         .scrollContentBackground(.hidden)
@@ -160,7 +154,7 @@ extension InputUserInfoView {
                     .datePickerStyle(WheelDatePickerStyle())
                     .labelsHidden()
                     .padding(.horizontal, 30)
-                    .background(Color.gray800Color)
+                    .background(Color.gray800)
                     .preferredColorScheme(.dark)
                 
             )
@@ -171,7 +165,7 @@ extension InputUserInfoView {
                         Text("\($0)")
                     }
                 }
-                    .background(Color.gray800Color)
+                    .background(Color.gray800)
                     .preferredColorScheme(.dark)
                     .pickerStyle(.wheel)
             )
@@ -183,7 +177,7 @@ extension InputUserInfoView {
                     }
                 }
                     .pickerStyle(.wheel)
-                    .background(Color.gray800Color)
+                    .background(Color.gray800)
                     .preferredColorScheme(.dark)
             )
         case .weight:
@@ -194,7 +188,7 @@ extension InputUserInfoView {
                     }
                 }
                     .pickerStyle(.wheel)
-                    .background(Color.gray800Color)
+                    .background(Color.gray800)
                     .preferredColorScheme(.dark)
             )
         case .none:

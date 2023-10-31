@@ -15,7 +15,7 @@ struct HomeTabView: View {
     
     @Namespace var namespace
     @State var currentIndex = 0
-    @State var isShow = false
+    @State private var showDetailView = false
     
     var body: some View {
         ZStack {
@@ -28,16 +28,16 @@ struct HomeTabView: View {
                             case .freeRunning:
                                 FreeRunningHomeView(homeTabViewModel: homeTabViewModel)
                             case .GPSArtRunning:
-                                GPSArtHomeView(homeTabViewModel: homeTabViewModel, isShow: $isShow, namespace: namespace)
+                                GPSArtHomeView(homeTabViewModel: homeTabViewModel, isShow: $showDetailView)
                             case .myRecord:
-                                RecordView(homeTabViewModel: homeTabViewModel)
+                                RecordView()
                             }
                         }
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                         
                         TabBar(selectedTab: $selectedTab)
                             .frame(maxHeight: .infinity, alignment: .bottom)
-                            .opacity(isShow ? 0 : 1)
+                            .opacity(showDetailView ? 0 : 1)
                             .ignoresSafeArea()
                     }
                 }
@@ -58,7 +58,7 @@ struct HomeTabView: View {
                 RunningView(homeTabViewModel: homeTabViewModel)
             }
         }
-        .tint(.primaryColor)
+        .tint(.customPrimary)
     }
 }
 

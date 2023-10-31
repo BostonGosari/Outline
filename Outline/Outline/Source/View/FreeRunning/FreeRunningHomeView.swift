@@ -38,7 +38,7 @@ struct FreeRunningHomeView: View {
                 .background(.black.opacity(0.6))
             
             VStack(spacing: 0) {
-                Header(scrollOffset: 20)
+                Header(loading: false, scrollOffset: 20)
                     .padding(.top, 8)
                 Spacer()
                 
@@ -74,7 +74,7 @@ extension FreeRunningHomeView {
     private var cardView: some View {
         Rectangle()
             .fill(
-                LinearGradient(colors: [.white20Color, .white20Color.opacity(0)], startPoint: .topLeading, endPoint: .bottomTrailing)
+                LinearGradient(colors: [.white20, .white20.opacity(0)], startPoint: .topLeading, endPoint: .bottomTrailing)
             )
             .roundedCorners(10, corners: [.topLeft])
             .roundedCorners(70, corners: [.topRight])
