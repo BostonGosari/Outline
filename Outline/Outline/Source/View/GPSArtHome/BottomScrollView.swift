@@ -38,7 +38,7 @@ struct BottomScrollView: View {
                                             .scaledToFill()
                                     } placeholder: {
                                         Rectangle()
-                                            .foregroundColor(.gray700Color)
+                                            .foregroundColor(.gray700)
                                     }
                                     .matchedGeometryEffect(id: currentCourse.id, in: namespace)
                                     .overlay {

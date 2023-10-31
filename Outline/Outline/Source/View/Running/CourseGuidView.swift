@@ -60,7 +60,7 @@ extension CourseGuidView {
             .caculateLines(width: width, height: height, coordinates: coursePathCoordinates)
             .stroke(lineWidth: showBigGuid ? 15 : 7)
             .scaleEffect(0.8)
-            .foregroundStyle(Color.blackColor.opacity(0.5))
+            .foregroundStyle(Color.customBlack.opacity(0.5))
             
     }
     
@@ -71,6 +71,6 @@ extension CourseGuidView {
             .caculateLines(width: width, height: height, coordinates: userLocations, canvasData: canvasData)
             .stroke(lineWidth: showBigGuid ? 15 : 7)
             .scaleEffect(0.8)
-            .foregroundStyle(Color.primaryColor)
+            .foregroundStyle(Color.customPrimary)
     }
 }

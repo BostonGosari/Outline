@@ -15,25 +15,25 @@ struct InputNicknameView: View {
     var body: some View {
         NavigationStack {
             ZStack(alignment: .top) {
-                Color.gray900Color
+                Color.gray900
                     .ignoresSafeArea()
                 
                 VStack(alignment: .leading, spacing: 0) {
                     Text("안녕하세요!\n어떻게 불러드릴까요?")
                         .font(.title)
                         .fontWeight(.semibold)
-                        .foregroundStyle(Color.whiteColor)
+                        .foregroundStyle(Color.customWhite)
                         .padding(.top, 30)
                     
                     Text("닉네임")
                         .padding(.top, 43)
                     
                     TextField("", text: $viewModel.nickname,
-                              prompt: Text(viewModel.defaultNickname).foregroundStyle(Color.gray400Color))
-                        .foregroundStyle(Color.whiteColor)
+                              prompt: Text(viewModel.defaultNickname).foregroundStyle(Color.gray400))
+                        .foregroundStyle(Color.customWhite)
                         .padding(.vertical, 13)
                         .padding(.horizontal, 16)
-                        .background(Color.gray700Color)
+                        .background(Color.gray700)
                         .clipShape(RoundedRectangle(cornerRadius: 10), style: /*@START_MENU_TOKEN@*/FillStyle()/*@END_MENU_TOKEN@*/)
                         .onChange(of: viewModel.nickname) {
                             viewModel.checkNicname()
@@ -88,7 +88,7 @@ extension InputNicknameView {
                Image(systemName: "chevron.backward")
                Text("다시 로그인")
             }
-            .foregroundStyle(Color.primaryColor)
+            .foregroundStyle(Color.customPrimary)
             .navigationBarBackButtonHidden(true)
         }
     }
@@ -96,14 +96,14 @@ extension InputNicknameView {
         Button("완료") {
             dismissKeyboard()
         }
-        .foregroundStyle(Color.primaryColor)
+        .foregroundStyle(Color.customPrimary)
     }
     
     @ViewBuilder
     private func checkView(_ text: String, _ isTrue: Bool) -> some View {
         HStack {
             Image(systemName: isTrue ? "checkmark" : "xmark")
-                .foregroundStyle(isTrue ? Color.greenColor : Color.redColor)
+                .foregroundStyle(isTrue ? Color.customGreen : Color.customRed)
             Text(text)
         }
     }

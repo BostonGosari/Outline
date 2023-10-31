@@ -58,7 +58,7 @@ struct HomeTabView: View {
                 RunningView(homeTabViewModel: homeTabViewModel)
             }
         }
-        .tint(.primaryColor)
+        .tint(.customPrimary)
     }
 }
 
