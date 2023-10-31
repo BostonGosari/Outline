@@ -33,7 +33,7 @@ struct BottomScrollView: View {
                     ForEach(viewModel.withoutRecommendedCourses, id: \.id) { currentCourse in
                         ZStack {
                             Button {
-                                withAnimation(.openCard) {
+                                withAnimation(.bouncy) {
                                     selectedCourse = currentCourse
                                     showDetailView = true
                                 }
@@ -43,6 +43,7 @@ struct BottomScrollView: View {
                                         ZStack {
                                             image
                                                 .resizable()
+                                                .matchedGeometryEffect(id: currentCourse.id, in: namespace)
                                             LinearGradient(
                                                 stops: [
                                                     Gradient.Stop(color: .black, location: 0.00),
@@ -68,10 +69,6 @@ struct BottomScrollView: View {
                                             .padding(.leading, 20)
                                             .frame(maxWidth: .infinity, alignment: .leading)
                                         }
-                                        .frame(
-                                            width: UIScreen.main.bounds.width * 0.4,
-                                            height: UIScreen.main.bounds.height * 0.25
-                                        )
                                         .roundedCorners(5, corners: [.topLeft])
                                         .roundedCorners(30, corners: [.topRight, .bottomLeft, .bottomRight])
                                         .shadow(color: .white, radius: 0.5, x: 0, y: -0.5)
@@ -84,14 +81,14 @@ struct BottomScrollView: View {
                                             .onDisappear {
                                                 loading = false
                                             }
-                                            .frame(
-                                                width: UIScreen.main.bounds.width * 0.4,
-                                                height: UIScreen.main.bounds.height * 0.25
-                                            )
                                             .roundedCorners(5, corners: [.topLeft])
                                             .roundedCorners(30, corners: [.topRight, .bottomLeft, .bottomRight])
                                     }
-                                    .matchedGeometryEffect(id: currentCourse.id, in: namespace)
+                                    .frame(
+                                        width: UIScreen.main.bounds.width * 0.4,
+                                        height: UIScreen.main.bounds.height * 0.25
+                                    )
+                                    .transition(.identity)
                                 }
                             }
                             .buttonStyle(CardButton())

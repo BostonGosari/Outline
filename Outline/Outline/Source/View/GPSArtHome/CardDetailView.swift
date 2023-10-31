@@ -55,7 +55,7 @@ struct CardDetailView: View {
                     .mask(
                         RoundedRectangle(cornerRadius: viewSize / 2, style: .continuous)
                     )
-                    .scaleEffect(viewSize / -600 + 1)
+                    .scaleEffect(showDetailView ? max(viewSize / -600 + 1, 0.9) : 0.9)
                     .gesture(isDraggable ? drag : nil)
                     
                     slideToUnlock
@@ -77,6 +77,7 @@ struct CardDetailView: View {
                 }
             }
             .scrollIndicators(scrollViewOffset > scrollStartRange ? .hidden : .automatic)
+            .scrollDisabled(!showDetailView)
             .ignoresSafeArea(edges: .top)
             .statusBarHidden()
                         
@@ -160,6 +161,7 @@ struct CardDetailView: View {
             width: UIScreen.main.bounds.width,
             height: UIScreen.main.bounds.height * 0.68
         )
+        .transition(.identity)
     }
     
     private var courseInformation: some View {
@@ -214,7 +216,7 @@ struct CardDetailView: View {
     
     private var closeButton: some View {
         Button {
-            withAnimation(.closeCard) {
+            withAnimation(.bouncy) {
                 showDetailView.toggle()
             }
         } label: {
@@ -243,7 +245,7 @@ extension CardDetailView {
                             viewSize = dragState.width
                         }
                         if viewSize > dragLimit {
-                            withAnimation(.closeCard) {
+                            withAnimation(.bouncy) {
                                 showDetailView = false
                                 dragState = .zero
                             }
@@ -257,7 +259,7 @@ extension CardDetailView {
                         }
                         
                         if viewSize > dragLimit {
-                            withAnimation(.closeCard) {
+                            withAnimation(.bouncy) {
                                 showDetailView = false
                                 dragState = .zero
                                 viewSize = 0.0
@@ -268,12 +270,12 @@ extension CardDetailView {
             }
             .onEnded { _ in
                 if viewSize >= dragLimit {
-                    withAnimation(.closeCard) {
+                    withAnimation(.bouncy) {
                         showDetailView = false
                         viewSize = 0.0
                     }
                 } else {
-                    withAnimation {
+                    withAnimation(.bouncy) {
                         dragState = .zero
                         viewSize = 0.0
                     }
@@ -287,11 +289,11 @@ extension CardDetailView {
 extension CardDetailView {
     
     private func close() {
-        withAnimation(.closeCard.delay(0.3)) {
+        withAnimation(.bouncy.delay(0.3)) {
             showDetailView = false
         }
         
-        withAnimation(.closeCard) {
+        withAnimation(.bouncy) {
             viewSize = .zero
         }
         
@@ -326,7 +328,7 @@ extension CardDetailView {
                 viewSize = scrollViewOffset - scrollStartRange
                 
                 if scrollViewOffset > scrollLimit {
-                    withAnimation(.closeCard) {
+                    withAnimation(.bouncy) {
                         showDetailView = false
                     }
                 }

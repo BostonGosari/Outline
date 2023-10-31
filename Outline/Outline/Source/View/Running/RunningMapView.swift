@@ -79,7 +79,7 @@ struct RunningMapView: View {
                     showBigGuide.toggle()
                     HapticManager.impact(style: .soft)
                 }
-                .animation(.openCard, value: showBigGuide)
+                .animation(.bouncy, value: showBigGuide)
             }
         }
         .sheet(isPresented: $showCustomSheet) {
