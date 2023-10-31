@@ -21,7 +21,7 @@ struct CardDetailInformationView: View {
                         Capsule()
                             .stroke()
                     }
-                    .foregroundColor(.primaryColor)
+                    .foregroundColor(.customPrimary)
                 Text("\(selectedCourse.course.courseLength, specifier: "%.0f")km")
                     .frame(width: 70, height: 23)
                     .background {
@@ -57,7 +57,7 @@ struct CardDetailInformationView: View {
                         Image(systemName: "location")
                         Text("거리")
                     }
-                    .foregroundColor(.primaryColor)
+                    .foregroundColor(.customPrimary)
                     Text("\(selectedCourse.course.courseLength, specifier: "%.0f")km")
                 }
                 HStack {
@@ -65,15 +65,15 @@ struct CardDetailInformationView: View {
                         Image(systemName: "clock")
                         Text("예상 소요 시간")
                     }
-                    .foregroundColor(.primaryColor)
-                    Text("\(formatDuration(selectedCourse.course.courseDuration))")
+                    .foregroundColor(.customPrimary)
+                    Text("\(selectedCourse.course.courseDuration.formatDuration())")
                 }
                 HStack {
                     HStack {
                         Image(systemName: "arrow.triangle.turn.up.right.diamond")
                         Text("골목길")
                     }
-                    .foregroundColor(.primaryColor)
+                    .foregroundColor(.customPrimary)
                     Text(stringForAlley(selectedCourse.course.alley))
                 }
             }
@@ -85,7 +85,7 @@ struct CardDetailInformationView: View {
                 .font(.title3)
                 .bold()
             VStack(alignment: .leading) {
-                MapInfoView(coordinates: convertToCLLocationCoordinates(selectedCourse.course.coursePaths))
+                MapInfoView(coordinates: ConvertCoordinateManager.convertToCLLocationCoordinates(selectedCourse.course.coursePaths))
                 .frame(height: 200)
                 .foregroundStyle(.thinMaterial)
                 Text("경로 제작 고사리님 @alsgiwc")
@@ -96,5 +96,27 @@ struct CardDetailInformationView: View {
         .padding(.vertical, 20)
         .padding(.horizontal)
         .padding(.bottom, 100)
+    }
+    
+    private func stringForCourseLevel(_ level: CourseLevel) -> String {
+        switch level {
+        case .easy:
+            return "쉬움"
+        case .normal:
+            return "보통"
+        case .hard:
+            return "어려움"
+        }
+    }
+    
+    private func stringForAlley(_ alley: Alley) -> String {
+        switch alley {
+        case .none:
+            return "없음"
+        case .few:
+            return "적음"
+        case .lots:
+            return "많음"
+        }
     }
 }
