@@ -9,9 +9,8 @@ import SwiftUI
 import CoreMotion
 
 class RunningViewModel: ObservableObject {
-    @Published var totalTime = 0.0
-    
     // 전송용 데이터
+    @Published var totalTime = 0.0
     @Published var totalSteps = 0.0
     @Published var totalDistance = 0.0
     @Published var kilocalorie = 0.0

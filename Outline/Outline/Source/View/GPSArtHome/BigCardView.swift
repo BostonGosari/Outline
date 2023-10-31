@@ -14,11 +14,11 @@ struct BigCardView: View {
     var index: Int
     var currentIndex: Int
     var namespace: Namespace.ID
-    var isShow: Bool
+    var showDetailView: Bool
     
     var body: some View {
         AsyncImage(url: URL(string: course.course.thumbnail)) { image in
-            if !isShow {
+            if !showDetailView {
                 image
                     .resizable()
                     .scaledToFit()
