@@ -30,7 +30,7 @@ struct HomeTabView: View {
                             case .GPSArtRunning:
                                 GPSArtHomeView(homeTabViewModel: homeTabViewModel, isShow: $showDetailView)
                             case .myRecord:
-                                RecordView(homeTabViewModel: homeTabViewModel)
+                                RecordView()
                             }
                         }
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -58,7 +58,7 @@ struct HomeTabView: View {
                 RunningView(homeTabViewModel: homeTabViewModel)
             }
         }
-        .tint(.primaryColor)
+        .tint(.customPrimary)
     }
 }
 

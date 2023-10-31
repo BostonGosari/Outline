@@ -71,7 +71,7 @@ struct GPSArtHomeView: View {
                                 width: UIScreen.main.bounds.width * 0.82,
                                 height: UIScreen.main.bounds.height * 0.55
                             )
-                            .foregroundColor(.gray700Color)
+                            .foregroundColor(.gray700)
                             .padding(.vertical, -20)
                     }
                     
@@ -79,7 +79,7 @@ struct GPSArtHomeView: View {
                         ForEach(0..<3) { index in
                             Rectangle()
                                 .frame(width: indexWidth, height: indexHeight)
-                                .foregroundColor(loading ? .gray700 : currentIndex == index ? .primaryColor : .white)
+                                .foregroundColor(loading ? .gray700 : currentIndex == index ? .customPrimary : .white)
                                 .animation(.bouncy, value: currentIndex)
                         }
                     }
@@ -92,7 +92,7 @@ struct GPSArtHomeView: View {
             }
             
                 if let selectedCourse, showDetailView {
-                    Color.gray900Color.ignoresSafeArea()
+                    Color.gray900.ignoresSafeArea()
                     CardDetailView(showDetailView: $showDetailView, selectedCourse: selectedCourse, currentIndex: currentIndex, namespace: namespace)
                         .zIndex(1)
                         .transition(
@@ -105,10 +105,10 @@ struct GPSArtHomeView: View {
                 }
         }
         .background(
-            BackgroundBlur(color: Color.thirdColor, padding: 0)
+            BackgroundBlur(color: Color.customThird, padding: 0)
         )
         .background(
-            BackgroundBlur(color: Color.primaryColor, padding: 500)
+            BackgroundBlur(color: Color.customPrimary, padding: 500)
         )
     }
     

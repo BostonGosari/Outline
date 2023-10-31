@@ -21,14 +21,14 @@ struct Header: View {
             Spacer()
             if loading {
                 Circle()
-                    .foregroundColor(.gray700Color)
+                    .foregroundColor(.gray700)
                     .frame(width: 30)
             } else {
                 Button { } label: {
                     Image(systemName: "person.crop.circle")
                         .font(.system(size: 30))
                         .fontWeight(.light)
-                        .foregroundColor(Color.primaryColor)
+                        .foregroundColor(Color.customPrimary)
                 }
             }
         }
@@ -53,14 +53,14 @@ struct InlineHeader: View {
             Spacer()
             if loading {
                 Circle()
-                    .foregroundColor(.gray700Color)
+                    .foregroundColor(.gray700)
                     .frame(width: 30)
             } else {
                 Button { } label: {
                     Image(systemName: "person.crop.circle")
                         .font(.system(size: 30))
                         .fontWeight(.light)
-                        .foregroundColor(Color.primaryColor)
+                        .foregroundColor(Color.customPrimary)
                 }
             }
         }
