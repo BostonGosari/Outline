@@ -19,7 +19,7 @@ struct RunningMapView: View {
     
     @State private var moveToFinishRunningView = false
     @State private var showCustomSheet = false
-    @State private var showBigGuid = false
+    @State private var showBigGuide = false
     
     @State private var checkUserLocation = true
     
@@ -65,7 +65,7 @@ struct RunningMapView: View {
             if let course = runningManager.startCourse,
                runningManager.runningType == .gpsArt {
                 CourseGuideView(
-                    userLocations: $locationManager.userLocations,
+                    userLocations: $viewModel.userLocations,
                     showBigGuide: $showBigGuide,
                     coursePathCoordinates: ConvertCoordinateManager.convertToCLLocationCoordinates(course.coursePaths),
                     courseRotate: course.heading
@@ -74,7 +74,6 @@ struct RunningMapView: View {
                     showBigGuide.toggle()
                     // TODO: 햅틱 추가
                 }
-                //                .animation(.easeInOut, value: showBigGuid)
                 .animation(.openCard, value: showBigGuide)
             }
         }
