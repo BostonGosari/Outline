@@ -10,26 +10,25 @@ import MapKit
 
 struct CardDetailInformationView: View {
     
-    @ObservedObject var homeTabViewModel: HomeTabViewModel
-    var currentIndex: Int
+    var selectedCourse: CourseWithDistance
     
     var body: some View {
         VStack(alignment: .leading, spacing: 24) {
             HStack {
-                Text("#\(stringForCourseLevel(homeTabViewModel.recommendedCoures[currentIndex].course.level))")
+                Text("#\(stringForCourseLevel(selectedCourse.course.level))")
                     .frame(width: 70, height: 23)
                     .background {
                         Capsule()
                             .stroke()
                     }
                     .foregroundColor(.primaryColor)
-                Text("\(homeTabViewModel.recommendedCoures[currentIndex].course.courseLength, specifier: "%.0f")km")
+                Text("\(selectedCourse.course.courseLength, specifier: "%.0f")km")
                     .frame(width: 70, height: 23)
                     .background {
                         Capsule()
                             .stroke()
                     }
-                Text("\(formatDuration(homeTabViewModel.recommendedCoures[currentIndex].course.courseDuration))")
+                Text("\(selectedCourse.course.courseDuration))")
                     .frame(width: 70, height: 23)
                     .background {
                         Capsule()
@@ -40,7 +39,7 @@ struct CardDetailInformationView: View {
             .font(.caption)
             
             VStack(alignment: .leading, spacing: 8) {
-                Text("\(homeTabViewModel.recommendedCoures[currentIndex].course.locationInfo.administrativeArea) \(homeTabViewModel.recommendedCoures[currentIndex].course.locationInfo.locality) \(homeTabViewModel.recommendedCoures[currentIndex].course.locationInfo.subLocality)")
+                Text("\(selectedCourse.course.locationInfo.administrativeArea) \(selectedCourse.course.locationInfo.locality) \(selectedCourse.course.locationInfo.subLocality)")
                     .font(.title3)
                     .bold()
                 Text("--")
@@ -59,7 +58,7 @@ struct CardDetailInformationView: View {
                         Text("거리")
                     }
                     .foregroundColor(.primaryColor)
-                    Text("\(homeTabViewModel.recommendedCoures[currentIndex].course.courseLength, specifier: "%.0f")km")
+                    Text("\(selectedCourse.course.courseLength, specifier: "%.0f")km")
                 }
                 HStack {
                     HStack {
@@ -67,7 +66,7 @@ struct CardDetailInformationView: View {
                         Text("예상 소요 시간")
                     }
                     .foregroundColor(.primaryColor)
-                    Text("\(formatDuration(homeTabViewModel.recommendedCoures[currentIndex].course.courseDuration))")
+                    Text("\(formatDuration(selectedCourse.course.courseDuration))")
                 }
                 HStack {
                     HStack {
@@ -75,7 +74,7 @@ struct CardDetailInformationView: View {
                         Text("골목길")
                     }
                     .foregroundColor(.primaryColor)
-                    Text(stringForAlley(homeTabViewModel.recommendedCoures[currentIndex].course.alley))
+                    Text(stringForAlley(selectedCourse.course.alley))
                 }
             }
             .padding(.horizontal, 10)
@@ -86,7 +85,7 @@ struct CardDetailInformationView: View {
                 .font(.title3)
                 .bold()
             VStack(alignment: .leading) {
-                MapInfoView(coordinates: convertToCLLocationCoordinates(homeTabViewModel.recommendedCoures[currentIndex].course.coursePaths))
+                MapInfoView(coordinates: convertToCLLocationCoordinates(selectedCourse.course.coursePaths))
                 .frame(height: 200)
                 .foregroundStyle(.thinMaterial)
                 Text("경로 제작 고사리님 @alsgiwc")
