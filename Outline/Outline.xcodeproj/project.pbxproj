@@ -54,7 +54,6 @@
 		29AE76E02ADE2BC700A46742 /* DateExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AE76DF2ADE2BC700A46742 /* DateExtention.swift */; };
 		29AE76E12ADE2C1700A46742 /* HomeTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01FDB9D2ADABD3D00BDA633 /* HomeTabView.swift */; };
 		29B205082AEA625100E63F39 /* PathGenerateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9528EFFF2AE042570056CCC6 /* PathGenerateManager.swift */; };
-		29C631542AE418E3005ECF55 /* DigitalTimerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C631532AE418E3005ECF55 /* DigitalTimerViewModel.swift */; };
 		29C631562AE418F1005ECF55 /* DigitalTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C631552AE418F1005ECF55 /* DigitalTimerView.swift */; };
 		29C9197E2ADE8F7F00AB0B5A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 29AE76AE2ADE0DEB00A46742 /* GoogleService-Info.plist */; };
 		29CC19A42AE95F2300B79610 /* RunningManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29CC19A32AE95F2300B79610 /* RunningManager.swift */; };
@@ -238,7 +237,6 @@
 		29AE76D92ADE2A5300A46742 /* InputNicknameViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InputNicknameViewModel.swift; path = Outline/Source/ViewModel/InputNicknameViewModel.swift; sourceTree = SOURCE_ROOT; };
 		29AE76DA2ADE2A5300A46742 /* InputUserInfoViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InputUserInfoViewModel.swift; path = Outline/Source/ViewModel/InputUserInfoViewModel.swift; sourceTree = SOURCE_ROOT; };
 		29AE76DF2ADE2BC700A46742 /* DateExtention.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtention.swift; sourceTree = "<group>"; };
-		29C631532AE418E3005ECF55 /* DigitalTimerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DigitalTimerViewModel.swift; sourceTree = "<group>"; };
 		29C631552AE418F1005ECF55 /* DigitalTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DigitalTimerView.swift; sourceTree = "<group>"; };
 		29CC19A32AE95F2300B79610 /* RunningManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningManager.swift; sourceTree = "<group>"; };
 		29CC42B92AF1069400578EF1 /* OnboardingLocationAuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingLocationAuthViewModel.swift; sourceTree = "<group>"; };
@@ -633,7 +631,6 @@
 				0EE92E6B2AE00A33003192FF /* FinishRunningViewModel.swift */,
 				0E9A5D472AE065A100C19FF3 /* ShareViewModel.swift */,
 				F0781D5F2AE163E00084ADD7 /* GPSArtHomeViewModel.swift */,
-				29C631532AE418E3005ECF55 /* DigitalTimerViewModel.swift */,
 				F035240F2AE35AF800CCD8A6 /* RunningViewModel.swift */,
 				0E2B4CBE2AE744E8002A5103 /* RecordDetailViewModel.swift */,
 			);
@@ -1060,7 +1057,6 @@
 				0E29F65F2ADF6CDD00F5EF5C /* RunningMapViewModel.swift in Sources */,
 				BB52396D2ADD6DBB00646494 /* CustomRoundedRectangle.swift in Sources */,
 				295232FA2AEED0630020EAFA /* BigCardView.swift in Sources */,
-				29C631542AE418E3005ECF55 /* DigitalTimerViewModel.swift in Sources */,
 				F096974D2ADBDBB000C38AF4 /* CardDetailView.swift in Sources */,
 				0EE92E7D2AE02DDC003192FF /* FreeRunningHomeView.swift in Sources */,
 				29FEDC5E2AED81A800C1F80B /* Shimmer.swift in Sources */,
@@ -1269,7 +1265,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Outline Watch/Preview Content\"";
-				DEVELOPMENT_TEAM = HQS8MXQ7B5;
+				DEVELOPMENT_TEAM = 77745NX67K;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1282,7 +1278,7 @@
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "당신의 러닝 데이터를 저장하기 위하여 사용됩니다. ";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "당신의 위치는 러닝을 기록하는데 사용됩니다. 운동 중에 백그라운드에서도 위치 서비스를 사용합니다.";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.helia.outline;
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = hyunjun.run;
 				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = NO;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1290,7 +1286,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				OTHER_LDFLAGS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = com.helia.outline.watchkitapp;
+				PRODUCT_BUNDLE_IDENTIFIER = hyunjun.run.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -1325,7 +1321,7 @@
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "당신의 러닝 데이터를 저장하기 위하여 사용됩니다. ";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "당신의 위치는 러닝을 기록하는데 사용됩니다. 운동 중에 백그라운드에서도 위치 서비스를 사용합니다.";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.helia.outline;
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = hyunjun.run;
 				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = NO;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1333,7 +1329,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				OTHER_LDFLAGS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = com.helia.outline.watchkitapp;
+				PRODUCT_BUNDLE_IDENTIFIER = hyunjun.run.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -1356,7 +1352,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Outline/Preview Content\"";
-				DEVELOPMENT_TEAM = HQS8MXQ7B5;
+				DEVELOPMENT_TEAM = 77745NX67K;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				"EXCLUDED_ARCHS[sdk=*]" = "";
@@ -1383,7 +1379,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				OTHER_LDFLAGS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = com.helia.outline;
+				PRODUCT_BUNDLE_IDENTIFIER = hyunjun.run;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1429,7 +1425,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				OTHER_LDFLAGS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = com.helia.outline;
+				PRODUCT_BUNDLE_IDENTIFIER = hyunjun.run;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SWIFT_EMIT_LOC_STRINGS = YES;

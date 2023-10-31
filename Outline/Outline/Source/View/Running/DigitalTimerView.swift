@@ -9,12 +9,12 @@ import SwiftUI
 
 struct DigitalTimerView: View {
     
-    @ObservedObject var digitalTimerViewModel: DigitalTimerViewModel
+    private var runningManager = RunningManager.shared
 
     var body: some View {
-        let timer = digitalTimerViewModel.counter
+        let timer = runningManager.counter
         
-        Text(digitalTimerViewModel.formattedTime(timer))
+        Text(runningManager.formattedTime(timer))
             .font(Font.custom("Pretendard-ExtraBold", size: 70))
             .foregroundColor(.customPrimary)
             .monospacedDigit()
@@ -24,5 +24,5 @@ struct DigitalTimerView: View {
 }
 
 #Preview {
-    DigitalTimerView(digitalTimerViewModel: DigitalTimerViewModel())
+    DigitalTimerView()
 }
