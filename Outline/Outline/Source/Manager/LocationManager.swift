@@ -38,25 +38,25 @@ final class LocationManager: NSObject, CLLocationManagerDelegate, ObservableObje
         locationManager.stopUpdatingLocation()
     }
     
-    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-        checkLocationAuthorizationStatus()
-    }
-    
-    func checkLocationAuthorizationStatus() {
-        switch locationManager.authorizationStatus {
-        case .notDetermined:
-            locationManager.requestWhenInUseAuthorization()
-            isAuthorized = false
-        case .restricted, .denied:
-            isAuthorized = false
-            isNext = true
-        case .authorizedAlways, .authorizedWhenInUse:
-            isAuthorized = true
-            isNext = true
-        @unknown default:
-            break
-        }
-    }
+//    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+//        checkLocationAuthorizationStatus()
+//    }
+//    
+//    func checkLocationAuthorizationStatus() {
+//        switch locationManager.authorizationStatus {
+//        case .notDetermined:
+//            locationManager.requestWhenInUseAuthorization()
+//            isAuthorized = false
+//        case .restricted, .denied:
+//            isAuthorized = false
+//            isNext = true
+//        case .authorizedAlways, .authorizedWhenInUse:
+//            isAuthorized = true
+//            isNext = true
+//        @unknown default:
+//            break
+//        }
+//    }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let currentLocation = locations.last?.coordinate {
@@ -105,7 +105,7 @@ final class LocationManager: NSObject, CLLocationManagerDelegate, ObservableObje
         let runningManager = RunningManager.shared
         
         if let course = runningManager.startCourse?.coursePaths {
-            let guideCourse = convertToCLLocationCoordinates(course)
+            let guideCourse = ConvertCoordinateManager.convertToCLLocationCoordinates(course)
             let progressManager = CourseProgressManager(guideCourse: guideCourse, userCourse: userLocations)
             progressManager.calculate()
             return progressManager.getProgress()

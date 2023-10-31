@@ -25,7 +25,7 @@ struct MetricsView: View {
                             .font(.system(size: 28).weight(.semibold))
                             .foregroundColor(.white)
                         Text("킬로미터")
-                            .font(.system(size: 11))
+                            .font(.system(size: 14))
                             .multilineTextAlignment(.center)
                             .foregroundColor(Color.gray500)
 
@@ -37,7 +37,7 @@ struct MetricsView: View {
                             .font(.system(size: 28).weight(.semibold))
                             .foregroundColor(.white)
                         Text("페이스")
-                            .font(.system(size: 11))
+                            .font(.system(size: 14))
                             .multilineTextAlignment(.center)
                             .foregroundColor(Color.gray500)
                     }
