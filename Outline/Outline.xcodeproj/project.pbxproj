@@ -136,7 +136,7 @@
 		F0492E232ADD545200F6EADD /* CourseListWatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0492E222ADD545200F6EADD /* CourseListWatchView.swift */; };
 		F05C7D562ADC565E006842DB /* PreferenceKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05C7D552ADC565E006842DB /* PreferenceKey.swift */; };
 		F05C97172ADA879100D5D959 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05C97162ADA879100D5D959 /* LocationManager.swift */; };
-		F06298A92AE18A50007AB2D3 /* ConvertFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06298A82AE18A50007AB2D3 /* ConvertFunctions.swift */; };
+		F06298A92AE18A50007AB2D3 /* ConvertCoordinateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06298A82AE18A50007AB2D3 /* ConvertCoordinateManager.swift */; };
 		F06298AB2AE1998D007AB2D3 /* MapInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06298AA2AE1998D007AB2D3 /* MapInfoView.swift */; };
 		F06298AF2AE1A2ED007AB2D3 /* CountDown.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06298AE2AE1A2ED007AB2D3 /* CountDown.swift */; };
 		F06B93622ADB847500387DEB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0AC8A9E2AD94C1F0061612C /* ContentView.swift */; };
@@ -312,7 +312,7 @@
 		F0492E222ADD545200F6EADD /* CourseListWatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseListWatchView.swift; sourceTree = "<group>"; };
 		F05C7D552ADC565E006842DB /* PreferenceKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferenceKey.swift; sourceTree = "<group>"; };
 		F05C97162ADA879100D5D959 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
-		F06298A82AE18A50007AB2D3 /* ConvertFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvertFunctions.swift; sourceTree = "<group>"; };
+		F06298A82AE18A50007AB2D3 /* ConvertCoordinateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvertCoordinateManager.swift; sourceTree = "<group>"; };
 		F06298AA2AE1998D007AB2D3 /* MapInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapInfoView.swift; sourceTree = "<group>"; };
 		F06298AE2AE1A2ED007AB2D3 /* CountDown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountDown.swift; sourceTree = "<group>"; };
 		F06B936D2ADC279100387DEB /* SlideToUnlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideToUnlock.swift; sourceTree = "<group>"; };
@@ -531,7 +531,7 @@
 			isa = PBXGroup;
 			children = (
 				BB5239272ADAF72A00646494 /* Logger.swift */,
-				F06298A82AE18A50007AB2D3 /* ConvertFunctions.swift */,
+				F06298A82AE18A50007AB2D3 /* ConvertCoordinateManager.swift */,
 				293C97DE2AE6C454007821F5 /* WatchConnectivityManager.swift */,
 			);
 			path = Shared;
@@ -670,7 +670,7 @@
 				F0AC8AFB2AD963690061612C /* ViewModel */,
 				F0AC8B052AD965290061612C /* Model */,
 				F05C97152ADA877A00D5D959 /* Manager */,
-				F0AC8B082AD965470061612C /* DesignSystem */,
+				F0AC8B082AD965470061612C /* Utils */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -723,26 +723,26 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		F0AC8B082AD965470061612C /* DesignSystem */ = {
+		F0AC8B082AD965470061612C /* Utils */ = {
 			isa = PBXGroup;
 			children = (
 				F0AC8B092AD965520061612C /* Component */,
 				F0AC8B0A2AD965570061612C /* Extension */,
 				F0AC8B0B2AD965650061612C /* Modifier */,
 			);
-			path = DesignSystem;
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		F0AC8B092AD965520061612C /* Component */ = {
 			isa = PBXGroup;
 			children = (
+				299803582AE0181900A9A134 /* Confetti */,
 				F06B936D2ADC279100387DEB /* SlideToUnlock.swift */,
 				F09697462ADBCD6000C38AF4 /* Shape.swift */,
 				F05C7D552ADC565E006842DB /* PreferenceKey.swift */,
 				BB5239572ADC396300646494 /* BackgroundBlur.swift */,
 				BB52396C2ADD6DBB00646494 /* CustomRoundedRectangle.swift */,
 				0E29F6522ADF6C3A00F5EF5C /* RunningPopup.swift */,
-				299803582AE0181900A9A134 /* Confetti */,
 				0EE92E6D2AE00AE5003192FF /* CompleteButton.swift */,
 				F06298AE2AE1A2ED007AB2D3 /* CountDown.swift */,
 				29FEDC5D2AED81A800C1F80B /* Shimmer.swift */,
@@ -1039,7 +1039,7 @@
 				BB397D0D2AE65AF800F92A43 /* MapView.swift in Sources */,
 				2975F0962AE3E1790046C00B /* CornerRectangleModifier.swift in Sources */,
 				954CB2B82AE6492B005EB2E9 /* OnboardingLocationAuthView.swift in Sources */,
-				F06298A92AE18A50007AB2D3 /* ConvertFunctions.swift in Sources */,
+				F06298A92AE18A50007AB2D3 /* ConvertCoordinateManager.swift in Sources */,
 				954CB2BA2AE654BA005EB2E9 /* OnboardingNotificationAuthView.swift in Sources */,
 				29C631562AE418F1005ECF55 /* DigitalTimerView.swift in Sources */,
 				299803532ADF1DC200A9A134 /* CoreMotionViewModel.swift in Sources */,
