@@ -16,18 +16,18 @@ struct GPSArtHomeView: View {
     
     @State var currentIndex: Int = 0
     @State private var loading = true
-    @State private var selectedCourse: GPSArtCourse?
+    @State private var selectedCourse: CourseWithDistance?
     @State private var showDetailView = false
     
     // 받아오는 변수
     @Binding var isShow: Bool
-    var namespace: Namespace.ID
-    
+    @Namespace private var namespace
+
     let indexWidth: CGFloat = 25
     let indexHeight: CGFloat = 3
     
     var body: some View {
-        ZStack(alignment: .top) {
+        ZStack {
             ScrollView {
                 Color.clear.frame(height: 0)
                     .onScrollViewOffsetChanged { offset in
@@ -37,13 +37,14 @@ struct GPSArtHomeView: View {
                 
                 VStack {
                     ScrollView(.horizontal, showsIndicators: false) {
+                        
                         getCurrentOffsetView
                         
                         HStack(spacing: 0) {
                             ForEach(homeTabViewModel.recommendedCoures.indices, id: \.self) { index in
                                 Button {
                                     withAnimation(.openCard) {
-                                        selectedCourse = homeTabViewModel.recommendedCoures[index].course
+                                        selectedCourse = homeTabViewModel.recommendedCoures[index]
                                         showDetailView = true
                                     }
                                 } label: {
@@ -83,23 +84,16 @@ struct GPSArtHomeView: View {
                         }
                     }
                     
-                    BottomScrollView(homeTabViewModel: homeTabViewModel)
+                    BottomScrollView(homeTabViewModel: homeTabViewModel, selectedCourse: $selectedCourse, showDetailView: $showDetailView, namespace: namespace)
                 }
-                .transition(
-                    .asymmetric(
-                        insertion: .opacity.animation(.easeInOut(duration: 0.1)),
-                        removal: .opacity.animation(.easeInOut(duration: 0.3).delay(0.2))
-                    )
-                )
             }
             .overlay(alignment: .top) {
                 InlineHeader(loading: loading, scrollOffset: scrollOffset)
             }
             
-            .overlay {
                 if let selectedCourse, showDetailView {
                     Color.gray900Color.ignoresSafeArea()
-                    CardDetailView(homeTabViewModel: homeTabViewModel, isShow: $showDetailView, course: selectedCourse, currentIndex: currentIndex, namespace: namespace)
+                    CardDetailView(showDetailView: $showDetailView, selectedCourse: selectedCourse, currentIndex: currentIndex, namespace: namespace)
                         .zIndex(1)
                         .transition(
                             .asymmetric(
@@ -109,7 +103,6 @@ struct GPSArtHomeView: View {
                         )
                         .ignoresSafeArea()
                 }
-            }
         }
         .background(
             BackgroundBlur(color: Color.thirdColor, padding: 0)

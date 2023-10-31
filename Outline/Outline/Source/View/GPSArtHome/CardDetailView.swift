@@ -12,13 +12,12 @@ struct CardDetailView: View {
     
     @State private var isUnlocked = false
     @State private var showAlert = false
-    @ObservedObject var homeTabViewModel: HomeTabViewModel
     @StateObject var runningManager = RunningManager.shared
     private let locationManager = CLLocationManager()
     @Environment(\.dismiss) var dismiss
     
-    @Binding var isShow: Bool
-    var course: GPSArtCourse
+    @Binding var showDetailView: Bool
+    var selectedCourse: CourseWithDistance
     var currentIndex: Int
     var namespace: Namespace.ID
     
@@ -35,9 +34,6 @@ struct CardDetailView: View {
     private let dragLimit: CGFloat = 60
     private let scrollLimit: CGFloat = 40
     
-    // 커진 카드의 크기
-    private let cardHeight: CGFloat = 575
-    
     var body: some View {
         ZStack {
             ScrollView {
@@ -52,7 +48,7 @@ struct CardDetailView: View {
                             courseImage
                             courseInformation
                         }
-                        CardDetailInformationView(homeTabViewModel: homeTabViewModel, currentIndex: currentIndex)
+                        CardDetailInformationView(selectedCourse: selectedCourse)
                             .opacity(appear[2] ? 1 : 0)
                             .offset(y: appear[2] ? 0 : fadeInOffset)
                     }
@@ -73,7 +69,7 @@ struct CardDetailView: View {
                         .opacity(progress * 0.8)
                         .animation(.easeInOut, value: progress)
                 }
-                .onChange(of: isShow) { _, _ in
+                .onChange(of: showDetailView) { _, _ in
                     fadeOut()
                 }
                 .onAppear {
@@ -106,7 +102,7 @@ struct CardDetailView: View {
                         .frame(width: 120)
                     Button {
                         showAlert = false
-                        isShow = false
+                        showDetailView = false
                         runningManager.start = true
                         runningManager.startFreeRun()
                     } label: {
@@ -124,7 +120,7 @@ struct CardDetailView: View {
                     Button {
                         withAnimation {
                             showAlert = false
-                            isShow = false
+                            showDetailView = false
                         }
                     } label: {
                         Text("홈으로 돌아가기")
@@ -150,36 +146,34 @@ struct CardDetailView: View {
     // MARK: - View Components
     
     private var courseImage: some View {
-        AsyncImage(url: URL(string: course.thumbnail)) { image in
+        AsyncImage(url: URL(string: selectedCourse.course.thumbnail)) { image in
             image
                 .resizable()
                 .scaledToFit()
                 .roundedCorners(45, corners: [.bottomRight])
                 .shadow(color: .white, radius: 0.5, y: 0.5)
-                .matchedGeometryEffect(id: "courseImage\(currentIndex)", in: namespace)
-                .transition(
-                    .asymmetric(
-                        insertion: .opacity.animation(.easeInOut(duration: 0.1)),
-                        removal: .opacity.animation(.easeInOut(duration: 0.3).delay(0.2))
-                    )
-                )
         } placeholder: {
             Rectangle()
                 .foregroundColor(.gray700Color)
         }
-        .frame(height: UIScreen.main.bounds.height * 0.68)
+        .matchedGeometryEffect(id: selectedCourse.id, in: namespace)
+        .frame(
+            width: UIScreen.main.bounds.width,
+            height: UIScreen.main.bounds.height * 0.68
+        )
+        .transition(.identity)
     }
     
     private var courseInformation: some View {
         VStack(alignment: .leading) {
             VStack(alignment: .leading, spacing: 0) {
-                Text("\(course.courseName)")
+                Text("\(selectedCourse.course.courseName)")
                     .font(.largeTitle)
                     .bold()
                     .padding(.bottom, 8)
                 HStack {
                     Image(systemName: "mappin")
-                    Text("\(course.locationInfo.locality) \(course.locationInfo.subLocality) • 내 위치에서 \(homeTabViewModel.recommendedCoures[currentIndex].distance/1000, specifier: "%.1f")km")
+                    Text("\(selectedCourse.course.locationInfo.locality) \(selectedCourse.course.locationInfo.subLocality) • 내 위치에서 \(selectedCourse.distance/1000, specifier: "%.1f")km")
                 }
                 .font(.caption)
                 .fontWeight(.semibold)
@@ -200,12 +194,12 @@ struct CardDetailView: View {
             .onChange(of: isUnlocked) { _, newValue in
                 if newValue {
                     let userLocation = locationManager.location?.coordinate
-                    let course = course.coursePaths
+                    let course = selectedCourse.course.coursePaths
                     
                     if let userLocation = userLocation, runningManager.checkDistance(userLocation: userLocation, course: course) {
-                        runningManager.startCourse = homeTabViewModel.recommendedCoures[currentIndex].course
+                        runningManager.startCourse = selectedCourse.course
                         runningManager.startGPSArtRun()
-                        isShow = false
+                        showDetailView = false
                         runningManager.start = true
                         isUnlocked = false
                     } else {
@@ -224,7 +218,7 @@ struct CardDetailView: View {
     private var closeButton: some View {
         Button {
             withAnimation(.closeCard) {
-                isShow.toggle()
+                showDetailView.toggle()
             }
         } label: {
             Image(systemName: "xmark.circle.fill")
@@ -253,7 +247,7 @@ extension CardDetailView {
                         }
                         if viewSize > dragLimit {
                             withAnimation(.closeCard) {
-                                isShow = false
+                                showDetailView = false
                                 dragState = .zero
                             }
                         }
@@ -267,7 +261,7 @@ extension CardDetailView {
                         
                         if viewSize > dragLimit {
                             withAnimation(.closeCard) {
-                                isShow = false
+                                showDetailView = false
                                 dragState = .zero
                                 viewSize = 0.0
                             }
@@ -278,7 +272,7 @@ extension CardDetailView {
             .onEnded { _ in
                 if viewSize >= dragLimit {
                     withAnimation(.closeCard) {
-                        isShow = false
+                        showDetailView = false
                         viewSize = 0.0
                     }
                 } else {
@@ -297,7 +291,7 @@ extension CardDetailView {
     
     private func close() {
         withAnimation(.closeCard.delay(0.3)) {
-            isShow = false
+            showDetailView = false
         }
         
         withAnimation(.closeCard) {
@@ -336,7 +330,7 @@ extension CardDetailView {
                 
                 if scrollViewOffset > scrollLimit {
                     withAnimation(.closeCard) {
-                        isShow = false
+                        showDetailView = false
                     }
                 }
             } else {
@@ -344,8 +338,4 @@ extension CardDetailView {
             }
         }
     }
-}
-
-#Preview {
-    HomeTabView()
 }
