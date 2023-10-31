@@ -4,7 +4,7 @@
 //
 //  Created by 김하은 on 10/15/23.
 //
-import os
+
 import SwiftUI
 import HealthKit
 import HealthKitUI
@@ -82,13 +82,7 @@ struct InputUserInfoView: View {
             .foregroundStyle(Color.customWhite)
             .navigationBarBackButtonHidden()
             .onAppear {
-            }
-            .onAppear {
-                healthKitManager.requestAuthorization { success in
-                    if success {
-                        print("health authorization allowed")
-                    }
-                }
+                viewModel.requestHealthAuthorization()
             }
         }
     }
