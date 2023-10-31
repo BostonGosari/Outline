@@ -10,7 +10,6 @@ import SwiftUI
 
 struct RecordDetailView: View {
     @Environment(\.dismiss) private var dismiss
-    @ObservedObject var homeTabViewModel: HomeTabViewModel
     @StateObject var viewModel = RecordDetailViewModel()
     
     @State private var showRenameSheet = false
@@ -115,7 +114,7 @@ struct RecordDetailView: View {
             }
         }
         .navigationDestination(isPresented: $viewModel.navigateToShareMainView) {
-            ShareMainView(homeTabViewModel: homeTabViewModel, runningData: viewModel.shareData)
+            ShareMainView(runningData: viewModel.shareData)
                 .navigationBarBackButtonHidden()
         }
         .onAppear {

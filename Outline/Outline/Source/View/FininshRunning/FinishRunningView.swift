@@ -12,10 +12,7 @@ struct FinishRunningView: View {
     @StateObject private var viewModel = FinishRunningViewModel()
     var gradientColors: [Color] = [.blackColor, .blackColor, .blackColor, .blackColor, .black50Color, .blackColor.opacity(0)]
     
-    @ObservedObject var homeTabViewModel: HomeTabViewModel
-    
-    @FetchRequest (entity: CoreRunningRecord.entity(), sortDescriptors: [])
-    var runningRecord: FetchedResults<CoreRunningRecord>
+    @FetchRequest (entity: CoreRunningRecord.entity(), sortDescriptors: []) var runningRecord: FetchedResults<CoreRunningRecord>
 
     var body: some View {
         NavigationStack {
@@ -76,7 +73,7 @@ struct FinishRunningView: View {
             }
         }
         .navigationDestination(isPresented: $viewModel.navigateToShareMainView) {
-            ShareMainView(homeTabViewModel: homeTabViewModel, runningData: viewModel.shareData)
+            ShareMainView(runningData: viewModel.shareData)
                 .navigationBarBackButtonHidden()
         }
         .onAppear {

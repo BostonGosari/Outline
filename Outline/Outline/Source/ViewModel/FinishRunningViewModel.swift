@@ -64,7 +64,7 @@ class FinishRunningViewModel: ObservableObject {
             }
             
             runningData[0].data = String(format: "%.2f", healthData.totalRunningDistance/1000)
-            runningData[1].data = formatMinuteSeconds(healthData.totalTime)
+            runningData[1].data = healthData.totalTime.formatMinuteSeconds()
             runningData[2].data = healthData.averagePace.formattedAveragePace()
             runningData[3].data  = "\(Int(healthData.averageHeartRate))"
             runningData[4].data  = "\(Int(healthData.totalEnergy))"

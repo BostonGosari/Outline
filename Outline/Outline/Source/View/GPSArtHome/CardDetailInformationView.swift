@@ -66,7 +66,7 @@ struct CardDetailInformationView: View {
                         Text("예상 소요 시간")
                     }
                     .foregroundColor(.primaryColor)
-                    Text("\(formatDuration(selectedCourse.course.courseDuration))")
+                    Text("\(selectedCourse.course.courseDuration.formatDuration())")
                 }
                 HStack {
                     HStack {
@@ -96,5 +96,27 @@ struct CardDetailInformationView: View {
         .padding(.vertical, 20)
         .padding(.horizontal)
         .padding(.bottom, 100)
+    }
+    
+    private func stringForCourseLevel(_ level: CourseLevel) -> String {
+        switch level {
+        case .easy:
+            return "쉬움"
+        case .normal:
+            return "보통"
+        case .hard:
+            return "어려움"
+        }
+    }
+    
+    private func stringForAlley(_ alley: Alley) -> String {
+        switch alley {
+        case .none:
+            return "없음"
+        case .few:
+            return "적음"
+        case .lots:
+            return "많음"
+        }
     }
 }
