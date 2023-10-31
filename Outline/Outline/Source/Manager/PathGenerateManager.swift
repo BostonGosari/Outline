@@ -49,6 +49,7 @@ final class PathGenerateManager {
     }
     func caculateLines(width: Double, height: Double, coordinates: [CLLocationCoordinate2D], canvasData: CanvasData) -> some Shape {
         var path = Path()
+        
         if coordinates.isEmpty {
             return path
         }
