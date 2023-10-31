@@ -41,7 +41,7 @@ struct GPSArtHomeView: View {
                         HStack(spacing: 0) {
                             ForEach(viewModel.recommendedCoures.indices, id: \.self) { index in
                                 Button {
-                                    withAnimation(.openCard) {
+                                    withAnimation(.bouncy) {
                                         selectedCourse = viewModel.recommendedCoures[index]
                                         showDetailView = true
                                     }
@@ -70,6 +70,9 @@ struct GPSArtHomeView: View {
                                 width: UIScreen.main.bounds.width * 0.84,
                                 height: UIScreen.main.bounds.height * 0.55
                             )
+                            .roundedCorners(10, corners: [.topLeft])
+                            .roundedCorners(70, corners: [.topRight])
+                            .roundedCorners(45, corners: [.bottomLeft, .bottomRight])
                             .foregroundColor(.gray700)
                             .padding(.top, -20)
                             .padding(.bottom, -10)
