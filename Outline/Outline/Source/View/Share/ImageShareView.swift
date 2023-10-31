@@ -40,7 +40,7 @@ struct ImageShareView: View {
     
     var body: some View {
         ZStack {
-            Color.gray900Color
+            Color.gray900
                 .ignoresSafeArea()
             
             VStack(spacing: 0) {
@@ -235,12 +235,12 @@ extension ImageShareView {
     private var pageIndicator: some View {
         HStack(spacing: 0) {
             Rectangle()
-                .fill(Color.whiteColor)
+                .fill(Color.customWhite)
                 .frame(width: 25, height: 3)
                 .padding(.trailing, 5)
             
             Rectangle()
-                .fill(Color.primaryColor)
+                .fill(Color.customPrimary)
                 .frame(width: 25, height: 3)
         }
         .frame(maxWidth: .infinity, alignment: .center)
@@ -255,7 +255,7 @@ extension ImageShareView {
             } label: {
                 Circle()
                     .fill(.black)
-                    .stroke(selectPhotoMode ?  Color.gray200Color : Color.primaryColor, lineWidth: 5)
+                    .stroke(selectPhotoMode ?  Color.gray200 : Color.customPrimary, lineWidth: 5)
             }
             .padding(.horizontal, 12)
             
@@ -264,7 +264,7 @@ extension ImageShareView {
             } label: {
                 Circle()
                     .fill(.white)
-                    .stroke(selectPhotoMode ? Color.primaryColor : Color.gray200Color, lineWidth: 5)
+                    .stroke(selectPhotoMode ? Color.customPrimary : Color.gray200, lineWidth: 5)
             }
             .padding(.horizontal, 12)
         }
@@ -280,7 +280,7 @@ extension ImageShareView {
             .caculateLines(width: imageSize, height: imageSize, coordinates: viewModel.runningData.userLocations)
             .stroke(lineWidth: 5)
             .scale(0.5)
-            .foregroundStyle(selectPhotoMode ? Color.primaryColor : Color.white)
+            .foregroundStyle(selectPhotoMode ? Color.customPrimary : Color.customWhite)
     }
     
     private var dragGesture: some Gesture {

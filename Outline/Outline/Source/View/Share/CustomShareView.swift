@@ -26,12 +26,11 @@ struct CustomShareView: View {
     @State private var imageWidth: CGFloat = 0
     @State private var imageHeight: CGFloat = 0
     
-    
     private let pathManager = PathGenerateManager.shared
     
     var body: some View {
         ZStack {
-            Color.gray900Color
+            Color.gray900
                 .ignoresSafeArea()
             
             VStack(spacing: 0) {
@@ -120,7 +119,7 @@ extension CustomShareView {
         VStack(alignment: .leading, spacing: 0) {
             Text(viewModel.runningData.courseName)
                 .font(.headline)
-                .foregroundStyle(Color.primaryColor)
+                .foregroundStyle(Color.customPrimary)
             Text(viewModel.runningData.runningDate)
                 .font(.body)
             
@@ -153,7 +152,7 @@ extension CustomShareView {
     private var pageIndicator: some View {
         HStack(spacing: 0) {
             Rectangle()
-                .fill(Color.primaryColor)
+                .fill(Color.customPrimary)
                 .frame(width: 25, height: 3)
                 .padding(.trailing, 5)
             
@@ -198,13 +197,13 @@ struct TagButton: View {
         }  label: {
             Text(text)
                 .font(.tag2)
-                .foregroundStyle(isShow ? Color.blackColor : Color.whiteColor)
+                .foregroundStyle(isShow ? Color.customBlack : Color.customWhite)
                 .padding(.horizontal, 16)
                 .padding(.vertical, 8)
                 .background {
                     Capsule()
-                        .fill(isShow ? Color.primaryColor : Color.clear)
-                        .stroke(isShow ? Color.primaryColor : Color.white)
+                        .fill(isShow ? Color.customPrimary : Color.clear)
+                        .stroke(isShow ? Color.customPrimary : Color.white)
                 }
         }
     }

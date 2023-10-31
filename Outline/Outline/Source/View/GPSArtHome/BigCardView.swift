@@ -29,7 +29,7 @@ struct BigCardView: View {
             }
         } placeholder: {
             Rectangle()
-                .foregroundColor(.gray700Color)
+                .foregroundColor(.gray700)
                 .onDisappear {
                     loading = false
                 }
@@ -82,14 +82,14 @@ struct BigCardView: View {
             HStack {
                 Text("#\(course.course.courseLength, specifier: "%.0f")km")
                     .font(.tag2)
-                    .foregroundColor(Color.primaryColor)
+                    .foregroundColor(Color.customPrimary)
                     .frame(width: 70, height: 23)
                     .background {
                         Capsule()
                             .stroke()
-                            .foregroundColor(Color.primaryColor)
+                            .foregroundColor(Color.customPrimary)
                     }
-                Text("#\(formatDuration(course.course.courseDuration))")
+                Text("#\(course.course.courseDuration.formatDuration())")
                     .frame(width: 70, height: 23)
                     .font(.tag2)
                     .background {
