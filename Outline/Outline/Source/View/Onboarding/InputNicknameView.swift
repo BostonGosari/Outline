@@ -9,7 +9,7 @@ import SwiftUI
 
 struct InputNicknameView: View {
     @Environment(\.dismiss) private var dismiss
-    @StateObject var dataTestViewModel = DataTestViewModel()
+//    @StateObject var dataTestViewModel = DataTestViewModel()
     @StateObject var viewModel = InputNicknameViewModel()
     
     var body: some View {
@@ -72,8 +72,8 @@ struct InputNicknameView: View {
             }
         }
         .onAppear {
-            dataTestViewModel.readUserNameSet()
-            viewModel.userNames = dataTestViewModel.userNameSet
+//            dataTestViewModel.readUserNameSet()
+//            viewModel.userNames = dataTestViewModel.userNameSet
             viewModel.defaultNickname = "아웃라인메이트\(viewModel.userNames.count)"
         }
     }
