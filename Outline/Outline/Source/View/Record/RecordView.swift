@@ -11,7 +11,6 @@ import CoreLocation
 struct RecordView: View {
     @State var selectedIndex: Int = 0
     @ObservedObject var homeTabViewModel: HomeTabViewModel
-    @ObservedObject private var dataTestViewModel = DataTestViewModel()
     @FetchRequest (entity: CoreRunningRecord.entity(), sortDescriptors: [])
     var runningRecord: FetchedResults<CoreRunningRecord>
     @State private var records: [CoreRunningRecord] = []
@@ -131,7 +130,6 @@ struct RecordView: View {
 }
 
 struct RecordItem: View {
-    @ObservedObject private var dataTestViewModel = DataTestViewModel()
     var record: CoreRunningRecord
     private let pathManager = PathGenerateManager.shared
     var body: some View {

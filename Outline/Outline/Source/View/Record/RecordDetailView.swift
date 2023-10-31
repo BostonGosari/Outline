@@ -12,7 +12,6 @@ struct RecordDetailView: View {
     @Environment(\.dismiss) private var dismiss
     @ObservedObject var homeTabViewModel: HomeTabViewModel
     @StateObject var viewModel = RecordDetailViewModel()
-    @StateObject var dataModel = DataTestViewModel()
     
     @State private var showRenameSheet = false
     @State private var newCourseName = ""
@@ -148,7 +147,7 @@ struct RecordDetailView: View {
                     .padding(.bottom, 41)
                 
                 CompleteButton(text: "완료", isActive: completeButtonActive) {
-                    dataModel.updateRunningRecord(record, courseName: newCourseName)
+//                    dataModel.updateRunningRecord(record, courseName: newCourseName)
                     dismiss()
                 }
                 .padding(.bottom, 30)
@@ -165,7 +164,7 @@ struct RecordDetailView: View {
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 Button {
-                    dataModel.deleteRunningRecord(record)
+                    //dataModel.deleteRunningRecord(record)
                     dismiss()
                 } label: {
                     Image(systemName: "trash.fill")
