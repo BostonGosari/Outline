@@ -47,14 +47,28 @@ struct RecordView: View {
                             }
                         }
                         .padding(.bottom, 16)
-                        ForEach(filteredRecords, id: \.id) { record in
-                            NavigationLink {
-                                RecordDetailView(homeTabViewModel: homeTabViewModel, record: record)
-                                
-                            } label: {
-                                RecordItem(record: record)
+                        if filteredRecords.isEmpty {
+                            VStack(alignment: .center) {
+                                Image(systemName: "exclamationmark.circle")
+                                    .foregroundColor(Color.primaryColor)
+                                    .font(Font.system(size: 36))
+                                    .padding(.top, 150)
+                                Text("아직 러닝 기록이 없어요")
+                                    .font(.subBody)
+                                    .foregroundColor(Color.gray500Color)
+                                    .padding(.top, 14)
                             }
-                            .padding(.bottom, 8)
+                            .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        } else {
+                            ForEach(filteredRecords, id: \.id) { record in
+                                NavigationLink {
+                                    RecordDetailView(homeTabViewModel: homeTabViewModel, record: record)
+                                    
+                                } label: {
+                                    RecordItem(record: record)
+                                }
+                                .padding(.bottom, 8)
+                            }
                         }
                     }
                     .padding()
