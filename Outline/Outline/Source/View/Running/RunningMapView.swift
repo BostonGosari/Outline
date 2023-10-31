@@ -115,7 +115,7 @@ extension RunningMapView {
                             digitalTimerViewModel.stopTimer()
                         } label: {
                             Image(systemName: "pause.fill")
-                                .buttonModifier(color: Color.primaryColor, size: 29, padding: 29)
+                                .buttonModifier(color: Color.customPrimary, size: 29, padding: 29)
                             
                         }
                         .padding(.trailing, 64)
@@ -130,7 +130,7 @@ extension RunningMapView {
                             }
                         } label: {
                             Image("Data")
-                                .imageButtonModifier(color: Color.primaryColor, size: 24, padding: 18)
+                                .imageButtonModifier(color: Color.customPrimary, size: 24, padding: 18)
                         }
                     }
                     .frame(maxWidth: .infinity, alignment: .trailing)
@@ -178,7 +178,7 @@ extension RunningMapView {
                         digitalTimerViewModel.startTimer()
                     } label: {
                         Image(systemName: "play.fill")
-                            .buttonModifier(color: Color.primaryColor, size: 24, padding: 26)
+                            .buttonModifier(color: Color.customPrimary, size: 24, padding: 26)
                     }
                 }
                 .frame(maxWidth: .infinity, alignment: .center)
@@ -221,8 +221,8 @@ extension RunningMapView {
     private func runningFinishSheet() -> some View {
         ZStack {
             RoundedRectangle(cornerRadius: 25)
-                .stroke(Color.primaryColor)
-                .fill(Color.black70Color)
+                .stroke(Color.customPrimary)
+                .fill(Color.black70)
             
             VStack(alignment: .center, spacing: 0) {
                 Text("그림을 완성했어요!")
@@ -232,11 +232,11 @@ extension RunningMapView {
                 
                 Text("5m이내에 도착지점이 있어요")
                     .font(.subBody)
-                    .foregroundStyle(Color.gray300Color)
+                    .foregroundStyle(Color.gray300)
                 
                 Text("러닝을 완료할까요?")
                     .font(.subBody)
-                    .foregroundStyle(Color.gray300Color)
+                    .foregroundStyle(Color.gray300)
                     .padding(.bottom, 41)
                 
                 CompleteButton(text: "완료하기", isActive: true) {
@@ -269,7 +269,7 @@ extension Image {
             .resizable()
             .scaledToFit()
             .frame(width: size)
-            .foregroundStyle(Color.blackColor)
+            .foregroundStyle(Color.customBlack)
             .padding(padding)
             .background(
                 Circle()
@@ -280,7 +280,7 @@ extension Image {
     func buttonModifier(color: Color, size: CGFloat, padding: CGFloat) -> some View {
         self
             .font(.system(size: size))
-            .foregroundStyle(Color.blackColor)
+            .foregroundStyle(Color.customBlack)
             .padding(padding)
             .background(
                 Circle()

@@ -10,20 +10,20 @@ import SwiftUI
 struct FinishRunningView: View {
     @StateObject private var runningManager = RunningManager.shared
     @StateObject private var viewModel = FinishRunningViewModel()
-    var gradientColors: [Color] = [.blackColor, .blackColor, .blackColor, .blackColor, .black50Color, .blackColor.opacity(0)]
+    var gradientColors: [Color] = [.customBlack, .customBlack, .customBlack, .customBlack, .black50, .customBlack.opacity(0)]
     
     @FetchRequest (entity: CoreRunningRecord.entity(), sortDescriptors: []) var runningRecord: FetchedResults<CoreRunningRecord>
 
     var body: some View {
         NavigationStack {
             ZStack {
-                Color.gray900Color
+                Color.gray900
                     .ignoresSafeArea()
                 VStack {
                     ZStack(alignment: .topLeading) {
                         FinishRunningMap(userLocations: $viewModel.userLocations)
                             .roundedCorners(45, corners: .bottomRight)
-                            .shadow(color: .whiteColor, radius: 1.5)
+                            .shadow(color: .customWhite, radius: 1.5)
 
                         VStack(spacing: 0) {
                             Text("\(viewModel.date)")
@@ -59,7 +59,7 @@ struct FinishRunningView: View {
                     }, label: {
                         Text("나중에 자랑하기")
                             .underline(pattern: .solid)
-                            .foregroundStyle(Color.gray300Color)
+                            .foregroundStyle(Color.gray300)
                     })
                     .padding(.bottom, 8)
                 }
@@ -94,14 +94,14 @@ extension FinishRunningView {
                 Text("\(viewModel.startTime)-\(viewModel.endTime)")
             }
             .font(.subBody)
-            .foregroundStyle(Color.gray200Color)
+            .foregroundStyle(Color.gray200)
             
             HStack {
                 Image(systemName: "mappin")
-                    .foregroundStyle(Color.gray400Color)
+                    .foregroundStyle(Color.gray400)
                 
                 Text("\(viewModel.courseRegion)")
-                    .foregroundStyle(Color.gray200Color)
+                    .foregroundStyle(Color.gray200)
             }
             .font(.subBody)
         }
