@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct LoginView: View {
+    @AppStorage("userId") var userId: String?
     @Environment(\.window) var window: UIWindow?
-
     @StateObject private var loginViewModel = LoginViewModel()
     
     var body: some View {
@@ -47,6 +47,7 @@ struct LoginView: View {
                     } label: {
                         HStack {
                             Spacer()
+                                .frame(width: 60)
                             Image("logoApple")
                                 .resizable()
                                 .frame(width: 24, height: 29)
@@ -68,6 +69,7 @@ struct LoginView: View {
                     } label: {
                         HStack {
                             Spacer()
+                                .frame(width: 60)
                             Image("logoKakaotalk")
                                 .resizable()
                                 .scaledToFit()
