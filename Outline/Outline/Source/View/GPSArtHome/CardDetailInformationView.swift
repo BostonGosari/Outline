@@ -28,7 +28,7 @@ struct CardDetailInformationView: View {
                         Capsule()
                             .stroke()
                     }
-                Text("\(selectedCourse.course.courseDuration))")
+                Text("\(selectedCourse.course.courseDuration.formatDuration())")
                     .frame(width: 70, height: 23)
                     .background {
                         Capsule()
