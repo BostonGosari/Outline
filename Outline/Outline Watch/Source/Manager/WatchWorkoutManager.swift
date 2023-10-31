@@ -136,7 +136,7 @@ class WatchWorkoutManager: NSObject, ObservableObject {
     @Published var cadence: Double = 0
     @Published var workout: HKWorkout?
  
-    //평균 페이스 계산
+    // 평균 페이스 계산
     func calculateAveragePace(distance: Double, duration: TimeInterval) {
         if distance > 0 && duration > 0 {
             let averagePaceInSecondsPerMeter = duration / distance

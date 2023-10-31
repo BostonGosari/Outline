@@ -43,7 +43,6 @@ struct BottomScrollView: View {
                                         ZStack {
                                             image
                                                 .resizable()
-                                                .scaledToFill()
                                             LinearGradient(
                                                 stops: [
                                                     Gradient.Stop(color: .black, location: 0.00),
