@@ -62,7 +62,7 @@ class RecordDetailViewModel: ObservableObject {
                         datas.append(Coordinate(longitude: data.longitude, latitude: data.latitude))
                     }
                 }
-                userLocations = convertToCLLocationCoordinates(datas)
+                userLocations = ConvertCoordinateManager.convertToCLLocationCoordinates(datas)
             }
             
             let geocoder = CLGeocoder()

@@ -22,7 +22,7 @@ struct WatchTabView: View {
     var body: some View {
         TabView(selection: $selection) {
             ControlsView(startCourse: startCourse).tag(Tab.controls)
-            MapWatchView(course: convertToCLLocationCoordinates(startCourse.coursePaths), userLocations: $userLocations).tag(Tab.map)
+            MapWatchView(course: ConvertCoordinateManager.convertToCLLocationCoordinates(startCourse.coursePaths), userLocations: $userLocations).tag(Tab.map)
             MetricsView().tag(Tab.metrics)
         }
         .navigationBarBackButtonHidden(true)
@@ -46,8 +46,4 @@ struct WatchTabView: View {
             selection = .controls
         }
     }
-}
-
-func convertToCLLocationCoordinates(_ coordinates: [Coordinate]) -> [CLLocationCoordinate2D] {
-    return coordinates.map { CLLocationCoordinate2D(latitude: $0.latitude, longitude: $0.longitude) }
 }

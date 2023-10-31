@@ -85,7 +85,7 @@ struct CardDetailInformationView: View {
                 .font(.title3)
                 .bold()
             VStack(alignment: .leading) {
-                MapInfoView(coordinates: convertToCLLocationCoordinates(selectedCourse.course.coursePaths))
+                MapInfoView(coordinates: ConvertCoordinateManager.convertToCLLocationCoordinates(selectedCourse.course.coursePaths))
                 .frame(height: 200)
                 .foregroundStyle(.thinMaterial)
                 Text("경로 제작 고사리님 @alsgiwc")

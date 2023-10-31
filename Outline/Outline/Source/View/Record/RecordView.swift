@@ -211,7 +211,7 @@ struct RecordItem: View {
             }
         }
         
-        return convertToCLLocationCoordinates(datas)
+        return ConvertCoordinateManager.convertToCLLocationCoordinates(datas)
     }
 }
 
