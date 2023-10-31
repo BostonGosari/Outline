@@ -16,7 +16,7 @@ struct DigitalTimerView: View {
         
         Text(digitalTimerViewModel.formattedTime(timer))
             .font(Font.custom("Pretendard-ExtraBold", size: 70))
-            .foregroundColor(.primaryColor)
+            .foregroundColor(.customPrimary)
             .monospacedDigit()
             .minimumScaleFactor(0.5)
             .lineLimit(1)

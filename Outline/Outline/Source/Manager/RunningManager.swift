@@ -26,7 +26,6 @@ class RunningManager: ObservableObject {
     func startFreeRun() {
         startCourse = GPSArtCourse()
         runningType = .free
-        locationManager.requestLocation()
         getFreeRunningName()
     }
     
@@ -53,7 +52,7 @@ class RunningManager: ObservableObject {
     }
     
     func checkDistance(userLocation: CLLocationCoordinate2D, course: [Coordinate]) -> Bool {
-        guard let shortestDistance = calculateShortestDistance(from: userLocation, to: convertToCLLocationCoordinates(course)) else {
+        guard let shortestDistance = calculateShortestDistance(from: userLocation, to: ConvertCoordinateManager.convertToCLLocationCoordinates(course)) else {
             print("can't calculate user location")
             print(userLocation)
             print(course)

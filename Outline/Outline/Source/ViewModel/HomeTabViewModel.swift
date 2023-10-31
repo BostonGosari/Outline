@@ -10,7 +10,7 @@ import CoreLocation
 import CoreData
 import SwiftUI
 
-struct CourseWithDistance: Identifiable {
+struct CourseWithDistance: Identifiable, Hashable {
     var id = UUID().uuidString
     var course: GPSArtCourse
     var distance: Double

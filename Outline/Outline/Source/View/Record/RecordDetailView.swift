@@ -10,22 +10,20 @@ import SwiftUI
 
 struct RecordDetailView: View {
     @Environment(\.dismiss) private var dismiss
-    @ObservedObject var homeTabViewModel: HomeTabViewModel
     @StateObject var viewModel = RecordDetailViewModel()
-    @StateObject var dataModel = DataTestViewModel()
     
     @State private var showRenameSheet = false
     @State private var newCourseName = ""
     @State private var completeButtonActive = false
     
     var record: CoreRunningRecord
-    var gradientColors: [Color] = [.blackColor, .blackColor, .blackColor, .blackColor, .black50Color, .blackColor.opacity(0)]
+    var gradientColors: [Color] = [.customBlack, .customBlack, .customBlack, .customBlack, .black50, .customBlack.opacity(0)]
     let columns: [GridItem] = Array(repeating: .init(.flexible()), count: 2)
     
     var body: some View {
         ZStack {
             LinearGradient(
-                colors: [.black, .gray900Color, .gray900Color],
+                colors: [.customBlack, .gray900, .gray900],
                 startPoint: .top,
                 endPoint: .bottom
             )
@@ -36,7 +34,7 @@ struct RecordDetailView: View {
                     ZStack(alignment: .topLeading) {
                         FinishRunningMap(userLocations: $viewModel.userLocations)
                             .roundedCorners(45, corners: .bottomLeft)
-                            .shadow(color: .whiteColor, radius: 1.5)
+                            .shadow(color: .customWhite, radius: 1.5)
                         
                         HStack(alignment: .top) {
                             courseInfo
@@ -45,7 +43,7 @@ struct RecordDetailView: View {
                                 showRenameSheet = true
                             } label: {
                                 Image(systemName: "pencil")
-                                    .foregroundStyle(Color.whiteColor)
+                                    .foregroundStyle(Color.customWhite)
                                     .font(.system(size: 20))
                             }
                             .padding(.top, 16)
@@ -71,7 +69,7 @@ struct RecordDetailView: View {
                     
                     Text(viewModel.runningData["시간"] ?? "0:0:0")
                         .font(Font.custom("Pretendard-ExtraBold", size: 70))
-                        .foregroundColor(.primaryColor)
+                        .foregroundColor(.customPrimary)
                         .monospacedDigit()
                         .minimumScaleFactor(0.5)
                         .lineLimit(1)
@@ -116,7 +114,7 @@ struct RecordDetailView: View {
             }
         }
         .navigationDestination(isPresented: $viewModel.navigateToShareMainView) {
-            ShareMainView(homeTabViewModel: homeTabViewModel, runningData: viewModel.shareData)
+            ShareMainView(runningData: viewModel.shareData)
                 .navigationBarBackButtonHidden()
         }
         .onAppear {
@@ -143,12 +141,12 @@ struct RecordDetailView: View {
             
                 Rectangle()
                     .frame(height: 1)
-                    .foregroundStyle(Color.primaryColor)
+                    .foregroundStyle(Color.customPrimary)
                     .padding(.horizontal, 16)
                     .padding(.bottom, 41)
                 
                 CompleteButton(text: "완료", isActive: completeButtonActive) {
-                    dataModel.updateRunningRecord(record, courseName: newCourseName)
+//                    dataModel.updateRunningRecord(record, courseName: newCourseName)
                     dismiss()
                 }
                 .padding(.bottom, 30)
@@ -165,11 +163,11 @@ struct RecordDetailView: View {
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 Button {
-                    dataModel.deleteRunningRecord(record)
+                    //dataModel.deleteRunningRecord(record)
                     dismiss()
                 } label: {
                     Image(systemName: "trash.fill")
-                        .foregroundStyle(Color.primaryColor)
+                        .foregroundStyle(Color.customPrimary)
                 }
             }
         }
@@ -187,14 +185,14 @@ extension RecordDetailView {
                 Text("\(viewModel.startTime)-\(viewModel.endTime)")
             }
             .font(.subBody)
-            .foregroundStyle(Color.gray200Color)
+            .foregroundStyle(Color.gray200)
             
             HStack {
                 Image(systemName: "mappin")
-                    .foregroundStyle(Color.gray400Color)
+                    .foregroundStyle(Color.gray400)
                 
                 Text("\(viewModel.courseRegion)")
-                    .foregroundStyle(Color.gray200Color)
+                    .foregroundStyle(Color.gray200)
             }
             .font(.subBody)
         }

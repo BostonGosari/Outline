@@ -10,7 +10,6 @@ import SwiftUI
 
 struct ShareMainView: View {
     @StateObject var runningManager = RunningManager.shared
-    @ObservedObject var homeTabViewModel: HomeTabViewModel
     @StateObject private var viewModel = ShareViewModel()
     
     let runningData: ShareModel
@@ -18,7 +17,7 @@ struct ShareMainView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                Color.gray900Color
+                Color.gray900
                     .ignoresSafeArea()
                 
                 TabView(selection: $viewModel.currentPage) {
@@ -41,7 +40,7 @@ struct ShareMainView: View {
                             .padding(.horizontal, 19)
                             .background {
                                 RoundedRectangle(cornerRadius: 15)
-                                    .fill(Color.whiteColor)
+                                    .fill(Color.customWhite)
                             }
                     }
                     .padding(.leading, 16)
@@ -87,7 +86,7 @@ struct NavigationModifier: ViewModifier {
                         runningManager.running = false
                     } label: {
                         (Text(Image(systemName: "chevron.left")) + Text("홈으로"))
-                            .foregroundStyle(Color.primaryColor)
+                            .foregroundStyle(Color.customPrimary)
                     }
                 }
             }

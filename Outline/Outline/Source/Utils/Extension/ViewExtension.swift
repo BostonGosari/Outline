@@ -38,6 +38,20 @@ extension View {
             }
     }
     
+    func onScrollViewXOffsetChanged(action: @escaping (_ offset: CGFloat) -> Void) -> some View {
+        self
+            .background(
+                GeometryReader { geo in
+                    Text("")
+                        .coordinateSpace(name: "scroll")
+                        .preference(key: ScrollViewXOffsetPreferenceKey.self, value: geo.frame(in: .named("scroll")).minX)
+                }
+            )
+            .onPreferenceChange(ScrollViewXOffsetPreferenceKey.self) { value in
+                action(value)
+            }
+    }
+    
     func asImage(size: CGSize) -> UIImage {
         let controller = UIHostingController(rootView: self)
         controller.view.bounds = CGRect(origin: .zero, size: size)
