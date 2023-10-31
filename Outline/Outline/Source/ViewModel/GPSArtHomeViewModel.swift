@@ -16,15 +16,14 @@ struct CourseWithDistance: Identifiable, Hashable {
     var distance: Double
 }
 
-class HomeTabViewModel: ObservableObject {
-    
+class GPSArtHomeViewModel: ObservableObject {
     @Published var courses: AllGPSArtCourses = []
     @Published var recommendedCoures: [CourseWithDistance] = []
     @Published var withoutRecommendedCourses: [CourseWithDistance] = []
     
-    let courseModel = CourseModel()
-    let locationManager = CLLocationManager()
-    let watchConnectivityManager = WatchConnectivityManager.shared
+    private let courseModel = CourseModel()
+    private let locationManager = CLLocationManager()
+    private let watchConnectivityManager = WatchConnectivityManager.shared
     
     func getAllCoursesFromFirebase() {
         courseModel.readAllCourses { result in
