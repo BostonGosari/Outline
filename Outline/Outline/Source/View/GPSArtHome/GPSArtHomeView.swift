@@ -61,7 +61,8 @@ struct GPSArtHomeView: View {
                     }
                     .contentMargins(UIScreen.main.bounds.width * 0.08, for: .scrollContent)
                     .scrollTargetBehavior(.viewAligned)
-                    .padding(.vertical, -20)
+                    .padding(.top, -20)
+                    .padding(.bottom, -10)
                     
                     if viewModel.courses.isEmpty {
                         Rectangle()
@@ -70,7 +71,8 @@ struct GPSArtHomeView: View {
                                 height: UIScreen.main.bounds.height * 0.55
                             )
                             .foregroundColor(.gray700)
-                            .padding(.vertical, -20)
+                            .padding(.top, -20)
+                            .padding(.bottom, -10)
                     }
                     
                     HStack {

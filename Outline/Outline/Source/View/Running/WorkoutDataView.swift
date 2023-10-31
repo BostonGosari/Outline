@@ -3,14 +3,13 @@ import SwiftUI
 struct WorkoutDataView: View {
     
     @ObservedObject var runningViewModel: RunningViewModel
-    @ObservedObject var digitalTimerViewModel: DigitalTimerViewModel
     let weight: Double = 60
     
     var body: some View {
         ZStack {
             Color("Gray900").ignoresSafeArea()
             VStack {
-                DigitalTimerView(digitalTimerViewModel: digitalTimerViewModel)
+                DigitalTimerView()
                 Spacer()
                 workOutDataGrid
             }
@@ -50,5 +49,5 @@ extension WorkoutDataView {
 }
 
 #Preview {
-    WorkoutDataView(runningViewModel: RunningViewModel(), digitalTimerViewModel: DigitalTimerViewModel())
+    WorkoutDataView(runningViewModel: RunningViewModel())
 }

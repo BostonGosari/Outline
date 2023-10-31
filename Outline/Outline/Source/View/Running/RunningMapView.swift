@@ -13,7 +13,6 @@ struct RunningMapView: View {
     @StateObject var runningManager = RunningManager.shared
     
     @ObservedObject var runningViewModel: RunningViewModel
-    @ObservedObject var digitalTimerViewModel: DigitalTimerViewModel
     
     @GestureState var isLongPressed = false
     
@@ -31,30 +30,37 @@ struct RunningMapView: View {
     
     var body: some View {
         ZStack(alignment: .topTrailing) {
-            Map(position: $position, interactionModes: .zoom) {
-                UserAnnotation(anchor: .center) { userlocation in
+            Map(position: $position) {
+                UserAnnotation { userlocation in
                     ZStack {
                         Circle().foregroundStyle(.white).frame(width: 22)
                         Circle().foregroundStyle(.customPrimary).frame(width: 17)
                     }
                     .onChange(of: userlocation.location) { _, userlocation in
-                        if let user = userlocation {
+                        if let user = userlocation, let startCourse = runningManager.startCourse {
                             if viewModel.userLocations.isEmpty {
                                 viewModel.startLocation = CLLocation(latitude: user.coordinate.latitude, longitude: user.coordinate.longitude)
                             }
                             viewModel.userLocations.append(user.coordinate)
                             viewModel.checkEndDistance()
+                            
+                            if !startCourse.coursePaths.isEmpty {
+                                runningManager.trackingDistance()
+                            }
                         }
                     }
                 }
-                MapPolyline(coordinates: ConvertCoordinateManager.convertToCLLocationCoordinates(runningManager.startCourse?.coursePaths ?? []))
-                    .stroke(.white.opacity(0.5), lineWidth: 8)
+                
+                if let courseGuide = runningManager.startCourse {
+                    MapPolyline(coordinates: ConvertCoordinateManager.convertToCLLocationCoordinates(courseGuide.coursePaths))
+                        .stroke(.white.opacity(0.5), lineWidth: 8)
+                }
                 
                 MapPolyline(coordinates: viewModel.userLocations)
                     .stroke(.customPrimary, lineWidth: 8)
                 
             }
-                
+            
             VStack(spacing: 0) {
                 Spacer()
                 runningButtonView
@@ -105,10 +111,11 @@ struct RunningMapView: View {
 }
 
 extension RunningMapView {
-    private var runningButtonView: AnyView {
-        switch viewModel.runningType {
-        case .start:
-            AnyView(
+    @ViewBuilder
+    private var runningButtonView: some View {
+        ZStack {
+            switch viewModel.runningType {
+            case .start:
                 VStack(spacing: 0) {
                     Button {
                         HapticManager.impact(style: .medium)
@@ -126,7 +133,7 @@ extension RunningMapView {
                             HapticManager.impact(style: .medium)
                             viewModel.runningType = .pause
                             runningViewModel.pauseRunning()
-                            digitalTimerViewModel.stopTimer()
+                            runningManager.stopTimer()
                         } label: {
                             Image(systemName: "pause.fill")
                                 .buttonModifier(color: Color.customPrimary, size: 29, padding: 29)
@@ -150,10 +157,8 @@ extension RunningMapView {
                     .frame(maxWidth: .infinity, alignment: .trailing)
                     .padding(.horizontal, 32)
                 }
-                    .transition(.slide)
-            )
-        case .pause:
-            AnyView(
+                .transition(.slide)
+            case .pause:
                 HStack(spacing: 0) {
                     Image(systemName: "stop.fill")
                         .buttonModifier(color: Color.white, size: 24, padding: 26)
@@ -177,7 +182,7 @@ extension RunningMapView {
                                         checkUserLocation = false
                                         viewModel.saveData(course: runningManager.startCourse)
                                         runningViewModel.stopRunning()
-                                        digitalTimerViewModel.counter = 0
+                                        runningManager.counter = 0
                                         showCustomSheet = true
                                     }
                                 }
@@ -189,20 +194,18 @@ extension RunningMapView {
                         HapticManager.impact(style: .medium)
                         viewModel.runningType = .start
                         runningViewModel.resumeRunning()
-                        digitalTimerViewModel.startTimer()
+                        runningManager.startTimer()
                     } label: {
                         Image(systemName: "play.fill")
                             .buttonModifier(color: Color.customPrimary, size: 24, padding: 26)
                     }
                 }
-                    .frame(maxWidth: .infinity, alignment: .center)
-                    .padding(.horizontal, 64)
-                    .transition(.slide)
-            )
-        case .stop:
-            AnyView(
+                .frame(maxWidth: .infinity, alignment: .center)
+                .padding(.horizontal, 64)
+                .transition(.slide)
+            case .stop:
                 EmptyView()
-            )
+            }
         }
     }
     
