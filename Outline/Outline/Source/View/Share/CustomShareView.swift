@@ -26,7 +26,6 @@ struct CustomShareView: View {
     @State private var imageWidth: CGFloat = 0
     @State private var imageHeight: CGFloat = 0
     
-    
     private let pathManager = PathGenerateManager.shared
     
     var body: some View {

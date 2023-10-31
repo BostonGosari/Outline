@@ -10,7 +10,6 @@ import SwiftUI
 
 struct ShareMainView: View {
     @StateObject var runningManager = RunningManager.shared
-    @ObservedObject var homeTabViewModel: HomeTabViewModel
     @StateObject private var viewModel = ShareViewModel()
     
     let runningData: ShareModel

@@ -10,7 +10,6 @@ import CoreLocation
 
 struct RecordView: View {
     @State var selectedIndex: Int = 0
-    @ObservedObject var homeTabViewModel: HomeTabViewModel
     @FetchRequest (entity: CoreRunningRecord.entity(), sortDescriptors: [])
     var runningRecord: FetchedResults<CoreRunningRecord>
     @State private var records: [CoreRunningRecord] = []
@@ -66,7 +65,7 @@ struct RecordView: View {
                         .padding(.bottom, 16)
                         ForEach(filteredRecords, id: \.id) { record in
                             NavigationLink {
-                                RecordDetailView(homeTabViewModel: homeTabViewModel, record: record)
+                                RecordDetailView(record: record)
                                 
                             } label: {
                                 RecordItem(record: record)
