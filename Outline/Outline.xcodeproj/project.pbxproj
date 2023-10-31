@@ -138,7 +138,6 @@
 		F09697472ADBCD6000C38AF4 /* Shape.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09697462ADBCD6000C38AF4 /* Shape.swift */; };
 		F096974D2ADBDBB000C38AF4 /* CardDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F096974C2ADBDBB000C38AF4 /* CardDetailView.swift */; };
 		F096974F2ADBEE9F00C38AF4 /* CardDetailInformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F096974E2ADBEE9F00C38AF4 /* CardDetailInformationView.swift */; };
-		F09697512ADC069E00C38AF4 /* AnimationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09697502ADC069E00C38AF4 /* AnimationExtension.swift */; };
 		F0AC8AA12AD94C200061612C /* Color.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F0AC8AA02AD94C200061612C /* Color.xcassets */; };
 		F0AC8AA42AD94C200061612C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F0AC8AA32AD94C200061612C /* Preview Assets.xcassets */; };
 		F0AC8AAF2AD94C200061612C /* OutlineWatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0AC8AAE2AD94C200061612C /* OutlineWatchApp.swift */; };
@@ -306,7 +305,6 @@
 		F09697462ADBCD6000C38AF4 /* Shape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shape.swift; sourceTree = "<group>"; };
 		F096974C2ADBDBB000C38AF4 /* CardDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetailView.swift; sourceTree = "<group>"; };
 		F096974E2ADBEE9F00C38AF4 /* CardDetailInformationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetailInformationView.swift; sourceTree = "<group>"; };
-		F09697502ADC069E00C38AF4 /* AnimationExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationExtension.swift; sourceTree = "<group>"; };
 		F0AC8A9C2AD94C1F0061612C /* OutlineApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutlineApp.swift; sourceTree = "<group>"; };
 		F0AC8A9E2AD94C1F0061612C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		F0AC8AA02AD94C200061612C /* Color.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Color.xcassets; sourceTree = "<group>"; };
@@ -726,7 +724,6 @@
 				0E29F64A2ADF653000F5EF5C /* FontExtension.swift */,
 				29AE76DF2ADE2BC700A46742 /* DateExtention.swift */,
 				F0AC8B372AD96AE10061612C /* ViewExtension.swift */,
-				F09697502ADC069E00C38AF4 /* AnimationExtension.swift */,
 				95A01E1D2AF0CCE70093D9C0 /* DoubleExtension.swift */,
 			);
 			path = Extension;
@@ -1051,7 +1048,6 @@
 				F096974D2ADBDBB000C38AF4 /* CardDetailView.swift in Sources */,
 				0EE92E7D2AE02DDC003192FF /* FreeRunningHomeView.swift in Sources */,
 				29FEDC5E2AED81A800C1F80B /* Shimmer.swift in Sources */,
-				F09697512ADC069E00C38AF4 /* AnimationExtension.swift in Sources */,
 				29CC19A42AE95F2300B79610 /* RunningManager.swift in Sources */,
 				F05C7D562ADC565E006842DB /* PreferenceKey.swift in Sources */,
 				0E9A5D3F2AE058D500C19FF3 /* ShareMainView.swift in Sources */,
