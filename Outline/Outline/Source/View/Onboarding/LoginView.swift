@@ -40,6 +40,7 @@ struct LoginView: View {
                         
                     NavigationLink {
                         InputNicknameView()
+                            .navigationBarBackButtonHidden()
                     } label: {
                         HStack {
                             Spacer()
