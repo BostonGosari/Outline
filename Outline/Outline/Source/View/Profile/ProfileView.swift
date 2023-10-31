@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct SwiftUIView: View {
+struct ProfileView: View {
     var body: some View {
         NavigationStack {
             VStack {
@@ -76,11 +76,13 @@ struct SwiftUIView: View {
                 Spacer()
             }
             .navigationTitle("설정")
+            .navigationBarTitleDisplayMode(.inline)
             .background(Color.gray900)
         }
+        .tint(Color.customPrimary)
     }
 }
 
 #Preview {
-    SwiftUIView()
+    ProfileView()
 }

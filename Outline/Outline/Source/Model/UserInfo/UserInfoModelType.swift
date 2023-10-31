@@ -14,7 +14,7 @@ struct UserInfo: Hashable, Codable {
     var weight: Int
     var gender: Gender = .notSetted
 }
-enum Gender: String, Codable {
+enum Gender: String, Codable, CaseIterable {
     case notSetted
     case man
     case woman
