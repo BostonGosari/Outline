@@ -42,7 +42,6 @@
 		2975F0962AE3E1790046C00B /* CornerRectangleModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2975F0952AE3E1790046C00B /* CornerRectangleModifier.swift */; };
 		297B80FB2AE73C4C00AF7219 /* Outline Watch App.app in Embed ExtensionKit Extensions */ = {isa = PBXBuildFile; fileRef = 297B80FA2AE73C4500AF7219 /* Outline Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		297B80FC2AE7515200AF7219 /* CourseModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E2EF702ADA6F230083ADEE /* CourseModelType.swift */; };
-		299803532ADF1DC200A9A134 /* CoreMotionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299803522ADF1DC200A9A134 /* CoreMotionViewModel.swift */; };
 		299803552ADF5F1000A9A134 /* HealthKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299803542ADF5F1000A9A134 /* HealthKitManager.swift */; };
 		299803572AE00C9B00A9A134 /* HapticManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299803562AE00C9B00A9A134 /* HapticManager.swift */; };
 		2998035B2AE0181900A9A134 /* ConfettiShapes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299803592AE0181900A9A134 /* ConfettiShapes.swift */; };
@@ -61,8 +60,8 @@
 		29C631542AE418E3005ECF55 /* DigitalTimerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C631532AE418E3005ECF55 /* DigitalTimerViewModel.swift */; };
 		29C631562AE418F1005ECF55 /* DigitalTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C631552AE418F1005ECF55 /* DigitalTimerView.swift */; };
 		29C9197E2ADE8F7F00AB0B5A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 29AE76AE2ADE0DEB00A46742 /* GoogleService-Info.plist */; };
-		29C9198D2ADE9B5B00AB0B5A /* CoreMotionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C9198C2ADE9B5B00AB0B5A /* CoreMotionView.swift */; };
 		29CC19A42AE95F2300B79610 /* RunningManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29CC19A32AE95F2300B79610 /* RunningManager.swift */; };
+		29CC42BA2AF1069400578EF1 /* OnboardingLocationAuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29CC42B92AF1069400578EF1 /* OnboardingLocationAuthViewModel.swift */; };
 		29EC2ECC2AEAD5690033446C /* CourseAccuracyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29EC2ECB2AEAD5680033446C /* CourseAccuracyManager.swift */; };
 		29EC2ECE2AEAD5A80033446C /* CourseProgressManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29EC2ECD2AEAD5A80033446C /* CourseProgressManager.swift */; };
 		29EC2ED22AEB2B560033446C /* CourseAnalyzeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29EC2ED12AEB2B560033446C /* CourseAnalyzeManager.swift */; };
@@ -234,7 +233,6 @@
 		2975F0952AE3E1790046C00B /* CornerRectangleModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CornerRectangleModifier.swift; sourceTree = "<group>"; };
 		297B80F92AE73C4500AF7219 /* Outline.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Outline.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		297B80FA2AE73C4500AF7219 /* Outline Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Outline Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		299803522ADF1DC200A9A134 /* CoreMotionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreMotionViewModel.swift; sourceTree = "<group>"; };
 		299803542ADF5F1000A9A134 /* HealthKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitManager.swift; sourceTree = "<group>"; };
 		299803562AE00C9B00A9A134 /* HapticManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticManager.swift; sourceTree = "<group>"; };
 		299803592AE0181900A9A134 /* ConfettiShapes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfettiShapes.swift; sourceTree = "<group>"; };
@@ -248,8 +246,8 @@
 		29AE76DF2ADE2BC700A46742 /* DateExtention.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtention.swift; sourceTree = "<group>"; };
 		29C631532AE418E3005ECF55 /* DigitalTimerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DigitalTimerViewModel.swift; sourceTree = "<group>"; };
 		29C631552AE418F1005ECF55 /* DigitalTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DigitalTimerView.swift; sourceTree = "<group>"; };
-		29C9198C2ADE9B5B00AB0B5A /* CoreMotionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreMotionView.swift; sourceTree = "<group>"; };
 		29CC19A32AE95F2300B79610 /* RunningManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningManager.swift; sourceTree = "<group>"; };
+		29CC42B92AF1069400578EF1 /* OnboardingLocationAuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingLocationAuthViewModel.swift; sourceTree = "<group>"; };
 		29EC2ECB2AEAD5680033446C /* CourseAccuracyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseAccuracyManager.swift; sourceTree = "<group>"; };
 		29EC2ECD2AEAD5A80033446C /* CourseProgressManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseProgressManager.swift; sourceTree = "<group>"; };
 		29EC2ED12AEB2B560033446C /* CourseAnalyzeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseAnalyzeManager.swift; sourceTree = "<group>"; };
@@ -430,15 +428,6 @@
 				954CB2B92AE654BA005EB2E9 /* OnboardingNotificationAuthView.swift */,
 			);
 			path = Onboarding;
-			sourceTree = "<group>";
-		};
-		29C9198B2ADE9B4400AB0B5A /* CoreMotion */ = {
-			isa = PBXGroup;
-			children = (
-				29C9198C2ADE9B5B00AB0B5A /* CoreMotionView.swift */,
-				299803522ADF1DC200A9A134 /* CoreMotionViewModel.swift */,
-			);
-			path = CoreMotion;
 			sourceTree = "<group>";
 		};
 		29EC2ECA2AEAD5290033446C /* CourseAnalyzer */ = {
@@ -634,7 +623,6 @@
 				0E9A5D402AE058D900C19FF3 /* Share */,
 				0EE92E7B2AE02DCB003192FF /* FreeRunning */,
 				0EE92E662AE00A02003192FF /* FininshRunning */,
-				29C9198B2ADE9B4400AB0B5A /* CoreMotion */,
 				29AE76D42ADE2A2200A46742 /* Onboarding */,
 				BB1D53072ADDB24A0073771F /* Running */,
 				BB5239352ADBD95300646494 /* GPSArtHome */,
@@ -649,6 +637,7 @@
 			children = (
 				29AE76D92ADE2A5300A46742 /* InputNicknameViewModel.swift */,
 				29AE76DA2ADE2A5300A46742 /* InputUserInfoViewModel.swift */,
+				29CC42B92AF1069400578EF1 /* OnboardingLocationAuthViewModel.swift */,
 				0E29F65E2ADF6CDD00F5EF5C /* RunningMapViewModel.swift */,
 				0EE92E6B2AE00A33003192FF /* FinishRunningViewModel.swift */,
 				0E9A5D472AE065A100C19FF3 /* ShareViewModel.swift */,
@@ -1028,7 +1017,6 @@
 				BB52396B2ADD385700646494 /* BottomScrollView.swift in Sources */,
 				29EC2ECC2AEAD5690033446C /* CourseAccuracyManager.swift in Sources */,
 				9528F0002AE042570056CCC6 /* PathGenerateManager.swift in Sources */,
-				29C9198D2ADE9B5B00AB0B5A /* CoreMotionView.swift in Sources */,
 				0E29F65C2ADF6CA000F5EF5C /* RunningMapView.swift in Sources */,
 				F096974F2ADBEE9F00C38AF4 /* CardDetailInformationView.swift in Sources */,
 				BB5239582ADC396300646494 /* BackgroundBlur.swift in Sources */,
@@ -1039,7 +1027,6 @@
 				F06298A92AE18A50007AB2D3 /* ConvertCoordinateManager.swift in Sources */,
 				954CB2BA2AE654BA005EB2E9 /* OnboardingNotificationAuthView.swift in Sources */,
 				29C631562AE418F1005ECF55 /* DigitalTimerView.swift in Sources */,
-				299803532ADF1DC200A9A134 /* CoreMotionViewModel.swift in Sources */,
 				F06B93622ADB847500387DEB /* ContentView.swift in Sources */,
 				F09697472ADBCD6000C38AF4 /* Shape.swift in Sources */,
 				F03524102AE35AF800CCD8A6 /* RunningViewModel.swift in Sources */,
@@ -1063,6 +1050,7 @@
 				299803572AE00C9B00A9A134 /* HapticManager.swift in Sources */,
 				0E29F64B2ADF653000F5EF5C /* FontExtension.swift in Sources */,
 				954CB2B62AE63E79005EB2E9 /* OnboardingHealthAuthView.swift in Sources */,
+				29CC42BA2AF1069400578EF1 /* OnboardingLocationAuthViewModel.swift in Sources */,
 				95A01E1E2AF0CCE70093D9C0 /* DoubleExtension.swift in Sources */,
 				F06298AB2AE1998D007AB2D3 /* MapInfoView.swift in Sources */,
 				29EC2ED22AEB2B560033446C /* CourseAnalyzeManager.swift in Sources */,

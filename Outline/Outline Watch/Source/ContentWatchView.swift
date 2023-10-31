@@ -5,25 +5,20 @@
 //  Created by Hyunjun Kim on 10/13/23.
 //
 
+import CoreLocation
 import SwiftUI
 
 struct ContentWatchView: View {
-    
-    @State private var navigate = false
     @StateObject private var workoutManager = WatchWorkoutManager()
-    @StateObject var locationManager = LocationManager()
-    @State private var userLocations: [CLLocationCoordinate2D] = []
+    
+    private var locationManager = CLLocationManager()
     
     var body: some View {
-        CourseListWatchView(userLocations: $userLocations, navigate: $navigate)
-            .sheet(isPresented: $workoutManager.showingSummaryView) {
-                SummaryView(userLocations: userLocations, navigate: $navigate)
-            }
+        CourseListWatchView()
             .environmentObject(workoutManager)
-            .environmentObject(locationManager)
             .onAppear {
                 workoutManager.requestAuthorization()
-                locationManager.checkLocationAuthorizationStatus()
+                locationManager.requestWhenInUseAuthorization()
             }
     }
 }
