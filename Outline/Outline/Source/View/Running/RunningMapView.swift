@@ -34,8 +34,8 @@ struct RunningMapView: View {
                     coordinates: ConvertCoordinateManager.convertToCLLocationCoordinates(course.coursePaths)
                 )
                 .ignoresSafeArea()
-            } 
-                
+            }
+            
             VStack(spacing: 0) {
                 Spacer()
                 runningButtonView
@@ -51,12 +51,12 @@ struct RunningMapView: View {
                     coursePathCoordinates: ConvertCoordinateManager.convertToCLLocationCoordinates(course.coursePaths),
                     courseRotate: course.heading
                 )
-                    .onTapGesture {
-                        showBigGuide.toggle()
-                        // TODO: 햅틱 추가
-                    }
+                .onTapGesture {
+                    showBigGuide.toggle()
+                    // TODO: 햅틱 추가
+                }
                 //                .animation(.easeInOut, value: showBigGuid)
-                    .animation(.openCard, value: showBigGuide)
+                .animation(.openCard, value: showBigGuide)
             }
         }
         .sheet(isPresented: $showCustomSheet) {
@@ -149,7 +149,7 @@ extension RunningMapView {
                                 .updating($isLongPressed) { currentState, gestureState, _ in
                                     gestureState = currentState
                                     HapticManager.impact(style: .medium)
-
+                                    
                                     if !isLongPressed {
                                         DispatchQueue.main.async {
                                             viewModel.isShowPopup = true
@@ -166,7 +166,7 @@ extension RunningMapView {
                                     }
                                 }
                         )
-            
+                    
                     Spacer()
                     
                     Button {
@@ -179,9 +179,9 @@ extension RunningMapView {
                             .buttonModifier(color: Color.customPrimary, size: 24, padding: 26)
                     }
                 }
-                .frame(maxWidth: .infinity, alignment: .center)
-                .padding(.horizontal, 64)
-                .transition(.slide)
+                    .frame(maxWidth: .infinity, alignment: .center)
+                    .padding(.horizontal, 64)
+                    .transition(.slide)
             )
         case .stop:
             AnyView(
