@@ -21,15 +21,12 @@ class HomeTabViewModel: ObservableObject {
     @Published var courses: AllGPSArtCourses = []
     @Published var recommendedCoures: [CourseWithDistance] = []
     @Published var withoutRecommendedCourses: [CourseWithDistance] = []
-    @Published var currentLocation: CLLocationCoordinate2D?
     
-    @Published var userLocations = [CLLocationCoordinate2D]()
-
     let courseModel = CourseModel()
     let locationManager = CLLocationManager()
     let watchConnectivityManager = WatchConnectivityManager.shared
     
-    func readAllCourses() {
+    func getAllCoursesFromFirebase() {
         courseModel.readAllCourses { result in
             switch result {
             case .success(let courseList):

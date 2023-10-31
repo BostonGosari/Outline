@@ -7,9 +7,6 @@
 import SwiftUI
 
 struct RunningView: View {
-    
-    @ObservedObject var homeTabViewModel: HomeTabViewModel
-    
     @StateObject var runningManager = RunningManager.shared
     @StateObject var runningViewModel: RunningViewModel
     @StateObject var digitalTimerViewModel = DigitalTimerViewModel()
@@ -18,9 +15,8 @@ struct RunningView: View {
     @State var checkRunning = true
     @State var selection = 0
     
-    init(homeTabViewModel: HomeTabViewModel) {
-        self.homeTabViewModel = homeTabViewModel
-        self._runningViewModel = StateObject(wrappedValue: RunningViewModel(homeTabViewModel: homeTabViewModel))
+    init() {
+        self._runningViewModel = StateObject(wrappedValue: RunningViewModel())
         
         UIPageControl.appearance().currentPageIndicatorTintColor = UIColor.customBlack
         UIPageControl.appearance().pageIndicatorTintColor = UIColor.white
@@ -31,7 +27,7 @@ struct RunningView: View {
             ZStack(alignment: .bottom) {
                 Color("Gray900").ignoresSafeArea()
                 TabView(selection: $selection) {
-                    RunningMapView(locationManager: locationManager, runningViewModel: runningViewModel, digitalTimerViewModel: digitalTimerViewModel, homeTabViewModel: homeTabViewModel, selection: $selection)
+                    RunningMapView(locationManager: locationManager, runningViewModel: runningViewModel, digitalTimerViewModel: digitalTimerViewModel, selection: $selection)
                         .tag(0)
                     WorkoutDataView(runningViewModel: runningViewModel, digitalTimerViewModel: digitalTimerViewModel)
                         .tag(1)
@@ -94,5 +90,5 @@ struct RunningView: View {
 }
 
 #Preview {
-    RunningView(homeTabViewModel: HomeTabViewModel())
+    RunningView()
 }
