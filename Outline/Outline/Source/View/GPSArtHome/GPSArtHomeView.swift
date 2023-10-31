@@ -22,7 +22,7 @@ struct GPSArtHomeView: View {
     // 받아오는 변수
     @Binding var isShow: Bool
     @Namespace private var namespace
-
+    
     let indexWidth: CGFloat = 25
     let indexHeight: CGFloat = 3
     
@@ -61,14 +61,14 @@ struct GPSArtHomeView: View {
                         }
                         .scrollTargetLayout()
                     }
-                    .contentMargins(UIScreen.main.bounds.width * 0.09, for: .scrollContent)
+                    .contentMargins(UIScreen.main.bounds.width * 0.08, for: .scrollContent)
                     .scrollTargetBehavior(.viewAligned)
                     .padding(.vertical, -20)
                     
                     if homeTabViewModel.courses.isEmpty {
                         Rectangle()
                             .frame(
-                                width: UIScreen.main.bounds.width * 0.82,
+                                width: UIScreen.main.bounds.width * 0.84,
                                 height: UIScreen.main.bounds.height * 0.55
                             )
                             .foregroundColor(.gray700)
@@ -91,18 +91,18 @@ struct GPSArtHomeView: View {
                 InlineHeader(loading: loading, scrollOffset: scrollOffset)
             }
             
-                if let selectedCourse, showDetailView {
-                    Color.gray900.ignoresSafeArea()
-                    CardDetailView(showDetailView: $showDetailView, selectedCourse: selectedCourse, currentIndex: currentIndex, namespace: namespace)
-                        .zIndex(1)
-                        .transition(
-                            .asymmetric(
-                                insertion: .opacity.animation(.easeInOut(duration: 0.1)),
-                                removal: .opacity.animation(.easeInOut(duration: 0.3).delay(0.2))
-                            )
+            if let selectedCourse, showDetailView {
+                Color.gray900.ignoresSafeArea()
+                CardDetailView(showDetailView: $showDetailView, selectedCourse: selectedCourse, currentIndex: currentIndex, namespace: namespace)
+                    .zIndex(1)
+                    .transition(
+                        .asymmetric(
+                            insertion: .opacity.animation(.easeInOut(duration: 0.1)),
+                            removal: .opacity.animation(.easeInOut(duration: 0.3).delay(0.2))
                         )
-                        .ignoresSafeArea()
-                }
+                    )
+                    .ignoresSafeArea()
+            }
         }
         .background(
             BackgroundBlur(color: Color.customThird, padding: 0)
@@ -115,7 +115,7 @@ struct GPSArtHomeView: View {
     private var getCurrentOffsetView: some View {
         Color.clear
             .onScrollViewXOffsetChanged { offset in
-                scrollXOffset = -offset + UIScreen.main.bounds.width * 0.09
+                scrollXOffset = -offset + UIScreen.main.bounds.width * 0.08
             }
             .onChange(of: scrollXOffset) { _, newValue in
                 withAnimation(.bouncy(duration: 1)) {
