@@ -26,7 +26,7 @@ struct HomeTabView: View {
                         Group {
                             switch selectedTab {
                             case .freeRunning:
-                                FreeRunningHomeView(homeTabViewModel: homeTabViewModel)
+                                FreeRunningHomeView()
                             case .GPSArtRunning:
                                 GPSArtHomeView(homeTabViewModel: homeTabViewModel, isShow: $showDetailView)
                             case .myRecord:
@@ -43,7 +43,7 @@ struct HomeTabView: View {
                 }
                 .onAppear {
                     homeTabViewModel.locationManager.requestWhenInUseAuthorization()
-                    homeTabViewModel.readAllCourses()
+                    homeTabViewModel.getAllCoursesFromFirebase()
                 }
                 .refreshable {
                     homeTabViewModel.fetchRecommendedCourses()
@@ -55,7 +55,7 @@ struct HomeTabView: View {
             }
             
             if runningManager.running {
-                RunningView(homeTabViewModel: homeTabViewModel)
+                RunningView()
             }
         }
         .tint(.customPrimary)

@@ -8,8 +8,6 @@
 import SwiftUI
 
 struct FreeRunningHomeView: View {
-    
-    @ObservedObject var homeTabViewModel: HomeTabViewModel
     @StateObject var runningManager = RunningManager.shared
     @State var userLocation = ""
     @State private var progress: Double = 0.0

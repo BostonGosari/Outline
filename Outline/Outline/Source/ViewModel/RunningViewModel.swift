@@ -9,11 +9,6 @@ import SwiftUI
 import CoreMotion
 
 class RunningViewModel: ObservableObject {
-    
-    @ObservedObject var homeTabViewModel: HomeTabViewModel
-    
-    // MARK: - Published Properties
-    
     @Published var totalTime = 0.0
     
     // 전송용 데이터
@@ -45,8 +40,7 @@ class RunningViewModel: ObservableObject {
     
     // MARK: - Initialization
     
-    init(homeTabViewModel: HomeTabViewModel) {
-        self.homeTabViewModel = homeTabViewModel
+    init() {
         self.pedometer = CMPedometer()
         self.healthKitManager = HealthKitManager()
     }
@@ -138,7 +132,7 @@ class RunningViewModel: ObservableObject {
     private func saveRunning() {
         guard let course = runningManger.startCourse else { return }
         
-        let courseData = CourseData(courseName: course.courseName, runningLength: course.courseLength, heading: course.heading, distance: course.distance, coursePaths: homeTabViewModel.userLocations, runningCourseId: "")
+        let courseData = CourseData(courseName: course.courseName, runningLength: course.courseLength, heading: course.heading, distance: course.distance, coursePaths: [CLLocationCoordinate2D](), runningCourseId: "")
         
         let healthData = HealthData(totalTime: totalTime, averageCadence: totalSteps / totalDistance, totalRunningDistance: totalDistance / 1000, totalEnergy: kilocalorie, averageHeartRate: 0.0, averagePace: totalTime / totalDistance * 1000 / 60, startDate: RunningStartDate, endDate: RunningEndDate)
         
