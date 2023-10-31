@@ -8,7 +8,7 @@ import SwiftUI
 
 struct RunningView: View {
     @StateObject var runningManager = RunningManager.shared
-    @StateObject var runningViewModel = RunningViewModel()
+    @StateObject var runningDataManager = RunningDataManager.shared
     
     @State var checkRunning = true
     @State var selection = 0
@@ -23,16 +23,16 @@ struct RunningView: View {
             ZStack(alignment: .bottom) {
                 Color("Gray900").ignoresSafeArea()
                 TabView(selection: $selection) {
-                    RunningMapView(runningViewModel: runningViewModel, selection: $selection)
+                    RunningMapView(selection: $selection)
                         .tag(0)
-                    WorkoutDataView(runningViewModel: runningViewModel)
+                    WorkoutDataView()
                         .tag(1)
                 }
                 .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
                 .edgesIgnoringSafeArea(.all)
                 .onAppear {
                     if runningManager.running == true {
-                        runningViewModel.startRunning()
+                        runningDataManager.startRunning()
                         runningManager.startTimer()
                     }
                 }

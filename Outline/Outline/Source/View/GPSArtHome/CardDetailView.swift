@@ -149,7 +149,6 @@ struct CardDetailView: View {
         AsyncImage(url: URL(string: selectedCourse.course.thumbnail)) { image in
             image
                 .resizable()
-                .scaledToFit()
                 .roundedCorners(45, corners: [.bottomRight])
                 .shadow(color: .white, radius: 0.5, y: 0.5)
         } placeholder: {
@@ -161,7 +160,6 @@ struct CardDetailView: View {
             width: UIScreen.main.bounds.width,
             height: UIScreen.main.bounds.height * 0.68
         )
-        .transition(.identity)
     }
     
     private var courseInformation: some View {
