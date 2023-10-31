@@ -36,6 +36,8 @@
 		29111E3F2AE0CD0C009833C7 /* ConfettiWatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29111E3E2AE0CD0C009833C7 /* ConfettiWatchView.swift */; };
 		293C97DF2AE6C454007821F5 /* WatchConnectivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 293C97DE2AE6C454007821F5 /* WatchConnectivityManager.swift */; };
 		293C97E02AE6C454007821F5 /* WatchConnectivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 293C97DE2AE6C454007821F5 /* WatchConnectivityManager.swift */; };
+		295232FA2AEED0630020EAFA /* BigCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295232F92AEED0630020EAFA /* BigCardView.swift */; };
+		295232FC2AEEE74A0020EAFA /* ButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295232FB2AEEE74A0020EAFA /* ButtonStyle.swift */; };
 		295324852AE038EE00085120 /* UserInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0AC8B062AD965390061612C /* UserInfoModel.swift */; };
 		2975F0962AE3E1790046C00B /* CornerRectangleModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2975F0952AE3E1790046C00B /* CornerRectangleModifier.swift */; };
 		297B80FB2AE73C4C00AF7219 /* Outline Watch App.app in Embed ExtensionKit Extensions */ = {isa = PBXBuildFile; fileRef = 297B80FA2AE73C4500AF7219 /* Outline Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -149,9 +151,7 @@
 		F06B936B2ADC23E100387DEB /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5239272ADAF72A00646494 /* Logger.swift */; };
 		F06B936E2ADC279100387DEB /* SlideToUnlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06B936D2ADC279100387DEB /* SlideToUnlock.swift */; };
 		F0781D602AE163E00084ADD7 /* HomeTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0781D5F2AE163E00084ADD7 /* HomeTabViewModel.swift */; };
-		F09697432ADBC1D200C38AF4 /* Carousel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09697422ADBC1D200C38AF4 /* Carousel.swift */; };
 		F09697472ADBCD6000C38AF4 /* Shape.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09697462ADBCD6000C38AF4 /* Shape.swift */; };
-		F096974B2ADBD73A00C38AF4 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F096974A2ADBD73A00C38AF4 /* CardView.swift */; };
 		F096974D2ADBDBB000C38AF4 /* CardDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F096974C2ADBDBB000C38AF4 /* CardDetailView.swift */; };
 		F096974F2ADBEE9F00C38AF4 /* CardDetailInformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F096974E2ADBEE9F00C38AF4 /* CardDetailInformationView.swift */; };
 		F09697512ADC069E00C38AF4 /* AnimationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09697502ADC069E00C38AF4 /* AnimationExtension.swift */; };
@@ -238,6 +238,8 @@
 		29111E3A2AE0CA89009833C7 /* SheetWatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetWatchView.swift; sourceTree = "<group>"; };
 		29111E3E2AE0CD0C009833C7 /* ConfettiWatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfettiWatchView.swift; sourceTree = "<group>"; };
 		293C97DE2AE6C454007821F5 /* WatchConnectivityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchConnectivityManager.swift; sourceTree = "<group>"; };
+		295232F92AEED0630020EAFA /* BigCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigCardView.swift; sourceTree = "<group>"; };
+		295232FB2AEEE74A0020EAFA /* ButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyle.swift; sourceTree = "<group>"; };
 		2975F0952AE3E1790046C00B /* CornerRectangleModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CornerRectangleModifier.swift; sourceTree = "<group>"; };
 		297B80F92AE73C4500AF7219 /* Outline.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Outline.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		297B80FA2AE73C4500AF7219 /* Outline Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Outline Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -332,9 +334,7 @@
 		F06B936D2ADC279100387DEB /* SlideToUnlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideToUnlock.swift; sourceTree = "<group>"; };
 		F0781D5F2AE163E00084ADD7 /* HomeTabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabViewModel.swift; sourceTree = "<group>"; };
 		F0864A382ADD6CFA00498DBA /* MapWatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapWatchView.swift; sourceTree = "<group>"; };
-		F09697422ADBC1D200C38AF4 /* Carousel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Carousel.swift; sourceTree = "<group>"; };
 		F09697462ADBCD6000C38AF4 /* Shape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shape.swift; sourceTree = "<group>"; };
-		F096974A2ADBD73A00C38AF4 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		F096974C2ADBDBB000C38AF4 /* CardDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetailView.swift; sourceTree = "<group>"; };
 		F096974E2ADBEE9F00C38AF4 /* CardDetailInformationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetailInformationView.swift; sourceTree = "<group>"; };
 		F09697502ADC069E00C38AF4 /* AnimationExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationExtension.swift; sourceTree = "<group>"; };
@@ -577,11 +577,10 @@
 			isa = PBXGroup;
 			children = (
 				BB5239362ADBD99F00646494 /* GPSArtHomeView.swift */,
+				295232F92AEED0630020EAFA /* BigCardView.swift */,
 				F0492E1C2ADD2AE900F6EADD /* Header.swift */,
-				F096974A2ADBD73A00C38AF4 /* CardView.swift */,
 				F096974C2ADBDBB000C38AF4 /* CardDetailView.swift */,
 				F096974E2ADBEE9F00C38AF4 /* CardDetailInformationView.swift */,
-				F09697422ADBC1D200C38AF4 /* Carousel.swift */,
 				BB52396A2ADD385700646494 /* BottomScrollView.swift */,
 				F06298AA2AE1998D007AB2D3 /* MapInfoView.swift */,
 			);
@@ -788,6 +787,7 @@
 				0EE92E6D2AE00AE5003192FF /* CompleteButton.swift */,
 				F06298AE2AE1A2ED007AB2D3 /* CountDown.swift */,
 				29FEDC5D2AED81A800C1F80B /* Shimmer.swift */,
+				295232FB2AEEE74A0020EAFA /* ButtonStyle.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -1092,7 +1092,6 @@
 				0E29F6552ADF6C7D00F5EF5C /* KMLParserManager.swift in Sources */,
 				0E2B4CBF2AE744E8002A5103 /* RecordDetailViewModel.swift in Sources */,
 				F0AC8B382AD96AE10061612C /* ViewExtension.swift in Sources */,
-				F09697432ADBC1D200C38AF4 /* Carousel.swift in Sources */,
 				0EE92E682AE00A11003192FF /* FinishRunningView.swift in Sources */,
 				0E29F65B2ADF6CA000F5EF5C /* RunningView.swift in Sources */,
 				29EC2ECE2AEAD5A80033446C /* CourseProgressManager.swift in Sources */,
@@ -1128,9 +1127,11 @@
 				954CB29A2AE514D3005EB2E9 /* ConnectingWatchModel.swift in Sources */,
 				0E9A5D462AE05DF200C19FF3 /* ShareMap.swift in Sources */,
 				0E29F65A2ADF6CA000F5EF5C /* RunningMap.swift in Sources */,
+				295232FC2AEEE74A0020EAFA /* ButtonStyle.swift in Sources */,
 				F05C97172ADA879100D5D959 /* LocationManager.swift in Sources */,
 				0E29F65F2ADF6CDD00F5EF5C /* RunningMapViewModel.swift in Sources */,
 				BB52396D2ADD6DBB00646494 /* CustomRoundedRectangle.swift in Sources */,
+				295232FA2AEED0630020EAFA /* BigCardView.swift in Sources */,
 				29C631542AE418E3005ECF55 /* DigitalTimerViewModel.swift in Sources */,
 				F096974D2ADBDBB000C38AF4 /* CardDetailView.swift in Sources */,
 				F05C97192ADA87B800D5D959 /* LocationAuthorizationView.swift in Sources */,
@@ -1151,7 +1152,6 @@
 				F06B936B2ADC23E100387DEB /* Logger.swift in Sources */,
 				29AE76E02ADE2BC700A46742 /* DateExtention.swift in Sources */,
 				0EE92E6A2AE00A2B003192FF /* FinishRunningMap.swift in Sources */,
-				F096974B2ADBD73A00C38AF4 /* CardView.swift in Sources */,
 				95EB1EE92ADDC43400B47984 /* PersistentController.swift in Sources */,
 				2998035C2AE0181900A9A134 /* Confetti.swift in Sources */,
 				29AE76DC2ADE2A5300A46742 /* InputUserInfoViewModel.swift in Sources */,
