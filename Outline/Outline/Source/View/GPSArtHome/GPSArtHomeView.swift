@@ -31,7 +31,7 @@ struct GPSArtHomeView: View {
                     .onScrollViewOffsetChanged { offset in
                         scrollOffset = offset
                     }
-                Header(loading: loading, scrollOffset: scrollOffset)
+                GPSArtHomeHeader(loading: loading, scrollOffset: scrollOffset)
                 
                 VStack {
                     ScrollView(.horizontal, showsIndicators: false) {
@@ -91,7 +91,7 @@ struct GPSArtHomeView: View {
                 }
             }
             .overlay(alignment: .top) {
-                InlineHeader(loading: loading, scrollOffset: scrollOffset)
+                GPSArtHomeInlineHeader(loading: loading, scrollOffset: scrollOffset)
             }
             .onAppear {
                 viewModel.getAllCoursesFromFirebase()
