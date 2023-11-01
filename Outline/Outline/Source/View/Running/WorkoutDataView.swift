@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct WorkoutDataView: View {
-    @StateObject var runningManager = RunningManager.shared
+    @StateObject var runningManager = RunningStartManager.shared
     @StateObject var runningDataManager = RunningDataManager.shared
     let weight: Double = 60
     

@@ -1,5 +1,5 @@
 //
-//  RunningManager.swift
+//  RunningStartManager.swift
 //  Outline
 //
 //  Created by hyunjun on 10/25/23.
@@ -8,7 +8,7 @@
 import Combine
 import CoreLocation
 
-class RunningManager: ObservableObject {
+class RunningStartManager: ObservableObject {
         
     @Published var counter = 0
     @Published var start = false
@@ -20,7 +20,7 @@ class RunningManager: ObservableObject {
     var startCourse: GPSArtCourse?
     var runningType: RunningType = .gpsArt
     
-    static let shared = RunningManager()
+    static let shared = RunningStartManager()
     
     private init() { }
     
@@ -90,7 +90,7 @@ class RunningManager: ObservableObject {
 
 // MARK: - 위치와 경로를 계산하는 함수
 
-extension RunningManager {
+extension RunningStartManager {
 
     func calculateShortestDistance(from userCoordinate: CLLocationCoordinate2D, to courseCoordinates: [CLLocationCoordinate2D]) -> CLLocationDistance? {
         guard !courseCoordinates.isEmpty else { return nil }

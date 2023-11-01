@@ -7,7 +7,7 @@
 import SwiftUI
 
 struct RunningView: View {
-    @StateObject var runningManager = RunningManager.shared
+    @StateObject var runningManager = RunningStartManager.shared
     @StateObject var runningDataManager = RunningDataManager.shared
     
     @State var checkRunning = true
