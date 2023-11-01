@@ -25,11 +25,13 @@ struct RunningView: View {
                 TabView(selection: $selection) {
                     RunningMapView(selection: $selection)
                         .tag(0)
-                    WorkoutDataView()
+                        .gesture(DragGesture())
+                    WorkoutDataView(selection: $selection)
                         .tag(1)
+                        .gesture(DragGesture())
                 }
-                .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
-                .edgesIgnoringSafeArea(.all)
+                .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+                .ignoresSafeArea()
                 .onAppear {
                     if runningManager.running == true {
                         runningDataManager.startRunning()
