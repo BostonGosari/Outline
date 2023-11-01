@@ -10,7 +10,7 @@ import SwiftUI
 
 struct RunningMapView: View {
     @StateObject private var viewModel = RunningMapViewModel()
-    @StateObject var runningManager = RunningStartManager.shared
+    @StateObject var runningStartManager = RunningStartManager.shared
     @StateObject var runningDataManager = RunningDataManager.shared
     
     @GestureState var isLongPressed = false
@@ -36,7 +36,7 @@ struct RunningMapView: View {
                         Circle().foregroundStyle(.customPrimary).frame(width: 17)
                     }
                     .onChange(of: userlocation.location) { _, userlocation in
-                        if let user = userlocation, let startCourse = runningManager.startCourse {
+                        if let user = userlocation, let startCourse = runningStartManager.startCourse {
                             if viewModel.userLocations.isEmpty {
                                 viewModel.startLocation = CLLocation(latitude: user.coordinate.latitude, longitude: user.coordinate.longitude)
                             }
@@ -44,13 +44,13 @@ struct RunningMapView: View {
                             viewModel.checkEndDistance()
                             
                             if !startCourse.coursePaths.isEmpty {
-                                runningManager.trackingDistance()
+                                runningStartManager.trackingDistance()
                             }
                         }
                     }
                 }
                 
-                if let courseGuide = runningManager.startCourse {
+                if let courseGuide = runningStartManager.startCourse {
                     MapPolyline(coordinates: ConvertCoordinateManager.convertToCLLocationCoordinates(courseGuide.coursePaths))
                         .stroke(.white.opacity(0.5), lineWidth: 8)
                 }
@@ -67,8 +67,8 @@ struct RunningMapView: View {
                     .padding(.bottom, 80)
             }
             
-            if let course = runningManager.startCourse,
-               runningManager.runningType == .gpsArt {
+            if let course = runningStartManager.startCourse,
+               runningStartManager.runningType == .gpsArt {
                 CourseGuideView(
                     userLocations: $viewModel.userLocations,
                     showBigGuide: $showBigGuide,
@@ -132,7 +132,7 @@ extension RunningMapView {
                             HapticManager.impact(style: .medium)
                             viewModel.runningType = .pause
                             runningDataManager.pauseRunning()
-                            runningManager.stopTimer()
+                            runningStartManager.stopTimer()
                         } label: {
                             Image(systemName: "pause.fill")
                                 .buttonModifier(color: Color.customPrimary, size: 29, padding: 29)
@@ -180,7 +180,7 @@ extension RunningMapView {
                                     DispatchQueue.main.async {
                                         checkUserLocation = false
                                         runningDataManager.stopRunning()
-                                        runningManager.counter = 0
+                                        runningStartManager.counter = 0
                                         showCustomSheet = true
                                     }
                                 }
@@ -192,7 +192,7 @@ extension RunningMapView {
                         HapticManager.impact(style: .medium)
                         viewModel.runningType = .start
                         runningDataManager.resumeRunning()
-                        runningManager.startTimer()
+                        runningStartManager.startTimer()
                     } label: {
                         Image(systemName: "play.fill")
                             .buttonModifier(color: Color.customPrimary, size: 24, padding: 26)

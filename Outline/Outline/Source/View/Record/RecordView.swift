@@ -174,13 +174,12 @@ struct RecordView: View {
 
 struct RecordItem: View {
     var record: CoreRunningRecord
-    private let pathManager = PathGenerateManager.shared
     var body: some View {
 
         ZStack {
             if let coursePath = record.courseData?.coursePaths,
                let data = pathToCoordinate(coursePath) {
-                pathManager
+                PathGenerateManager
                     .caculateLines(width: 358, height: 176, coordinates: data)
                     .stroke(lineWidth: 5)
                     .scale(0.5)
