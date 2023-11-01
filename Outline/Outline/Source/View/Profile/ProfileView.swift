@@ -23,7 +23,7 @@ struct ProfileView: View {
                     .background(Color.gray700)
                     .padding(.top, 20)
                 List {
-                    Group{
+                    Group {
                         NavigationLink {
                             ProfileUserInfoView()
                         } label: {
