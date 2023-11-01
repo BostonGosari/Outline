@@ -30,7 +30,7 @@ struct GPSArtCourse: Codable, Hashable {
     var startLocation: Coordinate
     var producer: String
     
-    init(id: String, courseName: String, locationInfo: Placemark, courseLength: Double, courseDuration: Double, centerLocation: Coordinate, distance: Double, level: CourseLevel, alley: Alley, coursePaths: [Coordinate], heading: Double, thumbnail: String, description: String = "", startLocation: Coordinate = Coordinate(longitude: 0, latitude: 0), producer: String = "Outline") {
+    init(id: String, courseName: String, locationInfo: Placemark, courseLength: Double, courseDuration: Double, centerLocation: Coordinate, distance: Double, level: CourseLevel, alley: Alley, coursePaths: [Coordinate], heading: Double, thumbnail: String, description: String = "", startLocation: Coordinate = Coordinate(longitude: 0, latitude: 0), producer: String = "") {
         self.id = id
         self.courseName = courseName
         self.locationInfo = locationInfo
