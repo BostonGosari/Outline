@@ -15,7 +15,8 @@ class ShareViewModel: ObservableObject {
     @Published var showCamera = false
     @Published var showImagePicker = false
     @Published var permissionDenied = false
-    @Published var shareImage: UIImage?
+    @Published var customImage: UIImage?
+    @Published var posterImage: UIImage?
     
     @Published var tapSaveButton = false
     @Published var tapShareButton = false
@@ -32,6 +33,8 @@ class ShareViewModel: ObservableObject {
         }
     }
     
+    private var shareImage: UIImage?
+    
     var alertTitle = ""
     var alertMessage = ""
     
@@ -40,8 +43,8 @@ class ShareViewModel: ObservableObject {
             if granted {
                 self.showCamera = true
             } else {
-                self.alertTitle = "카메라에 접근할 수 없습니다."
-                self.alertMessage = "설정에서 카메라 권한을 허용해주세요."
+                self.alertTitle = "카메라 권한 허용"
+                self.alertMessage = "권한을 허용하면 사진을 찍어 업로드할 수 있어요."
                 self.permissionDenied = true
             }
         }
@@ -53,12 +56,12 @@ class ShareViewModel: ObservableObject {
             case .authorized:
                 self.showImagePicker = true
             case .denied:
-                self.alertTitle = "카메라에 접근할 수 없습니다."
-                self.alertMessage = "설정에서 카메라 권한을 허용해주세요."
+                self.alertTitle = "사진 권한 허용"
+                self.alertMessage = "권한을 허용하면 사진을 함께 업로드할 수 있어요."
                 self.permissionDenied = true
             case .restricted, .notDetermined:
-                self.alertTitle = "사진에 접근할 수 없습니다."
-                self.alertMessage = "설정에서 사진 권한을 허용해주세요."
+                self.alertTitle = "사진 권한 허용"
+                self.alertMessage = "권한을 허용하면 사진을 함께 업로드할 수 있어요."
                 self.permissionDenied = true
             default:
                 break
@@ -87,13 +90,21 @@ class ShareViewModel: ObservableObject {
     }
     
     func saveImage() {
+        if currentPage == 0 {
+            shareImage = customImage
+        } else {
+            shareImage = posterImage
+        }
+        
         if let image = shareImage {
             print(currentPage)
             let imageSaver = ImageSaver()
             imageSaver.writeToPhotoAlbum(image: image)
-            
             isShowPopup = true
         }
+    }
+    
+    func renderLayerImage() {
     }
 }
 
@@ -103,6 +114,10 @@ class ImageSaver: NSObject {
     }
 
     @objc func saveCompleted(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
-        print("Save finished!")
+        if let error = error {
+            print(error)
+        } else {
+            print("Save finished!")
+        }
     }
 }

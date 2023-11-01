@@ -41,11 +41,6 @@ struct CustomShareView: View {
             }
             
         }
-        .onChange(of: viewModel.currentPage, {
-            if viewModel.currentPage == 0 {
-                renderLayerImage()
-            }
-        })
         .onAppear {
             renderLayerImage()
         }
