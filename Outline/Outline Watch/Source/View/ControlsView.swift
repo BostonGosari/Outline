@@ -12,10 +12,10 @@ struct ControlsView: View {
     
     @EnvironmentObject var workoutManager: WatchWorkoutManager
     @StateObject var watchConnectivityManager = WatchConnectivityManager.shared
+    @StateObject var watchRunningManager = WatchRunningManager.shared
     @State private var showingConfirmation = false
     @State private var animate1 = false
     @State private var animate2 = false
-    let startCourse: GPSArtCourse
     
     var body: some View {
         ScrollView {
@@ -117,10 +117,13 @@ extension ControlsView {
                 Button {
                     showingConfirmation = false
                     workoutManager.endWorkout()
-                    let courseData = CourseData(courseName: startCourse.courseName, runningLength: startCourse.courseLength, heading: startCourse.heading, distance: startCourse.distance, coursePaths: ConvertCoordinateManager.convertToCLLocationCoordinates(startCourse.coursePaths), runningCourseId: "")
+                    
+                    let startCourse = watchRunningManager.startCourse
+                    
+                    let courseData = CourseData(courseName: startCourse.courseName, runningLength: startCourse.courseLength, heading: startCourse.heading, distance: startCourse.distance, coursePaths: watchRunningManager.userLocations, runningCourseId: "")
                     let healthData = HealthData(totalTime: 0.0, averageCadence: workoutManager.cadence, totalRunningDistance: workoutManager.distance, totalEnergy: workoutManager.calorie, averageHeartRate: workoutManager.heartRate, averagePace: workoutManager.pace, startDate: Date(), endDate: Date())
                     
-                    watchConnectivityManager.sendRunningRecordToPhone(RunningRecord(id: UUID().uuidString, runningType: .gpsArt, courseData: courseData, healthData: healthData))
+                    watchConnectivityManager.sendRunningRecordToPhone(RunningRecord(id: UUID().uuidString, runningType: watchRunningManager.runningType, courseData: courseData, healthData: healthData))
                     
                 } label: {
                     Text("종료하기")

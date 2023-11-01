@@ -9,13 +9,8 @@ import SwiftUI
 import MapKit
 
 struct MapWatchView: View {
-    
-    var course: [CLLocationCoordinate2D] = []
-    
+    @StateObject var watchRunningManager = WatchRunningManager.shared
     @State var position: MapCameraPosition = .userLocation(followsHeading: true, fallback: .automatic)
-    
-    @Binding var userLocations: [CLLocationCoordinate2D]
-    
     @State private var userCoordinate: CLLocationCoordinate2D?
     
     var body: some View {
@@ -28,13 +23,13 @@ struct MapWatchView: View {
                     }
                     .onChange(of: userlocation.location) { _, userlocation in
                         if let user = userlocation {
-                            userLocations.append(user.coordinate)
+                            watchRunningManager.userLocations.append(user.coordinate)
                         }
                     }
                 }
-                MapPolyline(coordinates: course)
+                MapPolyline(coordinates: ConvertCoordinateManager.convertToCLLocationCoordinates(watchRunningManager.startCourse.coursePaths))
                     .stroke(.white.opacity(0.5), lineWidth: 8)
-                MapPolyline(coordinates: userLocations)
+                MapPolyline(coordinates: watchRunningManager.userLocations)
                     .stroke(.first, lineWidth: 8)
             }
             .mapControlVisibility(.hidden)
