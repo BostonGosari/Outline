@@ -10,20 +10,21 @@ import SwiftUI
 struct WatchTabView: View {
     @EnvironmentObject var workoutManager: WatchWorkoutManager
     @Environment(\.isLuminanceReduced) var isLuminanceReduced
+    @StateObject var watchRunningManager = WatchRunningManager.shared
     @State private var selection: Tab = .metrics
-    @Binding var userLocations: [CLLocationCoordinate2D]
-    var startCourse: GPSArtCourse
-    private let locationManager = CLLocationManager()
-    
+        
     enum Tab {
         case controls, map, metrics
     }
     
     var body: some View {
         TabView(selection: $selection) {
-            ControlsView(startCourse: startCourse).tag(Tab.controls)
-            MapWatchView(course: ConvertCoordinateManager.convertToCLLocationCoordinates(startCourse.coursePaths), userLocations: $userLocations).tag(Tab.map)
-            MetricsView().tag(Tab.metrics)
+            ControlsView()
+                .tag(Tab.controls)
+            MapWatchView()
+                .tag(Tab.map)
+            MetricsView()
+                .tag(Tab.metrics)
         }
         .navigationBarBackButtonHidden(true)
         .onChange(of: workoutManager.running) { _, _ in

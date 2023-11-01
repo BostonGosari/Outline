@@ -9,6 +9,7 @@ import SwiftUI
 
 struct HomeTabView: View {
     @StateObject private var runningManager = RunningStartManager.shared
+    @StateObject var runningDataManager = RunningDataManager.shared
     @State private var selectedTab: Tab = .GPSArtRunning
     @State private var showDetailView = false
     
@@ -36,8 +37,13 @@ struct HomeTabView: View {
                             .ignoresSafeArea()
                     }
                 }
+                .overlay {
+                    if runningDataManager.endWithoutSaving {
+                        RunningPopup(text: "30초 이하의 러닝은 저장되지 않아요")
+                            .frame(maxHeight: .infinity, alignment: .top)
+                    }
+                }
             }
-            
             if runningManager.start {
                 CountDown(running: $runningManager.running, start: $runningManager.start)
             }
@@ -45,6 +51,7 @@ struct HomeTabView: View {
             if runningManager.running {
                 RunningView()
             }
+          
         }
     }
 }
