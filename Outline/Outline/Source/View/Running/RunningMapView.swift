@@ -12,7 +12,6 @@ struct RunningMapView: View {
     @StateObject private var viewModel = RunningMapViewModel()
     @StateObject var runningStartManager = RunningStartManager.shared
     @StateObject var runningDataManager = RunningDataManager.shared
-    
     @GestureState var isLongPressed = false
     
     @State private var moveToFinishRunningView = false
@@ -178,11 +177,18 @@ extension RunningMapView {
                                 .onEnded { _ in
                                     HapticManager.impact(style: .heavy)
                                     DispatchQueue.main.async {
-                                        checkUserLocation = false
-                                        runningDataManager.stopRunning()
-                                        runningStartManager.counter = 0
-                                        showCustomSheet = true
-                                    }
+                                       if runningStartManager.counter < 3 {
+                                           runningDataManager.stopRunningWithoutRecord()
+                                           runningStartManager.counter = 0
+                                           runningStartManager.running = false
+                                           
+                                       } else {
+                                           checkUserLocation = false
+                                           runningDataManager.stopRunning()
+                                           runningStartManager.counter = 0
+                                           showCustomSheet = true
+                                       }
+                                   }
                                 }
                         )
                     
