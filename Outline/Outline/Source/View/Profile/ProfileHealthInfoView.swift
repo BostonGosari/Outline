@@ -8,69 +8,63 @@
 import SwiftUI
 
 struct ProfileHealthInfoView: View {
-    @State private var userName = "아웃라인메이트"
-    @State private var birthday = Date()
-
-    @State private var showBirthdayPicker = false
-    @State private var showGenderPicker = false
+    @Environment(\.dismiss) private var dismiss
+    @State private var height: Int = 170
+    @State private var weight: Int = 60
     
-    private var dateRange: ClosedRange<Date> {
-        let min = Calendar.current.date(byAdding: .year, value: -120, to: Date())!
-        let max = Calendar.current.date(byAdding: .year, value: 0, to: Date())!
+    @State private var showHeightPicker = false
+    @State private var showWeightPicker = false
+    
+    private var heightRange: ClosedRange<Int> {
+        let min = 0
+        let max = 300
+        return min...max
+    }
+    private var weightRange: ClosedRange<Int> {
+        let min = 0
+        let max = 300
         return min...max
     }
     
     var body: some View {
-        VStack {
-            ZStack {
-                Image("defaultProfileImage")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 118, height: 118)
-                Image("changeProfileImage")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 118, height: 118)
+        VStack(alignment: .leading) {
+            VStack(alignment: .leading) {
+                Text("간단한 신체정보를 알려주세요.")
+                    .font(.title2)
+                    .padding(.bottom, 20)
+                    .padding(.top, 40)
+                Text("정확한 러닝 정보를 받으실 수 있어요.")
+                    .font(.tag)
+                    .foregroundStyle(Color.gray300)
+                    .padding(.bottom, 0)
+                Text("이 정보는 타인에게 공유되지 않아요.")
+                    .font(.tag)
+                    .foregroundStyle(Color.gray300)
             }
-            .padding(.top, 18)
-            
-            HStack {
-                Text("문승의")
-                Spacer()
-            }
-            .padding(.horizontal, 24)
-            .padding(.top, 30)
-            
-            TextField("아웃라인메이트", text: $userName)
-            .textFieldStyle(OvalTextFieldStyle())
             .padding(.horizontal, 16)
-            
-            Divider()
-                .frame(height: 1)
-                .background(Color.gray700)
-                .padding(.vertical, 20)
+            .padding(.bottom, 50)
             
             List {
                 Group {
                     Button {
-                        showGenderPicker.toggle()
+                        showHeightPicker.toggle()
                     } label: {
                         HStack {
-                            Text("생년월일")
+                            Text("신장")
                             Spacer()
-                            Text("2003.09.06.")
+                            Text("\(height)cm")
                                 .foregroundStyle(Color.gray400)
                         }
                         .frame(height: 40)
                     }
 
                     Button {
-                        // logout
+                        showWeightPicker.toggle()
                     } label: {
                         HStack {
-                            Text("성별")
+                            Text("체중")
                             Spacer()
-                            Text("여성")
+                            Text("\(weight)kg")
                                 .foregroundStyle(Color.customPrimary)
                         }
                         .frame(height: 40)
@@ -83,19 +77,48 @@ struct ProfileHealthInfoView: View {
             .listStyle(.inset)
             .padding(.horizontal, 16)
             .frame(height: 2 * 62)
-            
             Spacer()
         }
-        .navigationTitle("설정")
+        .navigationTitle("내 정보")
         .navigationBarTitleDisplayMode(.inline)
         .background(Color.gray900)
-        .sheet(isPresented: $showBirthdayPicker, content: {
-            DatePicker(
-                "Birthday",
-                selection: $birthday,
-                in: dateRange,
-                displayedComponents: [.date, .hourAndMinute]
-            )
+        .sheet(isPresented: $showHeightPicker, content: {
+            HStack {
+                Spacer()
+                Button {
+                    showHeightPicker = false
+                } label: {
+                    Text("완료")
+                }
+            }
+            .padding(16)
+            Picker("신장", selection: $height) {
+                ForEach(heightRange, id: \.self) { h in
+                    Text("\(h)cm")
+                }
+            }
+            .pickerStyle(.wheel)
+            .presentationDetents([.medium])
+        })
+        .sheet(isPresented: $showWeightPicker, content: {
+            VStack {
+                HStack {
+                    Spacer()
+                    Button {
+                        showWeightPicker = false
+                    } label: {
+                        Text("완료")
+                    }
+                }
+                .padding(16)
+                Picker("체중", selection: $weight) {
+                    ForEach(weightRange, id: \.self) { w in
+                        Text("\(w)kg")
+                    }
+                }
+                .pickerStyle(.wheel)
+                .presentationDetents([.medium])
+            }
         })
     }
 }
