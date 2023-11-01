@@ -26,6 +26,7 @@ class RunningDataManager: ObservableObject {
     @Published var end: Date?
     
     @Published var userLocations = [CLLocationCoordinate2D]()
+    @Published var endWithoutSaving = false
     
     // MARK: - Private Properties
     
@@ -48,6 +49,14 @@ class RunningDataManager: ObservableObject {
         startPedometerUpdates()
     }
     
+    func stopRunningWithoutRecord() {
+        RunningEndDate = Date()
+        endWithoutSaving = true
+        Timer.scheduledTimer(withTimeInterval: 2.0, repeats: false) {_ in
+            self.endWithoutSaving = false
+        }
+    }
+ 
     func stopRunning() {
         RunningEndDate = Date()
         stopPedometerUpdates()
