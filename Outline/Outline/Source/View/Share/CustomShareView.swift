@@ -26,7 +26,7 @@ struct CustomShareView: View {
     @State private var imageWidth: CGFloat = 0
     @State private var imageHeight: CGFloat = 0
     
-    @State private var position: MapCameraPosition = .userLocation(followsHeading: true, fallback: .automatic)
+    @State private var position: MapCameraPosition = .userLocation(fallback: .automatic)
         
     var body: some View {
         ZStack {
@@ -101,6 +101,8 @@ extension CustomShareView {
             Map(position: $position) {
                 MapPolyline(coordinates: viewModel.runningData.userLocations)
                     .stroke(.customPrimary, lineWidth: 8)
+            }
+            .mapControls {
             }
             .frame(width: imageWidth, height: imageHeight)
             .overlay {
