@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct ProfileHealthInfoView: View {
-    @AppStorage("height") var height: Int = 170
-    @AppStorage("weight") var weight: Int = 60
+    @AppStorage("height") var height: Int = 183
+    @AppStorage("weight") var weight: Int = 73
     
     @Environment(\.dismiss) private var dismiss
     
@@ -17,13 +17,13 @@ struct ProfileHealthInfoView: View {
     @State private var showWeightPicker = false
     
     private var heightRange: ClosedRange<Int> {
-        let min = 0
-        let max = 300
+        let min = 91
+        let max = 242
         return min...max
     }
     private var weightRange: ClosedRange<Int> {
-        let min = 0
-        let max = 300
+        let min = 13
+        let max = 227
         return min...max
     }
     
@@ -105,26 +105,6 @@ struct ProfileHealthInfoView: View {
         })
     }
 }
-//
-//enum HealthInfoDataType {
-//    case
-//}
-//
-//struct CustomPicker: View {
-//    var pickerDescription: String = ""
-//    @Binding var value: Int
-//    @Binding var range: ClosedRange<Int>
-//    
-//    var body: some View {
-//        Picker("체중", selection: $weight) {
-//            ForEach(range, id: \.self) { v in
-//                Text("\(v)kg")
-//            }
-//        }
-//        .pickerStyle(.wheel)
-//        .presentationDetents([.medium])
-//    }
-//}
 
 #Preview {
     ProfileHealthInfoView()
