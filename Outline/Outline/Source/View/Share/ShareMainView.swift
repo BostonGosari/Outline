@@ -22,16 +22,15 @@ struct ShareMainView: View {
                     .ignoresSafeArea()
                 
                 TabView(selection: $viewModel.currentPage) {
-                    CustomShareView(viewModel: viewModel, renderedImage: $viewModel.shareImage)
+                    CustomShareView(viewModel: viewModel, renderedImage: $viewModel.customImage)
                         .tag(0)
-                    ImageShareView(viewModel: viewModel, shareImage: $viewModel.shareImage)
+                    ImageShareView(viewModel: viewModel, shareImage: $viewModel.posterImage)
                         .tag(1)
                 }
                 .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
                 
                 HStack(spacing: 0) {
                     Button {
-                        viewModel.tapSaveButton = true
                         viewModel.saveImage()
                     }  label: {
                         Image(systemName: "square.and.arrow.down")
@@ -70,6 +69,9 @@ struct ShareMainView: View {
                         .frame(maxHeight: .infinity, alignment: .bottom)
                         .padding(.bottom, 74)
                 }
+            }
+            .overlay {
+                //TODO: 권한 거부시 sheet
             }
         }
     }
