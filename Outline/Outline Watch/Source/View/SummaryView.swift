@@ -41,7 +41,7 @@ struct SummaryView: View {
             ScrollViewReader { proxy in
                 ScrollView {
                     ConfettiWatchView()
-                    PathGenerateManager.shared.caculateLines(width: 80, height: 80, coordinates: userLocations)
+                    PathGenerateManager.caculateLines(width: 80, height: 80, coordinates: userLocations)
                         .stroke(style: StrokeStyle(lineWidth: 8, lineCap: .round, lineJoin: .round))
                         .scaledToFit()
                         .foregroundStyle(.first)

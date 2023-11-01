@@ -12,7 +12,6 @@ struct CourseGuideView: View {
     @Binding var userLocations: [CLLocationCoordinate2D]
     @Binding var showBigGuide: Bool
     
-    private let pathManager = PathGenerateManager.shared
     let coursePathCoordinates: [CLLocationCoordinate2D]
     let courseRotate: Double
     
@@ -56,7 +55,7 @@ struct CourseGuideView: View {
 
 extension CourseGuideView {
     private var coursePath: some View {
-        pathManager
+        PathGenerateManager
             .caculateLines(width: width, height: height, coordinates: coursePathCoordinates)
             .stroke(lineWidth: showBigGuide ? 15 : 7)
             .scaleEffect(0.8)
@@ -65,9 +64,9 @@ extension CourseGuideView {
     }
     
     private var userPath: some View {
-        let canvasData = pathManager.calculateCanvaData(coordinates: coursePathCoordinates, width: width, height: height)
+        let canvasData = PathGenerateManager.calculateCanvaData(coordinates: coursePathCoordinates, width: width, height: height)
         
-        return pathManager
+        return PathGenerateManager
             .caculateLines(width: width, height: height, coordinates: userLocations, canvasData: canvasData)
             .stroke(lineWidth: showBigGuide ? 15 : 7)
             .scaleEffect(0.8)
