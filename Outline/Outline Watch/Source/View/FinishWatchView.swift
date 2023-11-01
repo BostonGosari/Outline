@@ -34,6 +34,7 @@ struct FinishWatchView: View {
             .scaledToFit()
             .frame(height: 118)
             .ignoresSafeArea()
+            .padding(.bottom, 20)
     }
 }
 
