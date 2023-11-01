@@ -29,6 +29,14 @@ class KakaoAuthModel: NSObject {
         }
     }
     
+    func kakaoSignOut() {
+        do {
+            try Auth.auth().signOut()
+        } catch {
+            print("kakao signout failed")
+        }
+    }
+    
     private func openKakaoService(completion: @escaping (Result<String, AuthError>) -> Void) {
         if UserApi.isKakaoTalkLoginAvailable() { // 카카오톡 앱 이용 가능한지
             UserApi.shared.loginWithKakaoTalk { oauthToken, error in // 카카오톡 앱으로 로그인
