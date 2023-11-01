@@ -30,6 +30,7 @@
 		0EE92E7D2AE02DDC003192FF /* FreeRunningHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE92E7C2AE02DDC003192FF /* FreeRunningHomeView.swift */; };
 		29111E372AE0C9CA009833C7 /* FinishWatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29111E362AE0C9CA009833C7 /* FinishWatchView.swift */; };
 		29111E3F2AE0CD0C009833C7 /* ConfettiWatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29111E3E2AE0CD0C009833C7 /* ConfettiWatchView.swift */; };
+		292613172AF2BCEF00591E32 /* RecordHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 292613162AF2BCEF00591E32 /* RecordHeader.swift */; };
 		293C97DF2AE6C454007821F5 /* WatchConnectivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 293C97DE2AE6C454007821F5 /* WatchConnectivityManager.swift */; };
 		293C97E02AE6C454007821F5 /* WatchConnectivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 293C97DE2AE6C454007821F5 /* WatchConnectivityManager.swift */; };
 		295232FA2AEED0630020EAFA /* BigCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295232F92AEED0630020EAFA /* BigCardView.swift */; };
@@ -127,7 +128,7 @@
 		F01FDB992ADABB6100BDA633 /* TabModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01FDB982ADABB6100BDA633 /* TabModel.swift */; };
 		F01FDB9C2ADABC4600BDA633 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01FDB9B2ADABC4600BDA633 /* TabBar.swift */; };
 		F03524102AE35AF800CCD8A6 /* RunningDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F035240F2AE35AF800CCD8A6 /* RunningDataManager.swift */; };
-		F0492E1D2ADD2AE900F6EADD /* Header.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0492E1C2ADD2AE900F6EADD /* Header.swift */; };
+		F0492E1D2ADD2AE900F6EADD /* GPSArtHomeHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0492E1C2ADD2AE900F6EADD /* GPSArtHomeHeader.swift */; };
 		F0492E212ADD52E900F6EADD /* WatchTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0492E202ADD52E900F6EADD /* WatchTabView.swift */; };
 		F0492E232ADD545200F6EADD /* CourseListWatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0492E222ADD545200F6EADD /* CourseListWatchView.swift */; };
 		F05C7D562ADC565E006842DB /* PreferenceKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05C7D552ADC565E006842DB /* PreferenceKey.swift */; };
@@ -219,6 +220,7 @@
 		0EE92E7C2AE02DDC003192FF /* FreeRunningHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeRunningHomeView.swift; sourceTree = "<group>"; };
 		29111E362AE0C9CA009833C7 /* FinishWatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishWatchView.swift; sourceTree = "<group>"; };
 		29111E3E2AE0CD0C009833C7 /* ConfettiWatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfettiWatchView.swift; sourceTree = "<group>"; };
+		292613162AF2BCEF00591E32 /* RecordHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordHeader.swift; sourceTree = "<group>"; };
 		293C97DE2AE6C454007821F5 /* WatchConnectivityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchConnectivityManager.swift; sourceTree = "<group>"; };
 		295232F92AEED0630020EAFA /* BigCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigCardView.swift; sourceTree = "<group>"; };
 		295232FB2AEEE74A0020EAFA /* ButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyle.swift; sourceTree = "<group>"; };
@@ -299,7 +301,7 @@
 		F01FDB9B2ADABC4600BDA633 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 		F01FDB9D2ADABD3D00BDA633 /* HomeTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabView.swift; sourceTree = "<group>"; };
 		F035240F2AE35AF800CCD8A6 /* RunningDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningDataManager.swift; sourceTree = "<group>"; };
-		F0492E1C2ADD2AE900F6EADD /* Header.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Header.swift; sourceTree = "<group>"; };
+		F0492E1C2ADD2AE900F6EADD /* GPSArtHomeHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPSArtHomeHeader.swift; sourceTree = "<group>"; };
 		F0492E202ADD52E900F6EADD /* WatchTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchTabView.swift; sourceTree = "<group>"; };
 		F0492E222ADD545200F6EADD /* CourseListWatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseListWatchView.swift; sourceTree = "<group>"; };
 		F05C7D552ADC565E006842DB /* PreferenceKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferenceKey.swift; sourceTree = "<group>"; };
@@ -512,6 +514,7 @@
 				BB397D082AE6408A00F92A43 /* RecordView.swift */,
 				BB397D0A2AE640A800F92A43 /* RecordDetailView.swift */,
 				BB397D0C2AE65AF800F92A43 /* MapView.swift */,
+				292613162AF2BCEF00591E32 /* RecordHeader.swift */,
 			);
 			path = Record;
 			sourceTree = "<group>";
@@ -531,7 +534,7 @@
 			children = (
 				BB5239362ADBD99F00646494 /* GPSArtHomeView.swift */,
 				295232F92AEED0630020EAFA /* BigCardView.swift */,
-				F0492E1C2ADD2AE900F6EADD /* Header.swift */,
+				F0492E1C2ADD2AE900F6EADD /* GPSArtHomeHeader.swift */,
 				F096974C2ADBDBB000C38AF4 /* CardDetailView.swift */,
 				F096974E2ADBEE9F00C38AF4 /* CardDetailInformationView.swift */,
 				BB52396A2ADD385700646494 /* BottomScrollView.swift */,
@@ -1024,6 +1027,7 @@
 				2975F0962AE3E1790046C00B /* CornerRectangleModifier.swift in Sources */,
 				954CB2B82AE6492B005EB2E9 /* OnboardingLocationAuthView.swift in Sources */,
 				F06298A92AE18A50007AB2D3 /* ConvertCoordinateManager.swift in Sources */,
+				292613172AF2BCEF00591E32 /* RecordHeader.swift in Sources */,
 				954CB2BA2AE654BA005EB2E9 /* OnboardingNotificationAuthView.swift in Sources */,
 				F06B93622ADB847500387DEB /* ContentView.swift in Sources */,
 				F09697472ADBCD6000C38AF4 /* Shape.swift in Sources */,
@@ -1086,7 +1090,7 @@
 				95EB1EE92ADDC43400B47984 /* PersistentController.swift in Sources */,
 				2998035C2AE0181900A9A134 /* Confetti.swift in Sources */,
 				29AE76DC2ADE2A5300A46742 /* InputUserInfoViewModel.swift in Sources */,
-				F0492E1D2ADD2AE900F6EADD /* Header.swift in Sources */,
+				F0492E1D2ADD2AE900F6EADD /* GPSArtHomeHeader.swift in Sources */,
 				0E9A5D422AE058EF00C19FF3 /* CustomShareView.swift in Sources */,
 				29AE76D72ADE2A2200A46742 /* InputNicknameView.swift in Sources */,
 				F01FDB992ADABB6100BDA633 /* TabModel.swift in Sources */,

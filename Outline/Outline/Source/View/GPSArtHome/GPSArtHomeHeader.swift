@@ -1,5 +1,5 @@
 //
-//  Header.swift
+//  GPSArtHomeHeader.swift
 //  Outline
 //
 //  Created by Hyunjun Kim on 10/16/23.
@@ -7,8 +7,7 @@
 
 import SwiftUI
 
-struct Header: View {
-    
+struct GPSArtHomeHeader: View {
     var loading: Bool
     var scrollOffset: CGFloat
     
@@ -46,17 +45,22 @@ struct Header: View {
     }
 }
 
-struct InlineHeader: View {
-    
+struct GPSArtHomeInlineHeader: View {
     var loading: Bool
     var scrollOffset: CGFloat
     
     var body: some View {
         HStack {
-            Image("HeaderLogo")
-                .resizable()
-                .scaledToFit()
-                .frame(height: 36)
+            if loading {
+                RoundedRectangle(cornerRadius: 9.5)
+                    .foregroundColor(.gray700)
+                    .frame(width: 115, height: 38)
+            } else {
+                Image("HeaderLogo")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(height: 36)
+            }
             Spacer()
             if loading {
                 Circle()
