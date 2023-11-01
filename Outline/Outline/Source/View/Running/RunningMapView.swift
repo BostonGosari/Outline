@@ -177,7 +177,7 @@ extension RunningMapView {
                                 .onEnded { _ in
                                     HapticManager.impact(style: .heavy)
                                     DispatchQueue.main.async {
-                                       if runningStartManager.counter < 3 {
+                                       if runningStartManager.counter < 30 {
                                            runningDataManager.stopRunningWithoutRecord()
                                            runningStartManager.counter = 0
                                            runningStartManager.running = false
