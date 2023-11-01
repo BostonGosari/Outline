@@ -55,7 +55,7 @@ class DataTestViewModel: ObservableObject {
         userInfoModel.createUser(nickname: "austin") { result in
             switch result {
             case .success(let uid):
-                self.uid = uid
+                print(uid)
             case .failure(let error):
                 print(error)
             }
