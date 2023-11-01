@@ -28,7 +28,9 @@ class InputUserInfoViewModel: ObservableObject {
     @Published var weight = 50
     @Published var currentPicker: PickerType = .none
     @Published var isDefault = false
-    
+    @Published var isButtonActive = false
+    @Published var moveToLocationAuthView = false
+
     private var healthStore = HKHealthStore()
         
     var defaultButtonImage: String {
@@ -68,6 +70,8 @@ class InputUserInfoViewModel: ObservableObject {
             HKQuantityType.workoutType()
         ]
         
-        healthStore.requestAuthorization(toShare: quantityTypes, read: quantityTypes) {_, _ in}
+        healthStore.requestAuthorization(toShare: quantityTypes, read: quantityTypes) {_, _ in
+            self.isButtonActive = true
+        }
     }
 }
