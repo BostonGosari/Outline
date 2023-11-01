@@ -179,6 +179,7 @@ extension RunningMapView {
                                     HapticManager.impact(style: .heavy)
                                     DispatchQueue.main.async {
                                         checkUserLocation = false
+                                        runningDataManager.userLocations = viewModel.userLocations
                                         runningDataManager.stopRunning()
                                         runningStartManager.counter = 0
                                         showCustomSheet = true
