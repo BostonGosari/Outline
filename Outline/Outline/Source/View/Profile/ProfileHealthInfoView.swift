@@ -84,15 +84,6 @@ struct ProfileHealthInfoView: View {
         .navigationBarTitleDisplayMode(.inline)
         .background(Color.gray900)
         .sheet(isPresented: $showHeightPicker, content: {
-            HStack {
-                Spacer()
-                Button {
-                    showHeightPicker = false
-                } label: {
-                    Text("완료")
-                }
-            }
-            .padding(16)
             Picker("신장", selection: $height) {
                 ForEach(heightRange, id: \.self) { h in
                     Text("\(h)cm")
@@ -103,15 +94,6 @@ struct ProfileHealthInfoView: View {
         })
         .sheet(isPresented: $showWeightPicker, content: {
             VStack {
-                HStack {
-                    Spacer()
-                    Button {
-                        showWeightPicker = false
-                    } label: {
-                        Text("완료")
-                    }
-                }
-                .padding(16)
                 Picker("체중", selection: $weight) {
                     ForEach(weightRange, id: \.self) { w in
                         Text("\(w)kg")
