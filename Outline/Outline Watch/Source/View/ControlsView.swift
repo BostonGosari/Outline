@@ -22,7 +22,7 @@ struct ControlsView: View {
         ScrollView {
             HStack(spacing: 11) {
                 ControlButton(systemName: "stop.fill", action: {
-                    if workoutManager.builder?.elapsedTime ?? 0 > 30 {
+                    if workoutManager.workout?.duration ?? 0 > 30 {
                         showingConfirmation = true
                     } else {
                         showingEndwithoutSavingSheet = true
