@@ -70,7 +70,6 @@ struct LookAroundModalView: View {
     }
 }
 
-
 #Preview {
     LookAroundView()
 }
