@@ -12,7 +12,7 @@ struct CardDetailView: View {
     
     @State private var isUnlocked = false
     @State private var showAlert = false
-    @StateObject var runningManager = RunningManager.shared
+    @StateObject var runningManager = RunningStartManager.shared
     private let locationManager = CLLocationManager()
     @Environment(\.dismiss) var dismiss
     
@@ -38,7 +38,7 @@ struct CardDetailView: View {
         ZStack {
             ScrollView {
                 ZStack {
-                    Color.gray
+                    Color.gray900
                         .onScrollViewOffsetChanged { value in
                             handleScrollViewOffset(value)
                         }
@@ -55,7 +55,7 @@ struct CardDetailView: View {
                     .mask(
                         RoundedRectangle(cornerRadius: viewSize / 2, style: .continuous)
                     )
-                    .scaleEffect(viewSize / -600 + 1)
+                    .scaleEffect(showDetailView ? max(viewSize / -600 + 1, 0.9) : 0.9)
                     .gesture(isDraggable ? drag : nil)
                     
                     slideToUnlock
@@ -77,6 +77,7 @@ struct CardDetailView: View {
                 }
             }
             .scrollIndicators(scrollViewOffset > scrollStartRange ? .hidden : .automatic)
+            .scrollDisabled(!showDetailView)
             .ignoresSafeArea(edges: .top)
             .statusBarHidden()
                         
@@ -149,7 +150,6 @@ struct CardDetailView: View {
         AsyncImage(url: URL(string: selectedCourse.course.thumbnail)) { image in
             image
                 .resizable()
-                .scaledToFit()
                 .roundedCorners(45, corners: [.bottomRight])
                 .shadow(color: .white, radius: 0.5, y: 0.5)
         } placeholder: {
@@ -193,10 +193,9 @@ struct CardDetailView: View {
         SlideToUnlock(isUnlocked: $isUnlocked, progress: $progress)
             .onChange(of: isUnlocked) { _, newValue in
                 if newValue {
-                    let userLocation = locationManager.location?.coordinate
                     let course = selectedCourse.course.coursePaths
                     
-                    if let userLocation = userLocation, runningManager.checkDistance(userLocation: userLocation, course: course) {
+                    if runningManager.checkDistance(course: course) {
                         runningManager.startCourse = selectedCourse.course
                         runningManager.startGPSArtRun()
                         showDetailView = false
@@ -217,7 +216,7 @@ struct CardDetailView: View {
     
     private var closeButton: some View {
         Button {
-            withAnimation(.closeCard) {
+            withAnimation(.bouncy) {
                 showDetailView.toggle()
             }
         } label: {
@@ -246,7 +245,7 @@ extension CardDetailView {
                             viewSize = dragState.width
                         }
                         if viewSize > dragLimit {
-                            withAnimation(.closeCard) {
+                            withAnimation(.bouncy) {
                                 showDetailView = false
                                 dragState = .zero
                             }
@@ -260,7 +259,7 @@ extension CardDetailView {
                         }
                         
                         if viewSize > dragLimit {
-                            withAnimation(.closeCard) {
+                            withAnimation(.bouncy) {
                                 showDetailView = false
                                 dragState = .zero
                                 viewSize = 0.0
@@ -271,12 +270,12 @@ extension CardDetailView {
             }
             .onEnded { _ in
                 if viewSize >= dragLimit {
-                    withAnimation(.closeCard) {
+                    withAnimation(.bouncy) {
                         showDetailView = false
                         viewSize = 0.0
                     }
                 } else {
-                    withAnimation {
+                    withAnimation(.bouncy) {
                         dragState = .zero
                         viewSize = 0.0
                     }
@@ -290,11 +289,11 @@ extension CardDetailView {
 extension CardDetailView {
     
     private func close() {
-        withAnimation(.closeCard.delay(0.3)) {
+        withAnimation(.bouncy.delay(0.3)) {
             showDetailView = false
         }
         
-        withAnimation(.closeCard) {
+        withAnimation(.bouncy) {
             viewSize = .zero
         }
         
@@ -329,7 +328,7 @@ extension CardDetailView {
                 viewSize = scrollViewOffset - scrollStartRange
                 
                 if scrollViewOffset > scrollLimit {
-                    withAnimation(.closeCard) {
+                    withAnimation(.bouncy) {
                         showDetailView = false
                     }
                 }
