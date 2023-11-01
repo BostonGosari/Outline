@@ -37,7 +37,7 @@ struct ProfileUserInfoView: View {
             .padding(.top, 18)
             
             HStack {
-                Text("문승의")
+                Text("닉네임")
                 Spacer()
             }
             .padding(.horizontal, 24)

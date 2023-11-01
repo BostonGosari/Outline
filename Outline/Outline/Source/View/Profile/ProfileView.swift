@@ -12,16 +12,20 @@ struct ProfileView: View {
     @State private var showDeleteCompleteAlert = false
     @State private var showLogoutAlert = false
     
+    // 추후 데이터 연결 필요
+    @State private var userProfileImage = "defaultProfileImage"
+    @State private var userName = "김시즈"
+    
     var body: some View {
         NavigationStack {
             VStack {
-                Image("defaultProfileImage")
+                Image(userProfileImage)
                     .resizable()
                     .scaledToFit()
                     .frame(width: 118, height: 118)
                     .padding(.top, 18)
                 
-                Text("문승의")
+                Text(userName)
                 Divider()
                     .frame(height: 1)
                     .background(Color.gray700)
