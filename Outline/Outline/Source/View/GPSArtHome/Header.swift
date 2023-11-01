@@ -14,10 +14,16 @@ struct Header: View {
     
     var body: some View {
         HStack {
-            Image("HeaderLogo")
-                .resizable()
-                .scaledToFit()
-                .frame(height: 36)
+            if loading {
+                RoundedRectangle(cornerRadius: 9.5)
+                    .foregroundColor(.gray700)
+                    .frame(width: 115, height: 38)
+            } else {
+                Image("HeaderLogo")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(height: 36)
+            }
             Spacer()
             if loading {
                 Circle()
@@ -32,7 +38,8 @@ struct Header: View {
                 }
             }
         }
-        .padding(.horizontal)
+        .padding(.leading, UIScreen.main.bounds.width * 0.08)
+        .padding(.trailing)
         .padding(.top)
         .frame(maxWidth: .infinity, alignment: .leading)
         .opacity(scrollOffset >= 20 ? 1 : 0)
@@ -64,7 +71,8 @@ struct InlineHeader: View {
                 }
             }
         }
-        .padding(.horizontal)
+        .padding(.leading, UIScreen.main.bounds.width * 0.08)
+        .padding(.trailing)
         .padding(.bottom, 10)
         .frame(maxWidth: .infinity, alignment: .leading)
         .background(

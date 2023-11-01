@@ -6,6 +6,7 @@
 //
 
 import CoreLocation
+import MapKit
 import SwiftUI
 
 struct RecordDetailView: View {
@@ -15,6 +16,8 @@ struct RecordDetailView: View {
     @State private var showRenameSheet = false
     @State private var newCourseName = ""
     @State private var completeButtonActive = false
+    
+    @State private var position: MapCameraPosition = .userLocation(followsHeading: true, fallback: .automatic)
     
     var record: CoreRunningRecord
     var gradientColors: [Color] = [.customBlack, .customBlack, .customBlack, .customBlack, .black50, .customBlack.opacity(0)]
@@ -32,9 +35,12 @@ struct RecordDetailView: View {
             ScrollView {
                 VStack(spacing: 0) {
                     ZStack(alignment: .topLeading) {
-                        FinishRunningMap(userLocations: $viewModel.userLocations)
-                            .roundedCorners(45, corners: .bottomLeft)
-                            .shadow(color: .customWhite, radius: 1.5)
+                        Map(position: $position, interactionModes: .zoom) {
+                            MapPolyline(coordinates: viewModel.userLocations)
+                                .stroke(.customPrimary, lineWidth: 8)
+                        }
+                        .roundedCorners(45, corners: .bottomLeft)
+                        .shadow(color: .customWhite, radius: 1.5)
                         
                         HStack(alignment: .top) {
                             courseInfo
@@ -163,7 +169,7 @@ struct RecordDetailView: View {
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 Button {
-                    //dataModel.deleteRunningRecord(record)
+                    // dataModel.deleteRunningRecord(record)
                     dismiss()
                 } label: {
                     Image(systemName: "trash.fill")

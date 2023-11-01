@@ -64,6 +64,3 @@ class CourseAccuracyManager: CourseAnalyzeManager {
         return maxDistance
     }
 }
-
-
-

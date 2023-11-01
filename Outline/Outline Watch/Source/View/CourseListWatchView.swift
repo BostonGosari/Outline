@@ -12,13 +12,13 @@ import UIKit
 struct CourseListWatchView: View {
     @EnvironmentObject var workoutManager: WatchWorkoutManager
     @StateObject var watchConnectivityManager = WatchConnectivityManager.shared
+    @StateObject var watchRunningManager = WatchRunningManager.shared
     @StateObject var viewModel = CourseListWatchViewModel()
     
-    @State private var startCourse: GPSArtCourse = GPSArtCourse()
     @State private var countdownSeconds = 3
     @State private var navigateDetailView = false
     @State private var navigate = false
-    @State private var userLocations: [CLLocationCoordinate2D] = []
+    @State private var selectedCourse: GPSArtCourse = GPSArtCourse()
     
     var workoutTypes: [HKWorkoutActivityType] = [.running]
     
@@ -30,6 +30,7 @@ struct CourseListWatchView: View {
                         viewModel.checkAuthorization()
                         if  viewModel.isHealthAuthorized && viewModel.isLocationAuthorized {
                             workoutManager.selectedWorkout = workoutTypes[0]
+                            watchRunningManager.startFreeRun()
                             navigate.toggle()
                         } else {
                             // TODO: 설정 안내 시트 필요
@@ -67,9 +68,14 @@ struct CourseListWatchView: View {
                         Button {
                             viewModel.checkAuthorization()
                             if viewModel.isHealthAuthorized && viewModel.isLocationAuthorized {
-                                workoutManager.selectedWorkout = workoutTypes[0]
-                                startCourse = course
-                                navigate.toggle()
+                                if watchRunningManager.checkDistance(course: course.coursePaths) {
+                                    workoutManager.selectedWorkout = workoutTypes[0]
+                                    watchRunningManager.startCourse = course
+                                    watchRunningManager.startGPSArtRun()
+                                    navigate.toggle()
+                                } else {
+                                    // TODO: 거리가 멀어요 자유러닝 안내시트
+                                }
                             } else {
                                 // TODO: 설정 안내 시트 필요
                             }
@@ -78,7 +84,7 @@ struct CourseListWatchView: View {
                                 Text(course.courseName)
                                     .padding(.leading, 4)
                                     .frame(maxWidth: .infinity, alignment: .leading)
-                                PathGenerateManager.shared.caculateLines(width: 75, height: 75, coordinates: ConvertCoordinateManager.convertToCLLocationCoordinates(course.coursePaths))
+                                PathGenerateManager.caculateLines(width: 75, height: 75, coordinates: ConvertCoordinateManager.convertToCLLocationCoordinates(course.coursePaths))
                                     .stroke(style: StrokeStyle(lineWidth: 4, lineCap: .round, lineJoin: .round))
                                     .scaledToFit()
                                     .frame(height: 75)
@@ -95,7 +101,7 @@ struct CourseListWatchView: View {
                         .buttonStyle(.plain)
                         .overlay(alignment: .topTrailing) {
                             Button {
-                                startCourse = course
+                                selectedCourse = course
                                 navigateDetailView.toggle()
                             } label: {
                                 VStack {
@@ -121,7 +127,7 @@ struct CourseListWatchView: View {
                 }
             }
             .navigationDestination(isPresented: $navigateDetailView) {
-                DetailView(course: startCourse)
+                DetailView(course: selectedCourse)
             }
             .navigationDestination(isPresented: $navigate) {
                 countdownView()
@@ -133,7 +139,7 @@ struct CourseListWatchView: View {
             .tint(.first)
         }
         .sheet(isPresented: $workoutManager.showingSummaryView) {
-            SummaryView(userLocations: userLocations, navigate: $navigate)
+            SummaryView(navigate: $navigate)
         }
     }
     
@@ -154,7 +160,7 @@ struct CourseListWatchView: View {
                         }
                     }
             } else {
-                WatchTabView(userLocations: $userLocations, startCourse: startCourse) // 카운트다운이 끝나면 WatchTabView로 이동
+                WatchTabView() // 카운트다운이 끝나면 WatchTabView로 이동
             }
         }.navigationBarBackButtonHidden()
     }

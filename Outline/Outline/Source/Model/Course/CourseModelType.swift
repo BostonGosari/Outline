@@ -26,8 +26,11 @@ struct GPSArtCourse: Codable, Hashable {
     var coursePaths: [Coordinate]
     var heading: Double
     var thumbnail: String
+    var description: String
+    var startLocation: Coordinate
+    var producer: String
     
-    init(id: String, courseName: String, locationInfo: Placemark, courseLength: Double, courseDuration: Double, centerLocation: Coordinate, distance: Double, level: CourseLevel, alley: Alley, coursePaths: [Coordinate], heading: Double, thumbnail: String) {
+    init(id: String, courseName: String, locationInfo: Placemark, courseLength: Double, courseDuration: Double, centerLocation: Coordinate, distance: Double, level: CourseLevel, alley: Alley, coursePaths: [Coordinate], heading: Double, thumbnail: String, description: String = "", startLocation: Coordinate = Coordinate(longitude: 0, latitude: 0), producer: String = "") {
         self.id = id
         self.courseName = courseName
         self.locationInfo = locationInfo
@@ -40,6 +43,9 @@ struct GPSArtCourse: Codable, Hashable {
         self.coursePaths = coursePaths
         self.heading = heading
         self.thumbnail = thumbnail
+        self.description = description
+        self.startLocation = startLocation
+        self.producer = producer
     }
     init() {
         self.id = ""
@@ -54,6 +60,9 @@ struct GPSArtCourse: Codable, Hashable {
         self.coursePaths = []
         self.heading = 0
         self.thumbnail = ""
+        self.description = ""
+        self.startLocation = Coordinate(longitude: 0, latitude: 0)
+        self.producer = "Outline"
     }
 }
 

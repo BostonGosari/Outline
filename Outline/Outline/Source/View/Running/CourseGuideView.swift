@@ -1,5 +1,5 @@
 //
-//  CourseGuidView.swift
+//  CourseGuideView.swift
 //  Outline
 //
 //  Created by hyebin on 10/25/23.
@@ -8,25 +8,24 @@
 import CoreLocation
 import SwiftUI
 
-struct CourseGuidView: View {
+struct CourseGuideView: View {
     @Binding var userLocations: [CLLocationCoordinate2D]
-    @Binding var showBigGuid: Bool
+    @Binding var showBigGuide: Bool
     
-    private let pathManager = PathGenerateManager.shared
     let coursePathCoordinates: [CLLocationCoordinate2D]
     let courseRotate: Double
     
     var width: Double {
-        return showBigGuid ? 320 : 113
+        return showBigGuide ? 320 : 113
     }
     
     var height: Double {
-        return showBigGuid ? 480 : 168
+        return showBigGuide ? 480 : 168
     }
     
     var body: some View {
-        ZStack(alignment: showBigGuid ? .top : .topTrailing) {
-            if showBigGuid {
+        ZStack(alignment: showBigGuide ? .top : .topTrailing) {
+            if showBigGuide {
                 Color.black.opacity(0.5)
                     .ignoresSafeArea()
             }
@@ -44,32 +43,32 @@ struct CourseGuidView: View {
                         .frame(width: width, height: height, alignment: .center)
                 }
                 .frame(width: width, height: height)
-                .padding(.top, showBigGuid ? 100 : 16)
-                .padding(.trailing, showBigGuid ? 0 : 16 )
+                .padding(.top, showBigGuide ? 100 : 16)
+                .padding(.trailing, showBigGuide ? 0 : 16 )
         }
         .onTapGesture {
-            showBigGuid.toggle()
-            // TODO: 햅틱 추가
+            showBigGuide.toggle()
+            HapticManager.impact(style: .soft)
         }
     }
 }
 
-extension CourseGuidView {
+extension CourseGuideView {
     private var coursePath: some View {
-        pathManager
+        PathGenerateManager
             .caculateLines(width: width, height: height, coordinates: coursePathCoordinates)
-            .stroke(lineWidth: showBigGuid ? 15 : 7)
+            .stroke(lineWidth: showBigGuide ? 15 : 7)
             .scaleEffect(0.8)
             .foregroundStyle(Color.customBlack.opacity(0.5))
             
     }
     
     private var userPath: some View {
-        let canvasData = pathManager.calculateCanvaData(coordinates: coursePathCoordinates, width: width, height: height)
+        let canvasData = PathGenerateManager.calculateCanvaData(coordinates: coursePathCoordinates, width: width, height: height)
         
-        return pathManager
+        return PathGenerateManager
             .caculateLines(width: width, height: height, coordinates: userLocations, canvasData: canvasData)
-            .stroke(lineWidth: showBigGuid ? 15 : 7)
+            .stroke(lineWidth: showBigGuide ? 15 : 7)
             .scaleEffect(0.8)
             .foregroundStyle(Color.customPrimary)
     }
