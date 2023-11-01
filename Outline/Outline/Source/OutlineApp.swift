@@ -19,7 +19,7 @@ struct OutlineApp: App {
   
     var body: some Scene {
         WindowGroup {
-            LookAroundView()
+            ContentView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
 
         }

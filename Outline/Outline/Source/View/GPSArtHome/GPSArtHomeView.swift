@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct GPSArtHomeView: View {
+    @AppStorage("authState") var authState: AuthState = .onboarding
+    
     @StateObject private var viewModel = GPSArtHomeViewModel()
     
     @State private var scrollOffset: CGFloat = 0
