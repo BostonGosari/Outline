@@ -32,13 +32,8 @@ struct RecordInlineHeader: View {
             Spacer()
             Text("기록")
                 .font(.custom("Pretendard-Regular", size: 18))
-                .offset(y: scrollOffset < 20 ? 0 : 20)
                 .opacity(scrollOffset < 20 ? 1 : 0)
-                .animation(.bouncy(duration: 1), value: scrollOffset)
-                .mask {
-                    Rectangle()
-                        .frame(height: 18)
-                }
+                .animation(.bouncy(duration: 0.7), value: scrollOffset)
             Spacer()
         }
         .padding(.horizontal)
