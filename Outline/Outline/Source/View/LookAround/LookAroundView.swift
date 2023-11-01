@@ -70,6 +70,36 @@ struct LookAroundModalView: View {
     }
 }
 
+struct LookAroundPopupView: View {
+    @AppStorage("authState") var authState: AuthState = .onboarding
+    
+    var body: some View {
+        RoundedRectangle(cornerRadius: 50)
+            .fill(Color.black70)
+            .strokeBorder(Color.customPrimary)
+            .frame(height: 54)
+            .padding(.horizontal, 24)
+            .overlay {
+                HStack {
+                    Text("OUTLINE 둘러보는 중")
+                        .foregroundStyle(Color.white)
+                        .font(.subBody)
+                    Spacer()
+                    Group {
+                        Text("회원가입")
+                            .foregroundStyle(Color.white)
+                            .font(.subBody)
+                        Image(systemName: "arrow.right.circle")
+                            .foregroundStyle(Color.customPrimary)
+                    }
+                    .onTapGesture {
+                        authState = .logout
+                    }
+                }
+            }
+    }
+}
+
 #Preview {
     LookAroundView()
 }
