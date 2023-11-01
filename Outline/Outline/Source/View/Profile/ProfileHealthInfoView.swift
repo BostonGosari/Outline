@@ -8,9 +8,10 @@
 import SwiftUI
 
 struct ProfileHealthInfoView: View {
+    @AppStorage("height") var height: Int = 170
+    @AppStorage("weight") var weight: Int = 60
+    
     @Environment(\.dismiss) private var dismiss
-    @State private var height: Int = 170
-    @State private var weight: Int = 60
     
     @State private var showHeightPicker = false
     @State private var showWeightPicker = false
