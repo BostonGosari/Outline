@@ -102,7 +102,7 @@ struct LookAroundPopupView: View {
                     }
                 }
                 .frame(height: 54)
-                .padding(.horizontal, 32)
+                .padding(.horizontal, 44)
             }
     }
 }
