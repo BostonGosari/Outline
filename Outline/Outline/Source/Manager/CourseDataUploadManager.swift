@@ -60,10 +60,6 @@ struct CourseDataUploadView: View {
             if let error = error {
                 print("Reverse geocoding error: \(error.localizedDescription)")
             } else if let placemark = placemarks?.first {
-                let area = placemark.administrativeArea ?? ""
-                let city = placemark.locality ?? ""
-                let town = placemark.subLocality ?? ""
-                
                 completion(Placemark(
                     name: placemark.name ?? "",
                     isoCountryCode: placemark.isoCountryCode ?? "",

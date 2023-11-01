@@ -9,7 +9,7 @@ import MapKit
 import SwiftUI
 
 struct FreeRunningHomeView: View {
-    @StateObject var runningManager = RunningManager.shared
+    @StateObject var runningManager = RunningStartManager.shared
     
     @State private var userLocation = ""
     @State private var progress: Double = 0.0
