@@ -27,9 +27,7 @@ struct CustomShareView: View {
     @State private var imageHeight: CGFloat = 0
     
     @State private var position: MapCameraPosition = .userLocation(followsHeading: true, fallback: .automatic)
-    
-    private let pathManager = PathGenerateManager.shared
-    
+        
     var body: some View {
         ZStack {
             Color.gray900
@@ -82,8 +80,8 @@ extension CustomShareView {
             Group {
                 Group {
                     Image(uiImage: renderdImage)
-                        
-                    pathManager.caculateLinesInRect(width: imageWidth, height: Double(imageWidth * 1920 / 1080), coordinates: viewModel.runningData.userLocations, region: mapView.region)
+                    
+                    PathGenerateManager.caculateLinesInRect(width: imageWidth, height: Double(imageWidth * 1920 / 1080), coordinates: viewModel.runningData.userLocations, region: mapView.region)
                         .stroke(style: StrokeStyle(lineWidth: 5, lineCap: .round, lineJoin: .round))
                 }
                 .overlay {
