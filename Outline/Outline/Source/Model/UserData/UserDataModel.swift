@@ -23,6 +23,9 @@ protocol UserDataModelProtocol {
         _ object: NSManagedObject,
         completion: @escaping (Result<Bool, CoreDataError>) -> Void
     )
+    func deleteAllRunningRecord(
+        completion: @escaping (Result<Bool, CoreDataError>) -> Void
+    )
 }
 
 enum CoreDataError: Error {
@@ -121,5 +124,10 @@ struct UserDataModel: UserDataModelProtocol {
         } catch {
             completion(.failure(.saveFailed))
         }
+    }
+    
+    func deleteAllRunningRecord(completion: @escaping (Result<Bool, CoreDataError>) -> Void) {
+        persistenceController.container.viewContext.reset()
+        completion(.success(true))
     }
 }
