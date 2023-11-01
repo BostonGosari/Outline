@@ -41,7 +41,7 @@ struct CardDetailInformationView: View {
                 Text("\(selectedCourse.course.locationInfo.administrativeArea) \(selectedCourse.course.locationInfo.locality) \(selectedCourse.course.locationInfo.subLocality)")
                     .font(.title3)
                     .bold()
-                Text("--")
+                Text("\(selectedCourse.course.description)")
                     .foregroundStyle(.gray)
             }
             
