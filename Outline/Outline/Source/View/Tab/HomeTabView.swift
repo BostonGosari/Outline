@@ -13,7 +13,7 @@ struct HomeTabView: View {
     @StateObject var watchConnectivityManager = WatchConnectivityManager.shared
     @State private var selectedTab: Tab = .GPSArtRunning
     @State private var showDetailView = false
-    @State private var showCustomSheet = true
+    @State private var showCustomSheet = false
     
     var body: some View {
         ZStack {
