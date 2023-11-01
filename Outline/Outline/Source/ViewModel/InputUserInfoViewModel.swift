@@ -5,6 +5,7 @@
 //  Created by hyebin on 10/16/23.
 //
 
+import CoreMotion
 import HealthKit
 import SwiftUI
 
@@ -30,9 +31,9 @@ class InputUserInfoViewModel: ObservableObject {
     @Published var isDefault = false
     @Published var isButtonActive = false
     @Published var moveToLocationAuthView = false
-
+    
     private var healthStore = HKHealthStore()
-        
+    
     var defaultButtonImage: String {
         isDefault ? "checkmark.square" : "square"
     }
@@ -71,7 +72,16 @@ class InputUserInfoViewModel: ObservableObject {
         ]
         
         healthStore.requestAuthorization(toShare: quantityTypes, read: quantityTypes) {_, _ in
+            self.requestMotionAccess()
             self.isButtonActive = true
+        }
+    }
+    
+    func requestMotionAccess() {
+        let motionManager = CMMotionActivityManager()
+        
+        if CMMotionActivityManager.isActivityAvailable() {
+            motionManager.queryActivityStarting(from: Date(), to: Date(), to: .main) { _, _ in }
         }
     }
 }
