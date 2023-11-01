@@ -113,7 +113,6 @@
 		BB1D534C2ADEA6F90073771F /* SummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1D534B2ADEA6F90073771F /* SummaryView.swift */; };
 		BB397D092AE6408A00F92A43 /* RecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB397D082AE6408A00F92A43 /* RecordView.swift */; };
 		BB397D0B2AE640A800F92A43 /* RecordDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB397D0A2AE640A800F92A43 /* RecordDetailView.swift */; };
-		BB397D0D2AE65AF800F92A43 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB397D0C2AE65AF800F92A43 /* MapView.swift */; };
 		BB493CF82AE0CA55009D3699 /* ElapsedTimeFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB493CF72AE0CA55009D3699 /* ElapsedTimeFormatter.swift */; };
 		BB5239292ADAF75C00646494 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5239272ADAF72A00646494 /* Logger.swift */; };
 		BB5239372ADBD99F00646494 /* GPSArtHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5239362ADBD99F00646494 /* GPSArtHomeView.swift */; };
@@ -277,7 +276,6 @@
 		BB1D534B2ADEA6F90073771F /* SummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryView.swift; sourceTree = "<group>"; };
 		BB397D082AE6408A00F92A43 /* RecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordView.swift; sourceTree = "<group>"; };
 		BB397D0A2AE640A800F92A43 /* RecordDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordDetailView.swift; sourceTree = "<group>"; };
-		BB397D0C2AE65AF800F92A43 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		BB493CEB2ADFD592009D3699 /* Outline-Watch-App-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Outline-Watch-App-Info.plist"; sourceTree = "<group>"; };
 		BB493CF72AE0CA55009D3699 /* ElapsedTimeFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElapsedTimeFormatter.swift; sourceTree = "<group>"; };
 		BB5239272ADAF72A00646494 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
@@ -491,7 +489,6 @@
 			children = (
 				BB397D082AE6408A00F92A43 /* RecordView.swift */,
 				BB397D0A2AE640A800F92A43 /* RecordDetailView.swift */,
-				BB397D0C2AE65AF800F92A43 /* MapView.swift */,
 			);
 			path = Record;
 			sourceTree = "<group>";
@@ -999,7 +996,6 @@
 				F096974F2ADBEE9F00C38AF4 /* CardDetailInformationView.swift in Sources */,
 				BB5239582ADC396300646494 /* BackgroundBlur.swift in Sources */,
 				BB5239372ADBD99F00646494 /* GPSArtHomeView.swift in Sources */,
-				BB397D0D2AE65AF800F92A43 /* MapView.swift in Sources */,
 				2975F0962AE3E1790046C00B /* CornerRectangleModifier.swift in Sources */,
 				954CB2B82AE6492B005EB2E9 /* OnboardingLocationAuthView.swift in Sources */,
 				F06298A92AE18A50007AB2D3 /* ConvertCoordinateManager.swift in Sources */,
