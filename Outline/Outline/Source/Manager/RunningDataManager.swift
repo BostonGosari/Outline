@@ -25,6 +25,8 @@ class RunningDataManager: ObservableObject {
     @Published var start: Date?
     @Published var end: Date?
     
+    @Published var userLocations = [CLLocationCoordinate2D]()
+    
     // MARK: - Private Properties
     
     private let pedometer = CMPedometer()
@@ -124,7 +126,7 @@ class RunningDataManager: ObservableObject {
     private func saveRunning() {
         guard let course = runningManger.startCourse else { return }
         
-        let courseData = CourseData(courseName: course.courseName, runningLength: course.courseLength, heading: course.heading, distance: course.distance, coursePaths: [CLLocationCoordinate2D](), runningCourseId: "")
+        let courseData = CourseData(courseName: course.courseName, runningLength: course.courseLength, heading: course.heading, distance: course.distance, coursePaths: userLocations, runningCourseId: "")
         
         let healthData = HealthData(totalTime: totalTime, averageCadence: totalSteps / totalDistance, totalRunningDistance: totalDistance / 1000, totalEnergy: kilocalorie, averageHeartRate: 0.0, averagePace: totalTime / totalDistance * 1000 / 60, startDate: RunningStartDate, endDate: RunningEndDate)
         
