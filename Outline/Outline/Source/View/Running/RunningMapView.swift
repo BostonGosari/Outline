@@ -17,6 +17,7 @@ struct RunningMapView: View {
     @State private var moveToFinishRunningView = false
     @State private var showCustomSheet = false
     @State private var showBigGuide = false
+    @State private var counter = 0
     
     @State private var checkUserLocation = true
     
@@ -81,8 +82,13 @@ struct RunningMapView: View {
                 .animation(.bouncy, value: showBigGuide)
             }
         }
-        .sheet(isPresented: $showCustomSheet) {
-            customSheet
+        .overlay {
+            if showCustomSheet {
+                customSheet
+                    .onAppear {
+                        counter += 1
+                    }
+            }
         }
         .overlay {
             if viewModel.isShowPopup {
@@ -214,28 +220,53 @@ extension RunningMapView {
     }
     
     private var customSheet: some View {
-        VStack(spacing: 0) {
-            Text("오늘은, 여기까지")
-                .font(.title2)
-                .padding(.top, 56)
-                .padding(.bottom, 8)
-            Text("즐거운 러닝이었나요? 다음에 또 만나요! ")
-                .font(.subBody)
-                .padding(.bottom, 24)
+        ZStack {
+            Color.black.opacity(0.5)
             
-            Image("Finish10")
-                .resizable()
-                .frame(width: 120, height: 120)
-                .padding(.bottom, 45)
-            
-            CompleteButton(text: "결과 페이지로", isActive: true) {
-                showCustomSheet = false
-                moveToFinishRunningView = true
+            VStack(spacing: 0) {
+                Text("오늘은, 여기까지")
+                    .font(.title2)
+                    .padding(.top, 56)
+                    .padding(.bottom, 8)
+                
+                Text("즐거운 러닝이었나요? 다음에 또 만나요! ")
+                    .font(.subBody)
+                    .padding(.bottom, 24)
+                
+                Image("Finish10")
+                    .resizable()
+                    .frame(width: 120, height: 120)
+                    .padding(.bottom, 45)
+                
+                CompleteButton(text: "결과 페이지로", isActive: true) {
+                    showCustomSheet = false
+                    moveToFinishRunningView = true
+                }
             }
+            .frame(height: UIScreen.main.bounds.height / 2)
+            .frame(maxWidth: .infinity)
+            .background {
+                RoundedRectangle(cornerRadius: 30, style: .continuous)
+                    .stroke(Color.customPrimary, lineWidth: 2)
+                RoundedRectangle(cornerRadius: 30, style: .continuous)
+                    .foregroundStyle(Color.gray900)
+            }
+            .frame(maxHeight: .infinity, alignment: .bottom)
+            .animation(.easeInOut, value: showCustomSheet)
+            
+            Confetti(counter: $counter,
+                     num: 40,
+                     colors: [.customPrimary, .customSecondary],
+                     confettiSize: 10,
+                     rainHeight: UIScreen.main.bounds.height,
+                     openingAngle: .degrees(60),
+                     closingAngle: .degrees(120),
+                     radius: 400,
+                     repetitions: 10,
+                     repetitionInterval: 1
+            )
         }
-        .presentationDetents([.height(420)])
-        .presentationCornerRadius(35)
-        .interactiveDismissDisabled()
+        .ignoresSafeArea()
     }
     
     @ViewBuilder
