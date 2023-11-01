@@ -9,9 +9,13 @@ import CoreLocation
 import SwiftUI
 
 struct ContentWatchView: View {
-    @StateObject private var workoutManager = WatchWorkoutManager()
+    @ObservedObject private var workoutManager: WatchWorkoutManager
     
     private var locationManager = CLLocationManager()
+    
+    init() {
+         self.workoutManager = WatchWorkoutManager(watchConnectivityManager: WatchConnectivityManager())
+     }
     
     var body: some View {
         CourseListWatchView()
