@@ -12,6 +12,8 @@ class LoginViewModel: ObservableObject {
     @AppStorage("authState") var authState: AuthState = .onboarding
     
     private let authModel = AuthModel()
+    private let userDataModel = UserDataModel()
+    private let userInfoModel = UserInfoModel()
     
     func loginWithApple(window: UIWindow?) {
         // if newUser => make firestore data
@@ -19,7 +21,7 @@ class LoginViewModel: ObservableObject {
             switch res {
             case .success(let uid):
                 self.userId = uid
-                self.authState = .login
+                self.checkLoginOrSignIn(uid: uid)
             case .failure(let error):
                 self.authState = .logout
                 print(error)
@@ -33,10 +35,35 @@ class LoginViewModel: ObservableObject {
             switch res {
             case .success(let uid):
                 self.userId = uid
-                self.authState = .login 
+                self.checkLoginOrSignIn(uid: uid)
             case .failure(let error):
                 self.authState = .logout
                 print(error)
+            }
+        }
+    }
+    
+    func checkLoginOrSignIn(uid: String){
+        userInfoModel.readUserInfo(uid: uid) { res in
+            switch res {
+            case .success(let userInfo):
+                print(userInfo)
+                print("user already exist")
+                self.authState = .login
+            case .failure(_):
+                print("newUser")
+                self.authState = .onboarding
+                self.setNewUser(uid: uid)
+            }
+        }
+    }
+    func setNewUser(uid: String){
+        userInfoModel.createUser(uid: uid, nickname: "default") { res in
+            switch res {
+            case .success(_):
+                print("success to create user")
+            case .failure(_):
+                print("fail to create user")
             }
         }
     }
@@ -61,6 +88,16 @@ class LoginViewModel: ObservableObject {
             switch res {
             case .success(let isSuccess):
                 self.authState = .logout
+                if let userId = self.userId {
+                    self.userInfoModel.deleteUser(uid: userId) { isSuccessDeleteDBUser in
+                        switch isSuccessDeleteDBUser {
+                        case .success(let success):
+                            print(success ? "delete user on FireStore" : "")
+                        case .failure(let failure):
+                            print("\(failure)")
+                        }
+                    }
+                }
                 self.userId = ""
                 print(isSuccess)
             case .failure(let error):
