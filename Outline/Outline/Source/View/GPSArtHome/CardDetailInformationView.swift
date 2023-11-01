@@ -9,7 +9,6 @@ import SwiftUI
 import MapKit
 
 struct CardDetailInformationView: View {
-
     var selectedCourse: CourseWithDistance
     
     var body: some View {
@@ -85,8 +84,22 @@ struct CardDetailInformationView: View {
                 .font(.title3)
                 .bold()
             VStack(alignment: .leading) {
-                MapInfoView(coordinates: ConvertCoordinateManager.convertToCLLocationCoordinates(selectedCourse.course.coursePaths))
-                .frame(height: 200)
+                NavigationLink {
+                    Map {
+                        UserAnnotation()
+                        MapPolyline(coordinates: ConvertCoordinateManager.convertToCLLocationCoordinates(selectedCourse.course.coursePaths))
+                            .stroke(.customPrimary, style: StrokeStyle(lineWidth: 8, lineCap: .round, lineJoin: .round))
+                    }
+                    .toolbarBackground(.hidden, for: .navigationBar)
+                } label: {
+                    Map(interactionModes: []) {
+                        UserAnnotation()
+                        MapPolyline(coordinates: ConvertCoordinateManager.convertToCLLocationCoordinates(selectedCourse.course.coursePaths))
+                            .stroke(.customPrimary, style: StrokeStyle(lineWidth: 4, lineCap: .round, lineJoin: .round))
+                    }
+                    .frame(height: 200)
+                }
+                .buttonStyle(.plain)
                 Text("경로 제작 \(selectedCourse.course.producer)님")
                     .foregroundStyle(.gray600)
             }
