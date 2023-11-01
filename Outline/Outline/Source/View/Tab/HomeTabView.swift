@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct HomeTabView: View {
-    @StateObject private var runningManager = RunningManager.shared
+    @StateObject private var runningManager = RunningStartManager.shared
     @State private var selectedTab: Tab = .GPSArtRunning
     @State private var showDetailView = false
     

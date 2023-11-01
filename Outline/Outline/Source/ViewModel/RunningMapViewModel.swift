@@ -63,7 +63,7 @@ class RunningMapViewModel: ObservableObject {
     }
     
     private func checkAccuracy() -> Double {
-        let runningManager = RunningManager.shared
+        let runningManager = RunningStartManager.shared
         
         if let course = runningManager.startCourse?.coursePaths {
             let guideCourse = ConvertCoordinateManager.convertToCLLocationCoordinates(course)

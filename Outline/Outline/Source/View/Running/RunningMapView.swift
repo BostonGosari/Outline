@@ -10,7 +10,7 @@ import SwiftUI
 
 struct RunningMapView: View {
     @StateObject private var viewModel = RunningMapViewModel()
-    @StateObject var runningManager = RunningManager.shared
+    @StateObject var runningManager = RunningStartManager.shared
     @StateObject var runningDataManager = RunningDataManager.shared
     
     @GestureState var isLongPressed = false

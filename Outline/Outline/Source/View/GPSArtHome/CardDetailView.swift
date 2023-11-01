@@ -12,7 +12,7 @@ struct CardDetailView: View {
     
     @State private var isUnlocked = false
     @State private var showAlert = false
-    @StateObject var runningManager = RunningManager.shared
+    @StateObject var runningManager = RunningStartManager.shared
     private let locationManager = CLLocationManager()
     @Environment(\.dismiss) var dismiss
     

@@ -9,7 +9,7 @@ import MapKit
 import SwiftUI
 
 struct FinishRunningView: View {
-    @StateObject private var runningManager = RunningManager.shared
+    @StateObject private var runningManager = RunningStartManager.shared
     @StateObject private var viewModel = FinishRunningViewModel()
     @FetchRequest (entity: CoreRunningRecord.entity(), sortDescriptors: []) var runningRecord: FetchedResults<CoreRunningRecord>
     

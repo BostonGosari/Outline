@@ -35,7 +35,7 @@ class RunningDataManager: ObservableObject {
     private var RunningStartDate = Date()
     private var RunningEndDate = Date()
     
-    private let runningManger = RunningManager.shared
+    private let runningManger = RunningStartManager.shared
     
     static let shared = RunningDataManager()
     
