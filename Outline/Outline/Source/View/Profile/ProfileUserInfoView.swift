@@ -88,7 +88,7 @@ struct ProfileUserInfoView: View {
             
             Spacer()
         }
-        .navigationTitle("설정")
+        .navigationTitle("내 정보")
         .navigationBarTitleDisplayMode(.inline)
         .background(Color.gray900)
         .sheet(isPresented: $showBirthdayPicker, content: {
