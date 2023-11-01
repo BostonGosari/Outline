@@ -14,6 +14,7 @@ struct ControlsView: View {
     @StateObject var watchConnectivityManager = WatchConnectivityManager.shared
     @StateObject var watchRunningManager = WatchRunningManager.shared
     @State private var showingConfirmation = false
+    @State private var showingEndwithoutSavingSheet = false
     @State private var animate1 = false
     @State private var animate2 = false
     
@@ -21,7 +22,11 @@ struct ControlsView: View {
         ScrollView {
             HStack(spacing: 11) {
                 ControlButton(systemName: "stop.fill", action: {
-                    showingConfirmation = true
+                    if workoutManager.workout?.duration ?? 0 > 30 {
+                        showingConfirmation = true
+                    } else {
+                        showingEndwithoutSavingSheet = true
+                    }
                 }, foregroundColor: .white, backgroundColor: .white)
                 
                 ControlButton(systemName: workoutManager.running ? "pause" : "play.fill", action: {
@@ -67,11 +72,12 @@ struct ControlsView: View {
         .toolbar(.hidden, for: .automatic)
         .overlay {
             if showingConfirmation {
-                customExitSheet()
-                    .ignoresSafeArea()
+                customExitSheet
+            }
+            else if showingEndwithoutSavingSheet {
+                customEndWithoutSavingSheet
             }
         }
-        
     }
 }
 
@@ -87,8 +93,7 @@ extension ControlsView {
                 .foregroundColor(Color.gray500)
         }
     }
-    
-    private func customExitSheet() -> some View {
+    private var customExitSheet: some View {
         ZStack {
             Rectangle()
                 .ignoresSafeArea()
@@ -141,6 +146,64 @@ extension ControlsView {
             }
         }
         .ignoresSafeArea()
+    }
+    private var customEndWithoutSavingSheet: some View {
+        ZStack {
+            Rectangle()
+                .ignoresSafeArea()
+                .foregroundStyle(.thinMaterial)
+            VStack {
+                VStack(alignment: .leading) {
+                    Text("30초 이하는 기록되지 않아요.")
+                    Text("러닝을 종료할까요?")
+                }
+                .padding()
+                .padding(.top, 20)
+                .background {
+                    RoundedRectangle(cornerRadius: 12, style: .continuous)
+                        .foregroundStyle(.gray.opacity(0.2))
+                }
+                Button {
+                    showingEndwithoutSavingSheet.toggle()
+                } label: {
+                    Text("계속 진행하기")
+                        .frame(maxWidth: .infinity)
+                        .frame(height: 36)
+                        .padding()
+                        .background(
+                            RoundedRectangle(cornerRadius: 20, style: .continuous)
+                                .foregroundColor(Color.gray800.opacity(0.5))
+                        )
+                        .foregroundColor(.white)
+                }
+                .buttonStyle(.plain)
+                Button {
+                    showingEndwithoutSavingSheet.toggle()
+                    workoutManager.endWorkout()
+                } label: {
+                    Text("종료하기")
+                        .frame(maxWidth: .infinity)
+                        .frame(height: 36)
+                        .padding()
+                        .background(
+                            RoundedRectangle(cornerRadius: 20, style: .continuous)
+                                .foregroundColor(Color.first)
+                        )
+                        .foregroundColor(.black)
+                }
+                .buttonStyle(.plain)
+            }
+            .padding(.top, 20)
+            .overlay(alignment: .topLeading) {
+                Image(systemName: "map.circle")
+                    .font(.system(size: 42))
+                    .foregroundColor(Color.first)
+                    .padding(16)
+                    .frame(width: 50, height: 50)
+            }
+            .toolbar(.hidden, for: .automatic)
+        }
+       
     }
 }
 
