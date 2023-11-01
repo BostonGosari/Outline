@@ -23,60 +23,106 @@ struct RecordView: View {
                 Color.gray900
                     .ignoresSafeArea()
                 BackgroundBlur(color: Color.customSecondary, padding: 50)
+                    .opacity(0.5)
+                BackgroundBlur(color: Color.customSecondary, padding: 50)
                 ScrollView {
                     VStack(alignment: .leading) {
-                        HStack(spacing: 8) {
+                        HStack(spacing: 0) {
                             ChipItem(label: "모두", isSelected: Binding(get: { self.selectedIndex == 0 }, set: { _ in self.selectedIndex = 0 }))
-                            ChipItem(label: "GPS아트", isSelected: Binding(get: { self.selectedIndex == 1 }, set: { _ in self.selectedIndex = 1 }))
-                            ChipItem(label: "자유", isSelected: Binding(get: { self.selectedIndex == 2 }, set: { _ in self.selectedIndex = 2 }))
+                                .padding(.trailing, 8)
+                            ChipItem(label: "GPS 러닝", isSelected: Binding(get: { self.selectedIndex == 1 }, set: { _ in self.selectedIndex = 1 }))
+                                .padding(.trailing, 8)
+                            ChipItem(label: "자유 러닝", isSelected: Binding(get: { self.selectedIndex == 2 }, set: { _ in self.selectedIndex = 2 }))
                             Spacer()
                             Button {
                                 isSortingSheetPresented = true
-                                } label: {
-                                Text(sortingButtonLabel)
-                                    .font(Font.subBody)
-                                    .foregroundStyle(Color.white)
+                            } label: {
+                                HStack {
+                                    Text(selectedSortOption.buttonLabel)
+                                        .font(Font.subBody)
+                                        .foregroundStyle(Color.customWhite)
+                                    Image(systemName: "chevron.down")
+                                        .font(Font.subBody)
+                                        .foregroundStyle(Color.customWhite)
+                                }
                             }
-                            .actionSheet(isPresented: $isSortingSheetPresented) {
-                                ActionSheet(
-                                    title: Text("정렬"),
-                                    buttons: [
-                                        .default(Text("최신순")) {
-                                            selectedSortOption = .latest
-                                        },
-                                        .default(Text("오래된 순")) {
-                                            selectedSortOption = .oldest
-                                        },
-                                        .default(Text("최장거리")) {
-                                            selectedSortOption = .longestDistance
-                                        },
-                                        .default(Text("최단거리")) {
-                                            selectedSortOption = .shortestDistance
-                                        },
-                                        .cancel()
-                                    ]
-                                )
-                            }
-                            Image(systemName: "chevron.down")
-                                .font(Font.subBody)
-                                .foregroundStyle(Color.white)
-                            
                         }
                         .padding(.bottom, 16)
-                        ForEach(filteredRecords, id: \.id) { record in
-                            NavigationLink {
-                                RecordDetailView(record: record)
-                                
-                            } label: {
-                                RecordItem(record: record)
+                        if filteredRecords.isEmpty {
+                            VStack(alignment: .center) {
+                                Image(systemName: "exclamationmark.circle")
+                                    .foregroundStyle(Color.customPrimary)
+                                    .font(Font.system(size: 36))
+                                    .padding(.top, 150)
+                                Text("아직 러닝 기록이 없어요")
+                                    .font(.subBody)
+                                    .foregroundColor(Color.gray500)
+                                    .padding(.top, 14)
                             }
-                            .padding(.bottom, 8)
+                            .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        } else {
+                            ForEach(filteredRecords, id: \.id) { record in
+                                NavigationLink {
+                                    RecordDetailView(record: record)
+                                    
+                                } label: {
+                                    RecordItem(record: record)
+                                }
+                                .padding(.bottom, 8)
+                            }
                         }
                     }
                     .padding()
                     
                 }
                 .navigationTitle("기록")
+                .sheet(isPresented: $isSortingSheetPresented) {
+                    VStack(alignment: .leading) {
+                        Text("정렬")
+                            .font(.subtitle)
+                        Divider()
+                            .padding(.bottom, 16)
+                            .foregroundColor(Color.gray500)
+                        ForEach(SortOption.allCases, id: \.self) { option in
+                            Button {
+                                selectedSortOption = option
+                                isSortingSheetPresented.toggle()
+                            } label: {
+                                HStack {
+                                    Text(option.buttonLabel)
+                                        .font(.subBody)
+                                        .foregroundColor(selectedSortOption.buttonLabel == option.rawValue ? Color.customPrimary : Color.gray500)
+                                    Spacer()
+                                    if selectedSortOption.buttonLabel == option.rawValue {
+                                        Image(systemName: "checkmark")
+                                            .foregroundColor(Color.customPrimary)
+                                            .padding(.trailing, 16)
+                                            .bold()
+                                    }
+                                       
+                                }
+                                .padding(.bottom, 24)
+                            }
+                         
+                        }
+                        Spacer()
+                        Button {
+                            isSortingSheetPresented.toggle()
+                        } label: {
+                            Text("취소")
+                                .font(.button)
+                                .foregroundColor(.white)
+                                .frame(maxWidth: .infinity, maxHeight: 55)
+                                .background(Color.gray700)
+                                .cornerRadius(15)
+                        }
+                    }
+                    .padding(EdgeInsets(top: 43, leading: 16, bottom: 60, trailing: 16))
+                    .ignoresSafeArea()
+                    .presentationDragIndicator(.visible)
+                    .presentationDetents([.height(407)])
+                    .presentationCornerRadius(35)
+                }
             }
             .onChange(of: selectedSortOption) {
                updateSortDescriptors()
@@ -90,16 +136,14 @@ struct RecordView: View {
         
         }
     }
-    private var sortingButtonLabel: String {
-        switch selectedSortOption {
-        case .latest:
-            return "최신순"
-        case .oldest:
-            return "오래된 순"
-        case .longestDistance:
-            return "최장거리"
-        case .shortestDistance:
-            return "최단거리"
+    enum SortOption: String, CaseIterable {
+        case latest = "최신순"
+        case oldest = "오래된 순"
+        case longestDistance = "최장 거리"
+        case shortestDistance = "최단 거리"
+
+        var buttonLabel: String {
+            return rawValue
         }
     }
     
@@ -130,13 +174,12 @@ struct RecordView: View {
 
 struct RecordItem: View {
     var record: CoreRunningRecord
-    private let pathManager = PathGenerateManager.shared
     var body: some View {
 
         ZStack {
             if let coursePath = record.courseData?.coursePaths,
                let data = pathToCoordinate(coursePath) {
-                pathManager
+                PathGenerateManager
                     .caculateLines(width: 358, height: 176, coordinates: data)
                     .stroke(lineWidth: 5)
                     .scale(0.5)

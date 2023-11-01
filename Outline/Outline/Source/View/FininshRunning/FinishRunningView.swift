@@ -5,15 +5,17 @@
 //  Created by hyebin on 10/18/23.
 //
 
+import MapKit
 import SwiftUI
 
 struct FinishRunningView: View {
-    @StateObject private var runningManager = RunningManager.shared
+    @StateObject private var runningManager = RunningStartManager.shared
     @StateObject private var viewModel = FinishRunningViewModel()
-    var gradientColors: [Color] = [.customBlack, .customBlack, .customBlack, .customBlack, .black50, .customBlack.opacity(0)]
-    
     @FetchRequest (entity: CoreRunningRecord.entity(), sortDescriptors: []) var runningRecord: FetchedResults<CoreRunningRecord>
-
+    
+    @State private var position: MapCameraPosition = .userLocation(followsHeading: true, fallback: .automatic)
+    private var gradientColors: [Color] = [.customBlack, .customBlack, .customBlack, .customBlack, .black50, .customBlack.opacity(0)]
+    
     var body: some View {
         NavigationStack {
             ZStack {
@@ -21,9 +23,12 @@ struct FinishRunningView: View {
                     .ignoresSafeArea()
                 VStack {
                     ZStack(alignment: .topLeading) {
-                        FinishRunningMap(userLocations: $viewModel.userLocations)
-                            .roundedCorners(45, corners: .bottomRight)
-                            .shadow(color: .customWhite, radius: 1.5)
+                        Map(position: $position, interactionModes: .zoom) {
+                            MapPolyline(coordinates: viewModel.userLocations)
+                                .stroke(.customPrimary, lineWidth: 8)
+                        }
+                        .roundedCorners(45, corners: .bottomRight)
+                        .shadow(color: .customWhite, radius: 1.5)
 
                         VStack(spacing: 0) {
                             Text("\(viewModel.date)")

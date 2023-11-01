@@ -14,18 +14,18 @@ struct BigCardView: View {
     var index: Int
     var currentIndex: Int
     var namespace: Namespace.ID
-    var isShow: Bool
+    var showDetailView: Bool
     
     var body: some View {
         AsyncImage(url: URL(string: course.course.thumbnail)) { image in
-            if !isShow {
+            if !showDetailView {
                 image
                     .resizable()
-                    .scaledToFit()
                     .roundedCorners(10, corners: [.topLeft])
                     .roundedCorners(70, corners: [.topRight])
                     .roundedCorners(45, corners: [.bottomLeft, .bottomRight])
                     .shadow(color: .white, radius: 1, y: -1)
+                    .matchedGeometryEffect(id: course.id, in: namespace)
             }
         } placeholder: {
             Rectangle()
@@ -33,10 +33,12 @@ struct BigCardView: View {
                 .onDisappear {
                     loading = false
                 }
+                .roundedCorners(10, corners: [.topLeft])
+                .roundedCorners(70, corners: [.topRight])
+                .roundedCorners(45, corners: [.bottomLeft, .bottomRight])
         }
-        .matchedGeometryEffect(id: course.id, in: namespace)
         .frame(
-            width: UIScreen.main.bounds.width * 0.82,
+            width: UIScreen.main.bounds.width * 0.84,
             height: UIScreen.main.bounds.height * 0.55
         )
         .transition(.identity)
@@ -45,9 +47,8 @@ struct BigCardView: View {
                 courseInformation
                     .opacity(index == currentIndex ? 1 : 0)
                     .offset(y: index == currentIndex ? 0 : 10)
-                    .background {
+                    .background(alignment: .bottom) {
                         Rectangle()
-                            .frame(width: UIScreen.main.bounds.width * 0.82)
                             .foregroundStyle(
                                 LinearGradient(
                                     stops: [

@@ -31,6 +31,7 @@ struct ContentView: View {
                 HomeTabView()
             }
         }
+        .tint(.customPrimary)
     }
 }
 
