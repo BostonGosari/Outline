@@ -22,14 +22,16 @@ struct RecordView: View {
             ZStack(alignment: .top) {
                 Color.gray900
                     .ignoresSafeArea()
-                BackgroundBlur(color: Color.secondaryColor, padding: 50)
+                BackgroundBlur(color: Color.customSecondary, padding: 50)
                     .opacity(0.5)
                 BackgroundBlur(color: Color.customSecondary, padding: 50)
                 ScrollView {
                     VStack(alignment: .leading) {
-                        HStack(spacing: 8) {
+                        HStack(spacing: 0) {
                             ChipItem(label: "모두", isSelected: Binding(get: { self.selectedIndex == 0 }, set: { _ in self.selectedIndex = 0 }))
+                                .padding(.trailing, 8)
                             ChipItem(label: "GPS 러닝", isSelected: Binding(get: { self.selectedIndex == 1 }, set: { _ in self.selectedIndex = 1 }))
+                                .padding(.trailing, 8)
                             ChipItem(label: "자유 러닝", isSelected: Binding(get: { self.selectedIndex == 2 }, set: { _ in self.selectedIndex = 2 }))
                             Spacer()
                             Button {
@@ -38,10 +40,10 @@ struct RecordView: View {
                                 HStack {
                                     Text(selectedSortOption.buttonLabel)
                                         .font(Font.subBody)
-                                        .foregroundStyle(Color.white)
+                                        .foregroundStyle(Color.customWhite)
                                     Image(systemName: "chevron.down")
                                         .font(Font.subBody)
-                                        .foregroundStyle(Color.white)
+                                        .foregroundStyle(Color.customWhite)
                                 }
                             }
                         }
@@ -49,12 +51,12 @@ struct RecordView: View {
                         if filteredRecords.isEmpty {
                             VStack(alignment: .center) {
                                 Image(systemName: "exclamationmark.circle")
-                                    .foregroundColor(Color.primaryColor)
+                                    .foregroundStyle(Color.customPrimary)
                                     .font(Font.system(size: 36))
                                     .padding(.top, 150)
                                 Text("아직 러닝 기록이 없어요")
                                     .font(.subBody)
-                                    .foregroundColor(Color.gray500Color)
+                                    .foregroundColor(Color.gray500)
                                     .padding(.top, 14)
                             }
                             .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -80,7 +82,7 @@ struct RecordView: View {
                             .font(.subtitle)
                         Divider()
                             .padding(.bottom, 16)
-                            .foregroundColor(Color.gray500Color)
+                            .foregroundColor(Color.gray500)
                         ForEach(SortOption.allCases, id: \.self) { option in
                             Button {
                                 selectedSortOption = option
@@ -89,11 +91,11 @@ struct RecordView: View {
                                 HStack {
                                     Text(option.buttonLabel)
                                         .font(.subBody)
-                                        .foregroundColor(selectedSortOption.buttonLabel == option.rawValue ? Color.primaryColor : Color.gray500Color)
+                                        .foregroundColor(selectedSortOption.buttonLabel == option.rawValue ? Color.customPrimary : Color.gray500)
                                     Spacer()
                                     if selectedSortOption.buttonLabel == option.rawValue {
                                         Image(systemName: "checkmark")
-                                            .foregroundColor(Color.primaryColor)
+                                            .foregroundColor(Color.customPrimary)
                                             .padding(.trailing, 16)
                                             .bold()
                                     }
@@ -111,7 +113,7 @@ struct RecordView: View {
                                 .font(.button)
                                 .foregroundColor(.white)
                                 .frame(maxWidth: .infinity, maxHeight: 55)
-                                .background(Color.gray700Color)
+                                .background(Color.gray700)
                                 .cornerRadius(15)
                         }
                     }
@@ -172,13 +174,12 @@ struct RecordView: View {
 
 struct RecordItem: View {
     var record: CoreRunningRecord
-    private let pathManager = PathGenerateManager.shared
     var body: some View {
 
         ZStack {
             if let coursePath = record.courseData?.coursePaths,
                let data = pathToCoordinate(coursePath) {
-                pathManager
+                PathGenerateManager
                     .caculateLines(width: 358, height: 176, coordinates: data)
                     .stroke(lineWidth: 5)
                     .scale(0.5)
@@ -286,4 +287,3 @@ enum SortOption {
     case longestDistance
     case shortestDistance
 }
-

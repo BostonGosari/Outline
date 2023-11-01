@@ -35,9 +35,7 @@ struct ImageShareView: View {
         Color.white.opacity(0.4),
         Color.white.opacity(0.5)
     ]
-    
-    private let pathManager = PathGenerateManager.shared
-    
+        
     var body: some View {
         ZStack {
             Color.gray900
@@ -76,7 +74,7 @@ struct ImageShareView: View {
             renderImage()
         }
         .onAppear {
-            let canvasSize = pathManager.calculateCanvaData(coordinates: viewModel.runningData.userLocations, width: imageSize, height: imageSize)
+            let canvasSize = PathGenerateManager.calculateCanvaData(coordinates: viewModel.runningData.userLocations, width: imageSize, height: imageSize)
             self.pathWidth = CGFloat(canvasSize.width)
             self.pathHeight = CGFloat(canvasSize.height)
         }
@@ -276,7 +274,7 @@ extension ImageShareView {
 
 extension ImageShareView {
     private var userPath: some View {
-        pathManager
+        PathGenerateManager
             .caculateLines(width: imageSize, height: imageSize, coordinates: viewModel.runningData.userLocations)
             .stroke(lineWidth: 5)
             .scale(0.5)
