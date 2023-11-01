@@ -5,38 +5,60 @@
 //  Created by 김하은 on 10/17/23.
 //
 
+import MapKit
 import SwiftUI
 
 struct RunningMapView: View {
     @StateObject private var viewModel = RunningMapViewModel()
-    @StateObject var runningManager = RunningManager.shared
-    
-    @ObservedObject var locationManager: LocationManager
-    @ObservedObject var runningViewModel: RunningViewModel
-    @ObservedObject var digitalTimerViewModel: DigitalTimerViewModel
-    @ObservedObject var homeTabViewModel: HomeTabViewModel
-    
+    @StateObject var runningStartManager = RunningStartManager.shared
+    @StateObject var runningDataManager = RunningDataManager.shared
     @GestureState var isLongPressed = false
+    
+    @State private var moveToFinishRunningView = false
+    @State private var showCustomSheet = false
+    @State private var showBigGuide = false
+    
+    @State private var checkUserLocation = true
+    
+    @State private var position: MapCameraPosition = .userLocation(followsHeading: true, fallback: .automatic)
     
     @Binding var selection: Int
     
-    @State var navigateToFinishRunningView = false
-    @State var showCustomSheet = false
-    @State var showBigGuid = false
-    @State private var showCompleteSheet = false
-    @State private var moveToFinishView = false
+    var courses: [CLLocationCoordinate2D] = []
     
     var body: some View {
         ZStack(alignment: .topTrailing) {
-            if let course = runningManager.startCourse {
-                RunningMap(
-                    locationManager: locationManager,
-                    viewModel: viewModel,
-                    coordinates:   ConvertCoordinateManager.convertToCLLocationCoordinates(course.coursePaths)
-                )
-                .ignoresSafeArea()
-            } 
+            Map(position: $position) {
+                UserAnnotation { userlocation in
+                    ZStack {
+                        Circle().foregroundStyle(.white).frame(width: 22)
+                        Circle().foregroundStyle(.customPrimary).frame(width: 17)
+                    }
+                    .onChange(of: userlocation.location) { _, userlocation in
+                        if let user = userlocation, let startCourse = runningStartManager.startCourse {
+                            if viewModel.userLocations.isEmpty {
+                                viewModel.startLocation = CLLocation(latitude: user.coordinate.latitude, longitude: user.coordinate.longitude)
+                            }
+                            viewModel.userLocations.append(user.coordinate)
+                            viewModel.checkEndDistance()
+                            
+                            if !startCourse.coursePaths.isEmpty {
+                                runningStartManager.trackingDistance()
+                            }
+                        }
+                    }
+                }
                 
+                if let courseGuide = runningStartManager.startCourse {
+                    MapPolyline(coordinates: ConvertCoordinateManager.convertToCLLocationCoordinates(courseGuide.coursePaths))
+                        .stroke(.white.opacity(0.5), lineWidth: 8)
+                }
+                
+                MapPolyline(coordinates: viewModel.userLocations)
+                    .stroke(.customPrimary, lineWidth: 8)
+                
+            }
+            
             VStack(spacing: 0) {
                 Spacer()
                 runningButtonView
@@ -44,20 +66,19 @@ struct RunningMapView: View {
                     .padding(.bottom, 80)
             }
             
-            if let course = runningManager.startCourse,
-               runningManager.runningType == .gpsArt {
-                CourseGuidView(
-                    userLocations: $locationManager.userLocations,
-                    showBigGuid: $showBigGuid,
+            if let course = runningStartManager.startCourse,
+               runningStartManager.runningType == .gpsArt {
+                CourseGuideView(
+                    userLocations: $viewModel.userLocations,
+                    showBigGuide: $showBigGuide,
                     coursePathCoordinates: ConvertCoordinateManager.convertToCLLocationCoordinates(course.coursePaths),
                     courseRotate: course.heading
                 )
-                    .onTapGesture {
-                        showBigGuid.toggle()
-                        // TODO: 햅틱 추가
-                    }
-                //                .animation(.easeInOut, value: showBigGuid)
-                    .animation(.openCard, value: showBigGuid)
+                .onTapGesture {
+                    showBigGuide.toggle()
+                    HapticManager.impact(style: .soft)
+                }
+                .animation(.bouncy, value: showBigGuide)
             }
         }
         .sheet(isPresented: $showCustomSheet) {
@@ -70,20 +91,17 @@ struct RunningMapView: View {
             }
         }
         .overlay {
-            if showCompleteSheet {
+            if viewModel.isShowComplteSheet {
                 runningFinishSheet()
             }
         }
         .overlay {
-            if locationManager.nearStartLocation {
+            if viewModel.isNearEndLocation {
                 RunningPopup(text: "도착 지점까지 30m 남았어요.")
                     .frame(maxHeight: .infinity, alignment: .bottom)
             }
         }
-        .onAppear {
-            locationManager.requestLocation()
-        }
-        .navigationDestination(isPresented: $navigateToFinishRunningView) {
+        .navigationDestination(isPresented: $moveToFinishRunningView) {
             FinishRunningView()
                 .navigationBarBackButtonHidden()
         }
@@ -91,10 +109,11 @@ struct RunningMapView: View {
 }
 
 extension RunningMapView {
-    private var runningButtonView: AnyView {
-        switch viewModel.runningType {
-        case .start:
-            AnyView(
+    @ViewBuilder
+    private var runningButtonView: some View {
+        ZStack {
+            switch viewModel.runningType {
+            case .start:
                 VStack(spacing: 0) {
                     Button {
                         HapticManager.impact(style: .medium)
@@ -111,8 +130,8 @@ extension RunningMapView {
                         Button {
                             HapticManager.impact(style: .medium)
                             viewModel.runningType = .pause
-                            runningViewModel.pauseRunning()
-                            digitalTimerViewModel.stopTimer()
+                            runningDataManager.pauseRunning()
+                            runningStartManager.stopTimer()
                         } label: {
                             Image(systemName: "pause.fill")
                                 .buttonModifier(color: Color.customPrimary, size: 29, padding: 29)
@@ -136,10 +155,8 @@ extension RunningMapView {
                     .frame(maxWidth: .infinity, alignment: .trailing)
                     .padding(.horizontal, 32)
                 }
-                    .transition(.slide)
-            )
-        case .pause:
-            AnyView(
+                .transition(.slide)
+            case .pause:
                 HStack(spacing: 0) {
                     Image(systemName: "stop.fill")
                         .buttonModifier(color: Color.white, size: 24, padding: 26)
@@ -150,7 +167,7 @@ extension RunningMapView {
                                 .updating($isLongPressed) { currentState, gestureState, _ in
                                     gestureState = currentState
                                     HapticManager.impact(style: .medium)
-
+                                    
                                     if !isLongPressed {
                                         DispatchQueue.main.async {
                                             viewModel.isShowPopup = true
@@ -160,22 +177,28 @@ extension RunningMapView {
                                 .onEnded { _ in
                                     HapticManager.impact(style: .heavy)
                                     DispatchQueue.main.async {
-                                        locationManager.stopUpdateLocation()
-                                        homeTabViewModel.userLocations = locationManager.userLocations
-                                        runningViewModel.stopRunning()
-                                        digitalTimerViewModel.counter = 0
-                                        showCustomSheet = true
-                                    }
+                                       if runningStartManager.counter < 30 {
+                                           runningDataManager.stopRunningWithoutRecord()
+                                           runningStartManager.counter = 0
+                                           runningStartManager.running = false
+                                           
+                                       } else {
+                                           checkUserLocation = false
+                                           runningDataManager.stopRunning()
+                                           runningStartManager.counter = 0
+                                           showCustomSheet = true
+                                       }
+                                   }
                                 }
                         )
-            
+                    
                     Spacer()
                     
                     Button {
                         HapticManager.impact(style: .medium)
                         viewModel.runningType = .start
-                        runningViewModel.resumeRunning()
-                        digitalTimerViewModel.startTimer()
+                        runningDataManager.resumeRunning()
+                        runningStartManager.startTimer()
                     } label: {
                         Image(systemName: "play.fill")
                             .buttonModifier(color: Color.customPrimary, size: 24, padding: 26)
@@ -184,11 +207,9 @@ extension RunningMapView {
                 .frame(maxWidth: .infinity, alignment: .center)
                 .padding(.horizontal, 64)
                 .transition(.slide)
-            )
-        case .stop:
-            AnyView(
+            case .stop:
                 EmptyView()
-            )
+            }
         }
     }
     
@@ -209,7 +230,7 @@ extension RunningMapView {
             
             CompleteButton(text: "결과 페이지로", isActive: true) {
                 showCustomSheet = false
-                navigateToFinishRunningView = true
+                moveToFinishRunningView = true
             }
         }
         .presentationDetents([.height(420)])
@@ -240,12 +261,12 @@ extension RunningMapView {
                     .padding(.bottom, 41)
                 
                 CompleteButton(text: "완료하기", isActive: true) {
-                    moveToFinishView = true
+                    moveToFinishRunningView = true
                 }
                 .padding(.bottom, 24)
                 
                 Button {
-                    locationManager.isShowCompleteSheet = false
+                    viewModel.isShowComplteSheet = false
                 } label: {
                     Text("조금 더 진행하기")
                         .foregroundStyle(Color.white)
@@ -256,10 +277,6 @@ extension RunningMapView {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
         .padding(EdgeInsets(top: 422, leading: 8, bottom: 34, trailing: 8))
-        .navigationDestination(isPresented: $moveToFinishView) {
-            FinishRunningView()
-                .navigationBarBackButtonHidden()
-        }
     }
 }
 

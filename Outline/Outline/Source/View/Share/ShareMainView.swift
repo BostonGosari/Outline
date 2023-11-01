@@ -9,7 +9,7 @@ import CoreLocation
 import SwiftUI
 
 struct ShareMainView: View {
-    @StateObject var runningManager = RunningManager.shared
+    @StateObject var runningManager = RunningStartManager.shared
     @StateObject private var viewModel = ShareViewModel()
     
     let runningData: ShareModel
@@ -73,7 +73,7 @@ struct ShareMainView: View {
 }
 
 struct NavigationModifier: ViewModifier {
-    @StateObject var runningManager = RunningManager.shared
+    @StateObject var runningManager = RunningStartManager.shared
     
     func body(content: Content) -> some View {
         content

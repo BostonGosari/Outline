@@ -26,8 +26,8 @@ struct CustomShareView: View {
     @State private var imageWidth: CGFloat = 0
     @State private var imageHeight: CGFloat = 0
     
-    private let pathManager = PathGenerateManager.shared
-    
+    @State private var position: MapCameraPosition = .userLocation(followsHeading: true, fallback: .automatic)
+        
     var body: some View {
         ZStack {
             Color.gray900
@@ -80,8 +80,8 @@ extension CustomShareView {
             Group {
                 Group {
                     Image(uiImage: renderdImage)
-                        
-                    pathManager.caculateLinesInRect(width: imageWidth, height: Double(imageWidth * 1920 / 1080), coordinates: viewModel.runningData.userLocations, region: mapView.region)
+                    
+                    PathGenerateManager.caculateLinesInRect(width: imageWidth, height: Double(imageWidth * 1920 / 1080), coordinates: viewModel.runningData.userLocations, region: mapView.region)
                         .stroke(style: StrokeStyle(lineWidth: 5, lineCap: .round, lineJoin: .round))
                 }
                 .overlay {
@@ -98,11 +98,15 @@ extension CustomShareView {
 extension CustomShareView {
     private var customImageView: some View {
         ZStack {
-            ShareMap(mapView: $mapView, mapViewRegion: $mapViewRegion, userLocations: viewModel.runningData.userLocations)
-                .frame(width: imageWidth, height: imageHeight)
-                .overlay {
-                    LinearGradient(colors: [.black.opacity(0), .black], startPoint: .center, endPoint: .bottom)
-                }
+            Map(position: $position) {
+                MapPolyline(coordinates: viewModel.runningData.userLocations)
+                    .stroke(.customPrimary, lineWidth: 8)
+            }
+            .frame(width: imageWidth, height: imageHeight)
+            .overlay {
+                LinearGradient(colors: [.black.opacity(0), .black], startPoint: .center, endPoint: .bottom)
+            }
+            
             runningInfo
             GeometryReader { proxy in
                 HStack {}

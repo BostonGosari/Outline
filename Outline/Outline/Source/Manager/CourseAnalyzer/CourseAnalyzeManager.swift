@@ -33,8 +33,10 @@ class CourseAnalyzeManager {
     
     func calculateTotalCourseLength(_ course: [CLLocationCoordinate2D]) -> Double {
         var totalLength = 0.0
-        for i in 1..<course.count {
-            totalLength += calculateDistance(course[i-1], course[i])
+        if !course.isEmpty {
+            for i in 1..<course.count {
+                totalLength += calculateDistance(course[i-1], course[i])
+            }
         }
         return totalLength
     }

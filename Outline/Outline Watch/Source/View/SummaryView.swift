@@ -13,6 +13,7 @@ import WatchKit
 struct SummaryView: View {
     @EnvironmentObject var workoutManager: WatchWorkoutManager
     @Environment(\.dismiss) var dismiss
+    @StateObject var watchRunningManager = WatchRunningManager.shared
     @State private var timeFormatter = ElapsedTimeFormatter()
     @State private var durationFormatter: DateComponentsFormatter = {
         let formatter = DateComponentsFormatter()
@@ -20,9 +21,7 @@ struct SummaryView: View {
         formatter.zeroFormattingBehavior = .pad
         return formatter
     }()
-    
-    var userLocations: [CLLocationCoordinate2D]
-    
+        
     @Binding var navigate: Bool
     @State private var isShowingFinishView = true
     @Namespace var topID
@@ -41,7 +40,7 @@ struct SummaryView: View {
             ScrollViewReader { proxy in
                 ScrollView {
                     ConfettiWatchView()
-                    PathGenerateManager.shared.caculateLines(width: 80, height: 80, coordinates: userLocations)
+                    PathGenerateManager.caculateLines(width: 80, height: 80, coordinates: watchRunningManager.userLocations)
                         .stroke(style: StrokeStyle(lineWidth: 8, lineCap: .round, lineJoin: .round))
                         .scaledToFit()
                         .foregroundStyle(.first)

@@ -8,13 +8,9 @@
 import SwiftUI
 
 struct HomeTabView: View {
-    
-    @StateObject private var homeTabViewModel = HomeTabViewModel()
-    @StateObject private var runningManager = RunningManager.shared
-    @State var selectedTab: Tab = .GPSArtRunning
-    
-    @Namespace var namespace
-    @State var currentIndex = 0
+    @StateObject private var runningManager = RunningStartManager.shared
+    @StateObject var runningDataManager = RunningDataManager.shared
+    @State private var selectedTab: Tab = .GPSArtRunning
     @State private var showDetailView = false
     
     var body: some View {
@@ -26,9 +22,9 @@ struct HomeTabView: View {
                         Group {
                             switch selectedTab {
                             case .freeRunning:
-                                FreeRunningHomeView(homeTabViewModel: homeTabViewModel)
+                                FreeRunningHomeView()
                             case .GPSArtRunning:
-                                GPSArtHomeView(homeTabViewModel: homeTabViewModel, isShow: $showDetailView)
+                                GPSArtHomeView(showDetailView: $showDetailView)
                             case .myRecord:
                                 RecordView()
                             }
@@ -41,24 +37,22 @@ struct HomeTabView: View {
                             .ignoresSafeArea()
                     }
                 }
-                .onAppear {
-                    homeTabViewModel.locationManager.requestWhenInUseAuthorization()
-                    homeTabViewModel.readAllCourses()
-                }
-                .refreshable {
-                    homeTabViewModel.fetchRecommendedCourses()
+                .overlay {
+                    if runningDataManager.endWithoutSaving {
+                        RunningPopup(text: "30초 이하의 러닝은 저장되지 않아요")
+                            .frame(maxHeight: .infinity, alignment: .top)
+                    }
                 }
             }
-            
             if runningManager.start {
                 CountDown(running: $runningManager.running, start: $runningManager.start)
             }
             
             if runningManager.running {
-                RunningView(homeTabViewModel: homeTabViewModel)
+                RunningView()
             }
+          
         }
-        .tint(.customPrimary)
     }
 }
 

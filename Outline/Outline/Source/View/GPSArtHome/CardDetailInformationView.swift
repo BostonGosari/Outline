@@ -9,7 +9,7 @@ import SwiftUI
 import MapKit
 
 struct CardDetailInformationView: View {
-    
+
     var selectedCourse: CourseWithDistance
     
     var body: some View {
@@ -28,7 +28,7 @@ struct CardDetailInformationView: View {
                         Capsule()
                             .stroke()
                     }
-                Text("\(selectedCourse.course.courseDuration))")
+                Text("\(selectedCourse.course.courseDuration.formatDuration())")
                     .frame(width: 70, height: 23)
                     .background {
                         Capsule()
@@ -42,7 +42,7 @@ struct CardDetailInformationView: View {
                 Text("\(selectedCourse.course.locationInfo.administrativeArea) \(selectedCourse.course.locationInfo.locality) \(selectedCourse.course.locationInfo.subLocality)")
                     .font(.title3)
                     .bold()
-                Text("--")
+                Text("\(selectedCourse.course.description)")
                     .foregroundStyle(.gray)
             }
             
@@ -87,9 +87,8 @@ struct CardDetailInformationView: View {
             VStack(alignment: .leading) {
                 MapInfoView(coordinates: ConvertCoordinateManager.convertToCLLocationCoordinates(selectedCourse.course.coursePaths))
                 .frame(height: 200)
-                .foregroundStyle(.thinMaterial)
-                Text("경로 제작 고사리님 @alsgiwc")
-                    .foregroundStyle(.gray)
+                Text("경로 제작 \(selectedCourse.course.producer)님")
+                    .foregroundStyle(.gray600)
             }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
