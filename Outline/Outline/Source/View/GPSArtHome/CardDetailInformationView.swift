@@ -100,7 +100,7 @@ struct CardDetailInformationView: View {
                     .frame(height: 200)
                 }
                 .buttonStyle(.plain)
-                Text("경로 제작 고사리님 @alsgiwc")
+                Text("경로 제작 \(selectedCourse.course.producer)님")
                     .foregroundStyle(.gray600)
             }
         }
