@@ -42,7 +42,6 @@ struct HomeTabView: View {
                             }
                         }
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
-                        
                         TabBar(selectedTab: $selectedTab)
                             .frame(maxHeight: .infinity, alignment: .bottom)
                             .opacity(showDetailView ? 0 : 1)
