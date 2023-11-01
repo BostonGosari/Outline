@@ -14,11 +14,11 @@ struct UserInfo: Hashable, Codable {
     var weight: Int
     var gender: Gender = .notSetted
 }
-enum Gender: String, Codable {
-    case notSetted
-    case man
-    case woman
-    case undefined
+enum Gender: String, Codable, CaseIterable {
+    case notSetted = "설정 안 됨"
+    case man = "남성"
+    case woman = "여성"
+    case undefined = "기타"
 }
 
 struct UserNameSet: Codable {
