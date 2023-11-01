@@ -43,7 +43,7 @@ class LoginViewModel: ObservableObject {
         }
     }
     
-    func checkLoginOrSignIn(uid: String){
+    func checkLoginOrSignIn(uid: String) {
         userInfoModel.readUserInfo(uid: uid) { res in
             switch res {
             case .success(let userInfo):
@@ -57,7 +57,7 @@ class LoginViewModel: ObservableObject {
             }
         }
     }
-    func setNewUser(uid: String){
+    func setNewUser(uid: String) {
         userInfoModel.createUser(uid: uid, nickname: "default") { res in
             switch res {
             case .success(_):
@@ -88,6 +88,7 @@ class LoginViewModel: ObservableObject {
             switch res {
             case .success(let isSuccess):
                 self.authState = .logout
+                
                 if let userId = self.userId {
                     self.userInfoModel.deleteUser(uid: userId) { isSuccessDeleteDBUser in
                         switch isSuccessDeleteDBUser {
@@ -95,6 +96,14 @@ class LoginViewModel: ObservableObject {
                             print(success ? "delete user on FireStore" : "")
                         case .failure(let failure):
                             print("\(failure)")
+                        }
+                    }
+                    self.userDataModel.deleteAllRunningRecord { res in
+                        switch res {
+                        case .success(let success):
+                            print("success to delete all running data \(success)")
+                        case .failure(let failure):
+                            print("fail to delete all running data \(failure)")
                         }
                     }
                 }

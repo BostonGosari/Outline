@@ -56,7 +56,7 @@ class AuthModel: AuthModelProtocol {
         })
     }
     
-    func handleCheckLoginState(completion: @escaping (Result<String?, AuthError>) -> Void){
+    func handleCheckLoginState(completion: @escaping (Result<String?, AuthError>) -> Void) {
         if let userId = Auth.auth().currentUser?.uid {
             completion(.success(userId))
         } else {
@@ -84,7 +84,7 @@ class AuthModel: AuthModelProtocol {
               if let _ = error {
                 completion(.failure(.errorInSignOut))
               } else {
-                  completion(.success(true))
+                completion(.success(true))
               }
             }
         } else {
