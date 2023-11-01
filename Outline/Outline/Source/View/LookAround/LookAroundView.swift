@@ -60,6 +60,8 @@ struct LookAroundModalView: View {
                     completion()
                 } label: {
                     Text("계속 둘러보기")
+                        .frame(height: 55)
+                        .foregroundStyle(.customWhite)
                 }
             }
             Spacer()
@@ -96,6 +98,8 @@ struct LookAroundPopupView: View {
                         authState = .logout
                     }
                 }
+                .frame(height: 54)
+                .padding(.horizontal, 32)
             }
     }
 }
