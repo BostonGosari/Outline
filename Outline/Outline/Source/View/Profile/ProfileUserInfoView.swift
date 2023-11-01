@@ -93,8 +93,7 @@ struct ProfileUserInfoView: View {
         .background(Color.gray900)
         .sheet(isPresented: $showBirthdayPicker, content: {
             DatePicker(
-                "생일",
-                selection: $birthday,
+                "", selection: $birthday,
                 in: dateRange,
                 displayedComponents: [.date]
             )
