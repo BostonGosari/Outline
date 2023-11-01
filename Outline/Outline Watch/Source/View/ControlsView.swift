@@ -72,17 +72,12 @@ struct ControlsView: View {
         .toolbar(.hidden, for: .automatic)
         .overlay {
             if showingConfirmation {
-                customExitSheet()
-                    .ignoresSafeArea()
+                customExitSheet
+            }
+            else if showingEndwithoutSavingSheet {
+                customEndWithoutSavingSheet
             }
         }
-        .overlay {
-            if showingEndwithoutSavingSheet {
-                customEndWithoutSavingSheet()
-                    .ignoresSafeArea()
-            }
-        }
-        
     }
 }
 
@@ -98,8 +93,7 @@ extension ControlsView {
                 .foregroundColor(Color.gray500)
         }
     }
-    
-    private func customExitSheet() -> some View {
+    private var customExitSheet: some View {
         ZStack {
             Rectangle()
                 .ignoresSafeArea()
@@ -150,8 +144,7 @@ extension ControlsView {
         }
         .ignoresSafeArea()
     }
-    
-    private func customEndWithoutSavingSheet() -> some View {
+    private var customEndWithoutSavingSheet: some View {
         ZStack {
             Rectangle()
                 .ignoresSafeArea()
