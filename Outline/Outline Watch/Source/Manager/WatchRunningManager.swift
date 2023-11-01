@@ -21,12 +21,14 @@ class WatchRunningManager: ObservableObject {
     var runningType: RunningType = .gpsArt
     
     func startFreeRun() {
+        userLocations = []
         startCourse = GPSArtCourse()
         runningType = .free
         getFreeRunName()
     }
     
     func startGPSArtRun() {
+        userLocations = []
         runningType = .gpsArt
     }
     
