@@ -284,11 +284,16 @@ extension ImageShareView {
     private var dragGesture: some Gesture {
         return DragGesture()
             .onChanged { value in
-                let translation = value.translation
-                offset = CGSize(
-                    width: translation.width+lastStoredOffset.width,
-                    height: translation.height+lastStoredOffset.height
-                )
+                let rotationRadians = lastAngle.radians
+                let x1 = value.translation.width * cos(rotationRadians)
+                let x2 = value.translation.height * -sin(rotationRadians)
+                let y1 =  value.translation.width * -sin(rotationRadians)
+                let y2 = value.translation.height * cos(rotationRadians)
+                
+                let translatedX = x1 - x2
+                let translatedY = y1 + y2
+
+                offset = CGSize(width: translatedX, height: translatedY)
             }
             .onEnded { _ in
                 lastStoredOffset = offset

@@ -9,6 +9,7 @@ import CoreLocation
 import SwiftUI
 
 struct ShareMainView: View {
+    @Environment(\.dismiss) var dismiss
     @StateObject var runningManager = RunningStartManager.shared
     @StateObject private var viewModel = ShareViewModel()
     
@@ -57,7 +58,9 @@ struct ShareMainView: View {
                 .padding(.bottom, 42)
             }
             .ignoresSafeArea()
-            .modifier(NavigationModifier())
+            .modifier(NavigationModifier(action: {
+                dismiss()
+            }))
             .onAppear {
                 viewModel.runningData = runningData
             }
@@ -73,7 +76,7 @@ struct ShareMainView: View {
 }
 
 struct NavigationModifier: ViewModifier {
-    @StateObject var runningManager = RunningStartManager.shared
+    let action: () -> Void
     
     func body(content: Content) -> some View {
         content
@@ -83,9 +86,9 @@ struct NavigationModifier: ViewModifier {
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
                     Button {
-                        runningManager.running = false
+                        action()
                     } label: {
-                        (Text(Image(systemName: "chevron.left")) + Text("홈으로"))
+                        (Text(Image(systemName: "chevron.left")) + Text("뒤로"))
                             .foregroundStyle(Color.customPrimary)
                     }
                 }
