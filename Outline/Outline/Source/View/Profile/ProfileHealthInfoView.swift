@@ -105,6 +105,27 @@ struct ProfileHealthInfoView: View {
         })
     }
 }
+//
+//enum HealthInfoDataType {
+//    case
+//}
+//
+//struct CustomPicker: View {
+//    var pickerDescription: String = ""
+//    @Binding var value: Int
+//    @Binding var range: ClosedRange<Int>
+//    
+//    var body: some View {
+//        Picker("체중", selection: $weight) {
+//            ForEach(range, id: \.self) { v in
+//                Text("\(v)kg")
+//            }
+//        }
+//        .pickerStyle(.wheel)
+//        .presentationDetents([.medium])
+//    }
+//}
+
 #Preview {
     ProfileHealthInfoView()
 }
