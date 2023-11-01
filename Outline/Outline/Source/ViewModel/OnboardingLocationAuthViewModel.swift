@@ -6,8 +6,10 @@
 //
 
 import CoreLocation
+import SwiftUI
 
 class OnboardingLocationAuthViewModel: NSObject, CLLocationManagerDelegate, ObservableObject {
+    @AppStorage("authState") var authState: AuthState = .onboarding
     @Published var moveToNextView = false
     
     private var locationManager = CLLocationManager()
@@ -23,8 +25,10 @@ class OnboardingLocationAuthViewModel: NSObject, CLLocationManagerDelegate, Obse
             locationManager.requestWhenInUseAuthorization()
         case .restricted, .denied:
             moveToNextView = true
+            authState = .login
         case .authorizedAlways, .authorizedWhenInUse:
             moveToNextView = true
+            authState = .login
         @unknown default:
             break
         }
