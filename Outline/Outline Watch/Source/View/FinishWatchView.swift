@@ -13,69 +13,28 @@ struct FinishWatchView: View {
     @State var completionPercentage: Double = 100
 
     var body: some View {
-        ZStack {
+        VStack {
             switch completionPercentage {
             case 100:
-                fullyCompletedView
+                finalImage("FinalImage1")
             case 50..<100:
-                halfOrMoreCompletedView
+                finalImage("FinalImage2")
             case ..<10:
-                lessThanTenPercentCompletedView
+                finalImage("FinalImage3")
             default:
                 Text("\(completionPercentage, specifier: "%.2f")%")
             }
         }
     }
     
-    private var fullyCompletedView: some View {
-        ZStack {
-            Text("PERFECT")
-                .font(.system(size: 40))
-                .foregroundStyle(.green)
-                .bold()
-                .offset(y: -40)
-            Text("🎉")
-                .font(.system(size: 64))
-            Text("DRAWING")
-                .font(.system(size: 40))
-                .foregroundStyle(.green)
-                .bold()
-                .offset(y: 40)
-        }
-    }
-    
-    private var halfOrMoreCompletedView: some View {
-        ZStack {
-            Text("오늘은")
-                .font(.system(size: 40))
-                .foregroundStyle(.green)
-                .bold()
-                .offset(y: -40)
-            Text("👋")
-                .font(.system(size: 64))
-            Text("여기까지")
-                .font(.system(size: 40))
-                .foregroundStyle(.green)
-                .bold()
-                .offset(y: 40)
-        }
-    }
-    
-    private var lessThanTenPercentCompletedView: some View {
-        ZStack {
-            Text("열심히")
-                .font(.system(size: 40))
-                .foregroundStyle(.green)
-                .bold()
-                .offset(y: -40)
-            Text("❤️‍🔥")
-                .font(.system(size: 64))
-            Text("달렸네요")
-                .font(.system(size: 40))
-                .foregroundStyle(.green)
-                .bold()
-                .offset(y: 40)
-        }
+    @ViewBuilder
+    private func finalImage(_ imageName: String) -> some View {
+        Image(imageName)
+            .resizable()
+            .scaledToFit()
+            .frame(height: 118)
+            .ignoresSafeArea()
+            .padding(.bottom, 20)
     }
 }
 

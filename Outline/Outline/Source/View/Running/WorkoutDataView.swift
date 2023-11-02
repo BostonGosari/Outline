@@ -1,36 +1,75 @@
 import SwiftUI
 
 struct WorkoutDataView: View {
+    @StateObject var runningManager = RunningStartManager.shared
+    @StateObject var runningDataManager = RunningDataManager.shared
     
-    @ObservedObject var runningViewModel: RunningViewModel
-    @ObservedObject var digitalTimerViewModel: DigitalTimerViewModel
-    let weight: Double = 60
+    @Binding var selection: Bool
+    
+    private let weight: Double = 60
     
     var body: some View {
         ZStack {
-            Color("Gray900").ignoresSafeArea()
-            VStack {
-                DigitalTimerView(digitalTimerViewModel: digitalTimerViewModel)
-                Spacer()
+            Rectangle()
+                .fill(.ultraThinMaterial)
+                .ignoresSafeArea()
+            VStack(spacing: 0) {
+                digitalTimer
+                    .padding(.top, 120)
+                    .padding(.bottom, 42)
+                
                 workOutDataGrid
+                    .padding(.bottom, 98)
+                    .padding(.horizontal, 32)
+                
+                Button {
+                    withAnimation {
+                        selection.toggle()
+                    }
+                } label: {
+                    Image(systemName: "map.fill")
+                        .font(.system(size: 24))
+                        .foregroundStyle(Color.customBlack)
+                        .padding(14)
+                        .background(
+                            Circle()
+                                .fill(Color.customPrimary)
+                        )
+                }
+                .padding(.trailing, 16)
+                .frame(maxWidth: .infinity, alignment: .trailing)
             }
-            .onChange(of: runningViewModel.distance) { _, _ in
-                runningViewModel.kilocalorie = weight * (runningViewModel.totalDistance + runningViewModel.distance) / 1000 * 1.036
+            .onChange(of: runningDataManager.distance) { _, _ in
+                runningDataManager.kilocalorie = weight * (runningDataManager.totalDistance + runningDataManager.distance) / 1000 * 1.036
             }
-            .frame(height: 300)
-            .padding()
         }
     }
     
     private var workOutDataGrid: some View {
-        LazyVGrid(columns: Array(repeating: GridItem(), count: 2), spacing: 36) {
-            let averagePace = (runningViewModel.totalTime + runningViewModel.time) / (runningViewModel.totalDistance + runningViewModel.distance) * 1000
+        LazyVGrid(columns: Array(repeating: GridItem(), count: 3), spacing: 45) {
+            let totalTime = runningDataManager.totalTime + runningDataManager.time
+            let totalDistance = runningDataManager.totalDistance + runningDataManager.distance
+            let averagePace = totalTime / totalDistance * 1000
             
-            workoutDataItem(value: String(format: "%.2f", (runningViewModel.totalDistance + runningViewModel.distance) / 1000), label: "킬로미터")
-            workoutDataItem(value: averagePace.formattedAveragePace(), label: "평균 페이스")
-            workoutDataItem(value: String(format: "%.0f", runningViewModel.kilocalorie), label: "칼로리")
+            let distanceKM = totalDistance / 1000
+            let kilocalorie = runningDataManager.kilocalorie
+            let cadence = totalTime != 0 ? ((runningDataManager.totalSteps + runningDataManager.steps) / totalTime * 60) : 0
+            
+            workoutDataItem(value: String(format: "%.2f", distanceKM), label: "킬로미터")
             workoutDataItem(value: "--", label: "BPM")
+            workoutDataItem(value: averagePace.formattedAveragePace(), label: "평균 페이스")
+            workoutDataItem(value: String(format: "%.0f", kilocalorie), label: "칼로리")
+            workoutDataItem(value: String(format: "%.0f", cadence), label: "케이던스")
         }
+    }
+    
+    private var digitalTimer: some View {
+        Text(runningManager.formattedTime(runningManager.counter))
+            .font(Font.custom("Pretendard-ExtraBold", size: 70))
+            .foregroundColor(.customPrimary)
+            .monospacedDigit()
+            .minimumScaleFactor(0.5)
+            .lineLimit(1)
     }
 }
 
@@ -38,6 +77,7 @@ extension WorkoutDataView {
     private func workoutDataItem(value: String, label: String) -> some View {
         VStack(spacing: 4) {
             Text(value)
+                .lineLimit(1)
                 .foregroundColor(.white)
                 .font(
                     Font.custom("Pretendard-SemiBold", size: 36)
@@ -47,8 +87,4 @@ extension WorkoutDataView {
                 .foregroundColor(Color.gray500)
         }
     }
-}
-
-#Preview {
-    WorkoutDataView(runningViewModel: RunningViewModel(homeTabViewModel: HomeTabViewModel()), digitalTimerViewModel: DigitalTimerViewModel())
 }

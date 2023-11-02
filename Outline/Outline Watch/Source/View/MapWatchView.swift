@@ -9,14 +9,8 @@ import SwiftUI
 import MapKit
 
 struct MapWatchView: View {
-    
-    let locationManager = CLLocationManager()
-    var course: [CLLocationCoordinate2D] = []
-    
+    @StateObject var watchRunningManager = WatchRunningManager.shared
     @State var position: MapCameraPosition = .userLocation(followsHeading: true, fallback: .automatic)
-    
-    @State private var userLocations: [CLLocationCoordinate2D] = []
-    
     @State private var userCoordinate: CLLocationCoordinate2D?
     
     var body: some View {
@@ -24,32 +18,26 @@ struct MapWatchView: View {
             Map(position: $position, interactionModes: .zoom) {
                 UserAnnotation(anchor: .center) { userlocation in
                     ZStack {
-                        Circle().foregroundStyle(.white).frame(width: 24)
-                        Circle().foregroundStyle(.green).frame(width: 18)
+                        Circle().foregroundStyle(.white).frame(width: 22)
+                        Circle().foregroundStyle(.first).frame(width: 17)
                     }
                     .onChange(of: userlocation.location) { _, userlocation in
                         if let user = userlocation {
-                            userLocations.append(user.coordinate)
+                            watchRunningManager.userLocations.append(user.coordinate)
                         }
                     }
                 }
-                MapPolyline(coordinates: course)
-                    .stroke(.gray.opacity(0.5), lineWidth: 8)
-                MapPolyline(coordinates: userLocations)
-                    .stroke(.green, lineWidth: 8)
+                MapPolyline(coordinates: ConvertCoordinateManager.convertToCLLocationCoordinates(watchRunningManager.startCourse.coursePaths))
+                    .stroke(.white.opacity(0.5), lineWidth: 8)
+                MapPolyline(coordinates: watchRunningManager.userLocations)
+                    .stroke(.first, lineWidth: 8)
             }
-            .mapControls {
-                MapUserLocationButton()
-            }
-            .onAppear {
-                locationManager.requestWhenInUseAuthorization()
-                locationManager.startUpdatingLocation()
-            }
-            .tint(.green)
+            .mapControlVisibility(.hidden)
+            .tint(.first)
             .overlay(alignment: .topLeading) {
                 Text("시티런")
                     .bold()
-                    .foregroundStyle(.green)
+                    .foregroundStyle(.first)
                     .padding()
                     .padding(.top, 5)
                     .padding(.leading, 20)
@@ -62,8 +50,4 @@ struct MapWatchView: View {
             }
         }
     }
-}
-
-#Preview {
-    MapWatchView()
 }

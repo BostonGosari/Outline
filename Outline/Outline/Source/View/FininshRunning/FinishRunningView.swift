@@ -5,30 +5,42 @@
 //  Created by hyebin on 10/18/23.
 //
 
+import MapKit
 import SwiftUI
 
 struct FinishRunningView: View {
-    @StateObject private var runningManager = RunningManager.shared
+    @StateObject private var runningManager = RunningStartManager.shared
     @StateObject private var viewModel = FinishRunningViewModel()
-    var gradientColors: [Color] = [.blackColor, .blackColor, .blackColor, .blackColor, .black50Color, .blackColor.opacity(0)]
+    @FetchRequest (entity: CoreRunningRecord.entity(), sortDescriptors: []) var runningRecord: FetchedResults<CoreRunningRecord>
     
-    @ObservedObject var homeTabViewModel: HomeTabViewModel
+    @State private var position: MapCameraPosition = .userLocation(fallback: .automatic)
     
-    @FetchRequest (entity: CoreRunningRecord.entity(), sortDescriptors: [])
-    var runningRecord: FetchedResults<CoreRunningRecord>
-
+    private var gradientColors: [Color] = [.customBlack, .customBlack, .customBlack, .customBlack, .black50, .customBlack.opacity(0)]
+    private let polylineGradient = Gradient(colors: [.customGradient1, .customGradient2, .customGradient3])
+    
     var body: some View {
         NavigationStack {
             ZStack {
-                Color.gray900Color
+                Color.gray900
                     .ignoresSafeArea()
                 VStack {
                     ZStack(alignment: .topLeading) {
-                        FinishRunningMap(userLocations: $viewModel.userLocations)
-                            .roundedCorners(45, corners: .bottomLeft)
-                            .shadow(color: .whiteColor, radius: 1.5)
+                        Map {
+                            MapPolyline(coordinates: viewModel.userLocations)
+                                .stroke(polylineGradient, style: StrokeStyle(lineWidth: 8, lineCap: .round, lineJoin: .round))
+                        }
+                        .roundedCorners(45, corners: .bottomRight)
+                        .shadow(color: .customWhite, radius: 1.5)
 
-                        courseInfo
+                        VStack(spacing: 0) {
+                            Text("\(viewModel.date)")
+                                .font(.date)
+                                .foregroundStyle(Color.white)
+                                .frame(maxWidth: .infinity, alignment: .center)
+                                .padding(.top, 64)
+                            
+                            courseInfo
+                        }
                             .background(
                                 LinearGradient(
                                     colors: gradientColors,
@@ -54,23 +66,21 @@ struct FinishRunningView: View {
                     }, label: {
                         Text("나중에 자랑하기")
                             .underline(pattern: .solid)
-                            .foregroundStyle(Color.gray300Color)
+                            .foregroundStyle(Color.gray300)
                     })
                     .padding(.bottom, 8)
                 }
             }
-            .navigationTitle("\(viewModel.date)")
-            .navigationBarTitleDisplayMode(.inline)
-            .preferredColorScheme(.dark)
         }
         .overlay {
             if viewModel.isShowPopup {
                 RunningPopup(text: "기록이 저장되었어요.")
-                    .frame(maxHeight: .infinity, alignment: .bottom)
+                    .frame(maxHeight: .infinity, alignment: .top)
+                    .transition(.move(edge: .top))
             }
         }
         .navigationDestination(isPresented: $viewModel.navigateToShareMainView) {
-            ShareMainView(homeTabViewModel: homeTabViewModel, runningData: viewModel.shareData)
+            ShareMainView(runningData: viewModel.shareData)
                 .navigationBarBackButtonHidden()
         }
         .onAppear {
@@ -91,19 +101,19 @@ extension FinishRunningView {
                 Text("\(viewModel.startTime)-\(viewModel.endTime)")
             }
             .font(.subBody)
-            .foregroundStyle(Color.gray200Color)
+            .foregroundStyle(Color.gray200)
             
             HStack {
                 Image(systemName: "mappin")
-                    .foregroundStyle(Color.gray400Color)
+                    .foregroundStyle(Color.gray400)
                 
                 Text("\(viewModel.courseRegion)")
-                    .foregroundStyle(Color.gray200Color)
+                    .foregroundStyle(Color.gray200)
             }
             .font(.subBody)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(.top, 100)
+        .padding(.top, 24)
         .padding(.leading, 16)
     }
     

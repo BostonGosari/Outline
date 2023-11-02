@@ -27,29 +27,6 @@ class HealthKitManager: ObservableObject {
         }
     }
     
-    func requestAuthorization(completion: @escaping (Bool) -> Void) {
-        guard let healthStore = self.healthStore else { return }
-        
-        let typesToShare: Set = [
-            HKQuantityType(.heartRate),
-            HKQuantityType(.activeEnergyBurned),
-            HKQuantityType(.distanceWalkingRunning),
-            HKQuantityType(.stepCount),
-            HKQuantityType(.runningSpeed),
-            HKQuantityType.workoutType()
-        ]
-        
-        healthStore.requestAuthorization(toShare: typesToShare, read: typesToShare) { success, _ in
-            if success {
-                print("requestAuthorization successful")
-                completion(true)
-            } else {
-                print("requestAuthorization denied")
-                completion(false)
-            }
-        }
-    }
-    
     func startWorkout() {
         workoutStartDate = Date()
         

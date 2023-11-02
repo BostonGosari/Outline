@@ -16,7 +16,7 @@ struct MetricsView: View {
                                              isPaused: workoutManager.session?.state == .paused)) { context in
             VStack(alignment: .center) {
                 Spacer()
-                ElapsedTimeView(elapsedTime: workoutManager.builder?.elapsedTime(at: context.date) ?? 0, showSubseconds: context.cadence == .live)
+                ElapsedTimeView(elapsedTime: workoutManager.builder?.elapsedTime(at: context.date) ?? 0)
                 Spacer()
                 HStack {
                     Spacer()
@@ -25,19 +25,19 @@ struct MetricsView: View {
                             .font(.system(size: 28).weight(.semibold))
                             .foregroundColor(.white)
                         Text("킬로미터")
-                            .font(.system(size: 11))
+                            .font(.system(size: 14))
                             .multilineTextAlignment(.center)
                             .foregroundColor(Color.gray500)
 
                     }
                     Spacer()
                     VStack {
-                        Text(workoutManager.pace > 0 ? String(format: "%02d’%02d’’", Int(workoutManager.pace) / 60, Int(workoutManager.pace) % 60) : "-’--’’")
+                        Text(workoutManager.pace > 0 ? String(format: "%02d’%02d’’", Int(workoutManager.pace), Int((workoutManager.pace * 60).truncatingRemainder(dividingBy: 60))) : "-’--’’")
 
                             .font(.system(size: 28).weight(.semibold))
                             .foregroundColor(.white)
                         Text("페이스")
-                            .font(.system(size: 11))
+                            .font(.system(size: 14))
                             .multilineTextAlignment(.center)
                             .foregroundColor(Color.gray500)
                     }
@@ -76,8 +76,4 @@ private struct MetricsTimelineSchedule: TimelineSchedule {
             return baseSchedule.next()
         }
     }
-}
-
-#Preview {
-    MetricsView().environmentObject(WatchWorkoutManager())
 }

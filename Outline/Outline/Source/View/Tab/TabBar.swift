@@ -8,11 +8,14 @@
 import SwiftUI
 
 struct TabBar: View {
-    
+    @AppStorage("authState") var authState: AuthState = .onboarding
     @Binding var selectedTab: Tab
     
     var body: some View {
         VStack {
+            if authState == .lookAround && selectedTab == .GPSArtRunning {
+                LookAroundPopupView()
+            }
             HStack {
                 ForEach(tabItems) { item in
                     TabBarButton(selectedTab: $selectedTab, item: item)
@@ -26,7 +29,7 @@ struct TabBar: View {
                     .foregroundStyle(.ultraThinMaterial)
                     .background(
                         RoundedRectangle(cornerRadius: 15, style: .continuous)
-                            .stroke(Color.gray400Color, lineWidth: 1)
+                            .stroke(Color.gray400, lineWidth: 1)
                     )
             )
         }
@@ -46,7 +49,7 @@ struct TabBarButton: View {
                 TabBarIcon(selectedTab: $selectedTab, item: item)
                 Text(item.text)
                     .font(.caption2)
-                    .foregroundColor(selectedTab == item.tab ? .primaryColor : .gray400Color)
+                    .foregroundColor(selectedTab == item.tab ? .customPrimary : .gray400)
             }
         }
         .buttonStyle(TabButtonStyle())
@@ -73,7 +76,7 @@ struct TabBarIcon: View {
                     .fill(
                         LinearGradient(
                             gradient: Gradient(
-                                colors: [Color.primaryColor, Color.primaryColor.opacity(0.5)]
+                                colors: [Color.customPrimary, Color.customPrimary.opacity(0.5)]
                             ),
                             startPoint: .bottomLeading,
                             endPoint: .topTrailing

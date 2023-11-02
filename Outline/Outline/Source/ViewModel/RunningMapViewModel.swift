@@ -14,15 +14,12 @@ enum CurrentRunningType {
     case stop
 }
 
-enum CurrentMapType {
-    case gpsArtRun
-    case freeRun
-}
-
 class RunningMapViewModel: ObservableObject {
     @Published var runningType: CurrentRunningType = .start
-    @Published var mapType: CurrentMapType = .gpsArtRun
     @Published var isUserLocationCenter = false
+    
+    @Published var userLocations: [CLLocationCoordinate2D] = []
+    @Published var startLocation = CLLocation()
    
     @Published var isShowPopup = false {
         didSet {
@@ -34,41 +31,43 @@ class RunningMapViewModel: ObservableObject {
         }
     }
     
-    var popupText: String {
-        switch runningType {
-        case .pause:
-            return "일시정지를 3초동안 누르면 러닝이 종료돼요"
-        case .start:
-            return "도착점이 10m 이내에 있어요"
-        default:
-            return ""
+    @Published var isShowComplteSheet = false
+    @Published var isNearEndLocation = false {
+        didSet {
+            if isNearEndLocation {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+                    self.isNearEndLocation = false
+                }
+            }
         }
     }
     
-    let coordinates: [CLLocationCoordinate2D] = {
-        if let kmlFilePath = Bundle.main.path(forResource: "test", ofType: "kml") {
-            let kmlParser = KMLParserManager()
-            return kmlParser.parseKMLFile(atPath: kmlFilePath)
+    func checkEndDistance() {
+        if checkAccuracy() >= 90 {
+            if let lastLocation = userLocations.last {
+                let location = CLLocation(latitude: lastLocation.latitude, longitude: lastLocation.longitude)
+                let startToDistance = location.distance(from: startLocation)
+                
+                if startToDistance <= 5 {
+                    isShowComplteSheet = true
+                } else if startToDistance <= 100 {
+                    isNearEndLocation = true
+                } else {
+                    isNearEndLocation = false
+                }
+            }
         }
-        return []
-    }()
+    }
     
-    // 위도 경도로 거리를 계산하는 함수, 추후 업데이트 예정
-    func calculateDistance(startCoordinate: CLLocationCoordinate2D, endCoordinate: CLLocationCoordinate2D) -> Double {
-        let earthRadius = 6371000.0 // Earth's radius in meters
+    private func checkAccuracy() -> Double {
+        let runningManager = RunningStartManager.shared
         
-        let lat1 = startCoordinate.latitude * .pi / 180.0
-        let lon1 = startCoordinate.longitude * .pi / 180.0
-        let lat2 = endCoordinate.latitude * .pi / 180.0
-        let lon2 = endCoordinate.longitude * .pi / 180.0
-
-        let dLat = lat2 - lat1
-        let dLon = lon2 - lon1
-
-        let first = sin(dLat / 2) * sin(dLat / 2) + cos(lat1) * cos(lat2) * sin(dLon / 2) * sin(dLon / 2)
-        let second = 2 * atan2(sqrt(first), sqrt(1 - first))
-
-        let distance = earthRadius * second
-        return distance
+        if let course = runningManager.startCourse?.coursePaths {
+            let guideCourse = ConvertCoordinateManager.convertToCLLocationCoordinates(course)
+            let progressManager = CourseProgressManager(guideCourse: guideCourse, userCourse: userLocations)
+            progressManager.calculate()
+            return progressManager.getProgress()
+        }
+        return 0
     }
 }

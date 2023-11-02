@@ -24,6 +24,10 @@ struct ImageShareView: View {
     @State private var angle: Angle = .degrees(0)
     @State private var lastAngle: Angle = .degrees(0)
     
+    @State private var pathWidth: CGFloat = 0
+    @State private var pathHeight: CGFloat = 0
+    
+    private let imageSize: CGFloat = 200
     private let gradientColors = [
         Color.white,
         Color.white.opacity(0.1),
@@ -31,12 +35,10 @@ struct ImageShareView: View {
         Color.white.opacity(0.4),
         Color.white.opacity(0.5)
     ]
-    
-    private let pathManager = PathGenerateManager.shared
-    
+        
     var body: some View {
         ZStack {
-            Color.gray900Color
+            Color.gray900
                 .ignoresSafeArea()
             
             VStack(spacing: 0) {
@@ -71,33 +73,30 @@ struct ImageShareView: View {
         .onChange(of: image) { 
             renderImage()
         }
+        .onAppear {
+            let canvasSize = PathGenerateManager.calculateCanvaData(coordinates: viewModel.runningData.userLocations, width: imageSize, height: imageSize)
+            self.pathWidth = CGFloat(canvasSize.width)
+            self.pathHeight = CGFloat(canvasSize.height)
+        }
     }
 }
 
 extension ImageShareView {
     
     private func renderImage() {
-        shareImage = mainImageView.asImage(size: size)
+        shareImage = mainImageView.offset(y: -30).asImage(size: size)
     }
     
     private var mainImageView: some View {
-        Group {
-            ZStack {
-                if selectPhotoMode {
-                    selectPhotoView
-                } else {
-                    blackImageView
-                }
-                GeometryReader { proxy in
-                    HStack {}
-                        .onAppear {
-                            size = CGSize(width: proxy.size.width, height: proxy.size.height)
-                            print(proxy.size)
-                    }
-                }
+        
+        ZStack {
+            if selectPhotoMode {
+                selectPhotoView
+            } else {
+                blackImageView
             }
-            .aspectRatio(1080/1920, contentMode: .fit)
         }
+        .aspectRatio(1080/1920, contentMode: .fill)
     }
     
     private var selectPhotoView: AnyView {
@@ -106,6 +105,8 @@ extension ImageShareView {
                 ZStack {
                     Image(uiImage: img)
                         .resizable()
+                        .scaledToFill()
+                        .frame(width: size.width, height: size.height)
                         .mask {
                             Rectangle()
                                 .aspectRatio(1080.0/1920.0, contentMode: .fit)
@@ -131,16 +132,20 @@ extension ImageShareView {
                         .resizable()
 
                     selectShareData
-                        .padding(.top, 43)
+                        .padding(.top, 44)
                     
-                    userPath
-                        .scaleEffect(scale)
-                        .offset(offset)
-                        .rotationEffect(angle)
+                    ZStack {
+                        Color.black.opacity(0.001)
+                        userPath
+                    }
+                    .frame(width: pathWidth + 30, height: pathHeight + 30)
+                    .scaleEffect(scale)
+                    .offset(offset)
+                    .rotationEffect(lastAngle + angle)
+                    .gesture(dragGesture)
+                    .gesture(rotationGesture)
+                    .simultaneousGesture(magnificationGesture)
                 }
-                .gesture(dragGesture)
-                .gesture(rotationGesture)
-                .simultaneousGesture(magnificationGesture)
             )
         } else {
             AnyView(
@@ -159,14 +164,15 @@ extension ImageShareView {
             Text(viewModel.runningData.distance)
                 .font(.shareData)
                 .fontWeight(.bold)
-                .padding(.bottom, 14)
+                .padding(.bottom, 17)
             
             Text(viewModel.runningData.pace)
                 .font(.shareData)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-        .padding(.leading, 18)
+        .padding(.leading, 16)
     }
+    
 }
 extension ImageShareView {
     private var blackImageView: some View {
@@ -177,15 +183,18 @@ extension ImageShareView {
             blackShareData
                 .padding(.top, 166)
                 .padding(.leading, 8)
-            
-            userPath
-                .scaleEffect(scale)
-                .offset(offset)
-                .rotationEffect(angle)
+            ZStack {
+                Color.black.opacity(0.001)
+                userPath
+            }
+            .frame(width: pathWidth + 30, height: pathHeight + 30)
+            .scaleEffect(scale)
+            .offset(offset)
+            .rotationEffect(lastAngle + angle)
+            .gesture(dragGesture)
+            .gesture(rotationGesture)
+            .simultaneousGesture(magnificationGesture)
         }
-        .gesture(dragGesture)
-        .gesture(rotationGesture)
-        .simultaneousGesture(magnificationGesture)
     }
     
     private var blackShareData: some View {
@@ -224,12 +233,12 @@ extension ImageShareView {
     private var pageIndicator: some View {
         HStack(spacing: 0) {
             Rectangle()
-                .fill(Color.whiteColor)
+                .fill(Color.customWhite)
                 .frame(width: 25, height: 3)
                 .padding(.trailing, 5)
             
             Rectangle()
-                .fill(Color.primaryColor)
+                .fill(Color.customPrimary)
                 .frame(width: 25, height: 3)
         }
         .frame(maxWidth: .infinity, alignment: .center)
@@ -244,7 +253,7 @@ extension ImageShareView {
             } label: {
                 Circle()
                     .fill(.black)
-                    .stroke(selectPhotoMode ?  Color.gray200Color : Color.primaryColor, lineWidth: 5)
+                    .stroke(selectPhotoMode ?  Color.gray200 : Color.customPrimary, lineWidth: 5)
             }
             .padding(.horizontal, 12)
             
@@ -253,7 +262,7 @@ extension ImageShareView {
             } label: {
                 Circle()
                     .fill(.white)
-                    .stroke(selectPhotoMode ? Color.primaryColor : Color.gray200Color, lineWidth: 5)
+                    .stroke(selectPhotoMode ? Color.customPrimary : Color.gray200, lineWidth: 5)
             }
             .padding(.horizontal, 12)
         }
@@ -265,11 +274,11 @@ extension ImageShareView {
 
 extension ImageShareView {
     private var userPath: some View {
-        pathManager
-            .caculateLines(width: size.width, height: size.height, coordinates: viewModel.runningData.userLocations)
+        PathGenerateManager
+            .caculateLines(width: imageSize, height: imageSize, coordinates: viewModel.runningData.userLocations)
             .stroke(lineWidth: 5)
             .scale(0.5)
-            .foregroundStyle(selectPhotoMode ? Color.primaryColor : Color.white)
+            .foregroundStyle(selectPhotoMode ? Color.customPrimary : Color.customWhite)
     }
     
     private var dragGesture: some Gesture {
@@ -289,13 +298,14 @@ extension ImageShareView {
     private var rotationGesture: some Gesture {
         return RotationGesture()
             .onChanged { value in
-                angle = lastAngle+value
+                angle = value
             }
-         .onEnded { _ in
-             withAnimation(.spring) {
-                 lastAngle = angle
+             .onEnded { _ in
+                 withAnimation(.spring) {
+                     lastAngle += angle
+                     angle = .zero
+                 }
              }
-         }
     }
     
     private var magnificationGesture: some Gesture {

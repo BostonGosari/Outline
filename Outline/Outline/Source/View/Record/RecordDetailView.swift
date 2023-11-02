@@ -6,37 +6,46 @@
 //
 
 import CoreLocation
+import MapKit
 import SwiftUI
 
 struct RecordDetailView: View {
     @Environment(\.dismiss) private var dismiss
-    @ObservedObject var homeTabViewModel: HomeTabViewModel
     @StateObject var viewModel = RecordDetailViewModel()
-    @StateObject var dataModel = DataTestViewModel()
     
     @State private var showRenameSheet = false
     @State private var newCourseName = ""
     @State private var completeButtonActive = false
+    @State private var isShowAlert = false
+    
+    @State private var position: MapCameraPosition = .userLocation(fallback: .automatic)
+    
+    @Binding var isDeleteData: Bool
+    
+    private let gradientColors: [Color] = [.customBlack, .customBlack, .customBlack, .customBlack, .black50, .customBlack.opacity(0)]
+    private let polylineGradient = Gradient(colors: [.customGradient1, .customGradient2, .customGradient3])
+    private let columns: [GridItem] = Array(repeating: .init(.flexible()), count: 3)
     
     var record: CoreRunningRecord
-    var gradientColors: [Color] = [.blackColor, .blackColor, .blackColor, .blackColor, .black50Color, .blackColor.opacity(0)]
-    let columns: [GridItem] = Array(repeating: .init(.flexible()), count: 2)
     
     var body: some View {
         ZStack {
             LinearGradient(
-                colors: [.black, .gray900Color, .gray900Color],
+                colors: [.customBlack, .customBlack, .gray900],
                 startPoint: .top,
                 endPoint: .bottom
             )
-            .ignoresSafeArea()
+                .ignoresSafeArea()
             
             ScrollView {
                 VStack(spacing: 0) {
                     ZStack(alignment: .topLeading) {
-                        FinishRunningMap(userLocations: $viewModel.userLocations)
-                            .roundedCorners(45, corners: .bottomLeft)
-                            .shadow(color: .whiteColor, radius: 1.5)
+                        Map {
+                            MapPolyline(coordinates: viewModel.userLocations)
+                                .stroke(polylineGradient, style: StrokeStyle(lineWidth: 8, lineCap: .round, lineJoin: .round))
+                        }
+                        .roundedCorners(45, corners: .bottomRight)
+                        .shadow(color: .customWhite, radius: 1.5)
                         
                         HStack(alignment: .top) {
                             courseInfo
@@ -45,7 +54,7 @@ struct RecordDetailView: View {
                                 showRenameSheet = true
                             } label: {
                                 Image(systemName: "pencil")
-                                    .foregroundStyle(Color.whiteColor)
+                                    .foregroundStyle(Color.customWhite)
                                     .font(.system(size: 20))
                             }
                             .padding(.top, 16)
@@ -64,112 +73,73 @@ struct RecordDetailView: View {
                     .frame(height: 575)
                     .padding(.bottom, 16)
                     
-                    CompleteButton(text: "자랑하기", isActive: true) {
+                    Button {
                         viewModel.saveShareData()
+                    } label: {
+                        RoundedRectangle(cornerRadius: 15)
+                            .stroke(Color.customPrimary)
+                            .frame(height: 55)
+                            .padding(.horizontal, 16)
+                            .overlay {
+                                Text("자랑하기")
+                                    .foregroundStyle(Color.customPrimary)
+                                    .font(.button)
+                            }
                     }
-                    .padding(.bottom, 40)
                     
-                    Text(viewModel.runningData["시간"] ?? "0:0:0")
-                        .font(Font.custom("Pretendard-ExtraBold", size: 70))
-                        .foregroundColor(.primaryColor)
+                    Text(viewModel.runningData["시간"] ?? "0:0.0")
+                        .font(.timeTitle)
+                        .foregroundColor(.customPrimary)
                         .monospacedDigit()
                         .minimumScaleFactor(0.5)
                         .lineLimit(1)
-                        .padding(.bottom, 16)
+                        .padding(.vertical, 40)
                     
-                    LazyVGrid(columns: columns, spacing: 42) {
-                        VStack(alignment: .center) {
-                            if let data = viewModel.runningData["킬로미터"] {
-                                Text(data)
-                                    .font(.title2)
-                                Text("킬로미터")
-                                    .font(.subBody)
-                            }
-                        }
-                        VStack(alignment: .center) {
-                            if let data = viewModel.runningData["평균 페이스"] {
-                                Text(data)
-                                    .font(.title2)
-                                Text("평균 페이스")
-                                    .font(.subBody)
-                            }
-                        }
-                        VStack(alignment: .center) {
-                            if let data = viewModel.runningData["칼로리"] {
-                                Text(data)
-                                    .font(.title2)
-                                Text("칼로리")
-                                    .font(.subBody)
-                            }
-                        }
-                        VStack(alignment: .center) {
-                            if let data = viewModel.runningData["BPM"] {
-                                Text(data)
-                                    .font(.title2)
-                                Text("BPM")
-                                    .font(.subBody)
-                            }
-                        }
-                        .padding(.horizontal, 51)
-                    }
+                    runningData
                 }
             }
         }
+        .alert("기록한 러닝이 사라져요\n정말 삭제하시겠어요?", isPresented: $isShowAlert) {
+            Button("취소", role: .cancel) {}
+            Button("삭제", role: .destructive) {
+                viewModel.deleteRunningRecord(record)
+                isDeleteData = true
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                    self.isDeleteData = false
+                }
+                dismiss()
+            }
+        }
         .navigationDestination(isPresented: $viewModel.navigateToShareMainView) {
-            ShareMainView(homeTabViewModel: homeTabViewModel, runningData: viewModel.shareData)
+            ShareMainView(runningData: viewModel.shareData)
                 .navigationBarBackButtonHidden()
         }
         .onAppear {
             viewModel.readData(runningRecord: record)
         }
         .sheet(isPresented: $showRenameSheet) {
-            VStack(alignment: .leading, spacing: 0) {
-                Text("코스 이름 수정하기")
-                    .font(.subtitle)
-                    .padding(.top, 35)
-                    .padding(.bottom, 48)
-                    .padding(.horizontal, 16)
-                
-                TextField("코스 이름을 입력하세요.", text: $newCourseName)
-                    .onChange(of: newCourseName) {
-                        if !newCourseName.isEmpty {
-                            completeButtonActive = true
-                        } else {
-                            completeButtonActive = false
-                        }
-                    }
-                    .padding(.bottom, 8)
-                    .padding(.horizontal, 16)
-            
-                Rectangle()
-                    .frame(height: 1)
-                    .foregroundStyle(Color.primaryColor)
-                    .padding(.horizontal, 16)
-                    .padding(.bottom, 41)
-                
-                CompleteButton(text: "완료", isActive: completeButtonActive) {
-                    dataModel.updateRunningRecord(record, courseName: newCourseName)
-                    dismiss()
-                }
-                .padding(.bottom, 30)
-            }
-            .ignoresSafeArea()
-            .presentationDragIndicator(.visible)
-            .presentationDetents([.height(330)])
-            .presentationCornerRadius(35)
+            updateNameSheet
         }
         .navigationTitle("\(viewModel.date)")
         .navigationBarTitleDisplayMode(.inline)
         .preferredColorScheme(.dark)
-        
+        .toolbarBackground(Color.black, for: .navigationBar)
         .toolbar {
-            ToolbarItem(placement: .topBarTrailing) {
+            ToolbarItem(placement: .topBarLeading) {
                 Button {
-                    dataModel.deleteRunningRecord(record)
                     dismiss()
                 } label: {
+                    Image(systemName: "chevron.left")
+                        .foregroundStyle(Color.customPrimary)
+                }
+            }
+            
+            ToolbarItem(placement: .topBarTrailing) {
+                Button {
+                    isShowAlert = true
+                } label: {
                     Image(systemName: "trash.fill")
-                        .foregroundStyle(Color.primaryColor)
+                        .foregroundStyle(Color.customPrimary)
                 }
             }
         }
@@ -187,19 +157,103 @@ extension RecordDetailView {
                 Text("\(viewModel.startTime)-\(viewModel.endTime)")
             }
             .font(.subBody)
-            .foregroundStyle(Color.gray200Color)
+            .foregroundStyle(Color.gray200)
             
             HStack {
                 Image(systemName: "mappin")
-                    .foregroundStyle(Color.gray400Color)
+                    .foregroundStyle(Color.gray400)
                 
                 Text("\(viewModel.courseRegion)")
-                    .foregroundStyle(Color.gray200Color)
+                    .foregroundStyle(Color.gray200)
             }
             .font(.subBody)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(.top, 16)
         .padding(.leading, 16)
+    }
+    
+    private var runningData: some View {
+        LazyVGrid(columns: columns, spacing: 40) {
+            VStack(alignment: .center) {
+                if let data = viewModel.runningData["킬로미터"] {
+                    Text(data)
+                        .font(.title2)
+                    Text("킬로미터")
+                        .font(.subBody)
+                }
+            }
+            VStack(alignment: .center) {
+                if let data = viewModel.runningData["BPM"] {
+                    Text(data)
+                        .font(.title2)
+                    Text("BPM")
+                        .font(.subBody)
+                }
+            }
+            VStack(alignment: .center) {
+                if let data = viewModel.runningData["평균 페이스"] {
+                    Text(data)
+                        .font(.title2)
+                    Text("평균 페이스")
+                        .font(.subBody)
+                }
+            }
+            VStack(alignment: .center) {
+                if let data = viewModel.runningData["칼로리"] {
+                    Text(data)
+                        .font(.title2)
+                    Text("칼로리")
+                        .font(.subBody)
+                }
+            }
+            VStack(alignment: .center) {
+                if let data = viewModel.runningData["케이던스"] {
+                    Text(data)
+                        .font(.title2)
+                    Text("케이던스")
+                        .font(.subBody)
+                }
+            }
+        }
+    }
+    
+    private var updateNameSheet: some View {
+        VStack(alignment: .leading, spacing: 0) {
+            Text("코스 이름 수정하기")
+                .font(.subtitle)
+                .padding(.top, 35)
+                .padding(.bottom, 48)
+                .padding(.horizontal, 16)
+            
+            TextField("코스 이름을 입력하세요.", text: $newCourseName)
+                .onChange(of: newCourseName) {
+                    if !newCourseName.isEmpty {
+                        completeButtonActive = true
+                    } else {
+                        completeButtonActive = false
+                    }
+                }
+                .padding(.bottom, 8)
+                .padding(.horizontal, 16)
+        
+            Rectangle()
+                .frame(height: 1)
+                .foregroundStyle(Color.customPrimary)
+                .padding(.horizontal, 16)
+                .padding(.bottom, 41)
+            
+            CompleteButton(text: "완료", isActive: completeButtonActive) {
+                viewModel.updateRunningRecord(record, courseName: newCourseName)
+                viewModel.courseName = newCourseName
+                completeButtonActive = false
+                showRenameSheet = false
+            }
+            .padding(.bottom, 30)
+        }
+        .ignoresSafeArea()
+        .presentationDragIndicator(.visible)
+        .presentationDetents([.height(330)])
+        .presentationCornerRadius(35)
     }
 }
