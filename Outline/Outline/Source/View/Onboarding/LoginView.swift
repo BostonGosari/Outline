@@ -120,7 +120,7 @@ struct LoginView: View {
                     }
                     .padding(.vertical, 5)
                     Button {
-                        UserDefaults.standard.set("lookAround", forKey: "authState")
+                        authState = .lookAround
                     } label: {
                         Text("둘러보기")
                             .foregroundStyle(.white)

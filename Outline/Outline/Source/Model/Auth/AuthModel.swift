@@ -81,7 +81,7 @@ class AuthModel: AuthModelProtocol {
         let user = Auth.auth().currentUser
         if let user = user {
             user.delete { error in
-              if let _ = error {
+              if error != nil {
                 completion(.failure(.errorInSignOut))
               } else {
                 completion(.success(true))
