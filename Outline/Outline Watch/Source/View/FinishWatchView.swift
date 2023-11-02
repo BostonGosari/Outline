@@ -7,9 +7,7 @@
 
 import SwiftUI
 
-struct FinishWatchView: View {
-    private let connectionWatchModel = ConnectingWatchModel()
-    
+struct FinishWatchView: View {    
     @State var completionPercentage: Double = 100
 
     var body: some View {
