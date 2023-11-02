@@ -10,37 +10,38 @@ import UIKit
 
 struct ControlsView: View {
     
-    @EnvironmentObject var workoutManager: WatchWorkoutManager
+    @StateObject var workoutManager = WatchWorkoutManager.shared
     @StateObject var watchConnectivityManager = WatchConnectivityManager.shared
     @StateObject var watchRunningManager = WatchRunningManager.shared
-    @State private var showingConfirmation = false
-    @State private var showingEndwithoutSavingSheet = false
-    @State private var animate1 = false
-    @State private var animate2 = false
+    @State private var showConfirmationSheet = false
+    @State private var showEndWithoutSavingSheet = false
+    @State private var buttonAnimation = false
+    @State private var dataAnimation = false
     
     var body: some View {
         ScrollView {
             HStack(spacing: 11) {
-                ControlButton(systemName: "stop.fill", action: {
-//                    if workoutManager.workout?.duration ?? 0 > 30 {
-                        showingConfirmation = true
-                    print(workoutManager.workout?.duration ?? 0)
-//                    } else {
-//                        showingEndwithoutSavingSheet = true
-//                    }
-                }, foregroundColor: .white, backgroundColor: .white)
-                
-                ControlButton(systemName: workoutManager.running ? "pause" : "play.fill", action: {
-                    workoutManager.togglePause()
-                    withAnimation {
-                        animate1.toggle()
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                            animate2.toggle()
+                ControlButton(systemName: "stop.fill", foregroundColor: .white, backgroundColor: .white) {
+                    if let builder = workoutManager.builder {
+                        if builder.elapsedTime > 30 {
+                            showConfirmationSheet = true
+                        } else {
+                            showEndWithoutSavingSheet = true
                         }
                     }
-                }, foregroundColor: .first, backgroundColor: .first)
+                }
+                
+                ControlButton(systemName: workoutManager.running ? "pause" : "play.fill", foregroundColor: .first, backgroundColor: .first) {
+                    workoutManager.togglePause()
+                    withAnimation {
+                        buttonAnimation.toggle()
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                            dataAnimation.toggle()
+                        }
+                    }
+                }
             }
-            .padding(.top, animate1 ? 20 : WKInterfaceDevice.current().screenBounds.height * 0.25)
+            .padding(.top, buttonAnimation ? 20 : WKInterfaceDevice.current().screenBounds.height * 0.25)
             .padding(.bottom, workoutManager.running ? 0 : 24)
             
             if !workoutManager.running {
@@ -52,32 +53,38 @@ struct ControlsView: View {
                     workoutDataItem(value: "\(workoutManager.averageHeartRate.formatted(.number.precision(.fractionLength(0))))", label: "BPM")
                 }
                 .padding(.bottom, 20)
-                .opacity(animate2 ? 1 : 0)
+                .opacity(dataAnimation ? 1 : 0)
             }
         }
         .scrollDisabled(workoutManager.running)
         .overlay(alignment: .topLeading) {
-            Text(workoutManager.running ? "시티런" : "일시 정지됨")
-                .fontWeight(.regular)
-                .foregroundStyle(.first)
-                .padding()
-                .padding(.top, 5)
-                .padding(.leading, 20)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .background {
-                    Rectangle()
-                        .foregroundStyle(.thinMaterial)
-                }
-                .ignoresSafeArea()
+            header
         }
         .toolbar(.hidden, for: .automatic)
         .overlay {
-            if showingConfirmation {
-                customExitSheet
-            } else if showingEndwithoutSavingSheet {
-                customEndWithoutSavingSheet
+            if showConfirmationSheet {
+                confirmationSheet
             }
         }
+        .sheet(isPresented: $showEndWithoutSavingSheet) {
+            customEndWithoutSavingSheet
+                .ignoresSafeArea()
+        }
+    }
+    
+    private var header: some View {
+        Text(workoutManager.running ? "시티런" : "일시 정지됨")
+            .fontWeight(.regular)
+            .foregroundStyle(.first)
+            .padding()
+            .padding(.top, 5)
+            .padding(.leading, 20)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .background {
+                Rectangle()
+                    .foregroundStyle(.thinMaterial)
+            }
+            .ignoresSafeArea()
     }
 }
 
@@ -93,7 +100,8 @@ extension ControlsView {
                 .foregroundColor(Color.gray500)
         }
     }
-    private var customExitSheet: some View {
+    
+    private var confirmationSheet: some View {
         ZStack {
             Rectangle()
                 .ignoresSafeArea()
@@ -106,7 +114,7 @@ extension ControlsView {
                 Spacer()
                 
                 Button {
-                    showingConfirmation = false
+                    showConfirmationSheet = false
                 } label: {
                     Text("계속 진행하기")
                         .frame(maxWidth: .infinity)
@@ -120,15 +128,9 @@ extension ControlsView {
                 }
                 .buttonStyle(.plain)
                 Button {
-                    showingConfirmation = false
+                    showConfirmationSheet = false
+                    sendDataToPhone()
                     workoutManager.endWorkout()
-                    
-                    let startCourse = watchRunningManager.startCourse
-                    
-                    let courseData = CourseData(courseName: startCourse.courseName, runningLength: startCourse.courseLength, heading: startCourse.heading, distance: startCourse.distance, coursePaths: watchRunningManager.userLocations, runningCourseId: "")
-                    let healthData = HealthData(totalTime: 0.0, averageCadence: workoutManager.cadence, totalRunningDistance: workoutManager.distance, totalEnergy: workoutManager.calorie, averageHeartRate: workoutManager.heartRate, averagePace: workoutManager.pace, startDate: Date(), endDate: Date())
-                    
-                    watchConnectivityManager.sendRunningRecordToPhone(RunningRecord(id: UUID().uuidString, runningType: watchRunningManager.runningType, courseData: courseData, healthData: healthData))
                 } label: {
                     Text("종료하기")
                         .frame(maxWidth: .infinity)
@@ -157,6 +159,7 @@ extension ControlsView {
                     Text("30초 이하는 기록되지 않아요.")
                     Text("러닝을 종료할까요?")
                 }
+                .font(.system(size: 13))
                 .padding()
                 .padding(.top, 20)
                 .background {
@@ -164,7 +167,7 @@ extension ControlsView {
                         .foregroundStyle(.gray.opacity(0.2))
                 }
                 Button {
-                    showingEndwithoutSavingSheet.toggle()
+                    showEndWithoutSavingSheet = false
                 } label: {
                     Text("계속 진행하기")
                         .frame(maxWidth: .infinity)
@@ -178,8 +181,10 @@ extension ControlsView {
                 }
                 .buttonStyle(.plain)
                 Button {
-                    showingEndwithoutSavingSheet.toggle()
+                    showEndWithoutSavingSheet = false
                     workoutManager.endWorkoutWithoutSummaryView()
+                    watchRunningManager.startRunning = false
+                    watchConnectivityManager.sendRunningSessionStateToPhone(false)
                 } label: {
                     Text("종료하기")
                         .frame(maxWidth: .infinity)
@@ -202,36 +207,17 @@ extension ControlsView {
                     .frame(width: 50, height: 50)
             }
             .toolbar(.hidden, for: .automatic)
+            .padding()
         }
-       
     }
-}
-
-struct ControlButton: View {
-    let systemName: String
-    let action: () -> Void
-    let foregroundColor: Color
-    let backgroundColor: Color
     
-    var body: some View {
-        Button(action: action) {
-            Image(systemName: systemName)
-                .font(.system(size: 24))
-                .fontWeight(.black)
-                .foregroundColor(foregroundColor)
-                .padding()
-                .overlay(
-                    Circle()
-                        .stroke(foregroundColor, lineWidth: 2)
-                        .frame(width: 80, height: 80)
-                        .background(
-                            Circle()
-                                .foregroundColor(backgroundColor)
-                                .opacity(0.5)
-                        )
-                )
-        }
-        .frame(maxWidth: .infinity)
-        .buttonStyle(.plain)
+    private func sendDataToPhone() {
+        let startCourse = watchRunningManager.startCourse
+        guard let builder = workoutManager.builder else { return }
+        
+        let courseData = CourseData(courseName: startCourse.courseName, runningLength: startCourse.courseLength, heading: startCourse.heading, distance: startCourse.distance, coursePaths: watchRunningManager.userLocations, runningCourseId: "")
+        let healthData = HealthData(totalTime: builder.elapsedTime, averageCadence: workoutManager.cadence, totalRunningDistance: workoutManager.distance, totalEnergy: workoutManager.calorie, averageHeartRate: workoutManager.heartRate, averagePace: workoutManager.averagePace, startDate: Date(), endDate: Date())
+        
+        watchConnectivityManager.sendRunningRecordToPhone(RunningRecord(id: UUID().uuidString, runningType: watchRunningManager.runningType, courseData: courseData, healthData: healthData))
     }
 }
