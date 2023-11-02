@@ -123,7 +123,7 @@ extension RunningMapView {
                         .tint(.white)
                         .controlSize(.large)
                         .frame(maxWidth: .infinity, alignment: .trailing)
-                        .padding(.trailing, 32)
+                        .padding(.trailing, 16)
                         .padding(.bottom, 14)
                     ZStack {
                         Button {
@@ -144,11 +144,18 @@ extension RunningMapView {
                                 selection.toggle()
                             }
                         } label: {
-                            Image("Data")
-                                .imageButtonModifier(color: Color.customPrimary, size: 24, padding: 18)
+                            Image(systemName: "doc.text.magnifyingglass")
+                                .font(.system(size: 20))
+                                .bold()
+                                .foregroundStyle(Color.white)
+                                .padding(18)
+                                .background(
+                                    Circle()
+                                        .fill(.thickMaterial)
+                                )
                         }
                         .frame(maxWidth: .infinity, alignment: .trailing)
-                        .padding(.trailing, 32)
+                        .padding(.trailing, 16)
                     }
                 }
                 .opacity(viewModel.runningType == .start ? 1 : 0)
