@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct HomeTabView: View {
+    @AppStorage("authState") var authState: AuthState = .onboarding
+    
     @StateObject private var runningManager = RunningStartManager.shared
     @StateObject var runningDataManager = RunningDataManager.shared
     @StateObject var watchConnectivityManager = WatchConnectivityManager.shared
@@ -23,15 +25,24 @@ struct HomeTabView: View {
                         Group {
                             switch selectedTab {
                             case .freeRunning:
-                                FreeRunningHomeView()
+                                if authState == .lookAround {
+                                    LookAroundView()
+                                        .navigationTitle("자유런")
+                                } else {
+                                    FreeRunningHomeView()
+                                }
                             case .GPSArtRunning:
                                 GPSArtHomeView(showDetailView: $showDetailView)
                             case .myRecord:
-                                RecordView()
+                                if authState == .lookAround {
+                                    LookAroundView()
+                                        .navigationTitle("기록")
+                                } else {
+                                    RecordView()
+                                }
                             }
                         }
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
-                        
                         TabBar(selectedTab: $selectedTab)
                             .frame(maxHeight: .infinity, alignment: .bottom)
                             .opacity(showDetailView ? 0 : 1)

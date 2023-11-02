@@ -97,6 +97,7 @@
 		95A01E312AF141C30093D9C0 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A01E302AF141C30093D9C0 /* ProfileView.swift */; };
 		95A01E332AF143BA0093D9C0 /* ProfileUserInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A01E322AF143BA0093D9C0 /* ProfileUserInfoView.swift */; };
 		95A01E352AF144030093D9C0 /* ProfileHealthInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A01E342AF144030093D9C0 /* ProfileHealthInfoView.swift */; };
+		95A01E3B2AF2B7250093D9C0 /* LookAroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A01E3A2AF2B7240093D9C0 /* LookAroundView.swift */; };
 		95E2EF712ADA6F230083ADEE /* CourseModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E2EF702ADA6F230083ADEE /* CourseModelType.swift */; };
 		95E2EF882ADBA5C70083ADEE /* CourseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E2EF872ADBA5C70083ADEE /* CourseModel.swift */; };
 		95EB1EE92ADDC43400B47984 /* PersistentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EB1EE82ADDC43400B47984 /* PersistentController.swift */; };
@@ -264,6 +265,7 @@
 		95A01E302AF141C30093D9C0 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		95A01E322AF143BA0093D9C0 /* ProfileUserInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUserInfoView.swift; sourceTree = "<group>"; };
 		95A01E342AF144030093D9C0 /* ProfileHealthInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHealthInfoView.swift; sourceTree = "<group>"; };
+		95A01E3A2AF2B7240093D9C0 /* LookAroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LookAroundView.swift; sourceTree = "<group>"; };
 		95E2EF702ADA6F230083ADEE /* CourseModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseModelType.swift; sourceTree = "<group>"; };
 		95E2EF872ADBA5C70083ADEE /* CourseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseModel.swift; sourceTree = "<group>"; };
 		95EB1EE82ADDC43400B47984 /* PersistentController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentController.swift; sourceTree = "<group>"; };
@@ -440,6 +442,14 @@
 				95A01E342AF144030093D9C0 /* ProfileHealthInfoView.swift */,
 			);
 			path = Profile;
+			sourceTree = "<group>";
+		};
+		95A01E392AF2B70F0093D9C0 /* LookAround */ = {
+			isa = PBXGroup;
+			children = (
+				95A01E3A2AF2B7240093D9C0 /* LookAroundView.swift */,
+			);
+			path = LookAround;
 			sourceTree = "<group>";
 		};
 		95EB1EF32ADE229200B47984 /* UserInfo */ = {
@@ -621,6 +631,7 @@
 		F0AC8AFA2AD963600061612C /* View */ = {
 			isa = PBXGroup;
 			children = (
+				95A01E392AF2B70F0093D9C0 /* LookAround */,
 				95A01E2F2AF141B90093D9C0 /* Profile */,
 				0E9A5D402AE058D900C19FF3 /* Share */,
 				0EE92E7B2AE02DCB003192FF /* FreeRunning */,
@@ -1061,6 +1072,7 @@
 				9528EFE92ADE9E870056CCC6 /* UserCoreDataModel.xcdatamodeld in Sources */,
 				F0781D602AE163E00084ADD7 /* GPSArtHomeViewModel.swift in Sources */,
 				299803552ADF5F1000A9A134 /* HealthKitManager.swift in Sources */,
+				95A01E3B2AF2B7250093D9C0 /* LookAroundView.swift in Sources */,
 				2998035E2AE0182100A9A134 /* ConfettiView.swift in Sources */,
 				954CB29A2AE514D3005EB2E9 /* ConnectingWatchModel.swift in Sources */,
 				0E9A5D462AE05DF200C19FF3 /* ShareMap.swift in Sources */,
