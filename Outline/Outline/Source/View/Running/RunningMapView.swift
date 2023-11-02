@@ -63,7 +63,7 @@ struct RunningMapView: View {
                 MapPolyline(coordinates: viewModel.userLocations)
                     .stroke(.customPrimary, style: StrokeStyle(lineWidth: 8, lineCap: .round, lineJoin: .round))
             }
-            .mapControls {}
+            .mapControlVisibility(.hidden)
             
             VStack(spacing: 0) {
                 Spacer()
