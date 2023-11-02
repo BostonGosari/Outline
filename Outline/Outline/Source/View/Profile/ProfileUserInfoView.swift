@@ -125,6 +125,7 @@ struct ProfileUserInfoView: View {
         }
     }
 }
+
 struct OvalTextFieldStyle: TextFieldStyle {
     func _body(configuration: TextField<Self._Label>) -> some View {
         configuration
@@ -133,7 +134,3 @@ struct OvalTextFieldStyle: TextFieldStyle {
             .cornerRadius(10)
     }
 }
-//
-//#Preview {
-//    ProfileUserInfoView()
-//}
