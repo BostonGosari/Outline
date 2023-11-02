@@ -9,22 +9,22 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.bostongosari.Outline</string>
+	<string>team.boston.gosari.outline</string>
 	<key>PROJECT_ID</key>
 	<string>outline-5640c</string>
 	<key>STORAGE_BUCKET</key>
 	<string>outline-5640c.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
-	<false></false>
+	<false/>
 	<key>IS_ANALYTICS_ENABLED</key>
-	<false></false>
+	<false/>
 	<key>IS_APPINVITE_ENABLED</key>
-	<true></true>
+	<true/>
 	<key>IS_GCM_ENABLED</key>
-	<true></true>
+	<true/>
 	<key>IS_SIGNIN_ENABLED</key>
-	<true></true>
+	<true/>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:336682413328:ios:c601c2e5c6fdb5cf18c995</string>
+	<string>1:336682413328:ios:12fd2e06d21fa23f18c995</string>
 </dict>
 </plist>
