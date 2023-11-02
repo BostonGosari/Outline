@@ -5,80 +5,134 @@
 //  Created by 김하은 on 10/23/23.
 //
 
-import SwiftUI
 import CoreLocation
+import SwiftUI
 
 struct RecordView: View {
-    @State var selectedIndex: Int = 0
-    @ObservedObject var homeTabViewModel: HomeTabViewModel
-    @ObservedObject private var dataTestViewModel = DataTestViewModel()
-    @FetchRequest (entity: CoreRunningRecord.entity(), sortDescriptors: [])
-    var runningRecord: FetchedResults<CoreRunningRecord>
-    @State private var records: [CoreRunningRecord] = []
+    @FetchRequest (entity: CoreRunningRecord.entity(), sortDescriptors: []) var runningRecord: FetchedResults<CoreRunningRecord>
+    
+    @State private var selectedIndex: Int = 0
     @State private var isSortingSheetPresented = false
     @State private var selectedSortOption: SortOption = .latest
     @State private var filteredRecords: [CoreRunningRecord] = []
-    
+    @State private var scrollOffset: CGFloat = 0
+    @State private var isDeleteData = false
+
     var body: some View {
         NavigationView {
             ZStack(alignment: .top) {
                 Color.gray900
                     .ignoresSafeArea()
-                BackgroundBlur(color: Color.secondaryColor, padding: 50)
+                BackgroundBlur(color: Color.customSecondary, padding: 50)
+                    .opacity(0.5)
+                
                 ScrollView {
+                    Color.clear.frame(height: 0)
+                        .onScrollViewOffsetChanged { offset in
+                            scrollOffset = offset
+                        }
+                    
+                    RecordHeader(scrollOffset: scrollOffset)
+
                     VStack(alignment: .leading) {
-                        HStack(spacing: 8) {
+                        HStack(spacing: 0) {
                             ChipItem(label: "모두", isSelected: Binding(get: { self.selectedIndex == 0 }, set: { _ in self.selectedIndex = 0 }))
-                            ChipItem(label: "GPS아트", isSelected: Binding(get: { self.selectedIndex == 1 }, set: { _ in self.selectedIndex = 1 }))
-                            ChipItem(label: "자유", isSelected: Binding(get: { self.selectedIndex == 2 }, set: { _ in self.selectedIndex = 2 }))
+                                .padding(.trailing, 8)
+                            ChipItem(label: "GPS 러닝", isSelected: Binding(get: { self.selectedIndex == 1 }, set: { _ in self.selectedIndex = 1 }))
+                                .padding(.trailing, 8)
+                            ChipItem(label: "자유 러닝", isSelected: Binding(get: { self.selectedIndex == 2 }, set: { _ in self.selectedIndex = 2 }))
                             Spacer()
                             Button {
                                 isSortingSheetPresented = true
-                                } label: {
-                                Text(sortingButtonLabel)
-                                    .font(Font.subBody)
-                                    .foregroundStyle(Color.white)
+                            } label: {
+                                HStack {
+                                    Text(selectedSortOption.buttonLabel)
+                                        .font(Font.subBody)
+                                        .foregroundStyle(Color.customWhite)
+                                    Image(systemName: "chevron.down")
+                                        .font(Font.subBody)
+                                        .foregroundStyle(Color.customWhite)
+                                }
                             }
-                            .actionSheet(isPresented: $isSortingSheetPresented) {
-                                ActionSheet(
-                                    title: Text("정렬"),
-                                    buttons: [
-                                        .default(Text("최신순")) {
-                                            selectedSortOption = .latest
-                                        },
-                                        .default(Text("오래된 순")) {
-                                            selectedSortOption = .oldest
-                                        },
-                                        .default(Text("최장거리")) {
-                                            selectedSortOption = .longestDistance
-                                        },
-                                        .default(Text("최단거리")) {
-                                            selectedSortOption = .shortestDistance
-                                        },
-                                        .cancel()
-                                    ]
-                                )
-                            }
-                            Image(systemName: "chevron.down")
-                                .font(Font.subBody)
-                                .foregroundStyle(Color.white)
-                            
                         }
                         .padding(.bottom, 16)
-                        ForEach(filteredRecords, id: \.id) { record in
-                            NavigationLink {
-                                RecordDetailView(homeTabViewModel: homeTabViewModel, record: record)
-                                
-                            } label: {
-                                RecordItem(record: record)
+                        if filteredRecords.isEmpty {
+                            VStack(alignment: .center) {
+                                Image(systemName: "exclamationmark.circle")
+                                    .foregroundStyle(Color.customPrimary)
+                                    .font(Font.system(size: 36))
+                                    .padding(.top, 150)
+                                Text("아직 러닝 기록이 없어요")
+                                    .font(.subBody)
+                                    .foregroundStyle(Color.gray500)
+                                    .padding(.top, 14)
                             }
-                            .padding(.bottom, 8)
+                            .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        } else {
+                            ForEach(filteredRecords, id: \.id) { record in
+                                NavigationLink {
+                                    RecordDetailView(isDeleteData: $isDeleteData, record: record)
+                                        .navigationBarBackButtonHidden()
+                                } label: {
+                                    RecordItem(record: record)
+                                }
+                                .padding(.bottom, 8)
+                            }
                         }
                     }
-                    .padding()
+                    .padding(.horizontal)
                     
                 }
-                .navigationTitle("기록")
+                .overlay(alignment: .top) {
+                    RecordInlineHeader(scrollOffset: scrollOffset)
+                }
+                .sheet(isPresented: $isSortingSheetPresented) {
+                    VStack(alignment: .leading) {
+                        Text("정렬")
+                            .font(.subtitle)
+                        Divider()
+                            .padding(.bottom, 16)
+                            .foregroundStyle(Color.gray500)
+                        ForEach(SortOption.allCases, id: \.self) { option in
+                            Button {
+                                selectedSortOption = option
+                                isSortingSheetPresented.toggle()
+                            } label: {
+                                HStack {
+                                    Text(option.buttonLabel)
+                                        .font(.subBody)
+                                        .foregroundStyle(selectedSortOption.buttonLabel == option.rawValue ? Color.customPrimary : Color.gray500)
+                                    Spacer()
+                                    if selectedSortOption.buttonLabel == option.rawValue {
+                                        Image(systemName: "checkmark")
+                                            .foregroundStyle(Color.customPrimary)
+                                            .padding(.trailing, 16)
+                                            .bold()
+                                    }
+                                       
+                                }
+                                .padding(.bottom, 24)
+                            }
+                         
+                        }
+                        Spacer()
+                        Button {
+                            isSortingSheetPresented.toggle()
+                        } label: {
+                            Text("취소")
+                                .font(.button)
+                                .foregroundStyle(.white)
+                                .frame(maxWidth: .infinity, maxHeight: 55)
+                                .background(Color.gray700)
+                                .cornerRadius(15)
+                        }
+                    }
+                    .padding(EdgeInsets(top: 43, leading: 16, bottom: 60, trailing: 16))
+                    .ignoresSafeArea()
+                    .presentationDragIndicator(.visible)
+                    .presentationDetents([.height(407)])
+                    .presentationCornerRadius(35)
+                }
             }
             .onChange(of: selectedSortOption) {
                updateSortDescriptors()
@@ -89,19 +143,23 @@ struct RecordView: View {
             .onAppear {
                 updateSortDescriptors()
             }
-        
+        }
+        .overlay {
+            if isDeleteData {
+                RunningPopup(text: "기록을 삭제했어요")
+                    .frame(maxHeight: .infinity, alignment: .top)
+            }
         }
     }
-    private var sortingButtonLabel: String {
-        switch selectedSortOption {
-        case .latest:
-            return "최신순"
-        case .oldest:
-            return "오래된 순"
-        case .longestDistance:
-            return "최장거리"
-        case .shortestDistance:
-            return "최단거리"
+    
+    enum SortOption: String, CaseIterable {
+        case latest = "최신순"
+        case oldest = "오래된 순"
+        case longestDistance = "최장 거리"
+        case shortestDistance = "최단 거리"
+
+        var buttonLabel: String {
+            return rawValue
         }
     }
     
@@ -131,19 +189,17 @@ struct RecordView: View {
 }
 
 struct RecordItem: View {
-    @ObservedObject private var dataTestViewModel = DataTestViewModel()
     var record: CoreRunningRecord
-    private let pathManager = PathGenerateManager.shared
     var body: some View {
 
         ZStack {
             if let coursePath = record.courseData?.coursePaths,
                let data = pathToCoordinate(coursePath) {
-                pathManager
+                PathGenerateManager
                     .caculateLines(width: 358, height: 176, coordinates: data)
-                    .stroke(lineWidth: 5)
+                    .stroke(lineWidth: 6)
                     .scale(0.5)
-                    .foregroundStyle(Color.primaryColor)
+                    .foregroundStyle(Color.customPrimary)
                     .padding(.horizontal, 16)
             }
             HStack {
@@ -151,21 +207,17 @@ struct RecordItem: View {
                       if let courseName = record.courseData?.courseName {
                           Text(courseName)
                               .font(Font.title2)
-                              .foregroundColor(Color.white)
+                              .foregroundStyle(Color.white)
                       }
-//                    if let distance = record.healthData?.totalRunningDistance {
-//                        Text(String(distance))
-//                                .font(Font.title2)
-//                                .foregroundColor(Color.white)
-//                        }
+
                     HStack {
                         Image(systemName: "calendar")
                             .font(Font.caption)
-                            .foregroundColor(Color.gray200)
+                            .foregroundStyle(Color.gray200)
                         if let startDate = record.healthData?.startDate {
                             Text(formatDate(startDate))
                                 .font(Font.caption)
-                                .foregroundColor(Color.gray200)
+                                .foregroundStyle(Color.gray200)
                         }
                     }
                 }
@@ -174,7 +226,7 @@ struct RecordItem: View {
                
                 Spacer()
             }
-            .foregroundColor(.clear)
+            .foregroundStyle(.clear)
             .frame(width: 358, height: 77)
             .background(
                 LinearGradient(
@@ -202,7 +254,6 @@ struct RecordItem: View {
     private func formatDate(_ date: Date) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .short
-//        dateFormatter.timeStyle = .short
         return dateFormatter.string(from: date)
     }
     
@@ -214,7 +265,7 @@ struct RecordItem: View {
             }
         }
         
-        return convertToCLLocationCoordinates(datas)
+        return ConvertCoordinateManager.convertToCLLocationCoordinates(datas)
     }
 }
 
@@ -228,15 +279,15 @@ struct ChipItem: View {
             .lineLimit(1)
             .padding(.horizontal, 15)
             .padding(.vertical, 6)
-            .background(isSelected ? Color.primaryColor : .clear)
-            .foregroundColor(isSelected ? Color.gray900 : Color.white)
+            .background(isSelected ? Color.customPrimary : .clear)
+            .foregroundStyle(isSelected ? Color.gray900 : Color.white)
             .cornerRadius(40)
             .onTapGesture {
                 self.isSelected.toggle()
             }
             .overlay(
                 RoundedRectangle(cornerRadius: 40)
-                    .stroke(isSelected ? Color.primaryColor : Color.white, lineWidth: 1)
+                    .stroke(isSelected ? Color.customPrimary : Color.white, lineWidth: 1)
             )
     }
 }

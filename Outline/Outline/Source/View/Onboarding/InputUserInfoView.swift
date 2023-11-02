@@ -4,7 +4,7 @@
 //
 //  Created by 김하은 on 10/15/23.
 //
-import os
+
 import SwiftUI
 import HealthKit
 import HealthKitUI
@@ -19,76 +19,56 @@ struct InputUserInfoView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                Color.gray900Color
+                Color.gray900
                     .ignoresSafeArea()
                     .onTapGesture {
                         viewModel.currentPicker = .none
                     }
                 
-                VStack(alignment: .center, spacing: 0) {
-                    Text("사용자 정보 입력")
-                        .font(.title2)
-                        .fontWeight(.semibold)
+                VStack(alignment: .leading, spacing: 0) {
+                    Text("간단한 정보를 알려주세요")
+                        .font(.title)
+                        .padding(EdgeInsets(top: 72, leading: 16, bottom: 8, trailing: 16))
                     
-                    Text("러닝 거리, 페이스, 칼로리 소모량 등\n더욱 정확한 러닝 결과를 위해 다음 정보가 필요합니다.")
-                        .multilineTextAlignment(.center)
-                        .padding(.top, 24)
+                    Text("입력하신 정보를 토대로\n더 정확한 러닝 결과를 알려드릴게요!")
+                        .font(.date)
+                        .padding(.horizontal, 16)
                     
                     listView
-                        .frame(maxHeight: .infinity)
-                        .padding(.bottom, 140)
+                    
+                    Button(action: {
+                        viewModel.defaultButtonTapped()
+                    }, label: {
+                        HStack(spacing: 0) {
+                            Image(systemName: viewModel.defaultButtonImage)
+                                .foregroundStyle(Color.customPrimary)
+                                .padding(.trailing, 12)
+                            
+                            Text("기본값 사용")
+                                .foregroundStyle(Color.gray400)
+                        }
+                    })
+                    .frame(maxWidth: .infinity, alignment: .center)
                     
                     Spacer()
                     
-                    HStack {
-                        Button(action: {
-                            viewModel.defaultButtonTapped()
-                        }, label: {
-                            Image(systemName: viewModel.defaultButtonImage)
-                                .foregroundStyle(Color.primaryColor)
-                        })
-                        
-                        Text("기본값 사용")
-                            .foregroundStyle(Color.gray400Color)
+                    CompleteButton(text: "완료", isActive: viewModel.isButtonActive) {
+                        viewModel.moveToLocationAuthView = true
                     }
-                    .padding(.bottom, 24)
-                    
-                    Text("정보를 입력하고 싶지 않은 경우, 기본값 사용을 선택해주세요.\n기본값을 바탕으로 러닝을 시작합니다.")
-                        .multilineTextAlignment(.center)
-                        .font(.caption)
-                        .foregroundStyle(Color.gray400Color)
-                        .padding(.bottom, 36)
-                    
-                    NavigationLink {
-                        OnboardingLocationAuthView()
-                    } label: {
-                        Text("완료")
-                            .foregroundStyle(Color.blackColor)
-                            .padding()
-                            .frame(maxWidth: .infinity)
-                            .background {
-                                RoundedRectangle(cornerRadius: 15)
-                                    .foregroundStyle(Color.primaryColor)
-                            }
-                    }
-                    .padding(.horizontal)
+                    .frame(maxHeight: .infinity, alignment: .bottom)
                 }
-                .padding(.top, 120)
                 
                 pickerView
                     .zIndex(1)
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
             }
-            .foregroundStyle(Color.whiteColor)
+            .foregroundStyle(Color.customWhite)
             .navigationBarBackButtonHidden()
             .onAppear {
+                viewModel.requestHealthAuthorization()
             }
-            .onAppear {
-                healthKitManager.requestAuthorization { success in
-                    if success {
-                        print("health authorization allowed")
-                    }
-                }
+            .navigationDestination(isPresented: $viewModel.moveToLocationAuthView) {
+                OnboardingLocationAuthView()
             }
         }
     }
@@ -107,8 +87,8 @@ extension InputUserInfoView {
                     }
                 
             }
-            .listRowBackground(Color.gray750Color)
-            .listRowSeparatorTint(Color.gray700Color)
+            .listRowBackground(Color.gray750)
+            .listRowSeparatorTint(Color.gray700)
             
             HStack {
                 Text("성별")
@@ -119,8 +99,8 @@ extension InputUserInfoView {
                         viewModel.currentPicker = .gender
                     }
             }
-            .listRowBackground(Color.gray750Color)
-            .listRowSeparatorTint(Color.gray700Color)
+            .listRowBackground(Color.gray750)
+            .listRowSeparatorTint(Color.gray700)
             
             HStack {
                 Text("신장")
@@ -131,8 +111,8 @@ extension InputUserInfoView {
                         viewModel.currentPicker = .height
                     }
             }
-            .listRowBackground(Color.gray750Color)
-            .listRowSeparatorTint(Color.gray700Color)
+            .listRowBackground(Color.gray750)
+            .listRowSeparatorTint(Color.gray700)
             
             HStack {
                 Text("체중")
@@ -143,8 +123,8 @@ extension InputUserInfoView {
                         viewModel.currentPicker = .weight
                     }
             }
-            .listRowBackground(Color.gray750Color)
-            .listRowSeparatorTint(Color.gray700Color)
+            .listRowBackground(Color.gray750)
+            .listRowSeparatorTint(Color.gray700)
         }
         .scrollDisabled(true)
         .scrollContentBackground(.hidden)
@@ -160,7 +140,7 @@ extension InputUserInfoView {
                     .datePickerStyle(WheelDatePickerStyle())
                     .labelsHidden()
                     .padding(.horizontal, 30)
-                    .background(Color.gray800Color)
+                    .background(Color.gray800)
                     .preferredColorScheme(.dark)
                 
             )
@@ -171,7 +151,7 @@ extension InputUserInfoView {
                         Text("\($0)")
                     }
                 }
-                    .background(Color.gray800Color)
+                    .background(Color.gray800)
                     .preferredColorScheme(.dark)
                     .pickerStyle(.wheel)
             )
@@ -183,7 +163,7 @@ extension InputUserInfoView {
                     }
                 }
                     .pickerStyle(.wheel)
-                    .background(Color.gray800Color)
+                    .background(Color.gray800)
                     .preferredColorScheme(.dark)
             )
         case .weight:
@@ -194,7 +174,7 @@ extension InputUserInfoView {
                     }
                 }
                     .pickerStyle(.wheel)
-                    .background(Color.gray800Color)
+                    .background(Color.gray800)
                     .preferredColorScheme(.dark)
             )
         case .none:

@@ -7,46 +7,48 @@
 
 import SwiftUI
 import HealthKit
+import UIKit
 
 struct CourseListWatchView: View {
     @EnvironmentObject var workoutManager: WatchWorkoutManager
-    var workoutTypes: [HKWorkoutActivityType] = [.running]
-    @State private var countdownSeconds = 3 
-    @State private var detailViewNavigate = false
-    @Binding var navigate: Bool
-    
-    @State private var startCourse: GPSArtCourse = GPSArtCourse()
-    
     @StateObject var watchConnectivityManager = WatchConnectivityManager.shared
+    @StateObject var watchRunningManager = WatchRunningManager.shared
+    @StateObject var viewModel = CourseListWatchViewModel()
+    
+    @State private var countdownSeconds = 3
+    @State private var navigateDetailView = false
+    @State private var navigate = false
+    @State private var selectedCourse: GPSArtCourse = GPSArtCourse()
+    
+    var workoutTypes: [HKWorkoutActivityType] = [.running]
     
     var body: some View {
         NavigationStack {
             ScrollView {
                 VStack(spacing: -5) {
                     Button {
-                        workoutManager.selectedWorkout = workoutTypes[0]
-                        navigate.toggle()
+                        viewModel.checkAuthorization()
+                        if  viewModel.isHealthAuthorized && viewModel.isLocationAuthorized {
+                            workoutManager.selectedWorkout = workoutTypes[0]
+                            watchRunningManager.startFreeRun()
+                            navigate.toggle()
+                        } else {
+                            // TODO: 설정 안내 시트 필요
+                        }
                     } label: {
-                           HStack {
-                               Image(systemName: "play.circle")
-                               Text("자유러닝")
-                                   .foregroundColor(.black)
-                           }
-                           .frame(height: 48)
-                           .frame(maxWidth: .infinity)
-                           .background(
-                               RoundedRectangle(cornerRadius: 12, style: .continuous)
-                                   .foregroundColor(.green)
-                           )
-                       }
+                        HStack {
+                            Image(systemName: "play.circle.fill")
+                            Text("자유러닝")
+                        }
+                        .foregroundColor(.black)
+                        .frame(height: 48)
+                        .frame(maxWidth: .infinity)
+                        .background(
+                            RoundedRectangle(cornerRadius: 12, style: .continuous)
+                                .foregroundStyle(.first)
+                        )
+                    }
                     .buttonStyle(.plain)
-                    .navigationDestination(isPresented: $navigate, destination: {
-                        countdownView()
-                            .onAppear {
-                                countdownSeconds = 3
-                            }
-                    })
-
                     .scrollTransition { content, phase in
                         content
                             .scaleEffect(phase.isIdentity ? 1 : 0.8)
@@ -55,34 +57,38 @@ struct CourseListWatchView: View {
                     .padding(.bottom, 8)
                     
                     if watchConnectivityManager.allCourses.isEmpty {
-                        Text("경로를 받으시려면 Outline 앱을 켜주세요")
+                        Text("OUTLINE iPhone을\n실행해서 경로를 제공받으세요.")
+                            .multilineTextAlignment(.center)
+                            .font(.caption)
+                            .foregroundStyle(.gray600)
+                            .padding(.top, 32)
                     }
                     
                     ForEach(watchConnectivityManager.allCourses, id: \.id) {course in
                         Button {
-                            print("button clicked")
-                            startCourse = course
-                            navigate = true
+                            viewModel.checkAuthorization()
+                            if viewModel.isHealthAuthorized && viewModel.isLocationAuthorized {
+                                if watchRunningManager.checkDistance(course: course.coursePaths) {
+                                    workoutManager.selectedWorkout = workoutTypes[0]
+                                    watchRunningManager.startCourse = course
+                                    watchRunningManager.startGPSArtRun()
+                                    navigate.toggle()
+                                } else {
+                                    // TODO: 거리가 멀어요 자유러닝 안내시트
+                                }
+                            } else {
+                                // TODO: 설정 안내 시트 필요
+                            }
                         } label: {
                             VStack {
                                 Text(course.courseName)
                                     .padding(.leading, 4)
                                     .frame(maxWidth: .infinity, alignment: .leading)
-                                    .overlay(alignment: .trailing) {
-                                        NavigationLink(value: course) {
-                                            Image(systemName: "ellipsis")
-                                                .font(.system(size: 24))
-                                                .contentShape(Rectangle())
-                                                .padding(20)
-                                        }
-                                        .buttonStyle(.plain)
-                                        .padding(.trailing, -4)
-                                    }
-                                PathGenerateManager.shared.caculateLines(width: 75, height: 75, coordinates: convertToCLLocationCoordinates(course.coursePaths))
-                                    .stroke(lineWidth: 4)
+                                PathGenerateManager.caculateLines(width: 75, height: 75, coordinates: ConvertCoordinateManager.convertToCLLocationCoordinates(course.coursePaths))
+                                    .stroke(style: StrokeStyle(lineWidth: 4, lineCap: .round, lineJoin: .round))
                                     .scaledToFit()
                                     .frame(height: 75)
-                                    .foregroundColor(.green)
+                                    .foregroundStyle(.first)
                             }
                             .padding(.vertical, 16)
                             .padding(.horizontal, 8)
@@ -93,6 +99,25 @@ struct CourseListWatchView: View {
                             }
                         }
                         .buttonStyle(.plain)
+                        .overlay(alignment: .topTrailing) {
+                            Button {
+                                selectedCourse = course
+                                navigateDetailView.toggle()
+                            } label: {
+                                VStack {
+                                    Image(systemName: "ellipsis.circle")
+                                        .foregroundStyle(.first, .clear)
+                                        .font(.system(size: 30))
+                                        .bold()
+                                        .padding(8)
+                                    Spacer()
+                                }
+                                .contentShape(Rectangle())
+                            }
+                            .foregroundStyle(.first)
+                            .buttonStyle(.plain)
+                            .padding(.trailing, -4)
+                        }
                         .scrollTransition { content, phase in
                             content
                                 .scaleEffect(phase.isIdentity ? 1 : 0.8)
@@ -101,36 +126,44 @@ struct CourseListWatchView: View {
                     }
                 }
             }
+            .navigationDestination(isPresented: $navigateDetailView) {
+                DetailView(course: selectedCourse)
+            }
+            .navigationDestination(isPresented: $navigate) {
+                countdownView()
+                    .onAppear {
+                        countdownSeconds = 3
+                    }
+            }
             .navigationTitle("러닝")
-            .navigationDestination(for: GPSArtCourse.self) { course in
-                DetailView(course: course)
-            }
-            .onAppear {
-                workoutManager.requestAuthorization()
-            }
+            .tint(.first)
+        }
+        .sheet(isPresented: $workoutManager.showingSummaryView) {
+            SummaryView(navigate: $navigate)
         }
     }
+    
     private func countdownView() -> some View {
-       VStack {
-           if countdownSeconds > 0 {
-               Image("Count\(countdownSeconds)")
-                   .resizable()
-                   .scaledToFit()
-                   .frame(maxWidth: .infinity, maxHeight: .infinity)  
-                   .onAppear {
-                       Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
-                           countdownSeconds -= 1
-                           if countdownSeconds == 0 {
-                               timer.invalidate()
-                               workoutManager.selectedWorkout = .running
-                           }
-                       }
-                   }
-           } else {
-               WatchTabView(startCourse: startCourse) // 카운트다운이 끝나면 WatchTabView로 이동
-           }
-       }.navigationBarBackButtonHidden()
-   }
+        VStack {
+            if countdownSeconds > 0 {
+                Image("Count\(countdownSeconds)")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .onAppear {
+                        Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
+                            countdownSeconds -= 1
+                            if countdownSeconds == 0 {
+                                timer.invalidate()
+                                workoutManager.selectedWorkout = .running
+                            }
+                        }
+                    }
+            } else {
+                WatchTabView() // 카운트다운이 끝나면 WatchTabView로 이동
+            }
+        }.navigationBarBackButtonHidden()
+    }
 }
 
 extension HKWorkoutActivityType: Identifiable {
@@ -161,14 +194,14 @@ struct DetailView: View {
         }
         .navigationTitle {
             Text(course.courseName)
-                .foregroundStyle(.green)
+                .foregroundStyle(.first)
         }
     }
     
     @ViewBuilder private func listBox(systemName: String, location: Placemark) -> some View {
         HStack {
             Image(systemName: systemName)
-                .foregroundStyle(.green)
+                .foregroundStyle(.first)
                 .padding(.horizontal, 5)
             Text("\(location.administrativeArea) \(location.locality) \(location.subLocality)")
         }
@@ -177,7 +210,7 @@ struct DetailView: View {
     @ViewBuilder private func listBox(systemName: String, context: String) -> some View {
         HStack {
             Image(systemName: systemName)
-                .foregroundStyle(.green)
+                .foregroundStyle(.first)
                 .padding(.horizontal, 5)
             Text(context)
         }
@@ -186,7 +219,7 @@ struct DetailView: View {
     @ViewBuilder private func listBox(systemName: String, alley: Alley) -> some View {
         HStack {
             Image(systemName: systemName)
-                .foregroundStyle(.green)
+                .foregroundStyle(.first)
                 .padding(.horizontal, 5)
             switch alley {
             case .few:
@@ -220,9 +253,51 @@ struct DetailView: View {
         
         return listBox(systemName: systemName, context: formattedString)
     }
-    
 }
 
-#Preview {
-    CourseListWatchView(navigate: .constant(true))
+class CourseListWatchViewModel: ObservableObject {
+    @Published var isHealthAuthorized = false
+    @Published var isLocationAuthorized = false
+    
+    private var healthStore = HKHealthStore()
+    private var locationManager = CLLocationManager()
+    
+    func checkAuthorization() {
+        checkHealthAuthorization()
+        checkLocationAuthorization()
+    }
+    
+    func checkHealthAuthorization() {
+        let quantityTypes: Set = [
+            HKQuantityType(.heartRate),
+            HKQuantityType(.activeEnergyBurned),
+            HKQuantityType(.distanceWalkingRunning),
+            HKQuantityType(.stepCount),
+            HKQuantityType(.cyclingCadence),
+            HKQuantityType(.runningSpeed),
+            HKQuantityType.workoutType()
+        ]
+        
+        healthStore.requestAuthorization(toShare: quantityTypes, read: quantityTypes) { success, _ in
+            if success {
+                self.isHealthAuthorized = true
+            } else {
+                self.isHealthAuthorized = false
+            }
+        }
+    }
+    
+    func checkLocationAuthorization() {
+        switch locationManager.authorizationStatus {
+        case .notDetermined:
+            locationManager.requestWhenInUseAuthorization()
+            isLocationAuthorized = false
+        case .restricted, .denied:
+            isLocationAuthorized = false
+        case .authorizedAlways, .authorizedWhenInUse:
+            isLocationAuthorized = true
+        @unknown default:
+            break
+        }
+    }
 }

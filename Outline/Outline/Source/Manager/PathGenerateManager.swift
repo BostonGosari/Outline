@@ -27,10 +27,7 @@ struct CanvasDataForShare {
 }
 
 final class PathGenerateManager {
-    static let shared = PathGenerateManager()
-    private init() {}
-
-    func caculateLines(width: Double, height: Double, coordinates: [CLLocationCoordinate2D]) -> some Shape {
+    static func caculateLines(width: Double, height: Double, coordinates: [CLLocationCoordinate2D]) -> some Shape {
         let canvasData = calculateCanvaData(coordinates: coordinates, width: width, height: height)
         var path = Path()
         if coordinates.isEmpty {
@@ -47,7 +44,25 @@ final class PathGenerateManager {
         
         return path
     }
-    private func calculateRelativePoint(coordinate: CLLocationCoordinate2D, canvasData: CanvasData) -> [Int] {
+    static func caculateLines(width: Double, height: Double, coordinates: [CLLocationCoordinate2D], canvasData: CanvasData) -> some Shape {
+        var path = Path()
+        
+        if coordinates.isEmpty {
+            return path
+        }
+        
+        let position = calculateRelativePoint(coordinate: coordinates[0], canvasData: canvasData)
+        path.move(to: CGPoint(x: position[0], y: -position[1]))
+        
+        for coordinate in coordinates {
+            let position = calculateRelativePoint(coordinate: coordinate, canvasData: canvasData)
+            path.addLine(to: CGPoint(x: position[0], y: -position[1]))
+        }
+        
+        return path
+    }
+    
+    static private func calculateRelativePoint(coordinate: CLLocationCoordinate2D, canvasData: CanvasData) -> [Int] {
         var posX: Int = 0
         var posY: Int = 0
         let tempX = (coordinate.longitude - canvasData.zeroX) * canvasData.scale * 1000000
@@ -62,7 +77,8 @@ final class PathGenerateManager {
             
         return [posX, posY]
     }
-    private func calculateCanvaData(coordinates: [CLLocationCoordinate2D], width: Double, height: Double) -> CanvasData {
+    
+    static func calculateCanvaData(coordinates: [CLLocationCoordinate2D], width: Double, height: Double) -> CanvasData {
         var minLat: Double = 90
         var maxLat: Double = -90
         var minLon: Double = 180
@@ -105,7 +121,7 @@ final class PathGenerateManager {
 }
 
 extension PathGenerateManager {
-    func caculateLinesInRect(
+    static func caculateLinesInRect(
         width: Double,
         height: Double,
         coordinates: [CLLocationCoordinate2D],
@@ -113,6 +129,10 @@ extension PathGenerateManager {
     ) -> some Shape {
         let canvasData = calculateCanvaDataInRect(width: width, height: height, region: region)
         var path = Path()
+        
+        if coordinates.isEmpty {
+            return path
+        }
         
         let startPosition = calculateRelativePoint(coordinate: coordinates[0], canvasData: canvasData)
         path.move(to: CGPoint(x: startPosition[0], y: -startPosition[1]))
@@ -125,7 +145,7 @@ extension PathGenerateManager {
         return path
     }
     
-    private func calculateCanvaDataInRect(width: Double, height: Double, region: MKCoordinateRegion) -> CanvasDataForShare {
+    static private func calculateCanvaDataInRect(width: Double, height: Double, region: MKCoordinateRegion) -> CanvasDataForShare {
         let minLon = region.center.longitude - region.span.longitudeDelta / 2
         let maxLat = region.center.latitude + region.span.latitudeDelta / 2
         
@@ -147,7 +167,7 @@ extension PathGenerateManager {
             )
     }
     
-    func calculateDeltaAndCenter(coordinates: [CLLocationCoordinate2D]) -> MKCoordinateRegion {
+    static func calculateDeltaAndCenter(coordinates: [CLLocationCoordinate2D]) -> MKCoordinateRegion {
         var minLat: Double = 90
         var maxLat: Double = -90
         var minLon: Double = 180
@@ -174,7 +194,7 @@ extension PathGenerateManager {
         return MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: centerLatitude, longitude: centerLongitude), span: MKCoordinateSpan(latitudeDelta: latitudeDelta, longitudeDelta: longitudeDelta))
     }
     
-    private func calculateRelativePoint(coordinate: CLLocationCoordinate2D, canvasData: CanvasDataForShare) -> [Int] {
+    static private func calculateRelativePoint(coordinate: CLLocationCoordinate2D, canvasData: CanvasDataForShare) -> [Int] {
         let posX = Int((coordinate.longitude - canvasData.zeroX) * canvasData.widthScale * 1000000)
         let posY = Int((coordinate.latitude - canvasData.zeroY) * canvasData.heightScale * 1000000)
         return [posX, posY]
