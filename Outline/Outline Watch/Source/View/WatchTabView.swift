@@ -12,6 +12,9 @@ struct WatchTabView: View {
     @StateObject var workoutManager = WatchWorkoutManager.shared
     @StateObject var watchRunningManager = WatchRunningManager.shared
     @State private var selection: Tab = .metrics
+    
+    @State private var mapWatchView = MapWatchView()
+    @State private var isMapLoaded = false
         
     enum Tab {
         case controls, map, metrics

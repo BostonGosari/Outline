@@ -13,29 +13,27 @@ struct MapWatchView: View {
     @State private var position: MapCameraPosition = .userLocation(followsHeading: true, fallback: .automatic)
     
     var body: some View {
-        NavigationStack {
-            Map(position: $position, interactionModes: .zoom) {
-                UserAnnotation(anchor: .center) { userlocation in
-                    ZStack {
-                        Circle().foregroundStyle(.white).frame(width: 22)
-                        Circle().foregroundStyle(.first).frame(width: 17)
-                    }
-                    .onChange(of: userlocation.location) { _, userlocation in
-                        if let user = userlocation {
-                            watchRunningManager.userLocations.append(user.coordinate)
-                        }
+        Map(position: $position, interactionModes: .zoom) {
+            UserAnnotation(anchor: .center) { userlocation in
+                ZStack {
+                    Circle().foregroundStyle(.white).frame(width: 22)
+                    Circle().foregroundStyle(.first).frame(width: 17)
+                }
+                .onChange(of: userlocation.location) { _, userlocation in
+                    if let user = userlocation {
+                        watchRunningManager.userLocations.append(user.coordinate)
                     }
                 }
-                MapPolyline(coordinates: ConvertCoordinateManager.convertToCLLocationCoordinates(watchRunningManager.startCourse.coursePaths))
-                    .stroke(.white.opacity(0.5), lineWidth: 8)
-                MapPolyline(coordinates: watchRunningManager.userLocations)
-                    .stroke(.first, lineWidth: 8)
             }
-            .mapControlVisibility(.hidden)
-            .tint(.first)
-            .overlay(alignment: .topLeading) {
-                header
-            }
+            MapPolyline(coordinates: ConvertCoordinateManager.convertToCLLocationCoordinates(watchRunningManager.startCourse.coursePaths))
+                .stroke(.white.opacity(0.5), lineWidth: 8)
+            MapPolyline(coordinates: watchRunningManager.userLocations)
+                .stroke(.first, lineWidth: 8)
+        }
+        .mapControlVisibility(.hidden)
+        .tint(.first)
+        .overlay(alignment: .topLeading) {
+            header
         }
     }
     

@@ -171,9 +171,10 @@ struct CourseListWatchView: View {
                     Text("자유 코스로 변경할까요?")
                     Text("현재 루트와 멀리 떨어져 있어요.")
                 }
-                .font(.system(size: 13))
+                .font(.system(size: 14))
                 .padding()
                 .padding(.top, 20)
+                .frame(maxWidth: .infinity, alignment: .leading)
                 .background {
                     RoundedRectangle(cornerRadius: 12, style: .continuous)
                         .foregroundStyle(.gray.opacity(0.2))
