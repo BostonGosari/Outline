@@ -8,11 +8,14 @@
 import SwiftUI
 
 struct TabBar: View {
-    
+    @AppStorage("authState") var authState: AuthState = .onboarding
     @Binding var selectedTab: Tab
     
     var body: some View {
         VStack {
+            if authState == .lookAround && selectedTab == .GPSArtRunning {
+                LookAroundPopupView()
+            }
             HStack {
                 ForEach(tabItems) { item in
                     TabBarButton(selectedTab: $selectedTab, item: item)
