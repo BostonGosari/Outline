@@ -15,7 +15,7 @@ enum AuthState: String {
 }
 
 struct ContentView: View {
-    
+    @AppStorage("userId") var userId: String?
     @AppStorage("authState") var authState: AuthState = .logout
     
     var body: some View {
@@ -29,6 +29,26 @@ struct ContentView: View {
                 HomeTabView()
             case .login:
                 HomeTabView()
+            }
+        }
+        .onAppear {
+            AuthModel().handleCheckLoginState { res in
+                switch res {
+                case .success(let userId):
+                    if let userId = userId {
+                        self.userId = userId
+                        self.authState = .login
+                    } else {
+                        if self.authState != .lookAround {
+                            self.authState = .logout
+                        }
+                    }
+                case .failure(let failure):
+                    if self.authState != .lookAround {
+                        self.authState = .logout
+                    }
+                    print("fail to find userInfo \(failure)")
+                }
             }
         }
         .tint(.customPrimary)
