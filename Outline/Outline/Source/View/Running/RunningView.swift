@@ -7,11 +7,12 @@
 import SwiftUI
 
 struct RunningView: View {
-    @StateObject var runningManager = RunningStartManager.shared
+    @StateObject var runningStartManager = RunningStartManager.shared
     @StateObject var runningDataManager = RunningDataManager.shared
     
+    @AppStorage("isFirstRunning") var isFirstRunning = true
     @State var checkRunning = true
-    @State var selection = 0
+    @State var selection = false
     
     init() {
         UIPageControl.appearance().currentPageIndicatorTintColor = UIColor.customBlack
@@ -22,23 +23,22 @@ struct RunningView: View {
         NavigationStack {
             ZStack(alignment: .bottom) {
                 Color("Gray900").ignoresSafeArea()
-                TabView(selection: $selection) {
-                    RunningMapView(selection: $selection)
-                        .tag(0)
-                    WorkoutDataView()
-                        .tag(1)
-                }
-                .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
-                .edgesIgnoringSafeArea(.all)
-                .onAppear {
-                    if runningManager.running == true {
-                        runningDataManager.startRunning()
-                        runningManager.startTimer()
+                RunningMapView(selection: $selection)
+                    .overlay {
+                        if selection {
+                            WorkoutDataView(selection: $selection)
+                                .transition(.move(edge: .trailing))
+                        }
                     }
-                }
+                    .onAppear {
+                        if runningStartManager.running == true {
+                            runningDataManager.startRunning()
+                            runningStartManager.startTimer()
+                        }
+                    }
                 
                 ZStack {
-                    if runningManager.changeRunningType && checkRunning {
+                    if runningStartManager.changeRunningType && checkRunning {
                         Color.black.opacity(0.5)
                     }
                     VStack(spacing: 10) {
@@ -52,7 +52,7 @@ struct RunningView: View {
                             .scaledToFit()
                             .frame(width: 120)
                         Button {
-                            runningManager.startFreeRun()
+                            runningStartManager.startFreeRun()
                             checkRunning = false
                         } label: {
                             Text("자유코스로 변경하기")
@@ -76,10 +76,15 @@ struct RunningView: View {
                             .foregroundStyle(Color.gray900)
                     }
                     .frame(maxHeight: .infinity, alignment: .bottom)
-                    .offset(y: runningManager.changeRunningType && checkRunning ? 0 : UIScreen.main.bounds.height / 2 + 2)
-                    .animation(.easeInOut, value: runningManager.changeRunningType)
+                    .offset(y: runningStartManager.changeRunningType && checkRunning ? 0 : UIScreen.main.bounds.height / 2 + 2)
+                    .animation(.easeInOut, value: runningStartManager.changeRunningType)
                     .ignoresSafeArea()
                 }
+            }
+        }
+        .overlay {
+            if isFirstRunning && runningStartManager.runningType == .gpsArt {
+                FirstRunningGuideView(isFirstRunning: $isFirstRunning)
             }
         }
     }
