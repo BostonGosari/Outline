@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct LoginView: View {
-    @AppStorage("authState") var authState: AuthState = .onboarding
+    @AppStorage("authState") var authState: AuthState = .logout
     @AppStorage("userId") var userId: String?
     @Environment(\.window) var window: UIWindow?
     @StateObject private var loginViewModel = LoginViewModel()

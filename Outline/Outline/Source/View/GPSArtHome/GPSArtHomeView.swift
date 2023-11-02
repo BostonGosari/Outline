@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct GPSArtHomeView: View {
-    @AppStorage("authState") var authState: AuthState = .onboarding
+    @AppStorage("authState") var authState: AuthState = .logout
     
     @StateObject private var viewModel = GPSArtHomeViewModel()
     
