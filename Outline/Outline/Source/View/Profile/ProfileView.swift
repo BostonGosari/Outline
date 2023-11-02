@@ -42,7 +42,12 @@ struct ProfileView: View {
                             .padding(.vertical, 5)
                     }
                     NavigationLink {
-                        ProfileHealthInfoView()
+                        ProfileHealthInfoView(
+                            height: $profileViewModel.userInfo.height,
+                            weight: $profileViewModel.userInfo.weight
+                        ) {
+                            profileViewModel.saveUserInfoOnDB()
+                        }
                     } label: {
                         Text("신체 정보")
                             .padding(.vertical, 5)
