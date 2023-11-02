@@ -5,18 +5,19 @@
 //  Created by 김하은 on 10/23/23.
 //
 
-import SwiftUI
 import CoreLocation
+import SwiftUI
 
 struct RecordView: View {
-    @State var selectedIndex: Int = 0
-    @FetchRequest (entity: CoreRunningRecord.entity(), sortDescriptors: [])
-    var runningRecord: FetchedResults<CoreRunningRecord>
-    @State private var records: [CoreRunningRecord] = []
+    @FetchRequest (entity: CoreRunningRecord.entity(), sortDescriptors: []) var runningRecord: FetchedResults<CoreRunningRecord>
+    
+    @State private var selectedIndex: Int = 0
     @State private var isSortingSheetPresented = false
     @State private var selectedSortOption: SortOption = .latest
     @State private var filteredRecords: [CoreRunningRecord] = []
-    
+    @State private var scrollOffset: CGFloat = 0
+    @State private var isDeleteData = false
+
     var body: some View {
         NavigationView {
             ZStack(alignment: .top) {
@@ -24,8 +25,15 @@ struct RecordView: View {
                     .ignoresSafeArea()
                 BackgroundBlur(color: Color.customSecondary, padding: 50)
                     .opacity(0.5)
-                BackgroundBlur(color: Color.customSecondary, padding: 50)
+                
                 ScrollView {
+                    Color.clear.frame(height: 0)
+                        .onScrollViewOffsetChanged { offset in
+                            scrollOffset = offset
+                        }
+                    
+                    RecordHeader(scrollOffset: scrollOffset)
+
                     VStack(alignment: .leading) {
                         HStack(spacing: 0) {
                             ChipItem(label: "모두", isSelected: Binding(get: { self.selectedIndex == 0 }, set: { _ in self.selectedIndex = 0 }))
@@ -56,15 +64,15 @@ struct RecordView: View {
                                     .padding(.top, 150)
                                 Text("아직 러닝 기록이 없어요")
                                     .font(.subBody)
-                                    .foregroundColor(Color.gray500)
+                                    .foregroundStyle(Color.gray500)
                                     .padding(.top, 14)
                             }
                             .frame(maxWidth: .infinity, maxHeight: .infinity)
                         } else {
                             ForEach(filteredRecords, id: \.id) { record in
                                 NavigationLink {
-                                    RecordDetailView(record: record)
-                                    
+                                    RecordDetailView(isDeleteData: $isDeleteData, record: record)
+                                        .navigationBarBackButtonHidden()
                                 } label: {
                                     RecordItem(record: record)
                                 }
@@ -72,17 +80,19 @@ struct RecordView: View {
                             }
                         }
                     }
-                    .padding()
+                    .padding(.horizontal)
                     
                 }
-                .navigationTitle("기록")
+                .overlay(alignment: .top) {
+                    RecordInlineHeader(scrollOffset: scrollOffset)
+                }
                 .sheet(isPresented: $isSortingSheetPresented) {
                     VStack(alignment: .leading) {
                         Text("정렬")
                             .font(.subtitle)
                         Divider()
                             .padding(.bottom, 16)
-                            .foregroundColor(Color.gray500)
+                            .foregroundStyle(Color.gray500)
                         ForEach(SortOption.allCases, id: \.self) { option in
                             Button {
                                 selectedSortOption = option
@@ -91,11 +101,11 @@ struct RecordView: View {
                                 HStack {
                                     Text(option.buttonLabel)
                                         .font(.subBody)
-                                        .foregroundColor(selectedSortOption.buttonLabel == option.rawValue ? Color.customPrimary : Color.gray500)
+                                        .foregroundStyle(selectedSortOption.buttonLabel == option.rawValue ? Color.customPrimary : Color.gray500)
                                     Spacer()
                                     if selectedSortOption.buttonLabel == option.rawValue {
                                         Image(systemName: "checkmark")
-                                            .foregroundColor(Color.customPrimary)
+                                            .foregroundStyle(Color.customPrimary)
                                             .padding(.trailing, 16)
                                             .bold()
                                     }
@@ -111,7 +121,7 @@ struct RecordView: View {
                         } label: {
                             Text("취소")
                                 .font(.button)
-                                .foregroundColor(.white)
+                                .foregroundStyle(.white)
                                 .frame(maxWidth: .infinity, maxHeight: 55)
                                 .background(Color.gray700)
                                 .cornerRadius(15)
@@ -133,9 +143,15 @@ struct RecordView: View {
             .onAppear {
                 updateSortDescriptors()
             }
-        
+        }
+        .overlay {
+            if isDeleteData {
+                RunningPopup(text: "기록을 삭제했어요")
+                    .frame(maxHeight: .infinity, alignment: .top)
+            }
         }
     }
+    
     enum SortOption: String, CaseIterable {
         case latest = "최신순"
         case oldest = "오래된 순"
@@ -181,7 +197,7 @@ struct RecordItem: View {
                let data = pathToCoordinate(coursePath) {
                 PathGenerateManager
                     .caculateLines(width: 358, height: 176, coordinates: data)
-                    .stroke(lineWidth: 5)
+                    .stroke(lineWidth: 6)
                     .scale(0.5)
                     .foregroundStyle(Color.customPrimary)
                     .padding(.horizontal, 16)
@@ -191,21 +207,17 @@ struct RecordItem: View {
                       if let courseName = record.courseData?.courseName {
                           Text(courseName)
                               .font(Font.title2)
-                              .foregroundColor(Color.white)
+                              .foregroundStyle(Color.white)
                       }
-//                    if let distance = record.healthData?.totalRunningDistance {
-//                        Text(String(distance))
-//                                .font(Font.title2)
-//                                .foregroundColor(Color.white)
-//                        }
+
                     HStack {
                         Image(systemName: "calendar")
                             .font(Font.caption)
-                            .foregroundColor(Color.gray200)
+                            .foregroundStyle(Color.gray200)
                         if let startDate = record.healthData?.startDate {
                             Text(formatDate(startDate))
                                 .font(Font.caption)
-                                .foregroundColor(Color.gray200)
+                                .foregroundStyle(Color.gray200)
                         }
                     }
                 }
@@ -214,7 +226,7 @@ struct RecordItem: View {
                
                 Spacer()
             }
-            .foregroundColor(.clear)
+            .foregroundStyle(.clear)
             .frame(width: 358, height: 77)
             .background(
                 LinearGradient(
@@ -242,7 +254,6 @@ struct RecordItem: View {
     private func formatDate(_ date: Date) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .short
-//        dateFormatter.timeStyle = .short
         return dateFormatter.string(from: date)
     }
     
@@ -269,7 +280,7 @@ struct ChipItem: View {
             .padding(.horizontal, 15)
             .padding(.vertical, 6)
             .background(isSelected ? Color.customPrimary : .clear)
-            .foregroundColor(isSelected ? Color.gray900 : Color.white)
+            .foregroundStyle(isSelected ? Color.gray900 : Color.white)
             .cornerRadius(40)
             .onTapGesture {
                 self.isSelected.toggle()

@@ -20,9 +20,9 @@ struct OnboardingLocationAuthView: View {
         }
         .padding(.top, 80)
         .navigationBarBackButtonHidden()
-        .navigationDestination(isPresented: $viewModel.moveToNextView) {
-            OnboardingNotificationAuthView()
-        }
+//        .navigationDestination(isPresented: $viewModel.moveToNextView) {
+//            OnboardingNotificationAuthView()
+//        }
     }
 }
 

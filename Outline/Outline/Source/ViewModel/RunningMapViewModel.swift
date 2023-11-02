@@ -32,16 +32,13 @@ class RunningMapViewModel: ObservableObject {
     }
     
     @Published var isShowComplteSheet = false
-    @Published var isNearEndLocation = false
-    
-    var popupText: String {
-        switch runningType {
-        case .pause:
-            return "일시정지를 3초동안 누르면 러닝이 종료돼요"
-        case .start:
-            return "도착점이 10m 이내에 있어요"
-        default:
-            return ""
+    @Published var isNearEndLocation = false {
+        didSet {
+            if isNearEndLocation {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+                    self.isNearEndLocation = false
+                }
+            }
         }
     }
     
@@ -53,7 +50,7 @@ class RunningMapViewModel: ObservableObject {
                 
                 if startToDistance <= 5 {
                     isShowComplteSheet = true
-                } else if startToDistance <= 30 {
+                } else if startToDistance <= 100 {
                     isNearEndLocation = true
                 } else {
                     isNearEndLocation = false
