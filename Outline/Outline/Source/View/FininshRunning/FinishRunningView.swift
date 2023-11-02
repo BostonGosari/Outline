@@ -13,8 +13,10 @@ struct FinishRunningView: View {
     @StateObject private var viewModel = FinishRunningViewModel()
     @FetchRequest (entity: CoreRunningRecord.entity(), sortDescriptors: []) var runningRecord: FetchedResults<CoreRunningRecord>
     
-    @State private var position: MapCameraPosition = .userLocation(followsHeading: true, fallback: .automatic)
+    @State private var position: MapCameraPosition = .userLocation(fallback: .automatic)
+    
     private var gradientColors: [Color] = [.customBlack, .customBlack, .customBlack, .customBlack, .black50, .customBlack.opacity(0)]
+    private let polylineGradient = Gradient(colors: [.customGradient1, .customGradient2, .customGradient3])
     
     var body: some View {
         NavigationStack {
@@ -23,9 +25,9 @@ struct FinishRunningView: View {
                     .ignoresSafeArea()
                 VStack {
                     ZStack(alignment: .topLeading) {
-                        Map(position: $position, interactionModes: .zoom) {
+                        Map {
                             MapPolyline(coordinates: viewModel.userLocations)
-                                .stroke(.customPrimary, lineWidth: 8)
+                                .stroke(polylineGradient, style: StrokeStyle(lineWidth: 8, lineCap: .round, lineJoin: .round))
                         }
                         .roundedCorners(45, corners: .bottomRight)
                         .shadow(color: .customWhite, radius: 1.5)
