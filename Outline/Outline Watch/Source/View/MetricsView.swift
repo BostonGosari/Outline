@@ -77,7 +77,3 @@ private struct MetricsTimelineSchedule: TimelineSchedule {
         }
     }
 }
-
-#Preview {
-    MetricsView().environmentObject(WatchWorkoutManager())
-}
