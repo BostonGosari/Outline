@@ -8,9 +8,7 @@
 import SwiftUI
 
 struct ImageShareView: View {
-    
     @ObservedObject var viewModel: ShareViewModel
-    @Binding var shareImage: UIImage?
     
     @State private var selectPhotoMode = false
     @State private var showSheet = false
@@ -62,16 +60,10 @@ struct ImageShareView: View {
             lastAngle = .degrees(0)
         }
         .modifier(SheetModifier(viewModel: viewModel, showSheet: $showSheet, image: $image))
-        .onChange(of: viewModel.currentPage, {
+        .onChange(of: viewModel.tapSaveButton) {
             if viewModel.currentPage == 1 {
-                renderImage()
+                viewModel.saveImage(image: renderImage())
             }
-        })
-        .onChange(of: selectPhotoMode, {
-            renderImage()
-        })
-        .onChange(of: image) { 
-            renderImage()
         }
         .onAppear {
             let canvasSize = PathGenerateManager.calculateCanvaData(coordinates: viewModel.runningData.userLocations, width: imageSize, height: imageSize)
@@ -82,9 +74,8 @@ struct ImageShareView: View {
 }
 
 extension ImageShareView {
-    
-    private func renderImage() {
-        shareImage = mainImageView.offset(y: -30).asImage(size: size)
+    private func renderImage() -> UIImage {
+        return mainImageView.offset(y: -30).asImage(size: size)
     }
     
     private var mainImageView: some View {
@@ -134,17 +125,19 @@ extension ImageShareView {
                     selectShareData
                         .padding(.top, 44)
                     
-                    ZStack {
-                        Color.black.opacity(0.001)
-                        userPath
+                    if !viewModel.runningData.userLocations.isEmpty {
+                        ZStack {
+                            Color.black.opacity(0.001)
+                            userPath
+                        }
+                        .frame(width: pathWidth + 30, height: pathHeight + 30)
+                        .scaleEffect(scale)
+                        .offset(offset)
+                        .rotationEffect(lastAngle + angle)
+                        .gesture(dragGesture)
+                        .gesture(rotationGesture)
+                        .simultaneousGesture(magnificationGesture)
                     }
-                    .frame(width: pathWidth + 30, height: pathHeight + 30)
-                    .scaleEffect(scale)
-                    .offset(offset)
-                    .rotationEffect(lastAngle + angle)
-                    .gesture(dragGesture)
-                    .gesture(rotationGesture)
-                    .simultaneousGesture(magnificationGesture)
                 }
             )
         } else {
@@ -183,17 +176,20 @@ extension ImageShareView {
             blackShareData
                 .padding(.top, 166)
                 .padding(.leading, 8)
-            ZStack {
-                Color.black.opacity(0.001)
-                userPath
+            
+            if !viewModel.runningData.userLocations.isEmpty {
+                ZStack {
+                    Color.black.opacity(0.001)
+                    userPath
+                }
+                .frame(width: pathWidth + 30, height: pathHeight + 30)
+                .scaleEffect(scale)
+                .offset(offset)
+                .rotationEffect(lastAngle + angle)
+                .gesture(dragGesture)
+                .gesture(rotationGesture)
+                .simultaneousGesture(magnificationGesture)
             }
-            .frame(width: pathWidth + 30, height: pathHeight + 30)
-            .scaleEffect(scale)
-            .offset(offset)
-            .rotationEffect(lastAngle + angle)
-            .gesture(dragGesture)
-            .gesture(rotationGesture)
-            .simultaneousGesture(magnificationGesture)
         }
     }
     

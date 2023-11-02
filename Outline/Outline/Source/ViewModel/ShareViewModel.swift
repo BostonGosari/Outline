@@ -9,7 +9,6 @@ import Photos
 import SwiftUI
 
 class ShareViewModel: ObservableObject {
-    
     @Published var runningData = ShareModel()
     @Published var currentPage = 0
     @Published var showCamera = false
@@ -32,8 +31,6 @@ class ShareViewModel: ObservableObject {
             }
         }
     }
-    
-    private var shareImage: UIImage?
     
     var alertTitle = ""
     var alertMessage = ""
@@ -69,10 +66,9 @@ class ShareViewModel: ObservableObject {
         }
     }
     
-    func shareToInstagram() -> Bool {
-        guard let url = URL(string: "instagram-stories://share?source_application=helia"),
-              let image = shareImage,
-              let imageData = image.pngData() else { return false }
+    func shareToInstagram(image: UIImage) {
+        guard let url = URL(string: "instagram-stories://share?source_application=Outline"),
+              let imageData = image.pngData() else { return }
 
         if UIApplication.shared.canOpenURL(url) {
             let pasteboardItems: [String: Any] = ["com.instagram.sharedSticker.stickerImage": imageData]
@@ -80,31 +76,18 @@ class ShareViewModel: ObservableObject {
 
             UIPasteboard.general.setItems([pasteboardItems], options: pasteboardOptions)
             UIApplication.shared.open(url)
-            return true
         } else {
             print("인스타그램이 설치되어 있지 않습니다.")
             isShowInstaAlert = true
-            
-            return false
         }
+        tapShareButton = false
     }
     
-    func saveImage() {
-        if currentPage == 0 {
-            shareImage = customImage
-        } else {
-            shareImage = posterImage
-        }
-        
-        if let image = shareImage {
-            print(currentPage)
-            let imageSaver = ImageSaver()
-            imageSaver.writeToPhotoAlbum(image: image)
-            isShowPopup = true
-        }
-    }
-    
-    func renderLayerImage() {
+    func saveImage(image: UIImage) {
+        let imageSaver = ImageSaver()
+        imageSaver.writeToPhotoAlbum(image: image)
+        isShowPopup = true
+        tapSaveButton = false
     }
 }
 

@@ -73,8 +73,7 @@ struct ControlsView: View {
         .overlay {
             if showingConfirmation {
                 customExitSheet
-            }
-            else if showingEndwithoutSavingSheet {
+            } else if showingEndwithoutSavingSheet {
                 customEndWithoutSavingSheet
             }
         }
