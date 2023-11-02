@@ -30,30 +30,7 @@ struct GPSArtHomeView: View {
     var body: some View {
         ZStack {
             if showNetworkErrorView {
-                VStack {
-                    Image(systemName: "exclamationmark.circle")
-                        .foregroundStyle(Color.customPrimary)
-                        .font(Font.system(size: 40))
-                    Text("예상치 못한 문제가 발생되었어요.")
-                        .font(.date)
-                        .foregroundStyle(Color.customWhite)
-                        .padding(.top, 16)
-                        .padding(.bottom, 40)
-                    Button {
-                        loading = true
-                        showNetworkErrorView.toggle()
-                    } label: {
-                        HStack {
-                            Text("다시 시도하기")
-                                .font(.caption)
-                                .foregroundStyle(Color.customPrimary)
-                            Image(systemName: "chevron.forward")
-                                .font(.caption)
-                                .foregroundStyle(Color.customPrimary)
-                        }
-                       
-                    }
-                }
+                errorView
             }
             else {
                 ScrollView {
@@ -184,6 +161,31 @@ struct GPSArtHomeView: View {
     }
 }
 
-#Preview {
-    HomeTabView()
+extension GPSArtHomeView{
+    var errorView: some View {
+        VStack {
+            Image(systemName: "exclamationmark.circle")
+                .foregroundStyle(Color.customPrimary)
+                .font(Font.system(size: 40))
+            Text("예상치 못한 문제가 발생되었어요.")
+                .font(.date)
+                .foregroundStyle(Color.customWhite)
+                .padding(.top, 16)
+                .padding(.bottom, 40)
+            Button {
+                loading = true
+                showNetworkErrorView.toggle()
+            } label: {
+                HStack {
+                    Text("다시 시도하기")
+                        .font(.caption)
+                        .foregroundStyle(Color.customPrimary)
+                    Image(systemName: "chevron.forward")
+                        .font(.caption)
+                        .foregroundStyle(Color.customPrimary)
+                }
+                
+            }
+        }
+    }
 }
