@@ -22,9 +22,11 @@ class LoginViewModel: ObservableObject {
             case .success(let uid):
                 self.userId = uid
                 self.checkLoginOrSignIn(uid: uid)
+                print("success to login on Apple")
             case .failure(let error):
                 self.authState = .logout
                 print(error)
+                print("fail to login on kakao")
             }
         }
     }
@@ -36,9 +38,11 @@ class LoginViewModel: ObservableObject {
             case .success(let uid):
                 self.userId = uid
                 self.checkLoginOrSignIn(uid: uid)
+                print("success to login on kakao")
             case .failure(let error):
                 self.authState = .logout
                 print(error)
+                print("fail to login on kakao")
             }
         }
     }
@@ -60,10 +64,11 @@ class LoginViewModel: ObservableObject {
     func setNewUser(uid: String) {
         userInfoModel.createUser(uid: uid, nickname: "default") { res in
             switch res {
-            case .success(_):
-                print("success to create user")
-            case .failure(_):
+            case .success(let isSuccess):
+                print("success to create user \(isSuccess)")
+            case .failure(let error):
                 print("fail to create user")
+                print(error)
             }
         }
     }
@@ -74,9 +79,9 @@ class LoginViewModel: ObservableObject {
             case .success(let isSuccess):
                 self.authState = .logout
                 self.userId = ""
-                print(isSuccess)
+                print("success to logout \(isSuccess)")
             case .failure(let error):
-                print("logout failed")
+                print("fail to logout")
                 print(error)
             }
         }
@@ -93,8 +98,9 @@ class LoginViewModel: ObservableObject {
                     self.userInfoModel.deleteUser(uid: userId) { isSuccessDeleteDBUser in
                         switch isSuccessDeleteDBUser {
                         case .success(let success):
-                            print(success ? "delete user on FireStore" : "")
+                            print("success to delete user on FireStore \(success)")
                         case .failure(let failure):
+                            print("fail to delete user on FireStore")
                             print("\(failure)")
                         }
                     }
@@ -108,9 +114,9 @@ class LoginViewModel: ObservableObject {
                     }
                 }
                 self.userId = ""
-                print(isSuccess)
+                print("reset userId to empty \(isSuccess)")
             case .failure(let error):
-                print("signout failed")
+                print("fail to signout")
                 print(error)
             }
         }
@@ -122,6 +128,7 @@ class LoginViewModel: ObservableObject {
             case .success(let uid):
                 self.userId = uid
                 self.authState = .login
+                
             case .failure(let error):
                 print("user not found")
                 self.authState = .logout
