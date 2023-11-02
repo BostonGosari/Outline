@@ -36,9 +36,12 @@ struct ProfileView: View {
                 List {
                     Group {
                         NavigationLink {
-                            ProfileUserInfoView(nickname: $profileViewModel.userInfo.nickname, birthday: $profileViewModel.userInfo.birthday, gender: $profileViewModel.userInfo.gender) {
-                                profileViewModel.saveUserInfoOnDB()
-                            }
+                            ProfileUserInfoView(
+                                nickname: $profileViewModel.userInfo.nickname,
+                                birthday: $profileViewModel.userInfo.birthday,
+                                gender: $profileViewModel.userInfo.gender,
+                                completion: profileViewModel.saveUserInfoOnDB
+                            )
                         } label: {
                             Text("내 정보")
                                 .padding(.vertical, 5)
@@ -46,10 +49,9 @@ struct ProfileView: View {
                         NavigationLink {
                             ProfileHealthInfoView(
                                 height: $profileViewModel.userInfo.height,
-                                weight: $profileViewModel.userInfo.weight
-                            ) {
-                                profileViewModel.saveUserInfoOnDB()
-                            }
+                                weight: $profileViewModel.userInfo.weight,
+                                completion: profileViewModel.saveUserInfoOnDB
+                            )
                         } label: {
                             Text("신체 정보")
                                 .padding(.vertical, 5)

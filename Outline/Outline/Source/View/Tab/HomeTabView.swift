@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct HomeTabView: View {
-    @AppStorage("authState") var authState: AuthState = .onboarding
+    @AppStorage("userId") var userId: String?
+    @AppStorage("authState") var authState: AuthState = .logout
     
     @StateObject private var runningManager = RunningStartManager.shared
     @StateObject var runningDataManager = RunningDataManager.shared
@@ -67,6 +68,22 @@ struct HomeTabView: View {
                 WatchRunningSheet
             }
                 
+        }
+        .onAppear {
+            AuthModel().handleCheckLoginState { res in
+                switch res {
+                case .success(let userId):
+                    if let userId = userId {
+                        self.userId = userId
+                        self.authState = .login
+                    } else {
+                        self.authState = .logout
+                    }
+                case .failure(let failure):
+                    self.authState = .logout
+                    print("fail to find userInfo \(failure)")
+                }
+            }
         }
         .onReceive(watchConnectivityManager.$isWatchRunning) { isRunning in
               if isRunning {

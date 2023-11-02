@@ -9,7 +9,7 @@ import SwiftUI
 
 final class ProfileViewModel: ObservableObject {
     @AppStorage("userId") var userId: String?
-    @AppStorage("authState") var authState: AuthState = .onboarding
+    @AppStorage("authState") var authState: AuthState = .logout
     
     @Published var userInfo = UserInfo(nickname: "", birthday: Date(), height: 170, weight: 60)
     
