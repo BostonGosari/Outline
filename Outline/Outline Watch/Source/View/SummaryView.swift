@@ -29,13 +29,11 @@ struct SummaryView: View {
     var body: some View {
         if workoutManager.workout == nil {
             ProgressView("Saving Workout")
-                .navigationBarHidden(true)
         } else if isShowingFinishView {
             FinishWatchView(completionPercentage: 100)
                 .onAppear {
                    scheduleTimerToHideFinishView()
                 }
-                .navigationBarHidden(true)
         } else {
             ScrollViewReader { proxy in
                 ScrollView {
@@ -59,9 +57,8 @@ struct SummaryView: View {
                         .padding(.bottom, 24)
                     LazyVGrid(columns: Array(repeating: GridItem(), count: 2), spacing: 24) {
                         workoutDataItem(value: "\((workoutManager.distance/1000).formatted(.number.precision(.fractionLength(2))))", label: "킬로미터")
-                        workoutDataItem(value: workoutManager.pace > 0
-                                        ? String(format: "%02d’%02d’’", Int(workoutManager.pace) / 60, Int(workoutManager.pace) % 60)
-                                        : "-’--’’",
+                        workoutDataItem(value: workoutManager.averagePace > 0
+                                        ? workoutManager.averagePace.formattedAveragePace() : "-’--’’",
                                         label: "평균 페이스")
                         workoutDataItem(value: "\(workoutManager.calorie.formatted(.number.precision(.fractionLength(0))))", label: "칼로리")
                         workoutDataItem(value: "\(workoutManager.averageHeartRate.formatted(.number.precision(.fractionLength(0))))", label: "BPM")
@@ -87,10 +84,7 @@ struct SummaryView: View {
                         }
                     }
                 }
-                .navigationBarHidden(true)
-               
             }
-            
         }
     }
     private func scheduleTimerToHideFinishView() {
