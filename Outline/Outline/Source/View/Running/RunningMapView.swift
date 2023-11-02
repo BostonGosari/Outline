@@ -17,33 +17,39 @@ struct RunningMapView: View {
     @State private var moveToFinishRunningView = false
     @State private var showCustomSheet = false
     @State private var showBigGuide = false
+    @State private var counter = 0
     
     @State private var checkUserLocation = true
     
-    @State private var position: MapCameraPosition = .userLocation(followsHeading: true, fallback: .automatic)
-    
+    @State private var position: MapCameraPosition = .userLocation(followsHeading: false, fallback: .automatic)
     @Binding var selection: Int
+    
+    @Namespace var mapScope
     
     var courses: [CLLocationCoordinate2D] = []
     
     var body: some View {
         ZStack(alignment: .topTrailing) {
-            Map(position: $position) {
+            Map(position: $position, scope: mapScope) {
                 UserAnnotation { userlocation in
                     ZStack {
                         Circle().foregroundStyle(.white).frame(width: 22)
                         Circle().foregroundStyle(.customPrimary).frame(width: 17)
                     }
                     .onChange(of: userlocation.location) { _, userlocation in
-                        if let user = userlocation, let startCourse = runningStartManager.startCourse {
-                            if viewModel.userLocations.isEmpty {
-                                viewModel.startLocation = CLLocation(latitude: user.coordinate.latitude, longitude: user.coordinate.longitude)
-                            }
-                            viewModel.userLocations.append(user.coordinate)
-                            viewModel.checkEndDistance()
-                            
-                            if !startCourse.coursePaths.isEmpty {
-                                runningStartManager.trackingDistance()
+                        if viewModel.runningType == .start {
+                            if let user = userlocation,
+                               let startCourse = runningStartManager.startCourse {
+                                if viewModel.userLocations.isEmpty {
+                                    viewModel.startLocation = CLLocation(latitude: user.coordinate.latitude, longitude: user.coordinate.longitude)
+                                }
+                                viewModel.userLocations.append(user.coordinate)
+                                if self.runningStartManager.runningType == .gpsArt {
+                                    viewModel.checkEndDistance()
+                                }
+                                if !startCourse.coursePaths.isEmpty {
+                                    runningStartManager.trackingDistance()
+                                }
                             }
                         }
                     }
@@ -51,13 +57,13 @@ struct RunningMapView: View {
                 
                 if let courseGuide = runningStartManager.startCourse {
                     MapPolyline(coordinates: ConvertCoordinateManager.convertToCLLocationCoordinates(courseGuide.coursePaths))
-                        .stroke(.white.opacity(0.5), lineWidth: 8)
+                        .stroke(.white.opacity(0.5), style: StrokeStyle(lineWidth: 8, lineCap: .round, lineJoin: .round))
                 }
                 
                 MapPolyline(coordinates: viewModel.userLocations)
-                    .stroke(.customPrimary, lineWidth: 8)
-                
+                    .stroke(.customPrimary, style: StrokeStyle(lineWidth: 8, lineCap: .round, lineJoin: .round))
             }
+            .mapControlVisibility(.hidden)
             
             VStack(spacing: 0) {
                 Spacer()
@@ -81,23 +87,20 @@ struct RunningMapView: View {
                 .animation(.bouncy, value: showBigGuide)
             }
         }
-        .sheet(isPresented: $showCustomSheet) {
-            customSheet
-        }
+        .mapScope(mapScope)
         .overlay {
-            if viewModel.isShowPopup {
-                RunningPopup(text: viewModel.popupText)
-                    .frame(maxHeight: .infinity, alignment: .bottom)
-            }
-        }
-        .overlay {
-            if viewModel.isShowComplteSheet {
+            if showCustomSheet {
+                customSheet
+                    .onAppear {
+                        counter += 1
+                    }
+            } else if viewModel.isShowComplteSheet {
                 runningFinishSheet()
-            }
-        }
-        .overlay {
-            if viewModel.isNearEndLocation {
-                RunningPopup(text: "도착 지점까지 30m 남았어요.")
+            } else if viewModel.isShowPopup {
+                RunningPopup(text: "일시정지를 3초동안 누르면 러닝이 종료돼요")
+                    .frame(maxHeight: .infinity, alignment: .bottom)
+            } else if viewModel.isNearEndLocation {
+                RunningPopup(text: "도착 지점이 근처에 있어요.")
                     .frame(maxHeight: .infinity, alignment: .bottom)
             }
         }
@@ -115,16 +118,13 @@ extension RunningMapView {
             switch viewModel.runningType {
             case .start:
                 VStack(spacing: 0) {
-                    Button {
-                        HapticManager.impact(style: .medium)
-                        viewModel.isUserLocationCenter = true
-                    } label: {
-                        Image("aim")
-                            .imageButtonModifier(color: Color.white, size: 22, padding: 19)
-                    }
-                    .frame(maxWidth: .infinity, alignment: .trailing)
-                    .padding(.trailing, 32)
-                    .padding(.bottom, 14)
+                    MapUserLocationButton(scope: mapScope)
+                        .buttonBorderShape(.circle)
+                        .tint(.white)
+                        .controlSize(.large)
+                        .frame(maxWidth: .infinity, alignment: .trailing)
+                        .padding(.trailing, 32)
+                        .padding(.bottom, 14)
                     
                     HStack {
                         Button {
@@ -214,28 +214,53 @@ extension RunningMapView {
     }
     
     private var customSheet: some View {
-        VStack(spacing: 0) {
-            Text("오늘은, 여기까지")
-                .font(.title2)
-                .padding(.top, 56)
-                .padding(.bottom, 8)
-            Text("즐거운 러닝이었나요? 다음에 또 만나요! ")
-                .font(.subBody)
-                .padding(.bottom, 24)
+        ZStack {
+            Color.black.opacity(0.5)
             
-            Image("Finish10")
-                .resizable()
-                .frame(width: 120, height: 120)
-                .padding(.bottom, 45)
-            
-            CompleteButton(text: "결과 페이지로", isActive: true) {
-                showCustomSheet = false
-                moveToFinishRunningView = true
+            VStack(spacing: 0) {
+                Text("오늘은, 여기까지")
+                    .font(.title2)
+                    .padding(.top, 56)
+                    .padding(.bottom, 8)
+                
+                Text("즐거운 러닝이었나요? 다음에 또 만나요! ")
+                    .font(.subBody)
+                    .padding(.bottom, 24)
+                
+                Image("Finish10")
+                    .resizable()
+                    .frame(width: 120, height: 120)
+                    .padding(.bottom, 45)
+                
+                CompleteButton(text: "결과 페이지로", isActive: true) {
+                    showCustomSheet = false
+                    moveToFinishRunningView = true
+                }
             }
+            .frame(height: UIScreen.main.bounds.height / 2)
+            .frame(maxWidth: .infinity)
+            .background {
+                RoundedRectangle(cornerRadius: 30, style: .continuous)
+                    .stroke(Color.customPrimary, lineWidth: 2)
+                RoundedRectangle(cornerRadius: 30, style: .continuous)
+                    .foregroundStyle(Color.gray900)
+            }
+            .frame(maxHeight: .infinity, alignment: .bottom)
+            .animation(.easeInOut, value: showCustomSheet)
+            
+            Confetti(counter: $counter,
+                     num: 40,
+                     colors: [.customPrimary, .customSecondary],
+                     confettiSize: 10,
+                     rainHeight: UIScreen.main.bounds.height,
+                     openingAngle: .degrees(60),
+                     closingAngle: .degrees(120),
+                     radius: 400,
+                     repetitions: 10,
+                     repetitionInterval: 1
+            )
         }
-        .presentationDetents([.height(420)])
-        .presentationCornerRadius(35)
-        .interactiveDismissDisabled()
+        .ignoresSafeArea()
     }
     
     @ViewBuilder

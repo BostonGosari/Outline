@@ -5,6 +5,7 @@
 //  Created by hyebin on 10/24/23.
 //
 
+import CoreData
 import CoreLocation
 import SwiftUI
 
@@ -14,14 +15,15 @@ class RecordDetailViewModel: ObservableObject {
     @Published var runningData = ["킬로미터": "", "시간": "", "평균 페이스": "", "BPM": "", "칼로리": "", "케이던스": ""]
     
     private var runningDate = Date()
+    private let userDataModel = UserDataModel()
+    
     var courseName: String = ""
     var startTime: String = ""
     var endTime: String = ""
     var date: String = ""
+    var userLocations: [CLLocationCoordinate2D] = []
     
     var shareData = ShareModel()
-    
-    var userLocations: [CLLocationCoordinate2D] = []
     
     func readData(runningRecord: CoreRunningRecord) {
         if let courseData = runningRecord.courseData,
@@ -43,11 +45,11 @@ class RecordDetailViewModel: ObservableObject {
                 endTime = ""
             }
             
-            runningData["킬로미터"] = String(format: "%.1f", healthData.totalRunningDistance/1000)
-            runningData["시간"] = healthData.totalTime.formatDuration()
+            runningData["킬로미터"] = String(format: "%.2f", healthData.totalRunningDistance/1000)
+            runningData["시간"] = healthData.totalTime.formatMinuteSecondsMilliSeconds()
             runningData["평균 페이스"] = healthData.averagePace.formattedAveragePace()
             runningData["BPM"] = "\(Int(healthData.averageHeartRate))"
-            runningData["칼로리"] = "\(healthData.totalEnergy)"
+            runningData["칼로리"] = "\(Int(healthData.totalEnergy))"
 
             if healthData.averageCadence > 0 {
                 runningData["케이던스"] = "\(Int(healthData.averageCadence))"
@@ -81,17 +83,28 @@ class RecordDetailViewModel: ObservableObject {
                     }
                 }
             }
-        } else {
-            courseName = ""
-            courseRegion = ""
-            
-            startTime = ""
-            endTime = ""
-            date = ""
-            
-            runningData = ["킬로미터": "", "시간": "", "평균 페이스": "", "BPM": "", "칼로리": "", "케이던스": ""]
-            
-            userLocations = []
+        }
+    }
+    
+    func deleteRunningRecord(_ record: NSManagedObject) {
+        userDataModel.deleteRunningRecord(record) { result in
+            switch result {
+            case .success(let isSaved):
+                print(isSaved)
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    func updateRunningRecord(_ record: NSManagedObject, courseName: String) {
+        userDataModel.updateRunningRecordCourseName(record, newCourseName: courseName) { result in
+            switch result {
+            case .success(let isSaved):
+                print(isSaved)
+            case .failure(let error):
+                print(error)
+            }
         }
     }
     
@@ -109,12 +122,5 @@ class RecordDetailViewModel: ObservableObject {
         )
         
         navigateToShareMainView = true
-    }
-    
-    private func formattedTime(_ counter: Int) -> String {
-        let minutes = counter / 60
-        let seconds = counter % 60
-        
-        return String(format: "%02d:%02d", minutes, seconds)
     }
 }
