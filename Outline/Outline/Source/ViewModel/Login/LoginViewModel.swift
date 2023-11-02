@@ -9,7 +9,7 @@ import SwiftUI
 
 class LoginViewModel: ObservableObject {
     @AppStorage("userId") var userId: String?
-    @AppStorage("authState") var authState: AuthState = .onboarding
+    @AppStorage("authState") var authState: AuthState = .logout
     
     private let authModel = AuthModel()
     private let userDataModel = UserDataModel()

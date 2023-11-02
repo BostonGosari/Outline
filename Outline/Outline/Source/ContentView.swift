@@ -16,7 +16,7 @@ enum AuthState: String {
 
 struct ContentView: View {
     
-    @AppStorage("authState") var authState: AuthState = .onboarding
+    @AppStorage("authState") var authState: AuthState = .logout
     
     var body: some View {
         Group {
