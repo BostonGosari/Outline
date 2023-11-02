@@ -44,6 +44,7 @@ final class ProfileViewModel: ObservableObject {
                 print("success to load userInfo")
             case .failure(let failure):
                 print("fail to load userInfo")
+                print(failure)
             }
         }
     }
@@ -67,8 +68,6 @@ final class ProfileViewModel: ObservableObject {
         authModel.handleSignOut { res in
             switch res {
             case .success(let isSuccess):
-                self.authState = .logout
-                
                 if let userId = self.userId {
                     self.userInfoModel.deleteUser(uid: userId) { isSuccessDeleteDBUser in
                         switch isSuccessDeleteDBUser {
@@ -77,14 +76,6 @@ final class ProfileViewModel: ObservableObject {
                         case .failure(let failure):
                             print("fail to delete user on FireStore")
                             print("\(failure)")
-                        }
-                    }
-                    self.userDataModel.deleteAllRunningRecord { res in
-                        switch res {
-                        case .success(let success):
-                            print("success to delete all running data \(success)")
-                        case .failure(let failure):
-                            print("fail to delete all running data \(failure)")
                         }
                     }
                 }
