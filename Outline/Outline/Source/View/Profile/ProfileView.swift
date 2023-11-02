@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ProfileView: View {
+    @AppStorage("authState") var authState: AuthState = .logout
     @ObservedObject private var profileViewModel = ProfileViewModel()
     
     @State private var showDeleteUserAlert = false
@@ -75,7 +76,7 @@ struct ProfileView: View {
                                 showDeleteUserAlert = false
                             }), secondaryButton: .default(Text("삭제").bold(), action: {
                                 showDeleteUserAlert = false
-                                // handle delete User
+                                profileViewModel.signOut()
                                 showDeleteCompleteAlert = true
                             }))
                     }
@@ -93,6 +94,7 @@ struct ProfileView: View {
                                 showLogoutAlert = false
                             }), secondaryButton: .default(Text("로그아웃").bold(), action: {
                                 showLogoutAlert = false
+                                profileViewModel.logOut()
                                 // handle logout
                             }))
                     }
@@ -117,8 +119,10 @@ struct ProfileView: View {
                 message: Text("탈퇴 처리가 성공적으로 완료되었습니다."),
                 primaryButton: .default(Text("닫기"), action: {
                     showDeleteCompleteAlert = false
+                    self.authState = .logout
                 }), secondaryButton: .default(Text("확인").bold(), action: {
                     showDeleteCompleteAlert = false
+                    self.authState = .logout
                 })
             )
         }
