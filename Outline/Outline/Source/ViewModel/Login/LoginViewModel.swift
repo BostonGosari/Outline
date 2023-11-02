@@ -61,6 +61,7 @@ class LoginViewModel: ObservableObject {
             }
         }
     }
+    
     func setNewUser(uid: String) {
         userInfoModel.createUser(uid: uid, nickname: "default") { res in
             switch res {
@@ -68,55 +69,6 @@ class LoginViewModel: ObservableObject {
                 print("success to create user \(isSuccess)")
             case .failure(let error):
                 print("fail to create user")
-                print(error)
-            }
-        }
-    }
-    
-    func logOut() {
-        authModel.handleLogout { res in
-            switch res {
-            case .success(let isSuccess):
-                self.authState = .logout
-                self.userId = ""
-                print("success to logout \(isSuccess)")
-            case .failure(let error):
-                print("fail to logout")
-                print(error)
-            }
-        }
-    }
-    
-    func signOut() {
-        // Delete FireStoreData, CoreData
-        authModel.handleSignOut { res in
-            switch res {
-            case .success(let isSuccess):
-                self.authState = .logout
-                
-                if let userId = self.userId {
-                    self.userInfoModel.deleteUser(uid: userId) { isSuccessDeleteDBUser in
-                        switch isSuccessDeleteDBUser {
-                        case .success(let success):
-                            print("success to delete user on FireStore \(success)")
-                        case .failure(let failure):
-                            print("fail to delete user on FireStore")
-                            print("\(failure)")
-                        }
-                    }
-                    self.userDataModel.deleteAllRunningRecord { res in
-                        switch res {
-                        case .success(let success):
-                            print("success to delete all running data \(success)")
-                        case .failure(let failure):
-                            print("fail to delete all running data \(failure)")
-                        }
-                    }
-                }
-                self.userId = ""
-                print("reset userId to empty \(isSuccess)")
-            case .failure(let error):
-                print("fail to signout")
                 print(error)
             }
         }

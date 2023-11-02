@@ -8,13 +8,14 @@
 import SwiftUI
 
 struct ProfileView: View {
+    @ObservedObject private var profileViewModel = ProfileViewModel()
+    
     @State private var showDeleteUserAlert = false
     @State private var showDeleteCompleteAlert = false
     @State private var showLogoutAlert = false
     
     // 추후 데이터 연결 필요
     @State private var userProfileImage = "defaultProfileImage"
-    @State private var userName = "김시즈"
     
     var body: some View {
         NavigationStack {
@@ -25,7 +26,7 @@ struct ProfileView: View {
                     .frame(width: 118, height: 118)
                     .padding(.top, 18)
                 
-                Text(userName)
+                Text(profileViewModel.userInfo.nickname)
                 Divider()
                     .frame(height: 1)
                     .background(Color.gray700)
@@ -33,7 +34,7 @@ struct ProfileView: View {
                 List {
                     Group {
                         NavigationLink {
-                            ProfileUserInfoView()
+                            ProfileUserInfoView(profileViewModel: profileViewModel)
                         } label: {
                             Text("내 정보")
                                 .padding(.vertical, 5)

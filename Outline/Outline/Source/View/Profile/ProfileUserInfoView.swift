@@ -9,12 +9,15 @@ import SwiftUI
 
 struct ProfileUserInfoView: View {
     @Environment(\.dismiss) private var dismiss
-    @State private var userName = "아웃라인메이트"
-    @State private var birthday = Date()
-    @State private var gender: Gender = .notSetted
-
+    
+    @Binding var nickname: String
+    @Binding var birthday: Date
+    @Binding var gender: Gender
+    
     @State private var showBirthdayPicker = false
     @State private var showGenderPicker = false
+    
+    var completion: () -> Void
     
     private var dateRange: ClosedRange<Date> {
         let min = Calendar.current.date(byAdding: .year, value: -120, to: Date())!
@@ -43,7 +46,7 @@ struct ProfileUserInfoView: View {
             .padding(.horizontal, 24)
             .padding(.top, 30)
             
-            TextField("아웃라인메이트", text: $userName)
+            TextField("아웃라인메이트", text: $nickname)
             .textFieldStyle(OvalTextFieldStyle())
             .padding(.horizontal, 16)
             
@@ -60,7 +63,7 @@ struct ProfileUserInfoView: View {
                         HStack {
                             Text("생년월일")
                             Spacer()
-                            Text("2003.09.06.")
+                            Text(birthday.dateToShareString())
                                 .foregroundStyle(Color.gray400)
                         }
                         .frame(height: 40)
@@ -112,7 +115,7 @@ struct ProfileUserInfoView: View {
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 Button {
-                    // handle save data
+                    completion()
                     dismiss()
                 } label: {
                     Text("완료")
@@ -130,7 +133,7 @@ struct OvalTextFieldStyle: TextFieldStyle {
             .cornerRadius(10)
     }
 }
-
-#Preview {
-    ProfileUserInfoView()
-}
+//
+//#Preview {
+//    ProfileUserInfoView()
+//}
