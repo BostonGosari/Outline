@@ -4,13 +4,15 @@ struct WorkoutDataView: View {
     @StateObject var runningManager = RunningStartManager.shared
     @StateObject var runningDataManager = RunningDataManager.shared
     
-    @Binding var selection: Int
+    @Binding var selection: Bool
     
     private let weight: Double = 60
     
     var body: some View {
         ZStack {
-            Color("Gray900").ignoresSafeArea()
+            Rectangle()
+                .fill(.ultraThinMaterial)
+                .ignoresSafeArea()
             VStack(spacing: 0) {
                 digitalTimer
                     .padding(.top, 120)
@@ -22,7 +24,7 @@ struct WorkoutDataView: View {
                 
                 Button {
                     withAnimation {
-                        selection = 0
+                        selection.toggle()
                     }
                 } label: {
                     Image(systemName: "map.fill")
