@@ -19,6 +19,7 @@ struct CourseListWatchView: View {
     @State private var navigateDetailView = false
     @State private var navigate = false
     @State private var selectedCourse: GPSArtCourse = GPSArtCourse()
+    @State private var isLocationPermissionSheetPresented = false
     
     var workoutTypes: [HKWorkoutActivityType] = [.running]
     
@@ -27,13 +28,16 @@ struct CourseListWatchView: View {
             ScrollView {
                 VStack(spacing: -5) {
                     Button {
-                        viewModel.checkAuthorization()
+//                        viewModel.checkAuthorization()
                         if  viewModel.isHealthAuthorized && viewModel.isLocationAuthorized {
                             workoutManager.selectedWorkout = workoutTypes[0]
                             watchRunningManager.startFreeRun()
                             navigate.toggle()
                         } else {
-                            // TODO: 설정 안내 시트 필요
+                           // 헬스는 자동으로 시트가 띄워짐
+                            if !viewModel.isLocationAuthorized {
+                                isLocationPermissionSheetPresented = true
+                            }
                         }
                     } label: {
                         HStack {
@@ -45,7 +49,7 @@ struct CourseListWatchView: View {
                         .frame(maxWidth: .infinity)
                         .background(
                             RoundedRectangle(cornerRadius: 12, style: .continuous)
-                                .foregroundStyle(.first)
+                                .foregroundStyle(Color.first)
                         )
                     }
                     .buttonStyle(.plain)
@@ -66,7 +70,7 @@ struct CourseListWatchView: View {
                     
                     ForEach(watchConnectivityManager.allCourses, id: \.id) {course in
                         Button {
-                            viewModel.checkAuthorization()
+//                            viewModel.checkAuthorization()
                             if viewModel.isHealthAuthorized && viewModel.isLocationAuthorized {
                                 if watchRunningManager.checkDistance(course: course.coursePaths) {
                                     workoutManager.selectedWorkout = workoutTypes[0]
@@ -77,7 +81,16 @@ struct CourseListWatchView: View {
                                     // TODO: 거리가 멀어요 자유러닝 안내시트
                                 }
                             } else {
-                                // TODO: 설정 안내 시트 필요
+                                if  viewModel.isHealthAuthorized && viewModel.isLocationAuthorized {
+                                    workoutManager.selectedWorkout = workoutTypes[0]
+                                    watchRunningManager.startFreeRun()
+                                    navigate.toggle()
+                                } else {
+                                   // 헬스는 자동으로 시트가 띄워짐
+                                    if !viewModel.isLocationAuthorized {
+                                        isLocationPermissionSheetPresented = true
+                                    }
+                                }
                             }
                         } label: {
                             VStack {
@@ -141,6 +154,35 @@ struct CourseListWatchView: View {
         .sheet(isPresented: $workoutManager.showingSummaryView) {
             SummaryView(navigate: $navigate)
         }
+        .sheet(isPresented: $isLocationPermissionSheetPresented) {
+            NavigationView {
+                LocationPermissionSheet()
+            }
+            .toolbar(.hidden, for: .navigationBar)
+              
+        }
+       
+    }
+    
+    private func LocationPermissionSheet() -> some View {
+        VStack {
+           Image(systemName: "location.circle")
+                .resizable()
+                .frame(width: 43, height: 43)
+                .foregroundStyle(Color.first)
+            Spacer()
+            Text("OUTLINE iPhone을 실행해서\n위치 권한을 허용해주세요.")
+                .multilineTextAlignment(.center)
+                .font(Font.system(size: 13))
+            Spacer()
+            Button {
+                isLocationPermissionSheetPresented.toggle()
+            } label: {
+                Text("확인")
+            }
+            
+        }
+      
     }
     
     private func countdownView() -> some View {
