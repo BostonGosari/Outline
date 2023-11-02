@@ -22,7 +22,7 @@ struct RunningMapView: View {
     @State private var checkUserLocation = true
     
     @State private var position: MapCameraPosition = .userLocation(followsHeading: false, fallback: .automatic)
-    @Binding var selection: Int
+    @Binding var selection: Bool
     
     @Namespace var mapScope
     
@@ -70,6 +70,8 @@ struct RunningMapView: View {
                 runningButtonView
                     .frame(maxWidth: .infinity)
                     .padding(.bottom, 80)
+                    .opacity(selection ? 0 : 1)
+                    .animation(.bouncy, value: selection)
             }
             
             if let course = runningStartManager.startCourse,
@@ -114,9 +116,7 @@ struct RunningMapView: View {
 extension RunningMapView {
     @ViewBuilder
     private var runningButtonView: some View {
-        ZStack {
-            switch viewModel.runningType {
-            case .start:
+        ZStack(alignment: .bottom) {
                 VStack(spacing: 0) {
                     MapUserLocationButton(scope: mapScope)
                         .buttonBorderShape(.circle)
@@ -125,8 +125,9 @@ extension RunningMapView {
                         .frame(maxWidth: .infinity, alignment: .trailing)
                         .padding(.trailing, 32)
                         .padding(.bottom, 14)
+                        .opacity(viewModel.runningType == .start ? 1 : 0)
                     
-                    HStack {
+                    ZStack {
                         Button {
                             HapticManager.impact(style: .medium)
                             viewModel.runningType = .pause
@@ -137,26 +138,22 @@ extension RunningMapView {
                                 .buttonModifier(color: Color.customPrimary, size: 29, padding: 29)
                             
                         }
-                        .padding(.trailing, 64)
+                        .frame(maxWidth: .infinity, alignment: .center)
                         
                         Button {
                             withAnimation {
-                                if selection == 0 {
-                                    selection = 1
-                                } else {
-                                    selection = 0
-                                }
+                                selection.toggle()
                             }
                         } label: {
                             Image("Data")
                                 .imageButtonModifier(color: Color.customPrimary, size: 24, padding: 18)
                         }
+                        .frame(maxWidth: .infinity, alignment: .trailing)
+                        .padding(.trailing, 32)
                     }
-                    .frame(maxWidth: .infinity, alignment: .trailing)
-                    .padding(.horizontal, 32)
+                    .opacity(viewModel.runningType == .start ? 1 : 0)
+
                 }
-                .transition(.slide)
-            case .pause:
                 HStack(spacing: 0) {
                     Image(systemName: "stop.fill")
                         .buttonModifier(color: Color.white, size: 24, padding: 26)
@@ -191,6 +188,7 @@ extension RunningMapView {
                                    }
                                 }
                         )
+                        .frame(maxWidth: .infinity, alignment: viewModel.runningType == .start ? .center : .leading)
                     
                     Spacer()
                     
@@ -203,13 +201,11 @@ extension RunningMapView {
                         Image(systemName: "play.fill")
                             .buttonModifier(color: Color.customPrimary, size: 24, padding: 26)
                     }
+                    .frame(maxWidth: .infinity, alignment: viewModel.runningType == .start ? .center : .trailing)
                 }
-                .frame(maxWidth: .infinity, alignment: .center)
                 .padding(.horizontal, 64)
-                .transition(.slide)
-            case .stop:
-                EmptyView()
-            }
+                .opacity(viewModel.runningType == .start ? 0 : 1)
+                .animation(.bouncy, value: viewModel.runningType)
         }
     }
     
