@@ -40,10 +40,10 @@ struct RunningMapView: View {
                         if viewModel.runningType == .start {
                             if let user = userlocation,
                                let startCourse = runningStartManager.startCourse {
-                                if viewModel.userLocations.isEmpty {
+                                if runningDataManager.userLocations.isEmpty {
                                     viewModel.startLocation = CLLocation(latitude: user.coordinate.latitude, longitude: user.coordinate.longitude)
                                 }
-                                viewModel.userLocations.append(user.coordinate)
+                                runningDataManager.userLocations.append(user.coordinate)
                                 if self.runningStartManager.runningType == .gpsArt {
                                     viewModel.checkEndDistance()
                                 }
