@@ -9,6 +9,13 @@ import Foundation
 import HealthKit
 
 class WatchWorkoutManager: NSObject, ObservableObject {
+    let watchConnectivityManager: WatchConnectivityManager
+
+    init(watchConnectivityManager: WatchConnectivityManager) {
+        self.watchConnectivityManager = watchConnectivityManager
+        super.init()
+    }
+    
     var selectedWorkout: HKWorkoutActivityType? {
         didSet {
             guard let selectedWorkout = selectedWorkout else { return }
@@ -207,6 +214,8 @@ extension WatchWorkoutManager: HKWorkoutSessionDelegate {
                         from fromState: HKWorkoutSessionState, date: Date) {
         DispatchQueue.main.async {
             self.running = toState == .running
+            // 러닝 세션의 상태를 iOS 앱으로 전달
+            self.watchConnectivityManager.sendRunningSessionStateToPhone(self.running)
         }
 
         // Wait for the session to transition states before ending the builder.
