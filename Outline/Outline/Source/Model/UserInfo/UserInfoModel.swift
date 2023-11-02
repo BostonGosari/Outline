@@ -13,7 +13,7 @@ import SwiftUI
 protocol UserInfoModelProtocol {
     func readUserInfo(uid: String, completion: @escaping (Result<UserInfo, ReadDataError>) -> Void)
     func updateUserInfo(uid: String, userInfo: UserInfo, completion: @escaping (Result<Bool, ReadDataError>) -> Void)
-    func createUser(nickname: String?, completion: @escaping (Result<String, ReadDataError>) -> Void)
+    func createUser(uid: String, nickname: String?, completion: @escaping (Result<Bool, ReadDataError>) -> Void)
     func deleteUser(uid: String, completion: @escaping (Result<Bool, ReadDataError>) -> Void)
 }
 
@@ -52,13 +52,13 @@ struct UserInfoModel: UserInfoModelProtocol {
         }
     }
     
-    func createUser(nickname: String?, completion: @escaping (Result<String, ReadDataError>) -> Void) {
+    func createUser(uid: String = UUID().uuidString, nickname: String?, completion: @escaping (Result<Bool, ReadDataError>) -> Void) {
         let newUserInfo = UserInfo(nickname: nickname ?? "default", birthday: Date(), height: 175, weight: 70)
-        let uid = UUID().uuidString
+        let uid = uid
         
         do {
             try userListRef.document(uid).setData(from: newUserInfo)
-            completion(.success(uid))
+            completion(.success(true))
         } catch {
             completion(.failure(.typeError))
         }
