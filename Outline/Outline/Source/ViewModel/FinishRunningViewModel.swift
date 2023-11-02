@@ -12,7 +12,7 @@ class FinishRunningViewModel: ObservableObject {
     @Published var isShowPopup = false {
         didSet {
             if isShowPopup {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                     self.isShowPopup = false
                 }
             }
@@ -63,8 +63,8 @@ class FinishRunningViewModel: ObservableObject {
                 endTime = ""
             }
             
-            runningData[0].data = String(format: "%.1f", healthData.totalRunningDistance/1000)
-            runningData[1].data = formatDuration(healthData.totalTime)
+            runningData[0].data = String(format: "%.2f", healthData.totalRunningDistance/1000)
+            runningData[1].data = healthData.totalTime.formatMinuteSeconds()
             runningData[2].data = healthData.averagePace.formattedAveragePace()
             runningData[3].data  = "\(Int(healthData.averageHeartRate))"
             runningData[4].data  = "\(Int(healthData.totalEnergy))"
@@ -80,7 +80,7 @@ class FinishRunningViewModel: ObservableObject {
                         datas.append(Coordinate(longitude: data.longitude, latitude: data.latitude))
                     }
                 }
-                userLocations = convertToCLLocationCoordinates(datas)
+                userLocations = ConvertCoordinateManager.convertToCLLocationCoordinates(datas)
             }
             
             let geocoder = CLGeocoder()

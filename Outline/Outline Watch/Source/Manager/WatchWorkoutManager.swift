@@ -9,13 +9,24 @@ import Foundation
 import HealthKit
 
 class WatchWorkoutManager: NSObject, ObservableObject {
+    let watchConnectivityManager: WatchConnectivityManager
+
+    init(watchConnectivityManager: WatchConnectivityManager) {
+        self.watchConnectivityManager = watchConnectivityManager
+        super.init()
+    }
+    
     var selectedWorkout: HKWorkoutActivityType? {
         didSet {
             guard let selectedWorkout = selectedWorkout else { return }
             startWorkout(workoutType: selectedWorkout)
         }
     }
-
+    
+    var isHealthKitAuthorized: Bool {
+        return HKHealthStore.isHealthDataAvailable()
+    }
+      
     @Published var showingSummaryView: Bool = false {
         didSet {
             if showingSummaryView == false {
@@ -67,7 +78,8 @@ class WatchWorkoutManager: NSObject, ObservableObject {
             HKQuantityType(.distanceWalkingRunning),
             HKQuantityType(.heartRate),
             HKQuantityType(.activeEnergyBurned),
-            HKQuantityType(.cyclingCadence)
+            HKQuantityType(.cyclingCadence),
+            HKQuantityType(.runningSpeed)
         ]
 
         // The quantity types to read from the health store.
@@ -77,6 +89,7 @@ class WatchWorkoutManager: NSObject, ObservableObject {
             HKQuantityType(.heartRate),
             HKQuantityType(.activeEnergyBurned),
             HKQuantityType(.cyclingCadence),
+            HKQuantityType(.runningSpeed),
             HKObjectType.activitySummaryType()
         ]
 
@@ -126,12 +139,26 @@ class WatchWorkoutManager: NSObject, ObservableObject {
     @Published var heartRate: Double = 0
     @Published var calorie: Double = 0
     @Published var pace: Double = 0
+    @Published var averagePace: Double = 0
     @Published var cadence: Double = 0
     @Published var workout: HKWorkout?
-
-    func updatePace(distance: Double, duration: TimeInterval) {
+ 
+    // 평균 페이스 계산
+    func calculateAveragePace(distance: Double, duration: TimeInterval) {
         if distance > 0 && duration > 0 {
-            let pace = duration / distance
+            let averagePaceInSecondsPerMeter = duration / distance
+            
+            let averagePaceInMinutesPerKilometer = averagePaceInSecondsPerMeter / 1000
+            self.averagePace = averagePaceInMinutesPerKilometer
+        } else {
+            self.averagePace = 0
+        }
+    }
+    
+    // 실시간 페이스 계산
+    func calculatePaceFromSpeed(speed: Double) {
+        if speed > 0 {
+            let pace = 60 / (speed) * 60
             self.pace = pace
         } else {
             self.pace = 0
@@ -140,31 +167,34 @@ class WatchWorkoutManager: NSObject, ObservableObject {
     
     func updateForStatistics(_ statistics: HKStatistics?) {
         guard let statistics = statistics else { return }
-
+        
         DispatchQueue.main.async {
-            switch statistics.quantityType {
-            case HKQuantityType.quantityType(forIdentifier: .heartRate):
-                let heartRateUnit = HKUnit.count().unitDivided(by: HKUnit.minute())
-                self.heartRate = statistics.mostRecentQuantity()?.doubleValue(for: heartRateUnit) ?? 0
-                self.averageHeartRate = statistics.averageQuantity()?.doubleValue(for: heartRateUnit) ?? 0
-            case HKQuantityType.quantityType(forIdentifier: .activeEnergyBurned):
-                let energyUnit = HKUnit.kilocalorie()
-                self.calorie = statistics.sumQuantity()?.doubleValue(for: energyUnit) ?? 0
-            case HKQuantityType.quantityType(forIdentifier: .distanceWalkingRunning), HKQuantityType.quantityType(forIdentifier: .distanceCycling):
-                let meterUnit = HKUnit.meter()
-                self.distance = statistics.sumQuantity()?.doubleValue(for: meterUnit) ?? 0
-                let duration = self.builder?.elapsedTime ?? 0
-                         self.updatePace(distance: self.distance, duration: duration)
-            case HKQuantityType.quantityType(forIdentifier: .cyclingCadence):
-                let cadenceUnit = HKUnit(from: "count/min")
-                self.cadence = statistics.averageQuantity()?.doubleValue(for: cadenceUnit) ?? 0
-
-            default:
-                return
-            }
-        }
-    }
-
+               switch statistics.quantityType {
+               case HKQuantityType.quantityType(forIdentifier: .heartRate):
+                   let heartRateUnit = HKUnit.count().unitDivided(by: HKUnit.minute())
+                   self.heartRate = statistics.mostRecentQuantity()?.doubleValue(for: heartRateUnit) ?? 0
+                   self.averageHeartRate = statistics.averageQuantity()?.doubleValue(for: heartRateUnit) ?? 0
+               case HKQuantityType.quantityType(forIdentifier: .activeEnergyBurned):
+                   let energyUnit = HKUnit.kilocalorie()
+                   self.calorie = statistics.sumQuantity()?.doubleValue(for: energyUnit) ?? 0
+               case HKQuantityType.quantityType(forIdentifier: .distanceWalkingRunning):
+                   let meterUnit = HKUnit.meter()
+                   self.distance = statistics.sumQuantity()?.doubleValue(for: meterUnit) ?? 0
+                   let duration = self.builder?.elapsedTime ?? 0
+                   self.calculateAveragePace(distance: self.distance, duration: duration)
+               case HKQuantityType.quantityType(forIdentifier: .runningSpeed):
+                   let meterPerSecondUnit = HKUnit.meter().unitDivided(by: HKUnit.second())
+                   let speed = statistics.mostRecentQuantity()?.doubleValue(for: meterPerSecondUnit) ?? 0
+                   self.calculatePaceFromSpeed(speed: speed)
+               case HKQuantityType.quantityType(forIdentifier: .cyclingCadence):
+                   let cadenceUnit = HKUnit(from: "count/min")
+                   self.cadence = statistics.averageQuantity()?.doubleValue(for: cadenceUnit) ?? 0
+               default:
+                   return
+               }
+           }
+       }
+    
     func resetWorkout() {
         selectedWorkout = nil
         builder = nil
@@ -184,6 +214,8 @@ extension WatchWorkoutManager: HKWorkoutSessionDelegate {
                         from fromState: HKWorkoutSessionState, date: Date) {
         DispatchQueue.main.async {
             self.running = toState == .running
+            // 러닝 세션의 상태를 iOS 앱으로 전달
+            self.watchConnectivityManager.sendRunningSessionStateToPhone(self.running)
         }
 
         // Wait for the session to transition states before ending the builder.
@@ -197,7 +229,7 @@ extension WatchWorkoutManager: HKWorkoutSessionDelegate {
             }
         }
     }
-
+    
     func workoutSession(_ workoutSession: HKWorkoutSession, didFailWithError error: Error) {
 
     }

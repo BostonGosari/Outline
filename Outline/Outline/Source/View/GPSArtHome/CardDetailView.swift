@@ -10,12 +10,14 @@ import MapKit
 
 struct CardDetailView: View {
     
-    @State var start = false
-    @ObservedObject var homeTabViewModel: HomeTabViewModel
-    @StateObject var runningManager = RunningManager.shared
+    @State private var isUnlocked = false
+    @State private var showAlert = false
+    @StateObject var runningManager = RunningStartManager.shared
+    private let locationManager = CLLocationManager()
     @Environment(\.dismiss) var dismiss
     
-    @Binding var isShow: Bool
+    @Binding var showDetailView: Bool
+    var selectedCourse: CourseWithDistance
     var currentIndex: Int
     var namespace: Namespace.ID
     
@@ -24,6 +26,7 @@ struct CardDetailView: View {
     @State private var scrollViewOffset: CGFloat = 0
     @State private var dragState: CGSize = .zero
     @State private var isDraggable = true
+    @State private var progress: Double = 0.0
     
     private let fadeInOffset: CGFloat = 10
     private let dragStartRange: CGFloat = 60
@@ -31,128 +34,219 @@ struct CardDetailView: View {
     private let dragLimit: CGFloat = 60
     private let scrollLimit: CGFloat = 40
     
-    // 커진 카드의 크기
-    private let cardHeight: CGFloat = 575
-    
     var body: some View {
-        ScrollView {
-            ZStack {
-                Color.gray900Color
-                    .onScrollViewOffsetChanged { value in
-                        handleScrollViewOffset(value)
+        ZStack {
+            ScrollView {
+                ZStack {
+                    Color.gray900
+                        .onScrollViewOffsetChanged { value in
+                            handleScrollViewOffset(value)
+                        }
+                    
+                    VStack {
+                        ZStack {
+                            courseImage
+                            courseInformation
+                        }
+                        CardDetailInformationView(selectedCourse: selectedCourse)
+                            .opacity(appear[2] ? 1 : 0)
+                            .offset(y: appear[2] ? 0 : fadeInOffset)
                     }
-                
-                VStack {
-                    ZStack {
-                        courseImage
-                        courseInformation
-                    }
-                    CardDetailInformationView(homeTabViewModel: homeTabViewModel, currentIndex: currentIndex)
-                        .opacity(appear[2] ? 1 : 0)
-                        .offset(y: appear[2] ? 0 : fadeInOffset)
+                    .mask(
+                        RoundedRectangle(cornerRadius: viewSize / 2, style: .continuous)
+                    )
+                    .scaleEffect(showDetailView ? max(viewSize / -600 + 1, 0.9) : 0.9)
+                    .gesture(isDraggable ? drag : nil)
+                    
+                    slideToUnlock
+                        .padding(.top, 485)
+                        .frame(maxHeight: .infinity, alignment: .top)
+                        .zIndex(1)
+                    
+                    closeButton
+                    
+                    Color.black
+                        .opacity(progress * 0.8)
+                        .animation(.easeInOut, value: progress)
                 }
-                .mask(
-                    RoundedRectangle(cornerRadius: viewSize / 2, style: .continuous)
-                )
-                .scaleEffect(viewSize / -600 + 1)
-                .gesture(isDraggable ? drag : nil)
+                .onChange(of: showDetailView) { _, _ in
+                    fadeOut()
+                }
+                .onAppear {
+                    fadeIn()
+                }
             }
-            .onChange(of: isShow) { _, _ in
-                fadeOut()
+            .scrollIndicators(scrollViewOffset > scrollStartRange ? .hidden : .automatic)
+            .scrollDisabled(!showDetailView)
+            .ignoresSafeArea(edges: .top)
+            .statusBarHidden()
+            
+            ZStack {
+                Color.customBlack.opacity(0.7)
+                VStack {
+                    Spacer()
+                    LookAroundModalView {
+                        showDetailView = false
+                    }
+                }
+                .frame(height: UIScreen.main.bounds.height / 2)
+                .frame(maxWidth: .infinity)
+                .background {
+                    RoundedRectangle(cornerRadius: 30, style: .continuous)
+                        .stroke(Color.customPrimary, lineWidth: 2)
+                    RoundedRectangle(cornerRadius: 30, style: .continuous)
+                        .foregroundStyle(Color.gray900)
+                }
+                .frame(maxHeight: .infinity, alignment: .bottom)
             }
-            .onAppear {
-                fadeIn()
+            
+                        
+            ZStack {
+                if showAlert {
+                    Color.black.opacity(0.5)
+                        .onTapGesture {
+                            withAnimation {
+                                showAlert = false
+                                progress = 0.0
+                            }
+                        }
+                }
+                VStack(spacing: 10) {
+                    Text("자유코스로 변경할까요?")
+                        .font(.title2)
+                    Text("앗! 현재 루트와 멀리 떨어져 있어요.")
+                        .font(.subBody)
+                        .foregroundColor(.gray300)
+                    Image("AnotherLocation")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 120)
+                    Button {
+                        showAlert = false
+                        showDetailView = false
+                        runningManager.start = true
+                        runningManager.startFreeRun()
+                    } label: {
+                        Text("자유코스로 변경하기")
+                            .font(.button)
+                            .foregroundStyle(Color.customBlack)
+                            .padding()
+                            .frame(maxWidth: .infinity)
+                            .background {
+                                RoundedRectangle(cornerRadius: 15, style: .continuous)
+                                    .foregroundStyle(Color.customPrimary)
+                            }
+                    }
+                    .padding()
+                    Button {
+                        withAnimation {
+                            showAlert = false
+                            showDetailView = false
+                        }
+                    } label: {
+                        Text("홈으로 돌아가기")
+                            .font(.button)
+                            .bold()
+                            .foregroundStyle(Color.customWhite)
+                    }
+                }
+                .frame(height: UIScreen.main.bounds.height / 2)
+                .frame(maxWidth: .infinity)
+                .background {
+                    RoundedRectangle(cornerRadius: 30, style: .continuous)
+                        .stroke(Color.customPrimary, lineWidth: 2)
+                    RoundedRectangle(cornerRadius: 30, style: .continuous)
+                        .foregroundStyle(Color.gray900)
+                }
+                .frame(maxHeight: .infinity, alignment: .bottom)
+                .offset(y: showAlert ? 0 : UIScreen.main.bounds.height / 2 + 2)
             }
         }
-        .overlay {
-            closeButton
-        }
-        .scrollIndicators(scrollViewOffset > scrollStartRange ? .hidden : .automatic)
-        .ignoresSafeArea(edges: .top)
-        .statusBarHidden()
     }
     
     // MARK: - View Components
     
     private var courseImage: some View {
-        AsyncImage(url: URL(string: homeTabViewModel.recommendedCoures[currentIndex].course.thumbnail)) { image in
+        AsyncImage(url: URL(string: selectedCourse.course.thumbnail)) { image in
             image
                 .resizable()
-                .scaledToFill()
+                .roundedCorners(45, corners: [.bottomRight])
+                .shadow(color: .white, radius: 0.5, y: 0.5)
         } placeholder: {
             Rectangle()
-                .scaledToFit()
+                .foregroundColor(.gray700)
         }
-        .foregroundColor(.gray800)
-        .roundedCorners(45, corners: [.bottomLeft])
-        .shadow(color: .white, radius: 0.5, y: 0.5)
-        .matchedGeometryEffect(id: "courseImage\(currentIndex)", in: namespace)
-        .frame(height: cardHeight)
+        .matchedGeometryEffect(id: selectedCourse.id, in: namespace)
+        .frame(
+            width: UIScreen.main.bounds.width,
+            height: UIScreen.main.bounds.height * 0.68
+        )
+        .transition(.identity)
     }
     
     private var courseInformation: some View {
         VStack(alignment: .leading) {
             VStack(alignment: .leading, spacing: 0) {
-                Text("\(homeTabViewModel.recommendedCoures[currentIndex].course.courseName)")
+                Text("\(selectedCourse.course.courseName)")
                     .font(.largeTitle)
                     .bold()
                     .padding(.bottom, 8)
                 HStack {
                     Image(systemName: "mappin")
-                    Text("\(homeTabViewModel.recommendedCoures[currentIndex].course.locationInfo.locality) \(homeTabViewModel.recommendedCoures[currentIndex].course.locationInfo.subLocality) • 내 위치에서 \(homeTabViewModel.recommendedCoures[currentIndex].distance/1000, specifier: "%.1f")km")
+                    Text("\(selectedCourse.course.locationInfo.locality) \(selectedCourse.course.locationInfo.subLocality) • 내 위치에서 \(selectedCourse.distance/1000, specifier: "%.1f")km")
                 }
                 .font(.caption)
                 .fontWeight(.semibold)
                 .padding(.bottom, 16)
-                
-                HStack {
-                    Text("#\(homeTabViewModel.recommendedCoures[currentIndex].course.courseLength, specifier: "%.0f")km")
-                        .frame(width: 70, height: 23)
-                        .background {
-                            Capsule()
-                                .stroke()
-                        }
-                    Text("#\(formatDuration(homeTabViewModel.recommendedCoures[currentIndex].course.courseDuration))")
-                        .frame(width: 70, height: 23)
-                        .background {
-                            Capsule()
-                                .stroke()
-                        }
-                }
-                .font(.caption)
             }
             .padding(.top, 100)
             .opacity(appear[0] ? 1 : 0)
             .offset(y: appear[0] ? 0 : fadeInOffset)
             
             Spacer()
-            
-            SlideToUnlock(isUnlocked: $runningManager.start)
-                .onChange(of: runningManager.start) { _, _ in
-                    runningManager.startCourse = homeTabViewModel.recommendedCoures[currentIndex].course
-                    runningManager.startGPSArtRun()
-                    isShow = false
-                }
-                .opacity(appear[1] ? 1 : 0)
-                .offset(y: appear[1] ? 0 : fadeInOffset)
-                .padding(-10)
         }
         .padding(40)
+        .frame(maxWidth: .infinity, alignment: .leading)
+    }
+    
+    private var slideToUnlock: some View {
+        SlideToUnlock(isUnlocked: $isUnlocked, progress: $progress)
+            .onChange(of: isUnlocked) { _, newValue in
+                if newValue {
+                    let course = selectedCourse.course.coursePaths
+                    
+                    if runningManager.checkDistance(course: course) {
+                        runningManager.startCourse = selectedCourse.course
+                        runningManager.startGPSArtRun()
+                        showDetailView = false
+                        runningManager.start = true
+                        isUnlocked = false
+                    } else {
+                        isUnlocked = false
+                        withAnimation {
+                            showAlert = true
+                        }
+                    }
+                }
+            }
+            .opacity(appear[1] ? 1 : 0)
+            .offset(y: appear[1] ? 0 : fadeInOffset)
+            .padding(-10)
     }
     
     private var closeButton: some View {
         Button {
-            withAnimation(.closeCard) {
-                isShow.toggle()
+            withAnimation(.bouncy) {
+                showDetailView.toggle()
             }
         } label: {
             Image(systemName: "xmark.circle.fill")
-                .font(.title)
-                .foregroundColor(viewSize > 15 ? .clear : .primaryColor)
+                .font(.system(size: 30))
+                .foregroundColor(viewSize > 15 ? .clear : .customPrimary)
         }
         .animation(.easeInOut, value: viewSize)
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
-        .padding(30)
+        .padding(20)
         .opacity(appear[1] ? 1 : 0)
         .offset(y: appear[1] ? 0 : fadeInOffset)
     }
@@ -171,8 +265,8 @@ extension CardDetailView {
                             viewSize = dragState.width
                         }
                         if viewSize > dragLimit {
-                            withAnimation(.closeCard) {
-                                isShow = false
+                            withAnimation(.bouncy) {
+                                showDetailView = false
                                 dragState = .zero
                             }
                         }
@@ -185,8 +279,8 @@ extension CardDetailView {
                         }
                         
                         if viewSize > dragLimit {
-                            withAnimation(.closeCard) {
-                                isShow = false
+                            withAnimation(.bouncy) {
+                                showDetailView = false
                                 dragState = .zero
                                 viewSize = 0.0
                             }
@@ -196,12 +290,12 @@ extension CardDetailView {
             }
             .onEnded { _ in
                 if viewSize >= dragLimit {
-                    withAnimation(.closeCard) {
-                        isShow = false
+                    withAnimation(.bouncy) {
+                        showDetailView = false
                         viewSize = 0.0
                     }
                 } else {
-                    withAnimation {
+                    withAnimation(.bouncy) {
                         dragState = .zero
                         viewSize = 0.0
                     }
@@ -215,11 +309,11 @@ extension CardDetailView {
 extension CardDetailView {
     
     private func close() {
-        withAnimation(.closeCard.delay(0.3)) {
-            isShow = false
+        withAnimation(.bouncy.delay(0.3)) {
+            showDetailView = false
         }
         
-        withAnimation(.closeCard) {
+        withAnimation(.bouncy) {
             viewSize = .zero
         }
         
@@ -254,8 +348,8 @@ extension CardDetailView {
                 viewSize = scrollViewOffset - scrollStartRange
                 
                 if scrollViewOffset > scrollLimit {
-                    withAnimation(.closeCard) {
-                        isShow = false
+                    withAnimation(.bouncy) {
+                        showDetailView = false
                     }
                 }
             } else {
@@ -263,8 +357,4 @@ extension CardDetailView {
             }
         }
     }
-}
-
-#Preview {
-    HomeTabView()
 }

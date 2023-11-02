@@ -8,68 +8,114 @@
 import SwiftUI
 
 struct GPSArtHomeView: View {
+    @AppStorage("authState") var authState: AuthState = .onboarding
     
-    @ObservedObject var homeTabViewModel: HomeTabViewModel
+    @StateObject private var viewModel = GPSArtHomeViewModel()
     
     @State private var scrollOffset: CGFloat = 0
+    @State private var scrollXOffset: CGFloat = 0
+    
     @State var currentIndex: Int = 0
-    
+    @State private var loading = true
+    @State private var selectedCourse: CourseWithDistance?
+    @State private var showNetworkErrorView = false
     // 받아오는 변수
-    @Binding var isShow: Bool
-    var namespace: Namespace.ID
+    @Binding var showDetailView: Bool
+    @Namespace private var namespace
     
-    // Carousel 에 필요한 변수들
-    let pageCount = 3
-    let edgeSpace: CGFloat = 36
-    let spacing: CGFloat = 20
-    
-    // 뷰에 있는 요소들의 사이즈 조정
-    let carouselFrameHeight: CGFloat = 484
     let indexWidth: CGFloat = 25
     let indexHeight: CGFloat = 3
+    let maxLoadingTime: TimeInterval = 5
     
     var body: some View {
-        ZStack(alignment: .top) {
-            ScrollView {
-                Color.clear.frame(height: 0)
-                    .onScrollViewOffsetChanged { offset in
-                        scrollOffset = offset
-                    }
-                Header(scrollOffset: scrollOffset)
-                    .padding(.bottom)
-                
-                VStack(spacing: 16) {
-                    Carousel(pageCount: pageCount, edgeSpace: edgeSpace, spacing: spacing, currentIndex: $currentIndex) { pageIndex in
-                        if !isShow {
-                            CardView(homeTabViewModel: homeTabViewModel, isShow: $isShow, currentIndex: $currentIndex, namespace: namespace, pageIndex: pageIndex)
-                                .transition(
-                                    .asymmetric(
-                                        insertion: .opacity.animation(.easeInOut(duration: 0.1)),
-                                        removal: .opacity.animation(.easeInOut(duration: 0.3).delay(0.2))
-                                    )
-                                )
+        ZStack {
+            if showNetworkErrorView {
+                 errorView
+             }
+            else {
+                ScrollView {
+                    Color.clear.frame(height: 0)
+                        .onScrollViewOffsetChanged { offset in
+                            scrollOffset = offset
                         }
-                    }
-                    .frame(height: carouselFrameHeight)
+                    GPSArtHomeHeader(loading: loading, scrollOffset: scrollOffset)
                     
-                    HStack {
-                        ForEach(0..<pageCount, id: \.self) { pageIndex in
-                            Rectangle()
-                                .frame(width: indexWidth, height: indexHeight)
-                                .foregroundColor(currentIndex == pageIndex ? .primaryColor : .white)
-                                .animation(.easeInOut, value: currentIndex)
+                    VStack {
+                        ScrollView(.horizontal, showsIndicators: false) {
+                            
+                            getCurrentOffsetView
+                            
+                            HStack(spacing: 0) {
+                                ForEach(viewModel.recommendedCoures.indices, id: \.self) { index in
+                                    Button {
+                                        withAnimation(.bouncy) {
+                                            selectedCourse = viewModel.recommendedCoures[index]
+                                            showDetailView = true
+                                        }
+                                    } label: {
+                                        BigCardView(course: viewModel.recommendedCoures[index], loading: $loading, index: index, currentIndex: currentIndex, namespace: namespace, showDetailView: showDetailView)
+                                            .scaleEffect(selectedCourse?.id == viewModel.recommendedCoures[index].course.id ? 0.96 : 1)
+                                    }
+                                    .buttonStyle(CardButton())
+                                    .disabled(loading)
+                                    .scrollTransition { content, phase in
+                                        content
+                                            .scaleEffect(phase.isIdentity ? 1 : 0.9)
+                                    }
+                                }
+                            }
+                            .scrollTargetLayout()
                         }
+                        .contentMargins(UIScreen.main.bounds.width * 0.08, for: .scrollContent)
+                        .scrollTargetBehavior(.viewAligned)
+                        .padding(.top, -20)
+                        .padding(.bottom, -10)
+                        
+                        if viewModel.courses.isEmpty {
+                            Rectangle()
+                                .frame(
+                                    width: UIScreen.main.bounds.width * 0.84,
+                                    height: UIScreen.main.bounds.height * 0.55
+                                )
+                                .roundedCorners(10, corners: [.topLeft])
+                                .roundedCorners(70, corners: [.topRight])
+                                .roundedCorners(45, corners: [.bottomLeft, .bottomRight])
+                                .foregroundColor(.gray700)
+                                .padding(.top, -20)
+                                .padding(.bottom, -10)
+                        }
+                        
+                        HStack {
+                            ForEach(0..<3) { index in
+                                Rectangle()
+                                    .frame(width: indexWidth, height: indexHeight)
+                                    .foregroundColor(loading ? .gray700 : currentIndex == index ? .customPrimary : .white)
+                                    .animation(.bouncy, value: currentIndex)
+                            }
+                        }
+                        
+                        BottomScrollView(viewModel: viewModel, selectedCourse: $selectedCourse, showDetailView: $showDetailView, namespace: namespace)
                     }
-                    BottomScrollView(homeTabViewModel: homeTabViewModel)
+                }
+                .overlay(alignment: .top) {
+                    GPSArtHomeInlineHeader(loading: loading, scrollOffset: scrollOffset)
+                }
+                .onAppear {
+                    viewModel.getAllCoursesFromFirebase()
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + maxLoadingTime) {
+                             if loading {
+                                 showNetworkErrorView = true
+                             }
+                         }
+                }
+                .refreshable {
+                    viewModel.fetchRecommendedCourses()
                 }
             }
-            .overlay(alignment: .top) {
-                InlineHeader(scrollOffset: scrollOffset)
-            }
-            
-            if isShow {
-                Color.gray900Color.ignoresSafeArea()
-                CardDetailView(homeTabViewModel: homeTabViewModel, isShow: $isShow, currentIndex: currentIndex, namespace: namespace)
+            if let selectedCourse, showDetailView {
+                Color.gray900.ignoresSafeArea()
+                CardDetailView(showDetailView: $showDetailView, selectedCourse: selectedCourse, currentIndex: currentIndex, namespace: namespace)
                     .zIndex(1)
                     .transition(
                         .asymmetric(
@@ -81,8 +127,61 @@ struct GPSArtHomeView: View {
             }
         }
         .background(
-            BackgroundBlur(color: Color.primaryColor, padding: 500)
+            BackgroundBlur(color: Color.customThird, padding: 0)
         )
+        .background(
+            BackgroundBlur(color: Color.customPrimary, padding: 500)
+        )
+    }
+    
+    private var getCurrentOffsetView: some View {
+        Color.clear
+            .onScrollViewXOffsetChanged { offset in
+                scrollXOffset = -offset + UIScreen.main.bounds.width * 0.08
+            }
+            .onChange(of: scrollXOffset) { _, newValue in
+                withAnimation(.bouncy(duration: 1)) {
+                    switch newValue {
+                    case ..<200:
+                        currentIndex = 0
+                    case 200..<500:
+                        currentIndex = 1
+                    case 500...:
+                        currentIndex = 2
+                    default:
+                        break
+                    }
+                }
+            }
+    }
+}
+
+extension GPSArtHomeView{
+    var errorView: some View {
+        VStack {
+            Image(systemName: "exclamationmark.circle")
+                .foregroundStyle(Color.customPrimary)
+                .font(Font.system(size: 40))
+            Text("예상치 못한 문제가 발생되었어요.")
+                .font(.date)
+                .foregroundStyle(Color.customWhite)
+                .padding(.top, 16)
+                .padding(.bottom, 40)
+            Button {
+                loading = true
+                showNetworkErrorView.toggle()
+            } label: {
+                HStack {
+                    Text("다시 시도하기")
+                        .font(.caption)
+                        .foregroundStyle(Color.customPrimary)
+                    Image(systemName: "chevron.forward")
+                        .font(.caption)
+                        .foregroundStyle(Color.customPrimary)
+                }
+                
+            }
+        }
     }
 }
 
