@@ -73,8 +73,7 @@ struct ControlsView: View {
         .overlay {
             if showingConfirmation {
                 customExitSheet
-            }
-            else if showingEndwithoutSavingSheet {
+            } else if showingEndwithoutSavingSheet {
                 customEndWithoutSavingSheet
             }
         }
@@ -129,7 +128,6 @@ extension ControlsView {
                     let healthData = HealthData(totalTime: 0.0, averageCadence: workoutManager.cadence, totalRunningDistance: workoutManager.distance, totalEnergy: workoutManager.calorie, averageHeartRate: workoutManager.heartRate, averagePace: workoutManager.pace, startDate: Date(), endDate: Date())
                     
                     watchConnectivityManager.sendRunningRecordToPhone(RunningRecord(id: UUID().uuidString, runningType: watchRunningManager.runningType, courseData: courseData, healthData: healthData))
-                    
                 } label: {
                     Text("종료하기")
                         .frame(maxWidth: .infinity)
