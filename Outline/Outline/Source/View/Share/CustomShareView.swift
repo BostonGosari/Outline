@@ -38,7 +38,7 @@ struct CustomShareView: View {
             
         }
         .onChange(of: viewModel.tapSaveButton) {
-            if viewModel.currentPage == 0 {
+            if viewModel.tapSaveButton && viewModel.currentPage == 0 {
                 renderMapViewAsImage(
                     width: Int(imageWidth),
                     height: Int(imageHeight)
@@ -50,7 +50,7 @@ struct CustomShareView: View {
             }
         }
         .onChange(of: viewModel.tapShareButton) {
-            if viewModel.currentPage == 0 {
+            if viewModel.tapShareButton && viewModel.currentPage == 0 {
                 renderMapViewAsImage(
                     width: Int(imageWidth),
                     height: Int(imageHeight)

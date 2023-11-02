@@ -14,8 +14,6 @@ class ShareViewModel: ObservableObject {
     @Published var showCamera = false
     @Published var showImagePicker = false
     @Published var permissionDenied = false
-    @Published var customImage: UIImage?
-    @Published var posterImage: UIImage?
     
     @Published var tapSaveButton = false
     @Published var tapShareButton = false
@@ -34,6 +32,7 @@ class ShareViewModel: ObservableObject {
     
     var alertTitle = ""
     var alertMessage = ""
+    var imageName = ""
     
     func checkCameraPermission() {
         AVCaptureDevice.requestAccess(for: .video) { granted in
@@ -42,6 +41,7 @@ class ShareViewModel: ObservableObject {
             } else {
                 self.alertTitle = "카메라 권한 허용"
                 self.alertMessage = "권한을 허용하면 사진을 찍어 업로드할 수 있어요."
+                self.imageName = "icon_Image_B"
                 self.permissionDenied = true
             }
         }
@@ -55,10 +55,12 @@ class ShareViewModel: ObservableObject {
             case .denied:
                 self.alertTitle = "사진 권한 허용"
                 self.alertMessage = "권한을 허용하면 사진을 함께 업로드할 수 있어요."
+                self.imageName = "icon_Camera"
                 self.permissionDenied = true
             case .restricted, .notDetermined:
                 self.alertTitle = "사진 권한 허용"
                 self.alertMessage = "권한을 허용하면 사진을 함께 업로드할 수 있어요."
+                self.imageName = "icon_Camera"
                 self.permissionDenied = true
             default:
                 break
@@ -84,10 +86,33 @@ class ShareViewModel: ObservableObject {
     }
     
     func saveImage(image: UIImage) {
-        let imageSaver = ImageSaver()
-        imageSaver.writeToPhotoAlbum(image: image)
-        isShowPopup = true
+        PHPhotoLibrary.requestAuthorization { status in
+            switch status {
+            case .authorized:
+                let imageSaver = ImageSaver()
+                imageSaver.writeToPhotoAlbum(image: image)
+                self.isShowPopup = true
+            case .denied:
+                self.alertTitle = "사진 권한 허용"
+                self.alertMessage = "권한을 허용하면 사진을 함께 업로드할 수 있어요."
+                self.imageName = "icon_Camera"
+                self.permissionDenied = true
+            case .restricted, .notDetermined:
+                self.alertTitle = "사진 권한 허용"
+                self.alertMessage = "권한을 허용하면 사진을 함께 업로드할 수 있어요."
+                self.imageName = "icon_Camera"
+                self.permissionDenied = true
+            default:
+                break
+            }
+        }
         tapSaveButton = false
+    }
+    
+    func openAppSetting() {
+        if let url = URL(string: UIApplication.openSettingsURLString) {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
     }
 }
 
