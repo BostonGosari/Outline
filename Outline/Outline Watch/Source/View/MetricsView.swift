@@ -32,7 +32,7 @@ struct MetricsView: View {
                     }
                     Spacer()
                     VStack {
-                        Text(workoutManager.pace > 0 ? String(format: "%02d’%02d’’", Int(workoutManager.pace), Int((workoutManager.pace * 60).truncatingRemainder(dividingBy: 60))) : "-’--’’")
+                        Text(workoutManager.pace > 0 ? workoutManager.pace.formattedAveragePace() : "-’--’’")
 
                             .font(.system(size: 28).weight(.semibold))
                             .foregroundColor(.white)
@@ -45,9 +45,6 @@ struct MetricsView: View {
                     Spacer()
                 }
                 Spacer()
-               
-//                Text(workoutManager.heartRate.formatted(.number.precision(.fractionLength(0))) + " bpm")
-//                Text(Measurement(value: workoutManager.distance, unit: UnitLength.meters).formatted(.measurement(width: .abbreviated, usage: .road)))
             }
             .font(.system(.title, design: .rounded).monospacedDigit().lowercaseSmallCaps())
             .frame(maxWidth: .infinity)

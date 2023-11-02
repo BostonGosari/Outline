@@ -71,6 +71,8 @@ struct HomeTabView: View {
         .onReceive(watchConnectivityManager.$isWatchRunning) { isRunning in
               if isRunning {
                   showCustomSheet = true
+              } else {
+                  showCustomSheet = false
               }
           }
     }

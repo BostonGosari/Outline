@@ -136,10 +136,9 @@ struct CourseListWatchView: View {
                     }
             }
             .navigationTitle("러닝")
-            .tint(.first)
-        }
-        .sheet(isPresented: $workoutManager.showingSummaryView) {
-            SummaryView(navigate: $navigate)
+            .sheet(isPresented: $workoutManager.showingSummaryView) {
+                SummaryView(navigate: $navigate)
+            }
         }
     }
     
@@ -162,7 +161,8 @@ struct CourseListWatchView: View {
             } else {
                 WatchTabView() // 카운트다운이 끝나면 WatchTabView로 이동
             }
-        }.navigationBarBackButtonHidden()
+        }
+        .navigationBarBackButtonHidden()
     }
 }
 

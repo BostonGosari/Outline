@@ -24,6 +24,7 @@ struct ContentWatchView: View {
                 workoutManager.requestAuthorization()
                 locationManager.requestWhenInUseAuthorization()
             }
+            .tint(.first)
     }
 }
 
