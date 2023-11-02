@@ -125,8 +125,6 @@ extension RunningMapView {
                         .frame(maxWidth: .infinity, alignment: .trailing)
                         .padding(.trailing, 32)
                         .padding(.bottom, 14)
-                        .opacity(viewModel.runningType == .start ? 1 : 0)
-                    
                     ZStack {
                         Button {
                             HapticManager.impact(style: .medium)
@@ -138,8 +136,8 @@ extension RunningMapView {
                                 .buttonModifier(color: Color.customPrimary, size: 29, padding: 29)
                             
                         }
+                        .buttonStyle(.plain)
                         .frame(maxWidth: .infinity, alignment: .center)
-                        .zIndex(1)
                         
                         Button {
                             withAnimation {
@@ -152,9 +150,10 @@ extension RunningMapView {
                         .frame(maxWidth: .infinity, alignment: .trailing)
                         .padding(.trailing, 32)
                     }
-                    .opacity(viewModel.runningType == .start ? 1 : 0)
-
                 }
+                .opacity(viewModel.runningType == .start ? 1 : 0)
+                .zIndex(1)
+
                 ZStack {
                     Image(systemName: "stop.fill")
                         .buttonModifier(color: Color.white, size: 24, padding: 26)
@@ -189,7 +188,6 @@ extension RunningMapView {
                                    }
                                 }
                         )
-                        .opacity(viewModel.runningType == .start ? 0 : 1)
                         .frame(maxWidth: .infinity, alignment: viewModel.runningType == .start ? .center : .leading)
                     Button {
                         HapticManager.impact(style: .medium)
@@ -200,10 +198,10 @@ extension RunningMapView {
                         Image(systemName: "play.fill")
                             .buttonModifier(color: Color.customPrimary, size: 24, padding: 26)
                     }
-                    .opacity(viewModel.runningType == .start ? 0 : 1)
                     .frame(maxWidth: .infinity, alignment: viewModel.runningType == .start ? .center : .trailing)
                 }
                 .padding(.horizontal, 64)
+                .padding(.bottom, 5)
                 .animation(.bouncy, value: viewModel.runningType)
         }
     }
