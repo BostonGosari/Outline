@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct ConfettiWatchView: View {
-    
     @State var counter = 0
     
     var body: some View {
@@ -30,15 +29,11 @@ struct ConfettiWatchView: View {
                  confettiSize: 7,
                  openingAngle: .degrees(60),
                  closingAngle: .degrees(120),
-                 repetitions: 3,
+                 repetitions: 5,
                  repetitionInterval: 0.5
         )
         .onAppear {
             counter += 1
         }
     }
-}
-
-#Preview {
-    ConfettiWatchView()
 }

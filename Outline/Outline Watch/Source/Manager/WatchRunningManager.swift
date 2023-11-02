@@ -15,6 +15,7 @@ class WatchRunningManager: ObservableObject {
     
     @Published var userLocations: [CLLocationCoordinate2D] = []
     @Published var changeRunningType = false
+    @Published var startRunning = false
     
     private let locationManager = CLLocationManager()
     var startCourse: GPSArtCourse = GPSArtCourse()
@@ -25,11 +26,13 @@ class WatchRunningManager: ObservableObject {
         startCourse = GPSArtCourse()
         runningType = .free
         getFreeRunName()
+        startRunning = true
     }
     
     func startGPSArtRun() {
         userLocations = []
         runningType = .gpsArt
+        startRunning = true
     }
     
     func trackingDistance() {

@@ -9,9 +9,8 @@ import SwiftUI
 import MapKit
 
 struct MapWatchView: View {
-    @StateObject var watchRunningManager = WatchRunningManager.shared
-    @State var position: MapCameraPosition = .userLocation(followsHeading: true, fallback: .automatic)
-    @State private var userCoordinate: CLLocationCoordinate2D?
+    @StateObject private var watchRunningManager = WatchRunningManager.shared
+    @State private var position: MapCameraPosition = .userLocation(followsHeading: true, fallback: .automatic)
     
     var body: some View {
         NavigationStack {
@@ -35,19 +34,23 @@ struct MapWatchView: View {
             .mapControlVisibility(.hidden)
             .tint(.first)
             .overlay(alignment: .topLeading) {
-                Text("시티런")
-                    .bold()
-                    .foregroundStyle(.first)
-                    .padding()
-                    .padding(.top, 5)
-                    .padding(.leading, 20)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .background {
-                        Rectangle()
-                            .foregroundStyle(.thinMaterial)
-                    }
-                    .ignoresSafeArea()
+                header
             }
         }
+    }
+    
+    private var header: some View {
+        Text("시티런")
+            .bold()
+            .foregroundStyle(.first)
+            .padding()
+            .padding(.top, 5)
+            .padding(.leading, 20)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .background {
+                Rectangle()
+                    .foregroundStyle(.thinMaterial)
+            }
+            .ignoresSafeArea()
     }
 }

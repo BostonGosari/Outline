@@ -9,11 +9,12 @@ import SwiftUI
 import HealthKit
 
 struct MetricsView: View {
-    @EnvironmentObject var workoutManager: WatchWorkoutManager
-    
+    @StateObject var workoutManager = WatchWorkoutManager.shared
+
     var body: some View {
-        TimelineView(MetricsTimelineSchedule(from: workoutManager.builder?.startDate ?? Date(),
-                                             isPaused: workoutManager.session?.state == .paused)) { context in
+        TimelineView(
+            MetricsTimelineSchedule(from: workoutManager.builder?.startDate ?? Date(),
+                                    isPaused: workoutManager.session?.state == .paused)) { context in
             VStack(alignment: .center) {
                 Spacer()
                 ElapsedTimeView(elapsedTime: workoutManager.builder?.elapsedTime(at: context.date) ?? 0)

@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct WatchTabView: View {
-    @EnvironmentObject var workoutManager: WatchWorkoutManager
     @Environment(\.isLuminanceReduced) var isLuminanceReduced
+    @StateObject var workoutManager = WatchWorkoutManager.shared
     @StateObject var watchRunningManager = WatchRunningManager.shared
     @State private var selection: Tab = .metrics
         
@@ -26,25 +26,21 @@ struct WatchTabView: View {
             MetricsView()
                 .tag(Tab.metrics)
         }
-        .navigationBarBackButtonHidden(true)
-        .onChange(of: workoutManager.running) { _, _ in
-            workoutManager.running ?
-            displayMetricsView()
-            : displayControlsView()
-        }
+        .toolbarBackground(.hidden, for: .navigationBar)
         .tabViewStyle(PageTabViewStyle(indexDisplayMode: isLuminanceReduced ? .never : .automatic))
+        .onChange(of: workoutManager.running) { _, newValue in
+            withAnimation {
+                if newValue {
+                    selection = .metrics
+                } else {
+                    selection = .controls
+                }
+            }
+        }
         .onChange(of: isLuminanceReduced) { _, _ in
-            displayMetricsView()
-        }
-    }
-    private func displayMetricsView() {
-        withAnimation {
-            selection = .metrics
-        }
-    }
-    private func displayControlsView() {
-        withAnimation {
-            selection = .controls
+            withAnimation {
+                selection = .metrics
+            }
         }
     }
 }

@@ -11,9 +11,11 @@ import SwiftUI
 import WatchKit
 
 struct SummaryView: View {
-    @EnvironmentObject var workoutManager: WatchWorkoutManager
     @Environment(\.dismiss) var dismiss
-    @StateObject var watchRunningManager = WatchRunningManager.shared
+    @StateObject var workoutManager = WatchWorkoutManager.shared
+    @StateObject var runningManager = WatchRunningManager.shared
+    
+    @State private var isShowingFinishView = true
     @State private var timeFormatter = ElapsedTimeFormatter()
     @State private var durationFormatter: DateComponentsFormatter = {
         let formatter = DateComponentsFormatter()
@@ -21,9 +23,7 @@ struct SummaryView: View {
         formatter.zeroFormattingBehavior = .pad
         return formatter
     }()
-        
-    @Binding var navigate: Bool
-    @State private var isShowingFinishView = true
+    
     @Namespace var topID
     
     var body: some View {
@@ -37,13 +37,12 @@ struct SummaryView: View {
         } else {
             ScrollViewReader { proxy in
                 ScrollView {
-                    ConfettiWatchView()
-                    PathGenerateManager.caculateLines(width: 80, height: 80, coordinates: watchRunningManager.userLocations)
+                    PathGenerateManager.caculateLines(width: 80, height: 80, coordinates: runningManager.userLocations)
                         .stroke(style: StrokeStyle(lineWidth: 8, lineCap: .round, lineJoin: .round))
                         .scaledToFit()
                         .foregroundStyle(.first)
                         .frame(width: 120, height: 120)
-
+                    ConfettiWatchView()
                     Text("그림을 완성했어요!")
                         .padding(.bottom)
                     Text(NSNumber(value: workoutManager.builder?.elapsedTime ?? 0), formatter: timeFormatter)
@@ -70,7 +69,8 @@ struct SummaryView: View {
                         .foregroundColor(Color.gray500)
                         .padding(.bottom, 8)
                     Button {
-                        navigate.toggle()
+                        runningManager.startRunning = false
+                        workoutManager.resetWorkout()
                         dismiss()
                     } label: {
                         Text("완료")
@@ -87,6 +87,7 @@ struct SummaryView: View {
             }
         }
     }
+    
     private func scheduleTimerToHideFinishView() {
            Timer.scheduledTimer(withTimeInterval: 3.0, repeats: false) { _ in
                withAnimation {
@@ -106,27 +107,6 @@ extension SummaryView {
             Text(label)
                 .font(.system(size: 14))
                 .foregroundColor(Color.gray500)
-        }
-    }
-}
-
-private struct MetricsTimelineSchedule: TimelineSchedule {
-    var startDate: Date
-    var isPaused: Bool
-
-    init(from startDate: Date, isPaused: Bool) {
-        self.startDate = startDate
-        self.isPaused = isPaused
-    }
-
-    func entries(from startDate: Date, mode: TimelineScheduleMode) -> AnyIterator<Date> {
-        var baseSchedule = PeriodicTimelineSchedule(from: self.startDate,
-                                                    by: (mode == .lowFrequency ? 1.0 : 1.0 / 30.0))
-            .entries(from: startDate, mode: mode)
-        
-        return AnyIterator<Date> {
-            guard !isPaused else { return nil }
-            return baseSchedule.next()
         }
     }
 }
