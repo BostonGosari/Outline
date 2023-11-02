@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct LoginView: View {
+    @AppStorage("authState") var authState: AuthState = .onboarding
     @AppStorage("userId") var userId: String?
     @Environment(\.window) var window: UIWindow?
     @StateObject private var loginViewModel = LoginViewModel()
@@ -87,29 +88,13 @@ struct LoginView: View {
                         }
                     }
                     
-                    Button {
-                        loginViewModel.logOut()
+                    NavigationLink {
+                        InputNicknameView()
+                           .navigationBarBackButtonHidden()
                     } label: {
                         HStack {
                             Spacer()
-                            Text("logout")
-                                .foregroundColor(.white)
-                                .frame(height: 60)
-                            Spacer()
-                        }
-                        .background(.ultraThinMaterial.opacity(0.9))
-                        .cornerRadius(60)
-                        .overlay {
-                            borderRectangle
-                        }
-                    }
-                    
-                    Button {
-                        loginViewModel.signOut()
-                    } label: {
-                        HStack {
-                            Spacer()
-                            Text("signout")
+                            Text("시작하기")
                                 .foregroundColor(.white)
                                 .frame(height: 60)
                             Spacer()
