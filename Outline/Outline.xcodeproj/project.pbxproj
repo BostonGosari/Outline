@@ -44,6 +44,7 @@
 		299457FB2AF3A57700F7D24C /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 299457FA2AF3A57700F7D24C /* FirebaseFirestore */; };
 		299457FD2AF3A57700F7D24C /* FirebaseFirestoreCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 299457FC2AF3A57700F7D24C /* FirebaseFirestoreCombine-Community */; };
 		299457FF2AF3A57700F7D24C /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 299457FE2AF3A57700F7D24C /* FirebaseFirestoreSwift */; };
+		299458072AF3BB6400F7D24C /* DoubleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A01E1D2AF0CCE70093D9C0 /* DoubleExtension.swift */; };
 		299803552ADF5F1000A9A134 /* HealthKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299803542ADF5F1000A9A134 /* HealthKitManager.swift */; };
 		299803572AE00C9B00A9A134 /* HapticManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299803562AE00C9B00A9A134 /* HapticManager.swift */; };
 		2998035B2AE0181900A9A134 /* ConfettiShapes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299803592AE0181900A9A134 /* ConfettiShapes.swift */; };
@@ -1166,6 +1167,7 @@
 				9528EFEA2ADE9E870056CCC6 /* UserCoreDataModel.xcdatamodeld in Sources */,
 				F0AC8B2A2AD967490061612C /* WatchModifier.swift in Sources */,
 				F0492E232ADD545200F6EADD /* CourseListWatchView.swift in Sources */,
+				299458072AF3BB6400F7D24C /* DoubleExtension.swift in Sources */,
 				BB1D53462ADE9CFA0073771F /* WatchWorkoutManager.swift in Sources */,
 				F0AC8B1D2AD966990061612C /* Model.swift in Sources */,
 				BB1D534A2ADE9DC40073771F /* ElapsedTimeView.swift in Sources */,

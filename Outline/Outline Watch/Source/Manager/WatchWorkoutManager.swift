@@ -133,6 +133,11 @@ class WatchWorkoutManager: NSObject, ObservableObject {
         showingSummaryView = true
     }
     
+    func endWorkoutWithoutSummaryView() {
+        session?.end()
+        resetWorkout()
+    }
+    
     // MARK: - Workout Metrics
     @Published var distance: Double = 0
     @Published var averageHeartRate: Double = 0
@@ -146,10 +151,8 @@ class WatchWorkoutManager: NSObject, ObservableObject {
     // 평균 페이스 계산
     func calculateAveragePace(distance: Double, duration: TimeInterval) {
         if distance > 0 && duration > 0 {
-            let averagePaceInSecondsPerMeter = duration / distance
-            
-            let averagePaceInMinutesPerKilometer = averagePaceInSecondsPerMeter / 1000
-            self.averagePace = averagePaceInMinutesPerKilometer
+            let averagePaceInSecondsPerKilometer = duration / distance * 1000
+            self.averagePace = averagePaceInSecondsPerKilometer
         } else {
             self.averagePace = 0
         }
@@ -158,7 +161,7 @@ class WatchWorkoutManager: NSObject, ObservableObject {
     // 실시간 페이스 계산
     func calculatePaceFromSpeed(speed: Double) {
         if speed > 0 {
-            let pace = 60 / (speed) * 60
+            let pace = 1 / speed * 1000
             self.pace = pace
         } else {
             self.pace = 0
