@@ -32,6 +32,22 @@ final class ProfileViewModel: ObservableObject {
         }
     }
     
+    func loadUserInfo() {
+        guard let userId = userId else {
+            print("fail to load userInfo: userId is nil")
+            return
+        }
+        userInfoModel.readUserInfo(uid: userId) { res in
+            switch res {
+            case .success(let userInfo):
+                self.userInfo = userInfo
+                print("success to load userInfo")
+            case .failure(let failure):
+                print("fail to load userInfo")
+            }
+        }
+    }
+    
     func logOut() {
         authModel.handleLogout { res in
             switch res {
