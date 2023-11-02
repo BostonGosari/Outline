@@ -11,7 +11,7 @@ import WatchConnectivity
 class WatchConnectivityManager: NSObject, WCSessionDelegate, ObservableObject {
 
     @Published var allCourses: [GPSArtCourse] = []
-    
+    @Published var isWatchRunning: Bool = false
     static let shared = WatchConnectivityManager()
     
     private let userDataModel = UserDataModel()
@@ -61,6 +61,11 @@ class WatchConnectivityManager: NSObject, WCSessionDelegate, ObservableObject {
             print("Failed to encode RunningReecord")
         }
     }
+    
+    func sendRunningSessionStateToPhone(_ isRunning: Bool) {
+        let signal = ["runningState": isRunning]
+        session.transferUserInfo(signal)
+    }
 
     func session(_ session: WCSession, didReceiveMessage message: [String: Any]) {
         DispatchQueue.main.async {
@@ -81,7 +86,15 @@ class WatchConnectivityManager: NSObject, WCSessionDelegate, ObservableObject {
                     print("Failed to decode GPSArtCourses: \(error)")
                 }
             }
-            
+             
+           if let isRunning = userInfo["runningState"] as? Bool {
+               if isRunning {
+                   self.isWatchRunning = true
+               } else {
+                   self.isWatchRunning = false
+               }
+           }
+    
             // iOS
             if let data = userInfo["newRunningRecord"] as? Data {
                 let decoder = JSONDecoder()
