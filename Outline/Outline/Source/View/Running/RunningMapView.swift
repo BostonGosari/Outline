@@ -250,6 +250,18 @@ extension RunningMapView {
             
             Confetti(counter: $counter,
                      num: 40,
+                     confettis: [
+                        .shape(.circle),
+                        .shape(.smallCircle),
+                        .shape(.triangle),
+                        .shape(.square),
+                        .shape(.smallSquare),
+                        .shape(.slimRectangle),
+                        .shape(.hexagon),
+                        .shape(.star),
+                        .shape(.starPop),
+                        .shape(.blink)
+                     ],
                      colors: [.customPrimary, .customSecondary],
                      confettiSize: 10,
                      rainHeight: UIScreen.main.bounds.height,
