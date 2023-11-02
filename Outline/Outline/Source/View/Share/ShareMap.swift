@@ -9,7 +9,6 @@ import MapKit
 import SwiftUI
 
 struct ShareMap: UIViewRepresentable {
-    
     @Binding var mapView: MKMapView
     @Binding var mapViewRegion: MKCoordinateRegion
     let userLocations: [CLLocationCoordinate2D]
