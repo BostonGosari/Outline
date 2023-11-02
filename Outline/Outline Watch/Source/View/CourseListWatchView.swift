@@ -28,7 +28,7 @@ struct CourseListWatchView: View {
             ScrollView {
                 VStack(spacing: -5) {
                     Button {
-//                        viewModel.checkAuthorization()
+                        viewModel.checkAuthorization()
                         if  viewModel.isHealthAuthorized && viewModel.isLocationAuthorized {
                             workoutManager.selectedWorkout = workoutTypes[0]
                             watchRunningManager.startFreeRun()
