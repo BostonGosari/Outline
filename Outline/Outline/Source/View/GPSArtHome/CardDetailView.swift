@@ -80,6 +80,26 @@ struct CardDetailView: View {
             .scrollDisabled(!showDetailView)
             .ignoresSafeArea(edges: .top)
             .statusBarHidden()
+            
+            ZStack {
+                Color.customBlack.opacity(0.7)
+                VStack {
+                    Spacer()
+                    LookAroundModalView {
+                        showDetailView = false
+                    }
+                }
+                .frame(height: UIScreen.main.bounds.height / 2)
+                .frame(maxWidth: .infinity)
+                .background {
+                    RoundedRectangle(cornerRadius: 30, style: .continuous)
+                        .stroke(Color.customPrimary, lineWidth: 2)
+                    RoundedRectangle(cornerRadius: 30, style: .continuous)
+                        .foregroundStyle(Color.gray900)
+                }
+                .frame(maxHeight: .infinity, alignment: .bottom)
+            }
+            
                         
             ZStack {
                 if showAlert {
