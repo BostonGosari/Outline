@@ -159,9 +159,10 @@ extension ControlsView {
                     Text("30초 이하는 기록되지 않아요.")
                     Text("러닝을 종료할까요?")
                 }
-                .font(.system(size: 13))
+                .font(.system(size: 14))
                 .padding()
                 .padding(.top, 20)
+                .frame(maxWidth: .infinity, alignment: .leading)
                 .background {
                     RoundedRectangle(cornerRadius: 12, style: .continuous)
                         .foregroundStyle(.gray.opacity(0.2))

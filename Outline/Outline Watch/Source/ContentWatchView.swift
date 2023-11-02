@@ -20,6 +20,7 @@ struct ContentWatchView: View {
                 CountDownView()
                     .sheet(isPresented: $workoutManager.showSummaryView) {
                         SummaryView()
+                            .toolbar(.hidden, for: .automatic)
                     }
             }
         }
