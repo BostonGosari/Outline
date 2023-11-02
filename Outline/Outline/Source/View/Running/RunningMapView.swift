@@ -139,6 +139,7 @@ extension RunningMapView {
                             
                         }
                         .frame(maxWidth: .infinity, alignment: .center)
+                        .zIndex(1)
                         
                         Button {
                             withAnimation {
@@ -154,7 +155,7 @@ extension RunningMapView {
                     .opacity(viewModel.runningType == .start ? 1 : 0)
 
                 }
-                HStack(spacing: 0) {
+                ZStack {
                     Image(systemName: "stop.fill")
                         .buttonModifier(color: Color.white, size: 24, padding: 26)
                         .scaleEffect(isLongPressed ? 1.6 : 1)
@@ -188,10 +189,8 @@ extension RunningMapView {
                                    }
                                 }
                         )
+                        .opacity(viewModel.runningType == .start ? 0 : 1)
                         .frame(maxWidth: .infinity, alignment: viewModel.runningType == .start ? .center : .leading)
-                    
-                    Spacer()
-                    
                     Button {
                         HapticManager.impact(style: .medium)
                         viewModel.runningType = .start
@@ -201,10 +200,10 @@ extension RunningMapView {
                         Image(systemName: "play.fill")
                             .buttonModifier(color: Color.customPrimary, size: 24, padding: 26)
                     }
+                    .opacity(viewModel.runningType == .start ? 0 : 1)
                     .frame(maxWidth: .infinity, alignment: viewModel.runningType == .start ? .center : .trailing)
                 }
                 .padding(.horizontal, 64)
-                .opacity(viewModel.runningType == .start ? 0 : 1)
                 .animation(.bouncy, value: viewModel.runningType)
         }
     }
