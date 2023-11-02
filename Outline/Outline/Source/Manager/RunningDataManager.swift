@@ -137,7 +137,7 @@ class RunningDataManager: ObservableObject {
         
         let courseData = CourseData(courseName: course.courseName, runningLength: course.courseLength, heading: course.heading, distance: course.distance, coursePaths: userLocations, runningCourseId: "")
         
-        let healthData = HealthData(totalTime: totalTime, averageCadence: totalSteps / totalDistance, totalRunningDistance: totalDistance / 1000, totalEnergy: kilocalorie, averageHeartRate: 0.0, averagePace: totalTime / totalDistance * 1000 / 60, startDate: RunningStartDate, endDate: RunningEndDate)
+        let healthData = HealthData(totalTime: totalTime, averageCadence: totalSteps / totalTime * 60, totalRunningDistance: totalDistance, totalEnergy: kilocalorie, averageHeartRate: 0.0, averagePace: totalTime / totalDistance * 1000, startDate: RunningStartDate, endDate: RunningEndDate)
         
         let newRunningRecord = RunningRecord(id: UUID().uuidString, runningType: runningManger.runningType, courseData: courseData, healthData: healthData)
         

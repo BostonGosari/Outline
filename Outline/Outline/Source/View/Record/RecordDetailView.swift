@@ -40,11 +40,11 @@ struct RecordDetailView: View {
             ScrollView {
                 VStack(spacing: 0) {
                     ZStack(alignment: .topLeading) {
-                        Map(position: $position, interactionModes: .zoom) {
+                        Map {
                             MapPolyline(coordinates: viewModel.userLocations)
                                 .stroke(polylineGradient, style: StrokeStyle(lineWidth: 8, lineCap: .round, lineJoin: .round))
                         }
-                        .roundedCorners(45, corners: .bottomLeft)
+                        .roundedCorners(45, corners: .bottomRight)
                         .shadow(color: .customWhite, radius: 1.5)
                         
                         HStack(alignment: .top) {

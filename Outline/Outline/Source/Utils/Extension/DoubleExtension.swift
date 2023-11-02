@@ -14,7 +14,7 @@ extension Double {
         }
         let minutes = Int(self / 60)
         let seconds = Int(self) % 60
-        return String(format: "%02d'%02d''", minutes, seconds)
+        return String(format: "%d'%02d''", minutes, seconds)
     }
     
     func formatDuration() -> String {
@@ -27,6 +27,15 @@ extension Double {
         let minutes = Int(self) / 60
         let seconds = Int(self) % 60
         return String(format: "%d:%02d", minutes, seconds)
+    }
+    
+    func formatMinuteSecondsMilliSeconds() -> String {
+        let totalSeconds = Int(self)
+        let minutes = totalSeconds / 60
+        let seconds = totalSeconds % 60
+        let milliseconds = Int((self - Double(totalSeconds)) * 100)
+        
+        return String(format: "%d:%02d.%02d", minutes, seconds, milliseconds)
     }
 
     func formatHourMinuteSeconds() -> String {

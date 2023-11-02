@@ -29,106 +29,108 @@ struct GPSArtHomeView: View {
     
     var body: some View {
         ZStack {
+
             if showNetworkErrorView {
                 errorView
             }
             else {
-                ScrollView {
-                    Color.clear.frame(height: 0)
-                        .onScrollViewOffsetChanged { offset in
-                            scrollOffset = offset
-                        }
-                    Header(loading: loading, scrollOffset: scrollOffset)
-                    
-                    VStack {
-                        ScrollView(.horizontal, showsIndicators: false) {
-                            
-                            getCurrentOffsetView
-                            
-                            HStack(spacing: 0) {
-                                ForEach(viewModel.recommendedCoures.indices, id: \.self) { index in
-                                    Button {
-                                        withAnimation(.bouncy) {
-                                            selectedCourse = viewModel.recommendedCoures[index]
-                                            showDetailView = true
-                                        }
-                                    } label: {
-                                        BigCardView(course: viewModel.recommendedCoures[index], loading: $loading, index: index, currentIndex: currentIndex, namespace: namespace, showDetailView: showDetailView)
-                                            .scaleEffect(selectedCourse?.id == viewModel.recommendedCoures[index].course.id ? 0.96 : 1)
-                                    }
-                                    .buttonStyle(CardButton())
-                                    .disabled(loading)
-                                    .scrollTransition { content, phase in
-                                        content
-                                            .scaleEffect(phase.isIdentity ? 1 : 0.9)
-                                    }
-                                }
-                            }
-                            .scrollTargetLayout()
-                        }
-                        .contentMargins(UIScreen.main.bounds.width * 0.08, for: .scrollContent)
-                        .scrollTargetBehavior(.viewAligned)
-                        .padding(.top, -20)
-                        .padding(.bottom, -10)
-                        
-                        if viewModel.courses.isEmpty {
-                            Rectangle()
-                                .frame(
-                                    width: UIScreen.main.bounds.width * 0.84,
-                                    height: UIScreen.main.bounds.height * 0.55
-                                )
-                                .roundedCorners(10, corners: [.topLeft])
-                                .roundedCorners(70, corners: [.topRight])
-                                .roundedCorners(45, corners: [.bottomLeft, .bottomRight])
-                                .foregroundColor(.gray700)
-                                .padding(.top, -20)
-                                .padding(.bottom, -10)
-                        }
-                        
-                        HStack {
-                            ForEach(0..<3) { index in
-                                Rectangle()
-                                    .frame(width: indexWidth, height: indexHeight)
-                                    .foregroundColor(loading ? .gray700 : currentIndex == index ? .customPrimary : .white)
-                                    .animation(.bouncy, value: currentIndex)
-                            }
-                        }
-                        
-                        BottomScrollView(viewModel: viewModel, selectedCourse: $selectedCourse, showDetailView: $showDetailView, namespace: namespace)
-                    }
-                }
-                .overlay(alignment: .top) {
-                    InlineHeader(loading: loading, scrollOffset: scrollOffset)
-                }
-                .onAppear {
-                    viewModel.getAllCoursesFromFirebase()
-                    
-                    DispatchQueue.main.asyncAfter(deadline: .now() + maxLoadingTime) {
-                        if loading {
-                            showNetworkErrorView = true
-                        }
-                    }
+          
+              ScrollView {
+                  Color.clear.frame(height: 0)
+                      .onScrollViewOffsetChanged { offset in
+                          scrollOffset = offset
+                      }
+                  GPSArtHomeHeader(loading: loading, scrollOffset: scrollOffset)
 
-                }
-                .onReceive(viewModel.$isNetworkErrorViewVisible) { isVisible in
-                    showNetworkErrorView = isVisible
-                }
-                .refreshable {
-                    viewModel.fetchRecommendedCourses()
-                }
-                
-                if let selectedCourse, showDetailView {
-                    Color.gray900.ignoresSafeArea()
-                    CardDetailView(showDetailView: $showDetailView, selectedCourse: selectedCourse, currentIndex: currentIndex, namespace: namespace)
-                        .zIndex(1)
-                        .transition(
-                            .asymmetric(
-                                insertion: .opacity.animation(.easeInOut(duration: 0.1)),
-                                removal: .opacity.animation(.easeInOut(duration: 0.3).delay(0.2))
-                            )
-                        )
-                        .ignoresSafeArea()
-                }
+                  VStack {
+                      ScrollView(.horizontal, showsIndicators: false) {
+
+                          getCurrentOffsetView
+
+                          HStack(spacing: 0) {
+                              ForEach(viewModel.recommendedCoures.indices, id: \.self) { index in
+                                  Button {
+                                      withAnimation(.bouncy) {
+                                          selectedCourse = viewModel.recommendedCoures[index]
+                                          showDetailView = true
+                                      }
+                                  }
+                              }
+                              .scrollTargetLayout()
+                          }
+                          .contentMargins(UIScreen.main.bounds.width * 0.08, for: .scrollContent)
+                          .scrollTargetBehavior(.viewAligned)
+                          .padding(.top, -20)
+                          .padding(.bottom, -10)
+
+                          if viewModel.courses.isEmpty {
+                              Rectangle()
+                                  .frame(
+                                      width: UIScreen.main.bounds.width * 0.84,
+                                      height: UIScreen.main.bounds.height * 0.55
+                                  )
+                                  .roundedCorners(10, corners: [.topLeft])
+                                  .roundedCorners(70, corners: [.topRight])
+                                  .roundedCorners(45, corners: [.bottomLeft, .bottomRight])
+                                  .foregroundColor(.gray700)
+                                  .padding(.top, -20)
+                                  .padding(.bottom, -10)
+                          }
+
+                          HStack {
+                              ForEach(0..<3) { index in
+                                  Rectangle()
+                                      .frame(width: indexWidth, height: indexHeight)
+                                      .foregroundColor(loading ? .gray700 : currentIndex == index ? .customPrimary : .white)
+                                      .animation(.bouncy, value: currentIndex)
+                              }
+                          }
+
+                          BottomScrollView(viewModel: viewModel, selectedCourse: $selectedCourse, showDetailView: $showDetailView, namespace: namespace)
+                      }
+                  }
+                  .overlay(alignment: .top) {
+                      InlineHeader(loading: loading, scrollOffset: scrollOffset)
+                  }
+                  .onAppear {
+                      viewModel.getAllCoursesFromFirebase()
+
+                      DispatchQueue.main.asyncAfter(deadline: .now() + maxLoadingTime) {
+                          if loading {
+                              showNetworkErrorView = true
+                          }
+                      }
+
+                  }
+
+                  .onReceive(viewModel.$isNetworkErrorViewVisible) { isVisible in
+                      showNetworkErrorView = isVisible
+                  }
+
+              }
+              .overlay(alignment: .top) {
+                  GPSArtHomeInlineHeader(loading: loading, scrollOffset: scrollOffset)
+              }
+              .onAppear {
+                  viewModel.getAllCoursesFromFirebase()
+              }
+              .refreshable {
+                  viewModel.fetchRecommendedCourses()
+              }
+
+              if let selectedCourse, showDetailView {
+                  Color.gray900.ignoresSafeArea()
+                  CardDetailView(showDetailView: $showDetailView, selectedCourse: selectedCourse, currentIndex: currentIndex, namespace: namespace)
+                      .zIndex(1)
+                      .transition(
+                          .asymmetric(
+                              insertion: .opacity.animation(.easeInOut(duration: 0.1)),
+                              removal: .opacity.animation(.easeInOut(duration: 0.3).delay(0.2))
+
+                          )
+                          .ignoresSafeArea()
+                  }
+              }
             }
         }
         .background(
