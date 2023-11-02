@@ -45,11 +45,11 @@ class RecordDetailViewModel: ObservableObject {
                 endTime = ""
             }
             
-            runningData["킬로미터"] = String(format: "%.1f", healthData.totalRunningDistance/1000)
-            runningData["시간"] = healthData.totalTime.formatDuration()
+            runningData["킬로미터"] = String(format: "%.2f", healthData.totalRunningDistance/1000)
+            runningData["시간"] = healthData.totalTime.formatMinuteSecondsMilliSeconds()
             runningData["평균 페이스"] = healthData.averagePace.formattedAveragePace()
             runningData["BPM"] = "\(Int(healthData.averageHeartRate))"
-            runningData["칼로리"] = "\(healthData.totalEnergy)"
+            runningData["칼로리"] = "\(Int(healthData.totalEnergy))"
 
             if healthData.averageCadence > 0 {
                 runningData["케이던스"] = "\(Int(healthData.averageCadence))"
