@@ -30,13 +30,13 @@ struct WorkoutDataView: View {
                     Image(systemName: "map.fill")
                         .font(.system(size: 24))
                         .foregroundStyle(Color.customBlack)
-                        .padding(16)
+                        .padding(14)
                         .background(
                             Circle()
                                 .fill(Color.customPrimary)
                         )
                 }
-                .padding(.trailing, 32)
+                .padding(.trailing, 16)
                 .frame(maxWidth: .infinity, alignment: .trailing)
             }
             .onChange(of: runningDataManager.distance) { _, _ in

@@ -40,10 +40,10 @@ struct RunningMapView: View {
                         if viewModel.runningType == .start {
                             if let user = userlocation,
                                let startCourse = runningStartManager.startCourse {
-                                if viewModel.userLocations.isEmpty {
+                                if runningDataManager.userLocations.isEmpty {
                                     viewModel.startLocation = CLLocation(latitude: user.coordinate.latitude, longitude: user.coordinate.longitude)
                                 }
-                                viewModel.userLocations.append(user.coordinate)
+                                runningDataManager.userLocations.append(user.coordinate)
                                 if self.runningStartManager.runningType == .gpsArt {
                                     viewModel.checkEndDistance()
                                 }
@@ -123,7 +123,7 @@ extension RunningMapView {
                         .tint(.white)
                         .controlSize(.large)
                         .frame(maxWidth: .infinity, alignment: .trailing)
-                        .padding(.trailing, 32)
+                        .padding(.trailing, 16)
                         .padding(.bottom, 14)
                     ZStack {
                         Button {
@@ -144,11 +144,18 @@ extension RunningMapView {
                                 selection.toggle()
                             }
                         } label: {
-                            Image("Data")
-                                .imageButtonModifier(color: Color.customPrimary, size: 24, padding: 18)
+                            Image(systemName: "doc.text.magnifyingglass")
+                                .font(.system(size: 20))
+                                .bold()
+                                .foregroundStyle(Color.white)
+                                .padding(18)
+                                .background(
+                                    Circle()
+                                        .fill(.thickMaterial)
+                                )
                         }
                         .frame(maxWidth: .infinity, alignment: .trailing)
-                        .padding(.trailing, 32)
+                        .padding(.trailing, 16)
                     }
                 }
                 .opacity(viewModel.runningType == .start ? 1 : 0)
@@ -243,6 +250,18 @@ extension RunningMapView {
             
             Confetti(counter: $counter,
                      num: 40,
+                     confettis: [
+                        .shape(.circle),
+                        .shape(.smallCircle),
+                        .shape(.triangle),
+                        .shape(.square),
+                        .shape(.smallSquare),
+                        .shape(.slimRectangle),
+                        .shape(.hexagon),
+                        .shape(.star),
+                        .shape(.starPop),
+                        .shape(.blink)
+                     ],
                      colors: [.customPrimary, .customSecondary],
                      confettiSize: 10,
                      rainHeight: UIScreen.main.bounds.height,
