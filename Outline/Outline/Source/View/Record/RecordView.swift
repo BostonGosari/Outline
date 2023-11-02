@@ -15,6 +15,7 @@ struct RecordView: View {
     @State private var isSortingSheetPresented = false
     @State private var selectedSortOption: SortOption = .latest
     @State private var filteredRecords: [CoreRunningRecord] = []
+    @State private var scrollOffset: CGFloat = 0
     @State private var isDeleteData = false
 
     var body: some View {
@@ -26,6 +27,13 @@ struct RecordView: View {
                     .opacity(0.5)
                 
                 ScrollView {
+                    Color.clear.frame(height: 0)
+                        .onScrollViewOffsetChanged { offset in
+                            scrollOffset = offset
+                        }
+                    
+                    RecordHeader(scrollOffset: scrollOffset)
+
                     VStack(alignment: .leading) {
                         HStack(spacing: 0) {
                             ChipItem(label: "모두", isSelected: Binding(get: { self.selectedIndex == 0 }, set: { _ in self.selectedIndex = 0 }))
@@ -72,10 +80,12 @@ struct RecordView: View {
                             }
                         }
                     }
-                    .padding()
+                    .padding(.horizontal)
                     
                 }
-                .navigationTitle("기록")
+                .overlay(alignment: .top) {
+                    RecordInlineHeader(scrollOffset: scrollOffset)
+                }
                 .sheet(isPresented: $isSortingSheetPresented) {
                     VStack(alignment: .leading) {
                         Text("정렬")
