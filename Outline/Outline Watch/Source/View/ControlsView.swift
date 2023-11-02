@@ -22,11 +22,12 @@ struct ControlsView: View {
         ScrollView {
             HStack(spacing: 11) {
                 ControlButton(systemName: "stop.fill", action: {
-                    if workoutManager.workout?.duration ?? 0 > 30 {
+//                    if workoutManager.workout?.duration ?? 0 > 30 {
                         showingConfirmation = true
-                    } else {
-                        showingEndwithoutSavingSheet = true
-                    }
+                    print(workoutManager.workout?.duration ?? 0)
+//                    } else {
+//                        showingEndwithoutSavingSheet = true
+//                    }
                 }, foregroundColor: .white, backgroundColor: .white)
                 
                 ControlButton(systemName: workoutManager.running ? "pause" : "play.fill", action: {
