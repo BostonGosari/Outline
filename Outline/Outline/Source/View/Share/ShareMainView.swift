@@ -10,7 +10,6 @@ import SwiftUI
 
 struct ShareMainView: View {
     @Environment(\.dismiss) var dismiss
-    @StateObject var runningManager = RunningStartManager.shared
     @StateObject private var viewModel = ShareViewModel()
     
     let runningData: ShareModel
@@ -22,16 +21,16 @@ struct ShareMainView: View {
                     .ignoresSafeArea()
                 
                 TabView(selection: $viewModel.currentPage) {
-                    CustomShareView(viewModel: viewModel, renderedImage: $viewModel.customImage)
+                    CustomShareView(viewModel: viewModel)
                         .tag(0)
-                    ImageShareView(viewModel: viewModel, shareImage: $viewModel.posterImage)
+                    ImageShareView(viewModel: viewModel)
                         .tag(1)
                 }
                 .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
                 
                 HStack(spacing: 0) {
                     Button {
-                        viewModel.saveImage()
+                        viewModel.tapSaveButton = true
                     }  label: {
                         Image(systemName: "square.and.arrow.down")
                             .foregroundStyle(Color.black)
@@ -47,9 +46,6 @@ struct ShareMainView: View {
                     
                     CompleteButton(text: "공유하기", isActive: true) {
                         viewModel.tapShareButton = true
-                        if viewModel.shareToInstagram() {
-                            runningManager.running = false
-                        }
                     }
                     .padding(.leading, -8)
                 }
