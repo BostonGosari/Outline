@@ -17,6 +17,7 @@ struct GPSArtHomeView: View {
     @State private var loading = true
     @State private var selectedCourse: CourseWithDistance?
     
+    @State private var showNetworkErrorView = false
     // 받아오는 변수
     @Binding var showDetailView: Bool
     @Namespace private var namespace
@@ -24,93 +25,133 @@ struct GPSArtHomeView: View {
     let indexWidth: CGFloat = 25
     let indexHeight: CGFloat = 3
     
+    let maxLoadingTime: TimeInterval = 5
+    
     var body: some View {
         ZStack {
-            ScrollView {
-                Color.clear.frame(height: 0)
-                    .onScrollViewOffsetChanged { offset in
-                        scrollOffset = offset
-                    }
-                Header(loading: loading, scrollOffset: scrollOffset)
-                
+            if showNetworkErrorView {
                 VStack {
-                    ScrollView(.horizontal, showsIndicators: false) {
-                        
-                        getCurrentOffsetView
-                        
-                        HStack(spacing: 0) {
-                            ForEach(viewModel.recommendedCoures.indices, id: \.self) { index in
-                                Button {
-                                    withAnimation(.bouncy) {
-                                        selectedCourse = viewModel.recommendedCoures[index]
-                                        showDetailView = true
-                                    }
-                                } label: {
-                                    BigCardView(course: viewModel.recommendedCoures[index], loading: $loading, index: index, currentIndex: currentIndex, namespace: namespace, showDetailView: showDetailView)
-                                        .scaleEffect(selectedCourse?.id == viewModel.recommendedCoures[index].course.id ? 0.96 : 1)
-                                }
-                                .buttonStyle(CardButton())
-                                .disabled(loading)
-                                .scrollTransition { content, phase in
-                                    content
-                                        .scaleEffect(phase.isIdentity ? 1 : 0.9)
-                                }
-                            }
+                    Image(systemName: "exclamationmark.circle")
+                        .foregroundStyle(Color.customPrimary)
+                        .font(Font.system(size: 40))
+                    Text("예상치 못한 문제가 발생되었어요.")
+                        .font(.date)
+                        .foregroundStyle(Color.customWhite)
+                        .padding(.top, 16)
+                        .padding(.bottom, 40)
+                    Button {
+                        loading = true
+                        showNetworkErrorView.toggle()
+                    } label: {
+                        HStack {
+                            Text("다시 시도하기")
+                                .font(.caption)
+                                .foregroundStyle(Color.customPrimary)
+                            Image(systemName: "chevron.forward")
+                                .font(.caption)
+                                .foregroundStyle(Color.customPrimary)
                         }
-                        .scrollTargetLayout()
+                       
                     }
-                    .contentMargins(UIScreen.main.bounds.width * 0.08, for: .scrollContent)
-                    .scrollTargetBehavior(.viewAligned)
-                    .padding(.top, -20)
-                    .padding(.bottom, -10)
-                    
-                    if viewModel.courses.isEmpty {
-                        Rectangle()
-                            .frame(
-                                width: UIScreen.main.bounds.width * 0.84,
-                                height: UIScreen.main.bounds.height * 0.55
-                            )
-                            .roundedCorners(10, corners: [.topLeft])
-                            .roundedCorners(70, corners: [.topRight])
-                            .roundedCorners(45, corners: [.bottomLeft, .bottomRight])
-                            .foregroundColor(.gray700)
-                            .padding(.top, -20)
-                            .padding(.bottom, -10)
-                    }
-                    
-                    HStack {
-                        ForEach(0..<3) { index in
-                            Rectangle()
-                                .frame(width: indexWidth, height: indexHeight)
-                                .foregroundColor(loading ? .gray700 : currentIndex == index ? .customPrimary : .white)
-                                .animation(.bouncy, value: currentIndex)
-                        }
-                    }
-                    
-                    BottomScrollView(viewModel: viewModel, selectedCourse: $selectedCourse, showDetailView: $showDetailView, namespace: namespace)
                 }
             }
-            .overlay(alignment: .top) {
-                InlineHeader(loading: loading, scrollOffset: scrollOffset)
-            }
-            .onAppear {
-                viewModel.getAllCoursesFromFirebase()
-            }
-            .refreshable {
-                viewModel.fetchRecommendedCourses()
-            }
-            
-            if let selectedCourse, showDetailView {
-                Color.gray900.ignoresSafeArea()
-                CardDetailView(showDetailView: $showDetailView, selectedCourse: selectedCourse, currentIndex: currentIndex, namespace: namespace)
-                    .zIndex(1)
-                    .transition(
-                        .asymmetric(
-                            insertion: .opacity.animation(.easeInOut(duration: 0.1)),
-                            removal: .opacity.animation(.easeInOut(duration: 0.3).delay(0.2))
+            else {
+                ScrollView {
+                    Color.clear.frame(height: 0)
+                        .onScrollViewOffsetChanged { offset in
+                            scrollOffset = offset
+                        }
+                    Header(loading: loading, scrollOffset: scrollOffset)
+                    
+                    VStack {
+                        ScrollView(.horizontal, showsIndicators: false) {
+                            
+                            getCurrentOffsetView
+                            
+                            HStack(spacing: 0) {
+                                ForEach(viewModel.recommendedCoures.indices, id: \.self) { index in
+                                    Button {
+                                        withAnimation(.bouncy) {
+                                            selectedCourse = viewModel.recommendedCoures[index]
+                                            showDetailView = true
+                                        }
+                                    } label: {
+                                        BigCardView(course: viewModel.recommendedCoures[index], loading: $loading, index: index, currentIndex: currentIndex, namespace: namespace, showDetailView: showDetailView)
+                                            .scaleEffect(selectedCourse?.id == viewModel.recommendedCoures[index].course.id ? 0.96 : 1)
+                                    }
+                                    .buttonStyle(CardButton())
+                                    .disabled(loading)
+                                    .scrollTransition { content, phase in
+                                        content
+                                            .scaleEffect(phase.isIdentity ? 1 : 0.9)
+                                    }
+                                }
+                            }
+                            .scrollTargetLayout()
+                        }
+                        .contentMargins(UIScreen.main.bounds.width * 0.08, for: .scrollContent)
+                        .scrollTargetBehavior(.viewAligned)
+                        .padding(.top, -20)
+                        .padding(.bottom, -10)
+                        
+                        if viewModel.courses.isEmpty {
+                            Rectangle()
+                                .frame(
+                                    width: UIScreen.main.bounds.width * 0.84,
+                                    height: UIScreen.main.bounds.height * 0.55
+                                )
+                                .roundedCorners(10, corners: [.topLeft])
+                                .roundedCorners(70, corners: [.topRight])
+                                .roundedCorners(45, corners: [.bottomLeft, .bottomRight])
+                                .foregroundColor(.gray700)
+                                .padding(.top, -20)
+                                .padding(.bottom, -10)
+                        }
+                        
+                        HStack {
+                            ForEach(0..<3) { index in
+                                Rectangle()
+                                    .frame(width: indexWidth, height: indexHeight)
+                                    .foregroundColor(loading ? .gray700 : currentIndex == index ? .customPrimary : .white)
+                                    .animation(.bouncy, value: currentIndex)
+                            }
+                        }
+                        
+                        BottomScrollView(viewModel: viewModel, selectedCourse: $selectedCourse, showDetailView: $showDetailView, namespace: namespace)
+                    }
+                }
+                .overlay(alignment: .top) {
+                    InlineHeader(loading: loading, scrollOffset: scrollOffset)
+                }
+                .onAppear {
+                    viewModel.getAllCoursesFromFirebase()
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + maxLoadingTime) {
+                        if loading {
+                            showNetworkErrorView = true
+                        }
+                    }
+
+                }
+                .onReceive(viewModel.$isNetworkErrorViewVisible) { isVisible in
+                    showNetworkErrorView = isVisible
+                }
+                .refreshable {
+                    viewModel.fetchRecommendedCourses()
+                }
+                
+                if let selectedCourse, showDetailView {
+                    Color.gray900.ignoresSafeArea()
+                    CardDetailView(showDetailView: $showDetailView, selectedCourse: selectedCourse, currentIndex: currentIndex, namespace: namespace)
+                        .zIndex(1)
+                        .transition(
+                            .asymmetric(
+                                insertion: .opacity.animation(.easeInOut(duration: 0.1)),
+                                removal: .opacity.animation(.easeInOut(duration: 0.3).delay(0.2))
+                            )
                         )
-                    )
-                    .ignoresSafeArea()
+                        .ignoresSafeArea()
+                }
             }
         }
         .background(
