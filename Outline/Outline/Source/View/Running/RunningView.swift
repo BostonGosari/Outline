@@ -12,7 +12,7 @@ struct RunningView: View {
     
     @AppStorage("isFirstRunning") var isFirstRunning = true
     @State var checkRunning = true
-    @State var selection = 0
+    @State var selection = false
     
     init() {
         UIPageControl.appearance().currentPageIndicatorTintColor = UIColor.customBlack
@@ -23,22 +23,19 @@ struct RunningView: View {
         NavigationStack {
             ZStack(alignment: .bottom) {
                 Color("Gray900").ignoresSafeArea()
-                TabView(selection: $selection) {
-                    RunningMapView(selection: $selection)
-                        .tag(0)
-                        .gesture(DragGesture())
-                    WorkoutDataView(selection: $selection)
-                        .tag(1)
-                        .gesture(DragGesture())
-                }
-                .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
-                .ignoresSafeArea()
-                .onAppear {
-                    if runningStartManager.running == true {
-                        runningDataManager.startRunning()
-                        runningStartManager.startTimer()
+                RunningMapView(selection: $selection)
+                    .overlay {
+                        if selection {
+                            WorkoutDataView(selection: $selection)
+                                .transition(.move(edge: .trailing))
+                        }
                     }
-                }
+                    .onAppear {
+                        if runningStartManager.running == true {
+                            runningDataManager.startRunning()
+                            runningStartManager.startTimer()
+                        }
+                    }
                 
                 ZStack {
                     if runningStartManager.changeRunningType && checkRunning {
