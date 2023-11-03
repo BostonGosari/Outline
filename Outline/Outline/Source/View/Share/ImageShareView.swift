@@ -8,9 +8,7 @@
 import SwiftUI
 
 struct ImageShareView: View {
-    
     @ObservedObject var viewModel: ShareViewModel
-    @Binding var shareImage: UIImage?
     
     @State private var selectPhotoMode = false
     @State private var showSheet = false
@@ -35,7 +33,7 @@ struct ImageShareView: View {
         Color.white.opacity(0.4),
         Color.white.opacity(0.5)
     ]
-        
+    
     var body: some View {
         ZStack {
             Color.gray900
@@ -62,16 +60,15 @@ struct ImageShareView: View {
             lastAngle = .degrees(0)
         }
         .modifier(SheetModifier(viewModel: viewModel, showSheet: $showSheet, image: $image))
-        .onChange(of: viewModel.currentPage, {
-            if viewModel.currentPage == 1 {
-                renderImage()
+        .onChange(of: viewModel.tapSaveButton) {
+            if viewModel.tapSaveButton && viewModel.currentPage == 1 {
+                viewModel.saveImage(image: renderImage())
             }
-        })
-        .onChange(of: selectPhotoMode, {
-            renderImage()
-        })
-        .onChange(of: image) { 
-            renderImage()
+        }
+        .onChange(of: viewModel.tapShareButton) {
+            if viewModel.tapShareButton && viewModel.currentPage == 1 {
+                viewModel.shareToInstagram(image: renderImage())
+            }
         }
         .onAppear {
             let canvasSize = PathGenerateManager.calculateCanvaData(coordinates: viewModel.runningData.userLocations, width: imageSize, height: imageSize)
@@ -82,80 +79,89 @@ struct ImageShareView: View {
 }
 
 extension ImageShareView {
-    
-    private func renderImage() {
-        shareImage = mainImageView.offset(y: -30).asImage(size: size)
+    private func renderImage() -> UIImage {
+        return mainImageView.offset(y: -30).asImage(size: size)
     }
     
     private var mainImageView: some View {
-        
         ZStack {
             if selectPhotoMode {
                 selectPhotoView
             } else {
                 blackImageView
             }
+            GeometryReader { proxy in
+                HStack {}
+                    .onAppear {
+                        self.size = CGSize(width: proxy.size.width, height: proxy.size.height)
+                    }
+            }
         }
         .aspectRatio(1080/1920, contentMode: .fill)
     }
     
-    private var selectPhotoView: AnyView {
-        if let img = image {
-            AnyView(
-                ZStack {
-                    Image(uiImage: img)
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: size.width, height: size.height)
-                        .mask {
-                            Rectangle()
-                                .aspectRatio(1080.0/1920.0, contentMode: .fit)
-                        }
-                    Image("ShareVinyl")
-                        .resizable()
-                        .opacity(0.5)
-                    Image("ShareWhite1")
-                      .resizable()
-                    
-                    Rectangle()
-                        .fill(Color.clear)
-                        .background {
-                            Rectangle()
-                                .fill(.ultraThinMaterial.opacity(0.6))
-                                .shadow(color: Color.black.opacity(0.1),
-                                        radius: 5, x: 5, y: 5)
-                        }
-                        .modifier(CornerRectangleModifier(topLeft: 6, topRight: 49, bottom: 29))
-                        .padding(EdgeInsets(top: 89, leading: 28, bottom: 40, trailing: 29))
-  
-                    Image("ShareWhite3")
-                        .resizable()
-
-                    selectShareData
-                        .padding(.top, 44)
-                    
-                    ZStack {
-                        Color.black.opacity(0.001)
-                        userPath
-                    }
-                    .frame(width: pathWidth + 30, height: pathHeight + 30)
-                    .scaleEffect(scale)
-                    .offset(offset)
-                    .rotationEffect(lastAngle + angle)
-                    .gesture(dragGesture)
-                    .gesture(rotationGesture)
-                    .simultaneousGesture(magnificationGesture)
-                }
-            )
-        } else {
-            AnyView(
+    private var selectPhotoView: some View {
+        ZStack {
+            if let img = image {
+                selectedImageView(img)
+            } else {
                 Button {
                     showSheet = true
                 } label: {
                     Image("ShareSelect")
                         .resizable()
                 }
-            )
+            }
+        }
+    }
+    
+    @ViewBuilder
+    private func selectedImageView(_ img: UIImage) -> some View {
+        ZStack {
+            Image(uiImage: img)
+                .resizable()
+                .scaledToFill()
+                .frame(width: size.width, height: size.height)
+                .mask {
+                    Rectangle()
+                        .aspectRatio(1080.0/1920.0, contentMode: .fit)
+                }
+            Image("ShareVinyl")
+                .resizable()
+                .opacity(0.5)
+            Image("ShareWhite1")
+                .resizable()
+            
+            Rectangle()
+                .fill(Color.clear)
+                .background {
+                    Rectangle()
+                        .fill(.ultraThinMaterial.opacity(0.6))
+                        .shadow(color: Color.black.opacity(0.1),
+                                radius: 5, x: 5, y: 5)
+                }
+                .modifier(CornerRectangleModifier(topLeft: 6, topRight: 49, bottom: 29))
+                .padding(EdgeInsets(top: 89, leading: 28, bottom: 40, trailing: 29))
+            
+            Image("ShareWhite3")
+                .resizable()
+            
+            selectShareData
+                .padding(.top, 44)
+            
+            if !viewModel.runningData.userLocations.isEmpty {
+                ZStack {
+                    Color.black.opacity(0.001)
+                    userPath
+                }
+                .frame(width: pathWidth + 30, height: pathHeight + 30)
+                .scaleEffect(scale)
+                .offset(offset)
+                .rotationEffect(lastAngle + angle)
+                .gesture(dragGesture)
+                .gesture(rotationGesture)
+                .simultaneousGesture(magnificationGesture)
+            }
         }
     }
     
@@ -183,17 +189,20 @@ extension ImageShareView {
             blackShareData
                 .padding(.top, 166)
                 .padding(.leading, 8)
-            ZStack {
-                Color.black.opacity(0.001)
-                userPath
+            
+            if !viewModel.runningData.userLocations.isEmpty {
+                ZStack {
+                    Color.black.opacity(0.001)
+                    userPath
+                }
+                .frame(width: pathWidth + 30, height: pathHeight + 30)
+                .scaleEffect(scale)
+                .offset(offset)
+                .rotationEffect(lastAngle + angle)
+                .gesture(dragGesture)
+                .gesture(rotationGesture)
+                .simultaneousGesture(magnificationGesture)
             }
-            .frame(width: pathWidth + 30, height: pathHeight + 30)
-            .scaleEffect(scale)
-            .offset(offset)
-            .rotationEffect(lastAngle + angle)
-            .gesture(dragGesture)
-            .gesture(rotationGesture)
-            .simultaneousGesture(magnificationGesture)
         }
     }
     
@@ -284,11 +293,16 @@ extension ImageShareView {
     private var dragGesture: some Gesture {
         return DragGesture()
             .onChanged { value in
-                let translation = value.translation
-                offset = CGSize(
-                    width: translation.width+lastStoredOffset.width,
-                    height: translation.height+lastStoredOffset.height
-                )
+                let rotationRadians = lastAngle.radians
+                let x1 = value.translation.width * cos(rotationRadians)
+                let x2 = value.translation.height * -sin(rotationRadians)
+                let y1 =  value.translation.width * -sin(rotationRadians)
+                let y2 = value.translation.height * cos(rotationRadians)
+                
+                let translatedX = x1 - x2
+                let translatedY = y1 + y2
+
+                offset = CGSize(width: translatedX, height: translatedY)
             }
             .onEnded { _ in
                 lastStoredOffset = offset
@@ -328,7 +342,6 @@ extension ImageShareView {
 }
 
 struct SheetModifier: ViewModifier {
-    
     @ObservedObject var viewModel: ShareViewModel
     @Binding var showSheet: Bool
     @Binding var image: UIImage?
@@ -348,14 +361,10 @@ struct SheetModifier: ViewModifier {
             
             .fullScreenCover(isPresented: $viewModel.showCamera) {
                 ImagePickerView(selectedImage: $image, sourceType: .camera)
+                    .ignoresSafeArea()
             }
             .sheet(isPresented: $viewModel.showImagePicker) {
                 ImagePickerView(selectedImage: $image)
-            }
-            .alert(viewModel.alertMessage, isPresented: $viewModel.permissionDenied) {
-                Button("설정으로", role: .cancel) {
-                    // move to 설정
-                }
             }
     }
 }
