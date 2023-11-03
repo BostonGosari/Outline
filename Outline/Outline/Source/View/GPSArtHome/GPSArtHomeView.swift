@@ -31,8 +31,7 @@ struct GPSArtHomeView: View {
         ZStack {
             if showNetworkErrorView {
                  errorView
-             }
-            else {
+             } else {
                 ScrollView {
                     Color.clear.frame(height: 0)
                         .onScrollViewOffsetChanged { offset in
@@ -156,7 +155,7 @@ struct GPSArtHomeView: View {
     }
 }
 
-extension GPSArtHomeView{
+extension GPSArtHomeView {
     var errorView: some View {
         VStack {
             Image(systemName: "exclamationmark.circle")

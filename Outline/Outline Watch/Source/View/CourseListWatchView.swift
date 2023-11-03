@@ -10,16 +10,15 @@ import HealthKit
 import UIKit
 
 struct CourseListWatchView: View {
-    @EnvironmentObject var workoutManager: WatchWorkoutManager
+    @StateObject var workoutManager = WatchWorkoutManager.shared
     @StateObject var watchConnectivityManager = WatchConnectivityManager.shared
-    @StateObject var watchRunningManager = WatchRunningManager.shared
+    @StateObject var runningManager = WatchRunningManager.shared
     @StateObject var viewModel = CourseListWatchViewModel()
     
-    @State private var countdownSeconds = 3
     @State private var navigateDetailView = false
-    @State private var navigate = false
     @State private var selectedCourse: GPSArtCourse = GPSArtCourse()
-    @State private var isLocationPermissionSheetPresented = false
+    @State private var showLocationPermissionSheet = false
+    @State private var showFreeRunningGuideSheet = false
     
     var workoutTypes: [HKWorkoutActivityType] = [.running]
     
@@ -28,15 +27,12 @@ struct CourseListWatchView: View {
             ScrollView {
                 VStack(spacing: -5) {
                     Button {
-//                        viewModel.checkAuthorization()
                         if  viewModel.isHealthAuthorized && viewModel.isLocationAuthorized {
                             workoutManager.selectedWorkout = workoutTypes[0]
-                            watchRunningManager.startFreeRun()
-                            navigate.toggle()
+                            runningManager.startFreeRun()
                         } else {
-                           // 헬스는 자동으로 시트가 띄워짐
                             if !viewModel.isLocationAuthorized {
-                                isLocationPermissionSheetPresented = true
+                                showLocationPermissionSheet = true
                             }
                         }
                     } label: {
@@ -70,26 +66,13 @@ struct CourseListWatchView: View {
                     
                     ForEach(watchConnectivityManager.allCourses, id: \.id) {course in
                         Button {
-//                            viewModel.checkAuthorization()
                             if viewModel.isHealthAuthorized && viewModel.isLocationAuthorized {
-                                if watchRunningManager.checkDistance(course: course.coursePaths) {
+                                if runningManager.checkDistance(course: course.coursePaths) {
                                     workoutManager.selectedWorkout = workoutTypes[0]
-                                    watchRunningManager.startCourse = course
-                                    watchRunningManager.startGPSArtRun()
-                                    navigate.toggle()
+                                    runningManager.startCourse = course
+                                    runningManager.startGPSArtRun()
                                 } else {
-                                    // TODO: 거리가 멀어요 자유러닝 안내시트
-                                }
-                            } else {
-                                if  viewModel.isHealthAuthorized && viewModel.isLocationAuthorized {
-                                    workoutManager.selectedWorkout = workoutTypes[0]
-                                    watchRunningManager.startFreeRun()
-                                    navigate.toggle()
-                                } else {
-                                   // 헬스는 자동으로 시트가 띄워짐
-                                    if !viewModel.isLocationAuthorized {
-                                        isLocationPermissionSheetPresented = true
-                                    }
+                                    showFreeRunningGuideSheet = true
                                 }
                             }
                         } label: {
@@ -115,7 +98,7 @@ struct CourseListWatchView: View {
                         .overlay(alignment: .topTrailing) {
                             Button {
                                 selectedCourse = course
-                                navigateDetailView.toggle()
+                                navigateDetailView = true
                             } label: {
                                 VStack {
                                     Image(systemName: "ellipsis.circle")
@@ -139,34 +122,29 @@ struct CourseListWatchView: View {
                     }
                 }
             }
-            .navigationDestination(isPresented: $navigateDetailView) {
-                DetailView(course: selectedCourse)
-            }
-            .navigationDestination(isPresented: $navigate) {
-                countdownView()
-                    .onAppear {
-                        countdownSeconds = 3
-                    }
-            }
             .navigationTitle("러닝")
-            .tint(.first)
-        }
-        .sheet(isPresented: $workoutManager.showingSummaryView) {
-            SummaryView(navigate: $navigate)
-        }
-        .sheet(isPresented: $isLocationPermissionSheetPresented) {
-            NavigationView {
-                LocationPermissionSheet()
+            .navigationDestination(isPresented: $navigateDetailView) {
+                CourseDetailView(course: selectedCourse)
             }
-            .toolbar(.hidden, for: .navigationBar)
-              
         }
-       
+        .sheet(isPresented: $showLocationPermissionSheet) {
+            locationPermissionSheet
+                .toolbar(.hidden, for: .navigationBar)
+                .ignoresSafeArea()
+        }
+        .sheet(isPresented: $showFreeRunningGuideSheet) {
+            freeRunningGuideSheet
+                .toolbar(.hidden, for: .navigationBar)
+                .ignoresSafeArea()
+        }
+        .onAppear {
+            viewModel.checkAuthorization()
+        }
     }
     
-    private func LocationPermissionSheet() -> some View {
+    private var locationPermissionSheet: some View {
         VStack {
-           Image(systemName: "location.circle")
+            Image(systemName: "location.circle")
                 .resizable()
                 .frame(width: 43, height: 43)
                 .foregroundStyle(Color.first)
@@ -176,170 +154,72 @@ struct CourseListWatchView: View {
                 .font(Font.system(size: 13))
             Spacer()
             Button {
-                isLocationPermissionSheetPresented.toggle()
+                showLocationPermissionSheet.toggle()
             } label: {
                 Text("확인")
             }
-            
         }
-      
     }
     
-    private func countdownView() -> some View {
-        VStack {
-            if countdownSeconds > 0 {
-                Image("Count\(countdownSeconds)")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .onAppear {
-                        Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
-                            countdownSeconds -= 1
-                            if countdownSeconds == 0 {
-                                timer.invalidate()
-                                workoutManager.selectedWorkout = .running
-                            }
-                        }
-                    }
-            } else {
-                WatchTabView() // 카운트다운이 끝나면 WatchTabView로 이동
+    private var freeRunningGuideSheet: some View {
+        ZStack {
+            Rectangle()
+                .ignoresSafeArea()
+                .foregroundStyle(.thinMaterial)
+            VStack {
+                VStack(alignment: .leading) {
+                    Text("자유 코스로 변경할까요?")
+                    Text("현재 루트와 멀리 떨어져 있어요.")
+                }
+                .font(.system(size: 14))
+                .padding()
+                .padding(.top, 20)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .background {
+                    RoundedRectangle(cornerRadius: 12, style: .continuous)
+                        .foregroundStyle(.gray.opacity(0.2))
+                }
+                Button {
+                    workoutManager.selectedWorkout = workoutTypes[0]
+                    runningManager.startFreeRun()
+                    showFreeRunningGuideSheet = false
+                } label: {
+                    Text("자유 코스로 변경")
+                        .frame(maxWidth: .infinity)
+                        .frame(height: 36)
+                        .padding()
+                        .background(
+                            RoundedRectangle(cornerRadius: 20, style: .continuous)
+                                .foregroundColor(Color.gray800.opacity(0.5))
+                        )
+                        .foregroundColor(.white)
+                }
+                .buttonStyle(.plain)
+                Button {
+                    showFreeRunningGuideSheet = false
+                } label: {
+                    Text("러닝 종료하기")
+                        .frame(maxWidth: .infinity)
+                        .frame(height: 36)
+                        .padding()
+                        .background(
+                            RoundedRectangle(cornerRadius: 20, style: .continuous)
+                                .foregroundColor(Color.first)
+                        )
+                        .foregroundColor(.black)
+                }
+                .buttonStyle(.plain)
             }
-        }.navigationBarBackButtonHidden()
-    }
-}
-
-extension HKWorkoutActivityType: Identifiable {
-    public var id: UInt {
-        rawValue
-    }
-    
-    var name: String {
-        switch self {
-        case .running:
-            return "Run"
-        default:
-            return ""
-        }
-    }
-}
-
-struct DetailView: View {
-    
-    var course: GPSArtCourse
-    
-    var body: some View {
-        List {
-            listBox(systemName: "flag", context: course.locationInfo.locality)
-            listBox(systemName: "location", context: course.courseLength, specifier: "%.0f", unit: "km")
-            listBox(systemName: "clock", duration: course.courseDuration)
-            listBox(systemName: "arrow.triangle.turn.up.right.diamond", alley: course.alley)
-        }
-        .navigationTitle {
-            Text(course.courseName)
-                .foregroundStyle(.first)
-        }
-    }
-    
-    @ViewBuilder private func listBox(systemName: String, location: Placemark) -> some View {
-        HStack {
-            Image(systemName: systemName)
-                .foregroundStyle(.first)
-                .padding(.horizontal, 5)
-            Text("\(location.administrativeArea) \(location.locality) \(location.subLocality)")
-        }
-    }
-    
-    @ViewBuilder private func listBox(systemName: String, context: String) -> some View {
-        HStack {
-            Image(systemName: systemName)
-                .foregroundStyle(.first)
-                .padding(.horizontal, 5)
-            Text(context)
-        }
-    }
-    
-    @ViewBuilder private func listBox(systemName: String, alley: Alley) -> some View {
-        HStack {
-            Image(systemName: systemName)
-                .foregroundStyle(.first)
-                .padding(.horizontal, 5)
-            switch alley {
-            case .few:
-                Text("적음")
-            case .lots:
-                Text("많음")
-            case .none:
-                Text("없음")
+            .padding(.top, 20)
+            .overlay(alignment: .topLeading) {
+                Image(systemName: "map.circle")
+                    .font(.system(size: 42))
+                    .foregroundColor(Color.first)
+                    .padding(16)
+                    .frame(width: 50, height: 50)
             }
-        }
-    }
-    
-    @ViewBuilder private func listBox(systemName: String, context: Double, specifier: String, unit: String = "") -> some View {
-        let formattedString = String(format: specifier + unit, context)
-        listBox(systemName: systemName, context: formattedString)
-    }
-    
-    private func listBox(systemName: String, duration: Double) -> some View {
-        let hours = Int(duration) / 60
-        let minutes = Int(duration) % 60
-        
-        let formattedString: String
-        switch (hours, minutes) {
-        case (0, _):
-            formattedString = "\(minutes)m"
-        case (_, 0):
-            formattedString = "\(hours)h 00m"
-        default:
-            formattedString = "\(hours)h \(minutes)m"
-        }
-        
-        return listBox(systemName: systemName, context: formattedString)
-    }
-}
-
-class CourseListWatchViewModel: ObservableObject {
-    @Published var isHealthAuthorized = false
-    @Published var isLocationAuthorized = false
-    
-    private var healthStore = HKHealthStore()
-    private var locationManager = CLLocationManager()
-    
-    func checkAuthorization() {
-        checkHealthAuthorization()
-        checkLocationAuthorization()
-    }
-    
-    func checkHealthAuthorization() {
-        let quantityTypes: Set = [
-            HKQuantityType(.heartRate),
-            HKQuantityType(.activeEnergyBurned),
-            HKQuantityType(.distanceWalkingRunning),
-            HKQuantityType(.stepCount),
-            HKQuantityType(.cyclingCadence),
-            HKQuantityType(.runningSpeed),
-            HKQuantityType.workoutType()
-        ]
-        
-        healthStore.requestAuthorization(toShare: quantityTypes, read: quantityTypes) { success, _ in
-            if success {
-                self.isHealthAuthorized = true
-            } else {
-                self.isHealthAuthorized = false
-            }
-        }
-    }
-    
-    func checkLocationAuthorization() {
-        switch locationManager.authorizationStatus {
-        case .notDetermined:
-            locationManager.requestWhenInUseAuthorization()
-            isLocationAuthorized = false
-        case .restricted, .denied:
-            isLocationAuthorized = false
-        case .authorizedAlways, .authorizedWhenInUse:
-            isLocationAuthorized = true
-        @unknown default:
-            break
+            .toolbar(.hidden, for: .automatic)
+            .padding()
         }
     }
 }

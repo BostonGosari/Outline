@@ -9,21 +9,21 @@ import CoreLocation
 import SwiftUI
 
 struct ContentWatchView: View {
-    @ObservedObject private var workoutManager: WatchWorkoutManager
-    
-    private var locationManager = CLLocationManager()
-    
-    init() {
-         self.workoutManager = WatchWorkoutManager(watchConnectivityManager: WatchConnectivityManager())
-     }
+    @StateObject var runningManager = WatchRunningManager.shared
+    @StateObject var workoutManager = WatchWorkoutManager.shared
     
     var body: some View {
-        CourseListWatchView()
-            .environmentObject(workoutManager)
-            .onAppear {
-                workoutManager.requestAuthorization()
-                locationManager.requestWhenInUseAuthorization()
+        ZStack {
+            CourseListWatchView()
+                .tint(.first)
+            if runningManager.startRunning {
+                CountDownView()
+                    .sheet(isPresented: $workoutManager.showSummaryView) {
+                        SummaryView()
+                            .toolbar(.hidden, for: .automatic)
+                    }
             }
+        }
     }
 }
 
