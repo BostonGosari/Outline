@@ -47,7 +47,7 @@ struct ShareMap: UIViewRepresentable {
             if let polyline = overlay as? MKPolyline {
                 let renderer = MKPolylineRenderer(polyline: polyline)
                 renderer.strokeColor = .white
-                renderer.lineWidth = 15
+                renderer.lineWidth = 8
                 return renderer
             }
             return MKOverlayRenderer(overlay: overlay)
