@@ -68,6 +68,7 @@ struct FreeRunningHomeView: View {
                                            if runningStartManager.isLocationAuthorized {
                                                runningStartManager.start = true
                                                runningStartManager.startFreeRun()
+                                               isUnlocked = false
                                            } else {
                                                runningStartManager.permissionType = .location
                                                runningStartManager.showPermissionSheet = true
