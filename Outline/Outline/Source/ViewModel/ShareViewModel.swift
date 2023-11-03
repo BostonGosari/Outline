@@ -82,7 +82,6 @@ class ShareViewModel: ObservableObject {
             print("인스타그램이 설치되어 있지 않습니다.")
             isShowInstaAlert = true
         }
-        tapShareButton = false
     }
     
     func saveImage(image: UIImage) {
@@ -106,7 +105,6 @@ class ShareViewModel: ObservableObject {
                 break
             }
         }
-        tapSaveButton = false
     }
     
     func openAppSetting() {

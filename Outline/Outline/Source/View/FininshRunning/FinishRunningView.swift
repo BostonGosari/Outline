@@ -14,6 +14,7 @@ struct FinishRunningView: View {
     @FetchRequest (entity: CoreRunningRecord.entity(), sortDescriptors: []) var runningRecord: FetchedResults<CoreRunningRecord>
     
     @State private var position: MapCameraPosition = .userLocation(fallback: .automatic)
+    @State private var save = false
     
     private var gradientColors: [Color] = [.customBlack, .customBlack, .customBlack, .customBlack, .black50, .customBlack.opacity(0)]
     private let polylineGradient = Gradient(colors: [.customGradient1, .customGradient2, .customGradient3])
@@ -84,8 +85,11 @@ struct FinishRunningView: View {
                 .navigationBarBackButtonHidden()
         }
         .onAppear {
-            viewModel.isShowPopup = true
-            viewModel.readData(runningRecord: runningRecord)
+            if !save {
+                viewModel.isShowPopup = true
+                viewModel.readData(runningRecord: runningRecord)
+                save = true
+            }
         }
     }
 }
