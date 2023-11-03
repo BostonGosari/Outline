@@ -9,7 +9,7 @@ import CoreLocation
 import SwiftUI
 
 class OnboardingLocationAuthViewModel: NSObject, CLLocationManagerDelegate, ObservableObject {
-    @AppStorage("authState") var authState: AuthState = .onboarding
+    @AppStorage("authState") var authState: AuthState = .logout
     @Published var moveToNextView = false
     
     private var locationManager = CLLocationManager()

@@ -19,12 +19,12 @@ struct OutlineApp: App {
         FirebaseApp.configure()
         guard let kakaoAPIKey = Bundle.main.object(forInfoDictionaryKey: "KakaoAPIKey") as? String else { return }
 
-        KakaoSDK.initSDK(appKey: "kakaoAPIKey")
+        KakaoSDK.initSDK(appKey: kakaoAPIKey)
     }
   
     var body: some Scene {
         WindowGroup {
-            LoginView()
+            ContentView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
                 .onOpenURL { url in
                     if AuthApi.isKakaoTalkLoginUrl(url) {

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct LoginView: View {
-    @AppStorage("authState") var authState: AuthState = .onboarding
+    @AppStorage("authState") var authState: AuthState = .logout
     @AppStorage("userId") var userId: String?
     @Environment(\.window) var window: UIWindow?
     @StateObject private var loginViewModel = LoginViewModel()
@@ -120,7 +120,7 @@ struct LoginView: View {
                     }
                     .padding(.vertical, 5)
                     Button {
-                        UserDefaults.standard.set("lookAround", forKey: "authState")
+                        authState = .lookAround
                     } label: {
                         Text("둘러보기")
                             .foregroundStyle(.white)

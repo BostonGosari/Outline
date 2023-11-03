@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct TabBar: View {
-    @AppStorage("authState") var authState: AuthState = .onboarding
+    @AppStorage("authState") var authState: AuthState = .logout
     @Binding var selectedTab: Tab
     
     var body: some View {
