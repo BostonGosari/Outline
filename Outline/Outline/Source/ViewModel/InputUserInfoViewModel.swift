@@ -18,6 +18,7 @@ enum PickerType {
 }
 
 class InputUserInfoViewModel: ObservableObject {
+    @AppStorage("userId") var userId: String?
     
     @Published var birthday: Date = {
         let dateFormatter = DateFormatter()
@@ -82,6 +83,24 @@ class InputUserInfoViewModel: ObservableObject {
         
         if CMMotionActivityManager.isActivityAvailable() {
             motionManager.queryActivityStarting(from: Date(), to: Date(), to: .main) { _, _ in }
+        }
+    }
+    
+    func saveUserInfo(nickname: String) {
+        guard let userId = userId else {
+            print("userId is not find when update userInfo")
+            return
+        }
+        let userInfoModel = UserInfoModel()
+        let updatedUserInfo = UserInfo(
+            nickname: nickname, birthday: birthday, height: height, weight: weight)
+        userInfoModel.updateUserInfo(uid: userId, userInfo: updatedUserInfo) { res in
+            switch res {
+            case .success(let success):
+                print("success to update userInfo \(success)")
+            case .failure(let failure):
+                print("fail to updated userInfo \(failure)")
+            }
         }
     }
 }
