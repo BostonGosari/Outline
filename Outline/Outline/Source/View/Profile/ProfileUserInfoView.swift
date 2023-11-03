@@ -70,7 +70,7 @@ struct ProfileUserInfoView: View {
                             .foregroundStyle(Color.gray400)
                     }
                     .frame(height: 40)
-
+                    
                     HStack {
                         Text("성별")
                             .font(.subBody)
@@ -80,7 +80,6 @@ struct ProfileUserInfoView: View {
                             .foregroundStyle(Color.customPrimary)
                     }
                     .frame(height: 40)
-                    
                 }
                 .listRowBackground(Color.gray750)
             }
@@ -134,3 +133,7 @@ struct OvalTextFieldStyle: TextFieldStyle {
             .cornerRadius(10)
     }
 }
+
+//#Preview {
+//    ProfileUserInfoView()
+//}

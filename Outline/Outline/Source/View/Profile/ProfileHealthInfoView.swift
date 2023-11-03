@@ -58,7 +58,7 @@ struct ProfileHealthInfoView: View {
                             Spacer()
                             Text("\(height)cm")
                                 .font(.subBody)
-                                .foregroundStyle(Color.gray400)
+                                .foregroundStyle(showHeightPicker ? Color.customPrimary : Color.gray400)
                         }
                         .frame(height: 40)
                     }
@@ -72,7 +72,7 @@ struct ProfileHealthInfoView: View {
                             Spacer()
                             Text("\(weight)kg")
                                 .font(.subBody)
-                                .foregroundStyle(Color.customPrimary)
+                                .foregroundStyle(showWeightPicker ? Color.customPrimary : Color.gray400)
                         }
                         .frame(height: 40)
                     }
