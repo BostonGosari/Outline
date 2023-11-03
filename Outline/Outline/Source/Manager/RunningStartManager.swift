@@ -8,6 +8,7 @@
 import Combine
 import CoreLocation
 import HealthKit
+import SwiftUI
 
 class RunningStartManager: ObservableObject {
         
@@ -47,11 +48,17 @@ class RunningStartManager: ObservableObject {
             HKQuantityType.workoutType()
         ]
         
-        healthStore.requestAuthorization(toShare: quantityTypes, read: quantityTypes) { success, _ in
-            if success {
-                self.isHealthAuthorized = true
-            } else {
-                self.isHealthAuthorized = false
+        for quantityType in quantityTypes {
+            let status = healthStore.authorizationStatus(for: quantityType)
+            switch status {
+            case .notDetermined:
+                isHealthAuthorized = false
+            case .sharingDenied:
+                isHealthAuthorized = false
+            case .sharingAuthorized:
+                isHealthAuthorized = true
+            @unknown default:
+                isHealthAuthorized = false
             }
         }
     }
