@@ -21,7 +21,8 @@ struct RunningMapView: View {
     
     @State private var checkUserLocation = true
     
-    @State private var position: MapCameraPosition = .userLocation(followsHeading: false, fallback: .automatic)
+    @State private var position: MapCameraPosition = .userLocation(followsHeading: true, fallback: .automatic)
+    @State private var currentLocation: CLLocation?
     @Binding var selection: Bool
     
     @Namespace var mapScope
@@ -31,30 +32,7 @@ struct RunningMapView: View {
     var body: some View {
         ZStack(alignment: .topTrailing) {
             Map(position: $position, scope: mapScope) {
-                UserAnnotation { userlocation in
-                    ZStack {
-                        Circle().foregroundStyle(.white).frame(width: 22)
-                        Circle().foregroundStyle(.customPrimary).frame(width: 17)
-                    }
-                    .onChange(of: userlocation.location) { _, userlocation in
-                        if viewModel.runningType == .start {
-                            if let user = userlocation,
-                               let startCourse = runningStartManager.startCourse {
-                                if runningDataManager.userLocations.isEmpty {
-                                    viewModel.startLocation = CLLocation(latitude: user.coordinate.latitude, longitude: user.coordinate.longitude)
-                                }
-                                runningDataManager.userLocations.append(user.coordinate)
-                                if self.runningStartManager.runningType == .gpsArt {
-                                    viewModel.checkEndDistance()
-                                }
-                                if !startCourse.coursePaths.isEmpty {
-                                    runningStartManager.trackingDistance()
-                                }
-                            }
-                        }
-                    }
-                }
-                
+                UserAnnotation()
                 if let courseGuide = runningStartManager.startCourse {
                     MapPolyline(coordinates: ConvertCoordinateManager.convertToCLLocationCoordinates(courseGuide.coursePaths))
                         .stroke(.white.opacity(0.5), style: StrokeStyle(lineWidth: 8, lineCap: .round, lineJoin: .round))
@@ -64,6 +42,28 @@ struct RunningMapView: View {
                     .stroke(.customPrimary, style: StrokeStyle(lineWidth: 8, lineCap: .round, lineJoin: .round))
             }
             .mapControlVisibility(.hidden)
+            .onChange(of: CLLocationManager().location) { _, userlocation in
+                if viewModel.runningType == .start {
+                    if let user = userlocation,
+                       let startCourse = runningStartManager.startCourse {
+                        if runningDataManager.userLocations.isEmpty {
+                            viewModel.startLocation = CLLocation(latitude: user.coordinate.latitude, longitude: user.coordinate.longitude)
+                            runningDataManager.userLocations.append(user.coordinate)
+                        } else if let last = runningDataManager.userLocations.last {
+                            if viewModel.checkLastToDistance(last: last, current: user.coordinate) {
+                                runningDataManager.userLocations.append(user.coordinate)
+                            }
+                        }
+
+                        if self.runningStartManager.runningType == .gpsArt {
+                            viewModel.checkEndDistance()
+                        }
+                        if !startCourse.coursePaths.isEmpty {
+                            runningStartManager.trackingDistance()
+                        }
+                    }
+                }
+            }
             
             VStack(spacing: 0) {
                 Spacer()

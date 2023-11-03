@@ -42,6 +42,12 @@ class RunningMapViewModel: ObservableObject {
         }
     }
     
+    func checkLastToDistance(last: CLLocationCoordinate2D, current: CLLocationCoordinate2D) -> Bool {
+        let lastLocation = CLLocation(latitude: last.latitude, longitude: last.longitude)
+        let currentLocation = CLLocation(latitude: current.latitude, longitude: current.longitude)
+        return lastLocation.distance(from: currentLocation) > 10
+    }
+    
     func checkEndDistance() {
         if checkAccuracy() >= 90 {
             if let lastLocation = userLocations.last {
