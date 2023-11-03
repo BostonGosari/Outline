@@ -138,7 +138,6 @@
 		BB5239582ADC396300646494 /* BackgroundBlur.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5239572ADC396300646494 /* BackgroundBlur.swift */; };
 		BB52396B2ADD385700646494 /* BottomScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB52396A2ADD385700646494 /* BottomScrollView.swift */; };
 		BB52396D2ADD6DBB00646494 /* CustomRoundedRectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB52396C2ADD6DBB00646494 /* CustomRoundedRectangle.swift */; };
-		BBD6956C2ADFBFA1007AA6D9 /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD6956A2ADFBB9E007AA6D9 /* ComplicationController.swift */; };
 		F01FDB992ADABB6100BDA633 /* TabModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01FDB982ADABB6100BDA633 /* TabModel.swift */; };
 		F01FDB9C2ADABC4600BDA633 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01FDB9B2ADABC4600BDA633 /* TabBar.swift */; };
 		F03524102AE35AF800CCD8A6 /* RunningDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F035240F2AE35AF800CCD8A6 /* RunningDataManager.swift */; };
@@ -315,7 +314,6 @@
 		BB5239572ADC396300646494 /* BackgroundBlur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundBlur.swift; sourceTree = "<group>"; };
 		BB52396A2ADD385700646494 /* BottomScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomScrollView.swift; sourceTree = "<group>"; };
 		BB52396C2ADD6DBB00646494 /* CustomRoundedRectangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomRoundedRectangle.swift; sourceTree = "<group>"; };
-		BBD6956A2ADFBB9E007AA6D9 /* ComplicationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplicationController.swift; sourceTree = "<group>"; };
 		F01FDB982ADABB6100BDA633 /* TabModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabModel.swift; sourceTree = "<group>"; };
 		F01FDB9B2ADABC4600BDA633 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 		F01FDB9D2ADABD3D00BDA633 /* HomeTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabView.swift; sourceTree = "<group>"; };
@@ -733,7 +731,6 @@
 			children = (
 				F0AC8AAE2AD94C200061612C /* OutlineWatchApp.swift */,
 				F0AC8AB02AD94C200061612C /* ContentWatchView.swift */,
-				BBD6956A2ADFBB9E007AA6D9 /* ComplicationController.swift */,
 				F0AC8B122AD965E80061612C /* View */,
 				F0AC8B132AD965F10061612C /* ViewModel */,
 				BB1D53442ADE9CEC0073771F /* Manager */,
@@ -1185,7 +1182,6 @@
 				BB5239292ADAF75C00646494 /* Logger.swift in Sources */,
 				F0AC8AB12AD94C200061612C /* ContentWatchView.swift in Sources */,
 				BB1D53432ADE9C7D0073771F /* ControlsView.swift in Sources */,
-				BBD6956C2ADFBFA1007AA6D9 /* ComplicationController.swift in Sources */,
 				BB1D534C2ADEA6F90073771F /* SummaryView.swift in Sources */,
 				BB1D53482ADE9D780073771F /* MetricsView.swift in Sources */,
 				29B205082AEA625100E63F39 /* PathGenerateManager.swift in Sources */,
