@@ -9,14 +9,14 @@ import Foundation
 import WatchConnectivity
 
 class WatchConnectivityManager: NSObject, WCSessionDelegate, ObservableObject {
-
+    
     @Published var allCourses: [GPSArtCourse] = []
     @Published var isWatchRunning: Bool = false
     static let shared = WatchConnectivityManager()
     
     private let userDataModel = UserDataModel()
     let session = WCSession.default
-
+    
     override init() {
         super.init()
         if WCSession.isSupported() {
@@ -26,17 +26,17 @@ class WatchConnectivityManager: NSObject, WCSessionDelegate, ObservableObject {
             print("ERROR: Watch session not supported")
         }
     }
-
+    
     func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
         if let error = error {
             print("session activation failed with error: \(error.localizedDescription)")
             return
         }
     }
-
+    
 #if os(iOS)
     func sessionDidBecomeInactive(_ session: WCSession) { }
-
+    
     func sessionDidDeactivate(_ session: WCSession) { }
 #endif
     
@@ -63,16 +63,16 @@ class WatchConnectivityManager: NSObject, WCSessionDelegate, ObservableObject {
     }
     
     func sendRunningSessionStateToPhone(_ isRunning: Bool) {
-        let signal = ["runningState": isRunning]
-        session.transferUserInfo(signal)
+        let isRunning = ["runningState": isRunning]
+        session.transferUserInfo(isRunning)
     }
-
+    
     func session(_ session: WCSession, didReceiveMessage message: [String: Any]) {
         DispatchQueue.main.async {
             
         }
     }
-
+    
     func session(_ session: WCSession, didReceiveUserInfo userInfo: [String: Any]) {
         DispatchQueue.main.async {
             // watchOS
@@ -86,15 +86,15 @@ class WatchConnectivityManager: NSObject, WCSessionDelegate, ObservableObject {
                     print("Failed to decode GPSArtCourses: \(error)")
                 }
             }
-             
-           if let isRunning = userInfo["runningState"] as? Bool {
-               if isRunning {
-                   self.isWatchRunning = true
-               } else {
-                   self.isWatchRunning = false
-               }
-           }
-    
+            
+            if let isRunning = userInfo["runningState"] as? Bool {
+                if isRunning {
+                    self.isWatchRunning = true
+                } else {
+                    self.isWatchRunning = false
+                }
+            }
+            
             // iOS
             if let data = userInfo["newRunningRecord"] as? Data {
                 let decoder = JSONDecoder()
@@ -104,8 +104,8 @@ class WatchConnectivityManager: NSObject, WCSessionDelegate, ObservableObject {
                         switch result {
                         case .success:
                             print("saved")
-                        case .failure(let error):
-                            print(error)
+                        case .failure:
+                            print("fail to save")
                         }
                     }
                 } catch {

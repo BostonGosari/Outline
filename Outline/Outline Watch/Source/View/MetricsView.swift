@@ -9,11 +9,12 @@ import SwiftUI
 import HealthKit
 
 struct MetricsView: View {
-    @EnvironmentObject var workoutManager: WatchWorkoutManager
-    
+    @StateObject var workoutManager = WatchWorkoutManager.shared
+
     var body: some View {
-        TimelineView(MetricsTimelineSchedule(from: workoutManager.builder?.startDate ?? Date(),
-                                             isPaused: workoutManager.session?.state == .paused)) { context in
+        TimelineView(
+            MetricsTimelineSchedule(from: workoutManager.builder?.startDate ?? Date(),
+                                    isPaused: workoutManager.session?.state == .paused)) { context in
             VStack(alignment: .center) {
                 Spacer()
                 ElapsedTimeView(elapsedTime: workoutManager.builder?.elapsedTime(at: context.date) ?? 0)
@@ -32,7 +33,7 @@ struct MetricsView: View {
                     }
                     Spacer()
                     VStack {
-                        Text(workoutManager.pace > 0 ? String(format: "%02d’%02d’’", Int(workoutManager.pace), Int((workoutManager.pace * 60).truncatingRemainder(dividingBy: 60))) : "-’--’’")
+                        Text(workoutManager.pace > 0 ? workoutManager.pace.formattedAveragePace() : "-’--’’")
 
                             .font(.system(size: 28).weight(.semibold))
                             .foregroundColor(.white)
@@ -45,9 +46,6 @@ struct MetricsView: View {
                     Spacer()
                 }
                 Spacer()
-               
-//                Text(workoutManager.heartRate.formatted(.number.precision(.fractionLength(0))) + " bpm")
-//                Text(Measurement(value: workoutManager.distance, unit: UnitLength.meters).formatted(.measurement(width: .abbreviated, usage: .road)))
             }
             .font(.system(.title, design: .rounded).monospacedDigit().lowercaseSmallCaps())
             .frame(maxWidth: .infinity)
