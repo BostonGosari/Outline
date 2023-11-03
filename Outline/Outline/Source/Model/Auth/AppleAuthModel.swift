@@ -119,12 +119,8 @@ extension AppleAuthModel: ASAuthorizationControllerDelegate {
               idToken: idTokenString,
               rawNonce: nonce)
             
-            //Firebase 작업
             Auth.auth().signIn(with: credential) { (authResult, error) in
-                if let error = error {
-                    // Error. If error.code == .MissingOrInvalidNonce, make sure
-                    // you're sending the SHA256-hashed nonce as a hex string with
-                    // your request to Apple.
+                if let _ = error {
                     if let completion = self.completion {
                         completion(.failure(.failToMakeNonce))
                     }
