@@ -55,7 +55,7 @@ struct HomeTabView: View {
                             .frame(maxHeight: .infinity, alignment: .top)
                     }
                 }
-             
+                
             }
             if runningManager.start {
                 CountDown(running: $runningManager.running, start: $runningManager.start)
@@ -64,21 +64,23 @@ struct HomeTabView: View {
                 RunningView()
             }
             if showCustomSheet {
-                WatchRunningSheet
+                watchRunningSheet
             }
-                
+            
         }
         .onReceive(watchConnectivityManager.$isWatchRunning) { isRunning in
-              if isRunning {
-                  showCustomSheet = true
-              }
-          }
+            if isRunning {
+                showCustomSheet = true
+            } else {
+                showCustomSheet = false
+            }
+        }
     }
     
 }
 
 extension HomeTabView {
-    private var WatchRunningSheet: some View {
+    private var watchRunningSheet: some View {
         ZStack {
             Color.black.opacity(0.5)
                 .onTapGesture {
