@@ -13,7 +13,7 @@ struct CardDetailView: View {
     
     @State private var isUnlocked = false
     @State private var showAlert = false
-    @StateObject var runningManager = RunningStartManager.shared
+    @StateObject var runningStartManager = RunningStartManager.shared
     private let locationManager = CLLocationManager()
     @Environment(\.dismiss) var dismiss
     
@@ -45,7 +45,7 @@ struct CardDetailView: View {
                         }
                     
                     VStack {
-                        ZStack {
+                        ZStack(alignment: .top) {
                             courseImage
                             courseInformation
                         }
@@ -119,6 +119,8 @@ struct CardDetailView: View {
                 VStack(spacing: 10) {
                     Text("자유코스로 변경할까요?")
                         .font(.title2)
+                        .fontWeight(.semibold)
+                        .padding(.top)
                     Text("앗! 현재 루트와 멀리 떨어져 있어요.")
                         .font(.subBody)
                         .foregroundColor(.gray300)
@@ -129,11 +131,12 @@ struct CardDetailView: View {
                     Button {
                         showAlert = false
                         showDetailView = false
-                        runningManager.start = true
-                        runningManager.startFreeRun()
+                        runningStartManager.start = true
+                        runningStartManager.startFreeRun()
                     } label: {
                         Text("자유코스로 변경하기")
                             .font(.button)
+                            .fontWeight(.medium)
                             .foregroundStyle(Color.customBlack)
                             .padding()
                             .frame(maxWidth: .infinity)
@@ -151,7 +154,7 @@ struct CardDetailView: View {
                     } label: {
                         Text("홈으로 돌아가기")
                             .font(.button)
-                            .bold()
+                            .fontWeight(.medium)
                             .foregroundStyle(Color.customWhite)
                     }
                 }
@@ -204,7 +207,7 @@ struct CardDetailView: View {
                 .fontWeight(.semibold)
                 .padding(.bottom, 16)
             }
-            .padding(.top, 100)
+            .padding(.top, 60)
             .opacity(appear[0] ? 1 : 0)
             .offset(y: appear[0] ? 0 : fadeInOffset)
             
@@ -218,19 +221,33 @@ struct CardDetailView: View {
         SlideToUnlock(isUnlocked: $isUnlocked, progress: $progress)
             .onChange(of: isUnlocked) { _, newValue in
                 if newValue {
-                    let course = selectedCourse.course.coursePaths
-                    
-                    if runningManager.checkDistance(course: course) {
-                        runningManager.startCourse = selectedCourse.course
-                        runningManager.startGPSArtRun()
-                        showDetailView = false
-                        runningManager.start = true
-                        isUnlocked = false
+                    runningStartManager.checkAuthorization()
+
+                    if runningStartManager.isHealthAuthorized {
+                        if runningStartManager.isLocationAuthorized {
+                            let course = selectedCourse.course.coursePaths
+                            
+                            if runningStartManager.checkDistance(course: course) {
+                                runningStartManager.startCourse = selectedCourse.course
+                                runningStartManager.startGPSArtRun()
+                                showDetailView = false
+                                runningStartManager.start = true
+                                isUnlocked = false
+                            } else {
+                                isUnlocked = false
+                                withAnimation {
+                                    showAlert = true
+                                }
+                            }
+                        } else {
+                           runningStartManager.showPermissionSheet = true
+                           runningStartManager.permissionType = .location
+                            isUnlocked = false
+                       }
                     } else {
+                        runningStartManager.showPermissionSheet = true
+                        runningStartManager.permissionType = .health
                         isUnlocked = false
-                        withAnimation {
-                            showAlert = true
-                        }
                     }
                 }
             }

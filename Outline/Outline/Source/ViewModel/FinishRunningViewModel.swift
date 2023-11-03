@@ -39,7 +39,6 @@ class FinishRunningViewModel: ObservableObject {
     ]
     
     var shareData = ShareModel()
-    
     var userLocations: [CLLocationCoordinate2D] = []
   
     func readData(runningRecord: FetchedResults<CoreRunningRecord>) {

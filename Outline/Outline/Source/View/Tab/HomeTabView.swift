@@ -48,6 +48,10 @@ struct HomeTabView: View {
                             .opacity(showDetailView ? 0 : 1)
                             .ignoresSafeArea()
                     }
+                    
+                    if let permissionType = runningManager.permissionType {
+                        PermissionSheet(showPermissionSheet: $runningManager.showPermissionSheet, permissionType: permissionType)
+                    }
                 }
                 .overlay {
                     if runningDataManager.endWithoutSaving {

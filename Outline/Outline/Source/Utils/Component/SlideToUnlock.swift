@@ -103,6 +103,9 @@ struct SlideToUnlock: View {
                             width = minWidth
                             isReached = false
                         }
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                            progress = 0
+                        }
                     }
                 }
             }
