@@ -8,13 +8,15 @@
 import SwiftUI
 
 struct ProfileHealthInfoView: View {
-    @AppStorage("height") var height: Int = 183
-    @AppStorage("weight") var weight: Int = 73
-    
     @Environment(\.dismiss) private var dismiss
+    
+    @Binding var height: Int
+    @Binding var weight: Int
     
     @State private var showHeightPicker = false
     @State private var showWeightPicker = false
+    
+    var completion: () -> Void = {}
     
     private var heightRange: ClosedRange<Int> {
         let min = 91
@@ -103,9 +105,16 @@ struct ProfileHealthInfoView: View {
                 .presentationDetents([.medium])
             }
         })
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                Button {
+                    completion()
+                    dismiss()
+                } label: {
+                    Text("완료")
+                        .foregroundStyle(Color.customPrimary)
+                }
+            }
+        }
     }
-}
-
-#Preview {
-    ProfileHealthInfoView()
 }

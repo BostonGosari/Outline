@@ -9,7 +9,7 @@ import SwiftUI
 
 struct OnboardingNotificationAuthView: View {
     
-    @AppStorage("authState") var authState: AuthState = .onboarding
+    @AppStorage("authState") var authState: AuthState = .logout
     @State private var showNotificationAlert = true
     @State private var isResponsed = false
     
