@@ -62,7 +62,7 @@ struct WorkoutDataView: View {
             HStack {
                 workoutDataItem(value: String(format: "%.0f", cadence), label: "케이던스")
                 workoutDataItem(value: averagePace.formattedAveragePace(), label: "평균 페이스")
-                    .scaleEffect(averagePace > 6000 ? 0.8 : 1.0)
+                    .scaleEffect(averagePace > 600 ? (averagePace > 6000 ? 0.8 : 0.95) : 1.0)
                 workoutDataItem(value: "", label: "")
             }
         }

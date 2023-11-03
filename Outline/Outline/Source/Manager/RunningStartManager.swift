@@ -66,7 +66,6 @@ class RunningStartManager: ObservableObject {
     func checkLocationAuthorization() {
         switch locationManager.authorizationStatus {
         case .notDetermined:
-            locationManager.requestWhenInUseAuthorization()
             isLocationAuthorized = false
         case .restricted, .denied:
             isLocationAuthorized = false
