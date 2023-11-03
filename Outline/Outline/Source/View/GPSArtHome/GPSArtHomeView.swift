@@ -71,17 +71,28 @@ struct GPSArtHomeView: View {
                         .padding(.bottom, -10)
                         
                         if viewModel.courses.isEmpty {
-                            Rectangle()
-                                .frame(
-                                    width: UIScreen.main.bounds.width * 0.84,
-                                    height: UIScreen.main.bounds.height * 0.57
-                                )
-                                .roundedCorners(10, corners: [.topLeft])
-                                .roundedCorners(70, corners: [.topRight])
-                                .roundedCorners(45, corners: [.bottomLeft, .bottomRight])
-                                .foregroundColor(.gray700)
-                                .padding(.top, -20)
-                                .padding(.bottom, -20)
+                            VStack {
+                                Rectangle()
+                                    .frame(
+                                        width: UIScreen.main.bounds.width * 0.84,
+                                        height: UIScreen.main.bounds.width * 0.84 * 1.5
+                                    )
+                                    .roundedCorners(10, corners: [.topLeft])
+                                    .roundedCorners(70, corners: [.topRight])
+                                    .roundedCorners(45, corners: [.bottomLeft, .bottomRight])
+                                    .foregroundColor(.gray700)
+                                    .padding(.top, -20)
+                                    .padding(.bottom, -20)
+                                HStack {
+                                    ForEach(0..<3) { _ in
+                                        Rectangle()
+                                            .frame(width: indexWidth, height: indexHeight)
+                                            .foregroundStyle(.gray700)
+                                    }
+                                }
+                                .padding(.bottom, -30)
+                            }
+                            .padding(.top, 8)
                         }
                         
                         HStack {

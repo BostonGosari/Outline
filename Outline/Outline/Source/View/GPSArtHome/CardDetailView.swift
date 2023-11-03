@@ -196,15 +196,16 @@ struct CardDetailView: View {
         VStack(alignment: .leading) {
             VStack(alignment: .leading, spacing: 0) {
                 Text("\(selectedCourse.course.courseName)")
-                    .font(.largeTitle)
-                    .bold()
+                    .font(.headline)
+                    .fontWeight(.semibold)
                     .padding(.bottom, 8)
                 HStack {
                     Image(systemName: "mappin")
                     Text("\(selectedCourse.course.locationInfo.locality) \(selectedCourse.course.locationInfo.subLocality) • 내 위치에서 \(selectedCourse.distance/1000, specifier: "%.1f")km")
                 }
-                .font(.caption)
-                .fontWeight(.semibold)
+                .font(.subBody)
+                .fontWeight(.regular)
+                .foregroundStyle(.gray400)
                 .padding(.bottom, 16)
             }
             .padding(.top, 60)
