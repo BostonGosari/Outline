@@ -23,9 +23,10 @@ struct BottomScrollView: View {
                     .foregroundColor(.gray700)
                     .frame(width: 148, height: 16)
             } else {
-                Text("이런 코스도 있어요.")
+                Text("이런 코스도 있어요")
                     .padding(.leading, 16)
                     .font(.subtitle)
+                    .fontWeight(.semibold)
                     .foregroundColor(.white)
             }
             ScrollView(.horizontal, showsIndicators: false) {
@@ -71,10 +72,7 @@ struct BottomScrollView: View {
                                         }
                                         .roundedCorners(5, corners: [.topLeft])
                                         .roundedCorners(30, corners: [.topRight, .bottomLeft, .bottomRight])
-                                        .shadow(color: .white, radius: 0.5, x: 0, y: -0.5)
-                                        .shadow(color: .white, radius: 0.5, x: 0.5, y: 0)
-                                        .shadow(color: .white, radius: 0.5, x: 0, y: 0.5)
-                                        .shadow(color: .white, radius: 0.5, x: -0.5, y: 0)
+                                        .shadow(color: .white, radius: 0.5, y: -0.5)
                                     } placeholder: {
                                         Rectangle()
                                             .foregroundColor(.gray700)

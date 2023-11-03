@@ -7,6 +7,7 @@
 
 import Combine
 import CoreLocation
+import HealthKit
 
 class RunningStartManager: ObservableObject {
         
@@ -15,14 +16,59 @@ class RunningStartManager: ObservableObject {
     @Published var running = false
     @Published var changeRunningType = false
     
+    @Published var isHealthAuthorized = false
+    @Published var isLocationAuthorized = false
+    @Published var showPermissionSheet = false
+    @Published var permissionType: PermissionType?
+    
     private var timer: AnyCancellable?
-    private let locationManager = CLLocationManager()
+    private var healthStore = HKHealthStore()
+    private var locationManager = CLLocationManager()
     var startCourse: GPSArtCourse?
     var runningType: RunningType = .gpsArt
     
     static let shared = RunningStartManager()
     
     private init() { }
+    
+    func checkAuthorization() {
+        checkHealthAuthorization()
+        checkLocationAuthorization()
+    }
+    
+    func checkHealthAuthorization() {
+        let quantityTypes: Set = [
+            HKQuantityType(.heartRate),
+            HKQuantityType(.activeEnergyBurned),
+            HKQuantityType(.distanceWalkingRunning),
+            HKQuantityType(.stepCount),
+            HKQuantityType(.cyclingCadence),
+            HKQuantityType(.runningSpeed),
+            HKQuantityType.workoutType()
+        ]
+        
+        healthStore.requestAuthorization(toShare: quantityTypes, read: quantityTypes) { success, _ in
+            if success {
+                self.isHealthAuthorized = true
+            } else {
+                self.isHealthAuthorized = false
+            }
+        }
+    }
+    
+    func checkLocationAuthorization() {
+        switch locationManager.authorizationStatus {
+        case .notDetermined:
+            locationManager.requestWhenInUseAuthorization()
+            isLocationAuthorized = false
+        case .restricted, .denied:
+            isLocationAuthorized = false
+        case .authorizedAlways, .authorizedWhenInUse:
+            isLocationAuthorized = true
+        @unknown default:
+            break
+        }
+    }
     
     func startFreeRun() {
         startCourse = GPSArtCourse()
@@ -65,7 +111,7 @@ class RunningStartManager: ObservableObject {
         guard let userLocation = locationManager.location?.coordinate else { return false }
         
         guard let shortestDistance = calculateShortestDistance(from: userLocation, to: ConvertCoordinateManager.convertToCLLocationCoordinates(course)) else { return false }
-        return shortestDistance <= 2000
+        return shortestDistance <= 100
     }
     
     func startTimer() {

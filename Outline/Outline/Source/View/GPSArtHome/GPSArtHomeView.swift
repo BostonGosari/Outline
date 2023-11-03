@@ -32,14 +32,14 @@ struct GPSArtHomeView: View {
             if showNetworkErrorView {
                  errorView
              } else {
-                ScrollView {
+                 ScrollView {
                     Color.clear.frame(height: 0)
                         .onScrollViewOffsetChanged { offset in
                             scrollOffset = offset
                         }
                     GPSArtHomeHeader(loading: loading, scrollOffset: scrollOffset)
                     
-                    VStack {
+                    VStack(spacing: 0) {
                         ScrollView(.horizontal, showsIndicators: false) {
                             
                             getCurrentOffsetView
@@ -74,14 +74,14 @@ struct GPSArtHomeView: View {
                             Rectangle()
                                 .frame(
                                     width: UIScreen.main.bounds.width * 0.84,
-                                    height: UIScreen.main.bounds.height * 0.55
+                                    height: UIScreen.main.bounds.height * 0.57
                                 )
                                 .roundedCorners(10, corners: [.topLeft])
                                 .roundedCorners(70, corners: [.topRight])
                                 .roundedCorners(45, corners: [.bottomLeft, .bottomRight])
                                 .foregroundColor(.gray700)
                                 .padding(.top, -20)
-                                .padding(.bottom, -10)
+                                .padding(.bottom, -20)
                         }
                         
                         HStack {
@@ -92,6 +92,7 @@ struct GPSArtHomeView: View {
                                     .animation(.bouncy, value: currentIndex)
                             }
                         }
+                        .padding(.bottom, -30)
                         
                         BottomScrollView(viewModel: viewModel, selectedCourse: $selectedCourse, showDetailView: $showDetailView, namespace: namespace)
                     }

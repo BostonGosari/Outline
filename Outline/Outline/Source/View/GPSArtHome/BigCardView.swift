@@ -39,7 +39,7 @@ struct BigCardView: View {
         }
         .frame(
             width: UIScreen.main.bounds.width * 0.84,
-            height: UIScreen.main.bounds.height * 0.55
+            height: UIScreen.main.bounds.height * 0.57
         )
         .transition(.identity)
         .overlay(alignment: .bottom) {
@@ -90,7 +90,7 @@ struct BigCardView: View {
                             .stroke()
                             .foregroundColor(Color.customPrimary)
                     }
-                Text("#\(course.course.courseDuration.formatDuration())")
+                Text("#\(course.course.courseDuration.formatDurationInKorean())")
                     .frame(width: 70, height: 23)
                     .font(.tag2)
                     .background {

@@ -41,11 +41,11 @@ struct ControlsView: View {
                     }
                 }
             }
-            .padding(.top, buttonAnimation ? 20 : WKInterfaceDevice.current().screenBounds.height * 0.25)
-            .padding(.bottom, workoutManager.running ? 0 : 24)
+            .padding(.top, buttonAnimation ? 20 : WKInterfaceDevice.current().screenBounds.height * 0.2)
+            .padding(.bottom, workoutManager.running ? 0 : 30)
             
             if !workoutManager.running {
-                LazyVGrid(columns: Array(repeating: GridItem(), count: 2), spacing: 24) {
+                LazyVGrid(columns: Array(repeating: GridItem(), count: 2), spacing: 12) {
                     workoutDataItem(value: "\((workoutManager.distance/1000).formatted(.number.precision(.fractionLength(2))))", label: "킬로미터")
                     workoutDataItem(value: workoutManager.averagePace.formattedAveragePace(),
                                     label: "평균 페이스")
@@ -57,10 +57,8 @@ struct ControlsView: View {
             }
         }
         .scrollDisabled(workoutManager.running)
-        .overlay(alignment: .topLeading) {
-            header
-        }
-        .toolbar(.hidden, for: .automatic)
+        .navigationTitle(workoutManager.running ? watchRunningManager.runningTitle : "일시 정지됨")
+        .navigationBarTitleDisplayMode(.inline)
         .overlay {
             if showConfirmationSheet {
                 confirmationSheet
