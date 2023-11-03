@@ -12,7 +12,7 @@ struct ConfettiWatchView: View {
     
     var body: some View {
         Confetti(counter: $counter,
-                 num: 30,
+                 num: 40,
                  confettis: [
                     .shape(.circle),
                     .shape(.smallCircle),
@@ -29,7 +29,7 @@ struct ConfettiWatchView: View {
                  confettiSize: 7,
                  openingAngle: .degrees(60),
                  closingAngle: .degrees(120),
-                 repetitions: 5,
+                 repetitions: 0,
                  repetitionInterval: 0.5
         )
         .onAppear {
