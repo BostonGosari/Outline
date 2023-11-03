@@ -32,22 +32,26 @@ struct ProfileUserInfoView: View {
                     .resizable()
                     .scaledToFit()
                     .frame(width: 118, height: 118)
-                Image("changeProfileImage")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 118, height: 118)
             }
             .padding(.top, 18)
             
             HStack {
                 Text("닉네임")
+                    .font(.subBody)
                 Spacer()
             }
             .padding(.horizontal, 24)
             .padding(.top, 30)
             
-            TextField("아웃라인메이트", text: $nickname)
-            .textFieldStyle(OvalTextFieldStyle())
+            HStack {
+                Text(nickname)
+                    .font(.subBody)
+                    .foregroundStyle(.gray400)
+                Spacer()
+            }
+            .padding(12)
+            .background(Color.gray750)
+            .cornerRadius(10)
             .padding(.horizontal, 16)
             
             Divider()
@@ -57,32 +61,28 @@ struct ProfileUserInfoView: View {
             
             List {
                 Group {
-                    Button {
-                        showBirthdayPicker.toggle()
-                    } label: {
-                        HStack {
-                            Text("생년월일")
-                            Spacer()
-                            Text(birthday.dateToShareString())
-                                .foregroundStyle(Color.gray400)
-                        }
-                        .frame(height: 40)
+                    HStack {
+                        Text("생년월일")
+                            .font(.subBody)
+                        Spacer()
+                        Text(birthday.dateToShareString())
+                            .font(.subBody)
+                            .foregroundStyle(Color.gray400)
                     }
+                    .frame(height: 40)
 
-                    Button {
-                        showGenderPicker.toggle()
-                    } label: {
-                        HStack {
-                            Text("성별")
-                            Spacer()
-                            Text("\(gender.rawValue)")
-                                .foregroundStyle(Color.customPrimary)
-                        }
-                        .frame(height: 40)
+                    HStack {
+                        Text("성별")
+                            .font(.subBody)
+                        Spacer()
+                        Text("\(gender.rawValue)")
+                            .font(.subBody)
+                            .foregroundStyle(Color.customPrimary)
                     }
+                    .frame(height: 40)
+                    
                 }
                 .listRowBackground(Color.gray750)
-                .listRowSeparator(.hidden)
             }
             .cornerRadius(10)
             .listStyle(.inset)

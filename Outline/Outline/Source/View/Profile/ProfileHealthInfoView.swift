@@ -54,8 +54,10 @@ struct ProfileHealthInfoView: View {
                     } label: {
                         HStack {
                             Text("신장")
+                                .font(.subBody)
                             Spacer()
                             Text("\(height)cm")
+                                .font(.subBody)
                                 .foregroundStyle(Color.gray400)
                         }
                         .frame(height: 40)
@@ -66,8 +68,10 @@ struct ProfileHealthInfoView: View {
                     } label: {
                         HStack {
                             Text("체중")
+                                .font(.subBody)
                             Spacer()
                             Text("\(weight)kg")
+                                .font(.subBody)
                                 .foregroundStyle(Color.customPrimary)
                         }
                         .frame(height: 40)
@@ -82,13 +86,14 @@ struct ProfileHealthInfoView: View {
             .frame(height: 2 * 62)
             Spacer()
         }
-        .navigationTitle("내 정보")
+        .navigationTitle("신체 정보")
         .navigationBarTitleDisplayMode(.inline)
         .background(Color.gray900)
         .sheet(isPresented: $showHeightPicker, content: {
             Picker("신장", selection: $height) {
                 ForEach(heightRange, id: \.self) { h in
                     Text("\(h)cm")
+                        .font(.subBody)
                 }
             }
             .pickerStyle(.wheel)
@@ -99,6 +104,7 @@ struct ProfileHealthInfoView: View {
                 Picker("체중", selection: $weight) {
                     ForEach(weightRange, id: \.self) { w in
                         Text("\(w)kg")
+                            .font(.subBody)
                     }
                 }
                 .pickerStyle(.wheel)
