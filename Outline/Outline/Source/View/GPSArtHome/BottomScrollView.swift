@@ -84,7 +84,7 @@ struct BottomScrollView: View {
                                     }
                                     .frame(
                                         width: UIScreen.main.bounds.width * 0.4,
-                                        height: UIScreen.main.bounds.height * 0.25
+                                        height: UIScreen.main.bounds.width * 0.4 * 1.45
                                     )
                                     .transition(.identity)
                                 }
