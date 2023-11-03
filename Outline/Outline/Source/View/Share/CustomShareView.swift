@@ -10,7 +10,6 @@ import MapKit
 import SwiftUI
 
 struct CustomShareView: View {
-    
     @ObservedObject var viewModel: ShareViewModel
 
     @State private var isShowBPM = true
@@ -19,15 +18,12 @@ struct CustomShareView: View {
     @State private var isShowDistance = true
     
     // handle Image
-    @Binding var renderedImage: UIImage?
     @State private var mapView = MKMapView()
     @State private var mapViewRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 29, longitude: 136), span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
     
     @State private var imageWidth: CGFloat = 0
     @State private var imageHeight: CGFloat = 0
     
-    @State private var position: MapCameraPosition = .userLocation(followsHeading: true, fallback: .automatic)
-        
     var body: some View {
         ZStack {
             Color.gray900
@@ -41,22 +37,36 @@ struct CustomShareView: View {
             }
             
         }
-        .onChange(of: viewModel.currentPage, {
-            if viewModel.currentPage == 0 {
-                renderLayerImage()
+        .onChange(of: viewModel.tapSaveButton) {
+            if viewModel.tapSaveButton && viewModel.currentPage == 0 {
+                renderMapViewAsImage(
+                    width: Int(imageWidth),
+                    height: Int(imageHeight)
+                ) { image in
+                    if let image = image {
+                        viewModel.saveImage(image: image)
+                    }
+                }
             }
-        })
-        .onAppear {
-            renderLayerImage()
+        }
+        .onChange(of: viewModel.tapShareButton) {
+            if viewModel.tapShareButton && viewModel.currentPage == 0 {
+                renderMapViewAsImage(
+                    width: Int(imageWidth),
+                    height: Int(imageHeight)
+                ) { image in
+                    if let image = image {
+                        viewModel.shareToInstagram(image: image)
+                    }
+                }
+            }
         }
     }
 }
 
 extension CustomShareView {
-    private func renderLayerImage() {
-        renderMapViewAsImage(width: Int(imageWidth), height: Int(imageHeight))
-    }
-    private func renderMapViewAsImage(width: Int, height: Int) {
+    private func renderMapViewAsImage(width: Int, height: Int, completion: @escaping (_ image: UIImage?) -> Void) {
+        var image: UIImage?
         let options: MKMapSnapshotter.Options = .init()
         options.region = mapViewRegion
         options.size = CGSize(width: width, height: height)
@@ -69,18 +79,20 @@ extension CustomShareView {
         snapshotter.start { snapshot, error in
            if let snapshot = snapshot {
                let renderedMapImage = snapshot.image
-               renderedImage = overlayMapInfo(renderdImage: renderedMapImage).asImage(size: CGSize(width: width, height: height))
+               image = overlayMapInfo(renderdImage: renderedMapImage).asImage(size: CGSize(width: width, height: height))
+               completion(image)
            } else if let error = error {
-              print(error)
+               print(error)
            }
         }
     }
+    
     private func overlayMapInfo(renderdImage: UIImage) -> some View {
         ZStack {
             Group {
                 Group {
                     Image(uiImage: renderdImage)
-                    
+                        
                     PathGenerateManager.caculateLinesInRect(width: imageWidth, height: Double(imageWidth * 1920 / 1080), coordinates: viewModel.runningData.userLocations, region: mapView.region)
                         .stroke(style: StrokeStyle(lineWidth: 5, lineCap: .round, lineJoin: .round))
                 }
@@ -98,15 +110,11 @@ extension CustomShareView {
 extension CustomShareView {
     private var customImageView: some View {
         ZStack {
-            Map(position: $position) {
-                MapPolyline(coordinates: viewModel.runningData.userLocations)
-                    .stroke(.customPrimary, lineWidth: 8)
-            }
-            .frame(width: imageWidth, height: imageHeight)
-            .overlay {
-                LinearGradient(colors: [.black.opacity(0), .black], startPoint: .center, endPoint: .bottom)
-            }
-            
+            ShareMap(mapView: $mapView, mapViewRegion: $mapViewRegion, userLocations: viewModel.runningData.userLocations)
+                .frame(width: imageWidth, height: imageHeight)
+                .overlay {
+                    LinearGradient(colors: [.black.opacity(0), .black], startPoint: .center, endPoint: .bottom)
+                }
             runningInfo
             GeometryReader { proxy in
                 HStack {}

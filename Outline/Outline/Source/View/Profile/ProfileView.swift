@@ -8,16 +8,19 @@
 import SwiftUI
 
 struct ProfileView: View {
+    @Environment(\.dismiss) private var dismiss
+    @AppStorage("authState") var authState: AuthState = .logout
+    @ObservedObject private var profileViewModel = ProfileViewModel()
+    
     @State private var showDeleteUserAlert = false
     @State private var showDeleteCompleteAlert = false
     @State private var showLogoutAlert = false
     
     // 추후 데이터 연결 필요
     @State private var userProfileImage = "defaultProfileImage"
-    @State private var userName = "김시즈"
     
     var body: some View {
-        NavigationStack {
+        ZStack {
             VStack {
                 Image(userProfileImage)
                     .resizable()
@@ -25,7 +28,7 @@ struct ProfileView: View {
                     .frame(width: 118, height: 118)
                     .padding(.top, 18)
                 
-                Text(userName)
+                Text(profileViewModel.userInfo.nickname)
                 Divider()
                     .frame(height: 1)
                     .background(Color.gray700)
@@ -33,13 +36,22 @@ struct ProfileView: View {
                 List {
                     Group {
                         NavigationLink {
-                            ProfileUserInfoView()
+                            ProfileUserInfoView(
+                                nickname: $profileViewModel.userInfo.nickname,
+                                birthday: $profileViewModel.userInfo.birthday,
+                                gender: $profileViewModel.userInfo.gender,
+                                completion: profileViewModel.saveUserInfoOnDB
+                            )
                         } label: {
                             Text("내 정보")
                                 .padding(.vertical, 5)
                         }
                         NavigationLink {
-                            ProfileHealthInfoView()
+                            ProfileHealthInfoView(
+                                height: $profileViewModel.userInfo.height,
+                                weight: $profileViewModel.userInfo.weight,
+                                completion: profileViewModel.saveUserInfoOnDB
+                            )
                         } label: {
                             Text("신체 정보")
                                 .padding(.vertical, 5)
@@ -73,7 +85,7 @@ struct ProfileView: View {
                                     showDeleteUserAlert = false
                                 }), secondaryButton: .default(Text("삭제").bold(), action: {
                                     showDeleteUserAlert = false
-                                    // handle delete User
+                                    profileViewModel.signOut()
                                     showDeleteCompleteAlert = true
                                 }))
                         }
@@ -91,6 +103,7 @@ struct ProfileView: View {
                                     showLogoutAlert = false
                                 }), secondaryButton: .default(Text("로그아웃").bold(), action: {
                                     showLogoutAlert = false
+                                    profileViewModel.logOut()
                                     // handle logout
                                 }))
                         }
@@ -115,14 +128,47 @@ struct ProfileView: View {
                     message: Text("탈퇴 처리가 성공적으로 완료되었습니다."),
                     primaryButton: .default(Text("닫기"), action: {
                         showDeleteCompleteAlert = false
+                        self.authState = .logout
                     }), secondaryButton: .default(Text("확인").bold(), action: {
                         showDeleteCompleteAlert = false
-                        // handle navigate to Login View
+                        self.authState = .logout
                     })
                 )
             }
+            
+            switch authState {
+            case .lookAround:
+                ZStack {
+                    Color.customBlack.opacity(0.7)
+                    VStack {
+                        Spacer()
+                        LookAroundModalView {
+                            dismiss()
+                        }
+                    }
+                    .frame(height: UIScreen.main.bounds.height / 2)
+                    .frame(maxWidth: .infinity)
+                    .background {
+                        RoundedRectangle(cornerRadius: 30, style: .continuous)
+                            .stroke(Color.customPrimary, lineWidth: 2)
+                        RoundedRectangle(cornerRadius: 30, style: .continuous)
+                            .foregroundStyle(Color.gray900)
+                    }
+                    .frame(maxHeight: .infinity, alignment: .bottom)
+                    .offset(y: 40)
+                }
+            default:
+                EmptyView()
+            }
         }
-        .tint(Color.customPrimary)
+        .onAppear {
+            switch authState {
+            case .login:
+                profileViewModel.loadUserInfo()
+            default:
+                return
+            }
+        }
     }
 }
 

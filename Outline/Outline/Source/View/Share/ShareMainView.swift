@@ -9,8 +9,10 @@ import CoreLocation
 import SwiftUI
 
 struct ShareMainView: View {
-    @StateObject var runningManager = RunningStartManager.shared
+    @Environment(\.dismiss) var dismiss
     @StateObject private var viewModel = ShareViewModel()
+    
+    @State private var isShowPermissionSheet = false
     
     let runningData: ShareModel
     
@@ -21,9 +23,9 @@ struct ShareMainView: View {
                     .ignoresSafeArea()
                 
                 TabView(selection: $viewModel.currentPage) {
-                    CustomShareView(viewModel: viewModel, renderedImage: $viewModel.shareImage)
+                    CustomShareView(viewModel: viewModel)
                         .tag(0)
-                    ImageShareView(viewModel: viewModel, shareImage: $viewModel.shareImage)
+                    ImageShareView(viewModel: viewModel)
                         .tag(1)
                 }
                 .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
@@ -31,7 +33,6 @@ struct ShareMainView: View {
                 HStack(spacing: 0) {
                     Button {
                         viewModel.tapSaveButton = true
-                        viewModel.saveImage()
                     }  label: {
                         Image(systemName: "square.and.arrow.down")
                             .foregroundStyle(Color.black)
@@ -47,9 +48,6 @@ struct ShareMainView: View {
                     
                     CompleteButton(text: "공유하기", isActive: true) {
                         viewModel.tapShareButton = true
-                        if viewModel.shareToInstagram() {
-                            runningManager.running = false
-                        }
                     }
                     .padding(.leading, -8)
                 }
@@ -57,9 +55,16 @@ struct ShareMainView: View {
                 .padding(.bottom, 42)
             }
             .ignoresSafeArea()
-            .modifier(NavigationModifier())
+            .modifier(NavigationModifier(action: {
+                dismiss()
+            }))
             .onAppear {
                 viewModel.runningData = runningData
+            }
+            .overlay {
+                if isShowPermissionSheet {
+                    permissionSheet
+                }
             }
             .overlay {
                 if viewModel.isShowPopup {
@@ -68,12 +73,70 @@ struct ShareMainView: View {
                         .padding(.bottom, 74)
                 }
             }
+            .onChange(of: viewModel.permissionDenied) {
+                if viewModel.permissionDenied {
+                    isShowPermissionSheet = true
+                }
+            }
         }
     }
 }
 
+extension ShareMainView {
+    private var permissionSheet: some View {
+        ZStack {
+            Color.black.opacity(0.5)
+                .onTapGesture {
+                    viewModel.permissionDenied = false
+                    isShowPermissionSheet = false
+                }
+            
+            VStack(spacing: 0) {
+                Text(viewModel.alertTitle)
+                    .font(.title2)
+                    .padding(.top, 44)
+                    .padding(.bottom, 8)
+                
+                Text(viewModel.alertMessage)
+                    .font(.subBody)
+                    .padding(.bottom, 30)
+                
+                Image(viewModel.imageName)
+                    .resizable()
+                    .frame(width: 120, height: 120)
+                    .padding(.bottom, 26)
+                
+                CompleteButton(text: "설정으로 가기", isActive: true) {
+                    viewModel.openAppSetting()
+                    viewModel.permissionDenied = false
+                    isShowPermissionSheet = false
+                }
+                .padding(.bottom, 20)
+                
+                Button("닫기") {
+                    viewModel.permissionDenied = false
+                    isShowPermissionSheet = false
+                }
+                .foregroundStyle(Color.customWhite)
+                .padding(.bottom, 40)
+            }
+            .frame(height: UIScreen.main.bounds.height / 2)
+            .frame(maxWidth: .infinity)
+            .background {
+                RoundedRectangle(cornerRadius: 30, style: .continuous)
+                    .stroke(Color.customPrimary, lineWidth: 2)
+                RoundedRectangle(cornerRadius: 30, style: .continuous)
+                    .foregroundStyle(Color.gray900)
+            }
+            .frame(maxHeight: .infinity, alignment: .bottom)
+            .animation(.easeInOut, value: isShowPermissionSheet)
+        }
+        .ignoresSafeArea()
+    }
+}
+
 struct NavigationModifier: ViewModifier {
-    @StateObject var runningManager = RunningStartManager.shared
+    let action: () -> Void
     
     func body(content: Content) -> some View {
         content
@@ -83,9 +146,9 @@ struct NavigationModifier: ViewModifier {
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
                     Button {
-                        runningManager.running = false
+                        action()
                     } label: {
-                        (Text(Image(systemName: "chevron.left")) + Text("홈으로"))
+                        (Text(Image(systemName: "chevron.left")) + Text("뒤로"))
                             .foregroundStyle(Color.customPrimary)
                     }
                 }
