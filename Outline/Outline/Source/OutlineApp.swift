@@ -19,7 +19,7 @@ struct OutlineApp: App {
         FirebaseApp.configure()
         guard let kakaoAPIKey = Bundle.main.object(forInfoDictionaryKey: "KakaoAPIKey") as? String else { return }
 
-        KakaoSDK.initSDK(appKey: "kakaoAPIKey")
+        KakaoSDK.initSDK(appKey: kakaoAPIKey)
     }
   
     var body: some Scene {

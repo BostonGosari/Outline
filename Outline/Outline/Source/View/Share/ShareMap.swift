@@ -2,14 +2,13 @@
 //  ShareMap.swift
 //  Outline
 //
-//  Created by hyebin on 10/19/23.
+//  Created by hyebin on 11/2/23.
 //
 
 import MapKit
 import SwiftUI
 
 struct ShareMap: UIViewRepresentable {
-    
     @Binding var mapView: MKMapView
     @Binding var mapViewRegion: MKCoordinateRegion
     let userLocations: [CLLocationCoordinate2D]

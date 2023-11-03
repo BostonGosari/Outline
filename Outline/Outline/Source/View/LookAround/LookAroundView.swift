@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct LookAroundView: View {
-    @AppStorage("authState") var authState: AuthState = .onboarding
+    @AppStorage("authState") var authState: AuthState = .logout
     
     var body: some View {
         VStack {
@@ -35,7 +35,7 @@ struct LookAroundView: View {
 }
 
 struct LookAroundModalView: View {
-    @AppStorage("authState") var authState: AuthState = .onboarding
+    @AppStorage("authState") var authState: AuthState = .logout
     var completion: () -> Void = {}
     
     var body: some View {
@@ -76,7 +76,7 @@ struct LookAroundModalView: View {
 }
 
 struct LookAroundPopupView: View {
-    @AppStorage("authState") var authState: AuthState = .onboarding
+    @AppStorage("authState") var authState: AuthState = .logout
     
     var body: some View {
         RoundedRectangle(cornerRadius: 50)

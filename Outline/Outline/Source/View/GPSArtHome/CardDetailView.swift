@@ -9,6 +9,7 @@ import SwiftUI
 import MapKit
 
 struct CardDetailView: View {
+    @AppStorage("authState") var authState: AuthState = .logout
     
     @State private var isUnlocked = false
     @State private var showAlert = false
@@ -81,25 +82,29 @@ struct CardDetailView: View {
             .ignoresSafeArea(edges: .top)
             .statusBarHidden()
             
-            ZStack {
-                Color.customBlack.opacity(0.7)
-                VStack {
-                    Spacer()
-                    LookAroundModalView {
-                        showDetailView = false
+            switch authState {
+            case .lookAround:
+                ZStack {
+                    Color.customBlack.opacity(0.7)
+                    VStack {
+                        Spacer()
+                        LookAroundModalView {
+                            showDetailView = false
+                        }
                     }
+                    .frame(height: UIScreen.main.bounds.height / 2)
+                    .frame(maxWidth: .infinity)
+                    .background {
+                        RoundedRectangle(cornerRadius: 30, style: .continuous)
+                            .stroke(Color.customPrimary, lineWidth: 2)
+                        RoundedRectangle(cornerRadius: 30, style: .continuous)
+                            .foregroundStyle(Color.gray900)
+                    }
+                    .frame(maxHeight: .infinity, alignment: .bottom)
                 }
-                .frame(height: UIScreen.main.bounds.height / 2)
-                .frame(maxWidth: .infinity)
-                .background {
-                    RoundedRectangle(cornerRadius: 30, style: .continuous)
-                        .stroke(Color.customPrimary, lineWidth: 2)
-                    RoundedRectangle(cornerRadius: 30, style: .continuous)
-                        .foregroundStyle(Color.gray900)
-                }
-                .frame(maxHeight: .infinity, alignment: .bottom)
+            default:
+                EmptyView()
             }
-            
                         
             ZStack {
                 if showAlert {

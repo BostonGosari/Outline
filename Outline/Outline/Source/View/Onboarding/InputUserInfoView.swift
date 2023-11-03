@@ -14,6 +14,7 @@ struct InputUserInfoView: View {
     @StateObject var viewModel = InputUserInfoViewModel()
     @StateObject var healthKitManager = HealthKitManager()
     
+    var userNickName = "default"
     private let genderList = ["설정 안 됨", "여성", "남성", "기타"]
     
     var body: some View {
@@ -53,6 +54,7 @@ struct InputUserInfoView: View {
                     Spacer()
                     
                     CompleteButton(text: "완료", isActive: viewModel.isButtonActive) {
+                        viewModel.saveUserInfo(nickname: userNickName)
                         viewModel.moveToLocationAuthView = true
                     }
                     .frame(maxHeight: .infinity, alignment: .bottom)

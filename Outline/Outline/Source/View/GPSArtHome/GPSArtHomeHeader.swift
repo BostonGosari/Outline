@@ -29,7 +29,9 @@ struct GPSArtHomeHeader: View {
                     .foregroundColor(.gray700)
                     .frame(width: 30)
             } else {
-                Button { } label: {
+                NavigationLink {
+                    ProfileView()
+                } label: {
                     Image(systemName: "person.crop.circle")
                         .font(.system(size: 30))
                         .fontWeight(.light)
