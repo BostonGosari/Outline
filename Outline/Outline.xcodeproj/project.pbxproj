@@ -20,10 +20,10 @@
 		0E9A5D3F2AE058D500C19FF3 /* ShareMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9A5D3E2AE058D500C19FF3 /* ShareMainView.swift */; };
 		0E9A5D422AE058EF00C19FF3 /* CustomShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9A5D412AE058EF00C19FF3 /* CustomShareView.swift */; };
 		0E9A5D442AE058FC00C19FF3 /* ImageShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9A5D432AE058FC00C19FF3 /* ImageShareView.swift */; };
-		0E9A5D462AE05DF200C19FF3 /* ShareMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9A5D452AE05DF200C19FF3 /* ShareMap.swift */; };
 		0E9A5D482AE065A100C19FF3 /* ShareViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9A5D472AE065A100C19FF3 /* ShareViewModel.swift */; };
 		0E9A5D4B2AE07C2900C19FF3 /* ImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9A5D4A2AE07C2900C19FF3 /* ImagePickerView.swift */; };
 		0E9A5D4F2AE0B8C800C19FF3 /* ShareModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9A5D4E2AE0B8C800C19FF3 /* ShareModel.swift */; };
+		0EC662A62AF3915300B777F1 /* ShareMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC662A52AF3915300B777F1 /* ShareMap.swift */; };
 		0EE92E682AE00A11003192FF /* FinishRunningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE92E672AE00A11003192FF /* FinishRunningView.swift */; };
 		0EE92E6C2AE00A33003192FF /* FinishRunningViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE92E6B2AE00A33003192FF /* FinishRunningViewModel.swift */; };
 		0EE92E6E2AE00AE5003192FF /* CompleteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE92E6D2AE00AE5003192FF /* CompleteButton.swift */; };
@@ -221,10 +221,10 @@
 		0E9A5D3E2AE058D500C19FF3 /* ShareMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareMainView.swift; sourceTree = "<group>"; };
 		0E9A5D412AE058EF00C19FF3 /* CustomShareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomShareView.swift; sourceTree = "<group>"; };
 		0E9A5D432AE058FC00C19FF3 /* ImageShareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageShareView.swift; sourceTree = "<group>"; };
-		0E9A5D452AE05DF200C19FF3 /* ShareMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareMap.swift; sourceTree = "<group>"; };
 		0E9A5D472AE065A100C19FF3 /* ShareViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewModel.swift; sourceTree = "<group>"; };
 		0E9A5D4A2AE07C2900C19FF3 /* ImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerView.swift; sourceTree = "<group>"; };
 		0E9A5D4E2AE0B8C800C19FF3 /* ShareModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareModel.swift; sourceTree = "<group>"; };
+		0EC662A52AF3915300B777F1 /* ShareMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareMap.swift; sourceTree = "<group>"; };
 		0EE92E672AE00A11003192FF /* FinishRunningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishRunningView.swift; sourceTree = "<group>"; };
 		0EE92E6B2AE00A33003192FF /* FinishRunningViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishRunningViewModel.swift; sourceTree = "<group>"; };
 		0EE92E6D2AE00AE5003192FF /* CompleteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteButton.swift; sourceTree = "<group>"; };
@@ -400,8 +400,8 @@
 				0E9A5D3E2AE058D500C19FF3 /* ShareMainView.swift */,
 				0E9A5D412AE058EF00C19FF3 /* CustomShareView.swift */,
 				0E9A5D432AE058FC00C19FF3 /* ImageShareView.swift */,
-				0E9A5D452AE05DF200C19FF3 /* ShareMap.swift */,
 				0E9A5D4A2AE07C2900C19FF3 /* ImagePickerView.swift */,
+				0EC662A52AF3915300B777F1 /* ShareMap.swift */,
 			);
 			path = Share;
 			sourceTree = "<group>";
@@ -1129,10 +1129,10 @@
 				95A01E3B2AF2B7250093D9C0 /* LookAroundView.swift in Sources */,
 				2998035E2AE0182100A9A134 /* ConfettiView.swift in Sources */,
 				954CB29A2AE514D3005EB2E9 /* ConnectingWatchModel.swift in Sources */,
-				0E9A5D462AE05DF200C19FF3 /* ShareMap.swift in Sources */,
 				295232FC2AEEE74A0020EAFA /* ButtonStyle.swift in Sources */,
 				0E29F65F2ADF6CDD00F5EF5C /* RunningMapViewModel.swift in Sources */,
 				BB52396D2ADD6DBB00646494 /* CustomRoundedRectangle.swift in Sources */,
+				0EC662A62AF3915300B777F1 /* ShareMap.swift in Sources */,
 				295232FA2AEED0630020EAFA /* BigCardView.swift in Sources */,
 				F096974D2ADBDBB000C38AF4 /* CardDetailView.swift in Sources */,
 				0EE92E7D2AE02DDC003192FF /* FreeRunningHomeView.swift in Sources */,
@@ -1441,6 +1441,7 @@
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "당신의 러닝 데이터를 저장하기 위하여 사용됩니다. ";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "당신의 위치는 러닝을 기록하는데 사용됩니다. 운동 중에 백그라운드에서도 위치 서비스를 사용합니다.";
 				INFOPLIST_KEY_NSMotionUsageDescription = "";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "당신의 위치는 러닝을 기록하는데 사용됩니다. 운동 중에 백그라운드에서도 위치 서비스를 사용합니다.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "러닝 화면을 꾸밀 수 있도록 사진을 선택해보세요!";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -1487,6 +1488,7 @@
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "당신의 러닝 데이터를 저장하기 위하여 사용됩니다. ";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "당신의 위치는 러닝을 기록하는데 사용됩니다. 운동 중에 백그라운드에서도 위치 서비스를 사용합니다.";
 				INFOPLIST_KEY_NSMotionUsageDescription = "";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "당신의 위치는 러닝을 기록하는데 사용됩니다. 운동 중에 백그라운드에서도 위치 서비스를 사용합니다.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "러닝 화면을 꾸밀 수 있도록 사진을 선택해보세요!";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
