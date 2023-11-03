@@ -17,7 +17,7 @@ struct ShareMainView: View {
     let runningData: ShareModel
     
     var body: some View {
-        NavigationStack {
+        NavigationView {
             ZStack {
                 Color.gray900
                     .ignoresSafeArea()
@@ -37,7 +37,7 @@ struct ShareMainView: View {
                         Image(systemName: "square.and.arrow.down")
                             .foregroundStyle(Color.black)
                             .font(.system(size: 20, weight: .semibold))
-                            .padding(.vertical, 16)
+                            .padding(.vertical, 14)
                             .padding(.horizontal, 19)
                             .background {
                                 RoundedRectangle(cornerRadius: 15)
@@ -66,17 +66,16 @@ struct ShareMainView: View {
                     permissionSheet
                 }
             }
-            .overlay {
-                if viewModel.isShowPopup {
-                    RunningPopup(text: "이미지 저장이 완료되었어요.")
-                        .frame(maxHeight: .infinity, alignment: .bottom)
-                        .padding(.bottom, 74)
-                }
-            }
             .onChange(of: viewModel.permissionDenied) {
                 if viewModel.permissionDenied {
                     isShowPermissionSheet = true
                 }
+            }
+        }
+        .overlay {
+            if viewModel.isShowPopup {
+                RunningPopup(text: "이미지 저장이 완료되었어요.")
+                    .frame(maxHeight: .infinity, alignment: .top)
             }
         }
     }
