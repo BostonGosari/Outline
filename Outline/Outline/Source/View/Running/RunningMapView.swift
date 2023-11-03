@@ -60,7 +60,7 @@ struct RunningMapView: View {
                         .stroke(.white.opacity(0.5), style: StrokeStyle(lineWidth: 8, lineCap: .round, lineJoin: .round))
                 }
                 
-                MapPolyline(coordinates: viewModel.userLocations)
+                MapPolyline(coordinates: runningDataManager.userLocations)
                     .stroke(.customPrimary, style: StrokeStyle(lineWidth: 8, lineCap: .round, lineJoin: .round))
             }
             .mapControlVisibility(.hidden)
