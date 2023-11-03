@@ -249,7 +249,7 @@ extension RunningMapView {
             .animation(.easeInOut, value: showCustomSheet)
             
             Confetti(counter: $counter,
-                     num: 40,
+                     num: 80,
                      confettis: [
                         .shape(.circle),
                         .shape(.smallCircle),
@@ -262,14 +262,10 @@ extension RunningMapView {
                         .shape(.starPop),
                         .shape(.blink)
                      ],
-                     colors: [.customPrimary, .customSecondary],
-                     confettiSize: 10,
+                     colors: [.blue, .yellow],
+                     confettiSize: 8,
                      rainHeight: UIScreen.main.bounds.height,
-                     openingAngle: .degrees(60),
-                     closingAngle: .degrees(120),
-                     radius: 400,
-                     repetitions: 10,
-                     repetitionInterval: 1
+                     radius: UIScreen.main.bounds.width
             )
         }
         .ignoresSafeArea()
