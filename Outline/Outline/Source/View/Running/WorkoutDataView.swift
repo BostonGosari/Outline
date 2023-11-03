@@ -61,8 +61,18 @@ struct WorkoutDataView: View {
             }
             HStack {
                 workoutDataItem(value: String(format: "%.0f", cadence), label: "케이던스")
-                workoutDataItem(value: averagePace.formattedAveragePace(), label: "평균 페이스")
-                    .scaleEffect(averagePace > 600 ? (averagePace > 6000 ? 0.8 : 0.95) : 1.0)
+                VStack(spacing: 4) {
+                    Text(averagePace.formattedAveragePace())
+                        .foregroundColor(.white)
+                        .font(
+                            Font.custom("Pretendard-SemiBold", size: 32)
+                        )
+                        .scaleEffect(averagePace > 600 ? (averagePace > 6000 ? 0.7 : 0.9) : 1.0)
+                    Text("평균 페이스")
+                        .font(Font.custom("Pretendard-Regular", size: 16))
+                        .foregroundColor(Color.gray200)
+                }
+                .frame(maxWidth: .infinity)
                 workoutDataItem(value: "", label: "")
             }
         }
