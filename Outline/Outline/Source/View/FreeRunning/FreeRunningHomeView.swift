@@ -54,12 +54,13 @@ struct FreeRunningHomeView: View {
                                Text(userLocation)
                            }
                            .font(.subBody)
+                           .frame(height: 16)
                            
-                           Spacer()
                            SlideToUnlock(isUnlocked: $runningManager.start, progress: $progress)
                                .onChange(of: runningManager.start) { _, _ in
                                    runningManager.startFreeRun()
                                }
+                               .frame(maxHeight: .infinity, alignment: .bottom)
                        }
                        .padding(EdgeInsets(top: 58, leading: 24, bottom: 24, trailing: 16))
                    }
