@@ -52,7 +52,10 @@ struct MetricsView: View {
             .frame(maxWidth: .infinity)
             .ignoresSafeArea(edges: .bottom)
             .scenePadding()
-            .navigationTitle(runningManager.runningTitle)
+            .navigationTitle {
+                Text(runningManager.runningTitle)
+                    .foregroundStyle(.first)
+            }
             .navigationBarTitleDisplayMode(.inline)
         }
     }

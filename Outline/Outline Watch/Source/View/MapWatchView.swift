@@ -32,7 +32,10 @@ struct MapWatchView: View {
         }
         .mapControlVisibility(.hidden)
         .tint(.first)
-        .navigationTitle(watchRunningManager.runningTitle)
+        .navigationTitle {
+            Text(watchRunningManager.runningTitle)
+                .foregroundStyle(.first)
+        }
         .navigationBarTitleDisplayMode(.inline)
 //        .overlay(alignment: .topLeading) {
 //            header

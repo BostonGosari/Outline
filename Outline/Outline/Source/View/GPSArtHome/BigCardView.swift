@@ -39,7 +39,7 @@ struct BigCardView: View {
         }
         .frame(
             width: UIScreen.main.bounds.width * 0.84,
-            height: UIScreen.main.bounds.height * 0.57
+            height: UIScreen.main.bounds.width * 0.84 * 1.5
         )
         .transition(.identity)
         .overlay(alignment: .bottom) {

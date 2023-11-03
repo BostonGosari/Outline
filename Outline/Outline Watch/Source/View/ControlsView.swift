@@ -57,7 +57,10 @@ struct ControlsView: View {
             }
         }
         .scrollDisabled(workoutManager.running)
-        .navigationTitle(workoutManager.running ? watchRunningManager.runningTitle : "일시 정지됨")
+        .navigationTitle {
+            Text(workoutManager.running ? watchRunningManager.runningTitle : "일시 정지됨")
+                .foregroundStyle(.first)
+        }
         .navigationBarTitleDisplayMode(.inline)
         .overlay {
             if showConfirmationSheet {
