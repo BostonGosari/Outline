@@ -148,7 +148,7 @@ extension RunningMapView {
                                 .font(.system(size: 20))
                                 .bold()
                                 .foregroundStyle(Color.white)
-                                .padding(18)
+                                .frame(width: 60, height: 60)
                                 .background(
                                     Circle()
                                         .fill(.thickMaterial)
