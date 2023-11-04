@@ -66,7 +66,7 @@ struct InputNicknameView: View {
                 viewModel.isKeyboardVisible = isVisible
             }
             .navigationDestination(isPresented: $viewModel.moveToInputUserInfoView) {
-                InputUserInfoView(userNickName:  viewModel.nickname)
+                InputUserInfoView(userNickName: viewModel.nickname)
             }
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
