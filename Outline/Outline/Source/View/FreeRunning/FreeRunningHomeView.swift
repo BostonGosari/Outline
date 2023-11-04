@@ -9,11 +9,14 @@ import MapKit
 import SwiftUI
 
 struct FreeRunningHomeView: View {
-    @StateObject var runningManager = RunningStartManager.shared
+    @StateObject var runningStartManager = RunningStartManager.shared
     
     @State private var userLocation = ""
     @State private var progress: Double = 0.0
     @State private var position: MapCameraPosition = .userLocation(fallback: .automatic)
+    @State private var showPermissionSheet = false
+    @State private var isUnlocked = false
+    @State private var permissionType: PermissionType = .health
    
     var body: some View {
         ZStack(alignment: .top) {
@@ -54,12 +57,31 @@ struct FreeRunningHomeView: View {
                                Text(userLocation)
                            }
                            .font(.subBody)
+                           .frame(height: 16)
                            
-                           Spacer()
-                           SlideToUnlock(isUnlocked: $runningManager.start, progress: $progress)
-                               .onChange(of: runningManager.start) { _, _ in
-                                   runningManager.startFreeRun()
+                           SlideToUnlock(isUnlocked: $isUnlocked, progress: $progress)
+                               .onChange(of: isUnlocked) { _, newValue in
+                                   if newValue {
+                                       runningStartManager.checkAuthorization()
+                                       
+                                       if runningStartManager.isHealthAuthorized {
+                                           if runningStartManager.isLocationAuthorized {
+                                               runningStartManager.start = true
+                                               runningStartManager.startFreeRun()
+                                               isUnlocked = false
+                                           } else {
+                                               runningStartManager.permissionType = .location
+                                               runningStartManager.showPermissionSheet = true
+                                               isUnlocked = false
+                                           }
+                                       } else {
+                                           runningStartManager.permissionType = .health
+                                           runningStartManager.showPermissionSheet = true
+                                           isUnlocked = false
+                                       }
+                                   }
                                }
+                               .frame(maxHeight: .infinity, alignment: .bottom)
                        }
                        .padding(EdgeInsets(top: 58, leading: 24, bottom: 24, trailing: 16))
                    }

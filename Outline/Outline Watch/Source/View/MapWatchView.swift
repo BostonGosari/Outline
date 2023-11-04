@@ -32,9 +32,14 @@ struct MapWatchView: View {
         }
         .mapControlVisibility(.hidden)
         .tint(.first)
-        .overlay(alignment: .topLeading) {
-            header
+        .navigationTitle {
+            Text(watchRunningManager.runningTitle)
+                .foregroundStyle(.first)
         }
+        .navigationBarTitleDisplayMode(.inline)
+//        .overlay(alignment: .topLeading) {
+//            header
+//        }
     }
     
     private var header: some View {

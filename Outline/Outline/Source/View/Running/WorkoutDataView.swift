@@ -30,7 +30,7 @@ struct WorkoutDataView: View {
                     Image(systemName: "map.fill")
                         .font(.system(size: 24))
                         .foregroundStyle(Color.customBlack)
-                        .padding(14)
+                        .frame(width: 60, height: 60)
                         .background(
                             Circle()
                                 .fill(Color.customPrimary)
@@ -46,7 +46,7 @@ struct WorkoutDataView: View {
     }
     
     private var workOutDataGrid: some View {
-        LazyVGrid(columns: Array(repeating: GridItem(), count: 3), spacing: 45) {
+        VStack(spacing: 39) {
             let totalTime = runningDataManager.totalTime + runningDataManager.time
             let totalDistance = runningDataManager.totalDistance + runningDataManager.distance
             let averagePace = totalTime / totalDistance * 1000
@@ -54,12 +54,27 @@ struct WorkoutDataView: View {
             let distanceKM = totalDistance / 1000
             let kilocalorie = runningDataManager.kilocalorie
             let cadence = totalTime != 0 ? ((runningDataManager.totalSteps + runningDataManager.steps) / totalTime * 60) : 0
-            
-            workoutDataItem(value: String(format: "%.2f", distanceKM), label: "킬로미터")
-            workoutDataItem(value: "--", label: "BPM")
-            workoutDataItem(value: averagePace.formattedAveragePace(), label: "평균 페이스")
-            workoutDataItem(value: String(format: "%.0f", kilocalorie), label: "칼로리")
-            workoutDataItem(value: String(format: "%.0f", cadence), label: "케이던스")
+            HStack {
+                workoutDataItem(value: String(format: "%.2f", distanceKM), label: "킬로미터")
+                workoutDataItem(value: "--", label: "BPM")
+                workoutDataItem(value: String(format: "%.0f", kilocalorie), label: "칼로리")
+            }
+            HStack {
+                workoutDataItem(value: String(format: "%.0f", cadence), label: "케이던스")
+                VStack(spacing: 4) {
+                    Text(averagePace.formattedAveragePace())
+                        .foregroundColor(.white)
+                        .font(
+                            Font.custom("Pretendard-SemiBold", size: 32)
+                        )
+                        .scaleEffect(averagePace > 600 ? (averagePace > 6000 ? 0.7 : 0.9) : 1.0)
+                    Text("평균 페이스")
+                        .font(Font.custom("Pretendard-Regular", size: 16))
+                        .foregroundColor(Color.gray200)
+                }
+                .frame(maxWidth: .infinity)
+                workoutDataItem(value: "", label: "")
+            }
         }
     }
     
@@ -77,14 +92,14 @@ extension WorkoutDataView {
     private func workoutDataItem(value: String, label: String) -> some View {
         VStack(spacing: 4) {
             Text(value)
-                .lineLimit(1)
                 .foregroundColor(.white)
                 .font(
-                    Font.custom("Pretendard-SemiBold", size: 36)
+                    Font.custom("Pretendard-SemiBold", size: 32)
                 )
             Text(label)
                 .font(Font.custom("Pretendard-Regular", size: 16))
-                .foregroundColor(Color.gray500)
+                .foregroundColor(Color.gray200)
         }
+        .frame(maxWidth: .infinity)
     }
 }
