@@ -40,36 +40,36 @@ struct LookAroundModalView: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            Spacer()
-            VStack(spacing: 0) {
-                Text("앗! 회원가입이 필요해요.")
-                    .font(.title2)
-                    .padding(.bottom, 8)
-                Text("OUTLINE에 가입하면 내가 그린\n러닝 기록을 확인할 수 있어요!")
-                    .font(.subBody)
-                    
-                    .multilineTextAlignment(.center)
-                    .foregroundStyle(.gray300)
-                Image("lookAroundImage")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 152, height: 152)
-                    .offset(x: 22)
-                
-                CompleteButton(text: "가입하러 가기", isActive: true) {
-                    authState = .logout
-                }
-                Button {
-                    completion()
-                } label: {
-                    Text("계속 둘러보기")
-                        .frame(height: 55)
-                        .foregroundStyle(.customWhite)
-                }
+            Text("앗! 회원가입이 필요해요.")
+                .font(.title2)
+                .padding(.top, 48)
+                .padding(.bottom, 8)
+            Text("OUTLINE에 가입하면 내가 그린\n러닝 기록을 확인할 수 있어요!")
+                .font(.subBody)
+                .multilineTextAlignment(.center)
+                .foregroundStyle(.gray300)
+                .padding(.bottom, 8)
+            Image("lookAroundImage")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 170, height: 170)
+                .offset(x: 26)
+                .padding(-20)
+            CompleteButton(text: "가입하러 가기", isActive: true) {
+                authState = .logout
             }
+            Button {
+                completion()
+            } label: {
+                Text("계속 둘러보기")
+                    .frame(height: 55)
+                    .foregroundStyle(.customWhite)
+                    .font(.button)
+            }
+            .padding(.top, 8)
             Spacer()
         }
-        .presentationDetents([.height(420)])
+        .presentationDetents([.height(448)])
         .presentationCornerRadius(35)
         .interactiveDismissDisabled()
     }
