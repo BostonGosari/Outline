@@ -25,4 +25,5 @@ extension Font {
     static let timeTitle = Font.custom("Pretendard-ExtraBold", size: 64)
     static let shareTitle = Font.custom("Pretendard-SemiBold", size: 25)
     static let shareData = Font.system(size: 39, weight: .bold)
+    static let firstGuideTitle = Font.custom("SFCompactDisplay-Semibold", size: 24)
 }
