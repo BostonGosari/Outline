@@ -11,7 +11,8 @@ struct WorkoutDataView: View {
     var body: some View {
         ZStack {
             Rectangle()
-                .fill(.ultraThinMaterial)
+                .fill(.black50)
+                .background(.ultraThinMaterial)
                 .ignoresSafeArea()
             VStack(spacing: 0) {
                 digitalTimer
@@ -30,10 +31,11 @@ struct WorkoutDataView: View {
                     Image(systemName: "map.fill")
                         .font(.system(size: 24))
                         .foregroundStyle(Color.customBlack)
-                        .padding(14)
+                        .padding(15)
                         .background(
                             Circle()
                                 .fill(Color.customPrimary)
+                                .frame(width: 60, height: 60)
                         )
                 }
                 .padding(.trailing, 16)
@@ -57,9 +59,9 @@ struct WorkoutDataView: View {
             
             workoutDataItem(value: String(format: "%.2f", distanceKM), label: "킬로미터")
             workoutDataItem(value: "--", label: "BPM")
-            workoutDataItem(value: averagePace.formattedAveragePace(), label: "평균 페이스")
-            workoutDataItem(value: String(format: "%.0f", kilocalorie), label: "칼로리")
             workoutDataItem(value: String(format: "%.0f", cadence), label: "케이던스")
+            workoutDataItem(value: String(format: "%.0f", kilocalorie), label: "칼로리")
+            workoutDataItem(value: averagePace.formattedAveragePace(), label: "평균 페이스")
         }
     }
     
