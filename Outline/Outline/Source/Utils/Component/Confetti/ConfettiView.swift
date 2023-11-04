@@ -28,7 +28,7 @@ struct ConfettiView: View {
             ///   - repetitions: 반복 횟수
             ///   - repetitionInterval: 반복 시간
             Confetti(counter: $counter,
-                     num: 40,
+                     num: 50,
                      confettis: [
                         .shape(.circle),
                         .shape(.smallCircle),
@@ -47,7 +47,7 @@ struct ConfettiView: View {
                      openingAngle: .degrees(60),
                      closingAngle: .degrees(120),
                      radius: 400,
-                     repetitions: 2,
+                     repetitions: 0,
                      repetitionInterval: 0.5)
             Button("Confetti") {
                 counter += 1

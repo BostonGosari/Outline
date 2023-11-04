@@ -55,10 +55,11 @@ struct SlideToUnlock: View {
                 .stroke(LinearGradient(colors: [.gray500, .gray750], startPoint: .top, endPoint: .bottom), lineWidth: 0.5)
             
             Text("밀어서 그리기")
-                .font(.title3)
-                .bold()
+                .font(.subtitle2)
+                .fontWeight(.semibold)
                 .shimmer(color: .white20, highlight: .customPrimary)
                 .frame(maxWidth: .infinity)
+                .padding(.leading, 12)
         }
     }
     
@@ -102,6 +103,9 @@ struct SlideToUnlock: View {
                             isUnlocked = true
                             width = minWidth
                             isReached = false
+                        }
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                            progress = 0
                         }
                     }
                 }
