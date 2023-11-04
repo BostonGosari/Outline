@@ -13,6 +13,10 @@ struct FinishRunningView: View {
     @StateObject private var viewModel = FinishRunningViewModel()
     @FetchRequest (entity: CoreRunningRecord.entity(), sortDescriptors: []) var runningRecord: FetchedResults<CoreRunningRecord>
     
+    @State private var showRenameSheet = false
+    @State private var newCourseName = ""
+    @State private var completeButtonActive = false
+    
     @State private var position: MapCameraPosition = .userLocation(fallback: .automatic)
     @State private var save = false
     
@@ -26,7 +30,7 @@ struct FinishRunningView: View {
                     .ignoresSafeArea()
                 VStack {
                     ZStack(alignment: .topLeading) {
-                        Map {
+                        Map(interactionModes: []) {
                             MapPolyline(coordinates: viewModel.userLocations)
                                 .stroke(polylineGradient, style: StrokeStyle(lineWidth: 8, lineCap: .round, lineJoin: .round))
                         }
@@ -40,7 +44,21 @@ struct FinishRunningView: View {
                                 .frame(maxWidth: .infinity, alignment: .center)
                                 .padding(.top, 64)
                             
-                            courseInfo
+                            HStack {
+                                courseInfo
+                                Spacer()
+                                if runningManager.runningType == .free {
+                                    Button {
+                                        showRenameSheet = true
+                                    } label: {
+                                        Image(systemName: "pencil")
+                                            .foregroundStyle(Color.customWhite)
+                                            .font(.system(size: 20))
+                                    }
+                                    .padding(.top, 16)
+                                    .padding(.trailing, 16)
+                                }
+                            }
                         }
                             .background(
                                 LinearGradient(
@@ -72,6 +90,9 @@ struct FinishRunningView: View {
                     .padding(.bottom, 8)
                 }
             }
+        }
+        .sheet(isPresented: $showRenameSheet) {
+            updateNameSheet
         }
         .overlay {
             if viewModel.isShowPopup {
@@ -135,5 +156,46 @@ extension FinishRunningView {
                 .padding(.bottom, 16)
             }
         }
+    }
+    
+    private var updateNameSheet: some View {
+        VStack(alignment: .leading, spacing: 0) {
+            Text("코스 이름 수정하기")
+                .font(.subtitle)
+                .padding(.top, 35)
+                .padding(.bottom, 48)
+                .padding(.horizontal, 16)
+            
+            TextField("코스 이름을 입력하세요.", text: $newCourseName)
+                .onChange(of: newCourseName) {
+                    if !newCourseName.isEmpty {
+                        completeButtonActive = true
+                    } else {
+                        completeButtonActive = false
+                    }
+                }
+                .padding(.bottom, 8)
+                .padding(.horizontal, 16)
+        
+            Rectangle()
+                .frame(height: 1)
+                .foregroundStyle(Color.customPrimary)
+                .padding(.horizontal, 16)
+                .padding(.bottom, 41)
+            
+            CompleteButton(text: "완료", isActive: completeButtonActive) {
+                if let record = runningRecord.last {
+                    viewModel.updateRunningRecord(record, courseName: newCourseName)
+                    viewModel.courseName = newCourseName
+                }
+                completeButtonActive = false
+                showRenameSheet = false
+            }
+            .padding(.bottom, 30)
+        }
+        .ignoresSafeArea()
+        .presentationDragIndicator(.visible)
+        .presentationDetents([.height(330)])
+        .presentationCornerRadius(35)
     }
 }
