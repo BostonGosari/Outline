@@ -13,24 +13,24 @@ struct LookAroundView: View {
     var body: some View {
         VStack {
             Spacer()
-            VStack(spacing: 0) {
-                Image("lookAroundImage")
-                    .offset(x: 22)
-                Text("앗! 회원가입이 필요해요.")
-                    .font(.title2)
-                    .padding(.bottom, 8)
-                Text("OUTLINE에 가입하면 내가 그린\n러닝 기록을 확인할 수 있어요!")
-                    .font(.subBody)
-                    .padding(.bottom, 32)
-                    .multilineTextAlignment(.center)
-                    .foregroundStyle(.gray300)
-                
-                CompleteButton(text: "가입하러 가기", isActive: true) {
-                    authState = .logout
-                }
+            Image("lookAroundImage")
+                .offset(x: 22, y: 16)
+            Text("앗! 회원가입이 필요해요.")
+                .font(.title2)
+                .padding(.bottom, 8)
+            Text("OUTLINE에 가입하면 내가 그린\n러닝 기록을 확인할 수 있어요!")
+                .font(.subBody)
+                .padding(.bottom, 32)
+                .multilineTextAlignment(.center)
+                .foregroundStyle(.gray300)
+            CompleteButton(text: "가입하러 가기", isActive: true) {
+                authState = .logout
             }
+            .frame(width: 262, height: 55) // CompleteButton안의 horizental padding만큼 더했습니다.
+            
             Spacer()
         }
+        .padding(.bottom, 100)
     }
 }
 
