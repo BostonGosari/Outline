@@ -36,7 +36,7 @@ struct FreeRunningHomeView: View {
                 .foregroundColor(.clear)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .background(.black.opacity(0.6))
-            
+            BackgroundBlur(color: .customSecondary, padding: 50)
             VStack(spacing: 0) {
                 GPSArtHomeHeader(loading: false, scrollOffset: 20)
                     .padding(.top, 8)
@@ -45,16 +45,14 @@ struct FreeRunningHomeView: View {
                 cardView
                    .overlay {
                        VStack(alignment: .leading) {
-                           Text("자유코스")
+                           Text("자유 코스")
                                .font(.headline)
                                .padding(.bottom, 8)
-                           
                            HStack {
                                Image(systemName: "mappin")
                                Text(userLocation)
                            }
-                           .font(.subBody)
-                           
+                           .font(.caption)
                            Spacer()
                            SlideToUnlock(isUnlocked: $runningManager.start, progress: $progress)
                                .onChange(of: runningManager.start) { _, _ in
@@ -63,7 +61,7 @@ struct FreeRunningHomeView: View {
                        }
                        .padding(EdgeInsets(top: 58, leading: 24, bottom: 24, trailing: 16))
                    }
-                   .padding(EdgeInsets(top: 8, leading: 16, bottom: 80, trailing: 20))
+                   .padding(EdgeInsets(top: 16, leading: 16, bottom: 80, trailing: 20))
             }
         }
         .onAppear {
@@ -75,14 +73,13 @@ struct FreeRunningHomeView: View {
 extension FreeRunningHomeView {
     private var cardView: some View {
         Rectangle()
-            .fill(
-                LinearGradient(colors: [.white20, .white20.opacity(0)], startPoint: .topLeading, endPoint: .bottomTrailing)
-            )
+            .fill(.white7)
             .roundedCorners(10, corners: [.topLeft])
             .roundedCorners(70, corners: [.topRight])
             .roundedCorners(45, corners: [.bottomLeft, .bottomRight])
             .overlay(
                 CustomRoundedRectangle(cornerRadiusTopLeft: 10, cornerRadiusTopRight: 79, cornerRadiusBottomLeft: 45, cornerRadiusBottomRight: 45)
+                   
             )
     }
     
