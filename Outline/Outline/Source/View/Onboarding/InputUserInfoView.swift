@@ -10,9 +10,10 @@ import HealthKit
 import HealthKitUI
 
 struct InputUserInfoView: View {
-    
     @StateObject var viewModel = InputUserInfoViewModel()
     @StateObject var healthKitManager = HealthKitManager()
+    
+    @State private var showSheet = false
     
     var userNickName = "default"
     private let genderList = ["설정 안 됨", "여성", "남성", "기타"]
@@ -24,6 +25,7 @@ struct InputUserInfoView: View {
                     .ignoresSafeArea()
                     .onTapGesture {
                         viewModel.currentPicker = .none
+                        showSheet = false
                     }
                 
                 VStack(alignment: .leading, spacing: 0) {
@@ -33,22 +35,27 @@ struct InputUserInfoView: View {
                     
                     Text("입력하신 정보를 토대로\n더 정확한 러닝 결과를 알려드릴게요!")
                         .font(.date)
+                        .foregroundStyle(Color.gray300)
                         .padding(.horizontal, 16)
                     
                     listView
+                        .padding(.top, 26)
                     
                     Button(action: {
                         viewModel.defaultButtonTapped()
+                        viewModel.currentPicker = .none
+                        showSheet = false
                     }, label: {
                         HStack(spacing: 0) {
                             Image(systemName: viewModel.defaultButtonImage)
-                                .foregroundStyle(Color.customPrimary)
+                                .foregroundStyle(viewModel.defaultButtonImage == "checkmark.square" ? Color.customPrimary : Color.gray400)
                                 .padding(.trailing, 12)
                             
                             Text("기본값 사용")
                                 .foregroundStyle(Color.gray400)
                         }
                     })
+                    .offset(y: -30)
                     .frame(maxWidth: .infinity, alignment: .center)
                     
                     Spacer()
@@ -57,12 +64,9 @@ struct InputUserInfoView: View {
                         viewModel.saveUserInfo(nickname: userNickName)
                         viewModel.moveToLocationAuthView = true
                     }
+                    .padding(.bottom, 16)
                     .frame(maxHeight: .infinity, alignment: .bottom)
                 }
-                
-                pickerView
-                    .zIndex(1)
-                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
             }
             .foregroundStyle(Color.customWhite)
             .navigationBarBackButtonHidden()
@@ -71,6 +75,12 @@ struct InputUserInfoView: View {
             }
             .navigationDestination(isPresented: $viewModel.moveToLocationAuthView) {
                 OnboardingLocationAuthView()
+            }
+            .overlay {
+                pickerView
+                    .transition(.move(edge: .bottom))
+                    .animation(.spring, value: showSheet)
+                    .frame(maxHeight: .infinity, alignment: .bottom)
             }
         }
     }
@@ -81,11 +91,16 @@ extension InputUserInfoView {
         List {
             HStack {
                 Text("생년월일")
+                    .font(.subBody)
                 Spacer()
                 Text(viewModel.birthday.dateToBirthDay())
                     .foregroundStyle(viewModel.listTextColor(.date))
                     .onTapGesture {
                         viewModel.currentPicker = .date
+                        showSheet = true
+                        if viewModel.isDefault {
+                            viewModel.defaultButtonTapped()
+                        }
                     }
                 
             }
@@ -94,11 +109,16 @@ extension InputUserInfoView {
             
             HStack {
                 Text("성별")
+                    .font(.subBody)
                 Spacer()
                 Text(viewModel.gender)
                     .foregroundStyle(viewModel.listTextColor(.gender))
                     .onTapGesture {
                         viewModel.currentPicker = .gender
+                        showSheet = true
+                        if viewModel.isDefault {
+                            viewModel.defaultButtonTapped()
+                        }
                     }
             }
             .listRowBackground(Color.gray750)
@@ -106,11 +126,16 @@ extension InputUserInfoView {
             
             HStack {
                 Text("신장")
+                    .font(.subBody)
                 Spacer()
                 Text("\(viewModel.height)cm")
                     .foregroundStyle(viewModel.listTextColor(.height))
                     .onTapGesture {
                         viewModel.currentPicker = .height
+                        showSheet = true
+                        if viewModel.isDefault {
+                            viewModel.defaultButtonTapped()
+                        }
                     }
             }
             .listRowBackground(Color.gray750)
@@ -118,11 +143,16 @@ extension InputUserInfoView {
             
             HStack {
                 Text("체중")
+                    .font(.subBody)
                 Spacer()
                 Text("\(viewModel.weight)kg")
                     .foregroundStyle(viewModel.listTextColor(.weight))
                     .onTapGesture {
                         viewModel.currentPicker = .weight
+                        showSheet = true
+                        if viewModel.isDefault {
+                            viewModel.defaultButtonTapped()
+                        }
                     }
             }
             .listRowBackground(Color.gray750)
@@ -134,53 +164,47 @@ extension InputUserInfoView {
 }
 
 extension InputUserInfoView {
-    private var pickerView: AnyView {
-        switch viewModel.currentPicker {
-        case .date:
-            AnyView(
+    private var pickerView: some View {
+        ZStack {
+            switch viewModel.currentPicker {
+            case .date:
                 DatePicker("", selection: $viewModel.birthday, displayedComponents: .date)
                     .datePickerStyle(WheelDatePickerStyle())
                     .labelsHidden()
                     .padding(.horizontal, 30)
                     .background(Color.gray800)
-                    .preferredColorScheme(.dark)
                 
-            )
-        case .gender:
-            AnyView(
+            case .gender:
                 Picker("", selection: $viewModel.gender) {
                     ForEach(genderList, id: \.self) {
                         Text("\($0)")
                     }
                 }
-                    .background(Color.gray800)
-                    .preferredColorScheme(.dark)
-                    .pickerStyle(.wheel)
-            )
-        case .height:
-            AnyView(
+                .background(Color.gray800)
+                .pickerStyle(.wheel)
+                
+            case .height:
                 Picker("", selection: $viewModel.height) {
                     ForEach(Array(91...242), id: \.self) {
                         Text("\($0)cm")
                     }
                 }
-                    .pickerStyle(.wheel)
-                    .background(Color.gray800)
-                    .preferredColorScheme(.dark)
-            )
-        case .weight:
-            AnyView(
+                .pickerStyle(.wheel)
+                .background(Color.gray800)
+                
+            case .weight:
                 Picker("", selection: $viewModel.weight) {
                     ForEach(Array(13...227), id: \.self) {
                         Text("\($0)kg")
                     }
                 }
-                    .pickerStyle(.wheel)
-                    .background(Color.gray800)
-                    .preferredColorScheme(.dark)
-            )
-        case .none:
-            AnyView(EmptyView())
+                .pickerStyle(.wheel)
+                .background(Color.gray800)
+                
+            case .none:
+                EmptyView()
+                    .frame(height: 0)
+            }
         }
     }
 }

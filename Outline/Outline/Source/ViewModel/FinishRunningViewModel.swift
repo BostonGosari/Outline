@@ -5,6 +5,7 @@
 //  Created by hyebin on 10/18/23.
 //
 
+import CoreData
 import CoreLocation
 import SwiftUI
 
@@ -21,6 +22,7 @@ class FinishRunningViewModel: ObservableObject {
     @Published var navigateToShareMainView = false
     
     private var runningDate = Date()
+    private let userDataModel = UserDataModel()
 
     var courseName: String = ""
     var courseRegion: String = ""
@@ -98,24 +100,6 @@ class FinishRunningViewModel: ObservableObject {
                     }
                 }
             }
-        } else {
-            courseName = ""
-            courseRegion = ""
-            
-            startTime = ""
-            endTime = ""
-            date = ""
-            
-            runningData = [
-                RunningDataItem(text: "킬로미터", data: ""),
-                RunningDataItem(text: "시간", data: ""),
-                RunningDataItem(text: "평균 페이스", data: ""),
-                RunningDataItem(text: "BPM", data: ""),
-                RunningDataItem(text: "칼로리", data: ""),
-                RunningDataItem(text: "케이던스", data: "")
-            ]
-            
-            userLocations = []
         }
     }
     
@@ -133,6 +117,17 @@ class FinishRunningViewModel: ObservableObject {
         )
         
         navigateToShareMainView = true
+    }
+    
+    func updateRunningRecord(_ record: NSManagedObject, courseName: String) {
+        userDataModel.updateRunningRecordCourseName(record, newCourseName: courseName) { result in
+            switch result {
+            case .success(let isSaved):
+                print(isSaved)
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
 }
 

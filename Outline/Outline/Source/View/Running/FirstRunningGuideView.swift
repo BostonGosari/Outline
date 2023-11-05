@@ -14,11 +14,13 @@ struct FirstRunningGuideView: View {
         ZStack {
             Color.customBlack
                 .opacity(0.7)
-                .ignoresSafeArea()
+                .overlay(.ultraThinMaterial.opacity(0.3))
             
             VStack(spacing: 0) {
                 Text("첫 그림이네요!\n우리 같이 완성해봐요")
-                    .font(.custom("Pretendard-SemiBold", size: 24))
+                    .font(.firstGuideTitle)
+                    .fontWeight(.semibold)
+                    .padding(.top, 24)
                     .padding(.bottom, 56)
                 
                 Group {
@@ -45,7 +47,7 @@ struct FirstRunningGuideView: View {
                     + Text("를 볼 수 있어요")
                 }
                 .font(.tag)
-                .padding(.bottom, 23)
+                .padding(.bottom, 16)
                 
                 Image("FirstRunningIcon2")
                     .resizable()
@@ -68,10 +70,10 @@ struct FirstRunningGuideView: View {
                 }
                 .buttonStyle(TabButtonStyle())
                 .padding(.horizontal, 43)
-                
             }
             .multilineTextAlignment(.center)
         }
+        .ignoresSafeArea()
     }
 }
 
