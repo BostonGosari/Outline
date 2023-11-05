@@ -87,7 +87,7 @@ struct ProfileUserInfoView: View {
             .listStyle(.inset)
             .padding(.horizontal, 16)
             .frame(height: 2 * 62)
-            
+            .scrollDisabled(true)
             Spacer()
         }
         .navigationTitle("내 정보")
