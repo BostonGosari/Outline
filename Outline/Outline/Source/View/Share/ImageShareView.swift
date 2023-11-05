@@ -41,7 +41,7 @@ struct ImageShareView: View {
             
             VStack(spacing: 0) {
                 mainImageView
-                    .padding(EdgeInsets(top: 20, leading: 49, bottom: 16, trailing: 49))
+                    .padding(EdgeInsets(top: 20, leading: 49, bottom: 12, trailing: 49))
                     .mask {
                         Rectangle()
                             .frame(maxWidth: .infinity, alignment: .center)
@@ -63,11 +63,13 @@ struct ImageShareView: View {
         .onChange(of: viewModel.tapSaveButton) {
             if viewModel.tapSaveButton && viewModel.currentPage == 1 {
                 viewModel.saveImage(image: renderImage())
+                viewModel.tapSaveButton = false
             }
         }
         .onChange(of: viewModel.tapShareButton) {
             if viewModel.tapShareButton && viewModel.currentPage == 1 {
                 viewModel.shareToInstagram(image: renderImage())
+                viewModel.tapShareButton = false
             }
         }
         .onAppear {
@@ -252,7 +254,7 @@ extension ImageShareView {
         }
         .frame(maxWidth: .infinity, alignment: .center)
         .padding(.horizontal, 168)
-        .padding(.bottom, 32)
+        .padding(.bottom, 24)
     }
     
     private var selectModeView: some View {
@@ -260,23 +262,32 @@ extension ImageShareView {
             Button {
                 selectPhotoMode = false
             } label: {
-                Circle()
-                    .fill(.black)
-                    .stroke(selectPhotoMode ?  Color.gray200 : Color.customPrimary, lineWidth: 5)
+                Image("Theme1")
+                    .resizable()
+                    .frame(width: 32, height: 32)
+                    .overlay {
+                        Circle()
+                            .fill(.clear)
+                            .stroke(selectPhotoMode ?  Color.gray200 : Color.customPrimary, lineWidth: 5)
+                    }
             }
             .padding(.horizontal, 12)
             
             Button {
                 selectPhotoMode = true
             } label: {
-                Circle()
-                    .fill(.white)
-                    .stroke(selectPhotoMode ? Color.customPrimary : Color.gray200, lineWidth: 5)
+                Image("Theme2")
+                    .resizable()
+                    .frame(width: 32, height: 32)
+                    .overlay {
+                        Circle()
+                            .fill(.clear)
+                            .stroke(selectPhotoMode ?  Color.customPrimary : Color.gray200, lineWidth: 5)
+                    }
             }
             .padding(.horizontal, 12)
         }
         .frame(maxWidth: .infinity, alignment: .center)
-        .padding(.horizontal, 143)
         .padding(.bottom, 110)
     }
 }

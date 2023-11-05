@@ -14,6 +14,8 @@ struct RunningMapView: View {
     @StateObject var runningDataManager = RunningDataManager.shared
     @GestureState var isLongPressed = false
     
+    @FetchRequest (entity: CoreRunningRecord.entity(), sortDescriptors: []) var runningRecord: FetchedResults<CoreRunningRecord>
+    
     @State private var moveToFinishRunningView = false
     @State private var showCustomSheet = false
     @State private var showBigGuide = false
@@ -99,7 +101,7 @@ struct RunningMapView: View {
             } else if viewModel.isShowComplteSheet {
                 runningFinishSheet()
             } else if viewModel.isShowPopup {
-                RunningPopup(text: "일시정지를 3초동안 누르면 러닝이 종료돼요")
+                RunningPopup(text: "정지 버튼을 길게 누르면 러닝이 종료돼요")
                     .frame(maxHeight: .infinity, alignment: .bottom)
             } else if viewModel.isNearEndLocation {
                 RunningPopup(text: "도착 지점이 근처에 있어요.")
@@ -134,6 +136,7 @@ extension RunningMapView {
                         } label: {
                             Image(systemName: "pause.fill")
                                 .buttonModifier(color: Color.customPrimary, size: 29, padding: 29)
+                                .fontWeight(.light)
                             
                         }
                         .buttonStyle(.plain)
@@ -175,6 +178,7 @@ extension RunningMapView {
                                     if !isLongPressed {
                                         DispatchQueue.main.async {
                                             viewModel.isShowPopup = true
+                                            HapticManager.impact(style: .light)
                                         }
                                     }
                                 }
@@ -336,6 +340,7 @@ extension Image {
                 Circle()
                     .fill(color)
                     .stroke(.white, style: .init())
+                    .frame(width: 80, height: 80)
             )
     }
 }
