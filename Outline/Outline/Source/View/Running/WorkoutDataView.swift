@@ -11,7 +11,8 @@ struct WorkoutDataView: View {
     var body: some View {
         ZStack {
             Rectangle()
-                .fill(.ultraThinMaterial)
+                .fill(.black50)
+                .background(.ultraThinMaterial)
                 .ignoresSafeArea()
             VStack(spacing: 0) {
                 digitalTimer
@@ -30,10 +31,11 @@ struct WorkoutDataView: View {
                     Image(systemName: "map.fill")
                         .font(.system(size: 24))
                         .foregroundStyle(Color.customBlack)
-                        .frame(width: 60, height: 60)
+                        .padding(15)
                         .background(
                             Circle()
                                 .fill(Color.customPrimary)
+                                .frame(width: 60, height: 60)
                         )
                 }
                 .padding(.trailing, 16)
@@ -54,6 +56,7 @@ struct WorkoutDataView: View {
             let distanceKM = totalDistance / 1000
             let kilocalorie = runningDataManager.kilocalorie
             let cadence = totalTime != 0 ? ((runningDataManager.totalSteps + runningDataManager.steps) / totalTime * 60) : 0
+
             HStack {
                 workoutDataItem(value: String(format: "%.2f", distanceKM), label: "킬로미터")
                 workoutDataItem(value: "--", label: "BPM")
@@ -75,6 +78,7 @@ struct WorkoutDataView: View {
                 .frame(maxWidth: .infinity)
                 workoutDataItem(value: "", label: "")
             }
+
         }
     }
     
