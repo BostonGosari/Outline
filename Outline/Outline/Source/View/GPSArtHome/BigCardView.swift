@@ -8,13 +8,15 @@
 import SwiftUI
 
 struct BigCardView: View {
-    
     var course: CourseWithDistance
     @Binding var loading: Bool
     var index: Int
     var currentIndex: Int
     var namespace: Namespace.ID
     var showDetailView: Bool
+    
+    private let capsuleWidth: CGFloat = 70
+    private let capsuleHeight: CGFloat = 25
     
     var body: some View {
         AsyncImage(url: URL(string: course.course.thumbnail)) { image in
@@ -39,7 +41,7 @@ struct BigCardView: View {
         }
         .frame(
             width: UIScreen.main.bounds.width * 0.84,
-            height: UIScreen.main.bounds.height * 0.55
+            height: UIScreen.main.bounds.width * 0.84 * 1.5
         )
         .transition(.identity)
         .overlay(alignment: .bottom) {
@@ -70,7 +72,7 @@ struct BigCardView: View {
     private var courseInformation: some View {
         VStack(alignment: .leading, spacing: 0) {
             Text("\(course.course.courseName)")
-                .font(.largeTitle)
+                .font(.headline)
                 .bold()
                 .padding(.bottom, 8)
                 .padding(.top, 47)
@@ -84,14 +86,14 @@ struct BigCardView: View {
                 Text("#\(course.course.courseLength, specifier: "%.0f")km")
                     .font(.tag2)
                     .foregroundColor(Color.customPrimary)
-                    .frame(width: 70, height: 23)
+                    .frame(width: capsuleWidth, height: capsuleHeight)
                     .background {
                         Capsule()
                             .stroke()
                             .foregroundColor(Color.customPrimary)
                     }
-                Text("#\(course.course.courseDuration.formatDuration())")
-                    .frame(width: 70, height: 23)
+                Text("#\(course.course.courseDuration.formatDurationInKorean())")
+                    .frame(width: capsuleWidth, height: capsuleHeight)
                     .font(.tag2)
                     .background {
                         Capsule()

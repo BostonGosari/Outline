@@ -22,10 +22,11 @@ struct InputNicknameView: View {
                         .font(.title)
                         .fontWeight(.semibold)
                         .foregroundStyle(Color.customWhite)
-                        .padding(.top, 47)
+                        .padding(.top, 28)
                         .padding(.horizontal, 16)
                     
                     Text("닉네임")
+                        .font(.subBody)
                         .padding(.top, 44)
                         .padding(.horizontal, 16)
                     
@@ -59,6 +60,7 @@ struct InputNicknameView: View {
                         }
                     }
                     .frame(maxHeight: .infinity, alignment: .bottom)
+                    .padding(.bottom, 16)
                 }
             }
             .ignoresSafeArea(.keyboard)
@@ -66,7 +68,7 @@ struct InputNicknameView: View {
                 viewModel.isKeyboardVisible = isVisible
             }
             .navigationDestination(isPresented: $viewModel.moveToInputUserInfoView) {
-                InputUserInfoView(userNickName:  viewModel.nickname)
+                InputUserInfoView(userNickName: viewModel.nickname)
             }
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
@@ -87,10 +89,12 @@ extension InputNicknameView {
     
     @ViewBuilder
     private func checkView(_ text: String, _ isTrue: Bool) -> some View {
-        HStack {
+        HStack(spacing: 0) {
             Image(systemName: isTrue ? "checkmark" : "xmark")
                 .foregroundStyle(isTrue ? Color.customGreen : Color.customRed)
+                .padding(.trailing, 14)
             Text(text)
+                .font(.caption)
         }
     }
     

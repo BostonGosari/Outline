@@ -214,9 +214,8 @@ struct RecordItem: View {
                let data = pathToCoordinate(coursePath) {
                 PathGenerateManager
                     .caculateLines(width: 358, height: 176, coordinates: data)
-                    .stroke(lineWidth: 6)
                     .scale(0.5)
-                    .foregroundStyle(Color.customPrimary)
+                    .stroke(.customPrimary, style: StrokeStyle(lineWidth: 8, lineCap: .round, lineJoin: .round))
                     .padding(.horizontal, 16)
             }
             HStack {
