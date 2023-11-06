@@ -69,7 +69,7 @@ struct ProfileUserInfoView: View {
                             .font(.subBody)
                             .foregroundStyle(Color.gray400)
                     }
-                    .frame(height: 40)
+                    .frame(height: 38)
                     
                     HStack {
                         Text("성별")
@@ -79,14 +79,14 @@ struct ProfileUserInfoView: View {
                             .font(.subBody)
                             .foregroundStyle(Color.customPrimary)
                     }
-                    .frame(height: 40)
+                    .frame(height: 38)
                 }
                 .listRowBackground(Color.gray750)
             }
             .cornerRadius(10)
             .listStyle(.inset)
             .padding(.horizontal, 16)
-            .frame(height: 2 * 62)
+            .frame(height: 2 * 60)
             .scrollDisabled(true)
             Spacer()
         }

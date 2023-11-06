@@ -60,7 +60,7 @@ struct ProfileHealthInfoView: View {
                                 .font(.subBody)
                                 .foregroundStyle(showHeightPicker ? Color.customPrimary : Color.gray400)
                         }
-                        .frame(height: 40)
+                        .frame(height: 38)
                     }
 
                     Button {
@@ -74,7 +74,7 @@ struct ProfileHealthInfoView: View {
                                 .font(.subBody)
                                 .foregroundStyle(showWeightPicker ? Color.customPrimary : Color.gray400)
                         }
-                        .frame(height: 40)
+                        .frame(height: 38)
                     }
                 }
                 .listRowBackground(Color.gray750)
@@ -83,7 +83,7 @@ struct ProfileHealthInfoView: View {
             .cornerRadius(10)
             .listStyle(.inset)
             .padding(.horizontal, 16)
-            .frame(height: 2 * 62)
+            .frame(height: 2 * 60)
             .scrollDisabled(true)
             
             Spacer()
