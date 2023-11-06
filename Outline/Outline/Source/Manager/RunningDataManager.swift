@@ -146,6 +146,7 @@ class RunningDataManager: ObservableObject {
             case .success:
                 print("saved")
                 print(newRunningRecord)
+                self.userLocations = []
             case .failure(let error):
                 print(error)
             }

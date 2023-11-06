@@ -12,8 +12,8 @@ import SwiftUI
 struct CustomShareView: View {
     @ObservedObject var viewModel: ShareViewModel
 
-    @State private var isShowBPM = true
-    @State private var isShowCal = true
+    @State private var isShowBPM = false
+    @State private var isShowCal = false
     @State private var isShowPace = true
     @State private var isShowDistance = true
     
@@ -31,7 +31,7 @@ struct CustomShareView: View {
             
             VStack(spacing: 0) {
                 customImageView
-                    .padding(EdgeInsets(top: 20, leading: 49, bottom: 16, trailing: 49))
+                    .padding(EdgeInsets(top: 20, leading: 49, bottom: 12, trailing: 49))
                 pageIndicator
                 tagView
             }
@@ -47,6 +47,7 @@ struct CustomShareView: View {
                         viewModel.saveImage(image: image)
                     }
                 }
+                viewModel.tapSaveButton = false
             }
         }
         .onChange(of: viewModel.tapShareButton) {
@@ -59,6 +60,7 @@ struct CustomShareView: View {
                         viewModel.shareToInstagram(image: image)
                     }
                 }
+                viewModel.tapShareButton = false
             }
         }
     }
