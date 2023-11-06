@@ -35,7 +35,7 @@ struct FinishRunningView: View {
                                 .stroke(polylineGradient, style: StrokeStyle(lineWidth: 8, lineCap: .round, lineJoin: .round))
                         }
                         .roundedCorners(45, corners: .bottomRight)
-                        .shadow(color: .customWhite, radius: 1.5)
+                        .shadow(color: .customWhite, radius: 0.5)
 
                         VStack(spacing: 0) {
                             Text("\(viewModel.date)")
@@ -60,13 +60,13 @@ struct FinishRunningView: View {
                                 }
                             }
                         }
-                            .background(
-                                LinearGradient(
-                                    colors: gradientColors,
-                                    startPoint: .top, 
-                                    endPoint: .bottom
-                                )
+                        .background(
+                            LinearGradient(
+                                colors: gradientColors,
+                                startPoint: .top,
+                                endPoint: .bottom
                             )
+                        )
                     }
                     .ignoresSafeArea()
                     
@@ -83,9 +83,10 @@ struct FinishRunningView: View {
                     Button(action: {
                         runningManager.running = false
                     }, label: {
-                        Text("나중에 자랑하기")
+                        Text("홈으로 돌아가기")
                             .underline(pattern: .solid)
                             .foregroundStyle(Color.gray300)
+                            .font(.subBody)
                     })
                     .padding(.bottom, 8)
                 }
@@ -120,14 +121,13 @@ extension FinishRunningView {
         VStack(alignment: .leading, spacing: 0) {
             Text("\(viewModel.courseName)")
                 .font(.headline)
-            
             HStack {
                 Image(systemName: "calendar")
                 Text("\(viewModel.startTime)-\(viewModel.endTime)")
             }
             .font(.subBody)
             .foregroundStyle(Color.gray200)
-            
+            .padding(.top, 8)
             HStack {
                 Image(systemName: "mappin")
                     .foregroundStyle(Color.gray400)
@@ -136,6 +136,7 @@ extension FinishRunningView {
                     .foregroundStyle(Color.gray200)
             }
             .font(.subBody)
+            .padding(.top, 4)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(.top, 24)
@@ -150,8 +151,10 @@ extension FinishRunningView {
                 VStack(alignment: .center) {
                     Text("\(runningData.data)")
                         .font(.title2)
+                        .padding(.bottom, 4)
                     Text(runningData.text)
                         .font(.subBody)
+                        .foregroundStyle(Color.gray500)
                 }
                 .padding(.bottom, 16)
             }
