@@ -30,11 +30,14 @@ struct RecordDetailView: View {
     
     var body: some View {
         ZStack {
+            Color.gray900
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .ignoresSafeArea()
             LinearGradient(
-                colors: [.customBlack, .customBlack, .gray900],
+                colors: [.customBlack, .gray900],
                 startPoint: .top,
-                endPoint: .bottom
-            )
+                endPoint: .center
+                )
                 .ignoresSafeArea()
             
             ScrollView {
@@ -55,9 +58,9 @@ struct RecordDetailView: View {
                             } label: {
                                 Image(systemName: "pencil")
                                     .foregroundStyle(Color.customWhite)
-                                    .font(.system(size: 20))
+                                    .font(.system(size: 24))
                             }
-                            .padding(.top, 16)
+                            .padding(.top, 25)
                             .padding(.trailing, 16)
                         }
                         .background(
@@ -96,6 +99,8 @@ struct RecordDetailView: View {
                         .padding(.vertical, 40)
                     
                     runningData
+                        .padding(.horizontal)
+                        .padding(.bottom, 100)
                 }
             }
         }
@@ -133,12 +138,12 @@ struct RecordDetailView: View {
                         .foregroundStyle(Color.customPrimary)
                 }
             }
-            
             ToolbarItem(placement: .topBarTrailing) {
                 Button {
                     isShowAlert = true
                 } label: {
-                    Image(systemName: "trash.fill")
+                    Image(systemName: "trash")
+                        .font(.subtitle)
                         .foregroundStyle(Color.customPrimary)
                 }
             }
@@ -151,14 +156,15 @@ extension RecordDetailView {
         VStack(alignment: .leading, spacing: 0) {
             Text("\(viewModel.courseName)")
                 .font(.headline)
-            
+                .padding(.bottom, 8)
             HStack {
                 Image(systemName: "calendar")
                 Text("\(viewModel.startTime)-\(viewModel.endTime)")
             }
+            .padding(.bottom, 4)
             .font(.subBody)
             .foregroundStyle(Color.gray200)
-            
+       
             HStack {
                 Image(systemName: "mappin")
                     .foregroundStyle(Color.gray400)
@@ -175,49 +181,20 @@ extension RecordDetailView {
     
     private var runningData: some View {
         LazyVGrid(columns: columns, spacing: 40) {
-            VStack(alignment: .center) {
-                if let data = viewModel.runningData["킬로미터"] {
-                    Text(data)
-                        .font(.title2)
-                    Text("킬로미터")
-                        .font(.subBody)
-                }
-            }
-            VStack(alignment: .center) {
-                if let data = viewModel.runningData["BPM"] {
-                    Text(data)
-                        .font(.title2)
-                    Text("BPM")
-                        .font(.subBody)
-                }
-            }
-            VStack(alignment: .center) {
-                if let data = viewModel.runningData["평균 페이스"] {
-                    Text(data)
-                        .font(.title2)
-                    Text("평균 페이스")
-                        .font(.subBody)
-                }
-            }
-            VStack(alignment: .center) {
-                if let data = viewModel.runningData["칼로리"] {
-                    Text(data)
-                        .font(.title2)
-                    Text("칼로리")
-                        .font(.subBody)
-                }
-            }
-            VStack(alignment: .center) {
-                if let data = viewModel.runningData["케이던스"] {
-                    Text(data)
-                        .font(.title2)
-                    Text("케이던스")
-                        .font(.subBody)
+            ForEach(["킬로미터", "BPM", "평균 페이스", "칼로리", "케이던스"], id: \.self) { key in
+                VStack(alignment: .center, spacing: 4) {
+                    if let data = viewModel.runningData[key] {
+                        Text(data)
+                            .font(.headline)
+                        Text(key)
+                            .font(.subBody)
+                            .foregroundStyle(Color.gray500)
+                    }
                 }
             }
         }
     }
-    
+
     private var updateNameSheet: some View {
         VStack(alignment: .leading, spacing: 0) {
             Text("코스 이름 수정하기")

@@ -52,7 +52,9 @@ struct CustomRoundedRectangle: View {
                     clockwise: false
                 )
             }
-            .stroke(Color.white.opacity(0.5), lineWidth: 1.5)
+            .stroke(
+                LinearGradient(colors: [.white, .white.opacity(0.16)], startPoint: .topLeading, endPoint: .bottomTrailing)
+            , lineWidth: 1)
             
         }
         .padding(.vertical, 2)
