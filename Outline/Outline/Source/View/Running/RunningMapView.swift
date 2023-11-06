@@ -14,6 +14,8 @@ struct RunningMapView: View {
     @StateObject var runningDataManager = RunningDataManager.shared
     @GestureState var isLongPressed = false
     
+    @FetchRequest (entity: CoreRunningRecord.entity(), sortDescriptors: []) var runningRecord: FetchedResults<CoreRunningRecord>
+    
     @State private var moveToFinishRunningView = false
     @State private var showCustomSheet = false
     @State private var showBigGuide = false
@@ -21,7 +23,8 @@ struct RunningMapView: View {
     
     @State private var checkUserLocation = true
     
-    @State private var position: MapCameraPosition = .userLocation(followsHeading: false, fallback: .automatic)
+    @State private var position: MapCameraPosition = .userLocation(followsHeading: true, fallback: .automatic)
+    @State private var currentLocation: CLLocation?
     @Binding var selection: Bool
     
     @Namespace var mapScope
@@ -31,30 +34,7 @@ struct RunningMapView: View {
     var body: some View {
         ZStack(alignment: .topTrailing) {
             Map(position: $position, scope: mapScope) {
-                UserAnnotation { userlocation in
-                    ZStack {
-                        Circle().foregroundStyle(.white).frame(width: 22)
-                        Circle().foregroundStyle(.customPrimary).frame(width: 17)
-                    }
-                    .onChange(of: userlocation.location) { _, userlocation in
-                        if viewModel.runningType == .start {
-                            if let user = userlocation,
-                               let startCourse = runningStartManager.startCourse {
-                                if runningDataManager.userLocations.isEmpty {
-                                    viewModel.startLocation = CLLocation(latitude: user.coordinate.latitude, longitude: user.coordinate.longitude)
-                                }
-                                runningDataManager.userLocations.append(user.coordinate)
-                                if self.runningStartManager.runningType == .gpsArt {
-                                    viewModel.checkEndDistance()
-                                }
-                                if !startCourse.coursePaths.isEmpty {
-                                    runningStartManager.trackingDistance()
-                                }
-                            }
-                        }
-                    }
-                }
-                
+                UserAnnotation()
                 if let courseGuide = runningStartManager.startCourse {
                     MapPolyline(coordinates: ConvertCoordinateManager.convertToCLLocationCoordinates(courseGuide.coursePaths))
                         .stroke(.white.opacity(0.5), style: StrokeStyle(lineWidth: 8, lineCap: .round, lineJoin: .round))
@@ -64,6 +44,28 @@ struct RunningMapView: View {
                     .stroke(.customPrimary, style: StrokeStyle(lineWidth: 8, lineCap: .round, lineJoin: .round))
             }
             .mapControlVisibility(.hidden)
+            .onChange(of: CLLocationManager().location) { _, userlocation in
+                if viewModel.runningType == .start {
+                    if let user = userlocation,
+                       let startCourse = runningStartManager.startCourse {
+                        if runningDataManager.userLocations.isEmpty {
+                            viewModel.startLocation = CLLocation(latitude: user.coordinate.latitude, longitude: user.coordinate.longitude)
+                            runningDataManager.userLocations.append(user.coordinate)
+                        } else if let last = runningDataManager.userLocations.last {
+                            if viewModel.checkLastToDistance(last: last, current: user.coordinate) {
+                                runningDataManager.userLocations.append(user.coordinate)
+                            }
+                        }
+
+                        if self.runningStartManager.runningType == .gpsArt {
+                            viewModel.checkEndDistance()
+                        }
+                        if !startCourse.coursePaths.isEmpty {
+                            runningStartManager.trackingDistance()
+                        }
+                    }
+                }
+            }
             
             VStack(spacing: 0) {
                 Spacer()
@@ -99,7 +101,7 @@ struct RunningMapView: View {
             } else if viewModel.isShowComplteSheet {
                 runningFinishSheet()
             } else if viewModel.isShowPopup {
-                RunningPopup(text: "일시정지를 3초동안 누르면 러닝이 종료돼요")
+                RunningPopup(text: "정지 버튼을 길게 누르면 러닝이 종료돼요")
                     .frame(maxHeight: .infinity, alignment: .bottom)
             } else if viewModel.isNearEndLocation {
                 RunningPopup(text: "도착 지점이 근처에 있어요.")
@@ -134,6 +136,7 @@ extension RunningMapView {
                         } label: {
                             Image(systemName: "pause.fill")
                                 .buttonModifier(color: Color.customPrimary, size: 29, padding: 29)
+                                .fontWeight(.light)
                             
                         }
                         .buttonStyle(.plain)
@@ -148,7 +151,7 @@ extension RunningMapView {
                                 .font(.system(size: 20))
                                 .bold()
                                 .foregroundStyle(Color.white)
-                                .padding(18)
+                                .frame(width: 60, height: 60)
                                 .background(
                                     Circle()
                                         .fill(.thickMaterial)
@@ -175,6 +178,7 @@ extension RunningMapView {
                                     if !isLongPressed {
                                         DispatchQueue.main.async {
                                             viewModel.isShowPopup = true
+                                            HapticManager.impact(style: .light)
                                         }
                                     }
                                 }
@@ -249,7 +253,7 @@ extension RunningMapView {
             .animation(.easeInOut, value: showCustomSheet)
             
             Confetti(counter: $counter,
-                     num: 40,
+                     num: 80,
                      confettis: [
                         .shape(.circle),
                         .shape(.smallCircle),
@@ -262,14 +266,10 @@ extension RunningMapView {
                         .shape(.starPop),
                         .shape(.blink)
                      ],
-                     colors: [.customPrimary, .customSecondary],
-                     confettiSize: 10,
+                     colors: [.blue, .yellow],
+                     confettiSize: 8,
                      rainHeight: UIScreen.main.bounds.height,
-                     openingAngle: .degrees(60),
-                     closingAngle: .degrees(120),
-                     radius: 400,
-                     repetitions: 10,
-                     repetitionInterval: 1
+                     radius: UIScreen.main.bounds.width
             )
         }
         .ignoresSafeArea()
@@ -340,6 +340,7 @@ extension Image {
                 Circle()
                     .fill(color)
                     .stroke(.white, style: .init())
+                    .frame(width: 80, height: 80)
             )
     }
 }

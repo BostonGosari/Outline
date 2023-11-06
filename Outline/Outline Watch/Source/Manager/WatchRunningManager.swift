@@ -16,6 +16,7 @@ class WatchRunningManager: ObservableObject {
     @Published var userLocations: [CLLocationCoordinate2D] = []
     @Published var changeRunningType = false
     @Published var startRunning = false
+    @Published var runningTitle = ""
     
     private let locationManager = CLLocationManager()
     var startCourse: GPSArtCourse = GPSArtCourse()
@@ -26,12 +27,14 @@ class WatchRunningManager: ObservableObject {
         startCourse = GPSArtCourse()
         runningType = .free
         getFreeRunName()
+        runningTitle = "자유러닝"
         startRunning = true
     }
     
     func startGPSArtRun() {
         userLocations = []
         runningType = .gpsArt
+        runningTitle = startCourse.courseName
         startRunning = true
     }
     
