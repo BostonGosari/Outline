@@ -32,85 +32,87 @@ struct RunningMapView: View {
     var courses: [CLLocationCoordinate2D] = []
     
     var body: some View {
-        ZStack(alignment: .topTrailing) {
-            Map(position: $position, scope: mapScope) {
-                UserAnnotation()
-                if let courseGuide = runningStartManager.startCourse {
-                    MapPolyline(coordinates: ConvertCoordinateManager.convertToCLLocationCoordinates(courseGuide.coursePaths))
-                        .stroke(.white.opacity(0.5), style: StrokeStyle(lineWidth: 8, lineCap: .round, lineJoin: .round))
+        NavigationStack {
+            ZStack(alignment: .topTrailing) {
+                Map(position: $position, scope: mapScope) {
+                    UserAnnotation()
+                    if let courseGuide = runningStartManager.startCourse {
+                        MapPolyline(coordinates: ConvertCoordinateManager.convertToCLLocationCoordinates(courseGuide.coursePaths))
+                            .stroke(.white.opacity(0.5), style: StrokeStyle(lineWidth: 8, lineCap: .round, lineJoin: .round))
+                    }
+                    
+                    MapPolyline(coordinates: runningDataManager.userLocations)
+                        .stroke(.customPrimary, style: StrokeStyle(lineWidth: 8, lineCap: .round, lineJoin: .round))
                 }
-                
-                MapPolyline(coordinates: runningDataManager.userLocations)
-                    .stroke(.customPrimary, style: StrokeStyle(lineWidth: 8, lineCap: .round, lineJoin: .round))
-            }
-            .mapControlVisibility(.hidden)
-            .onChange(of: CLLocationManager().location) { _, userlocation in
-                if viewModel.runningType == .start {
-                    if let user = userlocation,
-                       let startCourse = runningStartManager.startCourse {
-                        if runningDataManager.userLocations.isEmpty {
-                            viewModel.startLocation = CLLocation(latitude: user.coordinate.latitude, longitude: user.coordinate.longitude)
-                            runningDataManager.userLocations.append(user.coordinate)
-                        } else if let last = runningDataManager.userLocations.last {
-                            if viewModel.checkLastToDistance(last: last, current: user.coordinate) {
+                .mapControlVisibility(.hidden)
+                .onChange(of: CLLocationManager().location) { _, userlocation in
+                    if viewModel.runningType == .start {
+                        if let user = userlocation,
+                           let startCourse = runningStartManager.startCourse {
+                            if runningDataManager.userLocations.isEmpty {
+                                viewModel.startLocation = CLLocation(latitude: user.coordinate.latitude, longitude: user.coordinate.longitude)
                                 runningDataManager.userLocations.append(user.coordinate)
+                            } else if let last = runningDataManager.userLocations.last {
+                                if viewModel.checkLastToDistance(last: last, current: user.coordinate) {
+                                    runningDataManager.userLocations.append(user.coordinate)
+                                }
+                            }
+                            
+                            if self.runningStartManager.runningType == .gpsArt {
+                                viewModel.checkEndDistance()
+                            }
+                            if !startCourse.coursePaths.isEmpty {
+                                runningStartManager.trackingDistance()
                             }
                         }
-
-                        if self.runningStartManager.runningType == .gpsArt {
-                            viewModel.checkEndDistance()
-                        }
-                        if !startCourse.coursePaths.isEmpty {
-                            runningStartManager.trackingDistance()
-                        }
                     }
                 }
-            }
-            
-            VStack(spacing: 0) {
-                Spacer()
-                runningButtonView
-                    .frame(maxWidth: .infinity)
-                    .padding(.bottom, 80)
-                    .opacity(selection ? 0 : 1)
-                    .animation(.bouncy, value: selection)
-            }
-            
-            if let course = runningStartManager.startCourse,
-               runningStartManager.runningType == .gpsArt {
-                CourseGuideView(
-                    userLocations: $viewModel.userLocations,
-                    showBigGuide: $showBigGuide,
-                    coursePathCoordinates: ConvertCoordinateManager.convertToCLLocationCoordinates(course.coursePaths),
-                    courseRotate: course.heading
-                )
-                .onTapGesture {
-                    showBigGuide.toggle()
-                    HapticManager.impact(style: .soft)
+                
+                VStack(spacing: 0) {
+                    Spacer()
+                    runningButtonView
+                        .frame(maxWidth: .infinity)
+                        .padding(.bottom, 80)
+                        .opacity(selection ? 0 : 1)
+                        .animation(.bouncy, value: selection)
                 }
-                .animation(.bouncy, value: showBigGuide)
-            }
-        }
-        .mapScope(mapScope)
-        .overlay {
-            if showCustomSheet {
-                customSheet
-                    .onAppear {
-                        counter += 1
+                
+                if let course = runningStartManager.startCourse,
+                   runningStartManager.runningType == .gpsArt {
+                    CourseGuideView(
+                        userLocations: $viewModel.userLocations,
+                        showBigGuide: $showBigGuide,
+                        coursePathCoordinates: ConvertCoordinateManager.convertToCLLocationCoordinates(course.coursePaths),
+                        courseRotate: course.heading
+                    )
+                    .onTapGesture {
+                        showBigGuide.toggle()
+                        HapticManager.impact(style: .soft)
                     }
-            } else if viewModel.isShowComplteSheet {
-                runningFinishSheet()
-            } else if viewModel.isShowPopup {
-                RunningPopup(text: "정지 버튼을 길게 누르면 러닝이 종료돼요")
-                    .frame(maxHeight: .infinity, alignment: .bottom)
-            } else if viewModel.isNearEndLocation {
-                RunningPopup(text: "도착 지점이 근처에 있어요.")
-                    .frame(maxHeight: .infinity, alignment: .bottom)
+                    .animation(.bouncy, value: showBigGuide)
+                }
             }
-        }
-        .navigationDestination(isPresented: $moveToFinishRunningView) {
-            FinishRunningView()
-                .navigationBarBackButtonHidden()
+            .mapScope(mapScope)
+            .overlay {
+                if showCustomSheet {
+                    customSheet
+                        .onAppear {
+                            counter += 1
+                        }
+                } else if viewModel.isShowComplteSheet {
+                    runningFinishSheet()
+                } else if viewModel.isShowPopup {
+                    RunningPopup(text: "정지 버튼을 길게 누르면 러닝이 종료돼요")
+                        .frame(maxHeight: .infinity, alignment: .bottom)
+                } else if viewModel.isNearEndLocation {
+                    RunningPopup(text: "도착 지점이 근처에 있어요.")
+                        .frame(maxHeight: .infinity, alignment: .bottom)
+                }
+            }
+            .navigationDestination(isPresented: $moveToFinishRunningView) {
+                FinishRunningView()
+                    .navigationBarBackButtonHidden()
+            }
         }
     }
 }
@@ -185,7 +187,7 @@ extension RunningMapView {
                                 .onEnded { _ in
                                     HapticManager.impact(style: .heavy)
                                     DispatchQueue.main.async {
-                                       if runningStartManager.counter < 30 {
+                                       if runningStartManager.counter < 3 {
                                            runningDataManager.stopRunningWithoutRecord()
                                            runningStartManager.counter = 0
                                            runningStartManager.running = false

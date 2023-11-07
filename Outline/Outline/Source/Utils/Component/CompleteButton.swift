@@ -13,9 +13,7 @@ struct CompleteButton: View {
     let action: () -> Void
 
     var body: some View {
-        Button {
-            self.action()
-        }  label: {
+        Button(action: action) {
             RoundedRectangle(cornerRadius: 15)
                 .fill(isActive ? Color.customPrimary : Color.gray700)
                 .frame(height: 55)
