@@ -24,7 +24,6 @@ struct FinishRunningView: View {
     private let polylineGradient = Gradient(colors: [.customGradient1, .customGradient2, .customGradient3])
     
     var body: some View {
-        NavigationStack {
             ZStack {
                 Color.gray900
                     .ignoresSafeArea()
@@ -91,7 +90,6 @@ struct FinishRunningView: View {
                     .padding(.bottom, 8)
                 }
             }
-        }
         .sheet(isPresented: $showRenameSheet) {
             updateNameSheet
         }
