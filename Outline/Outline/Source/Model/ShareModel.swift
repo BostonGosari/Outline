@@ -10,7 +10,7 @@ import CoreLocation
 struct ShareModel {
     var courseName: String
     var runningDate: String
-    var runningRegion: String
+    var regionDisplayName: String
     var distance: String
     var cal: String
     var pace: String
@@ -21,7 +21,7 @@ struct ShareModel {
     init() {
         self.courseName = ""
         self.runningDate = ""
-        self.runningRegion = ""
+        self.regionDisplayName = ""
         self.distance = ""
         self.cal = ""
         self.pace = ""
@@ -30,10 +30,10 @@ struct ShareModel {
         self.userLocations = []
     }
     
-    init(courseName: String, runningDate: String, runningRegion: String, distance: String, cal: String, pace: String, bpm: String, time: String, userLocations: [CLLocationCoordinate2D]) {
+    init(courseName: String, runningDate: String, regionDisplayName: String, distance: String, cal: String, pace: String, bpm: String, time: String, userLocations: [CLLocationCoordinate2D]) {
         self.courseName = courseName
         self.runningDate = runningDate
-        self.runningRegion = runningRegion
+        self.regionDisplayName = regionDisplayName
         self.distance = distance
         self.cal = cal
         self.pace = pace
