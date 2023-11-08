@@ -139,7 +139,6 @@
 		BB1D531C2ADDBCB20073771F /* Pretendard-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BB1D531B2ADDBCB20073771F /* Pretendard-SemiBold.ttf */; };
 		BB1D531E2ADDBCB90073771F /* Pretendard-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BB1D531D2ADDBCB90073771F /* Pretendard-Thin.ttf */; };
 		BB1D53432ADE9C7D0073771F /* ControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1D53422ADE9C7D0073771F /* ControlsView.swift */; };
-		BB1D53462ADE9CFA0073771F /* WatchWorkoutManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1D53452ADE9CFA0073771F /* WatchWorkoutManager.swift */; };
 		BB1D53482ADE9D780073771F /* MetricsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1D53472ADE9D770073771F /* MetricsView.swift */; };
 		BB1D534A2ADE9DC40073771F /* ElapsedTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1D53492ADE9DC40073771F /* ElapsedTimeView.swift */; };
 		BB1D534C2ADEA6F90073771F /* SummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1D534B2ADEA6F90073771F /* SummaryView.swift */; };
@@ -321,7 +320,6 @@
 		BB1D531B2ADDBCB20073771F /* Pretendard-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.ttf"; sourceTree = "<group>"; };
 		BB1D531D2ADDBCB90073771F /* Pretendard-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Thin.ttf"; sourceTree = "<group>"; };
 		BB1D53422ADE9C7D0073771F /* ControlsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlsView.swift; sourceTree = "<group>"; };
-		BB1D53452ADE9CFA0073771F /* WatchWorkoutManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchWorkoutManager.swift; sourceTree = "<group>"; };
 		BB1D53472ADE9D770073771F /* MetricsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetricsView.swift; sourceTree = "<group>"; };
 		BB1D53492ADE9DC40073771F /* ElapsedTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElapsedTimeView.swift; sourceTree = "<group>"; };
 		BB1D534B2ADEA6F90073771F /* SummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryView.swift; sourceTree = "<group>"; };
@@ -572,7 +570,6 @@
 		BB1D53442ADE9CEC0073771F /* Manager */ = {
 			isa = PBXGroup;
 			children = (
-				BB1D53452ADE9CFA0073771F /* WatchWorkoutManager.swift */,
 				29CC42BC2AF24BCE00578EF1 /* WatchRunningManager.swift */,
 			);
 			path = Manager;
@@ -846,10 +843,10 @@
 			children = (
 				F0492E222ADD545200F6EADD /* CourseListWatchView.swift */,
 				2930EDC12AF408EC007FD141 /* CourseDetailView.swift */,
+				2930EDBC2AF3FD97007FD141 /* CountDownView.swift */,
 				F0492E202ADD52E900F6EADD /* WatchTabView.swift */,
 				F0864A382ADD6CFA00498DBA /* MapWatchView.swift */,
 				BB1D53422ADE9C7D0073771F /* ControlsView.swift */,
-				2930EDBC2AF3FD97007FD141 /* CountDownView.swift */,
 				BB1D53472ADE9D770073771F /* MetricsView.swift */,
 				BB1D534B2ADEA6F90073771F /* SummaryView.swift */,
 				29111E362AE0C9CA009833C7 /* FinishWatchView.swift */,
@@ -1207,7 +1204,6 @@
 				2930EDC22AF408EC007FD141 /* CourseDetailView.swift in Sources */,
 				293FD2052AFBB7BF00623B23 /* WorkoutManager.swift in Sources */,
 				293FD2082AFBB7FC00623B23 /* WorkoutManager+watchOS.swift in Sources */,
-				BB1D53462ADE9CFA0073771F /* WatchWorkoutManager.swift in Sources */,
 				F0AC8B1D2AD966990061612C /* Model.swift in Sources */,
 				BB1D534A2ADE9DC40073771F /* ElapsedTimeView.swift in Sources */,
 				299803602AE0240100A9A134 /* ConfettiShapes.swift in Sources */,

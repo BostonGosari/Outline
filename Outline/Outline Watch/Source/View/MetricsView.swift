@@ -9,16 +9,16 @@ import SwiftUI
 import HealthKit
 
 struct MetricsView: View {
+    @StateObject var workoutManager = WorkoutManager.shared
     @StateObject var runningManager = WatchRunningManager.shared
-    @StateObject var workoutManager = WatchWorkoutManager.shared
 
     var body: some View {
         TimelineView(
-            MetricsTimelineSchedule(from: workoutManager.builder?.startDate ?? Date(),
-                                    isPaused: workoutManager.session?.state == .paused)) { context in
+            MetricsTimelineSchedule(from: workoutManager.session?.startDate ?? Date(),
+                                    isPaused: workoutManager.sessionState == .paused)) { context in
             VStack(alignment: .center) {
                 Spacer()
-                ElapsedTimeView(elapsedTime: workoutManager.builder?.elapsedTime(at: context.date) ?? 0)
+                ElapsedTimeView(elapsedTime: elapsedTime(with: context.date))
                 Spacer()
                 HStack {
                     Spacer()
@@ -58,5 +58,9 @@ struct MetricsView: View {
             }
             .navigationBarTitleDisplayMode(.inline)
         }
+    }
+    
+    private func elapsedTime(with contextDate: Date) -> TimeInterval {
+        return workoutManager.builder?.elapsedTime(at: contextDate) ?? 0
     }
 }

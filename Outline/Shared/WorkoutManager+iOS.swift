@@ -9,8 +9,6 @@ import Foundation
 import os
 import HealthKit
 
-// MARK: - Workout session management
-//
 extension WorkoutManager {
     func startWatchWorkout(workoutType: HKWorkoutActivityType) async throws {
         let configuration = HKWorkoutConfiguration()
@@ -20,9 +18,6 @@ extension WorkoutManager {
     }
     
     func retrieveRemoteSession() {
-        /**
-         HealthKit calls this handler when a session starts mirroring.
-         */
         healthStore.workoutSessionMirroringStartHandler = { mirroredSession in
             Task { @MainActor in
                 self.resetWorkout()
@@ -50,8 +45,6 @@ extension WorkoutManager {
     }
 }
 
-// MARK: - Fetching workouts and workout quantity collections.
-//
 extension WorkoutManager {
     func fetchTodaysWorkouts(workoutType: HKWorkoutActivityType) async -> [HKWorkout] {
         let samples = try? await withCheckedThrowingContinuation { (continuation: CheckedContinuation<[HKSample], Error>) in
@@ -66,8 +59,8 @@ extension WorkoutManager {
             }
             
             let todayPredicate = HKQuery.predicateForSamples(withStart: startDate, end: endDate, options: [])
-            let cyclingPredicate = HKQuery.predicateForWorkouts(with: .cycling)
-            let compoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [todayPredicate, cyclingPredicate])
+            let runningPredicate = HKQuery.predicateForWorkouts(with: .running)
+            let compoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [todayPredicate, runningPredicate])
             
             let sortByStartDate = NSSortDescriptor(key: HKSampleSortIdentifierStartDate, ascending: false)
             

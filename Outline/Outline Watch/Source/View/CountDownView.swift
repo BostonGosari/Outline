@@ -5,10 +5,12 @@
 //  Created by hyunjun on 11/3/23.
 //
 
+import os
 import SwiftUI
+import HealthKit
 
 struct CountDownView: View {
-    @StateObject var workoutManager = WatchWorkoutManager.shared
+    @StateObject var workoutManager = WorkoutManager.shared
     @State private var countdownSeconds = 3
     
     var body: some View {
@@ -26,12 +28,29 @@ struct CountDownView: View {
                             countdownSeconds -= 1
                             if countdownSeconds == 0 {
                                 timer.invalidate()
-                                workoutManager.selectedWorkout = .running
                             }
                         }
                     }
+                    .onDisappear {
+                        startWorkout()
+                        print(workoutManager.sessionState.rawValue.description)
+                        print(workoutManager.session?.description)
+                    }
             } else {
                 WatchTabView()
+            }
+        }
+    }
+    
+    private func startWorkout() {
+        Task {
+            do {
+                let configuration = HKWorkoutConfiguration()
+                configuration.activityType = .running
+                configuration.locationType = .outdoor
+                try await workoutManager.startWorkout(workoutConfiguration: configuration)
+            } catch {
+                Logger.shared.log("Failed to start workout \(error))")
             }
         }
     }

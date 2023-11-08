@@ -80,4 +80,3 @@ extension HKWorkout {
         return value.formatted(.number.precision(.fractionLength(0))) + " bpm"
     }
 }
-

@@ -11,8 +11,8 @@ import SwiftUI
 import WatchKit
 
 struct SummaryView: View {
+    @StateObject var workoutManager = WorkoutManager.shared
     @Environment(\.dismiss) var dismiss
-    @StateObject var workoutManager = WatchWorkoutManager.shared
     @StateObject var runningManager = WatchRunningManager.shared
     
     @State private var isShowingFinishView = true
@@ -74,7 +74,6 @@ struct SummaryView: View {
                         .padding(.bottom, 8)
                     Button {
                         runningManager.startRunning = false
-                        workoutManager.resetWorkout()
                         dismiss()
                     } label: {
                         Text("완료")

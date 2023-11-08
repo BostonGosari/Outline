@@ -10,7 +10,7 @@ import HealthKit
 import UIKit
 
 struct CourseListWatchView: View {
-    @StateObject var workoutManager = WatchWorkoutManager.shared
+    @StateObject var workoutManager = WorkoutManager.shared
     @StateObject var watchConnectivityManager = WatchConnectivityManager.shared
     @StateObject var runningManager = WatchRunningManager.shared
     @StateObject var viewModel = CourseListWatchViewModel()
@@ -19,16 +19,13 @@ struct CourseListWatchView: View {
     @State private var selectedCourse: GPSArtCourse = GPSArtCourse()
     @State private var showLocationPermissionSheet = false
     @State private var showFreeRunningGuideSheet = false
-    
-    var workoutTypes: [HKWorkoutActivityType] = [.running]
-    
+        
     var body: some View {
         NavigationStack {
             ScrollView {
                 VStack(spacing: -5) {
                     Button {
-                        if  viewModel.isHealthAuthorized && viewModel.isLocationAuthorized {
-                            workoutManager.selectedWorkout = workoutTypes[0]
+                        if viewModel.isHealthAuthorized && viewModel.isLocationAuthorized {
                             runningManager.startFreeRun()
                         } else {
                             if !viewModel.isLocationAuthorized {
@@ -68,7 +65,6 @@ struct CourseListWatchView: View {
                         Button {
                             if viewModel.isHealthAuthorized && viewModel.isLocationAuthorized {
                                 if runningManager.checkDistance(course: course.coursePaths) {
-                                    workoutManager.selectedWorkout = workoutTypes[0]
                                     runningManager.startCourse = course
                                     runningManager.startGPSArtRun()
                                 } else {
@@ -180,25 +176,11 @@ struct CourseListWatchView: View {
                         .foregroundStyle(.gray.opacity(0.2))
                 }
                 Button {
-                    workoutManager.selectedWorkout = workoutTypes[0]
                     runningManager.startFreeRun()
                     showFreeRunningGuideSheet = false
                 } label: {
                     Text("자유 코스로 변경")
-                        .frame(maxWidth: .infinity)
-                        .frame(height: 36)
-                        .padding()
-                        .background(
-                            RoundedRectangle(cornerRadius: 20, style: .continuous)
-                                .foregroundColor(Color.gray800.opacity(0.5))
-                        )
-                        .foregroundColor(.white)
-                }
-                .buttonStyle(.plain)
-                Button {
-                    showFreeRunningGuideSheet = false
-                } label: {
-                    Text("러닝 종료하기")
+                        .foregroundColor(.black)
                         .frame(maxWidth: .infinity)
                         .frame(height: 36)
                         .padding()
@@ -206,7 +188,20 @@ struct CourseListWatchView: View {
                             RoundedRectangle(cornerRadius: 20, style: .continuous)
                                 .foregroundColor(Color.first)
                         )
-                        .foregroundColor(.black)
+                        .foregroundColor(.white)
+                }
+                .buttonStyle(.plain)
+                Button {
+                    showFreeRunningGuideSheet = false
+                } label: {
+                    Text("뒤로가기")
+                        .frame(maxWidth: .infinity)
+                        .frame(height: 36)
+                        .padding()
+                        .background(
+                            RoundedRectangle(cornerRadius: 20, style: .continuous)
+                                .foregroundColor(Color.gray800.opacity(0.5))
+                        )
                 }
                 .buttonStyle(.plain)
             }

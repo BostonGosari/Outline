@@ -9,8 +9,10 @@ import CoreLocation
 import SwiftUI
 
 struct ContentWatchView: View {
+    @StateObject var workoutManager = WorkoutManager.shared
     @StateObject var runningManager = WatchRunningManager.shared
-    @StateObject var workoutManager = WatchWorkoutManager.shared
+    
+    @State private var isSheetActive = false
     
     var body: some View {
         ZStack {
@@ -18,9 +20,15 @@ struct ContentWatchView: View {
                 .tint(.first)
             if runningManager.startRunning {
                 CountDownView()
-                    .sheet(isPresented: $workoutManager.showSummaryView) {
+                    .onChange(of: workoutManager.sessionState) { _, newValue in
+                        if newValue == .ended {
+                            isSheetActive = true
+                        }
+                    }
+                    .sheet(isPresented: $isSheetActive) {
+                        workoutManager.resetWorkout()
+                    } content: {
                         SummaryView()
-                            .toolbar(.hidden, for: .automatic)
                     }
             }
         }

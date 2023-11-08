@@ -37,23 +37,5 @@ struct MapWatchView: View {
                 .foregroundStyle(.first)
         }
         .navigationBarTitleDisplayMode(.inline)
-//        .overlay(alignment: .topLeading) {
-//            header
-//        }
-    }
-    
-    private var header: some View {
-        Text("시티런")
-            .bold()
-            .foregroundStyle(.first)
-            .padding()
-            .padding(.top, 5)
-            .padding(.leading, 20)
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .background {
-                Rectangle()
-                    .foregroundStyle(.thinMaterial)
-            }
-            .ignoresSafeArea()
     }
 }

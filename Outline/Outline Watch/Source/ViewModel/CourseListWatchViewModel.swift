@@ -26,17 +26,28 @@ class CourseListWatchViewModel: NSObject, CLLocationManagerDelegate, ObservableO
     }
     
     func checkHealthAuthorization() {
-        let quantityTypes: Set = [
+        let typesToShare: Set = [
             HKQuantityType(.heartRate),
             HKQuantityType(.activeEnergyBurned),
             HKQuantityType(.distanceWalkingRunning),
-            HKQuantityType(.stepCount),
             HKQuantityType(.cyclingCadence),
+            HKQuantityType(.stepCount),
             HKQuantityType(.runningSpeed),
             HKQuantityType.workoutType()
         ]
         
-        healthStore.requestAuthorization(toShare: quantityTypes, read: quantityTypes) { success, _ in
+        let typesToRead: Set = [
+            HKQuantityType(.heartRate),
+            HKQuantityType(.activeEnergyBurned),
+            HKQuantityType(.distanceWalkingRunning),
+            HKQuantityType(.cyclingCadence),
+            HKQuantityType(.stepCount),
+            HKQuantityType(.runningSpeed),
+            HKQuantityType.workoutType(),
+            HKObjectType.activitySummaryType()
+        ]
+        
+        healthStore.requestAuthorization(toShare: typesToShare, read: typesToRead) { success, _ in
             if success {
                 self.isHealthAuthorized = true
             } else {

@@ -9,10 +9,10 @@ import SwiftUI
 import UIKit
 
 struct ControlsView: View {
-    
-    @StateObject var workoutManager = WatchWorkoutManager.shared
+    @StateObject var workoutManager = WorkoutManager.shared
     @StateObject var watchConnectivityManager = WatchConnectivityManager.shared
     @StateObject var watchRunningManager = WatchRunningManager.shared
+    
     @State private var showConfirmationSheet = false
     @State private var showEndWithoutSavingSheet = false
     @State private var buttonAnimation = false
@@ -30,21 +30,25 @@ struct ControlsView: View {
                         }
                     }
                 }
-                
-                ControlButton(systemName: workoutManager.running ? "pause" : "play.fill", foregroundColor: .first, backgroundColor: .first) {
-                    workoutManager.togglePause()
-                    withAnimation {
-                        buttonAnimation.toggle()
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                            dataAnimation.toggle()
+
+                ControlButton(
+                    systemName: workoutManager.sessionState == .running ? "pause" : "play.fill",
+                    foregroundColor: .first, backgroundColor: .first) {
+                        withAnimation {
+                            workoutManager.sessionState == .running ? workoutManager.session?.pause() : workoutManager.session?.resume()
+                            print(workoutManager.sessionState.rawValue.description)
+                            print(workoutManager.session?.description)
+                            buttonAnimation.toggle()
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                dataAnimation.toggle()
+                            }
                         }
                     }
-                }
             }
             .padding(.top, buttonAnimation ? 20 : WKInterfaceDevice.current().screenBounds.height * 0.2)
-            .padding(.bottom, workoutManager.running ? 0 : 30)
+            .padding(.bottom, workoutManager.sessionState == .running ? 0 : 30)
             
-            if !workoutManager.running {
+            if workoutManager.sessionState != .running {
                 LazyVGrid(columns: Array(repeating: GridItem(), count: 2), spacing: 12) {
                     workoutDataItem(value: "\((workoutManager.distance/1000).formatted(.number.precision(.fractionLength(2))))", label: "킬로미터")
                     workoutDataItem(value: workoutManager.averagePace.formattedAveragePace(),
@@ -56,9 +60,9 @@ struct ControlsView: View {
                 .opacity(dataAnimation ? 1 : 0)
             }
         }
-        .scrollDisabled(workoutManager.running)
+        .scrollDisabled(workoutManager.sessionState == .running)
         .navigationTitle {
-            Text(workoutManager.running ? watchRunningManager.runningTitle : "일시 정지됨")
+            Text(workoutManager.sessionState == .running ? watchRunningManager.runningTitle : "일시 정지됨")
                 .foregroundStyle(.first)
         }
         .navigationBarTitleDisplayMode(.inline)
@@ -71,21 +75,6 @@ struct ControlsView: View {
             customEndWithoutSavingSheet
                 .ignoresSafeArea()
         }
-    }
-    
-    private var header: some View {
-        Text(workoutManager.running ? "시티런" : "일시 정지됨")
-            .fontWeight(.regular)
-            .foregroundStyle(.first)
-            .padding()
-            .padding(.top, 5)
-            .padding(.leading, 20)
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .background {
-                Rectangle()
-                    .foregroundStyle(.thinMaterial)
-            }
-            .ignoresSafeArea()
     }
 }
 
@@ -129,9 +118,11 @@ extension ControlsView {
                 }
                 .buttonStyle(.plain)
                 Button {
+                    print(workoutManager.sessionState.rawValue.description)
+                    print(workoutManager.session?.description)
                     showConfirmationSheet = false
                     sendDataToPhone()
-                    workoutManager.endWorkout()
+                    workoutManager.session?.stopActivity(with: .now)
                 } label: {
                     Text("종료하기")
                         .frame(maxWidth: .infinity)
@@ -183,9 +174,11 @@ extension ControlsView {
                 }
                 .buttonStyle(.plain)
                 Button {
+                    print(workoutManager.sessionState.rawValue.description)
+                    print(workoutManager.session?.description)
                     showEndWithoutSavingSheet = false
-                    workoutManager.endWorkoutWithoutSummaryView()
                     watchRunningManager.startRunning = false
+                    workoutManager.session?.stopActivity(with: .now)
                     watchConnectivityManager.sendRunningSessionStateToPhone(false)
                 } label: {
                     Text("종료하기")
