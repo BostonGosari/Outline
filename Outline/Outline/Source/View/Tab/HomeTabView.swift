@@ -59,7 +59,6 @@ struct HomeTabView: View {
                             .frame(maxHeight: .infinity, alignment: .top)
                     }
                 }
-                
             }
             if runningManager.start {
                 CountDown(running: $runningManager.running, start: $runningManager.start)
@@ -70,7 +69,6 @@ struct HomeTabView: View {
             if showCustomSheet {
                 watchRunningSheet
             }
-            
         }
         .onReceive(watchConnectivityManager.$isWatchRunning) { isRunning in
             if isRunning {
