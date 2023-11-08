@@ -149,29 +149,25 @@ class WatchWorkoutManager: NSObject, ObservableObject {
         
         DispatchQueue.main.async {
             switch statistics.quantityType {
-            case HKQuantityType.quantityType(forIdentifier: .heartRate):
+            case HKQuantityType(.heartRate):
                 let heartRateUnit = HKUnit.count().unitDivided(by: HKUnit.minute())
                 self.heartRate = statistics.mostRecentQuantity()?.doubleValue(for: heartRateUnit) ?? 0
                 self.averageHeartRate = statistics.averageQuantity()?.doubleValue(for: heartRateUnit) ?? 0
-            case HKQuantityType.quantityType(forIdentifier: .activeEnergyBurned):
+            case HKQuantityType(.activeEnergyBurned):
                 let energyUnit = HKUnit.kilocalorie()
                 self.calorie = statistics.sumQuantity()?.doubleValue(for: energyUnit) ?? 0
-            case HKQuantityType.quantityType(forIdentifier: .distanceWalkingRunning):
+            case HKQuantityType(.distanceWalkingRunning):
                 let meterUnit = HKUnit.meter()
                 self.distance = statistics.sumQuantity()?.doubleValue(for: meterUnit) ?? 0
                 let duration = self.builder?.elapsedTime ?? 0
                 self.calculateAveragePace(distance: self.distance, duration: duration)
-            case HKQuantityType.quantityType(forIdentifier: .runningSpeed):
+            case HKQuantityType(.runningSpeed):
                 let meterPerSecondUnit = HKUnit.meter().unitDivided(by: HKUnit.second())
                 let speed = statistics.mostRecentQuantity()?.doubleValue(for: meterPerSecondUnit) ?? 0
                 self.calculatePaceFromSpeed(speed: speed)
-            case HKQuantityType.quantityType(forIdentifier: .stepCount):
-                let stepCountUnit = HKUnit.count()
-                self.stepCount = statistics.averageQuantity()?.doubleValue(for: stepCountUnit) ?? 0
-                let duration = self.builder?.elapsedTime ?? 0
-                if duration != 0 {
-                    self.cadence = self.stepCount/duration
-                }
+            case HKQuantityType(.cyclingCadence):
+                let cadenceUnit = HKUnit(from: "count/min")
+                self.cadence = statistics.averageQuantity()?.doubleValue(for: cadenceUnit) ?? 0
             default:
                 return
             }
