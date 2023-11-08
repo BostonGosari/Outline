@@ -17,59 +17,57 @@ struct ShareMainView: View {
     let runningData: ShareModel
     
     var body: some View {
-        NavigationView {
-            ZStack {
-                Color.gray900
-                    .ignoresSafeArea()
+        ZStack {
+            Color.gray900
+                .ignoresSafeArea()
+            
+            TabView(selection: $viewModel.currentPage) {
+                CustomShareView(viewModel: viewModel)
+                    .tag(0)
+                ImageShareView(viewModel: viewModel)
+                    .tag(1)
+            }
+            .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+            
+            HStack(spacing: 0) {
+                Button {
+                    viewModel.tapSaveButton = true
+                }  label: {
+                    Image(systemName: "square.and.arrow.down")
+                        .foregroundStyle(Color.black)
+                        .font(.system(size: 20, weight: .semibold))
+                        .padding(.vertical, 14)
+                        .padding(.horizontal, 19)
+                        .background {
+                            RoundedRectangle(cornerRadius: 15)
+                                .fill(Color.customWhite)
+                        }
+                }
+                .padding(.leading, 16)
                 
-                TabView(selection: $viewModel.currentPage) {
-                    CustomShareView(viewModel: viewModel)
-                        .tag(0)
-                    ImageShareView(viewModel: viewModel)
-                        .tag(1)
+                CompleteButton(text: "공유하기", isActive: true) {
+                    viewModel.tapShareButton = true
                 }
-                .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
-                
-                HStack(spacing: 0) {
-                    Button {
-                        viewModel.tapSaveButton = true
-                    }  label: {
-                        Image(systemName: "square.and.arrow.down")
-                            .foregroundStyle(Color.black)
-                            .font(.system(size: 20, weight: .semibold))
-                            .padding(.vertical, 14)
-                            .padding(.horizontal, 19)
-                            .background {
-                                RoundedRectangle(cornerRadius: 15)
-                                    .fill(Color.customWhite)
-                            }
-                    }
-                    .padding(.leading, 16)
-                    
-                    CompleteButton(text: "공유하기", isActive: true) {
-                        viewModel.tapShareButton = true
-                    }
-                    .padding(.leading, -8)
-                }
-                .frame(maxHeight: .infinity, alignment: .bottom)
-                .padding(.bottom, 42)
+                .padding(.leading, -8)
             }
-            .ignoresSafeArea()
-            .modifier(NavigationModifier(action: {
-                dismiss()
-            }))
-            .onAppear {
-                viewModel.runningData = runningData
+            .frame(maxHeight: .infinity, alignment: .bottom)
+            .padding(.bottom, 42)
+        }
+        .ignoresSafeArea()
+        .modifier(NavigationModifier(action: {
+            dismiss()
+        }))
+        .onAppear {
+            viewModel.runningData = runningData
+        }
+        .overlay {
+            if isShowPermissionSheet {
+                permissionSheet
             }
-            .overlay {
-                if isShowPermissionSheet {
-                    permissionSheet
-                }
-            }
-            .onChange(of: viewModel.permissionDenied) {
-                if viewModel.permissionDenied {
-                    isShowPermissionSheet = true
-                }
+        }
+        .onChange(of: viewModel.permissionDenied) {
+            if viewModel.permissionDenied {
+                isShowPermissionSheet = true
             }
         }
         .overlay {
