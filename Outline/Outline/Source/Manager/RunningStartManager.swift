@@ -95,10 +95,12 @@ class RunningStartManager: ObservableObject {
                 if let error = error {
                     print("Reverse geocoding error: \(error.localizedDescription)")
                 } else if let placemark = placemarks?.first {
+                    let area = placemark.administrativeArea ?? ""
                     let city = placemark.locality ?? ""
                     let town = placemark.subLocality ?? ""
                     
                     self.startCourse?.courseName = "\(city) \(town)런"
+                    self.startCourse?.regionDisplayName =  "\(area) \(city) \(town)"
                 }
             }
         }
