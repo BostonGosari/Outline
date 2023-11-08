@@ -1,11 +1,23 @@
 //
-//  File.swift
+//  ElapsedTimeView.swift
 //  Outline Watch App
 //
-//  Created by 김하은 on 10/19/23.
+//  Created by 김하은 on 10/17/23.
 //
 
-import Foundation
+import SwiftUI
+
+struct ElapsedTimeView: View {
+    @State private var timeFormatter = ElapsedTimeFormatter()
+    var elapsedTime: TimeInterval = 0
+
+    var body: some View {
+        Text(NSNumber(value: elapsedTime), formatter: timeFormatter)
+            .monospacedDigit()
+            .foregroundColor(Color.green)
+            .font(.system(size: 40, weight: .bold))
+    }
+}
 
 class ElapsedTimeFormatter: Formatter {
     let componentsFormatter: DateComponentsFormatter = {
@@ -33,4 +45,8 @@ class ElapsedTimeFormatter: Formatter {
 
         return formattedString
     }
+}
+
+#Preview {
+    ElapsedTimeView()
 }

@@ -166,7 +166,7 @@ class WatchWorkoutManager: NSObject, ObservableObject {
                 let speed = statistics.mostRecentQuantity()?.doubleValue(for: meterPerSecondUnit) ?? 0
                 self.calculatePaceFromSpeed(speed: speed)
             case HKQuantityType(.cyclingCadence):
-                let cadenceUnit = HKUnit(from: "count/min")
+                let cadenceUnit = HKUnit.count().unitDivided(by: .minute())
                 self.cadence = statistics.averageQuantity()?.doubleValue(for: cadenceUnit) ?? 0
             default:
                 return
