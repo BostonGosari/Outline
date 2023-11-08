@@ -27,6 +27,7 @@ struct CourseData: Codable {
     var distance: Double
     var coursePaths: [CLLocationCoordinate2D]
     var runningCourseId: String
+    var regionDisplayName: String
 }
 
 struct HealthData: Codable {
