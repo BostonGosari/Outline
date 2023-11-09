@@ -22,14 +22,14 @@ class RecordDetailViewModel: ObservableObject {
     var endTime: String = ""
     var date: String = ""
     var userLocations: [CLLocationCoordinate2D] = []
-    
+    var regionDisplayName: String = ""
     var shareData = ShareModel()
     
     func readData(runningRecord: CoreRunningRecord) {
         if let courseData = runningRecord.courseData,
            let healthData = runningRecord.healthData {
             courseName = courseData.courseName ?? ""
-            
+            regionDisplayName = courseData.regionDisplayName ?? ""
             if let startDate = healthData.startDate {
                 startTime = startDate.timeToString()
                 date = startDate.dateToString()
@@ -66,23 +66,6 @@ class RecordDetailViewModel: ObservableObject {
                 }
                 userLocations = ConvertCoordinateManager.convertToCLLocationCoordinates(datas)
             }
-            
-            let geocoder = CLGeocoder()
-            
-            if let first = userLocations.first {
-                let start = CLLocation(latitude: first.latitude, longitude: first.longitude)
-                geocoder.reverseGeocodeLocation(start) { placemarks, error in
-                    if let error = error {
-                        print("Reverse geocoding error: \(error.localizedDescription)")
-                    } else if let placemark = placemarks?.first {
-                        let area = placemark.administrativeArea ?? ""
-                        let city = placemark.locality ?? ""
-                        let town = placemark.subLocality ?? ""
-                        
-                        self.courseRegion = "\(area) \(city) \(town)"
-                    }
-                }
-            }
         }
     }
     
@@ -112,7 +95,7 @@ class RecordDetailViewModel: ObservableObject {
         shareData = ShareModel(
             courseName: courseName,
             runningDate: runningDate.dateToShareString(),
-            runningRegion: courseRegion,
+            regionDisplayName: regionDisplayName,
             distance: "\(runningData["킬로미터"] ?? "0")km",
             cal: "\(runningData["칼로리"] ?? "0")Kcal",
             pace: "\(runningData["평균 페이스"] ?? "-'--")",

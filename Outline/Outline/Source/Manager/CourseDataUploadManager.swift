@@ -34,7 +34,8 @@ struct CourseDataUploadView: View {
                         alley: .lots,
                         coursePaths: parsedCoordinates,
                         heading: 1.5,
-                        thumbnail: "https://firebasestorage.googleapis.com/v0/b/outline-5640c.appspot.com/o/courseImages%2FcourseImage_duckRun.jpg?alt=media&token=479a261d-0534-4e21-ac27-a9b2b27bfce7&_gl=1*4pvvwz*_ga*MTE2MDQ4NzcyNy4xNjk3MTE2NTg4*_ga_CW55HF8NVT*MTY5NzcxNDc1Ny4zMy4xLjE2OTc3MTUyOTEuNTEuMC4w"
+                        thumbnail: "https://firebasestorage.googleapis.com/v0/b/outline-5640c.appspot.com/o/courseImages%2FcourseImage_duckRun.jpg?alt=media&token=479a261d-0534-4e21-ac27-a9b2b27bfce7&_gl=1*4pvvwz*_ga*MTE2MDQ4NzcyNy4xNjk3MTE2NTg4*_ga_CW55HF8NVT*MTY5NzcxNDc1Ny4zMy4xLjE2OTc3MTUyOTEuNTEuMC4w",
+                        regionDisplayName: "포항시 북구 효자동"
                     )
                     coureDataUploadMananger.uploadData(course: gpsArtCourse)
                 }
