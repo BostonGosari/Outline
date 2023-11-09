@@ -23,7 +23,7 @@ struct ControlsView: View {
             HStack(spacing: 11) {
                 ControlButton(systemName: "stop.fill", foregroundColor: .white, backgroundColor: .white) {
                     if let builder = workoutManager.builder {
-                        if builder.elapsedTime > 30 {
+                        if builder.elapsedTime > 3 {
                             showConfirmationSheet = true
                         } else {
                             showEndWithoutSavingSheet = true
@@ -34,21 +34,23 @@ struct ControlsView: View {
                 ControlButton(
                     systemName: workoutManager.sessionState == .running ? "pause" : "play.fill",
                     foregroundColor: .customPrimary, backgroundColor: .customPrimary) {
-                        withAnimation {
-                            workoutManager.sessionState == .running ? workoutManager.session?.pause() : workoutManager.session?.resume()
-                            print(workoutManager.sessionState.rawValue.description)
-                            print(workoutManager.session?.description)
-                            buttonAnimation.toggle()
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                                dataAnimation.toggle()
-                            }
-                        }
+                        workoutManager.toggleWorkout()
                     }
             }
             .padding(.top, buttonAnimation ? 20 : WKInterfaceDevice.current().screenBounds.height * 0.2)
             .padding(.bottom, workoutManager.sessionState == .running ? 0 : 30)
+            .onChange(of: workoutManager.sessionState) { _, newValue in
+                if newValue != .ended {
+                    withAnimation {
+                        buttonAnimation.toggle()
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                            dataAnimation.toggle()
+                        }
+                    }
+                }
+            }
             
-            if workoutManager.sessionState != .running {
+            if workoutManager.sessionState == .paused {
                 LazyVGrid(columns: Array(repeating: GridItem(), count: 2), spacing: 12) {
                     workoutDataItem(value: "\((workoutManager.distance/1000).formatted(.number.precision(.fractionLength(2))))", label: "킬로미터")
                     workoutDataItem(value: workoutManager.averagePace.formattedAveragePace(),
@@ -118,10 +120,8 @@ extension ControlsView {
                 }
                 .buttonStyle(.plain)
                 Button {
-                    print(workoutManager.sessionState.rawValue.description)
-                    print(workoutManager.session?.description)
+                    print(workoutManager.session ?? "error")
                     showConfirmationSheet = false
-                    sendDataToPhone()
                     workoutManager.session?.stopActivity(with: .now)
                 } label: {
                     Text("종료하기")
@@ -174,11 +174,9 @@ extension ControlsView {
                 }
                 .buttonStyle(.plain)
                 Button {
-                    print(workoutManager.sessionState.rawValue.description)
-                    print(workoutManager.session?.description)
+                    print(workoutManager.session ?? "")
                     showEndWithoutSavingSheet = false
                     watchRunningManager.startRunning = false
-                    workoutManager.session?.stopActivity(with: .now)
                     watchConnectivityManager.sendRunningSessionStateToPhone(false)
                 } label: {
                     Text("종료하기")

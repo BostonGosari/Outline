@@ -16,6 +16,9 @@ struct HomeTabView: View {
     @State private var selectedTab: Tab = .GPSArtRunning
     @State private var showDetailView = false
     @State private var showCustomSheet = false
+    
+    @State private var showMirroringView = false
+    
     var body: some View {
         ZStack {
             NavigationStack {
@@ -76,6 +79,18 @@ struct HomeTabView: View {
             } else {
                 showCustomSheet = false
             }
+        }
+        
+        // for test
+        .sheet(isPresented: $showMirroringView) {
+            MirroringView()
+                .ignoresSafeArea()
+        }
+        .overlay {
+            Button("mirroringView") {
+                showMirroringView.toggle()
+            }
+            .buttonStyle(.borderedProminent)
         }
     }
     

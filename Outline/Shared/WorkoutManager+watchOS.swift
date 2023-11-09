@@ -9,8 +9,6 @@ import Foundation
 import os
 import HealthKit
 
-// MARK: - Workout session management
-//
 extension WorkoutManager {
     func requestAuthorization() {
         Task {
@@ -28,11 +26,29 @@ extension WorkoutManager {
         session?.delegate = self
         builder?.delegate = self
         builder?.dataSource = HKLiveWorkoutDataSource(healthStore: healthStore, workoutConfiguration: workoutConfiguration)
-
+        
         try await session?.startMirroringToCompanionDevice()
         let startDate = Date()
         session?.startActivity(with: startDate)
         try await builder?.beginCollection(at: startDate)
+        print(session ?? "error")
+    }
+    
+    func toggleWorkout() {
+        if session?.state == .running {
+            session?.pause()
+            print("paused")
+        } else if session?.state == .paused {
+            session?.resume()
+            print("resumed")
+        }
+        
+        print(session ?? "error")
+    }
+    
+    func endWorkout() {
+        session?.end()
+        print("end")
     }
     
     func handleReceivedData(_ data: Data) throws {
@@ -59,7 +75,7 @@ extension WorkoutManager: HKLiveWorkoutBuilderDelegate {
                 Logger.shared.log("Encoded data is empty")
                 return
             }
-
+            
             await sendData(archivedData)
         }
     }

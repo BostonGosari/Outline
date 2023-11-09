@@ -12,10 +12,7 @@ struct WatchTabView: View {
     @Environment(\.isLuminanceReduced) var isLuminanceReduced
     @StateObject var watchRunningManager = WatchRunningManager.shared
     @State private var selection: Tab = .metrics
-    
-    @State private var mapWatchView = MapWatchView()
-    @State private var isMapLoaded = false
-        
+            
     enum Tab {
         case controls, map, metrics
     }
@@ -30,7 +27,6 @@ struct WatchTabView: View {
                 MetricsView()
                     .tag(Tab.metrics)
             }
-            .tabViewStyle(PageTabViewStyle(indexDisplayMode: isLuminanceReduced ? .never : .automatic))
             .onChange(of: workoutManager.sessionState) { _, newValue in
                 withAnimation {
                     if newValue == .running {

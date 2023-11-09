@@ -14,17 +14,7 @@ struct MapWatchView: View {
     
     var body: some View {
         Map(position: $position, interactionModes: .zoom) {
-            UserAnnotation(anchor: .center) { userlocation in
-                ZStack {
-                    Circle().foregroundStyle(.white).frame(width: 22)
-                    Circle().foregroundStyle(.customPrimary).frame(width: 17)
-                }
-                .onChange(of: userlocation.location) { _, userlocation in
-                    if let user = userlocation {
-                        watchRunningManager.userLocations.append(user.coordinate)
-                    }
-                }
-            }
+            UserAnnotation()
             MapPolyline(coordinates: ConvertCoordinateManager.convertToCLLocationCoordinates(watchRunningManager.startCourse.coursePaths))
                 .stroke(.white.opacity(0.5), lineWidth: 8)
             MapPolyline(coordinates: watchRunningManager.userLocations)
@@ -32,6 +22,11 @@ struct MapWatchView: View {
         }
         .mapControlVisibility(.hidden)
         .tint(.customPrimary)
+        .onChange(of: CLLocationManager().location) { _, userlocation in
+            if let user = userlocation {
+                watchRunningManager.userLocations.append(user.coordinate)
+            }
+        }
         .navigationTitle {
             Text(watchRunningManager.runningTitle)
                 .foregroundStyle(.customPrimary)

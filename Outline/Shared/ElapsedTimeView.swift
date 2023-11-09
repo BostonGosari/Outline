@@ -14,8 +14,8 @@ struct ElapsedTimeView: View {
     var body: some View {
         Text(NSNumber(value: elapsedTime), formatter: timeFormatter)
             .monospacedDigit()
-            .foregroundStyle(.customPrimary)
             .font(.system(size: 40, weight: .bold))
+            .foregroundStyle(.customPrimary)
     }
 }
 

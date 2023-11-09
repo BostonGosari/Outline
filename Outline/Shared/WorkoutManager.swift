@@ -90,7 +90,7 @@ class WorkoutManager: NSObject, ObservableObject {
             finishedWorkout = try await builder.finishWorkout()
             session?.end()
         } catch {
-            Logger.shared.log("Failed to end workout: \(error))")
+            print("error to end workout")
             return
         }
         workout = finishedWorkout
@@ -179,35 +179,29 @@ extension WorkoutManager {
 }
 
 extension WorkoutManager: HKWorkoutSessionDelegate {
-    nonisolated func workoutSession(_ workoutSession: HKWorkoutSession,
-                                    didChangeTo toState: HKWorkoutSessionState,
-                                    from fromState: HKWorkoutSessionState,
-                                    date: Date) {
-        Logger.shared.log("Session state changed from \(fromState.rawValue) to \(toState.rawValue)")
-        let sessionSateChange = SessionStateChange(newState: toState, date: date)
-        asynStreamTuple.continuation.yield(sessionSateChange)
+    nonisolated func workoutSession(_ workoutSession: HKWorkoutSession, didChangeTo toState: HKWorkoutSessionState, from fromState: HKWorkoutSessionState, date: Date) {
+        DispatchQueue.main.async {
+            let sessionSateChange = SessionStateChange(newState: toState, date: date)
+            self.asynStreamTuple.continuation.yield(sessionSateChange)
+        }
     }
         
-    nonisolated func workoutSession(_ workoutSession: HKWorkoutSession,
-                                    didFailWithError error: Error) {
-        Logger.shared.log("\(#function): \(error)")
+    nonisolated func workoutSession(_ workoutSession: HKWorkoutSession, didFailWithError error: Error) {
+        print("workout session error")
     }
     
-    nonisolated func workoutSession(_ workoutSession: HKWorkoutSession,
-                                    didDisconnectFromRemoteDeviceWithError error: Error?) {
-        Logger.shared.log("\(#function): \(error)")
+    nonisolated func workoutSession(_ workoutSession: HKWorkoutSession, didDisconnectFromRemoteDeviceWithError error: Error?) {
+        print("error to connect remote device")
     }
     
-    nonisolated func workoutSession(_ workoutSession: HKWorkoutSession,
-                                    didReceiveDataFromRemoteWorkoutSession data: [Data]) {
-        Logger.shared.log("\(#function): \(data.debugDescription)")
+    nonisolated func workoutSession(_ workoutSession: HKWorkoutSession, didReceiveDataFromRemoteWorkoutSession data: [Data]) {
         Task { @MainActor in
             do {
                 for anElement in data {
                     try handleReceivedData(anElement)
                 }
             } catch {
-                Logger.shared.log("Failed to handle received data: \(error))")
+                print("error to handle received data")
             }
         }
     }

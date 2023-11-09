@@ -33,8 +33,6 @@ struct CountDownView: View {
                     }
                     .onDisappear {
                         startWorkout()
-                        print(workoutManager.sessionState.rawValue.description)
-                        print(workoutManager.session?.description)
                     }
             } else {
                 WatchTabView()
@@ -49,8 +47,7 @@ struct CountDownView: View {
                 configuration.activityType = .running
                 configuration.locationType = .outdoor
                 try await workoutManager.startWorkout(workoutConfiguration: configuration)
-            } catch {
-                Logger.shared.log("Failed to start workout \(error))")
+                print("start")
             }
         }
     }

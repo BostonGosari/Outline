@@ -14,14 +14,14 @@ import SwiftUI
 @main
 struct OutlineApp: App {
     let persistenceController = PersistenceController.shared
-
+    
     init() {
         FirebaseApp.configure()
         guard let kakaoAPIKey = Bundle.main.object(forInfoDictionaryKey: "KakaoAPIKey") as? String else { return }
-
+        
         KakaoSDK.initSDK(appKey: kakaoAPIKey)
     }
-  
+    
     var body: some Scene {
         WindowGroup {
             ContentView()

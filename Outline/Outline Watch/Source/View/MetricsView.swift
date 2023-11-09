@@ -15,7 +15,7 @@ struct MetricsView: View {
     var body: some View {
         TimelineView(
             MetricsTimelineSchedule(from: workoutManager.session?.startDate ?? Date(),
-                                    isPaused: workoutManager.sessionState == .paused)) { context in
+                                    isPaused: workoutManager.session?.state == .paused)) { context in
             VStack(alignment: .center) {
                 Spacer()
                 ElapsedTimeView(elapsedTime: elapsedTime(with: context.date))

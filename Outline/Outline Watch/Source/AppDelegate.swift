@@ -17,9 +17,9 @@ class AppDelegate: NSObject, WKApplicationDelegate {
             do {
                 WorkoutManager.shared.resetWorkout()
                 try await WorkoutManager.shared.startWorkout(workoutConfiguration: workoutConfiguration)
-                Logger.shared.log("Successfully started workout")
+                print("Successfully started workout")
             } catch {
-                Logger.shared.log("Failed started workout")
+                print("Failed started workout")
             }
         }
     }
