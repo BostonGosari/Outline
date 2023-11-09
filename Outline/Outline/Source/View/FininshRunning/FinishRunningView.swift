@@ -38,7 +38,7 @@ struct FinishRunningView: View {
 
                         VStack(spacing: 0) {
                             Text("\(viewModel.date)")
-                                .font(.date)
+                                .font(.customDate)
                                 .foregroundStyle(Color.white)
                                 .frame(maxWidth: .infinity, alignment: .center)
                                 .padding(.top, 64)
@@ -85,7 +85,7 @@ struct FinishRunningView: View {
                         Text("홈으로 돌아가기")
                             .underline(pattern: .solid)
                             .foregroundStyle(Color.gray300)
-                            .font(.subBody)
+                            .font(.customSubbody)
                     })
                     .padding(.bottom, 8)
                 }
@@ -118,12 +118,12 @@ extension FinishRunningView {
     private var courseInfo: some View {
         VStack(alignment: .leading, spacing: 0) {
             Text("\(viewModel.courseName)")
-                .font(.headline)
+                .font(.customHeadline)
             HStack {
                 Image(systemName: "calendar")
                 Text("\(viewModel.startTime)-\(viewModel.endTime)")
             }
-            .font(.subBody)
+            .font(.customSubbody)
             .foregroundStyle(Color.gray200)
             .padding(.top, 8)
             HStack {
@@ -133,7 +133,7 @@ extension FinishRunningView {
                 Text("\(viewModel.courseRegion)")
                     .foregroundStyle(Color.gray200)
             }
-            .font(.subBody)
+            .font(.customSubbody)
             .padding(.top, 4)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
@@ -148,10 +148,10 @@ extension FinishRunningView {
             ForEach(viewModel.runningData, id: \.self) { runningData in
                 VStack(alignment: .center) {
                     Text("\(runningData.data)")
-                        .font(.title2)
+                        .font(.customTitle2)
                         .padding(.bottom, 4)
                     Text(runningData.text)
-                        .font(.subBody)
+                        .font(.customSubbody)
                         .foregroundStyle(Color.gray500)
                 }
                 .padding(.bottom, 16)
@@ -162,7 +162,7 @@ extension FinishRunningView {
     private var updateNameSheet: some View {
         VStack(alignment: .leading, spacing: 0) {
             Text("코스 이름 수정하기")
-                .font(.subtitle)
+                .font(.customSubtitle)
                 .padding(.top, 35)
                 .padding(.bottom, 48)
                 .padding(.horizontal, 16)
