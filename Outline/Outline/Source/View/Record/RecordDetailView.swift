@@ -169,7 +169,7 @@ extension RecordDetailView {
                 Image(systemName: "mappin")
                     .foregroundStyle(Color.gray400)
                 
-                Text("\(viewModel.courseRegion)")
+                Text("\(viewModel.regionDisplayName)")
                     .foregroundStyle(Color.gray200)
             }
             .font(.customSubbody)

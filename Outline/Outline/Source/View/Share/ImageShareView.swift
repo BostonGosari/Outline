@@ -212,7 +212,7 @@ extension ImageShareView {
         VStack(alignment: .leading) {
             Text(viewModel.runningData.courseName)
                 .font(.customShareTitle)
-            Text(viewModel.runningData.runningRegion)
+            Text(viewModel.runningData.regionDisplayName)
                 .font(.customTab)
                 .padding(.bottom, 32)
             
