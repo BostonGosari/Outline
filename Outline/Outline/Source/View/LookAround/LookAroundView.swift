@@ -16,10 +16,10 @@ struct LookAroundView: View {
             Image("lookAroundImage")
                 .offset(x: 22, y: 16)
             Text("앗! 회원가입이 필요해요.")
-                .font(.title2)
+                .font(.customTitle2)
                 .padding(.bottom, 8)
             Text("OUTLINE에 가입하면 내가 그린\n러닝 기록을 확인할 수 있어요!")
-                .font(.subBody)
+                .font(.customSubbody)
                 .padding(.bottom, 32)
                 .multilineTextAlignment(.center)
                 .foregroundStyle(.gray300)
@@ -41,11 +41,11 @@ struct LookAroundModalView: View {
     var body: some View {
         VStack(spacing: 0) {
             Text("앗! 회원가입이 필요해요.")
-                .font(.title2)
+                .font(.customTitle2)
                 .padding(.top, 48)
                 .padding(.bottom, 8)
             Text("OUTLINE에 가입하면 내가 그린\n러닝 기록을 확인할 수 있어요!")
-                .font(.subBody)
+                .font(.customSubbody)
                 .multilineTextAlignment(.center)
                 .foregroundStyle(.gray300)
                 .padding(.bottom, 8)
@@ -64,7 +64,7 @@ struct LookAroundModalView: View {
                 Text("계속 둘러보기")
                     .frame(height: 55)
                     .foregroundStyle(.customWhite)
-                    .font(.button)
+                    .font(.customButton)
             }
             .padding(.top, 8)
             Spacer()
@@ -88,12 +88,12 @@ struct LookAroundPopupView: View {
                 HStack {
                     Text("OUTLINE 둘러보는 중")
                         .foregroundStyle(Color.white)
-                        .font(.subBody)
+                        .font(.customSubbody)
                     Spacer()
                     Group {
                         Text("회원가입")
                             .foregroundStyle(Color.white)
-                            .font(.subBody)
+                            .font(.customSubbody)
                         Image(systemName: "arrow.right.circle")
                             .foregroundStyle(Color.customPrimary)
                     }

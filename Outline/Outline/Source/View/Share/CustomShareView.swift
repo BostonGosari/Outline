@@ -132,10 +132,10 @@ extension CustomShareView {
     private var runningInfo: some View {
         VStack(alignment: .leading, spacing: 0) {
             Text(viewModel.runningData.courseName)
-                .font(.headline)
+                .font(.customHeadline)
                 .foregroundStyle(Color.customPrimary)
             Text(viewModel.runningData.runningDate)
-                .font(.body)
+                .font(.customBody)
             
             Spacer()
             
@@ -143,20 +143,20 @@ extension CustomShareView {
                 VStack(alignment: .leading) {
                     Text(viewModel.runningData.distance)
                         .opacity(isShowDistance ? 1 : 0)
-                        .font(.body)
+                        .font(.customBody)
                     Text(viewModel.runningData.bpm)
                         .opacity(isShowBPM ? 1 : 0)
-                        .font(.body)
+                        .font(.customBody)
                 }
                 Spacer()
                 
                 VStack(alignment: .trailing) {
                     Text(viewModel.runningData.pace)
                         .opacity(isShowPace ? 1 : 0)
-                        .font(.body)
+                        .font(.customBody)
                     Text(viewModel.runningData.cal)
                         .opacity(isShowCal ? 1 : 0)
-                        .font(.body)
+                        .font(.customBody)
                 }
             }
         }
@@ -210,7 +210,7 @@ struct TagButton: View {
             self.action()
         }  label: {
             Text(text)
-                .font(.tag2)
+                .font(.customTag2)
                 .foregroundStyle(isShow ? Color.customBlack : Color.customWhite)
                 .padding(.horizontal, 16)
                 .padding(.vertical, 8)
