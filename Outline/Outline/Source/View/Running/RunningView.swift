@@ -42,9 +42,9 @@ struct RunningView: View {
                 }
                 VStack(spacing: 10) {
                     Text("자유코스로 변경할까요?")
-                        .font(.title2)
+                        .font(.customTitle2)
                     Text("앗! 현재 루트와 멀리 떨어져 있어요.")
-                        .font(.subBody)
+                        .font(.customSubbody)
                         .foregroundColor(.gray300)
                     Image("AnotherLocation")
                         .resizable()
@@ -55,7 +55,7 @@ struct RunningView: View {
                         checkRunning = false
                     } label: {
                         Text("자유코스로 변경하기")
-                            .font(.button)
+                            .font(.customButton)
                             .foregroundStyle(Color.customBlack)
                             .padding()
                             .frame(maxWidth: .infinity)

@@ -170,12 +170,12 @@ extension ImageShareView {
     private var selectShareData: some View {
         VStack(alignment: .leading, spacing: 0) {
             Text(viewModel.runningData.distance)
-                .font(.shareData)
+                .font(.customShareData)
                 .fontWeight(.bold)
                 .padding(.bottom, 17)
             
             Text(viewModel.runningData.pace)
-                .font(.shareData)
+                .font(.customShareData)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
         .padding(.leading, 16)
@@ -211,9 +211,9 @@ extension ImageShareView {
     private var blackShareData: some View {
         VStack(alignment: .leading) {
             Text(viewModel.runningData.courseName)
-                .font(.shareTitle)
+                .font(.customShareTitle)
             Text(viewModel.runningData.runningRegion)
-                .font(.tab)
+                .font(.customTab)
                 .padding(.bottom, 32)
             
             HStack {
@@ -234,7 +234,7 @@ extension ImageShareView {
                     Text(viewModel.runningData.time)
                 }
             }
-            .font(.tab)
+            .font(.customTab)
             .padding(.trailing, 5)
         }
     }

@@ -33,15 +33,15 @@ struct ProfileHealthInfoView: View {
         VStack(alignment: .leading) {
             VStack(alignment: .leading) {
                 Text("간단한 신체정보를 알려주세요.")
-                    .font(.title2)
+                    .font(.customTitle2)
                     .padding(.bottom, 20)
                     .padding(.top, 40)
                 Text("정확한 러닝 정보를 받으실 수 있어요.")
-                    .font(.tag)
+                    .font(.customTag)
                     .foregroundStyle(Color.gray300)
                     .padding(.bottom, 0)
                 Text("이 정보는 타인에게 공유되지 않아요.")
-                    .font(.tag)
+                    .font(.customTag)
                     .foregroundStyle(Color.gray300)
             }
             .padding(.horizontal, 16)

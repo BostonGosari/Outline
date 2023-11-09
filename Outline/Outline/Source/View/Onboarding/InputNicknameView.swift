@@ -19,14 +19,14 @@ struct InputNicknameView: View {
                 
                 VStack(alignment: .leading, spacing: 0) {
                     Text("안녕하세요!\n어떻게 불러드릴까요?")
-                        .font(.title)
+                        .font(.customTitle)
                         .fontWeight(.semibold)
                         .foregroundStyle(Color.customWhite)
                         .padding(.top, 28)
                         .padding(.horizontal, 16)
                     
                     Text("닉네임")
-                        .font(.subBody)
+                        .font(.customSubbody)
                         .padding(.top, 44)
                         .padding(.horizontal, 16)
                     
@@ -94,7 +94,7 @@ extension InputNicknameView {
                 .foregroundStyle(isTrue ? Color.customGreen : Color.customRed)
                 .padding(.trailing, 14)
             Text(text)
-                .font(.caption)
+                .font(.customCaption)
         }
     }
     
