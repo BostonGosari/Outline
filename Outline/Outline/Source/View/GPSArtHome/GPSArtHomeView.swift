@@ -174,7 +174,7 @@ extension GPSArtHomeView {
                 .foregroundStyle(Color.customPrimary)
                 .font(Font.system(size: 40))
             Text("예상치 못한 문제가 발생되었어요.")
-                .font(.date)
+                .font(.customDate)
                 .foregroundStyle(Color.customWhite)
                 .padding(.top, 16)
                 .padding(.bottom, 40)
@@ -184,10 +184,10 @@ extension GPSArtHomeView {
             } label: {
                 HStack {
                     Text("다시 시도하기")
-                        .font(.caption)
+                        .font(.customCaption)
                         .foregroundStyle(Color.customPrimary)
                     Image(systemName: "chevron.forward")
-                        .font(.caption)
+                        .font(.customCaption)
                         .foregroundStyle(Color.customPrimary)
                 }
                 

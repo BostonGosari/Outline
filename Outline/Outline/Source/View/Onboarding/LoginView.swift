@@ -36,7 +36,7 @@ struct LoginView: View {
                                 .scaledToFit()
                                 .padding(.trailing, 37)
                             Text("애플아이디로 계속하기")
-                                .font(.subBody)
+                                .font(.customSubbody)
                                 .foregroundColor(.white)
                                 .frame(height: 60)
                             Spacer()
@@ -59,7 +59,7 @@ struct LoginView: View {
                                 .frame(width: 24, height: 29)
                                 .padding(.trailing, 37)
                             Text("카카오아이디로 계속하기")
-                                .font(.subBody)
+                                .font(.customSubbody)
                                 .foregroundColor(.white)
                                 .frame(height: 60)
                             Spacer()
@@ -96,7 +96,7 @@ struct LoginView: View {
                             .foregroundStyle(Color.gray300)
                         Text("또는")
                             .foregroundStyle(Color.gray300)
-                            .font(.caption)
+                            .font(.customCaption)
                         Rectangle()
                             .frame(maxWidth: .infinity)
                             .frame(height: 1)
@@ -108,7 +108,7 @@ struct LoginView: View {
                     } label: {
                         Text("둘러보기")
                             .foregroundStyle(.white)
-                            .font(.button)
+                            .font(.customButton)
                             .fontWeight(.medium)
                     }
                 }

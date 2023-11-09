@@ -48,7 +48,7 @@ struct TabBarButton: View {
             VStack(spacing: 5) {
                 TabBarIcon(selectedTab: $selectedTab, item: item)
                 Text(item.text)
-                    .font(.caption2)
+                    .font(.customTab)
                     .foregroundColor(selectedTab == item.tab ? .customPrimary : .gray400)
             }
         }

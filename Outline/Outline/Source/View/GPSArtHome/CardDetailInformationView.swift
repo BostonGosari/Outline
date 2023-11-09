@@ -17,7 +17,7 @@ struct CardDetailInformationView: View {
         VStack(alignment: .leading, spacing: 24) {
             HStack {
                 Text("#\(stringForCourseLevel(selectedCourse.course.level))")
-                    .font(.tag)
+                    .font(.customTag)
                     .frame(width: capsuleWidth, height: capsuleHeight)
                     .background {
                         Capsule()
@@ -25,14 +25,14 @@ struct CardDetailInformationView: View {
                     }
                     .foregroundColor(.customPrimary)
                 Text("#\(selectedCourse.course.courseLength, specifier: "%.0f")km")
-                    .font(.tag)
+                    .font(.customTag)
                     .frame(width: capsuleWidth, height: capsuleHeight)
                     .background {
                         Capsule()
                             .stroke()
                     }
                 Text("#\(selectedCourse.course.courseDuration.formatDuration())")
-                    .font(.tag)
+                    .font(.customTag)
                     .frame(width: capsuleWidth, height: capsuleHeight)
                     .background {
                         Capsule()
@@ -40,13 +40,13 @@ struct CardDetailInformationView: View {
                     }
             }
             .fontWeight(.semibold)
-            .font(.tag)
+            .font(.customTag)
             
             VStack(alignment: .leading, spacing: 8) {
                 Text("\(selectedCourse.course.locationInfo.administrativeArea) \(selectedCourse.course.locationInfo.locality) \(selectedCourse.course.locationInfo.subLocality)")
-                    .font(.body)
+                    .font(.customBody)
                 Text("\(selectedCourse.course.description)")
-                    .font(.subBody)
+                    .font(.customSubbody)
                     .foregroundStyle(.gray)
             }
             .padding(.bottom, -8)
@@ -54,7 +54,7 @@ struct CardDetailInformationView: View {
             Divider()
             
             Text("경로 정보")
-                .font(.subtitle)
+                .font(.customSubtitle)
                 .fontWeight(.semibold)
             VStack(alignment: .leading, spacing: 17) {
                 HStack {
@@ -62,19 +62,19 @@ struct CardDetailInformationView: View {
                         Image(systemName: "location")
                             .font(.system(size: 20))
                         Text("거리")
-                            .font(.tag)
+                            .font(.customTag)
                             .fontWeight(.semibold)
                     }
                     .foregroundColor(.customPrimary)
                     Text("\(selectedCourse.course.courseLength, specifier: "%.0f")km")
-                        .font(.subBody)
+                        .font(.customSubbody)
                 }
                 HStack {
                     HStack {
                         Image(systemName: "clock")
                             .font(.system(size: 20))
                         Text("예상 소요 시간")
-                            .font(.tag)
+                            .font(.customTag)
                             .fontWeight(.semibold)
                     }
                     .foregroundColor(.customPrimary)
@@ -85,7 +85,7 @@ struct CardDetailInformationView: View {
                         Image(systemName: "arrow.triangle.turn.up.right.diamond")
                             .font(.system(size: 20))
                         Text("골목길")
-                            .font(.tag)
+                            .font(.customTag)
                             .fontWeight(.semibold)
                     }
                     .foregroundColor(.customPrimary)
@@ -98,7 +98,7 @@ struct CardDetailInformationView: View {
             Divider()
             
             Text("경로 지도")
-                .font(.subtitle)
+                .font(.customSubtitle)
                 .fontWeight(.semibold)
             VStack(alignment: .leading, spacing: 8) {
                 NavigationLink {
@@ -119,7 +119,7 @@ struct CardDetailInformationView: View {
                 }
                 .buttonStyle(.plain)
                 Text("경로 제작 \(selectedCourse.course.producer)님")
-                    .font(.subBody)
+                    .font(.customSubbody)
                     .foregroundStyle(.gray600)
             }
         }

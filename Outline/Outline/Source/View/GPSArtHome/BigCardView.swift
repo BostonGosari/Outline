@@ -72,7 +72,7 @@ struct BigCardView: View {
     private var courseInformation: some View {
         VStack(alignment: .leading, spacing: 0) {
             Text("\(course.course.courseName)")
-                .font(.headline)
+                .font(.customHeadline)
                 .bold()
                 .padding(.bottom, 8)
                 .padding(.top, 47)
@@ -80,11 +80,11 @@ struct BigCardView: View {
                 Image(systemName: "mappin")
                 Text("\(course.course.locationInfo.locality) \(course.course.locationInfo.subLocality) • 내 위치에서 \(course.distance/1000, specifier: "%.1f")km")
             }
-            .font(.caption)
+            .font(.customCaption)
             .padding(.bottom, 16)
             HStack {
                 Text("#\(course.course.courseLength, specifier: "%.0f")km")
-                    .font(.tag2)
+                    .font(.customTag2)
                     .foregroundColor(Color.customPrimary)
                     .frame(width: capsuleWidth, height: capsuleHeight)
                     .background {
@@ -94,7 +94,7 @@ struct BigCardView: View {
                     }
                 Text("#\(course.course.courseDuration.formatDurationInKorean())")
                     .frame(width: capsuleWidth, height: capsuleHeight)
-                    .font(.tag2)
+                    .font(.customTag2)
                     .background {
                         Capsule()
                             .stroke()

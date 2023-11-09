@@ -19,7 +19,7 @@ struct OnboardingHealthAuthView: View {
                     .scaledToFit()
                     .frame(width: 120, height: 120)
                 Text("APPLE 건강")
-                    .font(.title2)
+                    .font(.customTitle2)
                 Spacer()
                     .frame(height: 300)
                 

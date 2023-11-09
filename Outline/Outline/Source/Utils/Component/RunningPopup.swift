@@ -20,7 +20,7 @@ struct RunningPopup: View {
             .overlay {
                 Text(text)
                     .foregroundStyle(Color.white)
-                    .font(.subBody)
+                    .font(.customSubbody)
             }
     }
 }
