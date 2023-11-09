@@ -86,12 +86,12 @@ struct RecordDetailView: View {
                             .overlay {
                                 Text("자랑하기")
                                     .foregroundStyle(Color.customPrimary)
-                                    .font(.button)
+                                    .font(.customButton)
                             }
                     }
                     
                     Text(viewModel.runningData["시간"] ?? "0:0.0")
-                        .font(.timeTitle)
+                        .font(.customTimeTitle)
                         .foregroundColor(.customPrimary)
                         .monospacedDigit()
                         .minimumScaleFactor(0.5)
@@ -143,7 +143,7 @@ struct RecordDetailView: View {
                     isShowAlert = true
                 } label: {
                     Image(systemName: "trash")
-                        .font(.subtitle)
+                        .font(.customSubtitle)
                         .foregroundStyle(Color.customPrimary)
                 }
             }
@@ -155,14 +155,14 @@ extension RecordDetailView {
     private var courseInfo: some View {
         VStack(alignment: .leading, spacing: 0) {
             Text("\(viewModel.courseName)")
-                .font(.headline)
+                .font(.customHeadline)
                 .padding(.bottom, 8)
             HStack {
                 Image(systemName: "calendar")
                 Text("\(viewModel.startTime)-\(viewModel.endTime)")
             }
             .padding(.bottom, 4)
-            .font(.subBody)
+            .font(.customSubbody)
             .foregroundStyle(Color.gray200)
        
             HStack {
@@ -172,7 +172,7 @@ extension RecordDetailView {
                 Text("\(viewModel.regionDisplayName)")
                     .foregroundStyle(Color.gray200)
             }
-            .font(.subBody)
+            .font(.customSubbody)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(.top, 16)
@@ -185,9 +185,9 @@ extension RecordDetailView {
                 VStack(alignment: .center, spacing: 4) {
                     if let data = viewModel.runningData[key] {
                         Text(data)
-                            .font(.headline)
+                            .font(.customHeadline)
                         Text(key)
-                            .font(.subBody)
+                            .font(.customSubbody)
                             .foregroundStyle(Color.gray500)
                     }
                 }
@@ -198,7 +198,7 @@ extension RecordDetailView {
     private var updateNameSheet: some View {
         VStack(alignment: .leading, spacing: 0) {
             Text("코스 이름 수정하기")
-                .font(.subtitle)
+                .font(.customSubtitle)
                 .padding(.top, 35)
                 .padding(.bottom, 48)
                 .padding(.horizontal, 16)

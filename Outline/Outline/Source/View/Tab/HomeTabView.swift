@@ -92,7 +92,7 @@ extension HomeTabView {
                 }
             VStack(spacing: 0) {
                 Text("Apple Watch로 러닝을\n추적하고 있어요")
-                    .font(.title2)
+                    .font(.customTitle2)
                     .padding(.top, 44)
                     .padding(.bottom, 20)
                     .foregroundStyle(Color.customWhite)
@@ -104,14 +104,14 @@ extension HomeTabView {
                 
                 Text("휴대폰에서 러닝을 시작하면 별개의\n새로운 러닝이 시작됩니다.")
                     .multilineTextAlignment(.center)
-                    .font(.subBody)
+                    .font(.customSubbody)
                     .padding(.bottom, 30)
                     .foregroundStyle(Color.gray400)
                 Button {
                     showCustomSheet.toggle()
                 } label: {
                     Text("완료")
-                        .font(.button)
+                        .font(.customButton)
                         .foregroundStyle(Color.customBlack)
                         .padding()
                         .frame(maxWidth: .infinity, maxHeight: 55)
