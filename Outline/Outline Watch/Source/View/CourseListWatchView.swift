@@ -42,7 +42,7 @@ struct CourseListWatchView: View {
                         .frame(maxWidth: .infinity)
                         .background(
                             RoundedRectangle(cornerRadius: 12, style: .continuous)
-                                .foregroundStyle(Color.first)
+                                .foregroundStyle(.customPrimary)
                         )
                     }
                     .buttonStyle(.plain)
@@ -80,7 +80,7 @@ struct CourseListWatchView: View {
                                     .stroke(style: StrokeStyle(lineWidth: 4, lineCap: .round, lineJoin: .round))
                                     .scaledToFit()
                                     .frame(height: 75)
-                                    .foregroundStyle(.first)
+                                    .foregroundStyle(.customPrimary)
                             }
                             .padding(.vertical, 16)
                             .padding(.horizontal, 8)
@@ -98,7 +98,7 @@ struct CourseListWatchView: View {
                             } label: {
                                 VStack {
                                     Image(systemName: "ellipsis.circle")
-                                        .foregroundStyle(.first, .clear)
+                                        .foregroundStyle(.customPrimary, .clear)
                                         .font(.system(size: 30))
                                         .bold()
                                         .padding(8)
@@ -106,7 +106,7 @@ struct CourseListWatchView: View {
                                 }
                                 .contentShape(Rectangle())
                             }
-                            .foregroundStyle(.first)
+                            .foregroundStyle(.customPrimary)
                             .buttonStyle(.plain)
                             .padding(.trailing, -4)
                         }
@@ -143,7 +143,7 @@ struct CourseListWatchView: View {
             Image(systemName: "location.circle")
                 .resizable()
                 .frame(width: 43, height: 43)
-                .foregroundStyle(Color.first)
+                .foregroundStyle(.customPrimary)
             Spacer()
             Text("OUTLINE iPhone을 실행해서\n위치 권한을 허용해주세요.")
                 .multilineTextAlignment(.center)
@@ -186,7 +186,7 @@ struct CourseListWatchView: View {
                         .padding()
                         .background(
                             RoundedRectangle(cornerRadius: 20, style: .continuous)
-                                .foregroundColor(Color.first)
+                                .foregroundStyle(.customPrimary)
                         )
                         .foregroundColor(.white)
                 }
@@ -209,7 +209,7 @@ struct CourseListWatchView: View {
             .overlay(alignment: .topLeading) {
                 Image(systemName: "map.circle")
                     .font(.system(size: 42))
-                    .foregroundColor(Color.first)
+                    .foregroundStyle(.customPrimary)
                     .padding(16)
                     .frame(width: 50, height: 50)
             }

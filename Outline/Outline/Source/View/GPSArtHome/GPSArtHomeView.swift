@@ -5,6 +5,7 @@
 //  Created by 김하은 on 10/15/23.
 //
 
+import CoreMotion
 import SwiftUI
 
 struct GPSArtHomeView: View {
@@ -19,6 +20,7 @@ struct GPSArtHomeView: View {
     @State private var loading = true
     @State private var selectedCourse: CourseWithDistance?
     @State private var showNetworkErrorView = false
+    @State private var degree = 0.0
     // 받아오는 변수
     @Binding var showDetailView: Bool
     @Namespace private var namespace
@@ -30,9 +32,9 @@ struct GPSArtHomeView: View {
     var body: some View {
         ZStack {
             if showNetworkErrorView {
-                 errorView
-             } else {
-                 ScrollView {
+                errorView
+            } else {
+                ScrollView {
                     Color.clear.frame(height: 0)
                         .onScrollViewOffsetChanged { offset in
                             scrollOffset = offset
@@ -115,10 +117,10 @@ struct GPSArtHomeView: View {
                     viewModel.getAllCoursesFromFirebase()
                     
                     DispatchQueue.main.asyncAfter(deadline: .now() + maxLoadingTime) {
-                             if loading {
-                                 showNetworkErrorView = true
-                             }
-                         }
+                        if loading {
+                            showNetworkErrorView = true
+                        }
+                    }
                 }
                 .refreshable {
                     viewModel.fetchRecommendedCourses()

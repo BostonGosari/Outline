@@ -40,7 +40,7 @@ struct SummaryView: View {
                         .trim(from: 0, to: progress)
                         .stroke(style: StrokeStyle(lineWidth: 8, lineCap: .round, lineJoin: .round))
                         .scaledToFit()
-                        .foregroundStyle(.first)
+                        .foregroundStyle(.customPrimary)
                         .frame(width: 120, height: 120)
                         .onAppear {
                             progress = 1.0
@@ -51,7 +51,7 @@ struct SummaryView: View {
                         .padding(.vertical)
                     Text(NSNumber(value: workoutManager.builder?.elapsedTime ?? 0), formatter: timeFormatter)
                         .id(topID)
-                        .foregroundColor(Color.first)
+                        .foregroundStyle(.customPrimary)
                         .font(.system(size: 40, weight: .bold))
                       
                     Text("총시간")

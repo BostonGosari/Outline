@@ -19,14 +19,14 @@ struct CourseDetailView: View {
         }
         .navigationTitle {
             Text(course.courseName)
-                .foregroundStyle(.first)
+                .foregroundStyle(.customPrimary)
         }
     }
     
     @ViewBuilder private func listBox(systemName: String, location: Placemark) -> some View {
         HStack {
             Image(systemName: systemName)
-                .foregroundStyle(.first)
+                .foregroundStyle(.customPrimary)
                 .padding(.horizontal, 5)
             Text("\(location.administrativeArea) \(location.locality) \(location.subLocality)")
         }
@@ -35,7 +35,7 @@ struct CourseDetailView: View {
     @ViewBuilder private func listBox(systemName: String, context: String) -> some View {
         HStack {
             Image(systemName: systemName)
-                .foregroundStyle(.first)
+                .foregroundStyle(.customPrimary)
                 .padding(.horizontal, 5)
             Text(context)
         }
@@ -44,7 +44,7 @@ struct CourseDetailView: View {
     @ViewBuilder private func listBox(systemName: String, alley: Alley) -> some View {
         HStack {
             Image(systemName: systemName)
-                .foregroundStyle(.first)
+                .foregroundStyle(.customPrimary)
                 .padding(.horizontal, 5)
             switch alley {
             case .few:

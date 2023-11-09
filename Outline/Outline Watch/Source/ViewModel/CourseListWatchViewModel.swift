@@ -48,10 +48,12 @@ class CourseListWatchViewModel: NSObject, CLLocationManagerDelegate, ObservableO
         ]
         
         healthStore.requestAuthorization(toShare: typesToShare, read: typesToRead) { success, _ in
-            if success {
-                self.isHealthAuthorized = true
-            } else {
-                self.isHealthAuthorized = false
+            DispatchQueue.main.async {
+                if success {
+                    self.isHealthAuthorized = true
+                } else {
+                    self.isHealthAuthorized = false
+                }
             }
         }
     }

@@ -54,7 +54,7 @@ struct MetricsView: View {
             .scenePadding()
             .navigationTitle {
                 Text(runningManager.runningTitle)
-                    .foregroundStyle(.first)
+                    .foregroundStyle(.customPrimary)
             }
             .navigationBarTitleDisplayMode(.inline)
         }

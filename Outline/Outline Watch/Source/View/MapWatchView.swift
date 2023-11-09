@@ -17,7 +17,7 @@ struct MapWatchView: View {
             UserAnnotation(anchor: .center) { userlocation in
                 ZStack {
                     Circle().foregroundStyle(.white).frame(width: 22)
-                    Circle().foregroundStyle(.first).frame(width: 17)
+                    Circle().foregroundStyle(.customPrimary).frame(width: 17)
                 }
                 .onChange(of: userlocation.location) { _, userlocation in
                     if let user = userlocation {
@@ -28,13 +28,13 @@ struct MapWatchView: View {
             MapPolyline(coordinates: ConvertCoordinateManager.convertToCLLocationCoordinates(watchRunningManager.startCourse.coursePaths))
                 .stroke(.white.opacity(0.5), lineWidth: 8)
             MapPolyline(coordinates: watchRunningManager.userLocations)
-                .stroke(.first, lineWidth: 8)
+                .stroke(.customPrimary, lineWidth: 8)
         }
         .mapControlVisibility(.hidden)
-        .tint(.first)
+        .tint(.customPrimary)
         .navigationTitle {
             Text(watchRunningManager.runningTitle)
-                .foregroundStyle(.first)
+                .foregroundStyle(.customPrimary)
         }
         .navigationBarTitleDisplayMode(.inline)
     }

@@ -102,6 +102,8 @@ extension WorkoutManager {
     func resetWorkout() {
         #if os(watchOS)
         builder = nil
+        #else
+        contextDate = nil
         #endif
         workout = nil
         session = nil

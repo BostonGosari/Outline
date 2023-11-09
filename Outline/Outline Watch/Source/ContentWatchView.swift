@@ -17,7 +17,7 @@ struct ContentWatchView: View {
     var body: some View {
         ZStack {
             CourseListWatchView()
-                .tint(.first)
+                .tint(.customPrimary)
             if runningManager.startRunning {
                 CountDownView()
                     .onChange(of: workoutManager.sessionState) { _, newValue in
@@ -29,6 +29,7 @@ struct ContentWatchView: View {
                         workoutManager.resetWorkout()
                     } content: {
                         SummaryView()
+                            .toolbar(.hidden, for: .navigationBar)
                     }
             }
         }

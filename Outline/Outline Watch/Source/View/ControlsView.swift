@@ -33,7 +33,7 @@ struct ControlsView: View {
 
                 ControlButton(
                     systemName: workoutManager.sessionState == .running ? "pause" : "play.fill",
-                    foregroundColor: .first, backgroundColor: .first) {
+                    foregroundColor: .customPrimary, backgroundColor: .customPrimary) {
                         withAnimation {
                             workoutManager.sessionState == .running ? workoutManager.session?.pause() : workoutManager.session?.resume()
                             print(workoutManager.sessionState.rawValue.description)
@@ -63,7 +63,7 @@ struct ControlsView: View {
         .scrollDisabled(workoutManager.sessionState == .running)
         .navigationTitle {
             Text(workoutManager.sessionState == .running ? watchRunningManager.runningTitle : "일시 정지됨")
-                .foregroundStyle(.first)
+                .foregroundStyle(.customPrimary)
         }
         .navigationBarTitleDisplayMode(.inline)
         .overlay {
@@ -130,7 +130,7 @@ extension ControlsView {
                         .padding()
                         .background(
                             RoundedRectangle(cornerRadius: 20, style: .continuous)
-                                .foregroundColor(Color.first)
+                                .foregroundStyle(.customPrimary)
                         )
                         .foregroundColor(.black)
                 }
@@ -187,7 +187,7 @@ extension ControlsView {
                         .padding()
                         .background(
                             RoundedRectangle(cornerRadius: 20, style: .continuous)
-                                .foregroundColor(Color.first)
+                                .foregroundStyle(.customPrimary)
                         )
                         .foregroundColor(.black)
                 }
@@ -197,7 +197,7 @@ extension ControlsView {
             .overlay(alignment: .topLeading) {
                 Image(systemName: "map.circle")
                     .font(.system(size: 42))
-                    .foregroundColor(Color.first)
+                    .foregroundStyle(.customPrimary)
                     .padding(16)
                     .frame(width: 50, height: 50)
             }
