@@ -25,7 +25,7 @@ struct BottomScrollView: View {
             } else {
                 Text("이런 코스도 있어요")
                     .padding(.leading, 16)
-                    .font(.subtitle)
+                    .font(.customSubtitle)
                     .fontWeight(.semibold)
                     .foregroundColor(.white)
             }
@@ -64,7 +64,7 @@ struct BottomScrollView: View {
                                                     Text("\(currentCourse.course.locationInfo.locality) \(currentCourse.course.locationInfo.subLocality)")
                                                         .foregroundColor(.gray600)
                                                 }
-                                                .font(.caption)
+                                                .font(.customCaption)
                                                 .padding(.bottom, 21)
                                             }
                                             .padding(.leading, 20)

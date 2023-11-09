@@ -47,10 +47,10 @@ struct RecordView: View {
                             } label: {
                                 HStack {
                                     Text(selectedSortOption.buttonLabel)
-                                        .font(Font.subBody)
+                                        .font(.customSubbody)
                                         .foregroundStyle(Color.customWhite)
                                     Image(systemName: "chevron.down")
-                                        .font(Font.subBody)
+                                        .font(.customSubbody)
                                         .foregroundStyle(Color.customWhite)
                                 }
                             }
@@ -63,7 +63,7 @@ struct RecordView: View {
                                     .font(Font.system(size: 36))
                                     .padding(.top, 150)
                                 Text("아직 러닝 기록이 없어요")
-                                    .font(.subBody)
+                                    .font(.customSubbody)
                                     .foregroundStyle(Color.gray500)
                                     .padding(.top, 14)
                             }
@@ -114,7 +114,7 @@ struct RecordView: View {
                     }
                   
                     Text("정렬")
-                        .font(.subtitle)
+                        .font(.customSubtitle)
                         .padding(.top, 22)
                     Divider()
                         .foregroundStyle(Color.gray600)
@@ -126,12 +126,12 @@ struct RecordView: View {
                         } label: {
                             HStack {
                                 Text(option.buttonLabel)
-                                    .font(.subBody)
+                                    .font(.customSubbody)
                                     .foregroundStyle(selectedSortOption.buttonLabel == option.rawValue ? Color.customPrimary : Color.gray500)
                                 Spacer()
                                 if selectedSortOption.buttonLabel == option.rawValue {
                                     Image(systemName: "checkmark")
-                                        .font(.subBody)
+                                        .font(.customSubbody)
                                         .foregroundStyle(Color.customPrimary)
                                         .padding(.trailing, 16)
                                         .bold()
@@ -145,7 +145,7 @@ struct RecordView: View {
                         isSortingSheetPresented.toggle()
                     } label: {
                         Text("취소")
-                            .font(.button)
+                            .font(.customButton)
                             .foregroundStyle(.white)
                             .frame(maxWidth: .infinity, maxHeight: 55)
                             .background(Color.gray700)
@@ -222,17 +222,17 @@ struct RecordItem: View {
                 VStack(alignment: .leading, spacing: 4) {
                       if let courseName = record.courseData?.courseName {
                           Text(courseName)
-                              .font(Font.title2)
+                              .font(.customTitle2)
                               .foregroundStyle(Color.white)
                       }
 
                     HStack {
                         Image(systemName: "calendar")
-                            .font(Font.caption)
+                            .font(Font.customCaption)
                             .foregroundStyle(Color.gray200)
                         if let startDate = record.healthData?.startDate {
                             Text(formatDate(startDate))
-                                .font(Font.caption)
+                                .font(.customCaption)
                                 .foregroundStyle(Color.gray400)
                         }
                     }
@@ -291,7 +291,7 @@ struct ChipItem: View {
 
     var body: some View {
         Text(label)
-            .font(Font.tag)
+            .font(.customTag)
             .lineLimit(1)
             .padding(.horizontal, 15)
             .padding(.vertical, 6)

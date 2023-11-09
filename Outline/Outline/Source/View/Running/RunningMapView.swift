@@ -225,12 +225,12 @@ extension RunningMapView {
             
             VStack(spacing: 0) {
                 Text("오늘은, 여기까지")
-                    .font(.title2)
+                    .font(.customTitle2)
                     .padding(.top, 56)
                     .padding(.bottom, 8)
                 
                 Text("즐거운 러닝이었나요? 다음에 또 만나요! ")
-                    .font(.subBody)
+                    .font(.customSubbody)
                     .padding(.bottom, 24)
                 
                 Image("Finish10")
@@ -286,16 +286,16 @@ extension RunningMapView {
             
             VStack(alignment: .center, spacing: 0) {
                 Text("그림을 완성했어요!")
-                    .font(.title2)
+                    .font(.customTitle2)
                     .padding(.top, 73)
                     .padding(.bottom, 20)
                 
                 Text("5m이내에 도착지점이 있어요")
-                    .font(.subBody)
+                    .font(.customSubbody)
                     .foregroundStyle(Color.gray300)
                 
                 Text("러닝을 완료할까요?")
-                    .font(.subBody)
+                    .font(.customSubbody)
                     .foregroundStyle(Color.gray300)
                     .padding(.bottom, 41)
                 
@@ -309,7 +309,7 @@ extension RunningMapView {
                 } label: {
                     Text("조금 더 진행하기")
                         .foregroundStyle(Color.white)
-                        .font(.button)
+                        .font(.customButton)
                         .padding(.bottom, 37)
                 }
             }
