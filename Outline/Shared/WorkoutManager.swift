@@ -10,6 +10,7 @@ import os
 import HealthKit
 
 @MainActor
+
 class WorkoutManager: NSObject, ObservableObject {
     struct SessionStateChange {
         let newState: HKWorkoutSessionState

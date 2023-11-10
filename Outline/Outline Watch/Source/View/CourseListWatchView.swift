@@ -12,21 +12,27 @@ import UIKit
 struct CourseListWatchView: View {
     @StateObject var workoutManager = WorkoutManager.shared
     @StateObject var watchConnectivityManager = WatchConnectivityManager.shared
-    @StateObject var runningManager = WatchRunningManager.shared
+    @StateObject var watchRunningManager = WatchRunningManager.shared
     @StateObject var viewModel = CourseListWatchViewModel()
     
     @State private var navigateDetailView = false
     @State private var selectedCourse: GPSArtCourse = GPSArtCourse()
     @State private var showLocationPermissionSheet = false
     @State private var showFreeRunningGuideSheet = false
-        
+    
     var body: some View {
         NavigationStack {
             ScrollView {
-                VStack(spacing: -5) {
+                if watchConnectivityManager.allCourses.isEmpty {
+                    Text("OUTLINE iPhone을\n실행해서 경로를 제공받으세요.")
+                        .multilineTextAlignment(.center)
+                        .font(.caption)
+                        .foregroundStyle(.gray600)
+                        .padding(.top, 32)
+                } else {
                     Button {
                         if viewModel.isHealthAuthorized && viewModel.isLocationAuthorized {
-                            runningManager.startFreeRun()
+                            watchRunningManager.startFreeRun()
                         } else {
                             if !viewModel.isLocationAuthorized {
                                 showLocationPermissionSheet = true
@@ -53,20 +59,12 @@ struct CourseListWatchView: View {
                     }
                     .padding(.bottom, 8)
                     
-                    if watchConnectivityManager.allCourses.isEmpty {
-                        Text("OUTLINE iPhone을\n실행해서 경로를 제공받으세요.")
-                            .multilineTextAlignment(.center)
-                            .font(.caption)
-                            .foregroundStyle(.gray600)
-                            .padding(.top, 32)
-                    }
-                    
                     ForEach(watchConnectivityManager.allCourses, id: \.id) {course in
                         Button {
                             if viewModel.isHealthAuthorized && viewModel.isLocationAuthorized {
-                                if runningManager.checkDistance(course: course.coursePaths) {
-                                    runningManager.startCourse = course
-                                    runningManager.startGPSArtRun()
+                                if watchRunningManager.checkDistance(course: course.coursePaths) {
+                                    watchRunningManager.startCourse = course
+                                    watchRunningManager.startGPSArtRun()
                                 } else {
                                     showFreeRunningGuideSheet = true
                                 }
@@ -176,7 +174,7 @@ struct CourseListWatchView: View {
                         .foregroundStyle(.gray.opacity(0.2))
                 }
                 Button {
-                    runningManager.startFreeRun()
+                    watchRunningManager.startFreeRun()
                     showFreeRunningGuideSheet = false
                 } label: {
                     Text("자유 코스로 변경")
