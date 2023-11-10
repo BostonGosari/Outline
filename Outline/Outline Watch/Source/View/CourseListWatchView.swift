@@ -22,101 +22,112 @@ struct CourseListWatchView: View {
     
     var body: some View {
         NavigationStack {
-            ScrollView {
+            VStack {
                 if watchConnectivityManager.allCourses.isEmpty {
-                    Text("OUTLINE iPhone을\n실행해서 경로를 제공받으세요.")
-                        .multilineTextAlignment(.center)
-                        .font(.caption)
-                        .foregroundStyle(.gray600)
-                        .padding(.top, 32)
+                    HStack {
+                        Image(systemName: "iphone")
+                            .foregroundStyle(.gray600, .clear)
+                            .font(.custom("SF Pro Display", size: 24, relativeTo: .title3))
+                        Text("OUTLINE iPhone을\n실행해서 코스를 선택하세요.")
+                            .multilineTextAlignment(.leading)
+                            .font(.customCaption)
+                            .foregroundStyle(.gray600)
+                    }
+                    .padding(.bottom, 20)
                 } else {
-                    Button {
-                        if viewModel.isHealthAuthorized && viewModel.isLocationAuthorized {
-                            watchRunningManager.startFreeRun()
-                        } else {
-                            if !viewModel.isLocationAuthorized {
-                                showLocationPermissionSheet = true
-                            }
-                        }
-                    } label: {
-                        HStack {
-                            Image(systemName: "play.circle.fill")
-                            Text("자유러닝")
-                        }
-                        .foregroundColor(.black)
-                        .frame(height: 48)
-                        .frame(maxWidth: .infinity)
-                        .background(
-                            RoundedRectangle(cornerRadius: 12, style: .continuous)
-                                .foregroundStyle(.customPrimary)
-                        )
-                    }
-                    .buttonStyle(.plain)
-                    .scrollTransition { content, phase in
-                        content
-                            .scaleEffect(phase.isIdentity ? 1 : 0.8)
-                            .opacity(phase.isIdentity ? 1 : 0.8)
-                    }
-                    .padding(.bottom, 8)
-                    
-                    ForEach(watchConnectivityManager.allCourses, id: \.id) {course in
-                        Button {
-                            if viewModel.isHealthAuthorized && viewModel.isLocationAuthorized {
-                                if watchRunningManager.checkDistance(course: course.coursePaths) {
-                                    watchRunningManager.startCourse = course
-                                    watchRunningManager.startGPSArtRun()
-                                } else {
-                                    showFreeRunningGuideSheet = true
-                                }
-                            }
-                        } label: {
-                            VStack {
-                                Text(course.courseName)
-                                    .padding(.leading, 4)
-                                    .frame(maxWidth: .infinity, alignment: .leading)
-                                PathGenerateManager.caculateLines(width: 75, height: 75, coordinates: ConvertCoordinateManager.convertToCLLocationCoordinates(course.coursePaths))
-                                    .stroke(style: StrokeStyle(lineWidth: 4, lineCap: .round, lineJoin: .round))
-                                    .scaledToFit()
-                                    .frame(height: 75)
-                                    .foregroundStyle(.customPrimary)
-                            }
-                            .padding(.vertical, 16)
-                            .padding(.horizontal, 8)
-                            .frame(maxWidth: .infinity)
-                            .background {
-                                RoundedRectangle(cornerRadius: 20, style: .continuous)
-                                    .foregroundStyle(.gray.opacity(0.2))
-                            }
-                        }
-                        .buttonStyle(.plain)
-                        .overlay(alignment: .topTrailing) {
+                    ScrollView {
+                        VStack(spacing: -5) {
                             Button {
-                                selectedCourse = course
-                                navigateDetailView = true
-                            } label: {
-                                VStack {
-                                    Image(systemName: "ellipsis.circle")
-                                        .foregroundStyle(.customPrimary, .clear)
-                                        .font(.system(size: 30))
-                                        .bold()
-                                        .padding(8)
-                                    Spacer()
+                                if viewModel.isHealthAuthorized && viewModel.isLocationAuthorized {
+                                    watchRunningManager.startFreeRun()
+                                } else {
+                                    if !viewModel.isLocationAuthorized {
+                                        showLocationPermissionSheet = true
+                                    }
                                 }
-                                .contentShape(Rectangle())
+                            } label: {
+                                HStack {
+                                    Image(systemName: "play.circle.fill")
+                                    Text("자유코스")
+                                }
+                                .font(.customButton)
+                                .foregroundColor(.black)
+                                .frame(height: 48)
+                                .frame(maxWidth: .infinity)
+                                .background(
+                                    RoundedRectangle(cornerRadius: 12, style: .continuous)
+                                        .foregroundStyle(.customPrimary)
+                                )
                             }
-                            .foregroundStyle(.customPrimary)
                             .buttonStyle(.plain)
-                            .padding(.trailing, -4)
-                        }
-                        .scrollTransition { content, phase in
-                            content
-                                .scaleEffect(phase.isIdentity ? 1 : 0.8)
-                                .opacity(phase.isIdentity ? 1 : 0.5)
+                            .scrollTransition { content, phase in
+                                content
+                                    .scaleEffect(phase.isIdentity ? 1 : 0.8)
+                                    .opacity(phase.isIdentity ? 1 : 0.8)
+                            }
+                            .padding(.bottom, 8)
+                            
+                            ForEach(watchConnectivityManager.allCourses, id: \.id) {course in
+                                Button {
+                                    if viewModel.isHealthAuthorized && viewModel.isLocationAuthorized {
+                                        if watchRunningManager.checkDistance(course: course.coursePaths) {
+                                            watchRunningManager.startCourse = course
+                                            watchRunningManager.startGPSArtRun()
+                                        } else {
+                                            showFreeRunningGuideSheet = true
+                                        }
+                                    }
+                                } label: {
+                                    VStack {
+                                        Text(course.courseName)
+                                            .font(.customSubTitle)
+                                            .padding(.leading, 4)
+                                            .frame(maxWidth: .infinity, alignment: .leading)
+                                        PathGenerateManager.caculateLines(width: 75, height: 75, coordinates: ConvertCoordinateManager.convertToCLLocationCoordinates(course.coursePaths))
+                                            .stroke(style: StrokeStyle(lineWidth: 4, lineCap: .round, lineJoin: .round))
+                                            .scaledToFit()
+                                            .frame(height: 75)
+                                            .foregroundStyle(.customPrimary)
+                                    }
+                                    .padding(.vertical, 16)
+                                    .padding(.horizontal, 8)
+                                    .frame(maxWidth: .infinity)
+                                    .background {
+                                        RoundedRectangle(cornerRadius: 24, style: .continuous)
+                                            .foregroundStyle(.gray900)
+                                    }
+                                }
+                                .buttonStyle(.plain)
+                                .overlay(alignment: .topTrailing) {
+                                    Button {
+                                        selectedCourse = course
+                                        navigateDetailView = true
+                                    } label: {
+                                        VStack {
+                                            Image(systemName: "ellipsis.circle")
+                                                .foregroundStyle(.customPrimary, .clear)
+                                                .font(.system(size: 30))
+                                                .bold()
+                                                .padding(8)
+                                            Spacer()
+                                        }
+                                        .contentShape(Rectangle())
+                                    }
+                                    .foregroundStyle(.customPrimary)
+                                    .buttonStyle(.plain)
+                                    .padding(.trailing, -4)
+                                }
+                                .scrollTransition { content, phase in
+                                    content
+                                        .scaleEffect(phase.isIdentity ? 1 : 0.8)
+                                        .opacity(phase.isIdentity ? 1 : 0.5)
+                                }
+                            }
                         }
                     }
                 }
             }
-            .navigationTitle("러닝")
+            .navigationTitle("코스")
             .navigationDestination(isPresented: $navigateDetailView) {
                 CourseDetailView(course: selectedCourse)
             }

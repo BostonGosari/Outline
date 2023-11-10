@@ -25,37 +25,42 @@ struct CourseDetailView: View {
     
     @ViewBuilder 
     private func listBox(systemName: String, location: Placemark) -> some View {
-        HStack {
+        HStack(spacing: 9) {
             Image(systemName: systemName)
+                .font(.customSystemImage)
                 .foregroundStyle(.customPrimary)
-                .padding(.horizontal, 5)
             Text("\(location.administrativeArea) \(location.locality) \(location.subLocality)")
+                .font(.customSubTitle)
         }
     }
     
     @ViewBuilder 
     private func listBox(systemName: String, context: String) -> some View {
-        HStack {
+        HStack(spacing: 9) {
             Image(systemName: systemName)
+                .font(.customSystemImage)
                 .foregroundStyle(.customPrimary)
-                .padding(.horizontal, 5)
             Text(context)
+                .font(.customSubTitle)
         }
     }
     
     @ViewBuilder 
     private func listBox(systemName: String, alley: Alley) -> some View {
-        HStack {
+        HStack(spacing: 9) {
             Image(systemName: systemName)
+                .font(.customSystemImage)
                 .foregroundStyle(.customPrimary)
-                .padding(.horizontal, 5)
             switch alley {
             case .few:
                 Text("적음")
+                    .font(.customSubTitle)
             case .lots:
                 Text("많음")
+                    .font(.customSubTitle)
             case .none:
                 Text("없음")
+                    .font(.customSubTitle)
             }
         }
     }
@@ -66,7 +71,6 @@ struct CourseDetailView: View {
         listBox(systemName: systemName, context: formattedString)
     }
     
-    @ViewBuilder
     private func listBox(systemName: String, duration: Double) -> some View {
         let hours = Int(duration) / 60
         let minutes = Int(duration) % 60
