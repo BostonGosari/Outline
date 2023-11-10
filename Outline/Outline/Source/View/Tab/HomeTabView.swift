@@ -9,15 +9,17 @@ import SwiftUI
 
 struct HomeTabView: View {
     @AppStorage("authState") var authState: AuthState = .logout
-    
+    @StateObject var workoutManager = WorkoutManager.shared
     @StateObject private var runningManager = RunningStartManager.shared
     @StateObject var runningDataManager = RunningDataManager.shared
     @StateObject var watchConnectivityManager = WatchConnectivityManager.shared
     @State private var selectedTab: Tab = .GPSArtRunning
     @State private var showDetailView = false
     @State private var showCustomSheet = false
-    
+    @State private var showMirroringSheet = false
     @State private var showMirroringView = false
+
+    @State private var showMirroringTestView = false
     
     var body: some View {
         ZStack {
@@ -72,6 +74,10 @@ struct HomeTabView: View {
             if showCustomSheet {
                 watchRunningSheet
             }
+            if showMirroringView {
+                MirroringMapView()
+                    .transition(.move(edge: .bottom))
+            }
         }
         .onReceive(watchConnectivityManager.$isWatchRunning) { isRunning in
             if isRunning {
@@ -80,15 +86,27 @@ struct HomeTabView: View {
                 showCustomSheet = false
             }
         }
+        .onChange(of: workoutManager.sessionState.isActive) { oldValue, newValue in
+            if oldValue != newValue {
+                if newValue {
+                    showMirroringSheet = true
+                } else if !newValue {
+                    showMirroringSheet = false
+                }
+            }
+        }
+        .sheet(isPresented: $showMirroringSheet) {
+            mirroringSheet
+        }
         
         // for test
-        .sheet(isPresented: $showMirroringView) {
+        .sheet(isPresented: $showMirroringTestView) {
             MirroringView()
                 .ignoresSafeArea()
         }
         .overlay {
             Button("mirroringView") {
-                showMirroringView.toggle()
+                showMirroringTestView.toggle()
             }
             .buttonStyle(.borderedProminent)
         }
@@ -179,7 +197,8 @@ extension HomeTabView {
                     .padding(.bottom, 37)
                 
                 Button {
-                    
+                    showMirroringSheet = false
+                    showMirroringView = true
                 } label: {
                     Text("미러링하기")
                         .font(.customBody)

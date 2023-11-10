@@ -346,3 +346,7 @@ extension Image {
             )
     }
 }
+
+#Preview {
+    RunningMapView(selection: .constant(false))
+}
