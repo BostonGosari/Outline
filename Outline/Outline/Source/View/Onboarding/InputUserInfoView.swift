@@ -30,11 +30,11 @@ struct InputUserInfoView: View {
                 
                 VStack(alignment: .leading, spacing: 0) {
                     Text("간단한 정보를 알려주세요")
-                        .font(.title)
+                        .font(.customTitle)
                         .padding(EdgeInsets(top: 72, leading: 16, bottom: 8, trailing: 16))
                     
                     Text("입력하신 정보를 토대로\n더 정확한 러닝 결과를 알려드릴게요!")
-                        .font(.date)
+                        .font(.customDate)
                         .foregroundStyle(Color.gray300)
                         .padding(.horizontal, 16)
                     
@@ -91,7 +91,7 @@ extension InputUserInfoView {
         List {
             HStack {
                 Text("생년월일")
-                    .font(.subBody)
+                    .font(.customSubbody)
                 Spacer()
                 Text(viewModel.birthday.dateToBirthDay())
                     .foregroundStyle(viewModel.listTextColor(.date))
@@ -109,7 +109,7 @@ extension InputUserInfoView {
             
             HStack {
                 Text("성별")
-                    .font(.subBody)
+                    .font(.customSubbody)
                 Spacer()
                 Text(viewModel.gender)
                     .foregroundStyle(viewModel.listTextColor(.gender))
@@ -126,7 +126,7 @@ extension InputUserInfoView {
             
             HStack {
                 Text("신장")
-                    .font(.subBody)
+                    .font(.customSubbody)
                 Spacer()
                 Text("\(viewModel.height)cm")
                     .foregroundStyle(viewModel.listTextColor(.height))
@@ -143,7 +143,7 @@ extension InputUserInfoView {
             
             HStack {
                 Text("체중")
-                    .font(.subBody)
+                    .font(.customSubbody)
                 Spacer()
                 Text("\(viewModel.weight)kg")
                     .foregroundStyle(viewModel.listTextColor(.weight))

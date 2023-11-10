@@ -21,7 +21,7 @@ struct CompleteButton: View {
                 .overlay {
                     Text(text)
                         .foregroundStyle(isActive ? Color.black : Color.customWhite)
-                        .font(.button)
+                        .font(.customButton)
                 }
         }
         .disabled(!isActive)

@@ -122,7 +122,7 @@ struct CardDetailView: View {
                         .fontWeight(.semibold)
                         .padding(.top)
                     Text("앗! 현재 루트와 멀리 떨어져 있어요.")
-                        .font(.subBody)
+                        .font(.customSubbody)
                         .foregroundColor(.gray300)
                     Image("AnotherLocation")
                         .resizable()
@@ -135,7 +135,7 @@ struct CardDetailView: View {
                         runningStartManager.startFreeRun()
                     } label: {
                         Text("자유코스로 변경하기")
-                            .font(.button)
+                            .font(.customButton)
                             .fontWeight(.medium)
                             .foregroundStyle(Color.customBlack)
                             .padding()
@@ -153,7 +153,7 @@ struct CardDetailView: View {
                         }
                     } label: {
                         Text("홈으로 돌아가기")
-                            .font(.button)
+                            .font(.customButton)
                             .fontWeight(.medium)
                             .foregroundStyle(Color.customWhite)
                     }
@@ -203,7 +203,7 @@ struct CardDetailView: View {
                     Image(systemName: "mappin")
                     Text("\(selectedCourse.course.locationInfo.locality) \(selectedCourse.course.locationInfo.subLocality) • 내 위치에서 \(selectedCourse.distance/1000, specifier: "%.1f")km")
                 }
-                .font(.subBody)
+                .font(.customSubbody)
                 .fontWeight(.regular)
                 .foregroundStyle(.gray400)
                 .padding(.bottom, 16)

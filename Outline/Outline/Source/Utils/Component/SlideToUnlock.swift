@@ -55,7 +55,7 @@ struct SlideToUnlock: View {
                 .stroke(LinearGradient(colors: [.gray500, .gray750], startPoint: .top, endPoint: .bottom), lineWidth: 0.5)
             
             Text("밀어서 그리기")
-                .font(.subtitle)
+                .font(.customSubtitle)
                 .bold()
                 .shimmer(color: .white.opacity(0.15), highlight: .customPrimary)
                 .frame(maxWidth: .infinity)

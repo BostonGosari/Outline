@@ -90,12 +90,12 @@ extension ShareMainView {
             
             VStack(spacing: 0) {
                 Text(viewModel.alertTitle)
-                    .font(.title2)
+                    .font(.customTitle2)
                     .padding(.top, 44)
                     .padding(.bottom, 8)
                 
                 Text(viewModel.alertMessage)
-                    .font(.subBody)
+                    .font(.customSubbody)
                     .padding(.bottom, 30)
                 
                 Image(viewModel.imageName)

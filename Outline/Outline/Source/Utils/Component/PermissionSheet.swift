@@ -62,11 +62,11 @@ struct PermissionSheet: View {
         }
         VStack(spacing: 10) {
             Text(permissionType.title)
-                .font(.title2)
+                .font(.customTitle2)
                 .fontWeight(.semibold)
                 .padding(.top)
             Text(permissionType.subTitle)
-                .font(.subBody)
+                .font(.customSubbody)
                 .foregroundColor(.gray300)
                 .multilineTextAlignment(.center)
             Image(permissionType.imageName)
@@ -80,7 +80,7 @@ struct PermissionSheet: View {
                 }
             } label: {
                 Text("설정으로 가기")
-                    .font(.button)
+                    .font(.customButton)
                     .fontWeight(.medium)
                     .foregroundStyle(Color.customBlack)
                     .padding()
@@ -98,7 +98,7 @@ struct PermissionSheet: View {
                 }
             } label: {
                 Text("닫기")
-                    .font(.button)
+                    .font(.customButton)
                     .fontWeight(.medium)
                     .foregroundStyle(.white)
             }

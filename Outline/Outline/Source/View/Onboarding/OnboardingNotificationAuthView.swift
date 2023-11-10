@@ -16,9 +16,9 @@ struct OnboardingNotificationAuthView: View {
     var body: some View {
         VStack {
             Text("알림을 켜주세요")
-                .font(.title2)
+                .font(.customTitle2)
             Text("Outline 알림을 통해 러닝 현황을 확인할 수 있어요.")
-                .font(.subBody)
+                .font(.customSubbody)
             Spacer()
         }
         .padding(.top, 80)

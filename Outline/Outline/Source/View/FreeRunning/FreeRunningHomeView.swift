@@ -49,13 +49,13 @@ struct FreeRunningHomeView: View {
                    .overlay {
                        VStack(alignment: .leading) {
                            Text("자유 코스")
-                               .font(.headline)
+                               .font(.customHeadline)
                                .padding(.bottom, 8)
                            HStack {
                                Image(systemName: "mappin")
                                Text(userLocation)
                            }
-                           .font(.caption)
+                           .font(.customCaption)
                            .frame(height: 16)
                            SlideToUnlock(isUnlocked: $isUnlocked, progress: $progress)
                                .onChange(of: isUnlocked) { _, newValue in

@@ -18,7 +18,7 @@ struct FirstRunningGuideView: View {
             
             VStack(spacing: 0) {
                 Text("첫 그림이네요!\n우리 같이 완성해봐요")
-                    .font(.firstGuideTitle)
+                    .font(.customFirstGuideTitle)
                     .fontWeight(.semibold)
                     .padding(.top, 24)
                     .padding(.bottom, 56)
@@ -28,7 +28,7 @@ struct FirstRunningGuideView: View {
                         .foregroundStyle(.customPrimary)
                     + Text("을 따라가면\n그림이 그려져요")
                 }
-                .font(.subBody)
+                .font(.customSubbody)
                 .padding(.bottom, 16)
                 
                 Image("FirstRunningIcon1")
@@ -46,7 +46,7 @@ struct FirstRunningGuideView: View {
                         .foregroundStyle(.customPrimary)
                     + Text("를 볼 수 있어요")
                 }
-                .font(.tag)
+                .font(.customTag)
                 .padding(.bottom, 16)
                 
                 Image("FirstRunningIcon2")
@@ -59,7 +59,7 @@ struct FirstRunningGuideView: View {
                     isFirstRunning = false
                 } label: {
                     Text("러닝 시작하기")
-                        .font(.button)
+                        .font(.customButton)
                         .foregroundStyle(.customBlack)
                         .padding(15)
                         .frame(maxWidth: .infinity)
