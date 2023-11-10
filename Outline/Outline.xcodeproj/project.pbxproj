@@ -32,6 +32,7 @@
 		29111E3F2AE0CD0C009833C7 /* ConfettiWatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29111E3E2AE0CD0C009833C7 /* ConfettiWatchView.swift */; };
 		291A22312AF48305004B3D10 /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 291A22302AF48305004B3D10 /* Secrets.xcconfig */; };
 		291A22352AF4CD94004B3D10 /* PermissionSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291A22342AF4CD94004B3D10 /* PermissionSheet.swift */; };
+		291B98EA2AFE62C6004E2D9B /* MirroringMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291B98E92AFE62C6004E2D9B /* MirroringMapView.swift */; };
 		292613172AF2BCEF00591E32 /* RecordHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 292613162AF2BCEF00591E32 /* RecordHeader.swift */; };
 		2930EDBB2AF3E59F007FD141 /* ControlButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2930EDBA2AF3E59F007FD141 /* ControlButton.swift */; };
 		2930EDBD2AF3FD97007FD141 /* CountDownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2930EDBC2AF3FD97007FD141 /* CountDownView.swift */; };
@@ -246,6 +247,7 @@
 		29111E3E2AE0CD0C009833C7 /* ConfettiWatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfettiWatchView.swift; sourceTree = "<group>"; };
 		291A22302AF48305004B3D10 /* Secrets.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 		291A22342AF4CD94004B3D10 /* PermissionSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionSheet.swift; sourceTree = "<group>"; };
+		291B98E92AFE62C6004E2D9B /* MirroringMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MirroringMapView.swift; sourceTree = "<group>"; };
 		292613162AF2BCEF00591E32 /* RecordHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordHeader.swift; sourceTree = "<group>"; };
 		2930EDBA2AF3E59F007FD141 /* ControlButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlButton.swift; sourceTree = "<group>"; };
 		2930EDBC2AF3FD97007FD141 /* CountDownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountDownView.swift; sourceTree = "<group>"; };
@@ -447,6 +449,7 @@
 			isa = PBXGroup;
 			children = (
 				296AB6F92AFD5CEB0065A834 /* MirroringView.swift */,
+				291B98E92AFE62C6004E2D9B /* MirroringMapView.swift */,
 			);
 			path = Mirroring;
 			sourceTree = "<group>";
@@ -1200,6 +1203,7 @@
 				F0492E1D2ADD2AE900F6EADD /* GPSArtHomeHeader.swift in Sources */,
 				293FD20A2AFBB80A00623B23 /* WorkoutManager+iOS.swift in Sources */,
 				0E9A5D422AE058EF00C19FF3 /* CustomShareView.swift in Sources */,
+				291B98EA2AFE62C6004E2D9B /* MirroringMapView.swift in Sources */,
 				29AE76D72ADE2A2200A46742 /* InputNicknameView.swift in Sources */,
 				F01FDB992ADABB6100BDA633 /* TabModel.swift in Sources */,
 			);

@@ -18,6 +18,17 @@ struct ContentWatchView: View {
         ZStack {
             CourseListWatchView()
                 .tint(.customPrimary)
+                .onChange(of: workoutManager.sessionState) { _, newValue in
+                    if newValue == .ended {
+                        isSheetActive = true
+                    }
+                }
+                .sheet(isPresented: $isSheetActive) {
+                    workoutManager.resetWorkout()
+                } content: {
+                    SummaryView()
+                        .toolbar(.hidden, for: .navigationBar)
+                }
             if runningManager.startRunning {
                 CountDownView()
                     .onChange(of: workoutManager.sessionState) { _, newValue in
@@ -25,12 +36,11 @@ struct ContentWatchView: View {
                             isSheetActive = true
                         }
                     }
-                    .sheet(isPresented: $isSheetActive) {
-                        workoutManager.resetWorkout()
-                    } content: {
-                        SummaryView()
-                            .toolbar(.hidden, for: .navigationBar)
-                    }
+            } else if workoutManager.sessionState == .running || workoutManager.sessionState == .paused {
+                ZStack {
+                    Color.black.ignoresSafeArea()
+                    WatchTabView()
+                }
             }
         }
     }

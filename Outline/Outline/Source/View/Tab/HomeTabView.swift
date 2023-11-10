@@ -152,3 +152,55 @@ extension HomeTabView {
         }
     }
 }
+
+extension HomeTabView {
+    private var mirroringSheet: some View {
+        ZStack {
+            Color.gray900.ignoresSafeArea()
+            RoundedRectangle(cornerRadius: 30, style: .continuous)
+                .stroke(lineWidth: 2)
+                .foregroundStyle(Gradient(colors: [.customPrimary, .gray900, .gray900]))
+                .ignoresSafeArea()
+            
+            VStack {
+                Text("Apple Watch로\n러닝을 그리고 있어요")
+                    .multilineTextAlignment(.center)
+                    .font(.customTitle2)
+                    .padding(.bottom, 26.5)
+                Image("RunningWatch")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 96)
+                    .padding(.bottom, 18.5)
+                Text("OUTLINE iPhone에서\n현재 Apple watch의 러닝을 미러링합니다.")
+                    .multilineTextAlignment(.center)
+                    .font(.customSubbody)
+                    .foregroundStyle(.gray400)
+                    .padding(.bottom, 37)
+                
+                Button {
+                    
+                } label: {
+                    Text("미러링하기")
+                        .font(.customBody)
+                        .foregroundStyle(.customBlack)
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background {
+                            RoundedRectangle(cornerRadius: 15)
+                                .foregroundStyle(.customPrimary)
+                        }
+                        .padding(.horizontal)
+                }
+            }
+            .padding(.top, 20)
+        }
+        .presentationDetents([.medium])
+        .presentationCornerRadius(30)
+        .presentationDragIndicator(.visible)
+    }
+}
+
+#Preview {
+    HomeTabView()
+}

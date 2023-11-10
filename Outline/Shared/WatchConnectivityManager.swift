@@ -22,16 +22,13 @@ class WatchConnectivityManager: NSObject, WCSessionDelegate, ObservableObject {
         if WCSession.isSupported() {
             session.delegate = self
             session.activate()
+            print("WCSession supported")
         } else {
-            print("ERROR: Watch session not supported")
+            print("Watch session not supported")
         }
     }
     
-    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
-        if let error = error {
-            print("session activation failed with error: \(error.localizedDescription)")
-            return
-        }
+    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) { 
     }
     
 #if os(iOS)

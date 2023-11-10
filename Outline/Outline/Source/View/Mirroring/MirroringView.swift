@@ -16,7 +16,6 @@ struct MirroringView: View {
         ZStack {
             Color.black
             VStack {
-                
                 let fromDate = workoutManager.session?.startDate ?? Date()
                 let schedule = MetricsTimelineSchedule(from: fromDate, isPaused: workoutManager.sessionState == .paused)
                 

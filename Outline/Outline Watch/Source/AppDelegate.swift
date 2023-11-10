@@ -5,7 +5,6 @@
 //  Created by hyunjun on 11/8/23.
 //
 
-import os
 import WatchKit
 import HealthKit
 import SwiftUI

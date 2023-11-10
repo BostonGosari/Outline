@@ -10,6 +10,7 @@ import SwiftUI
 
 struct FreeRunningHomeView: View {
     @StateObject var runningStartManager = RunningStartManager.shared
+    @StateObject var watchConnectivityManager = WatchConnectivityManager.shared
     
     @State private var userLocation = ""
     @State private var progress: Double = 0.0

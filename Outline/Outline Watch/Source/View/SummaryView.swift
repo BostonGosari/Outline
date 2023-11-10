@@ -47,7 +47,9 @@ struct SummaryView: View {
                             progress = 1.0
                         }
                         .animation(.bouncy(duration: 3), value: progress)
-                    ConfettiWatchView()
+                        .overlay {
+                            ConfettiWatchView()
+                        }
                     Text("그림을 완성했어요!")
                         .padding(.vertical)
                     Text(NSNumber(value: workoutManager.builder?.elapsedTime ?? 0), formatter: timeFormatter)

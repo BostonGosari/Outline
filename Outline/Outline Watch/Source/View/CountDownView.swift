@@ -35,7 +35,10 @@ struct CountDownView: View {
                         startWorkout()
                     }
             } else {
-                WatchTabView()
+                ZStack {
+                    Color.black.ignoresSafeArea()
+                    WatchTabView()
+                }
             }
         }
     }
