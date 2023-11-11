@@ -78,6 +78,7 @@
 		9528EFEC2ADEC7CF0056CCC6 /* UserDataModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9528EFEB2ADEC7CF0056CCC6 /* UserDataModelType.swift */; };
 		9528F0002AE042570056CCC6 /* PathGenerateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9528EFFF2AE042570056CCC6 /* PathGenerateManager.swift */; };
 		9528F0062AE0B37B0056CCC6 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9528F0052AE0B37B0056CCC6 /* LoginView.swift */; };
+		954B04182AFF725000A8A83E /* ProfileUserInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954B04172AFF725000A8A83E /* ProfileUserInfoViewModel.swift */; };
 		954CB29C2AE51619005EB2E9 /* PersistentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EB1EE82ADDC43400B47984 /* PersistentController.swift */; };
 		954CB29D2AE5161B005EB2E9 /* UserDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EB1EEB2ADDC66B00B47984 /* UserDataModel.swift */; };
 		954CB29E2AE5161D005EB2E9 /* UserDataModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9528EFEB2ADEC7CF0056CCC6 /* UserDataModelType.swift */; };
@@ -266,6 +267,7 @@
 		9528EFEB2ADEC7CF0056CCC6 /* UserDataModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataModelType.swift; sourceTree = "<group>"; };
 		9528EFFF2AE042570056CCC6 /* PathGenerateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathGenerateManager.swift; sourceTree = "<group>"; };
 		9528F0052AE0B37B0056CCC6 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		954B04172AFF725000A8A83E /* ProfileUserInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUserInfoViewModel.swift; sourceTree = "<group>"; };
 		954CB29F2AE5457A005EB2E9 /* pohangCrocodileRun.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = pohangCrocodileRun.kml; sourceTree = "<group>"; };
 		954CB2A02AE5457A005EB2E9 /* seoulOctopusRun.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = seoulOctopusRun.kml; sourceTree = "<group>"; };
 		954CB2A12AE5457A005EB2E9 /* pohangDangDangRun.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = pohangDangDangRun.kml; sourceTree = "<group>"; };
@@ -703,6 +705,7 @@
 				F0781D5F2AE163E00084ADD7 /* GPSArtHomeViewModel.swift */,
 				0E2B4CBE2AE744E8002A5103 /* RecordDetailViewModel.swift */,
 				95C953CC2AF3BF760040B9DA /* ProfileViewModel.swift */,
+				954B04172AFF725000A8A83E /* ProfileUserInfoViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1117,6 +1120,7 @@
 				BB397D0B2AE640A800F92A43 /* RecordDetailView.swift in Sources */,
 				2998035B2AE0181900A9A134 /* ConfettiShapes.swift in Sources */,
 				29AE76D82ADE2A2200A46742 /* InputUserInfoView.swift in Sources */,
+				954B04182AFF725000A8A83E /* ProfileUserInfoViewModel.swift in Sources */,
 				299803572AE00C9B00A9A134 /* HapticManager.swift in Sources */,
 				0E29F64B2ADF653000F5EF5C /* FontExtension.swift in Sources */,
 				954CB2B62AE63E79005EB2E9 /* OnboardingHealthAuthView.swift in Sources */,
