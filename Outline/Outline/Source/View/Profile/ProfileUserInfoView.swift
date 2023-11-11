@@ -135,19 +135,29 @@ struct ProfileUserInfoView: View {
         })
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
-                Button {
-                    if profileUserInfoViewModel.isSuccessToCheckName {
-                        profileUserInfoViewModel.updateUserNameSet(oldUserName: nickname, newUserName: profileUserInfoViewModel.nickname)
-                        nickname = profileUserInfoViewModel.nickname
-                    } else {
-                        profileUserInfoViewModel.nickname = nickname
+                if profileUserInfoViewModel.showBirthdayPicker || profileUserInfoViewModel.showGenderPicker {
+                    Button {
+                        completion()
+                    } label: {
+                        Text("완료")
+                            .foregroundStyle(Color.customPrimary)
                     }
-                    completion()
-                    dismiss()
-                } label: {
-                    Text("완료")
-                        .foregroundStyle(Color.customPrimary)
+                } else if profileUserInfoViewModel.isKeyboardVisible {
+                    Button {
+                        if profileUserInfoViewModel.isSuccessToCheckName {
+                            profileUserInfoViewModel.updateUserNameSet(oldUserName: nickname, newUserName: profileUserInfoViewModel.nickname)
+                            nickname = profileUserInfoViewModel.nickname
+                        } else {
+                            profileUserInfoViewModel.nickname = nickname
+                        }
+                        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                        completion()
+                    } label: {
+                        Text("완료")
+                            .foregroundStyle(Color.customPrimary)
+                    }
                 }
+                
             }
         }
     }
