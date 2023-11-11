@@ -86,4 +86,3 @@ extension ProfileUserInfoViewModel {
         checkInputWord = nickname.range(of: pattern, options: .regularExpression) != nil
     }
 }
-
