@@ -105,6 +105,7 @@ struct UserInfoModel: UserInfoModelProtocol {
             }
         }
     }
+    
     func createUserNameSet(userName: String, completion: @escaping (Result<Bool, ReadDataError>) -> Void) {
         readUserNameSet { readUserNameResult in
             switch readUserNameResult {
@@ -113,6 +114,24 @@ struct UserInfoModel: UserInfoModelProtocol {
                     var newUserNameList = userNameList
                     newUserNameList.append(userName)
                     try userUtilRef.document("userNameSet").setData(from: UserNameSet(userNames: newUserNameList))
+                    completion(.success(true))
+                } catch {
+                    completion(.failure(.typeError))
+                }
+            case .failure(let failure):
+                completion(.failure(.dataNotFound))
+            }
+        }
+    }
+    
+    func deleteUserNameSet(userName: String, completion: @escaping (Result<Bool, ReadDataError>) -> Void) {
+        readUserNameSet { readUserNameResult in
+            switch readUserNameResult {
+            case .success(let userNameList):
+                do {
+                    try userUtilRef
+                        .document("userNameSet")
+                        .setData(from: UserNameSet(userNames: userNameList.filter({ $0 != userName })))
                     completion(.success(true))
                 } catch {
                     completion(.failure(.typeError))
