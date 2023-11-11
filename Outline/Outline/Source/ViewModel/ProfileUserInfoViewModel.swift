@@ -13,12 +13,14 @@ class ProfileUserInfoViewModel: ObservableObject {
     @Published var checkInputCount = false
     @Published var checkInputWord = false
     @Published var checkNicnameDuplication = false
-    @Published var isSuccess = false
+    @Published var isSuccessToCheckName = false
     @Published var isKeyboardVisible = false
     @Published var showBirthdayPicker = false
     @Published var showGenderPicker = false
     
     private var userNameSet: [String] = []
+    
+    private let userInfoModel = UserInfoModel()
     
     var keyboardWillShowPublisher: AnyPublisher<Bool, Never> {
         NotificationCenter.default.publisher(for: UIResponder.keyboardWillShowNotification)
@@ -33,7 +35,6 @@ class ProfileUserInfoViewModel: ObservableObject {
     }
     
     init() {
-        let userInfoModel = UserInfoModel()
         userInfoModel.readUserNameSet { result in
             switch result {
             case .success(let userList):
@@ -49,7 +50,7 @@ class ProfileUserInfoViewModel: ObservableObject {
         checkCount()
         checkSymbol()
         
-        isSuccess = checkInputCount && checkInputWord && checkNicnameDuplication
+        isSuccessToCheckName = checkInputCount && checkInputWord && checkNicnameDuplication
     }
 }
 
