@@ -79,6 +79,14 @@ final class ProfileViewModel: ObservableObject {
                         }
                     }
                 }
+                self.userInfoModel.deleteUserNameSet(userName: self.userInfo.nickname) { res in
+                    switch res {
+                    case .success(let success):
+                        print("success to delete userNameSet on DB \(success)")
+                    case .failure(let failure):
+                        print("fail to delete userNameSet on DB \(failure)")
+                    }
+                }
                 self.userId = ""
                 print("reset userId to empty \(isSuccess)")
             case .failure(let error):
