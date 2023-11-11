@@ -61,25 +61,32 @@ struct ProfileUserInfoView: View {
             
             List {
                 Group {
-                    HStack {
-                        Text("생년월일")
-                            .font(.subBody)
-                        Spacer()
-                        Text(birthday.dateToShareString())
-                            .font(.subBody)
-                            .foregroundStyle(Color.gray400)
+                    Button {
+                        showBirthdayPicker.toggle()
+                    } label: {
+                        HStack {
+                            Text("생년월일")
+                                .font(.subBody)
+                            Spacer()
+                            Text(birthday.dateToShareString())
+                                .font(.subBody)
+                                .foregroundStyle(Color.gray400)
+                        }
+                        .frame(height: 38)
                     }
-                    .frame(height: 38)
-                    
-                    HStack {
-                        Text("성별")
-                            .font(.subBody)
-                        Spacer()
-                        Text("\(gender.rawValue)")
-                            .font(.subBody)
-                            .foregroundStyle(Color.customPrimary)
+                    Button {
+                        showGenderPicker.toggle()
+                    } label: {
+                        HStack {
+                            Text("성별")
+                                .font(.subBody)
+                            Spacer()
+                            Text("\(gender.rawValue)")
+                                .font(.subBody)
+                                .foregroundStyle(Color.customPrimary)
+                        }
+                        .frame(height: 38)
                     }
-                    .frame(height: 38)
                 }
                 .listRowBackground(Color.gray750)
             }
@@ -125,6 +132,28 @@ struct ProfileUserInfoView: View {
     }
 }
 
+extension ProfileUserInfoView {
+    private var doneButton: some View {
+        Button(showBirthdayPicker || showGenderPicker  ? "완료" : "") {
+            dismissKeyboard()
+        }
+        .foregroundStyle(Color.customPrimary)
+    }
+    
+    @ViewBuilder
+    private func checkView(_ text: String, _ isTrue: Bool) -> some View {
+        HStack {
+            Image(systemName: isTrue ? "checkmark" : "xmark")
+                .foregroundStyle(isTrue ? Color.customGreen : Color.customRed)
+            Text(text)
+        }
+    }
+    
+    private func dismissKeyboard() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
+}
+
 struct OvalTextFieldStyle: TextFieldStyle {
     func _body(configuration: TextField<Self._Label>) -> some View {
         configuration
@@ -133,7 +162,3 @@ struct OvalTextFieldStyle: TextFieldStyle {
             .cornerRadius(10)
     }
 }
-
-//#Preview {
-//    ProfileUserInfoView()
-//}
