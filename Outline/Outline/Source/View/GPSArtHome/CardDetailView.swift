@@ -7,6 +7,7 @@
 
 import SwiftUI
 import MapKit
+import Kingfisher
 
 struct CardDetailView: View {
     @AppStorage("authState") var authState: AuthState = .logout
@@ -175,28 +176,27 @@ struct CardDetailView: View {
     // MARK: - View Components
     
     private var courseImage: some View {
-        AsyncImage(url: URL(string: selectedCourse.course.thumbnail)) { image in
-            image
-                .resizable()
-                .roundedCorners(45, corners: [.bottomRight])
-                .shadow(color: .white, radius: 0.5, y: 0.5)
-        } placeholder: {
-            Rectangle()
-                .foregroundColor(.gray700)
-        }
-        .matchedGeometryEffect(id: selectedCourse.id, in: namespace)
-        .frame(
-            width: UIScreen.main.bounds.width,
-            height: UIScreen.main.bounds.height * 0.68
-        )
-        .transition(.identity)
+        KFImage(URL(string: selectedCourse.course.thumbnail))
+            .resizable()
+            .placeholder {
+                Rectangle()
+                    .foregroundColor(.gray700)
+            }
+            .roundedCorners(45, corners: [.bottomRight])
+            .shadow(color: .white, radius: 0.5, y: 0.5)
+            .frame(
+                width: UIScreen.main.bounds.width,
+                height: UIScreen.main.bounds.height * 0.68
+            )
+            .transition(.identity)
+          
     }
     
     private var courseInformation: some View {
         VStack(alignment: .leading) {
             VStack(alignment: .leading, spacing: 0) {
                 Text("\(selectedCourse.course.courseName)")
-                    .font(.headline)
+                    .font(.customHeadline)
                     .fontWeight(.semibold)
                     .padding(.bottom, 8)
                 HStack {
