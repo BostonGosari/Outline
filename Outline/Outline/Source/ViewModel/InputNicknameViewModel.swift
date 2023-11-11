@@ -56,6 +56,21 @@ class InputNicknameViewModel: ObservableObject {
             moveToInputUserInfoView = true
         }
     }
+    
+    func createUserName() {
+        let userInfoModel = UserInfoModel()
+        if nickname.isEmpty {
+            return
+        }
+        userInfoModel.createUserNameSet(userName: nickname) { res in
+            switch res {
+            case .success(let success):
+                print("success to create userName \(success)")
+            case .failure(let failure):
+                print("fail to create userName \(failure)")
+            }
+        }
+    }
 }
 
 extension InputNicknameViewModel {

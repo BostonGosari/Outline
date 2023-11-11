@@ -55,6 +55,7 @@ struct InputNicknameView: View {
                     
                     CompleteButton(text: "다음", isActive: viewModel.isSuccess) {
                         if viewModel.isSuccess {
+                            viewModel.createUserName()
                             viewModel.moveToInputUserInfoView = true
                         }
                     }

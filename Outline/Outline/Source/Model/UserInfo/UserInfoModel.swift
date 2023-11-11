@@ -84,15 +84,42 @@ struct UserInfoModel: UserInfoModelProtocol {
         }
     }
     
-    func updateUserNameSet(newUserNames: [String], completion: @escaping (Result<Bool, ReadDataError>) -> Void) {
-        if newUserNames.isEmpty {
-            completion(.failure(.dataNotFound))
+    func updateUserNameSet(oldUserName: String, userName: String, completion: @escaping (Result<Bool, ReadDataError>) -> Void) {
+        readUserNameSet { readUserNameResult in
+            switch readUserNameResult {
+            case .success(let userNameList):
+                do {
+                    var newUserNameList = userNameList.map { v in
+                        if v == oldUserName {
+                            return userName
+                        }
+                        return v
+                    }
+                    try userUtilRef.document("userNameSet").setData(from: UserNameSet(userNames: newUserNameList))
+                    completion(.success(true))
+                } catch {
+                    completion(.failure(.typeError))
+                }
+            case .failure(let failure):
+                completion(.failure(.dataNotFound))
+            }
         }
-        do {
-            try userUtilRef.document("userNameSet").setData(from: UserNameSet(userNames: newUserNames))
-            completion(.success(true))
-        } catch {
-            completion(.failure(.typeError))
+    }
+    func createUserNameSet(userName: String, completion: @escaping (Result<Bool, ReadDataError>) -> Void) {
+        readUserNameSet { readUserNameResult in
+            switch readUserNameResult {
+            case .success(let userNameList):
+                do {
+                    var newUserNameList = userNameList
+                    newUserNameList.append(userName)
+                    try userUtilRef.document("userNameSet").setData(from: UserNameSet(userNames: newUserNameList))
+                    completion(.success(true))
+                } catch {
+                    completion(.failure(.typeError))
+                }
+            case .failure(let failure):
+                completion(.failure(.dataNotFound))
+            }
         }
     }
 }

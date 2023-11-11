@@ -52,6 +52,20 @@ class ProfileUserInfoViewModel: ObservableObject {
         
         isSuccessToCheckName = checkInputCount && checkInputWord && checkNicnameDuplication
     }
+    
+    func updateUserNameSet(oldUserName: String, newUserName: String) {
+        userInfoModel.updateUserNameSet(
+            oldUserName: oldUserName,
+            userName: newUserName
+        ) { res in
+            switch res {
+            case .success(let success):
+                print("update userNameSet success \(success)")
+            case .failure(let failure):
+                print("fail to update userNameSet \(failure)")
+            }
+        }
+    }
 }
 
 extension ProfileUserInfoViewModel {
