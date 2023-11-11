@@ -5,10 +5,11 @@
 //  Created by Seungui Moon on 10/31/23.
 //
 
+import Combine
 import SwiftUI
 
 struct ProfileUserInfoView: View {
-    @ObservedObject private var profileUserInfoViewModel = ProfileUserInfoViewModel()
+    @StateObject private var profileUserInfoViewModel = ProfileUserInfoViewModel()
     @Environment(\.dismiss) private var dismiss
     
     @Binding var nickname: String
@@ -33,24 +34,37 @@ struct ProfileUserInfoView: View {
             }
             .padding(.top, 18)
             
-            HStack {
-                Text("닉네임")
-                    .font(.subBody)
-                Spacer()
+            TextField("\(nickname)", text: $profileUserInfoViewModel.nickname)
+                .foregroundStyle(Color.customWhite)
+                .padding(.vertical, 13)
+                .padding(.horizontal, 16)
+                .background(Color.gray700)
+                .clipShape(RoundedRectangle(cornerRadius: 10), style: /*@START_MENU_TOKEN@*/FillStyle()/*@END_MENU_TOKEN@*/)
+                .onChange(of: profileUserInfoViewModel.nickname) {
+                    profileUserInfoViewModel.checkNicname()
+                }
+                .padding(.top, 8)
+                .padding(.bottom, 16)
+                .padding(.horizontal, 16)
+            if profileUserInfoViewModel.isKeyboardVisible {
+                HStack {
+                    VStack(alignment: .leading) {
+                        checkView("2자리 이상 16자리 이하", profileUserInfoViewModel.checkInputCount)
+                            .padding(.bottom, 16)
+                            .padding(.horizontal, 16)
+                        
+                        checkView("특수 문자 제외", profileUserInfoViewModel.checkInputWord)
+                            .padding(.bottom, 16)
+                            .padding(.horizontal, 16)
+                        
+                        checkView("닉네임 중복 제외", profileUserInfoViewModel.checkNicnameDuplication)
+                            .padding(.horizontal, 16)
+                    }
+                    Spacer()
+                }
+                .frame(maxWidth: .infinity)
+                .padding(.horizontal, 16)
             }
-            .padding(.horizontal, 24)
-            .padding(.top, 30)
-            
-            HStack {
-                Text(nickname)
-                    .font(.subBody)
-                    .foregroundStyle(.gray400)
-                Spacer()
-            }
-            .padding(12)
-            .background(Color.gray750)
-            .cornerRadius(10)
-            .padding(.horizontal, 16)
             
             Divider()
                 .frame(height: 1)
@@ -98,6 +112,16 @@ struct ProfileUserInfoView: View {
         .navigationTitle("내 정보")
         .navigationBarTitleDisplayMode(.inline)
         .background(Color.gray900)
+        .onReceive(Publishers.Merge(profileUserInfoViewModel.keyboardWillShowPublisher, profileUserInfoViewModel.keyboardWillHidePublisher)) { isVisible in
+            profileUserInfoViewModel.isKeyboardVisible = isVisible
+            if isVisible == false {
+                if profileUserInfoViewModel.isSuccessToCheckName {
+                    nickname = profileUserInfoViewModel.nickname
+                } else {
+                    profileUserInfoViewModel.nickname = nickname
+                }
+            }
+        }
         .sheet(isPresented: $profileUserInfoViewModel.showBirthdayPicker, content: {
             DatePicker(
                 "", selection: $birthday,
