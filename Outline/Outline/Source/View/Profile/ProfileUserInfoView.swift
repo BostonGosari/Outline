@@ -8,14 +8,12 @@
 import SwiftUI
 
 struct ProfileUserInfoView: View {
+    @ObservedObject private var profileUserInfoViewModel = ProfileUserInfoViewModel()
     @Environment(\.dismiss) private var dismiss
     
     @Binding var nickname: String
     @Binding var birthday: Date
     @Binding var gender: Gender
-    
-    @State private var showBirthdayPicker = false
-    @State private var showGenderPicker = false
     
     var completion: () -> Void
     
@@ -62,7 +60,7 @@ struct ProfileUserInfoView: View {
             List {
                 Group {
                     Button {
-                        showBirthdayPicker.toggle()
+                        profileUserInfoViewModel.showBirthdayPicker.toggle()
                     } label: {
                         HStack {
                             Text("생년월일")
@@ -75,7 +73,7 @@ struct ProfileUserInfoView: View {
                         .frame(height: 38)
                     }
                     Button {
-                        showGenderPicker.toggle()
+                        profileUserInfoViewModel.showGenderPicker.toggle()
                     } label: {
                         HStack {
                             Text("성별")
@@ -100,7 +98,7 @@ struct ProfileUserInfoView: View {
         .navigationTitle("내 정보")
         .navigationBarTitleDisplayMode(.inline)
         .background(Color.gray900)
-        .sheet(isPresented: $showBirthdayPicker, content: {
+        .sheet(isPresented: $profileUserInfoViewModel.showBirthdayPicker, content: {
             DatePicker(
                 "", selection: $birthday,
                 in: dateRange,
@@ -109,7 +107,7 @@ struct ProfileUserInfoView: View {
             .datePickerStyle(.wheel)
             .presentationDetents([.medium])
         })
-        .sheet(isPresented: $showGenderPicker, content: {
+        .sheet(isPresented: $profileUserInfoViewModel.showGenderPicker, content: {
             Picker("성별", selection: $gender) {
                 ForEach(Gender.allCases, id: \.self) { gender in
                     Text(gender.rawValue)
@@ -134,7 +132,7 @@ struct ProfileUserInfoView: View {
 
 extension ProfileUserInfoView {
     private var doneButton: some View {
-        Button(showBirthdayPicker || showGenderPicker  ? "완료" : "") {
+        Button(profileUserInfoViewModel.showBirthdayPicker || profileUserInfoViewModel.showGenderPicker  ? "완료" : "") {
             dismissKeyboard()
         }
         .foregroundStyle(Color.customPrimary)
