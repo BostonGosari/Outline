@@ -114,13 +114,6 @@ struct ProfileUserInfoView: View {
         .background(Color.gray900)
         .onReceive(Publishers.Merge(profileUserInfoViewModel.keyboardWillShowPublisher, profileUserInfoViewModel.keyboardWillHidePublisher)) { isVisible in
             profileUserInfoViewModel.isKeyboardVisible = isVisible
-            if isVisible == false {
-                if profileUserInfoViewModel.isSuccessToCheckName {
-                    nickname = profileUserInfoViewModel.nickname
-                } else {
-                    profileUserInfoViewModel.nickname = nickname
-                }
-            }
         }
         .sheet(isPresented: $profileUserInfoViewModel.showBirthdayPicker, content: {
             DatePicker(
@@ -143,6 +136,12 @@ struct ProfileUserInfoView: View {
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 Button {
+                    if profileUserInfoViewModel.isSuccessToCheckName {
+                        profileUserInfoViewModel.updateUserNameSet(oldUserName: nickname, newUserName: profileUserInfoViewModel.nickname)
+                        nickname = profileUserInfoViewModel.nickname
+                    } else {
+                        profileUserInfoViewModel.nickname = nickname
+                    }
                     completion()
                     dismiss()
                 } label: {
