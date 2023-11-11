@@ -13,7 +13,7 @@ import WatchKit
 struct SummaryView: View {
     @StateObject var workoutManager = WorkoutManager.shared
     @Environment(\.dismiss) var dismiss
-    @StateObject var runningManager = WatchRunningManager.shared
+    @StateObject var watchRunningManager = WatchRunningManager.shared
     @StateObject var watchConnectivityManager = WatchConnectivityManager.shared
     
     @State private var isShowingFinishView = true
@@ -37,7 +37,7 @@ struct SummaryView: View {
         } else {
             ScrollViewReader { proxy in
                 ScrollView {
-                    PathGenerateManager.caculateLines(width: 80, height: 80, coordinates: runningManager.userLocations)
+                    PathGenerateManager.caculateLines(width: 80, height: 80, coordinates: watchRunningManager.userLocations)
                         .trim(from: 0, to: progress)
                         .stroke(style: StrokeStyle(lineWidth: 8, lineCap: .round, lineJoin: .round))
                         .scaledToFit()
@@ -76,7 +76,8 @@ struct SummaryView: View {
                         .foregroundColor(Color.gray500)
                         .padding(.bottom, 8)
                     Button {
-                        runningManager.startRunning = false
+                        watchRunningManager.startRunning = false
+                        watchConnectivityManager.sendRunningSessionStateToPhone(false)
                         dismiss()
                     } label: {
                         Text("완료")

@@ -10,6 +10,7 @@ import WatchConnectivity
 
 class WatchConnectivityManager: NSObject, WCSessionDelegate, ObservableObject {
     @Published var allCourses: [GPSArtCourse] = []
+    @Published var course: GPSArtCourse = GPSArtCourse()
     @Published var isWatchRunning: Bool = false
     
     static let shared = WatchConnectivityManager()
@@ -36,6 +37,17 @@ class WatchConnectivityManager: NSObject, WCSessionDelegate, ObservableObject {
     
     func sessionDidDeactivate(_ session: WCSession) { }
 #endif
+    
+    func sendGPSArtCourse(_ course: GPSArtCourse) {
+        do {
+            let encoder = JSONEncoder()
+            let data = try encoder.encode(course)
+            let userInfo = ["gpsArtCourse": data]
+            session.transferUserInfo(userInfo)
+        } catch {
+            print("Failed to encod GPSArtCourse")
+        }
+    }
     
     func sendGPSArtCoursesToWatch(_ courses: [GPSArtCourse]) {
         do {
@@ -81,6 +93,17 @@ class WatchConnectivityManager: NSObject, WCSessionDelegate, ObservableObject {
                     print("received all courses")
                 } catch {
                     print("Failed to decode GPSArtCourses: \(error)")
+                }
+            }
+            
+            if let data = userInfo["gpsArtCourse"] as? Data {
+                let decoder = JSONDecoder()
+                do {
+                    let course = try decoder.decode(GPSArtCourse.self, from: data)
+                    self.course = course
+                    print("received course")
+                } catch {
+                    print("Failed to decode GPSArtCourse: \(error)")
                 }
             }
             

@@ -29,7 +29,7 @@ struct MirroringView: View {
         .onAppear {
             workoutManager.retrieveRemoteSession()
         }
-        .onChange(of: workoutManager.sessionState) { _, newValue in
+        .onChange(of: workoutManager.session?.state) { _, newValue in
             withAnimation {
                 if newValue == .paused {
                     isPaused = true
@@ -106,8 +106,9 @@ struct MirroringView: View {
             Button {
                 if let session = workoutManager.session {
                     session.stopActivity(with: .now )
-                    showMirroringView = false
+                    session.end()
                 }
+                showMirroringView = false
             } label: {
                 Image(systemName: "stop.circle.fill")
                     .font(.system(size: 60))

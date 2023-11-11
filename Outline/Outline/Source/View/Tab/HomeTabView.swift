@@ -72,7 +72,7 @@ struct HomeTabView: View {
                 CountDown(running: $runningManager.running, start: $runningManager.start)
             }
             if runningManager.running {
-                RunningView()
+                    RunningView()
             }
             if showCustomSheet {
                 watchRunningSheet
@@ -83,6 +83,7 @@ struct HomeTabView: View {
                 showMirroringSheet = true
             } else {
                 showMirroringSheet = false
+                showMirroringView = false
             }
         }
         .sheet(isPresented: $showMirroringSheet) {

@@ -14,6 +14,8 @@ struct CardDetailView: View {
     @State private var isUnlocked = false
     @State private var showAlert = false
     @StateObject var runningStartManager = RunningStartManager.shared
+    @StateObject var watchConnectivityManager = WatchConnectivityManager.shared
+    @StateObject var workoutManager = WorkoutManager.shared
     private let locationManager = CLLocationManager()
     @Environment(\.dismiss) var dismiss
     
@@ -105,7 +107,7 @@ struct CardDetailView: View {
             default:
                 EmptyView()
             }
-                        
+            
             ZStack {
                 if showAlert {
                     Color.black.opacity(0.5)
@@ -223,7 +225,7 @@ struct CardDetailView: View {
             .onChange(of: isUnlocked) { _, newValue in
                 if newValue {
                     runningStartManager.checkAuthorization()
-
+                    
                     if runningStartManager.isHealthAuthorized {
                         if runningStartManager.isLocationAuthorized {
                             let course = selectedCourse.course.coursePaths
@@ -241,10 +243,10 @@ struct CardDetailView: View {
                                 }
                             }
                         } else {
-                           runningStartManager.showPermissionSheet = true
-                           runningStartManager.permissionType = .location
+                            runningStartManager.showPermissionSheet = true
+                            runningStartManager.permissionType = .location
                             isUnlocked = false
-                       }
+                        }
                     } else {
                         runningStartManager.showPermissionSheet = true
                         runningStartManager.permissionType = .health

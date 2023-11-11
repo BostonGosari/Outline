@@ -16,4 +16,8 @@ final class ConvertCoordinateManager {
     static func convertToCLLocationCoordinate(_ coordinate: Coordinate) -> CLLocationCoordinate2D {
         return CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: coordinate.longitude)
     }
+    
+    static func convertToCLLocationCoordinates(_ coordinates: [CLLocation]) -> [CLLocationCoordinate2D] {
+        return coordinates.map { CLLocationCoordinate2D(latitude: $0.coordinate.latitude, longitude: $0.coordinate.longitude) }
+    }
 }

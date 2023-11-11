@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import os
 import HealthKit
 
 extension WorkoutManager {
@@ -40,6 +39,16 @@ extension WorkoutManager {
         } else if let statisticsArray = try NSKeyedUnarchiver.unarchivedArrayOfObjects(ofClass: HKStatistics.self, from: data) {
             for statistics in statisticsArray {
                 updateForStatistics(statistics)
+            }
+        }
+    }
+    
+    func startRunningOnWatch() {
+        Task {
+            do {
+                try await startWatchWorkout(workoutType: .running)
+            } catch {
+                print("fail to start running on the paired watch")
             }
         }
     }

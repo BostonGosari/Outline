@@ -42,8 +42,12 @@ struct CountDown: View {
                 count = 1
             }
             DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                running = true
                 start.toggle()
+                if WatchConnectivityManager.shared.session.isWatchAppInstalled {
+                    WorkoutManager.shared.startRunningOnWatch()
+                } else {
+                    running = true
+                }
             }
         }
     }

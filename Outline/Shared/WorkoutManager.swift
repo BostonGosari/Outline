@@ -6,8 +6,8 @@
 //
 
 import Foundation
-import os
 import HealthKit
+import CoreLocation
 
 @MainActor
 
@@ -124,7 +124,6 @@ extension WorkoutManager {
         do {
             try await session?.sendToRemoteWorkoutSession(data: data)
         } catch {
-            Logger.shared.log("Failed to send data: \(error)")
         }
     }
 }
@@ -135,6 +134,7 @@ extension WorkoutManager {
         case HKQuantityType.quantityType(forIdentifier: .heartRate):
             let heartRateUnit = HKUnit.count().unitDivided(by: .minute())
             heartRate = statistics.mostRecentQuantity()?.doubleValue(for: heartRateUnit) ?? 0
+            averageHeartRate = statistics.averageQuantity()?.doubleValue(for: heartRateUnit) ?? 0
             
         case HKQuantityType.quantityType(forIdentifier: .activeEnergyBurned):
             let energyUnit = HKUnit.kilocalorie()
@@ -144,37 +144,29 @@ extension WorkoutManager {
             HKQuantityType.quantityType(forIdentifier: .distanceCycling):
             let meterUnit = HKUnit.meter()
             distance = statistics.sumQuantity()?.doubleValue(for: meterUnit) ?? 0
-            calculateAveragePace(distance: distance, duration: elapsedTimeInterval)
             
         case HKQuantityType(.runningSpeed):
-            let meterPerSecondUnit = HKUnit.meter().unitDivided(by: HKUnit.second())
-            let speed = statistics.mostRecentQuantity()?.doubleValue(for: meterPerSecondUnit) ?? 0
-            calculatePaceFromSpeed(speed: speed)
+            let kilometerPerSecondUnit = HKUnit.meterUnit(with: .kilo).unitDivided(by: HKUnit.second())
+            let speed = statistics.mostRecentQuantity()?.doubleValue(for: kilometerPerSecondUnit) ?? 0
+            let averageSpeed = statistics.averageQuantity()?.doubleValue(for: kilometerPerSecondUnit) ?? 0
+            pace = calculatePaceFromSpeed(speed: speed)
+            averagePace = calculatePaceFromSpeed(speed: averageSpeed)
             
         case HKQuantityType(.cyclingCadence):
-            let cadenceUnit = HKUnit.count().unitDivided(by: .minute())
-            cadence = statistics.mostRecentQuantity()?.doubleValue(for: cadenceUnit) ?? 0
+            let cadenceUnit = HKUnit.count().unitDivided(by: HKUnit.minute())
+            cadence = statistics.sumQuantity()?.doubleValue(for: cadenceUnit) ?? 0
             
         default:
             return
         }
     }
     
-    func calculateAveragePace(distance: Double, duration: TimeInterval) {
-        if distance > 0 && duration > 0 {
-            let averagePaceInSecondsPerKilometer = duration / distance * 1000
-            self.averagePace = averagePaceInSecondsPerKilometer
-        } else {
-            self.averagePace = 0
-        }
-    }
-    
-    func calculatePaceFromSpeed(speed: Double) {
+    func calculatePaceFromSpeed(speed: Double) -> Double {
         if speed > 0 {
-            let pace = 1 / speed * 1000
-            self.pace = pace
+            let pace = 1 / speed
+            return pace
         } else {
-            self.pace = 0
+            return 0
         }
     }
 }
