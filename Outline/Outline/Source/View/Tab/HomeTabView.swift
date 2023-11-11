@@ -64,6 +64,9 @@ struct HomeTabView: View {
                             .frame(maxHeight: .infinity, alignment: .top)
                     }
                 }
+                .fullScreenCover(isPresented: $showMirroringView) {
+                    MirroringView(showMirroringView: $showMirroringView)
+                }
             }
             if runningManager.start {
                 CountDown(running: $runningManager.running, start: $runningManager.start)
@@ -74,41 +77,16 @@ struct HomeTabView: View {
             if showCustomSheet {
                 watchRunningSheet
             }
-            if showMirroringView {
-                MirroringMapView()
-                    .transition(.move(edge: .bottom))
-            }
         }
         .onReceive(watchConnectivityManager.$isWatchRunning) { isRunning in
             if isRunning {
-                showCustomSheet = true
+                showMirroringSheet = true
             } else {
-                showCustomSheet = false
-            }
-        }
-        .onChange(of: workoutManager.sessionState.isActive) { oldValue, newValue in
-            if oldValue != newValue {
-                if newValue {
-                    showMirroringSheet = true
-                } else if !newValue {
-                    showMirroringSheet = false
-                }
+                showMirroringSheet = false
             }
         }
         .sheet(isPresented: $showMirroringSheet) {
             mirroringSheet
-        }
-        
-        // for test
-        .sheet(isPresented: $showMirroringTestView) {
-            MirroringView()
-                .ignoresSafeArea()
-        }
-        .overlay {
-            Button("mirroringView") {
-                showMirroringTestView.toggle()
-            }
-            .buttonStyle(.borderedProminent)
         }
     }
     

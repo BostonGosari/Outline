@@ -23,7 +23,7 @@ struct ControlsView: View {
             HStack(spacing: 11) {
                 ControlButton(systemName: "stop.fill", foregroundColor: .white, backgroundColor: .white) {
                     if let builder = workoutManager.builder {
-                        if builder.elapsedTime > 3 {
+                        if builder.elapsedTime > 10 {
                             showConfirmationSheet = true
                         } else {
                             showEndWithoutSavingSheet = true
@@ -120,9 +120,10 @@ extension ControlsView {
                 }
                 .buttonStyle(.plain)
                 Button {
-                    print(workoutManager.session ?? "error")
                     showConfirmationSheet = false
+                    sendDataToPhone()
                     workoutManager.session?.stopActivity(with: .now)
+                    watchConnectivityManager.sendRunningSessionStateToPhone(false)
                 } label: {
                     Text("종료하기")
                         .frame(maxWidth: .infinity)
@@ -177,6 +178,7 @@ extension ControlsView {
                     print(workoutManager.session ?? "")
                     showEndWithoutSavingSheet = false
                     watchRunningManager.startRunning = false
+                    workoutManager.session?.end()
                     watchConnectivityManager.sendRunningSessionStateToPhone(false)
                 } label: {
                     Text("종료하기")

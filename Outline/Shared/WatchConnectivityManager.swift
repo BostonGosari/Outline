@@ -9,9 +9,9 @@ import Foundation
 import WatchConnectivity
 
 class WatchConnectivityManager: NSObject, WCSessionDelegate, ObservableObject {
-    
     @Published var allCourses: [GPSArtCourse] = []
     @Published var isWatchRunning: Bool = false
+    
     static let shared = WatchConnectivityManager()
     
     private let userDataModel = UserDataModel()

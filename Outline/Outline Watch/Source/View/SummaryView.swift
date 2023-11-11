@@ -77,7 +77,6 @@ struct SummaryView: View {
                         .padding(.bottom, 8)
                     Button {
                         runningManager.startRunning = false
-                        sendDataToPhone()
                         dismiss()
                     } label: {
                         Text("완료")
@@ -101,16 +100,6 @@ struct SummaryView: View {
                    isShowingFinishView = false
                }
            }
-    }
-    
-    private func sendDataToPhone() {
-        let startCourse = runningManager.startCourse
-        guard let builder = workoutManager.builder else { return }
-        
-        let courseData = CourseData(courseName: startCourse.courseName, runningLength: startCourse.courseLength, heading: startCourse.heading, distance: startCourse.distance, coursePaths: runningManager.userLocations, runningCourseId: "", regionDisplayName: startCourse.regionDisplayName)
-        let healthData = HealthData(totalTime: builder.elapsedTime, averageCadence: workoutManager.cadence, totalRunningDistance: workoutManager.distance, totalEnergy: workoutManager.calorie, averageHeartRate: workoutManager.heartRate, averagePace: workoutManager.averagePace, startDate: Date(), endDate: Date())
-        
-        watchConnectivityManager.sendRunningRecordToPhone(RunningRecord(id: UUID().uuidString, runningType: runningManager.runningType, courseData: courseData, healthData: healthData))
     }
 }
 

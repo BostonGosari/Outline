@@ -11,6 +11,7 @@ import HealthKit
 
 struct CountDownView: View {
     @StateObject var workoutManager = WorkoutManager.shared
+    @StateObject var watchConnectivityManager = WatchConnectivityManager.shared
     @State private var countdownSeconds = 3
     
     var body: some View {
@@ -33,6 +34,7 @@ struct CountDownView: View {
                     }
                     .onDisappear {
                         startWorkout()
+                        watchConnectivityManager.sendRunningSessionStateToPhone(true)
                     }
             } else {
                 ZStack {

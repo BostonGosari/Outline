@@ -32,7 +32,10 @@
 		29111E3F2AE0CD0C009833C7 /* ConfettiWatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29111E3E2AE0CD0C009833C7 /* ConfettiWatchView.swift */; };
 		291A22312AF48305004B3D10 /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 291A22302AF48305004B3D10 /* Secrets.xcconfig */; };
 		291A22352AF4CD94004B3D10 /* PermissionSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291A22342AF4CD94004B3D10 /* PermissionSheet.swift */; };
-		291B98EA2AFE62C6004E2D9B /* MirroringMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291B98E92AFE62C6004E2D9B /* MirroringMapView.swift */; };
+		291B98EA2AFE62C6004E2D9B /* MirroringView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291B98E92AFE62C6004E2D9B /* MirroringView.swift */; };
+		291B98EC2AFF516A004E2D9B /* MirroringMetricsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291B98EB2AFF516A004E2D9B /* MirroringMetricsView.swift */; };
+		291B98EE2AFF5644004E2D9B /* MirroringNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291B98ED2AFF5644004E2D9B /* MirroringNavigationView.swift */; };
+		291B98F02AFF5AC6004E2D9B /* MirroringMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291B98EF2AFF5AC6004E2D9B /* MirroringMapView.swift */; };
 		292613172AF2BCEF00591E32 /* RecordHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 292613162AF2BCEF00591E32 /* RecordHeader.swift */; };
 		2930EDBB2AF3E59F007FD141 /* ControlButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2930EDBA2AF3E59F007FD141 /* ControlButton.swift */; };
 		2930EDBD2AF3FD97007FD141 /* CountDownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2930EDBC2AF3FD97007FD141 /* CountDownView.swift */; };
@@ -54,7 +57,7 @@
 		295232FA2AEED0630020EAFA /* BigCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295232F92AEED0630020EAFA /* BigCardView.swift */; };
 		295232FC2AEEE74A0020EAFA /* ButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295232FB2AEEE74A0020EAFA /* ButtonStyle.swift */; };
 		295324852AE038EE00085120 /* UserInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0AC8B062AD965390061612C /* UserInfoModel.swift */; };
-		296AB6FA2AFD5CEB0065A834 /* MirroringView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 296AB6F92AFD5CEB0065A834 /* MirroringView.swift */; };
+		296AB6FA2AFD5CEB0065A834 /* MirroringTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 296AB6F92AFD5CEB0065A834 /* MirroringTestView.swift */; };
 		2975F0962AE3E1790046C00B /* CornerRectangleModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2975F0952AE3E1790046C00B /* CornerRectangleModifier.swift */; };
 		297B80FB2AE73C4C00AF7219 /* Outline Watch App.app in Embed ExtensionKit Extensions */ = {isa = PBXBuildFile; fileRef = 297B80FA2AE73C4500AF7219 /* Outline Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		297B80FC2AE7515200AF7219 /* CourseModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E2EF702ADA6F230083ADEE /* CourseModelType.swift */; };
@@ -247,7 +250,10 @@
 		29111E3E2AE0CD0C009833C7 /* ConfettiWatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfettiWatchView.swift; sourceTree = "<group>"; };
 		291A22302AF48305004B3D10 /* Secrets.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 		291A22342AF4CD94004B3D10 /* PermissionSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionSheet.swift; sourceTree = "<group>"; };
-		291B98E92AFE62C6004E2D9B /* MirroringMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MirroringMapView.swift; sourceTree = "<group>"; };
+		291B98E92AFE62C6004E2D9B /* MirroringView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MirroringView.swift; sourceTree = "<group>"; };
+		291B98EB2AFF516A004E2D9B /* MirroringMetricsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MirroringMetricsView.swift; sourceTree = "<group>"; };
+		291B98ED2AFF5644004E2D9B /* MirroringNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MirroringNavigationView.swift; sourceTree = "<group>"; };
+		291B98EF2AFF5AC6004E2D9B /* MirroringMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MirroringMapView.swift; sourceTree = "<group>"; };
 		292613162AF2BCEF00591E32 /* RecordHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordHeader.swift; sourceTree = "<group>"; };
 		2930EDBA2AF3E59F007FD141 /* ControlButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlButton.swift; sourceTree = "<group>"; };
 		2930EDBC2AF3FD97007FD141 /* CountDownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountDownView.swift; sourceTree = "<group>"; };
@@ -263,7 +269,7 @@
 		293FD20F2AFBC52900623B23 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		295232F92AEED0630020EAFA /* BigCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigCardView.swift; sourceTree = "<group>"; };
 		295232FB2AEEE74A0020EAFA /* ButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyle.swift; sourceTree = "<group>"; };
-		296AB6F92AFD5CEB0065A834 /* MirroringView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MirroringView.swift; sourceTree = "<group>"; };
+		296AB6F92AFD5CEB0065A834 /* MirroringTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MirroringTestView.swift; sourceTree = "<group>"; };
 		2975F0952AE3E1790046C00B /* CornerRectangleModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CornerRectangleModifier.swift; sourceTree = "<group>"; };
 		297B80F92AE73C4500AF7219 /* Outline.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Outline.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		297B80FA2AE73C4500AF7219 /* Outline Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Outline Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -448,8 +454,11 @@
 		296AB6F82AFD5CD30065A834 /* Mirroring */ = {
 			isa = PBXGroup;
 			children = (
-				296AB6F92AFD5CEB0065A834 /* MirroringView.swift */,
-				291B98E92AFE62C6004E2D9B /* MirroringMapView.swift */,
+				296AB6F92AFD5CEB0065A834 /* MirroringTestView.swift */,
+				291B98E92AFE62C6004E2D9B /* MirroringView.swift */,
+				291B98EF2AFF5AC6004E2D9B /* MirroringMapView.swift */,
+				291B98EB2AFF516A004E2D9B /* MirroringMetricsView.swift */,
+				291B98ED2AFF5644004E2D9B /* MirroringNavigationView.swift */,
 			);
 			path = Mirroring;
 			sourceTree = "<group>";
@@ -1115,7 +1124,7 @@
 				F06298AF2AE1A2ED007AB2D3 /* CountDown.swift in Sources */,
 				29AE76AC2ADE0D9100A46742 /* OutlineApp.swift in Sources */,
 				0E29F65D2ADF6CA000F5EF5C /* WorkoutDataView.swift in Sources */,
-				296AB6FA2AFD5CEB0065A834 /* MirroringView.swift in Sources */,
+				296AB6FA2AFD5CEB0065A834 /* MirroringTestView.swift in Sources */,
 				F0ECB3AD2AF28541003FA2B4 /* FirstRunningGuideView.swift in Sources */,
 				BB52396B2ADD385700646494 /* BottomScrollView.swift in Sources */,
 				95B8F4602AED391300D9F35B /* AppleAuthModel.swift in Sources */,
@@ -1123,6 +1132,7 @@
 				9528F0002AE042570056CCC6 /* PathGenerateManager.swift in Sources */,
 				0E29F65C2ADF6CA000F5EF5C /* RunningMapView.swift in Sources */,
 				F096974F2ADBEE9F00C38AF4 /* CardDetailInformationView.swift in Sources */,
+				291B98EC2AFF516A004E2D9B /* MirroringMetricsView.swift in Sources */,
 				BB5239582ADC396300646494 /* BackgroundBlur.swift in Sources */,
 				BB5239372ADBD99F00646494 /* GPSArtHomeView.swift in Sources */,
 				2975F0962AE3E1790046C00B /* CornerRectangleModifier.swift in Sources */,
@@ -1133,6 +1143,7 @@
 				293FD1FC2AFB941500623B23 /* ElapsedTimeView.swift in Sources */,
 				954CB2BA2AE654BA005EB2E9 /* OnboardingNotificationAuthView.swift in Sources */,
 				F06B93622ADB847500387DEB /* ContentView.swift in Sources */,
+				291B98F02AFF5AC6004E2D9B /* MirroringMapView.swift in Sources */,
 				F09697472ADBCD6000C38AF4 /* Shape.swift in Sources */,
 				F03524102AE35AF800CCD8A6 /* RunningDataManager.swift in Sources */,
 				0E29F6552ADF6C7D00F5EF5C /* KMLParserManager.swift in Sources */,
@@ -1161,6 +1172,7 @@
 				954CB2B62AE63E79005EB2E9 /* OnboardingHealthAuthView.swift in Sources */,
 				29CC42BA2AF1069400578EF1 /* OnboardingLocationAuthViewModel.swift in Sources */,
 				95A01E1E2AF0CCE70093D9C0 /* DoubleExtension.swift in Sources */,
+				291B98EE2AFF5644004E2D9B /* MirroringNavigationView.swift in Sources */,
 				F06298AB2AE1998D007AB2D3 /* MapInfoView.swift in Sources */,
 				95A01E352AF144030093D9C0 /* ProfileHealthInfoView.swift in Sources */,
 				29EC2ED22AEB2B560033446C /* CourseAnalyzeManager.swift in Sources */,
@@ -1203,7 +1215,7 @@
 				F0492E1D2ADD2AE900F6EADD /* GPSArtHomeHeader.swift in Sources */,
 				293FD20A2AFBB80A00623B23 /* WorkoutManager+iOS.swift in Sources */,
 				0E9A5D422AE058EF00C19FF3 /* CustomShareView.swift in Sources */,
-				291B98EA2AFE62C6004E2D9B /* MirroringMapView.swift in Sources */,
+				291B98EA2AFE62C6004E2D9B /* MirroringView.swift in Sources */,
 				29AE76D72ADE2A2200A46742 /* InputNicknameView.swift in Sources */,
 				F01FDB992ADABB6100BDA633 /* TabModel.swift in Sources */,
 			);

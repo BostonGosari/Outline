@@ -1,0 +1,94 @@
+//
+//  MirroringMetricsView.swift
+//  Outline
+//
+//  Created by hyunjun on 11/11/23.
+//
+
+import SwiftUI
+
+struct MirroringMetricsView: View {
+    @StateObject var workoutManager = WorkoutManager.shared
+    var showDetail: Bool
+    var isPaused: Bool
+    
+    var body: some View {
+        let fromDate = workoutManager.session?.startDate ?? Date()
+        let schedule = MetricsTimelineSchedule(from: fromDate, isPaused: workoutManager.sessionState == .paused)
+        
+        VStack {
+            TimelineView(schedule) { context in
+                if showDetail {
+                    VStack(spacing: 25) {
+                        ElapsedTimeView(elapsedTime: workoutTimeInterval(context.date))
+                            .font(.customHeadline)
+                            .foregroundStyle(.customPrimary)
+                        HStack {
+                            MetricItem(value: "1000", label: "킬로미터")
+                            MetricItem(value: "100", label: "BPM")
+                            MetricItem(value: "232", label: "케이던스")
+                        }
+                        HStack {
+                            MetricItem(value: "232", label: "칼로리")
+                            MetricItem(value: "888'29''", label: "평균 페이스")
+                            MetricItem(value: "000", label: "000")
+                                .opacity(0)
+                        }
+                    }
+                    .padding(.top, 20)
+                    .padding(.bottom, 100)
+                }
+                HStack {
+                    VStack(alignment: .center) {
+                        ElapsedTimeView(elapsedTime: workoutTimeInterval(context.date))
+                            .font(.customTitle)
+                        Text("진행시간")
+                            .font(.customCaption)
+                            .foregroundStyle(.gray400)
+                    }
+                    .padding(.leading, 40)
+                    Spacer()
+                }
+                .opacity(!isPaused && !showDetail ? 1 : 0)
+            }
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+    }
+    
+    private func workoutTimeInterval(_ contextDate: Date) -> TimeInterval {
+        var timeInterval = workoutManager.elapsedTimeInterval
+        if workoutManager.sessionState == .running {
+            if let referenceContextDate = workoutManager.contextDate {
+                timeInterval += (contextDate.timeIntervalSinceReferenceDate - referenceContextDate.timeIntervalSinceReferenceDate)
+            } else {
+                workoutManager.contextDate = contextDate
+            }
+        } else {
+            var date = contextDate
+            date.addTimeInterval(workoutManager.elapsedTimeInterval)
+            timeInterval = date.timeIntervalSinceReferenceDate - contextDate.timeIntervalSinceReferenceDate
+            workoutManager.contextDate = nil
+        }
+        return timeInterval
+    }
+}
+
+struct MetricItem: View {
+    var value = "888'29''"
+    var label = "평균 페이스"
+    
+    var body: some View {
+        VStack {
+            Text(value)
+                .font(.customTitle)
+            Text(label)
+                .font(.customSubbody)
+                .foregroundStyle(.gray200)
+        }
+        .frame(maxWidth: .infinity)
+    }
+}
+
+#Preview {
+    MirroringView(showMirroringView: .constant(true))
+}

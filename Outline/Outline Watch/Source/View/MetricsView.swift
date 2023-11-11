@@ -19,6 +19,8 @@ struct MetricsView: View {
             VStack(alignment: .center) {
                 Spacer()
                 ElapsedTimeView(elapsedTime: elapsedTime(with: context.date))
+                    .font(.system(size: 40, weight: .bold))
+                    .foregroundStyle(.customPrimary)
                 Spacer()
                 HStack {
                     Spacer()
@@ -35,7 +37,6 @@ struct MetricsView: View {
                     Spacer()
                     VStack {
                         Text(workoutManager.pace > 0 ? workoutManager.pace.formattedAveragePace() : "-’--’’")
-
                             .font(.system(size: 28).weight(.semibold))
                             .foregroundColor(.white)
                         Text("페이스")
