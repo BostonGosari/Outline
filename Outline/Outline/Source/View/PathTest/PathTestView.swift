@@ -19,7 +19,7 @@ struct PathTestView: View {
               
             PathGenerateManager.caculateLines(width: 400, height: 400, coordinates: coordinates.map({ CLLocationCoordinate2D(latitude: $0.latitude, longitude: $0.longitude) }))
                 .fill(.clear)
-                .stroke(.customBlack, style: .init(lineWidth: 5))
+                .stroke(.customBlack, style: .init(lineWidth: 10, lineCap: .round, lineJoin: .round) )
         }
         .background(Color.customPrimary)
         .frame(width: 400, height: 400)
