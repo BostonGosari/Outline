@@ -11,7 +11,7 @@
 			<string>NATIVE_APP_KEY</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string></string>
+				<string>kakao$(KAKAO_API_KEY)</string>
 			</array>
 		</dict>
 	</array>
