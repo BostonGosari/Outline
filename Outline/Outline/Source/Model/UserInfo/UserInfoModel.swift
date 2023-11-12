@@ -84,16 +84,16 @@ struct UserInfoModel: UserInfoModelProtocol {
         }
     }
     
-    func updateUserNameSet(oldUserName: String, userName: String, completion: @escaping (Result<Bool, ReadDataError>) -> Void) {
+    func updateUserNameSet(oldUserName: String, newUserName: String, completion: @escaping (Result<Bool, ReadDataError>) -> Void) {
         readUserNameSet { readUserNameResult in
             switch readUserNameResult {
             case .success(let userNameList):
                 do {
-                    var newUserNameList = userNameList.map { v in
-                        if v == oldUserName {
+                    let newUserNameList = userNameList.map { userName in
+                        if userName == oldUserName {
                             return userName
                         }
-                        return v
+                        return userName
                     }
                     try userUtilRef.document("userNameSet").setData(from: UserNameSet(userNames: newUserNameList))
                     completion(.success(true))
