@@ -28,7 +28,7 @@ struct CanvasDataForShare {
 
 final class PathGenerateManager {
     static func caculateLines(width: Double, height: Double, coordinates: [CLLocationCoordinate2D]) -> some Shape {
-        let canvasData = calculateCanvaDataForInBox(coordinates: coordinates, width: width, height: height)
+        let canvasData = calculateCanvaData(coordinates: coordinates, width: width, height: height)
         var path = Path()
         if coordinates.isEmpty {
             return path

@@ -16,13 +16,12 @@ struct PathTestView: View {
     
     var body: some View {
         ZStack {
-              
-            PathGenerateManager.caculateLines(width: 400, height: 400, coordinates: coordinates.map({ CLLocationCoordinate2D(latitude: $0.latitude, longitude: $0.longitude) }))
+            PathGenerateManager.caculateLines(width: 200, height: 100, coordinates: coordinates.map({ CLLocationCoordinate2D(latitude: $0.latitude, longitude: $0.longitude) }))
                 .fill(.clear)
-                .stroke(.customBlack, style: .init(lineWidth: 10, lineCap: .round, lineJoin: .round) )
+                .stroke(.customGreen, style: .init(lineWidth: 5, lineCap: .round, lineJoin: .round) )
         }
-        .background(Color.customPrimary)
-        .frame(width: 400, height: 400)
+        .background(Color.customWhite)
+        .frame(width: 200, height: 100)
         .onAppear {
             getGPSArtCourseData()
         }
