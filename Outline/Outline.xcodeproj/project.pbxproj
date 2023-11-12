@@ -79,6 +79,7 @@
 		9528F0002AE042570056CCC6 /* PathGenerateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9528EFFF2AE042570056CCC6 /* PathGenerateManager.swift */; };
 		9528F0062AE0B37B0056CCC6 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9528F0052AE0B37B0056CCC6 /* LoginView.swift */; };
 		954B04182AFF725000A8A83E /* ProfileUserInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954B04172AFF725000A8A83E /* ProfileUserInfoViewModel.swift */; };
+		954B04292B012FD400A8A83E /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 954B04282B012FD400A8A83E /* Secrets.xcconfig */; };
 		954CB29C2AE51619005EB2E9 /* PersistentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EB1EE82ADDC43400B47984 /* PersistentController.swift */; };
 		954CB29D2AE5161B005EB2E9 /* UserDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EB1EEB2ADDC66B00B47984 /* UserDataModel.swift */; };
 		954CB29E2AE5161D005EB2E9 /* UserDataModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9528EFEB2ADEC7CF0056CCC6 /* UserDataModelType.swift */; };
@@ -114,7 +115,6 @@
 		95B8F45E2AED35E100D9F35B /* FirebaseAuthCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 95B8F45D2AED35E100D9F35B /* FirebaseAuthCombine-Community */; };
 		95B8F4602AED391300D9F35B /* AppleAuthModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B8F45F2AED391300D9F35B /* AppleAuthModel.swift */; };
 		95C953CD2AF3BF760040B9DA /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C953CC2AF3BF760040B9DA /* ProfileViewModel.swift */; };
-		95C953CF2AF496870040B9DA /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 95C953CE2AF496870040B9DA /* Secrets.xcconfig */; };
 		95E2EF712ADA6F230083ADEE /* CourseModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E2EF702ADA6F230083ADEE /* CourseModelType.swift */; };
 		95E2EF882ADBA5C70083ADEE /* CourseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E2EF872ADBA5C70083ADEE /* CourseModel.swift */; };
 		95EB1EE92ADDC43400B47984 /* PersistentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EB1EE82ADDC43400B47984 /* PersistentController.swift */; };
@@ -268,6 +268,7 @@
 		9528EFFF2AE042570056CCC6 /* PathGenerateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathGenerateManager.swift; sourceTree = "<group>"; };
 		9528F0052AE0B37B0056CCC6 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		954B04172AFF725000A8A83E /* ProfileUserInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUserInfoViewModel.swift; sourceTree = "<group>"; };
+		954B04282B012FD400A8A83E /* Secrets.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Secrets.xcconfig; path = ../Secrets.xcconfig; sourceTree = "<group>"; };
 		954CB29F2AE5457A005EB2E9 /* pohangCrocodileRun.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = pohangCrocodileRun.kml; sourceTree = "<group>"; };
 		954CB2A02AE5457A005EB2E9 /* seoulOctopusRun.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = seoulOctopusRun.kml; sourceTree = "<group>"; };
 		954CB2A12AE5457A005EB2E9 /* pohangDangDangRun.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = pohangDangDangRun.kml; sourceTree = "<group>"; };
@@ -289,7 +290,6 @@
 		95B8F4592AED27C400D9F35B /* AuthModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthModel.swift; sourceTree = "<group>"; };
 		95B8F45F2AED391300D9F35B /* AppleAuthModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleAuthModel.swift; sourceTree = "<group>"; };
 		95C953CC2AF3BF760040B9DA /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
-		95C953CE2AF496870040B9DA /* Secrets.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Secrets.xcconfig; path = ../../../../../Downloads/Secrets.xcconfig; sourceTree = "<group>"; };
 		95E2EF702ADA6F230083ADEE /* CourseModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseModelType.swift; sourceTree = "<group>"; };
 		95E2EF872ADBA5C70083ADEE /* CourseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseModel.swift; sourceTree = "<group>"; };
 		95EB1EE82ADDC43400B47984 /* PersistentController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentController.swift; sourceTree = "<group>"; };
@@ -624,8 +624,8 @@
 			isa = PBXGroup;
 			children = (
 				BB52392D2ADAF93D00646494 /* Outline Watch App.entitlements */,
-				95C953CE2AF496870040B9DA /* Secrets.xcconfig */,
 				BB493CEB2ADFD592009D3699 /* Outline-Watch-App-Info.plist */,
+				954B04282B012FD400A8A83E /* Secrets.xcconfig */,
 				950459832AF3869500E66E9B /* GoogleService-Info.plist */,
 				BB5239262ADAF70A00646494 /* Shared */,
 				F0AC8A9B2AD94C1F0061612C /* Outline */,
@@ -1015,11 +1015,11 @@
 				F0AC8B2E2AD968A20061612C /* Icon.xcassets in Resources */,
 				954CB2AD2AE5457B005EB2E9 /* pohangDuckRun.kml in Resources */,
 				F0AC8AA12AD94C200061612C /* Color.xcassets in Resources */,
-				95C953CF2AF496870040B9DA /* Secrets.xcconfig in Resources */,
 				954CB2AF2AE5457B005EB2E9 /* seoulCamelRun.kml in Resources */,
 				BB1D531E2ADDBCB90073771F /* Pretendard-Thin.ttf in Resources */,
 				BB1D530C2ADDBC560073771F /* Pretendard-Black.ttf in Resources */,
 				BB1D530E2ADDBC620073771F /* Pretendard-Bold.ttf in Resources */,
+				954B04292B012FD400A8A83E /* Secrets.xcconfig in Resources */,
 				BB1D53182ADDBCA20073771F /* Pretendard-Medium.ttf in Resources */,
 				BB1D53162ADDBC900073771F /* Pretendard-Light.ttf in Resources */,
 				954CB2A92AE5457B005EB2E9 /* pohangDangDangRun.kml in Resources */,
@@ -1432,7 +1432,7 @@
 		};
 		F0AC8ABE2AD94C210061612C /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 95C953CE2AF496870040B9DA /* Secrets.xcconfig */;
+			baseConfigurationReference = 954B04282B012FD400A8A83E /* Secrets.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1480,7 +1480,7 @@
 		};
 		F0AC8ABF2AD94C210061612C /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 95C953CE2AF496870040B9DA /* Secrets.xcconfig */;
+			baseConfigurationReference = 954B04282B012FD400A8A83E /* Secrets.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;

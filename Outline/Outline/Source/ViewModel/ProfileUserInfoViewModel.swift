@@ -56,7 +56,7 @@ class ProfileUserInfoViewModel: ObservableObject {
     func updateUserNameSet(oldUserName: String, newUserName: String) {
         userInfoModel.updateUserNameSet(
             oldUserName: oldUserName,
-            userName: newUserName
+            newUserName: newUserName
         ) { res in
             switch res {
             case .success(let success):
