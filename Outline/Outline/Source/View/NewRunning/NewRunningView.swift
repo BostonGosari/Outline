@@ -19,8 +19,6 @@ struct NewRunningView: View {
         ZStack {
             map
             navigation
-        }
-        .overlay {
             metrics
         }
     }
@@ -104,6 +102,9 @@ struct NewRunningView: View {
                 withAnimation {
                     showDetail = false
                     isPaused = false
+                    if sheetHeight != 0 {
+                        sheetHeight = 0
+                    }
                 }
             } label: {
                 Image(systemName: "play.circle.fill")
