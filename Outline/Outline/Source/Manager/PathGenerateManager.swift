@@ -102,7 +102,7 @@ final class PathGenerateManager {
         
         var relativeScale: Double = 0
         
-        if calculatedWidth > calculatedHeight {
+        if calculatedWidth < calculatedHeight {
             relativeScale = width / calculatedWidth
         } else {
             relativeScale = height / calculatedHeight
