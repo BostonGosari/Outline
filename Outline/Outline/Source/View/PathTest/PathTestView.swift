@@ -16,18 +16,13 @@ struct PathTestView: View {
     
     var body: some View {
         ZStack {
-            Rectangle()
-                .fill(.white30)
-                .frame(width: 100, height: 300)
-            
-            PathGenerateManager.caculateLines(width: 100, height: 300, coordinates: coordinates.map({ CLLocationCoordinate2D(latitude: $0.latitude, longitude: $0.longitude) }))
-//            PathGenerateManager.caculateLinesInRect(
-//                width: 300,
-//                height: 100,
-//                coordinates: coordinates.map({ CLLocationCoordinate2D(latitude: $0.latitude, longitude: $0.longitude) }),
-//                region: PathGenerateManager.calculateDeltaAndCenter(coordinates: coordinates.map({ CLLocationCoordinate2D(latitude: $0.latitude, longitude: $0.longitude) })))
+              
+            PathGenerateManager.caculateLines(width: 400, height: 400, coordinates: coordinates.map({ CLLocationCoordinate2D(latitude: $0.latitude, longitude: $0.longitude) }))
+                .fill(.clear)
+                .stroke(.customBlack, style: .init(lineWidth: 5))
         }
-        .frame(width: 100, height: 300)
+        .background(Color.customPrimary)
+        .frame(width: 400, height: 400)
         .onAppear {
             getGPSArtCourseData()
         }
@@ -36,7 +31,7 @@ struct PathTestView: View {
 
 extension PathTestView {
     private func getGPSArtCourseData() {
-        let parsedCoordinates = parseCooridinates(fileName: "pohangDangDangRun")
+        let parsedCoordinates = parseCooridinates(fileName: "seoulOctopusRun")
         self.coordinates = parsedCoordinates
     }
     
