@@ -51,7 +51,7 @@ struct WorkoutDataView: View {
         VStack(spacing: 39) {
             let totalTime = runningDataManager.totalTime + runningDataManager.time
             let totalDistance = runningDataManager.totalDistance + runningDataManager.distance
-            let averagePace = totalTime / totalDistance * 1000
+            let currentPace = runningDataManager.pace
             
             let distanceKM = totalDistance / 1000
             let kilocalorie = runningDataManager.kilocalorie
@@ -65,13 +65,13 @@ struct WorkoutDataView: View {
             HStack {
                 workoutDataItem(value: String(format: "%.0f", cadence), label: "케이던스")
                 VStack(spacing: 4) {
-                    Text(averagePace.formattedAveragePace())
+                    Text(currentPace.formattedCurrentPace())
                         .foregroundColor(.white)
                         .font(
                             Font.custom("Pretendard-SemiBold", size: 32)
                         )
-                        .scaleEffect(averagePace > 600 ? (averagePace > 6000 ? 0.7 : 0.9) : 1.0)
-                    Text("평균 페이스")
+                        .scaleEffect(currentPace > 600 ? (currentPace > 6000 ? 0.7 : 0.9) : 1.0)
+                    Text("페이스")
                         .font(Font.custom("Pretendard-Regular", size: 16))
                         .foregroundColor(Color.gray200)
                 }
