@@ -9,6 +9,7 @@ import SwiftUI
 
 struct MirroringView: View {
     @StateObject var workoutManager = WorkoutManager.shared
+    @StateObject var runningStartManager = RunningStartManager.shared
     @State var showDetail = false
     @State var isPaused = false
     @State var showDetailSheet = true
@@ -17,7 +18,7 @@ struct MirroringView: View {
     @State var sheetHeight: CGFloat = 0.0
     
     @Binding var showMirroringView: Bool
-        
+    
     var body: some View {
         ZStack {
             MirroringMapView()
@@ -109,6 +110,7 @@ struct MirroringView: View {
                     session.end()
                 }
                 showMirroringView = false
+                runningStartManager.mirroringRunning = false
             } label: {
                 Image(systemName: "stop.circle.fill")
                     .font(.system(size: 60))

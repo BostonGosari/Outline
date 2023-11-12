@@ -15,6 +15,7 @@ class RunningStartManager: ObservableObject {
     @Published var counter = 0
     @Published var start = false
     @Published var running = false
+    @Published var mirroringRunning = false
     @Published var changeRunningType = false
     
     @Published var isHealthAuthorized = false

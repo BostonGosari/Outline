@@ -8,9 +8,8 @@
 import SwiftUI
 
 struct CountDown: View {
-    
-    @Binding var running: Bool
-    @Binding var start: Bool
+    @StateObject private var runningManager = RunningStartManager.shared
+    @StateObject private var watchConnectivityManager = WatchConnectivityManager.shared
     @State var count = 3
     
     var body: some View {
@@ -42,11 +41,15 @@ struct CountDown: View {
                 count = 1
             }
             DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                start.toggle()
+                runningManager.start = false
                 if WatchConnectivityManager.shared.session.isWatchAppInstalled {
+                    if let course = runningManager.startCourse {
+                        watchConnectivityManager.sendGPSArtCourse(course)
+                    }
                     WorkoutManager.shared.startRunningOnWatch()
+                    runningManager.mirroringRunning = true
                 } else {
-                    running = true
+                    runningManager.running = true
                 }
             }
         }

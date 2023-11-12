@@ -10,7 +10,7 @@ import WatchConnectivity
 
 class WatchConnectivityManager: NSObject, WCSessionDelegate, ObservableObject {
     @Published var allCourses: [GPSArtCourse] = []
-    @Published var course: GPSArtCourse = GPSArtCourse()
+    @Published var receivedCourse: GPSArtCourse = GPSArtCourse()
     @Published var isWatchRunning: Bool = false
     
     static let shared = WatchConnectivityManager()
@@ -100,7 +100,7 @@ class WatchConnectivityManager: NSObject, WCSessionDelegate, ObservableObject {
                 let decoder = JSONDecoder()
                 do {
                     let course = try decoder.decode(GPSArtCourse.self, from: data)
-                    self.course = course
+                    self.receivedCourse = course
                     print("received course")
                 } catch {
                     print("Failed to decode GPSArtCourse: \(error)")
@@ -110,7 +110,7 @@ class WatchConnectivityManager: NSObject, WCSessionDelegate, ObservableObject {
             if let isRunning = userInfo["runningState"] as? Bool {
                 if isRunning {
                     self.isWatchRunning = true
-                } else {
+                } else if !isRunning {
                     self.isWatchRunning = false
                 }
             }

@@ -20,8 +20,8 @@ struct MapWatchView: View {
             if !watchRunningManager.startCourse.coursePaths.isEmpty {
                 MapPolyline(coordinates: ConvertCoordinateManager.convertToCLLocationCoordinates(watchRunningManager.startCourse.coursePaths))
                     .stroke(.white.opacity(0.5), style: StrokeStyle(lineWidth: 8, lineCap: .round, lineJoin: .round))
-            } else if !watchConnectivityManager.course.coursePaths.isEmpty {
-                MapPolyline(coordinates: ConvertCoordinateManager.convertToCLLocationCoordinates(watchConnectivityManager.course.coursePaths))
+            } else if !watchConnectivityManager.receivedCourse.coursePaths.isEmpty {
+                MapPolyline(coordinates: ConvertCoordinateManager.convertToCLLocationCoordinates(watchConnectivityManager.receivedCourse.coursePaths))
                     .stroke(.white.opacity(0.5), style: StrokeStyle(lineWidth: 8, lineCap: .round, lineJoin: .round))
             }
             

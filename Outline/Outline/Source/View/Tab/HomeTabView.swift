@@ -18,8 +18,6 @@ struct HomeTabView: View {
     @State private var showCustomSheet = false
     @State private var showMirroringSheet = false
     @State private var showMirroringView = false
-
-    @State private var showMirroringTestView = false
     
     var body: some View {
         ZStack {
@@ -69,10 +67,13 @@ struct HomeTabView: View {
                 }
             }
             if runningManager.start {
-                CountDown(running: $runningManager.running, start: $runningManager.start)
+                CountDown()
             }
             if runningManager.running {
-                    RunningView()
+                RunningView()
+            }
+            if runningManager.mirroringRunning {
+                MirroringView(showMirroringView: .constant(true))
             }
             if showCustomSheet {
                 watchRunningSheet
@@ -84,6 +85,7 @@ struct HomeTabView: View {
             } else {
                 showMirroringSheet = false
                 showMirroringView = false
+                runningManager.mirroringRunning = false
             }
         }
         .sheet(isPresented: $showMirroringSheet) {
