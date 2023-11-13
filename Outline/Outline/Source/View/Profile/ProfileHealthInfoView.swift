@@ -33,15 +33,15 @@ struct ProfileHealthInfoView: View {
         VStack(alignment: .leading) {
             VStack(alignment: .leading) {
                 Text("간단한 신체정보를 알려주세요.")
-                    .font(.customTitle2)
+//                    .font(.title2)
                     .padding(.bottom, 20)
                     .padding(.top, 40)
                 Text("정확한 러닝 정보를 받으실 수 있어요.")
-                    .font(.customTag)
+//                    .font(.tag)
                     .foregroundStyle(Color.gray300)
                     .padding(.bottom, 0)
                 Text("이 정보는 타인에게 공유되지 않아요.")
-                    .font(.customTag)
+//                    .font(.tag)
                     .foregroundStyle(Color.gray300)
             }
             .padding(.horizontal, 16)
@@ -54,11 +54,13 @@ struct ProfileHealthInfoView: View {
                     } label: {
                         HStack {
                             Text("신장")
+//                                .font(.subBody)
                             Spacer()
                             Text("\(height)cm")
-                                .foregroundStyle(Color.gray400)
+//                                .font(.subBody)
+                                .foregroundStyle(showHeightPicker ? Color.customPrimary : Color.gray400)
                         }
-                        .frame(height: 40)
+                        .frame(height: 38)
                     }
 
                     Button {
@@ -66,11 +68,13 @@ struct ProfileHealthInfoView: View {
                     } label: {
                         HStack {
                             Text("체중")
+//                                .font(.subBody)
                             Spacer()
                             Text("\(weight)kg")
-                                .foregroundStyle(Color.customPrimary)
+//                                .font(.subBody)
+                                .foregroundStyle(showWeightPicker ? Color.customPrimary : Color.gray400)
                         }
-                        .frame(height: 40)
+                        .frame(height: 38)
                     }
                 }
                 .listRowBackground(Color.gray750)
@@ -79,42 +83,39 @@ struct ProfileHealthInfoView: View {
             .cornerRadius(10)
             .listStyle(.inset)
             .padding(.horizontal, 16)
-            .frame(height: 2 * 62)
+            .frame(height: 2 * 60)
+            .scrollDisabled(true)
+            
             Spacer()
         }
-        .navigationTitle("내 정보")
+        .navigationTitle("신체 정보")
         .navigationBarTitleDisplayMode(.inline)
         .background(Color.gray900)
-        .sheet(isPresented: $showHeightPicker, content: {
+        .sheet(isPresented: $showHeightPicker, onDismiss: {
+            completion()
+        }, content: {
             Picker("신장", selection: $height) {
                 ForEach(heightRange, id: \.self) { h in
                     Text("\(h)cm")
+//                        .font(.subBody)
                 }
             }
             .pickerStyle(.wheel)
             .presentationDetents([.medium])
         })
-        .sheet(isPresented: $showWeightPicker, content: {
+        .sheet(isPresented: $showWeightPicker, onDismiss: {
+            completion()
+        }, content: {
             VStack {
                 Picker("체중", selection: $weight) {
                     ForEach(weightRange, id: \.self) { w in
                         Text("\(w)kg")
+//                            .font(.subBody)
                     }
                 }
                 .pickerStyle(.wheel)
                 .presentationDetents([.medium])
             }
         })
-        .toolbar {
-            ToolbarItem(placement: .topBarTrailing) {
-                Button {
-                    completion()
-                    dismiss()
-                } label: {
-                    Text("완료")
-                        .foregroundStyle(Color.customPrimary)
-                }
-            }
-        }
     }
 }
