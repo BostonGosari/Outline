@@ -5,17 +5,16 @@
 //  Created by Seungui Moon on 10/31/23.
 //
 
+import Combine
 import SwiftUI
 
 struct ProfileUserInfoView: View {
+    @StateObject private var profileUserInfoViewModel = ProfileUserInfoViewModel()
     @Environment(\.dismiss) private var dismiss
     
     @Binding var nickname: String
     @Binding var birthday: Date
     @Binding var gender: Gender
-    
-    @State private var showBirthdayPicker = false
-    @State private var showGenderPicker = false
     
     var completion: () -> Void
     
@@ -32,23 +31,40 @@ struct ProfileUserInfoView: View {
                     .resizable()
                     .scaledToFit()
                     .frame(width: 118, height: 118)
-                Image("changeProfileImage")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 118, height: 118)
             }
             .padding(.top, 18)
             
-            HStack {
-                Text("닉네임")
-                Spacer()
+            TextField("\(nickname)", text: $profileUserInfoViewModel.nickname)
+                .foregroundStyle(Color.customWhite)
+                .padding(.vertical, 13)
+                .padding(.horizontal, 16)
+                .background(Color.gray700)
+                .clipShape(RoundedRectangle(cornerRadius: 10), style: /*@START_MENU_TOKEN@*/FillStyle()/*@END_MENU_TOKEN@*/)
+                .onChange(of: profileUserInfoViewModel.nickname) {
+                    profileUserInfoViewModel.checkNicname()
+                }
+                .padding(.top, 8)
+                .padding(.bottom, 16)
+                .padding(.horizontal, 16)
+            if profileUserInfoViewModel.isKeyboardVisible {
+                HStack {
+                    VStack(alignment: .leading) {
+                        checkView("2자리 이상 16자리 이하", profileUserInfoViewModel.checkInputCount)
+                            .padding(.bottom, 16)
+                            .padding(.horizontal, 16)
+                        
+                        checkView("특수 문자 제외", profileUserInfoViewModel.checkInputWord)
+                            .padding(.bottom, 16)
+                            .padding(.horizontal, 16)
+                        
+                        checkView("닉네임 중복 제외", profileUserInfoViewModel.checkNicnameDuplication)
+                            .padding(.horizontal, 16)
+                    }
+                    Spacer()
+                }
+                .frame(maxWidth: .infinity)
+                .padding(.horizontal, 16)
             }
-            .padding(.horizontal, 24)
-            .padding(.top, 30)
-            
-            TextField("아웃라인메이트", text: $nickname)
-            .textFieldStyle(OvalTextFieldStyle())
-            .padding(.horizontal, 16)
             
             Divider()
                 .frame(height: 1)
@@ -58,43 +74,50 @@ struct ProfileUserInfoView: View {
             List {
                 Group {
                     Button {
-                        showBirthdayPicker.toggle()
+                        profileUserInfoViewModel.showBirthdayPicker.toggle()
                     } label: {
                         HStack {
                             Text("생년월일")
+//                                .font(.subBody)
                             Spacer()
                             Text(birthday.dateToShareString())
+//                                .font(.subBody)
                                 .foregroundStyle(Color.gray400)
                         }
-                        .frame(height: 40)
+                        .frame(height: 38)
                     }
-
                     Button {
-                        showGenderPicker.toggle()
+                        profileUserInfoViewModel.showGenderPicker.toggle()
                     } label: {
                         HStack {
                             Text("성별")
+//                                .font(.subBody)
                             Spacer()
                             Text("\(gender.rawValue)")
+//                                .font(.subBody)
                                 .foregroundStyle(Color.customPrimary)
                         }
-                        .frame(height: 40)
+                        .frame(height: 38)
                     }
                 }
                 .listRowBackground(Color.gray750)
-                .listRowSeparator(.hidden)
             }
             .cornerRadius(10)
             .listStyle(.inset)
             .padding(.horizontal, 16)
-            .frame(height: 2 * 62)
-            
+            .frame(height: 2 * 60)
+            .scrollDisabled(true)
             Spacer()
         }
         .navigationTitle("내 정보")
         .navigationBarTitleDisplayMode(.inline)
         .background(Color.gray900)
-        .sheet(isPresented: $showBirthdayPicker, content: {
+        .onReceive(Publishers.Merge(profileUserInfoViewModel.keyboardWillShowPublisher, profileUserInfoViewModel.keyboardWillHidePublisher)) { isVisible in
+            profileUserInfoViewModel.isKeyboardVisible = isVisible
+        }
+        .sheet(isPresented: $profileUserInfoViewModel.showBirthdayPicker, onDismiss: {
+            completion()
+        }, content: {
             DatePicker(
                 "", selection: $birthday,
                 in: dateRange,
@@ -103,7 +126,9 @@ struct ProfileUserInfoView: View {
             .datePickerStyle(.wheel)
             .presentationDetents([.medium])
         })
-        .sheet(isPresented: $showGenderPicker, content: {
+        .sheet(isPresented: $profileUserInfoViewModel.showGenderPicker, onDismiss: {
+            completion()
+        }, content: {
             Picker("성별", selection: $gender) {
                 ForEach(Gender.allCases, id: \.self) { gender in
                     Text(gender.rawValue)
@@ -112,17 +137,39 @@ struct ProfileUserInfoView: View {
             .pickerStyle(.wheel)
             .presentationDetents([.medium])
         })
-        .toolbar {
-            ToolbarItem(placement: .topBarTrailing) {
-                Button {
+        .onChange(of: profileUserInfoViewModel.isKeyboardVisible, { _, newValue in
+            if newValue == false {
+                if profileUserInfoViewModel.isSuccessToCheckName {
+                    profileUserInfoViewModel.updateUserNameSet(oldUserName: nickname, newUserName: profileUserInfoViewModel.nickname)
+                    nickname = profileUserInfoViewModel.nickname
                     completion()
-                    dismiss()
-                } label: {
-                    Text("완료")
-                        .foregroundStyle(Color.customPrimary)
+                } else {
+                    profileUserInfoViewModel.nickname = nickname
                 }
             }
+        })
+    }
+}
+
+extension ProfileUserInfoView {
+    private var doneButton: some View {
+        Button(profileUserInfoViewModel.showBirthdayPicker || profileUserInfoViewModel.showGenderPicker  ? "완료" : "") {
+            dismissKeyboard()
         }
+        .foregroundStyle(Color.customPrimary)
+    }
+    
+    @ViewBuilder
+    private func checkView(_ text: String, _ isTrue: Bool) -> some View {
+        HStack {
+            Image(systemName: isTrue ? "checkmark" : "xmark")
+                .foregroundStyle(isTrue ? Color.customGreen : Color.customRed)
+            Text(text)
+        }
+    }
+    
+    private func dismissKeyboard() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
 }
 
