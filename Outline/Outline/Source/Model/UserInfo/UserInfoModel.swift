@@ -91,7 +91,7 @@ struct UserInfoModel: UserInfoModelProtocol {
                 do {
                     let newUserNameList = userNameList.map { userName in
                         if userName == oldUserName {
-                            return userName
+                            return newUserName
                         }
                         return userName
                     }

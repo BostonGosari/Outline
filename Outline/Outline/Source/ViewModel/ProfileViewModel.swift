@@ -65,36 +65,38 @@ final class ProfileViewModel: ObservableObject {
     
     func signOut() {
         // Delete FireStoreData, CoreData
-        authModel.handleSignOut { res in
-            switch res {
-            case .success(let isSuccess):
-                if let userId = self.userId {
-                    print(userId)
-                    self.userInfoModel.deleteUser(uid: userId) { isSuccessDeleteDBUser in
-                        switch isSuccessDeleteDBUser {
-                        case .success(let success):
-                            print("success to delete user on FireStore \(success)")
-                        case .failure(let failure):
-                            print("fail to delete user on FireStore")
-                            print("\(failure)")
+        if let userId = self.userId {
+            self.userInfoModel.deleteUser(uid: userId) { isSuccessDeleteDBUser in
+                switch isSuccessDeleteDBUser {
+                case .success(let isSuccess):
+                    print("success to delete user on FireStore \(isSuccess)")
+                    if let userId = self.userId {
+                        print(userId)
+                        self.authModel.handleSignOut { res in
+                            switch res {
+                            case .success(let success):
+                                print("success to sign out at authModel\(success)")
+                            case .failure(let failure):
+                                print("fail to signout at authModel \(failure)")
+                            }
                         }
                     }
+                case .failure(let error):
+                    print("fail to delete user on FireStore")
+                    print(error)
                 }
-                
-                self.userInfoModel.deleteUserNameSet(userName: self.userInfo.nickname) { res in
-                    switch res {
-                    case .success(let success):
-                        print("success to delete userNameSet on DB \(success)")
-                    case .failure(let failure):
-                        print("fail to delete userNameSet on DB \(failure)")
-                    }
-                }
-                self.userId = ""
-                print("reset userId to empty \(isSuccess)")
-            case .failure(let error):
-                print("fail to signout")
-                print(error)
             }
         }
+        
+        self.userInfoModel.deleteUserNameSet(userName: self.userInfo.nickname) { res in
+            switch res {
+            case .success(let success):
+                print("success to delete userNameSet on DB \(success)")
+            case .failure(let failure):
+                print("fail to delete userNameSet on DB \(failure)")
+            }
+        }
+        self.userId = ""
+        print("reset userId to empty")
     }
 }
