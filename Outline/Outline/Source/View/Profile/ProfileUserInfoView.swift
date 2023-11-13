@@ -115,7 +115,9 @@ struct ProfileUserInfoView: View {
         .onReceive(Publishers.Merge(profileUserInfoViewModel.keyboardWillShowPublisher, profileUserInfoViewModel.keyboardWillHidePublisher)) { isVisible in
             profileUserInfoViewModel.isKeyboardVisible = isVisible
         }
-        .sheet(isPresented: $profileUserInfoViewModel.showBirthdayPicker, content: {
+        .sheet(isPresented: $profileUserInfoViewModel.showBirthdayPicker, onDismiss: {
+            completion()
+        }, content: {
             DatePicker(
                 "", selection: $birthday,
                 in: dateRange,
@@ -124,7 +126,9 @@ struct ProfileUserInfoView: View {
             .datePickerStyle(.wheel)
             .presentationDetents([.medium])
         })
-        .sheet(isPresented: $profileUserInfoViewModel.showGenderPicker, content: {
+        .sheet(isPresented: $profileUserInfoViewModel.showGenderPicker, onDismiss: {
+            completion()
+        }, content: {
             Picker("성별", selection: $gender) {
                 ForEach(Gender.allCases, id: \.self) { gender in
                     Text(gender.rawValue)
@@ -133,23 +137,34 @@ struct ProfileUserInfoView: View {
             .pickerStyle(.wheel)
             .presentationDetents([.medium])
         })
-        .toolbar {
-            ToolbarItem(placement: .topBarTrailing) {
-                Button {
-                    if profileUserInfoViewModel.isSuccessToCheckName {
-                        profileUserInfoViewModel.updateUserNameSet(oldUserName: nickname, newUserName: profileUserInfoViewModel.nickname)
-                        nickname = profileUserInfoViewModel.nickname
-                    } else {
-                        profileUserInfoViewModel.nickname = nickname
-                    }
+        .onChange(of: profileUserInfoViewModel.isKeyboardVisible, { _, newValue in
+            if newValue == false {
+                if profileUserInfoViewModel.isSuccessToCheckName {
+                    profileUserInfoViewModel.updateUserNameSet(oldUserName: nickname, newUserName: profileUserInfoViewModel.nickname)
+                    nickname = profileUserInfoViewModel.nickname
                     completion()
-                    dismiss()
-                } label: {
-                    Text("완료")
-                        .foregroundStyle(Color.customPrimary)
+                } else {
+                    profileUserInfoViewModel.nickname = nickname
                 }
             }
-        }
+        })
+//        .toolbar {
+//            ToolbarItem(placement: .topBarTrailing) {
+//                Button {
+//                    if profileUserInfoViewModel.isSuccessToCheckName {
+//                        profileUserInfoViewModel.updateUserNameSet(oldUserName: nickname, newUserName: profileUserInfoViewModel.nickname)
+//                        nickname = profileUserInfoViewModel.nickname
+//                    } else {
+//                        profileUserInfoViewModel.nickname = nickname
+//                    }
+//                    completion()
+//                    dismiss()
+//                } label: {
+//                    Text("완료")
+//                        .foregroundStyle(Color.customPrimary)
+//                }
+//            }
+//        }
     }
 }
 
