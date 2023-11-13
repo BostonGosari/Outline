@@ -31,6 +31,9 @@ struct OutlineApp: App {
                         _ = AuthController.handleOpenUrl(url: url)
                     }
                 }
+                .overlay {
+                    NewRunningView()
+                }
         }
     }
 }
