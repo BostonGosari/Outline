@@ -12,8 +12,8 @@ import SwiftUI
 struct CustomShareView: View {
     @ObservedObject var viewModel: ShareViewModel
 
-    @State private var isShowBPM = true
-    @State private var isShowCal = true
+    @State private var isShowBPM = false
+    @State private var isShowCal = false
     @State private var isShowPace = true
     @State private var isShowDistance = true
     
@@ -31,7 +31,7 @@ struct CustomShareView: View {
             
             VStack(spacing: 0) {
                 customImageView
-                    .padding(EdgeInsets(top: 20, leading: 49, bottom: 16, trailing: 49))
+                    .padding(EdgeInsets(top: 20, leading: 49, bottom: 12, trailing: 49))
                 pageIndicator
                 tagView
             }
@@ -47,6 +47,7 @@ struct CustomShareView: View {
                         viewModel.saveImage(image: image)
                     }
                 }
+                viewModel.tapSaveButton = false
             }
         }
         .onChange(of: viewModel.tapShareButton) {
@@ -59,6 +60,7 @@ struct CustomShareView: View {
                         viewModel.shareToInstagram(image: image)
                     }
                 }
+                viewModel.tapShareButton = false
             }
         }
     }
@@ -130,10 +132,10 @@ extension CustomShareView {
     private var runningInfo: some View {
         VStack(alignment: .leading, spacing: 0) {
             Text(viewModel.runningData.courseName)
-                .font(.headline)
+                .font(.customHeadline)
                 .foregroundStyle(Color.customPrimary)
             Text(viewModel.runningData.runningDate)
-                .font(.body)
+                .font(.customBody)
             
             Spacer()
             
@@ -141,20 +143,20 @@ extension CustomShareView {
                 VStack(alignment: .leading) {
                     Text(viewModel.runningData.distance)
                         .opacity(isShowDistance ? 1 : 0)
-                        .font(.body)
+                        .font(.customBody)
                     Text(viewModel.runningData.bpm)
                         .opacity(isShowBPM ? 1 : 0)
-                        .font(.body)
+                        .font(.customBody)
                 }
                 Spacer()
                 
                 VStack(alignment: .trailing) {
                     Text(viewModel.runningData.pace)
                         .opacity(isShowPace ? 1 : 0)
-                        .font(.body)
+                        .font(.customBody)
                     Text(viewModel.runningData.cal)
                         .opacity(isShowCal ? 1 : 0)
-                        .font(.body)
+                        .font(.customBody)
                 }
             }
         }
@@ -208,7 +210,7 @@ struct TagButton: View {
             self.action()
         }  label: {
             Text(text)
-                .font(.tag2)
+                .font(.customTag2)
                 .foregroundStyle(isShow ? Color.customBlack : Color.customWhite)
                 .padding(.horizontal, 16)
                 .padding(.vertical, 8)

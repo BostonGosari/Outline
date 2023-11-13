@@ -9,6 +9,7 @@
         <attribute name="courseName" attributeType="String"/>
         <attribute name="distance" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="heading" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="regionDisplayName" optional="YES" attributeType="String"/>
         <attribute name="runningCourseId" optional="YES" attributeType="String"/>
         <attribute name="runningLength" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <relationship name="coursePaths" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="CoreCoordinate" inverseName="parentCoursePaths" inverseEntity="CoreCoordinate"/>

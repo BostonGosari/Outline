@@ -7,6 +7,8 @@
 
 import Combine
 import CoreLocation
+import HealthKit
+import SwiftUI
 
 class RunningStartManager: ObservableObject {
         
@@ -15,14 +17,64 @@ class RunningStartManager: ObservableObject {
     @Published var running = false
     @Published var changeRunningType = false
     
+    @Published var isHealthAuthorized = false
+    @Published var isLocationAuthorized = false
+    @Published var showPermissionSheet = false
+    @Published var permissionType: PermissionType?
+    
     private var timer: AnyCancellable?
-    private let locationManager = CLLocationManager()
+    private var healthStore = HKHealthStore()
+    private var locationManager = CLLocationManager()
     var startCourse: GPSArtCourse?
     var runningType: RunningType = .gpsArt
     
     static let shared = RunningStartManager()
     
     private init() { }
+    
+    func checkAuthorization() {
+        checkHealthAuthorization()
+        checkLocationAuthorization()
+    }
+    
+    func checkHealthAuthorization() {
+        let quantityTypes: Set = [
+            HKQuantityType(.heartRate),
+            HKQuantityType(.activeEnergyBurned),
+            HKQuantityType(.distanceWalkingRunning),
+            HKQuantityType(.stepCount),
+            HKQuantityType(.cyclingCadence),
+            HKQuantityType(.runningSpeed),
+            HKQuantityType.workoutType()
+        ]
+        
+        for quantityType in quantityTypes {
+            let status = healthStore.authorizationStatus(for: quantityType)
+            switch status {
+            case .notDetermined:
+                isHealthAuthorized = false
+            case .sharingDenied:
+                isHealthAuthorized = false
+            case .sharingAuthorized:
+                isHealthAuthorized = true
+            @unknown default:
+                isHealthAuthorized = false
+            }
+        }
+    }
+    
+    func checkLocationAuthorization() {
+        switch locationManager.authorizationStatus {
+        case .notDetermined:
+            isLocationAuthorized = false
+        case .restricted, .denied:
+            isLocationAuthorized = false
+        case .authorizedAlways, .authorizedWhenInUse:
+            isLocationAuthorized = true
+        @unknown default:
+            break
+        }
+    }
     
     func startFreeRun() {
         startCourse = GPSArtCourse()
@@ -43,10 +95,12 @@ class RunningStartManager: ObservableObject {
                 if let error = error {
                     print("Reverse geocoding error: \(error.localizedDescription)")
                 } else if let placemark = placemarks?.first {
+                    let area = placemark.administrativeArea ?? ""
                     let city = placemark.locality ?? ""
                     let town = placemark.subLocality ?? ""
                     
                     self.startCourse?.courseName = "\(city) \(town)런"
+                    self.startCourse?.regionDisplayName =  "\(area) \(city) \(town)"
                 }
             }
         }
@@ -65,7 +119,7 @@ class RunningStartManager: ObservableObject {
         guard let userLocation = locationManager.location?.coordinate else { return false }
         
         guard let shortestDistance = calculateShortestDistance(from: userLocation, to: ConvertCoordinateManager.convertToCLLocationCoordinates(course)) else { return false }
-        return shortestDistance <= 2000
+        return shortestDistance <= 3000
     }
     
     func startTimer() {

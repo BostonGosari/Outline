@@ -14,11 +14,13 @@ struct FirstRunningGuideView: View {
         ZStack {
             Color.customBlack
                 .opacity(0.7)
-                .ignoresSafeArea()
+                .overlay(.ultraThinMaterial.opacity(0.3))
             
             VStack(spacing: 0) {
                 Text("첫 그림이네요!\n우리 같이 완성해봐요")
-                    .font(.custom("Pretendard-SemiBold", size: 24))
+                    .font(.customFirstGuideTitle)
+                    .fontWeight(.semibold)
+                    .padding(.top, 24)
                     .padding(.bottom, 56)
                 
                 Group {
@@ -26,7 +28,7 @@ struct FirstRunningGuideView: View {
                         .foregroundStyle(.customPrimary)
                     + Text("을 따라가면\n그림이 그려져요")
                 }
-                .font(.subBody)
+                .font(.customSubbody)
                 .padding(.bottom, 16)
                 
                 Image("FirstRunningIcon1")
@@ -44,8 +46,8 @@ struct FirstRunningGuideView: View {
                         .foregroundStyle(.customPrimary)
                     + Text("를 볼 수 있어요")
                 }
-                .font(.tag)
-                .padding(.bottom, 23)
+                .font(.customTag)
+                .padding(.bottom, 16)
                 
                 Image("FirstRunningIcon2")
                     .resizable()
@@ -57,7 +59,7 @@ struct FirstRunningGuideView: View {
                     isFirstRunning = false
                 } label: {
                     Text("러닝 시작하기")
-                        .font(.button)
+                        .font(.customButton)
                         .foregroundStyle(.customBlack)
                         .padding(15)
                         .frame(maxWidth: .infinity)
@@ -68,10 +70,10 @@ struct FirstRunningGuideView: View {
                 }
                 .buttonStyle(TabButtonStyle())
                 .padding(.horizontal, 43)
-                
             }
             .multilineTextAlignment(.center)
         }
+        .ignoresSafeArea()
     }
 }
 

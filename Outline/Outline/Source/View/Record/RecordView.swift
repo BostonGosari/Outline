@@ -47,10 +47,10 @@ struct RecordView: View {
                             } label: {
                                 HStack {
                                     Text(selectedSortOption.buttonLabel)
-                                        .font(Font.subBody)
+                                        .font(.customSubbody)
                                         .foregroundStyle(Color.customWhite)
                                     Image(systemName: "chevron.down")
-                                        .font(Font.subBody)
+                                        .font(.customSubbody)
                                         .foregroundStyle(Color.customWhite)
                                 }
                             }
@@ -63,7 +63,7 @@ struct RecordView: View {
                                     .font(Font.system(size: 36))
                                     .padding(.top, 150)
                                 Text("아직 러닝 기록이 없어요")
-                                    .font(.subBody)
+                                    .font(.customSubbody)
                                     .foregroundStyle(Color.gray500)
                                     .padding(.top, 14)
                             }
@@ -80,58 +80,16 @@ struct RecordView: View {
                             }
                         }
                     }
-                    .padding(.horizontal)
-                    
+                        .padding(.horizontal)
+                        .padding(.top, 12)
+               
                 }
                 .overlay(alignment: .top) {
                     RecordInlineHeader(scrollOffset: scrollOffset)
                 }
-                .sheet(isPresented: $isSortingSheetPresented) {
-                    VStack(alignment: .leading) {
-                        Text("정렬")
-                            .font(.subtitle)
-                        Divider()
-                            .padding(.bottom, 16)
-                            .foregroundStyle(Color.gray500)
-                        ForEach(SortOption.allCases, id: \.self) { option in
-                            Button {
-                                selectedSortOption = option
-                                isSortingSheetPresented.toggle()
-                            } label: {
-                                HStack {
-                                    Text(option.buttonLabel)
-                                        .font(.subBody)
-                                        .foregroundStyle(selectedSortOption.buttonLabel == option.rawValue ? Color.customPrimary : Color.gray500)
-                                    Spacer()
-                                    if selectedSortOption.buttonLabel == option.rawValue {
-                                        Image(systemName: "checkmark")
-                                            .foregroundStyle(Color.customPrimary)
-                                            .padding(.trailing, 16)
-                                            .bold()
-                                    }
-                                       
-                                }
-                                .padding(.bottom, 24)
-                            }
-                         
-                        }
-                        Spacer()
-                        Button {
-                            isSortingSheetPresented.toggle()
-                        } label: {
-                            Text("취소")
-                                .font(.button)
-                                .foregroundStyle(.white)
-                                .frame(maxWidth: .infinity, maxHeight: 55)
-                                .background(Color.gray700)
-                                .cornerRadius(15)
-                        }
-                    }
-                    .padding(EdgeInsets(top: 43, leading: 16, bottom: 60, trailing: 16))
-                    .ignoresSafeArea()
-                    .presentationDragIndicator(.visible)
-                    .presentationDetents([.height(407)])
-                    .presentationCornerRadius(35)
+                if isSortingSheetPresented {
+                    Color.black.opacity(0.7)
+                        .ignoresSafeArea()
                 }
             }
             .onChange(of: selectedSortOption) {
@@ -143,6 +101,65 @@ struct RecordView: View {
             .onAppear {
                 updateSortDescriptors()
             }
+            .sheet(isPresented: $isSortingSheetPresented) {
+                VStack(alignment: .leading) {
+                    HStack {
+                        Spacer()
+                        Rectangle()
+                            .foregroundColor(.clear)
+                            .frame(width: 36, height: 5)
+                            .background(Color.gray300)
+                            .cornerRadius(5)
+                        Spacer()
+                    }
+                  
+                    Text("정렬")
+                        .font(.customSubtitle)
+                        .padding(.top, 22)
+                    Divider()
+                        .foregroundStyle(Color.gray600)
+                        .padding(.top, 8)
+                    ForEach(SortOption.allCases, id: \.self) { option in
+                        Button {
+                            selectedSortOption = option
+                            isSortingSheetPresented.toggle()
+                        } label: {
+                            HStack {
+                                Text(option.buttonLabel)
+                                    .font(.customSubbody)
+                                    .foregroundStyle(selectedSortOption.buttonLabel == option.rawValue ? Color.customPrimary : Color.gray500)
+                                Spacer()
+                                if selectedSortOption.buttonLabel == option.rawValue {
+                                    Image(systemName: "checkmark")
+                                        .font(.customSubbody)
+                                        .foregroundStyle(Color.customPrimary)
+                                        .padding(.trailing, 16)
+                                        .bold()
+                                }
+                                   
+                            }
+                            .padding(.top, 16)
+                        }
+                    }
+                    Button {
+                        isSortingSheetPresented.toggle()
+                    } label: {
+                        Text("취소")
+                            .font(.customButton)
+                            .foregroundStyle(.white)
+                            .frame(maxWidth: .infinity, maxHeight: 55)
+                            .background(Color.gray700)
+                            .cornerRadius(15)
+                    }
+                    .padding(.top, 30)
+                }
+                .padding(EdgeInsets(top: 16, leading: 16, bottom: 60, trailing: 16))
+                .ignoresSafeArea()
+                .presentationDragIndicator(.hidden)
+                .presentationDetents([.height(407)])
+                .presentationCornerRadius(35)
+            }
+        
         }
         .overlay {
             if isDeleteData {
@@ -197,27 +214,26 @@ struct RecordItem: View {
                let data = pathToCoordinate(coursePath) {
                 PathGenerateManager
                     .caculateLines(width: 358, height: 176, coordinates: data)
-                    .stroke(lineWidth: 6)
                     .scale(0.5)
-                    .foregroundStyle(Color.customPrimary)
+                    .stroke(.customPrimary, style: StrokeStyle(lineWidth: 8, lineCap: .round, lineJoin: .round))
                     .padding(.horizontal, 16)
             }
             HStack {
                 VStack(alignment: .leading, spacing: 4) {
                       if let courseName = record.courseData?.courseName {
                           Text(courseName)
-                              .font(Font.title2)
+                              .font(.customTitle2)
                               .foregroundStyle(Color.white)
                       }
 
                     HStack {
                         Image(systemName: "calendar")
-                            .font(Font.caption)
+                            .font(Font.customCaption)
                             .foregroundStyle(Color.gray200)
                         if let startDate = record.healthData?.startDate {
                             Text(formatDate(startDate))
-                                .font(Font.caption)
-                                .foregroundStyle(Color.gray200)
+                                .font(.customCaption)
+                                .foregroundStyle(Color.gray400)
                         }
                     }
                 }
@@ -246,7 +262,7 @@ struct RecordItem: View {
         .cornerRadius(8)
         .overlay(
             RoundedRectangle(cornerRadius: 8)
-                .stroke(Color.white, lineWidth: 1)
+                .stroke(Color.white, lineWidth: 0.3)
                 .frame(maxWidth: .infinity, maxHeight: 176)
         )
     }
@@ -275,7 +291,7 @@ struct ChipItem: View {
 
     var body: some View {
         Text(label)
-            .font(Font.tag)
+            .font(.customTag)
             .lineLimit(1)
             .padding(.horizontal, 15)
             .padding(.vertical, 6)

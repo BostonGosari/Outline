@@ -1,11 +1,11 @@
 {
   "images" : [
     {
+      "filename" : "Theme2.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "loginLines.png",
       "idiom" : "universal",
       "scale" : "2x"
     },

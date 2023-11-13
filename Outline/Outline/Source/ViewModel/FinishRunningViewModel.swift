@@ -5,6 +5,7 @@
 //  Created by hyebin on 10/18/23.
 //
 
+import CoreData
 import CoreLocation
 import SwiftUI
 
@@ -21,10 +22,10 @@ class FinishRunningViewModel: ObservableObject {
     @Published var navigateToShareMainView = false
     
     private var runningDate = Date()
+    private let userDataModel = UserDataModel()
 
     var courseName: String = ""
-    var courseRegion: String = ""
-    
+    var regionDisplayName: String = ""
     var startTime: String = ""
     var endTime: String = ""
     var date: String = ""
@@ -39,7 +40,6 @@ class FinishRunningViewModel: ObservableObject {
     ]
     
     var shareData = ShareModel()
-    
     var userLocations: [CLLocationCoordinate2D] = []
   
     func readData(runningRecord: FetchedResults<CoreRunningRecord>) {
@@ -47,7 +47,7 @@ class FinishRunningViewModel: ObservableObject {
             let courseData = data.courseData,
             let healthData = data.healthData {
             courseName = courseData.courseName ?? ""
-            
+            regionDisplayName = courseData.regionDisplayName ?? ""
             if let startDate = healthData.startDate {
                 startTime = startDate.timeToString()
                 date = startDate.dateToString()
@@ -82,41 +82,6 @@ class FinishRunningViewModel: ObservableObject {
                 }
                 userLocations = ConvertCoordinateManager.convertToCLLocationCoordinates(datas)
             }
-            
-            let geocoder = CLGeocoder()
-            
-            if let first = userLocations.first {
-                let start = CLLocation(latitude: first.latitude, longitude: first.longitude)
-                geocoder.reverseGeocodeLocation(start) { placemarks, error in
-                    if let error = error {
-                        print("Reverse geocoding error: \(error.localizedDescription)")
-                    } else if let placemark = placemarks?.first {
-                        let area = placemark.administrativeArea ?? ""
-                        let city = placemark.locality ?? ""
-                        let town = placemark.subLocality ?? ""
-                        
-                        self.courseRegion = "\(area) \(city) \(town)"
-                    }
-                }
-            }
-        } else {
-            courseName = ""
-            courseRegion = ""
-            
-            startTime = ""
-            endTime = ""
-            date = ""
-            
-            runningData = [
-                RunningDataItem(text: "킬로미터", data: ""),
-                RunningDataItem(text: "시간", data: ""),
-                RunningDataItem(text: "평균 페이스", data: ""),
-                RunningDataItem(text: "BPM", data: ""),
-                RunningDataItem(text: "칼로리", data: ""),
-                RunningDataItem(text: "케이던스", data: "")
-            ]
-            
-            userLocations = []
         }
     }
     
@@ -124,7 +89,7 @@ class FinishRunningViewModel: ObservableObject {
         shareData = ShareModel(
             courseName: courseName,
             runningDate: runningDate.dateToShareString(),
-            runningRegion: courseRegion,
+            regionDisplayName: regionDisplayName,
             distance: "\(runningData[0].data)km",
             cal: "\(runningData[4].data)Kcal",
             pace: "\(runningData[2].data)",
@@ -134,6 +99,17 @@ class FinishRunningViewModel: ObservableObject {
         )
         
         navigateToShareMainView = true
+    }
+    
+    func updateRunningRecord(_ record: NSManagedObject, courseName: String) {
+        userDataModel.updateRunningRecordCourseName(record, newCourseName: courseName) { result in
+            switch result {
+            case .success(let isSaved):
+                print(isSaved)
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
 }
 

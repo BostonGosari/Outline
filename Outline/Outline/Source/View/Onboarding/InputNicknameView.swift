@@ -19,13 +19,14 @@ struct InputNicknameView: View {
                 
                 VStack(alignment: .leading, spacing: 0) {
                     Text("안녕하세요!\n어떻게 불러드릴까요?")
-                        .font(.title)
+                        .font(.customTitle)
                         .fontWeight(.semibold)
                         .foregroundStyle(Color.customWhite)
-                        .padding(.top, 47)
+                        .padding(.top, 28)
                         .padding(.horizontal, 16)
                     
                     Text("닉네임")
+                        .font(.customSubbody)
                         .padding(.top, 44)
                         .padding(.horizontal, 16)
                     
@@ -60,6 +61,7 @@ struct InputNicknameView: View {
                         }
                     }
                     .frame(maxHeight: .infinity, alignment: .bottom)
+                    .padding(.bottom, 16)
                 }
             }
             .ignoresSafeArea(.keyboard)
@@ -88,10 +90,12 @@ extension InputNicknameView {
     
     @ViewBuilder
     private func checkView(_ text: String, _ isTrue: Bool) -> some View {
-        HStack {
+        HStack(spacing: 0) {
             Image(systemName: isTrue ? "checkmark" : "xmark")
                 .foregroundStyle(isTrue ? Color.customGreen : Color.customRed)
+                .padding(.trailing, 14)
             Text(text)
+                .font(.customCaption)
         }
     }
     

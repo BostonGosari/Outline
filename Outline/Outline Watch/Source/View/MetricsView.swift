@@ -9,6 +9,7 @@ import SwiftUI
 import HealthKit
 
 struct MetricsView: View {
+    @StateObject var runningManager = WatchRunningManager.shared
     @StateObject var workoutManager = WatchWorkoutManager.shared
 
     var body: some View {
@@ -51,6 +52,11 @@ struct MetricsView: View {
             .frame(maxWidth: .infinity)
             .ignoresSafeArea(edges: .bottom)
             .scenePadding()
+            .navigationTitle {
+                Text(runningManager.runningTitle)
+                    .foregroundStyle(.first)
+            }
+            .navigationBarTitleDisplayMode(.inline)
         }
     }
 }

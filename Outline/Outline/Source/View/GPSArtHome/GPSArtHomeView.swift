@@ -32,14 +32,14 @@ struct GPSArtHomeView: View {
             if showNetworkErrorView {
                  errorView
              } else {
-                ScrollView {
+                 ScrollView {
                     Color.clear.frame(height: 0)
                         .onScrollViewOffsetChanged { offset in
                             scrollOffset = offset
                         }
                     GPSArtHomeHeader(loading: loading, scrollOffset: scrollOffset)
                     
-                    VStack {
+                    VStack(spacing: 0) {
                         ScrollView(.horizontal, showsIndicators: false) {
                             
                             getCurrentOffsetView
@@ -71,17 +71,28 @@ struct GPSArtHomeView: View {
                         .padding(.bottom, -10)
                         
                         if viewModel.courses.isEmpty {
-                            Rectangle()
-                                .frame(
-                                    width: UIScreen.main.bounds.width * 0.84,
-                                    height: UIScreen.main.bounds.height * 0.55
-                                )
-                                .roundedCorners(10, corners: [.topLeft])
-                                .roundedCorners(70, corners: [.topRight])
-                                .roundedCorners(45, corners: [.bottomLeft, .bottomRight])
-                                .foregroundColor(.gray700)
-                                .padding(.top, -20)
-                                .padding(.bottom, -10)
+                            VStack {
+                                Rectangle()
+                                    .frame(
+                                        width: UIScreen.main.bounds.width * 0.84,
+                                        height: UIScreen.main.bounds.width * 0.84 * 1.5
+                                    )
+                                    .roundedCorners(10, corners: [.topLeft])
+                                    .roundedCorners(70, corners: [.topRight])
+                                    .roundedCorners(45, corners: [.bottomLeft, .bottomRight])
+                                    .foregroundColor(.gray700)
+                                    .padding(.top, -20)
+                                    .padding(.bottom, -20)
+                                HStack {
+                                    ForEach(0..<3) { _ in
+                                        Rectangle()
+                                            .frame(width: indexWidth, height: indexHeight)
+                                            .foregroundStyle(.gray700)
+                                    }
+                                }
+                                .padding(.bottom, -30)
+                            }
+                            .padding(.top, 8)
                         }
                         
                         HStack {
@@ -92,6 +103,7 @@ struct GPSArtHomeView: View {
                                     .animation(.bouncy, value: currentIndex)
                             }
                         }
+                        .padding(.bottom, -30)
                         
                         BottomScrollView(viewModel: viewModel, selectedCourse: $selectedCourse, showDetailView: $showDetailView, namespace: namespace)
                     }
@@ -100,13 +112,15 @@ struct GPSArtHomeView: View {
                     GPSArtHomeInlineHeader(loading: loading, scrollOffset: scrollOffset)
                 }
                 .onAppear {
-                    viewModel.getAllCoursesFromFirebase()
+                    if viewModel.courses.isEmpty {
+                        viewModel.getAllCoursesFromFirebase()
+                    }
                     
                     DispatchQueue.main.asyncAfter(deadline: .now() + maxLoadingTime) {
-                             if loading {
-                                 showNetworkErrorView = true
-                             }
-                         }
+                        if loading {
+                            showNetworkErrorView = true
+                        }
+                    }
                 }
                 .refreshable {
                     viewModel.fetchRecommendedCourses()
@@ -162,7 +176,7 @@ extension GPSArtHomeView {
                 .foregroundStyle(Color.customPrimary)
                 .font(Font.system(size: 40))
             Text("예상치 못한 문제가 발생되었어요.")
-                .font(.date)
+                .font(.customDate)
                 .foregroundStyle(Color.customWhite)
                 .padding(.top, 16)
                 .padding(.bottom, 40)
@@ -172,10 +186,10 @@ extension GPSArtHomeView {
             } label: {
                 HStack {
                     Text("다시 시도하기")
-                        .font(.caption)
+                        .font(.customCaption)
                         .foregroundStyle(Color.customPrimary)
                     Image(systemName: "chevron.forward")
-                        .font(.caption)
+                        .font(.customCaption)
                         .foregroundStyle(Color.customPrimary)
                 }
                 
