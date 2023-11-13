@@ -70,8 +70,7 @@ struct BigCardView: View {
             }
         }
     }
-    
-    
+
     private var courseInformation: some View {
         VStack(alignment: .leading, spacing: 0) {
             Text("\(course.course.courseName)")

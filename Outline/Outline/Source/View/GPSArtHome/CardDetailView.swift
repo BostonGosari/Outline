@@ -184,12 +184,14 @@ struct CardDetailView: View {
             }
             .roundedCorners(45, corners: [.bottomRight])
             .shadow(color: .white, radius: 0.5, y: 0.5)
+            .matchedGeometryEffect(id: selectedCourse.id, in: namespace)
             .frame(
                 width: UIScreen.main.bounds.width,
                 height: UIScreen.main.bounds.height * 0.68
             )
             .transition(.identity)
           
+
     }
     
     private var courseInformation: some View {
