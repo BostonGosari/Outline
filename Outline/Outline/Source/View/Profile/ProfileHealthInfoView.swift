@@ -33,15 +33,15 @@ struct ProfileHealthInfoView: View {
         VStack(alignment: .leading) {
             VStack(alignment: .leading) {
                 Text("간단한 신체정보를 알려주세요.")
-                    .font(.title2)
+//                    .font(.title2)
                     .padding(.bottom, 20)
                     .padding(.top, 40)
                 Text("정확한 러닝 정보를 받으실 수 있어요.")
-                    .font(.tag)
+//                    .font(.tag)
                     .foregroundStyle(Color.gray300)
                     .padding(.bottom, 0)
                 Text("이 정보는 타인에게 공유되지 않아요.")
-                    .font(.tag)
+//                    .font(.tag)
                     .foregroundStyle(Color.gray300)
             }
             .padding(.horizontal, 16)
@@ -54,10 +54,10 @@ struct ProfileHealthInfoView: View {
                     } label: {
                         HStack {
                             Text("신장")
-                                .font(.subBody)
+//                                .font(.subBody)
                             Spacer()
                             Text("\(height)cm")
-                                .font(.subBody)
+//                                .font(.subBody)
                                 .foregroundStyle(showHeightPicker ? Color.customPrimary : Color.gray400)
                         }
                         .frame(height: 38)
@@ -68,10 +68,10 @@ struct ProfileHealthInfoView: View {
                     } label: {
                         HStack {
                             Text("체중")
-                                .font(.subBody)
+//                                .font(.subBody)
                             Spacer()
                             Text("\(weight)kg")
-                                .font(.subBody)
+//                                .font(.subBody)
                                 .foregroundStyle(showWeightPicker ? Color.customPrimary : Color.gray400)
                         }
                         .frame(height: 38)
@@ -97,7 +97,7 @@ struct ProfileHealthInfoView: View {
             Picker("신장", selection: $height) {
                 ForEach(heightRange, id: \.self) { h in
                     Text("\(h)cm")
-                        .font(.subBody)
+//                        .font(.subBody)
                 }
             }
             .pickerStyle(.wheel)
@@ -110,7 +110,7 @@ struct ProfileHealthInfoView: View {
                 Picker("체중", selection: $weight) {
                     ForEach(weightRange, id: \.self) { w in
                         Text("\(w)kg")
-                            .font(.subBody)
+//                            .font(.subBody)
                     }
                 }
                 .pickerStyle(.wheel)
