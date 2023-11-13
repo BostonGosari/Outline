@@ -78,10 +78,10 @@ struct ProfileUserInfoView: View {
                     } label: {
                         HStack {
                             Text("생년월일")
-//                                .font(.subBody)
+                                .font(.customSubbody)
                             Spacer()
                             Text(birthday.dateToShareString())
-//                                .font(.subBody)
+                                .font(.customSubbody)
                                 .foregroundStyle(Color.gray400)
                         }
                         .frame(height: 38)
@@ -91,10 +91,10 @@ struct ProfileUserInfoView: View {
                     } label: {
                         HStack {
                             Text("성별")
-//                                .font(.subBody)
+                                .font(.customSubbody)
                             Spacer()
                             Text("\(gender.rawValue)")
-//                                .font(.subBody)
+                                .font(.customSubbody)
                                 .foregroundStyle(Color.customPrimary)
                         }
                         .frame(height: 38)
