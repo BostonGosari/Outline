@@ -41,11 +41,11 @@ struct ControlsView: View {
                     }
                 }
             }
-            .padding(.top, buttonAnimation ? 20 : WKInterfaceDevice.current().screenBounds.height * 0.25)
-            .padding(.bottom, workoutManager.running ? 0 : 24)
+            .padding(.top, buttonAnimation ? 20 : WKInterfaceDevice.current().screenBounds.height * 0.2)
+            .padding(.bottom, workoutManager.running ? 0 : 30)
             
             if !workoutManager.running {
-                LazyVGrid(columns: Array(repeating: GridItem(), count: 2), spacing: 24) {
+                LazyVGrid(columns: Array(repeating: GridItem(), count: 2), spacing: 12) {
                     workoutDataItem(value: "\((workoutManager.distance/1000).formatted(.number.precision(.fractionLength(2))))", label: "킬로미터")
                     workoutDataItem(value: workoutManager.averagePace.formattedAveragePace(),
                                     label: "평균 페이스")
@@ -57,10 +57,11 @@ struct ControlsView: View {
             }
         }
         .scrollDisabled(workoutManager.running)
-        .overlay(alignment: .topLeading) {
-            header
+        .navigationTitle {
+            Text(workoutManager.running ? watchRunningManager.runningTitle : "일시 정지됨")
+                .foregroundStyle(.first)
         }
-        .toolbar(.hidden, for: .automatic)
+        .navigationBarTitleDisplayMode(.inline)
         .overlay {
             if showConfirmationSheet {
                 confirmationSheet
@@ -216,7 +217,7 @@ extension ControlsView {
         let startCourse = watchRunningManager.startCourse
         guard let builder = workoutManager.builder else { return }
         
-        let courseData = CourseData(courseName: startCourse.courseName, runningLength: startCourse.courseLength, heading: startCourse.heading, distance: startCourse.distance, coursePaths: watchRunningManager.userLocations, runningCourseId: "")
+        let courseData = CourseData(courseName: startCourse.courseName, runningLength: startCourse.courseLength, heading: startCourse.heading, distance: startCourse.distance, coursePaths: watchRunningManager.userLocations, runningCourseId: "", regionDisplayName: startCourse.regionDisplayName)
         let healthData = HealthData(totalTime: builder.elapsedTime, averageCadence: workoutManager.cadence, totalRunningDistance: workoutManager.distance, totalEnergy: workoutManager.calorie, averageHeartRate: workoutManager.heartRate, averagePace: workoutManager.averagePace, startDate: Date(), endDate: Date())
         
         watchConnectivityManager.sendRunningRecordToPhone(RunningRecord(id: UUID().uuidString, runningType: watchRunningManager.runningType, courseData: courseData, healthData: healthData))

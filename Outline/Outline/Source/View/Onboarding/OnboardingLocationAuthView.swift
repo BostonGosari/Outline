@@ -13,9 +13,9 @@ struct OnboardingLocationAuthView: View {
     var body: some View {
         VStack {
             Text("위치 권한을 켜주세요")
-                .font(.title2)
+                .font(.customTitle2)
             Text("러닝 중 현재 위치를 정확히 알 수 있어요.")
-                .font(.subBody)
+                .font(.customSubbody)
             Spacer()
         }
         .padding(.top, 80)

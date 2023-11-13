@@ -9,11 +9,14 @@ import MapKit
 import SwiftUI
 
 struct FreeRunningHomeView: View {
-    @StateObject var runningManager = RunningStartManager.shared
+    @StateObject var runningStartManager = RunningStartManager.shared
     
     @State private var userLocation = ""
     @State private var progress: Double = 0.0
     @State private var position: MapCameraPosition = .userLocation(fallback: .automatic)
+    @State private var showPermissionSheet = false
+    @State private var isUnlocked = false
+    @State private var permissionType: PermissionType = .health
    
     var body: some View {
         ZStack(alignment: .top) {
@@ -36,7 +39,7 @@ struct FreeRunningHomeView: View {
                 .foregroundColor(.clear)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .background(.black.opacity(0.6))
-            
+            BackgroundBlur(color: .customSecondary, padding: 50)
             VStack(spacing: 0) {
                 GPSArtHomeHeader(loading: false, scrollOffset: 20)
                     .padding(.top, 8)
@@ -45,25 +48,42 @@ struct FreeRunningHomeView: View {
                 cardView
                    .overlay {
                        VStack(alignment: .leading) {
-                           Text("자유코스")
-                               .font(.headline)
+                           Text("자유 코스")
+                               .font(.customHeadline)
                                .padding(.bottom, 8)
-                           
                            HStack {
                                Image(systemName: "mappin")
                                Text(userLocation)
                            }
-                           .font(.subBody)
-                           
-                           Spacer()
-                           SlideToUnlock(isUnlocked: $runningManager.start, progress: $progress)
-                               .onChange(of: runningManager.start) { _, _ in
-                                   runningManager.startFreeRun()
+                           .font(.customCaption)
+                           .frame(height: 16)
+                           SlideToUnlock(isUnlocked: $isUnlocked, progress: $progress)
+                               .onChange(of: isUnlocked) { _, newValue in
+                                   if newValue {
+                                       runningStartManager.checkAuthorization()
+                                       
+                                       if runningStartManager.isHealthAuthorized {
+                                           if runningStartManager.isLocationAuthorized {
+                                               runningStartManager.start = true
+                                               runningStartManager.startFreeRun()
+                                               isUnlocked = false
+                                           } else {
+                                               runningStartManager.permissionType = .location
+                                               runningStartManager.showPermissionSheet = true
+                                               isUnlocked = false
+                                           }
+                                       } else {
+                                           runningStartManager.permissionType = .health
+                                           runningStartManager.showPermissionSheet = true
+                                           isUnlocked = false
+                                       }
+                                   }
                                }
+                               .frame(maxHeight: .infinity, alignment: .bottom)
                        }
                        .padding(EdgeInsets(top: 58, leading: 24, bottom: 24, trailing: 16))
                    }
-                   .padding(EdgeInsets(top: 8, leading: 16, bottom: 80, trailing: 20))
+                   .padding(EdgeInsets(top: 16, leading: 16, bottom: 80, trailing: 20))
             }
         }
         .onAppear {
@@ -75,14 +95,13 @@ struct FreeRunningHomeView: View {
 extension FreeRunningHomeView {
     private var cardView: some View {
         Rectangle()
-            .fill(
-                LinearGradient(colors: [.white20, .white20.opacity(0)], startPoint: .topLeading, endPoint: .bottomTrailing)
-            )
+            .fill(.white7)
             .roundedCorners(10, corners: [.topLeft])
             .roundedCorners(70, corners: [.topRight])
             .roundedCorners(45, corners: [.bottomLeft, .bottomRight])
             .overlay(
                 CustomRoundedRectangle(cornerRadiusTopLeft: 10, cornerRadiusTopRight: 79, cornerRadiusBottomLeft: 45, cornerRadiusBottomRight: 45)
+                   
             )
     }
     

@@ -10,59 +10,72 @@ import MapKit
 
 struct CardDetailInformationView: View {
     var selectedCourse: CourseWithDistance
+    private let capsuleWidth: CGFloat = 87
+    private let capsuleHeight: CGFloat = 28
     
     var body: some View {
         VStack(alignment: .leading, spacing: 24) {
             HStack {
                 Text("#\(stringForCourseLevel(selectedCourse.course.level))")
-                    .frame(width: 70, height: 23)
+                    .font(.customTag)
+                    .frame(width: capsuleWidth, height: capsuleHeight)
                     .background {
                         Capsule()
                             .stroke()
                     }
                     .foregroundColor(.customPrimary)
-                Text("\(selectedCourse.course.courseLength, specifier: "%.0f")km")
-                    .frame(width: 70, height: 23)
+                Text("#\(selectedCourse.course.courseLength, specifier: "%.0f")km")
+                    .font(.customTag)
+                    .frame(width: capsuleWidth, height: capsuleHeight)
                     .background {
                         Capsule()
                             .stroke()
                     }
-                Text("\(selectedCourse.course.courseDuration.formatDuration())")
-                    .frame(width: 70, height: 23)
+                Text("#\(selectedCourse.course.courseDuration.formatDuration())")
+                    .font(.customTag)
+                    .frame(width: capsuleWidth, height: capsuleHeight)
                     .background {
                         Capsule()
                             .stroke()
                     }
             }
             .fontWeight(.semibold)
-            .font(.caption)
+            .font(.customTag)
             
             VStack(alignment: .leading, spacing: 8) {
                 Text("\(selectedCourse.course.locationInfo.administrativeArea) \(selectedCourse.course.locationInfo.locality) \(selectedCourse.course.locationInfo.subLocality)")
-                    .font(.title3)
-                    .bold()
+                    .font(.customBody)
                 Text("\(selectedCourse.course.description)")
+                    .font(.customSubbody)
                     .foregroundStyle(.gray)
             }
+            .padding(.bottom, -8)
             
             Divider()
             
             Text("경로 정보")
-                .font(.title3)
-                .bold()
+                .font(.customSubtitle)
+                .fontWeight(.semibold)
             VStack(alignment: .leading, spacing: 17) {
                 HStack {
                     HStack {
                         Image(systemName: "location")
+                            .font(.system(size: 20))
                         Text("거리")
+                            .font(.customTag)
+                            .fontWeight(.semibold)
                     }
                     .foregroundColor(.customPrimary)
                     Text("\(selectedCourse.course.courseLength, specifier: "%.0f")km")
+                        .font(.customSubbody)
                 }
                 HStack {
                     HStack {
                         Image(systemName: "clock")
+                            .font(.system(size: 20))
                         Text("예상 소요 시간")
+                            .font(.customTag)
+                            .fontWeight(.semibold)
                     }
                     .foregroundColor(.customPrimary)
                     Text("\(selectedCourse.course.courseDuration.formatDuration())")
@@ -70,26 +83,31 @@ struct CardDetailInformationView: View {
                 HStack {
                     HStack {
                         Image(systemName: "arrow.triangle.turn.up.right.diamond")
+                            .font(.system(size: 20))
                         Text("골목길")
+                            .font(.customTag)
+                            .fontWeight(.semibold)
                     }
                     .foregroundColor(.customPrimary)
                     Text(stringForAlley(selectedCourse.course.alley))
                 }
             }
             .padding(.horizontal, 10)
+            .padding(.bottom, 2)
             
             Divider()
             
             Text("경로 지도")
-                .font(.title3)
-                .bold()
-            VStack(alignment: .leading) {
+                .font(.customSubtitle)
+                .fontWeight(.semibold)
+            VStack(alignment: .leading, spacing: 8) {
                 NavigationLink {
                     Map {
                         UserAnnotation()
                         MapPolyline(coordinates: ConvertCoordinateManager.convertToCLLocationCoordinates(selectedCourse.course.coursePaths))
                             .stroke(.customPrimary, style: StrokeStyle(lineWidth: 8, lineCap: .round, lineJoin: .round))
                     }
+                    .mapControlVisibility(.hidden)
                     .toolbarBackground(.hidden, for: .navigationBar)
                 } label: {
                     Map(interactionModes: []) {
@@ -101,6 +119,7 @@ struct CardDetailInformationView: View {
                 }
                 .buttonStyle(.plain)
                 Text("경로 제작 \(selectedCourse.course.producer)님")
+                    .font(.customSubbody)
                     .foregroundStyle(.gray600)
             }
         }

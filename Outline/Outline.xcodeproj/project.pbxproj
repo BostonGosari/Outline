@@ -30,6 +30,7 @@
 		0EE92E7D2AE02DDC003192FF /* FreeRunningHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE92E7C2AE02DDC003192FF /* FreeRunningHomeView.swift */; };
 		29111E372AE0C9CA009833C7 /* FinishWatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29111E362AE0C9CA009833C7 /* FinishWatchView.swift */; };
 		29111E3F2AE0CD0C009833C7 /* ConfettiWatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29111E3E2AE0CD0C009833C7 /* ConfettiWatchView.swift */; };
+		291A22352AF4CD94004B3D10 /* PermissionSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291A22342AF4CD94004B3D10 /* PermissionSheet.swift */; };
 		292613172AF2BCEF00591E32 /* RecordHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 292613162AF2BCEF00591E32 /* RecordHeader.swift */; };
 		2930EDBB2AF3E59F007FD141 /* ControlButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2930EDBA2AF3E59F007FD141 /* ControlButton.swift */; };
 		2930EDBD2AF3FD97007FD141 /* CountDownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2930EDBC2AF3FD97007FD141 /* CountDownView.swift */; };
@@ -67,7 +68,6 @@
 		29EC2ED22AEB2B560033446C /* CourseAnalyzeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29EC2ED12AEB2B560033446C /* CourseAnalyzeManager.swift */; };
 		29EC2ED42AEB30430033446C /* CourseAnalyzeTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29EC2ED32AEB30430033446C /* CourseAnalyzeTest.swift */; };
 		29FEDC5E2AED81A800C1F80B /* Shimmer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FEDC5D2AED81A800C1F80B /* Shimmer.swift */; };
-		950459842AF3869500E66E9B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 950459832AF3869500E66E9B /* GoogleService-Info.plist */; };
 		9528EFE92ADE9E870056CCC6 /* UserCoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 95EB1EF62ADE251100B47984 /* UserCoreDataModel.xcdatamodeld */; };
 		9528EFEA2ADE9E870056CCC6 /* UserCoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 95EB1EF62ADE251100B47984 /* UserCoreDataModel.xcdatamodeld */; };
 		9528EFEC2ADEC7CF0056CCC6 /* UserDataModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9528EFEB2ADEC7CF0056CCC6 /* UserDataModelType.swift */; };
@@ -135,6 +135,7 @@
 		BB1D534C2ADEA6F90073771F /* SummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1D534B2ADEA6F90073771F /* SummaryView.swift */; };
 		BB397D092AE6408A00F92A43 /* RecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB397D082AE6408A00F92A43 /* RecordView.swift */; };
 		BB397D0B2AE640A800F92A43 /* RecordDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB397D0A2AE640A800F92A43 /* RecordDetailView.swift */; };
+		BB44B1672AFF5BBD000462CA /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = BB44B1662AFF5BBD000462CA /* Kingfisher */; };
 		BB493CF82AE0CA55009D3699 /* ElapsedTimeFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB493CF72AE0CA55009D3699 /* ElapsedTimeFormatter.swift */; };
 		BB5239292ADAF75C00646494 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5239272ADAF72A00646494 /* Logger.swift */; };
 		BB5239372ADBD99F00646494 /* GPSArtHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5239362ADBD99F00646494 /* GPSArtHomeView.swift */; };
@@ -221,6 +222,7 @@
 		0E29F6592ADF6CA000F5EF5C /* WorkoutDataView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkoutDataView.swift; sourceTree = "<group>"; };
 		0E29F65E2ADF6CDD00F5EF5C /* RunningMapViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RunningMapViewModel.swift; sourceTree = "<group>"; };
 		0E2B4CBE2AE744E8002A5103 /* RecordDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordDetailViewModel.swift; sourceTree = "<group>"; };
+		0E96BA912AF4E00B000C8FBF /* SFCompactDisplay-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFCompactDisplay-Semibold.ttf"; sourceTree = "<group>"; };
 		0E9A5D3E2AE058D500C19FF3 /* ShareMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareMainView.swift; sourceTree = "<group>"; };
 		0E9A5D412AE058EF00C19FF3 /* CustomShareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomShareView.swift; sourceTree = "<group>"; };
 		0E9A5D432AE058FC00C19FF3 /* ImageShareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageShareView.swift; sourceTree = "<group>"; };
@@ -234,6 +236,7 @@
 		0EE92E7C2AE02DDC003192FF /* FreeRunningHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeRunningHomeView.swift; sourceTree = "<group>"; };
 		29111E362AE0C9CA009833C7 /* FinishWatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishWatchView.swift; sourceTree = "<group>"; };
 		29111E3E2AE0CD0C009833C7 /* ConfettiWatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfettiWatchView.swift; sourceTree = "<group>"; };
+		291A22342AF4CD94004B3D10 /* PermissionSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionSheet.swift; sourceTree = "<group>"; };
 		292613162AF2BCEF00591E32 /* RecordHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordHeader.swift; sourceTree = "<group>"; };
 		2930EDBA2AF3E59F007FD141 /* ControlButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlButton.swift; sourceTree = "<group>"; };
 		2930EDBC2AF3FD97007FD141 /* CountDownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountDownView.swift; sourceTree = "<group>"; };
@@ -263,7 +266,6 @@
 		29EC2ED12AEB2B560033446C /* CourseAnalyzeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseAnalyzeManager.swift; sourceTree = "<group>"; };
 		29EC2ED32AEB30430033446C /* CourseAnalyzeTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseAnalyzeTest.swift; sourceTree = "<group>"; };
 		29FEDC5D2AED81A800C1F80B /* Shimmer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shimmer.swift; sourceTree = "<group>"; };
-		950459832AF3869500E66E9B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		9528EFEB2ADEC7CF0056CCC6 /* UserDataModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataModelType.swift; sourceTree = "<group>"; };
 		9528EFFF2AE042570056CCC6 /* PathGenerateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathGenerateManager.swift; sourceTree = "<group>"; };
 		9528F0052AE0B37B0056CCC6 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -363,6 +365,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BB44B1672AFF5BBD000462CA /* Kingfisher in Frameworks */,
 				959BB2102AEE380200B5B10B /* KakaoSDKCommon in Frameworks */,
 				954B04342B01CB0900A8A83E /* FirebaseAuth in Frameworks */,
 				959BB2122AEE380200B5B10B /* KakaoSDKUser in Frameworks */,
@@ -541,6 +544,7 @@
 		BB1D530A2ADDBC430073771F /* Font */ = {
 			isa = PBXGroup;
 			children = (
+				0E96BA912AF4E00B000C8FBF /* SFCompactDisplay-Semibold.ttf */,
 				BB1D530B2ADDBC560073771F /* Pretendard-Black.ttf */,
 				BB1D530F2ADDBC690073771F /* Pretendard-ExtraBold.ttf */,
 				BB1D530D2ADDBC620073771F /* Pretendard-Bold.ttf */,
@@ -625,8 +629,6 @@
 			children = (
 				BB52392D2ADAF93D00646494 /* Outline Watch App.entitlements */,
 				BB493CEB2ADFD592009D3699 /* Outline-Watch-App-Info.plist */,
-				954B04282B012FD400A8A83E /* Secrets.xcconfig */,
-				950459832AF3869500E66E9B /* GoogleService-Info.plist */,
 				BB5239262ADAF70A00646494 /* Shared */,
 				F0AC8A9B2AD94C1F0061612C /* Outline */,
 				F0AC8AAD2AD94C200061612C /* Outline Watch */,
@@ -795,6 +797,7 @@
 				F06298AE2AE1A2ED007AB2D3 /* CountDown.swift */,
 				29FEDC5D2AED81A800C1F80B /* Shimmer.swift */,
 				295232FB2AEEE74A0020EAFA /* ButtonStyle.swift */,
+				291A22342AF4CD94004B3D10 /* PermissionSheet.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -931,11 +934,12 @@
 				959BB20D2AEE380200B5B10B /* KakaoSDKAuth */,
 				959BB20F2AEE380200B5B10B /* KakaoSDKCommon */,
 				959BB2112AEE380200B5B10B /* KakaoSDKUser */,
-				954B04332B01CB0900A8A83E /* FirebaseAuth */,
-				954B04352B01CB0900A8A83E /* FirebaseAuthCombine-Community */,
-				954B04372B01CB0900A8A83E /* FirebaseFirestore */,
-				954B04392B01CB0900A8A83E /* FirebaseFirestoreCombine-Community */,
-				954B043B2B01CB0900A8A83E /* FirebaseFirestoreSwift */,
+				299457F62AF3A57700F7D24C /* FirebaseAuth */,
+				299457F82AF3A57700F7D24C /* FirebaseAuthCombine-Community */,
+				299457FA2AF3A57700F7D24C /* FirebaseFirestore */,
+				299457FC2AF3A57700F7D24C /* FirebaseFirestoreCombine-Community */,
+				299457FE2AF3A57700F7D24C /* FirebaseFirestoreSwift */,
+				BB44B1662AFF5BBD000462CA /* Kingfisher */,
 			);
 			productName = Outline;
 			productReference = 297B80F92AE73C4500AF7219 /* Outline.app */;
@@ -988,7 +992,8 @@
 			mainGroup = F0AC8A902AD94C1F0061612C;
 			packageReferences = (
 				959BB20C2AEE380200B5B10B /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */,
-				954B04322B01CB0900A8A83E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				299457F52AF3A57700F7D24C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				BB44B1652AFF5BBC000462CA /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = F0AC8A902AD94C1F0061612C;
 			projectDirPath = "";
@@ -1019,11 +1024,9 @@
 				BB1D531E2ADDBCB90073771F /* Pretendard-Thin.ttf in Resources */,
 				BB1D530C2ADDBC560073771F /* Pretendard-Black.ttf in Resources */,
 				BB1D530E2ADDBC620073771F /* Pretendard-Bold.ttf in Resources */,
-				954B04292B012FD400A8A83E /* Secrets.xcconfig in Resources */,
 				BB1D53182ADDBCA20073771F /* Pretendard-Medium.ttf in Resources */,
 				BB1D53162ADDBC900073771F /* Pretendard-Light.ttf in Resources */,
 				954CB2A92AE5457B005EB2E9 /* pohangDangDangRun.kml in Resources */,
-				950459842AF3869500E66E9B /* GoogleService-Info.plist in Resources */,
 				BB1D53102ADDBC690073771F /* Pretendard-ExtraBold.ttf in Resources */,
 				BB1D531C2ADDBCB20073771F /* Pretendard-SemiBold.ttf in Resources */,
 			);
@@ -1157,6 +1160,7 @@
 				0EE92E6C2AE00A33003192FF /* FinishRunningViewModel.swift in Sources */,
 				F01FDB9C2ADABC4600BDA633 /* TabBar.swift in Sources */,
 				0E9A5D442AE058FC00C19FF3 /* ImageShareView.swift in Sources */,
+				291A22352AF4CD94004B3D10 /* PermissionSheet.swift in Sources */,
 				95EB1EEC2ADDC66B00B47984 /* UserDataModel.swift in Sources */,
 				F06B936B2ADC23E100387DEB /* Logger.swift in Sources */,
 				29AE76E02ADE2BC700A46742 /* DateExtention.swift in Sources */,
@@ -1432,7 +1436,6 @@
 		};
 		F0AC8ABE2AD94C210061612C /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 954B04282B012FD400A8A83E /* Secrets.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1480,7 +1483,6 @@
 		};
 		F0AC8ABF2AD94C210061612C /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 954B04282B012FD400A8A83E /* Secrets.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1576,6 +1578,14 @@
 				minimumVersion = 2.18.1;
 			};
 		};
+		BB44B1652AFF5BBC000462CA /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.10.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1626,6 +1636,11 @@
 		95B8F45D2AED35E100D9F35B /* FirebaseAuthCombine-Community */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = "FirebaseAuthCombine-Community";
+		};
+		BB44B1662AFF5BBD000462CA /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BB44B1652AFF5BBC000462CA /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
 		};
 /* End XCSwiftPackageProductDependency section */
 

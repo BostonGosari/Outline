@@ -30,9 +30,13 @@ struct CourseGuideView: View {
                     .ignoresSafeArea()
             }
             
-            RoundedRectangle(cornerRadius: 20)
-                .fill(Color.gray.opacity(0.7))
-                .stroke(.white)
+            Rectangle()
+                .fill(Color.white30)
+                .roundedCorners(24.5, corners: [.topRight])
+                .roundedCorners(7, corners: [.topLeft, .bottomLeft, .bottomRight])
+                .overlay(
+                    CustomRoundedRectangle(cornerRadiusTopLeft: 7, cornerRadiusTopRight: 24.5, cornerRadiusBottomLeft: 7, cornerRadiusBottomRight: 7)
+                )
                 .overlay {
                     coursePath
                         .overlay {
@@ -48,7 +52,7 @@ struct CourseGuideView: View {
         }
         .onTapGesture {
             showBigGuide.toggle()
-            HapticManager.impact(style: .soft)
+            HapticManager.impact(style: .light)
         }
     }
 }
