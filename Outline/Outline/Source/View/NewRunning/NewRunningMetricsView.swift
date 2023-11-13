@@ -47,7 +47,6 @@ struct NewRunningMetricsView: View {
             .opacity(!isPaused && !showDetail ? 1 : 0)
             
         }
-        .frame(maxWidth: .infinity, alignment: .leading)
     }
 }
 

@@ -13,7 +13,9 @@ struct NewRunningView: View {
     @State var showDetailSheet = true
     
     @State var navigationTranslation: CGFloat = 0.0
-    @State var sheetHeight: CGFloat = 0.0
+    @State var navigationSheetHeight: CGFloat = 0.0
+    @State var metricsTranslation: CGFloat = 0.0
+    @State var metricsSheetHeight: CGFloat = 0.0
     
     var body: some View {
         ZStack {
@@ -28,8 +30,8 @@ struct NewRunningView: View {
     }
     
     private var navigation: some View {
-        NewRunningNavigationView(showDetailNavigation: navigationTranslation + sheetHeight > 10)
-            .frame(height: 70 + navigationTranslation + sheetHeight, alignment: .top)
+        NewRunningNavigationView(showDetailNavigation: navigationTranslation + navigationSheetHeight > 10)
+            .frame(height: 70 + navigationTranslation + navigationSheetHeight, alignment: .top)
             .mask {
                 Rectangle()
                     .roundedCorners(50, corners: .bottomRight)
@@ -47,7 +49,7 @@ struct NewRunningView: View {
                     }
             }
             .zIndex(1)
-            .gesture(gesture)
+            .gesture(navigationGesture)
             .frame(maxHeight: .infinity, alignment: .top)
     }
     
@@ -56,10 +58,8 @@ struct NewRunningView: View {
             .overlay(alignment: .topTrailing) {
                 showDetailButton
             }
-            .overlay(alignment: .bottom) {
-                controlButton
-            }
             .padding(.top, 26)
+            .frame(height: showDetail ? 360 + metricsTranslation : 80, alignment: .top)
             .mask {
                 RoundedRectangle(cornerRadius: 20)
             }
@@ -68,6 +68,11 @@ struct NewRunningView: View {
                     .foregroundStyle(.thinMaterial)
                     .ignoresSafeArea()
             }
+            .gesture(metricsGesture)
+            .overlay(alignment: .bottom) {
+                controlButton
+            }
+            .zIndex(1)
             .frame(maxHeight: .infinity, alignment: .bottom)
     }
     
@@ -89,7 +94,7 @@ struct NewRunningView: View {
     private var controlButton: some View {
         ZStack {
             Button {
-
+                
             } label: {
                 Image(systemName: "stop.circle.fill")
                     .font(.system(size: 60))
@@ -102,8 +107,8 @@ struct NewRunningView: View {
                 withAnimation {
                     showDetail = false
                     isPaused = false
-                    if sheetHeight != 0 {
-                        sheetHeight = 0
+                    if navigationSheetHeight != 0 {
+                        navigationSheetHeight = 0
                     }
                 }
             } label: {
@@ -122,8 +127,8 @@ struct NewRunningView: View {
                 withAnimation {
                     showDetail = true
                     isPaused = true
-                    if sheetHeight != 0 {
-                        sheetHeight = 0
+                    if navigationSheetHeight != 0 {
+                        navigationSheetHeight = 0
                     }
                 }
             } label: {
@@ -144,11 +149,11 @@ struct NewRunningView: View {
         .padding(.horizontal, 90)
     }
     
-    private var gesture: some Gesture {
+    private var navigationGesture: some Gesture {
         DragGesture()
             .onChanged { value in
                 let translationY = value.translation.height
-                if sheetHeight == 0 {
+                if navigationSheetHeight == 0 {
                     navigationTranslation = min(max(translationY, -5), 340)
                 } else {
                     navigationTranslation = max(min(translationY, 40), -310)
@@ -158,9 +163,9 @@ struct NewRunningView: View {
                 let translationY = value.translation.height
                 withAnimation(.bouncy) {
                     if translationY > 0 {
-                        sheetHeight = 300
+                        navigationSheetHeight = 300
                     } else {
-                        sheetHeight = 0
+                        navigationSheetHeight = 0
                     }
                     navigationTranslation = 0.0
                 }
@@ -168,14 +173,35 @@ struct NewRunningView: View {
             .simultaneously(with: TapGesture()
                 .onEnded { _ in
                     withAnimation {
-                        if sheetHeight == 0 {
-                            sheetHeight = 300
+                        if navigationSheetHeight == 0 {
+                            navigationSheetHeight = 300
                         } else {
-                            sheetHeight = 0
+                            navigationSheetHeight = 0
                         }
                     }
                 }
             )
+    }
+    
+    private var metricsGesture: some Gesture {
+        DragGesture()
+            .onChanged { value in
+                let translationY = value.translation.height
+                if showDetail {
+                    metricsTranslation = min(-translationY, 30)
+                }
+            }
+            .onEnded { value in
+                let translationY = value.translation.height
+                if showDetail {
+                    withAnimation(.bouncy) {
+                        if translationY > 0 {
+                            showDetail = false
+                        }
+                        metricsTranslation = 0.0
+                    }
+                }
+            }
     }
 }
 
