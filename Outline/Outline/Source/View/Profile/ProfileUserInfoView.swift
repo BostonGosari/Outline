@@ -148,23 +148,6 @@ struct ProfileUserInfoView: View {
                 }
             }
         })
-//        .toolbar {
-//            ToolbarItem(placement: .topBarTrailing) {
-//                Button {
-//                    if profileUserInfoViewModel.isSuccessToCheckName {
-//                        profileUserInfoViewModel.updateUserNameSet(oldUserName: nickname, newUserName: profileUserInfoViewModel.nickname)
-//                        nickname = profileUserInfoViewModel.nickname
-//                    } else {
-//                        profileUserInfoViewModel.nickname = nickname
-//                    }
-//                    completion()
-//                    dismiss()
-//                } label: {
-//                    Text("완료")
-//                        .foregroundStyle(Color.customPrimary)
-//                }
-//            }
-//        }
     }
 }
 
