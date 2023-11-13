@@ -7,6 +7,7 @@
 
 import SwiftUI
 import MapKit
+import Kingfisher
 
 struct BottomScrollView: View {
     @ObservedObject var viewModel: GPSArtHomeViewModel
@@ -40,57 +41,72 @@ struct BottomScrollView: View {
                                 }
                             } label: {
                                 ZStack {
-                                    AsyncImage(url: URL(string: currentCourse.course.thumbnail)) { image in
-                                        ZStack {
-                                            image
-                                                .resizable()
-                                                .matchedGeometryEffect(id: currentCourse.id, in: namespace)
-                                            LinearGradient(
-                                                stops: [
-                                                    Gradient.Stop(color: .black, location: 0.00),
-                                                    Gradient.Stop(color: .black.opacity(0), location: 1.00)
-                                                ],
-                                                startPoint: UnitPoint(x: 0.5, y: 0.9),
-                                                endPoint: UnitPoint(x: 0.5, y: 0.1)
-                                            )
-                                            VStack(alignment: .leading, spacing: 4) {
-                                                Spacer()
-                                                Text("\(currentCourse.course.courseName)")
-                                                    .font(Font.system(size: 20).weight(.semibold))
-                                                    .foregroundColor(.white)
-                                                HStack(spacing: 0) {
-                                                    Image(systemName: "mappin")
-                                                        .foregroundColor(.gray600)
-                                                    Text("\(currentCourse.course.locationInfo.locality) \(currentCourse.course.locationInfo.subLocality)")
-                                                        .foregroundColor(.gray600)
+                                    KFImage(URL(string: currentCourse.course.thumbnail))
+                                        .resizable()
+                                        .placeholder {
+                                            Rectangle()
+                                                .foregroundColor(.gray700)
+                                                .onDisappear {
+                                                    loading = false
                                                 }
-                                                .font(.customCaption)
-                                                .padding(.bottom, 21)
-                                            }
-                                            .padding(.leading, 20)
-                                            .frame(maxWidth: .infinity, alignment: .leading)
+                                                .roundedCorners(5, corners: [.topLeft])
+                                                .roundedCorners(30, corners: [.topRight, .bottomLeft, .bottomRight])
                                         }
-                                        .roundedCorners(5, corners: [.topLeft])
-                                        .roundedCorners(30, corners: [.topRight, .bottomLeft, .bottomRight])
-                                        .shadow(color: .white, radius: 0.5, y: -0.5)
-                                    } placeholder: {
-                                        Rectangle()
-                                            .foregroundColor(.gray700)
-                                            .onDisappear {
-                                                loading = false
-                                            }
-                                            .roundedCorners(5, corners: [.topLeft])
-                                            .roundedCorners(30, corners: [.topRight, .bottomLeft, .bottomRight])
-                                    }
-                                    .frame(
-                                        width: UIScreen.main.bounds.width * 0.4,
-                                        height: UIScreen.main.bounds.width * 0.4 * 1.45
+                                    LinearGradient(
+                                        stops: [
+                                            Gradient.Stop(color: .black, location: 0.00),
+                                            Gradient.Stop(color: .black.opacity(0), location: 1.00)
+                                        ],
+                                        startPoint: UnitPoint(x: 0.5, y: 0.9),
+                                        endPoint: UnitPoint(x: 0.5, y: 0.1)
                                     )
-                                    .transition(.identity)
+                                    VStack(alignment: .leading, spacing: 4) {
+                                        Spacer()
+                                        Text("\(currentCourse.course.courseName)")
+                                            .font(Font.system(size: 20).weight(.semibold))
+                                            .foregroundColor(.white)
+                                        HStack(spacing: 0) {
+                                            Image(systemName: "mappin")
+                                                .foregroundColor(.gray600)
+                                            Text("\(currentCourse.course.locationInfo.locality) \(currentCourse.course.locationInfo.subLocality)")
+                                                .foregroundColor(.gray600)
+                                        }
+                                        .font(.customCaption)
+                                        .padding(.bottom, 21)
+                                    }
+                                    .padding(.leading, 20)
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                    
+                                    // Additional content on top of the image
+                                    VStack(alignment: .leading, spacing: 4) {
+                                        Spacer()
+                                        Text("\(currentCourse.course.courseName)")
+                                            .font(Font.system(size: 20).weight(.semibold))
+                                            .foregroundColor(.white)
+                                        HStack(spacing: 0) {
+                                            Image(systemName: "mappin")
+                                                .foregroundColor(.gray600)
+                                            Text("\(currentCourse.course.locationInfo.locality) \(currentCourse.course.locationInfo.subLocality)")
+                                                .foregroundColor(.gray600)
+                                        }
+                                        .font(.customCaption)
+                                        .padding(.bottom, 21)
+                                    }
+                                    .padding(.leading, 20)
+                                    .frame(maxWidth: .infinity, alignment: .leading)
                                 }
+                                .roundedCorners(5, corners: [.topLeft])
+                                .roundedCorners(30, corners: [.topRight, .bottomLeft, .bottomRight])
+                                .shadow(color: .white, radius: 0.5, y: -0.5)
                             }
-                            .buttonStyle(CardButton())
+                            .frame(
+                                  width: UIScreen.main.bounds.width * 0.4,
+                                  height: UIScreen.main.bounds.width * 0.4 * 1.45
+                              )
+                              .transition(.identity)
+                          
                         }
+                        .buttonStyle(CardButton())
                     }
                 }
                 .scrollTargetLayout()
