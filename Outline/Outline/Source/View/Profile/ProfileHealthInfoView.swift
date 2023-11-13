@@ -91,7 +91,9 @@ struct ProfileHealthInfoView: View {
         .navigationTitle("신체 정보")
         .navigationBarTitleDisplayMode(.inline)
         .background(Color.gray900)
-        .sheet(isPresented: $showHeightPicker, content: {
+        .sheet(isPresented: $showHeightPicker, onDismiss: {
+            completion()
+        }, content: {
             Picker("신장", selection: $height) {
                 ForEach(heightRange, id: \.self) { h in
                     Text("\(h)cm")
@@ -101,7 +103,9 @@ struct ProfileHealthInfoView: View {
             .pickerStyle(.wheel)
             .presentationDetents([.medium])
         })
-        .sheet(isPresented: $showWeightPicker, content: {
+        .sheet(isPresented: $showWeightPicker, onDismiss: {
+            completion()
+        }, content: {
             VStack {
                 Picker("체중", selection: $weight) {
                     ForEach(weightRange, id: \.self) { w in
@@ -113,16 +117,5 @@ struct ProfileHealthInfoView: View {
                 .presentationDetents([.medium])
             }
         })
-        .toolbar {
-            ToolbarItem(placement: .topBarTrailing) {
-                Button {
-                    completion()
-                    dismiss()
-                } label: {
-                    Text("완료")
-                        .foregroundStyle(Color.customPrimary)
-                }
-            }
-        }
     }
 }
