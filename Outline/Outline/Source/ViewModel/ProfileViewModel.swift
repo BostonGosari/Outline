@@ -69,6 +69,7 @@ final class ProfileViewModel: ObservableObject {
             switch res {
             case .success(let isSuccess):
                 if let userId = self.userId {
+                    print(userId)
                     self.userInfoModel.deleteUser(uid: userId) { isSuccessDeleteDBUser in
                         switch isSuccessDeleteDBUser {
                         case .success(let success):
@@ -79,6 +80,7 @@ final class ProfileViewModel: ObservableObject {
                         }
                     }
                 }
+                
                 self.userInfoModel.deleteUserNameSet(userName: self.userInfo.nickname) { res in
                     switch res {
                     case .success(let success):
