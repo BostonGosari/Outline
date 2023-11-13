@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct BigCardView: View {
     var course: CourseWithDistance
@@ -19,56 +20,57 @@ struct BigCardView: View {
     private let capsuleHeight: CGFloat = 25
     
     var body: some View {
-        AsyncImage(url: URL(string: course.course.thumbnail)) { image in
+        ZStack {
             if !showDetailView {
-                image
+                KFImage(URL(string: course.course.thumbnail))
                     .resizable()
+                
+                    .placeholder {
+                        Rectangle()
+                            .foregroundColor(.gray700)
+                            .onDisappear {
+                                loading = false
+                            }
+                            .roundedCorners(10, corners: [.topLeft])
+                            .roundedCorners(70, corners: [.topRight])
+                            .roundedCorners(45, corners: [.bottomLeft, .bottomRight])
+                    }
                     .roundedCorners(10, corners: [.topLeft])
                     .roundedCorners(70, corners: [.topRight])
                     .roundedCorners(45, corners: [.bottomLeft, .bottomRight])
                     .shadow(color: .white, radius: 1, y: -1)
-                    .matchedGeometryEffect(id: course.id, in: namespace)
-            }
-        } placeholder: {
-            Rectangle()
-                .foregroundColor(.gray700)
-                .onDisappear {
-                    loading = false
-                }
-                .roundedCorners(10, corners: [.topLeft])
-                .roundedCorners(70, corners: [.topRight])
-                .roundedCorners(45, corners: [.bottomLeft, .bottomRight])
-        }
-        .frame(
-            width: UIScreen.main.bounds.width * 0.84,
-            height: UIScreen.main.bounds.width * 0.84 * 1.5
-        )
-        .transition(.identity)
-        .overlay(alignment: .bottom) {
-            if !loading {
-                courseInformation
-                    .opacity(index == currentIndex ? 1 : 0)
-                    .offset(y: index == currentIndex ? 0 : 10)
-                    .background(alignment: .bottom) {
-                        Rectangle()
-                            .foregroundStyle(
-                                LinearGradient(
-                                    stops: [
-                                        Gradient.Stop(color: .black.opacity(0), location: 0.00),
-                                        Gradient.Stop(color: .black.opacity(0.7), location: 0.33),
-                                        Gradient.Stop(color: .black.opacity(0.8), location: 1.00)
-                                    ],
-                                    startPoint: UnitPoint(x: 0.5, y: 0),
-                                    endPoint: UnitPoint(x: 0.5, y: 1)
-                                )
-                            )
-                            .roundedCorners(45, corners: [.bottomLeft, .bottomRight])
-                            .opacity(index == currentIndex ? 1 : 0)
+                    .frame(
+                        width: UIScreen.main.bounds.width * 0.84,
+                        height: UIScreen.main.bounds.width * 0.84 * 1.5
+                    )
+                    .transition(.identity)
+                    .overlay(alignment: .bottom) {
+                        if !loading {
+                            courseInformation
+                                .opacity(index == currentIndex ? 1 : 0)
+                                .offset(y: index == currentIndex ? 0 : 10)
+                                .background(alignment: .bottom) {
+                                    Rectangle()
+                                        .foregroundStyle(
+                                            LinearGradient(
+                                                stops: [
+                                                    Gradient.Stop(color: .black.opacity(0), location: 0.00),
+                                                    Gradient.Stop(color: .black.opacity(0.7), location: 0.33),
+                                                    Gradient.Stop(color: .black.opacity(0.8), location: 1.00)
+                                                ],
+                                                startPoint: UnitPoint(x: 0.5, y: 0),
+                                                endPoint: UnitPoint(x: 0.5, y: 1)
+                                            )
+                                        )
+                                        .roundedCorners(45, corners: [.bottomLeft, .bottomRight])
+                                        .opacity(index == currentIndex ? 1 : 0)
+                                }
+                        }
                     }
             }
         }
     }
-    
+
     private var courseInformation: some View {
         VStack(alignment: .leading, spacing: 0) {
             Text("\(course.course.courseName)")

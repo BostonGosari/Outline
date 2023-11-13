@@ -112,13 +112,15 @@ struct GPSArtHomeView: View {
                     GPSArtHomeInlineHeader(loading: loading, scrollOffset: scrollOffset)
                 }
                 .onAppear {
-                    viewModel.getAllCoursesFromFirebase()
+                    if viewModel.courses.isEmpty {
+                        viewModel.getAllCoursesFromFirebase()
+                    }
                     
                     DispatchQueue.main.asyncAfter(deadline: .now() + maxLoadingTime) {
-                             if loading {
-                                 showNetworkErrorView = true
-                             }
-                         }
+                        if loading {
+                            showNetworkErrorView = true
+                        }
+                    }
                 }
                 .refreshable {
                     viewModel.fetchRecommendedCourses()

@@ -29,6 +29,7 @@ struct ProfileView: View {
                     .padding(.top, 18)
                 
                 Text(profileViewModel.userInfo.nickname)
+                    .font(.customTag)
                 Divider()
                     .frame(height: 1)
                     .background(Color.gray700)
@@ -44,6 +45,7 @@ struct ProfileView: View {
                             )
                         } label: {
                             Text("내 정보")
+                                .font(.customSubbody)
                                 .padding(.vertical, 5)
                         }
                         NavigationLink {
@@ -54,6 +56,7 @@ struct ProfileView: View {
                             )
                         } label: {
                             Text("신체 정보")
+                                .font(.customSubbody)
                                 .padding(.vertical, 5)
                         }
                     }
@@ -75,12 +78,14 @@ struct ProfileView: View {
                             showDeleteUserAlert = true
                         } label: {
                             Text("계정 삭제")
+                                .font(.customSubbody)
                                 .foregroundStyle(Color.customRed)
                         }
                         .alert(isPresented: $showDeleteUserAlert) {
                             Alert(
-                                title: Text("계정 삭제"),
-                                message: Text("이별인가요? 너무아쉬워요. 계정을 삭제하면 러닝 정보, 경로 기록 등\n 모든 활동 정보가 삭제 됩니다."),
+                                title: Text("계정 삭제").font(.customButton),
+                                message: Text("이별인가요? 너무아쉬워요. 계정을 삭제하면 러닝 정보, 경로 기록 등\n 모든 활동 정보가 삭제 됩니다.")
+                                    .font(.customCaption),
                                 primaryButton: .default(Text("취소"), action: {
                                     showDeleteUserAlert = false
                                 }), secondaryButton: .default(Text("삭제").bold(), action: {
@@ -94,11 +99,13 @@ struct ProfileView: View {
                             showLogoutAlert = true
                         } label: {
                             Text("로그아웃")
+                                .font(.customSubbody)
                         }
                         .alert(isPresented: $showLogoutAlert) {
                             Alert(
-                                title: Text("로그아웃"),
-                                message: Text("정말 로그아웃 하시겠나요?"),
+                                title: Text("로그아웃").font(.customButton),
+                                message: Text("정말 로그아웃 하시겠나요?")
+                                    .font(.customCaption),
                                 primaryButton: .default(Text("닫기"), action: {
                                     showLogoutAlert = false
                                 }), secondaryButton: .default(Text("로그아웃").bold(), action: {
@@ -124,8 +131,8 @@ struct ProfileView: View {
             .background(Color.gray900)
             .alert(isPresented: $showDeleteCompleteAlert) {
                 Alert(
-                    title: Text("탈퇴 완료"),
-                    message: Text("탈퇴 처리가 성공적으로 완료되었습니다."),
+                    title: Text("탈퇴 완료").font(.customButton),
+                    message: Text("탈퇴 처리가 성공적으로 완료되었습니다.").font(.customCaption),
                     primaryButton: .default(Text("닫기"), action: {
                         showDeleteCompleteAlert = false
                         self.authState = .logout
