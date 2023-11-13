@@ -43,8 +43,7 @@ final class ProfileViewModel: ObservableObject {
                 self.userInfo = userInfo
                 print("success to load userInfo")
             case .failure(let failure):
-                print("fail to load userInfo")
-                print(failure)
+                print("fail to load userInfo \(failure)")
             }
         }
     }
@@ -57,8 +56,7 @@ final class ProfileViewModel: ObservableObject {
                 self.userId = ""
                 print("success to logout \(isSuccess)")
             case .failure(let error):
-                print("fail to logout")
-                print(error)
+                print("fail to logout \(error)")
             }
         }
     }
@@ -71,7 +69,6 @@ final class ProfileViewModel: ObservableObject {
                 case .success(let isSuccess):
                     print("success to delete user on FireStore \(isSuccess)")
                     if let userId = self.userId {
-                        print(userId)
                         self.authModel.handleSignOut { res in
                             switch res {
                             case .success(let success):
