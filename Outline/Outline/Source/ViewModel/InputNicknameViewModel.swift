@@ -15,6 +15,7 @@ class InputNicknameViewModel: ObservableObject {
     @Published var checkNicnameDuplication = false
     @Published var isSuccess = false
     @Published var moveToInputUserInfoView = false
+    @Published var moveToHeathAuthenticationView = false
     @Published  var isKeyboardVisible = false
     
     private var userNameSet: [String] = []
