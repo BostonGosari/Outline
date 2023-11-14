@@ -16,7 +16,7 @@ struct CourseWithDistance: Identifiable, Hashable {
     var distance: Double
 }
 
-class GPSArtHomeViewModel: ObservableObject {
+class GPSArtHomeViewModel: NSObject, CLLocationManagerDelegate, ObservableObject {
     @Published var courses: AllGPSArtCourses = []
     @Published var recommendedCoures: [CourseWithDistance] = []
     @Published var withoutRecommendedCourses: [CourseWithDistance] = []
@@ -24,6 +24,11 @@ class GPSArtHomeViewModel: ObservableObject {
     private let courseModel = CourseModel()
     private let locationManager = CLLocationManager()
     private let watchConnectivityManager = WatchConnectivityManager.shared
+    
+    override init() {
+        super.init()
+        locationManager.delegate = self
+    }
     
     func getAllCoursesFromFirebase() {
         courseModel.readAllCourses { result in
@@ -73,15 +78,19 @@ class GPSArtHomeViewModel: ObservableObject {
         case .notDetermined:
             locationManager.requestWhenInUseAuthorization()
         case .restricted, .denied:
-            break
+            requestMotionAccess()
         case .authorizedAlways, .authorizedWhenInUse:
-            break
+            requestMotionAccess()
         @unknown default:
             break
         }
     }
     
-    func requestMotionAccess() {
+    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        checkLocationAuthorization()
+    }
+    
+    private func requestMotionAccess() {
         let motionManager = CMMotionActivityManager()
         
         if CMMotionActivityManager.isActivityAvailable() {
