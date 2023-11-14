@@ -40,7 +40,6 @@
 		2921B00B2B012FA200533A83 /* FirebaseFirestoreCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 2921B00A2B012FA200533A83 /* FirebaseFirestoreCombine-Community */; };
 		2921B00D2B012FA200533A83 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 2921B00C2B012FA200533A83 /* FirebaseFirestoreSwift */; };
 		2921B00F2B01301100533A83 /* NewRunningMetricsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2921B00E2B01301100533A83 /* NewRunningMetricsView.swift */; };
-		2921B0112B01F39600533A83 /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 2921B0102B01F39600533A83 /* Secrets.xcconfig */; };
 		2921B0132B01F3F700533A83 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2921B0122B01F3F700533A83 /* GoogleService-Info.plist */; };
 		292613172AF2BCEF00591E32 /* RecordHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 292613162AF2BCEF00591E32 /* RecordHeader.swift */; };
 		2930EDBB2AF3E59F007FD141 /* ControlButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2930EDBA2AF3E59F007FD141 /* ControlButton.swift */; };
@@ -115,6 +114,7 @@
 		95A01E332AF143BA0093D9C0 /* ProfileUserInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A01E322AF143BA0093D9C0 /* ProfileUserInfoView.swift */; };
 		95A01E352AF144030093D9C0 /* ProfileHealthInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A01E342AF144030093D9C0 /* ProfileHealthInfoView.swift */; };
 		95A01E3B2AF2B7250093D9C0 /* LookAroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A01E3A2AF2B7240093D9C0 /* LookAroundView.swift */; };
+		95ACF8CA2B033F740045AEA8 /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 95ACF8C92B033F730045AEA8 /* Secrets.xcconfig */; };
 		95B8F45A2AED27C400D9F35B /* AuthModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B8F4592AED27C400D9F35B /* AuthModel.swift */; };
 		95B8F45C2AED35E100D9F35B /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 95B8F45B2AED35E100D9F35B /* FirebaseAuth */; };
 		95B8F45E2AED35E100D9F35B /* FirebaseAuthCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 95B8F45D2AED35E100D9F35B /* FirebaseAuthCombine-Community */; };
@@ -246,7 +246,6 @@
 		2921AFFF2B012E4400533A83 /* NewRunningMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewRunningMapView.swift; sourceTree = "<group>"; };
 		2921B0012B012EC800533A83 /* NewRunningNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewRunningNavigationView.swift; sourceTree = "<group>"; };
 		2921B00E2B01301100533A83 /* NewRunningMetricsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewRunningMetricsView.swift; sourceTree = "<group>"; };
-		2921B0102B01F39600533A83 /* Secrets.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Secrets.xcconfig; path = ../../../Downloads/Secrets.xcconfig; sourceTree = "<group>"; };
 		2921B0122B01F3F700533A83 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		292613162AF2BCEF00591E32 /* RecordHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordHeader.swift; sourceTree = "<group>"; };
 		2930EDBA2AF3E59F007FD141 /* ControlButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlButton.swift; sourceTree = "<group>"; };
@@ -299,6 +298,7 @@
 		95A01E322AF143BA0093D9C0 /* ProfileUserInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUserInfoView.swift; sourceTree = "<group>"; };
 		95A01E342AF144030093D9C0 /* ProfileHealthInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHealthInfoView.swift; sourceTree = "<group>"; };
 		95A01E3A2AF2B7240093D9C0 /* LookAroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LookAroundView.swift; sourceTree = "<group>"; };
+		95ACF8C92B033F730045AEA8 /* Secrets.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 		95B8F4592AED27C400D9F35B /* AuthModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthModel.swift; sourceTree = "<group>"; };
 		95B8F45F2AED391300D9F35B /* AppleAuthModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleAuthModel.swift; sourceTree = "<group>"; };
 		95C953CC2AF3BF760040B9DA /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
@@ -648,8 +648,8 @@
 		F0AC8A902AD94C1F0061612C = {
 			isa = PBXGroup;
 			children = (
-				2921B0102B01F39600533A83 /* Secrets.xcconfig */,
 				2921B0122B01F3F700533A83 /* GoogleService-Info.plist */,
+				95ACF8C92B033F730045AEA8 /* Secrets.xcconfig */,
 				BB52392D2ADAF93D00646494 /* Outline Watch App.entitlements */,
 				BB493CEB2ADFD592009D3699 /* Outline-Watch-App-Info.plist */,
 				BB5239262ADAF70A00646494 /* Shared */,
@@ -1048,9 +1048,9 @@
 				BB1D531E2ADDBCB90073771F /* Pretendard-Thin.ttf in Resources */,
 				BB1D530C2ADDBC560073771F /* Pretendard-Black.ttf in Resources */,
 				BB1D530E2ADDBC620073771F /* Pretendard-Bold.ttf in Resources */,
+				95ACF8CA2B033F740045AEA8 /* Secrets.xcconfig in Resources */,
 				BB1D53182ADDBCA20073771F /* Pretendard-Medium.ttf in Resources */,
 				BB1D53162ADDBC900073771F /* Pretendard-Light.ttf in Resources */,
-				2921B0112B01F39600533A83 /* Secrets.xcconfig in Resources */,
 				954CB2A92AE5457B005EB2E9 /* pohangDangDangRun.kml in Resources */,
 				BB1D53102ADDBC690073771F /* Pretendard-ExtraBold.ttf in Resources */,
 				BB1D531C2ADDBCB20073771F /* Pretendard-SemiBold.ttf in Resources */,
@@ -1466,7 +1466,7 @@
 		};
 		F0AC8ABE2AD94C210061612C /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2921B0102B01F39600533A83 /* Secrets.xcconfig */;
+			baseConfigurationReference = 95ACF8C92B033F730045AEA8 /* Secrets.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1514,7 +1514,7 @@
 		};
 		F0AC8ABF2AD94C210061612C /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2921B0102B01F39600533A83 /* Secrets.xcconfig */;
+			baseConfigurationReference = 95ACF8C92B033F730045AEA8 /* Secrets.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
