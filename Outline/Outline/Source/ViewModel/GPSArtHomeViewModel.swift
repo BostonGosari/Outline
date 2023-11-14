@@ -72,17 +72,16 @@ class GPSArtHomeViewModel: ObservableObject {
         switch locationManager.authorizationStatus {
         case .notDetermined:
             locationManager.requestWhenInUseAuthorization()
-            requestMotionAccess()
         case .restricted, .denied:
-            requestMotionAccess()
+            break
         case .authorizedAlways, .authorizedWhenInUse:
-            requestMotionAccess()
+            break
         @unknown default:
             break
         }
     }
     
-    private func requestMotionAccess() {
+    func requestMotionAccess() {
         let motionManager = CMMotionActivityManager()
         
         if CMMotionActivityManager.isActivityAvailable() {
