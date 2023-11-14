@@ -104,6 +104,7 @@ struct NewRunningView: View {
                 .padding(.trailing, 16)
                 .foregroundStyle(.gray600, .gray800)
                 .fontWeight(.semibold)
+                .opacity(isPaused ? 0 : 1)
         }
     }
     
@@ -202,19 +203,23 @@ struct NewRunningView: View {
     private var metricsGesture: some Gesture {
         DragGesture()
             .onChanged { value in
-                let translationY = value.translation.height
-                if showDetail {
-                    metricsTranslation = min(-translationY, 30)
+                if !isPaused {
+                    let translationY = value.translation.height
+                    if showDetail {
+                        metricsTranslation = min(-translationY, 30)
+                    }
                 }
             }
             .onEnded { value in
-                let translationY = value.translation.height
-                if showDetail {
-                    withAnimation(.bouncy) {
-                        if translationY > 0 {
-                            showDetail = false
+                if !isPaused {
+                    let translationY = value.translation.height
+                    if showDetail {
+                        withAnimation(.bouncy) {
+                            if translationY > 0 {
+                                showDetail = false
+                            }
+                            metricsTranslation = 0.0
                         }
-                        metricsTranslation = 0.0
                     }
                 }
             }
