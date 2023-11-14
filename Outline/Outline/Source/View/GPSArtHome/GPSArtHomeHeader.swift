@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct GPSArtHomeHeader: View {
+    var title: String
     var loading: Bool
     var scrollOffset: CGFloat
     
@@ -18,10 +19,8 @@ struct GPSArtHomeHeader: View {
                     .foregroundColor(.gray700)
                     .frame(width: 115, height: 38)
             } else {
-                Image("HeaderLogo")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(height: 36)
+                Text(title)
+                    .font(.customTitle)
             }
             Spacer()
             if loading {
@@ -56,36 +55,28 @@ struct GPSArtHomeInlineHeader: View {
             if loading {
                 RoundedRectangle(cornerRadius: 9.5)
                     .foregroundColor(.gray700)
-                    .frame(width: 115, height: 38)
+                    .frame(width: 42, height: 24)
             } else {
-                Image("HeaderLogo")
+                Image("OulineLogo")
                     .resizable()
                     .scaledToFit()
-                    .frame(height: 36)
-            }
-            Spacer()
-            if loading {
-                Circle()
-                    .foregroundColor(.gray700)
-                    .frame(width: 30)
-            } else {
-                Button { } label: {
-                    Image(systemName: "person.crop.circle")
-                        .font(.system(size: 30))
-                        .fontWeight(.light)
-                        .foregroundColor(Color.customPrimary)
-                }
+                    .frame(height: 24)
             }
         }
-        .padding(.leading, UIScreen.main.bounds.width * 0.08)
-        .padding(.trailing)
+        .opacity(scrollOffset < 20 ? 1 : 0)
+        .animation(.bouncy, value: scrollOffset)
+        .transition(.opacity)
         .padding(.bottom, 10)
-        .frame(maxWidth: .infinity, alignment: .leading)
+        .frame(maxWidth: .infinity)
         .background(
             Rectangle()
                 .fill(.ultraThinMaterial)
                 .edgesIgnoringSafeArea(.top)
+                .opacity(scrollOffset < 20 ? 1 : 0)
         )
-        .opacity(scrollOffset < 20 ? 1 : 0)
     }
+}
+
+#Preview {
+    GPSArtHomeInlineHeader(loading: false, scrollOffset: 0)
 }
