@@ -8,6 +8,11 @@
 import SwiftUI
 
 struct NewRunningView: View {
+    @StateObject var runningStartManager = RunningStartManager.shared
+    @StateObject var runningDataManager = RunningDataManager.shared
+    
+    @AppStorage("isFirstRunning") var isFirstRunning = true
+    
     @State var showDetail = false
     @State var isPaused = false
     @State var showDetailSheet = true
@@ -23,10 +28,21 @@ struct NewRunningView: View {
             navigation
             metrics
         }
+        .overlay {
+            if isFirstRunning && runningStartManager.runningType == .gpsArt {
+                FirstRunningGuideView(isFirstRunning: $isFirstRunning)
+            }
+        }
     }
     
     private var map: some View {
         NewRunningMapView()
+            .onAppear {
+                if runningStartManager.running == true {
+                    runningDataManager.startRunning()
+                    runningStartManager.startTimer()
+                }
+            }
     }
     
     private var navigation: some View {

@@ -64,7 +64,7 @@ struct HomeTabView: View {
                 CountDown(running: $runningManager.running, start: $runningManager.start)
             }
             if runningManager.running {
-                RunningView()
+                NewRunningView()
             }
             if showCustomSheet {
                 watchRunningSheet
