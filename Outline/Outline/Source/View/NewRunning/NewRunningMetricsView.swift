@@ -31,7 +31,7 @@ struct NewRunningMetricsView: View {
             }
             HStack {
                 VStack(alignment: .center) {
-                    Text("00:00")
+                    Text(runningManager.formattedTime(runningManager.counter))
                         .font(.customTitle)
                     Text("진행시간")
                         .font(.customCaption)

@@ -80,7 +80,9 @@ struct FinishRunningView: View {
                     .padding(.bottom, 16)
                     
                     Button(action: {
-                        runningManager.running = false
+                        withAnimation {
+                            runningManager.complete = false
+                        }
                     }, label: {
                         Text("홈으로 돌아가기")
                             .underline(pattern: .solid)
