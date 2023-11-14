@@ -24,6 +24,7 @@ struct FinishRunningView: View {
     private let polylineGradient = Gradient(colors: [.customGradient1, .customGradient2, .customGradient3])
     
     var body: some View {
+        NavigationStack {
             ZStack {
                 Color.gray900
                     .ignoresSafeArea()
@@ -35,7 +36,7 @@ struct FinishRunningView: View {
                         }
                         .roundedCorners(45, corners: .bottomRight)
                         .shadow(color: .customWhite, radius: 0.5)
-
+                        
                         VStack(spacing: 0) {
                             Text("\(viewModel.date)")
                                 .font(.customDate)
@@ -92,25 +93,26 @@ struct FinishRunningView: View {
                     .padding(.bottom, 8)
                 }
             }
-        .sheet(isPresented: $showRenameSheet) {
-            updateNameSheet
-        }
-        .overlay {
-            if viewModel.isShowPopup {
-                RunningPopup(text: "기록이 저장되었어요.")
-                    .frame(maxHeight: .infinity, alignment: .top)
-                    .transition(.move(edge: .top))
+            .sheet(isPresented: $showRenameSheet) {
+                updateNameSheet
             }
-        }
-        .navigationDestination(isPresented: $viewModel.navigateToShareMainView) {
-            ShareMainView(runningData: viewModel.shareData)
-                .navigationBarBackButtonHidden()
-        }
-        .onAppear {
-            if !save {
-                viewModel.isShowPopup = true
-                viewModel.readData(runningRecord: runningRecord)
-                save = true
+            .overlay {
+                if viewModel.isShowPopup {
+                    RunningPopup(text: "기록이 저장되었어요.")
+                        .frame(maxHeight: .infinity, alignment: .top)
+                        .transition(.move(edge: .top))
+                }
+            }
+            .navigationDestination(isPresented: $viewModel.navigateToShareMainView) {
+                ShareMainView(runningData: viewModel.shareData)
+                    .navigationBarBackButtonHidden()
+            }
+            .onAppear {
+                if !save {
+                    viewModel.isShowPopup = true
+                    viewModel.readData(runningRecord: runningRecord)
+                    save = true
+                }
             }
         }
     }
