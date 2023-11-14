@@ -5,10 +5,10 @@
 //  Created by Hyunjun Kim on 10/19/23.
 //
 
-import Foundation
 import CoreLocation
 import CoreData
 import SwiftUI
+import CoreMotion
 
 struct CourseWithDistance: Identifiable, Hashable {
     var id = UUID().uuidString
@@ -65,6 +65,28 @@ class GPSArtHomeViewModel: ObservableObject {
             // 위치 정보가 없을 경우 앞의 세 코스를 추천 코스로 표시하고 나머지는 추천되지 않은 코스로 표시
             self.recommendedCoures = self.courses.prefix(3).map { CourseWithDistance(course: $0, distance: 0) }
             self.withoutRecommendedCourses = Array(self.courses.dropFirst(3)).map { CourseWithDistance(course: $0, distance: 0) }
+        }
+    }
+    
+    func checkLocationAuthorization() {
+        switch locationManager.authorizationStatus {
+        case .notDetermined:
+            locationManager.requestWhenInUseAuthorization()
+            requestMotionAccess()
+        case .restricted, .denied:
+            requestMotionAccess()
+        case .authorizedAlways, .authorizedWhenInUse:
+            requestMotionAccess()
+        @unknown default:
+            break
+        }
+    }
+    
+    private func requestMotionAccess() {
+        let motionManager = CMMotionActivityManager()
+        
+        if CMMotionActivityManager.isActivityAvailable() {
+            motionManager.queryActivityStarting(from: Date(), to: Date(), to: .main) { _, _ in }
         }
     }
 }

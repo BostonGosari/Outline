@@ -54,7 +54,7 @@ class LoginViewModel: ObservableObject {
                 print(userInfo)
                 print("user already exist")
                 self.authState = .login
-            case .failure(_):
+            case .failure:
                 print("newUser")
                 self.authState = .onboarding
                 self.setNewUser(uid: uid)
