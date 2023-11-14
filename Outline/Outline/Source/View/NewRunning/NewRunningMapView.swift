@@ -11,11 +11,11 @@ import SwiftUI
 struct NewRunningMapView: View {
     @StateObject var runningStartManager = RunningStartManager.shared
     @StateObject var runningDataManager = RunningDataManager.shared
+    @StateObject var locationManager = LocationManager()
     
     @State private var showBigGuide = false
     
     @State private var position: MapCameraPosition = .userLocation(followsHeading: true, fallback: .automatic)
-    @State private var userlocations: [CLLocationCoordinate2D] = []
     @Namespace var mapScope
     
     var body: some View {
@@ -28,15 +28,10 @@ struct NewRunningMapView: View {
                         .stroke(.black.opacity(0.3), style: StrokeStyle(lineWidth: 8, lineCap: .round, lineJoin: .round))
                 }
                 
-                MapPolyline(coordinates: userlocations)
+                MapPolyline(coordinates: locationManager.userLocations)
                     .stroke(.customPrimary, style: StrokeStyle(lineWidth: 5, lineCap: .round, lineJoin: .round))
             }
             .mapControlVisibility(.hidden)
-            .onChange(of: CLLocationManager().location) { _, userlocation in
-                if let user = userlocation {
-                    userlocations.append(user.coordinate)
-                }
-            }
             
             VStack {
                 guideView
@@ -62,7 +57,7 @@ struct NewRunningMapView: View {
             if let course = runningStartManager.startCourse,
                runningStartManager.runningType == .gpsArt {
                 CourseGuideView(
-                    userLocations: $userlocations,
+                    userLocations: $locationManager.userLocations,
                     showBigGuide: $showBigGuide,
                     coursePathCoordinates: ConvertCoordinateManager.convertToCLLocationCoordinates(course.coursePaths),
                     courseRotate: course.heading
