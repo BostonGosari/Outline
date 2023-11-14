@@ -76,20 +76,18 @@ final class ProfileViewModel: ObservableObject {
                 switch isSuccessDeleteDBUser {
                 case .success(let isSuccess):
                     print("success to delete user on FireStore \(isSuccess)")
-                    if let userId = self.userId {
-                        self.authModel.handleSignOut { res in
-                            switch res {
-                            case .success(let success):
-                                print("success to sign out at authModel\(success)")
-                            case .failure(let failure):
-                                print("fail to signout at authModel \(failure)")
-                            }
-                        }
-                    }
                 case .failure(let error):
                     print("fail to delete user on FireStore")
                     print(error)
                 }
+            }
+        }
+        self.authModel.handleSignOut { res in
+            switch res {
+            case .success(let success):
+                print("success to sign out at authModel\(success)")
+            case .failure(let failure):
+                print("fail to signout at authModel \(failure)")
             }
         }
         
