@@ -115,6 +115,7 @@
 		95A01E332AF143BA0093D9C0 /* ProfileUserInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A01E322AF143BA0093D9C0 /* ProfileUserInfoView.swift */; };
 		95A01E352AF144030093D9C0 /* ProfileHealthInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A01E342AF144030093D9C0 /* ProfileHealthInfoView.swift */; };
 		95A01E3B2AF2B7250093D9C0 /* LookAroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A01E3A2AF2B7240093D9C0 /* LookAroundView.swift */; };
+		95ACF8CA2B033F740045AEA8 /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 95ACF8C92B033F730045AEA8 /* Secrets.xcconfig */; };
 		95B8F45A2AED27C400D9F35B /* AuthModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B8F4592AED27C400D9F35B /* AuthModel.swift */; };
 		95B8F45C2AED35E100D9F35B /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 95B8F45B2AED35E100D9F35B /* FirebaseAuth */; };
 		95B8F45E2AED35E100D9F35B /* FirebaseAuthCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 95B8F45D2AED35E100D9F35B /* FirebaseAuthCombine-Community */; };
@@ -299,6 +300,7 @@
 		95A01E322AF143BA0093D9C0 /* ProfileUserInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUserInfoView.swift; sourceTree = "<group>"; };
 		95A01E342AF144030093D9C0 /* ProfileHealthInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHealthInfoView.swift; sourceTree = "<group>"; };
 		95A01E3A2AF2B7240093D9C0 /* LookAroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LookAroundView.swift; sourceTree = "<group>"; };
+		95ACF8C92B033F730045AEA8 /* Secrets.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 		95B8F4592AED27C400D9F35B /* AuthModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthModel.swift; sourceTree = "<group>"; };
 		95B8F45F2AED391300D9F35B /* AppleAuthModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleAuthModel.swift; sourceTree = "<group>"; };
 		95C953CC2AF3BF760040B9DA /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
