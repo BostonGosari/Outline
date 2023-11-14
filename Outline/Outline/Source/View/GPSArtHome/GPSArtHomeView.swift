@@ -113,6 +113,8 @@ struct GPSArtHomeView: View {
                 }
                 .onAppear {
                     viewModel.checkLocationAuthorization()
+                    viewModel.requestMotionAccess()
+                    
                     if viewModel.courses.isEmpty {
                         viewModel.getAllCoursesFromFirebase()
                     }
