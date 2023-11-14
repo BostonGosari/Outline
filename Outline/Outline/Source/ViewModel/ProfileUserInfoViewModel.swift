@@ -1,23 +1,26 @@
 //
-//  InputNicknameViewModel.swift
+//  ProfileUserInfoViewModel.swift
 //  Outline
 //
-//  Created by hyebin on 10/16/23.
+//  Created by Seungui Moon on 11/11/23.
 //
 
 import Combine
 import SwiftUI
 
-class InputNicknameViewModel: ObservableObject {    
+class ProfileUserInfoViewModel: ObservableObject {
     @Published var nickname = ""
     @Published var checkInputCount = false
     @Published var checkInputWord = false
     @Published var checkNicnameDuplication = false
-    @Published var isSuccess = false
-    @Published var moveToInputUserInfoView = false
-    @Published  var isKeyboardVisible = false
+    @Published var isSuccessToCheckName = false
+    @Published var isKeyboardVisible = false
+    @Published var showBirthdayPicker = false
+    @Published var showGenderPicker = false
     
     private var userNameSet: [String] = []
+    
+    private let userInfoModel = UserInfoModel()
     
     var keyboardWillShowPublisher: AnyPublisher<Bool, Never> {
         NotificationCenter.default.publisher(for: UIResponder.keyboardWillShowNotification)
@@ -32,7 +35,6 @@ class InputNicknameViewModel: ObservableObject {
     }
     
     init() {
-        let userInfoModel = UserInfoModel()
         userInfoModel.readUserNameSet { result in
             switch result {
             case .success(let userList):
@@ -48,32 +50,25 @@ class InputNicknameViewModel: ObservableObject {
         checkCount()
         checkSymbol()
         
-        isSuccess = checkInputCount && checkInputWord && checkNicnameDuplication
+        isSuccessToCheckName = checkInputCount && checkInputWord && checkNicnameDuplication
     }
     
-    func doneButtonTapped() {
-        if isSuccess {
-            moveToInputUserInfoView = true
-        }
-    }
-    
-    func createUserName() {
-        let userInfoModel = UserInfoModel()
-        if nickname.isEmpty {
-            return
-        }
-        userInfoModel.createUserNameSet(userName: nickname) { res in
+    func updateUserNameSet(oldUserName: String, newUserName: String) {
+        userInfoModel.updateUserNameSet(
+            oldUserName: oldUserName,
+            newUserName: newUserName
+        ) { res in
             switch res {
             case .success(let success):
-                print("success to create userName \(success)")
+                print("update userNameSet success \(success)")
             case .failure(let failure):
-                print("fail to create userName \(failure)")
+                print("fail to update userNameSet \(failure)")
             }
         }
     }
 }
 
-extension InputNicknameViewModel {
+extension ProfileUserInfoViewModel {
     private func checkDuplication() {
         if userNameSet.contains(nickname) {
             checkNicnameDuplication = false

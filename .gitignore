@@ -100,3 +100,4 @@ iOSInjectionProject/
 
 # API KEY
 *.xcconfig
+/Outline/GoogleService-Info.plist

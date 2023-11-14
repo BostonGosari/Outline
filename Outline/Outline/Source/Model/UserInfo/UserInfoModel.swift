@@ -84,15 +84,61 @@ struct UserInfoModel: UserInfoModelProtocol {
         }
     }
     
-    func updateUserNameSet(newUserNames: [String], completion: @escaping (Result<Bool, ReadDataError>) -> Void) {
-        if newUserNames.isEmpty {
-            completion(.failure(.dataNotFound))
+    func updateUserNameSet(oldUserName: String, newUserName: String, completion: @escaping (Result<Bool, ReadDataError>) -> Void) {
+        readUserNameSet { readUserNameResult in
+            switch readUserNameResult {
+            case .success(let userNameList):
+                do {
+                    let newUserNameList = userNameList.map { userName in
+                        if userName == oldUserName {
+                            return newUserName
+                        }
+                        return userName
+                    }
+                    try userUtilRef.document("userNameSet").setData(from: UserNameSet(userNames: newUserNameList))
+                    completion(.success(true))
+                } catch {
+                    completion(.failure(.typeError))
+                }
+            case .failure(let failure):
+                completion(.failure(.dataNotFound))
+            }
         }
-        do {
-            try userUtilRef.document("userNameSet").setData(from: UserNameSet(userNames: newUserNames))
-            completion(.success(true))
-        } catch {
-            completion(.failure(.typeError))
+    }
+    
+    func createUserNameSet(userName: String, completion: @escaping (Result<Bool, ReadDataError>) -> Void) {
+        readUserNameSet { readUserNameResult in
+            switch readUserNameResult {
+            case .success(let userNameList):
+                do {
+                    var newUserNameList = userNameList
+                    newUserNameList.append(userName)
+                    try userUtilRef.document("userNameSet").setData(from: UserNameSet(userNames: newUserNameList))
+                    completion(.success(true))
+                } catch {
+                    completion(.failure(.typeError))
+                }
+            case .failure(let failure):
+                completion(.failure(.dataNotFound))
+            }
+        }
+    }
+    
+    func deleteUserNameSet(userName: String, completion: @escaping (Result<Bool, ReadDataError>) -> Void) {
+        readUserNameSet { readUserNameResult in
+            switch readUserNameResult {
+            case .success(let userNameList):
+                do {
+                    try userUtilRef
+                        .document("userNameSet")
+                        .setData(from: UserNameSet(userNames: userNameList.filter({ $0 != userName })))
+                    completion(.success(true))
+                } catch {
+                    completion(.failure(.typeError))
+                }
+            case .failure(let failure):
+                completion(.failure(.dataNotFound))
+            }
         }
     }
 }

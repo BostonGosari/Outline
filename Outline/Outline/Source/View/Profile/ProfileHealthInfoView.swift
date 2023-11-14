@@ -54,11 +54,13 @@ struct ProfileHealthInfoView: View {
                     } label: {
                         HStack {
                             Text("신장")
+                                .font(.customSubbody)
                             Spacer()
                             Text("\(height)cm")
-                                .foregroundStyle(Color.gray400)
+                                .font(.customSubbody)
+                                .foregroundStyle(showHeightPicker ? Color.customPrimary : Color.gray400)
                         }
-                        .frame(height: 40)
+                        .frame(height: 38)
                     }
 
                     Button {
@@ -66,11 +68,13 @@ struct ProfileHealthInfoView: View {
                     } label: {
                         HStack {
                             Text("체중")
+                                .font(.customSubbody)
                             Spacer()
                             Text("\(weight)kg")
-                                .foregroundStyle(Color.customPrimary)
+                                .font(.customSubbody)
+                                .foregroundStyle(showWeightPicker ? Color.customPrimary : Color.gray400)
                         }
-                        .frame(height: 40)
+                        .frame(height: 38)
                     }
                 }
                 .listRowBackground(Color.gray750)
@@ -79,42 +83,39 @@ struct ProfileHealthInfoView: View {
             .cornerRadius(10)
             .listStyle(.inset)
             .padding(.horizontal, 16)
-            .frame(height: 2 * 62)
+            .frame(height: 2 * 60)
+            .scrollDisabled(true)
+            
             Spacer()
         }
-        .navigationTitle("내 정보")
+        .navigationTitle("신체 정보")
         .navigationBarTitleDisplayMode(.inline)
         .background(Color.gray900)
-        .sheet(isPresented: $showHeightPicker, content: {
+        .sheet(isPresented: $showHeightPicker, onDismiss: {
+            completion()
+        }, content: {
             Picker("신장", selection: $height) {
                 ForEach(heightRange, id: \.self) { h in
                     Text("\(h)cm")
+                        .font(.customSubbody)
                 }
             }
             .pickerStyle(.wheel)
             .presentationDetents([.medium])
         })
-        .sheet(isPresented: $showWeightPicker, content: {
+        .sheet(isPresented: $showWeightPicker, onDismiss: {
+            completion()
+        }, content: {
             VStack {
                 Picker("체중", selection: $weight) {
                     ForEach(weightRange, id: \.self) { w in
                         Text("\(w)kg")
+                            .font(.customSubbody)
                     }
                 }
                 .pickerStyle(.wheel)
                 .presentationDetents([.medium])
             }
         })
-        .toolbar {
-            ToolbarItem(placement: .topBarTrailing) {
-                Button {
-                    completion()
-                    dismiss()
-                } label: {
-                    Text("완료")
-                        .foregroundStyle(Color.customPrimary)
-                }
-            }
-        }
     }
 }

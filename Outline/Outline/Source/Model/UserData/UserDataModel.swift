@@ -31,9 +31,11 @@ protocol UserDataModelProtocol {
 enum CoreDataError: Error {
     case saveFailed
     case dataNotFound
+    case deleteFail
 }
 
 struct UserDataModel: UserDataModelProtocol {
+    @FetchRequest (entity: CoreRunningRecord.entity(), sortDescriptors: []) var runningRecord: FetchedResults<CoreRunningRecord>
     
     let persistenceController = PersistenceController.shared
     
@@ -127,7 +129,14 @@ struct UserDataModel: UserDataModelProtocol {
     }
     
     func deleteAllRunningRecord(completion: @escaping (Result<Bool, CoreDataError>) -> Void) {
-        persistenceController.container.viewContext.reset()
-        completion(.success(true))
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "CoreRunningRecord")
+        let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+
+        do {
+            try persistenceController.container.viewContext.execute(batchDeleteRequest)
+            completion(.success(true))
+        } catch {
+            completion(.failure(.deleteFail))
+        }
     }
 }
