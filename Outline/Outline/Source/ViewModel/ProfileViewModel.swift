@@ -62,7 +62,15 @@ final class ProfileViewModel: ObservableObject {
     }
     
     func signOut() {
-        // Delete FireStoreData, CoreData
+        userDataModel.deleteAllRunningRecord { res in
+            switch res {
+            case .success(let success):
+                print("success to delete all course data \(success)")
+            case .failure(let failure):
+                print("fail to delete all course data \(failure)")
+            }
+        }
+        
         if let userId = self.userId {
             self.userInfoModel.deleteUser(uid: userId) { isSuccessDeleteDBUser in
                 switch isSuccessDeleteDBUser {
