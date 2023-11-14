@@ -62,7 +62,6 @@ final class ProfileViewModel: ObservableObject {
     }
     
     func signOut() {
-        // Delete FireStoreData, CoreData
         userDataModel.deleteAllRunningRecord { res in
             switch res {
             case .success(let success):
