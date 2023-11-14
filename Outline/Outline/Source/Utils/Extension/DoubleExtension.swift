@@ -21,7 +21,7 @@ extension Double {
     }
     
     func formattedAveragePace() -> String {
-        if self.isZero {
+        if self.isZero || self.isNaN || self.isInfinite {
             return "-'--''"
         }
         let minutes = Int(self / 60)
