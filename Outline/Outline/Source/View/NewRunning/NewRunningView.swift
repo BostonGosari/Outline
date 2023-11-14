@@ -22,11 +22,14 @@ struct NewRunningView: View {
     @State var navigationSheetHeight: CGFloat = 0.0
     @State var metricsTranslation: CGFloat = 0.0
     @State var metricsSheetHeight: CGFloat = 0.0
+    @State var stopButtonScale: CGFloat = 1
     
     var body: some View {
         ZStack {
             map
-            navigation
+            if runningStartManager.runningType == .gpsArt {
+                navigation
+            }
             metrics
         }
         .overlay {
@@ -38,7 +41,9 @@ struct NewRunningView: View {
             completeSheet
         }
     }
-    
+}
+
+extension NewRunningView {
     private var map: some View {
         NewRunningMapView()
             .onAppear {
@@ -115,24 +120,13 @@ struct NewRunningView: View {
     private var controlButton: some View {
         ZStack {
             Button {
-                DispatchQueue.main.async {
-                    if runningStartManager.counter < 3 {
-                        runningDataManager.stopRunningWithoutRecord()
-                        runningStartManager.counter = 0
-                        runningStartManager.running = false
-                    } else {
-                        runningDataManager.stopRunning()
-                        runningStartManager.counter = 0
-                        withAnimation {
-                            showCompleteSheet = true
-                        }
-                    }
-                }
             } label: {
                 Image(systemName: "stop.circle.fill")
                     .font(.system(size: 60))
                     .fontWeight(.ultraLight)
                     .foregroundStyle(.black, .customWhite)
+                    .gesture(stopButtonGesture)
+                    .scaleEffect(stopButtonScale)
             }
             .frame(maxWidth: .infinity, alignment: isPaused ? .leading : .center)
             
@@ -186,6 +180,35 @@ struct NewRunningView: View {
         .padding(.horizontal, 90)
     }
     
+    private var completeSheet: some View {
+        VStack(spacing: 0) {
+            Text("오늘은, 여기까지")
+                .font(.customTitle2)
+                .padding(.top, 56)
+                .padding(.bottom, 8)
+            
+            Text("즐거운 러닝이었나요? 다음에 또 만나요! ")
+                .font(.customSubbody)
+                .padding(.bottom, 24)
+            
+            Image("Finish10")
+                .resizable()
+                .frame(width: 120, height: 120)
+                .padding(.bottom, 45)
+            
+            CompleteButton(text: "결과 페이지로", isActive: true) {
+                runningStartManager.complete = true
+                withAnimation {
+                    runningStartManager.running = false
+                }
+            }
+        }
+        .presentationDetents([.height(UIScreen.main.bounds.height / 2)])
+        .presentationDragIndicator(.hidden)
+    }
+}
+
+extension NewRunningView {
     private var navigationGesture: some Gesture {
         DragGesture()
             .onChanged { value in
@@ -244,34 +267,37 @@ struct NewRunningView: View {
                 }
             }
     }
-}
-
-extension NewRunningView {
-    private var completeSheet: some View {
-        VStack(spacing: 0) {
-            Text("오늘은, 여기까지")
-                .font(.customTitle2)
-                .padding(.top, 56)
-                .padding(.bottom, 8)
-            
-            Text("즐거운 러닝이었나요? 다음에 또 만나요! ")
-                .font(.customSubbody)
-                .padding(.bottom, 24)
-            
-            Image("Finish10")
-                .resizable()
-                .frame(width: 120, height: 120)
-                .padding(.bottom, 45)
-            
-            CompleteButton(text: "결과 페이지로", isActive: true) {
-                runningStartManager.complete = true
+    
+    private var stopButtonGesture: some Gesture {
+        LongPressGesture(minimumDuration: 2)
+            .onChanged { _ in
                 withAnimation {
-                    runningStartManager.running = false
+                    stopButtonScale = 1.3
                 }
             }
-        }
-        .presentationDetents([.height(UIScreen.main.bounds.height / 2)])
-        .presentationDragIndicator(.hidden)
+            .onEnded { _ in
+                DispatchQueue.main.async {
+                    if runningStartManager.counter < 3 {
+                        runningDataManager.stopRunningWithoutRecord()
+                        runningStartManager.counter = 0
+                        runningStartManager.running = false
+                    } else {
+                        runningDataManager.stopRunning()
+                        runningStartManager.counter = 0
+                        withAnimation {
+                            showCompleteSheet = true
+                        }
+                    }
+                }
+            }
+            .simultaneously(with: TapGesture()
+                .onEnded { _ in
+                    withAnimation {
+                        stopButtonScale = 1
+                        //TODO: show Popup
+                    }
+                }
+            )
     }
 }
 
