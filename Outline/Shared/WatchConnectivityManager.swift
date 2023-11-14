@@ -12,6 +12,7 @@ class WatchConnectivityManager: NSObject, WCSessionDelegate, ObservableObject {
     @Published var allCourses: [GPSArtCourse] = []
     @Published var receivedCourse: GPSArtCourse = GPSArtCourse()
     @Published var isWatchRunning: Bool = false
+    @Published var isWatchConnected: Bool = false
     
     static let shared = WatchConnectivityManager()
     
@@ -30,12 +31,17 @@ class WatchConnectivityManager: NSObject, WCSessionDelegate, ObservableObject {
     }
     
     func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) { 
+        print("error activationDidCompleteWith")
     }
     
 #if os(iOS)
-    func sessionDidBecomeInactive(_ session: WCSession) { }
+    func sessionDidBecomeInactive(_ session: WCSession) { 
+        print("error sessionDidBecomeInactive")
+    }
     
-    func sessionDidDeactivate(_ session: WCSession) { }
+    func sessionDidDeactivate(_ session: WCSession) { 
+        print("error sessionDidDeactivate")
+    }
 #endif
     
     func sendGPSArtCourse(_ course: GPSArtCourse) {
