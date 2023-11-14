@@ -63,6 +63,9 @@ struct HomeTabView: View {
             if runningManager.start {
                 CountDown(running: $runningManager.running, start: $runningManager.start)
             }
+            if runningManager.complete {
+                FinishRunningView()
+            }
             if runningManager.running {
                 NewRunningView()
             }

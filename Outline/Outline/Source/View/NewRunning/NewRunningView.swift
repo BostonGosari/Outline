@@ -16,6 +16,7 @@ struct NewRunningView: View {
     @State var showDetail = false
     @State var isPaused = false
     @State var showDetailSheet = true
+    @State private var showCompleteSheet = false
     
     @State var navigationTranslation: CGFloat = 0.0
     @State var navigationSheetHeight: CGFloat = 0.0
@@ -32,6 +33,9 @@ struct NewRunningView: View {
             if isFirstRunning && runningStartManager.runningType == .gpsArt {
                 FirstRunningGuideView(isFirstRunning: $isFirstRunning)
             }
+        }
+        .sheet(isPresented: $showCompleteSheet) {
+            completeSheet
         }
     }
     
@@ -111,7 +115,19 @@ struct NewRunningView: View {
     private var controlButton: some View {
         ZStack {
             Button {
-                
+                DispatchQueue.main.async {
+                    if runningStartManager.counter < 3 {
+                        runningDataManager.stopRunningWithoutRecord()
+                        runningStartManager.counter = 0
+                        runningStartManager.running = false
+                    } else {
+                        runningDataManager.stopRunning()
+                        runningStartManager.counter = 0
+                        withAnimation {
+                            showCompleteSheet = true
+                        }
+                    }
+                }
             } label: {
                 Image(systemName: "stop.circle.fill")
                     .font(.system(size: 60))
@@ -128,6 +144,8 @@ struct NewRunningView: View {
                         navigationSheetHeight = 0
                     }
                 }
+                runningDataManager.resumeRunning()
+                runningStartManager.startTimer()
             } label: {
                 Image(systemName: "play.circle.fill")
                     .font(.system(size: 60))
@@ -148,6 +166,8 @@ struct NewRunningView: View {
                         navigationSheetHeight = 0
                     }
                 }
+                runningDataManager.pauseRunning()
+                runningStartManager.stopTimer()
             } label: {
                 Image(systemName: "pause.circle.fill")
                     .font(.system(size: 60))
@@ -223,6 +243,35 @@ struct NewRunningView: View {
                     }
                 }
             }
+    }
+}
+
+extension NewRunningView {
+    private var completeSheet: some View {
+        VStack(spacing: 0) {
+            Text("오늘은, 여기까지")
+                .font(.customTitle2)
+                .padding(.top, 56)
+                .padding(.bottom, 8)
+            
+            Text("즐거운 러닝이었나요? 다음에 또 만나요! ")
+                .font(.customSubbody)
+                .padding(.bottom, 24)
+            
+            Image("Finish10")
+                .resizable()
+                .frame(width: 120, height: 120)
+                .padding(.bottom, 45)
+            
+            CompleteButton(text: "결과 페이지로", isActive: true) {
+                runningStartManager.complete = true
+                withAnimation {
+                    runningStartManager.running = false
+                }
+            }
+        }
+        .presentationDetents([.height(UIScreen.main.bounds.height / 2)])
+        .presentationDragIndicator(.hidden)
     }
 }
 

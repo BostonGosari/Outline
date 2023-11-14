@@ -32,6 +32,12 @@ struct NewRunningMapView: View {
                     .stroke(.customPrimary, style: StrokeStyle(lineWidth: 5, lineCap: .round, lineJoin: .round))
             }
             .mapControlVisibility(.hidden)
+            .onAppear {
+                if let startCourse = runningStartManager.startCourse,
+                   !startCourse.coursePaths.isEmpty {
+                    runningStartManager.trackingDistance()
+                }
+            }
             
             VStack {
                 guideView
