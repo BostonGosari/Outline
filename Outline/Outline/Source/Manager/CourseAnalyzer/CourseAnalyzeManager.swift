@@ -40,4 +40,51 @@ class CourseAnalyzeManager {
         }
         return totalLength
     }
+    
+    // 두 경로 간의 점의 갯수를 일치시키는 함수
+    func makePointsEquallySpaced(path1: [CLLocationCoordinate2D], path2: [CLLocationCoordinate2D]) -> ([CLLocationCoordinate2D], [CLLocationCoordinate2D]) {
+        let minPointsCount = min(path1.count, path2.count)
+        var resultPath1 = [CLLocationCoordinate2D]()
+        var resultPath2 = [CLLocationCoordinate2D]()
+
+        for i in 0..<(minPointsCount - 1) {
+            let guidePoint = path1[i]
+            let closestUserPoint = findClosestPoint(guidePoint: guidePoint, userPath: path2)
+
+            resultPath1.append(guidePoint)
+            resultPath2.append(closestUserPoint)
+        }
+
+        // 마지막 점 추가
+        resultPath1.append(path1.last!)
+        resultPath2.append(path2.last!)
+
+        return (resultPath1, resultPath2)
+    }
+
+    // 가이드 점에 가장 가까운 유저 점 찾기
+    func findClosestPoint(guidePoint: CLLocationCoordinate2D, userPath: [CLLocationCoordinate2D]) -> CLLocationCoordinate2D {
+        var closestPoint = userPath.first!
+        var minDistance = Double.infinity
+
+        for userPoint in userPath {
+            let distance = calculateDistance(guidePoint, userPoint)
+            if distance < minDistance {
+                minDistance = distance
+                closestPoint = userPoint
+            }
+        }
+
+        return closestPoint
+    }
+
+
+
+    // 보간 함수
+    private func interpolatePoint(start: CLLocationCoordinate2D, end: CLLocationCoordinate2D, factor: Double) -> CLLocationCoordinate2D {
+        let latitude = start.latitude + (end.latitude - start.latitude) * factor
+        let longitude = start.longitude + (end.longitude - start.longitude) * factor
+
+        return CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+    }
 }
