@@ -73,22 +73,6 @@ struct MirroringMetricsView: View {
     }
 }
 
-struct MetricItem: View {
-    var value = "888'29''"
-    var label = "평균 페이스"
-    
-    var body: some View {
-        VStack {
-            Text(value)
-                .font(.customTitle)
-            Text(label)
-                .font(.customSubbody)
-                .foregroundStyle(.gray200)
-        }
-        .frame(maxWidth: .infinity)
-    }
-}
-
 #Preview {
     MirroringView(showMirroringView: .constant(true))
 }
