@@ -18,6 +18,8 @@
 		0E29F65F2ADF6CDD00F5EF5C /* RunningMapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E29F65E2ADF6CDD00F5EF5C /* RunningMapViewModel.swift */; };
 		0E2B4CBF2AE744E8002A5103 /* RecordDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2B4CBE2AE744E8002A5103 /* RecordDetailViewModel.swift */; };
 		0E4291602B03CF3100EE75F5 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E42915F2B03CF3100EE75F5 /* LocationManager.swift */; };
+		0E4291642B049F9800EE75F5 /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4291632B049F9800EE75F5 /* Route.swift */; };
+		0E4291662B04B00C00EE75F5 /* test.json in Resources */ = {isa = PBXBuildFile; fileRef = 0E4291652B04B00C00EE75F5 /* test.json */; };
 		0E9A5D3F2AE058D500C19FF3 /* ShareMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9A5D3E2AE058D500C19FF3 /* ShareMainView.swift */; };
 		0E9A5D422AE058EF00C19FF3 /* CustomShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9A5D412AE058EF00C19FF3 /* CustomShareView.swift */; };
 		0E9A5D442AE058FC00C19FF3 /* ImageShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9A5D432AE058FC00C19FF3 /* ImageShareView.swift */; };
@@ -229,6 +231,8 @@
 		0E29F65E2ADF6CDD00F5EF5C /* RunningMapViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RunningMapViewModel.swift; sourceTree = "<group>"; };
 		0E2B4CBE2AE744E8002A5103 /* RecordDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordDetailViewModel.swift; sourceTree = "<group>"; };
 		0E42915F2B03CF3100EE75F5 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		0E4291632B049F9800EE75F5 /* Route.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
+		0E4291652B04B00C00EE75F5 /* test.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = test.json; sourceTree = "<group>"; };
 		0E96BA912AF4E00B000C8FBF /* SFCompactDisplay-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFCompactDisplay-Semibold.ttf"; sourceTree = "<group>"; };
 		0E9A5D3E2AE058D500C19FF3 /* ShareMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareMainView.swift; sourceTree = "<group>"; };
 		0E9A5D412AE058EF00C19FF3 /* CustomShareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomShareView.swift; sourceTree = "<group>"; };
@@ -756,6 +760,7 @@
 		F0AC8AFD2AD9638C0061612C /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				0E4291652B04B00C00EE75F5 /* test.json */,
 				0E29F64D2ADF681E00F5EF5C /* KML */,
 				BB1D530A2ADDBC430073771F /* Font */,
 				F0AC8B2F2AD968FD0061612C /* Image */,
@@ -796,6 +801,7 @@
 				95EB1EF32ADE229200B47984 /* UserInfo */,
 				F01FDB982ADABB6100BDA633 /* TabModel.swift */,
 				0E9A5D4E2AE0B8C800C19FF3 /* ShareModel.swift */,
+				0E4291632B049F9800EE75F5 /* Route.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1046,6 +1052,7 @@
 				954CB2A52AE5457B005EB2E9 /* pohangCrocodileRun.kml in Resources */,
 				F0AC8B2E2AD968A20061612C /* Icon.xcassets in Resources */,
 				954CB2AD2AE5457B005EB2E9 /* pohangDuckRun.kml in Resources */,
+				0E4291662B04B00C00EE75F5 /* test.json in Resources */,
 				F0AC8AA12AD94C200061612C /* Color.xcassets in Resources */,
 				954CB2AF2AE5457B005EB2E9 /* seoulCamelRun.kml in Resources */,
 				BB1D531E2ADDBCB90073771F /* Pretendard-Thin.ttf in Resources */,
@@ -1197,6 +1204,7 @@
 				291A22352AF4CD94004B3D10 /* PermissionSheet.swift in Sources */,
 				95EB1EEC2ADDC66B00B47984 /* UserDataModel.swift in Sources */,
 				F06B936B2ADC23E100387DEB /* Logger.swift in Sources */,
+				0E4291642B049F9800EE75F5 /* Route.swift in Sources */,
 				29AE76E02ADE2BC700A46742 /* DateExtention.swift in Sources */,
 				95EB1EE92ADDC43400B47984 /* PersistentController.swift in Sources */,
 				2998035C2AE0181900A9A134 /* Confetti.swift in Sources */,
