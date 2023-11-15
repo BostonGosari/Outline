@@ -155,13 +155,13 @@ class AccuracyCheckViewModel: ObservableObject {
     func caculateAccuracyAndProgress() {
         // 진행률 계산
         let progressManager = CourseProgressManager(guideCourse: coordinatesToCLLocationCoordiantes(coordinates: gpsCourses.coursePaths), userCourse: userLocations)
-        progressManager.calculateProgress(path1: coordinatesToCLLocationCoordiantes(coordinates: gpsCourses.coursePaths), path2: userLocations)
+        progressManager.calculate()
         self.progress = progressManager.getProgress()
         print(progress)
         
         // 정확도 계산
         let accuracyManager = CourseAccuracyManager(guideCourse: coordinatesToCLLocationCoordiantes(coordinates: gpsCourses.coursePaths), userCourse: userLocations)
-        accuracyManager.calculateAccuracy(path1: coordinatesToCLLocationCoordiantes(coordinates: gpsCourses.coursePaths), path2: userLocations, userProgress: progress)
+        accuracyManager.calculate(userProgress: progress)
         self.accuracy = accuracyManager.getAccuracy()
      
     }

@@ -25,6 +25,10 @@ class CourseAnalyzeManager {
         fatalError("This method should be overridden")
     }
     
+    func calculate(userProgress: Double) {
+        fatalError("This method should be overridden")
+    }
+    
     func calculateDistance(_ coordinate1: CLLocationCoordinate2D, _ coordinate2: CLLocationCoordinate2D) -> Double {
         let location1 = CLLocation(latitude: coordinate1.latitude, longitude: coordinate1.longitude)
         let location2 = CLLocation(latitude: coordinate2.latitude, longitude: coordinate2.longitude)
@@ -42,24 +46,24 @@ class CourseAnalyzeManager {
     }
     
     // 두 경로 간의 점의 갯수를 일치시키는 함수
-    func makePointsEquallySpaced(path1: [CLLocationCoordinate2D], path2: [CLLocationCoordinate2D]) -> ([CLLocationCoordinate2D], [CLLocationCoordinate2D]) {
-        let minPointsCount = min(path1.count, path2.count)
-        var resultPath1 = [CLLocationCoordinate2D]()
-        var resultPath2 = [CLLocationCoordinate2D]()
+    func makePointsEquallySpaced(guideCourse: [CLLocationCoordinate2D], userCourse: [CLLocationCoordinate2D]) -> ([CLLocationCoordinate2D], [CLLocationCoordinate2D]) {
+        let minPointsCount = min(guideCourse.count, userCourse.count)
+        var resultguideCourse = [CLLocationCoordinate2D]()
+        var resultuserCourse = [CLLocationCoordinate2D]()
 
         for i in 0..<(minPointsCount - 1) {
-            let guidePoint = path1[i]
-            let closestUserPoint = findClosestPoint(guidePoint: guidePoint, userPath: path2)
+            let guidePoint = guideCourse[i]
+            let closestUserPoint = findClosestPoint(guidePoint: guidePoint, userPath: userCourse)
 
-            resultPath1.append(guidePoint)
-            resultPath2.append(closestUserPoint)
+            resultguideCourse.append(guidePoint)
+            resultuserCourse.append(closestUserPoint)
         }
 
         // 마지막 점 추가
-        resultPath1.append(path1.last!)
-        resultPath2.append(path2.last!)
+        resultguideCourse.append(guideCourse.last!)
+        resultuserCourse.append(userCourse.last!)
 
-        return (resultPath1, resultPath2)
+        return (resultguideCourse, resultuserCourse)
     }
 
     // 가이드 점에 가장 가까운 유저 점 찾기
