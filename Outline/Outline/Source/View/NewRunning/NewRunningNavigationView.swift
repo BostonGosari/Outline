@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct NewRunningNavigationView: View {
+    var distance: Int
+    var direction: String
     var showDetailNavigation: Bool
         
         var body: some View {
@@ -18,9 +20,9 @@ struct NewRunningNavigationView: View {
                         .padding(.leading)
                         .padding(.trailing, 5)
                     VStack(alignment: .leading) {
-                        Text("630m")
+                        Text("\(distance)m")
                             .font(.customTitle2)
-                        Text("포항공과대학교 C5")
+                        Text(direction)
                             .font(.customSubtitle)
                             .foregroundStyle(.gray500)
                     }
@@ -52,5 +54,9 @@ struct NewRunningNavigationView: View {
 }
 
 #Preview {
-    NewRunningNavigationView(showDetailNavigation: false)
+    NewRunningNavigationView(
+        distance: 0,
+        direction: "우회전",
+        showDetailNavigation: false
+    )
 }
