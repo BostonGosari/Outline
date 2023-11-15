@@ -9,15 +9,19 @@ import CoreLocation
 import SwiftUI
 
 class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
-    @Published var userLocations: [CLLocationCoordinate2D] = []
+    @Published var userLocations: [CLLocationCoordinate2D]
+    @Published var isRunning: Bool
     
     private var locationManager = CLLocationManager()
     
     static let shared = LocationManager()
     
     private override init() {
-        super.init()
         userLocations = []
+        isRunning = true
+        
+        super.init()
+        
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.distanceFilter = 10
@@ -29,7 +33,8 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if let currentLocation = locations.last?.coordinate {
+        if isRunning,
+            let currentLocation = locations.last?.coordinate {
             userLocations.append(currentLocation)
         }
     }

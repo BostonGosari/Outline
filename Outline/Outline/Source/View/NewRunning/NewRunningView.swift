@@ -141,6 +141,7 @@ extension NewRunningView {
                 }
                 runningDataManager.resumeRunning()
                 runningStartManager.startTimer()
+                locationManager.isRunning = true
             } label: {
                 Image(systemName: "play.circle.fill")
                     .font(.system(size: 60))
@@ -163,6 +164,7 @@ extension NewRunningView {
                 }
                 runningDataManager.pauseRunning()
                 runningStartManager.stopTimer()
+                locationManager.isRunning = false
             } label: {
                 Image(systemName: "pause.circle.fill")
                     .font(.system(size: 60))
