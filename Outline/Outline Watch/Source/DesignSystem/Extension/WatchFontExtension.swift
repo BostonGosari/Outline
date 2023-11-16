@@ -10,6 +10,7 @@ import SwiftUI
 extension Font {
     static let customHeadline = Font.custom("SF Pro Display", size: 40, relativeTo: .largeTitle)
     static let customSubHeadline = Font.custom("SF Pro Display", size: 32, relativeTo: .title)
+    static let customLargeTitle = Font.custom("SF Pro Display", size: 24, relativeTo: .headline)
     static let customTitle = Font.custom("SF Pro Display", size: 21, relativeTo: .headline)
     static let customSubTitle = Font.custom("SF Pro Display", size: 14, relativeTo: .subheadline)
     static let customButton = Font.custom("SF Pro Display", size: 13, relativeTo: .body)

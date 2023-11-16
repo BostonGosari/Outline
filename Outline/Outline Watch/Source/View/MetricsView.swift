@@ -18,19 +18,21 @@ struct MetricsView: View {
             MetricsTimelineSchedule(from: workoutManager.session?.startDate ?? Date(),
                                     isPaused: workoutManager.session?.state == .paused)) { context in
             VStack(alignment: .center) {
-                Spacer()
                 ElapsedTimeView(elapsedTime: elapsedTime(with: context.date))
-                    .font(.system(size: 40, weight: .bold))
+                    .font(.system(size: 40))
+                    .fontWeight(.bold)
                     .foregroundStyle(.customPrimary)
-                Spacer()
+                    .monospacedDigit()
+                    .padding(.bottom)
                 HStack {
                     Spacer()
                     VStack {
                         Text("\((workoutManager.distance/1000).formatted(.number.precision(.fractionLength(2))))")
-                            .font(.system(size: 28).weight(.semibold))
+                            .font(.system(size: 24))
+                            .fontWeight(.semibold)
                             .foregroundColor(.white)
                         Text("킬로미터")
-                            .font(.system(size: 14))
+                            .font(.customBody)
                             .multilineTextAlignment(.center)
                             .foregroundColor(Color.gray500)
 
@@ -38,31 +40,21 @@ struct MetricsView: View {
                     Spacer()
                     VStack {
                         Text(workoutManager.pace > 0 ? workoutManager.pace.formattedAveragePace() : "-’--’’")
-                            .font(.system(size: 28).weight(.semibold))
+                            .font(.system(size: 24))
+                            .fontWeight(.semibold)
                             .foregroundColor(.white)
                         Text("페이스")
-                            .font(.system(size: 14))
+                            .font(.customBody)
                             .multilineTextAlignment(.center)
                             .foregroundColor(Color.gray500)
                     }
                     .padding(.leading, 20)
                     Spacer()
                 }
-                Spacer()
             }
             .font(.system(.title, design: .rounded).monospacedDigit().lowercaseSmallCaps())
             .frame(maxWidth: .infinity)
-            .ignoresSafeArea(edges: .bottom)
-            .navigationTitle {
-                if watchConnectivityManager.receivedCourse.coursePaths.isEmpty {
-                    Text(runningManager.runningTitle)
-                        .foregroundStyle(.customPrimary)
-                } else {
-                    Text(watchConnectivityManager.receivedCourse.courseName)
-                        .foregroundStyle(.customPrimary)
-                }
-            }
-            .navigationBarTitleDisplayMode(.inline)
+            .padding(.bottom)
         }
     }
     

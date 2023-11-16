@@ -36,15 +36,5 @@ struct MapWatchView: View {
             }
         }
         .tint(.customPrimary)
-        .navigationTitle {
-            if watchConnectivityManager.receivedCourse.coursePaths.isEmpty {
-                Text(watchRunningManager.runningTitle)
-                    .foregroundStyle(.customPrimary)
-            } else {
-                Text(watchConnectivityManager.receivedCourse.courseName)
-                    .foregroundStyle(.customPrimary)
-            }
-        }
-        .navigationBarTitleDisplayMode(.inline)
     }
 }
