@@ -24,16 +24,7 @@ struct CourseListWatchView: View {
         NavigationStack {
             VStack {
                 if watchConnectivityManager.allCourses.isEmpty {
-                    HStack {
-                        Image(systemName: "iphone")
-                            .foregroundStyle(.gray600, .clear)
-                            .font(.custom("SF Pro Display", size: 24, relativeTo: .title3))
-                        Text("OUTLINE iPhone을\n실행해서 코스를 선택하세요.")
-                            .multilineTextAlignment(.leading)
-                            .font(.customCaption)
-                            .foregroundStyle(.gray600)
-                    }
-                    .padding(.bottom, 20)
+                    contentUnavilable
                 } else {
                     ScrollView {
                         VStack(spacing: -5) {
@@ -78,6 +69,8 @@ struct CourseListWatchView: View {
                                         } else {
                                             showFreeRunningGuideSheet = true
                                         }
+                                    } else if !viewModel.isLocationAuthorized {
+                                        showLocationPermissionSheet = true
                                     }
                                 } label: {
                                     VStack {
@@ -135,97 +128,33 @@ struct CourseListWatchView: View {
             }
         }
         .sheet(isPresented: $showLocationPermissionSheet) {
-            locationPermissionSheet
+            PermissionSheet()
                 .toolbar(.hidden, for: .navigationBar)
-                .ignoresSafeArea()
         }
         .sheet(isPresented: $showFreeRunningGuideSheet) {
-            freeRunningGuideSheet
-                .toolbar(.hidden, for: .navigationBar)
-                .ignoresSafeArea()
+            TwoButtonSheet(text: "자유 코스로 변경할까요?\n현재 루트와 멀리 떨어져 있어요", firstLabel: "자유 코스로 변경", firstAction: {
+                watchRunningManager.startFreeRun()
+                showFreeRunningGuideSheet = false
+            }, secondLabel: "돌아가기", secondAction: {
+                showFreeRunningGuideSheet = false
+            })
+            .toolbar(.hidden, for: .navigationBar)
         }
         .onAppear {
             viewModel.checkAuthorization()
         }
     }
     
-    private var locationPermissionSheet: some View {
-        VStack {
-            Image(systemName: "location.circle")
-                .resizable()
-                .frame(width: 43, height: 43)
-                .foregroundStyle(.customPrimary)
-            Spacer()
-            Text("OUTLINE iPhone을 실행해서\n위치 권한을 허용해주세요.")
-                .multilineTextAlignment(.center)
-                .font(Font.system(size: 13))
-            Spacer()
-            Button {
-                showLocationPermissionSheet.toggle()
-            } label: {
-                Text("확인")
-            }
+    private var contentUnavilable: some View {
+        HStack {
+            Image(systemName: "iphone")
+                .foregroundStyle(.gray600, .clear)
+                .font(.custom("SF Pro Display", size: 24, relativeTo: .title3))
+            Text("OUTLINE iPhone을\n실행해서 코스를 선택하세요.")
+                .multilineTextAlignment(.leading)
+                .font(.customCaption)
+                .foregroundStyle(.gray600)
         }
-    }
-    
-    private var freeRunningGuideSheet: some View {
-        ZStack {
-            Rectangle()
-                .ignoresSafeArea()
-                .foregroundStyle(.thinMaterial)
-            VStack {
-                VStack(alignment: .leading) {
-                    Text("자유 코스로 변경할까요?")
-                    Text("현재 루트와 멀리 떨어져 있어요.")
-                }
-                .font(.system(size: 14))
-                .padding()
-                .padding(.top, 20)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .background {
-                    RoundedRectangle(cornerRadius: 12, style: .continuous)
-                        .foregroundStyle(.gray.opacity(0.2))
-                }
-                Button {
-                    watchRunningManager.startFreeRun()
-                    showFreeRunningGuideSheet = false
-                } label: {
-                    Text("자유 코스로 변경")
-                        .foregroundColor(.black)
-                        .frame(maxWidth: .infinity)
-                        .frame(height: 36)
-                        .padding()
-                        .background(
-                            RoundedRectangle(cornerRadius: 20, style: .continuous)
-                                .foregroundStyle(.customPrimary)
-                        )
-                        .foregroundColor(.white)
-                }
-                .buttonStyle(.plain)
-                Button {
-                    showFreeRunningGuideSheet = false
-                } label: {
-                    Text("뒤로가기")
-                        .frame(maxWidth: .infinity)
-                        .frame(height: 36)
-                        .padding()
-                        .background(
-                            RoundedRectangle(cornerRadius: 20, style: .continuous)
-                                .foregroundColor(Color.gray800.opacity(0.5))
-                        )
-                }
-                .buttonStyle(.plain)
-            }
-            .padding(.top, 20)
-            .overlay(alignment: .topLeading) {
-                Image(systemName: "map.circle")
-                    .font(.system(size: 42))
-                    .foregroundStyle(.customPrimary)
-                    .padding(16)
-                    .frame(width: 50, height: 50)
-            }
-            .toolbar(.hidden, for: .automatic)
-            .padding()
-        }
+        .padding(.bottom, 20)
     }
 }

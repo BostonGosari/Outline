@@ -53,7 +53,6 @@ struct MetricsView: View {
             .font(.system(.title, design: .rounded).monospacedDigit().lowercaseSmallCaps())
             .frame(maxWidth: .infinity)
             .ignoresSafeArea(edges: .bottom)
-            .scenePadding()
             .navigationTitle {
                 if watchConnectivityManager.receivedCourse.coursePaths.isEmpty {
                     Text(runningManager.runningTitle)

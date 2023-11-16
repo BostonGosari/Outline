@@ -35,6 +35,9 @@
 		291B98EC2AFF516A004E2D9B /* MirroringMetricsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291B98EB2AFF516A004E2D9B /* MirroringMetricsView.swift */; };
 		291B98EE2AFF5644004E2D9B /* MirroringNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291B98ED2AFF5644004E2D9B /* MirroringNavigationView.swift */; };
 		291B98F02AFF5AC6004E2D9B /* MirroringMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291B98EF2AFF5AC6004E2D9B /* MirroringMapView.swift */; };
+		29215ED72B063A1A003BBF2E /* PermissionSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29215ED62B063A1A003BBF2E /* PermissionSheet.swift */; };
+		29215ED92B063F5B003BBF2E /* EndRunningSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29215ED82B063F5B003BBF2E /* EndRunningSheet.swift */; };
+		29215EDB2B064566003BBF2E /* TwoButtonSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29215EDA2B064566003BBF2E /* TwoButtonSheet.swift */; };
 		2921AFFE2B012DD100533A83 /* NewRunningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2921AFFD2B012DD100533A83 /* NewRunningView.swift */; };
 		2921B0002B012E4400533A83 /* NewRunningMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2921AFFF2B012E4400533A83 /* NewRunningMapView.swift */; };
 		2921B0022B012EC800533A83 /* NewRunningNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2921B0012B012EC800533A83 /* NewRunningNavigationView.swift */; };
@@ -66,8 +69,8 @@
 		295232FA2AEED0630020EAFA /* BigCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295232F92AEED0630020EAFA /* BigCardView.swift */; };
 		295232FC2AEEE74A0020EAFA /* ButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295232FB2AEEE74A0020EAFA /* ButtonStyle.swift */; };
 		295324852AE038EE00085120 /* UserInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0AC8B062AD965390061612C /* UserInfoModel.swift */; };
-		296AB6FA2AFD5CEB0065A834 /* MirroringTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 296AB6F92AFD5CEB0065A834 /* MirroringTestView.swift */; };
 		2955F7FA2B038084005CE2C0 /* HealthAuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2955F7F92B038084005CE2C0 /* HealthAuthViewModel.swift */; };
+		296AB6FA2AFD5CEB0065A834 /* MirroringTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 296AB6F92AFD5CEB0065A834 /* MirroringTestView.swift */; };
 		2975F0962AE3E1790046C00B /* CornerRectangleModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2975F0952AE3E1790046C00B /* CornerRectangleModifier.swift */; };
 		297B80FB2AE73C4C00AF7219 /* Outline Watch App.app in Embed ExtensionKit Extensions */ = {isa = PBXBuildFile; fileRef = 297B80FA2AE73C4500AF7219 /* Outline Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		297B80FC2AE7515200AF7219 /* CourseModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E2EF702ADA6F230083ADEE /* CourseModelType.swift */; };
@@ -155,7 +158,6 @@
 		BB397D092AE6408A00F92A43 /* RecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB397D082AE6408A00F92A43 /* RecordView.swift */; };
 		BB397D0B2AE640A800F92A43 /* RecordDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB397D0A2AE640A800F92A43 /* RecordDetailView.swift */; };
 		BB44B1672AFF5BBD000462CA /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = BB44B1662AFF5BBD000462CA /* Kingfisher */; };
-		BB493CF82AE0CA55009D3699 /* ElapsedTimeFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB493CF72AE0CA55009D3699 /* ElapsedTimeFormatter.swift */; };
 		BB5239292ADAF75C00646494 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5239272ADAF72A00646494 /* Logger.swift */; };
 		BB5239372ADBD99F00646494 /* GPSArtHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5239362ADBD99F00646494 /* GPSArtHomeView.swift */; };
 		BB5239582ADC396300646494 /* BackgroundBlur.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5239572ADC396300646494 /* BackgroundBlur.swift */; };
@@ -185,7 +187,6 @@
 		F0AC8AB32AD94C210061612C /* WatchImage.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F0AC8AB22AD94C210061612C /* WatchImage.xcassets */; };
 		F0AC8AB62AD94C210061612C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F0AC8AB52AD94C210061612C /* Preview Assets.xcassets */; };
 		F0AC8B1D2AD966990061612C /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0AC8B152AD9660D0061612C /* Model.swift */; };
-		F0AC8B2A2AD967490061612C /* WatchModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0AC8B282AD967460061612C /* WatchModifier.swift */; };
 		F0AC8B2C2AD967E30061612C /* Image.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F0AC8B2B2AD967E30061612C /* Image.xcassets */; };
 		F0AC8B2E2AD968A20061612C /* Icon.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F0AC8B2D2AD968A20061612C /* Icon.xcassets */; };
 		F0AC8B352AD96A360061612C /* WatchColor.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F0AC8B322AD969FD0061612C /* WatchColor.xcassets */; };
@@ -259,6 +260,9 @@
 		291B98EB2AFF516A004E2D9B /* MirroringMetricsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MirroringMetricsView.swift; sourceTree = "<group>"; };
 		291B98ED2AFF5644004E2D9B /* MirroringNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MirroringNavigationView.swift; sourceTree = "<group>"; };
 		291B98EF2AFF5AC6004E2D9B /* MirroringMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MirroringMapView.swift; sourceTree = "<group>"; };
+		29215ED62B063A1A003BBF2E /* PermissionSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionSheet.swift; sourceTree = "<group>"; };
+		29215ED82B063F5B003BBF2E /* EndRunningSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndRunningSheet.swift; sourceTree = "<group>"; };
+		29215EDA2B064566003BBF2E /* TwoButtonSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoButtonSheet.swift; sourceTree = "<group>"; };
 		2921AFFD2B012DD100533A83 /* NewRunningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewRunningView.swift; sourceTree = "<group>"; };
 		2921AFFF2B012E4400533A83 /* NewRunningMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewRunningMapView.swift; sourceTree = "<group>"; };
 		2921B0012B012EC800533A83 /* NewRunningNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewRunningNavigationView.swift; sourceTree = "<group>"; };
@@ -279,8 +283,8 @@
 		293FD20F2AFBC52900623B23 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		295232F92AEED0630020EAFA /* BigCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigCardView.swift; sourceTree = "<group>"; };
 		295232FB2AEEE74A0020EAFA /* ButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyle.swift; sourceTree = "<group>"; };
-		296AB6F92AFD5CEB0065A834 /* MirroringTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MirroringTestView.swift; sourceTree = "<group>"; };
 		2955F7F92B038084005CE2C0 /* HealthAuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthAuthViewModel.swift; sourceTree = "<group>"; };
+		296AB6F92AFD5CEB0065A834 /* MirroringTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MirroringTestView.swift; sourceTree = "<group>"; };
 		2975F0952AE3E1790046C00B /* CornerRectangleModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CornerRectangleModifier.swift; sourceTree = "<group>"; };
 		297B80F92AE73C4500AF7219 /* Outline.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Outline.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		297B80FA2AE73C4500AF7219 /* Outline Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Outline Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -382,7 +386,6 @@
 		F0AC8AC42AD9514C0061612C /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		F0AC8B062AD965390061612C /* UserInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoModel.swift; sourceTree = "<group>"; };
 		F0AC8B152AD9660D0061612C /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
-		F0AC8B282AD967460061612C /* WatchModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchModifier.swift; sourceTree = "<group>"; };
 		F0AC8B2B2AD967E30061612C /* Image.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Image.xcassets; sourceTree = "<group>"; };
 		F0AC8B2D2AD968A20061612C /* Icon.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Icon.xcassets; sourceTree = "<group>"; };
 		F0AC8B302AD969DA0061612C /* WatchIcon.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = WatchIcon.xcassets; sourceTree = "<group>"; };
@@ -462,6 +465,17 @@
 			path = FreeRunning;
 			sourceTree = "<group>";
 		};
+		2921AFFC2B012DBF00533A83 /* NewRunning */ = {
+			isa = PBXGroup;
+			children = (
+				2921AFFD2B012DD100533A83 /* NewRunningView.swift */,
+				2921AFFF2B012E4400533A83 /* NewRunningMapView.swift */,
+				2921B0012B012EC800533A83 /* NewRunningNavigationView.swift */,
+				2921B00E2B01301100533A83 /* NewRunningMetricsView.swift */,
+			);
+			path = NewRunning;
+			sourceTree = "<group>";
+		};
 		296AB6F82AFD5CD30065A834 /* Mirroring */ = {
 			isa = PBXGroup;
 			children = (
@@ -472,17 +486,6 @@
 				291B98ED2AFF5644004E2D9B /* MirroringNavigationView.swift */,
 			);
 			path = Mirroring;
-			sourceTree = "<group>";
-		};
-		2921AFFC2B012DBF00533A83 /* NewRunning */ = {
-			isa = PBXGroup;
-			children = (
-				2921AFFD2B012DD100533A83 /* NewRunningView.swift */,
-				2921AFFF2B012E4400533A83 /* NewRunningMapView.swift */,
-				2921B0012B012EC800533A83 /* NewRunningNavigationView.swift */,
-				2921B00E2B01301100533A83 /* NewRunningMetricsView.swift */,
-			);
-			path = NewRunning;
 			sourceTree = "<group>";
 		};
 		299803582AE0181900A9A134 /* Confetti */ = {
@@ -922,7 +925,6 @@
 			children = (
 				F0AC8B1F2AD966EC0061612C /* Component */,
 				F0AC8B202AD966F30061612C /* Extension */,
-				F0AC8B212AD966FB0061612C /* Modifier */,
 			);
 			path = DesignSystem;
 			sourceTree = "<group>";
@@ -931,6 +933,9 @@
 			isa = PBXGroup;
 			children = (
 				2930EDBA2AF3E59F007FD141 /* ControlButton.swift */,
+				29215ED62B063A1A003BBF2E /* PermissionSheet.swift */,
+				29215ED82B063F5B003BBF2E /* EndRunningSheet.swift */,
+				29215EDA2B064566003BBF2E /* TwoButtonSheet.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -941,14 +946,6 @@
 				293EECA82AFE040300359E5F /* WatchFontExtension.swift */,
 			);
 			path = Extension;
-			sourceTree = "<group>";
-		};
-		F0AC8B212AD966FB0061612C /* Modifier */ = {
-			isa = PBXGroup;
-			children = (
-				F0AC8B282AD967460061612C /* WatchModifier.swift */,
-			);
-			path = Modifier;
 			sourceTree = "<group>";
 		};
 		F0AC8B2F2AD968FD0061612C /* Image */ = {
@@ -1254,8 +1251,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				29215EDB2B064566003BBF2E /* TwoButtonSheet.swift in Sources */,
 				9528EFEA2ADE9E870056CCC6 /* UserCoreDataModel.xcdatamodeld in Sources */,
-				F0AC8B2A2AD967490061612C /* WatchModifier.swift in Sources */,
 				F0492E232ADD545200F6EADD /* CourseListWatchView.swift in Sources */,
 				299458072AF3BB6400F7D24C /* DoubleExtension.swift in Sources */,
 				2930EDC22AF408EC007FD141 /* CourseDetailView.swift in Sources */,
@@ -1274,7 +1271,9 @@
 				293FD20E2AFBB86600623B23 /* HKWorkout+Statistics.swift in Sources */,
 				2930EDC02AF3FE3F007FD141 /* CourseListWatchViewModel.swift in Sources */,
 				293EECA92AFE040300359E5F /* WatchFontExtension.swift in Sources */,
+				29215ED72B063A1A003BBF2E /* PermissionSheet.swift in Sources */,
 				29111E3F2AE0CD0C009833C7 /* ConfettiWatchView.swift in Sources */,
+				29215ED92B063F5B003BBF2E /* EndRunningSheet.swift in Sources */,
 				BB5239292ADAF75C00646494 /* Logger.swift in Sources */,
 				F0AC8AB12AD94C200061612C /* ContentWatchView.swift in Sources */,
 				BB1D53432ADE9C7D0073771F /* ControlsView.swift in Sources */,

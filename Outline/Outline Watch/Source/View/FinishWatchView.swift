@@ -17,6 +17,7 @@ struct FinishWatchView: View {
                 finalImage("FinalImage1")
             case 50..<100:
                 finalImage("FinalImage2")
+                    .padding(.bottom, 10)
             case ..<10:
                 finalImage("FinalImage3")
             default:

@@ -26,7 +26,7 @@ struct WatchTabView: View {
                 MetricsView()
                     .tag(Tab.metrics)
             }
-            .onChange(of: workoutManager.sessionState) { _, newValue in
+            .onChange(of: workoutManager.session?.state) { _, newValue in
                 withAnimation {
                     if newValue == .running {
                         selection = .metrics
