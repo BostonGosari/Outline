@@ -112,6 +112,8 @@ struct GPSArtHomeView: View {
                     GPSArtHomeInlineHeader(loading: loading, scrollOffset: scrollOffset)
                 }
                 .onAppear {
+                    viewModel.checkLocationAuthorization()
+                    
                     if viewModel.courses.isEmpty {
                         viewModel.getAllCoursesFromFirebase()
                     }
