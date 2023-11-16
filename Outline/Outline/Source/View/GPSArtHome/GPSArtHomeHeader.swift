@@ -64,8 +64,6 @@ struct GPSArtHomeInlineHeader: View {
             }
         }
         .opacity(scrollOffset < 20 ? 1 : 0)
-        .animation(.bouncy, value: scrollOffset)
-        .transition(.opacity)
         .padding(.bottom, 10)
         .frame(maxWidth: .infinity)
         .background(
