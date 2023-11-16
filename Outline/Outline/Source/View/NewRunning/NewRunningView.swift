@@ -8,21 +8,21 @@
 import SwiftUI
 
 struct NewRunningView: View {
-    @StateObject var runningStartManager = RunningStartManager.shared
-    @StateObject var runningDataManager = RunningDataManager.shared
+    @StateObject private var runningStartManager = RunningStartManager.shared
+    @StateObject private var runningDataManager = RunningDataManager.shared
     
-    @AppStorage("isFirstRunning") var isFirstRunning = true
+    @AppStorage("isFirstRunning") private var isFirstRunning = true
     
-    @State var showDetail = false
-    @State var isPaused = false
-    @State var showDetailSheet = true
+    @State private var showDetail = false
+    @State private var isPaused = false
+    @State private var showDetailSheet = true
     @State private var showCompleteSheet = false
     
-    @State var navigationTranslation: CGFloat = 0.0
-    @State var navigationSheetHeight: CGFloat = 0.0
-    @State var metricsTranslation: CGFloat = 0.0
-    @State var metricsSheetHeight: CGFloat = 0.0
-    @State var stopButtonScale: CGFloat = 1
+    @State private var navigationTranslation: CGFloat = 0.0
+    @State private var navigationSheetHeight: CGFloat = 0.0
+    @State private var metricsTranslation: CGFloat = 0.0
+    @State private var metricsSheetHeight: CGFloat = 0.0
+    @State private var stopButtonScale: CGFloat = 1
     
     var body: some View {
         ZStack {

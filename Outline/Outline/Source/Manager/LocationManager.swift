@@ -16,7 +16,6 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     override init() {
         super.init()
         locationManager.delegate = self
-        locationManager.requestWhenInUseAuthorization()
         locationManager.distanceFilter = 10
         locationManager.startUpdatingLocation()
     }

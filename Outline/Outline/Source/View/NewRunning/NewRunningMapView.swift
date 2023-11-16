@@ -9,14 +9,14 @@ import MapKit
 import SwiftUI
 
 struct NewRunningMapView: View {
-    @StateObject var runningStartManager = RunningStartManager.shared
-    @StateObject var runningDataManager = RunningDataManager.shared
-    @StateObject var locationManager = LocationManager()
+    @StateObject private var runningStartManager = RunningStartManager.shared
+    @StateObject private var runningDataManager = RunningDataManager.shared
+    @StateObject private var locationManager = LocationManager()
     
     @State private var showBigGuide = false
     
     @State private var position: MapCameraPosition = .userLocation(followsHeading: true, fallback: .automatic)
-    @Namespace var mapScope
+    @Namespace private var mapScope
     
     var body: some View {
         ZStack(alignment: .topTrailing) {
