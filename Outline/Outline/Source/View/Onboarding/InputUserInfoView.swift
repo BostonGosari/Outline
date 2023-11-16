@@ -10,6 +10,7 @@ import HealthKit
 import HealthKitUI
 
 struct InputUserInfoView: View {
+    @AppStorage("authState") var authState: AuthState = .logout
     @StateObject var viewModel = InputUserInfoViewModel()
     @StateObject var healthKitManager = HealthKitManager()
     
@@ -60,9 +61,9 @@ struct InputUserInfoView: View {
                     
                     Spacer()
                     
-                    CompleteButton(text: "완료", isActive: viewModel.isButtonActive) {
+                    CompleteButton(text: "완료", isActive: true) {
                         viewModel.saveUserInfo(nickname: userNickName)
-                        viewModel.moveToLocationAuthView = true
+                        authState = .login
                     }
                     .padding(.bottom, 16)
                     .frame(maxHeight: .infinity, alignment: .bottom)
@@ -70,12 +71,6 @@ struct InputUserInfoView: View {
             }
             .foregroundStyle(Color.customWhite)
             .navigationBarBackButtonHidden()
-            .onAppear {
-                viewModel.requestHealthAuthorization()
-            }
-            .navigationDestination(isPresented: $viewModel.moveToLocationAuthView) {
-                OnboardingLocationAuthView()
-            }
             .overlay {
                 pickerView
                     .transition(.move(edge: .bottom))
