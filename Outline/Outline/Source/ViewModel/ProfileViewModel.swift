@@ -22,8 +22,8 @@ final class ProfileViewModel: ObservableObject {
             print("fail to userInfo updated: userId is nil")
             return
         }
-        userInfoModel.updateUserInfo(uid: userId, userInfo: userInfo) { res in
-            switch res {
+        userInfoModel.updateUserInfo(uid: userId, userInfo: userInfo) { result in
+            switch result {
             case .success(let success):
                 print("success to userInfo updated \(success)")
             case .failure(let failure):
@@ -37,8 +37,8 @@ final class ProfileViewModel: ObservableObject {
             print("fail to load userInfo: userId is nil")
             return
         }
-        userInfoModel.readUserInfo(uid: userId) { res in
-            switch res {
+        userInfoModel.readUserInfo(uid: userId) { result in
+            switch result {
             case .success(let userInfo):
                 self.userInfo = userInfo
                 print("success to load userInfo")
@@ -49,8 +49,8 @@ final class ProfileViewModel: ObservableObject {
     }
     
     func logOut() {
-        authModel.handleLogout { res in
-            switch res {
+        authModel.handleLogout { result in
+            switch result {
             case .success(let isSuccess):
                 self.authState = .logout
                 self.userId = ""
@@ -62,8 +62,8 @@ final class ProfileViewModel: ObservableObject {
     }
     
     func signOut() {
-        userDataModel.deleteAllRunningRecord { res in
-            switch res {
+        userDataModel.deleteAllRunningRecord { result in
+            switch result {
             case .success(let success):
                 print("success to delete all course data \(success)")
             case .failure(let failure):
@@ -82,8 +82,8 @@ final class ProfileViewModel: ObservableObject {
                 }
             }
         }
-        self.authModel.handleSignOut { res in
-            switch res {
+        self.authModel.handleSignOut { result in
+            switch result {
             case .success(let success):
                 print("success to sign out at authModel\(success)")
             case .failure(let failure):
@@ -91,8 +91,8 @@ final class ProfileViewModel: ObservableObject {
             }
         }
         
-        self.userInfoModel.deleteUserNameSet(userName: self.userInfo.nickname) { res in
-            switch res {
+        self.userInfoModel.deleteUserNameSet(userName: self.userInfo.nickname) { result in
+            switch result {
             case .success(let success):
                 print("success to delete userNameSet on DB \(success)")
             case .failure(let failure):
