@@ -16,6 +16,7 @@ struct HomeTabView: View {
     @State private var selectedTab: Tab = .GPSArtRunning
     @State private var showDetailView = false
     @State private var showCustomSheet = false
+    
     var body: some View {
         ZStack {
             NavigationStack {
