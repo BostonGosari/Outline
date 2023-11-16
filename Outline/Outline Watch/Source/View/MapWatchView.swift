@@ -17,13 +17,14 @@ struct MapWatchView: View {
         Map(position: $position, interactionModes: .zoom) {
             UserAnnotation()
             
-            if !watchRunningManager.startCourse.coursePaths.isEmpty {
-                MapPolyline(coordinates: ConvertCoordinateManager.convertToCLLocationCoordinates(watchRunningManager.startCourse.coursePaths))
-                    .stroke(.white.opacity(0.5), style: StrokeStyle(lineWidth: 8, lineCap: .round, lineJoin: .round))
-            } else if !watchConnectivityManager.receivedCourse.coursePaths.isEmpty {
+            if !watchConnectivityManager.receivedCourse.coursePaths.isEmpty {
                 MapPolyline(coordinates: ConvertCoordinateManager.convertToCLLocationCoordinates(watchConnectivityManager.receivedCourse.coursePaths))
                     .stroke(.white.opacity(0.5), style: StrokeStyle(lineWidth: 8, lineCap: .round, lineJoin: .round))
             }
+                if !watchRunningManager.startCourse.coursePaths.isEmpty {
+                    MapPolyline(coordinates: ConvertCoordinateManager.convertToCLLocationCoordinates(watchRunningManager.startCourse.coursePaths))
+                        .stroke(.white.opacity(0.5), style: StrokeStyle(lineWidth: 8, lineCap: .round, lineJoin: .round))
+                }
             
             MapPolyline(coordinates: watchRunningManager.userLocations)
                 .stroke(.customPrimary, style: StrokeStyle(lineWidth: 8, lineCap: .round, lineJoin: .round))
@@ -36,8 +37,13 @@ struct MapWatchView: View {
         }
         .tint(.customPrimary)
         .navigationTitle {
-            Text(watchRunningManager.runningTitle)
-                .foregroundStyle(.customPrimary)
+            if watchConnectivityManager.receivedCourse.coursePaths.isEmpty {
+                Text(watchRunningManager.runningTitle)
+                    .foregroundStyle(.customPrimary)
+            } else {
+                Text(watchConnectivityManager.receivedCourse.courseName)
+                    .foregroundStyle(.customPrimary)
+            }
         }
         .navigationBarTitleDisplayMode(.inline)
     }

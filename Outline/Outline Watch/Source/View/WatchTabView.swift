@@ -9,7 +9,6 @@ import SwiftUI
 
 struct WatchTabView: View {
     @StateObject var workoutManager = WorkoutManager.shared
-    @Environment(\.isLuminanceReduced) var isLuminanceReduced
     @StateObject var watchRunningManager = WatchRunningManager.shared
     @State private var selection: Tab = .metrics
             
@@ -32,11 +31,6 @@ struct WatchTabView: View {
                     if newValue == .running {
                         selection = .metrics
                     }
-                }
-            }
-            .onChange(of: isLuminanceReduced) { _, _ in
-                withAnimation {
-                    selection = .metrics
                 }
             }
         }

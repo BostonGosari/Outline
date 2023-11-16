@@ -73,8 +73,8 @@ struct CourseListWatchView: View {
                                     if viewModel.isHealthAuthorized && viewModel.isLocationAuthorized {
                                         if watchRunningManager.checkDistance(course: course.coursePaths) {
                                             watchRunningManager.startCourse = course
-                                            watchConnectivityManager.sendGPSArtCourse(course)
                                             watchRunningManager.startGPSArtRun()
+                                            watchConnectivityManager.sendGPSArtCourse(course)
                                         } else {
                                             showFreeRunningGuideSheet = true
                                         }

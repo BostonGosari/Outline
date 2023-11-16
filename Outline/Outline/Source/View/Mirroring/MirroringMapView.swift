@@ -31,7 +31,7 @@ struct MirroringMapView: View {
                         .stroke(.white.opacity(0.5), style: StrokeStyle(lineWidth: 8, lineCap: .round, lineJoin: .round))
                 }
                 if let startCourse = runningStartManager.startCourse {
-                    if startCourse.coursePaths.isEmpty {
+                    if !startCourse.coursePaths.isEmpty {
                         MapPolyline(coordinates: ConvertCoordinateManager.convertToCLLocationCoordinates(startCourse.coursePaths))
                             .stroke(.white.opacity(0.5), style: StrokeStyle(lineWidth: 8, lineCap: .round, lineJoin: .round))
                     }

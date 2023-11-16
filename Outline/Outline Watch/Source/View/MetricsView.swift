@@ -9,6 +9,7 @@ import SwiftUI
 import HealthKit
 
 struct MetricsView: View {
+    @StateObject var watchConnectivityManager = WatchConnectivityManager.shared
     @StateObject var workoutManager = WorkoutManager.shared
     @StateObject var runningManager = WatchRunningManager.shared
 
@@ -54,8 +55,13 @@ struct MetricsView: View {
             .ignoresSafeArea(edges: .bottom)
             .scenePadding()
             .navigationTitle {
-                Text(runningManager.runningTitle)
-                    .foregroundStyle(.customPrimary)
+                if watchConnectivityManager.receivedCourse.coursePaths.isEmpty {
+                    Text(runningManager.runningTitle)
+                        .foregroundStyle(.customPrimary)
+                } else {
+                    Text(watchConnectivityManager.receivedCourse.courseName)
+                        .foregroundStyle(.customPrimary)
+                }
             }
             .navigationBarTitleDisplayMode(.inline)
         }

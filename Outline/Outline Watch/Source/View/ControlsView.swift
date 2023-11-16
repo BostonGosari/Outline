@@ -71,8 +71,13 @@ struct ControlsView: View {
         }
         .scrollDisabled(workoutManager.session?.state == .running)
         .navigationTitle {
-            Text(workoutManager.session?.state == .running ? watchRunningManager.runningTitle : "일시 정지됨")
-                .foregroundStyle(.customPrimary)
+            if watchConnectivityManager.receivedCourse.coursePaths.isEmpty {
+                Text(workoutManager.session?.state == .running ? watchRunningManager.runningTitle : "일시 정지됨")
+                    .foregroundStyle(.customPrimary)
+            } else {
+                Text(workoutManager.session?.state == .running ? watchConnectivityManager.receivedCourse.courseName : "일시 정지됨")
+                    .foregroundStyle(.customPrimary)
+            }
         }
         .navigationBarTitleDisplayMode(.inline)
         .sheet(isPresented: $showConfirmationSheet) {
