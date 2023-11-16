@@ -69,8 +69,11 @@ struct HomeTabView: View {
             if runningManager.start {
                 CountDown()
             }
+            if runningManager.complete {
+                FinishRunningView()
+            }
             if runningManager.running {
-                RunningView()
+                NewRunningView()
             }
             if runningManager.mirroringRunning {
                 MirroringView(showMirroringView: .constant(true))
