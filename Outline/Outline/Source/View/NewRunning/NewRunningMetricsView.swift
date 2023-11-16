@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct NewRunningMetricsView: View {
-    @StateObject var runningManager = RunningStartManager.shared
-    @StateObject var runningDataManager = RunningDataManager.shared
-    
-    var showDetail: Bool
-    var isPaused: Bool
+    @StateObject private var runningManager = RunningStartManager.shared
+    @StateObject private var runningDataManager = RunningDataManager.shared
     
     // TODO: 사용자 데이터에서 가져오기
     private let weight: Double = 60
+    
+    var showDetail: Bool
+    var isPaused: Bool
     
     var body: some View {
         VStack {
