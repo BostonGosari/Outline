@@ -10,12 +10,12 @@ import SwiftUI
 import HealthKit
 
 struct MirroringMapView: View {
+    @StateObject private var locationManager = LocationManager()
     @StateObject private var workoutManager = WorkoutManager.shared
     @StateObject private var runningStartManager = RunningStartManager.shared
     @StateObject var watchConnectivityManager = WatchConnectivityManager.shared
 
     @State private var position: MapCameraPosition = .userLocation(followsHeading: true, fallback: .automatic)
-    @State private var userlocations: [CLLocationCoordinate2D] = []
     @Namespace var mapScope
     
     var body: some View {
@@ -23,7 +23,7 @@ struct MirroringMapView: View {
             Map(position: $position, scope: mapScope) {
                 UserAnnotation()
                 
-                MapPolyline(coordinates: userlocations)
+                MapPolyline(coordinates: locationManager.userLocations)
                     .stroke(.customPrimary, style: StrokeStyle(lineWidth: 8, lineCap: .round, lineJoin: .round))
                 
                 if !watchConnectivityManager.receivedCourse.coursePaths.isEmpty {
@@ -38,20 +38,15 @@ struct MirroringMapView: View {
                 }
             }
             .mapControlVisibility(.hidden)
-            .onChange(of: CLLocationManager().location) { _, userlocation in
-                if let user = userlocation {
-                    userlocations.append(user.coordinate)
-                }
-            }
             
             VStack(alignment: .trailing) {
-                Rectangle()
-                    .frame(width: 113, height: 168)
-                    .foregroundStyle(.white.opacity(0.4))
                 MapUserLocationButton(scope: mapScope)
                     .buttonBorderShape(.circle)
                     .tint(.white)
                     .controlSize(.large)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
+                    .padding(.bottom, 96)
+                    .padding(.leading, 16)
             }
             .padding(.top, 80)
             .padding(.trailing, 13)

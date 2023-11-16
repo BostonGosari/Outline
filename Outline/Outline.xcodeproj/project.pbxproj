@@ -54,6 +54,7 @@
 		2930EDBD2AF3FD97007FD141 /* CountDownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2930EDBC2AF3FD97007FD141 /* CountDownView.swift */; };
 		2930EDC02AF3FE3F007FD141 /* CourseListWatchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2930EDBF2AF3FE3F007FD141 /* CourseListWatchViewModel.swift */; };
 		2930EDC22AF408EC007FD141 /* CourseDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2930EDC12AF408EC007FD141 /* CourseDetailView.swift */; };
+		293C86A32B06540D00640329 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E42915F2B03CF3100EE75F5 /* LocationManager.swift */; };
 		293C97DF2AE6C454007821F5 /* WatchConnectivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 293C97DE2AE6C454007821F5 /* WatchConnectivityManager.swift */; };
 		293C97E02AE6C454007821F5 /* WatchConnectivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 293C97DE2AE6C454007821F5 /* WatchConnectivityManager.swift */; };
 		293EECA92AFE040300359E5F /* WatchFontExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 293EECA82AFE040300359E5F /* WatchFontExtension.swift */; };
@@ -645,6 +646,7 @@
 				293FD2062AFBB7FC00623B23 /* WorkoutManager+watchOS.swift */,
 				293FD2092AFBB80A00623B23 /* WorkoutManager+iOS.swift */,
 				293FD20C2AFBB86600623B23 /* HKWorkout+Statistics.swift */,
+				0E42915F2B03CF3100EE75F5 /* LocationManager.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -683,7 +685,6 @@
 				954FFF772AE132D100D27537 /* CourseDataUploadManager.swift */,
 				29CC19A32AE95F2300B79610 /* RunningStartManager.swift */,
 				F035240F2AE35AF800CCD8A6 /* RunningDataManager.swift */,
-				0E42915F2B03CF3100EE75F5 /* LocationManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -1293,6 +1294,7 @@
 				954CB29C2AE51619005EB2E9 /* PersistentController.swift in Sources */,
 				F0492E212ADD52E900F6EADD /* WatchTabView.swift in Sources */,
 				2930EDBD2AF3FD97007FD141 /* CountDownView.swift in Sources */,
+				293C86A32B06540D00640329 /* LocationManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

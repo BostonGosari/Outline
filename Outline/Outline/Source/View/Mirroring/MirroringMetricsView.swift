@@ -26,13 +26,10 @@ struct MirroringMetricsView: View {
                         HStack {
                             MetricItem(value: "\((workoutManager.distance/1000).formatted(.number.precision(.fractionLength(2))))", label: "킬로미터")
                             MetricItem(value: "\(workoutManager.heartRate.formatted(.number.precision(.fractionLength(0))))", label: "BPM")
-                            MetricItem(value: "\(workoutManager.cadence.formatted(.number.precision(.fractionLength(0))))", label: "케이던스")
                         }
                         HStack {
                             MetricItem(value: "\(workoutManager.calorie.formatted(.number.precision(.fractionLength(0))))", label: "칼로리")
                             MetricItem(value: "\(workoutManager.averagePace.formattedAveragePace())", label: "평균 페이스")
-                            MetricItem(value: "000", label: "000")
-                                .opacity(0)
                         }
                     }
                     .padding(.top, 20)

@@ -9,6 +9,7 @@ import SwiftUI
 import MapKit
 
 struct MapWatchView: View {
+    @StateObject private var locationManager = LocationManager()
     @StateObject private var watchConnectivityManager = WatchConnectivityManager.shared
     @StateObject private var watchRunningManager = WatchRunningManager.shared
     @State private var position: MapCameraPosition = .userLocation(followsHeading: true, fallback: .automatic)
@@ -26,15 +27,10 @@ struct MapWatchView: View {
                         .stroke(.white.opacity(0.5), style: StrokeStyle(lineWidth: 8, lineCap: .round, lineJoin: .round))
                 }
             
-            MapPolyline(coordinates: watchRunningManager.userLocations)
+            MapPolyline(coordinates: locationManager.userLocations)
                 .stroke(.customPrimary, style: StrokeStyle(lineWidth: 8, lineCap: .round, lineJoin: .round))
         }
         .mapControlVisibility(.hidden)
-        .onChange(of: CLLocationManager().location) { _, userlocation in
-            if let user = userlocation {
-                watchRunningManager.userLocations.append(user.coordinate)
-            }
-        }
         .tint(.customPrimary)
     }
 }

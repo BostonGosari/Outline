@@ -10,6 +10,7 @@ import SwiftUI
 struct MirroringView: View {
     @StateObject var workoutManager = WorkoutManager.shared
     @StateObject var runningStartManager = RunningStartManager.shared
+    @StateObject var watchConnectivityManager = WatchConnectivityManager.shared
     @State var showDetail = false
     @State var isPaused = false
     @State var showDetailSheet = true
@@ -22,7 +23,9 @@ struct MirroringView: View {
     var body: some View {
         ZStack {
             MirroringMapView()
-            mirroringNavigation
+            if runningStartManager.runningType == .gpsArt && !watchConnectivityManager.receivedCourse.coursePaths.isEmpty {
+                mirroringNavigation
+            }
         }
         .overlay {
             mirroringMetrics
