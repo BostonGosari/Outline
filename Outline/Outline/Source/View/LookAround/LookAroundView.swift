@@ -9,6 +9,7 @@ import SwiftUI
 
 struct LookAroundView: View {
     @AppStorage("authState") var authState: AuthState = .logout
+    var type: LookArroundType
     
     var body: some View {
         VStack {
@@ -23,7 +24,7 @@ struct LookAroundView: View {
             Text("앗! 회원가입이 필요해요.")
                 .font(.customTitle2)
                 .padding(.bottom, 8)
-            Text("OUTLINE에 가입하면 내가 그린\n러닝 기록을 확인할 수 있어요!")
+            Text(type.subTitle)
                 .font(.customSubbody)
                 .padding(.bottom, 32)
                 .multilineTextAlignment(.center)
@@ -70,5 +71,5 @@ struct LookAroundPopupView: View {
 }
 
 #Preview {
-    LookAroundView()
+    LookAroundView(type: .running)
 }

@@ -85,8 +85,8 @@ struct RecordView: View {
                         .padding(.horizontal)
                         .padding(.top, 12)
                     } else {
-                        LookAroundView()
-                            .padding(.top, 100)
+                        LookAroundView(type: .record)
+                            .padding(.top, 120)
                     }
                 }
                 .scrollDisabled(authState == .lookAround)
