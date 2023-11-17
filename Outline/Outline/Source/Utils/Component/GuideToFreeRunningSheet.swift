@@ -33,6 +33,7 @@ struct GuideToFreeRunningSheet: View {
                     .frame(width: 120)
                 Button {
                     dismiss()
+                    action()
                 } label: {
                     Text("자유코스로 변경하기")
                         .font(.customButton)
@@ -48,7 +49,6 @@ struct GuideToFreeRunningSheet: View {
                 
                 Button {
                     dismiss()
-                    action()
                 } label: {
                     Text("돌아가기")
                         .font(.customBody)
