@@ -41,7 +41,7 @@ struct FreeRunningHomeView: View {
                 .background(.black.opacity(0.6))
             BackgroundBlur(color: .customSecondary, padding: 50)
             VStack(spacing: 0) {
-                GPSArtHomeHeader(loading: false, scrollOffset: 20)
+                GPSArtHomeHeader(title: "자유 아트", loading: false, scrollOffset: 20)
                     .padding(.top, 8)
                 Spacer()
                 

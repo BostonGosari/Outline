@@ -182,16 +182,16 @@ struct CardDetailView: View {
                 Rectangle()
                     .foregroundColor(.gray700)
             }
-            .roundedCorners(45, corners: [.bottomRight])
-            .shadow(color: .white, radius: 0.5, y: 0.5)
+            .mask {
+                UnevenRoundedRectangle(bottomTrailingRadius: 45, style: .circular)
+            }
             .matchedGeometryEffect(id: selectedCourse.id, in: namespace)
+            .shadow(color: .white, radius: 0.5, y: 0.5)
             .frame(
                 width: UIScreen.main.bounds.width,
                 height: UIScreen.main.bounds.height * 0.68
             )
-            .transition(.identity)
-          
-
+            .transition(.opacity)
     }
     
     private var courseInformation: some View {

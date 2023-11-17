@@ -16,6 +16,7 @@ struct HomeTabView: View {
     @State private var selectedTab: Tab = .GPSArtRunning
     @State private var showDetailView = false
     @State private var showCustomSheet = false
+    
     var body: some View {
         ZStack {
             NavigationStack {
@@ -63,8 +64,11 @@ struct HomeTabView: View {
             if runningManager.start {
                 CountDown(running: $runningManager.running, start: $runningManager.start)
             }
+            if runningManager.complete {
+                FinishRunningView()
+            }
             if runningManager.running {
-                RunningView()
+                NewRunningView()
             }
             if showCustomSheet {
                 watchRunningSheet
