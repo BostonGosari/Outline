@@ -81,14 +81,4 @@ class CourseAnalyzeManager {
 
         return closestPoint
     }
-
-
-
-    // 보간 함수
-    private func interpolatePoint(start: CLLocationCoordinate2D, end: CLLocationCoordinate2D, factor: Double) -> CLLocationCoordinate2D {
-        let latitude = start.latitude + (end.latitude - start.latitude) * factor
-        let longitude = start.longitude + (end.longitude - start.longitude) * factor
-
-        return CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-    }
 }
