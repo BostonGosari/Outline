@@ -21,7 +21,7 @@ class RunningStartManager: ObservableObject {
     @Published var isHealthAuthorized = false
     @Published var isLocationAuthorized = false
     @Published var showPermissionSheet = false
-    @Published var permissionType: PermissionType?
+    @Published var permissionType: PermissionType = .health
     
     private var timer: AnyCancellable?
     private var healthStore = HKHealthStore()
