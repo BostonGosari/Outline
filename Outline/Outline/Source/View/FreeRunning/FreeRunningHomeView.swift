@@ -89,7 +89,7 @@ struct FreeRunningHomeView: View {
                         }
                         .padding(EdgeInsets(top: 16, leading: 16, bottom: 80, trailing: 20))
                 } else {
-                    LookAroundView()
+                    LookAroundView(type: .running)
                     Spacer()
                 }
             }
