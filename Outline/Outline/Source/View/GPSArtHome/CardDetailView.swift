@@ -14,6 +14,7 @@ struct CardDetailView: View {
     
     @State private var isUnlocked = false
     @State private var showAlert = false
+    @State private var showNeedLoginSheet = false
     @StateObject var runningStartManager = RunningStartManager.shared
     private let locationManager = CLLocationManager()
     @Environment(\.dismiss) var dismiss
@@ -83,30 +84,6 @@ struct CardDetailView: View {
             .ignoresSafeArea(edges: .top)
             .statusBarHidden()
             
-            switch authState {
-            case .lookAround:
-                ZStack {
-                    Color.customBlack.opacity(0.7)
-                    VStack {
-                        Spacer()
-                        LookAroundModalView {
-                            showDetailView = false
-                        }
-                    }
-                    .frame(height: UIScreen.main.bounds.height / 2)
-                    .frame(maxWidth: .infinity)
-                    .background {
-                        RoundedRectangle(cornerRadius: 30, style: .continuous)
-                            .stroke(Color.customPrimary, lineWidth: 2)
-                        RoundedRectangle(cornerRadius: 30, style: .continuous)
-                            .foregroundStyle(Color.gray900)
-                    }
-                    .frame(maxHeight: .infinity, alignment: .bottom)
-                }
-            default:
-                EmptyView()
-            }
-                        
             ZStack {
                 if showAlert {
                     Color.black.opacity(0.5)
@@ -171,6 +148,16 @@ struct CardDetailView: View {
                 .offset(y: showAlert ? 0 : UIScreen.main.bounds.height / 2 + 2)
             }
         }
+        .sheet(isPresented: $showNeedLoginSheet) {
+            NeedLoginSheet(type: .running) {
+                showDetailView = false
+            }
+        }
+        .onAppear {
+            if authState == .lookAround {
+                showNeedLoginSheet = true
+            }
+        }
     }
     
     // MARK: - View Components
@@ -225,7 +212,6 @@ struct CardDetailView: View {
             .onChange(of: isUnlocked) { _, newValue in
                 if newValue {
                     runningStartManager.checkAuthorization()
-
                     if runningStartManager.isHealthAuthorized {
                         if runningStartManager.isLocationAuthorized {
                             let course = selectedCourse.course.coursePaths

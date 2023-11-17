@@ -11,6 +11,7 @@ import SwiftUI
 struct RecordView: View {
     @FetchRequest (entity: CoreRunningRecord.entity(), sortDescriptors: []) var runningRecord: FetchedResults<CoreRunningRecord>
     
+    @AppStorage("authState") var authState: AuthState = .logout
     @State private var selectedIndex: Int = 0
     @State private var isSortingSheetPresented = false
     @State private var selectedSortOption: SortOption = .latest
@@ -34,56 +35,61 @@ struct RecordView: View {
                     
                     RecordHeader(scrollOffset: scrollOffset)
 
-                    VStack(alignment: .leading) {
-                        HStack(spacing: 0) {
-                            ChipItem(label: "모두", isSelected: Binding(get: { self.selectedIndex == 0 }, set: { _ in self.selectedIndex = 0 }))
-                                .padding(.trailing, 8)
-                            ChipItem(label: "GPS 러닝", isSelected: Binding(get: { self.selectedIndex == 1 }, set: { _ in self.selectedIndex = 1 }))
-                                .padding(.trailing, 8)
-                            ChipItem(label: "자유 러닝", isSelected: Binding(get: { self.selectedIndex == 2 }, set: { _ in self.selectedIndex = 2 }))
-                            Spacer()
-                            Button {
-                                isSortingSheetPresented = true
-                            } label: {
-                                HStack {
-                                    Text(selectedSortOption.buttonLabel)
-                                        .font(.customSubbody)
-                                        .foregroundStyle(Color.customWhite)
-                                    Image(systemName: "chevron.down")
-                                        .font(.customSubbody)
-                                        .foregroundStyle(Color.customWhite)
-                                }
-                            }
-                        }
-                        .padding(.bottom, 16)
-                        if filteredRecords.isEmpty {
-                            VStack(alignment: .center) {
-                                Image(systemName: "exclamationmark.circle")
-                                    .foregroundStyle(Color.customPrimary)
-                                    .font(Font.system(size: 36))
-                                    .padding(.top, 150)
-                                Text("아직 러닝 기록이 없어요")
-                                    .font(.customSubbody)
-                                    .foregroundStyle(Color.gray500)
-                                    .padding(.top, 14)
-                            }
-                            .frame(maxWidth: .infinity, maxHeight: .infinity)
-                        } else {
-                            ForEach(filteredRecords, id: \.id) { record in
-                                NavigationLink {
-                                    RecordDetailView(isDeleteData: $isDeleteData, record: record)
-                                        .navigationBarBackButtonHidden()
+                    if authState == .login {
+                        VStack(alignment: .leading) {
+                            HStack(spacing: 0) {
+                                ChipItem(label: "모두", isSelected: Binding(get: { self.selectedIndex == 0 }, set: { _ in self.selectedIndex = 0 }))
+                                    .padding(.trailing, 8)
+                                ChipItem(label: "GPS 러닝", isSelected: Binding(get: { self.selectedIndex == 1 }, set: { _ in self.selectedIndex = 1 }))
+                                    .padding(.trailing, 8)
+                                ChipItem(label: "자유 러닝", isSelected: Binding(get: { self.selectedIndex == 2 }, set: { _ in self.selectedIndex = 2 }))
+                                Spacer()
+                                Button {
+                                    isSortingSheetPresented = true
                                 } label: {
-                                    RecordItem(record: record)
+                                    HStack {
+                                        Text(selectedSortOption.buttonLabel)
+                                            .font(.customSubbody)
+                                            .foregroundStyle(Color.customWhite)
+                                        Image(systemName: "chevron.down")
+                                            .font(.customSubbody)
+                                            .foregroundStyle(Color.customWhite)
+                                    }
                                 }
-                                .padding(.bottom, 8)
+                            }
+                            .padding(.bottom, 16)
+                            if filteredRecords.isEmpty {
+                                VStack(alignment: .center) {
+                                    Image(systemName: "exclamationmark.circle")
+                                        .foregroundStyle(Color.customPrimary)
+                                        .font(Font.system(size: 36))
+                                        .padding(.top, 150)
+                                    Text("아직 러닝 기록이 없어요")
+                                        .font(.customSubbody)
+                                        .foregroundStyle(Color.gray500)
+                                        .padding(.top, 14)
+                                }
+                                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                            } else {
+                                ForEach(filteredRecords, id: \.id) { record in
+                                    NavigationLink {
+                                        RecordDetailView(isDeleteData: $isDeleteData, record: record)
+                                            .navigationBarBackButtonHidden()
+                                    } label: {
+                                        RecordItem(record: record)
+                                    }
+                                    .padding(.bottom, 8)
+                                }
                             }
                         }
-                    }
                         .padding(.horizontal)
                         .padding(.top, 12)
-               
+                    } else {
+                        LookAroundView()
+                            .padding(.top, 100)
+                    }
                 }
+                .scrollDisabled(authState == .lookAround)
                 .overlay(alignment: .top) {
                     RecordInlineHeader(scrollOffset: scrollOffset)
                 }
