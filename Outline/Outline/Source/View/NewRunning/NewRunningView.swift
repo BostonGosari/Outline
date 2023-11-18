@@ -31,15 +31,14 @@ struct NewRunningView: View {
                 navigation
             }
             metrics
+            RunningFinishPopUp(isPresented: $showCompleteSheet, score: .constant(-1))
         }
         .overlay {
             if isFirstRunning && runningStartManager.runningType == .gpsArt {
                 FirstRunningGuideView(isFirstRunning: $isFirstRunning)
             }
         }
-        .sheet(isPresented: $showCompleteSheet) {
-            completeSheet
-        }
+       
     }
 }
 
@@ -277,6 +276,7 @@ extension NewRunningView {
             }
             .onEnded { _ in
                 DispatchQueue.main.async {
+                    showDetail = false
                     if runningStartManager.counter < 3 {
                         runningDataManager.stopRunningWithoutRecord()
                         runningStartManager.counter = 0
