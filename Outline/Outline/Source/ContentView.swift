@@ -29,6 +29,7 @@ struct ContentView: View {
                 HomeTabView()
             case .login:
                 HomeTabView()
+//                AccuracyCheckView()
             }
         }
         .onAppear {

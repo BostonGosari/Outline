@@ -25,6 +25,7 @@ struct UnderlineButton: View {
                    )
             }
         }
+        .padding(.top, 16)
     }
 }
 
