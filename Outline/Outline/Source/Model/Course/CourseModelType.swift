@@ -30,8 +30,34 @@ struct GPSArtCourse: Codable, Hashable {
     var startLocation: Coordinate
     var regionDisplayName: String
     var producer: String
+    var thumbnailLong: String
+    var title: String
+    var navigation: [Navigation]
+    var hotSpot: HotSpot
     
-    init(id: String, courseName: String, locationInfo: Placemark, courseLength: Double, courseDuration: Double, centerLocation: Coordinate, distance: Double, level: CourseLevel, alley: Alley, coursePaths: [Coordinate], heading: Double, thumbnail: String, description: String = "", startLocation: Coordinate = Coordinate(longitude: 0, latitude: 0), regionDisplayName: String, producer: String = "") {
+    
+    init(
+        id: String,
+        courseName: String,
+        locationInfo: Placemark,
+        courseLength: Double,
+        courseDuration: Double,
+        centerLocation: Coordinate,
+        distance: Double,
+        level: CourseLevel,
+        alley: Alley,
+        coursePaths: [Coordinate],
+        heading: Double,
+        thumbnail: String,
+        description: String = "",
+        startLocation: Coordinate = Coordinate(longitude: 0, latitude: 0),
+        regionDisplayName: String,
+        producer: String = "",
+        thumbnailLong: String = "",
+        title: String = "",
+        navigation: [Navigation] = [],
+        hotSpot: HotSpot = HotSpot(title: "", location: Coordinate(longitude: 0, latitude: 0))
+    ) {
         self.id = id
         self.courseName = courseName
         self.locationInfo = locationInfo
@@ -48,6 +74,10 @@ struct GPSArtCourse: Codable, Hashable {
         self.startLocation = startLocation
         self.regionDisplayName = regionDisplayName
         self.producer = producer
+        self.thumbnailLong = thumbnailLong
+        self.title = title
+        self.navigation = navigation
+        self.hotSpot = hotSpot
     }
     init() {
         self.id = ""
@@ -66,6 +96,10 @@ struct GPSArtCourse: Codable, Hashable {
         self.startLocation = Coordinate(longitude: 0, latitude: 0)
         self.regionDisplayName = ""
         self.producer = "Outline"
+        self.title = "default title"
+        self.thumbnailLong = ""
+        self.navigation = []
+        self.hotSpot = HotSpot(title: "", location: Coordinate(longitude: 0, latitude: 0))
     }
 }
 
@@ -95,4 +129,22 @@ enum Alley: String, Codable, Hashable {
 struct Coordinate: Codable, Hashable {
     var longitude: Double
     var latitude: Double
+}
+
+struct Navigation: Codable, Hashable {
+    var distance: Int
+    var description: String
+    var direction: NavigationDirection
+}
+
+enum NavigationDirection: Codable, Hashable {
+    case left
+    case right
+    case front
+    case uTurn
+}
+
+struct HotSpot: Codable, Hashable {
+    var title: String
+    var location: Coordinate
 }
