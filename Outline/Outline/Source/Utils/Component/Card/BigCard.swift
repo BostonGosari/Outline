@@ -73,12 +73,18 @@ struct BigCard: View {
             }
         }
         .overlay {
-            Image(cardType.hologramImage)
-                .resizable()
-                .opacity(cardType == .excellent ? 0.4 : 0.2)
-                .mask {
-                    UnevenRoundedRectangle(topLeadingRadius: 10, bottomLeadingRadius: 45, bottomTrailingRadius: 45, topTrailingRadius: 70)
-                }
+            ZStack {
+                Image(cardType.hologramImage)
+                    .resizable()
+                    .opacity(cardType == .excellent ? 0.4 : 0.2)
+                LinearGradient(colors: [.white.opacity(manager.roll * 0.5), .clear, .white.opacity(manager.roll * 0.3), .clear, .white.opacity(manager.roll * 0.3)], startPoint: .topTrailing, endPoint: .bottomLeading)
+                LinearGradient(colors: [.clear, .yellow.opacity(manager.pitch * 0.2), .clear, .yellow.opacity(manager.pitch * 0.2), .clear, .yellow.opacity(manager.pitch * 0.2), .clear], startPoint: .topTrailing, endPoint: .bottomLeading)
+                LinearGradient(colors: [.blue.opacity(manager.pitch * 0.2), .clear, .blue.opacity(manager.pitch * 0.2), .clear, .blue.opacity(manager.pitch * 0.2), .clear, .blue.opacity(manager.pitch * 0.2)], startPoint: .topTrailing, endPoint: .bottomLeading)
+                LinearGradient(colors: [.clear, .red.opacity(manager.roll * 0.3), .clear, .red.opacity(manager.roll * 0.2), .clear, .red.opacity(manager.roll * 0.2), .clear], startPoint: .topTrailing, endPoint: .bottomLeading)
+            }
+            .mask {
+                UnevenRoundedRectangle(topLeadingRadius: 10, bottomLeadingRadius: 45, bottomTrailingRadius: 45, topTrailingRadius: 70)
+            }
             UnevenRoundedRectangle(topLeadingRadius: 10, bottomLeadingRadius: 45, bottomTrailingRadius: 45, topTrailingRadius: 70)
                 .stroke(LinearGradient(
                     colors: [.customCardBorderGradient1, .customCardBorderGradient2, .customCardBorderGradient3, .customCardBorderGradient4],
@@ -110,18 +116,18 @@ struct BigCard: View {
     private var drag: some Gesture {
         DragGesture()
             .onChanged { value in
-                DispatchQueue.main.async {
-                    withAnimation(.bouncy) {
-                        rotationAngle = value.translation.width * 2
-                        updateCardSide()
-                    }
+                withAnimation(.bouncy) {
+                    rotationAngle = value.translation.width * 2
+                    updateCardSide()
                 }
             }
             .onEnded { _ in
-                withAnimation(.bouncy(extraBounce: 0.2)) {
+                DispatchQueue.main.async {
                     let nearestAngle = round(rotationAngle / 180) * 180
-                    rotationAngle = 0
-                    snapShotAngle += nearestAngle
+                    withAnimation(.bouncy(extraBounce: 0.2)) {
+                        rotationAngle = 0
+                        snapShotAngle += nearestAngle
+                    }
                 }
             }
             .simultaneously(with: TapGesture()
