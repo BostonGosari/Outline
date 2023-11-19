@@ -11,11 +11,6 @@ import MapKit
 struct BigCardFrontSide: View {
     private let cardWidth = UIScreen.main.bounds.width * 0.815
     private let cardHeight = UIScreen.main.bounds.width * 0.815 * 1.635
-    private let borderGradient = LinearGradient(
-        colors: [.customCardBorderGradient1, .customCardBorderGradient2, .customCardBorderGradient3, .customCardBorderGradient4],
-        startPoint: .topLeading,
-        endPoint: .bottomTrailing
-    )
     private let cardBorder: CGFloat = 10
     
     var cardType: CardType
@@ -63,15 +58,6 @@ struct BigCardFrontSide: View {
                     UnevenRoundedRectangle(topLeadingRadius: 10, bottomLeadingRadius: 45, bottomTrailingRadius: 45, topTrailingRadius: 70)
                         .strokeBorder(lineWidth: 10)
                 }
-                .mask {
-                    UnevenRoundedRectangle(topLeadingRadius: 10, bottomLeadingRadius: 45, bottomTrailingRadius: 45, topTrailingRadius: 70)
-                }
-            UnevenRoundedRectangle(topLeadingRadius: 10, bottomLeadingRadius: 45, bottomTrailingRadius: 45, topTrailingRadius: 70)
-                .stroke(borderGradient, lineWidth: 2)
-            
-            Image(cardType.hologramImage)
-                .resizable()
-                .opacity(cardType == .excellent ? 0.4 : 0.2)
                 .mask {
                     UnevenRoundedRectangle(topLeadingRadius: 10, bottomLeadingRadius: 45, bottomTrailingRadius: 45, topTrailingRadius: 70)
                 }
