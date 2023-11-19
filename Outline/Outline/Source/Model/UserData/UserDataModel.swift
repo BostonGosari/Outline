@@ -63,6 +63,8 @@ struct UserDataModel: UserDataModelProtocol {
         newCourseData.setValue(record.courseData.distance, forKey: "distance")
         newCourseData.setValue(record.courseData.heading, forKey: "heading")
         newCourseData.setValue(record.courseData.regionDisplayName, forKey: "regionDisplayName")
+        newCourseData.setValue(record.courseData.score, forKey: "score")
+        
         var pathList: [CoreCoordinate] = []
         for path in record.courseData.coursePaths {
             let newPath = CoreCoordinate(entity: CoreCoordinate.entity(), insertInto: persistenceController.container.viewContext)
