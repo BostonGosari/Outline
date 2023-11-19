@@ -33,7 +33,7 @@ struct GPSArtCourse: Codable, Hashable {
     var thumbnailLong: String
     var title: String
     var navigation: [Navigation]
-    var hotSpot: HotSpot
+    var hotSpots: [HotSpot]
     
     
     init(
@@ -56,7 +56,7 @@ struct GPSArtCourse: Codable, Hashable {
         thumbnailLong: String = "",
         title: String = "",
         navigation: [Navigation] = [],
-        hotSpot: HotSpot = HotSpot(title: "", location: Coordinate(longitude: 0, latitude: 0))
+        hotSpots: [HotSpot] = []
     ) {
         self.id = id
         self.courseName = courseName
@@ -77,7 +77,7 @@ struct GPSArtCourse: Codable, Hashable {
         self.thumbnailLong = thumbnailLong
         self.title = title
         self.navigation = navigation
-        self.hotSpot = hotSpot
+        self.hotSpots = hotSpots
     }
     init() {
         self.id = ""
@@ -99,7 +99,7 @@ struct GPSArtCourse: Codable, Hashable {
         self.title = "default title"
         self.thumbnailLong = ""
         self.navigation = []
-        self.hotSpot = HotSpot(title: "", location: Coordinate(longitude: 0, latitude: 0))
+        self.hotSpots = []
     }
 }
 
@@ -134,14 +134,6 @@ struct Coordinate: Codable, Hashable {
 struct Navigation: Codable, Hashable {
     var distance: Int
     var description: String
-    var direction: NavigationDirection
-}
-
-enum NavigationDirection: Codable, Hashable {
-    case left
-    case right
-    case front
-    case uTurn
 }
 
 struct HotSpot: Codable, Hashable {

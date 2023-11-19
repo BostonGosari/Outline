@@ -24,7 +24,7 @@ struct OutlineApp: App {
   
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            CourseDataUploadView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
                 .onOpenURL { url in
                     if AuthApi.isKakaoTalkLoginUrl(url) {
