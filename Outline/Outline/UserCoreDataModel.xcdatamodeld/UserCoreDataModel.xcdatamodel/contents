@@ -12,6 +12,7 @@
         <attribute name="regionDisplayName" optional="YES" attributeType="String"/>
         <attribute name="runningCourseId" optional="YES" attributeType="String"/>
         <attribute name="runningLength" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="score" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="coursePaths" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="CoreCoordinate" inverseName="parentCoursePaths" inverseEntity="CoreCoordinate"/>
         <relationship name="parentRecord" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CoreRunningRecord" inverseName="courseData" inverseEntity="CoreRunningRecord"/>
     </entity>
