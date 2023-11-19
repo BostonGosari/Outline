@@ -43,21 +43,29 @@ enum CardType {
 }
 
 struct BigCard: View {
-    @StateObject var manager = MotionManager()
-    @State var translation: CGSize = .zero
-    @State var isDragging = false
-    @State var snapShotAngle: Double = 0
-    @State var rotationAngle: Double = 0
-    @State var isFrontSide = true
-    @State var isFliped = false
-    @State var isDragable = false
-    @State var cardFloatingOffset: CGFloat = 0
+    @StateObject private var manager = MotionManager()
+    @State private var translation: CGSize = .zero
+    @State private var isDragging = false
+    @State private var snapShotAngle: Double = 0
+    @State private var rotationAngle: Double = 0
+    @State private var isFrontSide = true
+    @State private var isFliped = false
+    @State private var isDragable = false
+    @State private var cardFloatingOffset: CGFloat = 0
     
-    var cardType: CardType = .good
+    var cardType: CardType = .nice
     var runName: String = "돌고래런"
     var date: String = "2023.11.19"
     var editMode: Bool = false
+    var time: String = "00:00.00"
+    var distance: String = "1.2KM"
+    var pace: String = "9'99''"
+    var kcal: String = "235"
+    var bpm: String = "100"
+    var score: Int = 100
     
+    private let cardWidth = UIScreen.main.bounds.width * 0.815
+    private let cardHeight = UIScreen.main.bounds.width * 0.815 * 1.635
     private let borderGradient = LinearGradient(
         colors: [.customCardBorderGradient1, .customCardBorderGradient2, .customCardBorderGradient3, .customCardBorderGradient4],
         startPoint: .topLeading,
@@ -67,9 +75,24 @@ struct BigCard: View {
     var body: some View {
         ZStack {
             if isFrontSide {
-                BigCardFrontSide(cardType: cardType, runName: runName, date: date)
+                BigCardFrontSide(
+                    cardType: cardType, 
+                    runName: runName,
+                    date: date
+                )
             } else {
-                BigCardBackSide(cardType: cardType, runName: runName, date: date, editMode: editMode)
+                BigCardBackSide(
+                    cardType: cardType,
+                    runName: runName,
+                    date: date,
+                    editMode: editMode,
+                    time: time,
+                    distance: distance,
+                    pace: pace,
+                    kcal: kcal,
+                    bpm: bpm,
+                    score: score
+                )
             }
         }
         .overlay {
@@ -77,10 +100,25 @@ struct BigCard: View {
                 Image(cardType.hologramImage)
                     .resizable()
                     .opacity(cardType == .excellent ? 0.4 : 0.2)
-                LinearGradient(colors: [.white.opacity(manager.roll * 0.5), .clear, .white.opacity(manager.roll * 0.3), .clear, .white.opacity(manager.roll * 0.3)], startPoint: .topTrailing, endPoint: .bottomLeading)
-                LinearGradient(colors: [.clear, .yellow.opacity(manager.pitch * 0.2), .clear, .yellow.opacity(manager.pitch * 0.2), .clear, .yellow.opacity(manager.pitch * 0.2), .clear], startPoint: .topTrailing, endPoint: .bottomLeading)
-                LinearGradient(colors: [.blue.opacity(manager.pitch * 0.2), .clear, .blue.opacity(manager.pitch * 0.2), .clear, .blue.opacity(manager.pitch * 0.2), .clear, .blue.opacity(manager.pitch * 0.2)], startPoint: .topTrailing, endPoint: .bottomLeading)
-                LinearGradient(colors: [.clear, .red.opacity(manager.roll * 0.3), .clear, .red.opacity(manager.roll * 0.2), .clear, .red.opacity(manager.roll * 0.2), .clear], startPoint: .topTrailing, endPoint: .bottomLeading)
+                LinearGradient(colors: [.white.opacity(manager.roll * 0.6), .clear, .white.opacity(manager.roll * 0.6), .clear, .white.opacity(manager.roll * 0.6)], startPoint: .topTrailing, endPoint: .bottomLeading)
+                LinearGradient(colors: [.clear, .yellow.opacity(manager.roll * 0.2), .clear, .yellow.opacity(manager.roll * 0.2), .clear, .yellow.opacity(manager.roll * 0.2), .clear], startPoint: .topTrailing, endPoint: .bottomLeading)
+                LinearGradient(colors: [.blue.opacity(manager.roll * 0.2), .clear, .blue.opacity(manager.roll * 0.2), .clear, .blue.opacity(manager.roll * 0.2), .clear, .blue.opacity(manager.roll * 0.2)], startPoint: .topTrailing, endPoint: .bottomLeading)
+                LinearGradient(colors: [.clear, .red.opacity(manager.roll * 0.1), .clear, .red.opacity(manager.roll * 0.1), .clear, .red.opacity(manager.roll * 0.1), .clear], startPoint: .topTrailing, endPoint: .bottomLeading)
+                LinearGradient(
+                    colors: [
+                        .customCardScoreGradient1.opacity(manager.roll * 0.3),
+                        .customCardScoreGradient2.opacity(manager.pitch * 0.3),
+                        .customCardScoreGradient3.opacity(manager.roll * 0.3),
+                        .customCardScoreGradient4.opacity(manager.pitch * 0.3),
+                        .customCardScoreGradient5.opacity(manager.roll * 0.3),
+                        .customCardScoreGradient6.opacity(manager.pitch * 0.3),
+                        .customCardScoreGradient7.opacity(manager.roll * 0.3),
+                        .customCardScoreGradient8.opacity(manager.pitch * 0.3),
+                        .customCardScoreGradient9.opacity(manager.roll * 0.3)
+                    ],
+                    startPoint: .bottomLeading,
+                    endPoint: .topTrailing
+                )
             }
             .mask {
                 UnevenRoundedRectangle(topLeadingRadius: 10, bottomLeadingRadius: 45, bottomTrailingRadius: 45, topTrailingRadius: 70)
@@ -191,8 +229,8 @@ final class MotionManager: ObservableObject {
             }
             
             if let motionData = motionData {
-                self.pitch = motionData.attitude.pitch
-                self.roll = motionData.attitude.roll
+                self.pitch = abs(motionData.attitude.pitch)
+                self.roll = abs(motionData.attitude.roll)
             }
         }
         

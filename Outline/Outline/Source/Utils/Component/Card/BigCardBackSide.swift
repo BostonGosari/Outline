@@ -20,6 +20,12 @@ struct BigCardBackSide: View {
     var runName: String
     var date: String
     var editMode: Bool
+    var time: String
+    var distance: String
+    var pace: String
+    var kcal: String
+    var bpm: String
+    var score: Int
     
     var body: some View {
         ZStack(alignment: .topLeading) {
@@ -59,7 +65,7 @@ struct BigCardBackSide: View {
                         Text("TIME")
                             .fontWeight(.bold)
                             .fontWidth(.expanded)
-                        Text("00.20.53")
+                        Text(time)
                             .font(.customCardBody)
                     }
                     Rectangle()
@@ -69,7 +75,7 @@ struct BigCardBackSide: View {
                         Text("DIS")
                             .fontWeight(.bold)
                             .fontWidth(.expanded)
-                        Text("1.2KM")
+                        Text(distance)
                             .font(.customCardBody)
                     }
                     Rectangle()
@@ -79,7 +85,7 @@ struct BigCardBackSide: View {
                         Text("PACE")
                             .fontWeight(.bold)
                             .fontWidth(.expanded)
-                        Text("9'99''")
+                        Text(pace)
                             .font(.customCardBody)
                     }
                     Rectangle()
@@ -89,18 +95,21 @@ struct BigCardBackSide: View {
                         Text("KCAL")
                             .fontWeight(.bold)
                             .fontWidth(.expanded)
-                        Text("235")
+                        Text(kcal)
                             .font(.customCardBody)
                     }
-                    Rectangle()
-                        .frame(height: 1)
-                        .foregroundStyle(.white30)
-                    VStack(alignment: .trailing, spacing: -5) {
-                        Text("BPM")
-                            .fontWeight(.bold)
-                            .fontWidth(.expanded)
-                        Text("100")
-                            .font(.customCardBody)
+                    
+                    if bpm != "0" {
+                        Rectangle()
+                            .frame(height: 1)
+                            .foregroundStyle(.white30)
+                        VStack(alignment: .trailing, spacing: -5) {
+                            Text("BPM")
+                                .fontWeight(.bold)
+                                .fontWidth(.expanded)
+                            Text(bpm)
+                                .font(.customCardBody)
+                        }
                     }
                 }
                 .shadow(color: .black.opacity(5), radius: 4)
@@ -114,12 +123,12 @@ struct BigCardBackSide: View {
                             Text("TIME")
                                 .fontWeight(.bold)
                                 .fontWidth(.expanded)
-                            Text("00.20.53")
+                            Text(time)
                                 .font(.customCardBody2)
                             Text("DIS")
                                 .fontWeight(.bold)
                                 .fontWidth(.expanded)
-                            Text("1.5KM")
+                            Text(distance)
                                 .font(.customCardBody2)
                         }
                         Rectangle()
@@ -128,12 +137,12 @@ struct BigCardBackSide: View {
                             Text("PACE")
                                 .fontWeight(.bold)
                                 .fontWidth(.expanded)
-                            Text("9'99''")
+                            Text(pace)
                                 .font(.customCardBody2)
                             Text("KCAL")
                                 .fontWeight(.bold)
                                 .fontWidth(.expanded)
-                            Text("235")
+                            Text(kcal)
                                 .font(.customCardBody2)
                         }
                     }
@@ -149,7 +158,7 @@ struct BigCardBackSide: View {
                             .fontWeight(.bold)
                             .fontWidth(.expanded)
                             .font(.system(size: 36))
-                        Text("100")
+                        Text("\(score)")
                             .fontWeight(.bold)
                             .fontWidth(.expanded)
                             .font(.system(size: 64))
@@ -165,5 +174,5 @@ struct BigCardBackSide: View {
 }
 
 #Preview {
-    BigCardBackSide(cardType: .excellent, runName: "오리런", date: "2023.11.19", editMode: true)
+    BigCardBackSide(cardType: .excellent, runName: "오리런", date: "2023.11.19", editMode: true, time: "00:00.00", distance: "1.2KM", pace: "9'99''", kcal: "235", bpm: "100", score: 100)
 }
