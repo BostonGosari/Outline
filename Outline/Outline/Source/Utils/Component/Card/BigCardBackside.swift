@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct BigCardBackSide: View {
+struct BigCardBackside: View {
     private let cardWidth = UIScreen.main.bounds.width * 0.815
     private let cardHeight = UIScreen.main.bounds.width * 0.815 * 1.635
     private let scoreGradient = LinearGradient(
@@ -174,5 +174,5 @@ struct BigCardBackSide: View {
 }
 
 #Preview {
-    BigCardBackSide(cardType: .excellent, runName: "오리런", date: "2023.11.19", editMode: true, time: "00:00.00", distance: "1.2KM", pace: "9'99''", kcal: "235", bpm: "100", score: 100)
+    BigCardBackside(cardType: .excellent, runName: "오리런", date: "2023.11.19", editMode: true, time: "00:00.00", distance: "1.2KM", pace: "9'99''", kcal: "235", bpm: "100", score: 100)
 }

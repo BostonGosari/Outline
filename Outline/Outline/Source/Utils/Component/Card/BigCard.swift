@@ -8,55 +8,24 @@
 import CoreMotion
 import SwiftUI
 
-enum CardType {
-    case freeRun
-    case nice
-    case good
-    case excellent
-    
-    var cardFrondSideImage: String {
-        switch self {
-        case .nice, .freeRun:
-            "NormalCardFrontSide"
-        case .good, .excellent:
-            "CardFrontSide"
-        }
-    }
-    
-    var cardBackSideImage: String {
-        switch self {
-        case .freeRun, .nice:
-            "NormalCardBackSide"
-        case .good, .excellent:
-            "CardBackSide"
-        }
-    }
-    
-    var hologramImage: String {
-        switch self {
-        case .freeRun, .nice, .good:
-            "Hologram1"
-        case .excellent:
-            "Hologram2"
-        }
-    }
-}
-
 struct BigCard: View {
     @StateObject private var manager = MotionManager()
     @State private var translation: CGSize = .zero
     @State private var isDragging = false
     @State private var snapShotAngle: Double = 0
     @State private var rotationAngle: Double = 0
-    @State private var isFrontSide = true
+    @State private var isFrontside = true
     @State private var isFliped = false
     @State private var isDragable = false
     @State private var cardFloatingOffset: CGFloat = 0
     
+    // Card data
     var cardType: CardType = .nice
     var runName: String = "돌고래런"
     var date: String = "2023.11.19"
     var editMode: Bool = false
+    
+    // BacksideCard data
     var time: String = "00:00.00"
     var distance: String = "1.2KM"
     var pace: String = "9'99''"
@@ -74,14 +43,14 @@ struct BigCard: View {
     
     var body: some View {
         ZStack {
-            if isFrontSide {
-                BigCardFrontSide(
+            if isFrontside {
+                BigCardFrontside(
                     cardType: cardType, 
                     runName: runName,
                     date: date
                 )
             } else {
-                BigCardBackSide(
+                BigCardBackside(
                     cardType: cardType,
                     runName: runName,
                     date: date,
@@ -101,20 +70,17 @@ struct BigCard: View {
                     .resizable()
                     .opacity(cardType == .excellent ? 0.4 : 0.2)
                 LinearGradient(colors: [.white.opacity(manager.roll * 0.6), .clear, .white.opacity(manager.roll * 0.6), .clear, .white.opacity(manager.roll * 0.6)], startPoint: .topTrailing, endPoint: .bottomLeading)
-                LinearGradient(colors: [.clear, .yellow.opacity(manager.roll * 0.2), .clear, .yellow.opacity(manager.roll * 0.2), .clear, .yellow.opacity(manager.roll * 0.2), .clear], startPoint: .topTrailing, endPoint: .bottomLeading)
-                LinearGradient(colors: [.blue.opacity(manager.roll * 0.2), .clear, .blue.opacity(manager.roll * 0.2), .clear, .blue.opacity(manager.roll * 0.2), .clear, .blue.opacity(manager.roll * 0.2)], startPoint: .topTrailing, endPoint: .bottomLeading)
-                LinearGradient(colors: [.clear, .red.opacity(manager.roll * 0.1), .clear, .red.opacity(manager.roll * 0.1), .clear, .red.opacity(manager.roll * 0.1), .clear], startPoint: .topTrailing, endPoint: .bottomLeading)
                 LinearGradient(
                     colors: [
-                        .customCardScoreGradient1.opacity(manager.roll * 0.3),
-                        .customCardScoreGradient2.opacity(manager.pitch * 0.3),
-                        .customCardScoreGradient3.opacity(manager.roll * 0.3),
-                        .customCardScoreGradient4.opacity(manager.pitch * 0.3),
-                        .customCardScoreGradient5.opacity(manager.roll * 0.3),
-                        .customCardScoreGradient6.opacity(manager.pitch * 0.3),
-                        .customCardScoreGradient7.opacity(manager.roll * 0.3),
-                        .customCardScoreGradient8.opacity(manager.pitch * 0.3),
-                        .customCardScoreGradient9.opacity(manager.roll * 0.3)
+                        .customCardScoreGradient1.opacity(min(manager.roll * 0.5, 0.5)),
+                        .customCardScoreGradient2.opacity(min(manager.roll * 0.5, 0.5)),
+                        .customCardScoreGradient3.opacity(min(manager.roll * 0.5, 0.5)),
+                        .customCardScoreGradient4.opacity(min(manager.roll * 0.5, 0.5)),
+                        .customCardScoreGradient5.opacity(min(manager.roll * 0.5, 0.5)),
+                        .customCardScoreGradient6.opacity(min(manager.roll * 0.5, 0.5)),
+                        .customCardScoreGradient7.opacity(min(manager.roll * 0.5, 0.5)),
+                        .customCardScoreGradient8.opacity(min(manager.roll * 0.5, 0.5)),
+                        .customCardScoreGradient9.opacity(min(manager.roll * 0.5, 0.5))
                     ],
                     startPoint: .bottomLeading,
                     endPoint: .topTrailing
@@ -174,7 +140,7 @@ struct BigCard: View {
                         snapShotAngle += 180
                     }
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                        isFrontSide.toggle()
+                        isFrontside.toggle()
                     }
                 }
             )
@@ -185,10 +151,10 @@ struct BigCard: View {
             rotationAngle += 360
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            isFrontSide.toggle()
+            isFrontside.toggle()
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) {
-            isFrontSide.toggle()
+            isFrontside.toggle()
             rotationAngle = 0
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
@@ -209,7 +175,7 @@ struct BigCard: View {
     private func updateCardSide() {
         let absRotationAngle = abs(rotationAngle)
         let isOddRotation = Int((absRotationAngle + 90) / 180) % 2 != 0
-        isFrontSide = (isOddRotation && isFliped) || (!isOddRotation && !isFliped)
+        isFrontside = (isOddRotation && isFliped) || (!isOddRotation && !isFliped)
     }
 }
 

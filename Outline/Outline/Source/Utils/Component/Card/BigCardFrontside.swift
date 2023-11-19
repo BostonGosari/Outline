@@ -8,7 +8,7 @@
 import SwiftUI
 import MapKit
 
-struct BigCardFrontSide: View {
+struct BigCardFrontside: View {
     private let cardWidth = UIScreen.main.bounds.width * 0.815
     private let cardHeight = UIScreen.main.bounds.width * 0.815 * 1.635
     private let cardBorder: CGFloat = 10
@@ -67,5 +67,5 @@ struct BigCardFrontSide: View {
 }
 
 #Preview {
-    BigCardFrontSide(cardType: .good, runName: "돌고래런", date: "2023.11.19")
+    BigCardFrontside(cardType: .good, runName: "돌고래런", date: "2023.11.19")
 }
