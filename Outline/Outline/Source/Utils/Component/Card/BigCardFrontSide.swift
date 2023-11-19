@@ -6,12 +6,9 @@
 //
 
 import SwiftUI
+import MapKit
 
 struct BigCardFrontSide: View {
-    var cardType: CardType
-    var runName: String
-    var date: String
-    
     private let cardWidth = UIScreen.main.bounds.width * 0.815
     private let cardHeight = UIScreen.main.bounds.width * 0.815 * 1.635
     private let borderGradient = LinearGradient(
@@ -19,19 +16,19 @@ struct BigCardFrontSide: View {
         startPoint: .topLeading,
         endPoint: .bottomTrailing
     )
+    private let cardBorder: CGFloat = 10
+    
+    var cardType: CardType
+    var runName: String
+    var date: String
     
     var body: some View {
         ZStack(alignment: .topLeading) {
-            Image(cardType.cardFrondSideImage)
-                .resizable()
-                .mask {
-                    UnevenRoundedRectangle(topLeadingRadius: 10, bottomLeadingRadius: 45, bottomTrailingRadius: 45, topTrailingRadius: 70)
-                }
-            Rectangle() // 아무거나 넣어주세요
+            Map() // 아무거나 넣어주세요
                 .foregroundStyle(.ultraThinMaterial)
                 .frame(width: cardWidth - 20, height: cardHeight - 20)
                 .mask {
-                    UnevenRoundedRectangle(topLeadingRadius: 10, bottomLeadingRadius: 40, bottomTrailingRadius: 40, topTrailingRadius: 62)
+                    UnevenRoundedRectangle(topLeadingRadius: 10, bottomLeadingRadius: 35, bottomTrailingRadius: 35, topTrailingRadius: 60)
                 }
                 .padding([.leading, .top], 10)
                 .overlay(alignment: .bottom) {
@@ -59,6 +56,15 @@ struct BigCardFrontSide: View {
                         .padding(.vertical, 12)
                         .frame(width: cardWidth * 0.52, height: cardHeight * 0.1)
                         .frame(width: cardWidth, height: cardHeight, alignment: .topLeading)
+                }
+            Image(cardType.cardFrondSideImage)
+                .resizable()
+                .mask {
+                    UnevenRoundedRectangle(topLeadingRadius: 10, bottomLeadingRadius: 45, bottomTrailingRadius: 45, topTrailingRadius: 70)
+                        .strokeBorder(lineWidth: 10)
+                }
+                .mask {
+                    UnevenRoundedRectangle(topLeadingRadius: 10, bottomLeadingRadius: 45, bottomTrailingRadius: 45, topTrailingRadius: 70)
                 }
             UnevenRoundedRectangle(topLeadingRadius: 10, bottomLeadingRadius: 45, bottomTrailingRadius: 45, topTrailingRadius: 70)
                 .stroke(borderGradient, lineWidth: 2)
