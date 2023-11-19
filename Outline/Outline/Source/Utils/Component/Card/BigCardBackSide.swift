@@ -11,9 +11,14 @@ struct BigCardBackSide: View {
     private let cardWidth = UIScreen.main.bounds.width * 0.815
     private let cardHeight = UIScreen.main.bounds.width * 0.815 * 1.635
     private let borderGradient = LinearGradient(
-        colors: [.pink, .purple, .blue, .green],
+        colors: [.customCardBorderGradient1, .customCardBorderGradient2, .customCardBorderGradient3, .customCardBorderGradient4],
         startPoint: .topLeading,
         endPoint: .bottomTrailing
+    )
+    private let scoreGradient = LinearGradient(
+        colors: [.customCardScoreGradient1, .customCardScoreGradient2, .customCardScoreGradient3, .customCardScoreGradient4, .customCardScoreGradient5, .customCardScoreGradient6, .customCardScoreGradient7, .customCardScoreGradient8, .customCardScoreGradient9],
+        startPoint: .bottomLeading,
+        endPoint: .topTrailing
     )
     
     var cardType: CardType
@@ -154,7 +159,7 @@ struct BigCardBackSide: View {
                             .fontWeight(.bold)
                             .fontWidth(.expanded)
                             .font(.system(size: 64))
-                            .foregroundStyle(LinearGradient(colors: [.blue, .purple, .green, .yellow, .red], startPoint: .bottomLeading, endPoint: .topTrailing))
+                            .foregroundStyle(scoreGradient)
                     }
                     .shadow(color: .black.opacity(5), radius: 4)
                 }
@@ -173,5 +178,5 @@ struct BigCardBackSide: View {
 }
 
 #Preview {
-    BigCardBackSide(cardType: .freeRun, runName: "오리런", date: "2023.11.19")
+    BigCardBackSide(cardType: .excellent, runName: "오리런", date: "2023.11.19")
 }
