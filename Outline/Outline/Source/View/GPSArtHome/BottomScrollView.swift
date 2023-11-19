@@ -29,6 +29,7 @@ struct BottomScrollView: View {
                     .font(.customSubtitle)
                     .fontWeight(.semibold)
                     .foregroundColor(.white)
+                    .padding(.bottom, -5)
             }
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 8) {
@@ -49,8 +50,9 @@ struct BottomScrollView: View {
                                                 .onDisappear {
                                                     loading = false
                                                 }
-                                                .roundedCorners(5, corners: [.topLeft])
-                                                .roundedCorners(30, corners: [.topRight, .bottomLeft, .bottomRight])
+                                                .mask {
+                                                    UnevenRoundedRectangle(topLeadingRadius: 5, bottomLeadingRadius: 30, bottomTrailingRadius: 30, topTrailingRadius: 30, style: .circular)
+                                                }
                                         }
                                     LinearGradient(
                                         stops: [
@@ -95,16 +97,17 @@ struct BottomScrollView: View {
                                     .padding(.leading, 20)
                                     .frame(maxWidth: .infinity, alignment: .leading)
                                 }
-                                .roundedCorners(5, corners: [.topLeft])
-                                .roundedCorners(30, corners: [.topRight, .bottomLeft, .bottomRight])
+                                .matchedGeometryEffect(id: currentCourse.id, in: namespace)
+                                .mask {
+                                    UnevenRoundedRectangle(topLeadingRadius: 5, bottomLeadingRadius: 30, bottomTrailingRadius: 30, topTrailingRadius: 30, style: .circular)
+                                }
                                 .shadow(color: .white, radius: 0.5, y: -0.5)
                             }
                             .frame(
                                   width: UIScreen.main.bounds.width * 0.4,
                                   height: UIScreen.main.bounds.width * 0.4 * 1.45
                               )
-                              .transition(.identity)
-                          
+                            .transition(.opacity)
                         }
                         .buttonStyle(CardButton())
                     }

@@ -11,6 +11,7 @@ enum PermissionType {
     case health
     case location
     case motion
+    case notification
     
     var title: String {
         switch self {
@@ -20,6 +21,8 @@ enum PermissionType {
             return "위치 권한 설정"
         case .motion:
             return "활동 데이터 공유 활성화"
+        case .notification:
+            return "알림 권한 설정"
         }
     }
     
@@ -30,6 +33,8 @@ enum PermissionType {
         case .location:
             return "권한을 허용해 편리하게 Outline 사용하세요.\n위치 정보는 앱이 실행 중일때만 사용합니다."
         case .motion:
+            return "권한을 허용해 편리하게 Outline을 사용하세요."
+        case .notification:
             return "권한을 허용해 편리하게 Outline을 사용하세요."
         }
     }
@@ -42,80 +47,64 @@ enum PermissionType {
             return "LocationPermissionImage"
         case .motion:
             return "MotionPermissionImage"
+        case .notification:
+            return "NotificationPermissionImage"
         }
     }
 }
 
 struct PermissionSheet: View {
-    @Binding var showPermissionSheet: Bool
+    @Environment(\.dismiss) var dismiss
     var permissionType: PermissionType
     
     var body: some View {
-        if showPermissionSheet {
-            Color.black.opacity(0.5)
-                .onTapGesture {
-                    withAnimation {
-                        showPermissionSheet = false
-                    }
-                }
+        ZStack {
+            Color.gray900.ignoresSafeArea()
+            RoundedRectangle(cornerRadius: 35, style: .continuous)
+                .stroke(lineWidth: 2)
+                .foregroundStyle(Gradient(colors: [.customPrimary, .gray900, .gray900, .gray900]))
                 .ignoresSafeArea()
-        }
-        VStack(spacing: 10) {
-            Text(permissionType.title)
-                .font(.customTitle2)
-                .fontWeight(.semibold)
-                .padding(.top)
-            Text(permissionType.subTitle)
-                .font(.customSubbody)
-                .foregroundColor(.gray300)
-                .multilineTextAlignment(.center)
-            Image(permissionType.imageName)
-                .resizable()
-                .scaledToFit()
-                .frame(width: 120)
-            Button {
-                withAnimation {
+            VStack(spacing: 10) {
+                Text(permissionType.title)
+                    .font(.customTitle2)
+                    .fontWeight(.semibold)
+                    .padding(.top, 36)
+                Text(permissionType.subTitle)
+                    .font(.customSubbody)
+                    .foregroundColor(.gray300)
+                    .multilineTextAlignment(.center)
+                Image(permissionType.imageName)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 120)
+                Button {
                     openAppSetting()
-                    showPermissionSheet = false
+                    dismiss()
+                } label: {
+                    Text("설정으로 가기")
+                        .font(.customButton)
+                        .foregroundStyle(Color.customBlack)
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .background {
+                            RoundedRectangle(cornerRadius: 15)
+                                .foregroundStyle(Color.customPrimary)
+                        }
                 }
-            } label: {
-                Text("설정으로 가기")
-                    .font(.customButton)
-                    .fontWeight(.medium)
-                    .foregroundStyle(Color.customBlack)
-                    .padding()
-                    .frame(maxWidth: .infinity)
-                    .background {
-                        RoundedRectangle(cornerRadius: 15, style: .continuous)
-                            .foregroundStyle(Color.customPrimary)
-                    }
-            }
-            .padding()
-            
-            Button {
-                withAnimation {
-                    showPermissionSheet = false
+                .padding()
+                
+                Button {
+                    dismiss()
+                } label: {
+                    Text("닫기")
+                        .font(.customBody)
+                        .foregroundStyle(.customWhite)
+                        .frame(maxWidth: .infinity)
                 }
-            } label: {
-                Text("닫기")
-                    .font(.customButton)
-                    .fontWeight(.medium)
-                    .foregroundStyle(.white)
             }
-            .padding()
+            .presentationDetents([.height(400)])
+            .presentationCornerRadius(35)
         }
-        .frame(height: UIScreen.main.bounds.height / 2)
-        .frame(maxWidth: .infinity)
-        .background {
-            RoundedRectangle(cornerRadius: 30, style: .continuous)
-                .stroke(Color.customPrimary, lineWidth: 2)
-            RoundedRectangle(cornerRadius: 30, style: .continuous)
-                .foregroundStyle(Color.gray900)
-        }
-        .frame(maxHeight: .infinity, alignment: .bottom)
-        .offset(y: showPermissionSheet ? 0 : UIScreen.main.bounds.height / 2 + 2)
-        .animation(.easeInOut, value: showPermissionSheet)
-        .ignoresSafeArea()
     }
     
     private func openAppSetting() {
@@ -123,4 +112,11 @@ struct PermissionSheet: View {
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
         }
     }
+}
+
+#Preview {
+    Text("sheet")
+        .sheet(isPresented: .constant(true)) {
+            PermissionSheet(permissionType: .health)
+        }
 }

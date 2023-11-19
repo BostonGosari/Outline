@@ -15,6 +15,7 @@ struct ProfileView: View {
     @State private var showDeleteUserAlert = false
     @State private var showDeleteCompleteAlert = false
     @State private var showLogoutAlert = false
+    @State private var showNeedLoginSheet = false
     
     // 추후 데이터 연결 필요
     @State private var userProfileImage = "defaultProfileImage"
@@ -142,36 +143,18 @@ struct ProfileView: View {
                     })
                 )
             }
-            
-            switch authState {
-            case .lookAround:
-                ZStack {
-                    Color.customBlack.opacity(0.7)
-                    VStack {
-                        Spacer()
-                        LookAroundModalView {
-                            dismiss()
-                        }
-                    }
-                    .frame(height: UIScreen.main.bounds.height / 2)
-                    .frame(maxWidth: .infinity)
-                    .background {
-                        RoundedRectangle(cornerRadius: 30, style: .continuous)
-                            .stroke(Color.customPrimary, lineWidth: 2)
-                        RoundedRectangle(cornerRadius: 30, style: .continuous)
-                            .foregroundStyle(Color.gray900)
-                    }
-                    .frame(maxHeight: .infinity, alignment: .bottom)
-                    .offset(y: 40)
-                }
-            default:
-                EmptyView()
+        }
+        .sheet(isPresented: $showNeedLoginSheet) {
+            NeedLoginSheet(type: .userInfo) {
+                dismiss()
             }
         }
         .onAppear {
             switch authState {
             case .login:
                 profileViewModel.loadUserInfo()
+            case .lookAround:
+                showNeedLoginSheet = true
             default:
                 return
             }

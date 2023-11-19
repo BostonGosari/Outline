@@ -15,7 +15,7 @@ struct NewRunningMapView: View {
     @State private var showBigGuide = false
     
     @State private var position: MapCameraPosition = .userLocation(followsHeading: true, fallback: .automatic)
-    @Namespace var mapScope
+    @Namespace private var mapScope
     
     var userLocations: [CLLocationCoordinate2D]
     

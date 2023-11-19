@@ -15,7 +15,7 @@ struct GPSArtHomeView: View {
     @State private var scrollOffset: CGFloat = 0
     @State private var scrollXOffset: CGFloat = 0
     
-    @State var currentIndex: Int = 0
+    @State var currentIndex: Int = 1
     @State private var loading = true
     @State private var selectedCourse: CourseWithDistance?
     @State private var showNetworkErrorView = false
@@ -37,7 +37,8 @@ struct GPSArtHomeView: View {
                         .onScrollViewOffsetChanged { offset in
                             scrollOffset = offset
                         }
-                    GPSArtHomeHeader(loading: loading, scrollOffset: scrollOffset)
+                     GPSArtHomeHeader(title: "내 근처 아트", loading: loading, scrollOffset: scrollOffset)
+                         .padding(.bottom, -10)
                     
                     VStack(spacing: 0) {
                         ScrollView(.horizontal, showsIndicators: false) {
@@ -68,7 +69,7 @@ struct GPSArtHomeView: View {
                         .contentMargins(UIScreen.main.bounds.width * 0.08, for: .scrollContent)
                         .scrollTargetBehavior(.viewAligned)
                         .padding(.top, -20)
-                        .padding(.bottom, -10)
+                        .padding(.bottom, -15)
                         
                         if viewModel.courses.isEmpty {
                             VStack {
@@ -112,6 +113,8 @@ struct GPSArtHomeView: View {
                     GPSArtHomeInlineHeader(loading: loading, scrollOffset: scrollOffset)
                 }
                 .onAppear {
+                    viewModel.checkLocationAuthorization()
+                    
                     if viewModel.courses.isEmpty {
                         viewModel.getAllCoursesFromFirebase()
                     }

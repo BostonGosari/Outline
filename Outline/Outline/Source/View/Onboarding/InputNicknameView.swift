@@ -35,7 +35,7 @@ struct InputNicknameView: View {
                         .padding(.vertical, 13)
                         .padding(.horizontal, 16)
                         .background(Color.gray700)
-                        .clipShape(RoundedRectangle(cornerRadius: 10), style: /*@START_MENU_TOKEN@*/FillStyle()/*@END_MENU_TOKEN@*/)
+                        .clipShape(RoundedRectangle(cornerRadius: 10), style: FillStyle())
                         .onChange(of: viewModel.nickname) {
                             viewModel.checkNicname()
                         }
@@ -57,7 +57,7 @@ struct InputNicknameView: View {
                     CompleteButton(text: "다음", isActive: viewModel.isSuccess) {
                         if viewModel.isSuccess {
                             viewModel.createUserName()
-                            viewModel.moveToInputUserInfoView = true
+                            viewModel.moveToHeathAuthenticationView = true
                         }
                     }
                     .frame(maxHeight: .infinity, alignment: .bottom)
@@ -68,8 +68,8 @@ struct InputNicknameView: View {
             .onReceive(Publishers.Merge(viewModel.keyboardWillShowPublisher, viewModel.keyboardWillHidePublisher)) { isVisible in
                 viewModel.isKeyboardVisible = isVisible
             }
-            .navigationDestination(isPresented: $viewModel.moveToInputUserInfoView) {
-                InputUserInfoView(userNickName: viewModel.nickname)
+            .navigationDestination(isPresented: $viewModel.moveToHeathAuthenticationView) {
+                HealthAuthView()
             }
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {

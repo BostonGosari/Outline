@@ -1,5 +1,5 @@
 //
-//  OnboardingNotificationAuthView.swift
+//  NotificationAuthView.swift
 //  Outline
 //
 //  Created by Seungui Moon on 10/23/23.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct OnboardingNotificationAuthView: View {
+struct NotificationAuthView: View {
     
     @AppStorage("authState") var authState: AuthState = .logout
     @State private var showNotificationAlert = true
@@ -37,5 +37,5 @@ struct OnboardingNotificationAuthView: View {
 }
 
 #Preview {
-    OnboardingNotificationAuthView()
+    NotificationAuthView()
 }
