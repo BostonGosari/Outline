@@ -19,7 +19,7 @@ class CategoryTestViewModel: ObservableObject {
     private let courseModel = CourseModel()
     
     func readFirstCourseList() {
-        readCategoryCourse(categoryType: .category1) { result in
+        courseModel.readCategoryCourse(categoryType: .category1) { result in
             switch result {
             case .success(let courseCategory):
                 self.firstCategoryTitle = courseCategory.title
@@ -40,7 +40,7 @@ class CategoryTestViewModel: ObservableObject {
     }
     
     func readSecondCourseList() {
-        readCategoryCourse(categoryType: .category2) { result in
+        courseModel.readCategoryCourse(categoryType: .category2) { result in
             switch result {
             case .success(let courseCategory):
                 self.secondCategoryTitle = courseCategory.title
@@ -61,7 +61,7 @@ class CategoryTestViewModel: ObservableObject {
     }
     
     func readThirdCourseList() {
-        readCategoryCourse(categoryType: .category3) { result in
+        courseModel.readCategoryCourse(categoryType: .category3) { result in
             switch result {
             case .success(let courseCategory):
                 self.thirdCategoryTitle = courseCategory.title
@@ -77,17 +77,6 @@ class CategoryTestViewModel: ObservableObject {
                 }
             case .failure(let failure):
                 print("fail to read category \(failure)")
-            }
-        }
-    }
-    
-    private func readCategoryCourse(categoryType: CourseCategoryType, completion: @escaping (Result<CourseCategory, GPSArtError>) -> Void) {
-        courseModel.readCategory(categoryType: categoryType) { result in
-            switch result {
-            case .success(let courseCategory):
-                completion(.success(courseCategory))
-            case .failure(_):
-                completion(.failure(.typeError))
             }
         }
     }
