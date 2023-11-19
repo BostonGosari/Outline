@@ -9,6 +9,7 @@ import MapKit
 import SwiftUI
 
 struct FreeRunningHomeView: View {
+    @AppStorage("authState") var authState: AuthState = .logout
     @StateObject var runningStartManager = RunningStartManager.shared
     
     @State private var userLocation = ""
@@ -20,7 +21,9 @@ struct FreeRunningHomeView: View {
    
     var body: some View {
         ZStack(alignment: .top) {
-            Map(position: $position)
+            if authState == .login {
+                Map(position: $position)
+            }
         
             Rectangle()
                 .foregroundColor(.clear)
@@ -45,45 +48,50 @@ struct FreeRunningHomeView: View {
                     .padding(.top, 8)
                 Spacer()
                 
-                cardView
-                   .overlay {
-                       VStack(alignment: .leading) {
-                           Text("자유 코스")
-                               .font(.customHeadline)
-                               .padding(.bottom, 8)
-                           HStack {
-                               Image(systemName: "mappin")
-                               Text(userLocation)
-                           }
-                           .font(.customCaption)
-                           .frame(height: 16)
-                           SlideToUnlock(isUnlocked: $isUnlocked, progress: $progress)
-                               .onChange(of: isUnlocked) { _, newValue in
-                                   if newValue {
-                                       runningStartManager.checkAuthorization()
-                                       
-                                       if runningStartManager.isHealthAuthorized {
-                                           if runningStartManager.isLocationAuthorized {
-                                               runningStartManager.start = true
-                                               runningStartManager.startFreeRun()
-                                               isUnlocked = false
-                                           } else {
-                                               runningStartManager.permissionType = .location
-                                               runningStartManager.showPermissionSheet = true
-                                               isUnlocked = false
-                                           }
-                                       } else {
-                                           runningStartManager.permissionType = .health
-                                           runningStartManager.showPermissionSheet = true
-                                           isUnlocked = false
-                                       }
-                                   }
-                               }
-                               .frame(maxHeight: .infinity, alignment: .bottom)
-                       }
-                       .padding(EdgeInsets(top: 58, leading: 24, bottom: 24, trailing: 16))
-                   }
-                   .padding(EdgeInsets(top: 16, leading: 16, bottom: 80, trailing: 20))
+                if authState == .login {
+                    cardView
+                        .overlay {
+                            VStack(alignment: .leading) {
+                                Text("자유 코스")
+                                    .font(.customHeadline)
+                                    .padding(.bottom, 8)
+                                HStack {
+                                    Image(systemName: "mappin")
+                                    Text(userLocation)
+                                }
+                                .font(.customCaption)
+                                .frame(height: 16)
+                                SlideToUnlock(isUnlocked: $isUnlocked, progress: $progress)
+                                    .onChange(of: isUnlocked) { _, newValue in
+                                        if newValue {
+                                            runningStartManager.checkAuthorization()
+                                            
+                                            if runningStartManager.isHealthAuthorized {
+                                                if runningStartManager.isLocationAuthorized {
+                                                    runningStartManager.start = true
+                                                    runningStartManager.startFreeRun()
+                                                    isUnlocked = false
+                                                } else {
+                                                    runningStartManager.permissionType = .location
+                                                    runningStartManager.showPermissionSheet = true
+                                                    isUnlocked = false
+                                                }
+                                            } else {
+                                                runningStartManager.permissionType = .health
+                                                runningStartManager.showPermissionSheet = true
+                                                isUnlocked = false
+                                            }
+                                        }
+                                    }
+                                    .frame(maxHeight: .infinity, alignment: .bottom)
+                            }
+                            .padding(EdgeInsets(top: 58, leading: 24, bottom: 24, trailing: 16))
+                        }
+                        .padding(EdgeInsets(top: 16, leading: 16, bottom: 80, trailing: 20))
+                } else {
+                    LookAroundView(type: .running)
+                    Spacer()
+                }
             }
         }
         .onAppear {
