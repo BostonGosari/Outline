@@ -115,6 +115,8 @@
 		95A01E332AF143BA0093D9C0 /* ProfileUserInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A01E322AF143BA0093D9C0 /* ProfileUserInfoView.swift */; };
 		95A01E352AF144030093D9C0 /* ProfileHealthInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A01E342AF144030093D9C0 /* ProfileHealthInfoView.swift */; };
 		95A01E3B2AF2B7250093D9C0 /* LookAroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A01E3A2AF2B7240093D9C0 /* LookAroundView.swift */; };
+		95ACF8D72B09C85D0045AEA8 /* CourseCategoryModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95ACF8D62B09C85D0045AEA8 /* CourseCategoryModelType.swift */; };
+		95ACF8D82B09C86C0045AEA8 /* CourseCategoryModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95ACF8D62B09C85D0045AEA8 /* CourseCategoryModelType.swift */; };
 		95B8F45A2AED27C400D9F35B /* AuthModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B8F4592AED27C400D9F35B /* AuthModel.swift */; };
 		95B8F45C2AED35E100D9F35B /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 95B8F45B2AED35E100D9F35B /* FirebaseAuth */; };
 		95B8F45E2AED35E100D9F35B /* FirebaseAuthCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 95B8F45D2AED35E100D9F35B /* FirebaseAuthCombine-Community */; };
@@ -301,6 +303,7 @@
 		95A01E322AF143BA0093D9C0 /* ProfileUserInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUserInfoView.swift; sourceTree = "<group>"; };
 		95A01E342AF144030093D9C0 /* ProfileHealthInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHealthInfoView.swift; sourceTree = "<group>"; };
 		95A01E3A2AF2B7240093D9C0 /* LookAroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LookAroundView.swift; sourceTree = "<group>"; };
+		95ACF8D62B09C85D0045AEA8 /* CourseCategoryModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseCategoryModelType.swift; sourceTree = "<group>"; };
 		95B8F4592AED27C400D9F35B /* AuthModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthModel.swift; sourceTree = "<group>"; };
 		95B8F45F2AED391300D9F35B /* AppleAuthModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleAuthModel.swift; sourceTree = "<group>"; };
 		95C953CC2AF3BF760040B9DA /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
@@ -539,6 +542,7 @@
 			children = (
 				95E2EF872ADBA5C70083ADEE /* CourseModel.swift */,
 				95E2EF702ADA6F230083ADEE /* CourseModelType.swift */,
+				95ACF8D62B09C85D0045AEA8 /* CourseCategoryModelType.swift */,
 			);
 			path = Course;
 			sourceTree = "<group>";
@@ -1119,6 +1123,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				295324852AE038EE00085120 /* UserInfoModel.swift in Sources */,
+				95ACF8D72B09C85D0045AEA8 /* CourseCategoryModelType.swift in Sources */,
 				954FFF782AE132D100D27537 /* CourseDataUploadManager.swift in Sources */,
 				29AE76E12ADE2C1700A46742 /* HomeTabView.swift in Sources */,
 				0E9A5D482AE065A100C19FF3 /* ShareViewModel.swift in Sources */,
@@ -1168,9 +1173,8 @@
 				954B04182AFF725000A8A83E /* ProfileUserInfoViewModel.swift in Sources */,
 				299803572AE00C9B00A9A134 /* HapticManager.swift in Sources */,
 				0E29F64B2ADF653000F5EF5C /* FontExtension.swift in Sources */,
-				954CB2B62AE63E79005EB2E9 /* OnboardingHealthAuthView.swift in Sources */,
+				954CB2B62AE63E79005EB2E9 /* HealthAuthView.swift in Sources */,
 				BB44B1702B047242000462CA /* AccuracyCheckView.swift in Sources */,
-				29CC42BA2AF1069400578EF1 /* OnboardingLocationAuthViewModel.swift in Sources */,
 				954CB2B62AE63E79005EB2E9 /* HealthAuthView.swift in Sources */,
 				95A01E1E2AF0CCE70093D9C0 /* DoubleExtension.swift in Sources */,
 				2921B00F2B01301100533A83 /* NewRunningMetricsView.swift in Sources */,
@@ -1242,6 +1246,7 @@
 				95A01E2C2AF0DF860093D9C0 /* ConvertCoordinateManager.swift in Sources */,
 				2930EDC02AF3FE3F007FD141 /* CourseListWatchViewModel.swift in Sources */,
 				29111E3F2AE0CD0C009833C7 /* ConfettiWatchView.swift in Sources */,
+				95ACF8D82B09C86C0045AEA8 /* CourseCategoryModelType.swift in Sources */,
 				F0AC8B272AD967330061612C /* WatchExtension.swift in Sources */,
 				BB5239292ADAF75C00646494 /* Logger.swift in Sources */,
 				F0AC8AB12AD94C200061612C /* ContentWatchView.swift in Sources */,
