@@ -48,7 +48,7 @@ struct BigCard: View {
     @State var rotationAngle: Double = 0
     @State var isFrontSide = true
     
-    var cardType: CardType = .excellent
+    var cardType: CardType = .good
     var runName: String = "돌고래런"
     var date: String = "2023.11.19"
     
@@ -57,7 +57,7 @@ struct BigCard: View {
             if isFrontSide {
                 BigCardFrontSide(cardType: cardType, runName: runName, date: date)
             } else {
-                BigCardBackSide(cardType: cardType)
+                BigCardBackSide(cardType: cardType, runName: runName, date: date)
             }
         }
         .rotation3DEffect(
