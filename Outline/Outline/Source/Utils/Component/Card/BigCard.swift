@@ -10,7 +10,6 @@ import SwiftUI
 
 struct BigCard: View {
     @StateObject private var manager = MotionManager()
-    @State private var translation: CGSize = .zero
     @State private var isDragging = false
     @State private var snapShotAngle: Double = 0
     @State private var rotationAngle: Double = 0
@@ -32,14 +31,6 @@ struct BigCard: View {
     var kcal: String = "235"
     var bpm: String = "100"
     var score: Int = 100
-    
-    private let cardWidth = UIScreen.main.bounds.width * 0.815
-    private let cardHeight = UIScreen.main.bounds.width * 0.815 * 1.635
-    private let borderGradient = LinearGradient(
-        colors: [.customCardBorderGradient1, .customCardBorderGradient2, .customCardBorderGradient3, .customCardBorderGradient4],
-        startPoint: .topLeading,
-        endPoint: .bottomTrailing
-    )
     
     var body: some View {
         ZStack {
@@ -65,44 +56,12 @@ struct BigCard: View {
             }
         }
         .overlay {
-            ZStack {
-                Image(cardType.hologramImage)
-                    .resizable()
-                    .opacity(cardType == .excellent ? 0.4 : 0.2)
-                LinearGradient(colors: [.white.opacity(manager.roll * 0.6), .clear, .white.opacity(manager.roll * 0.6), .clear, .white.opacity(manager.roll * 0.6)], startPoint: .topTrailing, endPoint: .bottomLeading)
-                LinearGradient(
-                    colors: [
-                        .customCardScoreGradient1.opacity(min(manager.roll * 0.5, 0.5)),
-                        .customCardScoreGradient2.opacity(min(manager.roll * 0.5, 0.5)),
-                        .customCardScoreGradient3.opacity(min(manager.roll * 0.5, 0.5)),
-                        .customCardScoreGradient4.opacity(min(manager.roll * 0.5, 0.5)),
-                        .customCardScoreGradient5.opacity(min(manager.roll * 0.5, 0.5)),
-                        .customCardScoreGradient6.opacity(min(manager.roll * 0.5, 0.5)),
-                        .customCardScoreGradient7.opacity(min(manager.roll * 0.5, 0.5)),
-                        .customCardScoreGradient8.opacity(min(manager.roll * 0.5, 0.5)),
-                        .customCardScoreGradient9.opacity(min(manager.roll * 0.5, 0.5))
-                    ],
-                    startPoint: .bottomLeading,
-                    endPoint: .topTrailing
-                )
-            }
-            .mask {
-                UnevenRoundedRectangle(topLeadingRadius: 10, bottomLeadingRadius: 45, bottomTrailingRadius: 45, topTrailingRadius: 70)
-            }
-            UnevenRoundedRectangle(topLeadingRadius: 10, bottomLeadingRadius: 45, bottomTrailingRadius: 45, topTrailingRadius: 70)
-                .stroke(LinearGradient(
-                    colors: [.customCardBorderGradient1, .customCardBorderGradient2, .customCardBorderGradient3, .customCardBorderGradient4],
-                    startPoint: .topLeading,
-                    endPoint: UnitPoint(x: manager.pitch * 2, y: manager.roll * 2)), lineWidth: 2)
-                .hueRotation(.degrees(90))
+            hologramOverlay
+            cardBorder
         }
         .rotation3DEffect(
             .degrees(snapShotAngle + rotationAngle),
-            axis: (
-                x: 0.0,
-                y: 1,
-                z: 0.0
-            ),
+            axis: (x: 0.0, y: 1, z: 0.0),
             perspective: 0.3
         )
         .offset(y: cardFloatingOffset)
@@ -115,6 +74,42 @@ struct BigCard: View {
                 isFliped.toggle()
             }
         }
+    }
+    
+    private var hologramOverlay: some View {
+        ZStack {
+            Image(cardType.hologramImage)
+                .resizable()
+                .opacity(cardType == .excellent ? 0.4 : 0.2)
+            LinearGradient(colors: [.white.opacity(manager.roll * 0.6), .clear, .white.opacity(manager.roll * 0.6), .clear, .white.opacity(manager.roll * 0.6)], startPoint: .topTrailing, endPoint: .bottomLeading)
+            LinearGradient(
+                colors: [
+                    .customCardScoreGradient1.opacity(min(manager.roll * 0.5, 0.5)),
+                    .customCardScoreGradient2.opacity(min(manager.roll * 0.5, 0.5)),
+                    .customCardScoreGradient3.opacity(min(manager.roll * 0.5, 0.5)),
+                    .customCardScoreGradient4.opacity(min(manager.roll * 0.5, 0.5)),
+                    .customCardScoreGradient5.opacity(min(manager.roll * 0.5, 0.5)),
+                    .customCardScoreGradient6.opacity(min(manager.roll * 0.5, 0.5)),
+                    .customCardScoreGradient7.opacity(min(manager.roll * 0.5, 0.5)),
+                    .customCardScoreGradient8.opacity(min(manager.roll * 0.5, 0.5)),
+                    .customCardScoreGradient9.opacity(min(manager.roll * 0.5, 0.5))
+                ],
+                startPoint: .bottomLeading,
+                endPoint: .topTrailing
+            )
+        }
+        .mask {
+            UnevenRoundedRectangle(topLeadingRadius: 10, bottomLeadingRadius: 45, bottomTrailingRadius: 45, topTrailingRadius: 70)
+        }
+    }
+    
+    private var cardBorder: some View {
+        UnevenRoundedRectangle(topLeadingRadius: 10, bottomLeadingRadius: 45, bottomTrailingRadius: 45, topTrailingRadius: 70)
+            .stroke(LinearGradient(
+                colors: [.customCardBorderGradient1, .customCardBorderGradient2, .customCardBorderGradient3, .customCardBorderGradient4],
+                startPoint: .topLeading,
+                endPoint: UnitPoint(x: manager.pitch * 2, y: manager.roll * 2)), lineWidth: 2)
+            .hueRotation(.degrees(90))
     }
     
     private var drag: some Gesture {
