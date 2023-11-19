@@ -24,6 +24,7 @@ struct BigCardBackSide: View {
     var cardType: CardType
     var runName: String
     var date: String
+    var editMode: Bool
     
     var body: some View {
         ZStack(alignment: .topLeading) {
@@ -37,7 +38,7 @@ struct BigCardBackSide: View {
                         HStack {
                             Text(runName)
                                 .font(.customHeadline)
-                            if cardType == .freeRun {
+                            if cardType == .freeRun || editMode {
                                 Button {
                                     // edit action
                                 } label: {
@@ -48,7 +49,7 @@ struct BigCardBackSide: View {
                                 }
                             }
                         }
-                        .padding(.leading, 24)
+                        .padding(.leading, cardType == .freeRun || editMode ? 24 : 0)
                         Text(date)
                             .font(.customSubbody)
                     }
@@ -159,7 +160,7 @@ struct BigCardBackSide: View {
                             .fontWeight(.bold)
                             .fontWidth(.expanded)
                             .font(.system(size: 64))
-                            .foregroundStyle(scoreGradient)
+                            .scoreShimmer(color: scoreGradient, highlight: .white)
                     }
                     .shadow(color: .black.opacity(5), radius: 4)
                 }
@@ -178,5 +179,5 @@ struct BigCardBackSide: View {
 }
 
 #Preview {
-    BigCardBackSide(cardType: .excellent, runName: "오리런", date: "2023.11.19")
+    BigCardBackSide(cardType: .excellent, runName: "오리런", date: "2023.11.19", editMode: true)
 }
