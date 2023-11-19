@@ -7,8 +7,9 @@
 
 import CoreMotion
 import SwiftUI
+import MapKit
 
-struct BigCard: View {
+struct BigCard<Content: View>: View {
     @StateObject private var manager = MotionManager()
     @State private var isDragging = false
     @State private var snapShotAngle: Double = 0
@@ -33,13 +34,16 @@ struct BigCard: View {
     var score: Int = 100
     var editAction: (() -> Void)?
     
+    @ViewBuilder var content: () -> Content
+    
     var body: some View {
         ZStack {
             if isFrontside {
                 BigCardFrontside(
-                    cardType: cardType, 
+                    cardType: cardType,
                     runName: runName,
-                    date: date
+                    date: date,
+                    content: content
                 )
             } else {
                 BigCardBackside(
@@ -52,7 +56,7 @@ struct BigCard: View {
                     pace: pace,
                     kcal: kcal,
                     bpm: bpm,
-                    score: score, 
+                    score: score,
                     editAction: editAction
                 )
             }
@@ -202,5 +206,22 @@ final class MotionManager: ObservableObject {
 }
 
 #Preview {
-    BigCard()
+    BigCard(
+        cardType: .good,
+        runName: "오리런",
+        date: "2023.11.19",
+        editMode: false,
+        time: "20:00.10",
+        distance: "1000KM",
+        pace: "9'99''",
+        kcal: "100",
+        bpm: "100",
+        score: 100,
+        editAction: {
+            // edit Action here
+        },
+        content: {
+            // Any View here
+        }
+    )
 }

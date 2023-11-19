@@ -7,10 +7,11 @@
 
 import SwiftUI
 
-struct SmallCarouselCard: View {
+struct SmallCarouselCard<Content: View>: View {
     var cardType: CardType
     var runName: String
     var date: String
+    @ViewBuilder var content: () -> Content
     
     private let cardWidth = UIScreen.main.bounds.width * 0.5
     private let cardHeight = UIScreen.main.bounds.width * 0.5 * 1.635
@@ -23,7 +24,7 @@ struct SmallCarouselCard: View {
     
     var body: some View {
         ZStack(alignment: .topLeading) {
-            Rectangle() // 아무거나 넣어주세요
+            content() // 아무거나 넣어주세요
                 .foregroundStyle(.ultraThinMaterial)
                 .frame(width: cardWidth - cardBorder * 2, height: cardHeight - cardBorder * 2)
                 .mask {
@@ -80,5 +81,8 @@ struct SmallCarouselCard: View {
 }
 
 #Preview {
-    SmallCarouselCard(cardType: .nice, runName: "돌고래런", date: "2023.11.19")
+    SmallCarouselCard(cardType: .good, runName: "돌고래런", date: "2023.11.19") {
+        Rectangle()
+            .foregroundStyle(.gray)
+    }
 }

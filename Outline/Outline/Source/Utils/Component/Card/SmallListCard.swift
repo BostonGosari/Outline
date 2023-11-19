@@ -7,9 +7,10 @@
 
 import SwiftUI
 
-struct SmallListCard: View {
+struct SmallListCard<Content: View>: View {
     var cardType: CardType
     var runName: String
+    @ViewBuilder var content: () -> Content
     
     private let cardWidth = UIScreen.main.bounds.width * 0.28
     private let cardHeight = UIScreen.main.bounds.width * 0.28 * 1.65
@@ -22,7 +23,7 @@ struct SmallListCard: View {
     
     var body: some View {
         ZStack(alignment: .topLeading) {
-            Rectangle() // 아무거나 넣어주세요
+            content()
                 .foregroundStyle(.ultraThinMaterial)
                 .frame(width: cardWidth - cardBorder * 2, height: cardHeight - cardBorder * 2)
                 .mask {
@@ -77,5 +78,8 @@ struct SmallListCard: View {
 }
 
 #Preview {
-    SmallListCard(cardType: .nice, runName: "돌고래런")
+    SmallListCard(cardType: .nice, runName: "돌고래런") {
+        Rectangle()
+            .foregroundStyle(.black)
+    }
 }

@@ -8,7 +8,7 @@
 import SwiftUI
 import MapKit
 
-struct BigCardFrontside: View {
+struct BigCardFrontside<Content: View>: View {
     private let cardWidth = UIScreen.main.bounds.width * 0.815
     private let cardHeight = UIScreen.main.bounds.width * 0.815 * 1.635
     private let cardBorder: CGFloat = 10
@@ -16,10 +16,11 @@ struct BigCardFrontside: View {
     var cardType: CardType
     var runName: String
     var date: String
-    
+    @ViewBuilder var content: () -> Content
+
     var body: some View {
         ZStack(alignment: .topLeading) {
-            Rectangle() // 아무거나 넣어주세요
+            content()
                 .foregroundStyle(.ultraThinMaterial)
                 .frame(width: cardWidth - 20, height: cardHeight - 20)
                 .mask {
@@ -70,6 +71,9 @@ struct BigCardFrontside: View {
     BigCardFrontside(
         cardType: .good,
         runName: "돌고래런",
-        date: "2023.11.19"
+        date: "2023.11.19", 
+        content: {
+            Rectangle()
+        }
     )
 }
