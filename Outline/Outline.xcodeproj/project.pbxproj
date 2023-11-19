@@ -104,6 +104,7 @@
 		954CB2BA2AE654BA005EB2E9 /* NotificationAuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954CB2B92AE654BA005EB2E9 /* NotificationAuthView.swift */; };
 		954FFF782AE132D100D27537 /* CourseDataUploadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954FFF772AE132D100D27537 /* CourseDataUploadManager.swift */; };
 		9572A2092B02563900E653AB /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 9572A2082B02563900E653AB /* Secrets.xcconfig */; };
+		9582405D2B09EAAD00105FAE /* CategoryTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9582405C2B09EAAD00105FAE /* CategoryTestView.swift */; };
 		959BB20E2AEE380200B5B10B /* KakaoSDKAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 959BB20D2AEE380200B5B10B /* KakaoSDKAuth */; };
 		959BB2102AEE380200B5B10B /* KakaoSDKCommon in Frameworks */ = {isa = PBXBuildFile; productRef = 959BB20F2AEE380200B5B10B /* KakaoSDKCommon */; };
 		959BB2122AEE380200B5B10B /* KakaoSDKUser in Frameworks */ = {isa = PBXBuildFile; productRef = 959BB2112AEE380200B5B10B /* KakaoSDKUser */; };
@@ -295,6 +296,7 @@
 		954CB2B92AE654BA005EB2E9 /* NotificationAuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationAuthView.swift; sourceTree = "<group>"; };
 		954FFF772AE132D100D27537 /* CourseDataUploadManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseDataUploadManager.swift; sourceTree = "<group>"; };
 		9572A2082B02563900E653AB /* Secrets.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
+		9582405C2B09EAAD00105FAE /* CategoryTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTestView.swift; sourceTree = "<group>"; };
 		959D90602ADA3A1000748BFB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		95A01E162AEE3E990093D9C0 /* KakaoAuthModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoAuthModel.swift; sourceTree = "<group>"; };
 		95A01E1B2AEE7A0A0093D9C0 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
@@ -732,6 +734,7 @@
 				BB5239352ADBD95300646494 /* GPSArtHome */,
 				BB397D072AE6406600F92A43 /* Record */,
 				F01FDB9A2ADABC2C00BDA633 /* Tab */,
+				9582405C2B09EAAD00105FAE /* CategoryTestView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1200,6 +1203,7 @@
 				295232FA2AEED0630020EAFA /* BigCardView.swift in Sources */,
 				F096974D2ADBDBB000C38AF4 /* CardDetailView.swift in Sources */,
 				0EE92E7D2AE02DDC003192FF /* FreeRunningHomeView.swift in Sources */,
+				9582405D2B09EAAD00105FAE /* CategoryTestView.swift in Sources */,
 				29FEDC5E2AED81A800C1F80B /* Shimmer.swift in Sources */,
 				2921AFFE2B012DD100533A83 /* NewRunningView.swift in Sources */,
 				29CC19A42AE95F2300B79610 /* RunningStartManager.swift in Sources */,

@@ -36,6 +36,7 @@ struct CourseModel: CourseModelProtocol {
                     let course = try snapshot.data(as: GPSArtCourse.self)
                     courseList.append(course)
                 }
+                print(courseList)
                 completion(.success(courseList))
             } catch {
                 completion(.failure(.typeError))
@@ -59,7 +60,7 @@ struct CourseModel: CourseModelProtocol {
         }
     }
     
-    func readCategories(completion: @escaping (Result<[CourseCategory], GPSArtError>) -> Void) {
+    func readAllCategories(completion: @escaping (Result<[CourseCategory], GPSArtError>) -> Void) {
         courseCategoryRef.getDocuments { (snapshot, error) in
             guard let snapshot = snapshot, error == nil else {
                 completion(.failure(.dataNotFound))
@@ -72,6 +73,31 @@ struct CourseModel: CourseModelProtocol {
                     courseCategories.append(courseCategory)
                 }
                 completion(.success(courseCategories))
+            } catch {
+                completion(.failure(.typeError))
+            }
+        }
+    }
+    
+    func readCategory(categoryType: CourseCategoryType, completion: @escaping (Result<CourseCategory, GPSArtError>) -> Void) {
+        var categoryId: String = ""
+        switch categoryType {
+        case .category1:
+            categoryId = "GPSArtHome_Category1"
+        case .category2:
+            categoryId = "GPSArtHome_Category2"
+        case .category3:
+            categoryId = "GPSArtHome_Category3"
+        }
+        courseCategoryRef.document(categoryId).getDocument { (snapshot, error) in
+            guard let snapshot = snapshot, snapshot.exists, error == nil else {
+                completion(.failure(.dataNotFound))
+                return
+            }
+            
+            do {
+                let courseCategory = try snapshot.data(as: CourseCategory.self)
+                completion(.success(courseCategory))
             } catch {
                 completion(.failure(.typeError))
             }
