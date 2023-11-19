@@ -22,6 +22,7 @@ enum GPSArtError: Error {
 
 struct CourseModel: CourseModelProtocol {
     private let courseListRef = Firestore.firestore().collection("allGPSArtCourses")
+    private let courseCategoryRef = Firestore.firestore().collection("artCategories")
     
     func readAllCourses(completion: @escaping (Result<AllGPSArtCourses, GPSArtError>) -> Void) {
         courseListRef.getDocuments { (snapshot, error) in
@@ -52,6 +53,25 @@ struct CourseModel: CourseModelProtocol {
             do {
                 let courseInfo = try snapshot.data(as: GPSArtCourse.self)
                 completion(.success(courseInfo))
+            } catch {
+                completion(.failure(.typeError))
+            }
+        }
+    }
+    
+    func readCategories(completion: @escaping (Result<[CourseCategory], GPSArtError>) -> Void) {
+        courseCategoryRef.getDocuments { (snapshot, error) in
+            guard let snapshot = snapshot, error == nil else {
+                completion(.failure(.dataNotFound))
+                return
+            }
+            do {
+                var courseCategories: [CourseCategory] = []
+                for snapshot in snapshot.documents {
+                    let courseCategory = try snapshot.data(as: CourseCategory.self)
+                    courseCategories.append(courseCategory)
+                }
+                completion(.success(courseCategories))
             } catch {
                 completion(.failure(.typeError))
             }
