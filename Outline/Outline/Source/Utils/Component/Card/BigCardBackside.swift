@@ -26,6 +26,7 @@ struct BigCardBackside: View {
     var kcal: String
     var bpm: String
     var score: Int
+    var editAction: (() -> Void)?
     
     var body: some View {
         ZStack(alignment: .topLeading) {
@@ -41,7 +42,7 @@ struct BigCardBackside: View {
                                 .font(.customHeadline)
                             if cardType == .freeRun || editMode {
                                 Button {
-                                    // edit action
+                                    editAction?()
                                 } label: {
                                     Image(systemName: "pencil")
                                         .font(.system(size: 20))
@@ -174,5 +175,18 @@ struct BigCardBackside: View {
 }
 
 #Preview {
-    BigCardBackside(cardType: .excellent, runName: "오리런", date: "2023.11.19", editMode: true, time: "00:00.00", distance: "1.2KM", pace: "9'99''", kcal: "235", bpm: "100", score: 100)
+    BigCardBackside(
+        cardType: .excellent,
+        runName: "오리런",
+        date: "2023.11.19",
+        editMode: true,
+        time: "00:00.00",
+        distance: "1.2KM",
+        pace: "9'99''",
+        kcal: "235",
+        bpm: "100",
+        score: 100
+    ) {
+        // edit Action
+    }
 }

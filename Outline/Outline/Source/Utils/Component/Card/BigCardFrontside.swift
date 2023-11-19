@@ -67,5 +67,9 @@ struct BigCardFrontside: View {
 }
 
 #Preview {
-    BigCardFrontside(cardType: .good, runName: "돌고래런", date: "2023.11.19")
+    BigCardFrontside(
+        cardType: .good,
+        runName: "돌고래런",
+        date: "2023.11.19"
+    )
 }

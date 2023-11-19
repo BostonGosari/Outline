@@ -31,6 +31,7 @@ struct BigCard: View {
     var kcal: String = "235"
     var bpm: String = "100"
     var score: Int = 100
+    var editAction: (() -> Void)?
     
     var body: some View {
         ZStack {
@@ -51,7 +52,8 @@ struct BigCard: View {
                     pace: pace,
                     kcal: kcal,
                     bpm: bpm,
-                    score: score
+                    score: score, 
+                    editAction: editAction
                 )
             }
         }
@@ -101,6 +103,7 @@ struct BigCard: View {
         .mask {
             UnevenRoundedRectangle(topLeadingRadius: 10, bottomLeadingRadius: 45, bottomTrailingRadius: 45, topTrailingRadius: 70)
         }
+        .allowsHitTesting(false)
     }
     
     private var cardBorder: some View {
