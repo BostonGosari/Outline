@@ -74,6 +74,8 @@
 		29B205082AEA625100E63F39 /* PathGenerateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9528EFFF2AE042570056CCC6 /* PathGenerateManager.swift */; };
 		29CC19A42AE95F2300B79610 /* RunningStartManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29CC19A32AE95F2300B79610 /* RunningStartManager.swift */; };
 		29CC42BD2AF24BCE00578EF1 /* WatchRunningManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29CC42BC2AF24BCE00578EF1 /* WatchRunningManager.swift */; };
+		29D6BAD32B0924D200BD8653 /* SmallCarouselCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D6BAD22B0924D200BD8653 /* SmallCarouselCard.swift */; };
+		29D6BAD52B092CA800BD8653 /* SmallListCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D6BAD42B092CA800BD8653 /* SmallListCard.swift */; };
 		29EBD7842B0883E500B44AA9 /* BigCardFrontSide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29EBD7832B0883E500B44AA9 /* BigCardFrontSide.swift */; };
 		29EC2ECC2AEAD5690033446C /* CourseAccuracyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29EC2ECB2AEAD5680033446C /* CourseAccuracyManager.swift */; };
 		29EC2ECE2AEAD5A80033446C /* CourseProgressManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29EC2ECD2AEAD5A80033446C /* CourseProgressManager.swift */; };
@@ -277,6 +279,8 @@
 		29AE76DF2ADE2BC700A46742 /* DateExtention.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtention.swift; sourceTree = "<group>"; };
 		29CC19A32AE95F2300B79610 /* RunningStartManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningStartManager.swift; sourceTree = "<group>"; };
 		29CC42BC2AF24BCE00578EF1 /* WatchRunningManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchRunningManager.swift; sourceTree = "<group>"; };
+		29D6BAD22B0924D200BD8653 /* SmallCarouselCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallCarouselCard.swift; sourceTree = "<group>"; };
+		29D6BAD42B092CA800BD8653 /* SmallListCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallListCard.swift; sourceTree = "<group>"; };
 		29EBD7832B0883E500B44AA9 /* BigCardFrontSide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigCardFrontSide.swift; sourceTree = "<group>"; };
 		29EC2ECB2AEAD5680033446C /* CourseAccuracyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseAccuracyManager.swift; sourceTree = "<group>"; };
 		29EC2ECD2AEAD5A80033446C /* CourseProgressManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseProgressManager.swift; sourceTree = "<group>"; };
@@ -490,6 +494,8 @@
 				29F835CC2B0894CF0052C3C1 /* BigCard.swift */,
 				29EBD7832B0883E500B44AA9 /* BigCardFrontSide.swift */,
 				29F835CE2B0894DB0052C3C1 /* BigCardBackSide.swift */,
+				29D6BAD22B0924D200BD8653 /* SmallCarouselCard.swift */,
+				29D6BAD42B092CA800BD8653 /* SmallListCard.swift */,
 			);
 			path = Card;
 			sourceTree = "<group>";
@@ -1150,6 +1156,7 @@
 				29EC2ECC2AEAD5690033446C /* CourseAccuracyManager.swift in Sources */,
 				9528F0002AE042570056CCC6 /* PathGenerateManager.swift in Sources */,
 				0E29F65C2ADF6CA000F5EF5C /* RunningMapView.swift in Sources */,
+				29D6BAD52B092CA800BD8653 /* SmallListCard.swift in Sources */,
 				F096974F2ADBEE9F00C38AF4 /* CardDetailInformationView.swift in Sources */,
 				BB5239582ADC396300646494 /* BackgroundBlur.swift in Sources */,
 				BB5239372ADBD99F00646494 /* GPSArtHomeView.swift in Sources */,
@@ -1172,6 +1179,7 @@
 				F06B936E2ADC279100387DEB /* SlideToUnlock.swift in Sources */,
 				0E9A5D4F2AE0B8C800C19FF3 /* ShareModel.swift in Sources */,
 				9528F0062AE0B37B0056CCC6 /* LoginView.swift in Sources */,
+				29D6BAD32B0924D200BD8653 /* SmallCarouselCard.swift in Sources */,
 				0EE92E6E2AE00AE5003192FF /* CompleteButton.swift in Sources */,
 				29EC2ED42AEB30430033446C /* CourseAnalyzeTest.swift in Sources */,
 				95C953CD2AF3BF760040B9DA /* ProfileViewModel.swift in Sources */,
