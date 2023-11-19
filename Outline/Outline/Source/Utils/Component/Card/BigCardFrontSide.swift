@@ -19,7 +19,7 @@ struct BigCardFrontSide: View {
     
     var body: some View {
         ZStack(alignment: .topLeading) {
-            Map() // 아무거나 넣어주세요
+            Rectangle() // 아무거나 넣어주세요
                 .foregroundStyle(.ultraThinMaterial)
                 .frame(width: cardWidth - 20, height: cardHeight - 20)
                 .mask {
@@ -67,5 +67,5 @@ struct BigCardFrontSide: View {
 }
 
 #Preview {
-    BigCardFrontSide(cardType: .nice, runName: "돌고래런", date: "2023.11.19")
+    BigCardFrontSide(cardType: .good, runName: "돌고래런", date: "2023.11.19")
 }
