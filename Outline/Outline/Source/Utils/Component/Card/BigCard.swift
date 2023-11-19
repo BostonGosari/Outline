@@ -58,6 +58,12 @@ struct BigCard: View {
     var date: String = "2023.11.19"
     var editMode: Bool = false
     
+    private let borderGradient = LinearGradient(
+        colors: [.customCardBorderGradient1, .customCardBorderGradient2, .customCardBorderGradient3, .customCardBorderGradient4],
+        startPoint: .topLeading,
+        endPoint: .bottomTrailing
+    )
+    
     var body: some View {
         ZStack {
             if isFrontSide {
@@ -65,6 +71,20 @@ struct BigCard: View {
             } else {
                 BigCardBackSide(cardType: cardType, runName: runName, date: date, editMode: editMode)
             }
+        }
+        .overlay {
+            Image(cardType.hologramImage)
+                .resizable()
+                .opacity(cardType == .excellent ? 0.4 : 0.2)
+                .mask {
+                    UnevenRoundedRectangle(topLeadingRadius: 10, bottomLeadingRadius: 45, bottomTrailingRadius: 45, topTrailingRadius: 70)
+                }
+            UnevenRoundedRectangle(topLeadingRadius: 10, bottomLeadingRadius: 45, bottomTrailingRadius: 45, topTrailingRadius: 70)
+                .stroke(LinearGradient(
+                    colors: [.customCardBorderGradient1, .customCardBorderGradient2, .customCardBorderGradient3, .customCardBorderGradient4],
+                    startPoint: .topLeading,
+                    endPoint: UnitPoint(x: manager.pitch * 2, y: manager.roll * 2)), lineWidth: 2)
+                .hueRotation(.degrees(90))
         }
         .rotation3DEffect(
             .degrees(snapShotAngle + rotationAngle),
@@ -106,10 +126,10 @@ struct BigCard: View {
             }
             .simultaneously(with: TapGesture()
                 .onEnded { _ in
-                    withAnimation(.bouncy(duration: 2)) {
+                    withAnimation(.bouncy(duration: 1.5)) {
                         snapShotAngle += 180
                     }
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                         isFrontSide.toggle()
                     }
                 }
@@ -120,19 +140,19 @@ struct BigCard: View {
         withAnimation(.bouncy(duration: 4)) {
             rotationAngle += 360
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             isFrontSide.toggle()
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.3) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) {
             isFrontSide.toggle()
             rotationAngle = 0
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
             withAnimation(.easeIn(duration: 0.5)) {
                 cardFloatingOffset = -5
             }
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3.5) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
             withAnimation(.bouncy(duration: 1.5, extraBounce: 0.65)) {
                 cardFloatingOffset = 0
             }

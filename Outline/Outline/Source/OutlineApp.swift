@@ -24,13 +24,14 @@ struct OutlineApp: App {
   
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
-                .onOpenURL { url in
-                    if AuthApi.isKakaoTalkLoginUrl(url) {
-                        _ = AuthController.handleOpenUrl(url: url)
-                    }
-                }
+//            ContentView()
+//                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+//                .onOpenURL { url in
+//                    if AuthApi.isKakaoTalkLoginUrl(url) {
+//                        _ = AuthController.handleOpenUrl(url: url)
+//                    }
+//                }
+            BigCard()
         }
     }
 }
