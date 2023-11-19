@@ -12,7 +12,7 @@ struct BigCardFrontSide: View {
     private let cardWidth = UIScreen.main.bounds.width * 0.815
     private let cardHeight = UIScreen.main.bounds.width * 0.815 * 1.635
     private let borderGradient = LinearGradient(
-        colors: [.pink, .purple, .blue, .green],
+        colors: [.customCardBorderGradient1, .customCardBorderGradient2, .customCardBorderGradient3, .customCardBorderGradient4],
         startPoint: .topLeading,
         endPoint: .bottomTrailing
     )

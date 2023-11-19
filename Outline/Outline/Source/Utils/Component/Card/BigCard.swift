@@ -47,6 +47,7 @@ struct BigCard: View {
     @State var snapShotAngle: Double = 0
     @State var rotationAngle: Double = 0
     @State var isFrontSide = true
+    @State var isFliped = false
     
     var cardType: CardType = .good
     var runName: String = "돌고래런"
@@ -60,6 +61,17 @@ struct BigCard: View {
                 BigCardBackSide(cardType: cardType, runName: runName, date: date)
             }
         }
+        .overlay {
+            VStack {
+                Text("\(snapShotAngle)")
+                Text("\(rotationAngle)")
+                Text("\(isFliped.description)")
+            }
+            .background {
+                Rectangle()
+                    .foregroundStyle(.black)
+            }
+        }
         .rotation3DEffect(
             .degrees(snapShotAngle + rotationAngle),
             axis: (
@@ -71,7 +83,12 @@ struct BigCard: View {
         )
         .gesture(drag)
         .onAppear {
-            rotateCard()
+            onAppearRotateCard()
+        }
+        .onChange(of: snapShotAngle) { oldValue, newValue in
+            if abs(Int(newValue - oldValue)) / 180 % 2 > 0 {
+                isFliped.toggle()
+            }
         }
     }
     
@@ -81,17 +98,7 @@ struct BigCard: View {
                 withAnimation(.bouncy) {
                     rotationAngle = value.translation.width * 2
                     DispatchQueue.main.async {
-                        if 0...90 ~= abs(rotationAngle) {
-                            isFrontSide = true
-                        } else if 90...270 ~= abs(rotationAngle) {
-                            isFrontSide = false
-                        } else if 270...450 ~= abs(rotationAngle) {
-                            isFrontSide = true
-                        } else if 450...630 ~= abs(rotationAngle) {
-                            isFrontSide = false
-                        } else if 630...810 ~= abs(rotationAngle) {
-                            isFrontSide = false
-                        }
+                        updateCardSide()
                     }
                 }
             }
@@ -114,17 +121,23 @@ struct BigCard: View {
             )
     }
     
-    private func rotateCard() {
+    private func onAppearRotateCard() {
         withAnimation(.bouncy(duration: 6)) {
             rotationAngle += 360
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.9) {
             isFrontSide.toggle()
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.9) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             isFrontSide.toggle()
             rotationAngle = 0
         }
+    }
+    
+    private func updateCardSide() {
+        let absRotationAngle = abs(rotationAngle)
+        let isOddRotation = Int((absRotationAngle + 90) / 180) % 2 != 0
+        isFrontSide = (isOddRotation && isFliped) || (!isOddRotation && !isFliped)
     }
 }
 
