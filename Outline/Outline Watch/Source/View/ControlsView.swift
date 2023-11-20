@@ -9,7 +9,6 @@ import SwiftUI
 import UIKit
 
 struct ControlsView: View {
-    
     @StateObject var workoutManager = WatchWorkoutManager.shared
     @StateObject var connectivityManager = WatchConnectivityManager.shared
     @StateObject var watchRunningManager = WatchRunningManager.shared
@@ -18,6 +17,8 @@ struct ControlsView: View {
     @State private var showEndWithoutSavingSheet = false
     @State private var buttonAnimation = false
     @State private var dataAnimation = false
+    
+    var userLocations: [CLLocationCoordinate2D]
     
     var body: some View {
         ScrollView {
@@ -91,10 +92,14 @@ extension ControlsView {
     
     private func sendDataToPhone() {
         let startCourse = watchRunningManager.startCourse
-        guard let builder = workoutManager.builder else { return }
         
-        let courseData = CourseData(courseName: startCourse.courseName, runningLength: startCourse.courseLength, heading: startCourse.heading, distance: startCourse.distance, coursePaths: watchRunningManager.userLocations, runningCourseId: "", regionDisplayName: startCourse.regionDisplayName)
-        let healthData = HealthData(totalTime: builder.elapsedTime, averageCadence: workoutManager.cadence, totalRunningDistance: workoutManager.distance, totalEnergy: workoutManager.calorie, averageHeartRate: workoutManager.heartRate, averagePace: workoutManager.averagePace, startDate: Date(), endDate: Date())
+        guard let builder = workoutManager.builder,
+              let startDate = workoutManager.session?.startDate,
+              let endDate = workoutManager.session?.endDate
+        else { return }
+        
+        let courseData = CourseData(courseName: startCourse.courseName, runningLength: startCourse.courseLength, heading: startCourse.heading, distance: startCourse.distance, coursePaths: userLocations, runningCourseId: "", regionDisplayName: startCourse.regionDisplayName)
+        let healthData = HealthData(totalTime: builder.elapsedTime, averageCadence: workoutManager.cadence, totalRunningDistance: workoutManager.distance, totalEnergy: workoutManager.calorie, averageHeartRate: workoutManager.heartRate, averagePace: workoutManager.averagePace, startDate: startDate, endDate: endDate)
         
         connectivityManager.sendRunningRecordToPhone(RunningRecord(id: UUID().uuidString, runningType: watchRunningManager.runningType, courseData: courseData, healthData: healthData))
     }
