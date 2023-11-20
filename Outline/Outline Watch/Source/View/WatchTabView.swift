@@ -22,7 +22,7 @@ struct WatchTabView: View {
     var body: some View {
         NavigationStack {
             TabView(selection: $selection) {
-                ControlsView()
+                ControlsView(userLocations: locationManager.userLocations)
                     .tag(Tab.controls)
                 MapWatchView(userLocations: locationManager.userLocations)
                     .tag(Tab.map)
