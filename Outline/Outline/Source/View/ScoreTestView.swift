@@ -11,21 +11,31 @@ struct ScoreTestView: View {
     @FetchRequest (entity: CoreCourseScore.entity(), sortDescriptors: []) var courseScores: FetchedResults<CoreCourseScore>
     private let courseScoreModel = CourseScoreModel()
     @State private var score: String = ""
+    @State private var savedScore: Int = 0
     
     var body: some View {
         VStack {
+            Text("\(savedScore)")
             ForEach(courseScores, id: \.id) { courseScore in
-                Text("\(courseScore.score)")
-                    .onTapGesture {
-                        courseScoreModel.deleteScore(courseScore) { res in
-                            switch res {
-                            case .success(let success):
-                                print("success to delete score \(success)")
-                            case .failure(let failure):
-                                print("fail to delete score \(failure)")
+                HStack {
+                    Text("\(courseScore.courseId ?? "no id")")
+                        .onTapGesture {
+                            if let courseId = courseScore.courseId {
+                                self.savedScore = courseScoreModel.getScore(id: courseId)
                             }
                         }
-                    }
+                    Text("\(courseScore.score)")
+                        .onTapGesture {
+                            courseScoreModel.deleteScore(courseScore) { res in
+                                switch res {
+                                case .success(let success):
+                                    print("success to delete score \(success)")
+                                case .failure(let failure):
+                                    print("fail to delete score \(failure)")
+                                }
+                            }
+                        }
+                }
             }
             TextField("score", text: $score)
             
