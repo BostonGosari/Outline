@@ -32,14 +32,21 @@ struct CourseScoreModel {
         }
     }
     
-    func getAllScores() {
-        
+    func getAllScores() -> [CoreCourseScore] {
+        let request = CoreCourseScore.fetchRequest()
+        do {
+            return try persistenceController.container.viewContext.fetch(request)
+        } catch {
+          print("fetch Person error: \(error)")
+          return []
+        }
     }
     
     func getScore(id: String) -> Int {
         var score: Int = -1
-        for courseScore in courseScores {
-            if let courseId = courseScore.courseId {
+
+        for courseScore in getAllScores() {
+            if let courseId = courseScore.courseId, courseId == id {
                 score = max(Int(courseScore.score), score)
             }
         }
