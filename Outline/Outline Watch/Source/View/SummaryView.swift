@@ -29,7 +29,7 @@ struct SummaryView: View {
     
     var body: some View {
         if isShowingFinishView {
-            FinishWatchView(completionPercentage: 100)
+            FinishWatchView(score: 100)
                 .onAppear {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
                         isShowingFinishView = false
@@ -59,7 +59,7 @@ struct SummaryView: View {
                         .font(.customHeadline)
                       
                     Text("총시간")
-                        .font(.customSubTitle)
+                        .font(.customBody)
                         .foregroundColor(Color.gray500)
                         .padding(.bottom, 24)
                     LazyVGrid(columns: Array(repeating: GridItem(), count: 2), spacing: 24) {
@@ -71,9 +71,8 @@ struct SummaryView: View {
                         workoutDataItem(value: "\(workoutManager.averageHeartRate.formatted(.number.precision(.fractionLength(0))))", label: "BPM")
                     }
                     .padding(.bottom, 36)
-                    Spacer()
                     Text("Outline 앱에서 전체 활동 기록을 확인하세요.")
-                        .font(.system(size: 10))
+                        .font(.customCaption2)
                         .foregroundColor(Color.gray500)
                         .padding(.bottom, 8)
                     Button {
@@ -82,10 +81,10 @@ struct SummaryView: View {
                         dismiss()
                     } label: {
                         Text("완료")
+                            .frame(height: 48)
                             .frame(maxWidth: .infinity)
                             .background {
                                 RoundedRectangle(cornerRadius: 20)
-                                    .frame(height: 48)
                                     .foregroundStyle(.gray800)
                             }
                     }

@@ -27,9 +27,11 @@ struct CourseDetailView: View {
     private func listBox(systemName: String, location: Placemark) -> some View {
         HStack {
             Image(systemName: systemName)
+                .font(.customSystemImage)
                 .foregroundStyle(.customPrimary)
                 .padding(.horizontal, 5)
             Text("\(location.administrativeArea) \(location.locality) \(location.subLocality)")
+                .font(.customBody)
         }
     }
     
@@ -37,9 +39,11 @@ struct CourseDetailView: View {
     private func listBox(systemName: String, context: String) -> some View {
         HStack {
             Image(systemName: systemName)
+                .font(.customSystemImage)
                 .foregroundStyle(.customPrimary)
                 .padding(.horizontal, 5)
             Text(context)
+                .font(.customBody)
         }
     }
     
@@ -47,16 +51,20 @@ struct CourseDetailView: View {
     private func listBox(systemName: String, alley: Alley) -> some View {
         HStack {
             Image(systemName: systemName)
+                .font(.customSystemImage)
                 .foregroundStyle(.customPrimary)
                 .padding(.horizontal, 5)
-            switch alley {
-            case .few:
-                Text("적음")
-            case .lots:
-                Text("많음")
-            case .none:
-                Text("없음")
+            Group {
+                switch alley {
+                case .few:
+                    Text("적음")
+                case .lots:
+                    Text("많음")
+                case .none:
+                    Text("없음")
+                }
             }
+            .font(.customBody)
         }
     }
     
