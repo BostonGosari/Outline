@@ -11,12 +11,13 @@ import SwiftUI
 struct NewRunningMapView: View {
     @StateObject private var runningStartManager = RunningStartManager.shared
     @StateObject private var runningDataManager = RunningDataManager.shared
-    @StateObject private var locationManager = LocationManager()
     
     @State private var showBigGuide = false
     
     @State private var position: MapCameraPosition = .userLocation(followsHeading: true, fallback: .automatic)
     @Namespace private var mapScope
+    
+    var userLocations: [CLLocationCoordinate2D]
     
     var body: some View {
         ZStack(alignment: .topTrailing) {
@@ -28,7 +29,7 @@ struct NewRunningMapView: View {
                         .stroke(.black.opacity(0.3), style: StrokeStyle(lineWidth: 8, lineCap: .round, lineJoin: .round))
                 }
                 
-                MapPolyline(coordinates: locationManager.userLocations)
+                MapPolyline(coordinates: userLocations)
                     .stroke(.customPrimary, style: StrokeStyle(lineWidth: 5, lineCap: .round, lineJoin: .round))
             }
             .mapControlVisibility(.hidden)
@@ -63,10 +64,10 @@ struct NewRunningMapView: View {
             if let course = runningStartManager.startCourse,
                runningStartManager.runningType == .gpsArt {
                 CourseGuideView(
-                    userLocations: $locationManager.userLocations,
                     showBigGuide: $showBigGuide,
                     coursePathCoordinates: ConvertCoordinateManager.convertToCLLocationCoordinates(course.coursePaths),
-                    courseRotate: course.heading
+                    courseRotate: course.heading,
+                    userLocations: userLocations
                 )
             }
         }
@@ -74,5 +75,5 @@ struct NewRunningMapView: View {
 }
 
 #Preview {
-    NewRunningMapView()
+    NewRunningMapView(userLocations: [])
 }
