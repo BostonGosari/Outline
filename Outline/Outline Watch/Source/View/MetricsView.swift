@@ -17,9 +17,7 @@ struct MetricsView: View {
             MetricsTimelineSchedule(from: workoutManager.builder?.startDate ?? Date(),
                                     isPaused: workoutManager.session?.state == .paused)) { context in
             VStack(alignment: .center) {
-                Spacer()
                 ElapsedTimeView(elapsedTime: workoutManager.builder?.elapsedTime(at: context.date) ?? 0)
-                Spacer()
                 HStack {
                     Spacer()
                     VStack {
@@ -27,7 +25,7 @@ struct MetricsView: View {
                             .font(.system(size: 28).weight(.semibold))
                             .foregroundColor(.white)
                         Text("킬로미터")
-                            .font(.system(size: 14))
+                            .font(.customBody)
                             .multilineTextAlignment(.center)
                             .foregroundColor(Color.gray500)
 
@@ -35,18 +33,16 @@ struct MetricsView: View {
                     Spacer()
                     VStack {
                         Text(workoutManager.pace > 0 ? workoutManager.pace.formattedAveragePace() : "-’--’’")
-
                             .font(.system(size: 28).weight(.semibold))
                             .foregroundColor(.white)
                         Text("페이스")
-                            .font(.system(size: 14))
+                            .font(.customBody)
                             .multilineTextAlignment(.center)
                             .foregroundColor(Color.gray500)
                     }
                     .padding(.leading, 20)
                     Spacer()
                 }
-                Spacer()
             }
             .font(.system(.title, design: .rounded).monospacedDigit().lowercaseSmallCaps())
             .frame(maxWidth: .infinity)
@@ -54,7 +50,7 @@ struct MetricsView: View {
             .scenePadding()
             .navigationTitle {
                 Text(runningManager.runningTitle)
-                    .foregroundStyle(.first)
+                    .foregroundStyle(.customPrimary)
             }
             .navigationBarTitleDisplayMode(.inline)
         }
