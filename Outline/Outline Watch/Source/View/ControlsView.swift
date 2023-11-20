@@ -58,23 +58,19 @@ struct ControlsView: View {
             }
         }
         .scrollDisabled(workoutManager.running)
-        .overlay {
-            if showEndRunningSheet {
-                EndRunningSheet(text: "종료하시겠어요?") {
-                    showEndRunningSheet = false
-                    sendDataToPhone()
-                    workoutManager.endWorkout()
-                }
+        .sheet(isPresented: $showEndRunningSheet) {
+            EndRunningSheet(text: "종료하시겠어요?") {
+                showEndRunningSheet = false
+                sendDataToPhone()
+                workoutManager.endWorkout()
             }
         }
-        .overlay {
-            if showEndWithoutSavingSheet {
-                EndRunningSheet(text: "30초 이하는 기록되지 않아요.\n종료하시겠어요?") {
-                    showEndWithoutSavingSheet = false
-                    workoutManager.endWorkoutWithoutSummaryView()
-                    watchRunningManager.startRunning = false
-                    connectivityManager.sendRunningSessionStateToPhone(false)
-                }
+        .sheet(isPresented: $showEndWithoutSavingSheet) {
+            EndRunningSheet(text: "30초 이하는 기록되지 않아요.\n종료하시겠어요?") {
+                showEndWithoutSavingSheet = false
+                workoutManager.endWorkoutWithoutSummaryView()
+                watchRunningManager.startRunning = false
+                connectivityManager.sendRunningSessionStateToPhone(false)
             }
         }
     }

@@ -26,7 +26,7 @@ struct CourseListWatchView: View {
         NavigationStack {
             VStack {
                 if connectivityManager.allCourses.isEmpty {
-                    contentUnavilable
+                    EmptyContentView()
                 } else {
                     ScrollView {
                         VStack(spacing: -5) {
@@ -111,7 +111,7 @@ struct CourseListWatchView: View {
                                 workoutManager.selectedWorkout = workoutTypes[0]
                                 runningManager.startFreeRun()
                                 showFreeRunningGuideSheet = false
-                            }, 
+                            },
                             secondLabel: "돌아가기",
                             secondAction: {
                                 showFreeRunningGuideSheet = false
@@ -154,18 +154,5 @@ struct CourseListWatchView: View {
         }
         .buttonStyle(.plain)
         .padding(.bottom, 8)
-    }
-    
-    private var contentUnavilable: some View {
-        HStack {
-            Image(systemName: "iphone")
-                .foregroundStyle(.gray600, .clear)
-                .font(.system(size: 24))
-            Text("OUTLINE iPhone을\n실행해서 코스를 선택하세요.")
-                .multilineTextAlignment(.leading)
-                .font(.customCaption)
-                .foregroundStyle(.gray600)
-        }
-        .padding(.bottom, 20)
     }
 }
