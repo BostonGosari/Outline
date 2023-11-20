@@ -116,28 +116,18 @@ struct GPSArtHomeView: View {
                 }
                 .onAppear {
                     viewModel.checkLocationAuthorization()
-                    viewModel.getAllCoursesFromFirebase()
-//                    if viewModel.courses.isEmpty {
-//                        viewModel.getAllCoursesFromFirebase()
-//                    }
+                    if viewModel.courses.isEmpty {
+                        viewModel.getAllCoursesFromFirebase()
+                    }
                     DispatchQueue.main.asyncAfter(deadline: .now() + maxLoadingTime) {
                         if loading {
                             showNetworkErrorView = true
                         }
                     }
                 }
-//                .onAppear {
-//                    viewModel.fetchRecommendedCourses()
-//                    viewModel.readFirstCourseList()
-//                    viewModel.readSecondCourseList()
-//                    viewModel.readThirdCourseList()
-//                }
-//                .refreshable {
-//                    viewModel.fetchRecommendedCourses()
-//                    viewModel.readFirstCourseList()
-//                    viewModel.readSecondCourseList()
-//                    viewModel.readThirdCourseList()
-//                }
+                .refreshable {
+                    viewModel.getAllCoursesFromFirebase()
+                }
             }
             if let selectedCourse, showDetailView {
                 Color.gray900.ignoresSafeArea()
