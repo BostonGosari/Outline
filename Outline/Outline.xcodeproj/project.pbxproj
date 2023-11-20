@@ -131,6 +131,8 @@
 		95EB1EE92ADDC43400B47984 /* PersistentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EB1EE82ADDC43400B47984 /* PersistentController.swift */; };
 		95EB1EEC2ADDC66B00B47984 /* UserDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EB1EEB2ADDC66B00B47984 /* UserDataModel.swift */; };
 		95EB1EF12ADE228A00B47984 /* UserInfoModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EB1EF02ADE228A00B47984 /* UserInfoModelType.swift */; };
+		BB1C49E52B0B766D009625AC /* MiniScrollView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1C49E42B0B766D009625AC /* MiniScrollView2.swift */; };
+		BB1C49E72B0B7694009625AC /* MiniScrollView3.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1C49E62B0B7694009625AC /* MiniScrollView3.swift */; };
 		BB1D530C2ADDBC560073771F /* Pretendard-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BB1D530B2ADDBC560073771F /* Pretendard-Black.ttf */; };
 		BB1D530E2ADDBC620073771F /* Pretendard-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BB1D530D2ADDBC620073771F /* Pretendard-Bold.ttf */; };
 		BB1D53102ADDBC690073771F /* Pretendard-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BB1D530F2ADDBC690073771F /* Pretendard-ExtraBold.ttf */; };
@@ -153,7 +155,7 @@
 		BB5239292ADAF75C00646494 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5239272ADAF72A00646494 /* Logger.swift */; };
 		BB5239372ADBD99F00646494 /* GPSArtHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5239362ADBD99F00646494 /* GPSArtHomeView.swift */; };
 		BB5239582ADC396300646494 /* BackgroundBlur.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5239572ADC396300646494 /* BackgroundBlur.swift */; };
-		BB52396B2ADD385700646494 /* BottomScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB52396A2ADD385700646494 /* BottomScrollView.swift */; };
+		BB52396B2ADD385700646494 /* MiniScrollView1.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB52396A2ADD385700646494 /* MiniScrollView1.swift */; };
 		BB52396D2ADD6DBB00646494 /* CustomRoundedRectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB52396C2ADD6DBB00646494 /* CustomRoundedRectangle.swift */; };
 		F01FDB992ADABB6100BDA633 /* TabModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01FDB982ADABB6100BDA633 /* TabModel.swift */; };
 		F01FDB9C2ADABC4600BDA633 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01FDB9B2ADABC4600BDA633 /* TabBar.swift */; };
@@ -321,6 +323,8 @@
 		95EB1EEB2ADDC66B00B47984 /* UserDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataModel.swift; sourceTree = "<group>"; };
 		95EB1EF02ADE228A00B47984 /* UserInfoModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoModelType.swift; sourceTree = "<group>"; };
 		95EB1EF72ADE251100B47984 /* UserCoreDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = UserCoreDataModel.xcdatamodel; sourceTree = "<group>"; };
+		BB1C49E42B0B766D009625AC /* MiniScrollView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniScrollView2.swift; sourceTree = "<group>"; };
+		BB1C49E62B0B7694009625AC /* MiniScrollView3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniScrollView3.swift; sourceTree = "<group>"; };
 		BB1D530B2ADDBC560073771F /* Pretendard-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Black.ttf"; sourceTree = "<group>"; };
 		BB1D530D2ADDBC620073771F /* Pretendard-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.ttf"; sourceTree = "<group>"; };
 		BB1D530F2ADDBC690073771F /* Pretendard-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraBold.ttf"; sourceTree = "<group>"; };
@@ -345,7 +349,7 @@
 		BB52392E2ADAFB2E00646494 /* Outline.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Outline.entitlements; sourceTree = "<group>"; };
 		BB5239362ADBD99F00646494 /* GPSArtHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPSArtHomeView.swift; sourceTree = "<group>"; };
 		BB5239572ADC396300646494 /* BackgroundBlur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundBlur.swift; sourceTree = "<group>"; };
-		BB52396A2ADD385700646494 /* BottomScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomScrollView.swift; sourceTree = "<group>"; };
+		BB52396A2ADD385700646494 /* MiniScrollView1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniScrollView1.swift; sourceTree = "<group>"; };
 		BB52396C2ADD6DBB00646494 /* CustomRoundedRectangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomRoundedRectangle.swift; sourceTree = "<group>"; };
 		F01FDB982ADABB6100BDA633 /* TabModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabModel.swift; sourceTree = "<group>"; };
 		F01FDB9B2ADABC4600BDA633 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
@@ -648,7 +652,9 @@
 				F0492E1C2ADD2AE900F6EADD /* GPSArtHomeHeader.swift */,
 				F096974C2ADBDBB000C38AF4 /* CardDetailView.swift */,
 				F096974E2ADBEE9F00C38AF4 /* CardDetailInformationView.swift */,
-				BB52396A2ADD385700646494 /* BottomScrollView.swift */,
+				BB52396A2ADD385700646494 /* MiniScrollView1.swift */,
+				BB1C49E42B0B766D009625AC /* MiniScrollView2.swift */,
+				BB1C49E62B0B7694009625AC /* MiniScrollView3.swift */,
 				F06298AA2AE1998D007AB2D3 /* MapInfoView.swift */,
 			);
 			path = GPSArtHome;
@@ -1151,8 +1157,9 @@
 				F06298AF2AE1A2ED007AB2D3 /* CountDown.swift in Sources */,
 				29AE76AC2ADE0D9100A46742 /* OutlineApp.swift in Sources */,
 				0E29F65D2ADF6CA000F5EF5C /* WorkoutDataView.swift in Sources */,
+				BB1C49E52B0B766D009625AC /* MiniScrollView2.swift in Sources */,
 				F0ECB3AD2AF28541003FA2B4 /* FirstRunningGuideView.swift in Sources */,
-				BB52396B2ADD385700646494 /* BottomScrollView.swift in Sources */,
+				BB52396B2ADD385700646494 /* MiniScrollView1.swift in Sources */,
 				95B8F4602AED391300D9F35B /* AppleAuthModel.swift in Sources */,
 				29EC2ECC2AEAD5690033446C /* CourseAccuracyManager.swift in Sources */,
 				9528F0002AE042570056CCC6 /* PathGenerateManager.swift in Sources */,
@@ -1160,6 +1167,7 @@
 				F096974F2ADBEE9F00C38AF4 /* CardDetailInformationView.swift in Sources */,
 				BB5239582ADC396300646494 /* BackgroundBlur.swift in Sources */,
 				BB5239372ADBD99F00646494 /* GPSArtHomeView.swift in Sources */,
+				BB1C49E72B0B7694009625AC /* MiniScrollView3.swift in Sources */,
 				2975F0962AE3E1790046C00B /* CornerRectangleModifier.swift in Sources */,
 				2921B0022B012EC800533A83 /* NewRunningNavigationView.swift in Sources */,
 				2972515C2B0787640048D787 /* GuideToFreeRunningSheet.swift in Sources */,

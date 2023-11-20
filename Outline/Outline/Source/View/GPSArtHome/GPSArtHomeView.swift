@@ -17,7 +17,7 @@ struct GPSArtHomeView: View {
     
     @State var currentIndex: Int = 1
     @State private var loading = true
-    @State private var selectedCourse: CourseWithDistance?
+    @State private var selectedCourse: GPSArtCourse?
     @State private var showNetworkErrorView = false
     // 받아오는 변수
     @Binding var showDetailView: Bool
@@ -37,7 +37,7 @@ struct GPSArtHomeView: View {
                         .onScrollViewOffsetChanged { offset in
                             scrollOffset = offset
                         }
-                     GPSArtHomeHeader(title: "내 근처 아트", loading: loading, scrollOffset: scrollOffset)
+                     GPSArtHomeHeader(title: "근처에서\n달려볼까요?", loading: loading, scrollOffset: scrollOffset)
                          .padding(.bottom, -10)
                     
                     VStack(spacing: 0) {
@@ -54,7 +54,7 @@ struct GPSArtHomeView: View {
                                         }
                                     } label: {
                                         BigCardView(course: viewModel.recommendedCoures[index], loading: $loading, index: index, currentIndex: currentIndex, namespace: namespace, showDetailView: showDetailView)
-                                            .scaleEffect(selectedCourse?.id == viewModel.recommendedCoures[index].course.id ? 0.96 : 1)
+                                            .scaleEffect(selectedCourse?.id == viewModel.recommendedCoures[index].id ? 0.96 : 1)
                                     }
                                     .buttonStyle(CardButton())
                                     .disabled(loading)
@@ -100,13 +100,15 @@ struct GPSArtHomeView: View {
                             ForEach(0..<3) { index in
                                 Rectangle()
                                     .frame(width: indexWidth, height: indexHeight)
-                                    .foregroundColor(loading ? .gray700 : currentIndex == index ? .customPrimary : .white)
+                                    .foregroundStyle(loading ? .gray600 : currentIndex == index ? .customPrimary : .white)
                                     .animation(.bouncy, value: currentIndex)
                             }
                         }
                         .padding(.bottom, -30)
                         
-                        BottomScrollView(viewModel: viewModel, selectedCourse: $selectedCourse, showDetailView: $showDetailView, namespace: namespace)
+                        MiniScrollView1(selectedCourse: $selectedCourse, courseList: $viewModel.firstCourseList, showDetailView: $showDetailView, category: $viewModel.firstCategoryTitle, namespace: namespace)
+                        MiniScrollView2(selectedCourse: $selectedCourse, courseList: $viewModel.secondCourseList, showDetailView: $showDetailView, category: $viewModel.secondCategoryTitle, namespace: namespace)
+                        MiniScrollView3(selectedCourse: $selectedCourse, courseList: $viewModel.thirdCourseList, showDetailView: $showDetailView, category: $viewModel.thirdCategoryTitle, namespace: namespace)
                     }
                 }
                 .overlay(alignment: .top) {
@@ -114,20 +116,28 @@ struct GPSArtHomeView: View {
                 }
                 .onAppear {
                     viewModel.checkLocationAuthorization()
-                    
-                    if viewModel.courses.isEmpty {
-                        viewModel.getAllCoursesFromFirebase()
-                    }
-                    
+                    viewModel.getAllCoursesFromFirebase()
+//                    if viewModel.courses.isEmpty {
+//                        viewModel.getAllCoursesFromFirebase()
+//                    }
                     DispatchQueue.main.asyncAfter(deadline: .now() + maxLoadingTime) {
                         if loading {
                             showNetworkErrorView = true
                         }
                     }
                 }
-                .refreshable {
-                    viewModel.fetchRecommendedCourses()
-                }
+//                .onAppear {
+//                    viewModel.fetchRecommendedCourses()
+//                    viewModel.readFirstCourseList()
+//                    viewModel.readSecondCourseList()
+//                    viewModel.readThirdCourseList()
+//                }
+//                .refreshable {
+//                    viewModel.fetchRecommendedCourses()
+//                    viewModel.readFirstCourseList()
+//                    viewModel.readSecondCourseList()
+//                    viewModel.readThirdCourseList()
+//                }
             }
             if let selectedCourse, showDetailView {
                 Color.gray900.ignoresSafeArea()
