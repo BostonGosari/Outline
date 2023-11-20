@@ -23,7 +23,8 @@ struct CourseDetailView: View {
         }
     }
     
-    @ViewBuilder private func listBox(systemName: String, location: Placemark) -> some View {
+    @ViewBuilder 
+    private func listBox(systemName: String, location: Placemark) -> some View {
         HStack {
             Image(systemName: systemName)
                 .foregroundStyle(.customPrimary)
@@ -32,7 +33,8 @@ struct CourseDetailView: View {
         }
     }
     
-    @ViewBuilder private func listBox(systemName: String, context: String) -> some View {
+    @ViewBuilder 
+    private func listBox(systemName: String, context: String) -> some View {
         HStack {
             Image(systemName: systemName)
                 .foregroundStyle(.customPrimary)
@@ -41,7 +43,8 @@ struct CourseDetailView: View {
         }
     }
     
-    @ViewBuilder private func listBox(systemName: String, alley: Alley) -> some View {
+    @ViewBuilder 
+    private func listBox(systemName: String, alley: Alley) -> some View {
         HStack {
             Image(systemName: systemName)
                 .foregroundStyle(.customPrimary)
@@ -57,7 +60,8 @@ struct CourseDetailView: View {
         }
     }
     
-    @ViewBuilder private func listBox(systemName: String, context: Double, specifier: String, unit: String = "") -> some View {
+    @ViewBuilder 
+    private func listBox(systemName: String, context: Double, specifier: String, unit: String = "") -> some View {
         let formattedString = String(format: specifier + unit, context)
         listBox(systemName: systemName, context: formattedString)
     }
