@@ -8,8 +8,9 @@
 import Foundation
 
 struct Route: Codable {
-    var nextDirection: String
-    var alertMessage: String
-    var longitude: Double
-    var latitude: Double
+    let nextDirection: String
+    let alertMessage: String
+    let longitude: Double
+    let latitude: Double
+    let distance: Double
 }

@@ -11,6 +11,7 @@ import SwiftUI
 struct NewRunningMapView: View {
     @StateObject private var runningStartManager = RunningStartManager.shared
     @StateObject private var runningDataManager = RunningDataManager.shared
+    @StateObject private var locationManager = LocationManager.shared
     
     @State private var showBigGuide = false
     
@@ -31,6 +32,12 @@ struct NewRunningMapView: View {
                 
                 MapPolyline(coordinates: userLocations)
                     .stroke(.customPrimary, style: StrokeStyle(lineWidth: 5, lineCap: .round, lineJoin: .round))
+                
+                if let point = locationManager.currentDirection {
+                    Annotation("point", coordinate: CLLocationCoordinate2D(latitude: point.latitude, longitude: point.longitude)) {
+                        Circle()
+                    }
+                }
             }
             .mapControlVisibility(.hidden)
             .onAppear {

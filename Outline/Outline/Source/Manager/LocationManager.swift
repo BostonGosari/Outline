@@ -17,6 +17,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     private var locationManager = CLLocationManager()
     private var navigationDatas = [Route]()
     private var index = 1
+    private var checkNextIndex = false
     
     static let shared = LocationManager()
     
@@ -29,10 +30,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         getNavigaionData()
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.distanceFilter = 10
         locationManager.startUpdatingLocation()
-        
-        setRegion()
     }
     
     private func getNavigaionData() {
@@ -52,26 +50,59 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
             print("JSON 파싱 에러: \(error.localizedDescription)")
         }
         
-        currentDirection = navigationDatas[index]
-        print(currentDirection)
-    }
-    
-    private func setRegion() {
-        if let currentDirection = currentDirection {
-            let region = CLCircularRegion(
-                center: CLLocationCoordinate2D(latitude: currentDirection.latitude, longitude: currentDirection.longitude),
-                radius: 2,
-                identifier: "\(index)"
-            )
-            locationManager.startMonitoring(for: region)
-        }
+        currentDirection = Route(
+            nextDirection: "직진",
+            alertMessage: "",
+            longitude: navigationDatas[index].longitude,
+            latitude: navigationDatas[index].latitude,
+            distance: 0
+        )
     }
     
     private func checkDistance(_ location: CLLocationCoordinate2D) {
-        if let direction = currentDirection {
-            let targetLocation =  CLLocation(latitude: direction.latitude, longitude: direction.longitude)
-            let currentLocation = CLLocation(latitude: location.latitude, longitude: location.longitude)
-            distance = targetLocation.distance(from: currentLocation)
+        let currentLocation = CLLocation(latitude: location.latitude, longitude: location.longitude)
+        let targetLocation = CLLocation(latitude: navigationDatas[index].latitude, longitude: navigationDatas[index].longitude)
+        distance = targetLocation.distance(from: currentLocation)
+        
+        if checkNextIndex {
+            let nextDistance = CLLocation(latitude: navigationDatas[index+1].latitude, longitude: navigationDatas[index+1].longitude).distance(from: currentLocation)
+            
+            if nextDistance <= navigationDatas[index+1].distance {
+                index += 1
+                checkNextIndex = false
+                
+                distance = 0
+                
+                currentDirection = Route(
+                    nextDirection: "직진",
+                    alertMessage: "",
+                    longitude: navigationDatas[index].longitude,
+                    latitude: navigationDatas[index].latitude,
+                    distance: 0
+                )
+            }
+        } else {
+            
+            if distance <= 10 && index+1 < navigationDatas.count {
+                checkNextIndex = true
+            } else if distance <= 30 {
+                currentDirection = Route(
+                    nextDirection: navigationDatas[index].nextDirection,
+                    alertMessage: navigationDatas[index].alertMessage,
+                    longitude: navigationDatas[index].longitude,
+                    latitude: navigationDatas[index].latitude,
+                    distance: distance
+                )
+            } else {
+                distance = 0
+                currentDirection = Route(
+                    nextDirection: "직진",
+                    alertMessage: "",
+                    longitude: navigationDatas[index].longitude,
+                    latitude: navigationDatas[index].latitude,
+                    distance: 0
+                )
+            }
         }
     }
     
@@ -87,7 +118,6 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         if index+1 < navigationDatas.count {
             index += 1
             currentDirection = navigationDatas[index]
-            setRegion()
         }
     }
 }
