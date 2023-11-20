@@ -9,9 +9,9 @@ import SwiftUI
 import UIKit
 
 struct ControlsView: View {
-    @StateObject var workoutManager = WatchWorkoutManager.shared
     @StateObject var connectivityManager = WatchConnectivityManager.shared
-    @StateObject var watchRunningManager = WatchRunningManager.shared
+    @StateObject var workoutManager = WatchWorkoutManager.shared
+    @StateObject var runningManager = WatchRunningManager.shared
     
     @State private var showEndRunningSheet = false
     @State private var showEndWithoutSavingSheet = false
@@ -58,7 +58,7 @@ struct ControlsView: View {
                 .opacity(dataAnimation ? 1 : 0)
             }
         }
-        .scrollDisabled(workoutManager.running)
+        .scrollDisabled(workoutManager.running || workoutManager.showSummaryView)
         .sheet(isPresented: $showEndRunningSheet) {
             EndRunningSheet(text: "종료하시겠어요?") {
                 showEndRunningSheet = false
@@ -70,7 +70,7 @@ struct ControlsView: View {
             EndRunningSheet(text: "30초 이하는 기록되지 않아요.\n종료하시겠어요?") {
                 showEndWithoutSavingSheet = false
                 workoutManager.endWorkoutWithoutSummaryView()
-                watchRunningManager.startRunning = false
+                runningManager.startRunning = false
                 connectivityManager.sendRunningSessionStateToPhone(false)
             }
         }
@@ -91,16 +91,13 @@ extension ControlsView {
     }
     
     private func sendDataToPhone() {
-        let startCourse = watchRunningManager.startCourse
+        let startCourse = runningManager.startCourse
         
-        guard let builder = workoutManager.builder,
-              let startDate = workoutManager.session?.startDate,
-              let endDate = workoutManager.session?.endDate
-        else { return }
+        guard let builder = workoutManager.builder else { return }
         
         let courseData = CourseData(courseName: startCourse.courseName, runningLength: startCourse.courseLength, heading: startCourse.heading, distance: startCourse.distance, coursePaths: userLocations, runningCourseId: "", regionDisplayName: startCourse.regionDisplayName)
-        let healthData = HealthData(totalTime: builder.elapsedTime, averageCadence: workoutManager.cadence, totalRunningDistance: workoutManager.distance, totalEnergy: workoutManager.calorie, averageHeartRate: workoutManager.heartRate, averagePace: workoutManager.averagePace, startDate: startDate, endDate: endDate)
+        let healthData = HealthData(totalTime: builder.elapsedTime, averageCadence: workoutManager.cadence, totalRunningDistance: workoutManager.distance, totalEnergy: workoutManager.calorie, averageHeartRate: workoutManager.heartRate, averagePace: workoutManager.averagePace, startDate: workoutManager.session?.startDate ?? Date(), endDate: workoutManager.session?.endDate ?? Date())
         
-        connectivityManager.sendRunningRecordToPhone(RunningRecord(id: UUID().uuidString, runningType: watchRunningManager.runningType, courseData: courseData, healthData: healthData))
+        connectivityManager.sendRunningRecordToPhone(RunningRecord(id: UUID().uuidString, runningType: runningManager.runningType, courseData: courseData, healthData: healthData))
     }
 }
