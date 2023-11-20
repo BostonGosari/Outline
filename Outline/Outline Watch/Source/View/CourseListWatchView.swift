@@ -24,7 +24,7 @@ struct CourseListWatchView: View {
     
     var body: some View {
         NavigationStack {
-            VStack {
+            ZStack {
                 if connectivityManager.allCourses.isEmpty {
                     EmptyContentView()
                 } else {
@@ -54,10 +54,10 @@ struct CourseListWatchView: View {
                                             .font(.customSubTitle)
                                             .padding(.leading, 4)
                                             .frame(maxWidth: .infinity, alignment: .leading)
-                                        PathGenerateManager.caculateLines(width: 75, height: 75, coordinates: ConvertCoordinateManager.convertToCLLocationCoordinates(course.coursePaths))
+                                        PathGenerateManager.caculateLines(width: 80, height: 80, coordinates: ConvertCoordinateManager.convertToCLLocationCoordinates(course.coursePaths))
                                             .stroke(style: StrokeStyle(lineWidth: 4, lineCap: .round, lineJoin: .round))
                                             .scaledToFit()
-                                            .frame(height: 75)
+                                            .frame(height: 80)
                                             .foregroundStyle(.customPrimary)
                                     }
                                     .padding(.vertical, 16)

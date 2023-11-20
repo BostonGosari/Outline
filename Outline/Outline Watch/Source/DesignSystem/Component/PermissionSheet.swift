@@ -50,6 +50,7 @@ struct PermissionSheet: View {
             }
             .buttonStyle(.plain)
         }
+        .toolbar(.hidden, for: .navigationBar)
     }
 }
 

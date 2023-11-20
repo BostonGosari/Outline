@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct WatchTabView: View {
-    @StateObject var workoutManager = WatchWorkoutManager.shared
-    @StateObject var runningManager = WatchRunningManager.shared
+    @StateObject private var locationManager = LocationManager()
+    @StateObject private var workoutManager = WatchWorkoutManager.shared
+    @StateObject private var runningManager = WatchRunningManager.shared
     
     @State private var selection: Tab = .metrics
     @State private var isMapLoaded = false
@@ -23,7 +24,7 @@ struct WatchTabView: View {
             TabView(selection: $selection) {
                 ControlsView()
                     .tag(Tab.controls)
-                MapWatchView()
+                MapWatchView(userLocations: locationManager.userLocations)
                     .tag(Tab.map)
                 MetricsView()
                     .tag(Tab.metrics)
