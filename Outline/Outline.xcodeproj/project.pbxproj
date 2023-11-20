@@ -109,6 +109,8 @@
 		9582406E2B0A81D900105FAE /* KakaoSDKCommon in Frameworks */ = {isa = PBXBuildFile; productRef = 9582406D2B0A81D900105FAE /* KakaoSDKCommon */; };
 		958240702B0A826D00105FAE /* KakaoSDKAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 9582406F2B0A826D00105FAE /* KakaoSDKAuth */; };
 		958240722B0A82A400105FAE /* KakaoSDKUser in Frameworks */ = {isa = PBXBuildFile; productRef = 958240712B0A82A400105FAE /* KakaoSDKUser */; };
+		958240752B0AFDF100105FAE /* CourseScoreModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958240742B0AFDF100105FAE /* CourseScoreModelType.swift */; };
+		958240772B0AFE7900105FAE /* CourseScoreModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958240762B0AFE7900105FAE /* CourseScoreModel.swift */; };
 		95A01E172AEE3E990093D9C0 /* KakaoAuthModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A01E162AEE3E990093D9C0 /* KakaoAuthModel.swift */; };
 		95A01E1C2AEE7A0A0093D9C0 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A01E1B2AEE7A0A0093D9C0 /* LoginViewModel.swift */; };
 		95A01E1E2AF0CCE70093D9C0 /* DoubleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A01E1D2AF0CCE70093D9C0 /* DoubleExtension.swift */; };
@@ -297,6 +299,8 @@
 		954CB2B92AE654BA005EB2E9 /* NotificationAuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationAuthView.swift; sourceTree = "<group>"; };
 		954FFF772AE132D100D27537 /* CourseDataUploadManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseDataUploadManager.swift; sourceTree = "<group>"; };
 		9572A2082B02563900E653AB /* Secrets.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
+		958240742B0AFDF100105FAE /* CourseScoreModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseScoreModelType.swift; sourceTree = "<group>"; };
+		958240762B0AFE7900105FAE /* CourseScoreModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseScoreModel.swift; sourceTree = "<group>"; };
 		959D90602ADA3A1000748BFB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		95A01E162AEE3E990093D9C0 /* KakaoAuthModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoAuthModel.swift; sourceTree = "<group>"; };
 		95A01E1B2AEE7A0A0093D9C0 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
@@ -491,6 +495,15 @@
 				29EC2ED32AEB30430033446C /* CourseAnalyzeTest.swift */,
 			);
 			path = CourseAnalyzer;
+			sourceTree = "<group>";
+		};
+		958240732B0AFCAC00105FAE /* Score */ = {
+			isa = PBXGroup;
+			children = (
+				958240742B0AFDF100105FAE /* CourseScoreModelType.swift */,
+				958240762B0AFE7900105FAE /* CourseScoreModel.swift */,
+			);
+			path = Score;
 			sourceTree = "<group>";
 		};
 		95A01E182AEE76510093D9C0 /* Auth */ = {
@@ -805,6 +818,7 @@
 		F0AC8B052AD965290061612C /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				958240732B0AFCAC00105FAE /* Score */,
 				95A01E182AEE76510093D9C0 /* Auth */,
 				95EB1EF42ADE22BB00B47984 /* Course */,
 				95EB1EF52ADE22C600B47984 /* UserData */,
@@ -1161,6 +1175,7 @@
 				F06B936E2ADC279100387DEB /* SlideToUnlock.swift in Sources */,
 				0E9A5D4F2AE0B8C800C19FF3 /* ShareModel.swift in Sources */,
 				9528F0062AE0B37B0056CCC6 /* LoginView.swift in Sources */,
+				958240752B0AFDF100105FAE /* CourseScoreModelType.swift in Sources */,
 				0EE92E6E2AE00AE5003192FF /* CompleteButton.swift in Sources */,
 				29EC2ED42AEB30430033446C /* CourseAnalyzeTest.swift in Sources */,
 				95C953CD2AF3BF760040B9DA /* ProfileViewModel.swift in Sources */,
@@ -1170,6 +1185,7 @@
 				BB397D092AE6408A00F92A43 /* RecordView.swift in Sources */,
 				BB397D0B2AE640A800F92A43 /* RecordDetailView.swift in Sources */,
 				BB44B16F2B047242000462CA /* AccuracyCheckViewModel.swift in Sources */,
+				958240772B0AFE7900105FAE /* CourseScoreModel.swift in Sources */,
 				2998035B2AE0181900A9A134 /* ConfettiShapes.swift in Sources */,
 				29AE76D82ADE2A2200A46742 /* InputUserInfoView.swift in Sources */,
 				954B04182AFF725000A8A83E /* ProfileUserInfoViewModel.swift in Sources */,
