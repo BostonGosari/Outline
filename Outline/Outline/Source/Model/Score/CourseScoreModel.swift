@@ -15,7 +15,7 @@ enum CourseScoreError: Error {
 }
 
 struct CourseScoreModel {
-    @FetchRequest (entity: CoreRunningRecord.entity(), sortDescriptors: []) var runningRecord: FetchedResults<CoreRunningRecord>
+    @FetchRequest (entity: CoreCourseScore.entity(), sortDescriptors: []) var courseScores: FetchedResults<CoreCourseScore>
     
     let persistenceController = PersistenceController.shared
     
@@ -36,12 +36,28 @@ struct CourseScoreModel {
         
     }
     
-    func getScore(id: String) {
-        
+    func getScore(id: String) -> Int {
+        var score: Int = -1
+        for courseScore in courseScores {
+            if let courseId = courseScore.courseId {
+                score = max(Int(courseScore.score), score)
+            }
+        }
+        return score
     }
     
-    func deleteScore() {
+    func deleteScore(
+        _ object: NSManagedObject,
+        completion: @escaping (Result<Bool, CourseScoreError>) -> Void
+    ) {
+        persistenceController.container.viewContext.delete(object)
         
+        do {
+            try saveContext()
+            completion(.success(true))
+        } catch {
+            completion(.failure(.failToSave))
+        }
     }
     
     private func saveContext() throws {
