@@ -14,7 +14,7 @@ struct NewRunningView: View {
     
     @AppStorage("isFirstRunning") private var isFirstRunning = true
     
-    @GestureState var press = false
+    @GestureState private var press = false
     
     @State private var showDetail = false
     @State private var isPaused = false
