@@ -58,11 +58,10 @@ struct ControlsView: View {
             }
         }
         .scrollDisabled(workoutManager.running)
-        .navigationTitle {
+        .overlay(alignment: .topTrailing) {
             Text(workoutManager.running ? watchRunningManager.runningTitle : "일시 정지됨")
                 .foregroundStyle(.customPrimary)
         }
-        .navigationBarTitleDisplayMode(.inline)
         .sheet(isPresented: $showConfirmationSheet) {
             EndRunningSheet(text: "종료하시겠어요?") {
                 showConfirmationSheet = false
@@ -78,21 +77,6 @@ struct ControlsView: View {
                 watchConnectivityManager.sendRunningSessionStateToPhone(false)
             }
         }
-    }
-    
-    private var header: some View {
-        Text(workoutManager.running ? "시티런" : "일시 정지됨")
-            .fontWeight(.regular)
-            .foregroundStyle(.customPrimary)
-            .padding()
-            .padding(.top, 5)
-            .padding(.leading, 20)
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .background {
-                Rectangle()
-                    .foregroundStyle(.thinMaterial)
-            }
-            .ignoresSafeArea()
     }
 }
 
