@@ -9,11 +9,11 @@ import CoreLocation
 import SwiftUI
 
 struct CourseGuideView: View {
-    @Binding var userLocations: [CLLocationCoordinate2D]
     @Binding var showBigGuide: Bool
     
     let coursePathCoordinates: [CLLocationCoordinate2D]
     let courseRotate: Double
+    var userLocations: [CLLocationCoordinate2D]
     
     var width: Double {
         return showBigGuide ? 320 : 113
