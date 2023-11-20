@@ -11,12 +11,13 @@ import MapKit
 struct MapWatchView: View {
     @StateObject private var runningManager = WatchRunningManager.shared
     @State private var position: MapCameraPosition = .userLocation(followsHeading: true, fallback: .automatic)
+    @State private var bounds: MapCameraBounds = .init(minimumDistance: 100, maximumDistance: 100)
     @State private var isTapped = false
     
     var userLocations: [CLLocationCoordinate2D]
     
     var body: some View {
-        Map(position: $position, interactionModes: []) {
+        Map(position: $position, bounds: bounds, interactionModes: []) {
             UserAnnotation()
             
             MapPolyline(coordinates: ConvertCoordinateManager.convertToCLLocationCoordinates(runningManager.startCourse.coursePaths))
@@ -35,14 +36,12 @@ struct MapWatchView: View {
         .onTapGesture(count: 2) {
             isTapped.toggle()
             
-            withAnimation {
-                if isTapped {
-                    position = .camera(MapCamera(
-                        centerCoordinate: ConvertCoordinateManager.convertToCLLocationCoordinate(runningManager.startCourse.centerLocation),
-                        distance: 20000))
-                } else {
-                    position = .userLocation(followsHeading: true, fallback: .automatic)
-                }
+            if isTapped {
+                position = .userLocation(followsHeading: false, fallback: .automatic)
+                bounds = .init(minimumDistance: 1000, maximumDistance: 1000)
+            } else {
+                position = .userLocation(followsHeading: true, fallback: .automatic)
+                bounds = .init(minimumDistance: 100, maximumDistance: 100)
             }
         }
     }

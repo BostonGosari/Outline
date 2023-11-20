@@ -22,6 +22,7 @@ struct ContentWatchView: View {
             
             if workoutManager.showSummaryView {
                 SummaryView()
+                    .transition(.move(edge: .bottom))
             }
         }
         .tint(.customPrimary)
