@@ -85,10 +85,10 @@ extension ControlsView {
         VStack(spacing: 0) {
             Text(value)
                 .foregroundColor(.white)
-                .font(.system(size: 24).weight(.semibold))
+                .font(.customLargeTitle)
                 .foregroundColor(.white)
             Text(label)
-                .font(.system(size: 14))
+                .font(.customBody)
                 .foregroundColor(Color.gray500)
         }
     }
