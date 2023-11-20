@@ -26,4 +26,7 @@ extension Font {
     static let customShareTitle = Font.custom("Pretendard-SemiBold", size: 25)
     static let customShareData = Font.system(size: 39, weight: .bold)
     static let customFirstGuideTitle = Font.custom("SFCompactDisplay-Semibold", size: 24)
+    
+    static let customCardBody = Font.custom("Pretendard-Regular", size: 32)
+    static let customCardBody2 = Font.custom("Pretendard-Regular", size: 24)
 }
