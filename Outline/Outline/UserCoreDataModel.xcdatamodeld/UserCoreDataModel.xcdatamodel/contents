@@ -16,7 +16,7 @@
         <relationship name="coursePaths" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="CoreCoordinate" inverseName="parentCoursePaths" inverseEntity="CoreCoordinate"/>
         <relationship name="parentRecord" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CoreRunningRecord" inverseName="courseData" inverseEntity="CoreRunningRecord"/>
     </entity>
-    <entity name="CoreCourseScoreSet" representedClassName=".CoreCourseScoreSet" syncable="YES" codeGenerationType="class">
+    <entity name="CoreCourseScore" representedClassName=".CoreCourseScore" syncable="YES" codeGenerationType="class">
         <attribute name="courseId" attributeType="String"/>
         <attribute name="score" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
     </entity>

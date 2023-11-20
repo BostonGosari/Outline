@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CourseScoreSet {
+struct CourseScore {
     var id: String
     var score: Int
 }
