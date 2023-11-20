@@ -10,6 +10,7 @@ import SwiftUI
 struct NewRunningView: View {
     @StateObject private var runningStartManager = RunningStartManager.shared
     @StateObject private var runningDataManager = RunningDataManager.shared
+    @StateObject private var locationManager = LocationManager()
     
     @AppStorage("isFirstRunning") private var isFirstRunning = true
     
@@ -45,7 +46,7 @@ struct NewRunningView: View {
 
 extension NewRunningView {
     private var map: some View {
-        NewRunningMapView()
+        NewRunningMapView(userLocations: locationManager.userLocations)
             .onAppear {
                 if runningStartManager.running == true {
                     runningDataManager.startRunning()
@@ -282,6 +283,7 @@ extension NewRunningView {
                         runningStartManager.counter = 0
                         runningStartManager.running = false
                     } else {
+                        runningDataManager.userLocations = locationManager.userLocations
                         runningDataManager.stopRunning()
                         runningStartManager.counter = 0
                         withAnimation {
