@@ -13,6 +13,8 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     @Published var isRunning: Bool
     @Published var currentDirection: Route?
     @Published var distance = 0.0
+    @Published var direction = ""
+    @Published var nextDirection = ""
     
     private var locationManager = CLLocationManager()
     private var navigationDatas = [Route]()
@@ -67,7 +69,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         if checkNextIndex {
             let nextDistance = CLLocation(latitude: navigationDatas[index+1].latitude, longitude: navigationDatas[index+1].longitude).distance(from: currentLocation)
             
-            if nextDistance <= navigationDatas[index+1].distance {
+            if nextDistance <= navigationDatas[index+1].distance-5 {
                 index += 1
                 checkNextIndex = false
                 
@@ -80,9 +82,10 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
                     latitude: navigationDatas[index].latitude,
                     distance: 0
                 )
+                direction = "직진"
+                nextDirection = "\(Int(navigationDatas[index].distance))미터 후 \(navigationDatas[index].nextDirection)"
             }
         } else {
-            
             if distance <= 10 && index+1 < navigationDatas.count {
                 checkNextIndex = true
             } else if distance <= 30 {
@@ -91,8 +94,10 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
                     alertMessage: navigationDatas[index].alertMessage,
                     longitude: navigationDatas[index].longitude,
                     latitude: navigationDatas[index].latitude,
-                    distance: distance
+                    distance: navigationDatas[index].distance
                 )
+                direction = navigationDatas[index].nextDirection
+                nextDirection = "직진"
             } else {
                 distance = 0
                 currentDirection = Route(
@@ -102,6 +107,9 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
                     latitude: navigationDatas[index].latitude,
                     distance: 0
                 )
+                direction = "직진"
+                
+                nextDirection = "\(Int(navigationDatas[index].distance))미터 후 \(navigationDatas[index].nextDirection)"
             }
         }
     }

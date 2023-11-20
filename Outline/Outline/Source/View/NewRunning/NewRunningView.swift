@@ -57,8 +57,9 @@ extension NewRunningView {
     
     private var navigation: some View {
         NewRunningNavigationView(
-            distance: Int(locationManager.distance),
-            direction: locationManager.currentDirection?.nextDirection ?? "direction 없음",
+            direction: $locationManager.direction,
+            distance: $locationManager.distance,
+            nextDirection: locationManager.nextDirection,
             showDetailNavigation: navigationTranslation + navigationSheetHeight > 10
         )
             .frame(height: 70 + navigationTranslation + navigationSheetHeight, alignment: .top)
