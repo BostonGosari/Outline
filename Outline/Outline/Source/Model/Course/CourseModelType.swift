@@ -142,5 +142,6 @@ struct Navigation: Codable, Hashable {
 
 struct HotSpot: Codable, Hashable {
     var title: String
+    var spotDescription: String
     var location: Coordinate
 }
