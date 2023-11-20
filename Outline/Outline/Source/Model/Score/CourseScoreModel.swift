@@ -12,6 +12,7 @@ enum CourseScoreError: Error {
     case typeError
     case dataNotFound
     case failToSave
+    case failToDelete
 }
 
 struct CourseScoreModel {
@@ -32,25 +33,34 @@ struct CourseScoreModel {
         }
     }
     
-    func getAllScores() -> [CoreCourseScore] {
-        let request = CoreCourseScore.fetchRequest()
-        do {
-            return try persistenceController.container.viewContext.fetch(request)
-        } catch {
-          print("fetch Person error: \(error)")
-          return []
+    func getScore(id: String, completion: @escaping (Result<Int, CourseScoreError>) -> Void) {
+        var score: Int = -1
+        
+        getAllScores { res in
+            switch res {
+            case .success(let coreCourseList):
+                for courseScore in coreCourseList {
+                    if let courseId = courseScore.courseId, courseId == id {
+                        score = max(Int(courseScore.score), score)
+                    }
+                }
+                completion(.success(score))
+            case .failure(let failure):
+                print("failt to get all courses \(failure)")
+                completion(.failure(.dataNotFound))
+            }
         }
     }
     
-    func getScore(id: String) -> Int {
-        var score: Int = -1
-
-        for courseScore in getAllScores() {
-            if let courseId = courseScore.courseId, courseId == id {
-                score = max(Int(courseScore.score), score)
-            }
+    func getAllScores(completion: @escaping (Result<[CoreCourseScore], CourseScoreError>) -> Void) {
+        let request = CoreCourseScore.fetchRequest()
+        do {
+            var coreCourseList = try persistenceController.container.viewContext.fetch(request)
+            completion(.success(coreCourseList))
+        } catch {
+            print("fetch Person error: \(error)")
+            completion(.failure(.dataNotFound))
         }
-        return score
     }
     
     func deleteScore(
@@ -64,6 +74,34 @@ struct CourseScoreModel {
             completion(.success(true))
         } catch {
             completion(.failure(.failToSave))
+        }
+    }
+    
+    func deleteScoreById(
+        id: String,
+        completion: @escaping (Result<Bool, CourseScoreError>) -> Void
+    ) {
+        getAllScores { res in
+            switch res {
+            case .success(let courseScoreList):
+                for courseScore in courseScoreList {
+                    if courseScore.courseId == id {
+                        deleteScore(courseScore) { res in
+                            print(res)
+                        }
+                    }
+                }
+                
+                do {
+                    try saveContext()
+                    completion(.success(true))
+                } catch {
+                    completion(.failure(.failToSave))
+                }
+            case .failure(let failure):
+                print("fail to delete by id \(failure)")
+                completion(.failure(.failToDelete))
+            }
         }
     }
     
