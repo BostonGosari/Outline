@@ -47,6 +47,23 @@ struct UserDataModel: UserDataModelProtocol {
         }
     }
     
+    func getFreeRunCount(completion: @escaping (Result<Int, CoreDataError>) -> Void) {
+        let request = CoreRunningRecord.fetchRequest()
+        do {
+            var runningRecords = try persistenceController.container.viewContext.fetch(request)
+            var freeRunCount: Int = 0
+            for record in runningRecords {
+                if let runningType = record.runningType, runningType == "free" {
+                    freeRunCount += 1
+                }
+            }
+            completion(.success(freeRunCount))
+        } catch {
+            print("fetch Person error: \(error)")
+            completion(.failure(.dataNotFound))
+        }
+    }
+    
     func createRunningRecord(
         record: RunningRecord,
         completion: @escaping (Result<Bool, CoreDataError>) -> Void
