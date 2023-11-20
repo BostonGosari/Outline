@@ -24,7 +24,7 @@ struct MetricsView: View {
                     Spacer()
                     VStack {
                         Text("\((workoutManager.distance/1000).formatted(.number.precision(.fractionLength(2))))")
-                            .font(.system(size: 28).weight(.semibold))
+                            .font(.customLargeTitle)
                             .foregroundColor(.white)
                         Text("킬로미터")
                             .font(.customBody)
@@ -35,7 +35,7 @@ struct MetricsView: View {
                     Spacer()
                     VStack {
                         Text(workoutManager.pace > 0 ? workoutManager.pace.formattedAveragePace() : "-’--’’")
-                            .font(.system(size: 28).weight(.semibold))
+                            .font(.customLargeTitle)
                             .foregroundColor(.white)
                         Text("페이스")
                             .font(.customBody)
