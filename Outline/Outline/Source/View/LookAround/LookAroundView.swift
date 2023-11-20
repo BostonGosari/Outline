@@ -9,16 +9,22 @@ import SwiftUI
 
 struct LookAroundView: View {
     @AppStorage("authState") var authState: AuthState = .logout
+    var type: LookArroundType
     
     var body: some View {
         VStack {
-            Spacer()
             Image("lookAroundImage")
-                .offset(x: 22, y: 16)
+                .resizable()
+                .scaledToFit()
+                .frame(height: 120)
+                .scaleEffect(1.6)
+                .padding(.leading, 40)
+                .offset(y: 10)
+                .padding(.bottom, 16)
             Text("앗! 회원가입이 필요해요.")
                 .font(.customTitle2)
                 .padding(.bottom, 8)
-            Text("OUTLINE에 가입하면 내가 그린\n러닝 기록을 확인할 수 있어요!")
+            Text(type.subTitle)
                 .font(.customSubbody)
                 .padding(.bottom, 32)
                 .multilineTextAlignment(.center)
@@ -26,52 +32,9 @@ struct LookAroundView: View {
             CompleteButton(text: "가입하러 가기", isActive: true) {
                 authState = .logout
             }
-            .frame(width: 262, height: 55) // CompleteButton안의 horizental padding만큼 더했습니다.
-            
-            Spacer()
+            .padding(.horizontal, 14)            
         }
         .padding(.bottom, 100)
-    }
-}
-
-struct LookAroundModalView: View {
-    @AppStorage("authState") var authState: AuthState = .logout
-    var completion: () -> Void = {}
-    
-    var body: some View {
-        VStack(spacing: 0) {
-            Text("앗! 회원가입이 필요해요.")
-                .font(.customTitle2)
-                .padding(.top, 48)
-                .padding(.bottom, 8)
-            Text("OUTLINE에 가입하면 내가 그린\n러닝 기록을 확인할 수 있어요!")
-                .font(.customSubbody)
-                .multilineTextAlignment(.center)
-                .foregroundStyle(.gray300)
-                .padding(.bottom, 8)
-            Image("lookAroundImage")
-                .resizable()
-                .scaledToFit()
-                .frame(width: 170, height: 170)
-                .offset(x: 26)
-                .padding(-20)
-            CompleteButton(text: "가입하러 가기", isActive: true) {
-                authState = .logout
-            }
-            Button {
-                completion()
-            } label: {
-                Text("계속 둘러보기")
-                    .frame(height: 55)
-                    .foregroundStyle(.customWhite)
-                    .font(.customButton)
-            }
-            .padding(.top, 8)
-            Spacer()
-        }
-        .presentationDetents([.height(448)])
-        .presentationCornerRadius(35)
-        .interactiveDismissDisabled()
     }
 }
 
@@ -108,5 +71,5 @@ struct LookAroundPopupView: View {
 }
 
 #Preview {
-    LookAroundView()
+    LookAroundView(type: .running)
 }
