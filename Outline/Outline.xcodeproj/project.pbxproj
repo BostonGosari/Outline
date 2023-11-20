@@ -876,10 +876,10 @@
 			children = (
 				F0492E222ADD545200F6EADD /* CourseListWatchView.swift */,
 				2930EDC12AF408EC007FD141 /* CourseDetailView.swift */,
+				2930EDBC2AF3FD97007FD141 /* CountDownView.swift */,
 				F0492E202ADD52E900F6EADD /* WatchTabView.swift */,
 				F0864A382ADD6CFA00498DBA /* MapWatchView.swift */,
 				BB1D53422ADE9C7D0073771F /* ControlsView.swift */,
-				2930EDBC2AF3FD97007FD141 /* CountDownView.swift */,
 				BB1D53472ADE9D770073771F /* MetricsView.swift */,
 				BB1D534B2ADEA6F90073771F /* SummaryView.swift */,
 				BB1D53492ADE9DC40073771F /* ElapsedTimeView.swift */,

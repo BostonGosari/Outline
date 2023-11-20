@@ -20,6 +20,7 @@ class GPSArtHomeViewModel: NSObject, CLLocationManagerDelegate, ObservableObject
     @Published var courses: AllGPSArtCourses = []
     @Published var recommendedCoures: [CourseWithDistance] = []
     @Published var withoutRecommendedCourses: [CourseWithDistance] = []
+    @Published private var watchCourses: [GPSArtCourse] = []
     
     private let courseModel = CourseModel()
     private let locationManager = CLLocationManager()
@@ -35,8 +36,8 @@ class GPSArtHomeViewModel: NSObject, CLLocationManagerDelegate, ObservableObject
             switch result {
             case .success(let courseList):
                 self.courses = courseList
-                self.watchConnectivityManager.sendGPSArtCoursesToWatch(self.courses)
                 self.fetchRecommendedCourses()
+                self.watchConnectivityManager.sendGPSArtCoursesToWatch(self.watchCourses)
             case .failure(let error):
                 print(error)
             }
@@ -62,6 +63,11 @@ class GPSArtHomeViewModel: NSObject, CLLocationManagerDelegate, ObservableObject
             
             // 거리에 따라 배열을 정렬
             courseDistances.sort { $0.distance < $1.distance }
+            
+            // 워치에 보내는 코스
+            for courseDistance in courseDistances {
+                watchCourses.append(courseDistance.course)
+            }
             
             // 가장 가까운 세 개의 코스와 그 외의 코스로 분리
             self.recommendedCoures = Array(courseDistances.prefix(3))

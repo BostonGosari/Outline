@@ -11,9 +11,8 @@ struct WatchTabView: View {
     @Environment(\.isLuminanceReduced) var isLuminanceReduced
     @StateObject var workoutManager = WatchWorkoutManager.shared
     @StateObject var watchRunningManager = WatchRunningManager.shared
-    @State private var selection: Tab = .metrics
     
-    @State private var mapWatchView = MapWatchView()
+    @State private var selection: Tab = .metrics
     @State private var isMapLoaded = false
         
     enum Tab {
@@ -30,8 +29,6 @@ struct WatchTabView: View {
                 MetricsView()
                     .tag(Tab.metrics)
             }
-            .toolbarBackground(.hidden, for: .navigationBar)
-            .tabViewStyle(PageTabViewStyle(indexDisplayMode: isLuminanceReduced ? .never : .automatic))
             .onChange(of: workoutManager.running) { _, newValue in
                 withAnimation {
                     if newValue {
