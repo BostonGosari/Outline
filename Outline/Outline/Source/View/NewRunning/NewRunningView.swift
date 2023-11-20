@@ -73,10 +73,18 @@ extension NewRunningView {
                     .foregroundStyle(.thinMaterial)
                     .ignoresSafeArea()
                     .overlay(alignment: .bottom) {
-                        Capsule()
-                            .frame(width: 40, height: 3)
-                            .padding(.bottom, 9)
-                            .foregroundStyle(.gray600)
+                        if navigationTranslation + navigationSheetHeight > 10 {
+                            Image(systemName: "chevron.up")
+                                .resizable()
+                                .frame(width: 40, height: 10)
+                                .foregroundStyle(Color.gray600)
+                                .padding(.bottom, 16)
+                        } else {
+                            Capsule()
+                                .frame(width: 40, height: 3)
+                                .padding(.bottom, 9)
+                                .foregroundStyle(.gray600)
+                        }
                     }
             }
             .zIndex(1)
@@ -222,16 +230,16 @@ extension NewRunningView {
             .onChanged { value in
                 let translationY = value.translation.height
                 if navigationSheetHeight == 0 {
-                    navigationTranslation = min(max(translationY, -5), 340)
+                    navigationTranslation = min(max(translationY, -5), 240)
                 } else {
-                    navigationTranslation = max(min(translationY, 40), -310)
+                    navigationTranslation = max(min(translationY, 40), -210)
                 }
             }
             .onEnded { value in
                 let translationY = value.translation.height
                 withAnimation(.bouncy) {
                     if translationY > 0 {
-                        navigationSheetHeight = 300
+                        navigationSheetHeight = 160
                     } else {
                         navigationSheetHeight = 0
                     }
@@ -242,7 +250,7 @@ extension NewRunningView {
                 .onEnded { _ in
                     withAnimation {
                         if navigationSheetHeight == 0 {
-                            navigationSheetHeight = 300
+                            navigationSheetHeight = 160
                         } else {
                             navigationSheetHeight = 0
                         }

@@ -33,11 +33,11 @@ struct NewRunningMapView: View {
                 MapPolyline(coordinates: userLocations)
                     .stroke(.customPrimary, style: StrokeStyle(lineWidth: 5, lineCap: .round, lineJoin: .round))
                 
-                if let point = locationManager.currentDirection {
-                    Annotation("point", coordinate: CLLocationCoordinate2D(latitude: point.latitude, longitude: point.longitude)) {
-                        Circle()
-                    }
+                // Test
+                Annotation("point", coordinate: locationManager.nextLocation) {
+                    Circle()
                 }
+                
             }
             .mapControlVisibility(.hidden)
             .onAppear {

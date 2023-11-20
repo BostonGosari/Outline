@@ -46,11 +46,16 @@ struct NewRunningNavigationView: View {
                         .padding(.leading)
                         .padding(.trailing, 5)
                     VStack(alignment: .leading) {
-                        Text(nextDirection)
-                            .font(.customTitle2)
-//                        Text("포항공과대학교 C5")
-//                            .font(.customSubtitle)
-//                            .foregroundStyle(.gray500)
+                        if nextDirection == "직진" {
+                            Text("경로를 따라 계속 이동")
+                                .font(.customTitle2)
+                        } else {
+                            Text(nextDirection)
+                                .font(.customTitle2)
+                            Text("포항공과대학교 C5")
+                                .font(.customSubtitle)
+                                .foregroundStyle(.gray500)
+                        }
                     }
                 }
             }

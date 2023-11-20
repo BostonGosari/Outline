@@ -11,10 +11,12 @@ import SwiftUI
 class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     @Published var userLocations: [CLLocationCoordinate2D]
     @Published var isRunning: Bool
-    @Published var currentDirection: Route?
     @Published var distance = 0.0
     @Published var direction = ""
     @Published var nextDirection = ""
+    
+    //Test용
+    @Published var nextLocation = CLLocationCoordinate2D()
     
     private var locationManager = CLLocationManager()
     private var navigationDatas = [Route]()
@@ -52,13 +54,8 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
             print("JSON 파싱 에러: \(error.localizedDescription)")
         }
         
-        currentDirection = Route(
-            nextDirection: "직진",
-            alertMessage: "",
-            longitude: navigationDatas[index].longitude,
-            latitude: navigationDatas[index].latitude,
-            distance: 0
-        )
+        // Test
+        nextLocation = CLLocationCoordinate2D(latitude: navigationDatas[1].latitude, longitude: navigationDatas[1].longitude)
     }
     
     private func checkDistance(_ location: CLLocationCoordinate2D) {
@@ -72,44 +69,26 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
             if nextDistance <= navigationDatas[index+1].distance-5 {
                 index += 1
                 checkNextIndex = false
-                
                 distance = 0
-                
-                currentDirection = Route(
-                    nextDirection: "직진",
-                    alertMessage: "",
-                    longitude: navigationDatas[index].longitude,
-                    latitude: navigationDatas[index].latitude,
-                    distance: 0
-                )
-                direction = "직진"
-                nextDirection = "\(Int(navigationDatas[index].distance))미터 후 \(navigationDatas[index].nextDirection)"
+                direction = "경로를 따라 계속 이동"
+                nextDirection = "\(Int(navigationDatas[index].distance)) \(navigationDatas[index].nextDirection)"
+                nextLocation = CLLocationCoordinate2D(latitude: navigationDatas[index].latitude, longitude: navigationDatas[index].longitude)
             }
         } else {
-            if distance <= 10 && index+1 < navigationDatas.count {
-                checkNextIndex = true
+            if index+1 < navigationDatas.count {
+                if distance <= 10 {
+                    checkNextIndex = true
+                } else if distance <= 30 {
+                    direction = navigationDatas[index].nextDirection
+                    nextDirection = "경로를 따라 계속 이동"
+                } else {
+                    distance = 0
+                    direction = "경로를 따라 계속 이동"
+                    nextDirection = "\(Int(navigationDatas[index].distance)) \(navigationDatas[index].nextDirection)"
+                }
             } else if distance <= 30 {
-                currentDirection = Route(
-                    nextDirection: navigationDatas[index].nextDirection,
-                    alertMessage: navigationDatas[index].alertMessage,
-                    longitude: navigationDatas[index].longitude,
-                    latitude: navigationDatas[index].latitude,
-                    distance: navigationDatas[index].distance
-                )
-                direction = navigationDatas[index].nextDirection
-                nextDirection = "직진"
-            } else {
-                distance = 0
-                currentDirection = Route(
-                    nextDirection: "직진",
-                    alertMessage: "",
-                    longitude: navigationDatas[index].longitude,
-                    latitude: navigationDatas[index].latitude,
-                    distance: 0
-                )
-                direction = "직진"
-                
-                nextDirection = "\(Int(navigationDatas[index].distance))미터 후 \(navigationDatas[index].nextDirection)"
+                direction = "도착지점이 근처에 있어요!"
+                nextDirection = ""
             }
         }
     }
@@ -119,13 +98,6 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
             let currentLocation = locations.last?.coordinate {
             checkDistance(currentLocation)
             userLocations.append(currentLocation)
-        }
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didExitRegion region: CLRegion) {
-        if index+1 < navigationDatas.count {
-            index += 1
-            currentDirection = navigationDatas[index]
         }
     }
 }
