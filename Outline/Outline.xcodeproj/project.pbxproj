@@ -106,8 +106,6 @@
 		954CB2BA2AE654BA005EB2E9 /* NotificationAuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954CB2B92AE654BA005EB2E9 /* NotificationAuthView.swift */; };
 		954FFF782AE132D100D27537 /* CourseDataUploadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954FFF772AE132D100D27537 /* CourseDataUploadManager.swift */; };
 		9572A2092B02563900E653AB /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 9572A2082B02563900E653AB /* Secrets.xcconfig */; };
-		9582405D2B09EAAD00105FAE /* CategoryTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9582405C2B09EAAD00105FAE /* CategoryTestView.swift */; };
-		958240602B09F2C500105FAE /* CategoryTestViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9582405F2B09F2C500105FAE /* CategoryTestViewModel.swift */; };
 		959BB20E2AEE380200B5B10B /* KakaoSDKAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 959BB20D2AEE380200B5B10B /* KakaoSDKAuth */; };
 		959BB2102AEE380200B5B10B /* KakaoSDKCommon in Frameworks */ = {isa = PBXBuildFile; productRef = 959BB20F2AEE380200B5B10B /* KakaoSDKCommon */; };
 		959BB2122AEE380200B5B10B /* KakaoSDKUser in Frameworks */ = {isa = PBXBuildFile; productRef = 959BB2112AEE380200B5B10B /* KakaoSDKUser */; };
@@ -303,8 +301,6 @@
 		954CB2B92AE654BA005EB2E9 /* NotificationAuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationAuthView.swift; sourceTree = "<group>"; };
 		954FFF772AE132D100D27537 /* CourseDataUploadManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseDataUploadManager.swift; sourceTree = "<group>"; };
 		9572A2082B02563900E653AB /* Secrets.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
-		9582405C2B09EAAD00105FAE /* CategoryTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTestView.swift; sourceTree = "<group>"; };
-		9582405F2B09F2C500105FAE /* CategoryTestViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTestViewModel.swift; sourceTree = "<group>"; };
 		959D90602ADA3A1000748BFB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		95A01E162AEE3E990093D9C0 /* KakaoAuthModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoAuthModel.swift; sourceTree = "<group>"; };
 		95A01E1B2AEE7A0A0093D9C0 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
@@ -502,15 +498,6 @@
 				29EC2ED32AEB30430033446C /* CourseAnalyzeTest.swift */,
 			);
 			path = CourseAnalyzer;
-			sourceTree = "<group>";
-		};
-		9582405E2B09F2A900105FAE /* CourseCategory */ = {
-			isa = PBXGroup;
-			children = (
-				9582405C2B09EAAD00105FAE /* CategoryTestView.swift */,
-				9582405F2B09F2C500105FAE /* CategoryTestViewModel.swift */,
-			);
-			path = CourseCategory;
 			sourceTree = "<group>";
 		};
 		95A01E182AEE76510093D9C0 /* Auth */ = {
@@ -743,7 +730,6 @@
 		F0AC8AFA2AD963600061612C /* View */ = {
 			isa = PBXGroup;
 			children = (
-				9582405E2B09F2A900105FAE /* CourseCategory */,
 				BB44B16C2B047242000462CA /* Accuracy */,
 				2921AFFC2B012DBF00533A83 /* NewRunning */,
 				95A01E392AF2B70F0093D9C0 /* LookAround */,
@@ -1229,11 +1215,9 @@
 				295232FA2AEED0630020EAFA /* BigCardView.swift in Sources */,
 				F096974D2ADBDBB000C38AF4 /* CardDetailView.swift in Sources */,
 				0EE92E7D2AE02DDC003192FF /* FreeRunningHomeView.swift in Sources */,
-				9582405D2B09EAAD00105FAE /* CategoryTestView.swift in Sources */,
 				29FEDC5E2AED81A800C1F80B /* Shimmer.swift in Sources */,
 				2921AFFE2B012DD100533A83 /* NewRunningView.swift in Sources */,
 				29CC19A42AE95F2300B79610 /* RunningStartManager.swift in Sources */,
-				958240602B09F2C500105FAE /* CategoryTestViewModel.swift in Sources */,
 				F05C7D562ADC565E006842DB /* PreferenceKey.swift in Sources */,
 				0E9A5D3F2AE058D500C19FF3 /* ShareMainView.swift in Sources */,
 				0E4291602B03CF3100EE75F5 /* LocationManager.swift in Sources */,
