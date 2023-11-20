@@ -10,14 +10,14 @@ import SwiftUI
 enum CardType {
     case freeRun
     case nice
-    case good
+    case great
     case excellent
     
     var cardFrondSideImage: String {
         switch self {
         case .nice, .freeRun:
             "NormalCardFrontSide"
-        case .good, .excellent:
+        case .great, .excellent:
             "CardFrontSide"
         }
     }
@@ -26,14 +26,14 @@ enum CardType {
         switch self {
         case .freeRun, .nice:
             "NormalCardBackSide"
-        case .good, .excellent:
+        case .great, .excellent:
             "CardBackSide"
         }
     }
     
     var hologramImage: String {
         switch self {
-        case .freeRun, .nice, .good:
+        case .freeRun, .nice, .great:
             "Hologram1"
         case .excellent:
             "Hologram2"

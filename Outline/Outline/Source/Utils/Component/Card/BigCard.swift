@@ -207,7 +207,7 @@ final class MotionManager: ObservableObject {
 
 #Preview {
     BigCard(
-        cardType: .good,
+        cardType: .great,
         runName: "오리런",
         date: "2023.11.19",
         editMode: false,

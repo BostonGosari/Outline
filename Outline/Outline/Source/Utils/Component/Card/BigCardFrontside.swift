@@ -69,7 +69,7 @@ struct BigCardFrontside<Content: View>: View {
 
 #Preview {
     BigCardFrontside(
-        cardType: .good,
+        cardType: .great,
         runName: "돌고래런",
         date: "2023.11.19", 
         content: {

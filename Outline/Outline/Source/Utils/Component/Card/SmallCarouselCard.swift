@@ -81,7 +81,7 @@ struct SmallCarouselCard<Content: View>: View {
 }
 
 #Preview {
-    SmallCarouselCard(cardType: .good, runName: "돌고래런", date: "2023.11.19") {
+    SmallCarouselCard(cardType: .great, runName: "돌고래런", date: "2023.11.19") {
         Rectangle()
             .foregroundStyle(.gray)
     }
