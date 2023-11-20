@@ -33,4 +33,8 @@
         <relationship name="courseData" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CoreCourseData" inverseName="parentRecord" inverseEntity="CoreCourseData"/>
         <relationship name="healthData" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CoreHealthData" inverseName="recordHeathData" inverseEntity="CoreHealthData"/>
     </entity>
+    <entity name="CourseCountSet" representedClassName="CourseCountSet" syncable="YES" codeGenerationType="class">
+        <attribute name="courseId" attributeType="String"/>
+        <attribute name="score" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+    </entity>
 </model>
