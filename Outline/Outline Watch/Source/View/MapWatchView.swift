@@ -15,22 +15,12 @@ struct MapWatchView: View {
     
     var body: some View {
         Map(position: $position, interactionModes: .zoom) {
-            UserAnnotation(anchor: .center) { userlocation in
-                ZStack {
-                    Circle().foregroundStyle(.white).frame(width: 22)
-                    Circle().foregroundStyle(.customPrimary).frame(width: 17)
-                }
-                .onChange(of: userlocation.location) { _, userlocation in
-                    if let user = userlocation {
-                        runningManager.userLocations.append(user.coordinate)
-                    }
-                }
-            }
+            UserAnnotation()
             
             MapPolyline(coordinates: ConvertCoordinateManager.convertToCLLocationCoordinates(runningManager.startCourse.coursePaths))
                 .stroke(.white.opacity(0.5), style: StrokeStyle(lineWidth: 8, lineCap: .round, lineJoin: .round))
             
-            MapPolyline(coordinates: runningManager.userLocations)
+            MapPolyline(coordinates: locationManager.userLocations)
                 .stroke(.customPrimary, style: StrokeStyle(lineWidth: 8, lineCap: .round, lineJoin: .round))
         }
         .mapControlVisibility(.hidden)
