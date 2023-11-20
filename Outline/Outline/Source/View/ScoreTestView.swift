@@ -21,7 +21,14 @@ struct ScoreTestView: View {
                     Text("\(courseScore.courseId ?? "no id")")
                         .onTapGesture {
                             if let courseId = courseScore.courseId {
-                                self.savedScore = courseScoreModel.getScore(id: courseId)
+                                courseScoreModel.getScore(id: courseId) { result in
+                                    switch result {
+                                    case .success(let score):
+                                        self.savedScore = score
+                                    case .failure(let failure):
+                                        print("fail to get score \(failure)")
+                                    }
+                                }
                             }
                         }
                     Text("\(courseScore.score)")
