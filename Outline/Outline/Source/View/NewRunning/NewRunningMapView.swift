@@ -9,8 +9,8 @@ import MapKit
 import SwiftUI
 
 struct NewRunningMapView: View {
-    @StateObject var runningStartManager = RunningStartManager.shared
-    @StateObject var runningDataManager = RunningDataManager.shared
+    @StateObject private var runningStartManager = RunningStartManager.shared
+    @StateObject private var runningDataManager = RunningDataManager.shared
     
     @State private var showBigGuide = false
     
