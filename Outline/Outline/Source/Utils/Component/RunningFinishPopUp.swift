@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CoreMotion
 
 enum ScoreState {
     case freerun
@@ -18,7 +19,10 @@ struct RunningFinishPopUp: View {
     @StateObject private var runningStartManager = RunningStartManager.shared
     @Binding var isPresented: Bool
     @Binding var score: Int
+    @Binding var userLocations: [CLLocationCoordinate2D]
     @State private var counter = 0
+    
+    @State private var progress = 0.0
     
     var scoreState: ScoreState {
         if score == -1 {
@@ -65,16 +69,17 @@ struct RunningFinishPopUp: View {
                     }
                 }
                 .padding(EdgeInsets(top: 42, leading: 16, bottom: 32, trailing: 16))
-                .frame(maxWidth: .infinity, maxHeight: scoreState == .freerun ? 505 : 600)
-                .foregroundColor(.clear)
                 .background(.black70)
                 .cornerRadius(25)
+                .frame(maxWidth: .infinity, maxHeight: scoreState == .freerun ? 505 : 600)
+                .padding(.horizontal, 16)
+                .foregroundColor(.clear)
+              
                 .overlay(
                     RoundedRectangle(cornerRadius: 25)
                         .inset(by: 0.5)
                         .stroke(.customPrimary)
                         .padding(.horizontal, 16)
-                        .frame(width: .infinity, height: scoreState == .freerun ? 505 : 600)
                 )
                 
                 if score > 50 {
@@ -121,12 +126,25 @@ struct RunningFinishPopUp: View {
                 .font(.customSubbody)
                 .foregroundStyle(.gray300)
                 .padding(.top, 8)
+            Spacer()
+            PathGenerateManager.caculateLines(width: 200, height: 200, coordinates: userLocations)
+                .trim(from: 0, to: progress)
+                .stroke(style: StrokeStyle(lineWidth: 8, lineCap: .round, lineJoin: .round))
+                .scaledToFit()
+                .foregroundStyle(.customPrimary)
+                .frame(width: 200, height: 200)
+                .onAppear {
+                    withAnimation(Animation.easeInOut(duration: 2).repeatForever(autoreverses: false)) {
+                        progress = 1.0
+                    }
+                }
+            Spacer()
         }
     }
     
     private func freerunContent() -> some View {
         VStack(spacing: 0) {
-            Text(scoreState.imageName)
+            Text(scoreState.title)
                 .font(.customTitle2)
                 .foregroundStyle(.customWhite)
                 .padding(.top, 24)
@@ -180,5 +198,10 @@ extension ScoreState {
 }
 
 #Preview {
-    RunningFinishPopUp(isPresented: .constant(true), score: .constant(50))
+    RunningFinishPopUp(isPresented: .constant(true), score: .constant(60), userLocations: .constant([
+        CLLocationCoordinate2D(latitude: 37.8325, longitude: -122.4794),
+        CLLocationCoordinate2D(latitude: 37.8311, longitude: -122.4839),
+        CLLocationCoordinate2D(latitude: 37.8281, longitude: -122.4859)
+        ])
+    )
 }
