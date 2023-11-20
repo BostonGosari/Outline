@@ -14,6 +14,7 @@ struct CardDetailView: View {
     
     @State private var isUnlocked = false
     @State private var showAlert = false
+    @State private var showNeedLoginSheet = false
     @StateObject var runningStartManager = RunningStartManager.shared
     private let locationManager = CLLocationManager()
     @Environment(\.dismiss) var dismiss
@@ -82,93 +83,24 @@ struct CardDetailView: View {
             .scrollDisabled(!showDetailView)
             .ignoresSafeArea(edges: .top)
             .statusBarHidden()
-            
-            switch authState {
-            case .lookAround:
-                ZStack {
-                    Color.customBlack.opacity(0.7)
-                    VStack {
-                        Spacer()
-                        LookAroundModalView {
-                            showDetailView = false
-                        }
-                    }
-                    .frame(height: UIScreen.main.bounds.height / 2)
-                    .frame(maxWidth: .infinity)
-                    .background {
-                        RoundedRectangle(cornerRadius: 30, style: .continuous)
-                            .stroke(Color.customPrimary, lineWidth: 2)
-                        RoundedRectangle(cornerRadius: 30, style: .continuous)
-                            .foregroundStyle(Color.gray900)
-                    }
-                    .frame(maxHeight: .infinity, alignment: .bottom)
-                }
-            default:
-                EmptyView()
+        }
+        .sheet(isPresented: $showAlert) {
+            progress = 0.0
+        } content: {
+            GuideToFreeRunningSheet {
+                showDetailView = false
+                runningStartManager.start = true
+                runningStartManager.startFreeRun()
             }
-                        
-            ZStack {
-                if showAlert {
-                    Color.black.opacity(0.5)
-                        .onTapGesture {
-                            withAnimation {
-                                showAlert = false
-                                progress = 0.0
-                            }
-                        }
-                }
-                VStack(spacing: 10) {
-                    Text("자유코스로 변경할까요?")
-                        .font(.title2)
-                        .fontWeight(.semibold)
-                        .padding(.top)
-                    Text("앗! 현재 루트와 멀리 떨어져 있어요.")
-                        .font(.customSubbody)
-                        .foregroundColor(.gray300)
-                    Image("AnotherLocation")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 120)
-                    Button {
-                        showAlert = false
-                        showDetailView = false
-                        runningStartManager.start = true
-                        runningStartManager.startFreeRun()
-                    } label: {
-                        Text("자유코스로 변경하기")
-                            .font(.customButton)
-                            .fontWeight(.medium)
-                            .foregroundStyle(Color.customBlack)
-                            .padding()
-                            .frame(maxWidth: .infinity)
-                            .background {
-                                RoundedRectangle(cornerRadius: 15, style: .continuous)
-                                    .foregroundStyle(Color.customPrimary)
-                            }
-                    }
-                    .padding()
-                    Button {
-                        withAnimation {
-                            showAlert = false
-                            showDetailView = false
-                        }
-                    } label: {
-                        Text("홈으로 돌아가기")
-                            .font(.customButton)
-                            .fontWeight(.medium)
-                            .foregroundStyle(Color.customWhite)
-                    }
-                }
-                .frame(height: UIScreen.main.bounds.height / 2)
-                .frame(maxWidth: .infinity)
-                .background {
-                    RoundedRectangle(cornerRadius: 30, style: .continuous)
-                        .stroke(Color.customPrimary, lineWidth: 2)
-                    RoundedRectangle(cornerRadius: 30, style: .continuous)
-                        .foregroundStyle(Color.gray900)
-                }
-                .frame(maxHeight: .infinity, alignment: .bottom)
-                .offset(y: showAlert ? 0 : UIScreen.main.bounds.height / 2 + 2)
+        }
+        .sheet(isPresented: $showNeedLoginSheet) {
+            NeedLoginSheet(type: .running) {
+                showDetailView = false
+            }
+        }
+        .onAppear {
+            if authState == .lookAround {
+                showNeedLoginSheet = true
             }
         }
     }
@@ -225,7 +157,6 @@ struct CardDetailView: View {
             .onChange(of: isUnlocked) { _, newValue in
                 if newValue {
                     runningStartManager.checkAuthorization()
-
                     if runningStartManager.isHealthAuthorized {
                         if runningStartManager.isLocationAuthorized {
                             let course = selectedCourse.course.coursePaths

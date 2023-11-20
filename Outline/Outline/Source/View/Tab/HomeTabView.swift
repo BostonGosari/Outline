@@ -8,8 +8,6 @@
 import SwiftUI
 
 struct HomeTabView: View {
-    @AppStorage("authState") var authState: AuthState = .logout
-    
     @StateObject private var runningManager = RunningStartManager.shared
     @StateObject var runningDataManager = RunningDataManager.shared
     @StateObject var watchConnectivityManager = WatchConnectivityManager.shared
@@ -26,21 +24,11 @@ struct HomeTabView: View {
                         Group {
                             switch selectedTab {
                             case .freeRunning:
-                                if authState == .lookAround {
-                                    LookAroundView()
-                                        .navigationTitle("자유런")
-                                } else {
-                                    FreeRunningHomeView()
-                                }
+                                FreeRunningHomeView()
                             case .GPSArtRunning:
                                 GPSArtHomeView(showDetailView: $showDetailView)
                             case .myRecord:
-                                if authState == .lookAround {
-                                    LookAroundView()
-                                        .navigationTitle("기록")
-                                } else {
-                                    RecordView()
-                                }
+                                RecordView()
                             }
                         }
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -49,10 +37,9 @@ struct HomeTabView: View {
                             .opacity(showDetailView ? 0 : 1)
                             .ignoresSafeArea()
                     }
-                    
-                    if let permissionType = runningManager.permissionType {
-                        PermissionSheet(showPermissionSheet: $runningManager.showPermissionSheet, permissionType: permissionType)
-                    }
+                }
+                .sheet(isPresented: $runningManager.showPermissionSheet) {
+                    PermissionSheet(permissionType: runningManager.permissionType)
                 }
                 .overlay {
                     if runningDataManager.endWithoutSaving {
