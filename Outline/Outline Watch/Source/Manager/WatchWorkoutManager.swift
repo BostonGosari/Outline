@@ -9,7 +9,6 @@ import Foundation
 import HealthKit
 
 class WatchWorkoutManager: NSObject, ObservableObject {
-    private let watchConnectivityManager = WatchConnectivityManager()
     static let shared = WatchWorkoutManager()
     
     var selectedWorkout: HKWorkoutActivityType? {
@@ -89,18 +88,10 @@ class WatchWorkoutManager: NSObject, ObservableObject {
     
     func togglePause() {
         if running == true {
-            self.pause()
+            session?.pause()
         } else {
-            resume()
+            session?.resume()
         }
-    }
-    
-    func pause() {
-        session?.pause()
-    }
-    
-    func resume() {
-        session?.resume()
     }
     
     func endWorkout() {
@@ -197,8 +188,6 @@ extension WatchWorkoutManager: HKWorkoutSessionDelegate {
                         from fromState: HKWorkoutSessionState, date: Date) {
         DispatchQueue.main.async {
             self.running = toState == .running
-            // 러닝 세션의 상태를 iOS 앱으로 전달
-            self.watchConnectivityManager.sendRunningSessionStateToPhone(self.running)
         }
         
         // Wait for the session to transition states before ending the builder.
@@ -231,7 +220,6 @@ extension WatchWorkoutManager: HKLiveWorkoutBuilderDelegate {
             }
             
             let statistics = workoutBuilder.statistics(for: quantityType)
-            
             // Update the published values.
             updateForStatistics(statistics)
         }

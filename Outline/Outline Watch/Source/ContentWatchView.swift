@@ -15,15 +15,15 @@ struct ContentWatchView: View {
     var body: some View {
         ZStack {
             CourseListWatchView()
-                .tint(.customPrimary)
             if runningManager.startRunning {
                 CountDownView()
                     .sheet(isPresented: $workoutManager.showSummaryView) {
                         SummaryView()
-                            .toolbar(.hidden, for: .automatic)
+                            .toolbar(.hidden, for: .navigationBar)
                     }
             }
         }
+        .tint(.customPrimary)
     }
 }
 

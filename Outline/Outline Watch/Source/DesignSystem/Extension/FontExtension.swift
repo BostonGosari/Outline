@@ -8,15 +8,15 @@
 import SwiftUI
 
 extension Font {
-    static let customHeadline = Font.custom("SF Pro Display", size: 40, relativeTo: .largeTitle)
-    static let customSubHeadline = Font.custom("SF Pro Display", size: 32, relativeTo: .title)
-    static let customLargeTitle = Font.custom("SF Pro Display", size: 24, relativeTo: .headline)
-    static let customTitle = Font.custom("SF Pro Display", size: 21, relativeTo: .headline)
-    static let customSubTitle = Font.custom("SF Pro Display", size: 14, relativeTo: .subheadline)
-    static let customButton = Font.custom("SF Pro Display", size: 13, relativeTo: .body)
-    static let customBody = Font.custom("SF Pro Display", size: 13, relativeTo: .body)
-    static let customCaption = Font.custom("SF Pro Display", size: 11, relativeTo: .caption)
-    static let customCaption2 = Font.custom("SF Pro Display", size: 10, relativeTo: .caption2)
-    static let customCaption3 = Font.custom("SF Pro Display", size: 8, relativeTo: .caption2)
-    static let customSystemImage = Font.custom("SF Pro Display", size: 20, relativeTo: .title)
+    static let customHeadline = Font.custom("SFProDisplay-Bold", size: 40)
+    static let customSubHeadline = Font.custom("SFProDisplay-Medium", size: 32)
+    static let customLargeTitle = Font.custom("SFProDisplay-Medium", size: 24)
+    static let customTitle = Font.custom("SFProDisplay-Regular", size: 21)
+    static let customSubTitle = Font.custom("SFProDisplay-Regular", size: 14)
+    static let customButton = Font.custom("SFProDisplay-Regular", size: 13)
+    static let customBody = Font.custom("SFProDisplay-Regular", size: 13)
+    static let customCaption = Font.custom("SFProDisplay-Regular", size: 11)
+    static let customCaption2 = Font.custom("SFProDisplay-Regular", size: 10)
+    static let customCaption3 = Font.custom("SFProDisplay-Regular", size: 8)
+    static let customSystemImage = Font.custom("SFProDisplay-Regular", size: 20)
 }

@@ -48,7 +48,6 @@ struct MetricsView: View {
             }
             .font(.system(.title, design: .rounded).monospacedDigit().lowercaseSmallCaps())
             .frame(maxWidth: .infinity)
-            .ignoresSafeArea(edges: .bottom)
         }
     }
 }

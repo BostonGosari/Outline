@@ -11,10 +11,10 @@ import UIKit
 struct ControlsView: View {
     
     @StateObject var workoutManager = WatchWorkoutManager.shared
-    @StateObject var watchConnectivityManager = WatchConnectivityManager.shared
+    @StateObject var connectivityManager = WatchConnectivityManager.shared
     @StateObject var watchRunningManager = WatchRunningManager.shared
     
-    @State private var showConfirmationSheet = false
+    @State private var showEndRunningSheet = false
     @State private var showEndWithoutSavingSheet = false
     @State private var buttonAnimation = false
     @State private var dataAnimation = false
@@ -24,8 +24,8 @@ struct ControlsView: View {
             HStack(spacing: 11) {
                 ControlButton(systemName: "stop.fill", foregroundColor: .white, backgroundColor: .white) {
                     if let builder = workoutManager.builder {
-                        if builder.elapsedTime > 30 {
-                            showConfirmationSheet = true
+                        if builder.elapsedTime > 3 {
+                            showEndRunningSheet = true
                         } else {
                             showEndWithoutSavingSheet = true
                         }
@@ -58,23 +58,23 @@ struct ControlsView: View {
             }
         }
         .scrollDisabled(workoutManager.running)
-        .overlay(alignment: .topTrailing) {
-            Text(workoutManager.running ? watchRunningManager.runningTitle : "일시 정지됨")
-                .foregroundStyle(.customPrimary)
-        }
-        .sheet(isPresented: $showConfirmationSheet) {
-            EndRunningSheet(text: "종료하시겠어요?") {
-                showConfirmationSheet = false
-                sendDataToPhone()
-                workoutManager.endWorkout()
+        .overlay {
+            if showEndRunningSheet {
+                EndRunningSheet(text: "종료하시겠어요?") {
+                    showEndRunningSheet = false
+                    sendDataToPhone()
+                    workoutManager.endWorkout()
+                }
             }
         }
-        .sheet(isPresented: $showEndWithoutSavingSheet) {
-            EndRunningSheet(text: "30초 이하는 기록되지 않아요.\n종료하시겠어요?") {
-                showEndWithoutSavingSheet = false
-                workoutManager.endWorkoutWithoutSummaryView()
-                watchRunningManager.startRunning = false
-                watchConnectivityManager.sendRunningSessionStateToPhone(false)
+        .overlay {
+            if showEndWithoutSavingSheet {
+                EndRunningSheet(text: "30초 이하는 기록되지 않아요.\n종료하시겠어요?") {
+                    showEndWithoutSavingSheet = false
+                    workoutManager.endWorkoutWithoutSummaryView()
+                    watchRunningManager.startRunning = false
+                    connectivityManager.sendRunningSessionStateToPhone(false)
+                }
             }
         }
     }
@@ -100,6 +100,6 @@ extension ControlsView {
         let courseData = CourseData(courseName: startCourse.courseName, runningLength: startCourse.courseLength, heading: startCourse.heading, distance: startCourse.distance, coursePaths: watchRunningManager.userLocations, runningCourseId: "", regionDisplayName: startCourse.regionDisplayName)
         let healthData = HealthData(totalTime: builder.elapsedTime, averageCadence: workoutManager.cadence, totalRunningDistance: workoutManager.distance, totalEnergy: workoutManager.calorie, averageHeartRate: workoutManager.heartRate, averagePace: workoutManager.averagePace, startDate: Date(), endDate: Date())
         
-        watchConnectivityManager.sendRunningRecordToPhone(RunningRecord(id: UUID().uuidString, runningType: watchRunningManager.runningType, courseData: courseData, healthData: healthData))
+        connectivityManager.sendRunningRecordToPhone(RunningRecord(id: UUID().uuidString, runningType: watchRunningManager.runningType, courseData: courseData, healthData: healthData))
     }
 }

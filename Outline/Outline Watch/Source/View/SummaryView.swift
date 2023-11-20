@@ -31,7 +31,9 @@ struct SummaryView: View {
         if isShowingFinishView {
             FinishWatchView(completionPercentage: 100)
                 .onAppear {
-                   scheduleTimerToHideFinishView()
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                        isShowingFinishView = false
+                    }
                 }
         } else {
             ScrollViewReader { proxy in
@@ -46,13 +48,15 @@ struct SummaryView: View {
                             progress = 1.0
                         }
                         .animation(.bouncy(duration: 3), value: progress)
-                    ConfettiWatchView()
+                        .overlay {
+                            ConfettiWatchView()
+                        }
                     Text("그림을 완성했어요!")
                         .padding(.vertical)
                     Text(NSNumber(value: workoutManager.builder?.elapsedTime ?? 0), formatter: timeFormatter)
                         .id(topID)
                         .foregroundStyle(.customPrimary)
-                        .font(.system(size: 40, weight: .bold))
+                        .font(.customHeadline)
                       
                     Text("총시간")
                         .font(.customSubTitle)
@@ -78,8 +82,14 @@ struct SummaryView: View {
                         dismiss()
                     } label: {
                         Text("완료")
+                            .frame(maxWidth: .infinity)
+                            .background {
+                                RoundedRectangle(cornerRadius: 20)
+                                    .frame(height: 48)
+                                    .foregroundStyle(.gray800)
+                            }
                     }
-                    .frame(maxWidth: .infinity)
+                    .buttonStyle(.plain)
                     .onAppear {
                         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                             withAnimation(.easeInOut(duration: 2)) {
@@ -90,14 +100,6 @@ struct SummaryView: View {
                 }
             }
         }
-    }
-    
-    private func scheduleTimerToHideFinishView() {
-           Timer.scheduledTimer(withTimeInterval: 3.0, repeats: false) { _ in
-               withAnimation {
-                   isShowingFinishView = false
-               }
-           }
     }
 }
 

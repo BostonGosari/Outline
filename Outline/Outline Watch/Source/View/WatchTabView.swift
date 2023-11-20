@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct WatchTabView: View {
-    @Environment(\.isLuminanceReduced) var isLuminanceReduced
     @StateObject var workoutManager = WatchWorkoutManager.shared
     @StateObject var watchRunningManager = WatchRunningManager.shared
     
@@ -38,11 +37,11 @@ struct WatchTabView: View {
                     }
                 }
             }
-            .onChange(of: isLuminanceReduced) { _, _ in
-                withAnimation {
-                    selection = .metrics
-                }
+            .navigationTitle {
+                Text(workoutManager.running ? watchRunningManager.runningTitle : "일시 정지됨")
+                    .foregroundStyle(.customPrimary)
             }
+            .navigationBarTitleDisplayMode(.inline)
         }
     }
 }

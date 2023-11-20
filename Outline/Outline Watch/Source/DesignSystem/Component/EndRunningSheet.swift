@@ -48,5 +48,6 @@ struct EndRunningSheet: View {
             }
             .buttonStyle(.plain)
         }
+        .toolbar(.hidden, for: .navigationBar)
     }
 }
