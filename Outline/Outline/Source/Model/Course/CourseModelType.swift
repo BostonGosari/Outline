@@ -136,8 +136,11 @@ struct Coordinate: Codable, Hashable {
 }
 
 struct Navigation: Codable, Hashable {
-    var distance: Int
-    var description: String
+    var distance: Double
+    var nextDirection: String
+    var longitude: Double
+    var latitude: Double
+    var alertMessage: String
 }
 
 struct HotSpot: Codable, Hashable {
