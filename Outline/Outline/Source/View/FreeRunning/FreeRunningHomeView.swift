@@ -51,8 +51,8 @@ struct FreeRunningHomeView: View {
                 if authState == .login {
                     cardView
                         .overlay {
-                            VStack(alignment: .leading) {
-                                Text("자유 코스")
+                            VStack(alignment: .leading, spacing: 0) {
+                                Text("새로운 러닝")
                                     .font(.customHeadline)
                                     .padding(.bottom, 8)
                                 HStack {
@@ -129,4 +129,8 @@ extension FreeRunningHomeView {
             }
         }
     }
+}
+
+#Preview {
+    FreeRunningHomeView()
 }
