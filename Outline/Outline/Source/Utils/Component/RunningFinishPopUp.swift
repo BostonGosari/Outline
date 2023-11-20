@@ -134,6 +134,7 @@ struct RunningFinishPopUp: View {
                 .foregroundStyle(.customPrimary)
                 .frame(width: 200, height: 200)
                 .onAppear {
+                    print("userLocations: \(userLocations)")
                     withAnimation(Animation.easeInOut(duration: 2).repeatForever(autoreverses: false)) {
                         progress = 1.0
                     }
