@@ -11,12 +11,12 @@ import MapKit
 struct MapWatchView: View {
     @StateObject private var runningManager = WatchRunningManager.shared
     @State private var position: MapCameraPosition = .userLocation(followsHeading: true, fallback: .automatic)
-    @GestureState private var isPressed = false
+    @State private var isTapped = false
     
     var userLocations: [CLLocationCoordinate2D]
     
     var body: some View {
-        Map(position: $position) {
+        Map(position: $position, interactionModes: []) {
             UserAnnotation()
             
             MapPolyline(coordinates: ConvertCoordinateManager.convertToCLLocationCoordinates(runningManager.startCourse.coursePaths))
@@ -28,39 +28,22 @@ struct MapWatchView: View {
         .mapControlVisibility(.hidden)
         .tint(.customPrimary)
         .overlay {
-            TabView {
-                smallNavigation
-                bigNavigation
+            if runningManager.runningType == .gpsArt {
+                NavigationTabView()
             }
-            .tabViewStyle(.verticalPage(transitionStyle: .blur))
         }
-    }
-    
-    var smallNavigation: some View {
-        HStack {
-            Image(systemName: "arrow.triangle.turn.up.right.diamond")
-                .font(.customLargeTitle)
-            Text("경로를 따라 계속 이동")
-                .font(.customSubTitle)
-        }
-        .padding(.top, 20)
-        .padding(.horizontal)
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .background {
-            RoundedRectangle(cornerRadius: 16)
-                .foregroundStyle(.ultraThinMaterial)
-                .ignoresSafeArea(edges: .bottom)
-        }
-        .frame(maxHeight: .infinity, alignment: .bottom)
-    }
-    
-    var bigNavigation: some View {
-        ZStack {
-            Rectangle()
-                .foregroundStyle(.ultraThinMaterial)
-                .ignoresSafeArea()
-            Text("hello")
-                .font(.customSubTitle)
+        .onTapGesture(count: 2) {
+            isTapped.toggle()
+            
+            withAnimation {
+                if isTapped {
+                    position = .camera(MapCamera(
+                        centerCoordinate: ConvertCoordinateManager.convertToCLLocationCoordinate(runningManager.startCourse.centerLocation),
+                        distance: 20000))
+                } else {
+                    position = .userLocation(followsHeading: true, fallback: .automatic)
+                }
+            }
         }
     }
 }
