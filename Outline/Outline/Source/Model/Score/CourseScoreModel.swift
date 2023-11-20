@@ -20,16 +20,38 @@ struct CourseScoreModel {
     
     let persistenceController = PersistenceController.shared
     
-    func createScore(courseId: String, score: Int, completion: @escaping (Result<Bool, CourseScoreError>) -> Void) {
-        let newCourseScore = CoreCourseScore(context: persistenceController.container.viewContext)
-        newCourseScore.setValue(courseId, forKey: "courseId")
-        newCourseScore.setValue(score, forKey: "score")
-        
-        do {
-            try saveContext()
-            completion(.success(true))
-        } catch {
-            completion(.failure(.failToSave))
+    func createOrUpdateScore(courseId: String, score: Int, completion: @escaping (Result<Bool, CourseScoreError>) -> Void) {
+        getScore(id: courseId) { result in
+            switch result {
+            case .success(let score):
+                if score == -1 {
+                    let newCourseScore = CoreCourseScore(context: persistenceController.container.viewContext)
+                    newCourseScore.setValue(courseId, forKey: "courseId")
+                    newCourseScore.setValue(score, forKey: "score")
+                } else {
+                    getAllScores { res in
+                        switch res {
+                        case .success(let coreCourseList):
+                            for courseScore in coreCourseList {
+                                if let scoreIdFineded = courseScore.courseId, scoreIdFineded == courseId {
+                                    courseScore.setValue(max(Int(courseScore.score), score), forKey: "score")
+                                }
+                            }
+                        case .failure(let failure):
+                            print("fail to get all courses \(failure)")
+                            completion(.failure(.dataNotFound))
+                        }
+                    }
+                }
+                do {
+                    try saveContext()
+                    completion(.success(true))
+                } catch {
+                    completion(.failure(.failToSave))
+                }
+            case .failure(let failure):
+                print("fail to get score \(failure)")
+            }
         }
     }
     
