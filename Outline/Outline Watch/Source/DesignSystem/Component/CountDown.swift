@@ -29,7 +29,7 @@ struct CountDown: View {
                 }
             }
             .scaledToFit()
-            .frame(height: 180)
+            .frame(height: 120)
         }
         .onAppear {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
@@ -44,7 +44,6 @@ struct CountDown: View {
         }
     }
 }
-
 
 #Preview {
     CountDown()

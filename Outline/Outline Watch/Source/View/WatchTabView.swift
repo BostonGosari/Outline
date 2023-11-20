@@ -9,7 +9,7 @@ import SwiftUI
 
 struct WatchTabView: View {
     @StateObject var workoutManager = WatchWorkoutManager.shared
-    @StateObject var watchRunningManager = WatchRunningManager.shared
+    @StateObject var runningManager = WatchRunningManager.shared
     
     @State private var selection: Tab = .metrics
     @State private var isMapLoaded = false
@@ -38,7 +38,7 @@ struct WatchTabView: View {
                 }
             }
             .navigationTitle {
-                Text(workoutManager.running ? watchRunningManager.runningTitle : "일시 정지됨")
+                Text(workoutManager.running ? runningManager.runningTitle : "일시 정지됨")
                     .foregroundStyle(.customPrimary)
             }
             .navigationBarTitleDisplayMode(.inline)

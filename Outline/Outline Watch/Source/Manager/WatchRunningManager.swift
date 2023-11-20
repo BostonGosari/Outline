@@ -27,7 +27,7 @@ class WatchRunningManager: ObservableObject {
         startCourse = GPSArtCourse()
         runningType = .free
         getFreeRunName()
-        runningTitle = "자유러닝"
+        runningTitle = "자유아트"
         startRunning = true
     }
     
