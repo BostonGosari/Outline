@@ -11,7 +11,7 @@ import UIKit
 
 struct CourseListWatchView: View {
     @StateObject var workoutManager = WatchWorkoutManager.shared
-    @StateObject var watchConnectivityManager = WatchConnectivityManager.shared
+    @StateObject var connectivityManager = WatchConnectivityManager.shared
     @StateObject var runningManager = WatchRunningManager.shared
     @StateObject var viewModel = CourseListWatchViewModel()
     
@@ -56,7 +56,7 @@ struct CourseListWatchView: View {
                     }
                     .padding(.bottom, 8)
                     
-                    if watchConnectivityManager.allCourses.isEmpty {
+                    if connectivityManager.allCourses.isEmpty {
                         Text("OUTLINE iPhone을\n실행해서 경로를 제공받으세요.")
                             .multilineTextAlignment(.center)
                             .font(.caption)
@@ -64,7 +64,7 @@ struct CourseListWatchView: View {
                             .padding(.top, 32)
                     }
                     
-                    ForEach(watchConnectivityManager.allCourses, id: \.id) {course in
+                    ForEach(connectivityManager.allCourses, id: \.id) {course in
                         Button {
                             if viewModel.isHealthAuthorized && viewModel.isLocationAuthorized {
                                 if runningManager.checkDistance(course: course.coursePaths) {
@@ -128,98 +128,21 @@ struct CourseListWatchView: View {
             }
         }
         .sheet(isPresented: $showLocationPermissionSheet) {
-            locationPermissionSheet
+            PermissionSheet(type: .location)
                 .toolbar(.hidden, for: .navigationBar)
-                .ignoresSafeArea()
         }
         .sheet(isPresented: $showFreeRunningGuideSheet) {
-            freeRunningGuideSheet
-                .toolbar(.hidden, for: .navigationBar)
-                .ignoresSafeArea()
+            TwoButtonSheet(text: "자유 코스로 변경할까요?\n현재 루트와 멀리 떨어져 있어요", firstLabel: "자유 코스로 변경", firstAction: {
+                workoutManager.selectedWorkout = workoutTypes[0]
+                runningManager.startFreeRun()
+                showFreeRunningGuideSheet = false
+            }, secondLabel: "돌아가기", secondAction: {
+                showFreeRunningGuideSheet = false
+            })
+            .toolbar(.hidden, for: .navigationBar)
         }
         .onAppear {
             viewModel.checkAuthorization()
-        }
-    }
-    
-    private var locationPermissionSheet: some View {
-        VStack {
-            Image(systemName: "location.circle")
-                .resizable()
-                .frame(width: 43, height: 43)
-                .foregroundStyle(.customPrimary)
-            Spacer()
-            Text("OUTLINE iPhone을 실행해서\n위치 권한을 허용해주세요.")
-                .multilineTextAlignment(.center)
-                .font(Font.system(size: 13))
-            Spacer()
-            Button {
-                showLocationPermissionSheet.toggle()
-            } label: {
-                Text("확인")
-            }
-        }
-    }
-    
-    private var freeRunningGuideSheet: some View {
-        ZStack {
-            Rectangle()
-                .ignoresSafeArea()
-                .foregroundStyle(.thinMaterial)
-            VStack {
-                VStack(alignment: .leading) {
-                    Text("자유 코스로 변경할까요?")
-                    Text("현재 루트와 멀리 떨어져 있어요.")
-                }
-                .font(.system(size: 14))
-                .padding()
-                .padding(.top, 20)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .background {
-                    RoundedRectangle(cornerRadius: 12, style: .continuous)
-                        .foregroundStyle(.gray.opacity(0.2))
-                }
-                Button {
-                    workoutManager.selectedWorkout = workoutTypes[0]
-                    runningManager.startFreeRun()
-                    showFreeRunningGuideSheet = false
-                } label: {
-                    Text("자유 코스로 변경")
-                        .frame(maxWidth: .infinity)
-                        .frame(height: 36)
-                        .padding()
-                        .background(
-                            RoundedRectangle(cornerRadius: 20, style: .continuous)
-                                .foregroundColor(Color.gray800.opacity(0.5))
-                        )
-                        .foregroundColor(.white)
-                }
-                .buttonStyle(.plain)
-                Button {
-                    showFreeRunningGuideSheet = false
-                } label: {
-                    Text("러닝 종료하기")
-                        .frame(maxWidth: .infinity)
-                        .frame(height: 36)
-                        .padding()
-                        .background(
-                            RoundedRectangle(cornerRadius: 20, style: .continuous)
-                                .foregroundStyle(.customPrimary)
-                        )
-                        .foregroundColor(.black)
-                }
-                .buttonStyle(.plain)
-            }
-            .padding(.top, 20)
-            .overlay(alignment: .topLeading) {
-                Image(systemName: "map.circle")
-                    .font(.system(size: 42))
-                    .foregroundStyle(.customPrimary)
-                    .padding(16)
-                    .frame(width: 50, height: 50)
-            }
-            .toolbar(.hidden, for: .automatic)
-            .padding()
         }
     }
 }
