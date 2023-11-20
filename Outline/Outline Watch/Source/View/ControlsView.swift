@@ -13,6 +13,7 @@ struct ControlsView: View {
     @StateObject var workoutManager = WatchWorkoutManager.shared
     @StateObject var watchConnectivityManager = WatchConnectivityManager.shared
     @StateObject var watchRunningManager = WatchRunningManager.shared
+    
     @State private var showConfirmationSheet = false
     @State private var showEndWithoutSavingSheet = false
     @State private var buttonAnimation = false
@@ -31,7 +32,7 @@ struct ControlsView: View {
                     }
                 }
                 
-                ControlButton(systemName: workoutManager.running ? "pause" : "play.fill", foregroundColor: .first, backgroundColor: .first) {
+                ControlButton(systemName: workoutManager.running ? "pause" : "play.fill", foregroundColor: .customPrimary, backgroundColor: .customPrimary) {
                     workoutManager.togglePause()
                     withAnimation {
                         buttonAnimation.toggle()
@@ -59,24 +60,30 @@ struct ControlsView: View {
         .scrollDisabled(workoutManager.running)
         .navigationTitle {
             Text(workoutManager.running ? watchRunningManager.runningTitle : "일시 정지됨")
-                .foregroundStyle(.first)
+                .foregroundStyle(.customPrimary)
         }
         .navigationBarTitleDisplayMode(.inline)
-        .overlay {
-            if showConfirmationSheet {
-                confirmationSheet
+        .sheet(isPresented: $showConfirmationSheet) {
+            EndRunningSheet(text: "종료하시겠어요?") {
+                showConfirmationSheet = false
+                sendDataToPhone()
+                workoutManager.endWorkout()
             }
         }
         .sheet(isPresented: $showEndWithoutSavingSheet) {
-            customEndWithoutSavingSheet
-                .ignoresSafeArea()
+            EndRunningSheet(text: "30초 이하는 기록되지 않아요.\n종료하시겠어요?") {
+                showEndWithoutSavingSheet = false
+                workoutManager.endWorkoutWithoutSummaryView()
+                watchRunningManager.startRunning = false
+                watchConnectivityManager.sendRunningSessionStateToPhone(false)
+            }
         }
     }
     
     private var header: some View {
         Text(workoutManager.running ? "시티런" : "일시 정지됨")
             .fontWeight(.regular)
-            .foregroundStyle(.first)
+            .foregroundStyle(.customPrimary)
             .padding()
             .padding(.top, 5)
             .padding(.leading, 20)
@@ -99,117 +106,6 @@ extension ControlsView {
             Text(label)
                 .font(.system(size: 14))
                 .foregroundColor(Color.gray500)
-        }
-    }
-    
-    private var confirmationSheet: some View {
-        ZStack {
-            Rectangle()
-                .ignoresSafeArea()
-                .foregroundStyle(.thinMaterial)
-            VStack {
-                Spacer()
-                Text("종료하시겠어요?")
-                    .font(.headline)
-                    .padding(.top, 20)
-                Spacer()
-                
-                Button {
-                    showConfirmationSheet = false
-                } label: {
-                    Text("계속 진행하기")
-                        .frame(maxWidth: .infinity)
-                        .frame(height: 40)
-                        .padding()
-                        .background(
-                            RoundedRectangle(cornerRadius: 20, style: .continuous)
-                                .foregroundColor(Color.gray800.opacity(0.5))
-                        )
-                        .foregroundColor(.white)
-                }
-                .buttonStyle(.plain)
-                Button {
-                    showConfirmationSheet = false
-                    sendDataToPhone()
-                    workoutManager.endWorkout()
-                } label: {
-                    Text("종료하기")
-                        .frame(maxWidth: .infinity)
-                        .frame(height: 40)
-                        .padding()
-                        .background(
-                            RoundedRectangle(cornerRadius: 20, style: .continuous)
-                                .foregroundColor(Color.first)
-                        )
-                        .foregroundColor(.black)
-                }
-                .buttonStyle(.plain)
-                Spacer()
-            }
-        }
-        .ignoresSafeArea()
-    }
-    
-    private var customEndWithoutSavingSheet: some View {
-        ZStack {
-            Rectangle()
-                .ignoresSafeArea()
-                .foregroundStyle(.thinMaterial)
-            VStack {
-                VStack(alignment: .leading) {
-                    Text("30초 이하는 기록되지 않아요.")
-                    Text("러닝을 종료할까요?")
-                }
-                .font(.system(size: 14))
-                .padding()
-                .padding(.top, 20)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .background {
-                    RoundedRectangle(cornerRadius: 12, style: .continuous)
-                        .foregroundStyle(.gray.opacity(0.2))
-                }
-                Button {
-                    showEndWithoutSavingSheet = false
-                } label: {
-                    Text("계속 진행하기")
-                        .frame(maxWidth: .infinity)
-                        .frame(height: 36)
-                        .padding()
-                        .background(
-                            RoundedRectangle(cornerRadius: 20, style: .continuous)
-                                .foregroundColor(Color.gray800.opacity(0.5))
-                        )
-                        .foregroundColor(.white)
-                }
-                .buttonStyle(.plain)
-                Button {
-                    showEndWithoutSavingSheet = false
-                    workoutManager.endWorkoutWithoutSummaryView()
-                    watchRunningManager.startRunning = false
-                    watchConnectivityManager.sendRunningSessionStateToPhone(false)
-                } label: {
-                    Text("종료하기")
-                        .frame(maxWidth: .infinity)
-                        .frame(height: 36)
-                        .padding()
-                        .background(
-                            RoundedRectangle(cornerRadius: 20, style: .continuous)
-                                .foregroundColor(Color.first)
-                        )
-                        .foregroundColor(.black)
-                }
-                .buttonStyle(.plain)
-            }
-            .padding(.top, 20)
-            .overlay(alignment: .topLeading) {
-                Image(systemName: "map.circle")
-                    .font(.system(size: 42))
-                    .foregroundColor(Color.first)
-                    .padding(16)
-                    .frame(width: 50, height: 50)
-            }
-            .toolbar(.hidden, for: .automatic)
-            .padding()
         }
     }
     

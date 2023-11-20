@@ -15,7 +15,7 @@ struct ContentWatchView: View {
     var body: some View {
         ZStack {
             CourseListWatchView()
-                .tint(.first)
+                .tint(.customPrimary)
             if runningManager.startRunning {
                 CountDownView()
                     .sheet(isPresented: $workoutManager.showSummaryView) {

@@ -17,7 +17,7 @@ struct MapWatchView: View {
             UserAnnotation(anchor: .center) { userlocation in
                 ZStack {
                     Circle().foregroundStyle(.white).frame(width: 22)
-                    Circle().foregroundStyle(.first).frame(width: 17)
+                    Circle().foregroundStyle(.customPrimary).frame(width: 17)
                 }
                 .onChange(of: userlocation.location) { _, userlocation in
                     if let user = userlocation {
@@ -25,35 +25,14 @@ struct MapWatchView: View {
                     }
                 }
             }
+            
             MapPolyline(coordinates: ConvertCoordinateManager.convertToCLLocationCoordinates(watchRunningManager.startCourse.coursePaths))
-                .stroke(.white.opacity(0.5), lineWidth: 8)
+                .stroke(.white.opacity(0.5), style: StrokeStyle(lineWidth: 8, lineCap: .round, lineJoin: .round))
+            
             MapPolyline(coordinates: watchRunningManager.userLocations)
-                .stroke(.first, lineWidth: 8)
+                .stroke(.customPrimary, style: StrokeStyle(lineWidth: 8, lineCap: .round, lineJoin: .round))
         }
         .mapControlVisibility(.hidden)
-        .tint(.first)
-        .navigationTitle {
-            Text(watchRunningManager.runningTitle)
-                .foregroundStyle(.first)
-        }
-        .navigationBarTitleDisplayMode(.inline)
-//        .overlay(alignment: .topLeading) {
-//            header
-//        }
-    }
-    
-    private var header: some View {
-        Text("시티런")
-            .bold()
-            .foregroundStyle(.first)
-            .padding()
-            .padding(.top, 5)
-            .padding(.leading, 20)
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .background {
-                Rectangle()
-                    .foregroundStyle(.thinMaterial)
-            }
-            .ignoresSafeArea()
+        .tint(.customPrimary)
     }
 }
