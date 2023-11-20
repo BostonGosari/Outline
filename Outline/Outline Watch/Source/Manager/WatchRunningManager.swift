@@ -8,9 +8,7 @@
 import CoreLocation
 
 class WatchRunningManager: ObservableObject {
-    
     static var shared = WatchRunningManager()
-    
     private init() { }
     
     @Published var userLocations: [CLLocationCoordinate2D] = []

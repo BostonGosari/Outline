@@ -55,5 +55,6 @@ struct TwoButtonSheet: View {
             }
             .buttonStyle(.plain)
         }
+        .toolbar(.hidden, for: .navigationBar)
     }
 }
