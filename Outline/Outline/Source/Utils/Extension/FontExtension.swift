@@ -22,7 +22,7 @@ extension Font {
     static let customCaption = Font.custom("Pretendard-Regular", size: 14)
     static let customTag2 = Font.custom("Pretendard-Medium", size: 13)
     static let customTab = Font.custom("Pretendard-Regular", size: 10)
-    static let customTimeTitle = Font.custom("Pretendard-ExtraBold", size: 64)
+    static let customTimeTitle = Font.custom("Pretendard-Bold", size: 48)
     static let customShareTitle = Font.custom("Pretendard-SemiBold", size: 25)
     static let customShareData = Font.system(size: 39, weight: .bold)
     static let customFirstGuideTitle = Font.custom("SFCompactDisplay-Semibold", size: 24)
