@@ -123,14 +123,6 @@
 		954CB2BA2AE654BA005EB2E9 /* NotificationAuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954CB2B92AE654BA005EB2E9 /* NotificationAuthView.swift */; };
 		954FFF782AE132D100D27537 /* CourseDataUploadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954FFF772AE132D100D27537 /* CourseDataUploadManager.swift */; };
 		9572A2092B02563900E653AB /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 9572A2082B02563900E653AB /* Secrets.xcconfig */; };
-		9580D48B2B0C7756006CE42F /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 958240622B0A81B500105FAE /* FirebaseAuth */; };
-		9580D48C2B0C7756006CE42F /* FirebaseAuthCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 958240642B0A81B500105FAE /* FirebaseAuthCombine-Community */; };
-		9580D48D2B0C7756006CE42F /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 958240662B0A81B500105FAE /* FirebaseFirestore */; };
-		9580D48E2B0C7756006CE42F /* FirebaseFirestoreCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 958240682B0A81B500105FAE /* FirebaseFirestoreCombine-Community */; };
-		9580D48F2B0C7756006CE42F /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 9582406A2B0A81B500105FAE /* FirebaseFirestoreSwift */; };
-		9580D4902B0C7756006CE42F /* KakaoSDKCommon in Frameworks */ = {isa = PBXBuildFile; productRef = 9582406D2B0A81D900105FAE /* KakaoSDKCommon */; };
-		9580D4912B0C7756006CE42F /* KakaoSDKAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 9582406F2B0A826D00105FAE /* KakaoSDKAuth */; };
-		9580D4922B0C7756006CE42F /* KakaoSDKUser in Frameworks */ = {isa = PBXBuildFile; productRef = 958240712B0A82A400105FAE /* KakaoSDKUser */; };
 		9580D4942B0C7985006CE42F /* ProfileVoiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9580D4932B0C7985006CE42F /* ProfileVoiceView.swift */; };
 		958240752B0AFDF100105FAE /* CourseScoreModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958240742B0AFDF100105FAE /* CourseScoreModelType.swift */; };
 		958240772B0AFE7900105FAE /* CourseScoreModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958240762B0AFE7900105FAE /* CourseScoreModel.swift */; };
@@ -513,6 +505,14 @@
 			path = FreeRunning;
 			sourceTree = "<group>";
 		};
+		2912A9142B0D174400D847B0 /* Mirroring */ = {
+			isa = PBXGroup;
+			children = (
+				2912A9122B0D0D9B00D847B0 /* Mirroringsheet.swift */,
+			);
+			path = Mirroring;
+			sourceTree = "<group>";
+		};
 		2921AFFC2B012DBF00533A83 /* NewRunning */ = {
 			isa = PBXGroup;
 			children = (
@@ -835,6 +835,7 @@
 		F0AC8AFA2AD963600061612C /* View */ = {
 			isa = PBXGroup;
 			children = (
+				2912A9142B0D174400D847B0 /* Mirroring */,
 				954B04252B00ADD100A8A83E /* PathTest */,
 				BB44B16C2B047242000462CA /* Accuracy */,
 				2921AFFC2B012DBF00533A83 /* NewRunning */,
@@ -964,7 +965,6 @@
 				BBEC68832B087B020026C306 /* UnderlineButton.swift */,
 				293C86C52B0778FD00640329 /* NeedLoginSheet.swift */,
 				2972515B2B0787640048D787 /* GuideToFreeRunningSheet.swift */,
-				2912A9122B0D0D9B00D847B0 /* Mirroringsheet.swift */,
 				BB02A3972B0CCFBE00250EDD /* ScoreStar.swift */,
 			);
 			path = Component;
