@@ -1,19 +1,20 @@
 //
-//  BottomScrollView.swift
+//  MiniScrollView1.swift
 //  Outline
 //
-//  Created by 김하은 on 10/16/23.
+//  Created by 김하은 on 10/20/23.
 //
 
 import SwiftUI
 import MapKit
 import Kingfisher
 
-struct BottomScrollView: View {
-    @ObservedObject var viewModel: GPSArtHomeViewModel
+struct MiniScrollView2: View {
     @State private var loading = true
-    @Binding var selectedCourse: CourseWithDistance?
+    @Binding var selectedCourse: GPSArtCourse?
+    @Binding var courseList: [GPSArtCourse]
     @Binding var showDetailView: Bool
+    @Binding var category: String
     var namespace: Namespace.ID
     
     var body: some View {
@@ -24,7 +25,7 @@ struct BottomScrollView: View {
                     .foregroundColor(.gray700)
                     .frame(width: 148, height: 16)
             } else {
-                Text("이런 코스도 있어요")
+                Text(category)
                     .padding(.leading, 16)
                     .font(.customSubtitle)
                     .fontWeight(.semibold)
@@ -33,7 +34,8 @@ struct BottomScrollView: View {
             }
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 8) {
-                    ForEach(viewModel.withoutRecommendedCourses, id: \.id) { currentCourse in
+                    ForEach(courseList.indices, id: \.self) { index in
+                        let currentCourse = courseList[index]
                         ZStack {
                             Button {
                                 withAnimation(.bouncy) {
@@ -42,7 +44,7 @@ struct BottomScrollView: View {
                                 }
                             } label: {
                                 ZStack {
-                                    KFImage(URL(string: currentCourse.course.thumbnail))
+                                    KFImage(URL(string: currentCourse.thumbnail))
                                         .resizable()
                                         .placeholder {
                                             Rectangle()
@@ -64,61 +66,59 @@ struct BottomScrollView: View {
                                     )
                                     VStack(alignment: .leading, spacing: 4) {
                                         Spacer()
-                                        Text("\(currentCourse.course.courseName)")
+                                        Text("\(currentCourse.courseName)")
                                             .font(Font.system(size: 20).weight(.semibold))
                                             .foregroundColor(.white)
                                         HStack(spacing: 0) {
                                             Image(systemName: "mappin")
                                                 .foregroundColor(.gray600)
-                                            Text("\(currentCourse.course.locationInfo.locality) \(currentCourse.course.locationInfo.subLocality)")
+                                            Text("\(currentCourse.locationInfo.locality) \(currentCourse.locationInfo.subLocality)")
                                                 .foregroundColor(.gray600)
                                         }
                                         .font(.customCaption)
                                         .padding(.bottom, 21)
                                     }
-                                    .padding(.leading, 20)
-                                    .frame(maxWidth: .infinity, alignment: .leading)
-                                    
-                                    // Additional content on top of the image
-                                    VStack(alignment: .leading, spacing: 4) {
-                                        Spacer()
-                                        Text("\(currentCourse.course.courseName)")
-                                            .font(Font.system(size: 20).weight(.semibold))
-                                            .foregroundColor(.white)
-                                        HStack(spacing: 0) {
-                                            Image(systemName: "mappin")
-                                                .foregroundColor(.gray600)
-                                            Text("\(currentCourse.course.locationInfo.locality) \(currentCourse.course.locationInfo.subLocality)")
-                                                .foregroundColor(.gray600)
-                                        }
-                                        .font(.customCaption)
-                                        .padding(.bottom, 21)
-                                    }
-                                    .padding(.leading, 20)
+                                    .padding(.leading, 16)
                                     .frame(maxWidth: .infinity, alignment: .leading)
                                 }
-                                .matchedGeometryEffect(id: currentCourse.id, in: namespace)
+                                .matchedGeometryEffect(id: "\(currentCourse.id)_2", in: namespace)
                                 .mask {
                                     UnevenRoundedRectangle(topLeadingRadius: 5, bottomLeadingRadius: 30, bottomTrailingRadius: 30, topTrailingRadius: 30, style: .circular)
                                 }
                                 .shadow(color: .white, radius: 0.5, y: -0.5)
+                                
                             }
                             .frame(
                                   width: UIScreen.main.bounds.width * 0.4,
-                                  height: UIScreen.main.bounds.width * 0.4 * 1.45
-                              )
+                                  height: UIScreen.main.bounds.width * 0.4 * 1.45,
+                                  alignment: .trailing
+                            )
+                           
                             .transition(.opacity)
+                            
+                            Image("top\(index+1)")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: UIScreen.main.bounds.width * 0.4)
+                                .offset(x: -UIScreen.main.bounds.width * 0.22, y: UIScreen.main.bounds.width * 0.18)
+                              
                         }
                         .buttonStyle(CardButton())
+                        .zIndex(Double(5-index))
+                        .frame(
+                              width: UIScreen.main.bounds.width * 0.45,
+                              height: UIScreen.main.bounds.width * 0.4 * 1.45
+                          )
+                        .offset(x: 16)
                     }
+                   
                 }
                 .scrollTargetLayout()
             }
             .scrollTargetBehavior(.viewAligned)
             .contentMargins(UIScreen.main.bounds.width * 0.05)
         }
-        .padding(.top, 30)
-        .padding(.bottom, 70)
+        .padding(.top, 36)
     }
 }
 
