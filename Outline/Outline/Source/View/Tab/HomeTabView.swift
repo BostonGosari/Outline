@@ -61,10 +61,10 @@ struct HomeTabView: View {
                 watchRunningSheet
             }
         }
-        .onReceive(watchConnectivityManager.$isWatchRunning) { isRunning in
-            if isRunning {
+        .onReceive(watchConnectivityManager.$runningState) { runningState in
+            if runningState == .start {
                 showCustomSheet = true
-            } else {
+            } else if runningState == .end {
                 showCustomSheet = false
             }
         }

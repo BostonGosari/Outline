@@ -8,10 +8,28 @@
 import Foundation
 import WatchConnectivity
 
+enum RunningState: Codable {
+    case start
+    case pause
+    case resume
+    case end
+}
+
+struct MirroringModel: Codable {
+    var runningType: RunningType
+    var courseName: String
+    var course: [Coordinate]
+    var userLocations: [Coordinate]
+    var time: Double
+    var distance: Double
+    var kcal: Double
+    var pace: Double
+}
+
 class WatchConnectivityManager: NSObject, WCSessionDelegate, ObservableObject {
     @Published var allCourses: [GPSArtCourse] = []
     @Published var receivedCourse: GPSArtCourse = GPSArtCourse()
-    @Published var isWatchRunning: Bool = false
+    @Published var runningState: RunningState = .end
     static let shared = WatchConnectivityManager()
     
     private let userDataModel = UserDataModel()
@@ -77,9 +95,9 @@ class WatchConnectivityManager: NSObject, WCSessionDelegate, ObservableObject {
         }
     }
     
-    func sendRunningSessionStateToPhone(_ isRunning: Bool) {
-        let isRunning = ["runningState": isRunning]
-        session.transferUserInfo(isRunning)
+    func sendRunning(_ runningState: RunningState) {
+        let runningState = ["runningState": runningState]
+        session.transferUserInfo(runningState)
     }
     
     func session(_ session: WCSession, didReceiveMessage message: [String: Any]) {
@@ -113,12 +131,8 @@ class WatchConnectivityManager: NSObject, WCSessionDelegate, ObservableObject {
                 }
             }
             
-            if let isRunning = userInfo["runningState"] as? Bool {
-                if isRunning {
-                    self.isWatchRunning = true
-                } else {
-                    self.isWatchRunning = false
-                }
+            if let runningState = userInfo["runningState"] as? RunningState {
+                self.runningState = runningState
             }
             
             // iOS
