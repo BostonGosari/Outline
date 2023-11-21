@@ -13,7 +13,7 @@ struct GPSArtHomeHeader: View {
     var scrollOffset: CGFloat
     
     var body: some View {
-        HStack {
+        HStack(alignment: .top) {
             if loading {
                 RoundedRectangle(cornerRadius: 9.5)
                     .foregroundColor(.gray700)
