@@ -24,7 +24,7 @@ struct RunningFinishPopUp: View {
     @Binding var userLocations: [CLLocationCoordinate2D]
    
     var scoreState: ScoreState {
-        if score == -1 {
+        if score == 0 {
             return .freerun
         } else if score < 50 {
             return .nice

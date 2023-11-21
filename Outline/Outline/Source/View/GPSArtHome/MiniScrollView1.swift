@@ -11,8 +11,8 @@ import Kingfisher
 
 struct MiniScrollView1: View {
     @State private var loading = true
-    @Binding var selectedCourse: CourseWithDistance?
-    @Binding var courseList: [CourseWithDistance]
+    @Binding var selectedCourse: CourseWithDistanceAndScore?
+    @Binding var courseList: [CourseWithDistanceAndScore]
     @Binding var showDetailView: Bool
     @Binding var category: String
     var namespace: Namespace.ID
@@ -64,6 +64,9 @@ struct MiniScrollView1: View {
                                         endPoint: UnitPoint(x: 0.5, y: 0.1)
                                     )
                                     VStack(alignment: .leading, spacing: 4) {
+                                       
+                                        ScoreStar(score: currentCourse.score, size: .small)
+                                            .padding(.top, 12)
                                         Spacer()
                                         Text("\(currentCourse.course.courseName)")
                                             .font(Font.system(size: 20).weight(.semibold))
@@ -77,7 +80,7 @@ struct MiniScrollView1: View {
                                         .font(.customCaption)
                                         .padding(.bottom, 21)
                                     }
-                                    .padding(.leading, 16)
+                                    .padding(.leading, 12)
                                     .frame(maxWidth: .infinity, alignment: .leading)
                                 }
                                 .matchedGeometryEffect(id: "\(currentCourse.id)_1", in: namespace)

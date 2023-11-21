@@ -50,7 +50,7 @@ struct UserDataModel: UserDataModelProtocol {
     func getFreeRunCount(completion: @escaping (Result<Int, CoreDataError>) -> Void) {
         let request = CoreRunningRecord.fetchRequest()
         do {
-            var runningRecords = try persistenceController.container.viewContext.fetch(request)
+            let runningRecords = try persistenceController.container.viewContext.fetch(request)
             var freeRunCount: Int = 0
             for record in runningRecords {
                 if let runningType = record.runningType, runningType == "free" {
