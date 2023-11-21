@@ -77,7 +77,7 @@ struct CourseScoreModel {
     func getAllScores(completion: @escaping (Result<[CoreCourseScore], CourseScoreError>) -> Void) {
         let request = CoreCourseScore.fetchRequest()
         do {
-            var coreCourseList = try persistenceController.container.viewContext.fetch(request)
+            let coreCourseList = try persistenceController.container.viewContext.fetch(request)
             completion(.success(coreCourseList))
         } catch {
             print("fetch Person error: \(error)")
