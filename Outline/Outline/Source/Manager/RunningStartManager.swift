@@ -16,15 +16,17 @@ class RunningStartManager: ObservableObject {
     @Published var start = false
     @Published var running = false
     @Published var changeRunningType = false
+    @Published var complete = false
     
     @Published var isHealthAuthorized = false
     @Published var isLocationAuthorized = false
     @Published var showPermissionSheet = false
-    @Published var permissionType: PermissionType?
+    @Published var permissionType: PermissionType = .health
     
     private var timer: AnyCancellable?
     private var healthStore = HKHealthStore()
     private var locationManager = CLLocationManager()
+    private let userDataModel = UserDataModel()
     var startCourse: GPSArtCourse?
     var runningType: RunningType = .gpsArt
     
@@ -139,6 +141,18 @@ class RunningStartManager: ObservableObject {
         let seconds = counter % 60
         
         return String(format: "%02d:%02d", minutes, seconds)
+    }
+    
+    func getFreeRunNumber(completion: @escaping (Result<Int, CoreDataError>) -> Void) {
+        userDataModel.getFreeRunCount { result in
+            switch result {
+            case .success(let freeRunCount):
+                completion(.success(freeRunCount))
+            case .failure(let failure):
+                print("fail to read free run count \(failure)")
+                completion(.failure(.dataNotFound))
+            }
+        }
     }
 }
 

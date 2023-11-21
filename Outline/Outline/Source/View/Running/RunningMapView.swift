@@ -80,10 +80,10 @@ struct RunningMapView: View {
                 if let course = runningStartManager.startCourse,
                    runningStartManager.runningType == .gpsArt {
                     CourseGuideView(
-                        userLocations: $viewModel.userLocations,
                         showBigGuide: $showBigGuide,
                         coursePathCoordinates: ConvertCoordinateManager.convertToCLLocationCoordinates(course.coursePaths),
-                        courseRotate: course.heading
+                        courseRotate: course.heading,
+                        userLocations: viewModel.userLocations
                     )
                     .onTapGesture {
                         showBigGuide.toggle()
