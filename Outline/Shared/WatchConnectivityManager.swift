@@ -103,7 +103,7 @@ class WatchConnectivityManager: NSObject, WCSessionDelegate, ObservableObject {
     }
     
     func sendIsMirroring(_ isMirroring: Bool) {
-        let userInfo = ["isMirroring" : isMirroring]
+        let userInfo = ["isMirroring": isMirroring]
         session.transferUserInfo(userInfo)
     }
     

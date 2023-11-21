@@ -64,6 +64,22 @@ struct NewRunningView: View {
                 showDetail = false
             }
         }
+        .onChange(of: runningStartManager.counter) { _, newValue in
+            if connectivityManger.isMirroring {
+                let userLocations = ConvertCoordinateManager.convertToCoordinates(locationManager.userLocations)
+                
+                let runningData = MirroringRunningData(
+                    userLocations: userLocations,
+                    time: Double(newValue),
+                    distance: runningDataManager.distance,
+                    kcal: runningDataManager.kilocalorie,
+                    pace: runningDataManager.pace,
+                    bpm: 0
+                )
+                
+                connectivityManger.sendRunningData(runningData)
+            }
+        }
     }
 }
 
