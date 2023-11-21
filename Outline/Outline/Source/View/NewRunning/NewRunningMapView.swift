@@ -32,6 +32,7 @@ struct NewRunningMapView: View {
                 MapPolyline(coordinates: userLocations)
                     .stroke(.customPrimary, style: StrokeStyle(lineWidth: 5, lineCap: .round, lineJoin: .round))
             }
+            .mapStyle(.standard(pointsOfInterest: [])) 
             .mapControlVisibility(.hidden)
             .onAppear {
                 if let startCourse = runningStartManager.startCourse,

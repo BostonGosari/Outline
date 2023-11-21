@@ -118,6 +118,50 @@ final class PathGenerateManager {
             zeroY: maxLat
             )
     }
+    
+    // Path가 외부로 나오지 않게 방지하는 로직이 추가된 map의 coordinates에 따른 view의 상대 사이즈를 구하는 함수
+    static func calculateCanvaDataForInBox(coordinates: [CLLocationCoordinate2D], width: Double, height: Double) -> CanvasData {
+        let sizeStandard: Double = width < height ? width : height
+        
+        var minLat: Double = 90
+        var maxLat: Double = -90
+        var minLon: Double = 180
+        var maxLon: Double = -180
+        for coordinate in coordinates {
+            if coordinate.latitude < minLat {
+                minLat = coordinate.latitude
+            }
+            if coordinate.latitude > maxLat {
+                maxLat = coordinate.latitude
+            }
+            if coordinate.longitude < minLon {
+                minLon = coordinate.longitude
+            }
+            if coordinate.longitude > maxLon {
+                maxLon = coordinate.longitude
+            }
+        }
+        let calculatedHeight = (maxLat - minLat) * 1000000
+        let calculatedWidth = (maxLon - minLon) * 1000000
+        
+        var relativeScale: Double = 0
+        
+        if calculatedWidth > calculatedHeight {
+            relativeScale = sizeStandard / calculatedWidth
+        } else {
+            relativeScale = sizeStandard / calculatedHeight
+        }
+        let fittedWidth = sizeStandard * relativeScale
+        let fittedHeight = sizeStandard * relativeScale
+        
+        return CanvasData(
+            width: Int(fittedWidth > 0 ? fittedWidth : 200),
+            height: Int(fittedHeight > 0 ? fittedHeight : 200),
+            scale: relativeScale > 0 ? relativeScale : 2,
+            zeroX: minLon,
+            zeroY: maxLat
+            )
+    }
 }
 
 extension PathGenerateManager {
