@@ -18,6 +18,7 @@ struct FreeRunningHomeView: View {
     @State private var showPermissionSheet = false
     @State private var isUnlocked = false
     @State private var permissionType: PermissionType = .health
+    @State private var freeRunCount: Int = 0
    
     var body: some View {
         ZStack(alignment: .top) {
@@ -51,8 +52,8 @@ struct FreeRunningHomeView: View {
                 if authState == .login {
                     cardView
                         .overlay {
-                            VStack(alignment: .leading) {
-                                Text("자유 코스")
+                            VStack(alignment: .leading, spacing: 0) {
+                                Text("새로운 러닝 \(freeRunCount == 0 ? "" : String(freeRunCount + 1))")
                                     .font(.customHeadline)
                                     .padding(.bottom, 8)
                                 HStack {
@@ -96,6 +97,24 @@ struct FreeRunningHomeView: View {
         }
         .onAppear {
             userLocationToString()
+            runningStartManager.getFreeRunNumber { result in
+                switch result {
+                case .success(let freeRunCount):
+                    self.freeRunCount = freeRunCount
+                case .failure(let failure):
+                    print("fail to load freeRunCount \(failure)")
+                }
+            }
+        }
+        .onChange(of: runningStartManager.complete) { _, _ in
+            runningStartManager.getFreeRunNumber { result in
+                switch result {
+                case .success(let freeRunCount):
+                    self.freeRunCount = freeRunCount
+                case .failure(let failure):
+                    print("fail to load freeRunCount \(failure)")
+                }
+            }
         }
     }
 }
@@ -129,4 +148,8 @@ extension FreeRunningHomeView {
             }
         }
     }
+}
+
+#Preview {
+    FreeRunningHomeView()
 }
