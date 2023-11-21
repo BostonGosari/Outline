@@ -11,8 +11,8 @@ import Kingfisher
 
 struct MiniScrollView3: View {
     @State private var loading = true
-    @Binding var selectedCourse: CourseWithDistance?
-    @Binding var courseList: [CourseWithDistance]
+    @Binding var selectedCourse: CourseWithDistanceAndScore?
+    @Binding var courseList: [CourseWithDistanceAndScore]
     @Binding var showDetailView: Bool
     @Binding var category: String
     var namespace: Namespace.ID
