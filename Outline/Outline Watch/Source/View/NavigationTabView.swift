@@ -60,7 +60,7 @@ struct NavigationTabView: View {
                     }
                     Rectangle()
                         .frame(width: 120, height: 1)
-                        .padding(.leading, 30)
+                        .padding(.leading, 36)
                         .foregroundStyle(.gray600)
                     HStack {
                         Image(systemName: "arrow.turn.up.right")
