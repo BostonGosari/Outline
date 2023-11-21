@@ -95,9 +95,15 @@ class WatchConnectivityManager: NSObject, WCSessionDelegate, ObservableObject {
         }
     }
     
-    func sendRunning(_ runningState: RunningState) {
-        let runningState = ["runningState": runningState]
-        session.transferUserInfo(runningState)
+    func sendRunningState(_ runningState: RunningState) {
+        do {
+            let encoder = JSONEncoder()
+            let data = try encoder.encode(runningState)
+            let userInfo = ["runningState": data]
+            session.transferUserInfo(userInfo)
+        } catch {
+            print("Failed to encode runningState")
+        }
     }
     
     func session(_ session: WCSession, didReceiveMessage message: [String: Any]) {
@@ -131,8 +137,15 @@ class WatchConnectivityManager: NSObject, WCSessionDelegate, ObservableObject {
                 }
             }
             
-            if let runningState = userInfo["runningState"] as? RunningState {
-                self.runningState = runningState
+            if let data = userInfo["runningState"] as? Data {
+                let decoder = JSONDecoder()
+                do {
+                    let runningState = try decoder.decode(RunningState.self, from: data)
+                    self.runningState = runningState
+                    print("received runningState")
+                } catch {
+                    print("Failed to decode runningState")
+                }
             }
             
             // iOS
