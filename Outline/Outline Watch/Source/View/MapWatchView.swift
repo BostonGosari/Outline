@@ -29,7 +29,6 @@ struct MapWatchView: View {
         }
         .mapControlVisibility(.hidden)
         .mapStyle(.standard(pointsOfInterest: []))
-        .gesture(gesture)
         .ignoresSafeArea(edges: .top)
         .tint(.customPrimary)
         .onAppear {
@@ -43,26 +42,26 @@ struct MapWatchView: View {
                 NavigationTabView()
             }
         }
+        .gesture(gesture)
     }
     
     private var gesture: some Gesture {
         TapGesture(count: 2)
             .onEnded { _ in
-                withAnimation(.bouncy(duration: 1)) {
+                withAnimation(.easeInOut) {
                     if isTapped {
                         let coordinates = ConvertCoordinateManager.convertToCLLocationCoordinates(runningManager.startCourse.coursePaths)
                         let center = calculateCenter(coordinates: coordinates)
                         let distance = calculateMaxDistance(coordinates: coordinates, from: center) * 6
                         
-                        position = .camera(.init(centerCoordinate: center, distance: distance))
-                        bounds = .init(minimumDistance: distance, maximumDistance: .infinity)
+                        position = .region(.init(center: center, latitudinalMeters: distance, longitudinalMeters: distance))
+                        bounds = .init(minimumDistance: distance, maximumDistance: distance)
+                        isTapped = false
                     } else {
                         position = .userLocation(followsHeading: true, fallback: .automatic)
                         bounds = .init(minimumDistance: 100, maximumDistance: 100)
+                        isTapped = true
                     }
-                }
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                    isTapped.toggle()
                 }
             }
     }
