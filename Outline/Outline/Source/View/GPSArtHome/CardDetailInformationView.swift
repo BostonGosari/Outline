@@ -46,6 +46,12 @@ struct CardDetailInformationView: View {
                     Text("\(selectedCourse.locationInfo.locality) \(selectedCourse.locationInfo.subLocality) \(selectedCourse.locationInfo.subThroughfare)")
                         .font(.customTag)
                         .fontWeight(.semibold)
+                    Text("복사")
+                        .font(.customTag)
+                        .foregroundStyle(.gray500)
+                        .onTapGesture {
+                            UIPasteboard.general.string = "\(selectedCourse.locationInfo.locality) \(selectedCourse.locationInfo.subLocality) \(selectedCourse.locationInfo.subThroughfare)"
+                        }
                 }
                 HStack {
                     HStack {
