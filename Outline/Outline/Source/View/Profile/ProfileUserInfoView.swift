@@ -102,11 +102,11 @@ struct ProfileUserInfoView: View {
                 }
                 .listRowBackground(Color.gray750)
             }
+            .scrollDisabled(true)
             .cornerRadius(10)
             .listStyle(.inset)
             .padding(.horizontal, 16)
             .frame(height: 2 * 60)
-            .scrollDisabled(true)
             Spacer()
         }
         .navigationTitle("내 정보")

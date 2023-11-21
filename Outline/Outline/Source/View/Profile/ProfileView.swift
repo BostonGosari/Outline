@@ -10,6 +10,8 @@ import SwiftUI
 struct ProfileView: View {
     @Environment(\.dismiss) private var dismiss
     @AppStorage("authState") var authState: AuthState = .logout
+    @AppStorage("voiceOniPhone") var voiceOniPhone: Bool = true
+    @AppStorage("voiceOnWatch") var voiceOnWatch: Bool = true
     @ObservedObject private var profileViewModel = ProfileViewModel()
     
     @State private var showDeleteUserAlert = false
@@ -21,7 +23,9 @@ struct ProfileView: View {
     @State private var userProfileImage = "defaultProfileImage"
     
     var body: some View {
+        
         ZStack {
+            
             VStack {
                 Image(userProfileImage)
                     .resizable()
@@ -60,13 +64,21 @@ struct ProfileView: View {
                                 .font(.customSubbody)
                                 .padding(.vertical, 5)
                         }
+                        NavigationLink {
+                            ProfileVoiceView(isVoiceOniPhone: $voiceOniPhone, isVoiceOnWatch: $voiceOnWatch)
+                        } label: {
+                            Text("음성 설정")
+                                .font(.customSubbody)
+                                .padding(.vertical, 5)
+                        }
                     }
                     .listRowBackground(Color.clear)
                     .listRowSeparator(.hidden)
                 }
+                .scrollDisabled(true)
                 .environment(\.defaultMinListRowHeight, 50)
                 .listStyle(.plain)
-                .frame(height: 100)
+                .frame(height: 150)
                 .padding(.top, 10)
                 
                 Rectangle()
@@ -120,6 +132,7 @@ struct ProfileView: View {
                     .listRowBackground(Color.clear)
                     .listRowSeparator(.hidden)
                 }
+                .scrollDisabled(true)
                 .environment(\.defaultMinListRowHeight, 50)
                 .listStyle(.plain)
                 .frame(height: 150)
@@ -143,6 +156,7 @@ struct ProfileView: View {
                     })
                 )
             }
+            
         }
         .sheet(isPresented: $showNeedLoginSheet) {
             NeedLoginSheet(type: .userInfo) {
