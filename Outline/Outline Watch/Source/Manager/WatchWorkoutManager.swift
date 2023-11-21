@@ -167,11 +167,14 @@ class WatchWorkoutManager: NSObject, ObservableObject {
         builder = nil
         workout = nil
         session = nil
-        calorie = 0
+        distance = 0
         averageHeartRate = 0
         heartRate = 0
-        distance = 0
+        calorie = 0
+        pace = 0
+        averagePace = 0
         stepCount = 0
+        cadence = 0
     }
 }
 

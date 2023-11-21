@@ -18,6 +18,7 @@ struct CourseListWatchView: View {
     @State private var navigateDetailView = false
     @State private var selectedCourse: GPSArtCourse = GPSArtCourse()
     @State private var showLocationPermissionSheet = false
+    @State private var showNetworkErrorSheet = false
     @State private var showFreeRunningGuideSheet = false
     
     var workoutTypes: [HKWorkoutActivityType] = [.running]
@@ -45,7 +46,11 @@ struct CourseListWatchView: View {
                                             runningManager.startCourse = course
                                             runningManager.startGPSArtRun()
                                         } else {
-                                            showFreeRunningGuideSheet = true
+                                            if runningManager.locationNetworkError {
+                                                showNetworkErrorSheet = true
+                                            } else {
+                                                showFreeRunningGuideSheet = true
+                                            }
                                         }
                                     }
                                 } label: {
@@ -101,7 +106,9 @@ struct CourseListWatchView: View {
                     }
                     .sheet(isPresented: $showLocationPermissionSheet) {
                         PermissionSheet(type: .location)
-                            .toolbar(.hidden, for: .navigationBar)
+                    }
+                    .sheet(isPresented: $showNetworkErrorSheet) {
+                        PermissionSheet(type: .network)
                     }
                     .sheet(isPresented: $showFreeRunningGuideSheet) {
                         TwoButtonSheet(
