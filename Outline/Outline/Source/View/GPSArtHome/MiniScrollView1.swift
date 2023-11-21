@@ -11,8 +11,8 @@ import Kingfisher
 
 struct MiniScrollView1: View {
     @State private var loading = true
-    @Binding var selectedCourse: GPSArtCourse?
-    @Binding var courseList: [GPSArtCourse]
+    @Binding var selectedCourse: CourseWithDistance?
+    @Binding var courseList: [CourseWithDistance]
     @Binding var showDetailView: Bool
     @Binding var category: String
     var namespace: Namespace.ID
@@ -43,7 +43,7 @@ struct MiniScrollView1: View {
                                 }
                             } label: {
                                 ZStack {
-                                    KFImage(URL(string: currentCourse.thumbnail))
+                                    KFImage(URL(string: currentCourse.course.thumbnail))
                                         .resizable()
                                         .placeholder {
                                             Rectangle()
@@ -65,13 +65,13 @@ struct MiniScrollView1: View {
                                     )
                                     VStack(alignment: .leading, spacing: 4) {
                                         Spacer()
-                                        Text("\(currentCourse.courseName)")
+                                        Text("\(currentCourse.course.courseName)")
                                             .font(Font.system(size: 20).weight(.semibold))
                                             .foregroundColor(.white)
                                         HStack(spacing: 0) {
                                             Image(systemName: "mappin")
                                                 .foregroundColor(.gray600)
-                                            Text("\(currentCourse.locationInfo.locality) \(currentCourse.locationInfo.subLocality)")
+                                            Text("\(currentCourse.course.locationInfo.locality) \(currentCourse.course.locationInfo.subLocality)")
                                                 .foregroundColor(.gray600)
                                         }
                                         .font(.customCaption)
