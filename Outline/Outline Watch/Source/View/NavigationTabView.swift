@@ -49,6 +49,7 @@ struct NavigationTabView: View {
                     HStack {
                         Image(systemName: "arrow.turn.up.right")
                             .font(.system(size: 26))
+                            .padding(.trailing)
                         VStack(alignment: .leading) {
                             Text("60m")
                                 .font(.customSubTitle)
@@ -64,13 +65,14 @@ struct NavigationTabView: View {
                     HStack {
                         Image(systemName: "arrow.turn.up.right")
                             .font(.system(size: 26))
+                            .padding(.trailing)
                         Text("경로를 따라 계속 이동")
                             .font(.customSubTitle)
                     }
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(12)
-                .padding(.top, 4)
+                .padding(.top, 8)
             }
             .overlay(alignment: .topLeading) {
                 Button {
