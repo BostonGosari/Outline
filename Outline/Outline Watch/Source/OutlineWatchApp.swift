@@ -9,7 +9,6 @@ import SwiftUI
 
 @main
 struct OutlineWatchApp: App {
-    
     var body: some Scene {
         WindowGroup {
             ContentWatchView()

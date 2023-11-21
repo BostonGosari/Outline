@@ -8,13 +8,12 @@
 import CoreLocation
 
 class WatchRunningManager: ObservableObject {
-    
     static var shared = WatchRunningManager()
-    
     private init() { }
     
     @Published var userLocations: [CLLocationCoordinate2D] = []
     @Published var changeRunningType = false
+    @Published var locationNetworkError = false
     @Published var startRunning = false
     @Published var runningTitle = ""
     
@@ -27,7 +26,7 @@ class WatchRunningManager: ObservableObject {
         startCourse = GPSArtCourse()
         runningType = .free
         getFreeRunName()
-        runningTitle = "자유러닝"
+        runningTitle = "자유아트"
         startRunning = true
     }
     
@@ -45,11 +44,20 @@ class WatchRunningManager: ObservableObject {
     }
     
     func checkDistance(course: [Coordinate]) -> Bool {
+        guard let userLocation = locationManager.location?.coordinate else {
+            print("error to get user location")
+            locationNetworkError = true
+            return false
+        }
         
-        guard let userLocation = locationManager.location?.coordinate else { return false }
+        guard let shortestDistance = calculateShortestDistance(from: userLocation, to: ConvertCoordinateManager.convertToCLLocationCoordinates(course)) else {
+            print("error to calculate")
+            locationNetworkError = true
+            return false
+        }
         
-        guard let shortestDistance = calculateShortestDistance(from: userLocation, to: ConvertCoordinateManager.convertToCLLocationCoordinates(course)) else { return false }
-        return shortestDistance <= 2000
+        locationNetworkError = false
+        return shortestDistance <= 3000
     }
     
     private func calculateShortestDistance(from userCoordinate: CLLocationCoordinate2D, to courseCoordinates: [CLLocationCoordinate2D]) -> CLLocationDistance? {

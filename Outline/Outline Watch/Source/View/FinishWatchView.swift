@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct FinishWatchView: View {    
-    @State var completionPercentage: Double = 100
+    var score = 100
 
     var body: some View {
         VStack {
-            switch completionPercentage {
+            switch score {
             case 100:
                 finalImage("FinalImage1")
             case 50..<100:
@@ -20,7 +20,7 @@ struct FinishWatchView: View {
             case ..<10:
                 finalImage("FinalImage3")
             default:
-                Text("\(completionPercentage, specifier: "%.2f")%")
+                Text("\(score, specifier: "%.2f")%")
             }
         }
     }
@@ -37,5 +37,5 @@ struct FinishWatchView: View {
 }
 
 #Preview {
-    FinishWatchView(completionPercentage: 100.0)
+    FinishWatchView(score: 100)
 }
