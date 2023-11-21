@@ -61,7 +61,7 @@ class GPSArtHomeViewModel: NSObject, CLLocationManagerDelegate, ObservableObject
         for course in self.courses {
             guard let firstCoordinate = course.coursePaths.first else { continue }
             let courseLocation = CLLocation(latitude: firstCoordinate.latitude, longitude: firstCoordinate.longitude)
-            let distance = currentCLLocation.distance(from: courseLocation)
+            var distance = currentCLLocation.distance(from: courseLocation)
             courseDistances.append((course: course, distance: distance))
         }
 
