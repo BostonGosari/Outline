@@ -41,6 +41,12 @@ struct ShareView: View {
                 buttons
             }
         }
+        .onAppear {
+            let canvasSize = PathGenerateManager.calculateCanvaData(coordinates: runningData.userLocations, width: 200, height: 200)
+            self.pathWidth = CGFloat(canvasSize.width)
+            self.pathHeight = CGFloat(canvasSize.height)
+        }
+        
         .navigationTitle("공유")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
@@ -108,7 +114,7 @@ extension ShareView {
         .font(.customSubbody)
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
         .padding(.trailing, 50)
-        .padding(.bottom, 57)
+        .padding(.bottom, 55)
     }
     
     private var userPath: some View {
@@ -155,7 +161,7 @@ extension ShareView {
             .padding(.leading, -8)
         }
         .frame(maxHeight: .infinity, alignment: .bottom)
-        .padding(.bottom, 8)
+        .padding(.bottom, 16)
     }
     
     private var instaSheet: some View {
@@ -251,8 +257,4 @@ extension ShareView {
                 }
             }
     }
-}
-
-#Preview {
-    ShareView(runningData: ShareModel(distance: "32.2km", cal: "235", pace: "9'99\"", time: "00:20", userLocations: []))
 }
