@@ -72,7 +72,6 @@ struct ControlsView: View {
                 showEndWithoutSavingSheet = false
                 workoutManager.endWorkoutWithoutSummaryView()
                 runningManager.startRunning = false
-                connectivityManager.sendRunningSessionStateToPhone(false)
             }
         }
     }
