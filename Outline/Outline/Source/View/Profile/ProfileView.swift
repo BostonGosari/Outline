@@ -75,6 +75,7 @@ struct ProfileView: View {
                     .listRowBackground(Color.clear)
                     .listRowSeparator(.hidden)
                 }
+                .scrollDisabled(true)
                 .environment(\.defaultMinListRowHeight, 50)
                 .listStyle(.plain)
                 .frame(height: 150)
@@ -131,6 +132,7 @@ struct ProfileView: View {
                     .listRowBackground(Color.clear)
                     .listRowSeparator(.hidden)
                 }
+                .scrollDisabled(true)
                 .environment(\.defaultMinListRowHeight, 50)
                 .listStyle(.plain)
                 .frame(height: 150)

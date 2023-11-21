@@ -20,7 +20,7 @@ struct ProfileVoiceView: View {
                     Text("iPhone 음성 피드백")
                         .font(.customSubbody)
                 }
-                .listRowBackground(Color.customBlack)
+                .listRowBackground(Color.gray900)
                 .toggleStyle(SwitchToggleStyle(tint: .customGreen))
                 .padding(.vertical, 10)
                 
@@ -28,16 +28,19 @@ struct ProfileVoiceView: View {
                     Text("Apple Watch 음성 피드백")
                         .font(.customSubbody)
                 }
-                .listRowBackground(Color.customBlack)
+                .listRowBackground(Color.gray900)
                 .padding(.vertical, 4)
                 .toggleStyle(SwitchToggleStyle(tint: .customGreen))
                 .padding(.vertical, 10)
                 .listRowSeparator(.hidden)
             }
-            .background(.gray900)
+            .scrollDisabled(true)
             .navigationTitle("음성 설정")
             .navigationBarTitleDisplayMode(.inline)
-            .listStyle(.grouped)
+            .listStyle(.plain)
+            .background(.gray900)
+
         }
+        .background(Color.gray900)
     }
 }
