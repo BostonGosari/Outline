@@ -62,6 +62,7 @@ struct ControlsView: View {
         .sheet(isPresented: $showEndRunningSheet) {
             EndRunningSheet(text: "종료하시겠어요?") {
                 showEndRunningSheet = false
+                runningManager.userLocations = userLocations
                 sendDataToPhone()
                 workoutManager.endWorkout()
             }
