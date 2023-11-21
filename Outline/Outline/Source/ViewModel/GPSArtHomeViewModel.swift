@@ -10,15 +10,25 @@ import CoreLocation
 import CoreMotion
 import SwiftUI
 
+struct CourseWithDistance: Identifiable, Hashable {
+    var id = UUID().uuidString
+    var course: GPSArtCourse
+    var distance: Double
+}
+
 class GPSArtHomeViewModel: NSObject, CLLocationManagerDelegate, ObservableObject {
     @Published var courses: AllGPSArtCourses = []
-    @Published var recommendedCoures: [GPSArtCourse] = []
+    @Published var coursesForWatch: [GPSArtCourse] = []
+
+    @Published var coursesWithDistance: [CourseWithDistance] = []
+    @Published var recommendedCoures: [CourseWithDistance] = []
+    
     @Published var firstCategoryTitle: String = ""
     @Published var secondCategoryTitle: String = ""
     @Published var thirdCategoryTitle: String = ""
-    @Published var firstCourseList: [GPSArtCourse] = []
-    @Published var secondCourseList: [GPSArtCourse] = []
-    @Published var thirdCourseList: [GPSArtCourse] = []
+    @Published var firstCourseList: [CourseWithDistance] = []
+    @Published var secondCourseList: [CourseWithDistance] = []
+    @Published var thirdCourseList: [CourseWithDistance] = []
     
     private let courseModel = CourseModel()
     private let locationManager = CLLocationManager()
@@ -26,16 +36,21 @@ class GPSArtHomeViewModel: NSObject, CLLocationManagerDelegate, ObservableObject
     
     override init() {
         super.init()
-        locationManager.delegate = self
-    }
+        locationManager.delegate = self    }
     
     func getAllCoursesFromFirebase() {
         courseModel.readAllCourses { result in
             switch result {
             case .success(let courseList):
+                self.courses.removeAll()
+                self.recommendedCoures.removeAll()
+                self.coursesWithDistance.removeAll()
+                self.firstCourseList.removeAll()
+                self.secondCourseList.removeAll()
+                self.thirdCourseList.removeAll()
                 self.courses = courseList
-                self.watchConnectivityManager.sendGPSArtCoursesToWatch(self.courses)
                 self.fetchRecommendedCourses()
+                self.watchConnectivityManager.sendGPSArtCoursesToWatch(self.coursesForWatch)
                 self.readFirstCourseList()
                 self.readSecondCourseList()
                 self.readThirdCourseList()
@@ -46,28 +61,27 @@ class GPSArtHomeViewModel: NSObject, CLLocationManagerDelegate, ObservableObject
     }
     
     func fetchRecommendedCourses() {
-        guard let userLocation = locationManager.location?.coordinate else {
-            // 위치 정보가 없을 경우 앞의 세 코스를 추천 코스로 표시하고 함수 종료
-            self.recommendedCoures = Array(self.courses.prefix(3))
-            return
-        }
-        
-        let currentCLLocation = CLLocation(latitude: userLocation.latitude, longitude: userLocation.longitude)
-        
-        // 각 코스의 거리를 계산하여 배열에 추가
-        var courseDistances: [(course: GPSArtCourse, distance: Double)] = []
-        
-        for course in self.courses {
-            guard let firstCoordinate = course.coursePaths.first else { continue }
-            let courseLocation = CLLocation(latitude: firstCoordinate.latitude, longitude: firstCoordinate.longitude)
-            let distance = currentCLLocation.distance(from: courseLocation)
-            courseDistances.append((course: course, distance: distance))
-        }
-        
-        // 거리에 따라 배열을 정렬하고 가장 가까운 세 개의 코스를 선택
-        let sortedCourses = courseDistances.sorted { $0.distance < $1.distance }
-        self.recommendedCoures = sortedCourses.prefix(3).map { $0.course }
-        print("fetchRecommendedCourses: \(self.recommendedCoures)")
+        let userlocation = locationManager.location?.coordinate
+               
+           if let location = userlocation {
+               let currentCLLocation = CLLocation(latitude: location.latitude, longitude: location.longitude)
+               
+               for course in self.courses {
+                   guard let firstCoordinate = course.coursePaths.first else { continue }
+                   let courseLocation = CLLocation(latitude: firstCoordinate.latitude, longitude: firstCoordinate.longitude)
+                   let distance = currentCLLocation.distance(from: courseLocation)
+                   coursesWithDistance.append(CourseWithDistance(course: course, distance: distance))
+               }
+               
+              let sortedCoursesWithDistance = coursesWithDistance.sorted { $0.distance < $1.distance }
+              
+              self.recommendedCoures = Array(sortedCoursesWithDistance.prefix(3))
+              
+              coursesForWatch = sortedCoursesWithDistance.map { $0.course }
+          } else {
+              self.recommendedCoures = self.courses.prefix(3).map { CourseWithDistance(course: $0, distance: 0) }
+              coursesForWatch = self.courses
+          }
     }
     
     func readFirstCourseList() {
@@ -75,43 +89,61 @@ class GPSArtHomeViewModel: NSObject, CLLocationManagerDelegate, ObservableObject
             switch result {
             case .success(let courseCategory):
                 self.firstCategoryTitle = courseCategory.title
-                for courseId in courseCategory.courseIdList {
-                    self.courseModel.readCourse(id: courseId) { resultOfReadingCourse in
-                        switch resultOfReadingCourse {
-                        case .success(let gpsArtCourseList):
-                            self.firstCourseList.append(gpsArtCourseList)
-                        case .failure(let failure):
-                            print("fail to read fire courseList \(failure)")
+                if let location = self.locationManager.location?.coordinate {
+                    let currentCLLocation = CLLocation(latitude: location.latitude, longitude: location.longitude)
+                    for courseId in courseCategory.courseIdList {
+                        self.courseModel.readCourse(id: courseId) { resultOfReadingCourse in
+                            switch resultOfReadingCourse {
+                            case .success(let gpsArtCourseList):
+                                if let firstCoordinate = gpsArtCourseList.coursePaths.first {
+                                    let courseLocation = CLLocation(latitude: firstCoordinate.latitude, longitude: firstCoordinate.longitude)
+                                    let distance = currentCLLocation.distance(from: courseLocation)
+                                    self.firstCourseList.append(CourseWithDistance(course: gpsArtCourseList, distance: distance))
+                                }
+                            case .failure(let failure):
+                                print("fail to read fire courseList \(failure)")
+                            }
                         }
                     }
+                } else {
+                    // 위치 정보가 없을 경우
+                    self.firstCourseList = self.courses.map { CourseWithDistance(course: $0, distance: 0) }
                 }
             case .failure(let failure):
                 print("fail to read category \(failure)")
             }
         }
-        print("firstCategoryTitle: \(self.firstCourseList)")
     }
+
     
     func readSecondCourseList() {
         courseModel.readCategoryCourse(categoryType: .category2) { result in
             switch result {
             case .success(let courseCategory):
                 self.secondCategoryTitle = courseCategory.title
-                for courseId in courseCategory.courseIdList {
-                    self.courseModel.readCourse(id: courseId) { resultOfReadingCourse in
-                        switch resultOfReadingCourse {
-                        case .success(let gpsArtCourseList):
-                            self.secondCourseList.append(gpsArtCourseList)
-                        case .failure(let failure):
-                            print("fail to read fire courseList \(failure)")
+                if let location = self.locationManager.location?.coordinate {
+                    let currentCLLocation = CLLocation(latitude: location.latitude, longitude: location.longitude)
+                    for courseId in courseCategory.courseIdList {
+                        self.courseModel.readCourse(id: courseId) { resultOfReadingCourse in
+                            switch resultOfReadingCourse {
+                            case .success(let gpsArtCourseList):
+                                if let firstCoordinate = gpsArtCourseList.coursePaths.first {
+                                    let courseLocation = CLLocation(latitude: firstCoordinate.latitude, longitude: firstCoordinate.longitude)
+                                    let distance = currentCLLocation.distance(from: courseLocation)
+                                    self.secondCourseList.append(CourseWithDistance(course: gpsArtCourseList, distance: distance))
+                                }
+                            case .failure(let failure):
+                                print("fail to read fire courseList \(failure)")
+                            }
                         }
                     }
+                } else {
+                    self.secondCourseList = self.courses.map { CourseWithDistance(course: $0, distance: 0) }
                 }
             case .failure(let failure):
                 print("fail to read category \(failure)")
             }
         }
-        print("secondCategoryTitle: \(self.secondCourseList)")
     }
     
     func readThirdCourseList() {
@@ -119,21 +151,29 @@ class GPSArtHomeViewModel: NSObject, CLLocationManagerDelegate, ObservableObject
             switch result {
             case .success(let courseCategory):
                 self.thirdCategoryTitle = courseCategory.title
-                for courseId in courseCategory.courseIdList {
-                    self.courseModel.readCourse(id: courseId) { resultOfReadingCourse in
-                        switch resultOfReadingCourse {
-                        case .success(let gpsArtCourseList):
-                            self.thirdCourseList.append(gpsArtCourseList)
-                        case .failure(let failure):
-                            print("fail to read fire courseList \(failure)")
+                if let location = self.locationManager.location?.coordinate {
+                    let currentCLLocation = CLLocation(latitude: location.latitude, longitude: location.longitude)
+                    for courseId in courseCategory.courseIdList {
+                        self.courseModel.readCourse(id: courseId) { resultOfReadingCourse in
+                            switch resultOfReadingCourse {
+                            case .success(let gpsArtCourseList):
+                                if let firstCoordinate = gpsArtCourseList.coursePaths.first {
+                                    let courseLocation = CLLocation(latitude: firstCoordinate.latitude, longitude: firstCoordinate.longitude)
+                                    let distance = currentCLLocation.distance(from: courseLocation)
+                                    self.thirdCourseList.append(CourseWithDistance(course: gpsArtCourseList, distance: distance))
+                                }
+                            case .failure(let failure):
+                                print("fail to read fire courseList \(failure)")
+                            }
                         }
                     }
+                } else {
+                    self.thirdCourseList = self.courses.map { CourseWithDistance(course: $0, distance: 0) }
                 }
             case .failure(let failure):
                 print("fail to read category \(failure)")
             }
         }
-        print("thirdCategoryTitle: \(self.thirdCourseList)")
     }
     
     func checkLocationAuthorization() {

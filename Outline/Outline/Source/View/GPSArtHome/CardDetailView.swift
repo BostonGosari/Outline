@@ -20,7 +20,7 @@ struct CardDetailView: View {
     @Environment(\.dismiss) var dismiss
     
     @Binding var showDetailView: Bool
-    var selectedCourse: GPSArtCourse
+    var selectedCourse: CourseWithDistance
     var currentIndex: Int
     var namespace: Namespace.ID 
     
@@ -51,7 +51,7 @@ struct CardDetailView: View {
                             courseImage
                             courseInformation
                         }
-                        CardDetailInformationView(selectedCourse: selectedCourse)
+                        CardDetailInformationView(selectedCourse: selectedCourse.course)
                             .opacity(appear[2] ? 1 : 0)
                             .offset(y: appear[2] ? 0 : fadeInOffset)
                     }
@@ -108,7 +108,7 @@ struct CardDetailView: View {
     // MARK: - View Components
     
     private var courseImage: some View {
-        KFImage(URL(string: selectedCourse.thumbnail))
+        KFImage(URL(string: selectedCourse.course.thumbnail))
             .resizable()
             .placeholder {
                 Rectangle()
@@ -129,13 +129,13 @@ struct CardDetailView: View {
     private var courseInformation: some View {
         VStack(alignment: .leading) {
             VStack(alignment: .leading, spacing: 0) {
-                Text("\(selectedCourse.courseName)")
+                Text("\(selectedCourse.course.courseName)")
                     .font(.customHeadline)
                     .fontWeight(.semibold)
                     .padding(.bottom, 8)
                 HStack {
                     Image(systemName: "mappin")
-                    Text("\(selectedCourse.locationInfo.locality) \(selectedCourse.locationInfo.subLocality) • 내 위치에서 \(selectedCourse.distance/1000, specifier: "%.1f")km")
+                    Text("\(selectedCourse.course.locationInfo.locality) \(selectedCourse.course.locationInfo.subLocality) • 내 위치에서 \(selectedCourse.distance/1000, specifier: "%.1f")km")
                 }
                 .font(.customSubbody)
                 .fontWeight(.regular)
@@ -159,10 +159,10 @@ struct CardDetailView: View {
                     runningStartManager.checkAuthorization()
                     if runningStartManager.isHealthAuthorized {
                         if runningStartManager.isLocationAuthorized {
-                            let course = selectedCourse.coursePaths
+                            let course = selectedCourse.course.coursePaths
                             
                             if runningStartManager.checkDistance(course: course) {
-                                runningStartManager.startCourse = selectedCourse
+                                runningStartManager.startCourse = selectedCourse.course
                                 runningStartManager.startGPSArtRun()
                                 showDetailView = false
                                 runningStartManager.start = true
