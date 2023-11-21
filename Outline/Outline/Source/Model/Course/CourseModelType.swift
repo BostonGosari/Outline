@@ -31,6 +31,7 @@ struct GPSArtCourse: Codable, Hashable {
     var regionDisplayName: String
     var producer: String
     var thumbnailLong: String
+    var thumbnailNeon: String
     var title: String
     var navigation: [Navigation]
     var hotSpots: [HotSpot]
@@ -54,6 +55,7 @@ struct GPSArtCourse: Codable, Hashable {
         regionDisplayName: String,
         producer: String = "",
         thumbnailLong: String = "",
+        thumbnailNeon: String = "",
         title: String = "",
         navigation: [Navigation] = [],
         hotSpots: [HotSpot] = []
@@ -75,6 +77,7 @@ struct GPSArtCourse: Codable, Hashable {
         self.regionDisplayName = regionDisplayName
         self.producer = producer
         self.thumbnailLong = thumbnailLong
+        self.thumbnailNeon = thumbnailNeon
         self.title = title
         self.navigation = navigation
         self.hotSpots = hotSpots
@@ -98,6 +101,7 @@ struct GPSArtCourse: Codable, Hashable {
         self.producer = "Outline"
         self.title = "default title"
         self.thumbnailLong = ""
+        self.thumbnailNeon = ""
         self.navigation = []
         self.hotSpots = []
     }
@@ -132,11 +136,15 @@ struct Coordinate: Codable, Hashable {
 }
 
 struct Navigation: Codable, Hashable {
-    var distance: Int
-    var description: String
+    var distance: Double
+    var nextDirection: String
+    var longitude: Double
+    var latitude: Double
+    var alertMessage: String
 }
 
 struct HotSpot: Codable, Hashable {
     var title: String
+    var spotDescription: String
     var location: Coordinate
 }
