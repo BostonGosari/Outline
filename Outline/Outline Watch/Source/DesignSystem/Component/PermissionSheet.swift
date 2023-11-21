@@ -7,31 +7,45 @@
 
 import SwiftUI
 
-enum PermissionType: String {
-    case location = "위치"
-    case health = "건강"
-}
-
-struct PermissionSheet: View {
-    var type: PermissionType = .location
+enum PermissionType {
+    case location
+    case health
+    case network
     
-    var systemImageName: String {
-        switch type {
+    var imageName: String {
+        switch self {
         case .location:
             "location.circle"
         case .health:
             "heart.circle"
+        case .network:
+            "exclamationmark.circle"
         }
     }
+    
+    var title: String {
+        switch self {
+        case .location:
+            "OUTLINE iPhone을 실행해서\n위치 권한을 허용해주세요."
+        case .health:
+            "OUTLINE iPhone을 실행해서\n건강 권한을 허용해주세요."
+        case .network:
+            "GPS 네트워크를\n불러올 수 없습니다."
+        }
+    }
+}
+
+struct PermissionSheet: View {
+    var type: PermissionType = .location
     @Environment(\.dismiss) var dismiss
     
     var body: some View {
         VStack {
-            Image(systemName: systemImageName)
+            Image(systemName: type.imageName)
                 .font(.system(size: 36))
                 .foregroundStyle(.customPrimary)
                 .padding(.bottom, 2)
-            Text("OUTLINE iPhone을 실행해서\n\(type.rawValue) 권한을 허용해주세요.")
+            Text(type.title)
                 .multilineTextAlignment(.center)
                 .font(.customBody)
             Spacer()

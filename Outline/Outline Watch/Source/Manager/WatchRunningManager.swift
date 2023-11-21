@@ -13,6 +13,7 @@ class WatchRunningManager: ObservableObject {
     
     @Published var userLocations: [CLLocationCoordinate2D] = []
     @Published var changeRunningType = false
+    @Published var locationNetworkError = false
     @Published var startRunning = false
     @Published var runningTitle = ""
     
@@ -43,16 +44,19 @@ class WatchRunningManager: ObservableObject {
     }
     
     func checkDistance(course: [Coordinate]) -> Bool {
-        
         guard let userLocation = locationManager.location?.coordinate else {
             print("error to get user location")
+            locationNetworkError = true
             return false
         }
         
         guard let shortestDistance = calculateShortestDistance(from: userLocation, to: ConvertCoordinateManager.convertToCLLocationCoordinates(course)) else {
             print("error to calculate")
+            locationNetworkError = true
             return false
         }
+        
+        locationNetworkError = false
         return shortestDistance <= 3000
     }
     

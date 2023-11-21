@@ -29,6 +29,7 @@ struct MapWatchView: View {
         }
         .mapControlVisibility(.hidden)
         .mapStyle(.standard(pointsOfInterest: []))
+        .gesture(gesture)
         .ignoresSafeArea(edges: .top)
         .tint(.customPrimary)
         .onAppear {
@@ -40,7 +41,6 @@ struct MapWatchView: View {
         .overlay {
             if runningManager.runningType == .gpsArt {
                 NavigationTabView()
-                    .gesture(gesture)
             }
         }
     }
