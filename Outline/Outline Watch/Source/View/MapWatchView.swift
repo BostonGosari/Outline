@@ -11,13 +11,14 @@ import MapKit
 struct MapWatchView: View {
     @StateObject private var runningManager = WatchRunningManager.shared
     @State private var position: MapCameraPosition = .userLocation(followsHeading: true, fallback: .automatic)
-    @State private var bounds: MapCameraBounds = .init(minimumDistance: 50, maximumDistance: 50)
+    @State private var bounds: MapCameraBounds = .init(minimumDistance: 100, maximumDistance: 100)
+    @State private var interactionModes: MapInteractionModes = []
     @State private var isTapped = false
     
     var userLocations: [CLLocationCoordinate2D]
     
     var body: some View {
-        Map(position: $position, bounds: bounds, interactionModes: []) {
+        Map(position: $position, bounds: bounds, interactionModes: interactionModes) {
             UserAnnotation()
             
             MapPolyline(coordinates: ConvertCoordinateManager.convertToCLLocationCoordinates(runningManager.startCourse.coursePaths))
@@ -30,27 +31,40 @@ struct MapWatchView: View {
         .mapStyle(.standard(pointsOfInterest: []))
         .ignoresSafeArea(edges: .top)
         .tint(.customPrimary)
+        .onAppear {
+            if runningManager.runningType == .free {
+                interactionModes = [.zoom]
+                bounds = .init(minimumDistance: 100, maximumDistance: .infinity)
+            }
+        }
         .overlay {
             if runningManager.runningType == .gpsArt {
                 NavigationTabView()
-                    .onTapGesture(count: 2) {
-                        withAnimation(.bouncy) {
-                            if isTapped {
-                                let coordinates = ConvertCoordinateManager.convertToCLLocationCoordinates(runningManager.startCourse.coursePaths)
-                                let center = calculateCenter(coordinates: coordinates)
-                                let distance = calculateMaxDistance(coordinates: coordinates, from: center) * 6
-                                
-                                position = .camera(.init(centerCoordinate: center, distance: distance))
-                                bounds = .init(minimumDistance: distance, maximumDistance: distance)
-                            } else {
-                                position = .userLocation(followsHeading: true, fallback: .automatic)
-                                bounds = .init(minimumDistance: 50, maximumDistance: 50)
-                            }
-                        }
-                        isTapped.toggle()
-                    }
+                    .gesture(gesture)
             }
         }
+    }
+    
+    private var gesture: some Gesture {
+        TapGesture(count: 2)
+            .onEnded { _ in
+                withAnimation(.bouncy(duration: 1)) {
+                    if isTapped {
+                        let coordinates = ConvertCoordinateManager.convertToCLLocationCoordinates(runningManager.startCourse.coursePaths)
+                        let center = calculateCenter(coordinates: coordinates)
+                        let distance = calculateMaxDistance(coordinates: coordinates, from: center) * 6
+                        
+                        position = .camera(.init(centerCoordinate: center, distance: distance))
+                        bounds = .init(minimumDistance: distance, maximumDistance: .infinity)
+                    } else {
+                        position = .userLocation(followsHeading: true, fallback: .automatic)
+                        bounds = .init(minimumDistance: 100, maximumDistance: 100)
+                    }
+                }
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    isTapped.toggle()
+                }
+            }
     }
     
     private func calculateCenter(coordinates: [CLLocationCoordinate2D]) -> CLLocationCoordinate2D {
