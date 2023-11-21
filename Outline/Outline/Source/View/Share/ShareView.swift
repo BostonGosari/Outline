@@ -33,11 +33,7 @@ struct ShareView: View {
                 .ignoresSafeArea()
             
             VStack(spacing: 0) {
-                ZStack {
-                    shareImage
-                    runningInfo
-                    userPath
-                }
+                shareImageCombined
                 buttons
             }
         }
@@ -45,8 +41,8 @@ struct ShareView: View {
             let canvasSize = PathGenerateManager.calculateCanvaData(coordinates: runningData.userLocations, width: 200, height: 200)
             pathWidth = CGFloat(canvasSize.width)
             pathHeight = CGFloat(canvasSize.height)
+            renderShareView()
         }
-        
         .navigationTitle("공유")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
@@ -75,17 +71,24 @@ struct ShareView: View {
 }
 
 extension ShareView {
-    private var shareImage: some View {
+    private var shareImageCombined: some View {
         ZStack {
-            backgroundImage
+            shareImage
             runningInfo
-            
+            userPath
             GeometryReader { proxy in
                 Color.clear
                     .onAppear {
                         size = CGSize(width: proxy.size.width, height: proxy.size.height)
                     }
             }
+        }
+    }
+    
+    private var shareImage: some View {
+        ZStack {
+            backgroundImage
+            
         }
     }
     
@@ -136,6 +139,7 @@ extension ShareView {
     private var buttons: some View {
         HStack(spacing: 0) {
             Button {
+                renderShareView()
                 if let img = image {
                     viewModel.saveImage(image: img)
                 }
@@ -153,6 +157,7 @@ extension ShareView {
             .padding(.leading, 16)
             
             CompleteButton(text: "Instagram으로 공유하기", isActive: true) {
+                renderShareView()
                 if let img = image {
                     viewModel.shareToInstagram(image: img)
                 }
@@ -208,6 +213,7 @@ extension ShareView {
 }
 
 extension ShareView {
+    
     private var dragGesture: some Gesture {
         return DragGesture()
             .onChanged { value in
@@ -257,4 +263,21 @@ extension ShareView {
                 }
             }
     }
+}
+
+extension ShareView {
+    private func renderShareView() {
+        image = shareImageCombined.offset(y: -8).asImage(size: size)
+    }
+    
+    private func renderShareViewWithRenderer() {
+        let renderer = ImageRenderer(content: shareImageCombined)
+        renderer.scale = UIScreen.main.scale
+        renderer.isOpaque = true
+        
+        if let cgImage = renderer.cgImage {
+            image = UIImage(cgImage: cgImage)
+        }
+    }
+    
 }
