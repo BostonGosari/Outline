@@ -12,6 +12,7 @@ enum PermissionType {
     case location
     case motion
     case notification
+    case photoLibrary
     
     var title: String {
         switch self {
@@ -23,6 +24,8 @@ enum PermissionType {
             return "활동 데이터 공유 활성화"
         case .notification:
             return "알림 권한 설정"
+        case .photoLibrary:
+            return "사진 권한 허용"
         }
     }
     
@@ -36,6 +39,8 @@ enum PermissionType {
             return "권한을 허용해 편리하게 Outline을 사용하세요."
         case .notification:
             return "권한을 허용해 편리하게 Outline을 사용하세요."
+        case .photoLibrary:
+            return "권한을 허용하면 이미지를 저장할 수 있어요."
         }
     }
     
@@ -49,6 +54,8 @@ enum PermissionType {
             return "MotionPermissionImage"
         case .notification:
             return "NotificationPermissionImage"
+        case .photoLibrary:
+            return "AlbumPermissionImage"
         }
     }
 }
