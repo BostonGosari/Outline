@@ -9,14 +9,14 @@ import SwiftUI
 import MapKit
 
 struct CardDetailInformationView: View {
-    var selectedCourse: CourseWithDistance
+    var selectedCourse: GPSArtCourse
     private let capsuleWidth: CGFloat = 87
     private let capsuleHeight: CGFloat = 28
     
     var body: some View {
         VStack(alignment: .leading, spacing: 24) {
             HStack {
-                Text("#\(stringForCourseLevel(selectedCourse.course.level))")
+                Text("#\(stringForCourseLevel(selectedCourse.level))")
                     .font(.customTag)
                     .frame(width: capsuleWidth, height: capsuleHeight)
                     .background {
@@ -24,14 +24,14 @@ struct CardDetailInformationView: View {
                             .stroke()
                     }
                     .foregroundColor(.customPrimary)
-                Text("#\(selectedCourse.course.courseLength, specifier: "%.0f")km")
+                Text("#\(selectedCourse.courseLength, specifier: "%.0f")km")
                     .font(.customTag)
                     .frame(width: capsuleWidth, height: capsuleHeight)
                     .background {
                         Capsule()
                             .stroke()
                     }
-                Text("#\(selectedCourse.course.courseDuration.formatDuration())")
+                Text("#\(selectedCourse.courseDuration.formatDuration())")
                     .font(.customTag)
                     .frame(width: capsuleWidth, height: capsuleHeight)
                     .background {
@@ -43,9 +43,9 @@ struct CardDetailInformationView: View {
             .font(.customTag)
             
             VStack(alignment: .leading, spacing: 8) {
-                Text("\(selectedCourse.course.locationInfo.administrativeArea) \(selectedCourse.course.locationInfo.locality) \(selectedCourse.course.locationInfo.subLocality)")
+                Text("\(selectedCourse.locationInfo.administrativeArea) \(selectedCourse.locationInfo.locality) \(selectedCourse.locationInfo.subLocality)")
                     .font(.customBody)
-                Text("\(selectedCourse.course.description)")
+                Text("\(selectedCourse.description)")
                     .font(.customSubbody)
                     .foregroundStyle(.gray)
             }
@@ -66,7 +66,7 @@ struct CardDetailInformationView: View {
                             .fontWeight(.semibold)
                     }
                     .foregroundColor(.customPrimary)
-                    Text("\(selectedCourse.course.courseLength, specifier: "%.0f")km")
+                    Text("\(selectedCourse.courseLength, specifier: "%.0f")km")
                         .font(.customSubbody)
                 }
                 HStack {
@@ -78,7 +78,7 @@ struct CardDetailInformationView: View {
                             .fontWeight(.semibold)
                     }
                     .foregroundColor(.customPrimary)
-                    Text("\(selectedCourse.course.courseDuration.formatDuration())")
+                    Text("\(selectedCourse.courseDuration.formatDuration())")
                 }
                 HStack {
                     HStack {
@@ -89,7 +89,7 @@ struct CardDetailInformationView: View {
                             .fontWeight(.semibold)
                     }
                     .foregroundColor(.customPrimary)
-                    Text(stringForAlley(selectedCourse.course.alley))
+                    Text(stringForAlley(selectedCourse.alley))
                 }
             }
             .padding(.horizontal, 10)
@@ -104,7 +104,7 @@ struct CardDetailInformationView: View {
                 NavigationLink {
                     Map {
                         UserAnnotation()
-                        MapPolyline(coordinates: ConvertCoordinateManager.convertToCLLocationCoordinates(selectedCourse.course.coursePaths))
+                        MapPolyline(coordinates: ConvertCoordinateManager.convertToCLLocationCoordinates(selectedCourse.coursePaths))
                             .stroke(.customPrimary, style: StrokeStyle(lineWidth: 8, lineCap: .round, lineJoin: .round))
                     }
                     .mapControlVisibility(.hidden)
@@ -112,13 +112,13 @@ struct CardDetailInformationView: View {
                 } label: {
                     Map(interactionModes: []) {
                         UserAnnotation()
-                        MapPolyline(coordinates: ConvertCoordinateManager.convertToCLLocationCoordinates(selectedCourse.course.coursePaths))
+                        MapPolyline(coordinates: ConvertCoordinateManager.convertToCLLocationCoordinates(selectedCourse.coursePaths))
                             .stroke(.customPrimary, style: StrokeStyle(lineWidth: 4, lineCap: .round, lineJoin: .round))
                     }
                     .frame(height: 200)
                 }
                 .buttonStyle(.plain)
-                Text("경로 제작 \(selectedCourse.course.producer)님")
+                Text("경로 제작 \(selectedCourse.producer)님")
                     .font(.customSubbody)
                     .foregroundStyle(.gray600)
             }

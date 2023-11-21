@@ -22,7 +22,7 @@ struct CardDetailView: View {
     @Binding var showDetailView: Bool
     var selectedCourse: CourseWithDistance
     var currentIndex: Int
-    var namespace: Namespace.ID
+    var namespace: Namespace.ID 
     
     @State private var appear = [false, false, false]
     @State private var viewSize = 0.0
@@ -51,7 +51,7 @@ struct CardDetailView: View {
                             courseImage
                             courseInformation
                         }
-                        CardDetailInformationView(selectedCourse: selectedCourse)
+                        CardDetailInformationView(selectedCourse: selectedCourse.course)
                             .opacity(appear[2] ? 1 : 0)
                             .offset(y: appear[2] ? 0 : fadeInOffset)
                     }

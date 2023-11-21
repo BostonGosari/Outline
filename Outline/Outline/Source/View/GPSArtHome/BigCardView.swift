@@ -29,7 +29,7 @@ struct BigCardView: View {
                         loading = false
                     }
             }
-            .matchedGeometryEffect(id: course.id, in: namespace)
+            .matchedGeometryEffect(id: "\(course.id)_0", in: namespace)
             .mask {
                 UnevenRoundedRectangle(topLeadingRadius: 10, bottomLeadingRadius: 45, bottomTrailingRadius: 45, topTrailingRadius: 70, style: .circular)
             }
@@ -76,28 +76,19 @@ struct BigCardView: View {
                 Text("\(course.course.locationInfo.locality) \(course.course.locationInfo.subLocality) • 내 위치에서 \(course.distance/1000, specifier: "%.1f")km")
             }
             .font(.customCaption)
-            .padding(.bottom, 16)
-            HStack {
+            .padding(.bottom, 11)
+            HStack(spacing: 8) {
                 Text("#\(course.course.courseLength, specifier: "%.0f")km")
-                    .font(.customTag2)
+                    .font(.customTag)
                     .foregroundColor(Color.customPrimary)
-                    .frame(width: capsuleWidth, height: capsuleHeight)
-                    .background {
-                        Capsule()
-                            .stroke()
-                            .foregroundColor(Color.customPrimary)
-                    }
                 Text("#\(course.course.courseDuration.formatDurationInKorean())")
-                    .frame(width: capsuleWidth, height: capsuleHeight)
-                    .font(.customTag2)
-                    .background {
-                        Capsule()
-                            .stroke()
-                    }
+                    .font(.customTag)
+                   
             }
+            .padding(.bottom, 19)
         }
-        .padding(.vertical, 36)
-        .padding(.leading, 18)
+        .padding(.vertical, 24)
+        .padding(.leading, 24)
         .frame(maxWidth: .infinity, alignment: .leading)
     }
     
