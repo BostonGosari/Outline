@@ -11,8 +11,8 @@ import Kingfisher
 
 struct MiniScrollView3: View {
     @State private var loading = true
-    @Binding var selectedCourse: GPSArtCourse?
-    @Binding var courseList: [GPSArtCourse]
+    @Binding var selectedCourse: CourseWithDistanceAndScore?
+    @Binding var courseList: [CourseWithDistanceAndScore]
     @Binding var showDetailView: Bool
     @Binding var category: String
     var namespace: Namespace.ID
@@ -43,7 +43,7 @@ struct MiniScrollView3: View {
                                 }
                             } label: {
                                 ZStack {
-                                    KFImage(URL(string: currentCourse.thumbnailLong))
+                                    KFImage(URL(string: currentCourse.course.thumbnailLong))
                                         .resizable()
                                         .placeholder {
                                             Rectangle()
@@ -65,23 +65,23 @@ struct MiniScrollView3: View {
                                     )
                                     VStack(alignment: .leading, spacing: 0) {
                                         Spacer()
-                                        Text("\(currentCourse.courseName)")
+                                        Text("\(currentCourse.course.courseName)")
                                             .font(.customHeadline)
                                             .foregroundColor(.white)
                                             .padding(.bottom, 8)
                                         HStack(spacing: 0) {
                                             Image(systemName: "mappin")
                                                 .foregroundColor(.gray600)
-                                            Text("\(currentCourse.locationInfo.locality) \(currentCourse.locationInfo.subLocality)")
+                                            Text("\(currentCourse.course.locationInfo.locality) \(currentCourse.course.locationInfo.subLocality)")
                                                 .foregroundColor(.gray600)
                                         }
                                         .font(.customCaption)
                                         .padding(.bottom, 4)
                                         HStack(spacing: 8) {
-                                            Text("#\(currentCourse.courseLength, specifier: "%.0f")km")
+                                            Text("#\(currentCourse.course.courseLength, specifier: "%.0f")km")
                                                 .font(.customTag2)
                                                 .foregroundColor(Color.customPrimary)
-                                            Text("#\(currentCourse.courseDuration.formatDurationInKorean())")
+                                            Text("#\(currentCourse.course.courseDuration.formatDurationInKorean())")
                                                 .font(.customTag2)
                                                
                                         }

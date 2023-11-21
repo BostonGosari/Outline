@@ -9,15 +9,7 @@ import Photos
 import SwiftUI
 
 class ShareViewModel: ObservableObject {
-    @Published var runningData = ShareModel()
-    @Published var currentPage = 0
-    @Published var showCamera = false
-    @Published var showImagePicker = false
     @Published var permissionDenied = false
-    
-    @Published var tapSaveButton = false
-    @Published var tapShareButton = false
-    
     @Published var isShowInstaAlert = false
     
     @Published var isShowPopup = false {
@@ -26,44 +18,6 @@ class ShareViewModel: ObservableObject {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
                     self.isShowPopup = false
                 }
-            }
-        }
-    }
-    
-    var alertTitle = ""
-    var alertMessage = ""
-    var imageName = ""
-    
-    func checkCameraPermission() {
-        AVCaptureDevice.requestAccess(for: .video) { granted in
-            if granted {
-                self.showCamera = true
-            } else {
-                self.alertTitle = "카메라 권한 허용"
-                self.alertMessage = "권한을 허용하면 사진을 찍어 업로드할 수 있어요."
-                self.imageName = "icon_Image_B"
-                self.permissionDenied = true
-            }
-        }
-    }
-    
-    func checkAlbumPermission() {
-        PHPhotoLibrary.requestAuthorization { status in
-            switch status {
-            case .authorized:
-                self.showImagePicker = true
-            case .denied:
-                self.alertTitle = "사진 권한 허용"
-                self.alertMessage = "권한을 허용하면 사진을 함께 업로드할 수 있어요."
-                self.imageName = "icon_Camera"
-                self.permissionDenied = true
-            case .restricted, .notDetermined:
-                self.alertTitle = "사진 권한 허용"
-                self.alertMessage = "권한을 허용하면 사진을 함께 업로드할 수 있어요."
-                self.imageName = "icon_Camera"
-                self.permissionDenied = true
-            default:
-                break
             }
         }
     }
@@ -92,14 +46,8 @@ class ShareViewModel: ObservableObject {
                 imageSaver.writeToPhotoAlbum(image: image)
                 self.isShowPopup = true
             case .denied:
-                self.alertTitle = "사진 권한 허용"
-                self.alertMessage = "권한을 허용하면 사진을 함께 업로드할 수 있어요."
-                self.imageName = "icon_Camera"
                 self.permissionDenied = true
             case .restricted, .notDetermined:
-                self.alertTitle = "사진 권한 허용"
-                self.alertMessage = "권한을 허용하면 사진을 함께 업로드할 수 있어요."
-                self.imageName = "icon_Camera"
                 self.permissionDenied = true
             default:
                 break

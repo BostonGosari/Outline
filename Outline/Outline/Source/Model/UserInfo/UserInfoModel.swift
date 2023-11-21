@@ -100,7 +100,7 @@ struct UserInfoModel: UserInfoModelProtocol {
                 } catch {
                     completion(.failure(.typeError))
                 }
-            case .failure(let failure):
+            case .failure(_):
                 completion(.failure(.dataNotFound))
             }
         }
@@ -118,7 +118,7 @@ struct UserInfoModel: UserInfoModelProtocol {
                 } catch {
                     completion(.failure(.typeError))
                 }
-            case .failure(let failure):
+            case .failure(_):
                 completion(.failure(.dataNotFound))
             }
         }
@@ -136,7 +136,7 @@ struct UserInfoModel: UserInfoModelProtocol {
                 } catch {
                     completion(.failure(.typeError))
                 }
-            case .failure(let failure):
+            case .failure(_):
                 completion(.failure(.dataNotFound))
             }
         }

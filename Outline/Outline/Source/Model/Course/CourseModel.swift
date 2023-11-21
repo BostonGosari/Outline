@@ -36,7 +36,6 @@ struct CourseModel: CourseModelProtocol {
                     let course = try snapshot.data(as: GPSArtCourse.self)
                     courseList.append(course)
                 }
-                print(courseList)
                 completion(.success(courseList))
             } catch {
                 completion(.failure(.typeError))
