@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-
+import CoreMotion
 struct NewRunningView: View {
     @StateObject private var runningStartManager = RunningStartManager.shared
     @StateObject private var runningDataManager = RunningDataManager.shared
@@ -43,6 +43,8 @@ struct NewRunningView: View {
                 navigation
             }
             metrics
+            RunningFinishPopUp(isPresented: $showCompleteSheet, score: .constant(60), userLocations: $locationManager.userLocations
+            )
         }
         .overlay {
             if isFirstRunning && runningStartManager.runningType == .gpsArt {
@@ -54,9 +56,6 @@ struct NewRunningView: View {
                 RunningPopup(text: "정지 버튼을 길게 누르면 러닝이 종료돼요")
                     .frame(maxHeight: .infinity, alignment: .top)
             }
-        }
-        .sheet(isPresented: $showCompleteSheet) {
-            completeSheet
         }
     }
 }
@@ -328,11 +327,11 @@ extension NewRunningView {
                         runningStartManager.running = false
                     } else {
                         runningDataManager.userLocations = locationManager.userLocations
-                        runningDataManager.stopRunning()
                         runningStartManager.counter = 0
                         withAnimation {
                             showCompleteSheet = true
                         }
+                        runningDataManager.stopRunning()
                     }
                 }
                 showStopPopup = false

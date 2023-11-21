@@ -79,7 +79,6 @@ struct CourseModel: CourseModelProtocol {
         }
     }
     
-    
     func readCategoryCourse(categoryType: CourseCategoryType, completion: @escaping (Result<CourseCategory, GPSArtError>) -> Void) {
         var categoryId: String = ""
         switch categoryType {

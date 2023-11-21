@@ -9,7 +9,7 @@ import SwiftUI
 import Kingfisher
 
 struct BigCardView: View {
-    var course: CourseWithDistance
+    var course: GPSArtCourse
     @Binding var loading: Bool
     var index: Int
     var currentIndex: Int
@@ -20,7 +20,7 @@ struct BigCardView: View {
     private let capsuleHeight: CGFloat = 25
     
     var body: some View {
-        KFImage(URL(string: course.course.thumbnail))
+        KFImage(URL(string: course.thumbnail))
             .resizable()
             .placeholder {
                 UnevenRoundedRectangle(topLeadingRadius: 10, bottomLeadingRadius: 45, bottomTrailingRadius: 45, topTrailingRadius: 70, style: .circular)
@@ -29,7 +29,7 @@ struct BigCardView: View {
                         loading = false
                     }
             }
-            .matchedGeometryEffect(id: course.id, in: namespace)
+            .matchedGeometryEffect(id: "\(course.id)_0", in: namespace)
             .mask {
                 UnevenRoundedRectangle(topLeadingRadius: 10, bottomLeadingRadius: 45, bottomTrailingRadius: 45, topTrailingRadius: 70, style: .circular)
             }
@@ -66,38 +66,29 @@ struct BigCardView: View {
     
     private var courseInformation: some View {
         VStack(alignment: .leading, spacing: 0) {
-            Text("\(course.course.courseName)")
+            Text("\(course.courseName)")
                 .font(.customHeadline)
                 .bold()
                 .padding(.bottom, 8)
                 .padding(.top, 47)
             HStack {
                 Image(systemName: "mappin")
-                Text("\(course.course.locationInfo.locality) \(course.course.locationInfo.subLocality) • 내 위치에서 \(course.distance/1000, specifier: "%.1f")km")
+                Text("\(course.locationInfo.locality) \(course.locationInfo.subLocality) • 내 위치에서 \(course.distance/1000, specifier: "%.1f")km")
             }
             .font(.customCaption)
-            .padding(.bottom, 16)
-            HStack {
-                Text("#\(course.course.courseLength, specifier: "%.0f")km")
-                    .font(.customTag2)
+            .padding(.bottom, 11)
+            HStack(spacing: 8) {
+                Text("#\(course.courseLength, specifier: "%.0f")km")
+                    .font(.customTag)
                     .foregroundColor(Color.customPrimary)
-                    .frame(width: capsuleWidth, height: capsuleHeight)
-                    .background {
-                        Capsule()
-                            .stroke()
-                            .foregroundColor(Color.customPrimary)
-                    }
-                Text("#\(course.course.courseDuration.formatDurationInKorean())")
-                    .frame(width: capsuleWidth, height: capsuleHeight)
-                    .font(.customTag2)
-                    .background {
-                        Capsule()
-                            .stroke()
-                    }
+                Text("#\(course.courseDuration.formatDurationInKorean())")
+                    .font(.customTag)
+                   
             }
+            .padding(.bottom, 19)
         }
-        .padding(.vertical, 36)
-        .padding(.leading, 18)
+        .padding(.vertical, 24)
+        .padding(.leading, 24)
         .frame(maxWidth: .infinity, alignment: .leading)
     }
     
