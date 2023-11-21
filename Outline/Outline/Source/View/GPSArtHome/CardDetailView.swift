@@ -20,7 +20,7 @@ struct CardDetailView: View {
     @Environment(\.dismiss) var dismiss
     
     @Binding var showDetailView: Bool
-    var selectedCourse: CourseWithDistance
+    var selectedCourse: CourseWithDistanceAndScore
     var currentIndex: Int
     var namespace: Namespace.ID 
     

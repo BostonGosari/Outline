@@ -89,8 +89,8 @@
 		9528EFEC2ADEC7CF0056CCC6 /* UserDataModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9528EFEB2ADEC7CF0056CCC6 /* UserDataModelType.swift */; };
 		9528F0002AE042570056CCC6 /* PathGenerateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9528EFFF2AE042570056CCC6 /* PathGenerateManager.swift */; };
 		9528F0062AE0B37B0056CCC6 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9528F0052AE0B37B0056CCC6 /* LoginView.swift */; };
-		954B04272B00ADE000A8A83E /* PathTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954B04262B00ADE000A8A83E /* PathTestView.swift */; };
 		954B04182AFF725000A8A83E /* ProfileUserInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954B04172AFF725000A8A83E /* ProfileUserInfoViewModel.swift */; };
+		954B04272B00ADE000A8A83E /* PathTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954B04262B00ADE000A8A83E /* PathTestView.swift */; };
 		954CB29C2AE51619005EB2E9 /* PersistentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EB1EE82ADDC43400B47984 /* PersistentController.swift */; };
 		954CB29D2AE5161B005EB2E9 /* UserDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EB1EEB2ADDC66B00B47984 /* UserDataModel.swift */; };
 		954CB29E2AE5161D005EB2E9 /* UserDataModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9528EFEB2ADEC7CF0056CCC6 /* UserDataModelType.swift */; };
@@ -112,11 +112,6 @@
 		9572A2092B02563900E653AB /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 9572A2082B02563900E653AB /* Secrets.xcconfig */; };
 		958240752B0AFDF100105FAE /* CourseScoreModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958240742B0AFDF100105FAE /* CourseScoreModelType.swift */; };
 		958240772B0AFE7900105FAE /* CourseScoreModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958240762B0AFE7900105FAE /* CourseScoreModel.swift */; };
-		9582405D2B09EAAD00105FAE /* CategoryTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9582405C2B09EAAD00105FAE /* CategoryTestView.swift */; };
-		958240602B09F2C500105FAE /* CategoryTestViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9582405F2B09F2C500105FAE /* CategoryTestViewModel.swift */; };
-		959BB20E2AEE380200B5B10B /* KakaoSDKAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 959BB20D2AEE380200B5B10B /* KakaoSDKAuth */; };
-		959BB2102AEE380200B5B10B /* KakaoSDKCommon in Frameworks */ = {isa = PBXBuildFile; productRef = 959BB20F2AEE380200B5B10B /* KakaoSDKCommon */; };
-		959BB2122AEE380200B5B10B /* KakaoSDKUser in Frameworks */ = {isa = PBXBuildFile; productRef = 959BB2112AEE380200B5B10B /* KakaoSDKUser */; };
 		95A01E172AEE3E990093D9C0 /* KakaoAuthModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A01E162AEE3E990093D9C0 /* KakaoAuthModel.swift */; };
 		95A01E1C2AEE7A0A0093D9C0 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A01E1B2AEE7A0A0093D9C0 /* LoginViewModel.swift */; };
 		95A01E1E2AF0CCE70093D9C0 /* DoubleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A01E1D2AF0CCE70093D9C0 /* DoubleExtension.swift */; };
@@ -137,6 +132,15 @@
 		95EB1EE92ADDC43400B47984 /* PersistentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EB1EE82ADDC43400B47984 /* PersistentController.swift */; };
 		95EB1EEC2ADDC66B00B47984 /* UserDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EB1EEB2ADDC66B00B47984 /* UserDataModel.swift */; };
 		95EB1EF12ADE228A00B47984 /* UserInfoModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EB1EF02ADE228A00B47984 /* UserInfoModelType.swift */; };
+		BB02A38F2B0CCCF300250EDD /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 958240622B0A81B500105FAE /* FirebaseAuth */; };
+		BB02A3902B0CCCF300250EDD /* FirebaseAuthCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 958240642B0A81B500105FAE /* FirebaseAuthCombine-Community */; };
+		BB02A3912B0CCCF300250EDD /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 958240662B0A81B500105FAE /* FirebaseFirestore */; };
+		BB02A3922B0CCCF300250EDD /* FirebaseFirestoreCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 958240682B0A81B500105FAE /* FirebaseFirestoreCombine-Community */; };
+		BB02A3932B0CCCF300250EDD /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 9582406A2B0A81B500105FAE /* FirebaseFirestoreSwift */; };
+		BB02A3942B0CCCF300250EDD /* KakaoSDKCommon in Frameworks */ = {isa = PBXBuildFile; productRef = 9582406D2B0A81D900105FAE /* KakaoSDKCommon */; };
+		BB02A3952B0CCCF300250EDD /* KakaoSDKAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 9582406F2B0A826D00105FAE /* KakaoSDKAuth */; };
+		BB02A3962B0CCCF300250EDD /* KakaoSDKUser in Frameworks */ = {isa = PBXBuildFile; productRef = 958240712B0A82A400105FAE /* KakaoSDKUser */; };
+		BB02A3982B0CCFBE00250EDD /* ScoreStar.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB02A3972B0CCFBE00250EDD /* ScoreStar.swift */; };
 		BB1C49E52B0B766D009625AC /* MiniScrollView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1C49E42B0B766D009625AC /* MiniScrollView2.swift */; };
 		BB1C49E72B0B7694009625AC /* MiniScrollView3.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1C49E62B0B7694009625AC /* MiniScrollView3.swift */; };
 		BB1D530C2ADDBC560073771F /* Pretendard-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BB1D530B2ADDBC560073771F /* Pretendard-Black.ttf */; };
@@ -308,8 +312,8 @@
 		9528EFEB2ADEC7CF0056CCC6 /* UserDataModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataModelType.swift; sourceTree = "<group>"; };
 		9528EFFF2AE042570056CCC6 /* PathGenerateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathGenerateManager.swift; sourceTree = "<group>"; };
 		9528F0052AE0B37B0056CCC6 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
-		954B04262B00ADE000A8A83E /* PathTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathTestView.swift; sourceTree = "<group>"; };
 		954B04172AFF725000A8A83E /* ProfileUserInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUserInfoViewModel.swift; sourceTree = "<group>"; };
+		954B04262B00ADE000A8A83E /* PathTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathTestView.swift; sourceTree = "<group>"; };
 		954CB29F2AE5457A005EB2E9 /* pohangCrocodileRun.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = pohangCrocodileRun.kml; sourceTree = "<group>"; };
 		954CB2A02AE5457A005EB2E9 /* seoulOctopusRun.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = seoulOctopusRun.kml; sourceTree = "<group>"; };
 		954CB2A12AE5457A005EB2E9 /* pohangDangDangRun.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = pohangDangDangRun.kml; sourceTree = "<group>"; };
@@ -322,8 +326,6 @@
 		9572A2082B02563900E653AB /* Secrets.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 		958240742B0AFDF100105FAE /* CourseScoreModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseScoreModelType.swift; sourceTree = "<group>"; };
 		958240762B0AFE7900105FAE /* CourseScoreModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseScoreModel.swift; sourceTree = "<group>"; };
-		9582405C2B09EAAD00105FAE /* CategoryTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTestView.swift; sourceTree = "<group>"; };
-		9582405F2B09F2C500105FAE /* CategoryTestViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTestViewModel.swift; sourceTree = "<group>"; };
 		959D90602ADA3A1000748BFB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		95A01E162AEE3E990093D9C0 /* KakaoAuthModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoAuthModel.swift; sourceTree = "<group>"; };
 		95A01E1B2AEE7A0A0093D9C0 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
@@ -342,6 +344,7 @@
 		95EB1EEB2ADDC66B00B47984 /* UserDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataModel.swift; sourceTree = "<group>"; };
 		95EB1EF02ADE228A00B47984 /* UserInfoModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoModelType.swift; sourceTree = "<group>"; };
 		95EB1EF72ADE251100B47984 /* UserCoreDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = UserCoreDataModel.xcdatamodel; sourceTree = "<group>"; };
+		BB02A3972B0CCFBE00250EDD /* ScoreStar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreStar.swift; sourceTree = "<group>"; };
 		BB1C49E42B0B766D009625AC /* MiniScrollView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniScrollView2.swift; sourceTree = "<group>"; };
 		BB1C49E62B0B7694009625AC /* MiniScrollView3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniScrollView3.swift; sourceTree = "<group>"; };
 		BB1D530B2ADDBC560073771F /* Pretendard-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Black.ttf"; sourceTree = "<group>"; };
@@ -415,17 +418,17 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BB02A3962B0CCCF300250EDD /* KakaoSDKUser in Frameworks */,
+				BB02A3952B0CCCF300250EDD /* KakaoSDKAuth in Frameworks */,
+				BB02A3942B0CCCF300250EDD /* KakaoSDKCommon in Frameworks */,
+				BB02A3932B0CCCF300250EDD /* FirebaseFirestoreSwift in Frameworks */,
+				BB02A3922B0CCCF300250EDD /* FirebaseFirestoreCombine-Community in Frameworks */,
+				BB02A3912B0CCCF300250EDD /* FirebaseFirestore in Frameworks */,
+				BB02A3902B0CCCF300250EDD /* FirebaseAuthCombine-Community in Frameworks */,
+				BB02A38F2B0CCCF300250EDD /* FirebaseAuth in Frameworks */,
 				BB44B1672AFF5BBD000462CA /* Kingfisher in Frameworks */,
-				958240722B0A82A400105FAE /* KakaoSDKUser in Frameworks */,
 				95B8F45C2AED35E100D9F35B /* FirebaseAuth in Frameworks */,
 				95B8F45E2AED35E100D9F35B /* FirebaseAuthCombine-Community in Frameworks */,
-				958240632B0A81B500105FAE /* FirebaseAuth in Frameworks */,
-				9582406E2B0A81D900105FAE /* KakaoSDKCommon in Frameworks */,
-				958240652B0A81B500105FAE /* FirebaseAuthCombine-Community in Frameworks */,
-				958240672B0A81B500105FAE /* FirebaseFirestore in Frameworks */,
-				958240692B0A81B500105FAE /* FirebaseFirestoreCombine-Community in Frameworks */,
-				9582406B2B0A81B500105FAE /* FirebaseFirestoreSwift in Frameworks */,
-				958240702B0A826D00105FAE /* KakaoSDKAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -554,15 +557,6 @@
 				958240762B0AFE7900105FAE /* CourseScoreModel.swift */,
 			);
 			path = Score;
-			sourceTree = "<group>";
-		};
-		9582405E2B09F2A900105FAE /* CourseCategory */ = {
-			isa = PBXGroup;
-			children = (
-				9582405C2B09EAAD00105FAE /* CategoryTestView.swift */,
-				9582405F2B09F2C500105FAE /* CategoryTestViewModel.swift */,
-			);
-			path = CourseCategory;
 			sourceTree = "<group>";
 		};
 		95A01E182AEE76510093D9C0 /* Auth */ = {
@@ -923,6 +917,7 @@
 				BBEC68832B087B020026C306 /* UnderlineButton.swift */,
 				293C86C52B0778FD00640329 /* NeedLoginSheet.swift */,
 				2972515B2B0787640048D787 /* GuideToFreeRunningSheet.swift */,
+				BB02A3972B0CCFBE00250EDD /* ScoreStar.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -1317,6 +1312,7 @@
 				29EBD7842B0883E500B44AA9 /* BigCardFrontside.swift in Sources */,
 				95EB1EE92ADDC43400B47984 /* PersistentController.swift in Sources */,
 				293C86C62B0778FD00640329 /* NeedLoginSheet.swift in Sources */,
+				BB02A3982B0CCFBE00250EDD /* ScoreStar.swift in Sources */,
 				2998035C2AE0181900A9A134 /* Confetti.swift in Sources */,
 				29AE76DC2ADE2A5300A46742 /* InputUserInfoViewModel.swift in Sources */,
 				F0492E1D2ADD2AE900F6EADD /* GPSArtHomeHeader.swift in Sources */,
