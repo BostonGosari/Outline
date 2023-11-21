@@ -56,6 +56,9 @@ struct HomeTabView: View {
             }
             if runningManager.running {
                 NewRunningView()
+                    .onAppear {
+                        watchConnectivityManager.sendRunningState(.start)
+                    }
             }
         }
         .sheet(isPresented: $showMirroringSheet) {
@@ -63,10 +66,10 @@ struct HomeTabView: View {
                 
             }
         }
-        .onReceive(watchConnectivityManager.$runningState) { runningState in
-            if runningState == .start {
+        .onChange(of: watchConnectivityManager.runningState) { _, newValue in
+            if newValue == .start {
                 showMirroringSheet = true
-            } else if runningState == .end {
+            } else if newValue == .end {
                 showMirroringSheet = false
             }
         }
