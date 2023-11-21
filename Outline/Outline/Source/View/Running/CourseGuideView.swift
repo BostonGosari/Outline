@@ -35,10 +35,12 @@ struct CourseGuideView: View {
             }
             .rotationEffect(Angle(degrees: courseRotate))
         }
+        .overlay {
+            UnevenRoundedRectangle(topLeadingRadius: 7, bottomLeadingRadius: 7, bottomTrailingRadius: 20, topTrailingRadius: 7)
+                .strokeBorder(.white, lineWidth: tapGuideView ? 0.7 : 2)
+        }
         .mask {
-            Rectangle()
-                .roundedCorners(20, corners: [.bottomRight])
-                .roundedCorners(7, corners: [.topLeft, .topRight, .bottomLeft])
+            UnevenRoundedRectangle(topLeadingRadius: 7, bottomLeadingRadius: 7, bottomTrailingRadius: 20, topTrailingRadius: 7)
         }
         .frame(width: width, height: height)
         .scaleEffect(tapGuideView ? 3 : 1, anchor: .top)
