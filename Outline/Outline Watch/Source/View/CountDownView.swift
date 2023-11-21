@@ -20,6 +20,7 @@ struct CountDownView: View {
                 Image("Count\(countdownSeconds)")
                     .resizable()
                     .scaledToFit()
+                    .padding(.bottom, countdownSeconds != 3 ? 10 : 0)
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .onAppear {
                         Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in

@@ -9,8 +9,8 @@ import Foundation
 import WatchConnectivity
 
 class WatchConnectivityManager: NSObject, WCSessionDelegate, ObservableObject {
-    
     @Published var allCourses: [GPSArtCourse] = []
+    @Published var receivedCourse: GPSArtCourse = GPSArtCourse()
     @Published var isWatchRunning: Bool = false
     static let shared = WatchConnectivityManager()
     
@@ -35,10 +35,25 @@ class WatchConnectivityManager: NSObject, WCSessionDelegate, ObservableObject {
     }
     
 #if os(iOS)
-    func sessionDidBecomeInactive(_ session: WCSession) { }
+    func sessionDidBecomeInactive(_ session: WCSession) {
+        print("error sessionDidBecomeInactive")
+    }
     
-    func sessionDidDeactivate(_ session: WCSession) { }
+    func sessionDidDeactivate(_ session: WCSession) { 
+        print("error sessionDidDeactivate")
+    }
 #endif
+    
+    func sendGPSArtCourse(_ course: GPSArtCourse) {
+        do {
+            let encoder = JSONEncoder()
+            let data = try encoder.encode(course)
+            let userInfo = ["gpsArtCourse": data]
+            session.transferUserInfo(userInfo)
+        } catch {
+            print("Failed to encod GPSArtCourse")
+        }
+    }
     
     func sendGPSArtCoursesToWatch(_ courses: [GPSArtCourse]) {
         do {
@@ -84,6 +99,17 @@ class WatchConnectivityManager: NSObject, WCSessionDelegate, ObservableObject {
                     print("received all courses")
                 } catch {
                     print("Failed to decode GPSArtCourses: \(error)")
+                }
+            }
+            
+            if let data = userInfo["gpsArtCourse"] as? Data {
+                let decoder = JSONDecoder()
+                do {
+                    let course = try decoder.decode(GPSArtCourse.self, from: data)
+                    self.receivedCourse = course
+                    print("received course")
+                } catch {
+                    print("Failed to decode GPSArtCourse: \(error)")
                 }
             }
             

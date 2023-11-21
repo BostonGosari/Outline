@@ -36,7 +36,6 @@ struct GPSArtCourse: Codable, Hashable {
     var navigation: [Navigation]
     var hotSpots: [HotSpot]
     
-    
     init(
         id: String,
         courseName: String,
