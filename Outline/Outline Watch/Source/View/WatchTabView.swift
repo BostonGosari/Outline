@@ -8,12 +8,11 @@
 import SwiftUI
 
 struct WatchTabView: View {
-    @Environment(\.isLuminanceReduced) var isLuminanceReduced
-    @StateObject var workoutManager = WatchWorkoutManager.shared
-    @StateObject var watchRunningManager = WatchRunningManager.shared
-    @State private var selection: Tab = .metrics
+    @StateObject private var locationManager = LocationManager()
+    @StateObject private var workoutManager = WatchWorkoutManager.shared
+    @StateObject private var runningManager = WatchRunningManager.shared
     
-    @State private var mapWatchView = MapWatchView()
+    @State private var selection: Tab = .metrics
     @State private var isMapLoaded = false
         
     enum Tab {
@@ -23,15 +22,13 @@ struct WatchTabView: View {
     var body: some View {
         NavigationStack {
             TabView(selection: $selection) {
-                ControlsView()
+                ControlsView(userLocations: locationManager.userLocations)
                     .tag(Tab.controls)
-                MapWatchView()
+                MapWatchView(userLocations: locationManager.userLocations)
                     .tag(Tab.map)
                 MetricsView()
                     .tag(Tab.metrics)
             }
-            .toolbarBackground(.hidden, for: .navigationBar)
-            .tabViewStyle(PageTabViewStyle(indexDisplayMode: isLuminanceReduced ? .never : .automatic))
             .onChange(of: workoutManager.running) { _, newValue in
                 withAnimation {
                     if newValue {
@@ -41,11 +38,11 @@ struct WatchTabView: View {
                     }
                 }
             }
-            .onChange(of: isLuminanceReduced) { _, _ in
-                withAnimation {
-                    selection = .metrics
-                }
+            .navigationTitle {
+                Text(workoutManager.running ? runningManager.runningTitle : "일시 정지됨")
+                    .foregroundStyle(.customPrimary)
             }
+            .navigationBarTitleDisplayMode(.inline)
         }
     }
 }
