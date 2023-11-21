@@ -9,7 +9,7 @@ import SwiftUI
 import Kingfisher
 
 struct BigCardView: View {
-    var course: GPSArtCourse
+    var course: CourseWithDistance
     @Binding var loading: Bool
     var index: Int
     var currentIndex: Int
@@ -20,7 +20,7 @@ struct BigCardView: View {
     private let capsuleHeight: CGFloat = 25
     
     var body: some View {
-        KFImage(URL(string: course.thumbnail))
+        KFImage(URL(string: course.course.thumbnail))
             .resizable()
             .placeholder {
                 UnevenRoundedRectangle(topLeadingRadius: 10, bottomLeadingRadius: 45, bottomTrailingRadius: 45, topTrailingRadius: 70, style: .circular)
@@ -66,22 +66,22 @@ struct BigCardView: View {
     
     private var courseInformation: some View {
         VStack(alignment: .leading, spacing: 0) {
-            Text("\(course.courseName)")
+            Text("\(course.course.courseName)")
                 .font(.customHeadline)
                 .bold()
                 .padding(.bottom, 8)
                 .padding(.top, 47)
             HStack {
                 Image(systemName: "mappin")
-                Text("\(course.locationInfo.locality) \(course.locationInfo.subLocality) • 내 위치에서 \(course.distance/1000, specifier: "%.1f")km")
+                Text("\(course.course.locationInfo.locality) \(course.course.locationInfo.subLocality) • 내 위치에서 \(course.distance/1000, specifier: "%.1f")km")
             }
             .font(.customCaption)
             .padding(.bottom, 11)
             HStack(spacing: 8) {
-                Text("#\(course.courseLength, specifier: "%.0f")km")
+                Text("#\(course.course.courseLength, specifier: "%.0f")km")
                     .font(.customTag)
                     .foregroundColor(Color.customPrimary)
-                Text("#\(course.courseDuration.formatDurationInKorean())")
+                Text("#\(course.course.courseDuration.formatDurationInKorean())")
                     .font(.customTag)
                    
             }
