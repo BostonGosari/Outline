@@ -36,8 +36,8 @@ enum PermissionType {
 }
 
 struct PermissionSheet: View {
-    var type: PermissionType = .location
     @Environment(\.dismiss) var dismiss
+    var type: PermissionType = .location
     
     var body: some View {
         VStack {
