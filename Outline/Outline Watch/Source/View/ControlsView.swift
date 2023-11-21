@@ -61,6 +61,7 @@ struct ControlsView: View {
         .scrollDisabled(workoutManager.running || workoutManager.showSummaryView)
         .sheet(isPresented: $showEndRunningSheet) {
             EndRunningSheet(text: "종료하시겠어요?") {
+                connectivityManager.sendRunningState(.end)
                 showEndRunningSheet = false
                 runningManager.userLocations = userLocations
                 sendDataToPhone()
@@ -69,6 +70,7 @@ struct ControlsView: View {
         }
         .sheet(isPresented: $showEndWithoutSavingSheet) {
             EndRunningSheet(text: "30초 이하는 기록되지 않아요.\n종료하시겠어요?") {
+                connectivityManager.sendRunningState(.end)
                 showEndWithoutSavingSheet = false
                 workoutManager.endWorkoutWithoutSummaryView()
                 runningManager.startRunning = false
