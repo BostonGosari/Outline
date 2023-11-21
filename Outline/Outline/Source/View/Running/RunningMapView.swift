@@ -83,7 +83,8 @@ struct RunningMapView: View {
                         tapGuideView: $showBigGuide,
                         coursePathCoordinates: ConvertCoordinateManager.convertToCLLocationCoordinates(course.coursePaths),
                         courseRotate: course.heading,
-                        userLocations: viewModel.userLocations
+                        userLocations: viewModel.userLocations,
+                        tapPossible: false
                     )
                     .onTapGesture {
                         showBigGuide.toggle()

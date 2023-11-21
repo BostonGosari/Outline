@@ -14,6 +14,7 @@ struct CourseGuideView: View {
     let coursePathCoordinates: [CLLocationCoordinate2D]
     let courseRotate: Double
     var userLocations: [CLLocationCoordinate2D]
+    var tapPossible: Bool
     
     var width = 113.0
     var height = 168.0
@@ -42,10 +43,12 @@ struct CourseGuideView: View {
         .frame(width: width, height: height)
         .scaleEffect(tapGuideView ? 3 : 1, anchor: .top)
         .onTapGesture {
-            withAnimation {
-                tapGuideView.toggle()
+            if tapPossible {
+                withAnimation {
+                    tapGuideView.toggle()
+                }
+                HapticManager.impact(style: .light)
             }
-            HapticManager.impact(style: .light)
         }
     }
 }
