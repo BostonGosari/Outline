@@ -67,7 +67,7 @@ class GPSArtHomeViewModel: NSObject, CLLocationManagerDelegate, ObservableObject
 
         // 거리에 따라 배열을 정렬하고 가장 가까운 세 개의 코스를 선택
         let sortedCourses = courseDistances.sorted { $0.distance < $1.distance }
-        self.watchCourses = sortedCourses
+        self.watchCourses = sortedCourses.map { $0.course }
         self.recommendedCoures = sortedCourses.prefix(3).map { $0.course }
     }
     
