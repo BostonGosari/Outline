@@ -17,7 +17,7 @@ struct GPSArtHomeView: View {
     
     @State var currentIndex: Int = 1
     @State private var loading = true
-    @State private var selectedCourse: GPSArtCourse?
+    @State private var selectedCourse: CourseWithDistance?
     @State private var showNetworkErrorView = false
     // 받아오는 변수
     @Binding var showDetailView: Bool
