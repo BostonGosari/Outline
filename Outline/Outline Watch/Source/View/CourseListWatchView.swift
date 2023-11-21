@@ -20,6 +20,7 @@ struct CourseListWatchView: View {
     @State private var showLocationPermissionSheet = false
     @State private var showNetworkErrorSheet = false
     @State private var showFreeRunningGuideSheet = false
+    @State private var showMirroringSheet = false
     
     var workoutTypes: [HKWorkoutActivityType] = [.running]
     
@@ -131,6 +132,26 @@ struct CourseListWatchView: View {
             .navigationTitle("아트")
             .onAppear {
                 viewModel.checkAuthorization()
+            }
+            .onChange(of: connectivityManager.runningState) { _, newValue in
+                if newValue == .start {
+                    showMirroringSheet = true
+                } else if newValue == .end {
+                    showMirroringSheet = false
+                }
+            }
+            .sheet(isPresented: $showMirroringSheet) {
+                TwoButtonSheet(
+                    text: "iPhone으로 러닝을 그리고 있어요",
+                    firstLabel: "돌아가기",
+                    firstAction: {
+                        showMirroringSheet = false
+                    },
+                    secondLabel: "미러링하기",
+                    secondAction: {
+                        showMirroringSheet = false
+                    }
+                )
             }
         }
     }

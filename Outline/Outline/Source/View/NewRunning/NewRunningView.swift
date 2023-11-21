@@ -8,6 +8,7 @@
 import SwiftUI
 import CoreMotion
 struct NewRunningView: View {
+    @StateObject private var connectivityManger = WatchConnectivityManager.shared
     @StateObject private var runningStartManager = RunningStartManager.shared
     @StateObject private var runningDataManager = RunningDataManager.shared
     @StateObject private var locationManager = LocationManager()
@@ -354,6 +355,7 @@ extension NewRunningView {
                         runningDataManager.stopRunningWithoutRecord()
                         runningStartManager.counter = 0
                         runningStartManager.running = false
+                        connectivityManger.sendRunningState(.end)
                     } else {
                         runningDataManager.userLocations = locationManager.userLocations
                         runningStartManager.counter = 0
@@ -361,6 +363,7 @@ extension NewRunningView {
                             showCompleteSheet = true
                         }
                         runningDataManager.stopRunning()
+                        connectivityManger.sendRunningState(.end)
                     }
                 }
                 showStopPopup = false
