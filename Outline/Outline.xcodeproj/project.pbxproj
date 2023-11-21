@@ -154,6 +154,15 @@
 		95EB1EE92ADDC43400B47984 /* PersistentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EB1EE82ADDC43400B47984 /* PersistentController.swift */; };
 		95EB1EEC2ADDC66B00B47984 /* UserDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EB1EEB2ADDC66B00B47984 /* UserDataModel.swift */; };
 		95EB1EF12ADE228A00B47984 /* UserInfoModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EB1EF02ADE228A00B47984 /* UserInfoModelType.swift */; };
+		BB02A38F2B0CCCF300250EDD /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 958240622B0A81B500105FAE /* FirebaseAuth */; };
+		BB02A3902B0CCCF300250EDD /* FirebaseAuthCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 958240642B0A81B500105FAE /* FirebaseAuthCombine-Community */; };
+		BB02A3912B0CCCF300250EDD /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 958240662B0A81B500105FAE /* FirebaseFirestore */; };
+		BB02A3922B0CCCF300250EDD /* FirebaseFirestoreCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 958240682B0A81B500105FAE /* FirebaseFirestoreCombine-Community */; };
+		BB02A3932B0CCCF300250EDD /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 9582406A2B0A81B500105FAE /* FirebaseFirestoreSwift */; };
+		BB02A3942B0CCCF300250EDD /* KakaoSDKCommon in Frameworks */ = {isa = PBXBuildFile; productRef = 9582406D2B0A81D900105FAE /* KakaoSDKCommon */; };
+		BB02A3952B0CCCF300250EDD /* KakaoSDKAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 9582406F2B0A826D00105FAE /* KakaoSDKAuth */; };
+		BB02A3962B0CCCF300250EDD /* KakaoSDKUser in Frameworks */ = {isa = PBXBuildFile; productRef = 958240712B0A82A400105FAE /* KakaoSDKUser */; };
+		BB02A3982B0CCFBE00250EDD /* ScoreStar.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB02A3972B0CCFBE00250EDD /* ScoreStar.swift */; };
 		BB1C49E52B0B766D009625AC /* MiniScrollView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1C49E42B0B766D009625AC /* MiniScrollView2.swift */; };
 		BB1C49E72B0B7694009625AC /* MiniScrollView3.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1C49E62B0B7694009625AC /* MiniScrollView3.swift */; };
 		BB1D530C2ADDBC560073771F /* Pretendard-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BB1D530B2ADDBC560073771F /* Pretendard-Black.ttf */; };
@@ -369,6 +378,7 @@
 		95EB1EEB2ADDC66B00B47984 /* UserDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataModel.swift; sourceTree = "<group>"; };
 		95EB1EF02ADE228A00B47984 /* UserInfoModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoModelType.swift; sourceTree = "<group>"; };
 		95EB1EF72ADE251100B47984 /* UserCoreDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = UserCoreDataModel.xcdatamodel; sourceTree = "<group>"; };
+		BB02A3972B0CCFBE00250EDD /* ScoreStar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreStar.swift; sourceTree = "<group>"; };
 		BB1C49E42B0B766D009625AC /* MiniScrollView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniScrollView2.swift; sourceTree = "<group>"; };
 		BB1C49E62B0B7694009625AC /* MiniScrollView3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniScrollView3.swift; sourceTree = "<group>"; };
 		BB1D530B2ADDBC560073771F /* Pretendard-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Black.ttf"; sourceTree = "<group>"; };
@@ -441,14 +451,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9580D4922B0C7756006CE42F /* KakaoSDKUser in Frameworks */,
-				9580D4912B0C7756006CE42F /* KakaoSDKAuth in Frameworks */,
-				9580D4902B0C7756006CE42F /* KakaoSDKCommon in Frameworks */,
-				9580D48F2B0C7756006CE42F /* FirebaseFirestoreSwift in Frameworks */,
-				9580D48E2B0C7756006CE42F /* FirebaseFirestoreCombine-Community in Frameworks */,
-				9580D48D2B0C7756006CE42F /* FirebaseFirestore in Frameworks */,
-				9580D48C2B0C7756006CE42F /* FirebaseAuthCombine-Community in Frameworks */,
-				9580D48B2B0C7756006CE42F /* FirebaseAuth in Frameworks */,
+				BB02A3962B0CCCF300250EDD /* KakaoSDKUser in Frameworks */,
+				BB02A3952B0CCCF300250EDD /* KakaoSDKAuth in Frameworks */,
+				BB02A3942B0CCCF300250EDD /* KakaoSDKCommon in Frameworks */,
+				BB02A3932B0CCCF300250EDD /* FirebaseFirestoreSwift in Frameworks */,
+				BB02A3922B0CCCF300250EDD /* FirebaseFirestoreCombine-Community in Frameworks */,
+				BB02A3912B0CCCF300250EDD /* FirebaseFirestore in Frameworks */,
+				BB02A3902B0CCCF300250EDD /* FirebaseAuthCombine-Community in Frameworks */,
+				BB02A38F2B0CCCF300250EDD /* FirebaseAuth in Frameworks */,
 				BB44B1672AFF5BBD000462CA /* Kingfisher in Frameworks */,
 				95B8F45C2AED35E100D9F35B /* FirebaseAuth in Frameworks */,
 				95B8F45E2AED35E100D9F35B /* FirebaseAuthCombine-Community in Frameworks */,
@@ -955,6 +965,7 @@
 				293C86C52B0778FD00640329 /* NeedLoginSheet.swift */,
 				2972515B2B0787640048D787 /* GuideToFreeRunningSheet.swift */,
 				2912A9122B0D0D9B00D847B0 /* Mirroringsheet.swift */,
+				BB02A3972B0CCFBE00250EDD /* ScoreStar.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -1362,6 +1373,7 @@
 				29EBD7842B0883E500B44AA9 /* BigCardFrontside.swift in Sources */,
 				95EB1EE92ADDC43400B47984 /* PersistentController.swift in Sources */,
 				293C86C62B0778FD00640329 /* NeedLoginSheet.swift in Sources */,
+				BB02A3982B0CCFBE00250EDD /* ScoreStar.swift in Sources */,
 				2998035C2AE0181900A9A134 /* Confetti.swift in Sources */,
 				29AE76DC2ADE2A5300A46742 /* InputUserInfoViewModel.swift in Sources */,
 				F0492E1D2ADD2AE900F6EADD /* GPSArtHomeHeader.swift in Sources */,

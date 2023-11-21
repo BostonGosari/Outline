@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct GPSArtHomeView: View {
-    @AppStorage("authState") var authState: AuthState = .logout
-    
+//    @AppStorage("authState") var authState: AuthState = .logout
+    private let courseScoreModel = CourseScoreModel()
     @StateObject private var viewModel = GPSArtHomeViewModel()
     
     @State private var scrollOffset: CGFloat = 0
@@ -17,7 +17,7 @@ struct GPSArtHomeView: View {
     
     @State var currentIndex: Int = 1
     @State private var loading = true
-    @State private var selectedCourse: CourseWithDistance?
+    @State private var selectedCourse: CourseWithDistanceAndScore?
     @State private var showNetworkErrorView = false
     // 받아오는 변수
     @Binding var showDetailView: Bool
