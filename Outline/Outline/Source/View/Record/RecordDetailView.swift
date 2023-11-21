@@ -116,7 +116,7 @@ struct RecordDetailView: View {
             }
         }
         .navigationDestination(isPresented: $viewModel.navigateToShareMainView) {
-            ShareMainView(runningData: viewModel.shareData)
+            ShareView(runningData: viewModel.shareData)
                 .navigationBarBackButtonHidden()
         }
         .onAppear {
