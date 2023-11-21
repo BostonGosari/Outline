@@ -80,7 +80,7 @@ struct RunningMapView: View {
                 if let course = runningStartManager.startCourse,
                    runningStartManager.runningType == .gpsArt {
                     CourseGuideView(
-                        showBigGuide: $showBigGuide,
+                        tapGuideView: $showBigGuide,
                         coursePathCoordinates: ConvertCoordinateManager.convertToCLLocationCoordinates(course.coursePaths),
                         courseRotate: course.heading,
                         userLocations: viewModel.userLocations

@@ -9,49 +9,42 @@ import CoreLocation
 import SwiftUI
 
 struct CourseGuideView: View {
-    @Binding var showBigGuide: Bool
+    @Binding var tapGuideView: Bool
     
     let coursePathCoordinates: [CLLocationCoordinate2D]
     let courseRotate: Double
     var userLocations: [CLLocationCoordinate2D]
     
-    var width: Double {
-        return showBigGuide ? 320 : 113
-    }
-    
-    var height: Double {
-        return showBigGuide ? 480 : 168
-    }
-    
+    var width = 113.0
+    var height = 168.0
+
     var body: some View {
-        ZStack(alignment: showBigGuide ? .top : .topTrailing) {
-            if showBigGuide {
-                Color.black.opacity(0.5)
-                    .ignoresSafeArea()
-            }
-            
-            Rectangle()
-                .fill(Color.white30)
-                .roundedCorners(24.5, corners: [.topRight])
-                .roundedCorners(7, corners: [.topLeft, .bottomLeft, .bottomRight])
+        ZStack {
+            TransparentBlurView(removeAllFilters: true)
+                .blur(radius: 3, opaque: true)
                 .overlay(
-                    CustomRoundedRectangle(cornerRadiusTopLeft: 7, cornerRadiusTopRight: 24.5, cornerRadiusBottomLeft: 7, cornerRadiusBottomRight: 7)
+                    Rectangle()
+                        .fill(Color.white30)
+                        .roundedCorners(20, corners: [.bottomRight])
+                        .roundedCorners(7, corners: [.topLeft, .topRight, .bottomLeft])
                 )
-                .overlay {
-                    coursePath
-                        .overlay {
-                            userPath
-                        }
-                        .scaledToFit()
-                        .rotationEffect(Angle(degrees: courseRotate))
-                        .frame(width: width, height: height, alignment: .center)
-                }
-                .frame(width: width, height: height)
-                .padding(.top, showBigGuide ? 100 : 16)
-                .padding(.trailing, showBigGuide ? 0 : 16 )
+            ZStack {
+                coursePath
+                userPath
+            }
+            .rotationEffect(Angle(degrees: courseRotate))
         }
+        .mask {
+            Rectangle()
+                .roundedCorners(20, corners: [.bottomRight])
+                .roundedCorners(7, corners: [.topLeft, .topRight, .bottomLeft])
+        }
+        .frame(width: width, height: height)
+        .scaleEffect(tapGuideView ? 3 : 1, anchor: .top)
         .onTapGesture {
-            showBigGuide.toggle()
+            withAnimation {
+                tapGuideView.toggle()
+            }
             HapticManager.impact(style: .light)
         }
     }
@@ -61,10 +54,8 @@ extension CourseGuideView {
     private var coursePath: some View {
         PathGenerateManager
             .caculateLines(width: width, height: height, coordinates: coursePathCoordinates)
-            .stroke(style: StrokeStyle(lineWidth: showBigGuide ? 15 : 7, lineCap: .round, lineJoin: .round))
+            .stroke(.customBlack.opacity(0.5), style: .init(lineWidth: 7, lineCap: .round, lineJoin: .round))
             .scaleEffect(0.8)
-            .foregroundStyle(Color.customBlack.opacity(0.5))
-            
     }
     
     private var userPath: some View {
@@ -72,8 +63,7 @@ extension CourseGuideView {
         
         return PathGenerateManager
             .caculateLines(width: width, height: height, coordinates: userLocations, canvasData: canvasData)
-            .stroke(style: StrokeStyle(lineWidth: showBigGuide ? 15 : 7, lineCap: .round, lineJoin: .round))
+            .stroke(.customPrimary, style: .init(lineWidth: 7, lineCap: .round, lineJoin: .round))
             .scaleEffect(0.8)
-            .foregroundStyle(Color.customPrimary)
     }
 }

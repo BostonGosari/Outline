@@ -20,6 +20,7 @@ struct NewRunningView: View {
     @State private var isPaused = false
     @State private var showDetailSheet = true
     @State private var showCompleteSheet = false
+    @State private var tapGuideView = false
     
     @State private var navigationTranslation: CGFloat = 0.0
     @State private var navigationSheetHeight: CGFloat = 0.0
@@ -43,6 +44,8 @@ struct NewRunningView: View {
                 navigation
             }
             metrics
+            guideView
+                
             RunningFinishPopUp(isPresented: $showCompleteSheet, score: .constant(60), userLocations: $locationManager.userLocations
             )
         }
@@ -207,6 +210,34 @@ extension NewRunningView {
             .zIndex(1)
         }
         .padding(.horizontal, 90)
+    }
+    
+    private var guideView: some View {
+        ZStack {
+            if let course = runningStartManager.startCourse,
+               runningStartManager.runningType == .gpsArt {
+                CourseGuideView(
+                    tapGuideView: $tapGuideView,
+                    coursePathCoordinates: ConvertCoordinateManager.convertToCLLocationCoordinates(course.coursePaths),
+                    courseRotate: course.heading,
+                    userLocations: locationManager.userLocations
+                )
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: tapGuideView ? .top : .topTrailing)
+                .padding(.top, 80)
+                .padding(.trailing, 16)
+            }
+        }
+        .zIndex(tapGuideView ? 2 : 0)
+        .background {
+            if tapGuideView {
+                Color.black50.ignoresSafeArea()
+                    .onTapGesture {
+                        withAnimation {
+                            tapGuideView = false
+                        }
+                    }
+            }
+        }
     }
     
     private var completeSheet: some View {
