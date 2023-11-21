@@ -19,45 +19,57 @@ struct CourseDetailView: View {
         }
         .navigationTitle {
             Text(course.courseName)
-                .foregroundStyle(.first)
+                .foregroundStyle(.customPrimary)
         }
     }
     
-    @ViewBuilder private func listBox(systemName: String, location: Placemark) -> some View {
+    @ViewBuilder 
+    private func listBox(systemName: String, location: Placemark) -> some View {
         HStack {
             Image(systemName: systemName)
-                .foregroundStyle(.first)
+                .font(.customSystemImage)
+                .foregroundStyle(.customPrimary)
                 .padding(.horizontal, 5)
             Text("\(location.administrativeArea) \(location.locality) \(location.subLocality)")
+                .font(.customBody)
         }
     }
     
-    @ViewBuilder private func listBox(systemName: String, context: String) -> some View {
+    @ViewBuilder 
+    private func listBox(systemName: String, context: String) -> some View {
         HStack {
             Image(systemName: systemName)
-                .foregroundStyle(.first)
+                .font(.customSystemImage)
+                .foregroundStyle(.customPrimary)
                 .padding(.horizontal, 5)
             Text(context)
+                .font(.customBody)
         }
     }
     
-    @ViewBuilder private func listBox(systemName: String, alley: Alley) -> some View {
+    @ViewBuilder 
+    private func listBox(systemName: String, alley: Alley) -> some View {
         HStack {
             Image(systemName: systemName)
-                .foregroundStyle(.first)
+                .font(.customSystemImage)
+                .foregroundStyle(.customPrimary)
                 .padding(.horizontal, 5)
-            switch alley {
-            case .few:
-                Text("적음")
-            case .lots:
-                Text("많음")
-            case .none:
-                Text("없음")
+            Group {
+                switch alley {
+                case .few:
+                    Text("적음")
+                case .lots:
+                    Text("많음")
+                case .none:
+                    Text("없음")
+                }
             }
+            .font(.customBody)
         }
     }
     
-    @ViewBuilder private func listBox(systemName: String, context: Double, specifier: String, unit: String = "") -> some View {
+    @ViewBuilder 
+    private func listBox(systemName: String, context: Double, specifier: String, unit: String = "") -> some View {
         let formattedString = String(format: specifier + unit, context)
         listBox(systemName: systemName, context: formattedString)
     }
