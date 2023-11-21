@@ -32,8 +32,12 @@ struct CardDetailInformationView: View {
             VStack(alignment: .leading, spacing: 17) {
                 HStack {
                     HStack {
-                        Image(systemName: "flag")
-                            .font(.system(size: 20))
+                        Group {
+                            Image(systemName: "flag")
+                                .font(.system(size: 20))
+                            Spacer()
+                        }
+                        .frame(width: 20)
                         Text("시작 위치")
                             .font(.customTag)
                             .fontWeight(.semibold)
@@ -45,8 +49,12 @@ struct CardDetailInformationView: View {
                 }
                 HStack {
                     HStack {
-                        Image(systemName: "graduationcap.fill")
-                            .font(.system(size: 16))
+                        Group {
+                            Image(systemName: "graduationcap.fill")
+                                .font(.system(size: 16))
+                            Spacer()
+                        }
+                        .frame(width: 20)
                         Text("난이도")
                             .font(.customTag)
                             .fontWeight(.semibold)
@@ -74,8 +82,12 @@ struct CardDetailInformationView: View {
                 }
                 HStack {
                     HStack {
-                        Image(systemName: "location")
-                            .font(.system(size: 20))
+                        Group {
+                            Image(systemName: "location")
+                                .font(.system(size: 20))
+                            Spacer()
+                        }
+                        .frame(width: 20)
                         Text("거리")
                             .font(.customTag)
                             .fontWeight(.semibold)
@@ -86,8 +98,12 @@ struct CardDetailInformationView: View {
                 }
                 HStack {
                     HStack {
-                        Image(systemName: "clock")
-                            .font(.system(size: 20))
+                        Group {
+                            Image(systemName: "clock")
+                                .font(.system(size: 20))
+                            Spacer()
+                        }
+                        .frame(width: 20)
                         Text("예상 소요 시간")
                             .font(.customTag)
                             .fontWeight(.semibold)
@@ -97,8 +113,12 @@ struct CardDetailInformationView: View {
                 }
                 HStack {
                     HStack {
-                        Image(systemName: "star.fill")
-                            .font(.system(size: 20))
+                        Group {
+                            Image(systemName: "star.fill")
+                                .font(.system(size: 20))
+                            Spacer()
+                        }
+                        .frame(width: 20)
                         Text("핫플레이스")
                             .font(.customTag)
                             .fontWeight(.semibold)
