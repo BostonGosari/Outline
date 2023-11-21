@@ -29,6 +29,7 @@
 		29111E372AE0C9CA009833C7 /* FinishWatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29111E362AE0C9CA009833C7 /* FinishWatchView.swift */; };
 		29111E3F2AE0CD0C009833C7 /* ConfettiWatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29111E3E2AE0CD0C009833C7 /* ConfettiWatchView.swift */; };
 		29111E952B0B8AA000CEFE00 /* NavigationTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29111E942B0B8AA000CEFE00 /* NavigationTabView.swift */; };
+		2912A9132B0D0D9B00D847B0 /* Mirroringsheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2912A9122B0D0D9B00D847B0 /* Mirroringsheet.swift */; };
 		291A22352AF4CD94004B3D10 /* PermissionSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291A22342AF4CD94004B3D10 /* PermissionSheet.swift */; };
 		2921AFFE2B012DD100533A83 /* NewRunningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2921AFFD2B012DD100533A83 /* NewRunningView.swift */; };
 		2921B0002B012E4400533A83 /* NewRunningMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2921AFFF2B012E4400533A83 /* NewRunningMapView.swift */; };
@@ -273,6 +274,7 @@
 		29111E362AE0C9CA009833C7 /* FinishWatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishWatchView.swift; sourceTree = "<group>"; };
 		29111E3E2AE0CD0C009833C7 /* ConfettiWatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfettiWatchView.swift; sourceTree = "<group>"; };
 		29111E942B0B8AA000CEFE00 /* NavigationTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationTabView.swift; sourceTree = "<group>"; };
+		2912A9122B0D0D9B00D847B0 /* Mirroringsheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mirroringsheet.swift; sourceTree = "<group>"; };
 		291A22342AF4CD94004B3D10 /* PermissionSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionSheet.swift; sourceTree = "<group>"; };
 		2921AFFD2B012DD100533A83 /* NewRunningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewRunningView.swift; sourceTree = "<group>"; };
 		2921AFFF2B012E4400533A83 /* NewRunningMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewRunningMapView.swift; sourceTree = "<group>"; };
@@ -952,6 +954,7 @@
 				BBEC68832B087B020026C306 /* UnderlineButton.swift */,
 				293C86C52B0778FD00640329 /* NeedLoginSheet.swift */,
 				2972515B2B0787640048D787 /* GuideToFreeRunningSheet.swift */,
+				2912A9122B0D0D9B00D847B0 /* Mirroringsheet.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -1261,6 +1264,7 @@
 				0E29F65D2ADF6CA000F5EF5C /* WorkoutDataView.swift in Sources */,
 				BB1C49E52B0B766D009625AC /* MiniScrollView2.swift in Sources */,
 				F0ECB3AD2AF28541003FA2B4 /* FirstRunningGuideView.swift in Sources */,
+				2912A9132B0D0D9B00D847B0 /* Mirroringsheet.swift in Sources */,
 				BB52396B2ADD385700646494 /* MiniScrollView1.swift in Sources */,
 				95B8F4602AED391300D9F35B /* AppleAuthModel.swift in Sources */,
 				29EC2ECC2AEAD5690033446C /* CourseAccuracyManager.swift in Sources */,
