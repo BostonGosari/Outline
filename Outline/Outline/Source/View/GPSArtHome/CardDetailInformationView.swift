@@ -15,19 +15,20 @@ struct CardDetailInformationView: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 24) {
-            VStack(alignment: .leading, spacing: 8) {
+            VStack(alignment: .leading, spacing: 0) {
                 Text("\(selectedCourse.description)")
                     .lineLimit(2)
                     .font(.customSubtitle2)
                     .foregroundStyle(.customWhite)
             }
-            .padding(.vertical, 8)
+            .padding(.vertical, 4)
             
             Divider()
             
             Text("경로 정보")
                 .font(.customSubtitle)
                 .fontWeight(.semibold)
+                .padding(.bottom, 6)
             VStack(alignment: .leading, spacing: 17) {
                 HStack {
                     HStack {
@@ -112,7 +113,7 @@ struct CardDetailInformationView: View {
                 }
             }
             .padding(.horizontal, 10)
-            .padding(.bottom, 2)
+            .padding(.bottom, 12)
             
             Divider()
             
