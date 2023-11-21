@@ -15,41 +15,13 @@ struct CardDetailInformationView: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 24) {
-            HStack {
-                Text("#\(stringForCourseLevel(selectedCourse.level))")
-                    .font(.customTag)
-                    .frame(width: capsuleWidth, height: capsuleHeight)
-                    .background {
-                        Capsule()
-                            .stroke()
-                    }
-                    .foregroundColor(.customPrimary)
-                Text("#\(selectedCourse.courseLength, specifier: "%.0f")km")
-                    .font(.customTag)
-                    .frame(width: capsuleWidth, height: capsuleHeight)
-                    .background {
-                        Capsule()
-                            .stroke()
-                    }
-                Text("#\(selectedCourse.courseDuration.formatDuration())")
-                    .font(.customTag)
-                    .frame(width: capsuleWidth, height: capsuleHeight)
-                    .background {
-                        Capsule()
-                            .stroke()
-                    }
-            }
-            .fontWeight(.semibold)
-            .font(.customTag)
-            
             VStack(alignment: .leading, spacing: 8) {
-                Text("\(selectedCourse.locationInfo.administrativeArea) \(selectedCourse.locationInfo.locality) \(selectedCourse.locationInfo.subLocality)")
-                    .font(.customBody)
                 Text("\(selectedCourse.description)")
-                    .font(.customSubbody)
-                    .foregroundStyle(.gray)
+                    .lineLimit(2)
+                    .font(.customSubtitle2)
+                    .foregroundStyle(.customWhite)
             }
-            .padding(.bottom, -8)
+            .padding(.vertical, 8)
             
             Divider()
             
@@ -57,6 +29,48 @@ struct CardDetailInformationView: View {
                 .font(.customSubtitle)
                 .fontWeight(.semibold)
             VStack(alignment: .leading, spacing: 17) {
+                HStack {
+                    HStack {
+                        Image(systemName: "flag")
+                            .font(.system(size: 20))
+                        Text("시작 위치")
+                            .font(.customTag)
+                            .fontWeight(.semibold)
+                    }
+                    .foregroundColor(.customPrimary)
+                    Text("\(selectedCourse.locationInfo.locality) \(selectedCourse.locationInfo.subLocality) \(selectedCourse.locationInfo.subThroughfare)")
+                        .font(.customTag)
+                        .fontWeight(.semibold)
+                }
+                HStack {
+                    HStack {
+                        Image(systemName: "graduationcap.fill")
+                            .font(.system(size: 16))
+                        Text("난이도")
+                            .font(.customTag)
+                            .fontWeight(.semibold)
+                    }
+                    .foregroundColor(.customPrimary)
+                    HStack(spacing: 4) {
+                        ForEach(0..<5) { index in
+                            if index < countForCourseLevel(selectedCourse.level) {
+                                RoundedRectangle(cornerRadius: 1)
+                                    .fill(.customWhite)
+                                    .frame(width: 8, height: 16)
+                            } else {
+                                RoundedRectangle(cornerRadius: 1)
+                                    .foregroundColor(.clear)
+                                    .frame(width: 8, height: 16)
+                                    .background(.white.opacity(0.2))
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 1)
+                                        .inset(by: 0.1)
+                                        .stroke(.white.opacity(0.3), lineWidth: 0.2)
+                                    )
+                            }
+                        }
+                    }
+                }
                 HStack {
                     HStack {
                         Image(systemName: "location")
@@ -78,18 +92,23 @@ struct CardDetailInformationView: View {
                             .fontWeight(.semibold)
                     }
                     .foregroundColor(.customPrimary)
-                    Text("\(selectedCourse.courseDuration.formatDuration())")
+                    Text("\(selectedCourse.courseDuration.formatDurationInKoreanDetail())")
                 }
                 HStack {
                     HStack {
-                        Image(systemName: "arrow.triangle.turn.up.right.diamond")
+                        Image(systemName: "star.fill")
                             .font(.system(size: 20))
-                        Text("골목길")
+                        Text("핫플레이스")
                             .font(.customTag)
                             .fontWeight(.semibold)
                     }
                     .foregroundColor(.customPrimary)
-                    Text(stringForAlley(selectedCourse.alley))
+                    ForEach(0..<selectedCourse.hotSpots.count) { index in
+                        Text("\(selectedCourse.hotSpots[index].title)")
+                        if index != selectedCourse.hotSpots.count - 1 {
+                            Text("ˑ")
+                        }
+                    }
                 }
             }
             .padding(.horizontal, 10)
@@ -129,25 +148,14 @@ struct CardDetailInformationView: View {
         .padding(.bottom, 100)
     }
     
-    private func stringForCourseLevel(_ level: CourseLevel) -> String {
+    private func countForCourseLevel(_ level: CourseLevel) -> Int {
         switch level {
         case .easy:
-            return "쉬움"
+            return 1
         case .normal:
-            return "보통"
+            return 3
         case .hard:
-            return "어려움"
-        }
-    }
-    
-    private func stringForAlley(_ alley: Alley) -> String {
-        switch alley {
-        case .none:
-            return "없음"
-        case .few:
-            return "적음"
-        case .lots:
-            return "많음"
+            return 5
         }
     }
 }
