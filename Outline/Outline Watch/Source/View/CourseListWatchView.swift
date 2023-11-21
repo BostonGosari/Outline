@@ -150,6 +150,7 @@ struct CourseListWatchView: View {
                     secondLabel: "미러링하기",
                     secondAction: {
                         showMirroringSheet = false
+                        connectivityManager.sendIsMirroring(true)
                     }
                 )
             }

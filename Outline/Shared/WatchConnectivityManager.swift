@@ -36,6 +36,7 @@ class WatchConnectivityManager: NSObject, WCSessionDelegate, ObservableObject {
     @Published var runningState: RunningState = .end
     @Published var runningInfo: MirroringRunningInfo = MirroringRunningInfo()
     @Published var runningData: MirroringRunningData = MirroringRunningData()
+    @Published var isMirroring = false
     static let shared = WatchConnectivityManager()
     
     private let userDataModel = UserDataModel()
@@ -99,6 +100,11 @@ class WatchConnectivityManager: NSObject, WCSessionDelegate, ObservableObject {
         } catch {
             print("Failed to encode runningState")
         }
+    }
+    
+    func sendIsMirroring(_ isMirroring: Bool) {
+        let userInfo = ["isMirroring" : isMirroring]
+        session.transferUserInfo(userInfo)
     }
     
     func sendRunningInfo(_ runningInfo: MirroringRunningInfo) {
@@ -182,6 +188,10 @@ class WatchConnectivityManager: NSObject, WCSessionDelegate, ObservableObject {
                 } catch {
                     print("Failed to decode runningState")
                 }
+            }
+            
+            if let data = userInfo["isMirroring"] as? Bool {
+                self.isMirroring = data
             }
             
             if let data = userInfo["runningInfo"] as? Data {

@@ -34,7 +34,7 @@ struct CountDownView: View {
                         }
                     }
             } else {
-                WatchTabView()
+                TabWatchView()
             }
         }
     }
