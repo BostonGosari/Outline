@@ -7,20 +7,22 @@
 
 import SwiftUI
 import MapKit
+import Kingfisher
 
 struct CardDetailView: View {
     @AppStorage("authState") var authState: AuthState = .logout
     
     @State private var isUnlocked = false
     @State private var showAlert = false
+    @State private var showNeedLoginSheet = false
     @StateObject var runningStartManager = RunningStartManager.shared
     private let locationManager = CLLocationManager()
     @Environment(\.dismiss) var dismiss
     
     @Binding var showDetailView: Bool
-    var selectedCourse: CourseWithDistance
+    var selectedCourse: GPSArtCourse
     var currentIndex: Int
-    var namespace: Namespace.ID
+    var namespace: Namespace.ID 
     
     @State private var appear = [false, false, false]
     @State private var viewSize = 0.0
@@ -81,93 +83,24 @@ struct CardDetailView: View {
             .scrollDisabled(!showDetailView)
             .ignoresSafeArea(edges: .top)
             .statusBarHidden()
-            
-            switch authState {
-            case .lookAround:
-                ZStack {
-                    Color.customBlack.opacity(0.7)
-                    VStack {
-                        Spacer()
-                        LookAroundModalView {
-                            showDetailView = false
-                        }
-                    }
-                    .frame(height: UIScreen.main.bounds.height / 2)
-                    .frame(maxWidth: .infinity)
-                    .background {
-                        RoundedRectangle(cornerRadius: 30, style: .continuous)
-                            .stroke(Color.customPrimary, lineWidth: 2)
-                        RoundedRectangle(cornerRadius: 30, style: .continuous)
-                            .foregroundStyle(Color.gray900)
-                    }
-                    .frame(maxHeight: .infinity, alignment: .bottom)
-                }
-            default:
-                EmptyView()
+        }
+        .sheet(isPresented: $showAlert) {
+            progress = 0.0
+        } content: {
+            GuideToFreeRunningSheet {
+                showDetailView = false
+                runningStartManager.start = true
+                runningStartManager.startFreeRun()
             }
-                        
-            ZStack {
-                if showAlert {
-                    Color.black.opacity(0.5)
-                        .onTapGesture {
-                            withAnimation {
-                                showAlert = false
-                                progress = 0.0
-                            }
-                        }
-                }
-                VStack(spacing: 10) {
-                    Text("자유코스로 변경할까요?")
-                        .font(.title2)
-                        .fontWeight(.semibold)
-                        .padding(.top)
-                    Text("앗! 현재 루트와 멀리 떨어져 있어요.")
-                        .font(.customSubbody)
-                        .foregroundColor(.gray300)
-                    Image("AnotherLocation")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 120)
-                    Button {
-                        showAlert = false
-                        showDetailView = false
-                        runningStartManager.start = true
-                        runningStartManager.startFreeRun()
-                    } label: {
-                        Text("자유코스로 변경하기")
-                            .font(.customButton)
-                            .fontWeight(.medium)
-                            .foregroundStyle(Color.customBlack)
-                            .padding()
-                            .frame(maxWidth: .infinity)
-                            .background {
-                                RoundedRectangle(cornerRadius: 15, style: .continuous)
-                                    .foregroundStyle(Color.customPrimary)
-                            }
-                    }
-                    .padding()
-                    Button {
-                        withAnimation {
-                            showAlert = false
-                            showDetailView = false
-                        }
-                    } label: {
-                        Text("홈으로 돌아가기")
-                            .font(.customButton)
-                            .fontWeight(.medium)
-                            .foregroundStyle(Color.customWhite)
-                    }
-                }
-                .frame(height: UIScreen.main.bounds.height / 2)
-                .frame(maxWidth: .infinity)
-                .background {
-                    RoundedRectangle(cornerRadius: 30, style: .continuous)
-                        .stroke(Color.customPrimary, lineWidth: 2)
-                    RoundedRectangle(cornerRadius: 30, style: .continuous)
-                        .foregroundStyle(Color.gray900)
-                }
-                .frame(maxHeight: .infinity, alignment: .bottom)
-                .offset(y: showAlert ? 0 : UIScreen.main.bounds.height / 2 + 2)
+        }
+        .sheet(isPresented: $showNeedLoginSheet) {
+            NeedLoginSheet(type: .running) {
+                showDetailView = false
+            }
+        }
+        .onAppear {
+            if authState == .lookAround {
+                showNeedLoginSheet = true
             }
         }
     }
@@ -175,33 +108,34 @@ struct CardDetailView: View {
     // MARK: - View Components
     
     private var courseImage: some View {
-        AsyncImage(url: URL(string: selectedCourse.course.thumbnail)) { image in
-            image
-                .resizable()
-                .roundedCorners(45, corners: [.bottomRight])
-                .shadow(color: .white, radius: 0.5, y: 0.5)
-        } placeholder: {
-            Rectangle()
-                .foregroundColor(.gray700)
-        }
-        .matchedGeometryEffect(id: selectedCourse.id, in: namespace)
-        .frame(
-            width: UIScreen.main.bounds.width,
-            height: UIScreen.main.bounds.height * 0.68
-        )
-        .transition(.identity)
+        KFImage(URL(string: selectedCourse.thumbnail))
+            .resizable()
+            .placeholder {
+                Rectangle()
+                    .foregroundColor(.gray700)
+            }
+            .mask {
+                UnevenRoundedRectangle(bottomTrailingRadius: 45, style: .circular)
+            }
+            .matchedGeometryEffect(id: selectedCourse.id, in: namespace)
+            .shadow(color: .white, radius: 0.5, y: 0.5)
+            .frame(
+                width: UIScreen.main.bounds.width,
+                height: UIScreen.main.bounds.height * 0.68
+            )
+            .transition(.opacity)
     }
     
     private var courseInformation: some View {
         VStack(alignment: .leading) {
             VStack(alignment: .leading, spacing: 0) {
-                Text("\(selectedCourse.course.courseName)")
-                    .font(.headline)
+                Text("\(selectedCourse.courseName)")
+                    .font(.customHeadline)
                     .fontWeight(.semibold)
                     .padding(.bottom, 8)
                 HStack {
                     Image(systemName: "mappin")
-                    Text("\(selectedCourse.course.locationInfo.locality) \(selectedCourse.course.locationInfo.subLocality) • 내 위치에서 \(selectedCourse.distance/1000, specifier: "%.1f")km")
+                    Text("\(selectedCourse.locationInfo.locality) \(selectedCourse.locationInfo.subLocality) • 내 위치에서 \(selectedCourse.distance/1000, specifier: "%.1f")km")
                 }
                 .font(.customSubbody)
                 .fontWeight(.regular)
@@ -223,13 +157,12 @@ struct CardDetailView: View {
             .onChange(of: isUnlocked) { _, newValue in
                 if newValue {
                     runningStartManager.checkAuthorization()
-
                     if runningStartManager.isHealthAuthorized {
                         if runningStartManager.isLocationAuthorized {
-                            let course = selectedCourse.course.coursePaths
+                            let course = selectedCourse.coursePaths
                             
                             if runningStartManager.checkDistance(course: course) {
-                                runningStartManager.startCourse = selectedCourse.course
+                                runningStartManager.startCourse = selectedCourse
                                 runningStartManager.startGPSArtRun()
                                 showDetailView = false
                                 runningStartManager.start = true

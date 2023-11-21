@@ -6,8 +6,8 @@
 //
 
 import CoreData
-import SwiftUI
 import CoreLocation
+import SwiftUI
 
 protocol UserDataModelProtocol {
     func createRunningRecord(
@@ -31,9 +31,11 @@ protocol UserDataModelProtocol {
 enum CoreDataError: Error {
     case saveFailed
     case dataNotFound
+    case deleteFail
 }
 
 struct UserDataModel: UserDataModelProtocol {
+    @FetchRequest (entity: CoreRunningRecord.entity(), sortDescriptors: []) var runningRecord: FetchedResults<CoreRunningRecord>
     
     let persistenceController = PersistenceController.shared
     
@@ -42,6 +44,23 @@ struct UserDataModel: UserDataModelProtocol {
             try persistenceController.container.viewContext.save()
         } catch {
             throw CoreDataError.saveFailed
+        }
+    }
+    
+    func getFreeRunCount(completion: @escaping (Result<Int, CoreDataError>) -> Void) {
+        let request = CoreRunningRecord.fetchRequest()
+        do {
+            var runningRecords = try persistenceController.container.viewContext.fetch(request)
+            var freeRunCount: Int = 0
+            for record in runningRecords {
+                if let runningType = record.runningType, runningType == "free" {
+                    freeRunCount += 1
+                }
+            }
+            completion(.success(freeRunCount))
+        } catch {
+            print("fetch Person error: \(error)")
+            completion(.failure(.dataNotFound))
         }
     }
     
@@ -61,6 +80,8 @@ struct UserDataModel: UserDataModelProtocol {
         newCourseData.setValue(record.courseData.distance, forKey: "distance")
         newCourseData.setValue(record.courseData.heading, forKey: "heading")
         newCourseData.setValue(record.courseData.regionDisplayName, forKey: "regionDisplayName")
+        newCourseData.setValue(record.courseData.score, forKey: "score")
+        
         var pathList: [CoreCoordinate] = []
         for path in record.courseData.coursePaths {
             let newPath = CoreCoordinate(entity: CoreCoordinate.entity(), insertInto: persistenceController.container.viewContext)
@@ -127,7 +148,14 @@ struct UserDataModel: UserDataModelProtocol {
     }
     
     func deleteAllRunningRecord(completion: @escaping (Result<Bool, CoreDataError>) -> Void) {
-        persistenceController.container.viewContext.reset()
-        completion(.success(true))
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "CoreRunningRecord")
+        let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+
+        do {
+            try persistenceController.container.viewContext.execute(batchDeleteRequest)
+            completion(.success(true))
+        } catch {
+            completion(.failure(.deleteFail))
+        }
     }
 }

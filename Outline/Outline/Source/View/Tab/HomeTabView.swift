@@ -8,14 +8,13 @@
 import SwiftUI
 
 struct HomeTabView: View {
-    @AppStorage("authState") var authState: AuthState = .logout
-    
     @StateObject private var runningManager = RunningStartManager.shared
     @StateObject var runningDataManager = RunningDataManager.shared
     @StateObject var watchConnectivityManager = WatchConnectivityManager.shared
     @State private var selectedTab: Tab = .GPSArtRunning
     @State private var showDetailView = false
     @State private var showCustomSheet = false
+    
     var body: some View {
         ZStack {
             NavigationStack {
@@ -25,21 +24,11 @@ struct HomeTabView: View {
                         Group {
                             switch selectedTab {
                             case .freeRunning:
-                                if authState == .lookAround {
-                                    LookAroundView()
-                                        .navigationTitle("자유런")
-                                } else {
-                                    FreeRunningHomeView()
-                                }
+                                FreeRunningHomeView()
                             case .GPSArtRunning:
                                 GPSArtHomeView(showDetailView: $showDetailView)
                             case .myRecord:
-                                if authState == .lookAround {
-                                    LookAroundView()
-                                        .navigationTitle("기록")
-                                } else {
-                                    RecordView()
-                                }
+                                RecordView()
                             }
                         }
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -48,10 +37,9 @@ struct HomeTabView: View {
                             .opacity(showDetailView ? 0 : 1)
                             .ignoresSafeArea()
                     }
-                    
-                    if let permissionType = runningManager.permissionType {
-                        PermissionSheet(showPermissionSheet: $runningManager.showPermissionSheet, permissionType: permissionType)
-                    }
+                }
+                .sheet(isPresented: $runningManager.showPermissionSheet) {
+                    PermissionSheet(permissionType: runningManager.permissionType)
                 }
                 .overlay {
                     if runningDataManager.endWithoutSaving {
@@ -63,8 +51,11 @@ struct HomeTabView: View {
             if runningManager.start {
                 CountDown(running: $runningManager.running, start: $runningManager.start)
             }
+            if runningManager.complete {
+                FinishRunningView()
+            }
             if runningManager.running {
-                RunningView()
+                NewRunningView()
             }
             if showCustomSheet {
                 watchRunningSheet

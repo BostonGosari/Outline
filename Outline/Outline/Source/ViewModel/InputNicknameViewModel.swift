@@ -15,6 +15,7 @@ class InputNicknameViewModel: ObservableObject {
     @Published var checkNicnameDuplication = false
     @Published var isSuccess = false
     @Published var moveToInputUserInfoView = false
+    @Published var moveToHeathAuthenticationView = false
     @Published  var isKeyboardVisible = false
     
     private var userNameSet: [String] = []
@@ -54,6 +55,21 @@ class InputNicknameViewModel: ObservableObject {
     func doneButtonTapped() {
         if isSuccess {
             moveToInputUserInfoView = true
+        }
+    }
+    
+    func createUserName() {
+        let userInfoModel = UserInfoModel()
+        if nickname.isEmpty {
+            return
+        }
+        userInfoModel.createUserNameSet(userName: nickname) { res in
+            switch res {
+            case .success(let success):
+                print("success to create userName \(success)")
+            case .failure(let failure):
+                print("fail to create userName \(failure)")
+            }
         }
     }
 }

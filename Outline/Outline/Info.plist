@@ -11,14 +11,14 @@
 			<string>NATIVE_APP_KEY</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>kakaof5f877543f22328d2dfadcc5fdd05569</string>
+				<string>kakao$(KAKAO_API_KEY)</string>
 			</array>
 		</dict>
 	</array>
-	<key>KakaoAPIKey</key>
-	<string>$(KAKAO_API_KEY)</string>
 	<key>FirestoreAPIKey</key>
 	<string>$(FIRESTORE_API_KEY)</string>
+	<key>KakaoAPIKey</key>
+	<string>$(KAKAO_API_KEY)</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>kakaolink</string>
