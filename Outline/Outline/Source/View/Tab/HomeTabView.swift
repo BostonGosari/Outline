@@ -60,10 +60,15 @@ struct HomeTabView: View {
                         watchConnectivityManager.sendRunningState(.start)
                     }
             }
+            if runningManager.mirroring {
+                MirroringView()
+                    .transition(.move(edge: .bottom))
+            }
         }
         .sheet(isPresented: $showMirroringSheet) {
             Mirroringsheet {
-                
+                runningManager.mirroring = true
+                watchConnectivityManager.sendIsMirroring(true)
             }
         }
         .onChange(of: watchConnectivityManager.runningState) { _, newValue in
@@ -71,6 +76,7 @@ struct HomeTabView: View {
                 showMirroringSheet = true
             } else if newValue == .end {
                 showMirroringSheet = false
+                runningManager.mirroring = false
             }
         }
     }
