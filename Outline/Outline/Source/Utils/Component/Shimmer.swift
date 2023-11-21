@@ -16,7 +16,6 @@ extension View {
 }
 
 struct ShimmerEffect: ViewModifier {
-    
     var color: Color
     var highlight: Color
     var blur: CGFloat = 0
