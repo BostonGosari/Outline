@@ -10,6 +10,7 @@ import CoreMotion
 
 enum ScoreState {
     case freerun
+    case notyet
     case nice
     case great
     case excellent
@@ -26,6 +27,8 @@ struct RunningFinishPopUp: View {
     var scoreState: ScoreState {
         if score == -1 {
             return .freerun
+        } else if score == 0 {
+            return .notyet
         } else if score < 50 {
             return .nice
         } else if score < 90 {
@@ -50,7 +53,7 @@ struct RunningFinishPopUp: View {
                     switch scoreState {
                     case .freerun:
                         freerunContent()
-                    case .nice, .great, .excellent:
+                    case .notyet, .nice, .great, .excellent:
                         gpsrunContent()
                     }
                     
@@ -165,6 +168,7 @@ extension ScoreState {
     var imageName: String {
         switch self {
         case .freerun: return "freerun"
+        case .notyet: return "notyet"
         case .nice: return "nice"
         case .great: return "great"
         case .excellent: return "excellent"
@@ -174,7 +178,7 @@ extension ScoreState {
     var title: String {
         switch self {
         case .freerun: return "오늘은, 여기까지"
-        case .nice: return "오늘은, 여기까지"
+        case .notyet, .nice: return "오늘은, 여기까지"
         case .great: return "신나는 러닝이었나요?"
         case .excellent: return "정말 완벽한 그림이에요!"
         }
@@ -183,7 +187,7 @@ extension ScoreState {
     var subtitle: String {
         switch self {
         case .freerun: return "즐거운 러닝이었나요? 다음에 또 만나요!"
-        case .nice: return "다음에는 완성해봐요. 또 만나요!"
+        case .notyet, .nice: return "다음에는 완성해봐요. 또 만나요!"
         case .great: return "50%이상 달성하셨네요! 다음에도 함께해요"
         case .excellent: return "100% 달성하셨네요. 당신은 멋진 아티스트!"
         }
@@ -191,7 +195,7 @@ extension ScoreState {
 
     var offset: CGFloat {
         switch self {
-        case .freerun, .excellent: return 0
+        case .freerun, .notyet, .excellent: return 0
         case .nice, .great: return -15
         }
     }
