@@ -17,13 +17,12 @@ enum ScoreState {
 
 struct RunningFinishPopUp: View {
     @StateObject private var runningStartManager = RunningStartManager.shared
+    @State private var counter = 0
+    @State private var progress = 0.0
     @Binding var isPresented: Bool
     @Binding var score: Int
     @Binding var userLocations: [CLLocationCoordinate2D]
-    @State private var counter = 0
-    
-    @State private var progress = 0.0
-    
+   
     var scoreState: ScoreState {
         if score == -1 {
             return .freerun

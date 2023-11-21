@@ -6,8 +6,8 @@
 //
 
 import CoreData
-import SwiftUI
 import CoreLocation
+import SwiftUI
 
 protocol UserDataModelProtocol {
     func createRunningRecord(

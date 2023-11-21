@@ -5,10 +5,10 @@
 //  Created by Hyunjun Kim on 10/19/23.
 //
 
-import CoreLocation
 import CoreData
-import SwiftUI
+import CoreLocation
 import CoreMotion
+import SwiftUI
 
 struct CourseWithDistance: Identifiable, Hashable {
     var id = UUID().uuidString
