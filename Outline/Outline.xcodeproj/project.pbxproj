@@ -537,6 +537,7 @@
 				958240762B0AFE7900105FAE /* CourseScoreModel.swift */,
 			);
 			path = Score;
+			sourceTree = "<group>";
 		9582405E2B09F2A900105FAE /* CourseCategory */ = {
 			isa = PBXGroup;
 			children = (
