@@ -47,6 +47,23 @@ struct UserDataModel: UserDataModelProtocol {
         }
     }
     
+    func getFreeRunCount(completion: @escaping (Result<Int, CoreDataError>) -> Void) {
+        let request = CoreRunningRecord.fetchRequest()
+        do {
+            var runningRecords = try persistenceController.container.viewContext.fetch(request)
+            var freeRunCount: Int = 0
+            for record in runningRecords {
+                if let runningType = record.runningType, runningType == "free" {
+                    freeRunCount += 1
+                }
+            }
+            completion(.success(freeRunCount))
+        } catch {
+            print("fetch Person error: \(error)")
+            completion(.failure(.dataNotFound))
+        }
+    }
+    
     func createRunningRecord(
         record: RunningRecord,
         completion: @escaping (Result<Bool, CoreDataError>) -> Void
@@ -63,6 +80,8 @@ struct UserDataModel: UserDataModelProtocol {
         newCourseData.setValue(record.courseData.distance, forKey: "distance")
         newCourseData.setValue(record.courseData.heading, forKey: "heading")
         newCourseData.setValue(record.courseData.regionDisplayName, forKey: "regionDisplayName")
+        newCourseData.setValue(record.courseData.score, forKey: "score")
+        
         var pathList: [CoreCoordinate] = []
         for path in record.courseData.coursePaths {
             let newPath = CoreCoordinate(entity: CoreCoordinate.entity(), insertInto: persistenceController.container.viewContext)
