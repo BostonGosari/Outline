@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-
+import CoreMotion
 struct NewRunningView: View {
     @StateObject private var runningStartManager = RunningStartManager.shared
     @StateObject private var runningDataManager = RunningDataManager.shared
@@ -32,15 +32,15 @@ struct NewRunningView: View {
                 navigation
             }
             metrics
+            RunningFinishPopUp(isPresented: $showCompleteSheet, score: .constant(60), userLocations: $locationManager.userLocations
+            )
         }
         .overlay {
             if isFirstRunning && runningStartManager.runningType == .gpsArt {
                 FirstRunningGuideView(isFirstRunning: $isFirstRunning)
             }
         }
-        .sheet(isPresented: $showCompleteSheet) {
-            completeSheet
-        }
+       
     }
 }
 
@@ -278,17 +278,18 @@ extension NewRunningView {
             }
             .onEnded { _ in
                 DispatchQueue.main.async {
+                    showDetail = false
                     if runningStartManager.counter < 3 {
                         runningDataManager.stopRunningWithoutRecord()
                         runningStartManager.counter = 0
                         runningStartManager.running = false
                     } else {
                         runningDataManager.userLocations = locationManager.userLocations
-                        runningDataManager.stopRunning()
                         runningStartManager.counter = 0
                         withAnimation {
                             showCompleteSheet = true
                         }
+                        runningDataManager.stopRunning()
                     }
                 }
             }
