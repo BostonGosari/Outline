@@ -43,8 +43,8 @@ struct ShareView: View {
         }
         .onAppear {
             let canvasSize = PathGenerateManager.calculateCanvaData(coordinates: runningData.userLocations, width: 200, height: 200)
-            self.pathWidth = CGFloat(canvasSize.width)
-            self.pathHeight = CGFloat(canvasSize.height)
+            pathWidth = CGFloat(canvasSize.width)
+            pathHeight = CGFloat(canvasSize.height)
         }
         
         .navigationTitle("공유")
@@ -81,9 +81,9 @@ extension ShareView {
             runningInfo
             
             GeometryReader { proxy in
-                HStack {}
+                Color.clear
                     .onAppear {
-                        self.size = CGSize(width: proxy.size.width, height: proxy.size.height)
+                        size = CGSize(width: proxy.size.width, height: proxy.size.height)
                     }
             }
         }
