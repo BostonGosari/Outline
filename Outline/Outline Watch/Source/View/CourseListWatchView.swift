@@ -21,6 +21,7 @@ struct CourseListWatchView: View {
     @State private var showNetworkErrorSheet = false
     @State private var showFreeRunningGuideSheet = false
     @State private var showMirroringSheet = false
+    @State private var showMirroringView = false
     
     var workoutTypes: [HKWorkoutActivityType] = [.running]
     
@@ -138,6 +139,7 @@ struct CourseListWatchView: View {
                     showMirroringSheet = true
                 } else if newValue == .end {
                     showMirroringSheet = false
+                    showMirroringView = false
                 }
             }
             .sheet(isPresented: $showMirroringSheet) {
@@ -151,8 +153,12 @@ struct CourseListWatchView: View {
                     secondAction: {
                         showMirroringSheet = false
                         connectivityManager.sendIsMirroring(true)
+                        showMirroringView = true
                     }
                 )
+            }
+            .sheet(isPresented: $showMirroringView) {
+                MirroringTabWatchView()
             }
         }
     }

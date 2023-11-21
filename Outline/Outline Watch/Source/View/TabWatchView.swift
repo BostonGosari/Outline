@@ -63,9 +63,11 @@ struct TabWatchView: View {
             }
             
             if connectivityManager.isMirroring {
+                let userLocations = ConvertCoordinateManager.convertToCoordinates(locationManager.userLocations)
+                
                 let runningData =
                 MirroringRunningData(
-                    userLocations: [],
+                    userLocations: userLocations,
                     time: count,
                     distance: workoutManager.distance,
                     kcal: workoutManager.calorie,

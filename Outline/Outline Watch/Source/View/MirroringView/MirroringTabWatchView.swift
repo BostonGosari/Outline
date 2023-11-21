@@ -18,7 +18,12 @@ struct MirroringTabWatchView: View {
     var body: some View {
         NavigationStack {
             TabView(selection: $selection) {
-                Text("Hello, World!")
+                VStack {
+                    Text("\(connectivityManager.runningData.time)")
+                    Text("\(connectivityManager.runningData.distance)")
+                    Text("\(connectivityManager.runningData.kcal)")
+                    Text(connectivityManager.runningData.pace.formattedCurrentPace())
+                }
             }
             .navigationTitle {
                 Text(connectivityManager.runningState == .start ? connectivityManager.runningInfo.courseName : "일시 정지됨")
