@@ -28,6 +28,7 @@ struct CourseData: Codable {
     var coursePaths: [CLLocationCoordinate2D]
     var runningCourseId: String
     var regionDisplayName: String
+    var score: Int?
 }
 
 struct HealthData: Codable {

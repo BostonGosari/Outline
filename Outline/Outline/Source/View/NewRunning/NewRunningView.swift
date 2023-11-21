@@ -6,13 +6,15 @@
 //
 
 import SwiftUI
-
+import CoreMotion
 struct NewRunningView: View {
     @StateObject private var runningStartManager = RunningStartManager.shared
     @StateObject private var runningDataManager = RunningDataManager.shared
     @StateObject private var locationManager = LocationManager()
     
     @AppStorage("isFirstRunning") private var isFirstRunning = true
+    
+    @GestureState private var press = false
     
     @State private var showDetail = false
     @State private var isPaused = false
@@ -24,6 +26,15 @@ struct NewRunningView: View {
     @State private var metricsTranslation: CGFloat = 0.0
     @State private var metricsSheetHeight: CGFloat = 0.0
     @State private var stopButtonScale: CGFloat = 1
+    @State private var showStopPopup = false {
+        didSet {
+            if showStopPopup {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                    self.showStopPopup = false
+                }
+            }
+        }
+    }
     
     var body: some View {
         ZStack {
@@ -32,14 +43,19 @@ struct NewRunningView: View {
                 navigation
             }
             metrics
+            RunningFinishPopUp(isPresented: $showCompleteSheet, score: .constant(60), userLocations: $locationManager.userLocations
+            )
         }
         .overlay {
             if isFirstRunning && runningStartManager.runningType == .gpsArt {
                 FirstRunningGuideView(isFirstRunning: $isFirstRunning)
             }
         }
-        .sheet(isPresented: $showCompleteSheet) {
-            completeSheet
+        .overlay {
+            if showStopPopup {
+                RunningPopup(text: "정지 버튼을 길게 누르면 러닝이 종료돼요")
+                    .frame(maxHeight: .infinity, alignment: .top)
+            }
         }
     }
 }
@@ -63,15 +79,21 @@ extension NewRunningView {
                     .roundedCorners(50, corners: .bottomRight)
             }
             .background {
-                Rectangle()
-                    .roundedCorners(50, corners: .bottomRight)
-                    .foregroundStyle(.thinMaterial)
+                TransparentBlurView(removeAllFilters: true)
+                    .blur(radius: 6, opaque: true)
                     .ignoresSafeArea()
-                    .overlay(alignment: .bottom) {
-                        Capsule()
-                            .frame(width: 40, height: 3)
-                            .padding(.bottom, 9)
-                            .foregroundStyle(.gray600)
+                    .overlay {
+                        Rectangle()
+                            .roundedCorners(50, corners: .bottomRight)
+                            .foregroundStyle(.black50)
+                            .ignoresSafeArea()
+                            .overlay(alignment: .bottom) {
+                                Capsule()
+                                    .frame(width: 40, height: 3)
+                                    .padding(.bottom, 9)
+                                    .foregroundStyle(.gray600)
+                            }
+                        
                     }
             }
             .zIndex(1)
@@ -90,9 +112,13 @@ extension NewRunningView {
                 RoundedRectangle(cornerRadius: 20)
             }
             .background {
-                RoundedRectangle(cornerRadius: 20)
-                    .foregroundStyle(.thinMaterial)
-                    .ignoresSafeArea()
+                TransparentBlurView(removeAllFilters: true)
+                    .blur(radius: 6, opaque: true)
+                    .overlay {
+                        RoundedRectangle(cornerRadius: 20)
+                            .foregroundStyle(.black50)
+                            .ignoresSafeArea()
+                    }
             }
             .gesture(metricsGesture)
             .overlay(alignment: .bottom) {
@@ -106,15 +132,16 @@ extension NewRunningView {
         Button {
             withAnimation {
                 showDetail.toggle()
+                navigationSheetHeight = 0
+                navigationTranslation = 0.0
             }
         } label: {
             Image(systemName: "chevron.up.circle.fill")
                 .rotationEffect(showDetail ? .degrees(-180) : .degrees(0))
                 .font(.system(size: 35))
                 .padding(.trailing, 16)
-                .foregroundStyle(.gray600, .gray800)
+                .foregroundStyle(.gray600, .gray700)
                 .fontWeight(.semibold)
-                .opacity(isPaused ? 0 : 1)
         }
     }
     
@@ -127,8 +154,9 @@ extension NewRunningView {
                     .fontWeight(.ultraLight)
                     .foregroundStyle(.black, .customWhite)
                     .gesture(stopButtonGesture)
-                    .scaleEffect(stopButtonScale)
+                    .scaleEffect(press ? 1.5 : 1)
             }
+            .animation(.easeInOut, value: press)
             .frame(maxWidth: .infinity, alignment: isPaused ? .leading : .center)
             
             Button {
@@ -213,32 +241,47 @@ extension NewRunningView {
     private var navigationGesture: some Gesture {
         DragGesture()
             .onChanged { value in
-                let translationY = value.translation.height
-                if navigationSheetHeight == 0 {
-                    navigationTranslation = min(max(translationY, -5), 340)
+                if !showDetail {
+                    let translationY = value.translation.height
+                    if navigationSheetHeight == 0 {
+                        navigationTranslation = min(max(translationY, -5), 340)
+                    } else {
+                        navigationTranslation = max(min(translationY, 40), -310)
+                    }
                 } else {
-                    navigationTranslation = max(min(translationY, 40), -310)
+                    navigationSheetHeight = 0
+                    navigationTranslation = 0.0
                 }
             }
             .onEnded { value in
-                let translationY = value.translation.height
-                withAnimation(.bouncy) {
-                    if translationY > 0 {
-                        navigationSheetHeight = 300
-                    } else {
-                        navigationSheetHeight = 0
+                if !showDetail {
+                    let translationY = value.translation.height
+                    withAnimation(.bouncy) {
+                        if translationY > 0 {
+                            navigationSheetHeight = 300
+                        } else {
+                            navigationSheetHeight = 0
+                        }
+                        navigationTranslation = 0.0
                     }
+                } else {
+                    navigationSheetHeight = 0
                     navigationTranslation = 0.0
                 }
             }
             .simultaneously(with: TapGesture()
                 .onEnded { _ in
-                    withAnimation {
-                        if navigationSheetHeight == 0 {
-                            navigationSheetHeight = 300
-                        } else {
-                            navigationSheetHeight = 0
+                    if !showDetail {
+                        withAnimation {
+                            if navigationSheetHeight == 0 {
+                                navigationSheetHeight = 300
+                            } else {
+                                navigationSheetHeight = 0
+                            }
                         }
+                    } else {
+                        navigationSheetHeight = 0
+                        navigationTranslation = 0.0
                     }
                 }
             )
@@ -251,6 +294,7 @@ extension NewRunningView {
                     let translationY = value.translation.height
                     if showDetail {
                         metricsTranslation = min(-translationY, 30)
+                        navigationTranslation = 0
                     }
                 }
             }
@@ -263,6 +307,7 @@ extension NewRunningView {
                                 showDetail = false
                             }
                             metricsTranslation = 0.0
+                            navigationTranslation = 0
                         }
                     }
                 }
@@ -270,33 +315,33 @@ extension NewRunningView {
     }
     
     private var stopButtonGesture: some Gesture {
-        LongPressGesture(minimumDuration: 2)
-            .onChanged { _ in
-                withAnimation {
-                    stopButtonScale = 1.3
-                }
+        LongPressGesture(minimumDuration: 1.5)
+            .updating($press) { (currentState, gestureState, _) in
+                gestureState = currentState
             }
             .onEnded { _ in
                 DispatchQueue.main.async {
-                    if runningStartManager.counter < 3 {
+                    if runningStartManager.counter < 30 {
                         runningDataManager.stopRunningWithoutRecord()
                         runningStartManager.counter = 0
                         runningStartManager.running = false
                     } else {
                         runningDataManager.userLocations = locationManager.userLocations
-                        runningDataManager.stopRunning()
                         runningStartManager.counter = 0
                         withAnimation {
                             showCompleteSheet = true
                         }
+                        runningDataManager.stopRunning()
                     }
                 }
+                showStopPopup = false
+                stopButtonScale = 1
             }
             .simultaneously(with: TapGesture()
                 .onEnded { _ in
                     withAnimation {
                         stopButtonScale = 1
-                        //TODO: show Popup
+                        showStopPopup = true
                     }
                 }
             )

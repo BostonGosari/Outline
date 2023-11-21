@@ -20,9 +20,9 @@ struct CardDetailView: View {
     @Environment(\.dismiss) var dismiss
     
     @Binding var showDetailView: Bool
-    var selectedCourse: CourseWithDistance
+    var selectedCourse: GPSArtCourse
     var currentIndex: Int
-    var namespace: Namespace.ID
+    var namespace: Namespace.ID 
     
     @State private var appear = [false, false, false]
     @State private var viewSize = 0.0
@@ -108,7 +108,7 @@ struct CardDetailView: View {
     // MARK: - View Components
     
     private var courseImage: some View {
-        KFImage(URL(string: selectedCourse.course.thumbnail))
+        KFImage(URL(string: selectedCourse.thumbnail))
             .resizable()
             .placeholder {
                 Rectangle()
@@ -129,13 +129,13 @@ struct CardDetailView: View {
     private var courseInformation: some View {
         VStack(alignment: .leading) {
             VStack(alignment: .leading, spacing: 0) {
-                Text("\(selectedCourse.course.courseName)")
+                Text("\(selectedCourse.courseName)")
                     .font(.customHeadline)
                     .fontWeight(.semibold)
                     .padding(.bottom, 8)
                 HStack {
                     Image(systemName: "mappin")
-                    Text("\(selectedCourse.course.locationInfo.locality) \(selectedCourse.course.locationInfo.subLocality) • 내 위치에서 \(selectedCourse.distance/1000, specifier: "%.1f")km")
+                    Text("\(selectedCourse.locationInfo.locality) \(selectedCourse.locationInfo.subLocality) • 내 위치에서 \(selectedCourse.distance/1000, specifier: "%.1f")km")
                 }
                 .font(.customSubbody)
                 .fontWeight(.regular)
@@ -159,10 +159,10 @@ struct CardDetailView: View {
                     runningStartManager.checkAuthorization()
                     if runningStartManager.isHealthAuthorized {
                         if runningStartManager.isLocationAuthorized {
-                            let course = selectedCourse.course.coursePaths
+                            let course = selectedCourse.coursePaths
                             
                             if runningStartManager.checkDistance(course: course) {
-                                runningStartManager.startCourse = selectedCourse.course
+                                runningStartManager.startCourse = selectedCourse
                                 runningStartManager.startGPSArtRun()
                                 showDetailView = false
                                 runningStartManager.start = true

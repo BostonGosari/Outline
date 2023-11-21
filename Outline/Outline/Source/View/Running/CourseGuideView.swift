@@ -61,7 +61,7 @@ extension CourseGuideView {
     private var coursePath: some View {
         PathGenerateManager
             .caculateLines(width: width, height: height, coordinates: coursePathCoordinates)
-            .stroke(lineWidth: showBigGuide ? 15 : 7)
+            .stroke(style: StrokeStyle(lineWidth: showBigGuide ? 15 : 7, lineCap: .round, lineJoin: .round))
             .scaleEffect(0.8)
             .foregroundStyle(Color.customBlack.opacity(0.5))
             
@@ -72,7 +72,7 @@ extension CourseGuideView {
         
         return PathGenerateManager
             .caculateLines(width: width, height: height, coordinates: userLocations, canvasData: canvasData)
-            .stroke(lineWidth: showBigGuide ? 15 : 7)
+            .stroke(style: StrokeStyle(lineWidth: showBigGuide ? 15 : 7, lineCap: .round, lineJoin: .round))
             .scaleEffect(0.8)
             .foregroundStyle(Color.customPrimary)
     }

@@ -296,7 +296,7 @@ extension ImageShareView {
     private var userPath: some View {
         PathGenerateManager
             .caculateLines(width: imageSize, height: imageSize, coordinates: viewModel.runningData.userLocations)
-            .stroke(lineWidth: 5)
+            .stroke(style: StrokeStyle(lineWidth: 5, lineCap: .round, lineJoin: .round))
             .scale(0.5)
             .foregroundStyle(selectPhotoMode ? Color.customPrimary : Color.customWhite)
     }
