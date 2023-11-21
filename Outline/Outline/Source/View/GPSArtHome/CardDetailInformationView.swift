@@ -9,6 +9,7 @@ import SwiftUI
 import MapKit
 
 struct CardDetailInformationView: View {
+    @Binding var showCopyLocationPopup: Bool
     var selectedCourse: GPSArtCourse
     private let capsuleWidth: CGFloat = 87
     private let capsuleHeight: CGFloat = 28
@@ -50,7 +51,7 @@ struct CardDetailInformationView: View {
                         .font(.customTag)
                         .foregroundStyle(.gray500)
                         .onTapGesture {
-                            UIPasteboard.general.string = "\(selectedCourse.locationInfo.locality) \(selectedCourse.locationInfo.subLocality) \(selectedCourse.locationInfo.subThroughfare)"
+                            copyLocation()
                         }
                 }
                 HStack {
@@ -183,6 +184,14 @@ struct CardDetailInformationView: View {
             return 3
         case .hard:
             return 5
+        }
+    }
+    
+    private func copyLocation() {
+        UIPasteboard.general.string = "\(selectedCourse.locationInfo.locality) \(selectedCourse.locationInfo.subLocality) \(selectedCourse.locationInfo.subThroughfare)"
+        showCopyLocationPopup = true
+        Timer.scheduledTimer(withTimeInterval: 2.0, repeats: false) {_ in
+            self.showCopyLocationPopup = false
         }
     }
 }
