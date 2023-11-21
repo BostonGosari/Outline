@@ -1,28 +1,28 @@
 //
-//  Shimmer.swift
+//  ScoreShimmer.swift
 //  Outline
 //
-//  Created by hyunjun on 10/29/23.
+//  Created by hyunjun on 11/19/23.
 //
 
 import SwiftUI
 
 extension View {
     @ViewBuilder
-    func shimmer(color: Color, highlight: Color, hightlightOpacity: CGFloat = 1, speed: CGFloat = 3) -> some View {
+    func scoreShimmer(color: LinearGradient, highlight: Color, hightlightOpacity: CGFloat = 1, speed: CGFloat = 3) -> some View {
         self
-            .modifier(ShimmerEffect(color: color, highlight: highlight, hightlightOpacity: hightlightOpacity, speed: speed))
+            .modifier(ScoreShimmerEffect(color: color, highlight: highlight, hightlightOpacity: hightlightOpacity, speed: speed))
     }
 }
 
-struct ShimmerEffect: ViewModifier {
-    var color: Color
+struct ScoreShimmerEffect: ViewModifier {
+    var color: LinearGradient
     var highlight: Color
     var blur: CGFloat = 0
     var hightlightOpacity: CGFloat
     var speed: CGFloat
     
-    @State private var moveTo: CGFloat = -0.6
+    @State private var moveTo: CGFloat = -1.2
     
     func body(content: Content) -> some View {
         content
@@ -43,13 +43,13 @@ struct ShimmerEffect: ViewModifier {
                                 .mask {
                                     Rectangle()
                                         .fill(
-                                            .linearGradient(colors: [ highlight.opacity(hightlightOpacity), .clear], startPoint: .top, endPoint: .bottom)
+                                            .linearGradient(colors: [.clear, highlight.opacity(hightlightOpacity), highlight.opacity(hightlightOpacity), .clear], startPoint: .top, endPoint: .bottom)
                                         )
                                         .blur(radius: blur)
-                                        .rotationEffect(.init(degrees: 95))
+                                        .rotationEffect(.init(degrees: 110))
                                         .offset(x: moveTo > 0 ? extraOffset : -extraOffset)
                                         .offset(x: size.width * moveTo)
-                                        .scaleEffect(x: 2)
+                                        .scaleEffect(x: 1)
                                 }
                         }
                         .mask {
@@ -58,7 +58,7 @@ struct ShimmerEffect: ViewModifier {
                     }
                     .onAppear {
                         DispatchQueue.main.async {
-                            moveTo = 0.6
+                            moveTo = 1.2
                         }
                     }
                     .animation(.easeInOut(duration: speed).repeatForever(autoreverses: false), value: moveTo)
@@ -67,5 +67,13 @@ struct ShimmerEffect: ViewModifier {
 }
 
 #Preview {
-    SlideToUnlock(isUnlocked: .constant(false), progress: .constant(0.0))
+    Text("100")
+        .fontWeight(.bold)
+        .fontWidth(.expanded)
+        .font(.system(size: 64))
+        .scoreShimmer(color: LinearGradient(
+            colors: [.customCardScoreGradient1, .customCardScoreGradient2, .customCardScoreGradient3, .customCardScoreGradient4, .customCardScoreGradient5, .customCardScoreGradient6, .customCardScoreGradient7, .customCardScoreGradient8, .customCardScoreGradient9],
+            startPoint: .bottomLeading,
+            endPoint: .topTrailing
+        ), highlight: .white)
 }
