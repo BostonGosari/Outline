@@ -1,4 +1,13 @@
 //
+//  SharePhotoView.swift
+//  Outline
+//
+//  Created by Seungui Moon on 11/22/23.
+//
+
+import SwiftUI
+
+s//
 //  ShareView.swift
 //  Outline
 //
@@ -8,7 +17,7 @@
 import CoreLocation
 import SwiftUI
 
-struct ShareView: View {
+struct SharePhotoView: View {
     @Environment(\.dismiss) var dismiss
     @StateObject private var viewModel = ShareViewModel()
 
@@ -70,7 +79,7 @@ struct ShareView: View {
     }
 }
 
-extension ShareView {
+extension SharePhotoView {
     private var viewForShare: some View {
         ZStack {
             ZStack {
@@ -249,7 +258,7 @@ extension ShareView {
     }
 }
 
-extension ShareView {
+extension SharePhotoView {
     
     private var dragGesture: some Gesture {
         return DragGesture()
@@ -302,7 +311,7 @@ extension ShareView {
     }
 }
 
-extension ShareView {
+extension SharePhotoView {
     private func renderShareView() {
         image = viewForShare.offset(y: -10).asImage(size: size)
     }
