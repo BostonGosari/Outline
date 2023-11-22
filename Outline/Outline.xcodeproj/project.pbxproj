@@ -95,6 +95,9 @@
 		29D6BAD52B092CA800BD8653 /* SmallListCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D6BAD42B092CA800BD8653 /* SmallListCard.swift */; };
 		29D6BAD72B09AE5B00BD8653 /* ScoreShimmer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D6BAD62B09AE5B00BD8653 /* ScoreShimmer.swift */; };
 		29D6BAD92B09D4DE00BD8653 /* CardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D6BAD82B09D4DE00BD8653 /* CardModel.swift */; };
+		29D7AD4A2B0E030F00AAAAB0 /* MirroringMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D7AD492B0E030F00AAAAB0 /* MirroringMapView.swift */; };
+		29D7AD4C2B0E032200AAAAB0 /* MirroringNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D7AD4B2B0E032200AAAAB0 /* MirroringNavigationView.swift */; };
+		29D7AD4E2B0E033000AAAAB0 /* MirroringMetricsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D7AD4D2B0E033000AAAAB0 /* MirroringMetricsView.swift */; };
 		29EBD7842B0883E500B44AA9 /* BigCardFrontside.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29EBD7832B0883E500B44AA9 /* BigCardFrontside.swift */; };
 		29EC2ECC2AEAD5690033446C /* CourseAccuracyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29EC2ECB2AEAD5680033446C /* CourseAccuracyManager.swift */; };
 		29EC2ECE2AEAD5A80033446C /* CourseProgressManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29EC2ECD2AEAD5A80033446C /* CourseProgressManager.swift */; };
@@ -338,6 +341,9 @@
 		29D6BAD42B092CA800BD8653 /* SmallListCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallListCard.swift; sourceTree = "<group>"; };
 		29D6BAD62B09AE5B00BD8653 /* ScoreShimmer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreShimmer.swift; sourceTree = "<group>"; };
 		29D6BAD82B09D4DE00BD8653 /* CardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardModel.swift; sourceTree = "<group>"; };
+		29D7AD492B0E030F00AAAAB0 /* MirroringMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MirroringMapView.swift; sourceTree = "<group>"; };
+		29D7AD4B2B0E032200AAAAB0 /* MirroringNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MirroringNavigationView.swift; sourceTree = "<group>"; };
+		29D7AD4D2B0E033000AAAAB0 /* MirroringMetricsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MirroringMetricsView.swift; sourceTree = "<group>"; };
 		29EBD7832B0883E500B44AA9 /* BigCardFrontside.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigCardFrontside.swift; sourceTree = "<group>"; };
 		29EC2ECB2AEAD5680033446C /* CourseAccuracyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseAccuracyManager.swift; sourceTree = "<group>"; };
 		29EC2ECD2AEAD5A80033446C /* CourseProgressManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseProgressManager.swift; sourceTree = "<group>"; };
@@ -521,6 +527,9 @@
 			isa = PBXGroup;
 			children = (
 				2912A91C2B0D20DC00D847B0 /* MirroringView.swift */,
+				29D7AD492B0E030F00AAAAB0 /* MirroringMapView.swift */,
+				29D7AD4B2B0E032200AAAAB0 /* MirroringNavigationView.swift */,
+				29D7AD4D2B0E033000AAAAB0 /* MirroringMetricsView.swift */,
 				2912A9122B0D0D9B00D847B0 /* Mirroringsheet.swift */,
 			);
 			path = Mirroring;
@@ -1332,6 +1341,7 @@
 				0E29F65B2ADF6CA000F5EF5C /* RunningView.swift in Sources */,
 				0EE0D3E22B0C83B200E75F4C /* ShareView.swift in Sources */,
 				29EC2ECE2AEAD5A80033446C /* CourseProgressManager.swift in Sources */,
+				29D7AD4A2B0E030F00AAAAB0 /* MirroringMapView.swift in Sources */,
 				F06B936E2ADC279100387DEB /* SlideToUnlock.swift in Sources */,
 				0E9A5D4F2AE0B8C800C19FF3 /* ShareModel.swift in Sources */,
 				9528F0062AE0B37B0056CCC6 /* LoginView.swift in Sources */,
@@ -1367,10 +1377,12 @@
 				0E29F6532ADF6C3A00F5EF5C /* RunningPopup.swift in Sources */,
 				95E2EF712ADA6F230083ADEE /* CourseModelType.swift in Sources */,
 				95EB1EF12ADE228A00B47984 /* UserInfoModelType.swift in Sources */,
+				29D7AD4E2B0E033000AAAAB0 /* MirroringMetricsView.swift in Sources */,
 				95A01E172AEE3E990093D9C0 /* KakaoAuthModel.swift in Sources */,
 				9528EFE92ADE9E870056CCC6 /* UserCoreDataModel.xcdatamodeld in Sources */,
 				F0781D602AE163E00084ADD7 /* GPSArtHomeViewModel.swift in Sources */,
 				299803552ADF5F1000A9A134 /* HealthKitManager.swift in Sources */,
+				29D7AD4C2B0E032200AAAAB0 /* MirroringNavigationView.swift in Sources */,
 				95A01E3B2AF2B7250093D9C0 /* LookAroundView.swift in Sources */,
 				2998035E2AE0182100A9A134 /* ConfettiView.swift in Sources */,
 				295232FC2AEEE74A0020EAFA /* ButtonStyle.swift in Sources */,

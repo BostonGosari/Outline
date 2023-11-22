@@ -47,6 +47,9 @@ struct CourseListWatchView: View {
                                             workoutManager.selectedWorkout = workoutTypes[0]
                                             runningManager.startCourse = course
                                             runningManager.startGPSArtRun()
+                                            
+                                            let runningInfo = MirroringRunningInfo(runningType: .gpsArt, courseName: course.courseName , course: course.coursePaths)
+                                            connectivityManager.sendRunningInfo(runningInfo)
                                         } else {
                                             if runningManager.locationNetworkError {
                                                 showNetworkErrorSheet = true
@@ -120,6 +123,8 @@ struct CourseListWatchView: View {
                                 workoutManager.selectedWorkout = workoutTypes[0]
                                 runningManager.startFreeRun()
                                 showFreeRunningGuideSheet = false
+                                
+                                sendFreeRunningInfoToPhone()
                             },
                             secondLabel: "돌아가기",
                             secondAction: {
@@ -172,6 +177,8 @@ struct CourseListWatchView: View {
             if  viewModel.isHealthAuthorized && viewModel.isLocationAuthorized {
                 workoutManager.selectedWorkout = workoutTypes[0]
                 runningManager.startFreeRun()
+                
+                sendFreeRunningInfoToPhone()
             } else {
                 if !viewModel.isLocationAuthorized {
                     showLocationPermissionSheet = true
@@ -193,5 +200,10 @@ struct CourseListWatchView: View {
         }
         .buttonStyle(.plain)
         .padding(.bottom, 8)
+    }
+    
+    private func sendFreeRunningInfoToPhone() {
+        let runningInfo = MirroringRunningInfo(runningType: .free, courseName: "자유아트", course: [])
+        connectivityManager.sendRunningInfo(runningInfo)
     }
 }
