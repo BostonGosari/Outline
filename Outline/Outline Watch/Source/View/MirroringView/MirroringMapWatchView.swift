@@ -48,7 +48,7 @@ struct MirroringMapWatchView: View {
             .onEnded { _ in
                 withAnimation(.easeInOut) {
                     if isTapped {
-                        let coordinates = ConvertCoordinateManager.convertToCLLocationCoordinates(connectivityManager.runningData.userLocations)
+                        let coordinates = ConvertCoordinateManager.convertToCLLocationCoordinates(connectivityManager.runningInfo.course)
                         let center = calculateCenter(coordinates: coordinates)
                         let distance = calculateMaxDistance(coordinates: coordinates, from: center) * 6
                         
