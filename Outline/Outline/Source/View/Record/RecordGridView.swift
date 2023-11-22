@@ -36,14 +36,20 @@ struct RecordGridView: View {
                 Spacer()
                 // Dropdown button for sorting
                 Button {
-                       isSortingSheetPresented.toggle()
-                   } label: {
-                       Label(selectedSortOption.buttonLabel, systemImage: "arrow.up.arrow.down")
-                           .font(.customSubbody)
-                           .foregroundStyle(Color.customPrimary)
-                           .padding(.horizontal)
-                   }
-                   .padding(.horizontal)
+                    isSortingSheetPresented.toggle()
+                } label: {
+                    HStack(spacing: 0) {
+                        Text(selectedSortOption.buttonLabel)
+                            .font(.customSubbody)
+                            .foregroundStyle(Color.customPrimary)
+                       
+                        Image(systemName: "chevron.down")
+                            .font(.customSubbody)
+                            .foregroundStyle(Color.customPrimary)
+                            .padding(.trailing, 4)
+                    }
+                }
+                .padding(.horizontal)
             }
 
             ScrollView {
@@ -112,13 +118,13 @@ struct RecordGridView: View {
                 }
                 .padding(.top, 30)
             }
-            .padding(EdgeInsets(top: 16, leading: 16, bottom: 60, trailing: 16))
+            .padding(EdgeInsets(top: 30, leading: 16, bottom: 50, trailing: 16))
             .ignoresSafeArea()
             .presentationDragIndicator(.hidden)
-            .presentationDetents([.height(375)])
+            .presentationDetents([.height(340)])
             .presentationCornerRadius(35)
         }
-        .onAppear(){
+        .onAppear {
             selectedSortOption = self.title == "GPS 아트" ? .highscore : .latest
         }
         .overlay {
