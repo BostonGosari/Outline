@@ -128,8 +128,11 @@ struct CourseListWatchView: View {
                         )
                         .toolbar(.hidden, for: .navigationBar)
                     }
-                    
-                    if showMirroringView {
+                }
+                
+                if showMirroringView {
+                    ZStack {
+                        Color.black.ignoresSafeArea()
                         MirroringTabWatchView()
                     }
                 }
