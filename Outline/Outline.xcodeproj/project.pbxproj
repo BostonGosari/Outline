@@ -122,14 +122,6 @@
 		954CB2BA2AE654BA005EB2E9 /* NotificationAuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954CB2B92AE654BA005EB2E9 /* NotificationAuthView.swift */; };
 		954FFF782AE132D100D27537 /* CourseDataUploadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954FFF772AE132D100D27537 /* CourseDataUploadManager.swift */; };
 		9572A2092B02563900E653AB /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 9572A2082B02563900E653AB /* Secrets.xcconfig */; };
-		9580D48B2B0C7756006CE42F /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 958240622B0A81B500105FAE /* FirebaseAuth */; };
-		9580D48C2B0C7756006CE42F /* FirebaseAuthCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 958240642B0A81B500105FAE /* FirebaseAuthCombine-Community */; };
-		9580D48D2B0C7756006CE42F /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 958240662B0A81B500105FAE /* FirebaseFirestore */; };
-		9580D48E2B0C7756006CE42F /* FirebaseFirestoreCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 958240682B0A81B500105FAE /* FirebaseFirestoreCombine-Community */; };
-		9580D48F2B0C7756006CE42F /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 9582406A2B0A81B500105FAE /* FirebaseFirestoreSwift */; };
-		9580D4902B0C7756006CE42F /* KakaoSDKCommon in Frameworks */ = {isa = PBXBuildFile; productRef = 9582406D2B0A81D900105FAE /* KakaoSDKCommon */; };
-		9580D4912B0C7756006CE42F /* KakaoSDKAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 9582406F2B0A826D00105FAE /* KakaoSDKAuth */; };
-		9580D4922B0C7756006CE42F /* KakaoSDKUser in Frameworks */ = {isa = PBXBuildFile; productRef = 958240712B0A82A400105FAE /* KakaoSDKUser */; };
 		9580D4942B0C7985006CE42F /* ProfileVoiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9580D4932B0C7985006CE42F /* ProfileVoiceView.swift */; };
 		958240752B0AFDF100105FAE /* CourseScoreModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958240742B0AFDF100105FAE /* CourseScoreModelType.swift */; };
 		958240772B0AFE7900105FAE /* CourseScoreModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958240762B0AFE7900105FAE /* CourseScoreModel.swift */; };
@@ -162,6 +154,7 @@
 		BB02A3952B0CCCF300250EDD /* KakaoSDKAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 9582406F2B0A826D00105FAE /* KakaoSDKAuth */; };
 		BB02A3962B0CCCF300250EDD /* KakaoSDKUser in Frameworks */ = {isa = PBXBuildFile; productRef = 958240712B0A82A400105FAE /* KakaoSDKUser */; };
 		BB02A3982B0CCFBE00250EDD /* ScoreStar.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB02A3972B0CCFBE00250EDD /* ScoreStar.swift */; };
+		BB02A39C2B0D26EA00250EDD /* RecordGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB02A39B2B0D26EA00250EDD /* RecordGridView.swift */; };
 		BB1C49E52B0B766D009625AC /* MiniScrollView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1C49E42B0B766D009625AC /* MiniScrollView2.swift */; };
 		BB1C49E72B0B7694009625AC /* MiniScrollView3.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1C49E62B0B7694009625AC /* MiniScrollView3.swift */; };
 		BB1D530C2ADDBC560073771F /* Pretendard-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BB1D530B2ADDBC560073771F /* Pretendard-Black.ttf */; };
@@ -377,6 +370,7 @@
 		95EB1EF02ADE228A00B47984 /* UserInfoModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoModelType.swift; sourceTree = "<group>"; };
 		95EB1EF72ADE251100B47984 /* UserCoreDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = UserCoreDataModel.xcdatamodel; sourceTree = "<group>"; };
 		BB02A3972B0CCFBE00250EDD /* ScoreStar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreStar.swift; sourceTree = "<group>"; };
+		BB02A39B2B0D26EA00250EDD /* RecordGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordGridView.swift; sourceTree = "<group>"; };
 		BB1C49E42B0B766D009625AC /* MiniScrollView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniScrollView2.swift; sourceTree = "<group>"; };
 		BB1C49E62B0B7694009625AC /* MiniScrollView3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniScrollView3.swift; sourceTree = "<group>"; };
 		BB1D530B2ADDBC560073771F /* Pretendard-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Black.ttf"; sourceTree = "<group>"; };
@@ -711,6 +705,7 @@
 				BB397D082AE6408A00F92A43 /* RecordView.swift */,
 				BB397D0A2AE640A800F92A43 /* RecordDetailView.swift */,
 				292613162AF2BCEF00591E32 /* RecordHeader.swift */,
+				BB02A39B2B0D26EA00250EDD /* RecordGridView.swift */,
 			);
 			path = Record;
 			sourceTree = "<group>";
@@ -1311,6 +1306,7 @@
 				95C953CD2AF3BF760040B9DA /* ProfileViewModel.swift in Sources */,
 				95A01E332AF143BA0093D9C0 /* ProfileUserInfoView.swift in Sources */,
 				29F835CF2B0894DB0052C3C1 /* BigCardBackside.swift in Sources */,
+				BB02A39C2B0D26EA00250EDD /* RecordGridView.swift in Sources */,
 				0EEFA04F2B0BAC1C00C656AE /* TransparentBlurView.swift in Sources */,
 				2955F7FA2B038084005CE2C0 /* HealthAuthViewModel.swift in Sources */,
 				95E2EF882ADBA5C70083ADEE /* CourseModel.swift in Sources */,
