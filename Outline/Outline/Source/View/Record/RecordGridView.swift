@@ -115,8 +115,11 @@ struct RecordGridView: View {
             .padding(EdgeInsets(top: 16, leading: 16, bottom: 60, trailing: 16))
             .ignoresSafeArea()
             .presentationDragIndicator(.hidden)
-            .presentationDetents([.height(407)])
+            .presentationDetents([.height(375)])
             .presentationCornerRadius(35)
+        }
+        .onAppear(){
+            selectedSortOption = self.title == "GPS 아트" ? .highscore : .latest
         }
         .overlay {
             if isDeleteData {
