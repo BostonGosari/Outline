@@ -128,6 +128,10 @@ struct CourseListWatchView: View {
                         )
                         .toolbar(.hidden, for: .navigationBar)
                     }
+                    
+                    if showMirroringView {
+                        MirroringTabWatchView()
+                    }
                 }
             }
             .navigationTitle("아트")
@@ -156,9 +160,6 @@ struct CourseListWatchView: View {
                         showMirroringView = true
                     }
                 )
-            }
-            .sheet(isPresented: $showMirroringView) {
-                MirroringTabWatchView()
             }
         }
     }

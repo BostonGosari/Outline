@@ -77,6 +77,10 @@
 		2998035E2AE0182100A9A134 /* ConfettiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2998035D2AE0182100A9A134 /* ConfettiView.swift */; };
 		299803602AE0240100A9A134 /* ConfettiShapes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299803592AE0181900A9A134 /* ConfettiShapes.swift */; };
 		299803612AE0240300A9A134 /* Confetti.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2998035A2AE0181900A9A134 /* Confetti.swift */; };
+		2999C6D32B0D7C37009C5585 /* MirroringMapWatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2999C6D22B0D7C37009C5585 /* MirroringMapWatchView.swift */; };
+		2999C6D52B0D7C4A009C5585 /* MirroringControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2999C6D42B0D7C4A009C5585 /* MirroringControlsView.swift */; };
+		2999C6D72B0D7C56009C5585 /* MirroringMetricsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2999C6D62B0D7C56009C5585 /* MirroringMetricsView.swift */; };
+		2999C6DB2B0D7CF3009C5585 /* MirroringNavigationWatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2999C6DA2B0D7CF3009C5585 /* MirroringNavigationWatchView.swift */; };
 		29AE76AC2ADE0D9100A46742 /* OutlineApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0AC8A9C2AD94C1F0061612C /* OutlineApp.swift */; };
 		29AE76D72ADE2A2200A46742 /* InputNicknameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AE76D52ADE2A2200A46742 /* InputNicknameView.swift */; };
 		29AE76D82ADE2A2200A46742 /* InputUserInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AE76D62ADE2A2200A46742 /* InputUserInfoView.swift */; };
@@ -319,6 +323,10 @@
 		299803592AE0181900A9A134 /* ConfettiShapes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfettiShapes.swift; sourceTree = "<group>"; };
 		2998035A2AE0181900A9A134 /* Confetti.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Confetti.swift; sourceTree = "<group>"; };
 		2998035D2AE0182100A9A134 /* ConfettiView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfettiView.swift; sourceTree = "<group>"; };
+		2999C6D22B0D7C37009C5585 /* MirroringMapWatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MirroringMapWatchView.swift; sourceTree = "<group>"; };
+		2999C6D42B0D7C4A009C5585 /* MirroringControlsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MirroringControlsView.swift; sourceTree = "<group>"; };
+		2999C6D62B0D7C56009C5585 /* MirroringMetricsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MirroringMetricsView.swift; sourceTree = "<group>"; };
+		2999C6DA2B0D7CF3009C5585 /* MirroringNavigationWatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MirroringNavigationWatchView.swift; sourceTree = "<group>"; };
 		29AE76D52ADE2A2200A46742 /* InputNicknameView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputNicknameView.swift; sourceTree = "<group>"; };
 		29AE76D62ADE2A2200A46742 /* InputUserInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputUserInfoView.swift; sourceTree = "<group>"; };
 		29AE76D92ADE2A5300A46742 /* InputNicknameViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InputNicknameViewModel.swift; path = Outline/Source/ViewModel/InputNicknameViewModel.swift; sourceTree = SOURCE_ROOT; };
@@ -522,6 +530,10 @@
 			isa = PBXGroup;
 			children = (
 				2912A9192B0D201100D847B0 /* MirroringTabWatchView.swift */,
+				2999C6D22B0D7C37009C5585 /* MirroringMapWatchView.swift */,
+				2999C6DA2B0D7CF3009C5585 /* MirroringNavigationWatchView.swift */,
+				2999C6D42B0D7C4A009C5585 /* MirroringControlsView.swift */,
+				2999C6D62B0D7C56009C5585 /* MirroringMetricsView.swift */,
 			);
 			path = MirroringView;
 			sourceTree = "<group>";
@@ -1422,8 +1434,11 @@
 				29111E3F2AE0CD0C009833C7 /* ConfettiWatchView.swift in Sources */,
 				95ACF8D82B09C86C0045AEA8 /* CourseCategoryModelType.swift in Sources */,
 				BB5239292ADAF75C00646494 /* Logger.swift in Sources */,
+				2999C6DB2B0D7CF3009C5585 /* MirroringNavigationWatchView.swift in Sources */,
+				2999C6D32B0D7C37009C5585 /* MirroringMapWatchView.swift in Sources */,
 				2912A91B2B0D20B400D847B0 /* MirroringTabWatchView.swift in Sources */,
 				F0AC8AB12AD94C200061612C /* ContentWatchView.swift in Sources */,
+				2999C6D52B0D7C4A009C5585 /* MirroringControlsView.swift in Sources */,
 				293D1E302B0B016D00AB85BE /* TwoButtonSheet.swift in Sources */,
 				BB1D53432ADE9C7D0073771F /* ControlsView.swift in Sources */,
 				BB1D534C2ADEA6F90073771F /* SummaryView.swift in Sources */,
@@ -1435,6 +1450,7 @@
 				F0E6481A2ADDA683002F9FAA /* MapWatchView.swift in Sources */,
 				954CB29D2AE5161B005EB2E9 /* UserDataModel.swift in Sources */,
 				F0AC8AAF2AD94C200061612C /* OutlineWatchApp.swift in Sources */,
+				2999C6D72B0D7C56009C5585 /* MirroringMetricsView.swift in Sources */,
 				2930EDBB2AF3E59F007FD141 /* ControlButton.swift in Sources */,
 				954CB29C2AE51619005EB2E9 /* PersistentController.swift in Sources */,
 				293D1E2E2B0B00BC00AB85BE /* FontExtension.swift in Sources */,

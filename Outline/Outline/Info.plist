@@ -38,5 +38,10 @@
 		<string>Pretendard-ExtraLight.ttf</string>
 		<string>SFCompactDisplay-Semibold.ttf</string>
 	</array>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>location</string>
+		<string>processing</string>
+	</array>
 </dict>
 </plist>
