@@ -33,7 +33,7 @@ struct MirroringRunningData: Codable {
 class WatchConnectivityManager: NSObject, WCSessionDelegate, ObservableObject {
     @Published var allCourses: [GPSArtCourse] = []
     @Published var receivedCourse: GPSArtCourse = GPSArtCourse()
-    @Published var runningState: RunningState = .end
+    @Published var runningState: RunningState?
     @Published var runningInfo: MirroringRunningInfo = MirroringRunningInfo()
     @Published var runningData: MirroringRunningData = MirroringRunningData()
     @Published var isMirroring = false

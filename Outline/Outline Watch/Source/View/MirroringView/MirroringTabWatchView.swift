@@ -26,11 +26,10 @@ struct MirroringTabWatchView: View {
                     .tag(Tab.metrics)
             }
             .navigationTitle {
-                Text(connectivityManager.runningState == .start ? connectivityManager.runningInfo.courseName : "일시 정지됨")
+                Text(connectivityManager.runningState == .pause ? "일시 정지됨" : connectivityManager.runningInfo.courseName)
                     .foregroundStyle(.customPrimary)
             }
             .navigationBarTitleDisplayMode(.inline)
-            .tint(.clear)
         }
     }
 }

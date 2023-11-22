@@ -64,6 +64,9 @@ struct NewRunningView: View {
                 showDetail = false
             }
         }
+        .onDisappear {
+            runningStartManager.counter = 0
+        }
         .onChange(of: runningStartManager.counter) { _, newValue in
             if connectivityManger.isMirroring {
                 let userLocations = ConvertCoordinateManager.convertToCoordinates(locationManager.userLocations)
@@ -78,6 +81,50 @@ struct NewRunningView: View {
                 )
                 
                 connectivityManger.sendRunningData(runningData)
+            }
+        }
+        .onChange(of: connectivityManger.runningState) { _, newValue in
+            if newValue == .pause {
+                withAnimation {
+                    showDetail = true
+                    isPaused = true
+                    if navigationSheetHeight != 0 {
+                        navigationSheetHeight = 0
+                    }
+                }
+                runningDataManager.pauseRunning()
+                runningStartManager.stopTimer()
+            } else if newValue == .resume {
+                withAnimation {
+                    showDetail = false
+                    isPaused = false
+                    if navigationSheetHeight != 0 {
+                        navigationSheetHeight = 0
+                    }
+                }
+                runningDataManager.resumeRunning()
+                runningStartManager.startTimer()
+            } else if newValue == .end {
+                DispatchQueue.main.async {
+                    if runningStartManager.counter < 30 {
+                        runningDataManager.stopRunningWithoutRecord()
+                        runningStartManager.stopTimer()
+                        runningStartManager.running = false
+                        if connectivityManger.isMirroring {
+                            connectivityManger.sendRunningState(.end)
+                        }
+                    } else {
+                        runningDataManager.userLocations = locationManager.userLocations
+                        runningStartManager.stopTimer()
+                        withAnimation {
+                            showCompleteSheet = true
+                        }
+                        runningDataManager.stopRunning()
+                        if connectivityManger.isMirroring {
+                            connectivityManger.sendRunningState(.end)
+                        }
+                    }
+                }
             }
         }
     }
@@ -192,6 +239,9 @@ extension NewRunningView {
                 }
                 runningDataManager.resumeRunning()
                 runningStartManager.startTimer()
+                if connectivityManger.isMirroring {
+                    connectivityManger.sendRunningState(.resume)
+                }
             } label: {
                 Image(systemName: "play.circle.fill")
                     .font(.system(size: 60))
@@ -214,6 +264,9 @@ extension NewRunningView {
                 }
                 runningDataManager.pauseRunning()
                 runningStartManager.stopTimer()
+                if connectivityManger.isMirroring {
+                    connectivityManger.sendRunningState(.pause)
+                }
             } label: {
                 Image(systemName: "pause.circle.fill")
                     .font(.system(size: 60))
@@ -369,17 +422,21 @@ extension NewRunningView {
                 DispatchQueue.main.async {
                     if runningStartManager.counter < 30 {
                         runningDataManager.stopRunningWithoutRecord()
-                        runningStartManager.counter = 0
+                        runningStartManager.stopTimer()
                         runningStartManager.running = false
-                        connectivityManger.sendRunningState(.end)
+                        if connectivityManger.isMirroring {
+                            connectivityManger.sendRunningState(.end)
+                        }
                     } else {
                         runningDataManager.userLocations = locationManager.userLocations
-                        runningStartManager.counter = 0
+                        runningStartManager.stopTimer()
                         withAnimation {
                             showCompleteSheet = true
                         }
                         runningDataManager.stopRunning()
-                        connectivityManger.sendRunningState(.end)
+                        if connectivityManger.isMirroring {
+                            connectivityManger.sendRunningState(.end)
+                        }
                     }
                 }
                 showStopPopup = false

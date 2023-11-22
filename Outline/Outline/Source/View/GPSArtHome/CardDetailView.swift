@@ -10,6 +10,7 @@ import MapKit
 import Kingfisher
 
 struct CardDetailView: View {
+    @StateObject private var connectivityManager = WatchConnectivityManager.shared
     @AppStorage("authState") var authState: AuthState = .logout
     
     @State private var isUnlocked = false
@@ -103,6 +104,9 @@ struct CardDetailView: View {
                 showDetailView = false
                 runningStartManager.start = true
                 runningStartManager.startFreeRun()
+                
+                let runningInfo = MirroringRunningInfo(runningType: .free, courseName: "자유아트", course: [])
+                connectivityManager.sendRunningInfo(runningInfo)
             }
         }
         .sheet(isPresented: $showNeedLoginSheet) {
@@ -172,10 +176,12 @@ struct CardDetailView: View {
                     if runningStartManager.isHealthAuthorized {
                         if runningStartManager.isLocationAuthorized {
                             let course = selectedCourse.course.coursePaths
+                            let runningInfo = MirroringRunningInfo(runningType: .gpsArt, courseName: selectedCourse.course.courseName, course: course)
                             
                             if runningStartManager.checkDistance(course: course) {
                                 runningStartManager.startCourse = selectedCourse.course
                                 runningStartManager.startGPSArtRun()
+                                connectivityManager.sendRunningInfo(runningInfo)
                                 showDetailView = false
                                 runningStartManager.start = true
                                 isUnlocked = false
