@@ -21,6 +21,8 @@
 		0E9A5D482AE065A100C19FF3 /* ShareViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9A5D472AE065A100C19FF3 /* ShareViewModel.swift */; };
 		0E9A5D4F2AE0B8C800C19FF3 /* ShareModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9A5D4E2AE0B8C800C19FF3 /* ShareModel.swift */; };
 		0EE0D3E22B0C83B200E75F4C /* ShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE0D3E12B0C83B200E75F4C /* ShareView.swift */; };
+		0EE0D4022B0DC30300E75F4C /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE0D4012B0DC30300E75F4C /* Place.swift */; };
+		0EE0D4042B0DC34000E75F4C /* CardDetailMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE0D4032B0DC34000E75F4C /* CardDetailMap.swift */; };
 		0EE92E682AE00A11003192FF /* FinishRunningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE92E672AE00A11003192FF /* FinishRunningView.swift */; };
 		0EE92E6C2AE00A33003192FF /* FinishRunningViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE92E6B2AE00A33003192FF /* FinishRunningViewModel.swift */; };
 		0EE92E6E2AE00AE5003192FF /* CompleteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE92E6D2AE00AE5003192FF /* CompleteButton.swift */; };
@@ -265,6 +267,8 @@
 		0E9A5D472AE065A100C19FF3 /* ShareViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewModel.swift; sourceTree = "<group>"; };
 		0E9A5D4E2AE0B8C800C19FF3 /* ShareModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareModel.swift; sourceTree = "<group>"; };
 		0EE0D3E12B0C83B200E75F4C /* ShareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareView.swift; sourceTree = "<group>"; };
+		0EE0D4012B0DC30300E75F4C /* Place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
+		0EE0D4032B0DC34000E75F4C /* CardDetailMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetailMap.swift; sourceTree = "<group>"; };
 		0EE92E672AE00A11003192FF /* FinishRunningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishRunningView.swift; sourceTree = "<group>"; };
 		0EE92E6B2AE00A33003192FF /* FinishRunningViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishRunningViewModel.swift; sourceTree = "<group>"; };
 		0EE92E6D2AE00AE5003192FF /* CompleteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteButton.swift; sourceTree = "<group>"; };
@@ -736,6 +740,7 @@
 				BB1C49E42B0B766D009625AC /* MiniScrollView2.swift */,
 				BB1C49E62B0B7694009625AC /* MiniScrollView3.swift */,
 				F06298AA2AE1998D007AB2D3 /* MapInfoView.swift */,
+				0EE0D4032B0DC34000E75F4C /* CardDetailMap.swift */,
 			);
 			path = GPSArtHome;
 			sourceTree = "<group>";
@@ -918,6 +923,7 @@
 				F01FDB982ADABB6100BDA633 /* TabModel.swift */,
 				0E9A5D4E2AE0B8C800C19FF3 /* ShareModel.swift */,
 				29D6BAD82B09D4DE00BD8653 /* CardModel.swift */,
+				0EE0D4012B0DC30300E75F4C /* Place.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1352,6 +1358,7 @@
 				291A22352AF4CD94004B3D10 /* PermissionSheet.swift in Sources */,
 				95EB1EEC2ADDC66B00B47984 /* UserDataModel.swift in Sources */,
 				F06B936B2ADC23E100387DEB /* Logger.swift in Sources */,
+				0EE0D4022B0DC30300E75F4C /* Place.swift in Sources */,
 				29AE76E02ADE2BC700A46742 /* DateExtention.swift in Sources */,
 				BBEC68822B0868520026C306 /* RunningFinishPopUp.swift in Sources */,
 				9580D4942B0C7985006CE42F /* ProfileVoiceView.swift in Sources */,
@@ -1359,6 +1366,7 @@
 				95EB1EE92ADDC43400B47984 /* PersistentController.swift in Sources */,
 				293C86C62B0778FD00640329 /* NeedLoginSheet.swift in Sources */,
 				2998035C2AE0181900A9A134 /* Confetti.swift in Sources */,
+				0EE0D4042B0DC34000E75F4C /* CardDetailMap.swift in Sources */,
 				29AE76DC2ADE2A5300A46742 /* InputUserInfoViewModel.swift in Sources */,
 				F0492E1D2ADD2AE900F6EADD /* GPSArtHomeHeader.swift in Sources */,
 				29AE76D72ADE2A2200A46742 /* InputNicknameView.swift in Sources */,
