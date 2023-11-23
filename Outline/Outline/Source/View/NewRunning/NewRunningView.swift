@@ -45,7 +45,7 @@ struct NewRunningView: View {
             metrics
             guideView
             
-            RunningFinishPopUp(isPresented: $showCompleteSheet, score: .constant(60), userLocations: $locationManager.userLocations)
+            RunningFinishPopUp(isPresented: $showCompleteSheet, score: .constant(100), userLocations: $locationManager.userLocations)
         }
         .overlay {
             if isFirstRunning && runningStartManager.runningType == .gpsArt {
