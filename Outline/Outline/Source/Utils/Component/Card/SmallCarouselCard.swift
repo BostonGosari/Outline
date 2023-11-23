@@ -9,19 +9,20 @@ import CoreLocation
 import SwiftUI
 
 struct SmallCarouselCard: View {
-    var cardType: CardType
-    var runName: String
-    var date: String
-    var data: [CLLocationCoordinate2D]
-    
+   
     private let cardWidth = UIScreen.main.bounds.width * 0.5
     private let cardHeight = UIScreen.main.bounds.width * 0.5 * 1.635
+    private let cardBorder: CGFloat = 8
     private let borderGradient = LinearGradient(
         colors: [.pink, .purple, .blue, .green],
         startPoint: .topLeading,
         endPoint: .bottomTrailing
     )
-    private let cardBorder: CGFloat = 8
+   
+    var cardType: CardType
+    var runName: String
+    var date: String
+    var data: [CLLocationCoordinate2D]
     
     var body: some View {
         ZStack(alignment: .topLeading) {

@@ -20,13 +20,14 @@ enum SortOption: String, CaseIterable {
 }
 
 struct RecordGridView: View {
-    var title: String
-    var records: [CoreRunningRecord]
+    
     @State private var isDeleteData = false
     @State private var selectedSortOption: SortOption = .latest
-    
     @State private var isSortingSheetPresented = false
     
+    var title: String
+    var records: [CoreRunningRecord]
+
     var body: some View {
         VStack {
             HStack {
