@@ -103,10 +103,10 @@ struct FinishRunningView: View {
                         .transition(.move(edge: .top))
                 }
             }
-            .navigationDestination(isPresented: $viewModel.navigateToShareMainView) {
-                ShareView(runningData: viewModel.shareData)
+            .sheet(isPresented: $viewModel.navigateToShareMainView, content: {
+                SharePhotoView(runningData: viewModel.shareData)
                     .navigationBarBackButtonHidden()
-            }
+            })
             .onAppear {
                 if !save {
                     viewModel.isShowPopup = true

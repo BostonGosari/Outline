@@ -1,14 +1,15 @@
 //
-//  ShareView.swift
+//  SharePhotoView.swift
 //  Outline
 //
-//  Created by hyebin on 11/21/23.
+//  Created by Seungui Moon on 11/22/23.
 //
 
 import CoreLocation
+import Photos
 import SwiftUI
 
-struct ShareView: View {
+struct SharePhotoView: View {
     @Environment(\.dismiss) var dismiss
     @StateObject private var viewModel = ShareViewModel()
 
@@ -25,17 +26,47 @@ struct ShareView: View {
     
     @State private var image: UIImage?
     
+    @State private var showUploadSheet = false
+    @State private var showCamera = false
+    @State private var showImagePicker = false
+    @State private var permissionDenied = false
+    @State private var photoImage: UIImage?
+    
     let runningData: ShareModel
     
     var body: some View {
-        ZStack {
-            Color.gray900
-                .ignoresSafeArea()
-            
-            VStack(spacing: 0) {
-                shareImageCombined
-                buttons
+        NavigationStack {
+            ZStack {
+                Color.gray900
+                    .ignoresSafeArea()
+                
+                    VStack(spacing: 0) {
+                        Spacer()
+                            .frame(height: 30)
+                        shareImageCombined
+                        buttons
+                    }
+                
             }
+            .navigationTitle("공유")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button("닫기") {
+                        dismiss()
+                    }
+                }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button("공유") {
+                        renderShareView()
+                        if let img = image {
+                            viewModel.shareToInstagram(image: img)
+                        }
+                    }
+                }
+            }
+            .toolbarBackground(Color.gray900)
+            
         }
         .onAppear {
             let canvasSize = PathGenerateManager.calculateCanvaData(coordinates: runningData.userLocations, width: 200, height: 200)
@@ -43,17 +74,27 @@ struct ShareView: View {
             pathHeight = CGFloat(canvasSize.height)
             renderShareView()
         }
-        .navigationTitle("공유")
-        .navigationBarTitleDisplayMode(.inline)
-        .toolbar {
-            ToolbarItem(placement: .topBarLeading) {
-                Button {
-                    dismiss()
-                } label: {
-                    (Text(Image(systemName: "chevron.left")) + Text("뒤로"))
-                        .foregroundStyle(Color.customPrimary)
-                }
-            }
+        .actionSheet(isPresented: $showUploadSheet) {
+               ActionSheet(
+                title: Text("이미지 선택"),
+                buttons: [
+                    .default(Text("사진 찍기"), action: {
+                        showCamera = true
+                    }),
+                    .default(Text("이미지 선택"), action: {
+                        showImagePicker = true
+                    }),
+                    .cancel(Text("Cancel"), action: {
+                        showUploadSheet = false
+                    })
+                ])
+           }
+        .fullScreenCover(isPresented: $showCamera) {
+            ImagePickerView(selectedImage: $photoImage, sourceType: .camera)
+                .ignoresSafeArea()
+        }
+        .sheet(isPresented: $showImagePicker) {
+            ImagePickerView(selectedImage: $photoImage)
         }
         .sheet(isPresented: $viewModel.permissionDenied) {
             PermissionSheet(permissionType: .photoLibrary)
@@ -70,20 +111,26 @@ struct ShareView: View {
     }
 }
 
-extension ShareView {
+extension SharePhotoView {
     private var viewForShare: some View {
         ZStack {
+            if let uiImage = photoImage {
+                Image(uiImage: uiImage)
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: size.width, height: size.height)
+            }
             ZStack {
                 Image("ShareFirstLayer")
                 Image("ShareSecondLayer")
-                    .background(
-                        TransparentBlurView(removeAllFilters: true)
-                            .blur(radius: 1, opaque: true)
-                    )
+//                    .background(
+//                        TransparentBlurView(removeAllFilters: true)
+//                            .blur(radius: 0, opaque: true)
+//                    )
                 Image("ShareThirdLayer")
             }
             .padding(.top, 16)
-            .padding(.bottom, 46)
+            .padding(.bottom, 16)
             .frame(width: size.width, height: size.height)
             
             ZStack {
@@ -96,8 +143,8 @@ extension ShareView {
                 .font(.customSubbody)
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
             }
-            .padding(.trailing, 50)
-            .padding(.bottom, 55)
+            .padding(.trailing, 16)
+            .padding(.bottom, 8)
             .frame(width: size.width, height: size.height)
 
             userPath
@@ -107,6 +154,16 @@ extension ShareView {
     }
     private var shareImageCombined: some View {
         ZStack {
+            if let uiImage = photoImage {
+                Image(uiImage: uiImage)
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: size.width + 30, height: size.height + 30)
+//                    .mask {
+//                        Rectangle()
+//                            .aspectRatio(1080.0/1920.0, contentMode: .fit)
+//                    }
+            }
             shareImage
             runningInfo
             userPath
@@ -117,7 +174,8 @@ extension ShareView {
                     }
             }
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .aspectRatio(1080.0/1920.0, contentMode: .fit)
+        .frame(maxWidth: size.width, maxHeight: size.height - 60)
     }
     
     private var shareImage: some View {
@@ -125,21 +183,23 @@ extension ShareView {
             backgroundImage
             runningInfo
         }
+        .background(.clear)
     }
     
     private var backgroundImage: some View {
         ZStack {
             Image("ShareFirstLayer")
             Image("ShareSecondLayer")
-                .background(
-                    TransparentBlurView(removeAllFilters: true)
-                        .blur(radius: 3, opaque: true)
-                )
+//                .background(
+//                    TransparentBlurView(removeAllFilters: true)
+//                        .blur(radius: 1, opaque: true)
+//                )
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
             Image("ShareThirdLayer")
         }
         .padding(.top, 16)
         .padding(.bottom, 46)
+        .background(.clear)
     }
     
     private var runningInfo: some View {
@@ -155,6 +215,7 @@ extension ShareView {
         }
         .padding(.trailing, 50)
         .padding(.bottom, 55)
+        .background(.clear)
     }
     
     private var userPath: some View {
@@ -180,6 +241,7 @@ extension ShareView {
                 if let img = image {
                     viewModel.saveImage(image: img)
                 }
+                
             } label: {
                 Image(systemName: "square.and.arrow.down")
                     .foregroundStyle(Color.black)
@@ -193,17 +255,16 @@ extension ShareView {
             }
             .padding(.leading, 16)
             
-            CompleteButton(text: "Instagram으로 공유하기", isActive: true) {
-                renderShareView()
-                if let img = image {
-                    viewModel.shareToInstagram(image: img)
-                }
-                
+            CompleteButton(text: "사진 업로드하기", isActive: true) {
+                showUploadSheet = true
+//                renderShareView()
+//                if let img = image {
+//                    viewModel.shareToInstagram(image: img)
+//                }
             }
             .padding(.leading, -8)
         }
         .frame(maxHeight: .infinity, alignment: .bottom)
-        .padding(.bottom, 70)
     }
     
     private var instaSheet: some View {
@@ -249,7 +310,7 @@ extension ShareView {
     }
 }
 
-extension ShareView {
+extension SharePhotoView {
     
     private var dragGesture: some Gesture {
         return DragGesture()
@@ -302,9 +363,9 @@ extension ShareView {
     }
 }
 
-extension ShareView {
+extension SharePhotoView {
     private func renderShareView() {
-        image = viewForShare.offset(y: -10).asImage(size: size)
+        image = viewForShare.offset(y: -24).asImage(size: size)
     }
     
     private func renderShareViewWithRenderer() {
@@ -317,4 +378,40 @@ extension ShareView {
         }
     }
     
+}
+
+extension SharePhotoView {
+    func checkCameraPermission() {
+        AVCaptureDevice.requestAccess(for: .video) { granted in
+            if granted {
+                self.showCamera = true
+            } else {
+//                self.alertTitle = "카메라 권한 허용"
+//                self.alertMessage = "권한을 허용하면 사진을 찍어 업로드할 수 있어요."
+//                self.imageName = "icon_Image_B"
+                self.permissionDenied = true
+            }
+        }
+    }
+    
+    func checkAlbumPermission() {
+        PHPhotoLibrary.requestAuthorization { status in
+            switch status {
+            case .authorized:
+                self.showImagePicker = true
+            case .denied:
+//                self.alertTitle = "사진 권한 허용"
+//                self.alertMessage = "권한을 허용하면 사진을 함께 업로드할 수 있어요."
+//                self.imageName = "icon_Camera"
+                self.permissionDenied = true
+            case .restricted, .notDetermined:
+//                self.alertTitle = "사진 권한 허용"
+//                self.alertMessage = "권한을 허용하면 사진을 함께 업로드할 수 있어요."
+//                self.imageName = "icon_Camera"
+                self.permissionDenied = true
+            default:
+                break
+            }
+        }
+    }
 }
