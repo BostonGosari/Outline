@@ -149,13 +149,8 @@ struct CardDetailInformationView: View {
                 .fontWeight(.semibold)
             VStack(alignment: .leading, spacing: 8) {
                 NavigationLink {
-                    Map {
-                        UserAnnotation()
-                        MapPolyline(coordinates: ConvertCoordinateManager.convertToCLLocationCoordinates(selectedCourse.coursePaths))
-                            .stroke(.customPrimary, style: StrokeStyle(lineWidth: 8, lineCap: .round, lineJoin: .round))
-                    }
-                    .mapControlVisibility(.hidden)
-                    .toolbarBackground(.hidden, for: .navigationBar)
+                    CardDetailMap(selectedCourse: selectedCourse)
+                        .toolbarBackground(.hidden, for: .navigationBar)
                 } label: {
                     Map(interactionModes: []) {
                         UserAnnotation()
