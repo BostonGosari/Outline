@@ -20,6 +20,7 @@ extension Font {
     static let customTag = Font.custom("Pretendard-SemiBold", size: 16)
     static let customSubbody = Font.custom("Pretendard-Regular", size: 16)
     static let customCaption = Font.custom("Pretendard-Regular", size: 14)
+    static let customCaption2 = Font.custom("Pretendard-Regular", size: 8)
     static let customTag2 = Font.custom("Pretendard-Medium", size: 13)
     static let customTab = Font.custom("Pretendard-Regular", size: 10)
     static let customTimeTitle = Font.custom("Pretendard-Bold", size: 48)

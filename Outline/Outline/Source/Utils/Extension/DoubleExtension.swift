@@ -35,6 +35,16 @@ extension Double {
         return String(format: "%dh%02dm", hours, minutes)
     }
     
+    func formatDurationInKoreanDetail() -> String {
+        let hours = Int(self) / 60
+        let minutes = Int(self) % 60
+        if hours == 0 {
+            return String(format: "%02d분", minutes)
+        } else {
+            return String(format: "%d시간 %02d분", hours, minutes)
+        }
+    }
+    
     func formatDurationInKorean() -> String {
         let hours = Int(self) / 60
         let minutes = Int(self) % 60

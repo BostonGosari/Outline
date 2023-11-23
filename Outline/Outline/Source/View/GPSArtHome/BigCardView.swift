@@ -9,13 +9,15 @@ import SwiftUI
 import Kingfisher
 
 struct BigCardView: View {
-    var course: CourseWithDistance
+    
+    var course: CourseWithDistanceAndScore
     @Binding var loading: Bool
     var index: Int
     var currentIndex: Int
     var namespace: Namespace.ID
     var showDetailView: Bool
     
+    private let courseScoreModel = CourseScoreModel()
     private let capsuleWidth: CGFloat = 70
     private let capsuleHeight: CGFloat = 25
     
@@ -39,6 +41,12 @@ struct BigCardView: View {
                 height: UIScreen.main.bounds.width * 0.84 * 1.5
             )
             .transition(.opacity)
+            .overlay(alignment: .topLeading) {
+                if !loading {
+                    ScoreStar(score: course.score, size: .big)
+                        .padding(24)
+                }
+            }
             .overlay(alignment: .bottom) {
                 if !loading {
                     courseInformation

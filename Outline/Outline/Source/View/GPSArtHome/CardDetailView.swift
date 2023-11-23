@@ -20,7 +20,7 @@ struct CardDetailView: View {
     @Environment(\.dismiss) var dismiss
     
     @Binding var showDetailView: Bool
-    var selectedCourse: CourseWithDistance
+    var selectedCourse: CourseWithDistanceAndScore
     var currentIndex: Int
     var namespace: Namespace.ID 
     
@@ -30,6 +30,7 @@ struct CardDetailView: View {
     @State private var dragState: CGSize = .zero
     @State private var isDraggable = true
     @State private var progress: Double = 0.0
+    @State private var showCopyLocationPopup = false
     
     private let fadeInOffset: CGFloat = 10
     private let dragStartRange: CGFloat = 60
@@ -51,7 +52,9 @@ struct CardDetailView: View {
                             courseImage
                             courseInformation
                         }
-                        CardDetailInformationView(selectedCourse: selectedCourse.course)
+                        CardDetailInformationView(
+                            showCopyLocationPopup: $showCopyLocationPopup, selectedCourse: selectedCourse.course
+                        )
                             .opacity(appear[2] ? 1 : 0)
                             .offset(y: appear[2] ? 0 : fadeInOffset)
                     }
@@ -83,6 +86,15 @@ struct CardDetailView: View {
             .scrollDisabled(!showDetailView)
             .ignoresSafeArea(edges: .top)
             .statusBarHidden()
+        }
+        .overlay {
+            if showCopyLocationPopup {
+                RunningPopup(text: "시작 위치 도로명이 복사되었어요.")
+                    .frame(maxHeight: .infinity, alignment: .top)
+                    .padding(.top, 52)
+            } else {
+                EmptyView()
+            }
         }
         .sheet(isPresented: $showAlert) {
             progress = 0.0

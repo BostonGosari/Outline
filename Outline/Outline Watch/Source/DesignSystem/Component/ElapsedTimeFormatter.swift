@@ -14,7 +14,7 @@ class ElapsedTimeFormatter: Formatter {
         formatter.zeroFormattingBehavior = .pad
         return formatter
     }()
-    var showSubseconds = true
+    var showSubseconds = false
 
     override func string(for value: Any?) -> String? {
         guard let time = value as? TimeInterval else {
