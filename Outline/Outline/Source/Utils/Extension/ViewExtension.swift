@@ -56,6 +56,10 @@ extension View {
         let controller = UIHostingController(rootView: self)
         controller.view.bounds = CGRect(origin: .zero, size: size)
         let image = controller.view.asImage(size: size)
+        if let pngData = image.pngData(), let pngImage = UIImage(data: pngData) {
+            return pngImage
+        }
+        controller.view.removeFromSuperview()
         return image
     }
 }
@@ -64,6 +68,7 @@ extension UIView {
     func asImage(size: CGSize) -> UIImage {
         let format = UIGraphicsImageRendererFormat()
         format.scale = UIScreen.main.scale
+        format.opaque = true
         return UIGraphicsImageRenderer(size: size, format: format).image { _ in
             self.drawHierarchy(in: self.layer.bounds, afterScreenUpdates: true)
         }

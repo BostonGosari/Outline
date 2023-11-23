@@ -115,10 +115,14 @@ struct RecordDetailView: View {
                 dismiss()
             }
         }
-        .navigationDestination(isPresented: $viewModel.navigateToShareMainView) {
-            ShareView(runningData: viewModel.shareData)
+        .sheet(isPresented: $viewModel.navigateToShareMainView, content: {
+            SharePhotoView(runningData: viewModel.shareData)
                 .navigationBarBackButtonHidden()
-        }
+        })
+//        .navigationDestination(isPresented: $viewModel.navigateToShareMainView) {
+//            ShareView(runningData: viewModel.shareData)
+//                .navigationBarBackButtonHidden()
+//        }
         .onAppear {
             viewModel.readData(runningRecord: record)
         }
