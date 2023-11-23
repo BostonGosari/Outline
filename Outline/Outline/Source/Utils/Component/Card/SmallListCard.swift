@@ -5,12 +5,14 @@
 //  Created by hyunjun on 11/19/23.
 //
 
+import CoreLocation
 import SwiftUI
 
-struct SmallListCard<Content: View>: View {
+struct SmallListCard: View {
     var cardType: CardType
     var runName: String
-    @ViewBuilder var content: () -> Content
+    var date: String
+    var data: [CLLocationCoordinate2D]
     
     private let cardWidth = UIScreen.main.bounds.width * 0.28
     private let cardHeight = UIScreen.main.bounds.width * 0.28 * 1.65
@@ -23,20 +25,14 @@ struct SmallListCard<Content: View>: View {
     
     var body: some View {
         ZStack(alignment: .topLeading) {
-            content()
+            Image("sampleMapImage")
                 .foregroundStyle(.ultraThinMaterial)
                 .frame(width: cardWidth - cardBorder * 2, height: cardHeight - cardBorder * 2)
                 .mask {
                     UnevenRoundedRectangle(topLeadingRadius: 1, bottomLeadingRadius: 11, bottomTrailingRadius: 11, topTrailingRadius: 21)
                 }
                 .padding([.leading, .top], cardBorder)
-                .overlay(alignment: .bottom) {
-                    VStack(spacing: 8) {
-                        Text(runName)
-                            .font(.customTag2)
-                    }
-                    .padding(.bottom, 16)
-                }
+                
             Image(cardType.cardFrondSideImage)
                 .resizable()
                 .mask {
@@ -65,21 +61,75 @@ struct SmallListCard<Content: View>: View {
                 }
             UnevenRoundedRectangle(topLeadingRadius: 5, bottomLeadingRadius: 15, bottomTrailingRadius: 15, topTrailingRadius: 25)
                 .stroke(borderGradient, lineWidth: 1)
-            
             Image(cardType.hologramImage)
                 .resizable()
-                .opacity(cardType == .excellent ? 0.2 : 0.1)
+                .opacity(cardType == .excellent ? 0.5 : cardType == .great ? 0.5 : 0.2)
                 .mask {
                     UnevenRoundedRectangle(topLeadingRadius: 5, bottomLeadingRadius: 15, bottomTrailingRadius: 15, topTrailingRadius: 25)
                 }
+                .overlay(alignment: .bottom) {
+                    VStack(spacing: 2) {
+                        PathGenerateManager
+                            .caculateLines(width: 100, height: 100, coordinates: data)
+                            .scale(0.5)
+                            .stroke(.customPrimary, style: StrokeStyle(lineWidth: 4, lineCap: .round, lineJoin: .round))
+                            .padding(.horizontal, 16)
+                        Text(runName)
+                            .font(.customCaption)
+                        Text(date)
+                            .font(.customTab)
+                    }
+                    .foregroundStyle(.customWhite)
+                    .padding(.bottom, 12)
+                }
+            
         }
         .frame(width: cardWidth, height: cardHeight)
     }
 }
 
-#Preview {
-    SmallListCard(cardType: .nice, runName: "돌고래런") {
-        Rectangle()
-            .foregroundStyle(.black)
+struct SmallListEmptyCard: View {
+    private let cardWidth = UIScreen.main.bounds.width * 0.28
+    private let cardHeight = UIScreen.main.bounds.width * 0.28 * 1.65
+    
+    var body: some View {
+        UnevenRoundedRectangle(topLeadingRadius: 5, bottomLeadingRadius: 15, bottomTrailingRadius: 15, topTrailingRadius: 25)
+            .fill(.white7)
+            .stroke(.white30, lineWidth: 1.0)
+            .frame(width: cardWidth, height: cardHeight)
     }
 }
+
+//#Preview {
+//    HStack {
+//        SmallListCard(cardType: .nice, runName: "돌고래런", date: "2023/10/23") {
+//            ZStack {
+//                Rectangle()
+//                    .foregroundStyle(.black)
+//                Text("안녕")
+//                    .font(.customTitle)
+//                    .foregroundStyle(.customWhite)
+//            }
+//           
+//        }
+//        SmallListCard(cardType: .great, runName: "돌고래런", date: "2023/10/23") {
+//            ZStack {
+//                Rectangle()
+//                    .foregroundStyle(.black)
+//                Text("안녕")
+//                    .font(.customTitle)
+//                    .foregroundStyle(.customWhite)
+//            }
+//        }
+//        SmallListCard(cardType: .excellent, runName: "돌고래런", date: "2023/10/23") {
+//            ZStack {
+//                Rectangle()
+//                    .foregroundStyle(.black)
+//                Text("안녕")
+//                    .font(.customTitle)
+//                    .foregroundStyle(.customWhite)
+//            }
+//        }
+//    }
+//   
+//}

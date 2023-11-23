@@ -12,8 +12,8 @@ struct RecordHeader: View {
     
     var body: some View {
         HStack {
-            Text("기록")
-                .font(.custom("Pretendard-SemiBold", size: 32))
+            Text("아트 컬랙션")
+                .font(.customTitle)
                 .scaleEffect(max(min(1.2, 1 + (scrollOffset-47)/500), 1), anchor: .topLeading)
             Spacer()
         }
@@ -30,7 +30,7 @@ struct RecordInlineHeader: View {
     var body: some View {
         HStack {
             Spacer()
-            Text("기록")
+            Text("아트 컬랙션")
                 .font(.custom("Pretendard-Regular", size: 18))
                 .opacity(scrollOffset < 20 ? 1 : 0)
                 .animation(.bouncy(duration: 0.7), value: scrollOffset)

@@ -18,8 +18,8 @@ struct NewRunningView: View {
     
     @State private var showDetail = false
     @State private var isPaused = false
-    @State private var showDetailSheet = true
     @State private var showCompleteSheet = false
+    @State private var tapGuideView = false
     
     @State private var navigationTranslation: CGFloat = 0.0
     @State private var navigationSheetHeight: CGFloat = 0.0
@@ -43,8 +43,9 @@ struct NewRunningView: View {
                 navigation
             }
             metrics
-            RunningFinishPopUp(isPresented: $showCompleteSheet, score: .constant(60), userLocations: $locationManager.userLocations
-            )
+            guideView
+            
+            RunningFinishPopUp(isPresented: $showCompleteSheet, score: .constant(100), userLocations: $locationManager.userLocations)
         }
         .overlay {
             if isFirstRunning && runningStartManager.runningType == .gpsArt {
@@ -55,6 +56,11 @@ struct NewRunningView: View {
             if showStopPopup {
                 RunningPopup(text: "정지 버튼을 길게 누르면 러닝이 종료돼요")
                     .frame(maxHeight: .infinity, alignment: .top)
+            }
+        }
+        .onChange(of: tapGuideView) {
+            withAnimation {
+                showDetail = false
             }
         }
     }
@@ -209,6 +215,35 @@ extension NewRunningView {
         .padding(.horizontal, 90)
     }
     
+    private var guideView: some View {
+        ZStack {
+            if let course = runningStartManager.startCourse,
+               runningStartManager.runningType == .gpsArt {
+                CourseGuideView(
+                    tapGuideView: $tapGuideView,
+                    coursePathCoordinates: ConvertCoordinateManager.convertToCLLocationCoordinates(course.coursePaths),
+                    courseRotate: course.heading,
+                    userLocations: locationManager.userLocations,
+                    tapPossible: !(navigationTranslation + navigationSheetHeight > 10)
+                )
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: tapGuideView ? .top : .topTrailing)
+                .padding(.top, 80)
+                .padding(.trailing, tapGuideView ? 0 : 16)
+            }
+        }
+        .zIndex(tapGuideView ? 2 : 0)
+        .background {
+            if tapGuideView {
+                Color.black50.ignoresSafeArea()
+                    .onTapGesture {
+                        withAnimation {
+                            tapGuideView = false
+                        }
+                    }
+            }
+        }
+    }
+    
     private var completeSheet: some View {
         VStack(spacing: 0) {
             Text("오늘은, 여기까지")
@@ -241,47 +276,41 @@ extension NewRunningView {
     private var navigationGesture: some Gesture {
         DragGesture()
             .onChanged { value in
-                if !showDetail {
-                    let translationY = value.translation.height
-                    if navigationSheetHeight == 0 {
-                        navigationTranslation = min(max(translationY, -5), 340)
-                    } else {
-                        navigationTranslation = max(min(translationY, 40), -310)
-                    }
+                withAnimation {
+                    showDetail = false
+                }
+                let translationY = value.translation.height
+                if navigationSheetHeight == 0 {
+                    navigationTranslation = min(max(translationY, -5), 340)
                 } else {
-                    navigationSheetHeight = 0
-                    navigationTranslation = 0.0
+                    navigationTranslation = max(min(translationY, 40), -310)
                 }
             }
             .onEnded { value in
-                if !showDetail {
-                    let translationY = value.translation.height
-                    withAnimation(.bouncy) {
-                        if translationY > 0 {
-                            navigationSheetHeight = 300
-                        } else {
-                            navigationSheetHeight = 0
-                        }
-                        navigationTranslation = 0.0
+                withAnimation {
+                    showDetail = false
+                }
+                let translationY = value.translation.height
+                withAnimation(.bouncy) {
+                    if translationY > 0 {
+                        navigationSheetHeight = 300
+                    } else {
+                        navigationSheetHeight = 0
                     }
-                } else {
-                    navigationSheetHeight = 0
                     navigationTranslation = 0.0
                 }
             }
             .simultaneously(with: TapGesture()
                 .onEnded { _ in
-                    if !showDetail {
-                        withAnimation {
-                            if navigationSheetHeight == 0 {
-                                navigationSheetHeight = 300
-                            } else {
-                                navigationSheetHeight = 0
-                            }
+                    withAnimation {
+                        showDetail = false
+                    }
+                    withAnimation {
+                        if navigationSheetHeight == 0 {
+                            navigationSheetHeight = 300
+                        } else {
+                            navigationSheetHeight = 0
                         }
-                    } else {
-                        navigationSheetHeight = 0
-                        navigationTranslation = 0.0
                     }
                 }
             )

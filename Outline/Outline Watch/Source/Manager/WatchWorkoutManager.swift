@@ -9,7 +9,6 @@ import Foundation
 import HealthKit
 
 class WatchWorkoutManager: NSObject, ObservableObject {
-    private let watchConnectivityManager = WatchConnectivityManager()
     static let shared = WatchWorkoutManager()
     
     var selectedWorkout: HKWorkoutActivityType? {
@@ -29,29 +28,23 @@ class WatchWorkoutManager: NSObject, ObservableObject {
     var session: HKWorkoutSession?
     var builder: HKLiveWorkoutBuilder?
     
-    // Start the workout.
     func startWorkout(workoutType: HKWorkoutActivityType) {
         let configuration = HKWorkoutConfiguration()
         configuration.activityType = workoutType
         configuration.locationType = .outdoor
         
-        // Create the session and obtain the workout builder.
         do {
             session = try HKWorkoutSession(healthStore: healthStore, configuration: configuration)
             builder = session?.associatedWorkoutBuilder()
         } catch {
-            // Handle any exceptions.
             return
         }
         
-        // Setup session and builder.
         session?.delegate = self
         builder?.delegate = self
         
-        // Set the workout builder's data source.
         builder?.dataSource = HKLiveWorkoutDataSource(healthStore: healthStore, workoutConfiguration: configuration)
         
-        // Start the workout session and begin data collection.
         let startDate = Date()
         session?.startActivity(with: startDate)
         builder?.beginCollection(withStart: startDate) { _, _ in
@@ -69,7 +62,6 @@ class WatchWorkoutManager: NSObject, ObservableObject {
             HKQuantityType.workoutType()
         ]
         
-        // 거리 시간 심박수 칼로리 페이스 케이던스
         let typesToRead: Set = [
             HKQuantityType(.heartRate),
             HKQuantityType(.activeEnergyBurned),
@@ -89,18 +81,10 @@ class WatchWorkoutManager: NSObject, ObservableObject {
     
     func togglePause() {
         if running == true {
-            self.pause()
+            session?.pause()
         } else {
-            resume()
+            session?.resume()
         }
-    }
-    
-    func pause() {
-        session?.pause()
-    }
-    
-    func resume() {
-        session?.resume()
     }
     
     func endWorkout() {
@@ -183,22 +167,22 @@ class WatchWorkoutManager: NSObject, ObservableObject {
         builder = nil
         workout = nil
         session = nil
-        calorie = 0
+        distance = 0
         averageHeartRate = 0
         heartRate = 0
-        distance = 0
+        calorie = 0
+        pace = 0
+        averagePace = 0
         stepCount = 0
+        cadence = 0
     }
 }
 
-// MARK: - HKWorkoutSessionDelegate
 extension WatchWorkoutManager: HKWorkoutSessionDelegate {
     func workoutSession(_ workoutSession: HKWorkoutSession, didChangeTo toState: HKWorkoutSessionState,
                         from fromState: HKWorkoutSessionState, date: Date) {
         DispatchQueue.main.async {
             self.running = toState == .running
-            // 러닝 세션의 상태를 iOS 앱으로 전달
-            self.watchConnectivityManager.sendRunningSessionStateToPhone(self.running)
         }
         
         // Wait for the session to transition states before ending the builder.
@@ -218,7 +202,6 @@ extension WatchWorkoutManager: HKWorkoutSessionDelegate {
     }
 }
 
-// MARK: - HKLiveWorkoutBuilderDelegate
 extension WatchWorkoutManager: HKLiveWorkoutBuilderDelegate {
     func workoutBuilderDidCollectEvent(_ workoutBuilder: HKLiveWorkoutBuilder) {
         
@@ -231,7 +214,6 @@ extension WatchWorkoutManager: HKLiveWorkoutBuilderDelegate {
             }
             
             let statistics = workoutBuilder.statistics(for: quantityType)
-            
             // Update the published values.
             updateForStatistics(statistics)
         }
