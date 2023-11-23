@@ -9,7 +9,7 @@ import Combine
 import SwiftUI
 
 struct InputNicknameView: View {
-    @StateObject var viewModel = InputNicknameViewModel()
+    @StateObject var viewModel = InputNicknameViewModel.shared
     
     var body: some View {
         NavigationStack {

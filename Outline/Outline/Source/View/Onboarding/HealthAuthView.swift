@@ -9,7 +9,7 @@ import SwiftUI
 
 struct HealthAuthView: View {
     @StateObject private var viewModel = HealthAuthViewModel()
-    @StateObject var inputNickNameViewModel = InputNicknameViewModel()
+    @StateObject var inputNickNameViewModel = InputNicknameViewModel.shared
     @State private var showHealthAuthentication = true
     
     var body: some View {
