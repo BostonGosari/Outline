@@ -50,7 +50,7 @@ struct GPSArtHomeView: View {
                             HStack(spacing: 0) {
                                 ForEach(viewModel.recommendedCoures.indices, id: \.self) { index in
                                     Button {
-                                        withAnimation(.spring) { 
+                                        withAnimation(.bouncy(duration: 0.7)) {
                                             selectedCourse = viewModel.recommendedCoures[index]
                                             showDetailView = true
                                             matched = true
