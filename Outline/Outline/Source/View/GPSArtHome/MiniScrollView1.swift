@@ -43,18 +43,24 @@ struct MiniScrollView1: View {
                                 }
                             } label: {
                                 ZStack {
-                                    KFImage(URL(string: currentCourse.course.thumbnail))
-                                        .resizable()
-                                        .placeholder {
-                                            Rectangle()
-                                                .foregroundColor(.gray700)
-                                                .onDisappear {
-                                                    loading = false
-                                                }
-                                                .mask {
-                                                    UnevenRoundedRectangle(topLeadingRadius: 5, bottomLeadingRadius: 30, bottomTrailingRadius: 30, topTrailingRadius: 30, style: .circular)
-                                                }
-                                        }
+                                    if showDetailView {
+                                        Rectangle()
+                                            .foregroundStyle(.gray800)
+                                    } else {
+                                        KFImage(URL(string: currentCourse.course.thumbnail))
+                                            .resizable()
+                                            .placeholder {
+                                                Rectangle()
+                                                    .foregroundColor(.gray700)
+                                                    .onDisappear {
+                                                        loading = false
+                                                    }
+                                                    .mask {
+                                                        UnevenRoundedRectangle(topLeadingRadius: 5, bottomLeadingRadius: 30, bottomTrailingRadius: 30, topTrailingRadius: 30, style: .circular)
+                                                    }
+                                            }
+                                            .matchedGeometryEffect(id: currentCourse.id, in: namespace)
+                                    }
                                     LinearGradient(
                                         stops: [
                                             Gradient.Stop(color: .black, location: 0.00),
@@ -83,9 +89,8 @@ struct MiniScrollView1: View {
                                     .padding(.leading, 12)
                                     .frame(maxWidth: .infinity, alignment: .leading)
                                 }
-                                .matchedGeometryEffect(id: "\(currentCourse.id)_1", in: namespace)
                                 .mask {
-                                    UnevenRoundedRectangle(topLeadingRadius: 5, bottomLeadingRadius: 30, bottomTrailingRadius: 30, topTrailingRadius: 30, style: .circular)
+                                    UnevenRoundedRectangle(topLeadingRadius: 5, bottomLeadingRadius: 30, bottomTrailingRadius: 30, topTrailingRadius: 30)
                                 }
                                 .shadow(color: .white, radius: 0.5, y: -0.5)
                             }

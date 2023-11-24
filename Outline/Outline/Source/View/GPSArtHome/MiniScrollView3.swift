@@ -36,73 +36,82 @@ struct MiniScrollView3: View {
                 HStack(spacing: 8) {
                     ForEach(courseList, id: \.id) { currentCourse in
                         ZStack {
-                            Button {
-                                withAnimation(.bouncy) {
-                                    selectedCourse = currentCourse
-                                    showDetailView = true
-                                }
-                            } label: {
-                                ZStack {
-                                    KFImage(URL(string: currentCourse.course.thumbnailLong))
-                                        .resizable()
-                                        .placeholder {
-                                            Rectangle()
-                                                .foregroundColor(.gray700)
-                                                .onDisappear {
-                                                    loading = false
-                                                }
-                                                .mask {
-                                                    UnevenRoundedRectangle(topLeadingRadius: 5, bottomLeadingRadius: 30, bottomTrailingRadius: 30, topTrailingRadius: 30, style: .circular)
-                                                }
-                                        }
-                                    LinearGradient(
-                                        stops: [
-                                            Gradient.Stop(color: .black, location: 0.00),
-                                            Gradient.Stop(color: .black.opacity(0), location: 1.00)
-                                        ],
-                                        startPoint: UnitPoint(x: 0.5, y: 0.9),
-                                        endPoint: UnitPoint(x: 0.5, y: 0.1)
+                            if showDetailView {
+                                UnevenRoundedRectangle(topLeadingRadius: 5, bottomLeadingRadius: 30, bottomTrailingRadius: 30, topTrailingRadius: 30)
+                                    .foregroundStyle(.gray800)
+                                    .frame(
+                                        width: UIScreen.main.bounds.width * 0.6,
+                                        height: UIScreen.main.bounds.width * 1.2
                                     )
-                                    VStack(alignment: .leading, spacing: 0) {
-                                        Spacer()
-                                        Text("\(currentCourse.course.courseName)")
-                                            .font(.customHeadline)
-                                            .foregroundColor(.white)
-                                            .padding(.bottom, 8)
-                                        HStack(spacing: 0) {
-                                            Image(systemName: "mappin")
-                                                .foregroundColor(.gray600)
-                                            Text("\(currentCourse.course.locationInfo.locality) \(currentCourse.course.locationInfo.subLocality)")
-                                                .foregroundColor(.gray600)
-                                        }
-                                        .font(.customCaption)
-                                        .padding(.bottom, 4)
-                                        HStack(spacing: 8) {
-                                            Text("#\(currentCourse.course.courseLength, specifier: "%.0f")km")
-                                                .font(.customTag2)
-                                                .foregroundColor(Color.customPrimary)
-                                            Text("#\(currentCourse.course.courseDuration.formatDurationInKorean())")
-                                                .font(.customTag2)
-                                               
-                                        }
-                                        .padding(.bottom, 21)
+                            } else {
+                                Button {
+                                    withAnimation(.bouncy) {
+                                        selectedCourse = currentCourse
+                                        showDetailView = true
                                     }
-                                    .padding(.leading, 16)
-                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                } label: {
+                                    ZStack {
+                                        KFImage(URL(string: currentCourse.course.thumbnailLong))
+                                            .resizable()
+                                            .placeholder {
+                                                Rectangle()
+                                                    .foregroundColor(.gray700)
+                                                    .onDisappear {
+                                                        loading = false
+                                                    }
+                                                    .mask {
+                                                        UnevenRoundedRectangle(topLeadingRadius: 5, bottomLeadingRadius: 30, bottomTrailingRadius: 30, topTrailingRadius: 30, style: .circular)
+                                                    }
+                                            }
+                                            .matchedGeometryEffect(id: currentCourse.id, in: namespace)
+                                        LinearGradient(
+                                            stops: [
+                                                Gradient.Stop(color: .black, location: 0.00),
+                                                Gradient.Stop(color: .black.opacity(0), location: 1.00)
+                                            ],
+                                            startPoint: UnitPoint(x: 0.5, y: 0.9),
+                                            endPoint: UnitPoint(x: 0.5, y: 0.1)
+                                        )
+                                        VStack(alignment: .leading, spacing: 0) {
+                                            Spacer()
+                                            Text("\(currentCourse.course.courseName)")
+                                                .font(.customHeadline)
+                                                .foregroundColor(.white)
+                                                .padding(.bottom, 8)
+                                            HStack(spacing: 0) {
+                                                Image(systemName: "mappin")
+                                                    .foregroundColor(.gray600)
+                                                Text("\(currentCourse.course.locationInfo.locality) \(currentCourse.course.locationInfo.subLocality)")
+                                                    .foregroundColor(.gray600)
+                                            }
+                                            .font(.customCaption)
+                                            .padding(.bottom, 4)
+                                            HStack(spacing: 8) {
+                                                Text("#\(currentCourse.course.courseLength, specifier: "%.0f")km")
+                                                    .font(.customTag2)
+                                                    .foregroundColor(Color.customPrimary)
+                                                Text("#\(currentCourse.course.courseDuration.formatDurationInKorean())")
+                                                    .font(.customTag2)
+                                                
+                                            }
+                                            .padding(.bottom, 21)
+                                        }
+                                        .padding(.leading, 16)
+                                        .frame(maxWidth: .infinity, alignment: .leading)
+                                    }
+                                    .mask {
+                                        UnevenRoundedRectangle(topLeadingRadius: 5, bottomLeadingRadius: 30, bottomTrailingRadius: 30, topTrailingRadius: 30)
+                                    }
+                                    .shadow(color: .white, radius: 0.5, y: -0.5)
                                 }
-                                .matchedGeometryEffect(id: "\(currentCourse.id)_3", in: namespace)
-                                .mask {
-                                    UnevenRoundedRectangle(topLeadingRadius: 5, bottomLeadingRadius: 30, bottomTrailingRadius: 30, topTrailingRadius: 30, style: .circular)
-                                }
-                                .shadow(color: .white, radius: 0.5, y: -0.5)
+                                .buttonStyle(CardButton())
+                                .frame(
+                                    width: UIScreen.main.bounds.width * 0.6,
+                                    height: UIScreen.main.bounds.width * 1.2
+                                )
+                                .transition(.opacity)
                             }
-                            .frame(
-                                  width: UIScreen.main.bounds.width * 0.6,
-                                  height: UIScreen.main.bounds.width * 1.2
-                              )
-                            .transition(.opacity)
                         }
-                        .buttonStyle(CardButton())
                     }
                 }
                 .scrollTargetLayout()

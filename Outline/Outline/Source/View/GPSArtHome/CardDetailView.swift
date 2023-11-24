@@ -49,8 +49,17 @@ struct CardDetailView: View {
                     
                     VStack {
                         ZStack(alignment: .top) {
-                            courseImage
-                            courseInformation
+                            if showDetailView {
+                                courseImage
+                                courseInformation
+                            } else {
+                                UnevenRoundedRectangle(bottomTrailingRadius: 45, style: .circular)
+                                    .frame(
+                                        width: UIScreen.main.bounds.width,
+                                        height: UIScreen.main.bounds.height * 0.68
+                                    )
+                                    .foregroundStyle(.gray800)
+                            }
                         }
                         CardDetailInformationView(
                             showCopyLocationPopup: $showCopyLocationPopup, selectedCourse: selectedCourse.course
