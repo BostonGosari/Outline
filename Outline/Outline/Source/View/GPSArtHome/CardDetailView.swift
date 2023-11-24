@@ -140,11 +140,11 @@ struct CardDetailView: View {
             }
             .overlay {
                     UnevenRoundedRectangle(bottomTrailingRadius: 45, style: .circular)
-                    .stroke(Color.gray, lineWidth: 1)
+                    .stroke(LinearGradient(colors: [.gray600, .clear, .clear, .clear], startPoint: .bottomTrailing, endPoint: .top), lineWidth: 1)
             }
             .matchedGeometryEffect(id: selectedCourse.id, in: namespace)
             .frame(
-                width: UIScreen.main.bounds.width + 2,
+//                width: UIScreen.main.bounds.width + 2,
                 height: UIScreen.main.bounds.height * 0.68
             )
             .offset(y: -1)
