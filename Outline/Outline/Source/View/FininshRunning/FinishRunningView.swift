@@ -20,7 +20,7 @@ struct FinishRunningView: View {
     @State private var position: MapCameraPosition = .userLocation(fallback: .automatic)
     @State private var save = false
     
-    private let polylineGradient = Gradient(colors: [.customGradient1, .customGradient2, .customGradient3])
+    private let polylineGradient = Gradient(colors: [.customGradient2, .customGradient3, .customGradient3, .customGradient3, .customGradient2])
     
     var body: some View {
         ZStack {
