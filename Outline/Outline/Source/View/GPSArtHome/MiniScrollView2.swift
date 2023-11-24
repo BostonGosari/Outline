@@ -38,15 +38,15 @@ struct MiniScrollView2: View {
                     ForEach(Array(courseList.enumerated()), id: \.element.id) { (index, currentCourse) in
                         ZStack {
                             Button {
-                                withAnimation(.bouncy) {
+                                withAnimation {
                                     selectedCourse = currentCourse
                                     showDetailView = true
                                 }
                             } label: {
                                 ZStack {
                                     if showDetailView {
-                                        Rectangle()
-                                            .foregroundStyle(.gray800)
+                                        UnevenRoundedRectangle(topLeadingRadius: 5, bottomLeadingRadius: 30, bottomTrailingRadius: 30, topTrailingRadius: 30)
+                                            .foregroundStyle(.clear)
                                     } else {
                                         KFImage(URL(string: currentCourse.course.thumbnail))
                                             .resizable()
@@ -57,7 +57,7 @@ struct MiniScrollView2: View {
                                                         loading = false
                                                     }
                                                     .mask {
-                                                        UnevenRoundedRectangle(topLeadingRadius: 5, bottomLeadingRadius: 30, bottomTrailingRadius: 30, topTrailingRadius: 30, style: .circular)
+                                                        UnevenRoundedRectangle(topLeadingRadius: 5, bottomLeadingRadius: 30, bottomTrailingRadius: 30, topTrailingRadius: 30)
                                                     }
                                             }
                                             .matchedGeometryEffect(id: currentCourse.id, in: namespace)
@@ -100,9 +100,7 @@ struct MiniScrollView2: View {
                                   height: UIScreen.main.bounds.width * 0.4 * 1.45,
                                   alignment: .trailing
                             )
-                           
-                            .transition(.opacity)
-                            
+                                                       
                             Image("top\(index+1)")
                                 .resizable()
                                 .scaledToFit()

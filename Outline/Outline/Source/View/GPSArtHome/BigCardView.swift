@@ -28,55 +28,63 @@ struct BigCardView: View {
                     width: UIScreen.main.bounds.width * 0.84,
                     height: UIScreen.main.bounds.width * 0.84 * 1.5
                 )
-                .foregroundStyle(.gray800)
+                .foregroundStyle(.gray700)
         } else {
-            KFImage(URL(string: course.course.thumbnail))
-                .resizable()
-                .placeholder {
-                    UnevenRoundedRectangle(topLeadingRadius: 10, bottomLeadingRadius: 45, bottomTrailingRadius: 45, topTrailingRadius: 70, style: .circular)
-                        .foregroundColor(.gray700)
-                        .onDisappear {
-                            loading = false
-                        }
-                }
-                .matchedGeometryEffect(id: course.id, in: namespace)
-                .mask {
-                    UnevenRoundedRectangle(topLeadingRadius: 10, bottomLeadingRadius: 45, bottomTrailingRadius: 45, topTrailingRadius: 70)
-                }
-                .shadow(color: .white, radius: 1, y: -1)
-                .frame(
-                    width: UIScreen.main.bounds.width * 0.84,
-                    height: UIScreen.main.bounds.width * 0.84 * 1.5
-                )
-                .overlay(alignment: .topLeading) {
-                    if !loading {
-                        ScoreStar(score: course.score, size: .big)
-                            .padding(24)
-                    }
-                }
-                .overlay(alignment: .bottom) {
-                    if !loading {
-                        courseInformation
-                            .opacity(index == currentIndex ? 1 : 0)
-                            .offset(y: index == currentIndex ? 0 : 10)
-                            .background(alignment: .bottom) {
-                                Rectangle()
-                                    .foregroundStyle(
-                                        LinearGradient(
-                                            stops: [
-                                                Gradient.Stop(color: .black.opacity(0), location: 0.00),
-                                                Gradient.Stop(color: .black.opacity(0.7), location: 0.33),
-                                                Gradient.Stop(color: .black.opacity(0.8), location: 1.00)
-                                            ],
-                                            startPoint: UnitPoint(x: 0.5, y: 0),
-                                            endPoint: UnitPoint(x: 0.5, y: 1)
-                                        )
-                                    )
-                                    .roundedCorners(45, corners: [.bottomLeft, .bottomRight])
-                                    .opacity(index == currentIndex ? 1 : 0)
+            ZStack {
+                KFImage(URL(string: course.course.thumbnail))
+                    .resizable()
+                    .placeholder {
+                        UnevenRoundedRectangle(topLeadingRadius: 10, bottomLeadingRadius: 45, bottomTrailingRadius: 45, topTrailingRadius: 70, style: .circular)
+                            .foregroundStyle(.gray700)
+                            .onDisappear {
+                                loading = false
                             }
                     }
-                }
+                    .matchedGeometryEffect(id: course.id, in: namespace)
+                    .mask {
+                        UnevenRoundedRectangle(topLeadingRadius: 10, bottomLeadingRadius: 45, bottomTrailingRadius: 45, topTrailingRadius: 70)
+                    }
+                    .shadow(color: .white, radius: 1, y: -1)
+                    .frame(
+                        width: UIScreen.main.bounds.width * 0.84,
+                        height: UIScreen.main.bounds.width * 0.84 * 1.5
+                    )
+                    .overlay(alignment: .topLeading) {
+                        if !loading {
+                            ScoreStar(score: course.score, size: .big)
+                                .padding(24)
+                        }
+                    }
+                    .overlay(alignment: .bottom) {
+                        if !loading {
+                            courseInformation
+                                .opacity(index == currentIndex ? 1 : 0)
+                                .offset(y: index == currentIndex ? 0 : 10)
+                                .background(alignment: .bottom) {
+                                    Rectangle()
+                                        .foregroundStyle(
+                                            LinearGradient(
+                                                stops: [
+                                                    Gradient.Stop(color: .black.opacity(0), location: 0.00),
+                                                    Gradient.Stop(color: .black.opacity(0.7), location: 0.33),
+                                                    Gradient.Stop(color: .black.opacity(0.8), location: 1.00)
+                                                ],
+                                                startPoint: UnitPoint(x: 0.5, y: 0),
+                                                endPoint: UnitPoint(x: 0.5, y: 1)
+                                            )
+                                        )
+                                        .roundedCorners(45, corners: [.bottomLeft, .bottomRight])
+                                        .opacity(index == currentIndex ? 1 : 0)
+                                }
+                        }
+                    }
+            }
+            .transition(
+                .asymmetric(
+                    insertion: .opacity.animation(.spring()),
+                    removal: .opacity.animation(.spring().delay(0.3))
+                )
+            )
         }
     }
     

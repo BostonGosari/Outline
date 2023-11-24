@@ -22,7 +22,7 @@ struct MiniScrollView1: View {
             if loading {
                 RoundedRectangle(cornerRadius: 9.5)
                     .padding(.leading, 16)
-                    .foregroundColor(.gray700)
+                    .foregroundStyle(.clear)
                     .frame(width: 148, height: 16)
             } else {
                 Text(category)
@@ -37,7 +37,7 @@ struct MiniScrollView1: View {
                     ForEach(courseList, id: \.id) { currentCourse in
                         ZStack {
                             Button {
-                                withAnimation(.bouncy) {
+                                withAnimation {
                                     selectedCourse = currentCourse
                                     showDetailView = true
                                 }
@@ -60,6 +60,9 @@ struct MiniScrollView1: View {
                                                     }
                                             }
                                             .matchedGeometryEffect(id: currentCourse.id, in: namespace)
+                                            .transition(
+                                                .asymmetric(insertion: .opacity.animation(.spring()), removal: .opacity.animation(.spring().delay(0.3)))
+                                            )
                                     }
                                     LinearGradient(
                                         stops: [
@@ -98,7 +101,6 @@ struct MiniScrollView1: View {
                                   width: UIScreen.main.bounds.width * 0.4,
                                   height: UIScreen.main.bounds.width * 0.4 * 1.45
                               )
-                            .transition(.opacity)
                         }
                         .buttonStyle(CardButton())
                     }
