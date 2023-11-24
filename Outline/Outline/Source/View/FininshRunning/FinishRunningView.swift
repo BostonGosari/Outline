@@ -103,10 +103,10 @@ struct FinishRunningView: View {
                         .transition(.move(edge: .top))
                 }
             }
-            .sheet(isPresented: $viewModel.navigateToShareMainView, content: {
+            .fullScreenCover(isPresented: $viewModel.navigateToShareMainView) {
                 SharePhotoView(runningData: viewModel.shareData)
-                    .navigationBarBackButtonHidden()
-            })
+                    .tint(.customPrimary)
+            }
             .onAppear {
                 if !save {
                     viewModel.isShowPopup = true
@@ -203,4 +203,8 @@ extension FinishRunningView {
         .presentationDetents([.height(330)])
         .presentationCornerRadius(35)
     }
+}
+
+#Preview {
+    FinishRunningView()
 }
