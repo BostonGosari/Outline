@@ -50,7 +50,7 @@ struct GPSArtHomeView: View {
                             HStack(spacing: 0) {
                                 ForEach(viewModel.recommendedCoures.indices, id: \.self) { index in
                                     Button {
-                                        withAnimation(.bouncy) {
+                                        withAnimation(.spring) { 
                                             selectedCourse = viewModel.recommendedCoures[index]
                                             showDetailView = true
                                             matched = true
@@ -136,13 +136,13 @@ struct GPSArtHomeView: View {
                 Color.gray900.ignoresSafeArea()
                 CardDetailView(showDetailView: $showDetailView, selectedCourse: selectedCourse, currentIndex: currentIndex, namespace: namespace)
                     .zIndex(1)
-//                    .transition(
-//                        .asymmetric(
-//                            insertion: .opacity.animation(.bouncy(duration: 0.1)),
-//                            removal: .opacity.animation(.bouncy(duration: 0.3).delay(0.2))
-//                        )
-//                    )
                     .ignoresSafeArea()
+                    .transition(
+                        .asymmetric(
+                            insertion: .opacity.animation(nil),
+                            removal: .opacity.animation(.easeInOut.delay(0.1))
+                        )
+                    )
             }
         }
         .background(

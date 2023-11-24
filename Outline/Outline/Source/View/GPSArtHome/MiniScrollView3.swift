@@ -22,7 +22,7 @@ struct MiniScrollView3: View {
             if loading {
                 RoundedRectangle(cornerRadius: 9.5)
                     .padding(.leading, 16)
-                    .foregroundColor(.gray700)
+                    .foregroundStyle(.clear)
                     .frame(width: 148, height: 16)
             } else {
                 Text(category)
@@ -45,7 +45,7 @@ struct MiniScrollView3: View {
                                     )
                             } else {
                                 Button {
-                                    withAnimation(.bouncy) {
+                                    withAnimation {
                                         selectedCourse = currentCourse
                                         showDetailView = true
                                     }
@@ -109,7 +109,6 @@ struct MiniScrollView3: View {
                                     width: UIScreen.main.bounds.width * 0.6,
                                     height: UIScreen.main.bounds.width * 1.2
                                 )
-                                .transition(.opacity)
                             }
                         }
                     }
