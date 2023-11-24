@@ -37,7 +37,7 @@ struct MiniScrollView1: View {
                     ForEach(courseList, id: \.id) { currentCourse in
                         ZStack {
                             Button {
-                                withAnimation {
+                                withAnimation(.bouncy(duration: 0.7)) {
                                     selectedCourse = currentCourse
                                     showDetailView = true
                                 }
@@ -45,7 +45,7 @@ struct MiniScrollView1: View {
                                 ZStack {
                                     if showDetailView {
                                         Rectangle()
-                                            .foregroundStyle(.gray800)
+                                            .foregroundStyle(.clear)
                                     } else {
                                         KFImage(URL(string: currentCourse.course.thumbnail))
                                             .resizable()

@@ -38,14 +38,14 @@ struct MiniScrollView2: View {
                     ForEach(Array(courseList.enumerated()), id: \.element.id) { (index, currentCourse) in
                         ZStack {
                             Button {
-                                withAnimation {
+                                withAnimation(.bouncy(duration: 0.7)) {
                                     selectedCourse = currentCourse
                                     showDetailView = true
                                 }
                             } label: {
                                 ZStack {
                                     if showDetailView {
-                                        UnevenRoundedRectangle(topLeadingRadius: 5, bottomLeadingRadius: 30, bottomTrailingRadius: 30, topTrailingRadius: 30)
+                                        Rectangle()
                                             .foregroundStyle(.clear)
                                     } else {
                                         KFImage(URL(string: currentCourse.course.thumbnail))

@@ -216,8 +216,8 @@ struct CardDetailView: View {
     
     private var closeButton: some View {
         Button {
-            withAnimation {
-                showDetailView.toggle()
+            withAnimation(.easeInOut) {
+                showDetailView = false
             }
         } label: {
             Image(systemName: "xmark.circle.fill")
@@ -245,7 +245,7 @@ extension CardDetailView {
                             viewSize = dragState.width
                         }
                         if viewSize > dragLimit {
-                            withAnimation {
+                            withAnimation(.easeInOut) {
                                 showDetailView = false
                                 dragState = .zero
                             }
@@ -259,7 +259,7 @@ extension CardDetailView {
                         }
                         
                         if viewSize > dragLimit {
-                            withAnimation {
+                            withAnimation(.easeInOut) {
                                 showDetailView = false
                                 dragState = .zero
                                 viewSize = 0.0
@@ -270,7 +270,7 @@ extension CardDetailView {
             }
             .onEnded { _ in
                 if viewSize >= dragLimit {
-                    withAnimation {
+                    withAnimation(.easeInOut) {
                         showDetailView = false
                         viewSize = 0.0
                     }
@@ -315,7 +315,7 @@ extension CardDetailView {
                 viewSize = scrollViewOffset - scrollStartRange
                 
                 if scrollViewOffset > scrollLimit {
-                    withAnimation {
+                    withAnimation(.easeInOut) {
                         showDetailView = false
                     }
                 }

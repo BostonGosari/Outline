@@ -37,15 +37,15 @@ struct MiniScrollView3: View {
                     ForEach(courseList, id: \.id) { currentCourse in
                         ZStack {
                             if showDetailView {
-                                UnevenRoundedRectangle(topLeadingRadius: 5, bottomLeadingRadius: 30, bottomTrailingRadius: 30, topTrailingRadius: 30)
-                                    .foregroundStyle(.gray800)
+                                Rectangle()
+                                    .foregroundStyle(.clear)
                                     .frame(
                                         width: UIScreen.main.bounds.width * 0.6,
                                         height: UIScreen.main.bounds.width * 1.2
                                     )
                             } else {
                                 Button {
-                                    withAnimation {
+                                    withAnimation(.bouncy(duration: 0.7)) {
                                         selectedCourse = currentCourse
                                         showDetailView = true
                                     }
