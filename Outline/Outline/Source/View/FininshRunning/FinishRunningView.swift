@@ -33,11 +33,11 @@ struct FinishRunningView: View {
                     date: viewModel.date,
                     editMode: runningManager.runningType == .free,
                     time: viewModel.runningData[1].data,
-                    distance: "\(viewModel.runningData[0].data) + KM",
+                    distance: "\(viewModel.runningData[0].data)KM",
                     pace: viewModel.runningData[2].data,
                     kcal: viewModel.runningData[4].data,
                     bpm: viewModel.runningData[3].data,
-                    score: 100,
+                    score: 96,
                     editAction: {
                         showRenameSheet = true
                     },
