@@ -28,6 +28,10 @@ class RunningDataManager: ObservableObject {
     @Published var userLocations = [CLLocationCoordinate2D]()
     @Published var endWithoutSaving = false
     
+    @Published var accuracy: Double = 0
+    @Published var progress: Double = 0
+    @Published var score: Int = 0
+    
     // MARK: - Private Properties
     
     private let pedometer = CMPedometer()
@@ -116,6 +120,7 @@ class RunningDataManager: ObservableObject {
         totalDistance += distance
         pedometer.stopUpdates()
         healthKitManager.endWorkout(steps: totalSteps, distance: totalDistance, energy: kilocalorie)
+        caculateAccuracyAndProgress()
         saveRunning()
         reset()
     }
@@ -132,10 +137,35 @@ class RunningDataManager: ObservableObject {
         time = 0.0
     }
     
+    func caculateAccuracyAndProgress() {
+        guard let course = runningManger.startCourse else { return }
+        // 진행률 계산
+        let progressManager = CourseProgressManager(guideCourse: coordinatesToCLLocationCoordiantes(coordinates: course.coursePaths), userCourse: userLocations)
+        progressManager.calculate()
+        self.progress = progressManager.getProgress()
+        
+        // 정확도 계산
+        let accuracyManager = CourseAccuracyManager(guideCourse: coordinatesToCLLocationCoordiantes(coordinates: course.coursePaths), userCourse: userLocations)
+        accuracyManager.calculate(userProgress: progress)
+        self.accuracy = accuracyManager.getAccuracy()
+        
+        self.score = Int(progress*accuracy)
+        print("progress \(progress) , accuracy \(accuracy)")
+        print("제 점수는요 .. \(score)점입니다 ")
+    }
+    
+    private func coordinatesToCLLocationCoordiantes(coordinates: [Coordinate]) -> [CLLocationCoordinate2D] {
+        var clLocations: [CLLocationCoordinate2D] = []
+        for coordinate in coordinates {
+            clLocations.append(CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: coordinate.longitude))
+        }
+        return clLocations
+    }
+    
     private func saveRunning() {
         guard let course = runningManger.startCourse else { return }
         
-        let courseData = CourseData(courseName: course.courseName, runningLength: course.courseLength, heading: course.heading, distance: course.distance, coursePaths: userLocations, runningCourseId: "", regionDisplayName: course.regionDisplayName, score: 100)
+        let courseData = CourseData(courseName: course.courseName, runningLength: course.courseLength, heading: course.heading, distance: course.distance, coursePaths: userLocations, runningCourseId: "", regionDisplayName: course.regionDisplayName, score: score)
         
         let healthData = HealthData(totalTime: totalTime, averageCadence: totalSteps / totalTime * 60, totalRunningDistance: totalDistance, totalEnergy: kilocalorie, averageHeartRate: 0.0, averagePace: totalTime / totalDistance * 1000, startDate: RunningStartDate, endDate: RunningEndDate)
         
