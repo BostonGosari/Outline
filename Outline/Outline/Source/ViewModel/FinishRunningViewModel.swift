@@ -50,7 +50,7 @@ class FinishRunningViewModel: ObservableObject {
             regionDisplayName = courseData.regionDisplayName ?? ""
             if let startDate = healthData.startDate {
                 startTime = startDate.timeToString()
-                date = startDate.dateToString()
+                date = startDate.dateToShareString()
                 runningDate = startDate
             } else {
                 startTime = ""

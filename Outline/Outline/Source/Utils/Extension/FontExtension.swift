@@ -30,4 +30,9 @@ extension Font {
     
     static let customCardBody = Font.custom("Pretendard-Regular", size: 32)
     static let customCardBody2 = Font.custom("Pretendard-Regular", size: 24)
+    
+    static let customCardTitle = Font.custom("StretchProRegular", size: 32)
+    static let customCardTitle2 = Font.custom("StretchProRegular", size: 24)
+    static let customCardScoreTitle = Font.custom("StretchProRegular", size: 36)
+    static let customCardScore = Font.custom("StretchProRegular", size: 64)
 }

@@ -64,8 +64,7 @@ struct BigCardBackside: View {
                 VStack(alignment: .trailing, spacing: 0) {
                     VStack(alignment: .trailing, spacing: -5) {
                         Text("TIME")
-                            .fontWeight(.bold)
-                            .fontWidth(.expanded)
+                            .font(.customCardTitle)
                         Text(time)
                             .font(.customCardBody)
                     }
@@ -74,8 +73,7 @@ struct BigCardBackside: View {
                         .foregroundStyle(.white30)
                     VStack(alignment: .trailing, spacing: -5) {
                         Text("DIS")
-                            .fontWeight(.bold)
-                            .fontWidth(.expanded)
+                            .font(.customCardTitle)
                         Text(distance)
                             .font(.customCardBody)
                     }
@@ -84,8 +82,7 @@ struct BigCardBackside: View {
                         .foregroundStyle(.white30)
                     VStack(alignment: .trailing, spacing: -5) {
                         Text("PACE")
-                            .fontWeight(.bold)
-                            .fontWidth(.expanded)
+                            .font(.customCardTitle)
                         Text(pace)
                             .font(.customCardBody)
                     }
@@ -94,8 +91,7 @@ struct BigCardBackside: View {
                         .foregroundStyle(.white30)
                     VStack(alignment: .trailing, spacing: -5) {
                         Text("KCAL")
-                            .fontWeight(.bold)
-                            .fontWidth(.expanded)
+                            .font(.customCardTitle)
                         Text(kcal)
                             .font(.customCardBody)
                     }
@@ -122,13 +118,11 @@ struct BigCardBackside: View {
                     HStack(spacing: 24) {
                         VStack(alignment: .trailing) {
                             Text("TIME")
-                                .fontWeight(.bold)
-                                .fontWidth(.expanded)
+                                .font(.customCardTitle2)
                             Text(time)
                                 .font(.customCardBody2)
                             Text("DIS")
-                                .fontWeight(.bold)
-                                .fontWidth(.expanded)
+                                .font(.customCardTitle2)
                             Text(distance)
                                 .font(.customCardBody2)
                         }
@@ -136,19 +130,16 @@ struct BigCardBackside: View {
                             .frame(width: 1, height: 130)
                         VStack(alignment: .leading) {
                             Text("PACE")
-                                .fontWeight(.bold)
-                                .fontWidth(.expanded)
+                                .font(.customCardTitle2)
                             Text(pace)
                                 .font(.customCardBody2)
                             Text("KCAL")
-                                .fontWeight(.bold)
-                                .fontWidth(.expanded)
+                                .font(.customCardTitle2)
                             Text(kcal)
                                 .font(.customCardBody2)
                         }
                     }
                     .shadow(color: .black.opacity(5), radius: 4)
-                    .font(.system(size: 24))
                     .padding(.top, 48)
                     .frame(maxWidth: .infinity, alignment: .center)
                     .padding(.trailing, 8)
@@ -156,13 +147,9 @@ struct BigCardBackside: View {
                     
                     VStack {
                         Text("SCORE")
-                            .fontWeight(.bold)
-                            .fontWidth(.expanded)
-                            .font(.system(size: 36))
+                            .font(.customCardScoreTitle)
                         Text("\(score)")
-                            .fontWeight(.bold)
-                            .fontWidth(.expanded)
-                            .font(.system(size: 64))
+                            .font(.customCardScore)
                             .scoreShimmer(color: scoreGradient, highlight: .white)
                     }
                     .shadow(color: .black.opacity(5), radius: 4)
@@ -176,7 +163,7 @@ struct BigCardBackside: View {
 
 #Preview {
     BigCardBackside(
-        cardType: .excellent,
+        cardType: .great,
         runName: "오리런",
         date: "2023.11.19",
         editMode: true,

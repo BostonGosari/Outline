@@ -20,81 +20,52 @@ struct FinishRunningView: View {
     @State private var position: MapCameraPosition = .userLocation(fallback: .automatic)
     @State private var save = false
     
-    private var gradientColors: [Color] = [.customBlack, .customBlack, .customBlack, .customBlack, .black50, .customBlack.opacity(0)]
-    private let polylineGradient = Gradient(colors: [.customGradient1, .customGradient2, .customGradient3])
+    private let polylineGradient = Gradient(colors: [.customGradient2, .customGradient3, .customGradient3, .customGradient3, .customGradient2])
     
     var body: some View {
-        NavigationStack {
-            ZStack {
-                Color.gray900
-                    .ignoresSafeArea()
-                VStack {
-                    ZStack(alignment: .topLeading) {
+        ZStack {
+            Color.gray900
+                .ignoresSafeArea()
+            VStack {
+                BigCard(
+                    cardType: .great,
+                    runName: viewModel.courseName,
+                    date: viewModel.date,
+                    editMode: runningManager.runningType == .free,
+                    time: viewModel.runningData[1].data,
+                    distance: "\(viewModel.runningData[0].data)KM",
+                    pace: viewModel.runningData[2].data,
+                    kcal: viewModel.runningData[4].data,
+                    bpm: viewModel.runningData[3].data,
+                    score: 96,
+                    editAction: {
+                        showRenameSheet = true
+                    },
+                    content: {
                         Map(interactionModes: []) {
                             MapPolyline(coordinates: viewModel.userLocations)
                                 .stroke(polylineGradient, style: StrokeStyle(lineWidth: 8, lineCap: .round, lineJoin: .round))
                         }
-                        .roundedCorners(45, corners: .bottomRight)
-                        .shadow(color: .customWhite, radius: 0.5)
-                        
-                        VStack(spacing: 0) {
-                            Text("\(viewModel.date)")
-                                .font(.customDate)
-                                .foregroundStyle(Color.white)
-                                .frame(maxWidth: .infinity, alignment: .center)
-                                .padding(.top, 64)
-                            
-                            HStack {
-                                courseInfo
-                                Spacer()
-                                if runningManager.runningType == .free {
-                                    Button {
-                                        showRenameSheet = true
-                                    } label: {
-                                        Image(systemName: "pencil")
-                                            .foregroundStyle(Color.customWhite)
-                                            .font(.system(size: 20))
-                                    }
-                                    .padding(.top, 16)
-                                    .padding(.trailing, 16)
-                                }
-                            }
-                        }
-                        .background(
-                            LinearGradient(
-                                colors: gradientColors,
-                                startPoint: .top,
-                                endPoint: .bottom
-                            )
-                        )
                     }
-                    .ignoresSafeArea()
-                    
-                    runningData
-                        .padding(.top, 32)
-                        .padding(.bottom, 16)
-                        .padding(.horizontal, 16)
-                    
-                    CompleteButton(text: "자랑하기", isActive: true) {
-                        viewModel.saveShareData()
-                    }
-                    .padding(.bottom, 16)
-                    
-                    Button(action: {
-                        withAnimation {
-                            runningManager.complete = false
-                        }
-                    }, label: {
-                        Text("홈으로 돌아가기")
-                            .underline(pattern: .solid)
-                            .foregroundStyle(Color.gray300)
-                            .font(.customSubbody)
-                    })
-                    .padding(.bottom, 8)
+                )
+                .padding(.top, 90)
+                Spacer()
+                CompleteButton(text: "자랑하기", isActive: true) {
+                    viewModel.saveShareData()
                 }
-            }
-            .sheet(isPresented: $showRenameSheet) {
-                updateNameSheet
+                .padding(.bottom, 16)
+                
+                Button(action: {
+                    withAnimation {
+                        runningManager.complete = false
+                    }
+                }, label: {
+                    Text("홈으로 돌아가기")
+                        .underline(pattern: .solid)
+                        .foregroundStyle(Color.gray300)
+                        .font(.customSubbody)
+                })
+                .padding(.bottom, 8)
             }
             .overlay {
                 if viewModel.isShowPopup {
@@ -103,10 +74,13 @@ struct FinishRunningView: View {
                         .transition(.move(edge: .top))
                 }
             }
-            .sheet(isPresented: $viewModel.navigateToShareMainView, content: {
+            .sheet(isPresented: $showRenameSheet) {
+                updateNameSheet
+            }
+            .fullScreenCover(isPresented: $viewModel.navigateToShareMainView) {
                 SharePhotoView(runningData: viewModel.shareData)
-                    .navigationBarBackButtonHidden()
-            })
+                    .tint(.customPrimary)
+            }
             .onAppear {
                 if !save {
                     viewModel.isShowPopup = true
@@ -119,50 +93,6 @@ struct FinishRunningView: View {
 }
 
 extension FinishRunningView {
-    private var courseInfo: some View {
-        VStack(alignment: .leading, spacing: 0) {
-            Text("\(viewModel.courseName)")
-                .font(.customHeadline)
-            HStack {
-                Image(systemName: "calendar")
-                Text("\(viewModel.startTime)-\(viewModel.endTime)")
-            }
-            .font(.customSubbody)
-            .foregroundStyle(Color.gray200)
-            .padding(.top, 8)
-            HStack {
-                Image(systemName: "mappin")
-                    .foregroundStyle(Color.gray400)
-                
-                Text("\(viewModel.regionDisplayName)")
-                    .foregroundStyle(Color.gray200)
-            }
-            .font(.customSubbody)
-            .padding(.top, 4)
-        }
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(.top, 24)
-        .padding(.leading, 16)
-    }
-    
-    private var runningData: some View {
-        let columns: [GridItem] = Array(repeating: .init(.flexible()), count: 3)
-        
-        return LazyVGrid(columns: columns) {
-            ForEach(viewModel.runningData, id: \.self) { runningData in
-                VStack(alignment: .center) {
-                    Text("\(runningData.data)")
-                        .font(.customTitle2)
-                        .padding(.bottom, 4)
-                    Text(runningData.text)
-                        .font(.customSubbody)
-                        .foregroundStyle(Color.gray500)
-                }
-                .padding(.bottom, 16)
-            }
-        }
-    }
-    
     private var updateNameSheet: some View {
         VStack(alignment: .leading, spacing: 0) {
             Text("코스 이름 수정하기")
@@ -181,7 +111,7 @@ extension FinishRunningView {
                 }
                 .padding(.bottom, 8)
                 .padding(.horizontal, 16)
-        
+            
             Rectangle()
                 .frame(height: 1)
                 .foregroundStyle(Color.customPrimary)
@@ -203,4 +133,8 @@ extension FinishRunningView {
         .presentationDetents([.height(330)])
         .presentationCornerRadius(35)
     }
+}
+
+#Preview {
+    FinishRunningView()
 }

@@ -68,6 +68,8 @@
 		2975F0962AE3E1790046C00B /* CornerRectangleModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2975F0952AE3E1790046C00B /* CornerRectangleModifier.swift */; };
 		297B80FB2AE73C4C00AF7219 /* Outline Watch App.app in Embed ExtensionKit Extensions */ = {isa = PBXBuildFile; fileRef = 297B80FA2AE73C4500AF7219 /* Outline Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		297B80FC2AE7515200AF7219 /* CourseModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E2EF702ADA6F230083ADEE /* CourseModelType.swift */; };
+		2990249A2B10B3E8005C5BA8 /* SFCompactDisplay-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0E96BA912AF4E00B000C8FBF /* SFCompactDisplay-Semibold.ttf */; };
+		2990249C2B10B599005C5BA8 /* StretchPro.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2990249B2B10B599005C5BA8 /* StretchPro.ttf */; };
 		299458072AF3BB6400F7D24C /* DoubleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A01E1D2AF0CCE70093D9C0 /* DoubleExtension.swift */; };
 		299803552ADF5F1000A9A134 /* HealthKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299803542ADF5F1000A9A134 /* HealthKitManager.swift */; };
 		299803572AE00C9B00A9A134 /* HapticManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299803562AE00C9B00A9A134 /* HapticManager.swift */; };
@@ -315,6 +317,7 @@
 		2975F0952AE3E1790046C00B /* CornerRectangleModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CornerRectangleModifier.swift; sourceTree = "<group>"; };
 		297B80F92AE73C4500AF7219 /* Outline.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Outline.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		297B80FA2AE73C4500AF7219 /* Outline Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Outline Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2990249B2B10B599005C5BA8 /* StretchPro.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = StretchPro.ttf; sourceTree = "<group>"; };
 		299803542ADF5F1000A9A134 /* HealthKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitManager.swift; sourceTree = "<group>"; };
 		299803562AE00C9B00A9A134 /* HapticManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticManager.swift; sourceTree = "<group>"; };
 		299803592AE0181900A9A134 /* ConfettiShapes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfettiShapes.swift; sourceTree = "<group>"; };
@@ -687,7 +690,6 @@
 		BB1D530A2ADDBC430073771F /* Font */ = {
 			isa = PBXGroup;
 			children = (
-				0E96BA912AF4E00B000C8FBF /* SFCompactDisplay-Semibold.ttf */,
 				BB1D530B2ADDBC560073771F /* Pretendard-Black.ttf */,
 				BB1D530F2ADDBC690073771F /* Pretendard-ExtraBold.ttf */,
 				BB1D530D2ADDBC620073771F /* Pretendard-Bold.ttf */,
@@ -696,6 +698,8 @@
 				BB1D53192ADDBCAB0073771F /* Pretendard-Regular.ttf */,
 				BB1D531D2ADDBCB90073771F /* Pretendard-Thin.ttf */,
 				BB1D53152ADDBC900073771F /* Pretendard-Light.ttf */,
+				0E96BA912AF4E00B000C8FBF /* SFCompactDisplay-Semibold.ttf */,
+				2990249B2B10B599005C5BA8 /* StretchPro.ttf */,
 			);
 			path = Font;
 			sourceTree = "<group>";
@@ -1187,6 +1191,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2990249C2B10B599005C5BA8 /* StretchPro.ttf in Resources */,
 				954CB2AB2AE5457B005EB2E9 /* flightRun.kml in Resources */,
 				0E1D1B2B2AE95E1C005282A2 /* test.kml in Resources */,
 				954CB2A72AE5457B005EB2E9 /* seoulOctopusRun.kml in Resources */,
@@ -1197,6 +1202,7 @@
 				F0AC8B2E2AD968A20061612C /* Icon.xcassets in Resources */,
 				954CB2AD2AE5457B005EB2E9 /* pohangDuckRun.kml in Resources */,
 				F0AC8AA12AD94C200061612C /* Color.xcassets in Resources */,
+				2990249A2B10B3E8005C5BA8 /* SFCompactDisplay-Semibold.ttf in Resources */,
 				29D7AD502B0F6C2C00AAAAB0 /* Secrets.xcconfig in Resources */,
 				954CB2AF2AE5457B005EB2E9 /* seoulCamelRun.kml in Resources */,
 				BB1D531E2ADDBCB90073771F /* Pretendard-Thin.ttf in Resources */,
