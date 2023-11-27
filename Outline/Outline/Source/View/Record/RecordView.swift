@@ -56,7 +56,6 @@ struct RecordView: View {
                                         ForEach(filteredRecords.prefix(5), id: \.id) { record in
                                             NavigationLink {
                                                 NewRecordDetailView(isDeleteData: $isDeleteData, record: record)
-                                                    .navigationBarBackButtonHidden()
                                             } label: {
                                                 if let courseName = record.courseData?.courseName,
                                                    let coursePaths = record.courseData?.coursePaths,
@@ -102,7 +101,6 @@ struct RecordView: View {
                                         ForEach(gpsArtRecords.prefix(3), id: \.id) { record in
                                             NavigationLink {
                                                 NewRecordDetailView(isDeleteData: $isDeleteData, record: record)
-                                                    .navigationBarBackButtonHidden()
                                             } label: {
                                                 if let courseName = record.courseData?.courseName,
                                                    let coursePaths = record.courseData?.coursePaths,
@@ -144,7 +142,6 @@ struct RecordView: View {
                                         ForEach(freeRecords.prefix(3), id: \.id) { record in
                                             NavigationLink {
                                                 NewRecordDetailView(isDeleteData: $isDeleteData, record: record)
-                                                    .navigationBarBackButtonHidden()
                                             } label: {
                                                 if let courseName = record.courseData?.courseName,
                                                    let coursePaths = record.courseData?.coursePaths,
@@ -186,6 +183,7 @@ struct RecordView: View {
               
             }
         }
+        .navigationTitle("모든 아트")
         .onAppear {
             filteredRecords = Array(runningRecord)
                 .sorted { $0.healthData?.startDate ?? Date() > $1.healthData?.startDate ?? Date() }
