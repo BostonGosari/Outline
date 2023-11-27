@@ -30,7 +30,7 @@ struct RecordInlineHeader: View {
     var body: some View {
         HStack {
             Spacer()
-            Text("아트 컬랙션")
+            Text("아트 컬렉션")
                 .font(.custom("Pretendard-Regular", size: 18))
                 .opacity(scrollOffset < 20 ? 1 : 0)
                 .animation(.bouncy(duration: 0.7), value: scrollOffset)
