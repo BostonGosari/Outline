@@ -141,6 +141,7 @@ extension SharePhotoView {
                     Text("Kcal \(runningData.cal)")
                 }
                 .font(.customSubbody)
+                .foregroundStyle(.white)
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
             }
             .padding(.trailing, 16)
