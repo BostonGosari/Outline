@@ -14,7 +14,7 @@ struct SharePhotoView: View {
     @StateObject private var viewModel = ShareViewModel()
 
     @State private var size: CGSize = .zero
-    @State private var scale: CGFloat = 1
+    @State private var scale: CGFloat = 3
     @State private var lastScale: CGFloat = 0
     @State private var offset: CGSize = .zero
     @State private var lastStoredOffset: CGSize = .zero
@@ -152,6 +152,7 @@ extension SharePhotoView {
         .frame(width: size.width, height: size.height)
         .background(.white.opacity(0))
     }
+    
     private var shareImageCombined: some View {
         ZStack {
             if let uiImage = photoImage {
@@ -170,7 +171,7 @@ extension SharePhotoView {
             GeometryReader { proxy in
                 Color.clear
                     .onAppear {
-                        size = CGSize(width: proxy.size.width - 30, height: proxy.size.height - 70)
+                        size = CGSize(width: proxy.size.width, height: proxy.size.height - 70)
                     }
             }
         }
@@ -237,7 +238,7 @@ extension SharePhotoView {
     private var buttons: some View {
         HStack(spacing: 0) {
             Button {
-                renderShareView()
+                renderShareViewForSaving()
                 if let img = image {
                     viewModel.saveImage(image: img)
                 }
@@ -366,7 +367,13 @@ extension SharePhotoView {
 
 extension SharePhotoView {
     private func renderShareView() {
-        image = viewForShare.offset(y: -24).asImage(size: size)
+        image = viewForShare
+            .render(scale: scale)
+    }
+    
+    private func renderShareViewForSaving() {
+        image = viewForShare
+            .asImage(size: size)
     }
     
     private func renderShareViewWithRenderer() {
@@ -414,6 +421,14 @@ extension SharePhotoView {
                 break
             }
         }
+    }
+}
+
+extension View {
+    @MainActor func render(scale: CGFloat) -> UIImage? {
+        let renderer = ImageRenderer(content: self)
+        renderer.scale = scale
+        return renderer.uiImage
     }
 }
 
