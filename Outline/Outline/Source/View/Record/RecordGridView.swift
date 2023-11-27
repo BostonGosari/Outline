@@ -27,7 +27,7 @@ struct RecordGridView: View {
     
     var title: String
     var records: [CoreRunningRecord]
-
+    
     var body: some View {
         ZStack {
             Color.gray900.ignoresSafeArea()
@@ -65,15 +65,17 @@ struct RecordGridView: View {
                 ScrollView {
                     LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())], spacing: 16) {
                         ForEach(records.sorted(by: sortRecords), id: \.id) { record in
-                            NavigationLink {
-                                NewRecordDetailView(isDeleteData: $isDeleteData, record: record)
-                                    .navigationBarBackButtonHidden()
-                            } label: {
-                                if let courseName = record.courseData?.courseName,
-                                   let coursePaths = record.courseData?.coursePaths,
-                                   let startDate = record.healthData?.startDate {
-                                    let data = pathToCoordinate(coursePaths)
-                                    SmallListCard(cardType: .freeRun, runName: courseName, date: formatDate(startDate), data: data! )
+                            if let courseName = record.courseData?.courseName,
+                               let coursePaths = record.courseData?.coursePaths,
+                               let startDate = record.healthData?.startDate,
+                               let score = record.courseData?.score {
+                                let data = pathToCoordinate(coursePaths)
+                                let cardType = getCardType(forScore: score)
+                                NavigationLink {
+                                    NewRecordDetailView(isDeleteData: $isDeleteData, record: record, cardType: cardType)
+                                        .navigationBarBackButtonHidden()
+                                } label: {
+                                    SmallListCard(cardType: cardType, runName: courseName, date: formatDate(startDate), data: data!)
                                 }
                             }
                         }
@@ -85,14 +87,14 @@ struct RecordGridView: View {
         .sheet(isPresented: $isSortingSheetPresented) {
             VStack(alignment: .leading) {
                 // Existing code for sheet header
-
+                
                 Text("정렬")
                     .font(.customSubtitle)
                     .padding(.top, 22)
                 Divider()
                     .foregroundStyle(Color.gray600)
                     .padding(.top, 8)
-
+                
                 // Sorting options based on the selected sort option
                 ForEach(sortingOptions(for: title), id: \.self) { option in
                     Button {
@@ -115,7 +117,7 @@ struct RecordGridView: View {
                         .padding(.top, 16)
                     }
                 }
-
+                
                 // Button to dismiss the sheet
                 Button {
                     isSortingSheetPresented.toggle()
@@ -145,7 +147,7 @@ struct RecordGridView: View {
             }
         }
     }
-
+    
     // Helper method to get sorting options based on the title
     func sortingOptions(for title: String) -> [SortOption] {
         switch title {
@@ -172,7 +174,7 @@ struct RecordGridView: View {
             return .freeRun // Add a default case or handle as needed
         }
     }
-   
+    
     private func sortRecords(record1: CoreRunningRecord, record2: CoreRunningRecord) -> Bool {
         switch selectedSortOption {
         case .latest:
@@ -187,7 +189,7 @@ struct RecordGridView: View {
             return record1.courseData?.score ?? -1 > record2.courseData?.score ?? -1
         }
     }
-   
+    
     func pathToCoordinate(_ paths: NSOrderedSet) -> [CLLocationCoordinate2D]? {
         var datas = [Coordinate]()
         paths.forEach { elem in
@@ -204,5 +206,5 @@ struct RecordGridView: View {
         dateFormatter.dateStyle = .short
         return dateFormatter.string(from: date)
     }
-
+    
 }

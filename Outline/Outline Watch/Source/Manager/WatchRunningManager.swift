@@ -109,6 +109,7 @@ class WatchRunningManager: ObservableObject {
     func caculateAccuracyAndProgress() {
         if runningType == .free {
             score = -1
+            print("제 점수는요 .. \(score)점입니다 ")
             return
         }
 

@@ -25,7 +25,7 @@ struct ControlsView: View {
             HStack(spacing: 11) {
                 ControlButton(systemName: "stop.fill", foregroundColor: .white, backgroundColor: .white) {
                     if let builder = workoutManager.builder {
-                        if builder.elapsedTime > 30 {
+                        if builder.elapsedTime > 3 {
                             showEndRunningSheet = true
                         } else {
                             showEndWithoutSavingSheet = true
