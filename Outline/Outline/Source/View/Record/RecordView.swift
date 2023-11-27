@@ -8,8 +8,6 @@
 import CoreLocation
 import SwiftUI
 
-
-
 struct RecordView: View {
     @AppStorage("authState") var authState: AuthState = .logout
     @FetchRequest (entity: CoreRunningRecord.entity(), sortDescriptors: []) var runningRecord: FetchedResults<CoreRunningRecord>
@@ -57,7 +55,7 @@ struct RecordView: View {
                                     HStack(spacing: 16) {
                                         ForEach(filteredRecords.prefix(5), id: \.id) { record in
                                             NavigationLink {
-                                                RecordDetailView(isDeleteData: $isDeleteData, record: record)
+                                                NewRecordDetailView(isDeleteData: $isDeleteData, record: record)
                                                     .navigationBarBackButtonHidden()
                                             } label: {
                                                 if let courseName = record.courseData?.courseName,
