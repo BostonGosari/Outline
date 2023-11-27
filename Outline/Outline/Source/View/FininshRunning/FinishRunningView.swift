@@ -4,7 +4,7 @@
 //
 //  Created by hyebin on 10/18/23.
 //
-
+   
 import MapKit
 import SwiftUI
 
@@ -37,7 +37,7 @@ struct FinishRunningView: View {
                     pace: viewModel.runningData[2].data,
                     kcal: viewModel.runningData[4].data,
                     bpm: viewModel.runningData[3].data,
-                    score: 96,
+                    score: Int(viewModel.runningData[6].data) ?? 77,
                     editAction: {
                         showRenameSheet = true
                     },

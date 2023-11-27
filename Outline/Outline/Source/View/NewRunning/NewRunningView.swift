@@ -45,7 +45,7 @@ struct NewRunningView: View {
             metrics
             guideView
             
-            RunningFinishPopUp(isPresented: $showCompleteSheet, score: .constant(100), userLocations: $locationManager.userLocations)
+            RunningFinishPopUp(isPresented: $showCompleteSheet, score: $runningDataManager.score, userLocations: $locationManager.userLocations)
         }
         .overlay {
             if isFirstRunning && runningStartManager.runningType == .gpsArt {
@@ -350,17 +350,18 @@ extension NewRunningView {
             }
             .onEnded { _ in
                 DispatchQueue.main.async {
-                    if runningStartManager.counter < 30 {
+                    if runningStartManager.counter < 3 {
                         runningDataManager.stopRunningWithoutRecord()
                         runningStartManager.counter = 0
                         runningStartManager.running = false
                     } else {
                         runningDataManager.userLocations = locationManager.userLocations
                         runningStartManager.counter = 0
+                        runningDataManager.stopRunning()
                         withAnimation {
                             showCompleteSheet = true
                         }
-                        runningDataManager.stopRunning()
+                        
                     }
                 }
                 showStopPopup = false
