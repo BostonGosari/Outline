@@ -89,18 +89,6 @@ struct NewRecordDetailView: View {
             .preferredColorScheme(.dark)
             .toolbarBackground(.hidden, for: .navigationBar)
             .toolbar {
-                ToolbarItem(placement: .topBarLeading) {
-                    Button {
-                        dismiss()
-                    } label: {
-                        HStack(spacing: 0) {
-                            Image(systemName: "chevron.left")
-                                .foregroundStyle(Color.customPrimary)
-                            Text("모든 아트")
-                                .font(.customBody)
-                        }
-                    }
-                }
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
                         isShowAlert = true
