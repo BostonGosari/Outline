@@ -101,7 +101,7 @@ struct RecordView: View {
                                     HStack(spacing: 16) {
                                         ForEach(gpsArtRecords.prefix(3), id: \.id) { record in
                                             NavigationLink {
-                                                RecordDetailView(isDeleteData: $isDeleteData, record: record)
+                                                NewRecordDetailView(isDeleteData: $isDeleteData, record: record)
                                                     .navigationBarBackButtonHidden()
                                             } label: {
                                                 if let courseName = record.courseData?.courseName,
@@ -143,7 +143,7 @@ struct RecordView: View {
                                     HStack(spacing: 16) {
                                         ForEach(freeRecords.prefix(3), id: \.id) { record in
                                             NavigationLink {
-                                                RecordDetailView(isDeleteData: $isDeleteData, record: record)
+                                                NewRecordDetailView(isDeleteData: $isDeleteData, record: record)
                                                     .navigationBarBackButtonHidden()
                                             } label: {
                                                 if let courseName = record.courseData?.courseName,
