@@ -18,6 +18,7 @@ struct RecordView: View {
     @State private var freeRecords: [CoreRunningRecord] = []
     @State private var selectedSortOption: SortOption = .latest
     @State private var isDeleteData = false
+    @State private var navigationTitle = "모든 아트"
     
     var body: some View {
         NavigationView {
@@ -193,7 +194,7 @@ struct RecordView: View {
                 
             }
         }
-        .navigationTitle("모든 아트")
+        .navigationTitle("아트 컬렉션")
         .toolbar(.hidden, for: .navigationBar)
         .onAppear {
             filteredRecords = Array(runningRecord)
