@@ -23,7 +23,7 @@ class FinishRunningViewModel: ObservableObject {
     
     private var runningDate = Date()
     private let userDataModel = UserDataModel()
-
+    
     var courseName: String = ""
     var regionDisplayName: String = ""
     var startTime: String = ""
@@ -37,16 +37,18 @@ class FinishRunningViewModel: ObservableObject {
         RunningDataItem(text: "BPM", data: ""),
         RunningDataItem(text: "칼로리", data: ""),
         RunningDataItem(text: "케이던스", data: ""),
-        RunningDataItem(text: "점수", data: "")
+        RunningDataItem(text: "점수", data: ""),
+        RunningDataItem(text: "러닝타입", data: "")
     ]
     
     var shareData = ShareModel()
     var userLocations: [CLLocationCoordinate2D] = []
-  
+    
     func readData(runningRecord: FetchedResults<CoreRunningRecord>) {
         if let data = runningRecord.last,
-            let courseData = data.courseData,
-            let healthData = data.healthData {
+           let courseData = data.courseData,
+           let healthData = data.healthData,
+           let runningType = data.runningType {
             courseName = courseData.courseName ?? ""
             regionDisplayName = courseData.regionDisplayName ?? ""
             if let startDate = healthData.startDate {
@@ -59,7 +61,7 @@ class FinishRunningViewModel: ObservableObject {
             }
             
             if let endDate = healthData.endDate {
-               endTime = endDate.timeToString()
+                endTime = endDate.timeToString()
             } else {
                 endTime = ""
             }
@@ -70,6 +72,7 @@ class FinishRunningViewModel: ObservableObject {
             runningData[3].data = "\(Int(healthData.averageHeartRate))"
             runningData[4].data = "\(Int(healthData.totalEnergy))"
             runningData[6].data = "\(courseData.score)"
+            runningData[7].data = runningType
             if healthData.averageCadence > 0 {
                 runningData[5].data = "\(Int(healthData.averageCadence))"
             } else {
