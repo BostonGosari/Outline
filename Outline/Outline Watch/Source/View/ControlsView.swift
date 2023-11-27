@@ -63,6 +63,7 @@ struct ControlsView: View {
             EndRunningSheet(text: "종료하시겠어요?") {
                 showEndRunningSheet = false
                 runningManager.userLocations = userLocations
+                runningManager.caculateAccuracyAndProgress()
                 sendDataToPhone()
                 workoutManager.endWorkout()
             }
