@@ -29,47 +29,57 @@ struct RecordGridView: View {
     var records: [CoreRunningRecord]
 
     var body: some View {
-        VStack {
-            HStack {
-                Text(title)
-                    .font(.customTitle)
-                    .padding(.horizontal)
-                Spacer()
-                // Dropdown button for sorting
-                Button {
-                    isSortingSheetPresented.toggle()
-                } label: {
-                    HStack(spacing: 0) {
-                        Text(selectedSortOption.buttonLabel)
-                            .font(.customSubbody)
-                            .foregroundStyle(Color.customPrimary)
-                       
-                        Image(systemName: "chevron.down")
-                            .font(.customSubbody)
-                            .foregroundStyle(Color.customPrimary)
-                            .padding(.trailing, 4)
-                    }
-                }
-                .padding(.horizontal)
-            }
-
-            ScrollView {
-                LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())], spacing: 16) {
-                    ForEach(records.sorted(by: sortRecords), id: \.id) { record in
-                        NavigationLink {
-                            NewRecordDetailView(isDeleteData: $isDeleteData, record: record)
-                                .navigationBarBackButtonHidden()
-                        } label: {
-                            if let courseName = record.courseData?.courseName,
-                               let coursePaths = record.courseData?.coursePaths,
-                               let startDate = record.healthData?.startDate {
-                                    let data = pathToCoordinate(coursePaths)
-                                SmallListCard(cardType: .freeRun, runName: courseName, date: formatDate(startDate), data: data! )
-                                }
+        ZStack {
+            Color.gray900.ignoresSafeArea()
+            
+            Circle()
+                .frame(maxHeight: .infinity, alignment: .bottom)
+                .foregroundStyle(.customPrimary.opacity(0.5))
+                .blur(radius: 150)
+                .offset(y: 300)
+            
+            VStack {
+                HStack {
+                    Text(title)
+                        .font(.customTitle)
+                        .padding(.horizontal)
+                    Spacer()
+                    // Dropdown button for sorting
+                    Button {
+                        isSortingSheetPresented.toggle()
+                    } label: {
+                        HStack(spacing: 0) {
+                            Text(selectedSortOption.buttonLabel)
+                                .font(.customSubbody)
+                                .foregroundStyle(Color.customPrimary)
+                            
+                            Image(systemName: "chevron.down")
+                                .font(.customSubbody)
+                                .foregroundStyle(Color.customPrimary)
+                                .padding(.trailing, 4)
                         }
                     }
+                    .padding(.horizontal)
                 }
-                .padding()
+                
+                ScrollView {
+                    LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())], spacing: 16) {
+                        ForEach(records.sorted(by: sortRecords), id: \.id) { record in
+                            NavigationLink {
+                                NewRecordDetailView(isDeleteData: $isDeleteData, record: record)
+                                    .navigationBarBackButtonHidden()
+                            } label: {
+                                if let courseName = record.courseData?.courseName,
+                                   let coursePaths = record.courseData?.coursePaths,
+                                   let startDate = record.healthData?.startDate {
+                                    let data = pathToCoordinate(coursePaths)
+                                    SmallListCard(cardType: .freeRun, runName: courseName, date: formatDate(startDate), data: data! )
+                                }
+                            }
+                        }
+                    }
+                    .padding()
+                }
             }
         }
         .sheet(isPresented: $isSortingSheetPresented) {

@@ -90,7 +90,10 @@ struct RecordView: View {
                                             .font(.customTitle2)
                                             .padding(.horizontal)
                                         Spacer()
-                                        NavigationLink(destination: RecordGridView(title: "GPS 아트", records: gpsArtRecords)) {
+                                        NavigationLink {
+                                            RecordGridView(title: "GPS 아트", records: gpsArtRecords)
+                                                .navigationBarTitleDisplayMode(.inline)
+                                        } label: {
                                             Text("View All")
                                                 .font(.customCaption)
                                                 .foregroundStyle(Color.customPrimary)
@@ -130,12 +133,16 @@ struct RecordView: View {
                                             .font(.customTitle2)
                                             .padding(.horizontal)
                                         Spacer()
-                                        NavigationLink(destination: RecordGridView(title: "자유러닝", records: freeRecords)) {
+                                        NavigationLink {
+                                            RecordGridView(title: "자유러닝", records: freeRecords)
+                                                .navigationBarTitleDisplayMode(.inline)
+                                        } label: {
                                             Text("View All")
                                                 .font(.customCaption)
                                                 .foregroundStyle(Color.customPrimary)
                                                 .padding(.horizontal)
                                         }
+
                                     }
                                     
                                     HStack(spacing: 16) {
