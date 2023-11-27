@@ -107,9 +107,12 @@ class WatchRunningManager: ObservableObject {
     }
     
     func caculateAccuracyAndProgress() {
-        
+        print("startCourse.coursePaths : \(startCourse.coursePaths)")
+        print("userLocations : \(userLocations)")
+
         let progressManager = CourseProgressManager(guideCourse: coordinatesToCLLocationCoordiantes(coordinates: startCourse.coursePaths), userCourse: userLocations)
         progressManager.calculate()
+        
         self.progress = progressManager.getProgress()
         
         // 정확도 계산

@@ -36,7 +36,8 @@ class FinishRunningViewModel: ObservableObject {
         RunningDataItem(text: "평균 페이스", data: ""),
         RunningDataItem(text: "BPM", data: ""),
         RunningDataItem(text: "칼로리", data: ""),
-        RunningDataItem(text: "케이던스", data: "")
+        RunningDataItem(text: "케이던스", data: ""),
+        RunningDataItem(text: "점수", data: "")
     ]
     
     var shareData = ShareModel()
@@ -66,8 +67,9 @@ class FinishRunningViewModel: ObservableObject {
             runningData[0].data = String(format: "%.2f", healthData.totalRunningDistance/1000)
             runningData[1].data = healthData.totalTime.formatMinuteSeconds()
             runningData[2].data = healthData.averagePace.formattedAveragePace()
-            runningData[3].data  = "\(Int(healthData.averageHeartRate))"
-            runningData[4].data  = "\(Int(healthData.totalEnergy))"
+            runningData[3].data = "\(Int(healthData.averageHeartRate))"
+            runningData[4].data = "\(Int(healthData.totalEnergy))"
+            runningData[6].data = "\(courseData.score)"
             if healthData.averageCadence > 0 {
                 runningData[5].data = "\(Int(healthData.averageCadence))"
             } else {
