@@ -28,7 +28,7 @@ struct CardDetailMap: View {
     
     var body: some View {
         ZStack {
-            Map(position: $position, selection: $mapSelction) {
+            Map(selection: $mapSelction) {
                 UserAnnotation()
                 MapPolyline(coordinates: ConvertCoordinateManager.convertToCLLocationCoordinates(selectedCourse.coursePaths))
                     .stroke(.customPrimary, style: StrokeStyle(lineWidth: 8, lineCap: .round, lineJoin: .round))
