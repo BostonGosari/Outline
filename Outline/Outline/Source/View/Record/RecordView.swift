@@ -184,6 +184,7 @@ struct RecordView: View {
             }
         }
         .navigationTitle("모든 아트")
+        .toolbar(.hidden, for: .navigationBar)
         .onAppear {
             filteredRecords = Array(runningRecord)
                 .sorted { $0.healthData?.startDate ?? Date() > $1.healthData?.startDate ?? Date() }

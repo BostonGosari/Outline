@@ -58,7 +58,6 @@ struct NewRecordDetailView: View {
                         }
                     }
                 )
-                .padding(.top, 60)
                 Spacer()
                 CompleteButton(text: "자랑하기", isActive: true) {
                     viewModel.saveShareData()
