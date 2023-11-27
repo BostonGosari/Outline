@@ -29,6 +29,7 @@ class FinishRunningViewModel: ObservableObject {
     var startTime: String = ""
     var endTime: String = ""
     var date: String = ""
+    var cardType: CardType = .freeRun
     
     var runningData: [RunningDataItem] = [
         RunningDataItem(text: "킬로미터", data: ""),
@@ -47,8 +48,7 @@ class FinishRunningViewModel: ObservableObject {
     func readData(runningRecord: FetchedResults<CoreRunningRecord>) {
         if let data = runningRecord.last,
            let courseData = data.courseData,
-           let healthData = data.healthData,
-           let runningType = data.runningType {
+           let healthData = data.healthData {
             courseName = courseData.courseName ?? ""
             regionDisplayName = courseData.regionDisplayName ?? ""
             if let startDate = healthData.startDate {
@@ -72,7 +72,6 @@ class FinishRunningViewModel: ObservableObject {
             runningData[3].data = "\(Int(healthData.averageHeartRate))"
             runningData[4].data = "\(Int(healthData.totalEnergy))"
             runningData[6].data = "\(courseData.score)"
-            runningData[7].data = runningType
             if healthData.averageCadence > 0 {
                 runningData[5].data = "\(Int(healthData.averageCadence))"
             } else {
