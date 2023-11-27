@@ -64,7 +64,8 @@ struct NewRecordDetailView: View {
                         }
                     }
                 )
-                Spacer()
+                .frame(maxHeight: .infinity, alignment: .center)
+                
                 CompleteButton(text: "자랑하기", isActive: true) {
                     viewModel.saveShareData()
                 }
@@ -105,6 +106,7 @@ struct NewRecordDetailView: View {
                 }
             }
         }
+        .navigationBarTitleDisplayMode(.inline)
     }
     
     private var updateNameSheet: some View {
