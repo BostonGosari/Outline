@@ -5,8 +5,11 @@
 //  Created by Hyunjun Kim on 10/21/23.
 //
 
-import SwiftUI
+import ActivityKit
 import CoreMotion
+import SwiftUI
+import WidgetKit
+
 
 class RunningDataManager: ObservableObject {
     // 전송용 데이터
@@ -47,6 +50,7 @@ class RunningDataManager: ObservableObject {
     func startRunning() {
         RunningStartDate = Date()
         startPedometerUpdates()
+        addLiveActivity()
     }
     
     func stopRunningWithoutRecord() {
@@ -131,6 +135,33 @@ class RunningDataManager: ObservableObject {
         cadence = 0.0
         time = 0.0
     }
+    
+    func addLiveActivity(){
+        let runningAtributes = RunningAttributes(totalDistance: totalDistance, totalTime: totalTime, pace: pace, heartrate: 127)
+        // Since It Dosen't Requires Any Intial Values
+        // If Your Content State Struct Contains Intializers Then You Must Pass it here
+        let intialContentState = RunningAttributes.ContentState()
+        
+        do{
+            let activity = try Activity<RunningAttributes>.request(attributes: runningAtributes, contentState: intialContentState)
+            print("Activity Added Successfully. id: \(activity.id)")
+        }catch{
+            print(error.localizedDescription)
+            
+        }
+    }
+    
+//    func removeActivity(){
+//        if let activity = Activity.activities.first(where: {(activity: Activity<OrderAttributes>) in
+//            activity.id == currentID
+//        })｛
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 2){
+//                Task{
+//                    await activity.end(using: activity.contentState,dismissalPolicy: .immediate)
+//                }
+//            }
+//        ｝
+//    }
     
     private func saveRunning() {
         guard let course = runningManger.startCourse else { return }
