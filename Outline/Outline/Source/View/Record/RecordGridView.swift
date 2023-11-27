@@ -20,7 +20,6 @@ enum SortOption: String, CaseIterable {
 }
 
 struct RecordGridView: View {
-    
     @State private var isDeleteData = false
     @State private var selectedSortOption: SortOption = .latest
     @State private var isSortingSheetPresented = false
@@ -73,7 +72,6 @@ struct RecordGridView: View {
                                 let cardType = getCardType(forScore: score)
                                 NavigationLink {
                                     NewRecordDetailView(isDeleteData: $isDeleteData, record: record, cardType: cardType)
-                                        .navigationBarBackButtonHidden()
                                 } label: {
                                     SmallListCard(cardType: cardType, runName: courseName, date: formatDate(startDate), data: data!)
                                 }
@@ -84,6 +82,7 @@ struct RecordGridView: View {
                 }
             }
         }
+        .navigationTitle("모든 아트")
         .sheet(isPresented: $isSortingSheetPresented) {
             VStack(alignment: .leading) {
                 // Existing code for sheet header

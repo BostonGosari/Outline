@@ -12,7 +12,7 @@ struct RecordHeader: View {
     
     var body: some View {
         HStack {
-            Text("아트 컬랙션")
+            Text("아트 컬렉션")
                 .font(.customTitle)
                 .scaleEffect(max(min(1.2, 1 + (scrollOffset-47)/500), 1), anchor: .topLeading)
             Spacer()
