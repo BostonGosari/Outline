@@ -25,6 +25,8 @@
 		<string>kakaokompassauth</string>
 		<string>instagram-stories</string>
 	</array>
+	<key>NSSuportsLiveActivities</key>
+	<true/>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Pretendard-Black.ttf</string>

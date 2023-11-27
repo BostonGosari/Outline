@@ -189,6 +189,14 @@
 		BB52396D2ADD6DBB00646494 /* CustomRoundedRectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB52396C2ADD6DBB00646494 /* CustomRoundedRectangle.swift */; };
 		BBEC68822B0868520026C306 /* RunningFinishPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBEC68812B0868520026C306 /* RunningFinishPopUp.swift */; };
 		BBEC68842B087B020026C306 /* UnderlineButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBEC68832B087B020026C306 /* UnderlineButton.swift */; };
+		BBF90BC32B137AD700E3FD70 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBF90BC22B137AD700E3FD70 /* WidgetKit.framework */; };
+		BBF90BC52B137AD700E3FD70 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBF90BC42B137AD700E3FD70 /* SwiftUI.framework */; };
+		BBF90BC82B137AD700E3FD70 /* Outline_Widget.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF90BC72B137AD700E3FD70 /* Outline_Widget.swift */; };
+		BBF90BCA2B137AD700E3FD70 /* AppIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF90BC92B137AD700E3FD70 /* AppIntent.swift */; };
+		BBF90BCC2B137AD800E3FD70 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BBF90BCB2B137AD800E3FD70 /* Assets.xcassets */; };
+		BBF90BD62B13827000E3FD70 /* FontExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E29F64A2ADF653000F5EF5C /* FontExtension.swift */; };
+		BBF90BD82B13859100E3FD70 /* RunningAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF90BD72B13859100E3FD70 /* RunningAttributes.swift */; };
+		BBF90BD92B13859100E3FD70 /* RunningAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF90BD72B13859100E3FD70 /* RunningAttributes.swift */; };
 		F01FDB992ADABB6100BDA633 /* TabModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01FDB982ADABB6100BDA633 /* TabModel.swift */; };
 		F01FDB9C2ADABC4600BDA633 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01FDB9B2ADABC4600BDA633 /* TabBar.swift */; };
 		F03524102AE35AF800CCD8A6 /* RunningDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F035240F2AE35AF800CCD8A6 /* RunningDataManager.swift */; };
@@ -231,6 +239,13 @@
 			remoteGlobalIDString = F0AC8AA82AD94C200061612C;
 			remoteInfo = "Outline Watch App";
 		};
+		BBF90BCE2B137AD800E3FD70 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F0AC8A912AD94C1F0061612C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BBF90BBF2B137AD700E3FD70;
+			remoteInfo = "Outline WidgetExtension";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -243,6 +258,16 @@
 				297B80FB2AE73C4C00AF7219 /* Outline Watch App.app in Embed ExtensionKit Extensions */,
 			);
 			name = "Embed ExtensionKit Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BBF90BD12B137AD800E3FD70 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+			);
+			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		F0AC8ABC2AD94C210061612C /* Embed Watch Content */ = {
@@ -412,6 +437,14 @@
 		BB52396C2ADD6DBB00646494 /* CustomRoundedRectangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomRoundedRectangle.swift; sourceTree = "<group>"; };
 		BBEC68812B0868520026C306 /* RunningFinishPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningFinishPopUp.swift; sourceTree = "<group>"; };
 		BBEC68832B087B020026C306 /* UnderlineButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnderlineButton.swift; sourceTree = "<group>"; };
+		BBF90BC02B137AD700E3FD70 /* Outline WidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Outline WidgetExtension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BBF90BC22B137AD700E3FD70 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		BBF90BC42B137AD700E3FD70 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		BBF90BC72B137AD700E3FD70 /* Outline_Widget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Outline_Widget.swift; sourceTree = "<group>"; };
+		BBF90BC92B137AD700E3FD70 /* AppIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIntent.swift; sourceTree = "<group>"; };
+		BBF90BCB2B137AD800E3FD70 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		BBF90BCD2B137AD800E3FD70 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BBF90BD72B13859100E3FD70 /* RunningAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningAttributes.swift; sourceTree = "<group>"; };
 		F01FDB982ADABB6100BDA633 /* TabModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabModel.swift; sourceTree = "<group>"; };
 		F01FDB9B2ADABC4600BDA633 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 		F01FDB9D2ADABD3D00BDA633 /* HomeTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabView.swift; sourceTree = "<group>"; };
@@ -450,6 +483,15 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		BBF90BBD2B137AD700E3FD70 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BBF90BC52B137AD700E3FD70 /* SwiftUI.framework in Frameworks */,
+				BBF90BC32B137AD700E3FD70 /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F0AC8A962AD94C1F0061612C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -760,6 +802,26 @@
 			path = GPSArtHome;
 			sourceTree = "<group>";
 		};
+		BBF90BC12B137AD700E3FD70 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BBF90BC22B137AD700E3FD70 /* WidgetKit.framework */,
+				BBF90BC42B137AD700E3FD70 /* SwiftUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BBF90BC62B137AD700E3FD70 /* Outline Widget */ = {
+			isa = PBXGroup;
+			children = (
+				BBF90BC72B137AD700E3FD70 /* Outline_Widget.swift */,
+				BBF90BC92B137AD700E3FD70 /* AppIntent.swift */,
+				BBF90BCB2B137AD800E3FD70 /* Assets.xcassets */,
+				BBF90BCD2B137AD800E3FD70 /* Info.plist */,
+			);
+			path = "Outline Widget";
+			sourceTree = "<group>";
+		};
 		F01FDB9A2ADABC2C00BDA633 /* Tab */ = {
 			isa = PBXGroup;
 			children = (
@@ -795,9 +857,12 @@
 				BB5239262ADAF70A00646494 /* Shared */,
 				F0AC8A9B2AD94C1F0061612C /* Outline */,
 				F0AC8AAD2AD94C200061612C /* Outline Watch */,
+				BBF90BC62B137AD700E3FD70 /* Outline Widget */,
 				F0AC8AC42AD9514C0061612C /* .swiftlint.yml */,
 				297B80F92AE73C4500AF7219 /* Outline.app */,
 				297B80FA2AE73C4500AF7219 /* Outline Watch App.app */,
+				BBF90BC02B137AD700E3FD70 /* Outline WidgetExtension.appex */,
+				BBF90BC12B137AD700E3FD70 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -939,6 +1004,7 @@
 				0E9A5D4E2AE0B8C800C19FF3 /* ShareModel.swift */,
 				29D6BAD82B09D4DE00BD8653 /* CardModel.swift */,
 				0EE0D4012B0DC30300E75F4C /* Place.swift */,
+				BBF90BD72B13859100E3FD70 /* RunningAttributes.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1092,6 +1158,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		BBF90BBF2B137AD700E3FD70 /* Outline WidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BBF90BD42B137AD800E3FD70 /* Build configuration list for PBXNativeTarget "Outline WidgetExtension" */;
+			buildPhases = (
+				BBF90BBC2B137AD700E3FD70 /* Sources */,
+				BBF90BBD2B137AD700E3FD70 /* Frameworks */,
+				BBF90BBE2B137AD700E3FD70 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Outline WidgetExtension";
+			productName = "Outline WidgetExtension";
+			productReference = BBF90BC02B137AD700E3FD70 /* Outline WidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		F0AC8A982AD94C1F0061612C /* Outline */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = F0AC8ABD2AD94C210061612C /* Build configuration list for PBXNativeTarget "Outline" */;
@@ -1133,10 +1216,12 @@
 				F0AC8AA52AD94C200061612C /* Sources */,
 				F0AC8AA62AD94C200061612C /* Frameworks */,
 				F0AC8AA72AD94C200061612C /* Resources */,
+				BBF90BD12B137AD800E3FD70 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				BBF90BCF2B137AD800E3FD70 /* PBXTargetDependency */,
 			);
 			name = "Outline Watch App";
 			productName = "Outline Watch App";
@@ -1153,6 +1238,9 @@
 				LastSwiftUpdateCheck = 1500;
 				LastUpgradeCheck = 1500;
 				TargetAttributes = {
+					BBF90BBF2B137AD700E3FD70 = {
+						CreatedOnToolsVersion = 15.0;
+					};
 					F0AC8A982AD94C1F0061612C = {
 						CreatedOnToolsVersion = 15.0;
 					};
@@ -1182,11 +1270,20 @@
 			targets = (
 				F0AC8A982AD94C1F0061612C /* Outline */,
 				F0AC8AA82AD94C200061612C /* Outline Watch App */,
+				BBF90BBF2B137AD700E3FD70 /* Outline WidgetExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		BBF90BBE2B137AD700E3FD70 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BBF90BCC2B137AD800E3FD70 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F0AC8A972AD94C1F0061612C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1268,6 +1365,17 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		BBF90BBC2B137AD700E3FD70 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BBF90BD62B13827000E3FD70 /* FontExtension.swift in Sources */,
+				BBF90BC82B137AD700E3FD70 /* Outline_Widget.swift in Sources */,
+				BBF90BD92B13859100E3FD70 /* RunningAttributes.swift in Sources */,
+				BBF90BCA2B137AD700E3FD70 /* AppIntent.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F0AC8A952AD94C1F0061612C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1318,6 +1426,7 @@
 				F06B936E2ADC279100387DEB /* SlideToUnlock.swift in Sources */,
 				0E9A5D4F2AE0B8C800C19FF3 /* ShareModel.swift in Sources */,
 				9528F0062AE0B37B0056CCC6 /* LoginView.swift in Sources */,
+				BBF90BD82B13859100E3FD70 /* RunningAttributes.swift in Sources */,
 				958240752B0AFDF100105FAE /* CourseScoreModelType.swift in Sources */,
 				29D6BAD32B0924D200BD8653 /* SmallCarouselCard.swift in Sources */,
 				0EE92E6E2AE00AE5003192FF /* CompleteButton.swift in Sources */,
@@ -1451,9 +1560,75 @@
 			target = F0AC8AA82AD94C200061612C /* Outline Watch App */;
 			targetProxy = 297B80F72AE73C0A00AF7219 /* PBXContainerItemProxy */;
 		};
+		BBF90BCF2B137AD800E3FD70 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BBF90BBF2B137AD700E3FD70 /* Outline WidgetExtension */;
+			targetProxy = BBF90BCE2B137AD800E3FD70 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		BBF90BD22B137AD800E3FD70 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = JXHZ6FLB7P;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Outline Widget/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Outline Widget";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "team.boston.gosari.outline.watchkitapp.Outline-Widget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+			};
+			name = Debug;
+		};
+		BBF90BD32B137AD800E3FD70 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = JXHZ6FLB7P;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Outline Widget/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Outline Widget";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "team.boston.gosari.outline.watchkitapp.Outline-Widget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 		F0AC8AB72AD94C210061612C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1579,6 +1754,7 @@
 		F0AC8ABA2AD94C210061612C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
@@ -1622,6 +1798,7 @@
 		F0AC8ABB2AD94C210061612C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
@@ -1769,6 +1946,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		BBF90BD42B137AD800E3FD70 /* Build configuration list for PBXNativeTarget "Outline WidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BBF90BD22B137AD800E3FD70 /* Debug */,
+				BBF90BD32B137AD800E3FD70 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		F0AC8A942AD94C1F0061612C /* Build configuration list for PBXProject "Outline" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
