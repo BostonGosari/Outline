@@ -10,7 +10,6 @@ import HealthKit
 import SwiftUI
 import WatchKit
 
-
 struct SummaryView: View {
     @Environment(\.dismiss) var dismiss
     @StateObject var workoutManager = WatchWorkoutManager.shared
