@@ -22,7 +22,7 @@ struct MiniScrollView1: View {
             if loading {
                 RoundedRectangle(cornerRadius: 9.5)
                     .padding(.leading, 16)
-                    .foregroundColor(.gray700)
+                    .foregroundStyle(.clear)
                     .frame(width: 148, height: 16)
             } else {
                 Text(category)
@@ -37,24 +37,33 @@ struct MiniScrollView1: View {
                     ForEach(courseList, id: \.id) { currentCourse in
                         ZStack {
                             Button {
-                                withAnimation(.bouncy) {
+                                withAnimation(.bouncy(duration: 0.7)) {
                                     selectedCourse = currentCourse
                                     showDetailView = true
                                 }
                             } label: {
                                 ZStack {
-                                    KFImage(URL(string: currentCourse.course.thumbnail))
-                                        .resizable()
-                                        .placeholder {
-                                            Rectangle()
-                                                .foregroundColor(.gray700)
-                                                .onDisappear {
-                                                    loading = false
-                                                }
-                                                .mask {
-                                                    UnevenRoundedRectangle(topLeadingRadius: 5, bottomLeadingRadius: 30, bottomTrailingRadius: 30, topTrailingRadius: 30, style: .circular)
-                                                }
-                                        }
+                                    if showDetailView {
+                                        Rectangle()
+                                            .foregroundStyle(.clear)
+                                    } else {
+                                        KFImage(URL(string: currentCourse.course.thumbnail))
+                                            .resizable()
+                                            .placeholder {
+                                                Rectangle()
+                                                    .foregroundColor(.gray700)
+                                                    .onDisappear {
+                                                        loading = false
+                                                    }
+                                                    .mask {
+                                                        UnevenRoundedRectangle(topLeadingRadius: 5, bottomLeadingRadius: 30, bottomTrailingRadius: 30, topTrailingRadius: 30, style: .circular)
+                                                    }
+                                            }
+                                            .matchedGeometryEffect(id: currentCourse.id, in: namespace)
+                                            .transition(
+                                                .asymmetric(insertion: .opacity.animation(.spring()), removal: .opacity.animation(.spring().delay(0.3)))
+                                            )
+                                    }
                                     LinearGradient(
                                         stops: [
                                             Gradient.Stop(color: .black, location: 0.00),
@@ -83,9 +92,8 @@ struct MiniScrollView1: View {
                                     .padding(.leading, 12)
                                     .frame(maxWidth: .infinity, alignment: .leading)
                                 }
-                                .matchedGeometryEffect(id: "\(currentCourse.id)_1", in: namespace)
                                 .mask {
-                                    UnevenRoundedRectangle(topLeadingRadius: 5, bottomLeadingRadius: 30, bottomTrailingRadius: 30, topTrailingRadius: 30, style: .circular)
+                                    UnevenRoundedRectangle(topLeadingRadius: 5, bottomLeadingRadius: 30, bottomTrailingRadius: 30, topTrailingRadius: 30)
                                 }
                                 .shadow(color: .white, radius: 0.5, y: -0.5)
                             }
@@ -93,7 +101,6 @@ struct MiniScrollView1: View {
                                   width: UIScreen.main.bounds.width * 0.4,
                                   height: UIScreen.main.bounds.width * 0.4 * 1.45
                               )
-                            .transition(.opacity)
                         }
                         .buttonStyle(CardButton())
                     }
