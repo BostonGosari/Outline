@@ -107,8 +107,10 @@ class WatchRunningManager: ObservableObject {
     }
     
     func caculateAccuracyAndProgress() {
-        print("startCourse.coursePaths : \(startCourse.coursePaths)")
-        print("userLocations : \(userLocations)")
+        if runningType == .free {
+            score = -1
+            return
+        }
 
         let progressManager = CourseProgressManager(guideCourse: coordinatesToCLLocationCoordiantes(coordinates: startCourse.coursePaths), userCourse: userLocations)
         progressManager.calculate()
