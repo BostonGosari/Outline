@@ -24,6 +24,7 @@ struct NewRecordDetailView: View {
     private let polylineGradient = Gradient(colors: [.customGradient2, .customGradient3, .customGradient3, .customGradient3, .customGradient2])
     
     var record: CoreRunningRecord
+    var cardType: CardType
     
     var body: some View {
         ZStack {
@@ -44,7 +45,7 @@ struct NewRecordDetailView: View {
             
             VStack {
                 BigCard(
-                    cardType: .great,
+                    cardType: cardType,
                     runName: viewModel.courseName,
                     date: viewModel.date,
                     editMode: true,

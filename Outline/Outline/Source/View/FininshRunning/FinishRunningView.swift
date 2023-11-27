@@ -41,7 +41,7 @@ struct FinishRunningView: View {
             
             VStack {
                 BigCard(
-                    cardType: .great,
+                    cardType: viewModel.cardType,
                     runName: viewModel.courseName,
                     date: viewModel.date,
                     editMode: runningManager.runningType == .free,

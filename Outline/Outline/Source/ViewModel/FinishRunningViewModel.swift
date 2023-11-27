@@ -29,7 +29,7 @@ class FinishRunningViewModel: ObservableObject {
     var startTime: String = ""
     var endTime: String = ""
     var date: String = ""
-    var cardType: CardType = .freeRun
+    var cardType: CardType = .great
     
     var runningData: [RunningDataItem] = [
         RunningDataItem(text: "킬로미터", data: ""),
@@ -72,6 +72,7 @@ class FinishRunningViewModel: ObservableObject {
             runningData[3].data = "\(Int(healthData.averageHeartRate))"
             runningData[4].data = "\(Int(healthData.totalEnergy))"
             runningData[6].data = "\(courseData.score)"
+            getCardType(score: Int(courseData.score))
             if healthData.averageCadence > 0 {
                 runningData[5].data = "\(Int(healthData.averageCadence))"
             } else {
@@ -113,6 +114,21 @@ class FinishRunningViewModel: ObservableObject {
             case .failure(let error):
                 print(error)
             }
+        }
+    }
+    
+    func getCardType(score: Int) {
+        switch score {
+        case -1:
+            cardType = .freeRun
+        case 0...50:
+            cardType = .nice
+        case 51...80:
+            cardType = .great
+        case 81...100:
+            cardType = .excellent
+        default:
+            cardType = .freeRun // Add a default case or handle as needed
         }
     }
 }
