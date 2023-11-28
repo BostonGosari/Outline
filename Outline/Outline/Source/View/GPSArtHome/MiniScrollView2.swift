@@ -38,24 +38,30 @@ struct MiniScrollView2: View {
                     ForEach(Array(courseList.enumerated()), id: \.element.id) { (index, currentCourse) in
                         ZStack {
                             Button {
-                                withAnimation(.bouncy) {
+                                withAnimation(.bouncy(duration: 0.7)) {
                                     selectedCourse = currentCourse
                                     showDetailView = true
                                 }
                             } label: {
                                 ZStack {
-                                    KFImage(URL(string: currentCourse.course.thumbnail))
-                                        .resizable()
-                                        .placeholder {
-                                            Rectangle()
-                                                .foregroundColor(.gray700)
-                                                .onDisappear {
-                                                    loading = false
-                                                }
-                                                .mask {
-                                                    UnevenRoundedRectangle(topLeadingRadius: 5, bottomLeadingRadius: 30, bottomTrailingRadius: 30, topTrailingRadius: 30, style: .circular)
-                                                }
-                                        }
+                                    if showDetailView {
+                                        Rectangle()
+                                            .foregroundStyle(.clear)
+                                    } else {
+                                        KFImage(URL(string: currentCourse.course.thumbnail))
+                                            .resizable()
+                                            .placeholder {
+                                                Rectangle()
+                                                    .foregroundColor(.gray700)
+                                                    .onDisappear {
+                                                        loading = false
+                                                    }
+                                                    .mask {
+                                                        UnevenRoundedRectangle(topLeadingRadius: 5, bottomLeadingRadius: 30, bottomTrailingRadius: 30, topTrailingRadius: 30)
+                                                    }
+                                            }
+                                            .matchedGeometryEffect(id: currentCourse.id, in: namespace)
+                                    }
                                     LinearGradient(
                                         stops: [
                                             Gradient.Stop(color: .black, location: 0.00),
@@ -83,7 +89,6 @@ struct MiniScrollView2: View {
                                     .padding(.leading, 16)
                                     .frame(maxWidth: .infinity, alignment: .leading)
                                 }
-                                .matchedGeometryEffect(id: "\(currentCourse.id)_2", in: namespace)
                                 .mask {
                                     UnevenRoundedRectangle(topLeadingRadius: 5, bottomLeadingRadius: 30, bottomTrailingRadius: 30, topTrailingRadius: 30, style: .circular)
                                 }
@@ -95,9 +100,7 @@ struct MiniScrollView2: View {
                                   height: UIScreen.main.bounds.width * 0.4 * 1.45,
                                   alignment: .trailing
                             )
-                           
-                            .transition(.opacity)
-                            
+                                                       
                             Image("top\(index+1)")
                                 .resizable()
                                 .scaledToFit()

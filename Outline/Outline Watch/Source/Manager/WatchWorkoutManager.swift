@@ -10,6 +10,7 @@ import HealthKit
 
 class WatchWorkoutManager: NSObject, ObservableObject {
     static let shared = WatchWorkoutManager()
+    private let watchRunningManager = WatchRunningManager.shared
     
     var selectedWorkout: HKWorkoutActivityType? {
         didSet {
@@ -88,6 +89,7 @@ class WatchWorkoutManager: NSObject, ObservableObject {
     }
     
     func endWorkout() {
+        watchRunningManager.caculateAccuracyAndProgress()
         session?.end()
         showSummaryView = true
     }

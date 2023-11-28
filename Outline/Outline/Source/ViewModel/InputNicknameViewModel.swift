@@ -20,6 +20,8 @@ class InputNicknameViewModel: ObservableObject {
     
     private var userNameSet: [String] = []
     
+    static let shared = InputNicknameViewModel()
+    
     var keyboardWillShowPublisher: AnyPublisher<Bool, Never> {
         NotificationCenter.default.publisher(for: UIResponder.keyboardWillShowNotification)
             .map { _ in true }

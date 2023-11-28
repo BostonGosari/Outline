@@ -40,6 +40,7 @@
 		2921B0022B012EC800533A83 /* NewRunningNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2921B0012B012EC800533A83 /* NewRunningNavigationView.swift */; };
 		2921B00F2B01301100533A83 /* NewRunningMetricsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2921B00E2B01301100533A83 /* NewRunningMetricsView.swift */; };
 		2921B0132B01F3F700533A83 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2921B0122B01F3F700533A83 /* GoogleService-Info.plist */; };
+		2925E0BF2B14825A0004BB05 /* NewRecordDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2925E0BE2B14825A0004BB05 /* NewRecordDetailView.swift */; };
 		292613172AF2BCEF00591E32 /* RecordHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 292613162AF2BCEF00591E32 /* RecordHeader.swift */; };
 		2930EDBB2AF3E59F007FD141 /* ControlButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2930EDBA2AF3E59F007FD141 /* ControlButton.swift */; };
 		2930EDBD2AF3FD97007FD141 /* CountDownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2930EDBC2AF3FD97007FD141 /* CountDownView.swift */; };
@@ -71,6 +72,8 @@
 		2975F0962AE3E1790046C00B /* CornerRectangleModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2975F0952AE3E1790046C00B /* CornerRectangleModifier.swift */; };
 		297B80FB2AE73C4C00AF7219 /* Outline Watch App.app in Embed ExtensionKit Extensions */ = {isa = PBXBuildFile; fileRef = 297B80FA2AE73C4500AF7219 /* Outline Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		297B80FC2AE7515200AF7219 /* CourseModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E2EF702ADA6F230083ADEE /* CourseModelType.swift */; };
+		2990249A2B10B3E8005C5BA8 /* SFCompactDisplay-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0E96BA912AF4E00B000C8FBF /* SFCompactDisplay-Semibold.ttf */; };
+		2990249C2B10B599005C5BA8 /* StretchPro.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2990249B2B10B599005C5BA8 /* StretchPro.ttf */; };
 		299458072AF3BB6400F7D24C /* DoubleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A01E1D2AF0CCE70093D9C0 /* DoubleExtension.swift */; };
 		299803552ADF5F1000A9A134 /* HealthKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299803542ADF5F1000A9A134 /* HealthKitManager.swift */; };
 		299803572AE00C9B00A9A134 /* HapticManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299803562AE00C9B00A9A134 /* HapticManager.swift */; };
@@ -100,6 +103,7 @@
 		29D7AD4A2B0E030F00AAAAB0 /* MirroringMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D7AD492B0E030F00AAAAB0 /* MirroringMapView.swift */; };
 		29D7AD4C2B0E032200AAAAB0 /* MirroringNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D7AD4B2B0E032200AAAAB0 /* MirroringNavigationView.swift */; };
 		29D7AD4E2B0E033000AAAAB0 /* MirroringMetricsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D7AD4D2B0E033000AAAAB0 /* MirroringMetricsView.swift */; };
+		29D7AD502B0F6C2C00AAAAB0 /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 29D7AD4F2B0F6C2C00AAAAB0 /* Secrets.xcconfig */; };
 		29EBD7842B0883E500B44AA9 /* BigCardFrontside.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29EBD7832B0883E500B44AA9 /* BigCardFrontside.swift */; };
 		29EC2ECC2AEAD5690033446C /* CourseAccuracyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29EC2ECB2AEAD5680033446C /* CourseAccuracyManager.swift */; };
 		29EC2ECE2AEAD5A80033446C /* CourseProgressManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29EC2ECD2AEAD5A80033446C /* CourseProgressManager.swift */; };
@@ -135,7 +139,6 @@
 		954FFF782AE132D100D27537 /* CourseDataUploadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954FFF772AE132D100D27537 /* CourseDataUploadManager.swift */; };
 		9552F8012B0DEF99005A788C /* SharePhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9552F8002B0DEF99005A788C /* SharePhotoView.swift */; };
 		9552F8032B0DF278005A788C /* ImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9552F8022B0DF278005A788C /* ImagePickerView.swift */; };
-		9572A2092B02563900E653AB /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 9572A2082B02563900E653AB /* Secrets.xcconfig */; };
 		9580D4942B0C7985006CE42F /* ProfileVoiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9580D4932B0C7985006CE42F /* ProfileVoiceView.swift */; };
 		958240752B0AFDF100105FAE /* CourseScoreModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958240742B0AFDF100105FAE /* CourseScoreModelType.swift */; };
 		958240772B0AFE7900105FAE /* CourseScoreModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958240762B0AFE7900105FAE /* CourseScoreModel.swift */; };
@@ -195,6 +198,10 @@
 		BB5239582ADC396300646494 /* BackgroundBlur.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5239572ADC396300646494 /* BackgroundBlur.swift */; };
 		BB52396B2ADD385700646494 /* MiniScrollView1.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB52396A2ADD385700646494 /* MiniScrollView1.swift */; };
 		BB52396D2ADD6DBB00646494 /* CustomRoundedRectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB52396C2ADD6DBB00646494 /* CustomRoundedRectangle.swift */; };
+		BB67086A2B11D580005D8BA5 /* CourseAnalyzeTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29EC2ED32AEB30430033446C /* CourseAnalyzeTest.swift */; };
+		BB67086B2B11D58D005D8BA5 /* CourseProgressManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29EC2ECD2AEAD5A80033446C /* CourseProgressManager.swift */; };
+		BB67086C2B11D58F005D8BA5 /* CourseAccuracyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29EC2ECB2AEAD5680033446C /* CourseAccuracyManager.swift */; };
+		BB67086D2B11D592005D8BA5 /* CourseAnalyzeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29EC2ED12AEB2B560033446C /* CourseAnalyzeManager.swift */; };
 		BBEC68822B0868520026C306 /* RunningFinishPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBEC68812B0868520026C306 /* RunningFinishPopUp.swift */; };
 		BBEC68842B087B020026C306 /* UnderlineButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBEC68832B087B020026C306 /* UnderlineButton.swift */; };
 		F01FDB992ADABB6100BDA633 /* TabModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01FDB982ADABB6100BDA633 /* TabModel.swift */; };
@@ -300,6 +307,7 @@
 		2921B0012B012EC800533A83 /* NewRunningNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewRunningNavigationView.swift; sourceTree = "<group>"; };
 		2921B00E2B01301100533A83 /* NewRunningMetricsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewRunningMetricsView.swift; sourceTree = "<group>"; };
 		2921B0122B01F3F700533A83 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		2925E0BE2B14825A0004BB05 /* NewRecordDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewRecordDetailView.swift; sourceTree = "<group>"; };
 		292613162AF2BCEF00591E32 /* RecordHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordHeader.swift; sourceTree = "<group>"; };
 		2930EDBA2AF3E59F007FD141 /* ControlButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlButton.swift; sourceTree = "<group>"; };
 		2930EDBC2AF3FD97007FD141 /* CountDownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountDownView.swift; sourceTree = "<group>"; };
@@ -328,6 +336,7 @@
 		2975F0952AE3E1790046C00B /* CornerRectangleModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CornerRectangleModifier.swift; sourceTree = "<group>"; };
 		297B80F92AE73C4500AF7219 /* Outline.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Outline.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		297B80FA2AE73C4500AF7219 /* Outline Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Outline Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2990249B2B10B599005C5BA8 /* StretchPro.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = StretchPro.ttf; sourceTree = "<group>"; };
 		299803542ADF5F1000A9A134 /* HealthKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitManager.swift; sourceTree = "<group>"; };
 		299803562AE00C9B00A9A134 /* HapticManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticManager.swift; sourceTree = "<group>"; };
 		299803592AE0181900A9A134 /* ConfettiShapes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfettiShapes.swift; sourceTree = "<group>"; };
@@ -351,6 +360,7 @@
 		29D7AD492B0E030F00AAAAB0 /* MirroringMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MirroringMapView.swift; sourceTree = "<group>"; };
 		29D7AD4B2B0E032200AAAAB0 /* MirroringNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MirroringNavigationView.swift; sourceTree = "<group>"; };
 		29D7AD4D2B0E033000AAAAB0 /* MirroringMetricsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MirroringMetricsView.swift; sourceTree = "<group>"; };
+		29D7AD4F2B0F6C2C00AAAAB0 /* Secrets.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Secrets.xcconfig; path = ../../../Downloads/Secrets.xcconfig; sourceTree = "<group>"; };
 		29EBD7832B0883E500B44AA9 /* BigCardFrontside.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigCardFrontside.swift; sourceTree = "<group>"; };
 		29EC2ECB2AEAD5680033446C /* CourseAccuracyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseAccuracyManager.swift; sourceTree = "<group>"; };
 		29EC2ECD2AEAD5A80033446C /* CourseProgressManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseProgressManager.swift; sourceTree = "<group>"; };
@@ -375,7 +385,6 @@
 		954FFF772AE132D100D27537 /* CourseDataUploadManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseDataUploadManager.swift; sourceTree = "<group>"; };
 		9552F8002B0DEF99005A788C /* SharePhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharePhotoView.swift; sourceTree = "<group>"; };
 		9552F8022B0DF278005A788C /* ImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerView.swift; sourceTree = "<group>"; };
-		9572A2082B02563900E653AB /* Secrets.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 		9580D4932B0C7985006CE42F /* ProfileVoiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileVoiceView.swift; sourceTree = "<group>"; };
 		958240742B0AFDF100105FAE /* CourseScoreModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseScoreModelType.swift; sourceTree = "<group>"; };
 		958240762B0AFE7900105FAE /* CourseScoreModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseScoreModel.swift; sourceTree = "<group>"; };
@@ -731,7 +740,6 @@
 		BB1D530A2ADDBC430073771F /* Font */ = {
 			isa = PBXGroup;
 			children = (
-				0E96BA912AF4E00B000C8FBF /* SFCompactDisplay-Semibold.ttf */,
 				BB1D530B2ADDBC560073771F /* Pretendard-Black.ttf */,
 				BB1D530F2ADDBC690073771F /* Pretendard-ExtraBold.ttf */,
 				BB1D530D2ADDBC620073771F /* Pretendard-Bold.ttf */,
@@ -740,6 +748,8 @@
 				BB1D53192ADDBCAB0073771F /* Pretendard-Regular.ttf */,
 				BB1D531D2ADDBCB90073771F /* Pretendard-Thin.ttf */,
 				BB1D53152ADDBC900073771F /* Pretendard-Light.ttf */,
+				0E96BA912AF4E00B000C8FBF /* SFCompactDisplay-Semibold.ttf */,
+				2990249B2B10B599005C5BA8 /* StretchPro.ttf */,
 			);
 			path = Font;
 			sourceTree = "<group>";
@@ -760,6 +770,7 @@
 				BB397D0A2AE640A800F92A43 /* RecordDetailView.swift */,
 				292613162AF2BCEF00591E32 /* RecordHeader.swift */,
 				BB02A39B2B0D26EA00250EDD /* RecordGridView.swift */,
+				2925E0BE2B14825A0004BB05 /* NewRecordDetailView.swift */,
 			);
 			path = Record;
 			sourceTree = "<group>";
@@ -829,7 +840,7 @@
 			isa = PBXGroup;
 			children = (
 				2921B0122B01F3F700533A83 /* GoogleService-Info.plist */,
-				9572A2082B02563900E653AB /* Secrets.xcconfig */,
+				29D7AD4F2B0F6C2C00AAAAB0 /* Secrets.xcconfig */,
 				BB52392D2ADAF93D00646494 /* Outline Watch App.entitlements */,
 				BB493CEB2ADFD592009D3699 /* Outline-Watch-App-Info.plist */,
 				BB5239262ADAF70A00646494 /* Shared */,
@@ -1233,6 +1244,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2990249C2B10B599005C5BA8 /* StretchPro.ttf in Resources */,
 				954CB2AB2AE5457B005EB2E9 /* flightRun.kml in Resources */,
 				0E1D1B2B2AE95E1C005282A2 /* test.kml in Resources */,
 				954CB2A72AE5457B005EB2E9 /* seoulOctopusRun.kml in Resources */,
@@ -1243,11 +1255,12 @@
 				F0AC8B2E2AD968A20061612C /* Icon.xcassets in Resources */,
 				954CB2AD2AE5457B005EB2E9 /* pohangDuckRun.kml in Resources */,
 				F0AC8AA12AD94C200061612C /* Color.xcassets in Resources */,
+				2990249A2B10B3E8005C5BA8 /* SFCompactDisplay-Semibold.ttf in Resources */,
+				29D7AD502B0F6C2C00AAAAB0 /* Secrets.xcconfig in Resources */,
 				954CB2AF2AE5457B005EB2E9 /* seoulCamelRun.kml in Resources */,
 				BB1D531E2ADDBCB90073771F /* Pretendard-Thin.ttf in Resources */,
 				BB1D530C2ADDBC560073771F /* Pretendard-Black.ttf in Resources */,
 				BB1D530E2ADDBC620073771F /* Pretendard-Bold.ttf in Resources */,
-				9572A2092B02563900E653AB /* Secrets.xcconfig in Resources */,
 				BB1D53182ADDBCA20073771F /* Pretendard-Medium.ttf in Resources */,
 				BB1D53162ADDBC900073771F /* Pretendard-Light.ttf in Resources */,
 				954CB2A92AE5457B005EB2E9 /* pohangDangDangRun.kml in Resources */,
@@ -1374,6 +1387,7 @@
 				95E2EF882ADBA5C70083ADEE /* CourseModel.swift in Sources */,
 				BB397D092AE6408A00F92A43 /* RecordView.swift in Sources */,
 				BB397D0B2AE640A800F92A43 /* RecordDetailView.swift in Sources */,
+				2925E0BF2B14825A0004BB05 /* NewRecordDetailView.swift in Sources */,
 				BB44B16F2B047242000462CA /* AccuracyCheckViewModel.swift in Sources */,
 				958240772B0AFE7900105FAE /* CourseScoreModel.swift in Sources */,
 				2998035B2AE0181900A9A134 /* ConfettiShapes.swift in Sources */,
@@ -1460,6 +1474,7 @@
 				299803612AE0240300A9A134 /* Confetti.swift in Sources */,
 				954CB29E2AE5161D005EB2E9 /* UserDataModelType.swift in Sources */,
 				293C97E02AE6C454007821F5 /* WatchConnectivityManager.swift in Sources */,
+				BB67086B2B11D58D005D8BA5 /* CourseProgressManager.swift in Sources */,
 				29111E372AE0C9CA009833C7 /* FinishWatchView.swift in Sources */,
 				95A01E2C2AF0DF860093D9C0 /* ConvertCoordinateManager.swift in Sources */,
 				2930EDC02AF3FE3F007FD141 /* CourseListWatchViewModel.swift in Sources */,
@@ -1472,6 +1487,9 @@
 				F0AC8AB12AD94C200061612C /* ContentWatchView.swift in Sources */,
 				2999C6D52B0D7C4A009C5585 /* MirroringControlsView.swift in Sources */,
 				293D1E302B0B016D00AB85BE /* TwoButtonSheet.swift in Sources */,
+				BB67086C2B11D58F005D8BA5 /* CourseAccuracyManager.swift in Sources */,
+				BB67086D2B11D592005D8BA5 /* CourseAnalyzeManager.swift in Sources */,
+				BB67086A2B11D580005D8BA5 /* CourseAnalyzeTest.swift in Sources */,
 				BB1D53432ADE9C7D0073771F /* ControlsView.swift in Sources */,
 				BB1D534C2ADEA6F90073771F /* SummaryView.swift in Sources */,
 				295346B82B0B5D52004F852E /* EmptyContentView.swift in Sources */,
@@ -1655,7 +1673,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.1;
 				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = team.boston.gosari.outline.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1698,7 +1716,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.1;
 				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = team.boston.gosari.outline.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1715,7 +1733,7 @@
 		};
 		F0AC8ABE2AD94C210061612C /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9572A2082B02563900E653AB /* Secrets.xcconfig */;
+			baseConfigurationReference = 29D7AD4F2B0F6C2C00AAAAB0 /* Secrets.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1731,6 +1749,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Outline/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Outline;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
 				INFOPLIST_KEY_NSCameraUsageDescription = "러닝 화면을 꾸밀 수 있도록 사진을 선택해보세요!\n사진을 선택해보세요!";
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "애플 워치를 이용하여 당신의 워크아웃 기록을 트래킹하여 운동에 저장하기 위하여 사용됩니다. ";
 				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "러닝을 하며 운동 데이터를 확인하는 데에 건강정보를 사용합니다. ";
@@ -1750,7 +1769,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.1;
 				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = team.boston.gosari.outline;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1765,7 +1784,7 @@
 		};
 		F0AC8ABF2AD94C210061612C /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9572A2082B02563900E653AB /* Secrets.xcconfig */;
+			baseConfigurationReference = 29D7AD4F2B0F6C2C00AAAAB0 /* Secrets.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1781,6 +1800,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Outline/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Outline;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
 				INFOPLIST_KEY_NSCameraUsageDescription = "러닝 화면을 꾸밀 수 있도록 사진을 선택해보세요!\n사진을 선택해보세요!";
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "애플 워치를 이용하여 당신의 워크아웃 기록을 트래킹하여 운동에 저장하기 위하여 사용됩니다. ";
 				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "러닝을 하며 운동 데이터를 확인하는 데에 건강정보를 사용합니다. ";
@@ -1800,7 +1820,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.1;
 				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = team.boston.gosari.outline;
 				PRODUCT_NAME = "$(TARGET_NAME)";

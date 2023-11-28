@@ -1,43 +1,53 @@
 //
-//  FinishRunningView.swift
+//  NewRecordDetailView.swift
 //  Outline
 //
-//  Created by hyebin on 10/18/23.
+//  Created by hyunjun on 11/27/23.
 //
-   
+
 import MapKit
 import SwiftUI
 
-struct FinishRunningView: View {
-    @StateObject private var runningManager = RunningStartManager.shared
-    @StateObject private var viewModel = FinishRunningViewModel()
-    @FetchRequest (entity: CoreRunningRecord.entity(), sortDescriptors: []) var runningRecord: FetchedResults<CoreRunningRecord>
-    
+struct NewRecordDetailView: View {
+    @Environment(\.dismiss) private var dismiss
+    @StateObject var viewModel = RecordDetailViewModel()
+        
     @State private var showRenameSheet = false
     @State private var newCourseName = ""
     @State private var completeButtonActive = false
+    @State private var isShowAlert = false
     
     @State private var position: MapCameraPosition = .userLocation(fallback: .automatic)
-    @State private var save = false
     
+    @Binding var isDeleteData: Bool
+
     private let polylineGradient = Gradient(colors: [.customGradient2, .customGradient3, .customGradient3, .customGradient3, .customGradient2])
+    
+    var record: CoreRunningRecord
     
     var body: some View {
         ZStack {
             Color.gray900
                 .ignoresSafeArea()
+            LinearGradient(
+                colors: [.customBlack, .gray900],
+                startPoint: .top,
+                endPoint: .center
+                )
+                .ignoresSafeArea()
+            
             VStack {
                 BigCard(
                     cardType: .great,
                     runName: viewModel.courseName,
                     date: viewModel.date,
-                    editMode: runningManager.runningType == .free,
-                    time: viewModel.runningData[1].data,
-                    distance: "\(viewModel.runningData[0].data)KM",
-                    pace: viewModel.runningData[2].data,
-                    kcal: viewModel.runningData[4].data,
-                    bpm: viewModel.runningData[3].data,
-                    score: Int(viewModel.runningData[6].data) ?? 77,
+                    editMode: true,
+                    time: viewModel.runningData["시간"] ?? "",
+                    distance: "\(viewModel.runningData["킬로미터"] ?? "")KM",
+                    pace: viewModel.runningData["평균 페이스"] ?? "",
+                    kcal: viewModel.runningData["칼로리"] ?? "",
+                    bpm: viewModel.runningData["BPM"] ?? "",
+                    score: Int(viewModel.runningData["점수"] ?? "") ?? 77,
                     editAction: {
                         showRenameSheet = true
                     },
@@ -48,51 +58,62 @@ struct FinishRunningView: View {
                         }
                     }
                 )
-                .padding(.top, 90)
+                .padding(.top, 60)
                 Spacer()
                 CompleteButton(text: "자랑하기", isActive: true) {
                     viewModel.saveShareData()
                 }
                 .padding(.bottom, 16)
-                
-                Button(action: {
-                    withAnimation {
-                        runningManager.complete = false
+            }
+            .alert("기록한 러닝이 사라져요\n정말 삭제하시겠어요?", isPresented: $isShowAlert) {
+                Button("취소", role: .cancel) {}
+                Button("삭제", role: .destructive) {
+                    viewModel.deleteRunningRecord(record)
+                    isDeleteData = true
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                        self.isDeleteData = false
                     }
-                }, label: {
-                    Text("홈으로 돌아가기")
-                        .underline(pattern: .solid)
-                        .foregroundStyle(Color.gray300)
-                        .font(.customSubbody)
-                })
-                .padding(.bottom, 8)
-            }
-            .overlay {
-                if viewModel.isShowPopup {
-                    RunningPopup(text: "기록이 저장되었어요.")
-                        .frame(maxHeight: .infinity, alignment: .top)
-                        .transition(.move(edge: .top))
+                    dismiss()
                 }
-            }
-            .sheet(isPresented: $showRenameSheet) {
-                updateNameSheet
             }
             .fullScreenCover(isPresented: $viewModel.navigateToShareMainView) {
                 SharePhotoView(runningData: viewModel.shareData)
                     .tint(.customPrimary)
             }
             .onAppear {
-                if !save {
-                    viewModel.isShowPopup = true
-                    viewModel.readData(runningRecord: runningRecord)
-                    save = true
+                viewModel.readData(runningRecord: record)
+            }
+            .sheet(isPresented: $showRenameSheet) {
+                updateNameSheet
+            }
+            .preferredColorScheme(.dark)
+            .toolbarBackground(.hidden, for: .navigationBar)
+            .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    Button {
+                        dismiss()
+                    } label: {
+                        HStack(spacing: 0) {
+                            Image(systemName: "chevron.left")
+                                .foregroundStyle(Color.customPrimary)
+                            Text("모든 아트")
+                                .font(.customBody)
+                        }
+                    }
+                }
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
+                        isShowAlert = true
+                    } label: {
+                        Image(systemName: "trash")
+                            .font(.customSubtitle)
+                            .foregroundStyle(Color.customPrimary)
+                    }
                 }
             }
         }
     }
-}
-
-extension FinishRunningView {
+    
     private var updateNameSheet: some View {
         VStack(alignment: .leading, spacing: 0) {
             Text("코스 이름 수정하기")
@@ -111,7 +132,7 @@ extension FinishRunningView {
                 }
                 .padding(.bottom, 8)
                 .padding(.horizontal, 16)
-            
+        
             Rectangle()
                 .frame(height: 1)
                 .foregroundStyle(Color.customPrimary)
@@ -119,10 +140,8 @@ extension FinishRunningView {
                 .padding(.bottom, 41)
             
             CompleteButton(text: "완료", isActive: completeButtonActive) {
-                if let record = runningRecord.last {
-                    viewModel.updateRunningRecord(record, courseName: newCourseName)
-                    viewModel.courseName = newCourseName
-                }
+                viewModel.updateRunningRecord(record, courseName: newCourseName)
+                viewModel.courseName = newCourseName
                 completeButtonActive = false
                 showRenameSheet = false
             }
@@ -133,8 +152,4 @@ extension FinishRunningView {
         .presentationDetents([.height(330)])
         .presentationCornerRadius(35)
     }
-}
-
-#Preview {
-    FinishRunningView()
 }
