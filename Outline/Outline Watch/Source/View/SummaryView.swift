@@ -64,7 +64,7 @@ struct SummaryView: View {
                                    Image("nice")
                                        .resizable()
                                        .frame(width: 200)
-                            case 0:
+                               case 0:
                                 Image("notyet")
                                     .resizable()
                                     .frame(width: 200)
