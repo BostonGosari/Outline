@@ -85,6 +85,7 @@ struct NewRecordDetailView: View {
             }
             .navigationDestination(isPresented: $viewModel.navigateToShareMainView) {
                 ShareView(runningData: viewModel.shareData)
+                    .navigationBarBackButtonHidden()
             }
             .onAppear {
                 viewModel.readData(runningRecord: record)

@@ -92,6 +92,7 @@ struct FinishRunningView: View {
             }
             .navigationDestination(isPresented: $viewModel.navigateToShareMainView) {
                 ShareView(runningData: viewModel.shareData)
+                    .navigationBarBackButtonHidden()
             }
             .onAppear {
                 if !save {
