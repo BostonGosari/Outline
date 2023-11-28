@@ -24,21 +24,28 @@ struct NewRecordDetailView: View {
     private let polylineGradient = Gradient(colors: [.customGradient2, .customGradient3, .customGradient3, .customGradient3, .customGradient2])
     
     var record: CoreRunningRecord
+    var cardType: CardType
     
     var body: some View {
         ZStack {
             Color.gray900
                 .ignoresSafeArea()
-            LinearGradient(
-                colors: [.customBlack, .gray900],
-                startPoint: .top,
-                endPoint: .center
-                )
-                .ignoresSafeArea()
+            Circle()
+                .frame(width: 350)
+                .foregroundStyle(.customPrimary.opacity(0.35))
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+                .offset(x: -175, y: -100)
+                .blur(radius: 120)
+            Circle()
+                .frame(width: 350)
+                .foregroundStyle(.customPrimary.opacity(0.35))
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
+                .offset(x: 100, y: 100)
+                .blur(radius: 120)
             
             VStack {
                 BigCard(
-                    cardType: .great,
+                    cardType: cardType,
                     runName: viewModel.courseName,
                     date: viewModel.date,
                     editMode: true,
@@ -58,8 +65,8 @@ struct NewRecordDetailView: View {
                         }
                     }
                 )
-                .padding(.top, 60)
-                Spacer()
+                .frame(maxHeight: .infinity, alignment: .center)
+                
                 CompleteButton(text: "자랑하기", isActive: true) {
                     viewModel.saveShareData()
                 }
@@ -89,18 +96,6 @@ struct NewRecordDetailView: View {
             .preferredColorScheme(.dark)
             .toolbarBackground(.hidden, for: .navigationBar)
             .toolbar {
-                ToolbarItem(placement: .topBarLeading) {
-                    Button {
-                        dismiss()
-                    } label: {
-                        HStack(spacing: 0) {
-                            Image(systemName: "chevron.left")
-                                .foregroundStyle(Color.customPrimary)
-                            Text("모든 아트")
-                                .font(.customBody)
-                        }
-                    }
-                }
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
                         isShowAlert = true
@@ -112,6 +107,7 @@ struct NewRecordDetailView: View {
                 }
             }
         }
+        .navigationBarTitleDisplayMode(.inline)
     }
     
     private var updateNameSheet: some View {
