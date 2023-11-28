@@ -48,7 +48,7 @@ struct CourseListWatchView: View {
                                             runningManager.startCourse = course
                                             runningManager.startGPSArtRun()
                                             
-                                            let runningInfo = MirroringRunningInfo(runningType: .gpsArt, courseName: course.courseName , course: course.coursePaths)
+                                            let runningInfo = MirroringRunningInfo(runningType: .gpsArt, courseName: course.courseName, course: course.coursePaths)
                                             connectivityManager.sendRunningInfo(runningInfo)
                                         } else {
                                             if runningManager.locationNetworkError {
