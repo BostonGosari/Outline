@@ -66,6 +66,25 @@ struct MirroringView: View {
         .onDisappear {
             connectivityManager.runningData.time = 0
         }
+        .onChange(of: connectivityManager.runningState) { _, newValue in
+            if newValue == .pause {
+                withAnimation {
+                    showDetail = true
+                    isPaused = true
+                    if navigationSheetHeight != 0 {
+                        navigationSheetHeight = 0
+                    }
+                }
+            } else {
+                withAnimation {
+                    showDetail = false
+                    isPaused = false
+                    if navigationSheetHeight != 0 {
+                        navigationSheetHeight = 0
+                    }
+                }
+            }
+        }
     }
 }
 
@@ -167,6 +186,7 @@ extension MirroringView {
                         navigationSheetHeight = 0
                     }
                 }
+                
                 connectivityManager.sendRunningState(.resume)
             } label: {
                 Image(systemName: "play.circle.fill")
