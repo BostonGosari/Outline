@@ -9,6 +9,7 @@ import CoreLocation
 import SwiftUI
 
 struct ShareView: View {
+    @Environment(\.dismiss) var dismiss
     @StateObject private var viewModel = ShareViewModel()
 
     @State private var size: CGSize = .zero
@@ -27,23 +28,35 @@ struct ShareView: View {
     let runningData: ShareModel
     
     var body: some View {
-        ZStack {
-            Color.gray900
-                .ignoresSafeArea()
-            
-            VStack(spacing: 0) {
-                shareImageCombined(false)
-                buttons
+        NavigationView {
+            ZStack {
+                Color.gray900
+                    .ignoresSafeArea()
+                
+                VStack(spacing: 0) {
+                    shareImageCombined
+                    buttons
+                }
+                .padding(.top, 36)
             }
-            .padding(.top, 36)
+            .onAppear {
+                let canvasSize = PathGenerateManager.calculateCanvaData(coordinates: runningData.userLocations, width: 200, height: 200)
+                pathWidth = CGFloat(canvasSize.width)
+                pathHeight = CGFloat(canvasSize.height)
+            }
+            .navigationTitle("공유")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+               ToolbarItem(placement: .topBarLeading) {
+                   Button {
+                       dismiss()
+                   } label: {
+                       (Text(Image(systemName: "chevron.left")) + Text("뒤로"))
+                           .foregroundStyle(Color.customPrimary)
+                   }
+               }
+           }
         }
-        .onAppear {
-            let canvasSize = PathGenerateManager.calculateCanvaData(coordinates: runningData.userLocations, width: 200, height: 200)
-            pathWidth = CGFloat(canvasSize.width)
-            pathHeight = CGFloat(canvasSize.height)
-        }
-        .navigationTitle("공유")
-        .navigationBarTitleDisplayMode(.inline)
         .sheet(isPresented: $viewModel.permissionDenied) {
             PermissionSheet(permissionType: .photoLibrary)
         }
@@ -60,10 +73,9 @@ struct ShareView: View {
 }
 
 extension ShareView {
-    @ViewBuilder
-    private func shareImageCombined(_ shareInsta: Bool) -> some View {
+    private var shareImageCombined: some View {
         ZStack {
-            backgroundImage(shareInsta)
+            backgroundImage
             runningInfo
             userPath
             GeometryReader { proxy in
@@ -76,8 +88,7 @@ extension ShareView {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
     
-    @ViewBuilder
-    private func backgroundImage(_ shareInsta: Bool) -> some View {
+    private var backgroundImage: some View {
         ZStack {
             Image("ShareFirstLayer")
             Image("ShareSecondLayer")
@@ -86,12 +97,6 @@ extension ShareView {
                         .fill(.white30)
                         .blur(radius: 3)
                         .mask(UnevenRoundedRectangle(topLeadingRadius: 10, bottomLeadingRadius: 45, bottomTrailingRadius: 45, topTrailingRadius: 70))
-                        .opacity(shareInsta ? 1 : 0)
-                )
-                .background(
-                    TransparentBlurView(removeAllFilters: true)
-                        .blur(radius: 3, opaque: true)
-                        .opacity(shareInsta ? 0 : 1)
                 )
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
             Image("ShareThirdLayer")
@@ -112,7 +117,7 @@ extension ShareView {
             .foregroundStyle(.white)
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
         }
-        .padding(.trailing, 40)
+        .padding(.trailing, 32)
         .padding(.bottom, 55)
     }
     
@@ -135,7 +140,7 @@ extension ShareView {
     private var buttons: some View {
         HStack(spacing: 0) {
             Button {
-                saveShareView()
+                renderShareView(true)
                 if let img = image {
                     viewModel.saveImage(image: img)
                 }
@@ -153,7 +158,7 @@ extension ShareView {
             .padding(.leading, 16)
             
             CompleteButton(text: "Instagram으로 공유하기", isActive: true) {
-                renderShareView()
+                renderShareView(false)
                 if let img = image {
                     viewModel.shareToInstagram(image: img)
                 }
@@ -209,15 +214,10 @@ extension ShareView {
 }
 
 extension ShareView {
-    private func renderShareView() {
-        image = shareImageCombined(true)
+    private func renderShareView(_ isSave: Bool) {
+        image = shareImageCombined
+            .background(isSave ? .gray900 : .clear)
             .render(scale: 3)
-    }
-    
-    private func saveShareView() {
-        image = shareImageCombined(false)
-            .offset(y: -10)
-            .asImage(size: size)
     }
 }
 
