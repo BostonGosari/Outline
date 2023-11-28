@@ -40,6 +40,11 @@ struct ControlsView: View {
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                             dataAnimation.toggle()
                         }
+                        if workoutManager.running {
+                            connectivityManager.sendRunningState(.pause)
+                        } else {
+                            connectivityManager.sendRunningState(.resume)
+                        }
                     }
                 }
             }
@@ -75,6 +80,15 @@ struct ControlsView: View {
                 showEndWithoutSavingSheet = false
                 workoutManager.endWorkoutWithoutSummaryView()
                 runningManager.startRunning = false
+            }
+        }
+        .onChange(of: connectivityManager.runningState) { _, newValue in
+            if newValue == .pause {
+                buttonAnimation = true
+                dataAnimation = true
+            } else if newValue == .resume {
+                buttonAnimation = false
+                dataAnimation = false
             }
         }
     }
