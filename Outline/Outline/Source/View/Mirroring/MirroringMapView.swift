@@ -21,10 +21,14 @@ struct MirroringMapView: View {
                 UserAnnotation()
                 
                 MapPolyline(coordinates: course)
+                    .stroke(.black.opacity(0.3), style: StrokeStyle(lineWidth: 8, lineCap: .round, lineJoin: .round))
                 
                 MapPolyline(coordinates: userLocations)
                     .stroke(.customPrimary, style: StrokeStyle(lineWidth: 5, lineCap: .round, lineJoin: .round))
             }
+            .mapStyle(.standard(pointsOfInterest: []))
+            .mapControlVisibility(.hidden)
+            
             MapUserLocationButton(scope: mapScope)
                 .buttonBorderShape(.circle)
                 .tint(.white)

@@ -51,6 +51,23 @@ struct TabWatchView: View {
                 Text(workoutManager.running ? runningManager.runningTitle : "일시 정지됨")
                     .foregroundStyle(.customPrimary)
             }
+            .onChange(of: connectivityManager.runningState) { _, newValue in
+                if newValue == .pause {
+                    workoutManager.session?.pause()
+                } else if newValue == .resume {
+                    workoutManager.session?.resume()
+                } else if newValue == .end {
+                    if count > 30 {
+                        runningManager.userLocations = locationManager.userLocations
+                        runningManager.caculateAccuracyAndProgress()
+                        sendDataToPhone()
+                        workoutManager.endWorkout()
+                    } else {
+                        workoutManager.endWorkoutWithoutSummaryView()
+                        runningManager.startRunning = false
+                    }
+                }
+            }
             .navigationBarTitleDisplayMode(.inline)
         }
     }
@@ -83,5 +100,16 @@ struct TabWatchView: View {
     private func stopMirring() {
         timer?.invalidate()
         timer = nil
+    }
+    
+    private func sendDataToPhone() {
+        let startCourse = runningManager.startCourse
+        
+        guard let builder = workoutManager.builder else { return }
+        
+        let courseData = CourseData(courseName: startCourse.courseName, runningLength: startCourse.courseLength, heading: startCourse.heading, distance: startCourse.distance, coursePaths: locationManager.userLocations, runningCourseId: "", regionDisplayName: startCourse.regionDisplayName, score: runningManager.score)
+        let healthData = HealthData(totalTime: builder.elapsedTime, averageCadence: workoutManager.cadence, totalRunningDistance: workoutManager.distance, totalEnergy: workoutManager.calorie, averageHeartRate: workoutManager.heartRate, averagePace: workoutManager.averagePace, startDate: workoutManager.session?.startDate ?? Date(), endDate: workoutManager.session?.endDate ?? Date())
+        
+        connectivityManager.sendRunningRecordToPhone(RunningRecord(id: UUID().uuidString, runningType: runningManager.runningType, courseData: courseData, healthData: healthData))
     }
 }
