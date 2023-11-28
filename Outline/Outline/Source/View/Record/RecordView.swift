@@ -18,6 +18,7 @@ struct RecordView: View {
     @State private var freeRecords: [CoreRunningRecord] = []
     @State private var selectedSortOption: SortOption = .latest
     @State private var isDeleteData = false
+    @State private var navigationTitle = "모든 아트"
     
     var body: some View {
         NavigationView {
@@ -54,25 +55,25 @@ struct RecordView: View {
                                 ScrollView(.horizontal, showsIndicators: false) {
                                     HStack(spacing: 16) {
                                         ForEach(filteredRecords.prefix(5), id: \.id) { record in
-                                            NavigationLink {
-                                                NewRecordDetailView(isDeleteData: $isDeleteData, record: record)
-                                                    .navigationBarBackButtonHidden()
-                                            } label: {
-                                                if let courseName = record.courseData?.courseName,
-                                                   let coursePaths = record.courseData?.coursePaths,
-                                                   let startDate = record.healthData?.startDate,
-                                                   let score = record.courseData?.score {
-                                                    let data = pathToCoordinate(coursePaths)
-                                                    let cardType = getCardType(forScore: score)
+                                            if let courseName = record.courseData?.courseName,
+                                               let coursePaths = record.courseData?.coursePaths,
+                                               let startDate = record.healthData?.startDate,
+                                               let score = record.courseData?.score {
+                                                let data = pathToCoordinate(coursePaths)
+                                                let cardType = getCardType(forScore: score)
+                                                NavigationLink {
+                                                    NewRecordDetailView(isDeleteData: $isDeleteData, record: record, cardType: cardType)
+                                                } label: {
                                                     SmallCarouselCard(cardType: cardType, runName: courseName, date: formatDate(startDate), data: data!)
-                                                } else {
-                                                    // Handle the case where score is nil
-                                                    SmallListEmptyCard()
                                                 }
+                                                .padding(.bottom, 8)
+                                            } else {
+                                                // Handle the case where score is nil
+                                                SmallListEmptyCard()
+                                                    .padding(.bottom, 8)
                                             }
-                                            .padding(.bottom, 8)
                                         }
-
+                                        
                                         // Use Group to conditionally include SmallListEmptyCard
                                         Group {
                                             ForEach(0 ..< max(0, 5 - filteredRecords.count), id: \.self) { _ in
@@ -82,7 +83,7 @@ struct RecordView: View {
                                         }
                                     }
                                     .padding(.horizontal)
-
+                                    
                                 }
                                 
                                 VStack(alignment: .leading) {
@@ -91,7 +92,10 @@ struct RecordView: View {
                                             .font(.customTitle2)
                                             .padding(.horizontal)
                                         Spacer()
-                                        NavigationLink(destination: RecordGridView(title: "GPS 아트", records: gpsArtRecords)) {
+                                        NavigationLink {
+                                            RecordGridView(title: "GPS 아트", records: gpsArtRecords)
+                                                .navigationBarTitleDisplayMode(.inline)
+                                        } label: {
                                             Text("View All")
                                                 .font(.customCaption)
                                                 .foregroundStyle(Color.customPrimary)
@@ -100,21 +104,20 @@ struct RecordView: View {
                                     }
                                     HStack(spacing: 16) {
                                         ForEach(gpsArtRecords.prefix(3), id: \.id) { record in
-                                            NavigationLink {
-                                                NewRecordDetailView(isDeleteData: $isDeleteData, record: record)
-                                                    .navigationBarBackButtonHidden()
-                                            } label: {
-                                                if let courseName = record.courseData?.courseName,
-                                                   let coursePaths = record.courseData?.coursePaths,
-                                                   let startDate = record.healthData?.startDate,
-                                                   let score = record.courseData?.score {
-                                                    let data = pathToCoordinate(coursePaths)
-                                                    let cardType = getCardType(forScore: score)
+                                            if let courseName = record.courseData?.courseName,
+                                               let coursePaths = record.courseData?.coursePaths,
+                                               let startDate = record.healthData?.startDate,
+                                               let score = record.courseData?.score {
+                                                let data = pathToCoordinate(coursePaths)
+                                                let cardType = getCardType(forScore: score)
+                                                NavigationLink {
+                                                    NewRecordDetailView(isDeleteData: $isDeleteData, record: record, cardType: cardType)
+                                                } label: {
                                                     SmallListCard(cardType: cardType, runName: courseName, date: formatDate(startDate), data: data!)
                                                 }
                                             }
                                         }
-
+                                        
                                         // Use Group to conditionally include SmallListEmptyCard
                                         Group {
                                             ForEach(0 ..< max(0, 3 - gpsArtRecords.count), id: \.self) { _ in
@@ -132,32 +135,37 @@ struct RecordView: View {
                                             .font(.customTitle2)
                                             .padding(.horizontal)
                                         Spacer()
-                                        NavigationLink(destination: RecordGridView(title: "자유러닝", records: freeRecords)) {
+                                        NavigationLink {
+                                            RecordGridView(title: "자유러닝", records: freeRecords)
+                                                .navigationBarTitleDisplayMode(.inline)
+                                        } label: {
                                             Text("View All")
                                                 .font(.customCaption)
                                                 .foregroundStyle(Color.customPrimary)
                                                 .padding(.horizontal)
                                         }
+                                        
                                     }
                                     
                                     HStack(spacing: 16) {
                                         ForEach(freeRecords.prefix(3), id: \.id) { record in
-                                            NavigationLink {
-                                                NewRecordDetailView(isDeleteData: $isDeleteData, record: record)
-                                                    .navigationBarBackButtonHidden()
-                                            } label: {
-                                                if let courseName = record.courseData?.courseName,
-                                                   let coursePaths = record.courseData?.coursePaths,
-                                                   let startDate = record.healthData?.startDate {
-                                                    let data = pathToCoordinate(coursePaths)
-                                                    SmallListCard(cardType: .freeRun, runName: courseName, date: formatDate(startDate), data: data!)
-                                                } else {
-                                                    // Handle the case where score is nil
-                                                    SmallListEmptyCard()
+                                            if let courseName = record.courseData?.courseName,
+                                               let coursePaths = record.courseData?.coursePaths,
+                                               let startDate = record.healthData?.startDate,
+                                               let score = record.courseData?.score {
+                                                let data = pathToCoordinate(coursePaths)
+                                                let cardType = getCardType(forScore: score)
+                                                NavigationLink {
+                                                    NewRecordDetailView(isDeleteData: $isDeleteData, record: record, cardType: cardType)
+                                                } label: {
+                                                    SmallListCard(cardType: cardType, runName: courseName, date: formatDate(startDate), data: data!)
                                                 }
+                                            } else {
+                                                // Handle the case where score is nil
+                                                SmallListEmptyCard()
                                             }
                                         }
-
+                                        
                                         // Use Group to conditionally include SmallListEmptyCard
                                         Group {
                                             ForEach(0 ..< max(0, 3 - freeRecords.count), id: \.self) { _ in
@@ -183,21 +191,23 @@ struct RecordView: View {
                 .overlay(alignment: .top) {
                     RecordInlineHeader(scrollOffset: scrollOffset)
                 }
-              
+                
             }
         }
+        .navigationTitle("아트 컬렉션")
+        .toolbar(.hidden, for: .navigationBar)
         .onAppear {
             filteredRecords = Array(runningRecord)
                 .sorted { $0.healthData?.startDate ?? Date() > $1.healthData?.startDate ?? Date() }
-
+            
             gpsArtRecords = filteredRecords
                 .filter { $0.runningType == "gpsArt" }
                 .sorted { $0.courseData?.score ?? -1 > $1.courseData?.score ?? -1 }
-
+            
             freeRecords = filteredRecords
                 .filter { $0.runningType == "free" }
                 .sorted { $0.healthData?.startDate ?? Date() > $1.healthData?.startDate ?? Date() }
-
+            
             print("Filtered Records Count: \(filteredRecords.count)")
             print("GPS Art Records Count: \(gpsArtRecords.count)")
             print("Free Records Count: \(freeRecords.count)")
