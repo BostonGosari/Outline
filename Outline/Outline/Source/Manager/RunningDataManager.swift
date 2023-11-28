@@ -140,6 +140,11 @@ class RunningDataManager: ObservableObject {
     func caculateAccuracyAndProgress() {
         guard let course = runningManger.startCourse else { return }
         // 진행률 계산
+        if runningManger.runningType == .free {
+            score = -1
+            return
+        }
+        
         let progressManager = CourseProgressManager(guideCourse: coordinatesToCLLocationCoordiantes(coordinates: course.coursePaths), userCourse: userLocations)
         progressManager.calculate()
         self.progress = progressManager.getProgress()
@@ -149,7 +154,7 @@ class RunningDataManager: ObservableObject {
         accuracyManager.calculate(userProgress: progress)
         self.accuracy = accuracyManager.getAccuracy()
         
-        self.score = Int(progress*accuracy)
+        self.score = Int(progress * accuracy)
         print("progress \(progress) , accuracy \(accuracy)")
         print("제 점수는요 .. \(score)점입니다 ")
     }

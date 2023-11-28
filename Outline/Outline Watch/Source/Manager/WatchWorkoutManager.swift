@@ -89,7 +89,6 @@ class WatchWorkoutManager: NSObject, ObservableObject {
     }
     
     func endWorkout() {
-        watchRunningManager.caculateAccuracyAndProgress()
         session?.end()
         showSummaryView = true
     }

@@ -26,9 +26,22 @@ struct FinishRunningView: View {
         ZStack {
             Color.gray900
                 .ignoresSafeArea()
+            Circle()
+                .frame(width: 350)
+                .foregroundStyle(.customPrimary.opacity(0.35))
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+                .offset(x: -175, y: -100)
+                .blur(radius: 120)
+            Circle()
+                .frame(width: 350)
+                .foregroundStyle(.customPrimary.opacity(0.35))
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
+                .offset(x: 100, y: 100)
+                .blur(radius: 120)
+            
             VStack {
                 BigCard(
-                    cardType: .great,
+                    cardType: viewModel.cardType,
                     runName: viewModel.courseName,
                     date: viewModel.date,
                     editMode: runningManager.runningType == .free,
