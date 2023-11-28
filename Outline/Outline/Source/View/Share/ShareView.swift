@@ -35,7 +35,7 @@ struct ShareView: View {
                 shareImageCombined(false)
                 buttons
             }
-            .padding(.top, 32)
+            .padding(.top, 36)
         }
         .onAppear {
             let canvasSize = PathGenerateManager.calculateCanvaData(coordinates: runningData.userLocations, width: 200, height: 200)
@@ -102,7 +102,7 @@ extension ShareView {
     
     private var runningInfo: some View {
         ZStack {
-            VStack(alignment: .trailing, spacing: -3) {
+            VStack(alignment: .trailing, spacing: -4) {
                 Text("Time \(runningData.time)")
                 Text("Pace \(runningData.pace)")
                 Text("Distance \(runningData.distance)")
@@ -112,7 +112,7 @@ extension ShareView {
             .foregroundStyle(.white)
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
         }
-        .padding(.trailing, 50)
+        .padding(.trailing, 40)
         .padding(.bottom, 55)
     }
     

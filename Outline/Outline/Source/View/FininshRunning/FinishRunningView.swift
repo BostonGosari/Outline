@@ -93,10 +93,6 @@ struct FinishRunningView: View {
             .navigationDestination(isPresented: $viewModel.navigateToShareMainView) {
                 ShareView(runningData: viewModel.shareData)
             }
-//            .fullScreenCover(isPresented: $viewModel.navigateToShareMainView) {
-//                SharePhotoView(runningData: viewModel.shareData)
-//                    .tint(.customPrimary)
-//            }
             .onAppear {
                 if !save {
                     viewModel.isShowPopup = true
