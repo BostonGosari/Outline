@@ -28,7 +28,7 @@ struct SummaryView: View {
                 .ignoresSafeArea()
             
             if isShowingFinishView {
-                FinishWatchView(score: 100)
+                FinishWatchView(score: runningManager.score)
                     .onAppear {
                         DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
                             isShowingFinishView = false
@@ -51,8 +51,29 @@ struct SummaryView: View {
                                 .overlay {
                                     ConfettiWatchView()
                                 }
-                            Text("그림을 완성했어요!")
-                                .padding(.vertical)
+                            switch runningManager.score {
+                               case 80...:
+                                   Image("excellent")
+                                       .resizable()
+                                       .frame(width: 200)
+                               case 50..<80:
+                                   Image("great")
+                                       .resizable()
+                                       .frame(width: 200)
+                               case 1..<50:
+                                   Image("nice")
+                                       .resizable()
+                                       .frame(width: 200)
+                            case 0:
+                                Image("notyet")
+                                    .resizable()
+                                    .frame(width: 200)
+                               default:
+                                   // Handle no score case (optional)
+                                    Text("그림을 완성했어요!")
+                                    .padding(.vertical)
+                               }
+                           
                             Text(NSNumber(value: workoutManager.builder?.elapsedTime ?? 0), formatter: timeFormatter)
                                 .id(topID)
                                 .foregroundStyle(.customPrimary)

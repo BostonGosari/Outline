@@ -27,7 +27,7 @@
 	</array>
 	<key>UIAppFonts</key>
 	<array>
-		<string>Resource/Font/Pretendard-Black.ttf</string>
+		<string>Pretendard-Black.ttf</string>
 		<string>Pretendard-ExtraBold.ttf</string>
 		<string>Pretendard-Bold.ttf</string>
 		<string>Pretendard-SemiBold.ttf</string>
@@ -35,8 +35,14 @@
 		<string>Pretendard-Regular.ttf</string>
 		<string>Pretendard-Thin.ttf</string>
 		<string>Pretendard-Light.ttf</string>
-		<string>Pretendard-ExtraLight.ttf</string>
 		<string>SFCompactDisplay-Semibold.ttf</string>
+		<string>StretchPro.ttf</string>
+	</array>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>fetch</string>
+		<string>processing</string>
+		<string>remote-notification</string>
 	</array>
 	<key>UIBackgroundModes</key>
 	<array>

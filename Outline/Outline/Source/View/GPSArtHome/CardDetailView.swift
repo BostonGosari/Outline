@@ -23,7 +23,7 @@ struct CardDetailView: View {
     @Binding var showDetailView: Bool
     var selectedCourse: CourseWithDistanceAndScore
     var currentIndex: Int
-    var namespace: Namespace.ID 
+    var namespace: Namespace.ID
     
     @State private var appear = [false, false, false]
     @State private var viewSize = 0.0
@@ -50,14 +50,23 @@ struct CardDetailView: View {
                     
                     VStack {
                         ZStack(alignment: .top) {
-                            courseImage
-                            courseInformation
+                            if showDetailView {
+                                courseImage
+                                courseInformation
+                            } else {
+                                UnevenRoundedRectangle(bottomTrailingRadius: 45, style: .circular)
+                                    .frame(
+                                        width: UIScreen.main.bounds.width,
+                                        height: UIScreen.main.bounds.height * 0.68
+                                    )
+                                    .foregroundStyle(.clear)
+                            }
                         }
                         CardDetailInformationView(
                             showCopyLocationPopup: $showCopyLocationPopup, selectedCourse: selectedCourse.course
                         )
-                            .opacity(appear[2] ? 1 : 0)
-                            .offset(y: appear[2] ? 0 : fadeInOffset)
+                        .opacity(appear[2] ? 1 : 0)
+                        .offset(y: appear[2] ? 0 : fadeInOffset)
                     }
                     .mask(
                         RoundedRectangle(cornerRadius: viewSize / 2, style: .continuous)
@@ -128,18 +137,21 @@ struct CardDetailView: View {
             .resizable()
             .placeholder {
                 Rectangle()
-                    .foregroundColor(.gray700)
+                    .foregroundColor(.clear)
             }
             .mask {
                 UnevenRoundedRectangle(bottomTrailingRadius: 45, style: .circular)
             }
+            .overlay {
+                    UnevenRoundedRectangle(bottomTrailingRadius: 45, style: .circular)
+                    .stroke(LinearGradient(colors: [.gray600, .clear, .clear, .clear], startPoint: .bottomTrailing, endPoint: .top), lineWidth: 1)
+            }
             .matchedGeometryEffect(id: selectedCourse.id, in: namespace)
-            .shadow(color: .white, radius: 0.5, y: 0.5)
             .frame(
-                width: UIScreen.main.bounds.width,
+//                width: UIScreen.main.bounds.width + 2,
                 height: UIScreen.main.bounds.height * 0.68
             )
-            .transition(.opacity)
+            .offset(y: -1)
     }
     
     private var courseInformation: some View {
@@ -192,10 +204,10 @@ struct CardDetailView: View {
                                 }
                             }
                         } else {
-                           runningStartManager.showPermissionSheet = true
-                           runningStartManager.permissionType = .location
+                            runningStartManager.showPermissionSheet = true
+                            runningStartManager.permissionType = .location
                             isUnlocked = false
-                       }
+                        }
                     } else {
                         runningStartManager.showPermissionSheet = true
                         runningStartManager.permissionType = .health
@@ -210,8 +222,8 @@ struct CardDetailView: View {
     
     private var closeButton: some View {
         Button {
-            withAnimation(.bouncy) {
-                showDetailView.toggle()
+            withAnimation(.easeInOut) {
+                showDetailView = false
             }
         } label: {
             Image(systemName: "xmark.circle.fill")
@@ -239,7 +251,7 @@ extension CardDetailView {
                             viewSize = dragState.width
                         }
                         if viewSize > dragLimit {
-                            withAnimation(.bouncy) {
+                            withAnimation(.easeInOut) {
                                 showDetailView = false
                                 dragState = .zero
                             }
@@ -253,7 +265,7 @@ extension CardDetailView {
                         }
                         
                         if viewSize > dragLimit {
-                            withAnimation(.bouncy) {
+                            withAnimation(.easeInOut) {
                                 showDetailView = false
                                 dragState = .zero
                                 viewSize = 0.0
@@ -264,12 +276,12 @@ extension CardDetailView {
             }
             .onEnded { _ in
                 if viewSize >= dragLimit {
-                    withAnimation(.bouncy) {
+                    withAnimation(.easeInOut) {
                         showDetailView = false
                         viewSize = 0.0
                     }
                 } else {
-                    withAnimation(.bouncy) {
+                    withAnimation {
                         dragState = .zero
                         viewSize = 0.0
                     }
@@ -281,19 +293,6 @@ extension CardDetailView {
 // MARK: - View Functions
 
 extension CardDetailView {
-    
-    private func close() {
-        withAnimation(.bouncy.delay(0.3)) {
-            showDetailView = false
-        }
-        
-        withAnimation(.bouncy) {
-            viewSize = .zero
-        }
-        
-        isDraggable = false
-    }
-    
     private func fadeIn() {
         withAnimation(.easeOut.delay(0.3)) {
             appear[0] = true
@@ -322,7 +321,7 @@ extension CardDetailView {
                 viewSize = scrollViewOffset - scrollStartRange
                 
                 if scrollViewOffset > scrollLimit {
-                    withAnimation(.bouncy) {
+                    withAnimation(.easeInOut) {
                         showDetailView = false
                     }
                 }

@@ -42,13 +42,13 @@ struct SharePhotoView: View {
                 
                     VStack(spacing: 0) {
                         Spacer()
-                            .frame(height: 30)
+                            .frame(height: 44)
                         shareImageCombined
                         buttons
                     }
                 
             }
-            .navigationTitle("공유")
+            .navigationTitle("공유 이미지 편집")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
@@ -248,6 +248,7 @@ extension SharePhotoView {
                     .font(.system(size: 20, weight: .semibold))
                     .padding(.vertical, 14)
                     .padding(.horizontal, 19)
+                    .padding(.leading, -1)
                     .background {
                         RoundedRectangle(cornerRadius: 15)
                             .fill(Color.customWhite)
@@ -414,4 +415,8 @@ extension SharePhotoView {
             }
         }
     }
+}
+
+#Preview {
+    FinishRunningView()
 }

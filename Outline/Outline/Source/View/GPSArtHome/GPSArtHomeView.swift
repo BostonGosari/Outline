@@ -19,6 +19,8 @@ struct GPSArtHomeView: View {
     @State private var loading = true
     @State private var selectedCourse: CourseWithDistanceAndScore?
     @State private var showNetworkErrorView = false
+    @State private var matched = false
+    
     // 받아오는 변수
     @Binding var showDetailView: Bool
     @Namespace private var namespace
@@ -48,9 +50,10 @@ struct GPSArtHomeView: View {
                             HStack(spacing: 0) {
                                 ForEach(viewModel.recommendedCoures.indices, id: \.self) { index in
                                     Button {
-                                        withAnimation(.bouncy) {
+                                        withAnimation(.bouncy(duration: 0.7)) {
                                             selectedCourse = viewModel.recommendedCoures[index]
                                             showDetailView = true
+                                            matched = true
                                         }
                                     } label: {
                                         BigCardView(course: viewModel.recommendedCoures[index], loading: $loading, index: index, currentIndex: currentIndex, namespace: namespace, showDetailView: showDetailView)
@@ -133,13 +136,13 @@ struct GPSArtHomeView: View {
                 Color.gray900.ignoresSafeArea()
                 CardDetailView(showDetailView: $showDetailView, selectedCourse: selectedCourse, currentIndex: currentIndex, namespace: namespace)
                     .zIndex(1)
+                    .ignoresSafeArea()
                     .transition(
                         .asymmetric(
-                            insertion: .opacity.animation(.easeInOut(duration: 0.1)),
-                            removal: .opacity.animation(.easeInOut(duration: 0.3).delay(0.2))
+                            insertion: .opacity.animation(nil),
+                            removal: .opacity.animation(.easeInOut.delay(0.1))
                         )
                     )
-                    .ignoresSafeArea()
             }
         }
         .background(

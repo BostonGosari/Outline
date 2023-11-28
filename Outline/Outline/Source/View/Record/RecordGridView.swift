@@ -57,7 +57,7 @@ struct RecordGridView: View {
                 LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())], spacing: 16) {
                     ForEach(records.sorted(by: sortRecords), id: \.id) { record in
                         NavigationLink {
-                            RecordDetailView(isDeleteData: $isDeleteData, record: record)
+                            NewRecordDetailView(isDeleteData: $isDeleteData, record: record)
                                 .navigationBarBackButtonHidden()
                         } label: {
                             if let courseName = record.courseData?.courseName,
