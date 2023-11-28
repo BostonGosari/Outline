@@ -83,9 +83,12 @@ struct NewRecordDetailView: View {
                     dismiss()
                 }
             }
-            .fullScreenCover(isPresented: $viewModel.navigateToShareMainView) {
-                SharePhotoView(runningData: viewModel.shareData)
-                    .tint(.customPrimary)
+//            .fullScreenCover(isPresented: $viewModel.navigateToShareMainView) {
+//                SharePhotoView(runningData: viewModel.shareData)
+//                    .tint(.customPrimary)
+//            }
+            .navigationDestination(isPresented: $viewModel.navigateToShareMainView) {
+                ShareView(runningData: viewModel.shareData)
             }
             .onAppear {
                 viewModel.readData(runningRecord: record)

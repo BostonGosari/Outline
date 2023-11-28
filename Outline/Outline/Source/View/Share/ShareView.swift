@@ -9,7 +9,6 @@ import CoreLocation
 import SwiftUI
 
 struct ShareView: View {
-    @Environment(\.dismiss) var dismiss
     @StateObject private var viewModel = ShareViewModel()
 
     @State private var size: CGSize = .zero
@@ -24,7 +23,7 @@ struct ShareView: View {
     @State private var pathHeight: CGFloat = 0
     
     @State private var image: UIImage?
-    
+   
     let runningData: ShareModel
     
     var body: some View {
@@ -33,28 +32,18 @@ struct ShareView: View {
                 .ignoresSafeArea()
             
             VStack(spacing: 0) {
-                shareImageCombined
+                shareImageCombined(false)
                 buttons
             }
+            .padding(.top, 32)
         }
         .onAppear {
             let canvasSize = PathGenerateManager.calculateCanvaData(coordinates: runningData.userLocations, width: 200, height: 200)
             pathWidth = CGFloat(canvasSize.width)
             pathHeight = CGFloat(canvasSize.height)
-            renderShareView()
         }
         .navigationTitle("공유")
         .navigationBarTitleDisplayMode(.inline)
-        .toolbar {
-            ToolbarItem(placement: .topBarLeading) {
-                Button {
-                    dismiss()
-                } label: {
-                    (Text(Image(systemName: "chevron.left")) + Text("뒤로"))
-                        .foregroundStyle(Color.customPrimary)
-                }
-            }
-        }
         .sheet(isPresented: $viewModel.permissionDenied) {
             PermissionSheet(permissionType: .photoLibrary)
         }
@@ -71,43 +60,10 @@ struct ShareView: View {
 }
 
 extension ShareView {
-    private var viewForShare: some View {
+    @ViewBuilder
+    private func shareImageCombined(_ shareInsta: Bool) -> some View {
         ZStack {
-            ZStack {
-                Image("ShareFirstLayer")
-                Image("ShareSecondLayer")
-                    .background(
-                        TransparentBlurView(removeAllFilters: true)
-                            .blur(radius: 1, opaque: true)
-                    )
-                Image("ShareThirdLayer")
-            }
-            .padding(.top, 16)
-            .padding(.bottom, 46)
-            .frame(width: size.width, height: size.height)
-            
-            ZStack {
-                VStack(alignment: .trailing, spacing: -3) {
-                    Text("Time \(runningData.time)")
-                    Text("Pace \(runningData.pace)")
-                    Text("Distance \(runningData.distance)")
-                    Text("Kcal \(runningData.cal)")
-                }
-                .font(.customSubbody)
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
-            }
-            .padding(.trailing, 50)
-            .padding(.bottom, 55)
-            .frame(width: size.width, height: size.height)
-
-            userPath
-        }
-        .frame(width: size.width, height: size.height)
-        .background(.white.opacity(0))
-    }
-    private var shareImageCombined: some View {
-        ZStack {
-            shareImage
+            backgroundImage(shareInsta)
             runningInfo
             userPath
             GeometryReader { proxy in
@@ -120,20 +76,22 @@ extension ShareView {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
     
-    private var shareImage: some View {
-        ZStack {
-            backgroundImage
-            runningInfo
-        }
-    }
-    
-    private var backgroundImage: some View {
+    @ViewBuilder
+    private func backgroundImage(_ shareInsta: Bool) -> some View {
         ZStack {
             Image("ShareFirstLayer")
             Image("ShareSecondLayer")
                 .background(
+                    Rectangle()
+                        .fill(.white30)
+                        .blur(radius: 3)
+                        .mask(UnevenRoundedRectangle(topLeadingRadius: 10, bottomLeadingRadius: 45, bottomTrailingRadius: 45, topTrailingRadius: 70))
+                        .opacity(shareInsta ? 1 : 0)
+                )
+                .background(
                     TransparentBlurView(removeAllFilters: true)
                         .blur(radius: 3, opaque: true)
+                        .opacity(shareInsta ? 0 : 1)
                 )
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
             Image("ShareThirdLayer")
@@ -151,6 +109,7 @@ extension ShareView {
                 Text("Kcal \(runningData.cal)")
             }
             .font(.customSubbody)
+            .foregroundStyle(.white)
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
         }
         .padding(.trailing, 50)
@@ -176,7 +135,7 @@ extension ShareView {
     private var buttons: some View {
         HStack(spacing: 0) {
             Button {
-                renderShareView()
+                saveShareView()
                 if let img = image {
                     viewModel.saveImage(image: img)
                 }
@@ -250,7 +209,19 @@ extension ShareView {
 }
 
 extension ShareView {
+    private func renderShareView() {
+        image = shareImageCombined(true)
+            .render(scale: 3)
+    }
     
+    private func saveShareView() {
+        image = shareImageCombined(false)
+            .offset(y: -10)
+            .asImage(size: size)
+    }
+}
+
+extension ShareView {
     private var dragGesture: some Gesture {
         return DragGesture()
             .onChanged { value in
@@ -300,21 +271,4 @@ extension ShareView {
                 }
             }
     }
-}
-
-extension ShareView {
-    private func renderShareView() {
-        image = viewForShare.offset(y: -10).asImage(size: size)
-    }
-    
-    private func renderShareViewWithRenderer() {
-        let renderer = ImageRenderer(content: shareImageCombined)
-        renderer.scale = UIScreen.main.scale
-        renderer.isOpaque = true
-        
-        if let cgImage = renderer.cgImage {
-            image = UIImage(cgImage: cgImage)
-        }
-    }
-    
 }
