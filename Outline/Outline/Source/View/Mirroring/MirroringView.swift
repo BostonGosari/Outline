@@ -147,6 +147,7 @@ extension MirroringView {
     private var controlButton: some View {
         ZStack {
             Button {
+                
             } label: {
                 Image(systemName: "stop.circle.fill")
                     .font(.system(size: 60))

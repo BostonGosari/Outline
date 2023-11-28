@@ -44,14 +44,14 @@ struct MirroringMetricsView: View {
     private var metricGrid: some View {
         VStack(spacing: 25) {
             let totalDistance = connectivityManager.runningData.distance
+            let bpm = Int(connectivityManager.runningData.bpm)
             let currentPace = connectivityManager.runningData.pace
-            
             let distanceKM = totalDistance / 1000
             let kilocalorie = connectivityManager.runningData.kcal
             
             HStack {
                 MetricItem(value: String(format: "%.2f", distanceKM), label: "킬로미터")
-                MetricItem(value: "--", label: "BPM")
+                MetricItem(value: String(bpm), label: "BPM")
             }
             HStack {
                 MetricItem(value: String(format: "%.0f", kilocalorie), label: "칼로리")
