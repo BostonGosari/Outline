@@ -189,6 +189,7 @@ extension NewRunningView {
                             .foregroundStyle(.black50)
                             .ignoresSafeArea()
                     }
+                    .ignoresSafeArea()
             }
             .gesture(metricsGesture)
             .overlay(alignment: .bottom) {
