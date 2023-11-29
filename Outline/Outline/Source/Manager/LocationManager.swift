@@ -15,13 +15,19 @@ struct Route: Codable {
     let latitude: Double
     let distance: Double
 }
+
+struct Direction {
+    var image: String
+    var distance: Int
+    var direcion: String
+}
  
 class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     @Published var userLocations: [CLLocationCoordinate2D] = []
     @Published var isRunning: Bool
     @Published var distance = 0.0
     @Published var direction = ""
-    @Published var nextDirection: String?
+    @Published var nextDirection: (distance: Int, direction: String)?
     @Published var hotSopt: (location: CLLocation, description: String)?
     @Published var nearHotSopt = false
     
@@ -64,7 +70,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         }
         
         direction = navigationDatas[index].nextDirection
-        nextDirection = navigationDatas[index+1].nextDirection
+        nextDirection = (Int(navigationDatas[index+1].distance), navigationDatas[index+1].nextDirection)
     }
     
     private func checkDistance(_ location: CLLocationCoordinate2D) {
@@ -96,7 +102,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
                     direction = navigationDatas[index].nextDirection
                     
                     if index+1 < navigationDatas.count {
-                        nextDirection = "\(Int(navigationDatas[index+1].distance)) \(navigationDatas[index+1].nextDirection)"
+                        nextDirection = (Int(navigationDatas[index+1].distance), navigationDatas[index+1].nextDirection)
                     } else {
                         nextDirection = nil
                     }
