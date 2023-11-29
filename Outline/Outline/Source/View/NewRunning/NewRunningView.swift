@@ -392,8 +392,10 @@ extension NewRunningView {
                 if !isPaused {
                     let translationY = value.translation.height
                     if showDetail {
-                        metricsTranslation = min(-translationY, 30)
-                        navigationTranslation = 0
+                        withAnimation {
+                            metricsTranslation = min(-translationY, 30)
+                            navigationTranslation = 0
+                        }
                     }
                 }
             }
