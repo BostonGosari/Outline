@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct TabWatchView: View {
-    @StateObject private var locationManager = LocationManager()
+    @StateObject private var locationManager = LocationManager.shared
     @StateObject private var connectivityManager = WatchConnectivityManager.shared
     @StateObject private var workoutManager = WatchWorkoutManager.shared
     @StateObject private var runningManager = WatchRunningManager.shared
