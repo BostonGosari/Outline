@@ -61,6 +61,7 @@ struct CardDetailView: View {
                                     .foregroundStyle(.clear)
                             }
                         }
+                        
                         CardDetailInformationView(
                             showCopyLocationPopup: $showCopyLocationPopup, selectedCourse: selectedCourse.course
                         )
