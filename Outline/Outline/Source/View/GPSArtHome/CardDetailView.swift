@@ -42,7 +42,7 @@ struct CardDetailView: View {
     var body: some View {
         ZStack {
             ScrollView {
-                ZStack {
+                ZStack(alignment: .top) {
                     Color.gray900
                         .onScrollViewOffsetChanged { value in
                             handleScrollViewOffset(value)
@@ -51,8 +51,8 @@ struct CardDetailView: View {
                     VStack {
                         ZStack(alignment: .top) {
                             if showDetailView {
-                                courseImage
-                                courseInformation
+                                    courseImage
+                                    courseInformation
                             } else {
                                 UnevenRoundedRectangle(bottomTrailingRadius: 45, style: .circular)
                                     .frame(
@@ -62,6 +62,7 @@ struct CardDetailView: View {
                                     .foregroundStyle(.clear)
                             }
                         }
+                        
                         CardDetailInformationView(
                             showCopyLocationPopup: $showCopyLocationPopup, selectedCourse: selectedCourse.course
                         )
@@ -143,12 +144,12 @@ struct CardDetailView: View {
                 UnevenRoundedRectangle(bottomTrailingRadius: 45, style: .circular)
             }
             .overlay {
-                    UnevenRoundedRectangle(bottomTrailingRadius: 45, style: .circular)
+                UnevenRoundedRectangle(bottomTrailingRadius: 45, style: .circular)
                     .stroke(LinearGradient(colors: [.gray600, .clear, .clear, .clear], startPoint: .bottomTrailing, endPoint: .top), lineWidth: 1)
             }
             .matchedGeometryEffect(id: selectedCourse.id, in: namespace)
             .frame(
-//                width: UIScreen.main.bounds.width + 2,
+                //                width: UIScreen.main.bounds.width + 2,
                 height: UIScreen.main.bounds.height * 0.68
             )
             .offset(y: -1)

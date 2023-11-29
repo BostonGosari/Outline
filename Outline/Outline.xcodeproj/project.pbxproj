@@ -94,6 +94,8 @@
 		29AE76E02ADE2BC700A46742 /* DateExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AE76DF2ADE2BC700A46742 /* DateExtention.swift */; };
 		29AE76E12ADE2C1700A46742 /* HomeTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01FDB9D2ADABD3D00BDA633 /* HomeTabView.swift */; };
 		29B205082AEA625100E63F39 /* PathGenerateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9528EFFF2AE042570056CCC6 /* PathGenerateManager.swift */; };
+		29B9BB8F2B16CF780042DE19 /* DrawPathView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B9BB8E2B16CF780042DE19 /* DrawPathView.swift */; };
+		29B9BB932B1734770042DE19 /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 29B9BB922B1734770042DE19 /* Secrets.xcconfig */; };
 		29CC19A42AE95F2300B79610 /* RunningStartManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29CC19A32AE95F2300B79610 /* RunningStartManager.swift */; };
 		29CC42BD2AF24BCE00578EF1 /* WatchRunningManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29CC42BC2AF24BCE00578EF1 /* WatchRunningManager.swift */; };
 		29D6BAD32B0924D200BD8653 /* SmallCarouselCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D6BAD22B0924D200BD8653 /* SmallCarouselCard.swift */; };
@@ -351,6 +353,8 @@
 		29AE76D92ADE2A5300A46742 /* InputNicknameViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InputNicknameViewModel.swift; path = Outline/Source/ViewModel/InputNicknameViewModel.swift; sourceTree = SOURCE_ROOT; };
 		29AE76DA2ADE2A5300A46742 /* InputUserInfoViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InputUserInfoViewModel.swift; path = Outline/Source/ViewModel/InputUserInfoViewModel.swift; sourceTree = SOURCE_ROOT; };
 		29AE76DF2ADE2BC700A46742 /* DateExtention.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtention.swift; sourceTree = "<group>"; };
+		29B9BB8E2B16CF780042DE19 /* DrawPathView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawPathView.swift; sourceTree = "<group>"; };
+		29B9BB922B1734770042DE19 /* Secrets.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 		29CC19A32AE95F2300B79610 /* RunningStartManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningStartManager.swift; sourceTree = "<group>"; };
 		29CC42BC2AF24BCE00578EF1 /* WatchRunningManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchRunningManager.swift; sourceTree = "<group>"; };
 		29D6BAD22B0924D200BD8653 /* SmallCarouselCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallCarouselCard.swift; sourceTree = "<group>"; };
@@ -646,6 +650,7 @@
 			isa = PBXGroup;
 			children = (
 				954B04262B00ADE000A8A83E /* PathTestView.swift */,
+				29B9BB8E2B16CF780042DE19 /* DrawPathView.swift */,
 			);
 			path = PathTest;
 			sourceTree = "<group>";
@@ -839,8 +844,8 @@
 		F0AC8A902AD94C1F0061612C = {
 			isa = PBXGroup;
 			children = (
+				29B9BB922B1734770042DE19 /* Secrets.xcconfig */,
 				2921B0122B01F3F700533A83 /* GoogleService-Info.plist */,
-				29D7AD4F2B0F6C2C00AAAAB0 /* Secrets.xcconfig */,
 				BB52392D2ADAF93D00646494 /* Outline Watch App.entitlements */,
 				BB493CEB2ADFD592009D3699 /* Outline-Watch-App-Info.plist */,
 				BB5239262ADAF70A00646494 /* Shared */,
@@ -1255,8 +1260,8 @@
 				F0AC8B2E2AD968A20061612C /* Icon.xcassets in Resources */,
 				954CB2AD2AE5457B005EB2E9 /* pohangDuckRun.kml in Resources */,
 				F0AC8AA12AD94C200061612C /* Color.xcassets in Resources */,
+				29B9BB932B1734770042DE19 /* Secrets.xcconfig in Resources */,
 				2990249A2B10B3E8005C5BA8 /* SFCompactDisplay-Semibold.ttf in Resources */,
-				29D7AD502B0F6C2C00AAAAB0 /* Secrets.xcconfig in Resources */,
 				954CB2AF2AE5457B005EB2E9 /* seoulCamelRun.kml in Resources */,
 				BB1D531E2ADDBCB90073771F /* Pretendard-Thin.ttf in Resources */,
 				BB1D530C2ADDBC560073771F /* Pretendard-Black.ttf in Resources */,
@@ -1403,6 +1408,7 @@
 				F06298AB2AE1998D007AB2D3 /* MapInfoView.swift in Sources */,
 				95A01E352AF144030093D9C0 /* ProfileHealthInfoView.swift in Sources */,
 				29EC2ED22AEB2B560033446C /* CourseAnalyzeManager.swift in Sources */,
+				29B9BB8F2B16CF780042DE19 /* DrawPathView.swift in Sources */,
 				0E1D1B292AE95AF2005282A2 /* CourseGuideView.swift in Sources */,
 				293C97DF2AE6C454007821F5 /* WatchConnectivityManager.swift in Sources */,
 				0E29F6532ADF6C3A00F5EF5C /* RunningPopup.swift in Sources */,
@@ -1733,7 +1739,7 @@
 		};
 		F0AC8ABE2AD94C210061612C /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 29D7AD4F2B0F6C2C00AAAAB0 /* Secrets.xcconfig */;
+			baseConfigurationReference = 29B9BB922B1734770042DE19 /* Secrets.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1784,7 +1790,7 @@
 		};
 		F0AC8ABF2AD94C210061612C /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 29D7AD4F2B0F6C2C00AAAAB0 /* Secrets.xcconfig */;
+			baseConfigurationReference = 29B9BB922B1734770042DE19 /* Secrets.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
