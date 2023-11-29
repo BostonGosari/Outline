@@ -119,10 +119,6 @@ struct RecordDetailView: View {
             SharePhotoView(runningData: viewModel.shareData)
                 .navigationBarBackButtonHidden()
         })
-//        .navigationDestination(isPresented: $viewModel.navigateToShareMainView) {
-//            ShareView(runningData: viewModel.shareData)
-//                .navigationBarBackButtonHidden()
-//        }
         .onAppear {
             viewModel.readData(runningRecord: record)
         }
