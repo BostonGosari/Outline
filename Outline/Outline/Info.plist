@@ -40,5 +40,11 @@
 		<string>SFCompactDisplay-Semibold.ttf</string>
 		<string>StretchPro.ttf</string>
 	</array>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>fetch</string>
+		<string>processing</string>
+		<string>remote-notification</string>
+	</array>
 </dict>
 </plist>

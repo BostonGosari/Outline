@@ -25,7 +25,7 @@ struct ControlsView: View {
             HStack(spacing: 11) {
                 ControlButton(systemName: "stop.fill", foregroundColor: .white, backgroundColor: .white) {
                     if let builder = workoutManager.builder {
-                        if builder.elapsedTime > 30 {
+                        if builder.elapsedTime > 3 {
                             showEndRunningSheet = true
                         } else {
                             showEndWithoutSavingSheet = true
@@ -63,6 +63,7 @@ struct ControlsView: View {
             EndRunningSheet(text: "종료하시겠어요?") {
                 showEndRunningSheet = false
                 runningManager.userLocations = userLocations
+                runningManager.caculateAccuracyAndProgress()
                 sendDataToPhone()
                 workoutManager.endWorkout()
             }
@@ -96,7 +97,7 @@ extension ControlsView {
         
         guard let builder = workoutManager.builder else { return }
         
-        let courseData = CourseData(courseName: startCourse.courseName, runningLength: startCourse.courseLength, heading: startCourse.heading, distance: startCourse.distance, coursePaths: userLocations, runningCourseId: "", regionDisplayName: startCourse.regionDisplayName)
+        let courseData = CourseData(courseName: startCourse.courseName, runningLength: startCourse.courseLength, heading: startCourse.heading, distance: startCourse.distance, coursePaths: userLocations, runningCourseId: "", regionDisplayName: startCourse.regionDisplayName, score: runningManager.score)
         let healthData = HealthData(totalTime: builder.elapsedTime, averageCadence: workoutManager.cadence, totalRunningDistance: workoutManager.distance, totalEnergy: workoutManager.calorie, averageHeartRate: workoutManager.heartRate, averagePace: workoutManager.averagePace, startDate: workoutManager.session?.startDate ?? Date(), endDate: workoutManager.session?.endDate ?? Date())
         
         connectivityManager.sendRunningRecordToPhone(RunningRecord(id: UUID().uuidString, runningType: runningManager.runningType, courseData: courseData, healthData: healthData))

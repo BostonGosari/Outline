@@ -23,12 +23,13 @@ class FinishRunningViewModel: ObservableObject {
     
     private var runningDate = Date()
     private let userDataModel = UserDataModel()
-
+    
     var courseName: String = ""
     var regionDisplayName: String = ""
     var startTime: String = ""
     var endTime: String = ""
     var date: String = ""
+    var cardType: CardType = .great
     
     var runningData: [RunningDataItem] = [
         RunningDataItem(text: "킬로미터", data: ""),
@@ -36,16 +37,18 @@ class FinishRunningViewModel: ObservableObject {
         RunningDataItem(text: "평균 페이스", data: ""),
         RunningDataItem(text: "BPM", data: ""),
         RunningDataItem(text: "칼로리", data: ""),
-        RunningDataItem(text: "케이던스", data: "")
+        RunningDataItem(text: "케이던스", data: ""),
+        RunningDataItem(text: "점수", data: ""),
+        RunningDataItem(text: "러닝타입", data: "")
     ]
     
     var shareData = ShareModel()
     var userLocations: [CLLocationCoordinate2D] = []
-  
+    
     func readData(runningRecord: FetchedResults<CoreRunningRecord>) {
         if let data = runningRecord.last,
-            let courseData = data.courseData,
-            let healthData = data.healthData {
+           let courseData = data.courseData,
+           let healthData = data.healthData {
             courseName = courseData.courseName ?? ""
             regionDisplayName = courseData.regionDisplayName ?? ""
             if let startDate = healthData.startDate {
@@ -58,7 +61,7 @@ class FinishRunningViewModel: ObservableObject {
             }
             
             if let endDate = healthData.endDate {
-               endTime = endDate.timeToString()
+                endTime = endDate.timeToString()
             } else {
                 endTime = ""
             }
@@ -66,8 +69,10 @@ class FinishRunningViewModel: ObservableObject {
             runningData[0].data = String(format: "%.2f", healthData.totalRunningDistance/1000)
             runningData[1].data = healthData.totalTime.formatMinuteSeconds()
             runningData[2].data = healthData.averagePace.formattedAveragePace()
-            runningData[3].data  = "\(Int(healthData.averageHeartRate))"
-            runningData[4].data  = "\(Int(healthData.totalEnergy))"
+            runningData[3].data = "\(Int(healthData.averageHeartRate))"
+            runningData[4].data = "\(Int(healthData.totalEnergy))"
+            runningData[6].data = "\(courseData.score)"
+            getCardType(score: Int(courseData.score))
             if healthData.averageCadence > 0 {
                 runningData[5].data = "\(Int(healthData.averageCadence))"
             } else {
@@ -109,6 +114,21 @@ class FinishRunningViewModel: ObservableObject {
             case .failure(let error):
                 print(error)
             }
+        }
+    }
+    
+    func getCardType(score: Int) {
+        switch score {
+        case -1:
+            cardType = .freeRun
+        case 0...50:
+            cardType = .nice
+        case 51...80:
+            cardType = .great
+        case 81...100:
+            cardType = .excellent
+        default:
+            cardType = .freeRun // Add a default case or handle as needed
         }
     }
 }

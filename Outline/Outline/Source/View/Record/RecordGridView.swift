@@ -20,69 +20,80 @@ enum SortOption: String, CaseIterable {
 }
 
 struct RecordGridView: View {
-    
     @State private var isDeleteData = false
     @State private var selectedSortOption: SortOption = .latest
     @State private var isSortingSheetPresented = false
     
     var title: String
     var records: [CoreRunningRecord]
-
+    
     var body: some View {
-        VStack {
-            HStack {
-                Text(title)
-                    .font(.customTitle)
-                    .padding(.horizontal)
-                Spacer()
-                // Dropdown button for sorting
-                Button {
-                    isSortingSheetPresented.toggle()
-                } label: {
-                    HStack(spacing: 0) {
-                        Text(selectedSortOption.buttonLabel)
-                            .font(.customSubbody)
-                            .foregroundStyle(Color.customPrimary)
-                       
-                        Image(systemName: "chevron.down")
-                            .font(.customSubbody)
-                            .foregroundStyle(Color.customPrimary)
-                            .padding(.trailing, 4)
-                    }
-                }
-                .padding(.horizontal)
-            }
-
-            ScrollView {
-                LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())], spacing: 16) {
-                    ForEach(records.sorted(by: sortRecords), id: \.id) { record in
-                        NavigationLink {
-                            RecordDetailView(isDeleteData: $isDeleteData, record: record)
-                                .navigationBarBackButtonHidden()
-                        } label: {
-                            if let courseName = record.courseData?.courseName,
-                               let coursePaths = record.courseData?.coursePaths,
-                               let startDate = record.healthData?.startDate {
-                                    let data = pathToCoordinate(coursePaths)
-                                SmallListCard(cardType: .freeRun, runName: courseName, date: formatDate(startDate), data: data! )
-                                }
+        ZStack {
+            Color.gray900.ignoresSafeArea()
+            
+            Circle()
+                .frame(maxHeight: .infinity, alignment: .bottom)
+                .foregroundStyle(.customPrimary.opacity(0.5))
+                .blur(radius: 150)
+                .offset(y: 300)
+            
+            VStack {
+                HStack {
+                    Text(title)
+                        .font(.customTitle)
+                        .padding(.horizontal)
+                    Spacer()
+                    // Dropdown button for sorting
+                    Button {
+                        isSortingSheetPresented.toggle()
+                    } label: {
+                        HStack(spacing: 0) {
+                            Text(selectedSortOption.buttonLabel)
+                                .font(.customSubbody)
+                                .foregroundStyle(Color.customPrimary)
+                            
+                            Image(systemName: "chevron.down")
+                                .font(.customSubbody)
+                                .foregroundStyle(Color.customPrimary)
+                                .padding(.trailing, 4)
                         }
                     }
+                    .padding(.horizontal)
                 }
-                .padding()
+                
+                ScrollView {
+                    LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())], spacing: 16) {
+                        ForEach(records.sorted(by: sortRecords), id: \.id) { record in
+                            if let courseName = record.courseData?.courseName,
+                               let coursePaths = record.courseData?.coursePaths,
+                               let startDate = record.healthData?.startDate,
+                               let score = record.courseData?.score {
+                                let data = pathToCoordinate(coursePaths)
+                                let cardType = getCardType(forScore: score)
+                                NavigationLink {
+                                    NewRecordDetailView(isDeleteData: $isDeleteData, record: record, cardType: cardType)
+                                } label: {
+                                    SmallListCard(cardType: cardType, runName: courseName, date: formatDate(startDate), data: data!)
+                                }
+                            }
+                        }
+                    }
+                    .padding()
+                }
             }
         }
+        .navigationTitle("모든 아트")
         .sheet(isPresented: $isSortingSheetPresented) {
             VStack(alignment: .leading) {
                 // Existing code for sheet header
-
+                
                 Text("정렬")
                     .font(.customSubtitle)
                     .padding(.top, 22)
                 Divider()
                     .foregroundStyle(Color.gray600)
                     .padding(.top, 8)
-
+                
                 // Sorting options based on the selected sort option
                 ForEach(sortingOptions(for: title), id: \.self) { option in
                     Button {
@@ -105,7 +116,7 @@ struct RecordGridView: View {
                         .padding(.top, 16)
                     }
                 }
-
+                
                 // Button to dismiss the sheet
                 Button {
                     isSortingSheetPresented.toggle()
@@ -135,7 +146,7 @@ struct RecordGridView: View {
             }
         }
     }
-
+    
     // Helper method to get sorting options based on the title
     func sortingOptions(for title: String) -> [SortOption] {
         switch title {
@@ -162,7 +173,7 @@ struct RecordGridView: View {
             return .freeRun // Add a default case or handle as needed
         }
     }
-   
+    
     private func sortRecords(record1: CoreRunningRecord, record2: CoreRunningRecord) -> Bool {
         switch selectedSortOption {
         case .latest:
@@ -177,7 +188,7 @@ struct RecordGridView: View {
             return record1.courseData?.score ?? -1 > record2.courseData?.score ?? -1
         }
     }
-   
+    
     func pathToCoordinate(_ paths: NSOrderedSet) -> [CLLocationCoordinate2D]? {
         var datas = [Coordinate]()
         paths.forEach { elem in
@@ -194,5 +205,5 @@ struct RecordGridView: View {
         dateFormatter.dateStyle = .short
         return dateFormatter.string(from: date)
     }
-
+    
 }
