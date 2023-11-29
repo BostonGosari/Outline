@@ -12,7 +12,7 @@ import SwiftUI
 class RecordDetailViewModel: ObservableObject {
     @Published var navigateToShareMainView = false
     @Published var courseRegion: String = ""
-    @Published var runningData = ["킬로미터": "", "시간": "", "평균 페이스": "", "BPM": "", "칼로리": "", "케이던스": ""]
+    @Published var runningData = ["킬로미터": "", "시간": "", "평균 페이스": "", "BPM": "", "칼로리": "", "케이던스": "", "점수": ""]
     
     private var runningDate = Date()
     private let userDataModel = UserDataModel()
@@ -50,6 +50,7 @@ class RecordDetailViewModel: ObservableObject {
             runningData["평균 페이스"] = healthData.averagePace.formattedAveragePace()
             runningData["BPM"] = "\(Int(healthData.averageHeartRate))"
             runningData["칼로리"] = "\(Int(healthData.totalEnergy))"
+            runningData["점수"] = "\(courseData.score)"
 
             if healthData.averageCadence > 0 {
                 runningData["케이던스"] = "\(Int(healthData.averageCadence))"

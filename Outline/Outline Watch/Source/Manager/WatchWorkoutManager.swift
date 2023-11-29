@@ -10,6 +10,7 @@ import HealthKit
 
 class WatchWorkoutManager: NSObject, ObservableObject {
     static let shared = WatchWorkoutManager()
+    private let watchRunningManager = WatchRunningManager.shared
     
     var selectedWorkout: HKWorkoutActivityType? {
         didSet {

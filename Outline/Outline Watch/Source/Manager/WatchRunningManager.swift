@@ -17,12 +17,17 @@ class WatchRunningManager: ObservableObject {
     @Published var startRunning = false
     @Published var runningTitle = ""
     
+    @Published var accuracy: Double = 0
+    @Published var progress: Double = 0
+    @Published var score: Int = 0
+    
     private let locationManager = CLLocationManager()
     var startCourse: GPSArtCourse = GPSArtCourse()
     var runningType: RunningType = .gpsArt
     
     func startFreeRun() {
         userLocations = []
+        score = 0
         startCourse = GPSArtCourse()
         runningType = .free
         getFreeRunName()
@@ -32,6 +37,7 @@ class WatchRunningManager: ObservableObject {
     
     func startGPSArtRun() {
         userLocations = []
+        score = 0
         runningType = .gpsArt
         runningTitle = startCourse.courseName
         startRunning = true
@@ -98,5 +104,35 @@ class WatchRunningManager: ObservableObject {
                 }
             }
         }
+    }
+    
+    func caculateAccuracyAndProgress() {
+        if runningType == .free {
+            score = -1
+            print("제 점수는요 .. \(score)점입니다 ")
+            return
+        }
+
+        let progressManager = CourseProgressManager(guideCourse: coordinatesToCLLocationCoordiantes(coordinates: startCourse.coursePaths), userCourse: userLocations)
+        progressManager.calculate()
+        
+        self.progress = progressManager.getProgress()
+        
+        // 정확도 계산
+        let accuracyManager = CourseAccuracyManager(guideCourse: coordinatesToCLLocationCoordiantes(coordinates: startCourse.coursePaths), userCourse: userLocations)
+        accuracyManager.calculate(userProgress: progress)
+        self.accuracy = accuracyManager.getAccuracy()
+        
+        self.score = Int(progress * accuracy)
+        print("progress \(progress) , accuracy \(accuracy)")
+        print("제 점수는요 .. \(score)점입니다 ")
+    }
+    
+    private func coordinatesToCLLocationCoordiantes(coordinates: [Coordinate]) -> [CLLocationCoordinate2D] {
+        var clLocations: [CLLocationCoordinate2D] = []
+        for coordinate in coordinates {
+            clLocations.append(CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: coordinate.longitude))
+        }
+        return clLocations
     }
 }
