@@ -7,11 +7,12 @@
 
 import SwiftUI
 import CoreMotion
+
 struct NewRunningView: View {
     @StateObject private var connectivityManger = WatchConnectivityManager.shared
     @StateObject private var runningStartManager = RunningStartManager.shared
     @StateObject private var runningDataManager = RunningDataManager.shared
-    @StateObject private var locationManager = LocationManager()
+    @StateObject private var locationManager = LocationManager.shared
     
     @AppStorage("isFirstRunning") private var isFirstRunning = true
     
