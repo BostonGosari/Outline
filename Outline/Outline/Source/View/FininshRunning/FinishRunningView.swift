@@ -90,9 +90,9 @@ struct FinishRunningView: View {
             .sheet(isPresented: $showRenameSheet) {
                 updateNameSheet
             }
-            .fullScreenCover(isPresented: $viewModel.navigateToShareMainView) {
-                SharePhotoView(runningData: viewModel.shareData)
-                    .tint(.customPrimary)
+            .navigationDestination(isPresented: $viewModel.navigateToShareMainView) {
+                ShareView(runningData: viewModel.shareData)
+                    .navigationBarBackButtonHidden()
             }
             .onAppear {
                 if !save {
