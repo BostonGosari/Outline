@@ -50,18 +50,8 @@ struct CardDetailView: View {
                     VStack {
                         ZStack(alignment: .top) {
                             if showDetailView {
-                                if progress > 0 {
-                                    UnevenRoundedRectangle(bottomTrailingRadius: 45, style: .circular)
-                                        .frame(
-                                            width: UIScreen.main.bounds.width,
-                                            height: UIScreen.main.bounds.height * 0.68
-                                        )
-                                        .foregroundStyle(.black)
-                                    courseInformation
-                                } else {
                                     courseImage
                                     courseInformation
-                                }
                             } else {
                                 UnevenRoundedRectangle(bottomTrailingRadius: 45, style: .circular)
                                     .frame(
@@ -93,13 +83,6 @@ struct CardDetailView: View {
                     Color.black
                         .opacity(progress * 0.8)
                         .animation(.easeInOut, value: progress)
-                    
-                    PathGenerateManager.caculateLines(width: 300, height: 300, coordinates: ConvertCoordinateManager.convertToCLLocationCoordinates(selectedCourse.course.coursePaths))
-                        .trim(from: 0.0, to: progress)
-                        .stroke(LinearGradient(colors: [.customSecondary, .customPrimary, .customPrimary], startPoint: .top, endPoint: .bottom), style: StrokeStyle(lineWidth: 8, lineCap: .round, lineJoin: .round))
-                        .animation(.easeInOut, value: progress)
-                        .frame(width: 300, height: 300)
-                        .border(Color.red)
                 }
                 .onChange(of: showDetailView) { _, _ in
                     fadeOut()
