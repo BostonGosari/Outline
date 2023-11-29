@@ -148,7 +148,10 @@ extension NewRunningView {
     }
     
     private var navigation: some View {
-        NewRunningNavigationView(showDetailNavigation: navigationTranslation + navigationSheetHeight > 10)
+        NewRunningNavigationView(
+            courseName: runningStartManager.startCourse?.courseName ?? "",
+            showDetailNavigation: navigationTranslation + navigationSheetHeight > 10
+        )
             .frame(height: 70 + navigationTranslation + navigationSheetHeight, alignment: .top)
             .mask {
                 Rectangle()

@@ -5,11 +5,15 @@
 //  Created by hyunjun on 11/13/23.
 //
 
+import AVFoundation
 import SwiftUI
 
 struct NewRunningNavigationView: View {
     @StateObject private var locationManager = LocationManager.shared
     
+    @State private var synthesizer = AVSpeechSynthesizer()
+    
+    let courseName: String
     var showDetailNavigation: Bool
         
     var body: some View {
@@ -54,6 +58,14 @@ struct NewRunningNavigationView: View {
                 }
             }
         }
+        .onAppear {
+            textToSpeech("\(courseName) 안내를 시작합니다.")
+        }
+        .onChange(of: locationManager.distance) {
+            if locationManager.distance <= 20 {
+                textToSpeech("\(Int(locationManager.distance))미터 후 \(locationManager.direction)하세요)")
+            }
+        }
     }
     
     private func getDirectionImage(_ direction: String) -> String {
@@ -66,8 +78,16 @@ struct NewRunningNavigationView: View {
             return ""
         }
     }
+    
+    private func textToSpeech(_ text: String) {
+        let utterance = AVSpeechUtterance(string: text)
+        utterance.voice = AVSpeechSynthesisVoice(language: "ko-KR")
+        utterance.rate = 0.5
+        
+        synthesizer.speak(utterance)
+    }
 }
 
 #Preview {
-    NewRunningNavigationView(showDetailNavigation: false)
+    NewRunningNavigationView(courseName: "고래런", showDetailNavigation: false)
 }
