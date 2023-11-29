@@ -41,7 +41,8 @@ struct NewRunningView: View {
     var body: some View {
         ZStack {
             map
-            if runningStartManager.runningType == .gpsArt {
+            if let startCourse = runningStartManager.startCourse,
+                !startCourse.navigation.isEmpty {
                 navigation
             }
             metrics
@@ -95,6 +96,7 @@ struct NewRunningView: View {
                 }
                 runningDataManager.pauseRunning()
                 runningStartManager.stopTimer()
+                locationManager.isRunning = false
             } else if newValue == .resume {
                 withAnimation {
                     showDetail = false
@@ -105,18 +107,21 @@ struct NewRunningView: View {
                 }
                 runningDataManager.resumeRunning()
                 runningStartManager.startTimer()
+                locationManager.isRunning = true
             } else if newValue == .end {
                 DispatchQueue.main.async {
                     if runningStartManager.counter < 30 {
                         runningDataManager.stopRunningWithoutRecord()
                         runningStartManager.stopTimer()
                         runningStartManager.running = false
+                        locationManager.isRunning = false
                         if connectivityManger.isMirroring {
                             connectivityManger.sendRunningState(.end)
                         }
                     } else {
                         runningDataManager.userLocations = locationManager.userLocations
                         runningStartManager.stopTimer()
+                        locationManager.isRunning = false
                         withAnimation {
                             showCompleteSheet = true
                         }
@@ -170,6 +175,9 @@ extension NewRunningView {
             .zIndex(1)
             .gesture(navigationGesture)
             .frame(maxHeight: .infinity, alignment: .top)
+            .onAppear {
+                locationManager.navigationDatas = runningStartManager.startCourse?.navigation
+            }
     }
     
     private var metrics: some View {
