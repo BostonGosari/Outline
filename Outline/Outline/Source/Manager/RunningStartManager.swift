@@ -11,10 +11,10 @@ import HealthKit
 import SwiftUI
 
 class RunningStartManager: ObservableObject {
-        
     @Published var counter = 0
     @Published var start = false
     @Published var running = false
+    @Published var mirroring = false
     @Published var changeRunningType = false
     @Published var complete = false
     

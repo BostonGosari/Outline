@@ -184,6 +184,7 @@ extension SharePhotoView {
         ZStack {
             backgroundImage
             runningInfo
+            
         }
         .background(.clear)
     }

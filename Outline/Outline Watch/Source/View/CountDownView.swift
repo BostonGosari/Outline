@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct CountDownView: View {
+    @StateObject var connectivityManager = WatchConnectivityManager.shared
     @StateObject var workoutManager = WatchWorkoutManager.shared
     @State private var countdownSeconds = 3
     
@@ -28,11 +29,12 @@ struct CountDownView: View {
                             if countdownSeconds == 0 {
                                 timer.invalidate()
                                 workoutManager.selectedWorkout = .running
+                                connectivityManager.sendRunningState(.start)
                             }
                         }
                     }
             } else {
-                WatchTabView()
+                TabWatchView()
             }
         }
     }
