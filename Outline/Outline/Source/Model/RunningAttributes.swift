@@ -10,7 +10,7 @@ import ActivityKit
 
 struct RunningAttributes: ActivityAttributes {
     struct ContentState : Codable, Hashable {
-        var status: Status = .received
+        var status: Status = .running
     }
     
     var totalDistance: Double
@@ -20,7 +20,6 @@ struct RunningAttributes: ActivityAttributes {
 }
 
 enum Status: String, CaseIterable, Codable, Equatable {
-    case received = "shippingbox.fill"
-    case progress = "person.bust"
-    case ready = "takeoutbag.and.cup.and.straw.fill"
+    case running = "shippingbox.fill"
+    case paused = "person.bust"
 }
