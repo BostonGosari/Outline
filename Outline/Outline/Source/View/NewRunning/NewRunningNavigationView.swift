@@ -8,40 +8,45 @@
 import SwiftUI
 
 struct NewRunningNavigationView: View {
+    @StateObject private var locationManager = LocationManager.shared
+    
     var showDetailNavigation: Bool
         
-        var body: some View {
-            VStack(alignment: .leading) {
-                HStack {
-                    Image(systemName: "arrow.triangle.turn.up.right.circle")
-                        .font(.system(size: 36))
-                        .padding(.leading)
-                        .padding(.trailing, 5)
-                    VStack(alignment: .leading) {
-                        Text("630m")
-                            .font(.customTitle2)
-                        Text("포항공과대학교 C5")
-                            .font(.customSubtitle)
-                            .foregroundStyle(.gray500)
-                    }
+    var body: some View {
+        VStack(alignment: .leading) {
+            HStack {
+                Image(systemName: getDirectionImage(locationManager.direction))
+                    .font(.system(size: 36))
+                    .padding(.leading)
+                    .padding(.trailing, 5)
+                VStack(alignment: .leading) {
+                    Text("\(Int(locationManager.distance))m")
+                        .font(.customTitle2)
+                    Text(locationManager.direction)
+                        .font(.customSubtitle)
+                        .foregroundStyle(.gray500)
                 }
-                .frame(maxWidth: .infinity, alignment: .leading)
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
 
-                if showDetailNavigation {
-                    Rectangle()
-                        .frame(width: 310, height: 1)
-                        .padding(.trailing)
-                        .frame(maxWidth: .infinity, alignment: .trailing)
-                        .foregroundStyle(.gray600)
+            if showDetailNavigation {
+                Rectangle()
+                    .frame(width: 310, height: 1)
+                    .padding(.trailing)
+                    .frame(maxWidth: .infinity, alignment: .trailing)
+                    .foregroundStyle(.gray600)
+                
+                if let nextDirection = locationManager.nextDirection {
                     HStack {
-                        Image(systemName: "arrow.triangle.turn.up.right.circle")
+                        Image(systemName: getDirectionImage(nextDirection.direction))
                             .font(.system(size: 36))
                             .padding(.leading)
                             .padding(.trailing, 5)
+                    
                         VStack(alignment: .leading) {
-                            Text("630m")
+                            Text("\(nextDirection.distance)m")
                                 .font(.customTitle2)
-                            Text("포항공과대학교 C5")
+                            Text(nextDirection.direction)
                                 .font(.customSubtitle)
                                 .foregroundStyle(.gray500)
                         }
@@ -49,6 +54,18 @@ struct NewRunningNavigationView: View {
                 }
             }
         }
+    }
+    
+    private func getDirectionImage(_ direction: String) -> String {
+        switch direction {
+        case "우회전":
+            return "arrow.turn.up.right"
+        case "좌회전":
+            return "arrow.turn.up.left"
+        default:
+            return ""
+        }
+    }
 }
 
 #Preview {

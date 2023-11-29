@@ -185,12 +185,12 @@ extension NewRunningView {
             .background {
                 TransparentBlurView(removeAllFilters: true)
                     .blur(radius: 6, opaque: true)
+                    .ignoresSafeArea()
                     .overlay {
                         RoundedRectangle(cornerRadius: 20)
                             .foregroundStyle(.black50)
                             .ignoresSafeArea()
                     }
-                    .ignoresSafeArea()
             }
             .gesture(metricsGesture)
             .overlay(alignment: .bottom) {
@@ -353,9 +353,9 @@ extension NewRunningView {
                 }
                 let translationY = value.translation.height
                 if navigationSheetHeight == 0 {
-                    navigationTranslation = min(max(translationY, -5), 340)
+                    navigationTranslation = min(max(translationY, -5), 150)
                 } else {
-                    navigationTranslation = max(min(translationY, 40), -310)
+                    navigationTranslation = max(min(translationY, 40), -160)
                 }
             }
             .onEnded { value in
@@ -365,7 +365,7 @@ extension NewRunningView {
                 let translationY = value.translation.height
                 withAnimation(.bouncy) {
                     if translationY > 0 {
-                        navigationSheetHeight = 300
+                        navigationSheetHeight = 150
                     } else {
                         navigationSheetHeight = 0
                     }
@@ -379,7 +379,7 @@ extension NewRunningView {
                     }
                     withAnimation {
                         if navigationSheetHeight == 0 {
-                            navigationSheetHeight = 300
+                            navigationSheetHeight = 150
                         } else {
                             navigationSheetHeight = 0
                         }
