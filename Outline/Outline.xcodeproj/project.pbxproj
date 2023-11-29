@@ -120,8 +120,6 @@
 		954CB2AA2AE5457B005EB2E9 /* pohangDangDangRun.kml in Resources */ = {isa = PBXBuildFile; fileRef = 954CB2A12AE5457A005EB2E9 /* pohangDangDangRun.kml */; };
 		954CB2AB2AE5457B005EB2E9 /* flightRun.kml in Resources */ = {isa = PBXBuildFile; fileRef = 954CB2A22AE5457A005EB2E9 /* flightRun.kml */; };
 		954CB2AC2AE5457B005EB2E9 /* flightRun.kml in Resources */ = {isa = PBXBuildFile; fileRef = 954CB2A22AE5457A005EB2E9 /* flightRun.kml */; };
-		954CB2AD2AE5457B005EB2E9 /* pohangDuckRun.kml in Resources */ = {isa = PBXBuildFile; fileRef = 954CB2A32AE5457B005EB2E9 /* pohangDuckRun.kml */; };
-		954CB2AE2AE5457B005EB2E9 /* pohangDuckRun.kml in Resources */ = {isa = PBXBuildFile; fileRef = 954CB2A32AE5457B005EB2E9 /* pohangDuckRun.kml */; };
 		954CB2AF2AE5457B005EB2E9 /* seoulCamelRun.kml in Resources */ = {isa = PBXBuildFile; fileRef = 954CB2A42AE5457B005EB2E9 /* seoulCamelRun.kml */; };
 		954CB2B02AE5457B005EB2E9 /* seoulCamelRun.kml in Resources */ = {isa = PBXBuildFile; fileRef = 954CB2A42AE5457B005EB2E9 /* seoulCamelRun.kml */; };
 		954CB2B62AE63E79005EB2E9 /* HealthAuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954CB2B52AE63E79005EB2E9 /* HealthAuthView.swift */; };
@@ -192,16 +190,19 @@
 		BB67086B2B11D58D005D8BA5 /* CourseProgressManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29EC2ECD2AEAD5A80033446C /* CourseProgressManager.swift */; };
 		BB67086C2B11D58F005D8BA5 /* CourseAccuracyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29EC2ECB2AEAD5680033446C /* CourseAccuracyManager.swift */; };
 		BB67086D2B11D592005D8BA5 /* CourseAnalyzeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29EC2ED12AEB2B560033446C /* CourseAnalyzeManager.swift */; };
+		BBBB27E52B1795360081C93D /* Color.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F0AC8AA02AD94C200061612C /* Color.xcassets */; };
+		BBBB27E62B1796DC0081C93D /* FontExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E29F64A2ADF653000F5EF5C /* FontExtension.swift */; };
+		BBCB1F032B1778DE00D9AE1C /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBF90BC22B137AD700E3FD70 /* WidgetKit.framework */; };
+		BBCB1F042B1778DE00D9AE1C /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBF90BC42B137AD700E3FD70 /* SwiftUI.framework */; };
+		BBCB1F072B1778DE00D9AE1C /* OutlineLiveActivityBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBCB1F062B1778DE00D9AE1C /* OutlineLiveActivityBundle.swift */; };
+		BBCB1F0B2B1778DE00D9AE1C /* OutlineLiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBCB1F0A2B1778DE00D9AE1C /* OutlineLiveActivity.swift */; };
+		BBCB1F0D2B1778DE00D9AE1C /* AppIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBCB1F0C2B1778DE00D9AE1C /* AppIntent.swift */; };
+		BBCB1F0F2B1778DF00D9AE1C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BBCB1F0E2B1778DF00D9AE1C /* Assets.xcassets */; };
+		BBCB1F132B1778DF00D9AE1C /* OutlineLiveActivityExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = BBCB1F022B1778DE00D9AE1C /* OutlineLiveActivityExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		BBCB1F172B1778EF00D9AE1C /* RunningAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF90BD72B13859100E3FD70 /* RunningAttributes.swift */; };
 		BBEC68822B0868520026C306 /* RunningFinishPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBEC68812B0868520026C306 /* RunningFinishPopUp.swift */; };
 		BBEC68842B087B020026C306 /* UnderlineButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBEC68832B087B020026C306 /* UnderlineButton.swift */; };
-		BBF90BC32B137AD700E3FD70 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBF90BC22B137AD700E3FD70 /* WidgetKit.framework */; };
-		BBF90BC52B137AD700E3FD70 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBF90BC42B137AD700E3FD70 /* SwiftUI.framework */; };
-		BBF90BC82B137AD700E3FD70 /* Outline_Widget.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF90BC72B137AD700E3FD70 /* Outline_Widget.swift */; };
-		BBF90BCA2B137AD700E3FD70 /* AppIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF90BC92B137AD700E3FD70 /* AppIntent.swift */; };
-		BBF90BCC2B137AD800E3FD70 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BBF90BCB2B137AD800E3FD70 /* Assets.xcassets */; };
-		BBF90BD62B13827000E3FD70 /* FontExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E29F64A2ADF653000F5EF5C /* FontExtension.swift */; };
 		BBF90BD82B13859100E3FD70 /* RunningAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF90BD72B13859100E3FD70 /* RunningAttributes.swift */; };
-		BBF90BD92B13859100E3FD70 /* RunningAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF90BD72B13859100E3FD70 /* RunningAttributes.swift */; };
 		F01FDB992ADABB6100BDA633 /* TabModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01FDB982ADABB6100BDA633 /* TabModel.swift */; };
 		F01FDB9C2ADABC4600BDA633 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01FDB9B2ADABC4600BDA633 /* TabBar.swift */; };
 		F03524102AE35AF800CCD8A6 /* RunningDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F035240F2AE35AF800CCD8A6 /* RunningDataManager.swift */; };
@@ -244,12 +245,12 @@
 			remoteGlobalIDString = F0AC8AA82AD94C200061612C;
 			remoteInfo = "Outline Watch App";
 		};
-		BBF90BCE2B137AD800E3FD70 /* PBXContainerItemProxy */ = {
+		BBCB1F112B1778DF00D9AE1C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = F0AC8A912AD94C1F0061612C /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = BBF90BBF2B137AD700E3FD70;
-			remoteInfo = "Outline WidgetExtension";
+			remoteGlobalIDString = BBCB1F012B1778DE00D9AE1C;
+			remoteInfo = OutlineLiveActivityExtension;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -263,6 +264,17 @@
 				297B80FB2AE73C4C00AF7219 /* Outline Watch App.app in Embed ExtensionKit Extensions */,
 			);
 			name = "Embed ExtensionKit Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BBCB1EFC2B17774400D9AE1C /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				BBCB1F132B1778DF00D9AE1C /* OutlineLiveActivityExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		BBF90BD12B137AD800E3FD70 /* Embed Foundation Extensions */ = {
@@ -383,7 +395,6 @@
 		954CB2A02AE5457A005EB2E9 /* seoulOctopusRun.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = seoulOctopusRun.kml; sourceTree = "<group>"; };
 		954CB2A12AE5457A005EB2E9 /* pohangDangDangRun.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = pohangDangDangRun.kml; sourceTree = "<group>"; };
 		954CB2A22AE5457A005EB2E9 /* flightRun.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = flightRun.kml; sourceTree = "<group>"; };
-		954CB2A32AE5457B005EB2E9 /* pohangDuckRun.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = pohangDuckRun.kml; sourceTree = "<group>"; };
 		954CB2A42AE5457B005EB2E9 /* seoulCamelRun.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = seoulCamelRun.kml; sourceTree = "<group>"; };
 		954CB2B52AE63E79005EB2E9 /* HealthAuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthAuthView.swift; sourceTree = "<group>"; };
 		954CB2B92AE654BA005EB2E9 /* NotificationAuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationAuthView.swift; sourceTree = "<group>"; };
@@ -441,15 +452,16 @@
 		BB5239572ADC396300646494 /* BackgroundBlur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundBlur.swift; sourceTree = "<group>"; };
 		BB52396A2ADD385700646494 /* MiniScrollView1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniScrollView1.swift; sourceTree = "<group>"; };
 		BB52396C2ADD6DBB00646494 /* CustomRoundedRectangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomRoundedRectangle.swift; sourceTree = "<group>"; };
+		BBCB1F022B1778DE00D9AE1C /* OutlineLiveActivityExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = OutlineLiveActivityExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		BBCB1F062B1778DE00D9AE1C /* OutlineLiveActivityBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutlineLiveActivityBundle.swift; sourceTree = "<group>"; };
+		BBCB1F0A2B1778DE00D9AE1C /* OutlineLiveActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutlineLiveActivity.swift; sourceTree = "<group>"; };
+		BBCB1F0C2B1778DE00D9AE1C /* AppIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIntent.swift; sourceTree = "<group>"; };
+		BBCB1F0E2B1778DF00D9AE1C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		BBCB1F102B1778DF00D9AE1C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BBEC68812B0868520026C306 /* RunningFinishPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningFinishPopUp.swift; sourceTree = "<group>"; };
 		BBEC68832B087B020026C306 /* UnderlineButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnderlineButton.swift; sourceTree = "<group>"; };
-		BBF90BC02B137AD700E3FD70 /* Outline WidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Outline WidgetExtension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBF90BC22B137AD700E3FD70 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		BBF90BC42B137AD700E3FD70 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
-		BBF90BC72B137AD700E3FD70 /* Outline_Widget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Outline_Widget.swift; sourceTree = "<group>"; };
-		BBF90BC92B137AD700E3FD70 /* AppIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIntent.swift; sourceTree = "<group>"; };
-		BBF90BCB2B137AD800E3FD70 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		BBF90BCD2B137AD800E3FD70 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BBF90BD72B13859100E3FD70 /* RunningAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningAttributes.swift; sourceTree = "<group>"; };
 		F01FDB982ADABB6100BDA633 /* TabModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabModel.swift; sourceTree = "<group>"; };
 		F01FDB9B2ADABC4600BDA633 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
@@ -489,12 +501,12 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		BBF90BBD2B137AD700E3FD70 /* Frameworks */ = {
+		BBCB1EFF2B1778DE00D9AE1C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BBF90BC52B137AD700E3FD70 /* SwiftUI.framework in Frameworks */,
-				BBF90BC32B137AD700E3FD70 /* WidgetKit.framework in Frameworks */,
+				BBCB1F042B1778DE00D9AE1C /* SwiftUI.framework in Frameworks */,
+				BBCB1F032B1778DE00D9AE1C /* WidgetKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -533,7 +545,6 @@
 				954CB2A22AE5457A005EB2E9 /* flightRun.kml */,
 				954CB29F2AE5457A005EB2E9 /* pohangCrocodileRun.kml */,
 				954CB2A12AE5457A005EB2E9 /* pohangDangDangRun.kml */,
-				954CB2A32AE5457B005EB2E9 /* pohangDuckRun.kml */,
 				954CB2A42AE5457B005EB2E9 /* seoulCamelRun.kml */,
 				954CB2A02AE5457A005EB2E9 /* seoulOctopusRun.kml */,
 			);
@@ -809,6 +820,18 @@
 			path = GPSArtHome;
 			sourceTree = "<group>";
 		};
+		BBCB1F052B1778DE00D9AE1C /* OutlineLiveActivity */ = {
+			isa = PBXGroup;
+			children = (
+				BBCB1F062B1778DE00D9AE1C /* OutlineLiveActivityBundle.swift */,
+				BBCB1F0A2B1778DE00D9AE1C /* OutlineLiveActivity.swift */,
+				BBCB1F0C2B1778DE00D9AE1C /* AppIntent.swift */,
+				BBCB1F0E2B1778DF00D9AE1C /* Assets.xcassets */,
+				BBCB1F102B1778DF00D9AE1C /* Info.plist */,
+			);
+			path = OutlineLiveActivity;
+			sourceTree = "<group>";
+		};
 		BBF90BC12B137AD700E3FD70 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -816,17 +839,6 @@
 				BBF90BC42B137AD700E3FD70 /* SwiftUI.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		BBF90BC62B137AD700E3FD70 /* Outline Widget */ = {
-			isa = PBXGroup;
-			children = (
-				BBF90BC72B137AD700E3FD70 /* Outline_Widget.swift */,
-				BBF90BC92B137AD700E3FD70 /* AppIntent.swift */,
-				BBF90BCB2B137AD800E3FD70 /* Assets.xcassets */,
-				BBF90BCD2B137AD800E3FD70 /* Info.plist */,
-			);
-			path = "Outline Widget";
 			sourceTree = "<group>";
 		};
 		F01FDB9A2ADABC2C00BDA633 /* Tab */ = {
@@ -864,12 +876,12 @@
 				BB5239262ADAF70A00646494 /* Shared */,
 				F0AC8A9B2AD94C1F0061612C /* Outline */,
 				F0AC8AAD2AD94C200061612C /* Outline Watch */,
-				BBF90BC62B137AD700E3FD70 /* Outline Widget */,
 				F0AC8AC42AD9514C0061612C /* .swiftlint.yml */,
 				297B80F92AE73C4500AF7219 /* Outline.app */,
 				297B80FA2AE73C4500AF7219 /* Outline Watch App.app */,
-				BBF90BC02B137AD700E3FD70 /* Outline WidgetExtension.appex */,
+				BBCB1F052B1778DE00D9AE1C /* OutlineLiveActivity */,
 				BBF90BC12B137AD700E3FD70 /* Frameworks */,
+				BBCB1F022B1778DE00D9AE1C /* OutlineLiveActivityExtension.appex */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1165,21 +1177,21 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		BBF90BBF2B137AD700E3FD70 /* Outline WidgetExtension */ = {
+		BBCB1F012B1778DE00D9AE1C /* OutlineLiveActivityExtension */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = BBF90BD42B137AD800E3FD70 /* Build configuration list for PBXNativeTarget "Outline WidgetExtension" */;
+			buildConfigurationList = BBCB1F142B1778DF00D9AE1C /* Build configuration list for PBXNativeTarget "OutlineLiveActivityExtension" */;
 			buildPhases = (
-				BBF90BBC2B137AD700E3FD70 /* Sources */,
-				BBF90BBD2B137AD700E3FD70 /* Frameworks */,
-				BBF90BBE2B137AD700E3FD70 /* Resources */,
+				BBCB1EFE2B1778DE00D9AE1C /* Sources */,
+				BBCB1EFF2B1778DE00D9AE1C /* Frameworks */,
+				BBCB1F002B1778DE00D9AE1C /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = "Outline WidgetExtension";
-			productName = "Outline WidgetExtension";
-			productReference = BBF90BC02B137AD700E3FD70 /* Outline WidgetExtension.appex */;
+			name = OutlineLiveActivityExtension;
+			productName = OutlineLiveActivityExtension;
+			productReference = BBCB1F022B1778DE00D9AE1C /* OutlineLiveActivityExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
 		F0AC8A982AD94C1F0061612C /* Outline */ = {
@@ -1192,11 +1204,13 @@
 				F0AC8A972AD94C1F0061612C /* Resources */,
 				F0AC8ABC2AD94C210061612C /* Embed Watch Content */,
 				BB5239252ADAF6EA00646494 /* Embed ExtensionKit Extensions */,
+				BBCB1EFC2B17774400D9AE1C /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				297B80F82AE73C0A00AF7219 /* PBXTargetDependency */,
+				BBCB1F122B1778DF00D9AE1C /* PBXTargetDependency */,
 			);
 			name = Outline;
 			packageProductDependencies = (
@@ -1228,7 +1242,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				BBF90BCF2B137AD800E3FD70 /* PBXTargetDependency */,
 			);
 			name = "Outline Watch App";
 			productName = "Outline Watch App";
@@ -1245,7 +1258,7 @@
 				LastSwiftUpdateCheck = 1500;
 				LastUpgradeCheck = 1500;
 				TargetAttributes = {
-					BBF90BBF2B137AD700E3FD70 = {
+					BBCB1F012B1778DE00D9AE1C = {
 						CreatedOnToolsVersion = 15.0;
 					};
 					F0AC8A982AD94C1F0061612C = {
@@ -1277,17 +1290,18 @@
 			targets = (
 				F0AC8A982AD94C1F0061612C /* Outline */,
 				F0AC8AA82AD94C200061612C /* Outline Watch App */,
-				BBF90BBF2B137AD700E3FD70 /* Outline WidgetExtension */,
+				BBCB1F012B1778DE00D9AE1C /* OutlineLiveActivityExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		BBF90BBE2B137AD700E3FD70 /* Resources */ = {
+		BBCB1F002B1778DE00D9AE1C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BBF90BCC2B137AD800E3FD70 /* Assets.xcassets in Resources */,
+				BBCB1F0F2B1778DF00D9AE1C /* Assets.xcassets in Resources */,
+				BBBB27E52B1795360081C93D /* Color.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1304,7 +1318,6 @@
 				BB1D531A2ADDBCAB0073771F /* Pretendard-Regular.ttf in Resources */,
 				954CB2A52AE5457B005EB2E9 /* pohangCrocodileRun.kml in Resources */,
 				F0AC8B2E2AD968A20061612C /* Icon.xcassets in Resources */,
-				954CB2AD2AE5457B005EB2E9 /* pohangDuckRun.kml in Resources */,
 				F0AC8AA12AD94C200061612C /* Color.xcassets in Resources */,
 				2990249A2B10B3E8005C5BA8 /* SFCompactDisplay-Semibold.ttf in Resources */,
 				29D7AD502B0F6C2C00AAAAB0 /* Secrets.xcconfig in Resources */,
@@ -1340,7 +1353,6 @@
 				293D1E432B0B42E400AB85BE /* SFProDisplay-Heavy.otf in Resources */,
 				293D1E452B0B42E400AB85BE /* SFProDisplay-Ultralight.otf in Resources */,
 				F0AC8B352AD96A360061612C /* WatchColor.xcassets in Resources */,
-				954CB2AE2AE5457B005EB2E9 /* pohangDuckRun.kml in Resources */,
 				293D1E462B0B42E400AB85BE /* SFProDisplay-Semibold.otf in Resources */,
 				293D1E472B0B42E400AB85BE /* SFProDisplay-Regular.otf in Resources */,
 				293D1E3A2B0B42B600AB85BE /* SFProDisplay-Black.otf in Resources */,
@@ -1372,14 +1384,15 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		BBF90BBC2B137AD700E3FD70 /* Sources */ = {
+		BBCB1EFE2B1778DE00D9AE1C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BBF90BD62B13827000E3FD70 /* FontExtension.swift in Sources */,
-				BBF90BC82B137AD700E3FD70 /* Outline_Widget.swift in Sources */,
-				BBF90BD92B13859100E3FD70 /* RunningAttributes.swift in Sources */,
-				BBF90BCA2B137AD700E3FD70 /* AppIntent.swift in Sources */,
+				BBBB27E62B1796DC0081C93D /* FontExtension.swift in Sources */,
+				BBCB1F0D2B1778DE00D9AE1C /* AppIntent.swift in Sources */,
+				BBCB1F072B1778DE00D9AE1C /* OutlineLiveActivityBundle.swift in Sources */,
+				BBCB1F172B1778EF00D9AE1C /* RunningAttributes.swift in Sources */,
+				BBCB1F0B2B1778DE00D9AE1C /* OutlineLiveActivity.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1572,15 +1585,15 @@
 			target = F0AC8AA82AD94C200061612C /* Outline Watch App */;
 			targetProxy = 297B80F72AE73C0A00AF7219 /* PBXContainerItemProxy */;
 		};
-		BBF90BCF2B137AD800E3FD70 /* PBXTargetDependency */ = {
+		BBCB1F122B1778DF00D9AE1C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = BBF90BBF2B137AD700E3FD70 /* Outline WidgetExtension */;
-			targetProxy = BBF90BCE2B137AD800E3FD70 /* PBXContainerItemProxy */;
+			target = BBCB1F012B1778DE00D9AE1C /* OutlineLiveActivityExtension */;
+			targetProxy = BBCB1F112B1778DF00D9AE1C /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		BBF90BD22B137AD800E3FD70 /* Debug */ = {
+		BBCB1F152B1778DF00D9AE1C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1590,27 +1603,26 @@
 				DEVELOPMENT_TEAM = JXHZ6FLB7P;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Outline Widget/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "Outline Widget";
+				INFOPLIST_FILE = OutlineLiveActivity/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = OutlineLiveActivity;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
-					"@executable_path/../../../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "team.boston.gosari.outline.watchkitapp.Outline-Widget";
+				PRODUCT_BUNDLE_IDENTIFIER = team.boston.gosari.outline.OutlineLiveActivity;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 4;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
-		BBF90BD32B137AD800E3FD70 /* Release */ = {
+		BBCB1F162B1778DF00D9AE1C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1620,23 +1632,22 @@
 				DEVELOPMENT_TEAM = JXHZ6FLB7P;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Outline Widget/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "Outline Widget";
+				INFOPLIST_FILE = OutlineLiveActivity/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = OutlineLiveActivity;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
-					"@executable_path/../../../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "team.boston.gosari.outline.watchkitapp.Outline-Widget";
+				PRODUCT_BUNDLE_IDENTIFIER = team.boston.gosari.outline.OutlineLiveActivity;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 4;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -1879,6 +1890,7 @@
 				INFOPLIST_KEY_NSMotionUsageDescription = "러닝을 하며 운동 데이터를 확인하는 데에 모션정보를 사용합니다. ";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "당신의 위치는 러닝을 기록하는데 사용됩니다. 운동 중에 백그라운드에서도 위치 서비스를 사용합니다.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "러닝 화면을 꾸밀 수 있도록 사진을 선택해보세요!";
+				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -1930,6 +1942,7 @@
 				INFOPLIST_KEY_NSMotionUsageDescription = "러닝을 하며 운동 데이터를 확인하는 데에 모션정보를 사용합니다. ";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "당신의 위치는 러닝을 기록하는데 사용됩니다. 운동 중에 백그라운드에서도 위치 서비스를 사용합니다.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "러닝 화면을 꾸밀 수 있도록 사진을 선택해보세요!";
+				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -1958,11 +1971,11 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		BBF90BD42B137AD800E3FD70 /* Build configuration list for PBXNativeTarget "Outline WidgetExtension" */ = {
+		BBCB1F142B1778DF00D9AE1C /* Build configuration list for PBXNativeTarget "OutlineLiveActivityExtension" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				BBF90BD22B137AD800E3FD70 /* Debug */,
-				BBF90BD32B137AD800E3FD70 /* Release */,
+				BBCB1F152B1778DF00D9AE1C /* Debug */,
+				BBCB1F162B1778DF00D9AE1C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

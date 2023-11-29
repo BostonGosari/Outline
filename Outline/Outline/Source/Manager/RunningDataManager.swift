@@ -7,9 +7,9 @@
 
 import ActivityKit
 import CoreMotion
+import Combine
 import SwiftUI
 import WidgetKit
-
 
 class RunningDataManager: ObservableObject {
     // 전송용 데이터
@@ -34,9 +34,13 @@ class RunningDataManager: ObservableObject {
     @Published var accuracy: Double = 0
     @Published var progress: Double = 0
     @Published var score: Int = 0
+    @Published var num: Int = 0
     
     // MARK: - Private Properties
+    @State var currentID: String = ""
     
+    @State private var activity : Activity<RunningAttributes>? = nil
+    private var cancellable: Set<AnyCancellable> = Set()
     private let pedometer = CMPedometer()
     private let healthKitManager = HealthKitManager()
     
@@ -50,7 +54,7 @@ class RunningDataManager: ObservableObject {
     static let shared = RunningDataManager()
     
     private init() { }
-
+    
     func startRunning() {
         RunningStartDate = Date()
         startPedometerUpdates()
@@ -64,10 +68,11 @@ class RunningDataManager: ObservableObject {
             self.endWithoutSaving = false
         }
     }
- 
+    
     func stopRunning() {
         RunningEndDate = Date()
         stopPedometerUpdates()
+//        removeActivity()
     }
     
     func pauseRunning() {
@@ -102,7 +107,6 @@ class RunningDataManager: ObservableObject {
             
             DispatchQueue.main.async {
                 self.updatePedometerData(data)
-                self.updateLiveActivity()
             }
         }
     }
@@ -142,50 +146,43 @@ class RunningDataManager: ObservableObject {
         time = 0.0
     }
     
-    func addLiveActivity(){
-        let runningAtributes = RunningAttributes(totalDistance: totalDistance, totalTime: totalTime, pace: pace, heartrate: 127)
-        // Since It Dosen't Requires Any Intial Values
-        // If Your Content State Struct Contains Intializers Then You Must Pass it here
-        let intialContentState = RunningAttributes.ContentState()
+    func addLiveActivity() {
+        guard ActivityAuthorizationInfo().areActivitiesEnabled else { return }
+             let attribute = RunningAttributes()
+             let state = RunningAttributes.ContentState(
+                totalDistance: String(self.totalDistance),
+                totalTime: String(self.num),
+                pace: String(self.pace),
+                heartrate: "--"
+                )
+             do {
+                 self.activity = try Activity.request(attributes: attribute, contentState: state)
+                 timer()
+             } catch {
+                 print(error)
+             }
+    }
+    
+    func timer() {
+           Timer.publish(every: 1, on: .main, in: .default)
+               .autoconnect()
+               .sink { [self] _ in
+                   Task {
+                       let newState = RunningAttributes.ContentState(totalDistance: String(self.totalDistance), totalTime: String(self.time), pace: String(self.pace), heartrate: "--")
+                      
+                       await activity?.update(using: newState)
+                   }
+               }
+               .store(in: &cancellable)
+       }
+    
+    func removeActivity() {
+        Task {
+            await activity?.end(using: nil, dismissalPolicy: .default)
+            cancellable.removeAll()
+        }
         
-        do{
-            let activity = try Activity<RunningAttributes>.request(attributes: runningAtributes, contentState: intialContentState)
-            currentID = activity.id
-            print("Activity Added Successfully. id: \(activity.id)")
-        }catch{
-            print(error.localizedDescription)
-            
-        }
     }
-    
-    func updateLiveActivity() {
-        // Retreiving Current Activity From the List Of Phone Acitivites
-        if let activity = Activity.activities.first(where: { (activity: Activity<RunningAttributes>) in
-            activity.id == currentID
-        }){
-            print("Activity Found")
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2){
-                var updatedState = activity.contentState
-                updatedState.status = currentSelection
-                Task{
-                    await activity.update(using: updatedState)
-                }
-            }
-        }
-    }
-    
-//    func removeActivity(){
-//        if let activity = Activity.activities.first(where: {(activity: Activity<OrderAttributes>) in
-//            activity.id == currentID
-//        })｛
-//            DispatchQueue.main.asyncAfter(deadline: .now() + 2){
-//                Task{
-//                    await activity.end(using: activity.contentState,dismissalPolicy: .immediate)
-//                }
-//            }
-//        ｝
-//    }
     
     func caculateAccuracyAndProgress() {
         guard let course = runningManger.startCourse else { return }

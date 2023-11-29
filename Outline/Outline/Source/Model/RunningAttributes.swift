@@ -9,17 +9,10 @@ import SwiftUI
 import ActivityKit
 
 struct RunningAttributes: ActivityAttributes {
-    struct ContentState : Codable, Hashable {
-        var status: Status = .running
+    struct ContentState: Codable, Hashable {
+        var totalDistance: String
+        var totalTime: String
+        var pace: String
+        var heartrate: String
     }
-    
-    var totalDistance: Double
-    var totalTime: Double
-    var pace: Double
-    var heartrate: Int
-}
-
-enum Status: String, CaseIterable, Codable, Equatable {
-    case running = "shippingbox.fill"
-    case paused = "person.bust"
 }
