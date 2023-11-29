@@ -98,6 +98,7 @@ class RunningDataManager: ObservableObject {
             
             DispatchQueue.main.async {
                 self.updatePedometerData(data)
+                self.updateLiveActivity()
             }
         }
     }
@@ -144,10 +145,28 @@ class RunningDataManager: ObservableObject {
         
         do{
             let activity = try Activity<RunningAttributes>.request(attributes: runningAtributes, contentState: intialContentState)
+            currentID = activity.id
             print("Activity Added Successfully. id: \(activity.id)")
         }catch{
             print(error.localizedDescription)
             
+        }
+    }
+    
+    func updateLiveActivity() {
+        // Retreiving Current Activity From the List Of Phone Acitivites
+        if let activity = Activity.activities.first(where: { (activity: Activity<RunningAttributes>) in
+            activity.id == currentID
+        }){
+            print("Activity Found")
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2){
+                var updatedState = activity.contentState
+                updatedState.status = currentSelection
+                Task{
+                    await activity.update(using: updatedState)
+                }
+            }
         }
     }
     
