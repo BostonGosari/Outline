@@ -1,8 +1,8 @@
 //
 //  AppIntent.swift
-//  Outline Widget
+//  OutlineLiveActivity
 //
-//  Created by 김하은 on 11/26/23.
+//  Created by 김하은 on 11/29/23.
 //
 
 import WidgetKit
