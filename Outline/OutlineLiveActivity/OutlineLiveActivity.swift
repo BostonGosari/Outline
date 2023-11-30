@@ -19,7 +19,7 @@ struct OutlineLiveActivity: Widget {
                     .overlay(
                         RoundedRectangle(cornerRadius: 25)
                         .inset(by: 0.5)
-                        .stroke(Color.customPrimary, lineWidth: 1)
+                        .stroke(Color.customPrimary, lineWidth: 1.5)
                     )
                 VStack(spacing: 0) {
                     HStack {
