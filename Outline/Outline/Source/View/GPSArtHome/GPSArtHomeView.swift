@@ -11,6 +11,7 @@ struct GPSArtHomeView: View {
     @AppStorage("authState") var authState: AuthState = .logout
     private let courseScoreModel = CourseScoreModel()
     @StateObject private var viewModel = GPSArtHomeViewModel()
+    @StateObject private var appleRunManager = AppleRunManager.shared
     
     @State private var scrollOffset: CGFloat = 0
     @State private var scrollXOffset: CGFloat = 0
@@ -20,7 +21,6 @@ struct GPSArtHomeView: View {
     @State private var selectedCourse: CourseWithDistanceAndScore?
     @State private var showNetworkErrorView = false
     @State private var matched = false
-    @State private var showAppleRunDetail = false
     
     // 받아오는 변수
     @Binding var showDetailView: Bool
@@ -52,10 +52,10 @@ struct GPSArtHomeView: View {
                                 Button {
                                     withAnimation(.bouncy(duration: 0.7)) {
                                         showDetailView = true
-                                        showAppleRunDetail = true
+                                        appleRunManager.showAppleRunDetail = true
                                     }
                                 } label: {
-                                    AppleRunCard(loading: $loading, showAppleRunDetail: $showAppleRunDetail, index: 0, currentIndex: currentIndex, namespace: namespace, showDetailView: showDetailView)
+                                    AppleRunCard(loading: $loading, showAppleRunDetail: $appleRunManager.showAppleRunDetail, index: 0, currentIndex: currentIndex, namespace: namespace, showDetailView: showDetailView)
                                 }
                                 .buttonStyle(CardButton())
                                 .disabled(loading)
@@ -161,9 +161,9 @@ struct GPSArtHomeView: View {
                     )
             }
             
-            if showDetailView, showAppleRunDetail {
+            if showDetailView, appleRunManager.showAppleRunDetail {
                 Color.gray900.ignoresSafeArea()
-                AppleRunDetail(showDetailView: $showDetailView, showAppleRunDetail: $showAppleRunDetail, namespace: namespace)
+                AppleRunDetail(showDetailView: $showDetailView, showAppleRunDetail: $appleRunManager.showAppleRunDetail, namespace: namespace)
                     .zIndex(1)
                     .ignoresSafeArea()
                     .transition(

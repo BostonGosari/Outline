@@ -31,6 +31,8 @@ class AppleRunManager: ObservableObject {
     
     @Published var progress = 0.0
     
+    @Published var showAppleRunDetail = false
+    
     private var timer: AnyCancellable?
     private let pedometer = CMPedometer()
     
@@ -107,7 +109,7 @@ class AppleRunManager: ObservableObject {
         endDate = data.endDate
         time = data.endDate.timeIntervalSince(data.startDate)
         
-        progress = min(steps / 100, 1.0)
+        progress = min(steps / 30, 1.0)
     }
     
     private func stopPedometerUpdates() {
@@ -128,5 +130,6 @@ class AppleRunManager: ObservableObject {
         avgPace = 0.0
         cadence = 0.0
         time = 0.0
+        progress = 0.0
     }
 }

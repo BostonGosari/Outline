@@ -121,10 +121,6 @@ struct AppleRunDetail: View {
                     .stroke(LinearGradient(colors: [.gray600, .clear, .clear, .clear], startPoint: .bottomTrailing, endPoint: .top), lineWidth: 1)
             }
             .matchedGeometryEffect(id: "AppleRun", in: namespace)
-            .overlay {
-                UnevenRoundedRectangle(bottomTrailingRadius: 45, style: .circular)
-                    .stroke(LinearGradient(colors: [.gray600, .clear, .clear, .clear], startPoint: .bottomTrailing, endPoint: .top), lineWidth: 1)
-            }
             .frame(
                 //                width: UIScreen.main.bounds.width + 2,
                 height: UIScreen.main.bounds.height * 0.68

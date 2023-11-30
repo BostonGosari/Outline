@@ -10,8 +10,6 @@ import SwiftUI
 
 struct AppleRunMapView: View {
     @StateObject private var appleRunManager = AppleRunManager.shared
-    @State private var position: MapCameraPosition = .userLocation(followsHeading: true, fallback: .automatic)
-    @Namespace private var mapScope
     
     @State private var coordinates: [CLLocationCoordinate2D] = []
     @State private var subCoordinates: [CLLocationCoordinate2D] = []
@@ -19,7 +17,7 @@ struct AppleRunMapView: View {
 
     var body: some View {
         ZStack(alignment: .topTrailing) {
-            Map(position: $position, scope: mapScope) {
+            Map {
                 MapPolyline(coordinates: coordinates)
                     .stroke(.white30, style: StrokeStyle(lineWidth: 6, lineCap: .round, lineJoin: .round))
 
@@ -33,10 +31,16 @@ struct AppleRunMapView: View {
             .mapStyle(.standard(pointsOfInterest: []))
             .mapControlVisibility(.hidden)
         }
-        .mapScope(mapScope)
         .tint(.customPrimary)
         .onAppear {
             getGPSArtCourseData()
+        }
+        .onChange(of: appleRunManager.progress) { _, newValue in
+            let count = coordinates.count
+            let index = Int(newValue * Double(count))
+            withAnimation {
+                userLocations = Array(coordinates.prefix(index))
+            }
         }
     }
     
