@@ -9,7 +9,7 @@ import MapKit
 import SwiftUI
 
 struct AppleRunView: View {
-    @StateObject private var runningManager = RunningDataManager.shared
+    @StateObject private var appleRunManager = AppleRunManager.shared
     @GestureState private var press = false
     
     @State private var showDetail = false
@@ -51,7 +51,7 @@ struct AppleRunView: View {
             }
         }
         .onAppear {
-            runningManager.startRunning()
+            appleRunManager.startRunning()
         }
     }
 }
@@ -156,6 +156,8 @@ extension AppleRunView {
                     }
                 }
                 
+                appleRunManager.resumeRunning()
+                
             } label: {
                 Image(systemName: "play.circle.fill")
                     .font(.system(size: 60))
@@ -176,6 +178,8 @@ extension AppleRunView {
                         navigationSheetHeight = 0
                     }
                 }
+                
+                appleRunManager.pauseRunning()
             } label: {
                 Image(systemName: "pause.circle.fill")
                     .font(.system(size: 60))
@@ -301,7 +305,7 @@ extension AppleRunView {
                 gestureState = currentState
             }
             .onEnded { _ in
-                
+                appleRunManager.stopRunning()
             }
             .simultaneously(with: TapGesture()
                 .onEnded { _ in

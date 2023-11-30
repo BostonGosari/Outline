@@ -9,6 +9,7 @@ import MapKit
 import SwiftUI
 
 struct AppleRunMapView: View {
+    @StateObject private var appleRunManager = AppleRunManager.shared
     @State private var position: MapCameraPosition = .userLocation(followsHeading: true, fallback: .automatic)
     @Namespace private var mapScope
     
@@ -31,14 +32,6 @@ struct AppleRunMapView: View {
             }
             .mapStyle(.standard(pointsOfInterest: []))
             .mapControlVisibility(.hidden)
-            
-            MapUserLocationButton(scope: mapScope)
-                .buttonBorderShape(.circle)
-                .tint(.white)
-                .controlSize(.large)
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
-                .padding(.bottom, 96)
-                .padding(.leading, 16)
         }
         .mapScope(mapScope)
         .tint(.customPrimary)

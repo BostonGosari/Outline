@@ -20,6 +20,7 @@ struct GPSArtHomeView: View {
     @State private var selectedCourse: CourseWithDistanceAndScore?
     @State private var showNetworkErrorView = false
     @State private var matched = false
+    @State private var showAppleRunDetail = false
     
     // 받아오는 변수
     @Binding var showDetailView: Bool
@@ -32,15 +33,15 @@ struct GPSArtHomeView: View {
     var body: some View {
         ZStack {
             if showNetworkErrorView {
-                 errorView
-             } else {
-                 ScrollView {
+                errorView
+            } else {
+                ScrollView {
                     Color.clear.frame(height: 0)
                         .onScrollViewOffsetChanged { offset in
                             scrollOffset = offset
                         }
-                     GPSArtHomeHeader(title: "근처에서\n달려볼까요?", loading: loading, scrollOffset: scrollOffset)
-                         .padding(.bottom, -10)
+                    GPSArtHomeHeader(title: "근처에서\n달려볼까요?", loading: loading, scrollOffset: scrollOffset)
+                        .padding(.bottom, -10)
                     
                     VStack(spacing: 0) {
                         ScrollView(.horizontal, showsIndicators: false) {
@@ -49,9 +50,12 @@ struct GPSArtHomeView: View {
                             
                             HStack(spacing: 0) {
                                 Button {
-                                    
+                                    withAnimation(.bouncy(duration: 0.7)) {
+                                        showDetailView = true
+                                        showAppleRunDetail = true
+                                    }
                                 } label: {
-                                    AppleRunCard(loading: $loading, index: 1, currentIndex: currentIndex)
+                                    AppleRunCard(loading: $loading, showAppleRunDetail: $showAppleRunDetail, index: 0, currentIndex: currentIndex, namespace: namespace, showDetailView: showDetailView)
                                 }
                                 .buttonStyle(CardButton())
                                 .disabled(loading)
@@ -68,7 +72,7 @@ struct GPSArtHomeView: View {
                                             matched = true
                                         }
                                     } label: {
-                                        BigCardView(course: viewModel.recommendedCoures[index], loading: $loading, index: index, currentIndex: currentIndex, namespace: namespace, showDetailView: showDetailView)
+                                        BigCardView(course: viewModel.recommendedCoures[index], loading: $loading, index: index + 1, currentIndex: currentIndex, namespace: namespace, showDetailView: showDetailView)
                                             .scaleEffect(selectedCourse?.id == viewModel.recommendedCoures[index].id ? 0.96 : 1)
                                     }
                                     .buttonStyle(CardButton())
@@ -156,6 +160,19 @@ struct GPSArtHomeView: View {
                         )
                     )
             }
+            
+            if showDetailView, showAppleRunDetail {
+                Color.gray900.ignoresSafeArea()
+                AppleRunDetail(showDetailView: $showDetailView, showAppleRunDetail: $showAppleRunDetail, namespace: namespace)
+                    .zIndex(1)
+                    .ignoresSafeArea()
+                    .transition(
+                        .asymmetric(
+                            insertion: .opacity.animation(nil),
+                            removal: .opacity.animation(.easeInOut.delay(0.1))
+                        )
+                    )
+            }
         }
         .background(
             BackgroundBlur(color: Color.customThird, padding: 0)
@@ -212,7 +229,6 @@ extension GPSArtHomeView {
                         .font(.customCaption)
                         .foregroundStyle(Color.customPrimary)
                 }
-                
             }
         }
     }

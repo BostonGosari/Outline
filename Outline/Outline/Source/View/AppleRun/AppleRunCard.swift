@@ -9,49 +9,62 @@ import SwiftUI
 
 struct AppleRunCard: View {
     @Binding var loading: Bool
+    @Binding var showAppleRunDetail: Bool
     var index: Int
     var currentIndex: Int
+    var namespace: Namespace.ID
+    var showDetailView: Bool
     
     var body: some View {
-        Rectangle()
-            .foregroundStyle(.gray700)
-            .mask {
-                UnevenRoundedRectangle(topLeadingRadius: 10, bottomLeadingRadius: 45, bottomTrailingRadius: 45, topTrailingRadius: 70)
-            }
-            .shadow(color: .white, radius: 1, y: -1)
-            .frame(
-                width: UIScreen.main.bounds.width * 0.84,
-                height: UIScreen.main.bounds.width * 0.84 * 1.5
-            )
-            .overlay(alignment: .topLeading) {
-                if !loading {
-                    ScoreStar(score: 100, size: .big)
-                        .padding(24)
+        if showDetailView {
+            UnevenRoundedRectangle(topLeadingRadius: 10, bottomLeadingRadius: 45, bottomTrailingRadius: 45, topTrailingRadius: 70)
+                .frame(
+                    width: UIScreen.main.bounds.width * 0.84,
+                    height: UIScreen.main.bounds.width * 0.84 * 1.5
+                )
+                .foregroundStyle(.gray700)
+        } else {
+            Image("AppleRun")
+                .resizable()
+                .matchedGeometryEffect(id: "AppleRun", in: namespace)
+                .mask {
+                    UnevenRoundedRectangle(topLeadingRadius: 10, bottomLeadingRadius: 45, bottomTrailingRadius: 45, topTrailingRadius: 70)
                 }
-            }
-            .overlay(alignment: .bottom) {
-                if !loading {
-                    courseInformation
-                        .opacity(index == currentIndex ? 1 : 0)
-                        .offset(y: index == currentIndex ? 0 : 10)
-                        .background(alignment: .bottom) {
-                            Rectangle()
-                                .foregroundStyle(
-                                    LinearGradient(
-                                        stops: [
-                                            Gradient.Stop(color: .black.opacity(0), location: 0.00),
-                                            Gradient.Stop(color: .black.opacity(0.7), location: 0.33),
-                                            Gradient.Stop(color: .black.opacity(0.8), location: 1.00)
-                                        ],
-                                        startPoint: UnitPoint(x: 0.5, y: 0),
-                                        endPoint: UnitPoint(x: 0.5, y: 1)
+                .shadow(color: .white, radius: 1, y: -1)
+                .frame(
+                    width: UIScreen.main.bounds.width * 0.84,
+                    height: UIScreen.main.bounds.width * 0.84 * 1.5
+                )
+                .overlay(alignment: .topLeading) {
+                    if !loading {
+                        ScoreStar(score: 100, size: .big)
+                            .padding(24)
+                    }
+                }
+                .overlay(alignment: .bottom) {
+                    if !loading {
+                        courseInformation
+                            .opacity(index == currentIndex ? 1 : 0)
+                            .offset(y: index == currentIndex ? 0 : 10)
+                            .background(alignment: .bottom) {
+                                Rectangle()
+                                    .foregroundStyle(
+                                        LinearGradient(
+                                            stops: [
+                                                Gradient.Stop(color: .black.opacity(0), location: 0.00),
+                                                Gradient.Stop(color: .black.opacity(0.7), location: 0.33),
+                                                Gradient.Stop(color: .black.opacity(0.8), location: 1.00)
+                                            ],
+                                            startPoint: UnitPoint(x: 0.5, y: 0),
+                                            endPoint: UnitPoint(x: 0.5, y: 1)
+                                        )
                                     )
-                                )
-                                .roundedCorners(45, corners: [.bottomLeft, .bottomRight])
-                                .opacity(index == currentIndex ? 1 : 0)
-                        }
+                                    .roundedCorners(45, corners: [.bottomLeft, .bottomRight])
+                                    .opacity(index == currentIndex ? 1 : 0)
+                            }
+                    }
                 }
-            }
+        }
     }
     
     private var courseInformation: some View {

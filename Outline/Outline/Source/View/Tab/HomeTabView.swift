@@ -9,6 +9,7 @@ import SwiftUI
 
 struct HomeTabView: View {
     @StateObject private var runningManager = RunningStartManager.shared
+    @StateObject private var appleRunManager = AppleRunManager.shared
     @StateObject var runningDataManager = RunningDataManager.shared
     @StateObject var watchConnectivityManager = WatchConnectivityManager.shared
     @State private var selectedTab: Tab = .GPSArtRunning
@@ -63,6 +64,14 @@ struct HomeTabView: View {
             if runningManager.mirroring {
                 MirroringView()
                     .transition(.move(edge: .bottom))
+            }
+            
+            if appleRunManager.start {
+                CountDown(running: $appleRunManager.running, start: $appleRunManager.start)
+            }
+            
+            if appleRunManager.running {
+                AppleRunView()
             }
         }
         .sheet(isPresented: $showMirroringSheet) {
