@@ -103,6 +103,8 @@
 		29B9BBA02B1816D40042DE19 /* AppleRun.kml in Resources */ = {isa = PBXBuildFile; fileRef = 29B9BB9F2B1816D40042DE19 /* AppleRun.kml */; };
 		29B9BBA42B1817FE0042DE19 /* AppleRunTail.kml in Resources */ = {isa = PBXBuildFile; fileRef = 29B9BBA32B1817FE0042DE19 /* AppleRunTail.kml */; };
 		29B9BBA62B181BDF0042DE19 /* AppleRunCourseGuideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B9BBA52B181BDF0042DE19 /* AppleRunCourseGuideView.swift */; };
+		29B9BBA82B18267C0042DE19 /* AppleRunCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B9BBA72B18267C0042DE19 /* AppleRunCard.swift */; };
+		29B9BBAA2B1826950042DE19 /* AppleRunDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B9BBA92B1826950042DE19 /* AppleRunDetail.swift */; };
 		29CC19A42AE95F2300B79610 /* RunningStartManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29CC19A32AE95F2300B79610 /* RunningStartManager.swift */; };
 		29CC42BD2AF24BCE00578EF1 /* WatchRunningManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29CC42BC2AF24BCE00578EF1 /* WatchRunningManager.swift */; };
 		29D6BAD32B0924D200BD8653 /* SmallCarouselCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D6BAD22B0924D200BD8653 /* SmallCarouselCard.swift */; };
@@ -368,6 +370,8 @@
 		29B9BB9F2B1816D40042DE19 /* AppleRun.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = AppleRun.kml; sourceTree = "<group>"; };
 		29B9BBA32B1817FE0042DE19 /* AppleRunTail.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = AppleRunTail.kml; sourceTree = "<group>"; };
 		29B9BBA52B181BDF0042DE19 /* AppleRunCourseGuideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleRunCourseGuideView.swift; sourceTree = "<group>"; };
+		29B9BBA72B18267C0042DE19 /* AppleRunCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleRunCard.swift; sourceTree = "<group>"; };
+		29B9BBA92B1826950042DE19 /* AppleRunDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleRunDetail.swift; sourceTree = "<group>"; };
 		29CC19A32AE95F2300B79610 /* RunningStartManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningStartManager.swift; sourceTree = "<group>"; };
 		29CC42BC2AF24BCE00578EF1 /* WatchRunningManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchRunningManager.swift; sourceTree = "<group>"; };
 		29D6BAD22B0924D200BD8653 /* SmallCarouselCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallCarouselCard.swift; sourceTree = "<group>"; };
@@ -644,6 +648,8 @@
 				29B9BBA52B181BDF0042DE19 /* AppleRunCourseGuideView.swift */,
 				29B9BB9F2B1816D40042DE19 /* AppleRun.kml */,
 				29B9BBA32B1817FE0042DE19 /* AppleRunTail.kml */,
+				29B9BBA72B18267C0042DE19 /* AppleRunCard.swift */,
+				29B9BBA92B1826950042DE19 /* AppleRunDetail.swift */,
 			);
 			path = AppleRun;
 			sourceTree = "<group>";
@@ -1401,8 +1407,10 @@
 				0E29F6552ADF6C7D00F5EF5C /* KMLParserManager.swift in Sources */,
 				0E2B4CBF2AE744E8002A5103 /* RecordDetailViewModel.swift in Sources */,
 				F0AC8B382AD96AE10061612C /* ViewExtension.swift in Sources */,
+				29B9BBAA2B1826950042DE19 /* AppleRunDetail.swift in Sources */,
 				95B8F45A2AED27C400D9F35B /* AuthModel.swift in Sources */,
 				0EE92E682AE00A11003192FF /* FinishRunningView.swift in Sources */,
+				29B9BBA82B18267C0042DE19 /* AppleRunCard.swift in Sources */,
 				0E29F65B2ADF6CA000F5EF5C /* RunningView.swift in Sources */,
 				0EE0D3E22B0C83B200E75F4C /* ShareView.swift in Sources */,
 				29EC2ECE2AEAD5A80033446C /* CourseProgressManager.swift in Sources */,

@@ -48,6 +48,18 @@ struct GPSArtHomeView: View {
                             getCurrentOffsetView
                             
                             HStack(spacing: 0) {
+                                Button {
+                                    
+                                } label: {
+                                    AppleRunCard(loading: $loading, index: 1, currentIndex: currentIndex)
+                                }
+                                .buttonStyle(CardButton())
+                                .disabled(loading)
+                                .scrollTransition { content, phase in
+                                    content
+                                        .scaleEffect(phase.isIdentity ? 1 : 0.9)
+                                }
+                                
                                 ForEach(viewModel.recommendedCoures.indices, id: \.self) { index in
                                     Button {
                                         withAnimation(.bouncy(duration: 0.7)) {
@@ -88,7 +100,7 @@ struct GPSArtHomeView: View {
                                     .padding(.top, -20)
                                     .padding(.bottom, -20)
                                 HStack {
-                                    ForEach(0..<3) { _ in
+                                    ForEach(0..<4) { _ in
                                         Rectangle()
                                             .frame(width: indexWidth, height: indexHeight)
                                             .foregroundStyle(.gray700)
@@ -100,7 +112,7 @@ struct GPSArtHomeView: View {
                         }
                         
                         HStack {
-                            ForEach(0..<3) { index in
+                            ForEach(0..<4) { index in
                                 Rectangle()
                                     .frame(width: indexWidth, height: indexHeight)
                                     .foregroundStyle(loading ? .gray600 : currentIndex == index ? .customPrimary : .white)
@@ -165,8 +177,10 @@ struct GPSArtHomeView: View {
                         currentIndex = 0
                     case 200..<500:
                         currentIndex = 1
-                    case 500...:
+                    case 500..<800:
                         currentIndex = 2
+                    case 800...:
+                        currentIndex = 3
                     default:
                         break
                     }
