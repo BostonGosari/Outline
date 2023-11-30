@@ -48,9 +48,9 @@ struct NewRunningMetricsView: View {
                 Task.detached {
                     // 시간이 바뀔 때마다 호출
                     await runningDataManager.updateLiveActivity(
-                        newTotalDistance: String(format: "%.2f", runningDataManager.totalDistance + runningDataManager.distance),
+                        newTotalDistance: String(format: "%.2f", (runningDataManager.totalDistance + runningDataManager.distance)/1000),
                         newTotalTime: runningManager.formattedTime(newCounterValue),
-                        newPace: String(format: "%.2f", runningDataManager.pace),
+                        newPace: String(format: "%.2f", runningDataManager.pace.formattedCurrentPace()),
                         newHeartrate: "--"
                     )
                 }

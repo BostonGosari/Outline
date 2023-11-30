@@ -358,13 +358,12 @@ extension NewRunningView {
                         runningStartManager.counter = 0
                         runningStartManager.running = false
                     } else {
-                        runningDataManager.userLocations = locationManager.userLocations
-                        runningStartManager.counter = 0
-                        runningDataManager.stopRunning()
                         Task {
                             await runningDataManager.removeActivity()
                         }
-                       
+                        runningDataManager.userLocations = locationManager.userLocations
+                        runningStartManager.counter = 0
+                        runningDataManager.stopRunning()
                         withAnimation {
                             showCompleteSheet = true
                         }
