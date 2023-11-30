@@ -306,6 +306,7 @@ extension AppleRunView {
             }
             .onEnded { _ in
                 appleRunManager.stopRunning()
+                appleRunManager.running = false
             }
             .simultaneously(with: TapGesture()
                 .onEnded { _ in
