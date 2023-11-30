@@ -48,7 +48,7 @@ struct MiniScrollView2: View {
                                         Rectangle()
                                             .foregroundStyle(.clear)
                                     } else {
-                                        KFImage(URL(string: currentCourse.course.thumbnail))
+                                        KFImage(URL(string: currentCourse.course.thumbnailNeon))
                                             .resizable()
                                             .placeholder {
                                                 Rectangle()
