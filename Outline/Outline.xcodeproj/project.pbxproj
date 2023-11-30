@@ -177,7 +177,6 @@
 		BB1D534C2ADEA6F90073771F /* SummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1D534B2ADEA6F90073771F /* SummaryView.swift */; };
 		BB397D092AE6408A00F92A43 /* RecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB397D082AE6408A00F92A43 /* RecordView.swift */; };
 		BB397D0B2AE640A800F92A43 /* RecordDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB397D0A2AE640A800F92A43 /* RecordDetailView.swift */; };
-		BB44B1672AFF5BBD000462CA /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = BB44B1662AFF5BBD000462CA /* Kingfisher */; };
 		BB44B16F2B047242000462CA /* AccuracyCheckViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB44B16D2B047242000462CA /* AccuracyCheckViewModel.swift */; };
 		BB44B1702B047242000462CA /* AccuracyCheckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB44B16E2B047242000462CA /* AccuracyCheckView.swift */; };
 		BB493CF82AE0CA55009D3699 /* ElapsedTimeFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB493CF72AE0CA55009D3699 /* ElapsedTimeFormatter.swift */; };
@@ -192,6 +191,7 @@
 		BB67086D2B11D592005D8BA5 /* CourseAnalyzeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29EC2ED12AEB2B560033446C /* CourseAnalyzeManager.swift */; };
 		BBBB27E52B1795360081C93D /* Color.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F0AC8AA02AD94C200061612C /* Color.xcassets */; };
 		BBBB27E62B1796DC0081C93D /* FontExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E29F64A2ADF653000F5EF5C /* FontExtension.swift */; };
+		BBBB27E92B186F910081C93D /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = BBBB27E82B186F910081C93D /* Kingfisher */; };
 		BBCB1F032B1778DE00D9AE1C /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBF90BC22B137AD700E3FD70 /* WidgetKit.framework */; };
 		BBCB1F042B1778DE00D9AE1C /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBF90BC42B137AD700E3FD70 /* SwiftUI.framework */; };
 		BBCB1F072B1778DE00D9AE1C /* OutlineLiveActivityBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBCB1F062B1778DE00D9AE1C /* OutlineLiveActivityBundle.swift */; };
@@ -522,7 +522,7 @@
 				BB02A3912B0CCCF300250EDD /* FirebaseFirestore in Frameworks */,
 				BB02A3902B0CCCF300250EDD /* FirebaseAuthCombine-Community in Frameworks */,
 				BB02A38F2B0CCCF300250EDD /* FirebaseAuth in Frameworks */,
-				BB44B1672AFF5BBD000462CA /* Kingfisher in Frameworks */,
+				BBBB27E92B186F910081C93D /* Kingfisher in Frameworks */,
 				95B8F45C2AED35E100D9F35B /* FirebaseAuth in Frameworks */,
 				95B8F45E2AED35E100D9F35B /* FirebaseAuthCombine-Community in Frameworks */,
 			);
@@ -1216,7 +1216,6 @@
 			packageProductDependencies = (
 				95B8F45B2AED35E100D9F35B /* FirebaseAuth */,
 				95B8F45D2AED35E100D9F35B /* FirebaseAuthCombine-Community */,
-				BB44B1662AFF5BBD000462CA /* Kingfisher */,
 				958240622B0A81B500105FAE /* FirebaseAuth */,
 				958240642B0A81B500105FAE /* FirebaseAuthCombine-Community */,
 				958240662B0A81B500105FAE /* FirebaseFirestore */,
@@ -1225,6 +1224,7 @@
 				9582406D2B0A81D900105FAE /* KakaoSDKCommon */,
 				9582406F2B0A826D00105FAE /* KakaoSDKAuth */,
 				958240712B0A82A400105FAE /* KakaoSDKUser */,
+				BBBB27E82B186F910081C93D /* Kingfisher */,
 			);
 			productName = Outline;
 			productReference = 297B80F92AE73C4500AF7219 /* Outline.app */;
@@ -1280,9 +1280,9 @@
 			);
 			mainGroup = F0AC8A902AD94C1F0061612C;
 			packageReferences = (
-				BB44B1652AFF5BBC000462CA /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				958240612B0A81B500105FAE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				9582406C2B0A81D900105FAE /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */,
+				BBBB27E72B186F910081C93D /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = F0AC8A902AD94C1F0061612C;
 			projectDirPath = "";
@@ -1618,7 +1618,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -1647,7 +1647,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -2026,7 +2026,7 @@
 				minimumVersion = 2.19.0;
 			};
 		};
-		BB44B1652AFF5BBC000462CA /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+		BBBB27E72B186F910081C93D /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
 			requirement = {
@@ -2085,9 +2085,9 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = "FirebaseAuthCombine-Community";
 		};
-		BB44B1662AFF5BBD000462CA /* Kingfisher */ = {
+		BBBB27E82B186F910081C93D /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = BB44B1652AFF5BBC000462CA /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			package = BBBB27E72B186F910081C93D /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
 		};
 /* End XCSwiftPackageProductDependency section */

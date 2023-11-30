@@ -15,4 +15,6 @@ struct RunningAttributes: ActivityAttributes {
         var pace: String
         var heartrate: String
     }
+    
+    let runningText: String
 }

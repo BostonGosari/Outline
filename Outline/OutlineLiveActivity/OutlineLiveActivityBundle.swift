@@ -11,6 +11,8 @@ import SwiftUI
 @main
 struct OutlineLiveActivityBundle: WidgetBundle {
     var body: some Widget {
-        OutlineLiveActivity()
+        if #available(iOS 16.2, *) {
+            OutlineLiveActivity()
+        }
     }
 }
