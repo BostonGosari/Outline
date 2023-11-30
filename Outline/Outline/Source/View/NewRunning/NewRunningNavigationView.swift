@@ -12,6 +12,7 @@ struct NewRunningNavigationView: View {
     @StateObject private var locationManager = LocationManager.shared
     
     @State private var synthesizer = AVSpeechSynthesizer()
+    @State private var audioPlayer: AVAudioPlayer?
     
     let courseName: String
     var showDetailNavigation: Bool
@@ -26,7 +27,7 @@ struct NewRunningNavigationView: View {
                 VStack(alignment: .leading) {
                     Text("\(Int(locationManager.distance))m")
                         .font(.customTitle2)
-                    Text(locationManager.direction)
+                    Text("\(locationManager.direction) 방면")
                         .font(.customSubtitle)
                         .foregroundStyle(.gray500)
                 }
@@ -50,7 +51,7 @@ struct NewRunningNavigationView: View {
                         VStack(alignment: .leading) {
                             Text("\(nextDirection.distance)m")
                                 .font(.customTitle2)
-                            Text(nextDirection.direction)
+                            Text("\(nextDirection.direction) 방면")
                                 .font(.customSubtitle)
                                 .foregroundStyle(.gray500)
                         }
@@ -59,6 +60,7 @@ struct NewRunningNavigationView: View {
             }
         }
         .onAppear {
+            playAlertSound()
             textToSpeech("\(courseName) 안내를 시작합니다.")
         }
         .onChange(of: locationManager.distance) {
@@ -66,16 +68,24 @@ struct NewRunningNavigationView: View {
                 textToSpeech("\(Int(locationManager.distance))미터 후 \(locationManager.direction)하세요)")
             }
         }
+        .onChange(of: locationManager.nearHotSopt) {
+            if locationManager.nearHotSopt {
+                if let hotSpot = locationManager.hotSpot {
+                    playAlertSound()
+                    textToSpeech(hotSpot.description)
+                }
+            }
+        }
     }
     
     private func getDirectionImage(_ direction: String) -> String {
         switch direction {
-        case "우회전":
+        case "우회전", "오른쪽":
             return "arrow.turn.up.right"
-        case "좌회전":
+        case "좌회전", "왼쪽":
             return "arrow.turn.up.left"
         default:
-            return ""
+            return "arrow.right.circle"
         }
     }
     
@@ -85,6 +95,17 @@ struct NewRunningNavigationView: View {
         utterance.rate = 0.5
         
         synthesizer.speak(utterance)
+    }
+    
+    private func playAlertSound() {
+        guard let url = Bundle.main.url(forResource: "alert", withExtension: "mp3") else { return }
+
+        do {
+            audioPlayer = try AVAudioPlayer(contentsOf: url)
+            audioPlayer?.play()
+        } catch let error {
+            print("Error playing sound: \(error.localizedDescription)")
+        }
     }
 }
 

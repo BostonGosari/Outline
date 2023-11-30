@@ -28,7 +28,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     @Published var distance = 0.0
     @Published var direction = ""
     @Published var nextDirection: (distance: Int, direction: String)?
-    @Published var hotSopt: (location: CLLocation, description: String)?
+    @Published var hotSpot: (location: CLLocation, description: String)?
     @Published var nearHotSopt = false
     @Published var navigationDatas: [Navigation]?
     
@@ -57,8 +57,8 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
             let targetLocation = CLLocation(latitude: navigationDatas[index].latitude, longitude: navigationDatas[index].longitude)
             distance = targetLocation.distance(from: currentLocation)
             
-            if let hotSopt {
-                if currentLocation.distance(from: hotSopt.location) < 30 {
+            if let hotSpot {
+                if currentLocation.distance(from: hotSpot.location) < 30 {
                     nearHotSopt = true
                 }
             }
@@ -68,9 +68,9 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
                     let nextDistance = CLLocation(latitude: navigationDatas[index+1].latitude, longitude: navigationDatas[index+1].longitude).distance(from: currentLocation)
                     if nextDistance <= navigationDatas[index+1].distance - 5 {
                         if navigationDatas[index+1].nextDirection == "핫스팟" {
-                            hotSopt = (
+                            hotSpot = (
                                 location: CLLocation(latitude: navigationDatas[index+1].latitude, longitude: navigationDatas[index+1].longitude),
-                                description: navigationDatas[index+1].nextDirection
+                                description: navigationDatas[index+1].alertMessage
                             )
                             index += 2
                         } else {
