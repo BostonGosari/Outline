@@ -73,6 +73,9 @@ extension NewRunningView {
                 if runningStartManager.running == true {
                     runningDataManager.startRunning()
                     runningStartManager.startTimer()
+                    Task {
+                        await runningDataManager.addLiveActivity()
+                    }
                 }
             }
     }
@@ -358,6 +361,10 @@ extension NewRunningView {
                         runningDataManager.userLocations = locationManager.userLocations
                         runningStartManager.counter = 0
                         runningDataManager.stopRunning()
+                        Task {
+                            await runningDataManager.removeActivity()
+                        }
+                       
                         withAnimation {
                             showCompleteSheet = true
                         }
