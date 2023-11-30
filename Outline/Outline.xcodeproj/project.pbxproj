@@ -21,6 +21,7 @@
 		0E9A5D482AE065A100C19FF3 /* ShareViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9A5D472AE065A100C19FF3 /* ShareViewModel.swift */; };
 		0E9A5D4F2AE0B8C800C19FF3 /* ShareModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9A5D4E2AE0B8C800C19FF3 /* ShareModel.swift */; };
 		0EB59A222B176BA100A18C50 /* test.json in Resources */ = {isa = PBXBuildFile; fileRef = 0EB59A212B176BA100A18C50 /* test.json */; };
+		0EB59A3E2B1835E600A18C50 /* alert.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0EB59A3D2B1835E600A18C50 /* alert.mp3 */; };
 		0EE0D3E22B0C83B200E75F4C /* ShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE0D3E12B0C83B200E75F4C /* ShareView.swift */; };
 		0EE0D4022B0DC30300E75F4C /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE0D4012B0DC30300E75F4C /* Place.swift */; };
 		0EE0D4042B0DC34000E75F4C /* CardDetailMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE0D4032B0DC34000E75F4C /* CardDetailMap.swift */; };
@@ -290,6 +291,7 @@
 		0E9A5D472AE065A100C19FF3 /* ShareViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewModel.swift; sourceTree = "<group>"; };
 		0E9A5D4E2AE0B8C800C19FF3 /* ShareModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareModel.swift; sourceTree = "<group>"; };
 		0EB59A212B176BA100A18C50 /* test.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = test.json; sourceTree = "<group>"; };
+		0EB59A3D2B1835E600A18C50 /* alert.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = alert.mp3; sourceTree = "<group>"; };
 		0EE0D3E12B0C83B200E75F4C /* ShareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareView.swift; sourceTree = "<group>"; };
 		0EE0D4012B0DC30300E75F4C /* Place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
 		0EE0D4032B0DC34000E75F4C /* CardDetailMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetailMap.swift; sourceTree = "<group>"; };
@@ -952,6 +954,7 @@
 		F0AC8AFD2AD9638C0061612C /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				0EB59A3D2B1835E600A18C50 /* alert.mp3 */,
 				0EB59A212B176BA100A18C50 /* test.json */,
 				0E29F64D2ADF681E00F5EF5C /* KML */,
 				BB1D530A2ADDBC430073771F /* Font */,
@@ -1265,6 +1268,7 @@
 				2990249A2B10B3E8005C5BA8 /* SFCompactDisplay-Semibold.ttf in Resources */,
 				954CB2AF2AE5457B005EB2E9 /* seoulCamelRun.kml in Resources */,
 				BB1D531E2ADDBCB90073771F /* Pretendard-Thin.ttf in Resources */,
+				0EB59A3E2B1835E600A18C50 /* alert.mp3 in Resources */,
 				BB1D530C2ADDBC560073771F /* Pretendard-Black.ttf in Resources */,
 				BB1D530E2ADDBC620073771F /* Pretendard-Bold.ttf in Resources */,
 				0EB59A222B176BA100A18C50 /* test.json in Resources */,
