@@ -115,5 +115,4 @@ struct BigCardView: View {
         .padding(.leading, 24)
         .frame(maxWidth: .infinity, alignment: .leading)
     }
-    
 }

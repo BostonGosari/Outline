@@ -5,9 +5,11 @@
 //  Created by hyunjun on 11/30/23.
 //
 
+import MapKit
 import SwiftUI
 
 struct AppleRunView: View {
+    @StateObject private var runningManager = RunningDataManager.shared
     @GestureState private var press = false
     
     @State private var showDetail = false
@@ -48,12 +50,15 @@ struct AppleRunView: View {
                 showDetail = false
             }
         }
+        .onAppear {
+            runningManager.startRunning()
+        }
     }
 }
 
 extension AppleRunView {
     private var map: some View {
-        MirroringMapView()
+        AppleRunMapView()
     }
     
     private var navigation: some View {
@@ -191,8 +196,7 @@ extension AppleRunView {
     
     private var guideView: some View {
         ZStack {
-            
-            CourseGuideView(
+            AppleRunCourseGuideView(
                 tapGuideView: $tapGuideView,
                 coursePathCoordinates: [],
                 courseRotate: 0.0,
@@ -202,6 +206,7 @@ extension AppleRunView {
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: tapGuideView ? .top : .topTrailing)
             .padding(.top, 80)
             .padding(.trailing, tapGuideView ? 0 : 16)
+
         }
         .zIndex(tapGuideView ? 2 : 0)
         .background {
