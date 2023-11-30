@@ -5,12 +5,13 @@
 //  Created by hyunjun on 11/13/23.
 //
 
+import Combine
 import SwiftUI
 
 struct NewRunningMetricsView: View {
     @StateObject private var runningManager = RunningStartManager.shared
     @StateObject private var runningDataManager = RunningDataManager.shared
-    
+
     // TODO: 사용자 데이터에서 가져오기
     private let weight: Double = 60
     
@@ -42,6 +43,20 @@ struct NewRunningMetricsView: View {
             }
             .opacity(!isPaused && !showDetail ? 1 : 0)
         }
+        .onReceive(runningManager.$counter) { newCounterValue in
+            if (runningDataManager.activityID != nil) {
+                Task.detached {
+                    // 시간이 바뀔 때마다 호출
+                    await runningDataManager.updateLiveActivity(
+                        newTotalDistance: String(format: "%.2f", runningDataManager.totalDistance + runningDataManager.distance),
+                        newTotalTime: runningManager.formattedTime(newCounterValue),
+                        newPace: String(format: "%.2f", runningDataManager.pace),
+                        newHeartrate: "--"
+                    )
+                }
+            }
+            
+        }
         .onChange(of: runningDataManager.distance) { _, _ in
             runningDataManager.kilocalorie = weight * (runningDataManager.totalDistance + runningDataManager.distance) / 1000 * 1.036
         }
@@ -64,6 +79,7 @@ struct NewRunningMetricsView: View {
                 MetricItem(value: currentPace.formattedCurrentPace(), label: "페이스")
             }
         }
+       
     }
 }
 

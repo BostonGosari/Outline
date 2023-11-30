@@ -74,7 +74,7 @@ extension NewRunningView {
                     runningDataManager.startRunning()
                     runningStartManager.startTimer()
                     Task {
-                        await runningDataManager.addLiveActivity()
+                        await runningDataManager.startLiveActivity()
                     }
                 }
             }
