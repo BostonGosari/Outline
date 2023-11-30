@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct AppleRunMetricsView: View {
+    @StateObject private var appleRunManager = AppleRunManager.shared
     private let weight: Double = 60
     
     var showDetail: Bool
@@ -17,7 +18,7 @@ struct AppleRunMetricsView: View {
         VStack {
             if showDetail {
                 VStack(spacing: 25) {
-                    Text(formattedTime(100))
+                    Text(formattedTime(appleRunManager.counter))
                         .font(.customTimeTitle)
                         .foregroundStyle(.customPrimary)
                     metricGrid
@@ -27,7 +28,7 @@ struct AppleRunMetricsView: View {
             }
             HStack {
                 VStack(alignment: .center) {
-                    Text(formattedTime(100))
+                    Text(formattedTime(appleRunManager.counter))
                         .font(.customTitle)
                     Text("진행시간")
                         .font(.customCaption)
@@ -42,15 +43,15 @@ struct AppleRunMetricsView: View {
     
     private var metricGrid: some View {
         VStack(spacing: 25) {
-            let totalDistance = 10
-            let bpm = 120
-            let currentPace = 100.0
+            let totalDistance = appleRunManager.distance
+            let steps = appleRunManager.steps
+            let currentPace = appleRunManager.pace
             let distanceKM = totalDistance / 1000
-            let kilocalorie = 100
+            let kilocalorie = appleRunManager.kilocalorie
             
             HStack {
                 MetricItem(value: String(format: "%.2f", distanceKM), label: "킬로미터")
-                MetricItem(value: String(bpm), label: "BPM")
+                MetricItem(value: String(format: "%.0f", steps), label: "걸음수")
             }
             HStack {
                 MetricItem(value: String(format: "%.0f", kilocalorie), label: "칼로리")
@@ -68,5 +69,5 @@ struct AppleRunMetricsView: View {
 }
 
 #Preview {
-    AppleRunMetricsView(showDetail: false, isPaused: false)
+    AppleRunMetricsView(showDetail: true, isPaused: true)
 }

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AppleRunNavigationView: View {
-    @StateObject private var connectivityManager = WatchConnectivityManager.shared
+    @StateObject private var appleRunManager = AppleRunManager.shared
     var showDetailNavigation: Bool
     
     var body: some View {
