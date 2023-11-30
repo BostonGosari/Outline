@@ -39,3 +39,5 @@ extension Font {
     static let customWidgetTitle = Font.custom("Pretendard-ExtraBold", size: 48)
     static let customWidgetData = Font.custom("Pretendard-Bold", size: 24)
 }
+
+

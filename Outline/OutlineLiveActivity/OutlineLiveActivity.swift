@@ -25,14 +25,15 @@ struct OutlineLiveActivity: Widget {
                     HStack {
                         Text("러닝중")
                             .foregroundStyle(.customWhite)
+                            .font(.customCaption)
                         Spacer()
                         Image(systemName: "circle.fill")
                             .foregroundStyle(.customPrimary)
                         Text("OUTLINE RUNNING")
                             .foregroundStyle(.customPrimary)
+                            .font(.customCaption)
                     }
-                    .font(.customCaption)
-                  
+                     
                     HStack(alignment: .bottom, spacing: 0) {
                         Text(context.state.totalDistance)
                             .font(.customWidgetTitle)
@@ -44,17 +45,21 @@ struct OutlineLiveActivity: Widget {
                     .foregroundStyle(.customPrimary)
                     .padding(.top, 15)
                     .padding(.bottom, 13)
+                    
                     Divider()
                     HStack {
                         Text(context.state.totalTime)
+                            .font(.customWidgetData)
                         Spacer()
                         Text(context.state.pace)
+                            .font(.customWidgetData)
                         Spacer()
                         Image(systemName: "heart")
                             .font(.customCaption)
                         Text(context.state.heartrate)
+                            .font(.customWidgetData)
                     }
-                    .font(.customWidgetData)
+                    
                     .fontWeight(.bold)
                     .foregroundStyle(.gray200)
                 }

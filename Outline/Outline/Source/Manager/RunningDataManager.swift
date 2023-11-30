@@ -36,10 +36,10 @@ class RunningDataManager: ObservableObject {
     @Published var score: Int = 0
     @Published var num: Int = 0
     
-    // MARK: - Private Properties
-    @State var currentID: String = ""
+    @MainActor @Published private(set) var activityID: String?
+    @MainActor @Published private(set) var activityToken: String?
     
-    @State private var activity : Activity<RunningAttributes>? = nil
+//    @State private var activity : Activity<RunningAttributes>? = nil
     private var cancellable: Set<AnyCancellable> = Set()
     private let pedometer = CMPedometer()
     private let healthKitManager = HealthKitManager()
@@ -58,7 +58,6 @@ class RunningDataManager: ObservableObject {
     func startRunning() {
         RunningStartDate = Date()
         startPedometerUpdates()
-        addLiveActivity()
     }
     
     func stopRunningWithoutRecord() {
@@ -72,7 +71,6 @@ class RunningDataManager: ObservableObject {
     func stopRunning() {
         RunningEndDate = Date()
         stopPedometerUpdates()
-//        removeActivity()
     }
     
     func pauseRunning() {
@@ -146,42 +144,61 @@ class RunningDataManager: ObservableObject {
         time = 0.0
     }
     
-    func addLiveActivity() {
+    func addLiveActivity() async {
         guard ActivityAuthorizationInfo().areActivitiesEnabled else { return }
-             let attribute = RunningAttributes()
-             let state = RunningAttributes.ContentState(
-                totalDistance: String(self.totalDistance),
-                totalTime: String(self.num),
-                pace: String(self.pace),
-                heartrate: "--"
-                )
-             do {
-                 self.activity = try Activity.request(attributes: attribute, contentState: state)
-                 timer()
-             } catch {
-                 print(error)
-             }
+        let attribute = RunningAttributes()
+        let state = ActivityContent(state: RunningAttributes.ContentState( totalDistance: String(self.totalDistance), totalTime: String(self.time), pace: String(self.pace), heartrate: "--"), staleDate: nil)
+        
+        do {
+            let activity = try? Activity<RunningAttributes>.request(attributes: attribute, content: state)
+            guard let activity = activity else {
+                       return
+                   }
+                   await MainActor.run { activityID = activity.id }
+            print("activity 생성 \(activity.id )")
+
+            await timer()
+        } catch {
+            print(error)
+        }
     }
     
-    func timer() {
-           Timer.publish(every: 1, on: .main, in: .default)
-               .autoconnect()
-               .sink { [self] _ in
-                   Task {
-                       let newState = RunningAttributes.ContentState(totalDistance: String(self.totalDistance), totalTime: String(self.time), pace: String(self.pace), heartrate: "--")
-                      
-                       await activity?.update(using: newState)
-                   }
-               }
-               .store(in: &cancellable)
-       }
-    
-    func removeActivity() {
-        Task {
-            await activity?.end(using: nil, dismissalPolicy: .default)
-            cancellable.removeAll()
-        }
+    func timer() async {
+        guard let activityID = await activityID,
+        let runningActivity = Activity<RunningAttributes>.activities.first(where: { $0.id == activityID }) else {
+                    return
+                }
         
+        Timer.publish(every: 1, on: .main, in: .default)
+            .autoconnect()
+            .sink { _ in
+                
+                Task {
+                    print("update \(activityID)")
+                    let newState = RunningAttributes.ContentState(totalDistance: "\(self.totalDistance)", totalTime: "\(self.time)", pace: "\(self.pace)", heartrate: "--")
+                    print("newState \(newState)")
+                    await runningActivity.update(using: newState)
+                }
+            }
+            .store(in: &cancellable)
+    }
+    
+    func removeActivity() async {
+        guard let activityID = await activityID,
+                     let runningActivity = Activity<RunningAttributes>.activities.first(where: { $0.id == activityID }) else {
+                   return
+               }
+               let initialContentState = RunningAttributes.ContentState( totalDistance: String(self.totalDistance), totalTime: String(self.time), pace: String(self.pace), heartrate: "--")
+
+               await runningActivity.end(
+                   ActivityContent(state: initialContentState, staleDate: Date.distantFuture),
+                   dismissalPolicy: .immediate
+               )
+               
+               await MainActor.run {
+                   self.activityID = nil
+                   self.activityToken = nil
+               }
     }
     
     func caculateAccuracyAndProgress() {
