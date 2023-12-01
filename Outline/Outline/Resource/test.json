@@ -1,0 +1,137 @@
+{
+    "Route": [
+        {
+            "nextDirection": "시작",
+            "alertMessage": "",
+            "longitude": 129.325743,
+            "latitude": 36.014769,
+            "distance": 0
+        },
+        {
+            "nextDirection": "우회전",
+            "alertMessage": "",
+            "longitude": 129.32599,
+            "latitude": 36.01469,
+            "distance": 23.929616826855952
+        },
+        {
+            "nextDirection": "좌회전",
+            "alertMessage": "",
+            "longitude": 129.325966,
+            "latitude": 36.014386,
+            "distance": 33.80093164487209
+        },
+        {
+            "nextDirection": "우회전",
+            "alertMessage": "",
+            "longitude": 129.3262424,
+            "latitude": 36.0143244,
+            "distance": 25.837101927429227
+        },
+        {
+            "nextDirection": "우회전",
+            "alertMessage": "",
+            "longitude": 129.326119,
+            "latitude": 36.013992,
+            "distance": 38.52391224606457
+        },
+        {
+            "nextDirection": "좌회전",
+            "alertMessage": "",
+            "longitude": 129.325993,
+            "latitude": 36.013895,
+            "distance": 15.64797186531424
+        },
+        {
+            "nextDirection": "좌회전",
+            "alertMessage": "",
+            "longitude": 129.32603,
+            "latitude": 36.01373,
+            "distance": 18.60962804104905
+        },
+        {
+            "nextDirection": "우회전",
+            "alertMessage": "",
+            "longitude": 129.326331,
+            "latitude": 36.013754,
+            "distance": 27.264587157639543
+        },
+        {
+            "nextDirection": "우회전",
+            "alertMessage": "",
+            "longitude": 129.326543,
+            "latitude": 36.013372,
+            "distance": 46.49566044476151
+        },
+        {
+            "nextDirection": "우회전",
+            "alertMessage": "",
+            "longitude": 129.326426,
+            "latitude": 36.013325,
+            "distance": 11.76606669019292
+        },
+        {
+            "nextDirection": "왼쪽으로 짧게 돌기",
+            "alertMessage": "",
+            "longitude": 129.326234,
+            "latitude": 36.013591,
+            "distance": 34.21577335650944
+        },
+        {
+            "nextDirection": "우회전",
+            "alertMessage": "",
+            "longitude": 129.326331,
+            "latitude": 36.013306,
+            "distance": 32.81007334080691
+        },
+        {
+            "nextDirection": "우회전",
+            "alertMessage": "",
+            "longitude": 129.326226,
+            "latitude": 36.013246,
+            "distance": 11.572266617587625
+        },
+        {
+            "nextDirection": "좌회전",
+            "alertMessage": "",
+            "longitude": 129.32603,
+            "latitude": 36.013565,
+            "distance": 39.56088669466253
+        },
+        {
+            "nextDirection": "우회전",
+            "alertMessage": "",
+            "longitude": 129.325832,
+            "latitude": 36.013491,
+            "distance": 19.647144881137944
+        },
+        {
+            "nextDirection": "우회전",
+            "alertMessage": "",
+            "longitude": 129.325202,
+            "latitude": 36.014648,
+            "distance": 140.38086840329012
+        },
+        {
+            "nextDirection": "왼쪽으로 돌기",
+            "alertMessage": "원을 그려주세요",
+            "longitude": 129.325655,
+            "latitude": 36.014776,
+            "distance": 43.23590286934486
+        },
+        {
+            "nextDirection": "왼쪽으로 돌기",
+            "alertMessage": "원을 그려주세요",
+            "longitude": 129.325837,
+            "latitude": 36.015132,
+            "distance": 42.77323585249888
+        },
+        {
+            "nextDirection": "도착",
+            "alertMessage": "도착 했어요",
+            "longitude": 129.325743,
+            "latitude": 36.014769,
+            "distance": 41.15993410041411
+        }
+    ]
+}

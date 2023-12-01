@@ -1,18 +1,15 @@
 //
-//  NewRunningView.swift
+//  MirroringView.swift
 //  Outline
 //
-//  Created by hyunjun on 11/13/23.
+//  Created by hyunjun on 11/22/23.
 //
 
 import SwiftUI
-import CoreMotion
 
-struct NewRunningView: View {
-    @StateObject private var connectivityManger = WatchConnectivityManager.shared
-    @StateObject private var runningStartManager = RunningStartManager.shared
-    @StateObject private var runningDataManager = RunningDataManager.shared
-    @StateObject private var locationManager = LocationManager.shared
+struct MirroringView: View {
+    @StateObject private var connectivityManager = WatchConnectivityManager.shared
+    @StateObject private var runningManager = RunningStartManager.shared
     
     @AppStorage("isFirstRunning") private var isFirstRunning = true
     
@@ -41,17 +38,17 @@ struct NewRunningView: View {
     var body: some View {
         ZStack {
             map
-            if let startCourse = runningStartManager.startCourse,
-                !startCourse.navigation.isEmpty {
+            if connectivityManager.runningInfo.runningType == .gpsArt {
                 navigation
             }
             metrics
-            guideView
             
-            RunningFinishPopUp(isPresented: $showCompleteSheet, score: $runningDataManager.score, userLocations: $locationManager.userLocations)
+            if connectivityManager.runningInfo.runningType == .gpsArt {
+                guideView
+            }
         }
         .overlay {
-            if isFirstRunning && runningStartManager.runningType == .gpsArt {
+            if isFirstRunning && connectivityManager.runningInfo.runningType == .gpsArt {
                 FirstRunningGuideView(isFirstRunning: $isFirstRunning)
             }
         }
@@ -67,25 +64,9 @@ struct NewRunningView: View {
             }
         }
         .onDisappear {
-            runningStartManager.counter = 0
+            connectivityManager.runningData.time = 0
         }
-        .onChange(of: runningStartManager.counter) { _, newValue in
-            if connectivityManger.isMirroring {
-                let userLocations = ConvertCoordinateManager.convertToCoordinates(locationManager.userLocations)
-                
-                let runningData = MirroringRunningData(
-                    userLocations: userLocations,
-                    time: Double(newValue),
-                    distance: runningDataManager.distance,
-                    kcal: runningDataManager.kilocalorie,
-                    pace: runningDataManager.pace,
-                    bpm: 0
-                )
-                
-                connectivityManger.sendRunningData(runningData)
-            }
-        }
-        .onChange(of: connectivityManger.runningState) { _, newValue in
+        .onChange(of: connectivityManager.runningState) { _, newValue in
             if newValue == .pause {
                 withAnimation {
                     showDetail = true
@@ -94,10 +75,7 @@ struct NewRunningView: View {
                         navigationSheetHeight = 0
                     }
                 }
-                runningDataManager.pauseRunning()
-                runningStartManager.stopTimer()
-                locationManager.isRunning = false
-            } else if newValue == .resume {
+            } else {
                 withAnimation {
                     showDetail = false
                     isPaused = false
@@ -105,54 +83,19 @@ struct NewRunningView: View {
                         navigationSheetHeight = 0
                     }
                 }
-                runningDataManager.resumeRunning()
-                runningStartManager.startTimer()
-                locationManager.isRunning = true
-            } else if newValue == .end {
-                DispatchQueue.main.async {
-                    if runningStartManager.counter < 30 {
-                        runningDataManager.stopRunningWithoutRecord()
-                        runningStartManager.stopTimer()
-                        runningStartManager.running = false
-                        locationManager.isRunning = false
-                        if connectivityManger.isMirroring {
-                            connectivityManger.sendRunningState(.end)
-                        }
-                    } else {
-                        runningDataManager.userLocations = locationManager.userLocations
-                        runningStartManager.stopTimer()
-                        locationManager.isRunning = false
-                        withAnimation {
-                            showCompleteSheet = true
-                        }
-                        runningDataManager.stopRunning()
-                        if connectivityManger.isMirroring {
-                            connectivityManger.sendRunningState(.end)
-                        }
-                    }
-                }
             }
         }
     }
 }
 
-extension NewRunningView {
+extension MirroringView {
     private var map: some View {
-        NewRunningMapView(userLocations: locationManager.userLocations)
-            .onAppear {
-                if runningStartManager.running == true {
-                    runningDataManager.startRunning()
-                    runningStartManager.startTimer()
-                    Task {
-                        await runningDataManager.startLiveActivity()
-                    }
-                }
-            }
+        MirroringMapView()
     }
     
     private var navigation: some View {
         NewRunningNavigationView(
-            courseName: runningStartManager.startCourse?.courseName ?? "",
+            courseName: runningManager.startCourse?.courseName ?? "",
             showDetailNavigation: navigationTranslation + navigationSheetHeight > 10
         )
             .frame(height: 70 + navigationTranslation + navigationSheetHeight, alignment: .top)
@@ -181,13 +124,10 @@ extension NewRunningView {
             .zIndex(1)
             .gesture(navigationGesture)
             .frame(maxHeight: .infinity, alignment: .top)
-            .onAppear {
-                locationManager.navigationDatas = runningStartManager.startCourse?.navigation
-            }
     }
     
     private var metrics: some View {
-        NewRunningMetricsView(showDetail: showDetail, isPaused: isPaused)
+        MirroringMetricsView(showDetail: showDetail, isPaused: isPaused)
             .overlay(alignment: .topTrailing) {
                 showDetailButton
             }
@@ -199,12 +139,12 @@ extension NewRunningView {
             .background {
                 TransparentBlurView(removeAllFilters: true)
                     .blur(radius: 6, opaque: true)
-                    .ignoresSafeArea()
                     .overlay {
                         RoundedRectangle(cornerRadius: 20)
                             .foregroundStyle(.black50)
                             .ignoresSafeArea()
                     }
+                    .ignoresSafeArea()
             }
             .gesture(metricsGesture)
             .overlay(alignment: .bottom) {
@@ -233,17 +173,14 @@ extension NewRunningView {
     
     private var controlButton: some View {
         ZStack {
-            Button {
-            } label: {
-                Image(systemName: "stop.circle.fill")
-                    .font(.system(size: 60))
-                    .fontWeight(.ultraLight)
-                    .foregroundStyle(.black, .customWhite)
-                    .gesture(stopButtonGesture)
-                    .scaleEffect(press ? 1.5 : 1)
-            }
-            .animation(.easeInOut, value: press)
-            .frame(maxWidth: .infinity, alignment: isPaused ? .leading : .center)
+            Image(systemName: "stop.circle.fill")
+                .font(.system(size: 60))
+                .fontWeight(.ultraLight)
+                .foregroundStyle(.black, .customWhite)
+                .gesture(stopButtonGesture)
+                .scaleEffect(press ? 1.5 : 1)
+                .animation(.easeInOut, value: press)
+                .frame(maxWidth: .infinity, alignment: isPaused ? .leading : .center)
             
             Button {
                 withAnimation {
@@ -253,11 +190,8 @@ extension NewRunningView {
                         navigationSheetHeight = 0
                     }
                 }
-                runningDataManager.resumeRunning()
-                runningStartManager.startTimer()
-                if connectivityManger.isMirroring {
-                    connectivityManger.sendRunningState(.resume)
-                }
+                
+                connectivityManager.sendRunningState(.resume)
             } label: {
                 Image(systemName: "play.circle.fill")
                     .font(.system(size: 60))
@@ -278,11 +212,7 @@ extension NewRunningView {
                         navigationSheetHeight = 0
                     }
                 }
-                runningDataManager.pauseRunning()
-                runningStartManager.stopTimer()
-                if connectivityManger.isMirroring {
-                    connectivityManger.sendRunningState(.pause)
-                }
+                connectivityManager.sendRunningState(.pause)
             } label: {
                 Image(systemName: "pause.circle.fill")
                     .font(.system(size: 60))
@@ -303,19 +233,19 @@ extension NewRunningView {
     
     private var guideView: some View {
         ZStack {
-            if let course = runningStartManager.startCourse,
-               runningStartManager.runningType == .gpsArt {
-                CourseGuideView(
-                    tapGuideView: $tapGuideView,
-                    coursePathCoordinates: ConvertCoordinateManager.convertToCLLocationCoordinates(course.coursePaths),
-                    courseRotate: course.heading,
-                    userLocations: locationManager.userLocations,
-                    tapPossible: !(navigationTranslation + navigationSheetHeight > 10)
-                )
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: tapGuideView ? .top : .topTrailing)
-                .padding(.top, 80)
-                .padding(.trailing, tapGuideView ? 0 : 16)
-            }
+            let userLocations = ConvertCoordinateManager.convertToCLLocationCoordinates(connectivityManager.runningData.userLocations)
+            let course = ConvertCoordinateManager.convertToCLLocationCoordinates(connectivityManager.runningInfo.course)
+            
+            CourseGuideView(
+                tapGuideView: $tapGuideView,
+                coursePathCoordinates: course,
+                courseRotate: 0.0,
+                userLocations: userLocations,
+                tapPossible: !(navigationTranslation + navigationSheetHeight > 10)
+            )
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: tapGuideView ? .top : .topTrailing)
+            .padding(.top, 80)
+            .padding(.trailing, tapGuideView ? 0 : 16)
         }
         .zIndex(tapGuideView ? 2 : 0)
         .background {
@@ -329,36 +259,9 @@ extension NewRunningView {
             }
         }
     }
-    
-    private var completeSheet: some View {
-        VStack(spacing: 0) {
-            Text("오늘은, 여기까지")
-                .font(.customTitle2)
-                .padding(.top, 56)
-                .padding(.bottom, 8)
-            
-            Text("즐거운 러닝이었나요? 다음에 또 만나요! ")
-                .font(.customSubbody)
-                .padding(.bottom, 24)
-            
-            Image("Finish10")
-                .resizable()
-                .frame(width: 120, height: 120)
-                .padding(.bottom, 45)
-            
-            CompleteButton(text: "결과 페이지로", isActive: true) {
-                runningStartManager.complete = true
-                withAnimation {
-                    runningStartManager.running = false
-                }
-            }
-        }
-        .presentationDetents([.height(UIScreen.main.bounds.height / 2)])
-        .presentationDragIndicator(.hidden)
-    }
 }
 
-extension NewRunningView {
+extension MirroringView {
     private var navigationGesture: some Gesture {
         DragGesture()
             .onChanged { value in
@@ -367,9 +270,9 @@ extension NewRunningView {
                 }
                 let translationY = value.translation.height
                 if navigationSheetHeight == 0 {
-                    navigationTranslation = min(max(translationY, -5), 150)
+                    navigationTranslation = min(max(translationY, -5), 340)
                 } else {
-                    navigationTranslation = max(min(translationY, 40), -160)
+                    navigationTranslation = max(min(translationY, 40), -310)
                 }
             }
             .onEnded { value in
@@ -379,7 +282,7 @@ extension NewRunningView {
                 let translationY = value.translation.height
                 withAnimation(.bouncy) {
                     if translationY > 0 {
-                        navigationSheetHeight = 150
+                        navigationSheetHeight = 300
                     } else {
                         navigationSheetHeight = 0
                     }
@@ -393,7 +296,7 @@ extension NewRunningView {
                     }
                     withAnimation {
                         if navigationSheetHeight == 0 {
-                            navigationSheetHeight = 150
+                            navigationSheetHeight = 300
                         } else {
                             navigationSheetHeight = 0
                         }
@@ -437,31 +340,8 @@ extension NewRunningView {
                 gestureState = currentState
             }
             .onEnded { _ in
-                DispatchQueue.main.async {
-                    if runningStartManager.counter < 3 {
-                        runningDataManager.stopRunningWithoutRecord()
-                        runningStartManager.stopTimer()
-                        runningStartManager.running = false
-                        if connectivityManger.isMirroring {
-                            connectivityManger.sendRunningState(.end)
-                        }
-                    } else {
-                        Task {
-                            await runningDataManager.removeActivity()
-                        }
-                        runningDataManager.userLocations = locationManager.userLocations
-                        runningStartManager.stopTimer()
-                        withAnimation {
-                            showCompleteSheet = true
-                        }
-                        runningDataManager.stopRunning()
-                        if connectivityManger.isMirroring {
-                            connectivityManger.sendRunningState(.end)
-                        }
-                    }
-                }
-                showStopPopup = false
-                stopButtonScale = 1
+                connectivityManager.sendRunningState(.end)
+                runningManager.mirroring = false
             }
             .simultaneously(with: TapGesture()
                 .onEnded { _ in
@@ -475,5 +355,5 @@ extension NewRunningView {
 }
 
 #Preview {
-    NewRunningView()
+    MirroringView()
 }

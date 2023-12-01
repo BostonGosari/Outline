@@ -32,7 +32,7 @@ struct SmallListCard: View {
                     UnevenRoundedRectangle(topLeadingRadius: 1, bottomLeadingRadius: 11, bottomTrailingRadius: 11, topTrailingRadius: 21)
                 }
                 .padding([.leading, .top], cardBorder)
-                
+            
             Image(cardType.cardFrondSideImage)
                 .resizable()
                 .mask {
@@ -63,7 +63,8 @@ struct SmallListCard: View {
                 .stroke(borderGradient, lineWidth: 1)
             Image(cardType.hologramImage)
                 .resizable()
-                .opacity(cardType == .excellent ? 0.5 : cardType == .great ? 0.5 : 0.2)
+                .opacity(cardType == .excellent ? 0.7 : cardType == .great ? 0.7 : 0.5)
+                .blendMode(.overlay)
                 .mask {
                     UnevenRoundedRectangle(topLeadingRadius: 5, bottomLeadingRadius: 15, bottomTrailingRadius: 15, topTrailingRadius: 25)
                 }
@@ -100,36 +101,6 @@ struct SmallListEmptyCard: View {
     }
 }
 
-//#Preview {
-//    HStack {
-//        SmallListCard(cardType: .nice, runName: "돌고래런", date: "2023/10/23") {
-//            ZStack {
-//                Rectangle()
-//                    .foregroundStyle(.black)
-//                Text("안녕")
-//                    .font(.customTitle)
-//                    .foregroundStyle(.customWhite)
-//            }
-//           
-//        }
-//        SmallListCard(cardType: .great, runName: "돌고래런", date: "2023/10/23") {
-//            ZStack {
-//                Rectangle()
-//                    .foregroundStyle(.black)
-//                Text("안녕")
-//                    .font(.customTitle)
-//                    .foregroundStyle(.customWhite)
-//            }
-//        }
-//        SmallListCard(cardType: .excellent, runName: "돌고래런", date: "2023/10/23") {
-//            ZStack {
-//                Rectangle()
-//                    .foregroundStyle(.black)
-//                Text("안녕")
-//                    .font(.customTitle)
-//                    .foregroundStyle(.customWhite)
-//            }
-//        }
-//    }
-//   
-//}
+#Preview {
+    SmallListCard(cardType: .excellent, runName: "돌고래런", date: "2023/10/23", data: [])
+}

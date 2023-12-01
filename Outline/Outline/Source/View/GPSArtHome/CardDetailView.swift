@@ -10,6 +10,7 @@ import MapKit
 import Kingfisher
 
 struct CardDetailView: View {
+    @StateObject private var connectivityManager = WatchConnectivityManager.shared
     @AppStorage("authState") var authState: AuthState = .logout
     
     @State private var isUnlocked = false
@@ -41,7 +42,7 @@ struct CardDetailView: View {
     var body: some View {
         ZStack {
             ScrollView {
-                ZStack {
+                ZStack(alignment: .top) {
                     Color.gray900
                         .onScrollViewOffsetChanged { value in
                             handleScrollViewOffset(value)
@@ -50,8 +51,8 @@ struct CardDetailView: View {
                     VStack {
                         ZStack(alignment: .top) {
                             if showDetailView {
-                                courseImage
-                                courseInformation
+                                    courseImage
+                                    courseInformation
                             } else {
                                 UnevenRoundedRectangle(bottomTrailingRadius: 45, style: .circular)
                                     .frame(
@@ -61,6 +62,7 @@ struct CardDetailView: View {
                                     .foregroundStyle(.clear)
                             }
                         }
+                        
                         CardDetailInformationView(
                             showCopyLocationPopup: $showCopyLocationPopup, selectedCourse: selectedCourse.course
                         )
@@ -112,6 +114,9 @@ struct CardDetailView: View {
                 showDetailView = false
                 runningStartManager.start = true
                 runningStartManager.startFreeRun()
+                
+                let runningInfo = MirroringRunningInfo(runningType: .free, courseName: "자유아트", course: [])
+                connectivityManager.sendRunningInfo(runningInfo)
             }
         }
         .sheet(isPresented: $showNeedLoginSheet) {
@@ -139,12 +144,12 @@ struct CardDetailView: View {
                 UnevenRoundedRectangle(bottomTrailingRadius: 45, style: .circular)
             }
             .overlay {
-                    UnevenRoundedRectangle(bottomTrailingRadius: 45, style: .circular)
+                UnevenRoundedRectangle(bottomTrailingRadius: 45, style: .circular)
                     .stroke(LinearGradient(colors: [.gray600, .clear, .clear, .clear], startPoint: .bottomTrailing, endPoint: .top), lineWidth: 1)
             }
             .matchedGeometryEffect(id: selectedCourse.id, in: namespace)
             .frame(
-//                width: UIScreen.main.bounds.width + 2,
+                //                width: UIScreen.main.bounds.width + 2,
                 height: UIScreen.main.bounds.height * 0.68
             )
             .offset(y: -1)
@@ -184,10 +189,12 @@ struct CardDetailView: View {
                     if runningStartManager.isHealthAuthorized {
                         if runningStartManager.isLocationAuthorized {
                             let course = selectedCourse.course.coursePaths
+                            let runningInfo = MirroringRunningInfo(runningType: .gpsArt, courseName: selectedCourse.course.courseName, course: course)
                             
                             if runningStartManager.checkDistance(course: course) {
                                 runningStartManager.startCourse = selectedCourse.course
                                 runningStartManager.startGPSArtRun()
+                                connectivityManager.sendRunningInfo(runningInfo)
                                 showDetailView = false
                                 runningStartManager.start = true
                                 isUnlocked = false

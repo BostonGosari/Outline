@@ -86,7 +86,8 @@ struct BigCard<Content: View>: View {
         ZStack {
             Image(cardType.hologramImage)
                 .resizable()
-                .opacity(cardType == .excellent ? 0.4 : 0.2)
+                .opacity(cardType == .excellent ? 0.7 : 0.5)
+                .blendMode(.overlay)
             LinearGradient(colors: [.white.opacity(manager.roll * 0.6), .clear, .white.opacity(manager.roll * 0.6), .clear, .white.opacity(manager.roll * 0.6)], startPoint: .topTrailing, endPoint: .bottomLeading)
             LinearGradient(
                 colors: [
@@ -207,7 +208,7 @@ final class MotionManager: ObservableObject {
 
 #Preview {
     BigCard(
-        cardType: .great,
+        cardType: .excellent,
         runName: "오리런",
         date: "2023.11.19",
         editMode: false,

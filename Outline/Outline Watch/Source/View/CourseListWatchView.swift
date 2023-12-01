@@ -20,6 +20,8 @@ struct CourseListWatchView: View {
     @State private var showLocationPermissionSheet = false
     @State private var showNetworkErrorSheet = false
     @State private var showFreeRunningGuideSheet = false
+    @State private var showMirroringSheet = false
+    @State private var showMirroringView = false
     
     var workoutTypes: [HKWorkoutActivityType] = [.running]
     
@@ -45,6 +47,9 @@ struct CourseListWatchView: View {
                                             workoutManager.selectedWorkout = workoutTypes[0]
                                             runningManager.startCourse = course
                                             runningManager.startGPSArtRun()
+                                            
+                                            let runningInfo = MirroringRunningInfo(runningType: .gpsArt, courseName: course.courseName, course: course.coursePaths)
+                                            connectivityManager.sendRunningInfo(runningInfo)
                                         } else {
                                             if runningManager.locationNetworkError {
                                                 showNetworkErrorSheet = true
@@ -118,6 +123,8 @@ struct CourseListWatchView: View {
                                 workoutManager.selectedWorkout = workoutTypes[0]
                                 runningManager.startFreeRun()
                                 showFreeRunningGuideSheet = false
+                                
+                                sendFreeRunningInfoToPhone()
                             },
                             secondLabel: "돌아가기",
                             secondAction: {
@@ -127,10 +134,40 @@ struct CourseListWatchView: View {
                         .toolbar(.hidden, for: .navigationBar)
                     }
                 }
+                
+                if showMirroringView {
+                    ZStack {
+                        Color.black.ignoresSafeArea()
+                        MirroringTabWatchView()
+                    }
+                }
             }
             .navigationTitle("아트")
             .onAppear {
                 viewModel.checkAuthorization()
+            }
+            .onChange(of: connectivityManager.runningState) { _, newValue in
+                if newValue == .start {
+                    showMirroringSheet = true
+                } else if newValue == .end {
+                    showMirroringSheet = false
+                    showMirroringView = false
+                }
+            }
+            .sheet(isPresented: $showMirroringSheet) {
+                TwoButtonSheet(
+                    text: "iPhone으로 러닝을 그리고 있어요",
+                    firstLabel: "돌아가기",
+                    firstAction: {
+                        showMirroringSheet = false
+                    },
+                    secondLabel: "미러링하기",
+                    secondAction: {
+                        showMirroringSheet = false
+                        connectivityManager.sendIsMirroring(true)
+                        showMirroringView = true
+                    }
+                )
             }
         }
     }
@@ -140,6 +177,8 @@ struct CourseListWatchView: View {
             if  viewModel.isHealthAuthorized && viewModel.isLocationAuthorized {
                 workoutManager.selectedWorkout = workoutTypes[0]
                 runningManager.startFreeRun()
+                
+                sendFreeRunningInfoToPhone()
             } else {
                 if !viewModel.isLocationAuthorized {
                     showLocationPermissionSheet = true
@@ -161,5 +200,10 @@ struct CourseListWatchView: View {
         }
         .buttonStyle(.plain)
         .padding(.bottom, 8)
+    }
+    
+    private func sendFreeRunningInfoToPhone() {
+        let runningInfo = MirroringRunningInfo(runningType: .free, courseName: "자유아트", course: [])
+        connectivityManager.sendRunningInfo(runningInfo)
     }
 }

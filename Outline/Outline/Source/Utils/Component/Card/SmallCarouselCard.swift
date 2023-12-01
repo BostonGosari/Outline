@@ -65,7 +65,8 @@ struct SmallCarouselCard: View {
             
             Image(cardType.hologramImage)
                 .resizable()
-                .opacity(cardType == .excellent ? 0.2 : 0.1)
+                .opacity(cardType == .excellent ? 0.7 : 0.5)
+                .blendMode(.overlay)
                 .mask {
                     UnevenRoundedRectangle(topLeadingRadius: 7, bottomLeadingRadius: 30, bottomTrailingRadius: 30, topTrailingRadius: 47)
                 }
@@ -102,5 +103,5 @@ struct SmallCarouselEmptyCard: View {
 }
 
 #Preview {
-    SmallCarouselEmptyCard()
+    SmallCarouselCard(cardType: .excellent, runName: "돌고래런", date: "2023.12.12", data: [])
 }

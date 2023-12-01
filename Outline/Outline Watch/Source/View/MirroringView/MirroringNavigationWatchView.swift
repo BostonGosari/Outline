@@ -1,15 +1,13 @@
 //
-//  NavigationTabView.swift
+//  MirroringNavigationWatchView.swift
 //  Outline Watch App
 //
-//  Created by hyunjun on 11/20/23.
+//  Created by hyunjun on 11/22/23.
 //
 
 import SwiftUI
 
-struct NavigationTabView: View {
-    @StateObject private var locationManager = LocationManager.shared
-    
+struct MirroringNavigationWatchView: View {
     @State private var selection = 0
     
     var body: some View {
@@ -24,9 +22,9 @@ struct NavigationTabView: View {
     
     var smallNavigation: some View {
         HStack {
-            Image(systemName: getDirectionImage(locationManager.direction))
+            Image(systemName: "arrow.turn.up.right")
                 .font(.system(size: 24))
-            Text("\(Int(locationManager.distance))m \(locationManager.direction)")
+            Text("경로를 따라 계속 이동")
                 .font(.customSubTitle)
         }
         .padding(.horizontal, 16)
@@ -49,13 +47,13 @@ struct NavigationTabView: View {
                     .ignoresSafeArea()
                 VStack(alignment: .leading, spacing: 18) {
                     HStack {
-                        Image(systemName: getDirectionImage(locationManager.direction))
+                        Image(systemName: "arrow.turn.up.right")
                             .font(.system(size: 26))
                             .padding(.trailing)
                         VStack(alignment: .leading) {
-                            Text("\(Int(locationManager.distance))m")
+                            Text("60m")
                                 .font(.customSubTitle)
-                            Text("locationManager.direction")
+                            Text("왼쪽에 도착지점:\n포항공과대학교 C5")
                                 .font(.customBody)
                                 .foregroundStyle(.gray500)
                         }
@@ -64,20 +62,12 @@ struct NavigationTabView: View {
                         .frame(width: 120, height: 1)
                         .padding(.leading, 36)
                         .foregroundStyle(.gray600)
-                    
-                    if let nextDirection = locationManager.nextDirection {
-                        HStack {
-                            Image(systemName: getDirectionImage(nextDirection.direction))
-                                .font(.system(size: 26))
-                                .padding(.trailing)
-                            VStack(alignment: .leading) {
-                                Text("\(nextDirection.distance)m")
-                                    .font(.customSubTitle)
-                                Text(nextDirection.direction)
-                                    .font(.customBody)
-                                    .foregroundStyle(.gray500)
-                            }
-                        }
+                    HStack {
+                        Image(systemName: "arrow.turn.up.right")
+                            .font(.system(size: 26))
+                            .padding(.trailing)
+                        Text("경로를 따라 계속 이동")
+                            .font(.customSubTitle)
                     }
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -100,19 +90,8 @@ struct NavigationTabView: View {
             .ignoresSafeArea()
         }
     }
-    
-    private func getDirectionImage(_ direction: String) -> String {
-        switch direction {
-        case "우회전":
-            return "arrow.turn.up.right"
-        case "좌회전":
-            return "arrow.turn.up.left"
-        default:
-            return ""
-        }
-    }
 }
 
 #Preview {
-    NavigationTabView()
+    MirroringNavigationWatchView()
 }

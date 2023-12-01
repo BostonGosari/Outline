@@ -35,7 +35,10 @@ struct EndRunningSheet: View {
             }
             .buttonStyle(.plain)
             
-            Button(action: action) {
+            Button {
+                dismiss()
+                action()
+            } label: {
                 Text("종료하기")
                     .font(.customButton)
                     .foregroundStyle(.black)
@@ -47,6 +50,7 @@ struct EndRunningSheet: View {
                     )
             }
             .buttonStyle(.plain)
+
         }
         .toolbar(.hidden, for: .navigationBar)
     }

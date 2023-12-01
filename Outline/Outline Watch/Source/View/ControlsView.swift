@@ -40,6 +40,11 @@ struct ControlsView: View {
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                             dataAnimation.toggle()
                         }
+                        if workoutManager.running {
+                            connectivityManager.sendRunningState(.pause)
+                        } else {
+                            connectivityManager.sendRunningState(.resume)
+                        }
                     }
                 }
             }
@@ -61,6 +66,7 @@ struct ControlsView: View {
         .scrollDisabled(workoutManager.running || workoutManager.showSummaryView)
         .sheet(isPresented: $showEndRunningSheet) {
             EndRunningSheet(text: "종료하시겠어요?") {
+                connectivityManager.sendRunningState(.end)
                 showEndRunningSheet = false
                 runningManager.userLocations = userLocations
                 runningManager.caculateAccuracyAndProgress()
@@ -70,10 +76,19 @@ struct ControlsView: View {
         }
         .sheet(isPresented: $showEndWithoutSavingSheet) {
             EndRunningSheet(text: "30초 이하는 기록되지 않아요.\n종료하시겠어요?") {
+                connectivityManager.sendRunningState(.end)
                 showEndWithoutSavingSheet = false
                 workoutManager.endWorkoutWithoutSummaryView()
                 runningManager.startRunning = false
-                connectivityManager.sendRunningSessionStateToPhone(false)
+            }
+        }
+        .onChange(of: connectivityManager.runningState) { _, newValue in
+            if newValue == .pause {
+                buttonAnimation = true
+                dataAnimation = true
+            } else if newValue == .resume {
+                buttonAnimation = false
+                dataAnimation = false
             }
         }
     }

@@ -10,6 +10,7 @@ import SwiftUI
 
 struct FreeRunningHomeView: View {
     @AppStorage("authState") var authState: AuthState = .logout
+    @StateObject private var connectivityManager = WatchConnectivityManager.shared
     @StateObject var runningStartManager = RunningStartManager.shared
     
     @State private var userLocation = ""
@@ -71,6 +72,10 @@ struct FreeRunningHomeView: View {
                                                 if runningStartManager.isLocationAuthorized {
                                                     runningStartManager.start = true
                                                     runningStartManager.startFreeRun()
+                                                    
+                                                    let runningInfo = MirroringRunningInfo(runningType: .free, courseName: "자유아트", course: [])
+                                                    connectivityManager.sendRunningInfo(runningInfo)
+                                                    
                                                     isUnlocked = false
                                                 } else {
                                                     runningStartManager.permissionType = .location
