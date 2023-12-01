@@ -68,11 +68,13 @@ struct NewRunningNavigationView: View {
                 textToSpeech("\(Int(locationManager.distance))미터 후 \(locationManager.direction)하세요)")
             }
         }
-        .onChange(of: locationManager.nearHotSopt) {
-            if locationManager.nearHotSopt {
+        .onChange(of: locationManager.nearHotSpot) {
+            if locationManager.nearHotSpot {
                 if let hotSpot = locationManager.hotSpot {
                     playAlertSound()
                     textToSpeech(hotSpot.description)
+                    locationManager.nearHotSpot = false
+                    locationManager.hotSpot = nil
                 }
             }
         }
