@@ -143,6 +143,9 @@ extension NewRunningView {
                 if runningStartManager.running == true {
                     runningDataManager.startRunning()
                     runningStartManager.startTimer()
+                    Task {
+                        await runningDataManager.startLiveActivity()
+                    }
                 }
             }
     }
@@ -443,6 +446,9 @@ extension NewRunningView {
                             connectivityManger.sendRunningState(.end)
                         }
                     } else {
+                        Task {
+                            await runningDataManager.removeActivity()
+                        }
                         runningDataManager.userLocations = locationManager.userLocations
                         runningStartManager.stopTimer()
                         withAnimation {

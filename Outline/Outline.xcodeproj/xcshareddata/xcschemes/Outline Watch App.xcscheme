@@ -57,12 +57,21 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
+            BlueprintIdentifier = "F0AC8A982AD94C1F0061612C"
+            BuildableName = "Outline.app"
+            BlueprintName = "Outline"
+            ReferencedContainer = "container:Outline.xcodeproj">
+         </BuildableReference>
+      </BuildableProductRunnable>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
             BlueprintIdentifier = "F0AC8AA82AD94C200061612C"
             BuildableName = "Outline Watch App.app"
             BlueprintName = "Outline Watch App"
             ReferencedContainer = "container:Outline.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"

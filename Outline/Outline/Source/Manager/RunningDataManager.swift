@@ -5,8 +5,12 @@
 //  Created by Hyunjun Kim on 10/21/23.
 //
 
-import SwiftUI
+import ActivityKit
 import CoreMotion
+import Combine
+import Foundation
+import SwiftUI
+import WidgetKit
 
 class RunningDataManager: ObservableObject {
     // 전송용 데이터
@@ -31,9 +35,13 @@ class RunningDataManager: ObservableObject {
     @Published var accuracy: Double = 0
     @Published var progress: Double = 0
     @Published var score: Int = 0
+    @Published var num: Int = 0
     
-    // MARK: - Private Properties
+    @MainActor @Published private(set) var activityID: String?
+    @MainActor @Published private(set) var activityToken: String?
     
+    //    @State private var activity : Activity<RunningAttributes>? = nil
+    private var cancellable: Set<AnyCancellable> = Set()
     private let pedometer = CMPedometer()
     private let healthKitManager = HealthKitManager()
     
@@ -47,7 +55,7 @@ class RunningDataManager: ObservableObject {
     static let shared = RunningDataManager()
     
     private init() { }
-
+    
     func startRunning() {
         RunningStartDate = Date()
         startPedometerUpdates()
@@ -60,7 +68,7 @@ class RunningDataManager: ObservableObject {
             self.endWithoutSaving = false
         }
     }
- 
+    
     func stopRunning() {
         RunningEndDate = Date()
         stopPedometerUpdates()
@@ -135,6 +143,71 @@ class RunningDataManager: ObservableObject {
         avgPace = 0.0
         cadence = 0.0
         time = 0.0
+    }
+    
+    func startLiveActivity() async {
+        await removeActivity()
+        await addLiveActivity()
+    }
+    
+    private func addLiveActivity() async {
+        if #available(iOS 16.2, *) {
+            if ActivityAuthorizationInfo().areActivitiesEnabled {
+                let attribute = RunningAttributes(runningText: "러닝중")
+                let state = ActivityContent(state: RunningAttributes.ContentState(totalDistance: "0", totalTime: "00:00", pace: "0'00''", heartrate: "--"), staleDate: nil)
+                
+                let activity = try? Activity.request(attributes: attribute, content: state)
+                guard let activity = activity else {
+                    return
+                }
+                await MainActor.run { activityID = activity.id }
+                
+                print("activity 생성 \(activity.id )")
+                
+                for await data in activity.pushTokenUpdates {
+                    let token = data.map {String(format: "%02x", $0)}.joined()
+                    print("Activity token: \(token)")
+                    await MainActor.run { activityToken = token }
+                    // HERE SEND THE TOKEN TO THE SERVER
+                }
+            }
+        }
+    }
+    
+    func updateLiveActivity(newTotalDistance: String, newTotalTime: String, newPace: String, newHeartrate: String) async {
+        guard let activityID = await activityID,
+              let runningActivity = Activity<RunningAttributes>.activities.first(where: { $0.id == activityID }) else {
+            return
+        }
+        if #available(iOS 16.2, *) {
+            Task.detached {
+                print("update \(activityID)")
+                let newState = RunningAttributes.ContentState(totalDistance: newTotalDistance, totalTime: newTotalTime, pace: newPace, heartrate: newHeartrate)
+                print("newState \(newState)")
+                await runningActivity.update(using: newState)
+            }
+        }
+    }
+    
+    func removeActivity() async {
+        guard let activityID = await activityID,
+              let runningActivity = Activity<RunningAttributes>.activities.first(where: { $0.id == activityID }) else {
+            return
+        }
+        if #available(iOS 16.2, *) {
+            let initialContentState = RunningAttributes.ContentState( totalDistance: String(self.totalDistance), totalTime: String(self.time), pace: String(self.pace), heartrate: "--")
+            
+            await runningActivity.end(
+                ActivityContent(state: initialContentState, staleDate: Date.distantFuture),
+                dismissalPolicy: .immediate
+            )
+            
+            await MainActor.run {
+                self.activityID = nil
+                self.activityToken = nil
+                print(self.activityID == nil ? "아이디를 찾을 수 없습니다. " : " 삭제실패")
+            }
+        }
     }
     
     func caculateAccuracyAndProgress() {
