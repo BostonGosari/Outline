@@ -637,7 +637,9 @@
 				2921AFFF2B012E4400533A83 /* NewRunningMapView.swift */,
 				2921B0012B012EC800533A83 /* NewRunningNavigationView.swift */,
 				2921B00E2B01301100533A83 /* NewRunningMetricsView.swift */,
+				0E1D1B282AE95AF2005282A2 /* CourseGuideView.swift */,
 				0EEFA04E2B0BAC1C00C656AE /* TransparentBlurView.swift */,
+				F0ECB3AC2AF28540003FA2B4 /* FirstRunningGuideView.swift */,
 			);
 			path = NewRunning;
 			sourceTree = "<group>";
@@ -794,8 +796,6 @@
 				0E29F6572ADF6CA000F5EF5C /* RunningView.swift */,
 				0E29F6582ADF6CA000F5EF5C /* RunningMapView.swift */,
 				0E29F6592ADF6CA000F5EF5C /* WorkoutDataView.swift */,
-				0E1D1B282AE95AF2005282A2 /* CourseGuideView.swift */,
-				F0ECB3AC2AF28540003FA2B4 /* FirstRunningGuideView.swift */,
 			);
 			path = Running;
 			sourceTree = "<group>";
