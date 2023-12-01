@@ -244,7 +244,7 @@ extension MirroringView {
                 tapPossible: !(navigationTranslation + navigationSheetHeight > 10)
             )
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: tapGuideView ? .top : .topTrailing)
-            .padding(.top, 80)
+            .padding(.top, 20)
             .padding(.trailing, tapGuideView ? 0 : 16)
         }
         .zIndex(tapGuideView ? 2 : 0)
