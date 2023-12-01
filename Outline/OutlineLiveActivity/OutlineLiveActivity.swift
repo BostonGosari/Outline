@@ -70,27 +70,23 @@ struct OutlineLiveActivity: Widget {
             DynamicIsland {
               
                 DynamicIslandExpandedRegion(.leading) {
-                    Text("시작")
+                 
                 }
                 DynamicIslandExpandedRegion(.trailing) {
-                    Text("끝")
+                  
                 }
                 DynamicIslandExpandedRegion(.center) {
-                    HStack {
-                        Image(systemName: "heart.fill").tint(.red)
-                        Text("진행률")
-                    }
+                   
                 }
                 DynamicIslandExpandedRegion(.bottom) {
                     Text(context.state.totalTime)
                 }
             } compactLeading: {
-                Text("0")
+          
             } compactTrailing: {
-                Text("100")
+            
             } minimal: {
-                // 다른앱에서도 live activiy가 있어서 떠있을때 작은 원모양으로 보여짐
-                Text("A앱")
+           
             }
            
         }

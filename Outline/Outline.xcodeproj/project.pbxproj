@@ -189,6 +189,17 @@
 		BB67086B2B11D58D005D8BA5 /* CourseProgressManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29EC2ECD2AEAD5A80033446C /* CourseProgressManager.swift */; };
 		BB67086C2B11D58F005D8BA5 /* CourseAccuracyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29EC2ECB2AEAD5680033446C /* CourseAccuracyManager.swift */; };
 		BB67086D2B11D592005D8BA5 /* CourseAnalyzeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29EC2ED12AEB2B560033446C /* CourseAnalyzeManager.swift */; };
+		BB869B532B196F1A0087202A /* Pretendard-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BB1D530B2ADDBC560073771F /* Pretendard-Black.ttf */; };
+		BB869B542B196F1D0087202A /* Pretendard-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BB1D530F2ADDBC690073771F /* Pretendard-ExtraBold.ttf */; };
+		BB869B552B196F1F0087202A /* Pretendard-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BB1D530D2ADDBC620073771F /* Pretendard-Bold.ttf */; };
+		BB869B562B196F220087202A /* Pretendard-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BB1D531B2ADDBCB20073771F /* Pretendard-SemiBold.ttf */; };
+		BB869B572B196F240087202A /* Pretendard-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BB1D53172ADDBCA20073771F /* Pretendard-Medium.ttf */; };
+		BB869B582B196F280087202A /* Pretendard-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BB1D53192ADDBCAB0073771F /* Pretendard-Regular.ttf */; };
+		BB869B592B196F2A0087202A /* Pretendard-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BB1D531D2ADDBCB90073771F /* Pretendard-Thin.ttf */; };
+		BB869B5A2B196F2D0087202A /* Pretendard-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BB1D53152ADDBC900073771F /* Pretendard-Light.ttf */; };
+		BB869B5B2B196F2F0087202A /* SFCompactDisplay-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0E96BA912AF4E00B000C8FBF /* SFCompactDisplay-Semibold.ttf */; };
+		BB869B5C2B196F310087202A /* StretchPro.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2990249B2B10B599005C5BA8 /* StretchPro.ttf */; };
+		BB869B5D2B1970480087202A /* DoubleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A01E1D2AF0CCE70093D9C0 /* DoubleExtension.swift */; };
 		BBBB27E52B1795360081C93D /* Color.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F0AC8AA02AD94C200061612C /* Color.xcassets */; };
 		BBBB27E62B1796DC0081C93D /* FontExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E29F64A2ADF653000F5EF5C /* FontExtension.swift */; };
 		BBBB27E92B186F910081C93D /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = BBBB27E82B186F910081C93D /* Kingfisher */; };
@@ -1300,8 +1311,18 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BB869B5C2B196F310087202A /* StretchPro.ttf in Resources */,
+				BB869B5B2B196F2F0087202A /* SFCompactDisplay-Semibold.ttf in Resources */,
+				BB869B592B196F2A0087202A /* Pretendard-Thin.ttf in Resources */,
+				BB869B562B196F220087202A /* Pretendard-SemiBold.ttf in Resources */,
 				BBCB1F0F2B1778DF00D9AE1C /* Assets.xcassets in Resources */,
+				BB869B582B196F280087202A /* Pretendard-Regular.ttf in Resources */,
+				BB869B552B196F1F0087202A /* Pretendard-Bold.ttf in Resources */,
 				BBBB27E52B1795360081C93D /* Color.xcassets in Resources */,
+				BB869B532B196F1A0087202A /* Pretendard-Black.ttf in Resources */,
+				BB869B572B196F240087202A /* Pretendard-Medium.ttf in Resources */,
+				BB869B5A2B196F2D0087202A /* Pretendard-Light.ttf in Resources */,
+				BB869B542B196F1D0087202A /* Pretendard-ExtraBold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1388,6 +1409,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BB869B5D2B1970480087202A /* DoubleExtension.swift in Sources */,
 				BBBB27E62B1796DC0081C93D /* FontExtension.swift in Sources */,
 				BBCB1F0D2B1778DE00D9AE1C /* AppIntent.swift in Sources */,
 				BBCB1F072B1778DE00D9AE1C /* OutlineLiveActivityBundle.swift in Sources */,
