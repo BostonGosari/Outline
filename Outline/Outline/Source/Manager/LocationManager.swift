@@ -8,20 +8,6 @@
 import CoreLocation
 import SwiftUI
 
-struct Route: Codable {
-    let nextDirection: String
-    let alertMessage: String
-    let longitude: Double
-    let latitude: Double
-    let distance: Double
-}
-
-struct Direction {
-    var image: String
-    var distance: Int
-    var direcion: String
-}
- 
 class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     @Published var userLocations: [CLLocationCoordinate2D] = []
     @Published var isRunning: Bool
@@ -29,7 +15,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     @Published var direction = ""
     @Published var nextDirection: (distance: Int, direction: String)?
     @Published var hotSpot: (location: CLLocation, description: String)?
-    @Published var nearHotSopt = false
+    @Published var nearHotSpot = false
     @Published var navigationDatas: [Navigation]?
     
     private var locationManager = CLLocationManager()
@@ -59,7 +45,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
             
             if let hotSpot {
                 if currentLocation.distance(from: hotSpot.location) < 30 {
-                    nearHotSopt = true
+                    nearHotSpot = true
                 }
             }
             
