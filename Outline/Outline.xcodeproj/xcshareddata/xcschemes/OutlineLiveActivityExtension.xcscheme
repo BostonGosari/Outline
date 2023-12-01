@@ -75,7 +75,7 @@
             BlueprintName = "Outline"
             ReferencedContainer = "container:Outline.xcodeproj">
          </BuildableReference>
-      </MacroExpansion>
+      </BuildableProductRunnable>
       <EnvironmentVariables>
          <EnvironmentVariable
             key = "_XCWidgetKind"
