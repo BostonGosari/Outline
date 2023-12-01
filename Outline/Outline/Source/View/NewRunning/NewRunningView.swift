@@ -438,7 +438,7 @@ extension NewRunningView {
             }
             .onEnded { _ in
                 DispatchQueue.main.async {
-                    if runningStartManager.counter < 3 {
+                    if runningStartManager.counter < 30 {
                         runningDataManager.stopRunningWithoutRecord()
                         runningStartManager.stopTimer()
                         runningStartManager.running = false
