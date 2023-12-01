@@ -35,11 +35,11 @@ struct MirroringMapWatchView: View {
                 bounds = .init(minimumDistance: 100, maximumDistance: .infinity)
             }
         }
-        .overlay {
-            if connectivityManager.runningInfo.runningType == .gpsArt {
-                NavigationTabView()
-            }
-        }
+//        .overlay {
+//            if connectivityManager.runningInfo.runningType == .gpsArt {
+//                NavigationTabView()
+//            }
+//        }
         .gesture(gesture)
     }
     

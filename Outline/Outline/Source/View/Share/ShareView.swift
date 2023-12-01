@@ -272,3 +272,11 @@ extension ShareView {
             }
     }
 }
+
+extension View {
+    @MainActor func render(scale: CGFloat) -> UIImage? {
+        let renderer = ImageRenderer(content: self)
+        renderer.scale = scale
+        return renderer.uiImage
+    }
+}
