@@ -86,7 +86,7 @@ struct BigCard<Content: View>: View {
         ZStack {
             Image(cardType.hologramImage)
                 .resizable()
-                .opacity(cardType == .excellent ? 0.7 : 0.5)
+                .opacity(cardType == .excellent ? 0.5 : 0.3)
                 .blendMode(.overlay)
             LinearGradient(colors: [.white.opacity(manager.roll * 0.6), .clear, .white.opacity(manager.roll * 0.6), .clear, .white.opacity(manager.roll * 0.6)], startPoint: .topTrailing, endPoint: .bottomLeading)
             LinearGradient(

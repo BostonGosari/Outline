@@ -50,6 +50,9 @@ struct NewRunningView: View {
             
             RunningFinishPopUp(isPresented: $showCompleteSheet, score: $runningDataManager.score, userLocations: $locationManager.userLocations)
         }
+        .onAppear {
+            locationManager.userLocations = []
+        }
         .overlay {
             if isFirstRunning && runningStartManager.runningType == .gpsArt {
                 FirstRunningGuideView(isFirstRunning: $isFirstRunning)
