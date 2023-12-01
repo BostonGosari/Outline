@@ -73,10 +73,6 @@ struct HomeTabView: View {
             if appleRunManager.running {
                 AppleRunView()
                     .transition(.move(edge: .bottom))
-                    .onDisappear {
-                        showDetailView = false
-                        appleRunManager.showAppleRunDetail = false
-                    }
             }
         }
         .sheet(isPresented: $showMirroringSheet) {

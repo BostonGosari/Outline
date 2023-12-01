@@ -16,6 +16,8 @@ struct AppleRunView: View {
     @State private var isPaused = false
     @State private var showCompleteSheet = false
     @State private var tapGuideView = false
+    @State private var counter = 0
+    @State private var finishAnimationProgress = 0.0
     
     @State private var navigationTranslation: CGFloat = 0.0
     @State private var navigationSheetHeight: CGFloat = 0.0
@@ -38,6 +40,16 @@ struct AppleRunView: View {
             navigation
             metrics
             guideView
+            
+            if appleRunManager.complete {
+                completeSheet
+                .zIndex(1)
+            }
+            
+            if appleRunManager.finish {
+                AppleRunFinishView()
+                .zIndex(1)
+            }
         }
         .overlay {
             if showStopPopup {
@@ -52,6 +64,11 @@ struct AppleRunView: View {
         }
         .onAppear {
             appleRunManager.startRunning()
+        }
+        .onChange(of: appleRunManager.progress) { _, newValue in
+            if newValue == 1.0 {
+                appleRunManager.complete = true
+            }
         }
     }
 }
@@ -224,6 +241,75 @@ extension AppleRunView {
             }
         }
     }
+    
+    private var completeSheet: some View {
+        ZStack {
+            Color.black.opacity(0.5).ignoresSafeArea()
+            VStack(spacing: 0) {
+                Text("정말 완벽한 그림이에요!")
+                    .font(.customTitle2)
+                    .padding(.bottom, 8)
+                
+                Text("100% 달성하셨네요. 당신은 멋진 아티스트!")
+                    .font(.customSubbody)
+                ZStack {
+                    VStack {
+                        AppleRunGuide()
+                            .trim(from: 0.0, to: finishAnimationProgress)
+                            .stroke(.customPrimary, style: .init(lineWidth: 7, lineCap: .round, lineJoin: .round))
+                            .frame(width: 120, height: 140)
+                            .onAppear {
+                                withAnimation(.easeInOut(duration: 3).repeatForever(autoreverses: false)) {
+                                    finishAnimationProgress = 1.0
+                                }
+                            }
+                    }
+                    Confetti(counter: $counter,
+                             num: 80,
+                             confettis: [
+                                .shape(.circle),
+                                .shape(.smallCircle),
+                                .shape(.triangle),
+                                .shape(.square),
+                                .shape(.smallSquare),
+                                .shape(.slimRectangle),
+                                .shape(.hexagon),
+                                .shape(.star),
+                                .shape(.starPop),
+                                .shape(.blink)
+                             ],
+                             colors: [.blue, .yellow],
+                             confettiSize: 8,
+                             rainHeight: UIScreen.main.bounds.height,
+                             radius: UIScreen.main.bounds.width
+                    )
+                    .onAppear {
+                        counter += 1
+                    }
+                    
+                }
+                .padding(.top, 30)
+                .padding(.bottom, 50)
+                
+                CompleteButton(text: "결과 페이지로", isActive: true) {
+                    withAnimation {
+                        appleRunManager.finish = true
+                    }
+                }
+            }
+            .padding(.top, 56)
+            .padding(.bottom, 32)
+            .background {
+                RoundedRectangle(cornerRadius: 25)
+                    .foregroundStyle(.black70)
+            }
+            .overlay {
+                RoundedRectangle(cornerRadius: 25)
+                    .stroke(.customPrimary)
+            }
+            .padding(.horizontal)
+        }
+    }
 }
 
 extension AppleRunView {
@@ -305,8 +391,8 @@ extension AppleRunView {
                 gestureState = currentState
             }
             .onEnded { _ in
-                appleRunManager.stopRunning()
-                appleRunManager.running = false
+                appleRunManager.pauseRunning()
+                appleRunManager.complete = true
             }
             .simultaneously(with: TapGesture()
                 .onEnded { _ in

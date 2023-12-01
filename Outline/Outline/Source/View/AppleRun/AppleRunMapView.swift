@@ -20,9 +20,6 @@ struct AppleRunMapView: View {
             Map {
                 MapPolyline(coordinates: coordinates)
                     .stroke(.white30, style: StrokeStyle(lineWidth: 6, lineCap: .round, lineJoin: .round))
-
-                MapPolyline(coordinates: subCoordinates)
-                    .stroke(.customPrimary, style: StrokeStyle(lineWidth: 6, lineCap: .round, lineJoin: .round))
                 
                 MapPolyline(coordinates: userLocations)
                     .stroke(.customPrimary, style: StrokeStyle(lineWidth: 6, lineCap: .round, lineJoin: .round))
