@@ -154,7 +154,7 @@ class RunningDataManager: ObservableObject {
         if #available(iOS 16.2, *) {
             if ActivityAuthorizationInfo().areActivitiesEnabled {
                 let attribute = RunningAttributes(runningText: "러닝중")
-                let state = ActivityContent(state: RunningAttributes.ContentState(totalDistance: "0", totalTime: "00:00", pace: "0", heartrate: "--"), staleDate: nil)
+                let state = ActivityContent(state: RunningAttributes.ContentState(totalDistance: "0", totalTime: "00:00", pace: "0'00''", heartrate: "--"), staleDate: nil)
                 
                 let activity = try? Activity.request(attributes: attribute, content: state)
                 guard let activity = activity else {

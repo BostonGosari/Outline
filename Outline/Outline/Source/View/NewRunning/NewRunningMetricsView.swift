@@ -50,7 +50,7 @@ struct NewRunningMetricsView: View {
                     await runningDataManager.updateLiveActivity(
                         newTotalDistance: String(format: "%.2f", (runningDataManager.totalDistance + runningDataManager.distance)/1000),
                         newTotalTime: runningManager.formattedTime(newCounterValue),
-                        newPace: String(format: "%.2f", runningDataManager.pace.formattedCurrentPace()),
+                        newPace: String(runningDataManager.pace.formattedCurrentPace()),
                         newHeartrate: "--"
                     )
                 }
