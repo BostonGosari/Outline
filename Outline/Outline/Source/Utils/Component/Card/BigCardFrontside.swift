@@ -33,6 +33,7 @@ struct BigCardFrontside<Content: View>: View {
                             .font(.customHeadline)
                         Text(date)
                             .font(.customSubbody)
+                            .multilineTextAlignment(.center)
                     }
                     .padding(.bottom, 36)
                 }

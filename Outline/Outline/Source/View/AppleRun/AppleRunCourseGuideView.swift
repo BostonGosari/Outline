@@ -19,7 +19,7 @@ struct AppleRunCourseGuideView: View {
     
     var width = 113.0
     var height = 168.0
-
+    
     var body: some View {
         ZStack {
             TransparentBlurView(removeAllFilters: true)
@@ -33,23 +33,15 @@ struct AppleRunCourseGuideView: View {
             ZStack {
                 coursePath
                 userPath
-                VStack {
-                    Ellipse()
-                        .frame(width: 24, height: 12)
-                        .rotationEffect(.degrees(-32))
-                        .foregroundStyle(.customPrimary)
-                    ZStack {
-                        AppleRunGuide()
-                            .stroke(.customBlack.opacity(0.5), style: .init(lineWidth: 7, lineCap: .round, lineJoin: .round))
-                            .scaledToFit()
-                        AppleRunGuide()
-                            .trim(from: 0.0, to: appleRunManager.progress)
-                            .stroke(.customPrimary, style: .init(lineWidth: 7, lineCap: .round, lineJoin: .round))
-                            .animation(.smooth, value: appleRunManager.progress)
-                            .scaledToFit()
-                    }
+                ZStack {
+                    AppleRunGuide()
+                        .stroke(.customBlack.opacity(0.5), style: .init(lineWidth: tapGuideView ? 5 : 7, lineCap: .round, lineJoin: .round))
+                    AppleRunGuide()
+                        .trim(from: 0.0, to: appleRunManager.progress)
+                        .stroke(.customPrimary, style: .init(lineWidth: tapGuideView ? 5 : 7, lineCap: .round, lineJoin: .round))
+                        .animation(.smooth, value: appleRunManager.progress)
                 }
-                .frame(width: 100, height: 100)
+                .frame(width: 80, height: 100)
             }
             .rotationEffect(Angle(degrees: courseRotate))
         }
@@ -94,16 +86,24 @@ struct AppleRunGuide: Shape {
         var path = Path()
         let width = rect.size.width
         let height = rect.size.height
-        path.move(to: CGPoint(x: 0.78628*width, y: 0.15988*height))
-        path.addCurve(to: CGPoint(x: 0.21326*width, y: 0.11764*height), control1: CGPoint(x: 0.49819*width, y: 0.00758*height), control2: CGPoint(x: 0.31942*width, y: 0.03692*height))
-        path.addCurve(to: CGPoint(x: 0.04819*width, y: 0.49853*height), control1: CGPoint(x: 0.09698*width, y: 0.20606*height), control2: CGPoint(x: 0.04819*width, y: 0.36997*height))
-        path.addCurve(to: CGPoint(x: 0.5*width, y: 0.94872*height), control1: CGPoint(x: 0.04819*width, y: 0.74435*height), control2: CGPoint(x: 0.24775*width, y: 0.94872*height))
-        path.addCurve(to: CGPoint(x: 0.94893*width, y: 0.54944*height), control1: CGPoint(x: 0.73461*width, y: 0.94872*height), control2: CGPoint(x: 0.92364*width, y: 0.77193*height))
-        path.addCurve(to: CGPoint(x: 0.83137*width, y: 0.5411*height), control1: CGPoint(x: 0.90595*width, y: 0.5487*height), control2: CGPoint(x: 0.86588*width, y: 0.54661*height))
-        path.addCurve(to: CGPoint(x: 0.70707*width, y: 0.47861*height), control1: CGPoint(x: 0.78587*width, y: 0.53383*height), control2: CGPoint(x: 0.73648*width, y: 0.51882*height))
-        path.addCurve(to: CGPoint(x: 0.69867*width, y: 0.32223*height), control1: CGPoint(x: 0.67458*width, y: 0.43417*height), control2: CGPoint(x: 0.6788*width, y: 0.37802*height))
-        path.addCurve(to: CGPoint(x: 0.78628*width, y: 0.15988*height), control1: CGPoint(x: 0.71477*width, y: 0.27705*height), control2: CGPoint(x: 0.74389*width, y: 0.22351*height))
-        path.closeSubpath()
+        path.move(to: CGPoint(x: 0.48462*width, y: 0.38903*height))
+        path.addCurve(to: CGPoint(x: 0.15424*width, y: 0.36509*height), control1: CGPoint(x: 0.48462*width, y: 0.38903*height), control2: CGPoint(x: 0.29014*width, y: 0.27582*height))
+        path.addCurve(to: CGPoint(x: 0.14193*width, y: 0.84187*height), control1: CGPoint(x: 0.01845*width, y: 0.45435*height), control2: CGPoint(x: -0.0495*width, y: 0.65031*height))
+        path.addCurve(to: CGPoint(x: 0.40132*width, y: 0.9659*height), control1: CGPoint(x: 0.33337*width, y: 1.03343*height), control2: CGPoint(x: 0.40132*width, y: 0.9659*height))
+        path.addCurve(to: CGPoint(x: 0.57022*width, y: 0.9674*height), control1: CGPoint(x: 0.40132*width, y: 0.9659*height), control2: CGPoint(x: 0.4733*width, y: 0.92207*height))
+        path.addCurve(to: CGPoint(x: 0.67965*width, y: 0.97074*height), control1: CGPoint(x: 0.57022*width, y: 0.9674*height), control2: CGPoint(x: 0.62107*width, y: 0.99037*height))
+        path.addCurve(to: CGPoint(x: 0.90713*width, y: 0.7901*height), control1: CGPoint(x: 0.73824*width, y: 0.95111*height), control2: CGPoint(x: 0.8639*width, y: 0.86924*height))
+        path.addCurve(to: CGPoint(x: 0.89897*width, y: 0.39828*height), control1: CGPoint(x: 0.95036*width, y: 0.71096*height), control2: CGPoint(x: 1.03934*width, y: 0.5658*height))
+        path.addCurve(to: CGPoint(x: 0.65505*width, y: 0.33595*height), control1: CGPoint(x: 0.89897*width, y: 0.39828*height), control2: CGPoint(x: 0.81719*width, y: 0.30989*height))
+        path.addCurve(to: CGPoint(x: 0.5676*width, y: 0.34202*height), control1: CGPoint(x: 0.65505*width, y: 0.33595*height), control2: CGPoint(x: 0.59047*width, y: 0.35761*height))
+        path.addCurve(to: CGPoint(x: 0.55366*width, y: 0.11024*height), control1: CGPoint(x: 0.54473*width, y: 0.32644*height), control2: CGPoint(x: 0.45718*width, y: 0.2311*height))
+        path.addCurve(to: CGPoint(x: 0.74455*width, y: 0.02555*height), control1: CGPoint(x: 0.65014*width, y: -0.01063*height), control2: CGPoint(x: 0.74455*width, y: 0.02555*height))
+        path.addCurve(to: CGPoint(x: 0.72713*width, y: 0.12062*height), control1: CGPoint(x: 0.74455*width, y: 0.02555*height), control2: CGPoint(x: 0.80205*width, y: 0.03673*height))
+        path.addCurve(to: CGPoint(x: 0.52775*width, y: 0.2503*height), control1: CGPoint(x: 0.65221*width, y: 0.20443*height), control2: CGPoint(x: 0.52775*width, y: 0.2503*height))
         return path
     }
+}
+
+#Preview {
+    AppleRunView()
 }

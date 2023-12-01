@@ -14,6 +14,7 @@ class AppleRunManager: ObservableObject {
     @Published var start = false
     @Published var running = false
     @Published var complete = false
+    @Published var finish = false
     
     @Published var totalTime = 0.0
     @Published var totalSteps = 0.0

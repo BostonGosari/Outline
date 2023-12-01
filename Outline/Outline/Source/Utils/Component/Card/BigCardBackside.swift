@@ -54,6 +54,7 @@ struct BigCardBackside: View {
                         .padding(.leading, cardType == .freeRun || editMode ? 24 : 0)
                         Text(date)
                             .font(.customSubbody)
+                            .multilineTextAlignment(.center)
                     }
                     .shadow(color: .black.opacity(5), radius: 4)
                     .scaleEffect(x: -1)
