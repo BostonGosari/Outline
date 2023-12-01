@@ -11,18 +11,15 @@ import MapKit
 struct CardDetailInformationView: View {
     @Binding var showCopyLocationPopup: Bool
     var selectedCourse: GPSArtCourse
-    private let capsuleWidth: CGFloat = 87
-    private let capsuleHeight: CGFloat = 28
     
     var body: some View {
         VStack(alignment: .leading, spacing: 24) {
-            VStack(alignment: .leading, spacing: 0) {
-                Text("\(selectedCourse.description)")
-                    .lineLimit(2)
-                    .font(.customSubtitle2)
-                    .foregroundStyle(.customWhite)
-            }
-            .padding(.vertical, 4)
+            Text(selectedCourse.description)
+                .multilineTextAlignment(.leading)
+                .font(.customSubtitle2)
+                .foregroundStyle(.customWhite)
+                .padding(.vertical, 4)
+                .fixedSize(horizontal: false, vertical: true)
             
             Divider()
             
@@ -80,8 +77,8 @@ struct CardDetailInformationView: View {
                                     .background(.white.opacity(0.2))
                                     .overlay(
                                         RoundedRectangle(cornerRadius: 1)
-                                        .inset(by: 0.1)
-                                        .stroke(.white.opacity(0.3), lineWidth: 0.2)
+                                            .inset(by: 0.1)
+                                            .stroke(.white.opacity(0.3), lineWidth: 0.2)
                                     )
                             }
                         }
@@ -165,7 +162,7 @@ struct CardDetailInformationView: View {
                     .foregroundStyle(.gray600)
             }
         }
-        .frame(maxWidth: .infinity, alignment: .leading)
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
         .padding(.vertical, 20)
         .padding(.horizontal)
         .padding(.bottom, 100)

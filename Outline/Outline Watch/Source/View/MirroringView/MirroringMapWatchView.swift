@@ -1,32 +1,28 @@
 //
-//  WatchMapView.swift
-//  Outline
+//  MirroringMapWatchView.swift
+//  Outline Watch App
 //
-//  Created by Hyunjun Kim on 10/16/23.
+//  Created by hyunjun on 11/22/23.
 //
 
-import SwiftUI
 import MapKit
+import SwiftUI
 
-struct MapWatchView: View {
-    @StateObject private var runningManager = WatchRunningManager.shared
-    @StateObject private var locationManager = LocationManager.shared
-    
+struct MirroringMapWatchView: View {
+    @StateObject private var connectivityManager = WatchConnectivityManager.shared
     @State private var position: MapCameraPosition = .userLocation(followsHeading: true, fallback: .automatic)
     @State private var bounds: MapCameraBounds = .init(minimumDistance: 100, maximumDistance: 100)
     @State private var interactionModes: MapInteractionModes = []
     @State private var isTapped = false
-    
-    var userLocations: [CLLocationCoordinate2D]
-    
+        
     var body: some View {
         Map(position: $position, bounds: bounds, interactionModes: interactionModes) {
             UserAnnotation()
             
-            MapPolyline(coordinates: ConvertCoordinateManager.convertToCLLocationCoordinates(runningManager.startCourse.coursePaths))
+            MapPolyline(coordinates: ConvertCoordinateManager.convertToCLLocationCoordinates(connectivityManager.runningInfo.course))
                 .stroke(.white.opacity(0.5), style: StrokeStyle(lineWidth: 8, lineCap: .round, lineJoin: .round))
             
-            MapPolyline(coordinates: userLocations)
+            MapPolyline(coordinates: ConvertCoordinateManager.convertToCLLocationCoordinates(connectivityManager.runningData.userLocations))
                 .stroke(.customPrimary, style: StrokeStyle(lineWidth: 8, lineCap: .round, lineJoin: .round))
         }
         .mapControlVisibility(.hidden)
@@ -34,17 +30,14 @@ struct MapWatchView: View {
         .ignoresSafeArea(edges: .top)
         .tint(.customPrimary)
         .onAppear {
-            if runningManager.runningType == .free {
+            if connectivityManager.runningInfo.runningType == .free {
                 interactionModes = [.zoom]
                 bounds = .init(minimumDistance: 100, maximumDistance: .infinity)
             }
         }
         .overlay {
-            if !runningManager.startCourse.navigation.isEmpty {
+            if connectivityManager.runningInfo.runningType == .gpsArt {
                 NavigationTabView()
-                    .onAppear {
-                        locationManager.navigationDatas = runningManager.startCourse.navigation
-                    }
             }
         }
         .gesture(gesture)
@@ -55,7 +48,7 @@ struct MapWatchView: View {
             .onEnded { _ in
                 withAnimation(.easeInOut) {
                     if isTapped {
-                        let coordinates = ConvertCoordinateManager.convertToCLLocationCoordinates(runningManager.startCourse.coursePaths)
+                        let coordinates = ConvertCoordinateManager.convertToCLLocationCoordinates(connectivityManager.runningInfo.course)
                         let center = calculateCenter(coordinates: coordinates)
                         let distance = calculateMaxDistance(coordinates: coordinates, from: center) * 6
                         
@@ -103,4 +96,8 @@ struct MapWatchView: View {
         
         return maxDistance
     }
+}
+
+#Preview {
+    MirroringMapWatchView()
 }
