@@ -32,7 +32,7 @@ struct AppleRunFinishView: View {
                 .blur(radius: 120)
             
             VStack {
-                BigCard(cardType: .excellent, runName: "애플런", date: "23 Apple Developer Academy FINAL SHOWCASE", editMode: false, time: "00:20", distance: "0.1KM", pace: "0'20''", kcal: "50", bpm: "120", score: 100) { } content: {
+                BigCard(cardType: .excellent, runName: "애플런", date: "23 Apple Developer Academy FINAL SHOWCASE", editMode: false, time: "00:20", distance: "0.1KM", pace: "12'04''", kcal: "56", bpm: "120", score: 100) { } content: {
                     Image("AppleRunCardImage")
                         .resizable()
                 }
@@ -42,8 +42,10 @@ struct AppleRunFinishView: View {
                 
                 CompleteButton(text: "자랑하기", isActive: true) {
 //                    appleRunManager.running = false
-                    appleRunManager.finish = false
-                    navigateToShareView = true
+//                    appleRunManager.finish = false
+                    withAnimation {
+                        navigateToShareView = true
+                    }
                 }
                 .padding(.bottom, 16)
                 
@@ -51,7 +53,6 @@ struct AppleRunFinishView: View {
                     withAnimation {
                         appleRunManager.running = false
                         appleRunManager.finish = false
-                        navigateToShareView = true
                     }
                 }, label: {
                     Text("홈으로 돌아가기")
@@ -62,8 +63,30 @@ struct AppleRunFinishView: View {
                 .padding(.bottom, 8)
             }
         }
-        .navigationDestination(isPresented: $navigateToShareView) {
-            ShareView(runningData: ShareModel(courseName: "애플런", runningDate: "2023.12.4", regionDisplayName: "애플디벨로퍼아카데미", distance: "0.3", cal: "30", pace: "5'33''", bpm: "120", time: "00:20", userLocations: userCoordinates))
+        .overlay {
+            if navigateToShareView {
+                ShareView(runningData: ShareModel(courseName: "애플런", runningDate: "2023.12.4", regionDisplayName: "애플디벨로퍼아카데미", distance: "0.3", cal: "30", pace: "5'33''", bpm: "120", time: "00:20", userLocations: userCoordinates))
+                    .overlay(alignment: .top) {
+                        HStack {
+                            Button {
+                                navigateToShareView = false
+                            } label: {
+                                HStack {
+                                    Image(systemName: "chevron.left")
+                                    Text("뒤로")
+                                }
+                            }
+                            .tint(.customPrimary)
+                            Spacer()
+                        }
+                        .padding(.vertical, 6)
+                        .background {
+                            Rectangle()
+                                .foregroundStyle(.gray900)
+                        }
+                    }
+                    .transition(.move(edge: .trailing))
+            }
         }
     }
 }
