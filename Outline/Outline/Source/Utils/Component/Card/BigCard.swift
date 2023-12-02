@@ -153,10 +153,10 @@ struct BigCard<Content: View>: View {
         withAnimation(.bouncy(duration: 4)) {
             rotationAngle += 360
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.62) {
             isFrontside.toggle()
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.3) {
             isFrontside.toggle()
             rotationAngle = 0
         }
