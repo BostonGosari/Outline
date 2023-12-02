@@ -42,12 +42,12 @@ struct AppleRunView: View {
             
             if appleRunManager.complete {
                 completeSheet
-                .zIndex(1)
+                    .zIndex(1)
             }
             
             if appleRunManager.finish {
                 AppleRunFinishView()
-                .zIndex(1)
+                    .zIndex(1)
             }
         }
         .overlay {
@@ -77,7 +77,7 @@ extension AppleRunView {
     private var map: some View {
         AppleRunMapView()
     }
-        
+    
     private var metrics: some View {
         AppleRunMetricsView(showDetail: showDetail, isPaused: isPaused)
             .overlay(alignment: .topTrailing) {
@@ -197,7 +197,7 @@ extension AppleRunView {
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: tapGuideView ? .top : .topTrailing)
             .padding(.top, 20)
             .padding(.trailing, tapGuideView ? 0 : 16)
-
+            
         }
         .zIndex(tapGuideView ? 2 : 0)
         .background {

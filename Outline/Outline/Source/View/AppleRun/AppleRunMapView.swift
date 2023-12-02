@@ -23,6 +23,17 @@ struct AppleRunMapView: View {
                 
                 MapPolyline(coordinates: userLocations)
                     .stroke(.customPrimary, style: StrokeStyle(lineWidth: 6, lineCap: .round, lineJoin: .round))
+                
+                Annotation("", coordinate: userLocations.last ?? CLLocationCoordinate2D(latitude: 36.0145573, longitude: 129.3256066)) {
+                    ZStack {
+                        Circle()
+                            .frame(width: 18)
+                            .foregroundStyle(.gray300)
+                        Circle()
+                            .frame(width: 12)
+                            .foregroundStyle(.customPrimary)
+                    }
+                }
 
             }
             .mapStyle(.standard(pointsOfInterest: []))
