@@ -26,13 +26,13 @@ struct GPSArtCourse: Codable, Hashable {
     var coursePaths: [Coordinate]
     var heading: Double
     var thumbnail: String
-    var description: String
+    var thumbnailNeon: String
+    var thumbnailLong: String
     var startLocation: Coordinate
     var regionDisplayName: String
     var producer: String
-    var thumbnailLong: String
-    var thumbnailNeon: String
     var title: String
+    var description: String
     var navigation: [Navigation]
     var hotSpots: [HotSpot]
     
@@ -49,13 +49,13 @@ struct GPSArtCourse: Codable, Hashable {
         coursePaths: [Coordinate],
         heading: Double,
         thumbnail: String,
-        description: String = "",
+        thumbnailNeon: String = "",
+        thumbnailLong: String = "",
         startLocation: Coordinate = Coordinate(longitude: 0, latitude: 0),
         regionDisplayName: String,
         producer: String = "",
-        thumbnailLong: String = "",
-        thumbnailNeon: String = "",
         title: String = "",
+        description: String = "",
         navigation: [Navigation] = [],
         hotSpots: [HotSpot] = []
     ) {
@@ -71,13 +71,13 @@ struct GPSArtCourse: Codable, Hashable {
         self.coursePaths = coursePaths
         self.heading = heading
         self.thumbnail = thumbnail
-        self.description = description
+        self.thumbnailNeon = thumbnailNeon
+        self.thumbnailLong = thumbnailLong
         self.startLocation = startLocation
         self.regionDisplayName = regionDisplayName
         self.producer = producer
-        self.thumbnailLong = thumbnailLong
-        self.thumbnailNeon = thumbnailNeon
         self.title = title
+        self.description = description
         self.navigation = navigation
         self.hotSpots = hotSpots
     }
@@ -94,13 +94,13 @@ struct GPSArtCourse: Codable, Hashable {
         self.coursePaths = []
         self.heading = 0
         self.thumbnail = ""
-        self.description = ""
+        self.thumbnailNeon = ""
+        self.thumbnailLong = ""
         self.startLocation = Coordinate(longitude: 0, latitude: 0)
         self.regionDisplayName = ""
         self.producer = "Outline"
         self.title = "default title"
-        self.thumbnailLong = ""
-        self.thumbnailNeon = ""
+        self.description = ""
         self.navigation = []
         self.hotSpots = []
     }

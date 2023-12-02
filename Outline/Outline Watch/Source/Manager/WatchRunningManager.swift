@@ -63,7 +63,7 @@ class WatchRunningManager: ObservableObject {
         }
         
         locationNetworkError = false
-        return shortestDistance <= 3000
+        return shortestDistance <= 50
     }
     
     private func calculateShortestDistance(from userCoordinate: CLLocationCoordinate2D, to courseCoordinates: [CLLocationCoordinate2D]) -> CLLocationDistance? {

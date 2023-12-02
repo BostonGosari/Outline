@@ -7,11 +7,12 @@
 
 import SwiftUI
 import CoreMotion
+
 struct NewRunningView: View {
     @StateObject private var connectivityManger = WatchConnectivityManager.shared
     @StateObject private var runningStartManager = RunningStartManager.shared
     @StateObject private var runningDataManager = RunningDataManager.shared
-    @StateObject private var locationManager = LocationManager()
+    @StateObject private var locationManager = LocationManager.shared
     
     @AppStorage("isFirstRunning") private var isFirstRunning = true
     
@@ -40,13 +41,17 @@ struct NewRunningView: View {
     var body: some View {
         ZStack {
             map
-            if runningStartManager.runningType == .gpsArt {
+            if let startCourse = runningStartManager.startCourse,
+                !startCourse.navigation.isEmpty {
                 navigation
             }
             metrics
             guideView
             
             RunningFinishPopUp(isPresented: $showCompleteSheet, score: $runningDataManager.score, userLocations: $locationManager.userLocations)
+        }
+        .onAppear {
+            locationManager.userLocations = []
         }
         .overlay {
             if isFirstRunning && runningStartManager.runningType == .gpsArt {
@@ -94,6 +99,7 @@ struct NewRunningView: View {
                 }
                 runningDataManager.pauseRunning()
                 runningStartManager.stopTimer()
+                locationManager.isRunning = false
             } else if newValue == .resume {
                 withAnimation {
                     showDetail = false
@@ -104,18 +110,21 @@ struct NewRunningView: View {
                 }
                 runningDataManager.resumeRunning()
                 runningStartManager.startTimer()
+                locationManager.isRunning = true
             } else if newValue == .end {
                 DispatchQueue.main.async {
                     if runningStartManager.counter < 30 {
                         runningDataManager.stopRunningWithoutRecord()
                         runningStartManager.stopTimer()
                         runningStartManager.running = false
+                        locationManager.isRunning = false
                         if connectivityManger.isMirroring {
                             connectivityManger.sendRunningState(.end)
                         }
                     } else {
                         runningDataManager.userLocations = locationManager.userLocations
                         runningStartManager.stopTimer()
+                        locationManager.isRunning = false
                         withAnimation {
                             showCompleteSheet = true
                         }
@@ -137,12 +146,18 @@ extension NewRunningView {
                 if runningStartManager.running == true {
                     runningDataManager.startRunning()
                     runningStartManager.startTimer()
+                    Task {
+                        await runningDataManager.startLiveActivity()
+                    }
                 }
             }
     }
     
     private var navigation: some View {
-        NewRunningNavigationView(showDetailNavigation: navigationTranslation + navigationSheetHeight > 10)
+        NewRunningNavigationView(
+            courseName: runningStartManager.startCourse?.courseName ?? "",
+            showDetailNavigation: navigationTranslation + navigationSheetHeight > 10
+        )
             .frame(height: 70 + navigationTranslation + navigationSheetHeight, alignment: .top)
             .mask {
                 Rectangle()
@@ -169,6 +184,9 @@ extension NewRunningView {
             .zIndex(1)
             .gesture(navigationGesture)
             .frame(maxHeight: .infinity, alignment: .top)
+            .onAppear {
+                locationManager.navigationDatas = runningStartManager.startCourse?.navigation
+            }
     }
     
     private var metrics: some View {
@@ -184,12 +202,12 @@ extension NewRunningView {
             .background {
                 TransparentBlurView(removeAllFilters: true)
                     .blur(radius: 6, opaque: true)
+                    .ignoresSafeArea()
                     .overlay {
                         RoundedRectangle(cornerRadius: 20)
                             .foregroundStyle(.black50)
                             .ignoresSafeArea()
                     }
-                    .ignoresSafeArea()
             }
             .gesture(metricsGesture)
             .overlay(alignment: .bottom) {
@@ -352,9 +370,9 @@ extension NewRunningView {
                 }
                 let translationY = value.translation.height
                 if navigationSheetHeight == 0 {
-                    navigationTranslation = min(max(translationY, -5), 340)
+                    navigationTranslation = min(max(translationY, -5), 150)
                 } else {
-                    navigationTranslation = max(min(translationY, 40), -310)
+                    navigationTranslation = max(min(translationY, 40), -160)
                 }
             }
             .onEnded { value in
@@ -364,7 +382,7 @@ extension NewRunningView {
                 let translationY = value.translation.height
                 withAnimation(.bouncy) {
                     if translationY > 0 {
-                        navigationSheetHeight = 300
+                        navigationSheetHeight = 150
                     } else {
                         navigationSheetHeight = 0
                     }
@@ -378,7 +396,7 @@ extension NewRunningView {
                     }
                     withAnimation {
                         if navigationSheetHeight == 0 {
-                            navigationSheetHeight = 300
+                            navigationSheetHeight = 150
                         } else {
                             navigationSheetHeight = 0
                         }
@@ -423,7 +441,7 @@ extension NewRunningView {
             }
             .onEnded { _ in
                 DispatchQueue.main.async {
-                    if runningStartManager.counter < 3 {
+                    if runningStartManager.counter < 30 {
                         runningDataManager.stopRunningWithoutRecord()
                         runningStartManager.stopTimer()
                         runningStartManager.running = false
@@ -431,6 +449,9 @@ extension NewRunningView {
                             connectivityManger.sendRunningState(.end)
                         }
                     } else {
+                        Task {
+                            await runningDataManager.removeActivity()
+                        }
                         runningDataManager.userLocations = locationManager.userLocations
                         runningStartManager.stopTimer()
                         withAnimation {

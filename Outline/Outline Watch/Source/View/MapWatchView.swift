@@ -10,6 +10,8 @@ import MapKit
 
 struct MapWatchView: View {
     @StateObject private var runningManager = WatchRunningManager.shared
+    @StateObject private var locationManager = LocationManager.shared
+    
     @State private var position: MapCameraPosition = .userLocation(followsHeading: true, fallback: .automatic)
     @State private var bounds: MapCameraBounds = .init(minimumDistance: 100, maximumDistance: 100)
     @State private var interactionModes: MapInteractionModes = []
@@ -38,8 +40,11 @@ struct MapWatchView: View {
             }
         }
         .overlay {
-            if runningManager.runningType == .gpsArt {
+            if !runningManager.startCourse.navigation.isEmpty {
                 NavigationTabView()
+                    .onAppear {
+                        locationManager.navigationDatas = runningManager.startCourse.navigation
+                    }
             }
         }
         .gesture(gesture)

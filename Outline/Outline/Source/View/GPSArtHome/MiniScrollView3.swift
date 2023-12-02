@@ -19,19 +19,14 @@ struct MiniScrollView3: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
-            if loading {
-                RoundedRectangle(cornerRadius: 9.5)
-                    .padding(.leading, 16)
-                    .foregroundStyle(.clear)
-                    .frame(width: 148, height: 16)
-            } else {
+           
                 Text(category)
                     .padding(.leading, 16)
                     .font(.customSubtitle)
                     .fontWeight(.semibold)
                     .foregroundColor(.white)
-                    .padding(.bottom, -5)
-            }
+//                    .padding(.bottom, -5)
+            
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 8) {
                     ForEach(courseList, id: \.id) { currentCourse in
@@ -52,18 +47,19 @@ struct MiniScrollView3: View {
                                 } label: {
                                     ZStack {
                                         KFImage(URL(string: currentCourse.course.thumbnailLong))
-                                            .resizable()
-                                            .placeholder {
-                                                Rectangle()
-                                                    .foregroundColor(.gray700)
-                                                    .onDisappear {
-                                                        loading = false
-                                                    }
-                                                    .mask {
-                                                        UnevenRoundedRectangle(topLeadingRadius: 5, bottomLeadingRadius: 30, bottomTrailingRadius: 30, topTrailingRadius: 30, style: .circular)
-                                                    }
-                                            }
+                                              .resizable()
+                                               .scaledToFill()
+                                               .frame(
+                                                   width: UIScreen.main.bounds.width * 0.6,
+                                                   height: UIScreen.main.bounds.width * 1.2
+                                               )
+                                               .clipped()
+                                            
                                             .matchedGeometryEffect(id: currentCourse.id, in: namespace)
+                                         
+                                            .mask {
+                                                UnevenRoundedRectangle(topLeadingRadius: 5, bottomLeadingRadius: 30, bottomTrailingRadius: 30, topTrailingRadius: 30)
+                                            }
                                         LinearGradient(
                                             stops: [
                                                 Gradient.Stop(color: .black, location: 0.00),
@@ -99,6 +95,10 @@ struct MiniScrollView3: View {
                                         .padding(.leading, 16)
                                         .frame(maxWidth: .infinity, alignment: .leading)
                                     }
+                                    .frame(
+                                        width: UIScreen.main.bounds.width * 0.6,
+                                        height: UIScreen.main.bounds.width * 1.2
+                                    )
                                     .mask {
                                         UnevenRoundedRectangle(topLeadingRadius: 5, bottomLeadingRadius: 30, bottomTrailingRadius: 30, topTrailingRadius: 30)
                                     }
@@ -115,11 +115,12 @@ struct MiniScrollView3: View {
                 }
                 .scrollTargetLayout()
             }
+//            .padding(.top, 20)
             .scrollTargetBehavior(.viewAligned)
             .contentMargins(UIScreen.main.bounds.width * 0.05)
         }
         .padding(.top, 48)
-        .padding(.bottom, 160)
+        .padding(.bottom, 120)
     }
 }
 

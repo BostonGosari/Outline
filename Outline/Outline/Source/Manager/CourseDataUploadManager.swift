@@ -68,23 +68,30 @@ struct CourseDataUploadView: View {
     }
     
     func setCourseData() {
-        let parsedCoordinates = parseCooridinates(fileName: "pohangDangDangRun")
         let centerLocation  = CLLocationCoordinate2D(latitude: 36.0259635, longitude: 129.361410)
         getPlaceMarks(coordinate: centerLocation) { newPlaceMark in
             let gpsArtCourse = GPSArtCourse(
                 id: UUID().uuidString,
-                courseName: "댕댕런",
+                courseName: "수영런",
                 locationInfo: newPlaceMark,
-                courseLength: 5,
-                courseDuration: 50,
+                courseLength: 3.7,
+                courseDuration: 60,
                 centerLocation: Coordinate(longitude: centerLocation.longitude, latitude: centerLocation.latitude),
                 distance: 0,
-                level: .hard,
+                level: .normal,
                 alley: .lots,
-                coursePaths: parsedCoordinates,
+                coursePaths: parseCooridinates(fileName: "SwimmingRun"),
                 heading: 1.5,
-                thumbnail: "https://firebasestorage.googleapis.com/v0/b/outline-5640c.appspot.com/o/courseImages%2FcourseImage_duckRun.jpg?alt=media&token=479a261d-0534-4e21-ac27-a9b2b27bfce7&_gl=1*4pvvwz*_ga*MTE2MDQ4NzcyNy4xNjk3MTE2NTg4*_ga_CW55HF8NVT*MTY5NzcxNDc1Ny4zMy4xLjE2OTc3MTUyOTEuNTEuMC4w",
-                regionDisplayName: "포항시 북구 효자동"
+                thumbnail: "https://firebasestorage.googleapis.com/v0/b/outline-5640c.appspot.com/o/Pohang%2Fdefault%2FSwimmingRun.jpg?alt=media&token=38f094a1-3d04-4215-9809-2c90f7a7c7d7",
+                thumbnailNeon: "https://firebasestorage.googleapis.com/v0/b/outline-5640c.appspot.com/o/Pohang%2Fneon%2FNeonSwimmingRun.jpg?alt=media&token=82eb719a-d019-4ce4-90c5-751d8eecd89f",
+                thumbnailLong: "https://firebasestorage.googleapis.com/v0/b/outline-5640c.appspot.com/o/Pohang%2Fhotspot%2FHotSpotSwimmingRun.jpg?alt=media&token=e02b62f4-a941-4b93-968e-281a44a79461",
+                startLocation: parseCooridinates(fileName: "SwimmingRun").first ?? Coordinate(longitude: 129.3773324, latitude: 36.0526138),
+                regionDisplayName: "포항시 북구 항구동",
+                producer: "Outline",
+                title: "영일대의 아름다운 야경과 함께 수영을 즐기는 모습을 담은 아트 코스",
+                description: "",
+                navigation: [],
+                hotSpots: [HotSpot(title: "영일대 해수욕장", spotDescription: "POSCO와 영일만이 보이는 해수욕장", location: Coordinate(longitude: 129.377948, latitude: 36.055857)), HotSpot(title: "영일대 해상누각", spotDescription: "전망 좋은 바다정자", location: Coordinate(longitude: 129.3830049982513, latitude: 36.06161748071163))]
             )
             coureDataUploadMananger.uploadData(course: gpsArtCourse)
         }

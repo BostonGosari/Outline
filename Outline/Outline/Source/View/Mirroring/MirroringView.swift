@@ -38,9 +38,9 @@ struct MirroringView: View {
     var body: some View {
         ZStack {
             map
-            if connectivityManager.runningInfo.runningType == .gpsArt {
-                navigation
-            }
+//            if connectivityManager.runningInfo.runningType == .gpsArt {
+//                navigation
+//            }
             metrics
             
             if connectivityManager.runningInfo.runningType == .gpsArt {
@@ -94,7 +94,10 @@ extension MirroringView {
     }
     
     private var navigation: some View {
-        NewRunningNavigationView(showDetailNavigation: navigationTranslation + navigationSheetHeight > 10)
+        NewRunningNavigationView(
+            courseName: runningManager.startCourse?.courseName ?? "",
+            showDetailNavigation: navigationTranslation + navigationSheetHeight > 10
+        )
             .frame(height: 70 + navigationTranslation + navigationSheetHeight, alignment: .top)
             .mask {
                 Rectangle()
@@ -241,7 +244,7 @@ extension MirroringView {
                 tapPossible: !(navigationTranslation + navigationSheetHeight > 10)
             )
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: tapGuideView ? .top : .topTrailing)
-            .padding(.top, 80)
+            .padding(.top, 20)
             .padding(.trailing, tapGuideView ? 0 : 16)
         }
         .zIndex(tapGuideView ? 2 : 0)

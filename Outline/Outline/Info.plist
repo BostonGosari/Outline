@@ -15,6 +15,11 @@
 			</array>
 		</dict>
 	</array>
+	<key>BGTaskSchedulerPermittedIdentifiers</key>
+	<array>
+		<string>team.boston.gosari.outline</string>
+		<string>team.boston.gosari.outline.watchkitapp</string>
+	</array>
 	<key>FirestoreAPIKey</key>
 	<string>$(FIRESTORE_API_KEY)</string>
 	<key>KakaoAPIKey</key>

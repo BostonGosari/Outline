@@ -23,82 +23,84 @@ struct FinishRunningView: View {
     private let polylineGradient = Gradient(colors: [.customGradient2, .customGradient3, .customGradient3, .customGradient3, .customGradient2])
     
     var body: some View {
-        ZStack {
-            Color.gray900
-                .ignoresSafeArea()
-            Circle()
-                .frame(width: 350)
-                .foregroundStyle(.customPrimary.opacity(0.35))
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-                .offset(x: -175, y: -100)
-                .blur(radius: 120)
-            Circle()
-                .frame(width: 350)
-                .foregroundStyle(.customPrimary.opacity(0.35))
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
-                .offset(x: 100, y: 100)
-                .blur(radius: 120)
-            
-            VStack {
-                BigCard(
-                    cardType: viewModel.cardType,
-                    runName: viewModel.courseName,
-                    date: viewModel.date,
-                    editMode: runningManager.runningType == .free,
-                    time: viewModel.runningData[1].data,
-                    distance: "\(viewModel.runningData[0].data)KM",
-                    pace: viewModel.runningData[2].data,
-                    kcal: viewModel.runningData[4].data,
-                    bpm: viewModel.runningData[3].data,
-                    score: Int(viewModel.runningData[6].data) ?? 77,
-                    editAction: {
-                        showRenameSheet = true
-                    },
-                    content: {
-                        Map(interactionModes: []) {
-                            MapPolyline(coordinates: viewModel.userLocations)
-                                .stroke(polylineGradient, style: StrokeStyle(lineWidth: 8, lineCap: .round, lineJoin: .round))
-                        }
-                    }
-                )
-                .padding(.top, 90)
-                Spacer()
-                CompleteButton(text: "자랑하기", isActive: true) {
-                    viewModel.saveShareData()
-                }
-                .padding(.bottom, 16)
+        NavigationStack {
+            ZStack {
+                Color.gray900
+                    .ignoresSafeArea()
+                Circle()
+                    .frame(width: 350)
+                    .foregroundStyle(.customPrimary.opacity(0.35))
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+                    .offset(x: -175, y: -100)
+                    .blur(radius: 120)
+                Circle()
+                    .frame(width: 350)
+                    .foregroundStyle(.customPrimary.opacity(0.35))
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
+                    .offset(x: 100, y: 100)
+                    .blur(radius: 120)
                 
-                Button(action: {
-                    withAnimation {
-                        runningManager.complete = false
+                VStack {
+                    BigCard(
+                        cardType: viewModel.cardType,
+                        runName: viewModel.courseName,
+                        date: viewModel.date,
+                        editMode: runningManager.runningType == .free,
+                        time: viewModel.runningData[1].data,
+                        distance: "\(viewModel.runningData[0].data)KM",
+                        pace: viewModel.runningData[2].data,
+                        kcal: viewModel.runningData[4].data,
+                        bpm: viewModel.runningData[3].data,
+                        score: Int(viewModel.runningData[6].data) ?? 77,
+                        editAction: {
+                            showRenameSheet = true
+                        },
+                        content: {
+                            Map(interactionModes: []) {
+                                MapPolyline(coordinates: viewModel.userLocations)
+                                    .stroke(polylineGradient, style: StrokeStyle(lineWidth: 8, lineCap: .round, lineJoin: .round))
+                            }
+                        }
+                    )
+                    .padding(.top, 90)
+                    Spacer()
+                    CompleteButton(text: "자랑하기", isActive: true) {
+                        viewModel.saveShareData()
                     }
-                }, label: {
-                    Text("홈으로 돌아가기")
-                        .underline(pattern: .solid)
-                        .foregroundStyle(Color.gray300)
-                        .font(.customSubbody)
-                })
-                .padding(.bottom, 8)
-            }
-            .overlay {
-                if viewModel.isShowPopup {
-                    RunningPopup(text: "기록이 저장되었어요.")
-                        .frame(maxHeight: .infinity, alignment: .top)
-                        .transition(.move(edge: .top))
+                    .padding(.bottom, 16)
+                    
+                    Button(action: {
+                        withAnimation {
+                            runningManager.complete = false
+                        }
+                    }, label: {
+                        Text("홈으로 돌아가기")
+                            .underline(pattern: .solid)
+                            .foregroundStyle(Color.gray300)
+                            .font(.customSubbody)
+                    })
+                    .padding(.bottom, 8)
                 }
-            }
-            .sheet(isPresented: $showRenameSheet) {
-                updateNameSheet
-            }
-            .navigationDestination(isPresented: $viewModel.navigateToShareMainView) {
-                ShareView(runningData: viewModel.shareData)
-                    .navigationBarBackButtonHidden()
-            }
-            .onAppear {
-                if !save {
-                    viewModel.isShowPopup = true
-                    viewModel.readData(runningRecord: runningRecord)
-                    save = true
+                .overlay {
+                    if viewModel.isShowPopup {
+                        RunningPopup(text: "기록이 저장되었어요.")
+                            .frame(maxHeight: .infinity, alignment: .top)
+                            .transition(.move(edge: .top))
+                    }
+                }
+                .sheet(isPresented: $showRenameSheet) {
+                    updateNameSheet
+                }
+                .navigationDestination(isPresented: $viewModel.navigateToShareMainView) {
+                    ShareView(runningData: viewModel.shareData)
+                        .navigationBarBackButtonHidden()
+                }
+                .onAppear {
+                    if !save {
+                        viewModel.isShowPopup = true
+                        viewModel.readData(runningRecord: runningRecord)
+                        save = true
+                    }
                 }
             }
         }
