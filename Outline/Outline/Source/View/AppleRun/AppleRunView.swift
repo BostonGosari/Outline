@@ -37,7 +37,6 @@ struct AppleRunView: View {
     var body: some View {
         ZStack {
             map
-            navigation
             metrics
             guideView
             
@@ -68,6 +67,7 @@ struct AppleRunView: View {
         .onChange(of: appleRunManager.progress) { _, newValue in
             if newValue == 1.0 {
                 appleRunManager.complete = true
+                appleRunManager.stopRunning()
             }
         }
     }
@@ -77,37 +77,7 @@ extension AppleRunView {
     private var map: some View {
         AppleRunMapView()
     }
-    
-    private var navigation: some View {
-        AppleRunNavigationView(showDetailNavigation: navigationTranslation + navigationSheetHeight > 10)
-            .frame(height: 70 + navigationTranslation + navigationSheetHeight, alignment: .top)
-            .mask {
-                Rectangle()
-                    .roundedCorners(50, corners: .bottomRight)
-            }
-            .background {
-                TransparentBlurView(removeAllFilters: true)
-                    .blur(radius: 6, opaque: true)
-                    .ignoresSafeArea()
-                    .overlay {
-                        Rectangle()
-                            .roundedCorners(50, corners: .bottomRight)
-                            .foregroundStyle(.black50)
-                            .ignoresSafeArea()
-                            .overlay(alignment: .bottom) {
-                                Capsule()
-                                    .frame(width: 40, height: 3)
-                                    .padding(.bottom, 9)
-                                    .foregroundStyle(.gray600)
-                            }
-                        
-                    }
-            }
-            .zIndex(1)
-            .gesture(navigationGesture)
-            .frame(maxHeight: .infinity, alignment: .top)
-    }
-    
+        
     private var metrics: some View {
         AppleRunMetricsView(showDetail: showDetail, isPaused: isPaused)
             .overlay(alignment: .topTrailing) {
@@ -225,7 +195,7 @@ extension AppleRunView {
                 tapPossible: !(navigationTranslation + navigationSheetHeight > 10)
             )
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: tapGuideView ? .top : .topTrailing)
-            .padding(.top, 80)
+            .padding(.top, 20)
             .padding(.trailing, tapGuideView ? 0 : 16)
 
         }
@@ -294,6 +264,8 @@ extension AppleRunView {
                 CompleteButton(text: "결과 페이지로", isActive: true) {
                     withAnimation {
                         appleRunManager.finish = true
+                        appleRunManager.complete = false
+                        appleRunManager.counter = 0
                     }
                 }
             }

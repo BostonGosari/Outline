@@ -31,6 +31,7 @@ struct AppleRunMapView: View {
         .tint(.customPrimary)
         .onAppear {
             getGPSArtCourseData()
+            print(coordinates)
         }
         .onChange(of: appleRunManager.progress) { _, newValue in
             let count = coordinates.count

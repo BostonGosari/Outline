@@ -44,8 +44,8 @@ struct AppleRunDetail: View {
                     VStack {
                         ZStack(alignment: .top) {
                             if showDetailView {
-                                    courseImage
-                                    courseInformation
+                                courseImage
+                                courseInformation
                             } else {
                                 UnevenRoundedRectangle(bottomTrailingRadius: 45, style: .circular)
                                     .frame(
@@ -117,12 +117,8 @@ struct AppleRunDetail: View {
                 UnevenRoundedRectangle(bottomTrailingRadius: 45, style: .circular)
             }
             .matchedGeometryEffect(id: "AppleRun", in: namespace)
-            .overlay {
-                UnevenRoundedRectangle(bottomTrailingRadius: 45, style: .circular)
-                    .stroke(LinearGradient(colors: [.gray600, .clear, .clear, .clear], startPoint: .bottomTrailing, endPoint: .top), lineWidth: 1)
-            }
+            .shadow(color: .white, radius: 1, y: 0.5)
             .frame(
-                //                width: UIScreen.main.bounds.width + 2,
                 height: UIScreen.main.bounds.height * 0.68
             )
             .offset(y: -1)
@@ -158,8 +154,8 @@ struct AppleRunDetail: View {
         SlideToUnlock(isUnlocked: $isUnlocked, progress: $progress)
             .onChange(of: isUnlocked) { _, newValue in
                 if newValue {
-                        isUnlocked = false
-                        appleRunManager.start = true
+                    isUnlocked = false
+                    appleRunManager.start = true
                 }
             }
             .opacity(appear[1] ? 1 : 0)
@@ -282,4 +278,8 @@ extension AppleRunDetail {
             }
         }
     }
+}
+
+#Preview {
+    HomeTabView()
 }

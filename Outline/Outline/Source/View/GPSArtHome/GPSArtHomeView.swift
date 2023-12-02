@@ -49,19 +49,21 @@ struct GPSArtHomeView: View {
                             getCurrentOffsetView
                             
                             HStack(spacing: 0) {
-                                Button {
-                                    withAnimation(.bouncy(duration: 0.7)) {
-                                        showDetailView = true
-                                        appleRunManager.showAppleRunDetail = true
+                                if !viewModel.recommendedCoures.isEmpty {
+                                    Button {
+                                        withAnimation(.bouncy(duration: 0.7)) {
+                                            showDetailView = true
+                                            appleRunManager.showAppleRunDetail = true
+                                        }
+                                    } label: {
+                                        AppleRunCard(loading: $loading, showAppleRunDetail: $appleRunManager.showAppleRunDetail, index: 0, currentIndex: currentIndex, namespace: namespace, showDetailView: showDetailView)
                                     }
-                                } label: {
-                                    AppleRunCard(loading: $loading, showAppleRunDetail: $appleRunManager.showAppleRunDetail, index: 0, currentIndex: currentIndex, namespace: namespace, showDetailView: showDetailView)
-                                }
-                                .buttonStyle(CardButton())
-                                .disabled(loading)
-                                .scrollTransition { content, phase in
-                                    content
-                                        .scaleEffect(phase.isIdentity ? 1 : 0.9)
+                                    .buttonStyle(CardButton())
+                                    .disabled(loading)
+                                    .scrollTransition { content, phase in
+                                        content
+                                            .scaleEffect(phase.isIdentity ? 1 : 0.9)
+                                    }
                                 }
                                 
                                 ForEach(viewModel.recommendedCoures.indices, id: \.self) { index in
