@@ -39,6 +39,7 @@ struct BigCardView: View {
                             .onDisappear {
                                 loading = false
                             }
+                            .padding(.bottom, 30)
                     }
                     .matchedGeometryEffect(id: course.id, in: namespace)
                     .mask {
