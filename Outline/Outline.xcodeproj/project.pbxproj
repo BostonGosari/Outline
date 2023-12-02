@@ -71,7 +71,6 @@
 		297399142B182EC600318321 /* AppleRunDetailInformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297399132B182EC600318321 /* AppleRunDetailInformationView.swift */; };
 		297399162B18344E00318321 /* AppleRunManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297399152B18344E00318321 /* AppleRunManager.swift */; };
 		297399182B195B4600318321 /* AppleRunFinishView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297399172B195B4600318321 /* AppleRunFinishView.swift */; };
-		2973991A2B196E3500318321 /* AppleRun.kml in Resources */ = {isa = PBXBuildFile; fileRef = 297399192B196E3500318321 /* AppleRun.kml */; };
 		2973991B2B19829A00318321 /* Outline Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 297B80FA2AE73C4500AF7219 /* Outline Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		2975F0962AE3E1790046C00B /* CornerRectangleModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2975F0952AE3E1790046C00B /* CornerRectangleModifier.swift */; };
 		297B80FC2AE7515200AF7219 /* CourseModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E2EF702ADA6F230083ADEE /* CourseModelType.swift */; };
@@ -98,7 +97,6 @@
 		29AE76E12ADE2C1700A46742 /* HomeTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01FDB9D2ADABD3D00BDA633 /* HomeTabView.swift */; };
 		29B205082AEA625100E63F39 /* PathGenerateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9528EFFF2AE042570056CCC6 /* PathGenerateManager.swift */; };
 		29B9BB8F2B16CF780042DE19 /* DrawPathView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B9BB8E2B16CF780042DE19 /* DrawPathView.swift */; };
-		29B9BB932B1734770042DE19 /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 29B9BB922B1734770042DE19 /* Secrets.xcconfig */; };
 		29B9BB962B1790230042DE19 /* AppleRunView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B9BB952B1790230042DE19 /* AppleRunView.swift */; };
 		29B9BB982B1790360042DE19 /* AppleRunMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B9BB972B1790360042DE19 /* AppleRunMapView.swift */; };
 		29B9BB9A2B1790420042DE19 /* AppleRunNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B9BB992B1790420042DE19 /* AppleRunNavigationView.swift */; };
@@ -121,6 +119,7 @@
 		29EC2ED22AEB2B560033446C /* CourseAnalyzeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29EC2ED12AEB2B560033446C /* CourseAnalyzeManager.swift */; };
 		29EC2ED42AEB30430033446C /* CourseAnalyzeTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29EC2ED32AEB30430033446C /* CourseAnalyzeTest.swift */; };
 		29F100A42B19BB6B004AC424 /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 29F100A32B19BB6B004AC424 /* Secrets.xcconfig */; };
+		29F100A82B1B1EDE004AC424 /* AppleRun.kml in Resources */ = {isa = PBXBuildFile; fileRef = 29F100A72B1B1EDE004AC424 /* AppleRun.kml */; };
 		29F835CD2B0894CF0052C3C1 /* BigCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F835CC2B0894CF0052C3C1 /* BigCard.swift */; };
 		29F835CF2B0894DB0052C3C1 /* BigCardBackside.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F835CE2B0894DB0052C3C1 /* BigCardBackside.swift */; };
 		29FEDC5E2AED81A800C1F80B /* Shimmer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FEDC5D2AED81A800C1F80B /* Shimmer.swift */; };
@@ -392,7 +391,6 @@
 		297399132B182EC600318321 /* AppleRunDetailInformationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleRunDetailInformationView.swift; sourceTree = "<group>"; };
 		297399152B18344E00318321 /* AppleRunManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleRunManager.swift; sourceTree = "<group>"; };
 		297399172B195B4600318321 /* AppleRunFinishView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleRunFinishView.swift; sourceTree = "<group>"; };
-		297399192B196E3500318321 /* AppleRun.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = AppleRun.kml; sourceTree = "<group>"; };
 		2975F0952AE3E1790046C00B /* CornerRectangleModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CornerRectangleModifier.swift; sourceTree = "<group>"; };
 		297B80F92AE73C4500AF7219 /* Outline.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Outline.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		297B80FA2AE73C4500AF7219 /* Outline Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Outline Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -412,7 +410,6 @@
 		29AE76DA2ADE2A5300A46742 /* InputUserInfoViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InputUserInfoViewModel.swift; path = Outline/Source/ViewModel/InputUserInfoViewModel.swift; sourceTree = SOURCE_ROOT; };
 		29AE76DF2ADE2BC700A46742 /* DateExtention.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtention.swift; sourceTree = "<group>"; };
 		29B9BB8E2B16CF780042DE19 /* DrawPathView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawPathView.swift; sourceTree = "<group>"; };
-		29B9BB922B1734770042DE19 /* Secrets.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 		29B9BB952B1790230042DE19 /* AppleRunView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleRunView.swift; sourceTree = "<group>"; };
 		29B9BB972B1790360042DE19 /* AppleRunMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleRunMapView.swift; sourceTree = "<group>"; };
 		29B9BB992B1790420042DE19 /* AppleRunNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleRunNavigationView.swift; sourceTree = "<group>"; };
@@ -435,6 +432,7 @@
 		29EC2ED12AEB2B560033446C /* CourseAnalyzeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseAnalyzeManager.swift; sourceTree = "<group>"; };
 		29EC2ED32AEB30430033446C /* CourseAnalyzeTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseAnalyzeTest.swift; sourceTree = "<group>"; };
 		29F100A32B19BB6B004AC424 /* Secrets.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
+		29F100A72B1B1EDE004AC424 /* AppleRun.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = AppleRun.kml; sourceTree = "<group>"; };
 		29F835CC2B0894CF0052C3C1 /* BigCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigCard.swift; sourceTree = "<group>"; };
 		29F835CE2B0894DB0052C3C1 /* BigCardBackside.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigCardBackside.swift; sourceTree = "<group>"; };
 		29FEDC5D2AED81A800C1F80B /* Shimmer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shimmer.swift; sourceTree = "<group>"; };
@@ -708,7 +706,7 @@
 				29B9BB992B1790420042DE19 /* AppleRunNavigationView.swift */,
 				29B9BB9B2B1790500042DE19 /* AppleRunMetricsView.swift */,
 				29B9BBA52B181BDF0042DE19 /* AppleRunCourseGuideView.swift */,
-				297399192B196E3500318321 /* AppleRun.kml */,
+				29F100A72B1B1EDE004AC424 /* AppleRun.kml */,
 				29B9BBA72B18267C0042DE19 /* AppleRunCard.swift */,
 				29B9BBA92B1826950042DE19 /* AppleRunDetail.swift */,
 				297399132B182EC600318321 /* AppleRunDetailInformationView.swift */,
@@ -1406,14 +1404,13 @@
 				954CB2AB2AE5457B005EB2E9 /* flightRun.kml in Resources */,
 				0E1D1B2B2AE95E1C005282A2 /* test.kml in Resources */,
 				954CB2A72AE5457B005EB2E9 /* seoulOctopusRun.kml in Resources */,
+				29F100A82B1B1EDE004AC424 /* AppleRun.kml in Resources */,
 				F0AC8AA42AD94C200061612C /* Preview Assets.xcassets in Resources */,
 				F0AC8B2C2AD967E30061612C /* Image.xcassets in Resources */,
 				BB1D531A2ADDBCAB0073771F /* Pretendard-Regular.ttf in Resources */,
 				954CB2A52AE5457B005EB2E9 /* pohangCrocodileRun.kml in Resources */,
 				29F100A42B19BB6B004AC424 /* Secrets.xcconfig in Resources */,
 				F0AC8B2E2AD968A20061612C /* Icon.xcassets in Resources */,
-				954CB2AD2AE5457B005EB2E9 /* pohangDuckRun.kml in Resources */,
-				2973991A2B196E3500318321 /* AppleRun.kml in Resources */,
 				F0AC8AA12AD94C200061612C /* Color.xcassets in Resources */,
 				2990249A2B10B3E8005C5BA8 /* SFCompactDisplay-Semibold.ttf in Resources */,
 				954CB2AF2AE5457B005EB2E9 /* seoulCamelRun.kml in Resources */,
@@ -1543,7 +1540,6 @@
 				95B8F45A2AED27C400D9F35B /* AuthModel.swift in Sources */,
 				0EE92E682AE00A11003192FF /* FinishRunningView.swift in Sources */,
 				29B9BBA82B18267C0042DE19 /* AppleRunCard.swift in Sources */,
-				0E29F65B2ADF6CA000F5EF5C /* RunningView.swift in Sources */,
 				0EE0D3E22B0C83B200E75F4C /* ShareView.swift in Sources */,
 				29EC2ECE2AEAD5A80033446C /* CourseProgressManager.swift in Sources */,
 				29D7AD4A2B0E030F00AAAAB0 /* MirroringMapView.swift in Sources */,
