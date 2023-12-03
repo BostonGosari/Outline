@@ -186,6 +186,7 @@ extension NewRunningView {
             .frame(maxHeight: .infinity, alignment: .top)
             .onAppear {
                 locationManager.navigationDatas = runningStartManager.startCourse?.navigation
+                locationManager.initNavigation()
             }
     }
     

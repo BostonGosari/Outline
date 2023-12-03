@@ -44,6 +44,7 @@ struct MapWatchView: View {
                 NavigationTabView()
                     .onAppear {
                         locationManager.navigationDatas = runningManager.startCourse.navigation
+                        locationManager.initNavigation()
                     }
             }
         }
