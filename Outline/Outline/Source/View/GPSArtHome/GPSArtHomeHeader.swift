@@ -17,7 +17,7 @@ struct GPSArtHomeHeader: View {
             if loading {
                 RoundedRectangle(cornerRadius: 9.5)
                     .foregroundColor(.gray700)
-                    .frame(width: 115, height: 38)
+                    .frame(width: 154, height: 76)
             } else {
                 Text(title)
                     .font(.customTitle)

@@ -104,7 +104,7 @@ struct GPSArtHomeView: View {
                                     .roundedCorners(45, corners: [.bottomLeft, .bottomRight])
                                     .foregroundColor(.gray700)
                                     .padding(.top, -20)
-                                    .padding(.bottom, -20)
+                                    .padding(.bottom, 13)
                                 HStack {
                                     ForEach(0..<4) { _ in
                                         Rectangle()
