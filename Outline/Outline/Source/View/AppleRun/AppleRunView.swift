@@ -5,6 +5,7 @@
 //  Created by hyunjun on 11/30/23.
 //
 
+import AVFoundation
 import MapKit
 import SwiftUI
 
@@ -33,6 +34,9 @@ struct AppleRunView: View {
             }
         }
     }
+    
+    @State private var synthesizer = AVSpeechSynthesizer()
+    @State private var audioPlayer: AVAudioPlayer?
     
     var body: some View {
         ZStack {
@@ -63,6 +67,8 @@ struct AppleRunView: View {
         }
         .onAppear {
             appleRunManager.startRunning()
+            playAlertSound()
+            textToSpeech("애플런을 시작합니다.")
         }
         .onChange(of: appleRunManager.progress) { _, newValue in
             if newValue == 1.0 {
@@ -374,6 +380,25 @@ extension AppleRunView {
                     }
                 }
             )
+    }
+    
+    private func textToSpeech(_ text: String) {
+        let utterance = AVSpeechUtterance(string: text)
+        utterance.voice = AVSpeechSynthesisVoice(language: "ko-KR")
+        utterance.rate = 0.5
+        
+        synthesizer.speak(utterance)
+    }
+    
+    private func playAlertSound() {
+        guard let url = Bundle.main.url(forResource: "alert", withExtension: "mp3") else { return }
+        
+        do {
+            audioPlayer = try AVAudioPlayer(contentsOf: url)
+            audioPlayer?.play()
+        } catch let error {
+            print("Error playing sound: \(error.localizedDescription)")
+        }
     }
 }
 
