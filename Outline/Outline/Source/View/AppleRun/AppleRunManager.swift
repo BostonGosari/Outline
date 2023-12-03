@@ -45,6 +45,7 @@ class AppleRunManager: ObservableObject {
     private init() { }
     
     func startRunning() {
+        reset()
         startPedometerUpdates()
         startTimer()
     }
