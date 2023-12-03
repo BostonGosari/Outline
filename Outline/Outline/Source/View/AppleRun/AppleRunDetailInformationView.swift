@@ -126,12 +126,22 @@ struct AppleRunDetailInformationView: View {
                 .font(.customSubtitle)
                 .fontWeight(.semibold)
             VStack(alignment: .leading, spacing: 8) {
-                Map(interactionModes: []) {
-                    UserAnnotation()
-                    MapPolyline(coordinates: coordinates)
-                        .stroke(.customPrimary, style: StrokeStyle(lineWidth: 4, lineCap: .round, lineJoin: .round))
+                NavigationLink {
+                        Map {
+                            UserAnnotation()
+                            MapPolyline(coordinates: coordinates)
+                                .stroke(.customPrimary, style: StrokeStyle(lineWidth: 4, lineCap: .round, lineJoin: .round))
+                            Marker("애플 디벨로퍼 아카데미", coordinate: CLLocationCoordinate2D(latitude: 36.01451, longitude: 129.32560))
+                                .tint(.customRed)
+                        }
+                } label: {
+                    Map(interactionModes: []) {
+                        UserAnnotation()
+                        MapPolyline(coordinates: coordinates)
+                            .stroke(.customPrimary, style: StrokeStyle(lineWidth: 4, lineCap: .round, lineJoin: .round))
+                    }
+                    .frame(height: 200)
                 }
-                .frame(height: 200)
                 
                 Text("경로 제작 보스턴고사리")
                     .font(.customSubbody)
@@ -167,5 +177,6 @@ struct AppleRunDetailInformationView: View {
 #Preview {
     NavigationStack {
         AppleRunDetailInformationView(showCopyLocationPopup: .constant(false))
+            .tint(.customPrimary)
     }
 }
