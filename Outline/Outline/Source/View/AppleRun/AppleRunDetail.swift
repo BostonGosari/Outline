@@ -127,7 +127,7 @@ struct AppleRunDetail: View {
     private var courseInformation: some View {
         VStack(alignment: .leading) {
             VStack(alignment: .leading, spacing: 0) {
-                Text("애플런")
+                Text("사과런")
                     .font(.customHeadline)
                     .fontWeight(.semibold)
                     .padding(.bottom, 8)

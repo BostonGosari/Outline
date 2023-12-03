@@ -137,7 +137,7 @@ class AppleRunManager: ObservableObject {
     }
     
     private func saveRunning() {
-        let courseData = CourseData(courseName: "애플런", runningLength: 0.03, heading: 1, distance: 0.03, coursePaths: userCoordinates, runningCourseId: "", regionDisplayName: "애플 디벨로퍼 아카데미", score: 100)
+        let courseData = CourseData(courseName: "사과런", runningLength: 0.03, heading: 1, distance: 0.03, coursePaths: userCoordinates, runningCourseId: "", regionDisplayName: "애플 디벨로퍼 아카데미", score: 100)
         
         let healthData = HealthData(totalTime: totalTime, averageCadence: totalSteps / totalTime * 60, totalRunningDistance: totalDistance, totalEnergy: kilocalorie, averageHeartRate: 0.0, averagePace: totalTime / totalDistance * 1000, startDate: startDate ?? Date(), endDate: endDate ?? Date())
         
