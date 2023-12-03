@@ -76,6 +76,10 @@ struct AppleRunView: View {
                 appleRunManager.complete = true
                 HapticManager.notification(type: .success)
                 appleRunManager.stopRunning()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    HapticManager.notification(type: .success)
+
+                }
             }
         }
     }

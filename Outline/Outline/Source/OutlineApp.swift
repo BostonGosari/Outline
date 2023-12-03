@@ -31,6 +31,7 @@ struct OutlineApp: App {
                         _ = AuthController.handleOpenUrl(url: url)
                     }
                 }
+//            CardAnimationForShowcase()
         }
     }
 }
