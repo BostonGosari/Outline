@@ -30,7 +30,9 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.startUpdatingLocation()
-        
+    }
+    
+    func initNavigation() {
         if let navigationDatas = navigationDatas {
             direction = navigationDatas[index].nextDirection
             nextDirection = (Int(navigationDatas[index+1].distance), navigationDatas[index+1].nextDirection)
