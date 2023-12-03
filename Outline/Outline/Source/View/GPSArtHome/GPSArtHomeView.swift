@@ -151,16 +151,16 @@ struct GPSArtHomeView: View {
                 }
             }
             if let selectedCourse, showDetailView {
-                Color.gray900.ignoresSafeArea()
-                CardDetailView(showDetailView: $showDetailView, selectedCourse: selectedCourse, currentIndex: currentIndex, namespace: namespace)
-                    .zIndex(1)
-                    .ignoresSafeArea()
-                    .transition(
-                        .asymmetric(
-                            insertion: .opacity.animation(nil),
-                            removal: .opacity.animation(.easeInOut.delay(0.1))
+                    Color.gray900.ignoresSafeArea()
+                    CardDetailView(showDetailView: $showDetailView, selectedCourse: selectedCourse, currentIndex: currentIndex, namespace: namespace)
+                        .zIndex(1)
+                        .ignoresSafeArea()
+                        .transition(
+                            .asymmetric(
+                                insertion: .opacity.animation(nil),
+                                removal: .opacity.animation(.easeInOut.delay(0.1))
+                            )
                         )
-                    )
             }
             
             if showDetailView, appleRunManager.showAppleRunDetail {
@@ -174,6 +174,9 @@ struct GPSArtHomeView: View {
                             removal: .opacity.animation(.easeInOut.delay(0.1))
                         )
                     )
+                    .onAppear {
+                        selectedCourse = nil
+                    }
             }
         }
         .background(
