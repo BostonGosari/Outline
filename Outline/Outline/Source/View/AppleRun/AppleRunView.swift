@@ -74,6 +74,7 @@ struct AppleRunView: View {
         .onChange(of: appleRunManager.progress) { _, newValue in
             if newValue == 1.0 {
                 appleRunManager.complete = true
+                HapticManager.notification(type: .success)
                 appleRunManager.stopRunning()
             }
         }

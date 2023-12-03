@@ -75,6 +75,7 @@
 		2975F0962AE3E1790046C00B /* CornerRectangleModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2975F0952AE3E1790046C00B /* CornerRectangleModifier.swift */; };
 		297B80FC2AE7515200AF7219 /* CourseModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E2EF702ADA6F230083ADEE /* CourseModelType.swift */; };
 		298BE0032B1C5F19005F6D79 /* AppleRunDetailNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 298BE0022B1C5F19005F6D79 /* AppleRunDetailNavigationView.swift */; };
+		298BE0062B1CB107005F6D79 /* CardAnimationForShowcase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 298BE0052B1CB107005F6D79 /* CardAnimationForShowcase.swift */; };
 		2990249A2B10B3E8005C5BA8 /* SFCompactDisplay-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0E96BA912AF4E00B000C8FBF /* SFCompactDisplay-Semibold.ttf */; };
 		2990249C2B10B599005C5BA8 /* StretchPro.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2990249B2B10B599005C5BA8 /* StretchPro.ttf */; };
 		299458072AF3BB6400F7D24C /* DoubleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A01E1D2AF0CCE70093D9C0 /* DoubleExtension.swift */; };
@@ -396,6 +397,7 @@
 		297B80F92AE73C4500AF7219 /* Outline.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Outline.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		297B80FA2AE73C4500AF7219 /* Outline Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Outline Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		298BE0022B1C5F19005F6D79 /* AppleRunDetailNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleRunDetailNavigationView.swift; sourceTree = "<group>"; };
+		298BE0052B1CB107005F6D79 /* CardAnimationForShowcase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardAnimationForShowcase.swift; sourceTree = "<group>"; };
 		2990249B2B10B599005C5BA8 /* StretchPro.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = StretchPro.ttf; sourceTree = "<group>"; };
 		299803542ADF5F1000A9A134 /* HealthKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitManager.swift; sourceTree = "<group>"; };
 		299803562AE00C9B00A9A134 /* HapticManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticManager.swift; sourceTree = "<group>"; };
@@ -676,6 +678,14 @@
 				293D1E392B0B42B600AB85BE /* SFProDisplay-Black.otf */,
 			);
 			path = Font;
+			sourceTree = "<group>";
+		};
+		298BE0042B1CB0EF005F6D79 /* ForShowcase */ = {
+			isa = PBXGroup;
+			children = (
+				298BE0052B1CB107005F6D79 /* CardAnimationForShowcase.swift */,
+			);
+			path = ForShowcase;
 			sourceTree = "<group>";
 		};
 		299803582AE0181900A9A134 /* Confetti */ = {
@@ -1007,6 +1017,7 @@
 		F0AC8AFA2AD963600061612C /* View */ = {
 			isa = PBXGroup;
 			children = (
+				298BE0042B1CB0EF005F6D79 /* ForShowcase */,
 				29B9BB942B1790030042DE19 /* AppleRun */,
 				2912A9142B0D174400D847B0 /* Mirroring */,
 				954B04252B00ADD100A8A83E /* PathTest */,
@@ -1533,6 +1544,7 @@
 				292613172AF2BCEF00591E32 /* RecordHeader.swift in Sources */,
 				29D6BAD72B09AE5B00BD8653 /* ScoreShimmer.swift in Sources */,
 				954CB2BA2AE654BA005EB2E9 /* NotificationAuthView.swift in Sources */,
+				298BE0062B1CB107005F6D79 /* CardAnimationForShowcase.swift in Sources */,
 				F06B93622ADB847500387DEB /* ContentView.swift in Sources */,
 				F09697472ADBCD6000C38AF4 /* Shape.swift in Sources */,
 				F03524102AE35AF800CCD8A6 /* RunningDataManager.swift in Sources */,
