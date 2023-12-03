@@ -69,7 +69,7 @@ struct AppleRunCard: View {
     
     private var courseInformation: some View {
         VStack(alignment: .leading, spacing: 0) {
-            Text("애플런")
+            Text("사과런")
                 .font(.customHeadline)
                 .bold()
                 .padding(.bottom, 8)

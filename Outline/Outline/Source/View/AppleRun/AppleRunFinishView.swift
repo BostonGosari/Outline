@@ -32,7 +32,7 @@ struct AppleRunFinishView: View {
                 .blur(radius: 120)
             
             VStack {
-                BigCard(cardType: .excellent, runName: "애플런", date: "23 Apple Developer Academy FINAL SHOWCASE", editMode: false, time: "00:20", distance: "0.1KM", pace: "12'04''", kcal: "56", bpm: "120", score: 100) { } content: {
+                BigCard(cardType: .excellent, runName: "사과런", date: "23 Apple Developer Academy FINAL SHOWCASE", editMode: false, time: "00:20", distance: "0.1KM", pace: "12'04''", kcal: "56", bpm: "120", score: 100) { } content: {
                     Image("AppleRunCardImage")
                         .resizable()
                 }
@@ -65,7 +65,7 @@ struct AppleRunFinishView: View {
         }
         .overlay {
             if navigateToShareView {
-                ShareView(runningData: ShareModel(courseName: "애플런", runningDate: "2023.12.4", regionDisplayName: "애플디벨로퍼아카데미", distance: "0.3", cal: "30", pace: "5'33''", bpm: "120", time: "00:20", userLocations: userCoordinates))
+                ShareView(runningData: ShareModel(courseName: "사과런", runningDate: "2023.12.4", regionDisplayName: "애플디벨로퍼아카데미", distance: "0.3", cal: "30", pace: "5'33''", bpm: "120", time: "00:20", userLocations: userCoordinates))
                     .overlay(alignment: .top) {
                         HStack {
                             Button {
