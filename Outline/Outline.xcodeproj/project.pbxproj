@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		0E1D1B292AE95AF2005282A2 /* CourseGuideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1D1B282AE95AF2005282A2 /* CourseGuideView.swift */; };
-		0E1D1B2B2AE95E1C005282A2 /* test.kml in Resources */ = {isa = PBXBuildFile; fileRef = 0E1D1B2A2AE95E1C005282A2 /* test.kml */; };
 		0E29F64B2ADF653000F5EF5C /* FontExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E29F64A2ADF653000F5EF5C /* FontExtension.swift */; };
 		0E29F6532ADF6C3A00F5EF5C /* RunningPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E29F6522ADF6C3A00F5EF5C /* RunningPopup.swift */; };
 		0E29F6552ADF6C7D00F5EF5C /* KMLParserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E29F6542ADF6C7D00F5EF5C /* KMLParserManager.swift */; };
@@ -115,6 +114,24 @@
 		29D7AD4A2B0E030F00AAAAB0 /* MirroringMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D7AD492B0E030F00AAAAB0 /* MirroringMapView.swift */; };
 		29D7AD4C2B0E032200AAAAB0 /* MirroringNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D7AD4B2B0E032200AAAAB0 /* MirroringNavigationView.swift */; };
 		29D7AD4E2B0E033000AAAAB0 /* MirroringMetricsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D7AD4D2B0E033000AAAAB0 /* MirroringMetricsView.swift */; };
+		29DC25862B1D558A00A62F67 /* DogRun.kml in Resources */ = {isa = PBXBuildFile; fileRef = 29DC25742B1D558A00A62F67 /* DogRun.kml */; };
+		29DC25872B1D558A00A62F67 /* PohangRun.kml in Resources */ = {isa = PBXBuildFile; fileRef = 29DC25752B1D558A00A62F67 /* PohangRun.kml */; };
+		29DC25882B1D558A00A62F67 /* test.kml in Resources */ = {isa = PBXBuildFile; fileRef = 29DC25762B1D558A00A62F67 /* test.kml */; };
+		29DC25892B1D558A00A62F67 /* SwimmingRun.kml in Resources */ = {isa = PBXBuildFile; fileRef = 29DC25772B1D558A00A62F67 /* SwimmingRun.kml */; };
+		29DC258A2B1D558A00A62F67 /* FishRun.kml in Resources */ = {isa = PBXBuildFile; fileRef = 29DC25782B1D558A00A62F67 /* FishRun.kml */; };
+		29DC258B2B1D558A00A62F67 /* WhaleRun.kml in Resources */ = {isa = PBXBuildFile; fileRef = 29DC25792B1D558A00A62F67 /* WhaleRun.kml */; };
+		29DC258C2B1D558A00A62F67 /* FaceRun.kml in Resources */ = {isa = PBXBuildFile; fileRef = 29DC257A2B1D558A00A62F67 /* FaceRun.kml */; };
+		29DC258D2B1D558A00A62F67 /* pohangCrocodileRun.kml in Resources */ = {isa = PBXBuildFile; fileRef = 29DC257B2B1D558A00A62F67 /* pohangCrocodileRun.kml */; };
+		29DC258E2B1D558A00A62F67 /* DinosourRun.kml in Resources */ = {isa = PBXBuildFile; fileRef = 29DC257C2B1D558A00A62F67 /* DinosourRun.kml */; };
+		29DC258F2B1D558A00A62F67 /* CatRun.kml in Resources */ = {isa = PBXBuildFile; fileRef = 29DC257D2B1D558A00A62F67 /* CatRun.kml */; };
+		29DC25902B1D558A00A62F67 /* seoulCamelRun.kml in Resources */ = {isa = PBXBuildFile; fileRef = 29DC257E2B1D558A00A62F67 /* seoulCamelRun.kml */; };
+		29DC25912B1D558A00A62F67 /* flightRun.kml in Resources */ = {isa = PBXBuildFile; fileRef = 29DC257F2B1D558A00A62F67 /* flightRun.kml */; };
+		29DC25922B1D558A00A62F67 /* ParrotRun.kml in Resources */ = {isa = PBXBuildFile; fileRef = 29DC25802B1D558A00A62F67 /* ParrotRun.kml */; };
+		29DC25932B1D558A00A62F67 /* pohangDangDangRun.kml in Resources */ = {isa = PBXBuildFile; fileRef = 29DC25812B1D558A00A62F67 /* pohangDangDangRun.kml */; };
+		29DC25942B1D558A00A62F67 /* CrocodileRun.kml in Resources */ = {isa = PBXBuildFile; fileRef = 29DC25822B1D558A00A62F67 /* CrocodileRun.kml */; };
+		29DC25952B1D558A00A62F67 /* seoulOctopusRun.kml in Resources */ = {isa = PBXBuildFile; fileRef = 29DC25832B1D558A00A62F67 /* seoulOctopusRun.kml */; };
+		29DC25962B1D558A00A62F67 /* RoseRun.kml in Resources */ = {isa = PBXBuildFile; fileRef = 29DC25842B1D558A00A62F67 /* RoseRun.kml */; };
+		29DC25972B1D558A00A62F67 /* DuckRun.kml in Resources */ = {isa = PBXBuildFile; fileRef = 29DC25852B1D558A00A62F67 /* DuckRun.kml */; };
 		29EBD7842B0883E500B44AA9 /* BigCardFrontside.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29EBD7832B0883E500B44AA9 /* BigCardFrontside.swift */; };
 		29EC2ECC2AEAD5690033446C /* CourseAccuracyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29EC2ECB2AEAD5680033446C /* CourseAccuracyManager.swift */; };
 		29EC2ECE2AEAD5A80033446C /* CourseProgressManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29EC2ECD2AEAD5A80033446C /* CourseProgressManager.swift */; };
@@ -135,16 +152,6 @@
 		954CB29C2AE51619005EB2E9 /* PersistentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EB1EE82ADDC43400B47984 /* PersistentController.swift */; };
 		954CB29D2AE5161B005EB2E9 /* UserDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EB1EEB2ADDC66B00B47984 /* UserDataModel.swift */; };
 		954CB29E2AE5161D005EB2E9 /* UserDataModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9528EFEB2ADEC7CF0056CCC6 /* UserDataModelType.swift */; };
-		954CB2A52AE5457B005EB2E9 /* pohangCrocodileRun.kml in Resources */ = {isa = PBXBuildFile; fileRef = 954CB29F2AE5457A005EB2E9 /* pohangCrocodileRun.kml */; };
-		954CB2A62AE5457B005EB2E9 /* pohangCrocodileRun.kml in Resources */ = {isa = PBXBuildFile; fileRef = 954CB29F2AE5457A005EB2E9 /* pohangCrocodileRun.kml */; };
-		954CB2A72AE5457B005EB2E9 /* seoulOctopusRun.kml in Resources */ = {isa = PBXBuildFile; fileRef = 954CB2A02AE5457A005EB2E9 /* seoulOctopusRun.kml */; };
-		954CB2A82AE5457B005EB2E9 /* seoulOctopusRun.kml in Resources */ = {isa = PBXBuildFile; fileRef = 954CB2A02AE5457A005EB2E9 /* seoulOctopusRun.kml */; };
-		954CB2A92AE5457B005EB2E9 /* pohangDangDangRun.kml in Resources */ = {isa = PBXBuildFile; fileRef = 954CB2A12AE5457A005EB2E9 /* pohangDangDangRun.kml */; };
-		954CB2AA2AE5457B005EB2E9 /* pohangDangDangRun.kml in Resources */ = {isa = PBXBuildFile; fileRef = 954CB2A12AE5457A005EB2E9 /* pohangDangDangRun.kml */; };
-		954CB2AB2AE5457B005EB2E9 /* flightRun.kml in Resources */ = {isa = PBXBuildFile; fileRef = 954CB2A22AE5457A005EB2E9 /* flightRun.kml */; };
-		954CB2AC2AE5457B005EB2E9 /* flightRun.kml in Resources */ = {isa = PBXBuildFile; fileRef = 954CB2A22AE5457A005EB2E9 /* flightRun.kml */; };
-		954CB2AF2AE5457B005EB2E9 /* seoulCamelRun.kml in Resources */ = {isa = PBXBuildFile; fileRef = 954CB2A42AE5457B005EB2E9 /* seoulCamelRun.kml */; };
-		954CB2B02AE5457B005EB2E9 /* seoulCamelRun.kml in Resources */ = {isa = PBXBuildFile; fileRef = 954CB2A42AE5457B005EB2E9 /* seoulCamelRun.kml */; };
 		954CB2B62AE63E79005EB2E9 /* HealthAuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954CB2B52AE63E79005EB2E9 /* HealthAuthView.swift */; };
 		954CB2BA2AE654BA005EB2E9 /* NotificationAuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954CB2B92AE654BA005EB2E9 /* NotificationAuthView.swift */; };
 		954FFF782AE132D100D27537 /* CourseDataUploadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954FFF772AE132D100D27537 /* CourseDataUploadManager.swift */; };
@@ -332,7 +339,6 @@
 
 /* Begin PBXFileReference section */
 		0E1D1B282AE95AF2005282A2 /* CourseGuideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseGuideView.swift; sourceTree = "<group>"; };
-		0E1D1B2A2AE95E1C005282A2 /* test.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = test.kml; sourceTree = "<group>"; };
 		0E29F64A2ADF653000F5EF5C /* FontExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontExtension.swift; sourceTree = "<group>"; };
 		0E29F6522ADF6C3A00F5EF5C /* RunningPopup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RunningPopup.swift; sourceTree = "<group>"; };
 		0E29F6542ADF6C7D00F5EF5C /* KMLParserManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KMLParserManager.swift; sourceTree = "<group>"; };
@@ -430,6 +436,24 @@
 		29D7AD492B0E030F00AAAAB0 /* MirroringMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MirroringMapView.swift; sourceTree = "<group>"; };
 		29D7AD4B2B0E032200AAAAB0 /* MirroringNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MirroringNavigationView.swift; sourceTree = "<group>"; };
 		29D7AD4D2B0E033000AAAAB0 /* MirroringMetricsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MirroringMetricsView.swift; sourceTree = "<group>"; };
+		29DC25742B1D558A00A62F67 /* DogRun.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = DogRun.kml; path = "../../../../../../Downloads/아카이브/DogRun.kml"; sourceTree = "<group>"; };
+		29DC25752B1D558A00A62F67 /* PohangRun.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = PohangRun.kml; path = "../../../../../../Downloads/아카이브/PohangRun.kml"; sourceTree = "<group>"; };
+		29DC25762B1D558A00A62F67 /* test.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = test.kml; path = "../../../../../../Downloads/아카이브/test.kml"; sourceTree = "<group>"; };
+		29DC25772B1D558A00A62F67 /* SwimmingRun.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = SwimmingRun.kml; path = "../../../../../../Downloads/아카이브/SwimmingRun.kml"; sourceTree = "<group>"; };
+		29DC25782B1D558A00A62F67 /* FishRun.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = FishRun.kml; path = "../../../../../../Downloads/아카이브/FishRun.kml"; sourceTree = "<group>"; };
+		29DC25792B1D558A00A62F67 /* WhaleRun.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = WhaleRun.kml; path = "../../../../../../Downloads/아카이브/WhaleRun.kml"; sourceTree = "<group>"; };
+		29DC257A2B1D558A00A62F67 /* FaceRun.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = FaceRun.kml; path = "../../../../../../Downloads/아카이브/FaceRun.kml"; sourceTree = "<group>"; };
+		29DC257B2B1D558A00A62F67 /* pohangCrocodileRun.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = pohangCrocodileRun.kml; path = "../../../../../../Downloads/아카이브/pohangCrocodileRun.kml"; sourceTree = "<group>"; };
+		29DC257C2B1D558A00A62F67 /* DinosourRun.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = DinosourRun.kml; path = "../../../../../../Downloads/아카이브/DinosourRun.kml"; sourceTree = "<group>"; };
+		29DC257D2B1D558A00A62F67 /* CatRun.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = CatRun.kml; path = "../../../../../../Downloads/아카이브/CatRun.kml"; sourceTree = "<group>"; };
+		29DC257E2B1D558A00A62F67 /* seoulCamelRun.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = seoulCamelRun.kml; path = "../../../../../../Downloads/아카이브/seoulCamelRun.kml"; sourceTree = "<group>"; };
+		29DC257F2B1D558A00A62F67 /* flightRun.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = flightRun.kml; path = "../../../../../../Downloads/아카이브/flightRun.kml"; sourceTree = "<group>"; };
+		29DC25802B1D558A00A62F67 /* ParrotRun.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = ParrotRun.kml; path = "../../../../../../Downloads/아카이브/ParrotRun.kml"; sourceTree = "<group>"; };
+		29DC25812B1D558A00A62F67 /* pohangDangDangRun.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = pohangDangDangRun.kml; path = "../../../../../../Downloads/아카이브/pohangDangDangRun.kml"; sourceTree = "<group>"; };
+		29DC25822B1D558A00A62F67 /* CrocodileRun.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = CrocodileRun.kml; path = "../../../../../../Downloads/아카이브/CrocodileRun.kml"; sourceTree = "<group>"; };
+		29DC25832B1D558A00A62F67 /* seoulOctopusRun.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = seoulOctopusRun.kml; path = "../../../../../../Downloads/아카이브/seoulOctopusRun.kml"; sourceTree = "<group>"; };
+		29DC25842B1D558A00A62F67 /* RoseRun.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = RoseRun.kml; path = "../../../../../../Downloads/아카이브/RoseRun.kml"; sourceTree = "<group>"; };
+		29DC25852B1D558A00A62F67 /* DuckRun.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = DuckRun.kml; path = "../../../../../../Downloads/아카이브/DuckRun.kml"; sourceTree = "<group>"; };
 		29EBD7832B0883E500B44AA9 /* BigCardFrontside.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigCardFrontside.swift; sourceTree = "<group>"; };
 		29EC2ECB2AEAD5680033446C /* CourseAccuracyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseAccuracyManager.swift; sourceTree = "<group>"; };
 		29EC2ECD2AEAD5A80033446C /* CourseProgressManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseProgressManager.swift; sourceTree = "<group>"; };
@@ -445,11 +469,6 @@
 		9528F0052AE0B37B0056CCC6 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		954B04172AFF725000A8A83E /* ProfileUserInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUserInfoViewModel.swift; sourceTree = "<group>"; };
 		954B04262B00ADE000A8A83E /* PathTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathTestView.swift; sourceTree = "<group>"; };
-		954CB29F2AE5457A005EB2E9 /* pohangCrocodileRun.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = pohangCrocodileRun.kml; sourceTree = "<group>"; };
-		954CB2A02AE5457A005EB2E9 /* seoulOctopusRun.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = seoulOctopusRun.kml; sourceTree = "<group>"; };
-		954CB2A12AE5457A005EB2E9 /* pohangDangDangRun.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = pohangDangDangRun.kml; sourceTree = "<group>"; };
-		954CB2A22AE5457A005EB2E9 /* flightRun.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = flightRun.kml; sourceTree = "<group>"; };
-		954CB2A42AE5457B005EB2E9 /* seoulCamelRun.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = seoulCamelRun.kml; sourceTree = "<group>"; };
 		954CB2B52AE63E79005EB2E9 /* HealthAuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthAuthView.swift; sourceTree = "<group>"; };
 		954CB2B92AE654BA005EB2E9 /* NotificationAuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationAuthView.swift; sourceTree = "<group>"; };
 		954FFF772AE132D100D27537 /* CourseDataUploadManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseDataUploadManager.swift; sourceTree = "<group>"; };
@@ -592,12 +611,24 @@
 		0E29F64D2ADF681E00F5EF5C /* KML */ = {
 			isa = PBXGroup;
 			children = (
-				0E1D1B2A2AE95E1C005282A2 /* test.kml */,
-				954CB2A22AE5457A005EB2E9 /* flightRun.kml */,
-				954CB29F2AE5457A005EB2E9 /* pohangCrocodileRun.kml */,
-				954CB2A12AE5457A005EB2E9 /* pohangDangDangRun.kml */,
-				954CB2A42AE5457B005EB2E9 /* seoulCamelRun.kml */,
-				954CB2A02AE5457A005EB2E9 /* seoulOctopusRun.kml */,
+				29DC257D2B1D558A00A62F67 /* CatRun.kml */,
+				29DC25822B1D558A00A62F67 /* CrocodileRun.kml */,
+				29DC257C2B1D558A00A62F67 /* DinosourRun.kml */,
+				29DC25742B1D558A00A62F67 /* DogRun.kml */,
+				29DC25852B1D558A00A62F67 /* DuckRun.kml */,
+				29DC257A2B1D558A00A62F67 /* FaceRun.kml */,
+				29DC25782B1D558A00A62F67 /* FishRun.kml */,
+				29DC257F2B1D558A00A62F67 /* flightRun.kml */,
+				29DC25802B1D558A00A62F67 /* ParrotRun.kml */,
+				29DC257B2B1D558A00A62F67 /* pohangCrocodileRun.kml */,
+				29DC25812B1D558A00A62F67 /* pohangDangDangRun.kml */,
+				29DC25752B1D558A00A62F67 /* PohangRun.kml */,
+				29DC25842B1D558A00A62F67 /* RoseRun.kml */,
+				29DC257E2B1D558A00A62F67 /* seoulCamelRun.kml */,
+				29DC25832B1D558A00A62F67 /* seoulOctopusRun.kml */,
+				29DC25772B1D558A00A62F67 /* SwimmingRun.kml */,
+				29DC25762B1D558A00A62F67 /* test.kml */,
+				29DC25792B1D558A00A62F67 /* WhaleRun.kml */,
 			);
 			path = KML;
 			sourceTree = "<group>";
@@ -1415,19 +1446,26 @@
 			buildActionMask = 2147483647;
 			files = (
 				2990249C2B10B599005C5BA8 /* StretchPro.ttf in Resources */,
-				954CB2AB2AE5457B005EB2E9 /* flightRun.kml in Resources */,
-				0E1D1B2B2AE95E1C005282A2 /* test.kml in Resources */,
-				954CB2A72AE5457B005EB2E9 /* seoulOctopusRun.kml in Resources */,
+				29DC258C2B1D558A00A62F67 /* FaceRun.kml in Resources */,
+				29DC25912B1D558A00A62F67 /* flightRun.kml in Resources */,
+				29DC25862B1D558A00A62F67 /* DogRun.kml in Resources */,
+				29DC25902B1D558A00A62F67 /* seoulCamelRun.kml in Resources */,
 				29F100A82B1B1EDE004AC424 /* AppleRun.kml in Resources */,
+				29DC258F2B1D558A00A62F67 /* CatRun.kml in Resources */,
 				F0AC8AA42AD94C200061612C /* Preview Assets.xcassets in Resources */,
+				29DC25892B1D558A00A62F67 /* SwimmingRun.kml in Resources */,
+				29DC25922B1D558A00A62F67 /* ParrotRun.kml in Resources */,
 				F0AC8B2C2AD967E30061612C /* Image.xcassets in Resources */,
+				29DC258B2B1D558A00A62F67 /* WhaleRun.kml in Resources */,
 				BB1D531A2ADDBCAB0073771F /* Pretendard-Regular.ttf in Resources */,
-				954CB2A52AE5457B005EB2E9 /* pohangCrocodileRun.kml in Resources */,
 				29F100A42B19BB6B004AC424 /* Secrets.xcconfig in Resources */,
+				29DC25972B1D558A00A62F67 /* DuckRun.kml in Resources */,
 				F0AC8B2E2AD968A20061612C /* Icon.xcassets in Resources */,
+				29DC25942B1D558A00A62F67 /* CrocodileRun.kml in Resources */,
 				F0AC8AA12AD94C200061612C /* Color.xcassets in Resources */,
+				29DC25952B1D558A00A62F67 /* seoulOctopusRun.kml in Resources */,
 				2990249A2B10B3E8005C5BA8 /* SFCompactDisplay-Semibold.ttf in Resources */,
-				954CB2AF2AE5457B005EB2E9 /* seoulCamelRun.kml in Resources */,
+				29DC25882B1D558A00A62F67 /* test.kml in Resources */,
 				BB1D531E2ADDBCB90073771F /* Pretendard-Thin.ttf in Resources */,
 				0EB59A3E2B1835E600A18C50 /* alert.mp3 in Resources */,
 				BB1D530C2ADDBC560073771F /* Pretendard-Black.ttf in Resources */,
@@ -1435,10 +1473,15 @@
 				0EB59A222B176BA100A18C50 /* test.json in Resources */,
 				BB1D53182ADDBCA20073771F /* Pretendard-Medium.ttf in Resources */,
 				BB1D53162ADDBC900073771F /* Pretendard-Light.ttf in Resources */,
-				954CB2A92AE5457B005EB2E9 /* pohangDangDangRun.kml in Resources */,
+				29DC25932B1D558A00A62F67 /* pohangDangDangRun.kml in Resources */,
+				29DC258E2B1D558A00A62F67 /* DinosourRun.kml in Resources */,
+				29DC25962B1D558A00A62F67 /* RoseRun.kml in Resources */,
 				BB1D53102ADDBC690073771F /* Pretendard-ExtraBold.ttf in Resources */,
+				29DC258D2B1D558A00A62F67 /* pohangCrocodileRun.kml in Resources */,
 				BB1D531C2ADDBCB20073771F /* Pretendard-SemiBold.ttf in Resources */,
 				2921B0132B01F3F700533A83 /* GoogleService-Info.plist in Resources */,
+				29DC258A2B1D558A00A62F67 /* FishRun.kml in Resources */,
+				29DC25872B1D558A00A62F67 /* PohangRun.kml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1446,18 +1489,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				954CB2B02AE5457B005EB2E9 /* seoulCamelRun.kml in Resources */,
 				F0AC8AB62AD94C210061612C /* Preview Assets.xcassets in Resources */,
-				954CB2A82AE5457B005EB2E9 /* seoulOctopusRun.kml in Resources */,
 				293D1E422B0B42E400AB85BE /* SFProDisplay-Medium.otf in Resources */,
-				954CB2AC2AE5457B005EB2E9 /* flightRun.kml in Resources */,
 				293D1E4A2B0B465F00AB85BE /* SFProDisplay-Bold.otf in Resources */,
 				293D1E442B0B42E400AB85BE /* SFProDisplay-Thin.otf in Resources */,
 				F0AC8AB32AD94C210061612C /* WatchImage.xcassets in Resources */,
 				F0AC8B362AD96A3D0061612C /* WatchIcon.xcassets in Resources */,
-				954CB2A62AE5457B005EB2E9 /* pohangCrocodileRun.kml in Resources */,
 				293D1E482B0B42E400AB85BE /* SFProDisplay-Light.otf in Resources */,
-				954CB2AA2AE5457B005EB2E9 /* pohangDangDangRun.kml in Resources */,
 				293D1E432B0B42E400AB85BE /* SFProDisplay-Heavy.otf in Resources */,
 				293D1E452B0B42E400AB85BE /* SFProDisplay-Ultralight.otf in Resources */,
 				F0AC8B352AD96A360061612C /* WatchColor.xcassets in Resources */,

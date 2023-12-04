@@ -129,9 +129,189 @@ class RunningDataManager: ObservableObject {
         pedometer.stopUpdates()
         healthKitManager.endWorkout(steps: totalSteps, distance: totalDistance, energy: kilocalorie)
         caculateAccuracyAndProgress()
-        saveRunning()
+        saveRunning1()
+        saveRunning2()
+        saveRunning3()
+        saveRunning4()
+        saveRunning5()
+        saveRunning6()
+        saveRunning7()
+        saveRunning8()
         reset()
     }
+    
+    func parseCooridinates(fileName: String) -> [Coordinate] {
+        if let kmlFilePath = Bundle.main.path(forResource: fileName, ofType: "kml") {
+            let kmlParser = KMLParserManager()
+            return kmlParser.parseKMLFile(atPath: kmlFilePath).map { clLocation2D in
+                Coordinate(longitude: clLocation2D.longitude, latitude: clLocation2D.latitude)
+            }
+        }
+        return []
+    }
+
+    
+    private func saveRunning1() {
+            guard let course = runningManger.startCourse else { return }
+            
+            let courseData = CourseData(courseName: "장미런", runningLength: 12, heading: 1.5, distance: 12, coursePaths: coordinatesToCLLocationCoordiantes(coordinates: parseCooridinates(fileName: "RoseRun")), runningCourseId: "", regionDisplayName: "포항시 북구 효자동", score: 100)
+            
+            let healthData = HealthData(totalTime: 500, averageCadence: 425, totalRunningDistance: 12,  totalEnergy: 345, averageHeartRate: 0.0, averagePace: totalTime / totalDistance * 1000, startDate: RunningStartDate, endDate: RunningEndDate)
+            
+            let newRunningRecord = RunningRecord(id: UUID().uuidString, runningType: runningManger.runningType, courseData: courseData, healthData: healthData)
+            
+            userDataModel.createRunningRecord(record: newRunningRecord) { result in
+                switch result {
+                case .success:
+                    print("saved")
+                    print(newRunningRecord)
+                    self.userLocations = []
+                case .failure(let error):
+                    print(error)
+                }
+            }
+        }
+        private func saveRunning2() {
+            guard let course = runningManger.startCourse else { return }
+            
+            let courseData = CourseData(courseName: "앵무새런", runningLength: course.courseLength, heading: course.heading, distance: course.distance, coursePaths: coordinatesToCLLocationCoordiantes(coordinates: parseCooridinates(fileName: "ParrotRun")), runningCourseId: "", regionDisplayName: "포항시 북구 효자동", score: 90)
+            
+            let healthData = HealthData(totalTime: 500, averageCadence: 425, totalRunningDistance: 12,  totalEnergy: 345, averageHeartRate: 0.0, averagePace: totalTime / totalDistance * 1000, startDate: RunningStartDate, endDate: RunningEndDate)
+            
+            let newRunningRecord = RunningRecord(id: UUID().uuidString, runningType: runningManger.runningType, courseData: courseData, healthData: healthData)
+            
+            userDataModel.createRunningRecord(record: newRunningRecord) { result in
+                switch result {
+                case .success:
+                    print("saved")
+                    print(newRunningRecord)
+                    self.userLocations = []
+                case .failure(let error):
+                    print(error)
+                }
+            }
+        }
+        private func saveRunning3() {
+            guard let course = runningManger.startCourse else { return }
+            
+            let courseData = CourseData(courseName: "공룡런", runningLength: course.courseLength, heading: course.heading, distance: course.distance, coursePaths: coordinatesToCLLocationCoordiantes(coordinates: parseCooridinates(fileName: "DinosourRun")), runningCourseId: "", regionDisplayName: "포항시 북구 효자동", score: 80)
+            
+            let healthData = HealthData(totalTime: 500, averageCadence: 425, totalRunningDistance: 12,  totalEnergy: 345, averageHeartRate: 0.0, averagePace: totalTime / totalDistance * 1000, startDate: RunningStartDate, endDate: RunningEndDate)
+            
+            let newRunningRecord = RunningRecord(id: UUID().uuidString, runningType: runningManger.runningType, courseData: courseData, healthData: healthData)
+            
+            userDataModel.createRunningRecord(record: newRunningRecord) { result in
+                switch result {
+                case .success:
+                    print("saved")
+                    print(newRunningRecord)
+                    self.userLocations = []
+                case .failure(let error):
+                    print(error)
+                }
+            }
+        }
+        private func saveRunning4() {
+            guard let course = runningManger.startCourse else { return }
+            
+            let courseData = CourseData(courseName: "악어런", runningLength: course.courseLength, heading: course.heading, distance: course.distance, coursePaths: coordinatesToCLLocationCoordiantes(coordinates: parseCooridinates(fileName: "CrocodileRun")), runningCourseId: "", regionDisplayName: "포항시 북구 효자동", score: 70)
+            
+            let healthData = HealthData(totalTime: 500, averageCadence: 425, totalRunningDistance: 12,  totalEnergy: 345, averageHeartRate: 0.0, averagePace: totalTime / totalDistance * 1000, startDate: RunningStartDate, endDate: RunningEndDate)
+            
+            let newRunningRecord = RunningRecord(id: UUID().uuidString, runningType: runningManger.runningType, courseData: courseData, healthData: healthData)
+            
+            userDataModel.createRunningRecord(record: newRunningRecord) { result in
+                switch result {
+                case .success:
+                    print("saved")
+                    print(newRunningRecord)
+                    self.userLocations = []
+                case .failure(let error):
+                    print(error)
+                }
+            }
+        }
+        private func saveRunning5() {
+            guard let course = runningManger.startCourse else { return }
+            
+            let courseData = CourseData(courseName: "얼굴런", runningLength: course.courseLength, heading: course.heading, distance: course.distance, coursePaths: coordinatesToCLLocationCoordiantes(coordinates: parseCooridinates(fileName: "FaceRun")), runningCourseId: "", regionDisplayName: "포항시 북구 효자동", score: 60)
+            
+            let healthData = HealthData(totalTime: 500, averageCadence: 425, totalRunningDistance: 12,  totalEnergy: 345, averageHeartRate: 0.0, averagePace: totalTime / totalDistance * 1000, startDate: RunningStartDate, endDate: RunningEndDate)
+            
+            let newRunningRecord = RunningRecord(id: UUID().uuidString, runningType: runningManger.runningType, courseData: courseData, healthData: healthData)
+            
+            userDataModel.createRunningRecord(record: newRunningRecord) { result in
+                switch result {
+                case .success:
+                    print("saved")
+                    print(newRunningRecord)
+                    self.userLocations = []
+                case .failure(let error):
+                    print(error)
+                }
+            }
+        }
+        private func saveRunning6() {
+            guard let course = runningManger.startCourse else { return }
+            
+            let courseData = CourseData(courseName: "강아지런", runningLength: course.courseLength, heading: course.heading, distance: course.distance, coursePaths: coordinatesToCLLocationCoordiantes(coordinates: parseCooridinates(fileName: "DogRun")), runningCourseId: "", regionDisplayName: "포항시 북구 효자동", score: 50)
+            
+            let healthData = HealthData(totalTime: 500, averageCadence: 425, totalRunningDistance: 12,  totalEnergy: 345, averageHeartRate: 0.0, averagePace: totalTime / totalDistance * 1000, startDate: RunningStartDate, endDate: RunningEndDate)
+            
+            let newRunningRecord = RunningRecord(id: UUID().uuidString, runningType: runningManger.runningType, courseData: courseData, healthData: healthData)
+            
+            userDataModel.createRunningRecord(record: newRunningRecord) { result in
+                switch result {
+                case .success:
+                    print("saved")
+                    print(newRunningRecord)
+                    self.userLocations = []
+                case .failure(let error):
+                    print(error)
+                }
+            }
+        }
+        private func saveRunning7() {
+            guard let course = runningManger.startCourse else { return }
+            
+            let courseData = CourseData(courseName: "고래런", runningLength: course.courseLength, heading: course.heading, distance: course.distance, coursePaths: coordinatesToCLLocationCoordiantes(coordinates: parseCooridinates(fileName: "WhaleRun")), runningCourseId: "", regionDisplayName: "포항시 북구 효자동", score: 40)
+            
+            let healthData = HealthData(totalTime: 500, averageCadence: 425, totalRunningDistance: 12,  totalEnergy: 345, averageHeartRate: 0.0, averagePace: totalTime / totalDistance * 1000, startDate: RunningStartDate, endDate: RunningEndDate)
+            
+            let newRunningRecord = RunningRecord(id: UUID().uuidString, runningType: runningManger.runningType, courseData: courseData, healthData: healthData)
+            
+            userDataModel.createRunningRecord(record: newRunningRecord) { result in
+                switch result {
+                case .success:
+                    print("saved")
+                    print(newRunningRecord)
+                    self.userLocations = []
+                case .failure(let error):
+                    print(error)
+                }
+            }
+        }
+        private func saveRunning8() {
+            guard let course = runningManger.startCourse else { return }
+            
+            let courseData = CourseData(courseName: "청어런", runningLength: course.courseLength, heading: course.heading, distance: course.distance, coursePaths: coordinatesToCLLocationCoordiantes(coordinates: parseCooridinates(fileName: "FishRun")), runningCourseId: "", regionDisplayName: "포항시 북구 효자동", score: 30)
+            
+            let healthData = HealthData(totalTime: 500, averageCadence: 425, totalRunningDistance: 12,  totalEnergy: 345, averageHeartRate: 0.0, averagePace: totalTime / totalDistance * 1000, startDate: RunningStartDate, endDate: RunningEndDate)
+            
+            let newRunningRecord = RunningRecord(id: UUID().uuidString, runningType: runningManger.runningType, courseData: courseData, healthData: healthData)
+            
+            userDataModel.createRunningRecord(record: newRunningRecord) { result in
+                switch result {
+                case .success:
+                    print("saved")
+                    print(newRunningRecord)
+                    self.userLocations = []
+                case .failure(let error):
+                    print(error)
+                }
+            }
+        }
+
     
     private func reset() {
         totalTime = 0.0
