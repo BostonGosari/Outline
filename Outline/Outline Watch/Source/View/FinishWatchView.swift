@@ -1,0 +1,41 @@
+//
+//  FinishWatchView.swift
+//  Outline Watch App
+//
+//  Created by hyunjun on 10/19/23.
+//
+
+import SwiftUI
+
+struct FinishWatchView: View {    
+    var score = 100
+
+    var body: some View {
+        VStack {
+            switch score {
+            case 100:
+                finalImage("FinalImage1")
+            case 50..<100:
+                finalImage("FinalImage2")
+            case ..<10:
+                finalImage("FinalImage3")
+            default:
+                Text("\(score, specifier: "%.2f")%")
+            }
+        }
+    }
+    
+    @ViewBuilder
+    private func finalImage(_ imageName: String) -> some View {
+        Image(imageName)
+            .resizable()
+            .scaledToFit()
+            .frame(height: 118)
+            .ignoresSafeArea()
+            .padding(.bottom, 20)
+    }
+}
+
+#Preview {
+    FinishWatchView(score: 100)
+}
