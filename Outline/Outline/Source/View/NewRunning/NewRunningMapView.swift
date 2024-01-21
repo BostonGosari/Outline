@@ -8,47 +8,63 @@
 import MapKit
 import SwiftUI
 
-struct NewRunningMapView: View {
+struct NewRunningMapView: UIViewRepresentable {
     @StateObject private var runningStartManager = RunningStartManager.shared
     @StateObject private var runningDataManager = RunningDataManager.shared
     
-    @State private var position: MapCameraPosition = .userLocation(followsHeading: true, fallback: .automatic)
-    @Namespace private var mapScope
-    
+    private let mapView = MKMapView()
     var userLocations: [CLLocationCoordinate2D]
     
-    var body: some View {
-        ZStack(alignment: .topTrailing) {
-            Map(position: $position, scope: mapScope) {
-                UserAnnotation()
-                
-                if let courseGuide = runningStartManager.startCourse {
-                    MapPolyline(coordinates: ConvertCoordinateManager.convertToCLLocationCoordinates(courseGuide.coursePaths))
-                        .stroke(.black.opacity(0.3), style: StrokeStyle(lineWidth: 8, lineCap: .round, lineJoin: .round))
-                }
-                
-                MapPolyline(coordinates: userLocations)
-                    .stroke(.customPrimary, style: StrokeStyle(lineWidth: 5, lineCap: .round, lineJoin: .round))
-            }
-            .mapStyle(.standard(pointsOfInterest: [])) 
-            .mapControlVisibility(.hidden)
-            .onAppear {
-                if let startCourse = runningStartManager.startCourse,
-                   !startCourse.coursePaths.isEmpty {
-                    runningStartManager.trackingDistance()
-                }
-            }
-            
-            MapUserLocationButton(scope: mapScope)
-                .buttonBorderShape(.circle)
-                .tint(.white)
-                .controlSize(.large)
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
-                .padding(.bottom, 96)
-                .padding(.leading, 16)
+    func makeUIView(context: Context) -> MKMapView {
+        mapView.delegate = context.coordinator
+        mapView.showsUserLocation = true
+        mapView.showsUserTrackingButton = true
+        mapView.userTrackingMode = .follow
+        mapView.showsCompass = false
+        
+        if let courseGuide = runningStartManager.startCourse {
+            let polyline = MKPolyline(coordinates: ConvertCoordinateManager.convertToCLLocationCoordinates(courseGuide.coursePaths), count: courseGuide.coursePaths.count)
+            mapView.addOverlay(polyline)
         }
-        .mapScope(mapScope)
-        .tint(.customPrimary)
+    
+        return mapView
+    }
+    
+    func updateUIView(_ uiView: MKMapView, context: Context) {
+        if uiView.overlays.count >= 2,
+           let overlay = uiView.overlays.last {
+            uiView.removeOverlay(overlay)
+        }
+        
+        if !userLocations.isEmpty {
+            let polyline = MKPolyline(
+                coordinates: userLocations,
+                count: userLocations.count
+            )
+            uiView.addOverlay(polyline)
+        }
+    }
+    
+    func makeCoordinator() -> Coordinator {
+        Coordinator(self)
+    }
+    
+    class Coordinator: NSObject, MKMapViewDelegate {
+        var parent: NewRunningMapView
+        
+        init(_ parent: NewRunningMapView) {
+            self.parent = parent
+        }
+        
+        func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+            if let polyline = overlay as? MKPolyline {
+                let renderer = MKPolylineRenderer(polyline: polyline)
+                renderer.strokeColor = (mapView.overlays.count == 1) ? UIColor(Color.black.opacity(0.3)) : .customPrimary
+                renderer.lineWidth = 7
+                return renderer
+            }
+            return MKOverlayRenderer(overlay: overlay)
+        }
     }
 }
 
