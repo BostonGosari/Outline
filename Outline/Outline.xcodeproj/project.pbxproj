@@ -15,6 +15,7 @@
 		0E29F65F2ADF6CDD00F5EF5C /* RunningMapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E29F65E2ADF6CDD00F5EF5C /* RunningMapViewModel.swift */; };
 		0E2B4CBF2AE744E8002A5103 /* RecordDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2B4CBE2AE744E8002A5103 /* RecordDetailViewModel.swift */; };
 		0E4291602B03CF3100EE75F5 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E42915F2B03CF3100EE75F5 /* LocationManager.swift */; };
+		0E7EE51D2B5E6D24004F6BAF /* FreeRunningMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7EE51C2B5E6D24004F6BAF /* FreeRunningMapView.swift */; };
 		0E9A5D482AE065A100C19FF3 /* ShareViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9A5D472AE065A100C19FF3 /* ShareViewModel.swift */; };
 		0E9A5D4F2AE0B8C800C19FF3 /* ShareModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9A5D4E2AE0B8C800C19FF3 /* ShareModel.swift */; };
 		0EB59A222B176BA100A18C50 /* test.json in Resources */ = {isa = PBXBuildFile; fileRef = 0EB59A212B176BA100A18C50 /* test.json */; };
@@ -326,6 +327,7 @@
 		0E29F65E2ADF6CDD00F5EF5C /* RunningMapViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RunningMapViewModel.swift; sourceTree = "<group>"; };
 		0E2B4CBE2AE744E8002A5103 /* RecordDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordDetailViewModel.swift; sourceTree = "<group>"; };
 		0E42915F2B03CF3100EE75F5 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		0E7EE51C2B5E6D24004F6BAF /* FreeRunningMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeRunningMapView.swift; sourceTree = "<group>"; };
 		0E96BA912AF4E00B000C8FBF /* SFCompactDisplay-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFCompactDisplay-Semibold.ttf"; sourceTree = "<group>"; };
 		0E9A5D472AE065A100C19FF3 /* ShareViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewModel.swift; sourceTree = "<group>"; };
 		0E9A5D4E2AE0B8C800C19FF3 /* ShareModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareModel.swift; sourceTree = "<group>"; };
@@ -596,6 +598,7 @@
 			isa = PBXGroup;
 			children = (
 				0EE92E7C2AE02DDC003192FF /* FreeRunningHomeView.swift */,
+				0E7EE51C2B5E6D24004F6BAF /* FreeRunningMapView.swift */,
 			);
 			path = FreeRunning;
 			sourceTree = "<group>";
@@ -1472,6 +1475,7 @@
 				29EC2ECC2AEAD5690033446C /* CourseAccuracyManager.swift in Sources */,
 				9528F0002AE042570056CCC6 /* PathGenerateManager.swift in Sources */,
 				29D6BAD52B092CA800BD8653 /* SmallListCard.swift in Sources */,
+				0E7EE51D2B5E6D24004F6BAF /* FreeRunningMapView.swift in Sources */,
 				F096974F2ADBEE9F00C38AF4 /* CardDetailInformationView.swift in Sources */,
 				BB5239582ADC396300646494 /* BackgroundBlur.swift in Sources */,
 				BB5239372ADBD99F00646494 /* GPSArtHomeView.swift in Sources */,
