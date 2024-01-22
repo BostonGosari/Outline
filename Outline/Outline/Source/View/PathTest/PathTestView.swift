@@ -10,27 +10,29 @@ import MapKit
 import SwiftUI
 
 struct PathTestView: View {
-    @State private var coordinates: [Coordinate] = []
+    @State private var coordinates: [CLLocationCoordinate2D] = []
     
     private let parseManager = KMLParserManager()
-    private var width = 300.0
-    private var height = 300.0
-    private let fileName = "seoulOctopusRun"
+    private var width: Double = 300
+    private var height: Double = 300
+    private let fileName = "dangdang"
     
     var body: some View {
         ZStack {
-                PathManager.createPath(width: width, height: height, coordinates: coordinates.map({ CLLocationCoordinate2D(latitude: $0.latitude, longitude: $0.longitude) }))
-                    .stroke(.green, style: .init(lineWidth: 4, lineCap: .round, lineJoin: .round) )
-                    .frame(width: PathManager.getCanvasData(coordinates: coordinates.map({ CLLocationCoordinate2D(latitude: $0.latitude, longitude: $0.longitude) }), width: width, height: height).width, height: PathManager.getCanvasData(coordinates: coordinates.map({ CLLocationCoordinate2D(latitude: $0.latitude, longitude: $0.longitude) }), width: width, height: height).height)
-                    .background {
-                        Color.white.opacity(0.2)
-                    }
-                    .overlay {
-                        VStack {
-                            Text("\(PathManager.getCanvasData(coordinates: coordinates.toCLLocationCoordinates(), width: width, height: height).width)")
-                            Text("\(PathManager.getCanvasData(coordinates: coordinates.toCLLocationCoordinates(), width: width, height: height).height)")
-                        }
-                    }
+            let canvasData = PathManager.getCanvasData(coordinates: coordinates, width: width, height: height)
+            
+            PathManager.createPath(width: width, height: height, coordinates: coordinates)
+            .stroke(.green, style: .init(lineWidth: 4, lineCap: .round, lineJoin: .round) )
+            .frame(width: canvasData.width, height: canvasData.height)
+            .background {
+                Color.white.opacity(0.2)
+            }
+            .overlay {
+                VStack {
+                    Text("\(canvasData.width)")
+                    Text("\(canvasData.height)")
+                }
+            }
         }
         .onAppear {
             getGPSArtCourseData()
@@ -41,7 +43,7 @@ struct PathTestView: View {
 extension PathTestView {
     private func getGPSArtCourseData() {
         let parsedCoordinates = parseCooridinates(fileName: fileName)
-        self.coordinates = parsedCoordinates
+        self.coordinates = parsedCoordinates.toCLLocationCoordinates()
     }
     
     private func parseCooridinates(fileName: String) -> [Coordinate] {
