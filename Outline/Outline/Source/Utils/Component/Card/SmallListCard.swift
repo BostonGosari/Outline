@@ -70,8 +70,8 @@ struct SmallListCard: View {
                 }
                 .overlay(alignment: .bottom) {
                     VStack(spacing: 2) {
-                        PathGenerateManager
-                            .caculateLines(width: 100, height: 100, coordinates: data)
+                        CoordinatePathManager
+                            .createPath(width: 100, height: 100, coordinates: data)
                             .scale(0.5)
                             .stroke(.customPrimary, style: StrokeStyle(lineWidth: 4, lineCap: .round, lineJoin: .round))
                             .padding(.horizontal, 16)

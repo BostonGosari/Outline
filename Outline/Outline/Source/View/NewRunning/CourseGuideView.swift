@@ -57,17 +57,17 @@ struct CourseGuideView: View {
 
 extension CourseGuideView {
     private var coursePath: some View {
-        PathGenerateManager
-            .caculateLines(width: width, height: height, coordinates: coursePathCoordinates)
+        CoordinatePathManager
+            .createPath(width: width, height: height, coordinates: coursePathCoordinates)
             .stroke(.customBlack.opacity(0.5), style: .init(lineWidth: 7, lineCap: .round, lineJoin: .round))
             .scaleEffect(0.8)
     }
     
     private var userPath: some View {
-        let canvasData = PathGenerateManager.calculateCanvasData(coordinates: coursePathCoordinates, width: width, height: height)
+        let canvasData = CoordinatePathManager.calculateCanvasData(coordinates: coursePathCoordinates, width: width, height: height)
         
-        return PathGenerateManager
-            .caculateLines(width: width, height: height, coordinates: userLocations, canvasData: canvasData)
+        return CoordinatePathManager
+            .createPath(width: width, height: height, coordinates: userLocations, canvasData: canvasData)
             .stroke(.customPrimary, style: .init(lineWidth: 7, lineCap: .round, lineJoin: .round))
             .scaleEffect(0.8)
     }
