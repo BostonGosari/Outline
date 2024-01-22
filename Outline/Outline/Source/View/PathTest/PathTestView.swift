@@ -13,15 +13,25 @@ struct PathTestView: View {
     @State private var coordinates: [Coordinate] = []
     
     private let parseManager = KMLParserManager()
+    private let width = 250.0
+    private let height = 200.0
+    private let fileName = "fish"
     
     var body: some View {
         ZStack {
-            PathGenerateManager.caculateLines(width: 200, height: 100, coordinates: coordinates.map({ CLLocationCoordinate2D(latitude: $0.latitude, longitude: $0.longitude) }))
-                .fill(.clear)
-                .stroke(.customGreen, style: .init(lineWidth: 5, lineCap: .round, lineJoin: .round) )
+            GeometryReader { geo in
+                PathGenerateManager.caculateLines(width: width, height: height, coordinates: coordinates.map({ CLLocationCoordinate2D(latitude: $0.latitude, longitude: $0.longitude) }))
+                    .stroke(.customGreen, style: .init(lineWidth: 4, lineCap: .round, lineJoin: .round) )
+                    .overlay {
+                        VStack {
+                            Text("\(PathGenerateManager.calculateCanvasData(coordinates: coordinates.map({ CLLocationCoordinate2D(latitude: $0.latitude, longitude: $0.longitude) }), width: width, height: height).width)")
+                            Text("\(PathGenerateManager.calculateCanvasData(coordinates: coordinates.map({ CLLocationCoordinate2D(latitude: $0.latitude, longitude: $0.longitude) }), width: width, height: height).height)")
+                            Text("\(geo.size.width)")
+                            Text("\(geo.size.height)")
+                        }
+                    }
+            }
         }
-        .background(Color.customWhite)
-        .frame(width: 200, height: 100)
         .onAppear {
             getGPSArtCourseData()
         }
@@ -30,7 +40,7 @@ struct PathTestView: View {
 
 extension PathTestView {
     private func getGPSArtCourseData() {
-        let parsedCoordinates = parseCooridinates(fileName: "seoulOctopusRun")
+        let parsedCoordinates = parseCooridinates(fileName: fileName)
         self.coordinates = parsedCoordinates
     }
     
