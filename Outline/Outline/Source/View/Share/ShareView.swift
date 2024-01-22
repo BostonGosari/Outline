@@ -40,7 +40,7 @@ struct ShareView: View {
                 .padding(.top, 36)
             }
             .onAppear {
-                let canvasSize = PathGenerateManager.calculateCanvaData(coordinates: runningData.userLocations, width: 200, height: 200)
+                let canvasSize = PathGenerateManager.calculateCanvasData(coordinates: runningData.userLocations, width: 200, height: 200)
                 pathWidth = CGFloat(canvasSize.width)
                 pathHeight = CGFloat(canvasSize.height)
             }

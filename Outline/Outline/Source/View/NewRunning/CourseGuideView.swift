@@ -64,7 +64,7 @@ extension CourseGuideView {
     }
     
     private var userPath: some View {
-        let canvasData = PathGenerateManager.calculateCanvaData(coordinates: coursePathCoordinates, width: width, height: height)
+        let canvasData = PathGenerateManager.calculateCanvasData(coordinates: coursePathCoordinates, width: width, height: height)
         
         return PathGenerateManager
             .caculateLines(width: width, height: height, coordinates: userLocations, canvasData: canvasData)
