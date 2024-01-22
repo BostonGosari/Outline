@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>제목없는 레이어</name>
+    <Style id="poly-000000-1200-77-normal">
+      <LineStyle>
+        <color>ff000000</color>
+        <width>1.2</width>
+      </LineStyle>
+      <PolyStyle>
+        <color>4d000000</color>
+        <fill>1</fill>
+        <outline>1</outline>
+      </PolyStyle>
+    </Style>
+    <Style id="poly-000000-1200-77-highlight">
+      <LineStyle>
+        <color>ff000000</color>
+        <width>1.8</width>
+      </LineStyle>
+      <PolyStyle>
+        <color>4d000000</color>
+        <fill>1</fill>
+        <outline>1</outline>
+      </PolyStyle>
+    </Style>
+    <StyleMap id="poly-000000-1200-77">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#poly-000000-1200-77-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#poly-000000-1200-77-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Placemark>
+      <name>모아이런</name>
+      <description><![CDATA[설명: <br>name: ]]></description>
+      <styleUrl>#poly-000000-1200-77</styleUrl>
+      <ExtendedData>
+        <Data name="설명">
+          <value/>
+        </Data>
+        <Data name="name">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <tessellate>1</tessellate>
+            <coordinates>
+              126.9794795,37.5838078,0
+              126.9791577,37.5833487,0
+              126.9801018,37.5828896,0
+              126.9808958,37.5825325,0
+              126.9802949,37.5819373,0
+              126.9810674,37.5814442,0
+              126.9801233,37.580951,0
+              126.9798229,37.5799307,0
+              126.9834707,37.5793525,0
+              126.9831273,37.5786723,0
+              126.9840715,37.5761554,0
+              126.9859168,37.5768357,0
+              126.9850156,37.5789784,0
+              126.9850156,37.5801008,0
+              126.9850156,37.5815632,0
+              126.9849727,37.5829576,0
+              126.9850585,37.5848281,0
+              126.9853589,37.5861204,0
+              126.9844577,37.5866645,0
+              126.9835565,37.5865625,0
+              126.9833848,37.5874807,0
+              126.9817111,37.5870726,0
+              126.9815395,37.5866305,0
+              126.9820545,37.5851341,0
+              126.9816253,37.5838758,0
+              126.9794795,37.5838078,0
+            </coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+  </Document>
+</kml>
