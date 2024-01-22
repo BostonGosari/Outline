@@ -66,27 +66,14 @@ struct FreeRunningHomeView: View {
                                 SlideToUnlock(isUnlocked: $isUnlocked, progress: $progress)
                                     .onChange(of: isUnlocked) { _, newValue in
                                         if newValue {
-                                            runningStartManager.checkAuthorization()
-                                            
-                                            if runningStartManager.isHealthAuthorized {
-                                                if runningStartManager.isLocationAuthorized {
-                                                    runningStartManager.start = true
-                                                    runningStartManager.startFreeRun()
-                                                    
-                                                    let runningInfo = MirroringRunningInfo(runningType: .free, courseName: "자유아트", course: [])
-                                                    connectivityManager.sendRunningInfo(runningInfo)
-                                                    
-                                                    isUnlocked = false
-                                                } else {
-                                                    runningStartManager.permissionType = .location
-                                                    runningStartManager.showPermissionSheet = true
-                                                    isUnlocked = false
-                                                }
-                                            } else {
-                                                runningStartManager.permissionType = .health
-                                                runningStartManager.showPermissionSheet = true
-                                                isUnlocked = false
+                                            if runningStartManager.checkAuthorization() {
+                                                runningStartManager.start = true
+                                                runningStartManager.startFreeRun()
+                                                
+                                                let runningInfo = MirroringRunningInfo(runningType: .free, courseName: "자유아트", course: [])
+                                                connectivityManager.sendRunningInfo(runningInfo)
                                             }
+                                            isUnlocked = false
                                         }
                                     }
                                     .frame(maxHeight: .infinity, alignment: .bottom)
