@@ -94,6 +94,9 @@
 		29AE76E12ADE2C1700A46742 /* HomeTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01FDB9D2ADABD3D00BDA633 /* HomeTabView.swift */; };
 		29B205082AEA625100E63F39 /* PathGenerateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9528EFFF2AE042570056CCC6 /* PathGenerateManager.swift */; };
 		29B39D302B5E5DF500C84E6A /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 29B39D2F2B5E5DF500C84E6A /* Secrets.xcconfig */; };
+		29B39D382B5E663800C84E6A /* moai.kml in Resources */ = {isa = PBXBuildFile; fileRef = 29B39D372B5E663800C84E6A /* moai.kml */; };
+		29B39D3A2B5E664000C84E6A /* fish.kml in Resources */ = {isa = PBXBuildFile; fileRef = 29B39D392B5E664000C84E6A /* fish.kml */; };
+		29B39D3C2B5E664700C84E6A /* dragon.kml in Resources */ = {isa = PBXBuildFile; fileRef = 29B39D3B2B5E664700C84E6A /* dragon.kml */; };
 		29B9BB8F2B16CF780042DE19 /* DrawPathView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B9BB8E2B16CF780042DE19 /* DrawPathView.swift */; };
 		29CC19A42AE95F2300B79610 /* RunningStartManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29CC19A32AE95F2300B79610 /* RunningStartManager.swift */; };
 		29CC42BD2AF24BCE00578EF1 /* WatchRunningManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29CC42BC2AF24BCE00578EF1 /* WatchRunningManager.swift */; };
@@ -396,6 +399,9 @@
 		29AE76DA2ADE2A5300A46742 /* InputUserInfoViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InputUserInfoViewModel.swift; path = Outline/Source/ViewModel/InputUserInfoViewModel.swift; sourceTree = SOURCE_ROOT; };
 		29AE76DF2ADE2BC700A46742 /* DateExtention.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtention.swift; sourceTree = "<group>"; };
 		29B39D2F2B5E5DF500C84E6A /* Secrets.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Secrets.xcconfig; path = ../../../../../Downloads/Secrets.xcconfig; sourceTree = "<group>"; };
+		29B39D372B5E663800C84E6A /* moai.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = moai.kml; sourceTree = "<group>"; };
+		29B39D392B5E664000C84E6A /* fish.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = fish.kml; sourceTree = "<group>"; };
+		29B39D3B2B5E664700C84E6A /* dragon.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = dragon.kml; sourceTree = "<group>"; };
 		29B9BB8E2B16CF780042DE19 /* DrawPathView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawPathView.swift; sourceTree = "<group>"; };
 		29CC19A32AE95F2300B79610 /* RunningStartManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningStartManager.swift; sourceTree = "<group>"; };
 		29CC42BC2AF24BCE00578EF1 /* WatchRunningManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchRunningManager.swift; sourceTree = "<group>"; };
@@ -566,6 +572,9 @@
 		0E29F64D2ADF681E00F5EF5C /* KML */ = {
 			isa = PBXGroup;
 			children = (
+				29B39D372B5E663800C84E6A /* moai.kml */,
+				29B39D3B2B5E664700C84E6A /* dragon.kml */,
+				29B39D392B5E664000C84E6A /* fish.kml */,
 				0E1D1B2A2AE95E1C005282A2 /* test.kml */,
 				954CB2A22AE5457A005EB2E9 /* flightRun.kml */,
 				954CB29F2AE5457A005EB2E9 /* pohangCrocodileRun.kml */,
@@ -1363,6 +1372,7 @@
 				954CB2AB2AE5457B005EB2E9 /* flightRun.kml in Resources */,
 				0E1D1B2B2AE95E1C005282A2 /* test.kml in Resources */,
 				954CB2A72AE5457B005EB2E9 /* seoulOctopusRun.kml in Resources */,
+				29B39D3C2B5E664700C84E6A /* dragon.kml in Resources */,
 				F0AC8AA42AD94C200061612C /* Preview Assets.xcassets in Resources */,
 				F0AC8B2C2AD967E30061612C /* Image.xcassets in Resources */,
 				BB1D531A2ADDBCAB0073771F /* Pretendard-Regular.ttf in Resources */,
@@ -1371,6 +1381,7 @@
 				F0AC8B2E2AD968A20061612C /* Icon.xcassets in Resources */,
 				F0AC8AA12AD94C200061612C /* Color.xcassets in Resources */,
 				2990249A2B10B3E8005C5BA8 /* SFCompactDisplay-Semibold.ttf in Resources */,
+				29B39D382B5E663800C84E6A /* moai.kml in Resources */,
 				954CB2AF2AE5457B005EB2E9 /* seoulCamelRun.kml in Resources */,
 				BB1D531E2ADDBCB90073771F /* Pretendard-Thin.ttf in Resources */,
 				0EB59A3E2B1835E600A18C50 /* alert.mp3 in Resources */,
@@ -1378,6 +1389,7 @@
 				BB1D530E2ADDBC620073771F /* Pretendard-Bold.ttf in Resources */,
 				0EB59A222B176BA100A18C50 /* test.json in Resources */,
 				BB1D53182ADDBCA20073771F /* Pretendard-Medium.ttf in Resources */,
+				29B39D3A2B5E664000C84E6A /* fish.kml in Resources */,
 				BB1D53162ADDBC900073771F /* Pretendard-Light.ttf in Resources */,
 				954CB2A92AE5457B005EB2E9 /* pohangDangDangRun.kml in Resources */,
 				BB1D53102ADDBC690073771F /* Pretendard-ExtraBold.ttf in Resources */,
