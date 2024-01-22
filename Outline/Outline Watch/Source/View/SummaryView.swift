@@ -38,7 +38,7 @@ struct SummaryView: View {
                 NavigationStack {
                     ScrollViewReader { proxy in
                         ScrollView {
-                            CoordinatePathManager.createPath(width: 80, height: 80, coordinates: runningManager.userLocations)
+                            PathManager.createPath(width: 80, height: 80, coordinates: runningManager.userLocations)
                                 .trim(from: 0, to: progress)
                                 .stroke(style: StrokeStyle(lineWidth: 8, lineCap: .round, lineJoin: .round))
                                 .scaledToFit()

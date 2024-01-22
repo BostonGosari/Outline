@@ -8,8 +8,15 @@
 import SwiftUI
 import CoreLocation
 
+struct Bound {
+    var minLon: Double
+    var maxLon: Double
+    var minLat: Double
+    var maxLat: Double
+}
+
 extension Array where Element == CLLocationCoordinate2D {
-    func bounding() -> (minLon: Double, maxLon: Double, minLat: Double, maxLat: Double) {
+    func getBound() -> Bound {
         let longitudes = self.map { $0.longitude }
         let latitudes = self.map { $0.latitude }
 
@@ -18,7 +25,7 @@ extension Array where Element == CLLocationCoordinate2D {
         let minLat = latitudes.min() ?? 90
         let maxLat = latitudes.max() ?? -90
 
-        return (minLon, maxLon, minLat, maxLat)
+        return Bound(minLon: minLon, maxLon: maxLon, minLat: minLat, maxLat: maxLat)
     }
 }
 
