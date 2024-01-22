@@ -39,16 +39,10 @@ struct PathManager {
     
     static func getCanvasData(coordinates: [CLLocationCoordinate2D], width: Double, height: Double) -> CanvasData {
         // longitude 는 넓이(가로), latitude 는 높이(세로)와 관련
-        let longitudes = coordinates.map { $0.longitude }
-        let latitudes = coordinates.map { $0.latitude }
+        let bound = coordinates.getBound()
         
-        let minLon = longitudes.min() ?? 180
-        let maxLon = longitudes.max() ?? -180
-        let minLat = latitudes.min() ?? 90
-        let maxLat = latitudes.max() ?? -90
-        
-        let longitudeRange = maxLon - minLon
-        let latitudeRange = maxLat - minLat
+        let longitudeRange = bound.maxLon - bound.minLon
+        let latitudeRange = bound.maxLat - bound.minLat
         
         var scale: Double = 0
         
@@ -66,25 +60,19 @@ struct PathManager {
             width: fittedWidth,
             height: fittedHeight,
             scale: scale,
-            initX: minLon,
-            initY: maxLat
+            initX: bound.minLon,
+            initY: bound.maxLat
         )
     }
     
     static func getLineWidth(coordinates: [CLLocationCoordinate2D]) -> CGFloat {
         guard !coordinates.isEmpty else { return 1.0 }
-
-        let longitudes = coordinates.map { $0.longitude }
-        let latitudes = coordinates.map { $0.latitude }
-
-        let minLon = longitudes.min() ?? 180
-        let maxLon = longitudes.max() ?? -180
-        let minLat = latitudes.min() ?? 90
-        let maxLat = latitudes.max() ?? -90
-
-        let minCoordinate = CLLocation(latitude: minLat, longitude: minLon)
-        let maxCoordinate = CLLocation(latitude: minLat, longitude: maxLon)
-
+        
+        let bound = coordinates.getBound()
+        
+        let minCoordinate = CLLocation(latitude: bound.minLat, longitude: bound.minLon)
+        let maxCoordinate = CLLocation(latitude: bound.maxLat, longitude: bound.maxLon)
+        // 해당 맵의 대각선의 거리를 구합니다. 단위: meter
         let distanceInMeters = minCoordinate.distance(from: maxCoordinate)
 
         // 최대, 최소 라인 두께를 구합니다.
