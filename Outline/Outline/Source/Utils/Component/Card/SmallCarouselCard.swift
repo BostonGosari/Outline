@@ -72,8 +72,8 @@ struct SmallCarouselCard: View {
                 }
                 .overlay(alignment: .bottom) {
                     VStack(spacing: 6) {
-                        PathGenerateManager
-                            .caculateLines(width: 200, height: 200, coordinates: data)
+                        CoordinatePathManager
+                            .createPath(width: 200, height: 200, coordinates: data)
                             .scale(0.5)
                             .stroke(.customPrimary, style: StrokeStyle(lineWidth: 4, lineCap: .round, lineJoin: .round))
                             .padding(.horizontal, 16)

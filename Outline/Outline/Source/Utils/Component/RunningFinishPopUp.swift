@@ -129,7 +129,7 @@ struct RunningFinishPopUp: View {
                 .foregroundStyle(.gray300)
                 .padding(.top, 8)
             Spacer()
-            PathGenerateManager.caculateLines(width: 200, height: 200, coordinates: userLocations)
+            CoordinatePathManager.createPath(width: 200, height: 200, coordinates: userLocations)
                 .trim(from: 0, to: progress)
                 .stroke(style: StrokeStyle(lineWidth: 8, lineCap: .round, lineJoin: .round))
                 .scaledToFit()
