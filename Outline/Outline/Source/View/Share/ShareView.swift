@@ -40,7 +40,7 @@ struct ShareView: View {
                 .padding(.top, 36)
             }
             .onAppear {
-                let canvasSize = CoordinatePathManager.calculateCanvasData(coordinates: runningData.userLocations, width: 200, height: 200)
+                let canvasSize = PathManager.getCanvasData(coordinates: runningData.userLocations, width: 200, height: 200)
                 pathWidth = CGFloat(canvasSize.width)
                 pathHeight = CGFloat(canvasSize.height)
             }
@@ -124,7 +124,7 @@ extension ShareView {
     private var userPath: some View {
         ZStack {
             Color.black.opacity(0.001)
-            CoordinatePathManager
+            PathManager
                 .createPath(width: 200, height: 200, coordinates: runningData.userLocations)
                 .stroke(.customPrimary, style: .init(lineWidth: 5, lineCap: .round, lineJoin: .round))
         }
