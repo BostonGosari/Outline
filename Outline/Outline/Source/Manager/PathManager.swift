@@ -22,16 +22,16 @@ struct PathManager {
         let data = canvasData ?? getCanvasData(coordinates: coordinates, width: width, height: height)
         var path = Path()
         
-        if coordinates.isEmpty {
-            return path
-        }
-        
-        let initialPosition = getRelativePoint(coordinate: coordinates[0], canvasData: data)
-        path.move(to: CGPoint(x: initialPosition.x, y: -initialPosition.y))
+        if coordinates.isEmpty { return path }
         
         for coordinate in coordinates {
             let position = getRelativePoint(coordinate: coordinate, canvasData: data)
-            path.addLine(to: CGPoint(x: position.x, y: -position.y))
+            
+            if path.isEmpty {
+                path.move(to: position)
+            } else {
+                path.addLine(to: position)
+            }
         }
         
         return path
@@ -48,17 +48,17 @@ struct PathManager {
         
         // 넓이가 높이보다 클 경우 넓이의 scale을, 높이가 넓이보다 클 경우 높이의 scale 을 따릅니다.
         if longitudeRange >= latitudeRange {
-            scale = width / longitudeRange
+            scale = width / longitudeRange / 0.9
         } else {
-            scale = height / latitudeRange
+            scale = height / latitudeRange / 1.1
         }
         
         let fittedWidth = longitudeRange * scale
         let fittedHeight = latitudeRange * scale
         
         return CanvasData(
-            width: fittedWidth,
-            height: fittedHeight,
+            width: fittedWidth * 0.9,
+            height: fittedHeight * 1.1,
             scale: scale,
             initX: bound.minLon,
             initY: bound.maxLat
@@ -86,13 +86,13 @@ struct PathManager {
     }
     
     static private func getRelativePoint(coordinate: CLLocationCoordinate2D, canvasData: CanvasData) -> CGPoint {
-        let tempX = (coordinate.longitude - canvasData.initX) * canvasData.scale
-        let tempY = (coordinate.latitude - canvasData.initY) * canvasData.scale
+        let tempX = (coordinate.longitude - canvasData.initX) * canvasData.scale * 0.9
+        let tempY = (coordinate.latitude - canvasData.initY) * canvasData.scale * 1.1
         
         guard !tempX.isNaN, !tempX.isInfinite, !tempY.isNaN, !tempY.isInfinite else {
             return CGPoint.zero
         }
         
-        return CGPoint(x: Int(tempX), y: Int(tempY))
+        return CGPoint(x: Int(tempX), y: -Int(tempY))
     }
 }
