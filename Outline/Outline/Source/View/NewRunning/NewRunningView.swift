@@ -142,6 +142,7 @@ struct NewRunningView: View {
 extension NewRunningView {
     private var map: some View {
         NewRunningMapView(userLocations: locationManager.userLocations)
+            .ignoresSafeArea()
             .onAppear {
                 if runningStartManager.running == true {
                     runningDataManager.startRunning()
