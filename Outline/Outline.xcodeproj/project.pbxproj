@@ -71,7 +71,7 @@
 		2973991B2B19829A00318321 /* Outline Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 297B80FA2AE73C4500AF7219 /* Outline Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		2975F0962AE3E1790046C00B /* CornerRectangleModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2975F0952AE3E1790046C00B /* CornerRectangleModifier.swift */; };
 		297B80FC2AE7515200AF7219 /* CourseModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E2EF702ADA6F230083ADEE /* CourseModelType.swift */; };
-		297E7A8A2B596B1600B470D7 /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 297E7A892B596B1600B470D7 /* Secrets.xcconfig */; };
+		297E7AAD2B5F9A0A00B470D7 /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 297E7AAC2B5F9A0A00B470D7 /* Secrets.xcconfig */; };
 		2990249A2B10B3E8005C5BA8 /* SFCompactDisplay-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0E96BA912AF4E00B000C8FBF /* SFCompactDisplay-Semibold.ttf */; };
 		2990249C2B10B599005C5BA8 /* StretchPro.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2990249B2B10B599005C5BA8 /* StretchPro.ttf */; };
 		299458072AF3BB6400F7D24C /* DoubleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A01E1D2AF0CCE70093D9C0 /* DoubleExtension.swift */; };
@@ -380,7 +380,7 @@
 		2975F0952AE3E1790046C00B /* CornerRectangleModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CornerRectangleModifier.swift; sourceTree = "<group>"; };
 		297B80F92AE73C4500AF7219 /* Outline.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Outline.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		297B80FA2AE73C4500AF7219 /* Outline Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Outline Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		297E7A892B596B1600B470D7 /* Secrets.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
+		297E7AAC2B5F9A0A00B470D7 /* Secrets.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 		2990249B2B10B599005C5BA8 /* StretchPro.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = StretchPro.ttf; sourceTree = "<group>"; };
 		299803542ADF5F1000A9A134 /* HealthKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitManager.swift; sourceTree = "<group>"; };
 		299803562AE00C9B00A9A134 /* HapticManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticManager.swift; sourceTree = "<group>"; };
@@ -906,7 +906,7 @@
 		F0AC8A902AD94C1F0061612C = {
 			isa = PBXGroup;
 			children = (
-				297E7A892B596B1600B470D7 /* Secrets.xcconfig */,
+				297E7AAC2B5F9A0A00B470D7 /* Secrets.xcconfig */,
 				2921B0122B01F3F700533A83 /* GoogleService-Info.plist */,
 				BB52392D2ADAF93D00646494 /* Outline Watch App.entitlements */,
 				BB493CEB2ADFD592009D3699 /* Outline-Watch-App-Info.plist */,
@@ -1367,7 +1367,7 @@
 				F0AC8B2C2AD967E30061612C /* Image.xcassets in Resources */,
 				BB1D531A2ADDBCAB0073771F /* Pretendard-Regular.ttf in Resources */,
 				954CB2A52AE5457B005EB2E9 /* pohangCrocodileRun.kml in Resources */,
-				297E7A8A2B596B1600B470D7 /* Secrets.xcconfig in Resources */,
+				297E7AAD2B5F9A0A00B470D7 /* Secrets.xcconfig in Resources */,
 				F0AC8B2E2AD968A20061612C /* Icon.xcassets in Resources */,
 				F0AC8AA12AD94C200061612C /* Color.xcassets in Resources */,
 				2990249A2B10B3E8005C5BA8 /* SFCompactDisplay-Semibold.ttf in Resources */,
@@ -1923,7 +1923,7 @@
 		};
 		F0AC8ABE2AD94C210061612C /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 297E7A892B596B1600B470D7 /* Secrets.xcconfig */;
+			baseConfigurationReference = 297E7AAC2B5F9A0A00B470D7 /* Secrets.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1975,7 +1975,7 @@
 		};
 		F0AC8ABF2AD94C210061612C /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 297E7A892B596B1600B470D7 /* Secrets.xcconfig */;
+			baseConfigurationReference = 297E7AAC2B5F9A0A00B470D7 /* Secrets.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
