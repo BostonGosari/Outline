@@ -20,7 +20,7 @@ struct LoginView: View {
                     .resizable()
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .ignoresSafeArea()
-             
+                    .scaledToFill()
                 VStack(spacing: 16) {
                     Spacer()
                         
@@ -70,25 +70,6 @@ struct LoginView: View {
                             borderRectangle
                         }
                     }
-                    
-//                    NavigationLink {
-//                        InputNicknameView()
-//                           .navigationBarBackButtonHidden()
-//                    } label: {
-//                        HStack {
-//                            Spacer()
-//                            Text("시작하기")
-//                                .foregroundColor(.white)
-//                                .frame(height: 60)
-//                            Spacer()
-//                        }
-//                        .background(.ultraThinMaterial.opacity(0.9))
-//                        .cornerRadius(60)
-//                        .overlay {
-//                            borderRectangle
-//                        }
-//                    }
-
                     HStack {
                         Rectangle()
                             .frame(maxWidth: .infinity)
@@ -111,6 +92,7 @@ struct LoginView: View {
                             .font(.customButton)
                             .fontWeight(.medium)
                     }
+                    .padding(.bottom, getSafeArea().bottom == 0 ? 100 : 0)
                 }
                 .padding(16)
             }

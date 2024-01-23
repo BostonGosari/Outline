@@ -62,12 +62,12 @@ struct FinishRunningView: View {
                             }
                         }
                     )
-                    .padding(.top, 90)
+                    .padding(.top, getSafeArea().bottom == 0 ? 20 : 90)
                     Spacer()
                     CompleteButton(text: "자랑하기", isActive: true) {
                         viewModel.saveShareData()
                     }
-                    .padding(.bottom, 16)
+                    .padding(.bottom, getSafeArea().bottom == 0 ? 10 : 16)
                     
                     Button(action: {
                         withAnimation {

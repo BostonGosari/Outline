@@ -36,6 +36,7 @@ struct HomeTabView: View {
                             .frame(maxHeight: .infinity, alignment: .bottom)
                             .opacity(showDetailView ? 0 : 1)
                             .ignoresSafeArea()
+                            .offset(y: getSafeArea().bottom == 0 ? 25 : 0)
                     }
                 }
                 .sheet(isPresented: $runningManager.showPermissionSheet) {
@@ -80,4 +81,8 @@ struct HomeTabView: View {
             }
         }
     }
+}
+
+#Preview{
+    HomeTabView()
 }

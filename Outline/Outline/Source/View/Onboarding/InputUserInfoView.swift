@@ -32,7 +32,7 @@ struct InputUserInfoView: View {
                 VStack(alignment: .leading, spacing: 0) {
                     Text("간단한 정보를 알려주세요")
                         .font(.customTitle)
-                        .padding(EdgeInsets(top: 72, leading: 16, bottom: 8, trailing: 16))
+                        .padding(EdgeInsets(top: getSafeArea().bottom == 0 ? 50 : 72, leading: 16, bottom: 8, trailing: 16))
                     
                     Text("입력하신 정보를 토대로\n더 정확한 러닝 결과를 알려드릴게요!")
                         .font(.customDate)
@@ -40,8 +40,10 @@ struct InputUserInfoView: View {
                         .padding(.horizontal, 16)
                     
                     listView
+                        .frame(height: 217)
                         .padding(.top, 26)
-                    
+                        .padding(.bottom, 17)
+                       
                     Button(action: {
                         viewModel.defaultButtonTapped()
                         viewModel.currentPicker = .none
@@ -56,17 +58,18 @@ struct InputUserInfoView: View {
                                 .foregroundStyle(Color.gray400)
                         }
                     })
-                    .offset(y: -30)
-                    .frame(maxWidth: .infinity, alignment: .center)
+                    .frame(maxWidth: .infinity)
                     
                     Spacer()
+                        .frame(maxHeight: .infinity)
                     
                     CompleteButton(text: "완료", isActive: true) {
                         viewModel.saveUserInfo(nickname: userNickName)
                         authState = .login
                     }
+                    
+                    .frame(alignment: .bottom)
                     .padding(.bottom, 16)
-                    .frame(maxHeight: .infinity, alignment: .bottom)
                 }
             }
             .foregroundStyle(Color.customWhite)
