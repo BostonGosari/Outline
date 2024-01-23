@@ -51,8 +51,8 @@ struct CardDetailView: View {
                     VStack {
                         ZStack(alignment: .top) {
                             if showDetailView {
-                                    courseImage
-                                    courseInformation
+                                courseImage
+                                courseInformation
                             } else {
                                 UnevenRoundedRectangle(bottomTrailingRadius: 45, style: .circular)
                                     .frame(
@@ -185,35 +185,23 @@ struct CardDetailView: View {
         SlideToUnlock(isUnlocked: $isUnlocked, progress: $progress)
             .onChange(of: isUnlocked) { _, newValue in
                 if newValue {
-                    runningStartManager.checkAuthorization()
-                    if runningStartManager.isHealthAuthorized {
-                        if runningStartManager.isLocationAuthorized {
-                            let course = selectedCourse.course.coursePaths
-                            let runningInfo = MirroringRunningInfo(runningType: .gpsArt, courseName: selectedCourse.course.courseName, course: course)
-                            
-                            if runningStartManager.checkDistance(course: course) {
-                                runningStartManager.startCourse = selectedCourse.course
-                                runningStartManager.startGPSArtRun()
-                                connectivityManager.sendRunningInfo(runningInfo)
-                                showDetailView = false
-                                runningStartManager.start = true
-                                isUnlocked = false
-                            } else {
-                                isUnlocked = false
-                                withAnimation {
-                                    showAlert = true
-                                }
-                            }
+                    if runningStartManager.checkAuthorization() {
+                        let course = selectedCourse.course.coursePaths
+                        let runningInfo = MirroringRunningInfo(runningType: .gpsArt, courseName: selectedCourse.course.courseName, course: course)
+                        
+                        if runningStartManager.checkDistance(course: course) {
+                            runningStartManager.startCourse = selectedCourse.course
+                            runningStartManager.startGPSArtRun()
+                            connectivityManager.sendRunningInfo(runningInfo)
+                            showDetailView = false
+                            runningStartManager.start = true
                         } else {
-                            runningStartManager.showPermissionSheet = true
-                            runningStartManager.permissionType = .location
-                            isUnlocked = false
+                            withAnimation {
+                                showAlert = true
+                            }
                         }
-                    } else {
-                        runningStartManager.showPermissionSheet = true
-                        runningStartManager.permissionType = .health
-                        isUnlocked = false
                     }
+                    isUnlocked = false
                 }
             }
             .opacity(appear[1] ? 1 : 0)

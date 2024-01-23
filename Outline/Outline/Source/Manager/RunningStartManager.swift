@@ -34,12 +34,25 @@ class RunningStartManager: ObservableObject {
     
     private init() { }
     
-    func checkAuthorization() {
+    func checkAuthorization() -> Bool {
         checkHealthAuthorization()
+        if !isHealthAuthorized {
+            permissionType = .health
+            showPermissionSheet = true
+            return false
+        }
+        
         checkLocationAuthorization()
+        if !isLocationAuthorized {
+            permissionType = .location
+            showPermissionSheet = true
+            return false
+        }
+        
+        return true
     }
     
-    func checkHealthAuthorization() {
+    private func checkHealthAuthorization() {
         let quantityTypes: Set = [
             HKQuantityType(.heartRate),
             HKQuantityType(.activeEnergyBurned),
@@ -65,7 +78,7 @@ class RunningStartManager: ObservableObject {
         }
     }
     
-    func checkLocationAuthorization() {
+    private func checkLocationAuthorization() {
         switch locationManager.authorizationStatus {
         case .notDetermined:
             isLocationAuthorized = false
