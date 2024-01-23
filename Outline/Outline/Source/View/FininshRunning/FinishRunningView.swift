@@ -56,10 +56,7 @@ struct FinishRunningView: View {
                             showRenameSheet = true
                         },
                         content: {
-                            Map(interactionModes: []) {
-                                MapPolyline(coordinates: viewModel.userLocations)
-                                    .stroke(polylineGradient, style: StrokeStyle(lineWidth: 8, lineCap: .round, lineJoin: .round))
-                            }
+                            FinishRunningMapView(userLocations: viewModel.userLocations)
                         }
                     )
                     .padding(.top, 90)
