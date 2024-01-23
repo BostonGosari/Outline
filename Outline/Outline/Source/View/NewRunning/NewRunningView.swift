@@ -196,18 +196,22 @@ extension NewRunningView {
                 showDetailButton
             }
             .padding(.top, 26)
-            .frame(height: showDetail ? 360 + metricsTranslation : 80, alignment: .top)
+            .frame(height: showDetail ? 360 + metricsTranslation : getSafeArea().bottom == 0 ? 110 : 80, alignment: .top)
+           
             .mask {
                 RoundedRectangle(cornerRadius: 20)
+                    
             }
             .background {
                 TransparentBlurView(removeAllFilters: true)
                     .blur(radius: 6, opaque: true)
+                    .offset(y: getSafeArea().bottom == 0 ? 20 : 0)
                     .ignoresSafeArea()
                     .overlay {
                         RoundedRectangle(cornerRadius: 20)
                             .foregroundStyle(.black50)
                             .ignoresSafeArea()
+                            .offset(y: getSafeArea().bottom == 0 ? 20 : 0)
                     }
             }
             .gesture(metricsGesture)
@@ -233,6 +237,7 @@ extension NewRunningView {
                 .foregroundStyle(.gray600, .gray700)
                 .fontWeight(.semibold)
         }
+        .offset(y: getSafeArea().bottom == 0 ? 20 : 0)
     }
     
     private var controlButton: some View {
@@ -303,6 +308,7 @@ extension NewRunningView {
             .zIndex(1)
         }
         .padding(.horizontal, 90)
+        .offset(y: getSafeArea().bottom == 0 ? -10 : 0)
     }
     
     private var guideView: some View {

@@ -76,7 +76,7 @@ struct CardDetailView: View {
                     .gesture(isDraggable ? drag : nil)
                     
                     slideToUnlock
-                        .padding(.top, 485)
+                        .padding(.top, UIScreen.main.bounds.height * 0.68 - 95)
                         .frame(maxHeight: .infinity, alignment: .top)
                         .zIndex(1)
                     
@@ -171,7 +171,7 @@ struct CardDetailView: View {
                 .foregroundStyle(.gray400)
                 .padding(.bottom, 16)
             }
-            .padding(.top, 60)
+            .padding(.top, getSafeArea().bottom == 0 ? 30 : 60)
             .opacity(appear[0] ? 1 : 0)
             .offset(y: appear[0] ? 0 : fadeInOffset)
             
@@ -319,4 +319,8 @@ extension CardDetailView {
             }
         }
     }
+}
+
+#Preview{
+    HomeTabView()
 }
