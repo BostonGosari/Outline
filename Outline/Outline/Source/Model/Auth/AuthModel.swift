@@ -78,16 +78,12 @@ class AuthModel: AuthModelProtocol {
     }
     
     func handleSignOut(completion: @escaping (Result<Bool, AuthError>) -> Void) {
-        let user = Auth.auth().currentUser
-        if let user = user {
-            user.delete { error in
-              if error != nil {
-                completion(.failure(.errorInSignOut))
-              } else {
-                completion(.success(true))
-              }
-            }
-        } else {
+        let firebaseAuth = Auth.auth()
+        do {
+            try firebaseAuth.signOut()
+            completion(.success(true))
+        } catch {
+            print("Error signing \(error)")
             completion(.failure(.failToDeleteUser))
         }
     }

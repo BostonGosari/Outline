@@ -10,6 +10,7 @@ import SwiftUI
 struct ProfileView: View {
     @Environment(\.dismiss) private var dismiss
     @AppStorage("authState") var authState: AuthState = .logout
+    @AppStorage("userId") var userId: String?
     @AppStorage("voiceOniPhone") var voiceOniPhone: Bool = true
     @AppStorage("voiceOnWatch") var voiceOnWatch: Bool = true
     @ObservedObject private var profileViewModel = ProfileViewModel()
@@ -150,9 +151,11 @@ struct ProfileView: View {
                     primaryButton: .default(Text("닫기"), action: {
                         showDeleteCompleteAlert = false
                         self.authState = .logout
+                        self.userId = nil
                     }), secondaryButton: .default(Text("확인").bold(), action: {
                         showDeleteCompleteAlert = false
                         self.authState = .logout
+                        self.userId = nil
                     })
                 )
             }

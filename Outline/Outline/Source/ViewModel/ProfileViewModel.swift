@@ -100,6 +100,7 @@ final class ProfileViewModel: ObservableObject {
             }
         }
         self.userId = ""
+        self.authState = .logout
         print("reset userId to empty")
     }
 }
