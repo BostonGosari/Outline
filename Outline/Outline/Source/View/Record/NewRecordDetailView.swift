@@ -59,10 +59,7 @@ struct NewRecordDetailView: View {
                         showRenameSheet = true
                     },
                     content: {
-                        Map(interactionModes: []) {
-                            MapPolyline(coordinates: viewModel.userLocations)
-                                .stroke(polylineGradient, style: StrokeStyle(lineWidth: 8, lineCap: .round, lineJoin: .round))
-                        }
+                        NewRecordDetailMapView(userLocations: viewModel.userLocations)
                     }
                 )
                 .frame(maxHeight: .infinity, alignment: .center)
