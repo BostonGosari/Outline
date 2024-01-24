@@ -4,13 +4,11 @@
 //
 //  Created by hyebin on 11/22/23.
 //
-
 import MapKit
 import SwiftUI
 
 struct CardDetailMap: View {
     @Environment(\.dismiss) private var dismiss
-    @State private var position: MapCameraPosition = .userLocation(followsHeading: true, fallback: .automatic)
     @State private var places = [Place]()
     @State private var mapSelction: Place?
     @State private var showCustomSheet = false
@@ -28,23 +26,6 @@ struct CardDetailMap: View {
     
     var body: some View {
         ZStack {
-//            Map(selection: $mapSelction) {
-//                UserAnnotation()
-//                MapPolyline(coordinates: ConvertCoordinateManager.convertToCLLocationCoordinates(selectedCourse.coursePaths))
-//                    .stroke(.customPrimary, style: StrokeStyle(lineWidth: 8, lineCap: .round, lineJoin: .round))
-//                
-//                ForEach(places) { place in
-//                    Marker(
-//                        place.title,
-//                        systemImage: place.id == 0  ? "flag.fill" : "mappin",
-//                        coordinate: place.location
-//                    )
-//                    .tag(place)
-//                    .tint(place.id == 0 ? .customRed : .customPrimary)
-//                }
-//            }
-//            .mapControlVisibility(.hidden)
-//            .mapStyle(.standard(pointsOfInterest: []))
             CardDetailMapView(
                 coursePaths: ConvertCoordinateManager.convertToCLLocationCoordinates(selectedCourse.coursePaths),
                 places: places
