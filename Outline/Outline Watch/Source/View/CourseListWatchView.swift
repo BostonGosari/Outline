@@ -60,19 +60,22 @@ struct CourseListWatchView: View {
                                     }
                                 } label: {
                                     VStack {
+                                        let coordinates = course.coursePaths.toCLLocationCoordinates()
+                                        let canvasData = PathManager.getCanvasData(coordinates: coordinates, width: 80, height: 80)
+                                        
                                         Text(course.courseName)
                                             .font(.customSubTitle)
                                             .padding(.leading, 4)
                                             .frame(maxWidth: .infinity, alignment: .leading)
-                                        PathManager.createPath(width: 80, height: 80, coordinates: ConvertCoordinateManager.convertToCLLocationCoordinates(course.coursePaths))
-                                            .stroke(style: StrokeStyle(lineWidth: 4, lineCap: .round, lineJoin: .round))
-                                            .scaledToFit()
-                                            .frame(height: 80)
+                                        PathManager.createPath(width: 80, height: 80, coordinates: coordinates)
+                                            .stroke(style: StrokeStyle(lineWidth: 2, lineCap: .round, lineJoin: .round))
+                                            .frame(width: canvasData.width, height: canvasData.height)
                                             .foregroundStyle(.customPrimary)
+                                            .frame(width: 80, height: 80)
                                     }
+                                    .frame(maxWidth: .infinity)
                                     .padding(.vertical, 16)
                                     .padding(.horizontal, 8)
-                                    .frame(maxWidth: .infinity)
                                     .background {
                                         RoundedRectangle(cornerRadius: 24)
                                             .foregroundStyle(.gray900)
