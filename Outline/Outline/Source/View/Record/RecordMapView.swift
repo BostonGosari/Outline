@@ -17,7 +17,8 @@ struct RecordMapView: UIViewRepresentable {
         mapView.isZoomEnabled = false
         mapView.isScrollEnabled = false
         mapView.isUserInteractionEnabled = false
-
+        mapView.preferredConfiguration = MKStandardMapConfiguration(emphasisStyle: .muted)
+        
         loadMapDataAsync()
  
         return mapView
