@@ -32,7 +32,6 @@
 		0EE92E6E2AE00AE5003192FF /* CompleteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE92E6D2AE00AE5003192FF /* CompleteButton.swift */; };
 		0EE92E7D2AE02DDC003192FF /* FreeRunningHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE92E7C2AE02DDC003192FF /* FreeRunningHomeView.swift */; };
 		0EEFA04F2B0BAC1C00C656AE /* TransparentBlurView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EEFA04E2B0BAC1C00C656AE /* TransparentBlurView.swift */; };
-		0EF5FEE42B5CEC3200D64E5E /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 0EF5FEE32B5CEC3200D64E5E /* Secrets.xcconfig */; };
 		29111E372AE0C9CA009833C7 /* FinishWatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29111E362AE0C9CA009833C7 /* FinishWatchView.swift */; };
 		29111E3F2AE0CD0C009833C7 /* ConfettiWatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29111E3E2AE0CD0C009833C7 /* ConfettiWatchView.swift */; };
 		29111E952B0B8AA000CEFE00 /* NavigationTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29111E942B0B8AA000CEFE00 /* NavigationTabView.swift */; };
@@ -77,7 +76,6 @@
 		2973991B2B19829A00318321 /* Outline Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 297B80FA2AE73C4500AF7219 /* Outline Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		2975F0962AE3E1790046C00B /* CornerRectangleModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2975F0952AE3E1790046C00B /* CornerRectangleModifier.swift */; };
 		297B80FC2AE7515200AF7219 /* CourseModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E2EF702ADA6F230083ADEE /* CourseModelType.swift */; };
-		297E7AAD2B5F9A0A00B470D7 /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 297E7AAC2B5F9A0A00B470D7 /* Secrets.xcconfig */; };
 		2990249A2B10B3E8005C5BA8 /* SFCompactDisplay-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0E96BA912AF4E00B000C8FBF /* SFCompactDisplay-Semibold.ttf */; };
 		2990249C2B10B599005C5BA8 /* StretchPro.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2990249B2B10B599005C5BA8 /* StretchPro.ttf */; };
 		299458072AF3BB6400F7D24C /* DoubleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A01E1D2AF0CCE70093D9C0 /* DoubleExtension.swift */; };
@@ -100,7 +98,6 @@
 		29AE76E02ADE2BC700A46742 /* DateExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AE76DF2ADE2BC700A46742 /* DateExtention.swift */; };
 		29AE76E12ADE2C1700A46742 /* HomeTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01FDB9D2ADABD3D00BDA633 /* HomeTabView.swift */; };
 		29B205082AEA625100E63F39 /* PathManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9528EFFF2AE042570056CCC6 /* PathManager.swift */; };
-		29B39D302B5E5DF500C84E6A /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 29B39D2F2B5E5DF500C84E6A /* Secrets.xcconfig */; };
 		29B39D382B5E663800C84E6A /* moai.kml in Resources */ = {isa = PBXBuildFile; fileRef = 29B39D372B5E663800C84E6A /* moai.kml */; };
 		29B39D3A2B5E664000C84E6A /* fish.kml in Resources */ = {isa = PBXBuildFile; fileRef = 29B39D392B5E664000C84E6A /* fish.kml */; };
 		29B39D3C2B5E664700C84E6A /* dragon.kml in Resources */ = {isa = PBXBuildFile; fileRef = 29B39D3B2B5E664700C84E6A /* dragon.kml */; };
@@ -112,6 +109,8 @@
 		29B39D4C2B5ECC6700C84E6A /* dangdang.kml in Resources */ = {isa = PBXBuildFile; fileRef = 29B39D4B2B5ECC6700C84E6A /* dangdang.kml */; };
 		29B39D4E2B5ECC7400C84E6A /* duck.kml in Resources */ = {isa = PBXBuildFile; fileRef = 29B39D4D2B5ECC7400C84E6A /* duck.kml */; };
 		29B39D502B5ECEC900C84E6A /* fishcat.kml in Resources */ = {isa = PBXBuildFile; fileRef = 29B39D4F2B5ECEC900C84E6A /* fishcat.kml */; };
+		29C9D2792B60EDCB002E3F1E /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 29C9D2782B60EDCB002E3F1E /* Secrets.xcconfig */; };
+		29C9D27A2B6124E2002E3F1E /* HealthAuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954CB2B52AE63E79005EB2E9 /* HealthAuthView.swift */; };
 		29CC19A42AE95F2300B79610 /* RunningStartManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29CC19A32AE95F2300B79610 /* RunningStartManager.swift */; };
 		29CC42BD2AF24BCE00578EF1 /* WatchRunningManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29CC42BC2AF24BCE00578EF1 /* WatchRunningManager.swift */; };
 		29D6BAD32B0924D200BD8653 /* SmallCarouselCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D6BAD22B0924D200BD8653 /* SmallCarouselCard.swift */; };
@@ -149,7 +148,6 @@
 		954CB2AC2AE5457B005EB2E9 /* flightRun.kml in Resources */ = {isa = PBXBuildFile; fileRef = 954CB2A22AE5457A005EB2E9 /* flightRun.kml */; };
 		954CB2AF2AE5457B005EB2E9 /* seoulCamelRun.kml in Resources */ = {isa = PBXBuildFile; fileRef = 954CB2A42AE5457B005EB2E9 /* seoulCamelRun.kml */; };
 		954CB2B02AE5457B005EB2E9 /* seoulCamelRun.kml in Resources */ = {isa = PBXBuildFile; fileRef = 954CB2A42AE5457B005EB2E9 /* seoulCamelRun.kml */; };
-		954CB2B62AE63E79005EB2E9 /* HealthAuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954CB2B52AE63E79005EB2E9 /* HealthAuthView.swift */; };
 		954CB2BA2AE654BA005EB2E9 /* NotificationAuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954CB2B92AE654BA005EB2E9 /* NotificationAuthView.swift */; };
 		954FFF782AE132D100D27537 /* CourseDataUploadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954FFF772AE132D100D27537 /* CourseDataUploadManager.swift */; };
 		9580D4942B0C7985006CE42F /* ProfileVoiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9580D4932B0C7985006CE42F /* ProfileVoiceView.swift */; };
@@ -361,7 +359,6 @@
 		0EE92E6D2AE00AE5003192FF /* CompleteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteButton.swift; sourceTree = "<group>"; };
 		0EE92E7C2AE02DDC003192FF /* FreeRunningHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeRunningHomeView.swift; sourceTree = "<group>"; };
 		0EEFA04E2B0BAC1C00C656AE /* TransparentBlurView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransparentBlurView.swift; sourceTree = "<group>"; };
-		0EF5FEE32B5CEC3200D64E5E /* Secrets.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 		29111E362AE0C9CA009833C7 /* FinishWatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishWatchView.swift; sourceTree = "<group>"; };
 		29111E3E2AE0CD0C009833C7 /* ConfettiWatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfettiWatchView.swift; sourceTree = "<group>"; };
 		29111E942B0B8AA000CEFE00 /* NavigationTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationTabView.swift; sourceTree = "<group>"; };
@@ -403,7 +400,6 @@
 		2975F0952AE3E1790046C00B /* CornerRectangleModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CornerRectangleModifier.swift; sourceTree = "<group>"; };
 		297B80F92AE73C4500AF7219 /* Outline.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Outline.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		297B80FA2AE73C4500AF7219 /* Outline Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Outline Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		297E7AAC2B5F9A0A00B470D7 /* Secrets.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 		2990249B2B10B599005C5BA8 /* StretchPro.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = StretchPro.ttf; sourceTree = "<group>"; };
 		299803542ADF5F1000A9A134 /* HealthKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitManager.swift; sourceTree = "<group>"; };
 		299803562AE00C9B00A9A134 /* HapticManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticManager.swift; sourceTree = "<group>"; };
@@ -419,7 +415,6 @@
 		29AE76D92ADE2A5300A46742 /* InputNicknameViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InputNicknameViewModel.swift; path = Outline/Source/ViewModel/InputNicknameViewModel.swift; sourceTree = SOURCE_ROOT; };
 		29AE76DA2ADE2A5300A46742 /* InputUserInfoViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InputUserInfoViewModel.swift; path = Outline/Source/ViewModel/InputUserInfoViewModel.swift; sourceTree = SOURCE_ROOT; };
 		29AE76DF2ADE2BC700A46742 /* DateExtention.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtention.swift; sourceTree = "<group>"; };
-		29B39D2F2B5E5DF500C84E6A /* Secrets.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Secrets.xcconfig; path = ../../../../../Downloads/Secrets.xcconfig; sourceTree = "<group>"; };
 		29B39D372B5E663800C84E6A /* moai.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = moai.kml; sourceTree = "<group>"; };
 		29B39D392B5E664000C84E6A /* fish.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = fish.kml; sourceTree = "<group>"; };
 		29B39D3B2B5E664700C84E6A /* dragon.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = dragon.kml; sourceTree = "<group>"; };
@@ -429,6 +424,7 @@
 		29B39D4B2B5ECC6700C84E6A /* dangdang.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = dangdang.kml; sourceTree = "<group>"; };
 		29B39D4D2B5ECC7400C84E6A /* duck.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = duck.kml; sourceTree = "<group>"; };
 		29B39D4F2B5ECEC900C84E6A /* fishcat.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = fishcat.kml; sourceTree = "<group>"; };
+		29C9D2782B60EDCB002E3F1E /* Secrets.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Secrets.xcconfig; path = ../../Secrets.xcconfig; sourceTree = "<group>"; };
 		29CC19A32AE95F2300B79610 /* RunningStartManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningStartManager.swift; sourceTree = "<group>"; };
 		29CC42BC2AF24BCE00578EF1 /* WatchRunningManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchRunningManager.swift; sourceTree = "<group>"; };
 		29D6BAD22B0924D200BD8653 /* SmallCarouselCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallCarouselCard.swift; sourceTree = "<group>"; };
@@ -949,7 +945,7 @@
 		F0AC8A902AD94C1F0061612C = {
 			isa = PBXGroup;
 			children = (
-				29B39D2F2B5E5DF500C84E6A /* Secrets.xcconfig */,
+				29C9D2782B60EDCB002E3F1E /* Secrets.xcconfig */,
 				2921B0122B01F3F700533A83 /* GoogleService-Info.plist */,
 				BB52392D2ADAF93D00646494 /* Outline Watch App.entitlements */,
 				BB493CEB2ADFD592009D3699 /* Outline-Watch-App-Info.plist */,
@@ -1414,13 +1410,13 @@
 				BB1D531A2ADDBCAB0073771F /* Pretendard-Regular.ttf in Resources */,
 				29B39D502B5ECEC900C84E6A /* fishcat.kml in Resources */,
 				954CB2A52AE5457B005EB2E9 /* pohangCrocodileRun.kml in Resources */,
-				29B39D302B5E5DF500C84E6A /* Secrets.xcconfig in Resources */,
 				F0AC8B2E2AD968A20061612C /* Icon.xcassets in Resources */,
 				F0AC8AA12AD94C200061612C /* Color.xcassets in Resources */,
 				2990249A2B10B3E8005C5BA8 /* SFCompactDisplay-Semibold.ttf in Resources */,
 				29B39D442B5ECA9F00C84E6A /* DuckRun.kml in Resources */,
 				29B39D382B5E663800C84E6A /* moai.kml in Resources */,
 				954CB2AF2AE5457B005EB2E9 /* seoulCamelRun.kml in Resources */,
+				29C9D2792B60EDCB002E3F1E /* Secrets.xcconfig in Resources */,
 				BB1D531E2ADDBCB90073771F /* Pretendard-Thin.ttf in Resources */,
 				0EB59A3E2B1835E600A18C50 /* alert.mp3 in Resources */,
 				BB1D530C2ADDBC560073771F /* Pretendard-Black.ttf in Resources */,
@@ -1505,6 +1501,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				29C9D27A2B6124E2002E3F1E /* HealthAuthView.swift in Sources */,
 				295324852AE038EE00085120 /* UserInfoModel.swift in Sources */,
 				95ACF8D72B09C85D0045AEA8 /* CourseCategoryModelType.swift in Sources */,
 				954FFF782AE132D100D27537 /* CourseDataUploadManager.swift in Sources */,
@@ -1577,9 +1574,7 @@
 				954B04182AFF725000A8A83E /* ProfileUserInfoViewModel.swift in Sources */,
 				299803572AE00C9B00A9A134 /* HapticManager.swift in Sources */,
 				0E29F64B2ADF653000F5EF5C /* FontExtension.swift in Sources */,
-				954CB2B62AE63E79005EB2E9 /* HealthAuthView.swift in Sources */,
 				BB44B1702B047242000462CA /* AccuracyCheckView.swift in Sources */,
-				954CB2B62AE63E79005EB2E9 /* HealthAuthView.swift in Sources */,
 				95A01E1E2AF0CCE70093D9C0 /* DoubleExtension.swift in Sources */,
 				2921B00F2B01301100533A83 /* NewRunningMetricsView.swift in Sources */,
 				F06298AB2AE1998D007AB2D3 /* MapInfoView.swift in Sources */,
@@ -1983,7 +1978,7 @@
 		};
 		F0AC8ABE2AD94C210061612C /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 29B39D2F2B5E5DF500C84E6A /* Secrets.xcconfig */;
+			baseConfigurationReference = 29C9D2782B60EDCB002E3F1E /* Secrets.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -2035,7 +2030,7 @@
 		};
 		F0AC8ABF2AD94C210061612C /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 29B39D2F2B5E5DF500C84E6A /* Secrets.xcconfig */;
+			baseConfigurationReference = 29C9D2782B60EDCB002E3F1E /* Secrets.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;

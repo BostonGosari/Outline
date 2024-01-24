@@ -23,6 +23,10 @@ struct RunningFinishPopUp: View {
     @Binding var isPresented: Bool
     @Binding var score: Int
     @Binding var userLocations: [CLLocationCoordinate2D]
+    
+    private var canvasData: CanvasData {
+        return PathManager.getCanvasData(coordinates: userLocations, width: 200, height: 200)
+    }
    
     var scoreState: ScoreState {
         if score == -1 {
@@ -134,6 +138,7 @@ struct RunningFinishPopUp: View {
                 .stroke(style: StrokeStyle(lineWidth: 8, lineCap: .round, lineJoin: .round))
                 .scaledToFit()
                 .foregroundStyle(.customPrimary)
+                .frame(width: canvasData.width, height: canvasData.height)
                 .frame(width: 200, height: 200)
                 .onAppear {
                     print("userLocations: \(userLocations)")

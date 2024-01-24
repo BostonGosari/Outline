@@ -21,6 +21,10 @@ struct SummaryView: View {
     
     @Namespace var topID
     
+    private var canvasData: CanvasData {
+        return PathManager.getCanvasData(coordinates: runningManager.userLocations, width: 80, height: 80)
+    }
+    
     var body: some View {
         ZStack {
             Rectangle()
@@ -43,6 +47,7 @@ struct SummaryView: View {
                                 .stroke(style: StrokeStyle(lineWidth: 8, lineCap: .round, lineJoin: .round))
                                 .scaledToFit()
                                 .foregroundStyle(.customPrimary)
+                                .frame(width: canvasData.width, height: canvasData.height)
                                 .frame(width: 120, height: 120)
                                 .onAppear {
                                     progress = 1.0

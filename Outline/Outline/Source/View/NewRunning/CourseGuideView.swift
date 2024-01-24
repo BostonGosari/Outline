@@ -16,9 +16,13 @@ struct CourseGuideView: View {
     var userLocations: [CLLocationCoordinate2D]
     var tapPossible: Bool
     
-    var width = 113.0
-    var height = 168.0
-
+    private let width = 113.0
+    private let height = 168.0
+    
+    private var canvasData: CanvasData {
+        return PathManager.getCanvasData(coordinates: coursePathCoordinates, width: width, height: height)
+    }
+    
     var body: some View {
         ZStack {
             TransparentBlurView(removeAllFilters: true)
@@ -33,6 +37,7 @@ struct CourseGuideView: View {
                 coursePath
                 userPath
             }
+            .frame(width: canvasData.width, height: canvasData.height)
             .rotationEffect(Angle(degrees: courseRotate))
         }
         .overlay {
@@ -64,9 +69,7 @@ extension CourseGuideView {
     }
     
     private var userPath: some View {
-        let canvasData = PathManager.getCanvasData(coordinates: coursePathCoordinates, width: width, height: height)
-        
-        return PathManager
+        PathManager
             .createPath(width: width, height: height, coordinates: userLocations, canvasData: canvasData)
             .stroke(.customPrimary, style: .init(lineWidth: 7, lineCap: .round, lineJoin: .round))
             .scaleEffect(0.8)

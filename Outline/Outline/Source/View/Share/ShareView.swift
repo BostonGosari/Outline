@@ -20,12 +20,13 @@ struct ShareView: View {
     @State private var angle: Angle = .degrees(0)
     @State private var lastAngle: Angle = .degrees(0)
     
-    @State private var pathWidth: CGFloat = 0
-    @State private var pathHeight: CGFloat = 0
-    
     @State private var image: UIImage?
    
     let runningData: ShareModel
+    
+    private var canvasData: CanvasData {
+        return PathManager.getCanvasData(coordinates: runningData.userLocations, width: 200, height: 200)
+    }
     
     var body: some View {
         NavigationView {
@@ -38,11 +39,6 @@ struct ShareView: View {
                     buttons
                 }
                 .padding(.top, 36)
-            }
-            .onAppear {
-                let canvasSize = PathManager.getCanvasData(coordinates: runningData.userLocations, width: 200, height: 200)
-                pathWidth = CGFloat(canvasSize.width)
-                pathHeight = CGFloat(canvasSize.height)
             }
             .navigationTitle("공유")
             .navigationBarTitleDisplayMode(.inline)
@@ -128,7 +124,7 @@ extension ShareView {
                 .createPath(width: 200, height: 200, coordinates: runningData.userLocations)
                 .stroke(.customPrimary, style: .init(lineWidth: 5, lineCap: .round, lineJoin: .round))
         }
-        .frame(width: pathWidth + 30, height: pathHeight + 30)
+        .frame(width: canvasData.width + 30, height: canvasData.height + 30)
         .scaleEffect(scale)
         .offset(offset)
         .rotationEffect(lastAngle + angle)
