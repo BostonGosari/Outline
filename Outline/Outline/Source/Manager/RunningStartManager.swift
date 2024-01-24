@@ -140,8 +140,7 @@ class RunningStartManager: ObservableObject {
         
         guard let shortestDistance = calculateShortestDistance(from: userLocation, to: ConvertCoordinateManager.convertToCLLocationCoordinates(course)) else { return false }
         
-        return true
-//        return shortestDistance <= 50
+        return shortestDistance <= 50
     }
     
     func startTimer() {
