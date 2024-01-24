@@ -24,7 +24,8 @@ struct FreeRunningHomeView: View {
     var body: some View {
         ZStack(alignment: .top) {
             if authState == .login {
-                Map(position: $position)
+                FreeRunningMapView()
+                    .ignoresSafeArea()
             }
         
             Rectangle()
