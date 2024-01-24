@@ -127,7 +127,7 @@ struct CardDetailInformationView: View {
                             .fontWeight(.semibold)
                     }
                     .foregroundColor(.customPrimary)
-                    ForEach(0..<selectedCourse.hotSpots.count) { index in
+                    ForEach(0..<selectedCourse.hotSpots.count, id: \.self) { index in
                         Text("\(selectedCourse.hotSpots[index].title)")
                         if index != selectedCourse.hotSpots.count - 1 {
                             Text("ˑ")
