@@ -135,13 +135,11 @@ struct RunningFinishPopUp: View {
             Spacer()
             PathManager.createPath(width: 200, height: 200, coordinates: userLocations)
                 .trim(from: 0, to: progress)
-                .stroke(style: StrokeStyle(lineWidth: 8, lineCap: .round, lineJoin: .round))
-                .scaledToFit()
+                .stroke(style: StrokeStyle(lineWidth: 4, lineCap: .round, lineJoin: .round))
                 .foregroundStyle(.customPrimary)
                 .frame(width: canvasData.width, height: canvasData.height)
                 .frame(width: 200, height: 200)
                 .onAppear {
-                    print("userLocations: \(userLocations)")
                     withAnimation(Animation.easeInOut(duration: 2).repeatForever(autoreverses: false)) {
                         progress = 1.0
                     }

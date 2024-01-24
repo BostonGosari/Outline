@@ -334,33 +334,6 @@ extension NewRunningView {
             }
         }
     }
-    
-    private var completeSheet: some View {
-        VStack(spacing: 0) {
-            Text("오늘은, 여기까지")
-                .font(.customTitle2)
-                .padding(.top, 56)
-                .padding(.bottom, 8)
-            
-            Text("즐거운 러닝이었나요? 다음에 또 만나요! ")
-                .font(.customSubbody)
-                .padding(.bottom, 24)
-            
-            Image("Finish10")
-                .resizable()
-                .frame(width: 120, height: 120)
-                .padding(.bottom, 45)
-            
-            CompleteButton(text: "결과 페이지로", isActive: true) {
-                runningStartManager.complete = true
-                withAnimation {
-                    runningStartManager.running = false
-                }
-            }
-        }
-        .presentationDetents([.height(UIScreen.main.bounds.height / 2)])
-        .presentationDragIndicator(.hidden)
-    }
 }
 
 extension NewRunningView {
