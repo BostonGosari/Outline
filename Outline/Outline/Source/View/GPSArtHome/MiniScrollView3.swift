@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import MapKit
 import Kingfisher
 
 struct MiniScrollView3: View {

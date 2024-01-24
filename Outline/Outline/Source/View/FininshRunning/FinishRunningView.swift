@@ -4,8 +4,7 @@
 //
 //  Created by hyebin on 10/18/23.
 //
-   
-import MapKit
+
 import SwiftUI
 
 struct FinishRunningView: View {
@@ -17,10 +16,7 @@ struct FinishRunningView: View {
     @State private var newCourseName = ""
     @State private var completeButtonActive = false
     
-    @State private var position: MapCameraPosition = .userLocation(fallback: .automatic)
     @State private var save = false
-    
-    private let polylineGradient = Gradient(colors: [.customGradient2, .customGradient3, .customGradient3, .customGradient3, .customGradient2])
     
     var body: some View {
         NavigationStack {

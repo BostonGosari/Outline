@@ -26,7 +26,7 @@ struct SmallCarouselCard: View {
     
     var body: some View {
         ZStack(alignment: .topLeading) {
-            Image("sampleMapImage")
+            RecordMapView(userLocations: data)
                 .foregroundStyle(.ultraThinMaterial)
                 .frame(width: cardWidth - cardBorder * 2, height: cardHeight - cardBorder * 2)
                 .mask {
@@ -72,11 +72,6 @@ struct SmallCarouselCard: View {
                 }
                 .overlay(alignment: .bottom) {
                     VStack(spacing: 6) {
-                        PathManager
-                            .createPath(width: 200, height: 200, coordinates: data)
-                            .scale(0.5)
-                            .stroke(.customPrimary, style: StrokeStyle(lineWidth: 4, lineCap: .round, lineJoin: .round))
-                            .padding(.horizontal, 16)
                         Text(runName)
                             .font(.customTitle2)
                         Text(date)

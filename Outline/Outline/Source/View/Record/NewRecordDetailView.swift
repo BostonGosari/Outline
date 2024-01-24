@@ -5,7 +5,6 @@
 //  Created by hyunjun on 11/27/23.
 //
 
-import MapKit
 import SwiftUI
 
 struct NewRecordDetailView: View {
@@ -17,11 +16,7 @@ struct NewRecordDetailView: View {
     @State private var completeButtonActive = false
     @State private var isShowAlert = false
     
-    @State private var position: MapCameraPosition = .userLocation(fallback: .automatic)
-    
     @Binding var isDeleteData: Bool
-
-    private let polylineGradient = Gradient(colors: [.customGradient2, .customGradient3, .customGradient3, .customGradient3, .customGradient2])
     
     var record: CoreRunningRecord
     var cardType: CardType
