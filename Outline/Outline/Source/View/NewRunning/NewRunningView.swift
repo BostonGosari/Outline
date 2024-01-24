@@ -451,9 +451,7 @@ extension NewRunningView {
                             connectivityManger.sendRunningState(.end)
                         }
                     } else {
-                        Task {
-                            await runningDataManager.removeActivity()
-                        }
+                       
                         runningDataManager.userLocations = locationManager.userLocations
                         runningStartManager.stopTimer()
                         withAnimation {
@@ -464,6 +462,10 @@ extension NewRunningView {
                             connectivityManger.sendRunningState(.end)
                         }
                     }
+                }
+                Task {
+                    print("여기옴")
+                    await runningDataManager.removeActivity()
                 }
                 showStopPopup = false
                 stopButtonScale = 1
