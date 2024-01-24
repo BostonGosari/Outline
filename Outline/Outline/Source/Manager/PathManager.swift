@@ -47,10 +47,12 @@ struct PathManager {
         var scale: Double = 0
         
         // 넓이가 높이보다 클 경우 넓이의 scale을, 높이가 넓이보다 클 경우 높이의 scale 을 따릅니다.
-        if longitudeRange >= latitudeRange {
-            scale = width / longitudeRange / 0.9
-        } else {
-            scale = height / latitudeRange / 1.1
+        if longitudeRange != 0 && latitudeRange != 0 {
+            if longitudeRange >= latitudeRange {
+                scale = width / longitudeRange / 0.9
+            } else {
+                scale = height / latitudeRange / 1.1
+            }
         }
         
         let fittedWidth = longitudeRange * scale
