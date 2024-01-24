@@ -123,8 +123,8 @@ extension ShareView {
             PathManager
                 .createPath(width: 200, height: 200, coordinates: runningData.userLocations)
                 .stroke(.customPrimary, style: .init(lineWidth: 5, lineCap: .round, lineJoin: .round))
+                .frame(width: canvasData.width, height: canvasData.height)
         }
-        .frame(width: canvasData.width + 30, height: canvasData.height + 30)
         .scaleEffect(scale)
         .offset(offset)
         .rotationEffect(lastAngle + angle)
@@ -138,7 +138,9 @@ extension ShareView {
             Button {
                 renderShareView(true)
                 if let img = image {
-                    viewModel.saveImage(image: img)
+                    DispatchQueue.main.async {
+                        viewModel.saveImage(image: img)
+                    }
                 }
             } label: {
                 Image(systemName: "square.and.arrow.down")
