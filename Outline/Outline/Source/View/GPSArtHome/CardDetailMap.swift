@@ -28,23 +28,28 @@ struct CardDetailMap: View {
     
     var body: some View {
         ZStack {
-            Map(selection: $mapSelction) {
-                UserAnnotation()
-                MapPolyline(coordinates: ConvertCoordinateManager.convertToCLLocationCoordinates(selectedCourse.coursePaths))
-                    .stroke(.customPrimary, style: StrokeStyle(lineWidth: 8, lineCap: .round, lineJoin: .round))
-                
-                ForEach(places) { place in
-                    Marker(
-                        place.title,
-                        systemImage: place.id == 0  ? "flag.fill" : "mappin",
-                        coordinate: place.location
-                    )
-                    .tag(place)
-                    .tint(place.id == 0 ? .customRed : .customPrimary)
-                }
-            }
-            .mapControlVisibility(.hidden)
-            .mapStyle(.standard(pointsOfInterest: []))
+//            Map(selection: $mapSelction) {
+//                UserAnnotation()
+//                MapPolyline(coordinates: ConvertCoordinateManager.convertToCLLocationCoordinates(selectedCourse.coursePaths))
+//                    .stroke(.customPrimary, style: StrokeStyle(lineWidth: 8, lineCap: .round, lineJoin: .round))
+//                
+//                ForEach(places) { place in
+//                    Marker(
+//                        place.title,
+//                        systemImage: place.id == 0  ? "flag.fill" : "mappin",
+//                        coordinate: place.location
+//                    )
+//                    .tag(place)
+//                    .tint(place.id == 0 ? .customRed : .customPrimary)
+//                }
+//            }
+//            .mapControlVisibility(.hidden)
+//            .mapStyle(.standard(pointsOfInterest: []))
+            CardDetailMapView(
+                coursePaths: ConvertCoordinateManager.convertToCLLocationCoordinates(selectedCourse.coursePaths),
+                places: places
+            )
+            .ignoresSafeArea()
             
             if showCustomSheet {
                 if let place = mapSelction {
