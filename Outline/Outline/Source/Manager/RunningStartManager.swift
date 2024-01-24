@@ -139,6 +139,7 @@ class RunningStartManager: ObservableObject {
         guard let userLocation = locationManager.location?.coordinate else { return false }
         
         guard let shortestDistance = calculateShortestDistance(from: userLocation, to: ConvertCoordinateManager.convertToCLLocationCoordinates(course)) else { return false }
+        
         return shortestDistance <= 50
     }
     
