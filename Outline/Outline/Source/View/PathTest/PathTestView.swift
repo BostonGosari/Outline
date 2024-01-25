@@ -15,12 +15,14 @@ struct PathTestView: View {
     private let parseManager = KMLParserManager()
     private var width: Double = 300
     private var height: Double = 300
-    private let fileName = "dangdang"
+    private let fileName = "moai"
+    
+    private var canvasData: CanvasData {
+        return PathManager.getCanvasData(coordinates: coordinates, width: width, height: height)
+    }
     
     var body: some View {
         ZStack {
-            let canvasData = PathManager.getCanvasData(coordinates: coordinates, width: width, height: height)
-            
             PathManager.createPath(width: width, height: height, coordinates: coordinates)
             .stroke(.green, style: .init(lineWidth: 4, lineCap: .round, lineJoin: .round) )
             .frame(width: canvasData.width, height: canvasData.height)
