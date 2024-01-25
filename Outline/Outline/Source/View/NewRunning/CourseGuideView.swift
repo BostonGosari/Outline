@@ -16,9 +16,13 @@ struct CourseGuideView: View {
     var userLocations: [CLLocationCoordinate2D]
     var tapPossible: Bool
     
-    var width = 113.0
-    var height = 168.0
-
+    private let width = 113.0
+    private let height = 168.0
+    
+    private var canvasData: CanvasData {
+        return PathManager.getCanvasData(coordinates: coursePathCoordinates, width: width, height: height)
+    }
+    
     var body: some View {
         ZStack {
             TransparentBlurView(removeAllFilters: true)
@@ -33,6 +37,7 @@ struct CourseGuideView: View {
                 coursePath
                 userPath
             }
+            .frame(width: canvasData.width, height: canvasData.height)
             .rotationEffect(Angle(degrees: courseRotate))
         }
         .overlay {
@@ -57,18 +62,16 @@ struct CourseGuideView: View {
 
 extension CourseGuideView {
     private var coursePath: some View {
-        PathGenerateManager
-            .caculateLines(width: width, height: height, coordinates: coursePathCoordinates)
-            .stroke(.customBlack.opacity(0.5), style: .init(lineWidth: 7, lineCap: .round, lineJoin: .round))
+        PathManager
+            .createPath(width: width, height: height, coordinates: coursePathCoordinates)
+            .stroke(.customBlack.opacity(0.5), style: .init(lineWidth: tapGuideView ? 3 : 4, lineCap: .round, lineJoin: .round))
             .scaleEffect(0.8)
     }
     
     private var userPath: some View {
-        let canvasData = PathGenerateManager.calculateCanvaData(coordinates: coursePathCoordinates, width: width, height: height)
-        
-        return PathGenerateManager
-            .caculateLines(width: width, height: height, coordinates: userLocations, canvasData: canvasData)
-            .stroke(.customPrimary, style: .init(lineWidth: 7, lineCap: .round, lineJoin: .round))
+        PathManager
+            .createPath(width: width, height: height, coordinates: userLocations, canvasData: canvasData)
+            .stroke(.customPrimary, style: .init(lineWidth: tapGuideView ? 3 : 4, lineCap: .round, lineJoin: .round))
             .scaleEffect(0.8)
     }
 }

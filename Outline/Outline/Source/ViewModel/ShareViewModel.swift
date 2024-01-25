@@ -25,11 +25,11 @@ class ShareViewModel: ObservableObject {
     func shareToInstagram(image: UIImage) {
         guard let url = URL(string: "instagram-stories://share?source_application=Outline"),
               let imageData = image.pngData() else { return }
-
+        
         if UIApplication.shared.canOpenURL(url) {
             let pasteboardItems: [String: Any] = ["com.instagram.sharedSticker.stickerImage": imageData]
             let pasteboardOptions = [UIPasteboard.OptionsKey.expirationDate: Date().addingTimeInterval(300)]
-
+            
             UIPasteboard.general.setItems([pasteboardItems], options: pasteboardOptions)
             UIApplication.shared.open(url)
         } else {
@@ -66,7 +66,7 @@ class ImageSaver: NSObject {
     func writeToPhotoAlbum(image: UIImage) {
         UIImageWriteToSavedPhotosAlbum(image, self, #selector(saveCompleted), nil)
     }
-
+    
     @objc func saveCompleted(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
         if let error = error {
             print(error)

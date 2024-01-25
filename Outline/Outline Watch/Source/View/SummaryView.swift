@@ -21,6 +21,10 @@ struct SummaryView: View {
     
     @Namespace var topID
     
+    private var canvasData: CanvasData {
+        return PathManager.getCanvasData(coordinates: runningManager.userLocations, width: 80, height: 80)
+    }
+    
     var body: some View {
         ZStack {
             Rectangle()
@@ -38,11 +42,12 @@ struct SummaryView: View {
                 NavigationStack {
                     ScrollViewReader { proxy in
                         ScrollView {
-                            PathGenerateManager.caculateLines(width: 80, height: 80, coordinates: runningManager.userLocations)
+                            PathManager.createPath(width: 80, height: 80, coordinates: runningManager.userLocations)
                                 .trim(from: 0, to: progress)
                                 .stroke(style: StrokeStyle(lineWidth: 8, lineCap: .round, lineJoin: .round))
                                 .scaledToFit()
                                 .foregroundStyle(.customPrimary)
+                                .frame(width: canvasData.width, height: canvasData.height)
                                 .frame(width: 120, height: 120)
                                 .onAppear {
                                     progress = 1.0

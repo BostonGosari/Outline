@@ -23,6 +23,10 @@ struct RunningFinishPopUp: View {
     @Binding var isPresented: Bool
     @Binding var score: Int
     @Binding var userLocations: [CLLocationCoordinate2D]
+    
+    private var canvasData: CanvasData {
+        return PathManager.getCanvasData(coordinates: userLocations, width: 200, height: 200)
+    }
    
     var scoreState: ScoreState {
         if score == -1 {
@@ -129,14 +133,13 @@ struct RunningFinishPopUp: View {
                 .foregroundStyle(.gray300)
                 .padding(.top, 8)
             Spacer()
-            PathGenerateManager.caculateLines(width: 200, height: 200, coordinates: userLocations)
+            PathManager.createPath(width: 200, height: 200, coordinates: userLocations)
                 .trim(from: 0, to: progress)
-                .stroke(style: StrokeStyle(lineWidth: 8, lineCap: .round, lineJoin: .round))
-                .scaledToFit()
+                .stroke(style: StrokeStyle(lineWidth: 4, lineCap: .round, lineJoin: .round))
                 .foregroundStyle(.customPrimary)
+                .frame(width: canvasData.width, height: canvasData.height)
                 .frame(width: 200, height: 200)
                 .onAppear {
-                    print("userLocations: \(userLocations)")
                     withAnimation(Animation.easeInOut(duration: 2).repeatForever(autoreverses: false)) {
                         progress = 1.0
                     }

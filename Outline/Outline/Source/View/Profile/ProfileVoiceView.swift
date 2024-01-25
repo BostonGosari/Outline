@@ -45,6 +45,6 @@ struct ProfileVoiceView: View {
     }
 }
 
-#Preview{
+#Preview {
     ProfileVoiceView(isVoiceOniPhone: .constant(true), isVoiceOnWatch: .constant(false))
 }
