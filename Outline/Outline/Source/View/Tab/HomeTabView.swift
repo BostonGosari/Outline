@@ -83,6 +83,6 @@ struct HomeTabView: View {
     }
 }
 
-#Preview{
+#Preview {
     HomeTabView()
 }
