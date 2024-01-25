@@ -109,10 +109,27 @@ struct GPSArtHomeView: View {
                         }
                         .padding(.bottom, -30)
                         
-                        CategoryScrollView(selectedCourse: $selectedCourse, courseList: $viewModel.firstCourseList, showDetailView: $showDetailView, category: $viewModel.firstCategoryTitle, namespace: namespace)
-                        RankingScrollView(selectedCourse: $selectedCourse, courseList: $viewModel.secondCourseList, showDetailView: $showDetailView, category: $viewModel.secondCategoryTitle, namespace: namespace)
-                        CategoryScrollView(selectedCourse: $selectedCourse, courseList: $viewModel.thirdCourseList, showDetailView: $showDetailView, category: $viewModel.thirdCategoryTitle, namespace: namespace)
-                            .padding(.bottom, 120)
+                        CategoryScrollView(
+                            selectedCourse: $selectedCourse,
+                            courseList: $viewModel.firstCourseList,
+                            showDetailView: $showDetailView,
+                            category: $viewModel.firstCategoryTitle,
+                            namespace: namespace
+                        )
+                        RankingScrollView(
+                            selectedCourse: $selectedCourse,
+                            courseList: $viewModel.secondCourseList,
+                            showDetailView: $showDetailView,
+                            category: $viewModel.secondCategoryTitle,
+                            namespace: namespace
+                        )
+                        CategoryScrollView(
+                            selectedCourse: $selectedCourse,
+                            courseList: $viewModel.thirdCourseList,
+                            showDetailView: $showDetailView,
+                            category: $viewModel.thirdCategoryTitle, namespace: namespace
+                        )
+                        .padding(.bottom, 120)
                         
                     }
                 }
