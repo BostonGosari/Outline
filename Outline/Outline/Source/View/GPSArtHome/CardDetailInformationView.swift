@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import MapKit
 
 struct CardDetailInformationView: View {
     @Binding var showCopyLocationPopup: Bool
@@ -146,11 +145,9 @@ struct CardDetailInformationView: View {
                     CardDetailMap(selectedCourse: selectedCourse)
                         .toolbarBackground(.hidden, for: .navigationBar)
                 } label: {
-                    Map(interactionModes: []) {
-                        UserAnnotation()
-                        MapPolyline(coordinates: ConvertCoordinateManager.convertToCLLocationCoordinates(selectedCourse.coursePaths))
-                            .stroke(.customPrimary, style: StrokeStyle(lineWidth: 4, lineCap: .round, lineJoin: .round))
-                    }
+                    CardDetailInformationMapView(
+                        coursePaths: ConvertCoordinateManager.convertToCLLocationCoordinates(selectedCourse.coursePaths)
+                    )
                     .frame(height: 200)
                 }
                 .buttonStyle(.plain)

@@ -4,15 +4,13 @@
 //
 //  Created by hyebin on 11/22/23.
 //
-
 import MapKit
 import SwiftUI
 
 struct CardDetailMap: View {
     @Environment(\.dismiss) private var dismiss
-    @State private var position: MapCameraPosition = .userLocation(followsHeading: true, fallback: .automatic)
     @State private var places = [Place]()
-    @State private var mapSelction: Place?
+    @State private var selectedAnnotation: SpotAnnotation?
     @State private var showCustomSheet = false
     @State private var showCopyLocationPopup = false {
         didSet {
@@ -28,26 +26,15 @@ struct CardDetailMap: View {
     
     var body: some View {
         ZStack {
-            Map(selection: $mapSelction) {
-                UserAnnotation()
-                MapPolyline(coordinates: ConvertCoordinateManager.convertToCLLocationCoordinates(selectedCourse.coursePaths))
-                    .stroke(.customPrimary, style: StrokeStyle(lineWidth: 8, lineCap: .round, lineJoin: .round))
-                
-                ForEach(places) { place in
-                    Marker(
-                        place.title,
-                        systemImage: place.id == 0  ? "flag.fill" : "mappin",
-                        coordinate: place.location
-                    )
-                    .tag(place)
-                    .tint(place.id == 0 ? .customRed : .customPrimary)
-                }
-            }
-            .mapControlVisibility(.hidden)
-            .mapStyle(.standard(pointsOfInterest: []))
+            CardDetailMapView(
+                places: $places,
+                selectedAnnotation: $selectedAnnotation,
+                coursePaths: ConvertCoordinateManager.convertToCLLocationCoordinates(selectedCourse.coursePaths)
+            )
+            .ignoresSafeArea()
             
             if showCustomSheet {
-                if let place = mapSelction {
+                if let place = selectedAnnotation {
                     pinDetails(selectedPin: place)
                 }
             }
@@ -59,15 +46,15 @@ struct CardDetailMap: View {
                     .padding(.top, -32)
             }
         }
-        .onChange(of: mapSelction) {
+        .onChange(of: selectedAnnotation) {
             withAnimation {
-                showCustomSheet = mapSelction != nil
+                showCustomSheet = selectedAnnotation != nil
             }
         }
         .onChange(of: showCustomSheet) {
             if showCustomSheet == false {
                 withAnimation {
-                    mapSelction = nil
+                    selectedAnnotation = nil
                 }
             }
         }
@@ -75,8 +62,8 @@ struct CardDetailMap: View {
             places.append(
                 Place(
                     id: 0,
-                    title: "\(selectedCourse.locationInfo.locality) \(selectedCourse.locationInfo.subLocality) \(selectedCourse.locationInfo.throughfare) \(selectedCourse.locationInfo.subThroughfare)",
-                    spotDescription: "시작 위치",
+                    title: "시작 위치",
+                    spotDescription: "\(selectedCourse.locationInfo.locality) \(selectedCourse.locationInfo.subLocality) \(selectedCourse.locationInfo.throughfare) \(selectedCourse.locationInfo.subThroughfare)",
                     location: CLLocationCoordinate2D(latitude: selectedCourse.startLocation.latitude, longitude: selectedCourse.startLocation.longitude)
                 )
             )
@@ -97,7 +84,7 @@ struct CardDetailMap: View {
 
 extension CardDetailMap {
     @ViewBuilder
-    private func pinDetails(selectedPin: Place) -> some View {
+    private func pinDetails(selectedPin: SpotAnnotation) -> some View {
         ZStack {
             TransparentBlurView(removeAllFilters: true)
                 .blur(radius: 8, opaque: true)
@@ -117,11 +104,11 @@ extension CardDetailMap {
                 HStack(alignment: .top) {
                     VStack(alignment: .leading, spacing: 4) {
                         HStack {
-                            Text(selectedPin.title)
+                            Text(selectedPin.title ?? "")
                                 .font(.customTitle2)
-                            if selectedPin.id == 0 {
+                            if selectedPin.title == "시작위치" {
                                 Button {
-                                    copyLocation(selectedPin.title)
+                                    copyLocation(selectedPin.title ?? "")
                                 } label: {
                                     Image(systemName: "doc.on.doc.fill")
                                         .font(.system(size: 16))
@@ -129,7 +116,7 @@ extension CardDetailMap {
                                 }
                             }
                         }
-                        Text(selectedPin.spotDescription)
+                        Text(selectedPin.subtitle ?? "")
                             .font(.customSubbody)
                     }
                     
