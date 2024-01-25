@@ -18,6 +18,7 @@ struct CardDetailMapView: UIViewRepresentable {
     func makeUIView(context: Context) -> MKMapView {
         mapView.delegate = context.coordinator
         mapView.showsUserLocation = true
+        mapView.userTrackingMode = .followWithHeading
         mapView.showsCompass = false
         
         let polyline = MKPolyline(coordinates: coursePaths, count: coursePaths.count)
