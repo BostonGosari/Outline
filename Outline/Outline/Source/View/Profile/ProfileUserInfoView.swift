@@ -124,7 +124,10 @@ struct ProfileUserInfoView: View {
                 displayedComponents: [.date]
             )
             .datePickerStyle(.wheel)
-            .presentationDetents([.medium])
+            .presentationDetents([.height(240)])
+            .frame(minWidth: 0, maxWidth: .infinity, alignment: .center)
+            .clipped()
+            .labelsHidden()
         })
         .sheet(isPresented: $profileUserInfoViewModel.showGenderPicker, onDismiss: {
             completion()
@@ -135,7 +138,9 @@ struct ProfileUserInfoView: View {
                 }
             }
             .pickerStyle(.wheel)
-            .presentationDetents([.medium])
+            .presentationDetents([.height(240)])
+            .frame(minWidth: 0, maxWidth: .infinity, alignment: .center)
+            .clipped()
         })
         .onChange(of: profileUserInfoViewModel.isKeyboardVisible, { _, newValue in
             if newValue == false {
