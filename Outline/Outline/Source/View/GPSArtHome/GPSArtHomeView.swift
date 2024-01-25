@@ -130,7 +130,6 @@ struct GPSArtHomeView: View {
                             category: $viewModel.thirdCategoryTitle, namespace: namespace
                         )
                         .padding(.bottom, 120)
-                        
                     }
                 }
                 .overlay(alignment: .top) {
