@@ -25,7 +25,7 @@ struct SmallListCard: View {
     
     var body: some View {
         ZStack(alignment: .topLeading) {
-            Image("sampleMapImage")
+            RecordMapView(userLocations: data)
                 .foregroundStyle(.ultraThinMaterial)
                 .frame(width: cardWidth - cardBorder * 2, height: cardHeight - cardBorder * 2)
                 .mask {
@@ -70,11 +70,6 @@ struct SmallListCard: View {
                 }
                 .overlay(alignment: .bottom) {
                     VStack(spacing: 2) {
-                        PathGenerateManager
-                            .caculateLines(width: 100, height: 100, coordinates: data)
-                            .scale(0.5)
-                            .stroke(.customPrimary, style: StrokeStyle(lineWidth: 4, lineCap: .round, lineJoin: .round))
-                            .padding(.horizontal, 16)
                         Text(runName)
                             .font(.customCaption)
                         Text(date)

@@ -4,8 +4,7 @@
 //
 //  Created by hyebin on 10/18/23.
 //
-   
-import MapKit
+
 import SwiftUI
 
 struct FinishRunningView: View {
@@ -17,10 +16,7 @@ struct FinishRunningView: View {
     @State private var newCourseName = ""
     @State private var completeButtonActive = false
     
-    @State private var position: MapCameraPosition = .userLocation(fallback: .automatic)
     @State private var save = false
-    
-    private let polylineGradient = Gradient(colors: [.customGradient2, .customGradient3, .customGradient3, .customGradient3, .customGradient2])
     
     var body: some View {
         NavigationStack {
@@ -56,10 +52,7 @@ struct FinishRunningView: View {
                             showRenameSheet = true
                         },
                         content: {
-                            Map(interactionModes: []) {
-                                MapPolyline(coordinates: viewModel.userLocations)
-                                    .stroke(polylineGradient, style: StrokeStyle(lineWidth: 8, lineCap: .round, lineJoin: .round))
-                            }
+                            FinishRunningMapView(userLocations: viewModel.userLocations)
                         }
                     )
                     .padding(.top, getSafeArea().bottom == 0 ? 20 : 90)

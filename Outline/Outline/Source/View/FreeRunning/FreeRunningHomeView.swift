@@ -15,7 +15,6 @@ struct FreeRunningHomeView: View {
     
     @State private var userLocation = ""
     @State private var progress: Double = 0.0
-    @State private var position: MapCameraPosition = .userLocation(fallback: .automatic)
     @State private var showPermissionSheet = false
     @State private var isUnlocked = false
     @State private var permissionType: PermissionType = .health
@@ -24,7 +23,8 @@ struct FreeRunningHomeView: View {
     var body: some View {
         ZStack(alignment: .top) {
             if authState == .login {
-                Map(position: $position)
+                FreeRunningMapView()
+                    .ignoresSafeArea()
             }
         
             Rectangle()

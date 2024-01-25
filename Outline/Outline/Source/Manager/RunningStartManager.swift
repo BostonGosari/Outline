@@ -27,6 +27,15 @@ class RunningStartManager: ObservableObject {
     private var healthStore = HKHealthStore()
     private var locationManager = CLLocationManager()
     private let userDataModel = UserDataModel()
+    private let quantityTypes: Set = [
+        HKQuantityType(.heartRate),
+        HKQuantityType(.activeEnergyBurned),
+        HKQuantityType(.distanceWalkingRunning),
+        HKQuantityType(.stepCount),
+        HKQuantityType(.cyclingCadence),
+        HKQuantityType(.runningSpeed),
+        HKQuantityType.workoutType()
+    ]
     var startCourse: GPSArtCourse?
     var runningType: RunningType = .gpsArt
     
@@ -53,21 +62,11 @@ class RunningStartManager: ObservableObject {
     }
     
     private func checkHealthAuthorization() {
-        let quantityTypes: Set = [
-            HKQuantityType(.heartRate),
-            HKQuantityType(.activeEnergyBurned),
-            HKQuantityType(.distanceWalkingRunning),
-            HKQuantityType(.stepCount),
-            HKQuantityType(.cyclingCadence),
-            HKQuantityType(.runningSpeed),
-            HKQuantityType.workoutType()
-        ]
-        
         for quantityType in quantityTypes {
             let status = healthStore.authorizationStatus(for: quantityType)
             switch status {
             case .notDetermined:
-                isHealthAuthorized = false
+                requestHealthAuthorization()
             case .sharingDenied:
                 isHealthAuthorized = false
             case .sharingAuthorized:
@@ -88,6 +87,12 @@ class RunningStartManager: ObservableObject {
             isLocationAuthorized = true
         @unknown default:
             break
+        }
+    }
+    
+    private func requestHealthAuthorization() {
+        healthStore.requestAuthorization(toShare: quantityTypes, read: quantityTypes) {_, _ in
+            self.isHealthAuthorized = false
         }
     }
     
@@ -134,6 +139,7 @@ class RunningStartManager: ObservableObject {
         guard let userLocation = locationManager.location?.coordinate else { return false }
         
         guard let shortestDistance = calculateShortestDistance(from: userLocation, to: ConvertCoordinateManager.convertToCLLocationCoordinates(course)) else { return false }
+        
         return shortestDistance <= 50
     }
     
@@ -172,10 +178,10 @@ class RunningStartManager: ObservableObject {
 // MARK: - 위치와 경로를 계산하는 함수
 
 extension RunningStartManager {
-
+    
     func calculateShortestDistance(from userCoordinate: CLLocationCoordinate2D, to courseCoordinates: [CLLocationCoordinate2D]) -> CLLocationDistance? {
         guard !courseCoordinates.isEmpty else { return nil }
-
+        
         var shortestDistance: CLLocationDistance?
         
         for courseCoordinate in courseCoordinates {
@@ -188,7 +194,7 @@ extension RunningStartManager {
         }
         return shortestDistance
     }
-
+    
     // 두 좌표 사이의 거리를 계산하는 함수
     private func calculateDistance(from coordinate1: CLLocationCoordinate2D, to coordinate2: CLLocationCoordinate2D) -> CLLocationDistance {
         let location1 = CLLocation(latitude: coordinate1.latitude, longitude: coordinate1.longitude)
