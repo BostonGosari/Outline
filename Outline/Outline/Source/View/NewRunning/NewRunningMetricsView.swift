@@ -41,6 +41,7 @@ struct NewRunningMetricsView: View {
                 .padding(.leading, 40)
                 Spacer()
             }
+            .offset(y: getSafeArea().bottom == 0 ? 15 : 0)
             .opacity(!isPaused && !showDetail ? 1 : 0)
         }
         .onReceive(runningManager.$counter) { newCounterValue in
@@ -100,5 +101,5 @@ struct MetricItem: View {
 }
 
 #Preview {
-    NewRunningMetricsView(showDetail: true, isPaused: true)
+    NewRunningMetricsView(showDetail: false, isPaused: true)
 }

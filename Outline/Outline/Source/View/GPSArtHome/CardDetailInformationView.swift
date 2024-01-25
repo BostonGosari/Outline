@@ -17,10 +17,10 @@ struct CardDetailInformationView: View {
                 .multilineTextAlignment(.leading)
                 .font(.customSubtitle2)
                 .foregroundStyle(.customWhite)
-                .padding(.vertical, 4)
                 .fixedSize(horizontal: false, vertical: true)
             
             Divider()
+                .padding(0)
             
             Text("경로 정보")
                 .font(.customSubtitle)
@@ -41,10 +41,9 @@ struct CardDetailInformationView: View {
                     }
                     .foregroundColor(.customPrimary)
                     Text("\(selectedCourse.locationInfo.locality) \(selectedCourse.locationInfo.subLocality) \(selectedCourse.locationInfo.subThroughfare)")
-                        .font(.customTag)
-                        .fontWeight(.semibold)
+                        .font(.customSubbody)
                     Text("복사")
-                        .font(.customTag)
+                        .font(.customSubbody)
                         .foregroundStyle(.gray500)
                         .onTapGesture {
                             copyLocation()
@@ -113,9 +112,10 @@ struct CardDetailInformationView: View {
                     }
                     .foregroundColor(.customPrimary)
                     Text("\(selectedCourse.courseDuration.formatDurationInKoreanDetail())")
+                        .font(.customSubbody)
                 }
-                HStack {
-                    HStack {
+                HStack(alignment: .top) {
+                    LazyHStack {
                         Group {
                             Image(systemName: "star.fill")
                                 .font(.system(size: 20))
@@ -127,12 +127,9 @@ struct CardDetailInformationView: View {
                             .fontWeight(.semibold)
                     }
                     .foregroundColor(.customPrimary)
-                    ForEach(0..<selectedCourse.hotSpots.count, id: \.self) { index in
-                        Text("\(selectedCourse.hotSpots[index].title)")
-                        if index != selectedCourse.hotSpots.count - 1 {
-                            Text("ˑ")
-                        }
-                    }
+                    Text(concatenateHotSpotTitles(selectedCourse.hotSpots))
+                        .font(.customSubbody)
+                        .fixedSize(horizontal: false, vertical: true)
                 }
             }
             .padding(.horizontal, 10)
@@ -183,4 +180,20 @@ struct CardDetailInformationView: View {
             self.showCopyLocationPopup = false
         }
     }
+    
+    func concatenateHotSpotTitles(_ hotSpots: [HotSpot]) -> String {
+        var result = ""
+        
+        for (index, hotSpot) in hotSpots.enumerated() {
+            result += hotSpot.title
+            if index != hotSpots.count - 1 {
+                result += " ˑ " // Add a line break if it's not the last element
+            }
+        }
+        return result
+    }
+}
+
+#Preview {
+    HomeTabView()
 }
