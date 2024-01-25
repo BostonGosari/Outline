@@ -44,3 +44,7 @@ struct ProfileVoiceView: View {
         .background(Color.gray900)
     }
 }
+
+#Preview{
+    ProfileVoiceView(isVoiceOniPhone: .constant(true), isVoiceOnWatch: .constant(false))
+}

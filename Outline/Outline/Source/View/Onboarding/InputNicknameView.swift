@@ -22,7 +22,7 @@ struct InputNicknameView: View {
                         .font(.customTitle)
                         .fontWeight(.semibold)
                         .foregroundStyle(Color.customWhite)
-                        .padding(.top, 28)
+                        .padding(.top, getSafeArea().bottom == 0 ? 20 : 47)
                         .padding(.horizontal, 16)
                     
                     Text("닉네임")
@@ -63,6 +63,7 @@ struct InputNicknameView: View {
                     .frame(maxHeight: .infinity, alignment: .bottom)
                     .padding(.bottom, 16)
                 }
+     
             }
             .ignoresSafeArea(.keyboard)
             .onReceive(Publishers.Merge(viewModel.keyboardWillShowPublisher, viewModel.keyboardWillHidePublisher)) { isVisible in
@@ -76,6 +77,7 @@ struct InputNicknameView: View {
                     doneButton
                 }
             }
+           
         }
     }
 }
