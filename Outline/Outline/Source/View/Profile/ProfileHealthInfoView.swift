@@ -119,3 +119,7 @@ struct ProfileHealthInfoView: View {
         })
     }
 }
+
+#Preview{
+    ProfileHealthInfoView(height: .constant(124), weight: .constant(124))
+}

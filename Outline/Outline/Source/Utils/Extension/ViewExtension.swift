@@ -49,6 +49,15 @@ extension View {
         controller.view.removeFromSuperview()
         return image
     }
+    
+    func getSafeArea() -> UIEdgeInsets {
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+            let window = windowScene.windows.first {
+            return window.safeAreaInsets
+        }
+        return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+    }
+
 }
 
 extension UIView {
