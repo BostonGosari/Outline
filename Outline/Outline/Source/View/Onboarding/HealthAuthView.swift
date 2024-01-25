@@ -27,7 +27,7 @@ struct HealthAuthView: View {
                     .font(.customSubbody)
                     .multilineTextAlignment(.center)
             }
-            .padding(.top, 100)
+            .padding(.top, getSafeArea().bottom == 0 ? 50 : 100)
             .navigationBarBackButtonHidden(true)
             .frame(maxHeight: .infinity, alignment: .top)
         }
