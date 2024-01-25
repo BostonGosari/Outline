@@ -114,7 +114,7 @@ struct CardDetailInformationView: View {
                     Text("\(selectedCourse.courseDuration.formatDurationInKoreanDetail())")
                         .font(.customSubbody)
                 }
-                HStack (alignment: .top) {
+                HStack(alignment: .top) {
                     LazyHStack {
                         Group {
                             Image(systemName: "star.fill")
