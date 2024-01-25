@@ -120,6 +120,6 @@ struct ProfileHealthInfoView: View {
     }
 }
 
-#Preview{
+#Preview {
     ProfileHealthInfoView(height: .constant(124), weight: .constant(124))
 }
