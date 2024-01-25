@@ -92,7 +92,7 @@ struct LoginView: View {
                             .font(.customButton)
                             .fontWeight(.medium)
                     }
-                    .padding(.bottom, getSafeArea().bottom == 0 ? 100 : 0)
+                    .padding(.bottom, getSafeArea().bottom == 0 ? 100 : 40)
                 }
                 .padding(16)
             }
