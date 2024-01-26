@@ -52,18 +52,10 @@
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
-      allowLocationSimulation = "YES">
+      allowLocationSimulation = "YES"
+      notificationPayloadFile = "PushNotificationPayload.apns">
       <BuildableProductRunnable
          runnableDebuggingMode = "0">
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "F0AC8A982AD94C1F0061612C"
-            BuildableName = "Outline.app"
-            BlueprintName = "Outline"
-            ReferencedContainer = "container:Outline.xcodeproj">
-         </BuildableReference>
-      </BuildableProductRunnable>
-      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "F0AC8AA82AD94C200061612C"
@@ -71,7 +63,7 @@
             BlueprintName = "Outline Watch App"
             ReferencedContainer = "container:Outline.xcodeproj">
          </BuildableReference>
-      </MacroExpansion>
+      </BuildableProductRunnable>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
