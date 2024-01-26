@@ -68,7 +68,7 @@ struct CourseListWatchView: View {
                                             .padding(.leading, 4)
                                             .frame(maxWidth: .infinity, alignment: .leading)
                                         PathManager.createPath(width: 80, height: 80, coordinates: coordinates)
-                                            .stroke(style: StrokeStyle(lineWidth: 2, lineCap: .round, lineJoin: .round))
+                                            .stroke(style: StrokeStyle(lineWidth: 2.5, lineCap: .round, lineJoin: .round))
                                             .frame(width: canvasData.width, height: canvasData.height)
                                             .foregroundStyle(.customPrimary)
                                             .frame(width: 80, height: 80)
