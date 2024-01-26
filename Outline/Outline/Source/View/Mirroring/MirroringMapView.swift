@@ -22,8 +22,9 @@ struct MirroringMapView: UIViewRepresentable {
         mapView.addSubview(trackingButton)
         
         trackingButton.translatesAutoresizingMaskIntoConstraints = false
-        trackingButton.trailingAnchor.constraint(equalTo: mapView.layoutMarginsGuide.trailingAnchor, constant: -16).isActive = true
-        trackingButton.topAnchor.constraint(equalTo: mapView.layoutMarginsGuide.topAnchor, constant: 42).isActive = true
+        trackingButton.leadingAnchor.constraint(equalTo: mapView.layoutMarginsGuide.leadingAnchor, constant: 16).isActive = true
+        trackingButton.bottomAnchor.constraint(equalTo: mapView.layoutMarginsGuide.bottomAnchor, constant: -92).isActive = true
+        
         trackingButton.backgroundColor = .black
         
         let course = ConvertCoordinateManager.convertToCLLocationCoordinates(connectivityManager.runningInfo.course)

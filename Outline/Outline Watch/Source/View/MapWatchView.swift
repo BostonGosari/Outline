@@ -16,39 +16,51 @@ struct MapWatchView: View {
     @State private var bounds: MapCameraBounds = .init(minimumDistance: 100, maximumDistance: 100)
     @State private var interactionModes: MapInteractionModes = []
     @State private var isTapped = false
+    @Namespace private var mapScope
     
     var userLocations: [CLLocationCoordinate2D]
     
     var body: some View {
-        Map(position: $position, bounds: bounds, interactionModes: interactionModes) {
-            UserAnnotation()
+        ZStack {
+            Map(position: $position, bounds: bounds, interactionModes: interactionModes, scope: mapScope) {
+                UserAnnotation()
+                
+                if !runningManager.startCourse.coursePaths.isEmpty {
+                    MapPolyline(coordinates: ConvertCoordinateManager.convertToCLLocationCoordinates(runningManager.startCourse.coursePaths))
+                        .stroke(.white.opacity(0.4), style: StrokeStyle(lineWidth: 5, lineCap: .round, lineJoin: .round))
+                }
+                
+                if !userLocations.isEmpty {
+                    MapPolyline(coordinates: userLocations)
+                        .stroke(.customPrimary, style: StrokeStyle(lineWidth: 5, lineCap: .round, lineJoin: .round))
+                }
+            }
+            .mapControlVisibility(.hidden)
+            .mapStyle(.standard(pointsOfInterest: []))
             
-            MapPolyline(coordinates: ConvertCoordinateManager.convertToCLLocationCoordinates(runningManager.startCourse.coursePaths))
-                .stroke(.white.opacity(0.5), style: StrokeStyle(lineWidth: 8, lineCap: .round, lineJoin: .round))
-            
-            MapPolyline(coordinates: userLocations)
-                .stroke(.customPrimary, style: StrokeStyle(lineWidth: 8, lineCap: .round, lineJoin: .round))
+            MapUserLocationButton(scope: mapScope)
+                .buttonBorderShape(.circle)
+                .controlSize(.large)
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
         }
-        .mapControlVisibility(.hidden)
-        .mapStyle(.standard(pointsOfInterest: []))
+        .mapScope(mapScope)
         .ignoresSafeArea(edges: .top)
         .tint(.customPrimary)
         .onAppear {
-            if runningManager.runningType == .free {
+//            if runningManager.runningType == .free {
                 interactionModes = [.zoom]
                 bounds = .init(minimumDistance: 100, maximumDistance: .infinity)
-            }
+//            }
         }
-        .overlay {
-            if !runningManager.startCourse.navigation.isEmpty {
-                NavigationTabView()
-                    .onAppear {
-                        locationManager.navigationDatas = runningManager.startCourse.navigation
-                        locationManager.initNavigation()
-                    }
-            }
-        }
-        .gesture(gesture)
+//        .overlay {
+//            if !runningManager.startCourse.navigation.isEmpty {
+//                NavigationTabView()
+//                    .onAppear {
+//                        locationManager.navigationDatas = runningManager.startCourse.navigation
+//                        locationManager.initNavigation()
+//                    }
+//            }
+//        }
     }
     
     private var gesture: some Gesture {
