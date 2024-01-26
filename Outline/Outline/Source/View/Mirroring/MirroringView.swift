@@ -91,6 +91,7 @@ struct MirroringView: View {
 extension MirroringView {
     private var map: some View {
         MirroringMapView()
+            .ignoresSafeArea()
     }
     
     private var navigation: some View {
