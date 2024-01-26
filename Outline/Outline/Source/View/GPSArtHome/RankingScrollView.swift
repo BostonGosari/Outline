@@ -1,27 +1,28 @@
 //
-//  BottomScrollView.swift
+//  RankingScrollView.swift
 //  Outline
 //
-//  Created by 김하은 on 10/16/23.
+//  Created by 김하은 on 10/20/23.
 //
 
 import SwiftUI
 import Kingfisher
 
-struct MiniScrollView1: View {
+struct RankingScrollView: View {
     @State private var loading = true
     @Binding var selectedCourse: CourseWithDistanceAndScore?
     @Binding var courseList: [CourseWithDistanceAndScore]
     @Binding var showDetailView: Bool
     @Binding var category: String
     var namespace: Namespace.ID
+    var zstackIndex: Int = 0
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             if loading {
                 RoundedRectangle(cornerRadius: 9.5)
                     .padding(.leading, 16)
-                    .foregroundStyle(.clear)
+                    .foregroundColor(.gray700)
                     .frame(width: 148, height: 16)
             } else {
                 Text(category)
@@ -33,7 +34,7 @@ struct MiniScrollView1: View {
             }
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 8) {
-                    ForEach(courseList, id: \.id) { currentCourse in
+                    ForEach(Array(courseList.enumerated()), id: \.element.id) { (index, currentCourse) in
                         ZStack {
                             Button {
                                 withAnimation(.bouncy(duration: 0.7)) {
@@ -55,13 +56,10 @@ struct MiniScrollView1: View {
                                                         loading = false
                                                     }
                                                     .mask {
-                                                        UnevenRoundedRectangle(topLeadingRadius: 5, bottomLeadingRadius: 30, bottomTrailingRadius: 30, topTrailingRadius: 30, style: .circular)
+                                                        UnevenRoundedRectangle(topLeadingRadius: 5, bottomLeadingRadius: 30, bottomTrailingRadius: 30, topTrailingRadius: 30)
                                                     }
                                             }
                                             .matchedGeometryEffect(id: currentCourse.id, in: namespace)
-                                            .transition(
-                                                .asymmetric(insertion: .opacity.animation(.spring()), removal: .opacity.animation(.spring().delay(0.3)))
-                                            )
                                     }
                                     LinearGradient(
                                         stops: [
@@ -72,7 +70,6 @@ struct MiniScrollView1: View {
                                         endPoint: UnitPoint(x: 0.5, y: 0.1)
                                     )
                                     VStack(alignment: .leading, spacing: 4) {
-                                       
                                         ScoreStar(score: currentCourse.score, size: .small)
                                             .padding(.top, 12)
                                         Spacer()
@@ -88,28 +85,44 @@ struct MiniScrollView1: View {
                                         .font(.customCaption)
                                         .padding(.bottom, 21)
                                     }
-                                    .padding(.leading, 12)
+                                    .padding(.leading, 16)
                                     .frame(maxWidth: .infinity, alignment: .leading)
                                 }
                                 .mask {
-                                    UnevenRoundedRectangle(topLeadingRadius: 5, bottomLeadingRadius: 30, bottomTrailingRadius: 30, topTrailingRadius: 30)
+                                    UnevenRoundedRectangle(topLeadingRadius: 5, bottomLeadingRadius: 30, bottomTrailingRadius: 30, topTrailingRadius: 30, style: .circular)
                                 }
                                 .shadow(color: .white, radius: 0.5, y: -0.5)
+                                
                             }
                             .frame(
                                   width: UIScreen.main.bounds.width * 0.4,
-                                  height: UIScreen.main.bounds.width * 0.4 * 1.45
-                              )
+                                  height: UIScreen.main.bounds.width * 0.4 * 1.45,
+                                  alignment: .trailing
+                            )
+                                                       
+                            Image("top\(index+1)")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: UIScreen.main.bounds.width * 0.4)
+                                .offset(x: -UIScreen.main.bounds.width * 0.22, y: UIScreen.main.bounds.width * 0.18)
+                              
                         }
                         .buttonStyle(CardButton())
+                        .zIndex(Double(5-index))
+                        .frame(
+                              width: UIScreen.main.bounds.width * 0.45,
+                              height: UIScreen.main.bounds.width * 0.4 * 1.45
+                          )
+                        .offset(x: 16)
                     }
+                   
                 }
                 .scrollTargetLayout()
             }
             .scrollTargetBehavior(.viewAligned)
             .contentMargins(UIScreen.main.bounds.width * 0.05)
         }
-        .padding(.top, 40)
+        .padding(.top, 36)
     }
 }
 
