@@ -16,6 +16,8 @@ struct MirroringMapView: UIViewRepresentable {
     func makeUIView(context: Context) -> MKMapView {
         mapView.delegate = context.coordinator
         mapView.showsUserLocation = true
+        mapView.userTrackingMode = .follow
+        mapView.showsCompass = false
         
         // tracking Button custom
         let trackingButton = MKUserTrackingButton(mapView: mapView)
