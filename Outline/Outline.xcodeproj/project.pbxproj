@@ -17,6 +17,7 @@
 		0E4291602B03CF3100EE75F5 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E42915F2B03CF3100EE75F5 /* LocationManager.swift */; };
 		0E4D309D2B5FC85600582E37 /* FinishRunningMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4D309C2B5FC85600582E37 /* FinishRunningMapView.swift */; };
 		0E696E942B60F39A00A4838F /* RecordMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E696E932B60F39A00A4838F /* RecordMapView.swift */; };
+		0E696E962B623A2100A4838F /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 0E696E952B623A2100A4838F /* Secrets.xcconfig */; };
 		0E7EE51D2B5E6D24004F6BAF /* FreeRunningMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7EE51C2B5E6D24004F6BAF /* FreeRunningMapView.swift */; };
 		0E7EE51F2B5E761E004F6BAF /* CardDetailInformationMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7EE51E2B5E761E004F6BAF /* CardDetailInformationMapView.swift */; };
 		0E7EE5212B5E7C4B004F6BAF /* CardDetailMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7EE5202B5E7C4B004F6BAF /* CardDetailMapView.swift */; };
@@ -183,8 +184,7 @@
 		BB02A3962B0CCCF300250EDD /* KakaoSDKUser in Frameworks */ = {isa = PBXBuildFile; productRef = 958240712B0A82A400105FAE /* KakaoSDKUser */; };
 		BB02A3982B0CCFBE00250EDD /* ScoreStar.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB02A3972B0CCFBE00250EDD /* ScoreStar.swift */; };
 		BB02A39C2B0D26EA00250EDD /* RecordGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB02A39B2B0D26EA00250EDD /* RecordGridView.swift */; };
-		BB1C49E52B0B766D009625AC /* MiniScrollView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1C49E42B0B766D009625AC /* MiniScrollView2.swift */; };
-		BB1C49E72B0B7694009625AC /* MiniScrollView3.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1C49E62B0B7694009625AC /* MiniScrollView3.swift */; };
+		BB1C49E52B0B766D009625AC /* RankingScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1C49E42B0B766D009625AC /* RankingScrollView.swift */; };
 		BB1D530C2ADDBC560073771F /* Pretendard-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BB1D530B2ADDBC560073771F /* Pretendard-Black.ttf */; };
 		BB1D530E2ADDBC620073771F /* Pretendard-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BB1D530D2ADDBC620073771F /* Pretendard-Bold.ttf */; };
 		BB1D53102ADDBC690073771F /* Pretendard-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BB1D530F2ADDBC690073771F /* Pretendard-ExtraBold.ttf */; };
@@ -205,7 +205,7 @@
 		BB5239292ADAF75C00646494 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5239272ADAF72A00646494 /* Logger.swift */; };
 		BB5239372ADBD99F00646494 /* GPSArtHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5239362ADBD99F00646494 /* GPSArtHomeView.swift */; };
 		BB5239582ADC396300646494 /* BackgroundBlur.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5239572ADC396300646494 /* BackgroundBlur.swift */; };
-		BB52396B2ADD385700646494 /* MiniScrollView1.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB52396A2ADD385700646494 /* MiniScrollView1.swift */; };
+		BB52396B2ADD385700646494 /* CategoryScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB52396A2ADD385700646494 /* CategoryScrollView.swift */; };
 		BB52396D2ADD6DBB00646494 /* CustomRoundedRectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB52396C2ADD6DBB00646494 /* CustomRoundedRectangle.swift */; };
 		BB67086A2B11D580005D8BA5 /* CourseAnalyzeTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29EC2ED32AEB30430033446C /* CourseAnalyzeTest.swift */; };
 		BB67086B2B11D58D005D8BA5 /* CourseProgressManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29EC2ECD2AEAD5A80033446C /* CourseProgressManager.swift */; };
@@ -343,6 +343,7 @@
 		0E42915F2B03CF3100EE75F5 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		0E4D309C2B5FC85600582E37 /* FinishRunningMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishRunningMapView.swift; sourceTree = "<group>"; };
 		0E696E932B60F39A00A4838F /* RecordMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordMapView.swift; sourceTree = "<group>"; };
+		0E696E952B623A2100A4838F /* Secrets.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Secrets.xcconfig; path = ../../../Downloads/Secrets.xcconfig; sourceTree = "<group>"; };
 		0E7EE51C2B5E6D24004F6BAF /* FreeRunningMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeRunningMapView.swift; sourceTree = "<group>"; };
 		0E7EE51E2B5E761E004F6BAF /* CardDetailInformationMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetailInformationMapView.swift; sourceTree = "<group>"; };
 		0E7EE5202B5E7C4B004F6BAF /* CardDetailMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetailMapView.swift; sourceTree = "<group>"; };
@@ -425,7 +426,6 @@
 		29B39D4B2B5ECC6700C84E6A /* dangdang.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = dangdang.kml; sourceTree = "<group>"; };
 		29B39D4D2B5ECC7400C84E6A /* duck.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = duck.kml; sourceTree = "<group>"; };
 		29B39D4F2B5ECEC900C84E6A /* fishcat.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = fishcat.kml; sourceTree = "<group>"; };
-		29C9D2782B60EDCB002E3F1E /* Secrets.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Secrets.xcconfig; path = ../../Secrets.xcconfig; sourceTree = "<group>"; };
 		29CC19A32AE95F2300B79610 /* RunningStartManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningStartManager.swift; sourceTree = "<group>"; };
 		29CC42BC2AF24BCE00578EF1 /* WatchRunningManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchRunningManager.swift; sourceTree = "<group>"; };
 		29D6BAD22B0924D200BD8653 /* SmallCarouselCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallCarouselCard.swift; sourceTree = "<group>"; };
@@ -479,8 +479,7 @@
 		95EB1EF72ADE251100B47984 /* UserCoreDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = UserCoreDataModel.xcdatamodel; sourceTree = "<group>"; };
 		BB02A3972B0CCFBE00250EDD /* ScoreStar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreStar.swift; sourceTree = "<group>"; };
 		BB02A39B2B0D26EA00250EDD /* RecordGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordGridView.swift; sourceTree = "<group>"; };
-		BB1C49E42B0B766D009625AC /* MiniScrollView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniScrollView2.swift; sourceTree = "<group>"; };
-		BB1C49E62B0B7694009625AC /* MiniScrollView3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniScrollView3.swift; sourceTree = "<group>"; };
+		BB1C49E42B0B766D009625AC /* RankingScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingScrollView.swift; sourceTree = "<group>"; };
 		BB1D530B2ADDBC560073771F /* Pretendard-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Black.ttf"; sourceTree = "<group>"; };
 		BB1D530D2ADDBC620073771F /* Pretendard-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.ttf"; sourceTree = "<group>"; };
 		BB1D530F2ADDBC690073771F /* Pretendard-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraBold.ttf"; sourceTree = "<group>"; };
@@ -504,7 +503,7 @@
 		BB52392E2ADAFB2E00646494 /* Outline.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Outline.entitlements; sourceTree = "<group>"; };
 		BB5239362ADBD99F00646494 /* GPSArtHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPSArtHomeView.swift; sourceTree = "<group>"; };
 		BB5239572ADC396300646494 /* BackgroundBlur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundBlur.swift; sourceTree = "<group>"; };
-		BB52396A2ADD385700646494 /* MiniScrollView1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniScrollView1.swift; sourceTree = "<group>"; };
+		BB52396A2ADD385700646494 /* CategoryScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryScrollView.swift; sourceTree = "<group>"; };
 		BB52396C2ADD6DBB00646494 /* CustomRoundedRectangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomRoundedRectangle.swift; sourceTree = "<group>"; };
 		BBCB1F022B1778DE00D9AE1C /* OutlineLiveActivityExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = OutlineLiveActivityExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBCB1F062B1778DE00D9AE1C /* OutlineLiveActivityBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutlineLiveActivityBundle.swift; sourceTree = "<group>"; };
@@ -887,9 +886,8 @@
 				F0492E1C2ADD2AE900F6EADD /* GPSArtHomeHeader.swift */,
 				F096974C2ADBDBB000C38AF4 /* CardDetailView.swift */,
 				F096974E2ADBEE9F00C38AF4 /* CardDetailInformationView.swift */,
-				BB52396A2ADD385700646494 /* MiniScrollView1.swift */,
-				BB1C49E42B0B766D009625AC /* MiniScrollView2.swift */,
-				BB1C49E62B0B7694009625AC /* MiniScrollView3.swift */,
+				BB52396A2ADD385700646494 /* CategoryScrollView.swift */,
+				BB1C49E42B0B766D009625AC /* RankingScrollView.swift */,
 				F06298AA2AE1998D007AB2D3 /* MapInfoView.swift */,
 				0EE0D4032B0DC34000E75F4C /* CardDetailMap.swift */,
 				0E7EE51E2B5E761E004F6BAF /* CardDetailInformationMapView.swift */,
@@ -947,7 +945,7 @@
 		F0AC8A902AD94C1F0061612C = {
 			isa = PBXGroup;
 			children = (
-				29C9D2782B60EDCB002E3F1E /* Secrets.xcconfig */,
+				0E696E952B623A2100A4838F /* Secrets.xcconfig */,
 				2921B0122B01F3F700533A83 /* GoogleService-Info.plist */,
 				BB52392D2ADAF93D00646494 /* Outline Watch App.entitlements */,
 				BB493CEB2ADFD592009D3699 /* Outline-Watch-App-Info.plist */,
@@ -1418,6 +1416,7 @@
 				29B39D442B5ECA9F00C84E6A /* DuckRun.kml in Resources */,
 				29B39D382B5E663800C84E6A /* moai.kml in Resources */,
 				954CB2AF2AE5457B005EB2E9 /* seoulCamelRun.kml in Resources */,
+				0E696E962B623A2100A4838F /* Secrets.xcconfig in Resources */,
 				BB1D531E2ADDBCB90073771F /* Pretendard-Thin.ttf in Resources */,
 				0EB59A3E2B1835E600A18C50 /* alert.mp3 in Resources */,
 				BB1D530C2ADDBC560073771F /* Pretendard-Black.ttf in Resources */,
@@ -1513,11 +1512,11 @@
 				F06298AF2AE1A2ED007AB2D3 /* CountDown.swift in Sources */,
 				29AE76AC2ADE0D9100A46742 /* OutlineApp.swift in Sources */,
 				29D6BAD92B09D4DE00BD8653 /* CardModel.swift in Sources */,
-				BB1C49E52B0B766D009625AC /* MiniScrollView2.swift in Sources */,
+				BB1C49E52B0B766D009625AC /* RankingScrollView.swift in Sources */,
 				2912A91D2B0D20DC00D847B0 /* MirroringView.swift in Sources */,
 				F0ECB3AD2AF28541003FA2B4 /* FirstRunningGuideView.swift in Sources */,
 				2912A9132B0D0D9B00D847B0 /* Mirroringsheet.swift in Sources */,
-				BB52396B2ADD385700646494 /* MiniScrollView1.swift in Sources */,
+				BB52396B2ADD385700646494 /* CategoryScrollView.swift in Sources */,
 				95B8F4602AED391300D9F35B /* AppleAuthModel.swift in Sources */,
 				29B39D402B5EC6CC00C84E6A /* CoordinateExtension.swift in Sources */,
 				29EC2ECC2AEAD5690033446C /* CourseAccuracyManager.swift in Sources */,
@@ -1528,7 +1527,6 @@
 				F096974F2ADBEE9F00C38AF4 /* CardDetailInformationView.swift in Sources */,
 				BB5239582ADC396300646494 /* BackgroundBlur.swift in Sources */,
 				BB5239372ADBD99F00646494 /* GPSArtHomeView.swift in Sources */,
-				BB1C49E72B0B7694009625AC /* MiniScrollView3.swift in Sources */,
 				2975F0962AE3E1790046C00B /* CornerRectangleModifier.swift in Sources */,
 				2921B0022B012EC800533A83 /* NewRunningNavigationView.swift in Sources */,
 				2972515C2B0787640048D787 /* GuideToFreeRunningSheet.swift in Sources */,
@@ -1984,7 +1982,6 @@
 		};
 		F0AC8ABE2AD94C210061612C /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 29C9D2782B60EDCB002E3F1E /* Secrets.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -2036,7 +2033,6 @@
 		};
 		F0AC8ABF2AD94C210061612C /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 29C9D2782B60EDCB002E3F1E /* Secrets.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
