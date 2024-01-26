@@ -30,6 +30,11 @@ struct NewRunningMapView: UIViewRepresentable {
         trackingButton.bottomAnchor.constraint(equalTo: mapView.layoutMarginsGuide.bottomAnchor, constant: -92).isActive = true
         
         trackingButton.backgroundColor = .black
+        
+        if let courseGuide = runningStartManager.startCourse {
+            let polyline = MKPolyline(coordinates: ConvertCoordinateManager.convertToCLLocationCoordinates(courseGuide.coursePaths), count: courseGuide.coursePaths.count)
+            mapView.addOverlay(polyline)
+        }
     
         return mapView
     }
@@ -63,7 +68,7 @@ struct NewRunningMapView: UIViewRepresentable {
         func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
             if let polyline = overlay as? MKPolyline {
                 let renderer = MKPolylineRenderer(polyline: polyline)
-                renderer.strokeColor = (mapView.overlays.count == 1) ? UIColor(Color.black.opacity(0.3)) : .customPrimary
+                renderer.strokeColor = (mapView.overlays.count == 1) ? UIColor(Color.black.opacity(0.5)) : .customPrimary
                 renderer.lineWidth = 5
                 return renderer
             }
