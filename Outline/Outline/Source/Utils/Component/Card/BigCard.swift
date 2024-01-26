@@ -13,8 +13,8 @@ struct BigCard<Content: View>: View {
     @StateObject private var manager = MotionManager()
     @State private var isDragging = false
     @State private var snapShotAngle: Double = 0
-    @State private var rotationAngle: Double = 0
-    @State private var isFrontside = true
+    @State private var rotationAngle: Double = -180
+    @State private var isFrontside = false
     @State private var isFliped = false
     @State private var isDragable = false
     @State private var cardFloatingOffset: CGFloat = 0
@@ -150,16 +150,20 @@ struct BigCard<Content: View>: View {
     }
     
     private func onAppearCardAnimation() {
-        withAnimation(.bouncy(duration: 4)) {
-            rotationAngle += 360
+        withAnimation(.bouncy(duration: 6)) {
+            rotationAngle += 540
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.615) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.64) {
             isFrontside.toggle()
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.305) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.34) {
+            isFrontside.toggle()
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.14) {
             isFrontside.toggle()
             rotationAngle = 0
         }
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
             withAnimation(.easeIn(duration: 0.5)) {
                 cardFloatingOffset = -5
@@ -170,7 +174,7 @@ struct BigCard<Content: View>: View {
                 cardFloatingOffset = 0
             }
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5.5) {
             isDragable = true
         }
     }
