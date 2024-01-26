@@ -19,11 +19,15 @@ struct MirroringMapWatchView: View {
         Map(position: $position, bounds: bounds, interactionModes: interactionModes) {
             UserAnnotation()
             
-            MapPolyline(coordinates: ConvertCoordinateManager.convertToCLLocationCoordinates(connectivityManager.runningInfo.course))
-                .stroke(.white.opacity(0.5), style: StrokeStyle(lineWidth: 8, lineCap: .round, lineJoin: .round))
+            if !connectivityManager.runningInfo.course.isEmpty {
+                MapPolyline(coordinates: connectivityManager.runningInfo.course.toCLLocationCoordinates())
+                    .stroke(.white.opacity(0.4), style: StrokeStyle(lineWidth: 5, lineCap: .round, lineJoin: .round))
+            }
             
-            MapPolyline(coordinates: ConvertCoordinateManager.convertToCLLocationCoordinates(connectivityManager.runningData.userLocations))
-                .stroke(.customPrimary, style: StrokeStyle(lineWidth: 8, lineCap: .round, lineJoin: .round))
+            if !connectivityManager.runningData.userLocations.isEmpty {
+                MapPolyline(coordinates: connectivityManager.runningData.userLocations.toCLLocationCoordinates())
+                    .stroke(.customPrimary, style: StrokeStyle(lineWidth: 5, lineCap: .round, lineJoin: .round))
+            }
         }
         .mapControlVisibility(.hidden)
         .mapStyle(.standard(pointsOfInterest: []))
