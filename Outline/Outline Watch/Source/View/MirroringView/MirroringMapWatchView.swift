@@ -14,37 +14,45 @@ struct MirroringMapWatchView: View {
     @State private var bounds: MapCameraBounds = .init(minimumDistance: 100, maximumDistance: 100)
     @State private var interactionModes: MapInteractionModes = []
     @State private var isTapped = false
-        
+    @Namespace private var mapScope
+    
     var body: some View {
-        Map(position: $position, bounds: bounds, interactionModes: interactionModes) {
-            UserAnnotation()
-            
-            if !connectivityManager.runningInfo.course.isEmpty {
-                MapPolyline(coordinates: connectivityManager.runningInfo.course.toCLLocationCoordinates())
-                    .stroke(.white.opacity(0.4), style: StrokeStyle(lineWidth: 5, lineCap: .round, lineJoin: .round))
+        ZStack {
+            Map(position: $position, bounds: bounds, interactionModes: interactionModes, scope: mapScope) {
+                UserAnnotation()
+                
+                if !connectivityManager.runningInfo.course.isEmpty {
+                    MapPolyline(coordinates: connectivityManager.runningInfo.course.toCLLocationCoordinates())
+                        .stroke(.white.opacity(0.4), style: StrokeStyle(lineWidth: 5, lineCap: .round, lineJoin: .round))
+                }
+                
+                if !connectivityManager.runningData.userLocations.isEmpty {
+                    MapPolyline(coordinates: connectivityManager.runningData.userLocations.toCLLocationCoordinates())
+                        .stroke(.customPrimary, style: StrokeStyle(lineWidth: 5, lineCap: .round, lineJoin: .round))
+                }
             }
+            .mapControlVisibility(.hidden)
+            .mapStyle(.standard(pointsOfInterest: []))
             
-            if !connectivityManager.runningData.userLocations.isEmpty {
-                MapPolyline(coordinates: connectivityManager.runningData.userLocations.toCLLocationCoordinates())
-                    .stroke(.customPrimary, style: StrokeStyle(lineWidth: 5, lineCap: .round, lineJoin: .round))
-            }
+            MapUserLocationButton(scope: mapScope)
+                .buttonBorderShape(.circle)
+                .controlSize(.large)
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
         }
-        .mapControlVisibility(.hidden)
-        .mapStyle(.standard(pointsOfInterest: []))
+        .mapScope(mapScope)
         .ignoresSafeArea(edges: .top)
         .tint(.customPrimary)
         .onAppear {
-            if connectivityManager.runningInfo.runningType == .free {
-                interactionModes = [.zoom]
-                bounds = .init(minimumDistance: 100, maximumDistance: .infinity)
-            }
+            //            if connectivityManager.runningInfo.runningType == .free {
+            interactionModes = [.zoom]
+            bounds = .init(minimumDistance: 100, maximumDistance: .infinity)
+            //            }
         }
 //        .overlay {
 //            if connectivityManager.runningInfo.runningType == .gpsArt {
 //                NavigationTabView()
 //            }
 //        }
-        .gesture(gesture)
     }
     
     private var gesture: some Gesture {
