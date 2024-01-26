@@ -101,7 +101,9 @@ struct ProfileHealthInfoView: View {
                 }
             }
             .pickerStyle(.wheel)
-            .presentationDetents([.medium])
+            .presentationDetents([.height(240)])
+            .frame(minWidth: 0, maxWidth: .infinity, alignment: .center)
+            .clipped()
         })
         .sheet(isPresented: $showWeightPicker, onDismiss: {
             completion()
@@ -114,7 +116,9 @@ struct ProfileHealthInfoView: View {
                     }
                 }
                 .pickerStyle(.wheel)
-                .presentationDetents([.medium])
+                .presentationDetents([.height(240)])
+                .frame(minWidth: 0, maxWidth: .infinity, alignment: .center)
+                .clipped()
             }
         })
     }

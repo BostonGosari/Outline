@@ -109,9 +109,27 @@ struct GPSArtHomeView: View {
                         }
                         .padding(.bottom, -30)
                         
-                        MiniScrollView1(selectedCourse: $selectedCourse, courseList: $viewModel.firstCourseList, showDetailView: $showDetailView, category: $viewModel.firstCategoryTitle, namespace: namespace)
-                        MiniScrollView2(selectedCourse: $selectedCourse, courseList: $viewModel.secondCourseList, showDetailView: $showDetailView, category: $viewModel.secondCategoryTitle, namespace: namespace)
-                        MiniScrollView3(selectedCourse: $selectedCourse, courseList: $viewModel.thirdCourseList, showDetailView: $showDetailView, category: $viewModel.thirdCategoryTitle, namespace: namespace)
+                        CategoryScrollView(
+                            selectedCourse: $selectedCourse,
+                            courseList: $viewModel.firstCourseList,
+                            showDetailView: $showDetailView,
+                            category: $viewModel.firstCategoryTitle,
+                            namespace: namespace
+                        )
+                        RankingScrollView(
+                            selectedCourse: $selectedCourse,
+                            courseList: $viewModel.secondCourseList,
+                            showDetailView: $showDetailView,
+                            category: $viewModel.secondCategoryTitle,
+                            namespace: namespace
+                        )
+                        CategoryScrollView(
+                            selectedCourse: $selectedCourse,
+                            courseList: $viewModel.thirdCourseList,
+                            showDetailView: $showDetailView,
+                            category: $viewModel.thirdCategoryTitle, namespace: namespace
+                        )
+                        .padding(.bottom, 120)
                     }
                 }
                 .overlay(alignment: .top) {
