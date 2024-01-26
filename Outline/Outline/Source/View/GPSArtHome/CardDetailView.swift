@@ -321,6 +321,6 @@ extension CardDetailView {
     }
 }
 
-#Preview{
+#Preview {
     HomeTabView()
 }

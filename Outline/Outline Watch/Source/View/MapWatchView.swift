@@ -23,11 +23,15 @@ struct MapWatchView: View {
         Map(position: $position, bounds: bounds, interactionModes: interactionModes) {
             UserAnnotation()
             
-            MapPolyline(coordinates: ConvertCoordinateManager.convertToCLLocationCoordinates(runningManager.startCourse.coursePaths))
-                .stroke(.white.opacity(0.5), style: StrokeStyle(lineWidth: 8, lineCap: .round, lineJoin: .round))
+            if !runningManager.startCourse.coursePaths.isEmpty {
+                MapPolyline(coordinates: ConvertCoordinateManager.convertToCLLocationCoordinates(runningManager.startCourse.coursePaths))
+                    .stroke(.white.opacity(0.4), style: StrokeStyle(lineWidth: 5, lineCap: .round, lineJoin: .round))
+            }
             
-            MapPolyline(coordinates: userLocations)
-                .stroke(.customPrimary, style: StrokeStyle(lineWidth: 8, lineCap: .round, lineJoin: .round))
+            if !userLocations.isEmpty {
+                MapPolyline(coordinates: userLocations)
+                    .stroke(.customPrimary, style: StrokeStyle(lineWidth: 5, lineCap: .round, lineJoin: .round))
+            }
         }
         .mapControlVisibility(.hidden)
         .mapStyle(.standard(pointsOfInterest: []))
