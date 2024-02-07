@@ -41,9 +41,9 @@ struct FinishRunningMapView: UIViewRepresentable {
         }
         
         func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-            let renderer = MKPolylineRenderer(overlay: overlay)
-            renderer.strokeColor = .customPrimary
-            //            renderer.strokeColor = Gradient(colors: [.customGradient2, .customGradient3, .customGradient3, .customGradient3, .customGradient2])
+            let renderer = MKGradientPolylineRenderer(overlay: overlay)
+            renderer.setColors([.customGradient2, .customGradient3, .customGradient3, .customGradient3, .customGradient2], locations: [])
+            renderer.lineCap = .round
             renderer.lineWidth = 8
             return renderer
         }
