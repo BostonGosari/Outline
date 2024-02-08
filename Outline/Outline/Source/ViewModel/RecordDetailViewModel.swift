@@ -46,7 +46,7 @@ class RecordDetailViewModel: ObservableObject {
             }
             
             runningData["킬로미터"] = String(format: "%.2f", healthData.totalRunningDistance/1000)
-            runningData["시간"] = healthData.totalTime.formatMinuteSecondsMilliSeconds()
+            runningData["시간"] = healthData.totalTime.formatMinuteSeconds()
             runningData["평균 페이스"] = healthData.averagePace.formattedAveragePace()
             runningData["BPM"] = "\(Int(healthData.averageHeartRate))"
             runningData["칼로리"] = "\(Int(healthData.totalEnergy))"

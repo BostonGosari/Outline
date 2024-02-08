@@ -123,6 +123,7 @@ class RunningDataManager: ObservableObject {
     }
     
     private func stopPedometerUpdates() {
+        print("times \(time) \(totalTime)")
         totalTime += time
         totalSteps += steps
         totalDistance += distance
