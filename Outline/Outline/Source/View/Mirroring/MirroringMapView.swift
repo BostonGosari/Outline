@@ -28,6 +28,7 @@ struct MirroringMapView: UIViewRepresentable {
         trackingButton.bottomAnchor.constraint(equalTo: mapView.layoutMarginsGuide.bottomAnchor, constant: -92).isActive = true
         
         trackingButton.backgroundColor = .black
+        trackingButton.tintColor = UIColor(.customPrimary)
         
         let course = ConvertCoordinateManager.convertToCLLocationCoordinates(connectivityManager.runningInfo.course)
         
