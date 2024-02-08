@@ -29,6 +29,8 @@ class RunningDataManager: ObservableObject {
     @Published var start: Date?
     @Published var end: Date?
     
+    @Published var saveTime = 0.0
+    
     @Published var userLocations = [CLLocationCoordinate2D]()
     @Published var endWithoutSaving = false
     
@@ -123,7 +125,6 @@ class RunningDataManager: ObservableObject {
     }
     
     private func stopPedometerUpdates() {
-        print("times \(time) \(totalTime)")
         totalTime += time
         totalSteps += steps
         totalDistance += distance
@@ -246,7 +247,7 @@ class RunningDataManager: ObservableObject {
         
         let courseData = CourseData(courseName: course.courseName, runningLength: course.courseLength, heading: course.heading, distance: course.distance, coursePaths: userLocations, runningCourseId: "", regionDisplayName: course.regionDisplayName, score: score)
         
-        let healthData = HealthData(totalTime: totalTime, averageCadence: totalSteps / totalTime * 60, totalRunningDistance: totalDistance, totalEnergy: kilocalorie, averageHeartRate: 0.0, averagePace: totalTime / totalDistance * 1000, startDate: RunningStartDate, endDate: RunningEndDate)
+        let healthData = HealthData(totalTime: saveTime, averageCadence: totalSteps / totalTime * 60, totalRunningDistance: totalDistance, totalEnergy: kilocalorie, averageHeartRate: 0.0, averagePace: totalTime / totalDistance * 1000, startDate: RunningStartDate, endDate: RunningEndDate)
         
         let newRunningRecord = RunningRecord(id: UUID().uuidString, runningType: runningManger.runningType, courseData: courseData, healthData: healthData)
         
