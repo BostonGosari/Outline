@@ -92,10 +92,6 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
             if navigationDatas != nil {
                 checkDistance(currentLocation)
             }
-            
-            if userLocations.isEmpty {
-                userLocations.append(currentLocation)
-            }
 
             if let location = manager.location {
                 let horizontalAccuracy = location.horizontalAccuracy
