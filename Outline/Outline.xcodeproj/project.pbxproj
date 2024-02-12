@@ -17,7 +17,6 @@
 		0E4291602B03CF3100EE75F5 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E42915F2B03CF3100EE75F5 /* LocationManager.swift */; };
 		0E4D309D2B5FC85600582E37 /* FinishRunningMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4D309C2B5FC85600582E37 /* FinishRunningMapView.swift */; };
 		0E696E942B60F39A00A4838F /* RecordMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E696E932B60F39A00A4838F /* RecordMapView.swift */; };
-		0E696E962B623A2100A4838F /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 0E696E952B623A2100A4838F /* Secrets.xcconfig */; };
 		0E7EE51D2B5E6D24004F6BAF /* FreeRunningMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7EE51C2B5E6D24004F6BAF /* FreeRunningMapView.swift */; };
 		0E7EE51F2B5E761E004F6BAF /* CardDetailInformationMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7EE51E2B5E761E004F6BAF /* CardDetailInformationMapView.swift */; };
 		0E7EE5212B5E7C4B004F6BAF /* CardDetailMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7EE5202B5E7C4B004F6BAF /* CardDetailMapView.swift */; };
@@ -74,6 +73,7 @@
 		295324852AE038EE00085120 /* UserInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0AC8B062AD965390061612C /* UserInfoModel.swift */; };
 		295346B82B0B5D52004F852E /* EmptyContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295346B72B0B5D52004F852E /* EmptyContentView.swift */; };
 		2955F7FA2B038084005CE2C0 /* HealthAuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2955F7F92B038084005CE2C0 /* HealthAuthViewModel.swift */; };
+		296C4E732B760FF50091B925 /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 296C4E722B760FF50091B925 /* Secrets.xcconfig */; };
 		2972515C2B0787640048D787 /* GuideToFreeRunningSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2972515B2B0787640048D787 /* GuideToFreeRunningSheet.swift */; };
 		2973991B2B19829A00318321 /* Outline Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 297B80FA2AE73C4500AF7219 /* Outline Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		2975F0962AE3E1790046C00B /* CornerRectangleModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2975F0952AE3E1790046C00B /* CornerRectangleModifier.swift */; };
@@ -343,7 +343,6 @@
 		0E42915F2B03CF3100EE75F5 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		0E4D309C2B5FC85600582E37 /* FinishRunningMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishRunningMapView.swift; sourceTree = "<group>"; };
 		0E696E932B60F39A00A4838F /* RecordMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordMapView.swift; sourceTree = "<group>"; };
-		0E696E952B623A2100A4838F /* Secrets.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Secrets.xcconfig; path = ../../../Downloads/Secrets.xcconfig; sourceTree = "<group>"; };
 		0E7EE51C2B5E6D24004F6BAF /* FreeRunningMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeRunningMapView.swift; sourceTree = "<group>"; };
 		0E7EE51E2B5E761E004F6BAF /* CardDetailInformationMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetailInformationMapView.swift; sourceTree = "<group>"; };
 		0E7EE5202B5E7C4B004F6BAF /* CardDetailMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetailMapView.swift; sourceTree = "<group>"; };
@@ -398,6 +397,7 @@
 		295232FB2AEEE74A0020EAFA /* ButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyle.swift; sourceTree = "<group>"; };
 		295346B72B0B5D52004F852E /* EmptyContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyContentView.swift; sourceTree = "<group>"; };
 		2955F7F92B038084005CE2C0 /* HealthAuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthAuthViewModel.swift; sourceTree = "<group>"; };
+		296C4E722B760FF50091B925 /* Secrets.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 		2972515B2B0787640048D787 /* GuideToFreeRunningSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuideToFreeRunningSheet.swift; sourceTree = "<group>"; };
 		2975F0952AE3E1790046C00B /* CornerRectangleModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CornerRectangleModifier.swift; sourceTree = "<group>"; };
 		297B80F92AE73C4500AF7219 /* Outline.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Outline.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -945,7 +945,7 @@
 		F0AC8A902AD94C1F0061612C = {
 			isa = PBXGroup;
 			children = (
-				0E696E952B623A2100A4838F /* Secrets.xcconfig */,
+				296C4E722B760FF50091B925 /* Secrets.xcconfig */,
 				2921B0122B01F3F700533A83 /* GoogleService-Info.plist */,
 				BB52392D2ADAF93D00646494 /* Outline Watch App.entitlements */,
 				BB5239262ADAF70A00646494 /* Shared */,
@@ -1416,7 +1416,7 @@
 				29B39D442B5ECA9F00C84E6A /* DuckRun.kml in Resources */,
 				29B39D382B5E663800C84E6A /* moai.kml in Resources */,
 				954CB2AF2AE5457B005EB2E9 /* seoulCamelRun.kml in Resources */,
-				0E696E962B623A2100A4838F /* Secrets.xcconfig in Resources */,
+				296C4E732B760FF50091B925 /* Secrets.xcconfig in Resources */,
 				BB1D531E2ADDBCB90073771F /* Pretendard-Thin.ttf in Resources */,
 				0EB59A3E2B1835E600A18C50 /* alert.mp3 in Resources */,
 				BB1D530C2ADDBC560073771F /* Pretendard-Black.ttf in Resources */,
@@ -1982,7 +1982,7 @@
 		};
 		F0AC8ABE2AD94C210061612C /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0E696E952B623A2100A4838F /* Secrets.xcconfig */;
+			baseConfigurationReference = 296C4E722B760FF50091B925 /* Secrets.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -2034,7 +2034,7 @@
 		};
 		F0AC8ABF2AD94C210061612C /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0E696E952B623A2100A4838F /* Secrets.xcconfig */;
+			baseConfigurationReference = 296C4E722B760FF50091B925 /* Secrets.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
