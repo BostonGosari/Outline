@@ -51,6 +51,7 @@ class RunningDataManager: ObservableObject {
     private var RunningEndDate = Date()
     
     private let runningManger = RunningStartManager.shared
+    private let locationManager = LocationManager.shared
     
     static let shared = RunningDataManager()
     
@@ -59,6 +60,7 @@ class RunningDataManager: ObservableObject {
     func startRunning() {
         RunningStartDate = Date()
         startPedometerUpdates()
+        locationManager.startUpdate()
     }
     
     func stopRunningWithoutRecord() {
@@ -72,6 +74,7 @@ class RunningDataManager: ObservableObject {
     func stopRunning() {
         RunningEndDate = Date()
         stopPedometerUpdates()
+        locationManager.stopUpdate()
     }
     
     func pauseRunning() {

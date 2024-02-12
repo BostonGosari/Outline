@@ -10,7 +10,7 @@ import SwiftUI
 
 class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     @Published var userLocations: [CLLocationCoordinate2D] = []
-    @Published var isRunning: Bool
+    @Published var isRunning: Bool = false
     @Published var distance = 0.0
     @Published var direction = ""
     @Published var nextDirection: (distance: Int, direction: String)?
@@ -23,13 +23,17 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     static let shared = LocationManager()
     
-    override init() {
+    func startUpdate() {
         isRunning = true
+        userLocations = []
         
-        super.init()
         locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
         locationManager.startUpdatingLocation()
+    }
+    
+    func stopUpdate() {
+        locationManager.stopUpdatingLocation()
     }
     
     func initNavigation() {
@@ -88,7 +92,18 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
             if navigationDatas != nil {
                 checkDistance(currentLocation)
             }
-            userLocations.append(currentLocation)
+
+            if let location = manager.location {
+                let horizontalAccuracy = location.horizontalAccuracy
+                let verticalAccuracy = location.verticalAccuracy
+                let speed = location.speed
+                
+                print(horizontalAccuracy, verticalAccuracy, speed)
+                
+                if speed > 0.5 && horizontalAccuracy < 20 && verticalAccuracy < 20 {
+                    userLocations.append(currentLocation)
+                }
+            }
         }
     }
 }
