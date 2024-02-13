@@ -123,6 +123,7 @@ struct NewRunningView: View {
                         }
                     } else {
                         runningDataManager.userLocations = locationManager.userLocations
+                        runningDataManager.saveTime = Double(runningStartManager.counter)
                         runningStartManager.stopTimer()
                         locationManager.isRunning = false
                         withAnimation {
@@ -430,8 +431,8 @@ extension NewRunningView {
                             connectivityManger.sendRunningState(.end)
                         }
                     } else {
-                       
                         runningDataManager.userLocations = locationManager.userLocations
+                        runningDataManager.saveTime = Double(runningStartManager.counter)
                         runningStartManager.stopTimer()
                         withAnimation {
                             showCompleteSheet = true

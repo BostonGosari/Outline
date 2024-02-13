@@ -99,7 +99,7 @@ class FinishRunningViewModel: ObservableObject {
             cal: "\(runningData[4].data)Kcal",
             pace: "\(runningData[2].data)",
             bpm: "\(runningData[3].data)BPM",
-            time: "\(runningData[1].data)km",
+            time: "\(runningData[1].data)",
             userLocations: userLocations
         )
         
