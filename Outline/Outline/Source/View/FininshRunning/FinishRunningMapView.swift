@@ -17,6 +17,11 @@ struct FinishRunningMapView: UIViewRepresentable {
         mapView.isZoomEnabled = false
         mapView.isScrollEnabled = false
         mapView.isUserInteractionEnabled = false
+        
+        let configuration = MKStandardMapConfiguration()
+        configuration.emphasisStyle = .muted
+        configuration.pointOfInterestFilter = .init(including: [.airport, .university, .hospital, .pharmacy, .police, .library, .park])
+        mapView.preferredConfiguration = configuration
 
         let polyline = MKPolyline(coordinates: userLocations, count: userLocations.count)
         let edgePadding = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)

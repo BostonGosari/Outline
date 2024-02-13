@@ -19,6 +19,11 @@ struct RecordMapView: UIViewRepresentable {
         mapView.isUserInteractionEnabled = false
         mapView.preferredConfiguration = MKStandardMapConfiguration(emphasisStyle: .muted)
         
+        let configuration = MKStandardMapConfiguration()
+        configuration.emphasisStyle = .muted
+        configuration.pointOfInterestFilter = .init(including: [.airport, .university, .hospital, .pharmacy, .police, .library, .park])
+        mapView.preferredConfiguration = configuration
+        
         loadMapDataAsync()
  
         return mapView
