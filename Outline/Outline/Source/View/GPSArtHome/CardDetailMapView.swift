@@ -56,6 +56,7 @@ struct CardDetailMapView: UIViewRepresentable {
             let renderer = MKPolylineRenderer(overlay: overlay)
             renderer.strokeColor = .customPrimary
             renderer.lineWidth = 8
+            renderer.lineCap = .round
             return renderer
         }
         
