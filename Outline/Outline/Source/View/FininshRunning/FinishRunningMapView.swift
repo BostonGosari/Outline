@@ -17,6 +17,11 @@ struct FinishRunningMapView: UIViewRepresentable {
         mapView.isZoomEnabled = false
         mapView.isScrollEnabled = false
         mapView.isUserInteractionEnabled = false
+        
+        let configuration = MKStandardMapConfiguration()
+        configuration.emphasisStyle = .muted
+        configuration.pointOfInterestFilter = .init(including: [.airport, .university, .hospital, .pharmacy, .police, .library, .park])
+        mapView.preferredConfiguration = configuration
 
         let polyline = MKPolyline(coordinates: userLocations, count: userLocations.count)
         let edgePadding = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
@@ -41,9 +46,9 @@ struct FinishRunningMapView: UIViewRepresentable {
         }
         
         func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-            let renderer = MKPolylineRenderer(overlay: overlay)
-            renderer.strokeColor = .customPrimary
-            //            renderer.strokeColor = Gradient(colors: [.customGradient2, .customGradient3, .customGradient3, .customGradient3, .customGradient2])
+            let renderer = MKGradientPolylineRenderer(overlay: overlay)
+            renderer.setColors([.customGradient2, .customGradient3, .customGradient3, .customGradient3, .customGradient2], locations: [])
+            renderer.lineCap = .round
             renderer.lineWidth = 8
             return renderer
         }

@@ -19,6 +19,11 @@ struct RecordMapView: UIViewRepresentable {
         mapView.isUserInteractionEnabled = false
         mapView.preferredConfiguration = MKStandardMapConfiguration(emphasisStyle: .muted)
         
+        let configuration = MKStandardMapConfiguration()
+        configuration.emphasisStyle = .muted
+        configuration.pointOfInterestFilter = .init(including: [.airport, .university, .hospital, .pharmacy, .police, .library, .park])
+        mapView.preferredConfiguration = configuration
+        
         loadMapDataAsync()
  
         return mapView
@@ -30,7 +35,7 @@ struct RecordMapView: UIViewRepresentable {
     private func loadMapDataAsync() {
         DispatchQueue.main.async {
             let polyline = MKPolyline(coordinates: userLocations, count: userLocations.count)
-            let edgePadding = UIEdgeInsets(top: 30, left: 30, bottom: 30, right: 30)
+            let edgePadding = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
             mapView.setVisibleMapRect(polyline.boundingMapRect, edgePadding: edgePadding, animated: false)
             mapView.addOverlay(polyline)
         }
@@ -48,9 +53,10 @@ struct RecordMapView: UIViewRepresentable {
         }
         
         func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-            let renderer = MKPolylineRenderer(overlay: overlay)
-            renderer.strokeColor = .customPrimary
-            renderer.lineWidth = 4
+            let renderer = MKGradientPolylineRenderer(overlay: overlay)
+            renderer.setColors([.customGradient2, .customGradient3, .customGradient3, .customGradient3, .customGradient2], locations: [])
+            renderer.lineWidth = 3
+            renderer.lineCap = .round
             return renderer
         }
     }

@@ -49,6 +49,7 @@ struct MapInfoView: UIViewRepresentable {
                 let renderer = MKPolylineRenderer(polyline: routePolyline)
                 renderer.strokeColor = UIColor(Color.customPrimary)
                 renderer.lineWidth = 4
+                renderer.lineCap = .round
                 return renderer
             }
             return MKOverlayRenderer()

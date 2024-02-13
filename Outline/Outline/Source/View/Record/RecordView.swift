@@ -35,7 +35,6 @@ struct RecordView: View {
                         }
                     
                     RecordHeader(scrollOffset: scrollOffset)
-                        .padding(.horizontal, 16)
                     
                     if authState == .login {
                         if filteredRecords.isEmpty {
@@ -51,9 +50,9 @@ struct RecordView: View {
                             }
                             .frame(maxWidth: .infinity, maxHeight: .infinity)
                         } else {
-                            VStack(alignment: .leading) {
+                            LazyVStack(alignment: .leading) {
                                 ScrollView(.horizontal, showsIndicators: false) {
-                                    HStack(spacing: 16) {
+                                    LazyHStack(spacing: 16) {
                                         ForEach(filteredRecords.prefix(5), id: \.id) { record in
                                             if let courseName = record.courseData?.courseName,
                                                let coursePaths = record.courseData?.coursePaths,
@@ -102,7 +101,7 @@ struct RecordView: View {
                                                 .padding(.horizontal)
                                         }
                                     }
-                                    HStack(spacing: 16) {
+                                    LazyHStack(spacing: 16) {
                                         ForEach(gpsArtRecords.prefix(3), id: \.id) { record in
                                             if let courseName = record.courseData?.courseName,
                                                let coursePaths = record.courseData?.coursePaths,
@@ -147,7 +146,7 @@ struct RecordView: View {
                                         
                                     }
                                     
-                                    HStack(spacing: 16) {
+                                    LazyHStack(spacing: 16) {
                                         ForEach(freeRecords.prefix(3), id: \.id) { record in
                                             if let courseName = record.courseData?.courseName,
                                                let coursePaths = record.courseData?.coursePaths,
@@ -179,7 +178,6 @@ struct RecordView: View {
                                 
                                 .padding(.bottom, 100)
                             }
-                            .padding(.horizontal)
                             .padding(.top, 12)
                         }
                     } else {
