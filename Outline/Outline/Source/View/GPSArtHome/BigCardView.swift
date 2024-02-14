@@ -86,6 +86,7 @@ struct BigCardView: View {
                     removal: .opacity.animation(.spring().delay(0.3))
                 )
             )
+           
         }
     }
     

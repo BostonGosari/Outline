@@ -61,7 +61,7 @@ struct ScoreStar: View {
                     .resizable()
                     .scaledToFit()
                     .frame(height: 12 + blurSize)
-                    .offset(x: -blurSize/2, y: blurSize/2)
+                    .offset(x: -blurSize/2, y: -blurSize/2)
             }
         }
       
