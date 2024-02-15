@@ -16,6 +16,7 @@ enum CourseScoreError: Error {
 }
 
 struct CourseScoreModel {
+    @FetchRequest (entity: CoreRunningRecord.entity(), sortDescriptors: []) var runningRecord: FetchedResults<CoreRunningRecord>
     @FetchRequest (entity: CoreCourseScore.entity(), sortDescriptors: []) var courseScores: FetchedResults<CoreCourseScore>
     
     let persistenceController = PersistenceController.shared
@@ -23,26 +24,21 @@ struct CourseScoreModel {
     func createOrUpdateScore(courseId: String, score: Int, completion: @escaping (Result<Bool, CourseScoreError>) -> Void) {
         getScore(id: courseId) { result in
             switch result {
-            case .success(let score):
-                if score == -1 {
-                    let newCourseScore = CoreCourseScore(context: persistenceController.container.viewContext)
-                    newCourseScore.setValue(courseId, forKey: "courseId")
-                    newCourseScore.setValue(score, forKey: "score")
+            case .success(let currentScore):
+                let newScore: Int
+                if currentScore == -1 {
+                    // 스코어가 없는 경우 새로운 스코어를 추가합니다.
+                    newScore = score
                 } else {
-                    getAllScores { res in
-                        switch res {
-                        case .success(let coreCourseList):
-                            for courseScore in coreCourseList {
-                                if let scoreIdFineded = courseScore.courseId, scoreIdFineded == courseId {
-                                    courseScore.setValue(max(Int(courseScore.score), score), forKey: "score")
-                                }
-                            }
-                        case .failure(let failure):
-                            print("fail to get all courses \(failure)")
-                            completion(.failure(.dataNotFound))
-                        }
-                    }
+                    // 이미 스코어가 있는 경우 주어진 값과 현재 스코어 중 큰 값을 선택합니다.
+                    newScore = max(currentScore, score)
                 }
+
+                // 새로운 스코어를 저장합니다.
+                let scoreEntity = CoreCourseScore(context: persistenceController.container.viewContext)
+                scoreEntity.courseId = courseId
+                scoreEntity.score = Int32(newScore)
+
                 do {
                     try saveContext()
                     completion(.success(true))
@@ -50,11 +46,12 @@ struct CourseScoreModel {
                     completion(.failure(.failToSave))
                 }
             case .failure(let failure):
-                print("fail to get score \(failure)")
+                print("Failed to get score: \(failure)")
+                completion(.failure(failure))
             }
         }
     }
-    
+
     func getScore(id: String, completion: @escaping (Result<Int, CourseScoreError>) -> Void) {
         var score: Int = -1
         
