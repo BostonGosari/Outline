@@ -247,22 +247,30 @@ class RunningDataManager: ObservableObject {
     
     private func saveRunning() {
         guard let course = runningManger.startCourse else { return }
-        
+      
         let courseData = CourseData(courseName: course.courseName, runningLength: course.courseLength, heading: course.heading, distance: course.distance, coursePaths: userLocations, runningCourseId: "", regionDisplayName: course.regionDisplayName, score: score)
         
         let healthData = HealthData(totalTime: saveTime, averageCadence: totalSteps / totalTime * 60, totalRunningDistance: totalDistance, totalEnergy: kilocalorie, averageHeartRate: 0.0, averagePace: totalTime / totalDistance * 1000, startDate: RunningStartDate, endDate: RunningEndDate)
         
         let newRunningRecord = RunningRecord(id: UUID().uuidString, runningType: runningManger.runningType, courseData: courseData, healthData: healthData)
         
-        userDataModel.createRunningRecord(record: newRunningRecord) { result in
-            switch result {
-            case .success:
-                print("saved")
-                print(newRunningRecord)
-                self.userLocations = []
-            case .failure(let error):
-                print(error)
-            }
-        }
+        self.userDataModel.createRunningRecord(record: newRunningRecord) { result in
+               switch result {
+               case .success:
+                   self.userLocations = []
+                   
+                   // 저장 후에 스코어를 업데이트
+                   CourseScoreModel().createOrUpdateScore(courseId: course.id, score: self.score) { scoreResult in
+                       switch scoreResult {
+                       case .success:
+                           print("Score updated successfully")
+                       case .failure(let error):
+                           print("Error updating score: \(error)")
+                       }
+                   }
+               case .failure(let error):
+                   print("Error saving running record: \(error)")
+               }
+           }
     }
 }
