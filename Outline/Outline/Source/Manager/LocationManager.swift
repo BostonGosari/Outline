@@ -30,10 +30,12 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
         locationManager.startUpdatingLocation()
+        locationManager.allowsBackgroundLocationUpdates = true
     }
     
     func stopUpdate() {
         locationManager.stopUpdatingLocation()
+        locationManager.allowsBackgroundLocationUpdates = false
     }
     
     func initNavigation() {
