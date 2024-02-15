@@ -95,6 +95,7 @@ class GPSArtHomeViewModel: NSObject, CLLocationManagerDelegate, ObservableObject
     }
 
     func readFirstCourseList() {
+       
         courseModel.readCategoryCourse(categoryType: .category1) { result in
             switch result {
             case .success(let courseCategory):
@@ -122,6 +123,16 @@ class GPSArtHomeViewModel: NSObject, CLLocationManagerDelegate, ObservableObject
                                     }
 
                                     self.firstCourseList.append(courseWithScore)
+                                    if self.firstCourseList.count == 5 {
+                                        let sortedCourseWithScores = self.firstCourseList.sorted(by: { (course1, course2) -> Bool in
+                                            guard let index1 = courseCategory.courseIdList.firstIndex(of: course1.course.id),
+                                                  let index2 = courseCategory.courseIdList.firstIndex(of: course2.course.id) else {
+                                                return false
+                                            }
+                                            return index1 < index2
+                                        })
+                                        self.firstCourseList = sortedCourseWithScores
+                                    }
                                 case .failure(let failure):
                                     print("Failed to get score for course \(courseId): \(failure)")
                                 }
@@ -131,6 +142,7 @@ class GPSArtHomeViewModel: NSObject, CLLocationManagerDelegate, ObservableObject
                         }
                     }
                 }
+             
             case .failure(let failure):
                 print("fail to read category \(failure)")
             }
@@ -165,6 +177,16 @@ class GPSArtHomeViewModel: NSObject, CLLocationManagerDelegate, ObservableObject
                                     }
 
                                     self.secondCourseList.append(courseWithScore)
+                                    if self.secondCourseList.count == 5 {
+                                        let sortedCourseWithScores = self.secondCourseList.sorted(by: { (course1, course2) -> Bool in
+                                            guard let index1 = courseCategory.courseIdList.firstIndex(of: course1.course.id),
+                                                  let index2 = courseCategory.courseIdList.firstIndex(of: course2.course.id) else {
+                                                return false
+                                            }
+                                            return index1 < index2
+                                        })
+                                        self.secondCourseList = sortedCourseWithScores
+                                    }
                                 case .failure(let failure):
                                     print("Failed to get score for course \(courseId): \(failure)")
                                 }
@@ -208,6 +230,16 @@ class GPSArtHomeViewModel: NSObject, CLLocationManagerDelegate, ObservableObject
                                     }
 
                                     self.thirdCourseList.append(courseWithScore)
+                                    if self.thirdCourseList.count == 5 {
+                                        let sortedCourseWithScores = self.thirdCourseList.sorted(by: { (course1, course2) -> Bool in
+                                            guard let index1 = courseCategory.courseIdList.firstIndex(of: course1.course.id),
+                                                  let index2 = courseCategory.courseIdList.firstIndex(of: course2.course.id) else {
+                                                return false
+                                            }
+                                            return index1 < index2
+                                        })
+                                        self.thirdCourseList = sortedCourseWithScores
+                                    }
                                 case .failure(let failure):
                                     print("Failed to get score for course \(courseId): \(failure)")
                                 }
