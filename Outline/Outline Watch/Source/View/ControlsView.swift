@@ -69,7 +69,7 @@ struct ControlsView: View {
                 connectivityManager.sendRunningState(.end)
                 showEndRunningSheet = false
                 runningManager.userLocations = userLocations
-                runningManager.caculateAccuracyAndProgress()
+                runningManager.calculateScore()
                 sendDataToPhone()
                 workoutManager.endWorkout()
             }

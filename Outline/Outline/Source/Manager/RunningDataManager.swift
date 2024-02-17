@@ -133,7 +133,7 @@ class RunningDataManager: ObservableObject {
         totalDistance += distance
         pedometer.stopUpdates()
         healthKitManager.endWorkout(steps: totalSteps, distance: totalDistance, energy: kilocalorie)
-        caculateAccuracyAndProgress()
+        calculateScore()
         saveRunning()
         reset()
     }
@@ -214,8 +214,9 @@ class RunningDataManager: ObservableObject {
             }
         }
     }
+
     
-    func caculateAccuracyAndProgress() {
+    func calculateScore() {
         guard let course = runningManger.startCourse else { return }
         // 진행률 계산
         if runningManger.runningType == .free {
@@ -223,19 +224,11 @@ class RunningDataManager: ObservableObject {
             return
         }
         
-        let progressManager = CourseProgressManager(guideCourse: coordinatesToCLLocationCoordiantes(coordinates: course.coursePaths), userCourse: userLocations)
-        progressManager.calculate()
-        self.progress = progressManager.getProgress()
-        
-        // 정확도 계산
-        let accuracyManager = CourseAccuracyManager(guideCourse: coordinatesToCLLocationCoordiantes(coordinates: course.coursePaths), userCourse: userLocations)
-        accuracyManager.calculate(userProgress: progress)
-        self.accuracy = accuracyManager.getAccuracy()
-        
-        self.score = Int(progress * accuracy)
-        print("progress \(progress) , accuracy \(accuracy)")
-        print("제 점수는요 .. \(score)점입니다 ")
+        let scoreManager = ScoreManager(guideCourse: coordinatesToCLLocationCoordiantes(coordinates: course.coursePaths), userCourse: userLocations)
+        scoreManager.calculate()
+        self.score = Int(scoreManager.score)
     }
+    
     
     private func coordinatesToCLLocationCoordiantes(coordinates: [Coordinate]) -> [CLLocationCoordinate2D] {
         var clLocations: [CLLocationCoordinate2D] = []
