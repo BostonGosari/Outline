@@ -59,7 +59,7 @@ struct TabWatchView: View {
                 } else if newValue == .end {
                     if count > 30 {
                         runningManager.userLocations = locationManager.userLocations
-                        runningManager.caculateAccuracyAndProgress()
+                        runningManager.calculateScore()
                         sendDataToPhone()
                         workoutManager.endWorkout()
                     } else {
