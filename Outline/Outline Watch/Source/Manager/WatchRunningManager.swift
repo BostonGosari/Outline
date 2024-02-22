@@ -106,26 +106,10 @@ class WatchRunningManager: ObservableObject {
         }
     }
     
-    func caculateAccuracyAndProgress() {
-        if runningType == .free {
-            score = -1
-            print("제 점수는요 .. \(score)점입니다 ")
-            return
-        }
-
-        let progressManager = CourseProgressManager(guideCourse: coordinatesToCLLocationCoordiantes(coordinates: startCourse.coursePaths), userCourse: userLocations)
-        progressManager.calculate()
-        
-        self.progress = progressManager.getProgress()
-        
-        // 정확도 계산
-        let accuracyManager = CourseAccuracyManager(guideCourse: coordinatesToCLLocationCoordiantes(coordinates: startCourse.coursePaths), userCourse: userLocations)
-        accuracyManager.calculate(userProgress: progress)
-        self.accuracy = accuracyManager.getAccuracy()
-        
-        self.score = Int(progress * accuracy)
-        print("progress \(progress) , accuracy \(accuracy)")
-        print("제 점수는요 .. \(score)점입니다 ")
+    func calculateScore() {
+        let scoreManager = ScoreManager(guideCourse: coordinatesToCLLocationCoordiantes(coordinates:startCourse.coursePaths), userCourse: userLocations)
+        scoreManager.calculate()
+        self.score = Int(scoreManager.score)
     }
     
     private func coordinatesToCLLocationCoordiantes(coordinates: [Coordinate]) -> [CLLocationCoordinate2D] {

@@ -70,9 +70,9 @@ class RunningMapViewModel: ObservableObject {
         
         if let course = runningManager.startCourse?.coursePaths {
             let guideCourse = ConvertCoordinateManager.convertToCLLocationCoordinates(course)
-            let progressManager = CourseProgressManager(guideCourse: guideCourse, userCourse: userLocations)
-            progressManager.calculate()
-            return progressManager.getProgress()
+            let scoreManager = ScoreManager(guideCourse: guideCourse, userCourse: userLocations)
+            scoreManager.calculate()
+            return scoreManager.score
         }
         return 0
     }
