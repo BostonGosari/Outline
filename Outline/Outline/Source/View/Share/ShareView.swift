@@ -11,16 +11,6 @@ import SwiftUI
 struct ShareView: View {
     @Environment(\.dismiss) var dismiss
     @StateObject var viewModel = ShareViewModel()
-
-    @State var size: CGSize = .zero
-    @State var scale: CGFloat = 1
-    @State var lastScale: CGFloat = 0
-    @State var offset: CGSize = .zero
-    @State var lastStoredOffset: CGSize = .zero
-    @State var angle: Angle = .degrees(0)
-    @State var lastAngle: Angle = .degrees(0)
-    
-    @State var image: UIImage?
    
     let runningData: ShareModel
     

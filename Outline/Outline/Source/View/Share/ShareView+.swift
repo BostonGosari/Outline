@@ -17,7 +17,7 @@ extension ShareView {
             GeometryReader { proxy in
                 Color.clear
                     .onAppear {
-                        size = CGSize(width: proxy.size.width - 30, height: proxy.size.height - 70)
+                        viewModel.onAppearSharedImageCombined(size: proxy.size)
                     }
             }
         }
@@ -65,9 +65,9 @@ extension ShareView {
                 .stroke(.customPrimary, style: .init(lineWidth: 5, lineCap: .round, lineJoin: .round))
                 .frame(width: canvasData.width, height: canvasData.height)
         }
-        .scaleEffect(scale)
-        .offset(offset)
-        .rotationEffect(lastAngle + angle)
+        .scaleEffect(viewModel.scale)
+        .offset(viewModel.offset)
+        .rotationEffect(viewModel.lastAngle + viewModel.angle)
         .gesture(dragGesture)
         .gesture(rotationGesture)
         .simultaneousGesture(magnificationGesture)
@@ -76,12 +76,7 @@ extension ShareView {
     var buttons: some View {
         HStack(spacing: 0) {
             Button {
-                renderShareView(true)
-                if let img = image {
-                    DispatchQueue.main.async {
-                        viewModel.saveImage(image: img)
-                    }
-                }
+                viewModel.onTapSaveImageButton(shareImageCombined: shareImageCombined)
             } label: {
                 Image(systemName: "square.and.arrow.down")
                     .foregroundStyle(Color.black)
@@ -96,11 +91,7 @@ extension ShareView {
             .padding(.leading, 16)
             
             CompleteButton(text: "사진 업로드하기", isActive: true) {
-                renderShareView(false)
-                if let img = image {
-                    viewModel.shareToInstagram(image: img)
-                }
-                
+                viewModel.onTapUploadImageButton(shareImageCombined: shareImageCombined)
             }
             .padding(.leading, -8)
         }
@@ -152,18 +143,10 @@ extension ShareView {
 }
 
 extension ShareView {
-    func renderShareView(_ isSave: Bool) {
-        image = shareImageCombined
-            .background(isSave ? .gray900 : .clear)
-            .render(scale: 3)
-    }
-}
-
-extension ShareView {
     var dragGesture: some Gesture {
         return DragGesture()
             .onChanged { value in
-                let rotationRadians = lastAngle.radians
+                let rotationRadians = viewModel.lastAngle.radians
                 let x1 = value.translation.width * cos(rotationRadians)
                 let x2 = value.translation.height * -sin(rotationRadians)
                 let y1 =  value.translation.width * -sin(rotationRadians)
@@ -172,22 +155,22 @@ extension ShareView {
                 let translatedX = x1 - x2
                 let translatedY = y1 + y2
 
-                offset = CGSize(width: translatedX, height: translatedY)
+                viewModel.offset = CGSize(width: translatedX, height: translatedY)
             }
             .onEnded { _ in
-                lastStoredOffset = offset
+                viewModel.lastStoredOffset = viewModel.offset
             }
     }
     
     var rotationGesture: some Gesture {
         return RotationGesture()
             .onChanged { value in
-                angle = value
+                viewModel.angle = value
             }
              .onEnded { _ in
                  withAnimation(.spring) {
-                     lastAngle += angle
-                     angle = .zero
+                     viewModel.lastAngle += viewModel.angle
+                     viewModel.angle = .zero
                  }
              }
     }
@@ -195,16 +178,16 @@ extension ShareView {
     var magnificationGesture: some Gesture {
         return MagnificationGesture()
             .onChanged { value in
-                let updatedScale = value + lastScale
-                scale = (updatedScale < 1 ? 1 : updatedScale)
+                let updatedScale = value + viewModel.lastScale
+                viewModel.scale = (updatedScale < 1 ? 1 : updatedScale)
             }
             .onEnded { _ in
                 withAnimation(.easeInOut(duration: 0.2)) {
-                    if scale < 1 {
-                        scale = 1
-                        lastScale = 0
+                    if viewModel.scale < 1 {
+                        viewModel.scale = 1
+                        viewModel.lastScale = 0
                     } else {
-                        lastScale = scale-1
+                        viewModel.lastScale = viewModel.scale - 1
                     }
                 }
             }
