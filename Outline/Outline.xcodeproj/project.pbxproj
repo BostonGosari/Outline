@@ -146,6 +146,7 @@
 		954CB2B02AE5457B005EB2E9 /* seoulCamelRun.kml in Resources */ = {isa = PBXBuildFile; fileRef = 954CB2A42AE5457B005EB2E9 /* seoulCamelRun.kml */; };
 		954CB2BA2AE654BA005EB2E9 /* NotificationAuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954CB2B92AE654BA005EB2E9 /* NotificationAuthView.swift */; };
 		954FFF782AE132D100D27537 /* CourseDataUploadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954FFF772AE132D100D27537 /* CourseDataUploadManager.swift */; };
+		9563829E2B95FD2E00D3AD32 /* ShareView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9563829D2B95FD2E00D3AD32 /* ShareView+.swift */; };
 		9580D4942B0C7985006CE42F /* ProfileVoiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9580D4932B0C7985006CE42F /* ProfileVoiceView.swift */; };
 		958240752B0AFDF100105FAE /* CourseScoreModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958240742B0AFDF100105FAE /* CourseScoreModelType.swift */; };
 		958240772B0AFE7900105FAE /* CourseScoreModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958240762B0AFE7900105FAE /* CourseScoreModel.swift */; };
@@ -443,6 +444,7 @@
 		954CB2B52AE63E79005EB2E9 /* HealthAuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthAuthView.swift; sourceTree = "<group>"; };
 		954CB2B92AE654BA005EB2E9 /* NotificationAuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationAuthView.swift; sourceTree = "<group>"; };
 		954FFF772AE132D100D27537 /* CourseDataUploadManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseDataUploadManager.swift; sourceTree = "<group>"; };
+		9563829D2B95FD2E00D3AD32 /* ShareView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ShareView+.swift"; sourceTree = "<group>"; };
 		9580D4932B0C7985006CE42F /* ProfileVoiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileVoiceView.swift; sourceTree = "<group>"; };
 		958240742B0AFDF100105FAE /* CourseScoreModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseScoreModelType.swift; sourceTree = "<group>"; };
 		958240762B0AFE7900105FAE /* CourseScoreModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseScoreModel.swift; sourceTree = "<group>"; };
@@ -602,6 +604,7 @@
 			isa = PBXGroup;
 			children = (
 				0EE0D3E12B0C83B200E75F4C /* ShareView.swift */,
+				9563829D2B95FD2E00D3AD32 /* ShareView+.swift */,
 			);
 			path = Share;
 			sourceTree = "<group>";
@@ -1487,6 +1490,7 @@
 				29B39D402B5EC6CC00C84E6A /* CoordinateExtension.swift in Sources */,
 				9528F0002AE042570056CCC6 /* PathManager.swift in Sources */,
 				29D6BAD52B092CA800BD8653 /* SmallListCard.swift in Sources */,
+				9563829E2B95FD2E00D3AD32 /* ShareView+.swift in Sources */,
 				0E7EE51D2B5E6D24004F6BAF /* FreeRunningMapView.swift in Sources */,
 				0E7EE5212B5E7C4B004F6BAF /* CardDetailMapView.swift in Sources */,
 				F096974F2ADBEE9F00C38AF4 /* CardDetailInformationView.swift in Sources */,
