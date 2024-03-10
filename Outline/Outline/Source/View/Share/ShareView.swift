@@ -7,10 +7,12 @@
 
 import CoreLocation
 import SwiftUI
+import PhotosUI
 
 struct ShareView: View {
     @Environment(\.dismiss) var dismiss
     @StateObject var viewModel = ShareViewModel()
+    @State private var selectedItem: PhotosPickerItem?
    
     let runningData: ShareModel
     
@@ -29,6 +31,9 @@ struct ShareView: View {
                     buttons
                 }
                 .padding(.top, 36)
+                
+                PhotosPicker("Select an image", selection: $selectedItem, matching: .images)
+                            
             }
             .navigationTitle("공유")
             .navigationBarTitleDisplayMode(.inline)
@@ -53,12 +58,12 @@ struct ShareView: View {
         }
         .confirmationDialog("이미지 선택", isPresented: $viewModel.isShowUploadImageSheet, actions: {
             Button {
-                
+                viewModel.isShowCamera = true
             } label: {
                 Text("사진 찍기")
             }
             Button {
-                
+                viewModel.isShowPhoto = true
             } label: {
                 Text("이미지 선택")
             }
@@ -70,6 +75,17 @@ struct ShareView: View {
         }
         .sheet(isPresented: $viewModel.isShowInstaAlert) {
             instaSheet
+        }
+        .fullScreenCover(isPresented: $viewModel.isShowCamera) {
+            AccessCameraView(selectedImage: $viewModel.uploadedImage)
+        }
+        .onChange(of: selectedItem) {
+            Task {
+                if let data = try? await selectedItem?.loadTransferable(type: Data.self) {
+                    viewModel.uploadedImage = UIImage(data: data)
+                }
+                print("Failed to load the image")
+            }
         }
         .overlay {
             if viewModel.isShowPopup {

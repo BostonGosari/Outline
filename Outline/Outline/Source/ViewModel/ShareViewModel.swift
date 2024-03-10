@@ -7,6 +7,7 @@
 
 import Photos
 import SwiftUI
+import PhotosUI
 
 class ShareViewModel: ObservableObject {
     @Published var permissionDenied = false
@@ -24,7 +25,7 @@ class ShareViewModel: ObservableObject {
     @Published var angle: Angle = .degrees(0)
     @Published var lastAngle: Angle = .degrees(0)
     @Published var renderedImage: UIImage?
-    @Published var uploadedImage: UIImage?
+    @Published var uploadedImage: UIImage?    
     
     @Published var isShowPopup = false {
         didSet {
