@@ -147,6 +147,7 @@
 		954CB2BA2AE654BA005EB2E9 /* NotificationAuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954CB2B92AE654BA005EB2E9 /* NotificationAuthView.swift */; };
 		954FFF782AE132D100D27537 /* CourseDataUploadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954FFF772AE132D100D27537 /* CourseDataUploadManager.swift */; };
 		9563829E2B95FD2E00D3AD32 /* ShareView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9563829D2B95FD2E00D3AD32 /* ShareView+.swift */; };
+		956382EC2B9D48DD00D3AD32 /* ShareView+Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956382EB2B9D48DD00D3AD32 /* ShareView+Camera.swift */; };
 		9580D4942B0C7985006CE42F /* ProfileVoiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9580D4932B0C7985006CE42F /* ProfileVoiceView.swift */; };
 		958240752B0AFDF100105FAE /* CourseScoreModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958240742B0AFDF100105FAE /* CourseScoreModelType.swift */; };
 		958240772B0AFE7900105FAE /* CourseScoreModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958240762B0AFE7900105FAE /* CourseScoreModel.swift */; };
@@ -445,6 +446,7 @@
 		954CB2B92AE654BA005EB2E9 /* NotificationAuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationAuthView.swift; sourceTree = "<group>"; };
 		954FFF772AE132D100D27537 /* CourseDataUploadManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseDataUploadManager.swift; sourceTree = "<group>"; };
 		9563829D2B95FD2E00D3AD32 /* ShareView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ShareView+.swift"; sourceTree = "<group>"; };
+		956382EB2B9D48DD00D3AD32 /* ShareView+Camera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ShareView+Camera.swift"; sourceTree = "<group>"; };
 		9580D4932B0C7985006CE42F /* ProfileVoiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileVoiceView.swift; sourceTree = "<group>"; };
 		958240742B0AFDF100105FAE /* CourseScoreModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseScoreModelType.swift; sourceTree = "<group>"; };
 		958240762B0AFE7900105FAE /* CourseScoreModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseScoreModel.swift; sourceTree = "<group>"; };
@@ -605,6 +607,7 @@
 			children = (
 				0EE0D3E12B0C83B200E75F4C /* ShareView.swift */,
 				9563829D2B95FD2E00D3AD32 /* ShareView+.swift */,
+				956382EB2B9D48DD00D3AD32 /* ShareView+Camera.swift */,
 			);
 			path = Share;
 			sourceTree = "<group>";
@@ -1587,6 +1590,7 @@
 				29EBD7842B0883E500B44AA9 /* BigCardFrontside.swift in Sources */,
 				95EB1EE92ADDC43400B47984 /* PersistentController.swift in Sources */,
 				293C86C62B0778FD00640329 /* NeedLoginSheet.swift in Sources */,
+				956382EC2B9D48DD00D3AD32 /* ShareView+Camera.swift in Sources */,
 				BB02A3982B0CCFBE00250EDD /* ScoreStar.swift in Sources */,
 				2998035C2AE0181900A9A134 /* Confetti.swift in Sources */,
 				0EE0D4042B0DC34000E75F4C /* CardDetailMap.swift in Sources */,

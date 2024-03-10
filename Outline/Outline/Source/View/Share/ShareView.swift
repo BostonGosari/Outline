@@ -34,15 +34,37 @@ struct ShareView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                ToolbarItem(placement: .topBarLeading) {
-                   Button {
-                       dismiss()
-                   } label: {
-                       (Text(Image(systemName: "chevron.left")) + Text("뒤로"))
-                           .foregroundStyle(Color.customPrimary)
-                   }
-               }
+                    Button {
+                        dismiss()
+                    } label: {
+                        (Text(Image(systemName: "chevron.left")) + Text("뒤로"))
+                            .foregroundStyle(Color.customPrimary)
+                    }
+                }
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
+                        viewModel.onTapUploadImageButton(shareImageCombined: shareImageCombined)
+                    } label: {
+                        Text("공유")
+                            .foregroundStyle(Color.customPrimary)
+                    }
+                }
            }
         }
+        .confirmationDialog("이미지 선택", isPresented: $viewModel.isShowUploadImageSheet, actions: {
+            Button {
+                
+            } label: {
+                Text("사진 찍기")
+            }
+            Button {
+                
+            } label: {
+                Text("이미지 선택")
+            }
+        }, message: {
+            Text("이미지 선택")
+        })
         .sheet(isPresented: $viewModel.permissionDenied) {
             PermissionSheet(permissionType: .photoLibrary)
         }
