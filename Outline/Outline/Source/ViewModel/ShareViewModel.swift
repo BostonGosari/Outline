@@ -10,7 +10,12 @@ import SwiftUI
 
 class ShareViewModel: ObservableObject {
     @Published var permissionDenied = false
+    @Published var isShowCameraAuthorization = false
+    @Published var isShowCamera = false
+    @Published var isShowPhotouthorization = false
+    @Published var isShowPhoto = false
     @Published var isShowInstaAlert = false
+    @Published var isShowUploadImageSheet = false
     @Published var size: CGSize = .zero
     @Published var scale: CGFloat = 1
     @Published var lastScale: CGFloat = 0
@@ -19,6 +24,7 @@ class ShareViewModel: ObservableObject {
     @Published var angle: Angle = .degrees(0)
     @Published var lastAngle: Angle = .degrees(0)
     @Published var renderedImage: UIImage?
+    @Published var uploadedImage: UIImage?
     
     @Published var isShowPopup = false {
         didSet {
@@ -81,7 +87,6 @@ class ShareViewModel: ObservableObject {
     
     @MainActor
     func onTapUploadImageButton(shareImageCombined: some View, isSave: Bool = true) {
-        // TODO: 여기서부터 추후 sheet 올라오는 기능, 권한 체크, 사진 올리는 기능 구현
         renderShareView(shareImageCombined, isSave)
         if let img = renderedImage {
             shareToInstagram(image: img)
@@ -98,6 +103,34 @@ class ShareViewModel: ObservableObject {
     @MainActor
     func onAppearSharedImageCombined(size: CGSize) {
         self.size = CGSize(width: size.width - 30, height: size.height - 70)
+    }
+}
+
+extension ShareViewModel {
+    @MainActor
+    func onTabCameraButton() {
+        let status = AVCaptureDevice.authorizationStatus(for: .video)
+        if status == .authorized {
+            //TODO: 카메라 접근 권한이 이미 허용 상태인 경우
+        } else if status == .notDetermined {
+            AVCaptureDevice.requestAccess(for: .video) { accessGranted in
+                DispatchQueue.main.async {
+                    if accessGranted {
+                        print("카메라 권한이 허용되었습니다. ")
+                    } else {
+                        print("카메라 권한이 거부되었습니더.")
+                    }
+                }
+            }
+        } else {
+            print("카메라 권한이 거부된 상태입니다.")
+            isShowCameraAuthorization = true
+        }
+    }
+    
+    @MainActor
+    func onTabAlbumButton() {
+        
     }
 }
 

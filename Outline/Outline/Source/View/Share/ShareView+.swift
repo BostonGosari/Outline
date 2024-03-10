@@ -11,6 +11,12 @@ import SwiftUI
 extension ShareView {
     var shareImageCombined: some View {
         ZStack {
+            if let uploadedImage = viewModel.uploadedImage {
+                Image(uiImage: uploadedImage)
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: viewModel.size.width, height: viewModel.size.height)
+            }
             backgroundImage
             runningInfo
             userPath
@@ -91,7 +97,7 @@ extension ShareView {
             .padding(.leading, 16)
             
             CompleteButton(text: "사진 업로드하기", isActive: true) {
-                viewModel.onTapUploadImageButton(shareImageCombined: shareImageCombined)
+                viewModel.isShowUploadImageSheet = true
             }
             .padding(.leading, -8)
         }
