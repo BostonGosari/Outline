@@ -26,6 +26,8 @@ class ShareViewModel: ObservableObject {
     @Published var lastAngle: Angle = .degrees(0)
     @Published var renderedImage: UIImage?
     @Published var uploadedImage: UIImage?    
+    @Published var selectedItem: PhotosPickerItem?
+    @Published var isSizeFixed = false
     
     @Published var isShowPopup = false {
         didSet {
@@ -103,7 +105,7 @@ class ShareViewModel: ObservableObject {
     
     @MainActor
     func onAppearSharedImageCombined(size: CGSize) {
-        self.size = CGSize(width: size.width - 30, height: size.height - 70)
+        self.size = CGSize(width: size.width, height: size.height)
     }
 }
 
@@ -112,7 +114,7 @@ extension ShareViewModel {
     func onTabCameraButton() {
         let status = AVCaptureDevice.authorizationStatus(for: .video)
         if status == .authorized {
-            //TODO: 카메라 접근 권한이 이미 허용 상태인 경우
+            isShowCamera = true
         } else if status == .notDetermined {
             AVCaptureDevice.requestAccess(for: .video) { accessGranted in
                 DispatchQueue.main.async {
@@ -127,11 +129,6 @@ extension ShareViewModel {
             print("카메라 권한이 거부된 상태입니다.")
             isShowCameraAuthorization = true
         }
-    }
-    
-    @MainActor
-    func onTabAlbumButton() {
-        
     }
 }
 

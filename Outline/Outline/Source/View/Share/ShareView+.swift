@@ -23,7 +23,10 @@ extension ShareView {
             GeometryReader { proxy in
                 Color.clear
                     .onAppear {
-                        viewModel.onAppearSharedImageCombined(size: proxy.size)
+                        if !viewModel.isSizeFixed {
+                            viewModel.onAppearSharedImageCombined(size: proxy.size)
+                            viewModel.isSizeFixed = true
+                        }
                     }
             }
         }
