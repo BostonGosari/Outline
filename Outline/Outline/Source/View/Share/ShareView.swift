@@ -56,12 +56,12 @@ struct ShareView: View {
         .photosPicker(isPresented: $viewModel.isShowPhoto, selection: $viewModel.selectedItem, matching: .images)
         .confirmationDialog("이미지 선택", isPresented: $viewModel.isShowUploadImageSheet, actions: {
             Button {
-                viewModel.onTabCameraButton()
+                viewModel.onTapCameraButton()
             } label: {
                 Text("사진 찍기")
             }
             Button {
-                viewModel.isShowPhoto = true
+                viewModel.onTapSelectImageButton()
             } label: {
                 Text("이미지 선택")
             }

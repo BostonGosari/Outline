@@ -111,7 +111,7 @@ class ShareViewModel: ObservableObject {
 
 extension ShareViewModel {
     @MainActor
-    func onTabCameraButton() {
+    func onTapCameraButton() {
         let status = AVCaptureDevice.authorizationStatus(for: .video)
         if status == .authorized {
             isShowCamera = true
@@ -129,6 +129,11 @@ extension ShareViewModel {
             print("카메라 권한이 거부된 상태입니다.")
             isShowCameraAuthorization = true
         }
+    }
+    
+    @MainActor
+    func onTapSelectImageButton() {
+        isShowPhoto = true
     }
 }
 
