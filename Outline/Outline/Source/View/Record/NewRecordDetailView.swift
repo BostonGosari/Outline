@@ -75,15 +75,14 @@ struct NewRecordDetailView: View {
                     dismiss()
                 }
             }
-            .navigationDestination(isPresented: $viewModel.navigateToShareMainView) {
-                ShareView(runningData: viewModel.shareData)
-                    .navigationBarBackButtonHidden()
-            }
             .onAppear {
                 viewModel.readData(runningRecord: record)
             }
             .sheet(isPresented: $showRenameSheet) {
                 updateNameSheet
+            }
+            .sheet(isPresented: $viewModel.navigateToShareMainView) {
+                ShareView(runningData: viewModel.shareData)
             }
             .preferredColorScheme(.dark)
             .toolbarBackground(.hidden, for: .navigationBar)

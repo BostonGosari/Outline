@@ -16,7 +16,7 @@ struct AccessCameraView: UIViewControllerRepresentable {
     func makeUIViewController(context: Context) -> UIImagePickerController {
         let imagePicker = UIImagePickerController()
         imagePicker.sourceType = .camera
-        imagePicker.allowsEditing = true
+        imagePicker.allowsEditing = false
         imagePicker.delegate = context.coordinator
         return imagePicker
     }
@@ -30,7 +30,6 @@ struct AccessCameraView: UIViewControllerRepresentable {
     }
 }
 
-// Coordinator will help to preview the selected image in the View.
 class Coordinator: NSObject, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     var picker: AccessCameraView
     
@@ -38,7 +37,7 @@ class Coordinator: NSObject, UINavigationControllerDelegate, UIImagePickerContro
         self.picker = picker
     }
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         guard let selectedImage = info[.originalImage] as? UIImage else { return }
         self.picker.selectedImage = selectedImage
         self.picker.isPresented.wrappedValue.dismiss()

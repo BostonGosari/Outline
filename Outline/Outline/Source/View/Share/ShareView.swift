@@ -12,7 +12,6 @@ import PhotosUI
 struct ShareView: View {
     @Environment(\.dismiss) var dismiss
     @StateObject var viewModel = ShareViewModel()
-    @State private var selectedItem: PhotosPickerItem?
    
     let runningData: ShareModel
     
@@ -31,18 +30,16 @@ struct ShareView: View {
                     buttons
                 }
                 .padding(.top, 36)
-                
-                PhotosPicker("Select an image", selection: $selectedItem, matching: .images)
                             
             }
-            .navigationTitle("공유")
+            .navigationTitle("공유 이미지 편집")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                ToolbarItem(placement: .topBarLeading) {
                     Button {
                         dismiss()
                     } label: {
-                        (Text(Image(systemName: "chevron.left")) + Text("뒤로"))
+                        Text("닫기")
                             .foregroundStyle(Color.customPrimary)
                     }
                 }
@@ -56,9 +53,10 @@ struct ShareView: View {
                 }
            }
         }
+        .photosPicker(isPresented: $viewModel.isShowPhoto, selection: $viewModel.selectedItem, matching: .images)
         .confirmationDialog("이미지 선택", isPresented: $viewModel.isShowUploadImageSheet, actions: {
             Button {
-                viewModel.isShowCamera = true
+                viewModel.onTabCameraButton()
             } label: {
                 Text("사진 찍기")
             }
@@ -78,13 +76,15 @@ struct ShareView: View {
         }
         .fullScreenCover(isPresented: $viewModel.isShowCamera) {
             AccessCameraView(selectedImage: $viewModel.uploadedImage)
+                .ignoresSafeArea()
         }
-        .onChange(of: selectedItem) {
+        .onChange(of: viewModel.selectedItem) {
             Task {
-                if let data = try? await selectedItem?.loadTransferable(type: Data.self) {
+                if let data = try? await viewModel.selectedItem?.loadTransferable(type: Data.self) {
                     viewModel.uploadedImage = UIImage(data: data)
+                } else {
+                    print("data error")
                 }
-                print("Failed to load the image")
             }
         }
         .overlay {
