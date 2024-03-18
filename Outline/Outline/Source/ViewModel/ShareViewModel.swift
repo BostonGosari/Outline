@@ -44,7 +44,7 @@ class ShareViewModel: ObservableObject {
               let imageData = image.pngData() else { return }
         
         if UIApplication.shared.canOpenURL(url) {
-            let pasteboardItems: [String: Any] = ["com.instagram.sharedSticker.stickerImage": imageData]
+            let pasteboardItems: [String: Any] = ["com.instagram.sharedSticker.backgroundImage": imageData]
             let pasteboardOptions = [UIPasteboard.OptionsKey.expirationDate: Date().addingTimeInterval(300)]
             
             UIPasteboard.general.setItems([pasteboardItems], options: pasteboardOptions)
