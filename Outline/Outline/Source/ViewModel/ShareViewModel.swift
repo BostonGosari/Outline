@@ -7,10 +7,27 @@
 
 import Photos
 import SwiftUI
+import PhotosUI
 
 class ShareViewModel: ObservableObject {
     @Published var permissionDenied = false
+    @Published var isShowCameraAuthorization = false
+    @Published var isShowCamera = false
+    @Published var isShowPhotouthorization = false
+    @Published var isShowPhoto = false
     @Published var isShowInstaAlert = false
+    @Published var isShowUploadImageSheet = false
+    @Published var size: CGSize = .zero
+    @Published var scale: CGFloat = 1
+    @Published var lastScale: CGFloat = 0
+    @Published var offset: CGSize = .zero
+    @Published var lastStoredOffset: CGSize = .zero
+    @Published var angle: Angle = .degrees(0)
+    @Published var lastAngle: Angle = .degrees(0)
+    @Published var renderedImage: UIImage?
+    @Published var uploadedImage: UIImage?    
+    @Published var selectedItem: PhotosPickerItem?
+    @Published var isSizeFixed = false
     
     @Published var isShowPopup = false {
         didSet {
@@ -27,7 +44,7 @@ class ShareViewModel: ObservableObject {
               let imageData = image.pngData() else { return }
         
         if UIApplication.shared.canOpenURL(url) {
-            let pasteboardItems: [String: Any] = ["com.instagram.sharedSticker.stickerImage": imageData]
+            let pasteboardItems: [String: Any] = ["com.instagram.sharedSticker.backgroundImage": imageData]
             let pasteboardOptions = [UIPasteboard.OptionsKey.expirationDate: Date().addingTimeInterval(300)]
             
             UIPasteboard.general.setItems([pasteboardItems], options: pasteboardOptions)
@@ -59,6 +76,64 @@ class ShareViewModel: ObservableObject {
         if let url = URL(string: UIApplication.openSettingsURLString) {
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
         }
+    }
+    
+    @MainActor
+    func onTapSaveImageButton(shareImageCombined: some View, isSave: Bool = true) {
+        renderShareView(shareImageCombined, isSave)
+        if let img = renderedImage {
+            DispatchQueue.main.async {
+                self.saveImage(image: img)
+            }
+        }
+    }
+    
+    @MainActor
+    func onTapUploadImageButton(shareImageCombined: some View, isSave: Bool = true) {
+        renderShareView(shareImageCombined, isSave)
+        if let img = renderedImage {
+            shareToInstagram(image: img)
+        }
+    }
+    
+    @MainActor 
+    func renderShareView(_ shareImageCombined: some View, _ isSave: Bool = true) {
+        renderedImage = shareImageCombined
+            .background(isSave ? .gray900 : .clear)
+            .render(scale: 3)
+    }
+    
+    @MainActor
+    func onAppearSharedImageCombined(size: CGSize) {
+        self.size = CGSize(width: size.width, height: size.height)
+    }
+}
+
+extension ShareViewModel {
+    @MainActor
+    func onTapCameraButton() {
+        let status = AVCaptureDevice.authorizationStatus(for: .video)
+        if status == .authorized {
+            isShowCamera = true
+        } else if status == .notDetermined {
+            AVCaptureDevice.requestAccess(for: .video) { accessGranted in
+                DispatchQueue.main.async {
+                    if accessGranted {
+                        print("카메라 권한이 허용되었습니다. ")
+                    } else {
+                        print("카메라 권한이 거부되었습니더.")
+                    }
+                }
+            }
+        } else {
+            print("카메라 권한이 거부된 상태입니다.")
+            isShowCameraAuthorization = true
+        }
+    }
+    
+    @MainActor
+    func onTapSelectImageButton() {
+        isShowPhoto = true
     }
 }
 

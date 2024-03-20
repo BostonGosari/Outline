@@ -84,10 +84,10 @@ struct FinishRunningView: View {
                 .sheet(isPresented: $showRenameSheet) {
                     updateNameSheet
                 }
-                .navigationDestination(isPresented: $viewModel.navigateToShareMainView) {
+                .sheet(isPresented: $viewModel.navigateToShareMainView, content: {
                     ShareView(runningData: viewModel.shareData)
                         .navigationBarBackButtonHidden()
-                }
+                })
                 .onAppear {
                     if !save {
                         viewModel.isShowPopup = true
