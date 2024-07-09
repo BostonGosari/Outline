@@ -82,24 +82,28 @@ struct BigCard<Content: View>: View {
         }
     }
     
+    private var hologramOpacity: CGFloat {
+        return manager.roll < 1 ? min(manager.roll * 0.5, 0.2) : 0
+    }
+    
     private var hologramOverlay: some View {
         ZStack {
             Image(cardType.hologramImage)
                 .resizable()
                 .opacity(cardType == .excellent ? 0.5 : 0.3)
                 .blendMode(.overlay)
-            LinearGradient(colors: [.white.opacity(manager.roll * 0.6), .clear, .white.opacity(manager.roll * 0.6), .clear, .white.opacity(manager.roll * 0.6)], startPoint: .topTrailing, endPoint: .bottomLeading)
+            LinearGradient(colors: [.white.opacity(hologramOpacity), .clear, .white.opacity(hologramOpacity), .clear, .white.opacity(hologramOpacity)], startPoint: .topTrailing, endPoint: .bottomLeading)
             LinearGradient(
                 colors: [
-                    .customCardScoreGradient1.opacity(min(manager.roll * 0.5, 0.5)),
-                    .customCardScoreGradient2.opacity(min(manager.roll * 0.5, 0.5)),
-                    .customCardScoreGradient3.opacity(min(manager.roll * 0.5, 0.5)),
-                    .customCardScoreGradient4.opacity(min(manager.roll * 0.5, 0.5)),
-                    .customCardScoreGradient5.opacity(min(manager.roll * 0.5, 0.5)),
-                    .customCardScoreGradient6.opacity(min(manager.roll * 0.5, 0.5)),
-                    .customCardScoreGradient7.opacity(min(manager.roll * 0.5, 0.5)),
-                    .customCardScoreGradient8.opacity(min(manager.roll * 0.5, 0.5)),
-                    .customCardScoreGradient9.opacity(min(manager.roll * 0.5, 0.5))
+                    .customCardScoreGradient1.opacity(hologramOpacity),
+                    .customCardScoreGradient2.opacity(hologramOpacity),
+                    .customCardScoreGradient3.opacity(hologramOpacity),
+                    .customCardScoreGradient4.opacity(hologramOpacity),
+                    .customCardScoreGradient5.opacity(hologramOpacity),
+                    .customCardScoreGradient6.opacity(hologramOpacity),
+                    .customCardScoreGradient7.opacity(hologramOpacity),
+                    .customCardScoreGradient8.opacity(hologramOpacity),
+                    .customCardScoreGradient9.opacity(hologramOpacity)
                 ],
                 startPoint: .bottomLeading,
                 endPoint: .topTrailing
@@ -202,8 +206,10 @@ final class MotionManager: ObservableObject {
             }
             
             if let motionData = motionData {
-                self.pitch = abs(motionData.attitude.pitch)
-                self.roll = abs(motionData.attitude.roll)
+                withAnimation {
+                    self.pitch = abs(motionData.attitude.pitch)
+                    self.roll = abs(motionData.attitude.roll)
+                }
             }
         }
         
