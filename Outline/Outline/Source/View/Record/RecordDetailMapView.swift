@@ -1,5 +1,5 @@
 //
-//  NewRecordDetailMapView.swift
+//  RecordDetailMapView.swift
 //  Outline
 //
 //  Created by hyebin on 1/22/24.
@@ -8,7 +8,7 @@
 import MapKit
 import SwiftUI
 
-struct NewRecordDetailMapView: UIViewRepresentable {
+struct RecordDetailMapView: UIViewRepresentable {
     private let mapView = MKMapView()
     let userLocations: [CLLocationCoordinate2D]
     
@@ -39,9 +39,9 @@ struct NewRecordDetailMapView: UIViewRepresentable {
     }
     
     class Coordinator: NSObject, MKMapViewDelegate {
-        var parent: NewRecordDetailMapView
+        var parent: RecordDetailMapView
         
-        init(_ parent: NewRecordDetailMapView) {
+        init(_ parent: RecordDetailMapView) {
             self.parent = parent
         }
         
@@ -56,5 +56,5 @@ struct NewRecordDetailMapView: UIViewRepresentable {
 }
 
 #Preview {
-    NewRecordDetailMapView(userLocations: [])
+    RecordDetailMapView(userLocations: [])
 }

@@ -61,7 +61,7 @@ struct RecordView: View {
                                                 let data = pathToCoordinate(coursePaths)
                                                 let cardType = getCardType(forScore: score)
                                                 NavigationLink {
-                                                    NewRecordDetailView(isDeleteData: $isDeleteData, record: record, cardType: cardType)
+                                                    RecordDetailView(isDeleteData: $isDeleteData, record: record, cardType: cardType)
                                                 } label: {
                                                     SmallCarouselCard(cardType: cardType, runName: courseName, date: formatDate(startDate), data: data!)
                                                 }
@@ -110,7 +110,7 @@ struct RecordView: View {
                                                 let data = pathToCoordinate(coursePaths)
                                                 let cardType = getCardType(forScore: score)
                                                 NavigationLink {
-                                                    NewRecordDetailView(isDeleteData: $isDeleteData, record: record, cardType: cardType)
+                                                    RecordDetailView(isDeleteData: $isDeleteData, record: record, cardType: cardType)
                                                 } label: {
                                                     SmallListCard(cardType: cardType, runName: courseName, date: formatDate(startDate), data: data!)
                                                 }
@@ -155,7 +155,7 @@ struct RecordView: View {
                                                 let data = pathToCoordinate(coursePaths)
                                                 let cardType = getCardType(forScore: score)
                                                 NavigationLink {
-                                                    NewRecordDetailView(isDeleteData: $isDeleteData, record: record, cardType: cardType)
+                                                    RecordDetailView(isDeleteData: $isDeleteData, record: record, cardType: cardType)
                                                 } label: {
                                                     SmallListCard(cardType: cardType, runName: courseName, date: formatDate(startDate), data: data!)
                                                 }

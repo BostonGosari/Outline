@@ -1,5 +1,5 @@
 //
-//  NewRunningView.swift
+//  RunningView.swift
 //  Outline
 //
 //  Created by hyunjun on 11/13/23.
@@ -8,7 +8,7 @@
 import SwiftUI
 import CoreMotion
 
-struct NewRunningView: View {
+struct RunningView: View {
     @StateObject private var connectivityManger = WatchConnectivityManager.shared
     @StateObject private var runningStartManager = RunningStartManager.shared
     @StateObject private var runningDataManager = RunningDataManager.shared
@@ -140,9 +140,9 @@ struct NewRunningView: View {
     }
 }
 
-extension NewRunningView {
+extension RunningView {
     private var map: some View {
-        NewRunningMapView(userLocations: locationManager.userLocations)
+        RunningMapView(userLocations: locationManager.userLocations)
             .ignoresSafeArea()
             .onAppear {
                 if runningStartManager.running == true {
@@ -156,7 +156,7 @@ extension NewRunningView {
     }
     
     private var navigation: some View {
-        NewRunningNavigationView(
+        RunningNavigationView(
             courseName: runningStartManager.startCourse?.courseName ?? "",
             showDetailNavigation: navigationTranslation + navigationSheetHeight > 10
         )
@@ -193,7 +193,7 @@ extension NewRunningView {
     }
     
     private var metrics: some View {
-        NewRunningMetricsView(showDetail: showDetail, isPaused: isPaused)
+        RunningMetricsView(showDetail: showDetail, isPaused: isPaused)
             .overlay(alignment: .topTrailing) {
                 showDetailButton
             }
@@ -343,7 +343,7 @@ extension NewRunningView {
     }
 }
 
-extension NewRunningView {
+extension RunningView {
     private var navigationGesture: some Gesture {
         DragGesture()
             .onChanged { value in
@@ -462,5 +462,5 @@ extension NewRunningView {
 }
 
 #Preview {
-    NewRunningView()
+    RunningView()
 }
