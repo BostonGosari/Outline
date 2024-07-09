@@ -1,5 +1,5 @@
 //
-//  NewRecordDetailView.swift
+//  RecordDetailView.swift
 //  Outline
 //
 //  Created by hyunjun on 11/27/23.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct NewRecordDetailView: View {
+struct RecordDetailView: View {
     @Environment(\.dismiss) private var dismiss
     @StateObject var viewModel = RecordDetailViewModel()
         
@@ -54,7 +54,7 @@ struct NewRecordDetailView: View {
                         showRenameSheet = true
                     },
                     content: {
-                        NewRecordDetailMapView(userLocations: viewModel.userLocations)
+                        RecordDetailMapView(userLocations: viewModel.userLocations)
                     }
                 )
                 .frame(maxHeight: .infinity, alignment: .center)

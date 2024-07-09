@@ -1,5 +1,5 @@
 //
-//  ShareView+.swift
+//  ShareView+Extension.swift
 //  Outline
 //
 //  Created by Seungui Moon on 3/4/24.
