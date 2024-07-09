@@ -92,6 +92,7 @@
 		2999C6D72B0D7C56009C5585 /* MirroringMetricsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2999C6D62B0D7C56009C5585 /* MirroringMetricsView.swift */; };
 		2999C6DB2B0D7CF3009C5585 /* MirroringNavigationWatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2999C6DA2B0D7CF3009C5585 /* MirroringNavigationWatchView.swift */; };
 		299DC11B2C3D20C800567874 /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 299DC11A2C3D20C800567874 /* Secrets.xcconfig */; };
+		299DC11D2C3D2BE700567874 /* MotionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299DC11C2C3D2BE700567874 /* MotionManager.swift */; };
 		29AE76AC2ADE0D9100A46742 /* OutlineApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0AC8A9C2AD94C1F0061612C /* OutlineApp.swift */; };
 		29AE76D72ADE2A2200A46742 /* InputNicknameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AE76D52ADE2A2200A46742 /* InputNicknameView.swift */; };
 		29AE76D82ADE2A2200A46742 /* InputUserInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AE76D62ADE2A2200A46742 /* InputUserInfoView.swift */; };
@@ -406,6 +407,7 @@
 		2999C6D62B0D7C56009C5585 /* MirroringMetricsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MirroringMetricsView.swift; sourceTree = "<group>"; };
 		2999C6DA2B0D7CF3009C5585 /* MirroringNavigationWatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MirroringNavigationWatchView.swift; sourceTree = "<group>"; };
 		299DC11A2C3D20C800567874 /* Secrets.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
+		299DC11C2C3D2BE700567874 /* MotionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionManager.swift; sourceTree = "<group>"; };
 		29AE76D52ADE2A2200A46742 /* InputNicknameView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputNicknameView.swift; sourceTree = "<group>"; };
 		29AE76D62ADE2A2200A46742 /* InputUserInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputUserInfoView.swift; sourceTree = "<group>"; };
 		29AE76D92ADE2A5300A46742 /* InputNicknameViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InputNicknameViewModel.swift; path = Outline/Source/ViewModel/InputNicknameViewModel.swift; sourceTree = SOURCE_ROOT; };
@@ -911,6 +913,7 @@
 				F035240F2AE35AF800CCD8A6 /* RunningDataManager.swift */,
 				0E42915F2B03CF3100EE75F5 /* LocationManager.swift */,
 				BBA3E3F32B80AAC60068C891 /* ScoreManager.swift */,
+				299DC11C2C3D2BE700567874 /* MotionManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -1558,6 +1561,7 @@
 				9528EFE92ADE9E870056CCC6 /* UserCoreDataModel.xcdatamodeld in Sources */,
 				F0781D602AE163E00084ADD7 /* GPSArtHomeViewModel.swift in Sources */,
 				299803552ADF5F1000A9A134 /* HealthKitManager.swift in Sources */,
+				299DC11D2C3D2BE700567874 /* MotionManager.swift in Sources */,
 				29D7AD4C2B0E032200AAAAB0 /* MirroringNavigationView.swift in Sources */,
 				95A01E3B2AF2B7250093D9C0 /* LookAroundView.swift in Sources */,
 				2998035E2AE0182100A9A134 /* ConfettiView.swift in Sources */,
