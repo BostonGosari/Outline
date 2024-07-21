@@ -56,7 +56,7 @@ struct HomeTabView: View {
                 FinishRunningView()
             }
             if runningManager.running {
-                NewRunningView()
+                RunningView()
                     .onAppear {
                         watchConnectivityManager.sendRunningState(.start)
                     }
