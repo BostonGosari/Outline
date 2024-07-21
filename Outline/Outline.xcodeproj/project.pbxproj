@@ -91,6 +91,8 @@
 		2999C6D52B0D7C4A009C5585 /* MirroringControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2999C6D42B0D7C4A009C5585 /* MirroringControlsView.swift */; };
 		2999C6D72B0D7C56009C5585 /* MirroringMetricsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2999C6D62B0D7C56009C5585 /* MirroringMetricsView.swift */; };
 		2999C6DB2B0D7CF3009C5585 /* MirroringNavigationWatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2999C6DA2B0D7CF3009C5585 /* MirroringNavigationWatchView.swift */; };
+		299DC11B2C3D20C800567874 /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 299DC11A2C3D20C800567874 /* Secrets.xcconfig */; };
+		299DC11D2C3D2BE700567874 /* MotionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299DC11C2C3D2BE700567874 /* MotionManager.swift */; };
 		29AE76AC2ADE0D9100A46742 /* OutlineApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0AC8A9C2AD94C1F0061612C /* OutlineApp.swift */; };
 		29AE76D72ADE2A2200A46742 /* InputNicknameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AE76D52ADE2A2200A46742 /* InputNicknameView.swift */; };
 		29AE76D82ADE2A2200A46742 /* InputUserInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AE76D62ADE2A2200A46742 /* InputUserInfoView.swift */; };
@@ -213,7 +215,6 @@
 		BB869B5B2B196F2F0087202A /* SFCompactDisplay-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0E96BA912AF4E00B000C8FBF /* SFCompactDisplay-Semibold.ttf */; };
 		BB869B5C2B196F310087202A /* StretchPro.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2990249B2B10B599005C5BA8 /* StretchPro.ttf */; };
 		BB869B5D2B1970480087202A /* DoubleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A01E1D2AF0CCE70093D9C0 /* DoubleExtension.swift */; };
-		BBA3E3F22B7CADB50068C891 /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = BBA3E3F12B7CADB50068C891 /* Secrets.xcconfig */; };
 		BBA3E3F42B80AAC60068C891 /* ScoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBA3E3F32B80AAC60068C891 /* ScoreManager.swift */; };
 		BBA3E3F52B80AC530068C891 /* ScoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBA3E3F32B80AAC60068C891 /* ScoreManager.swift */; };
 		BBBB27E52B1795360081C93D /* Color.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F0AC8AA02AD94C200061612C /* Color.xcassets */; };
@@ -403,6 +404,8 @@
 		2999C6D42B0D7C4A009C5585 /* MirroringControlsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MirroringControlsView.swift; sourceTree = "<group>"; };
 		2999C6D62B0D7C56009C5585 /* MirroringMetricsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MirroringMetricsView.swift; sourceTree = "<group>"; };
 		2999C6DA2B0D7CF3009C5585 /* MirroringNavigationWatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MirroringNavigationWatchView.swift; sourceTree = "<group>"; };
+		299DC11A2C3D20C800567874 /* Secrets.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
+		299DC11C2C3D2BE700567874 /* MotionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionManager.swift; sourceTree = "<group>"; };
 		29AE76D52ADE2A2200A46742 /* InputNicknameView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputNicknameView.swift; sourceTree = "<group>"; };
 		29AE76D62ADE2A2200A46742 /* InputUserInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputUserInfoView.swift; sourceTree = "<group>"; };
 		29AE76D92ADE2A5300A46742 /* InputNicknameViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InputNicknameViewModel.swift; path = Outline/Source/ViewModel/InputNicknameViewModel.swift; sourceTree = SOURCE_ROOT; };
@@ -492,7 +495,6 @@
 		BB5239572ADC396300646494 /* BackgroundBlur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundBlur.swift; sourceTree = "<group>"; };
 		BB52396A2ADD385700646494 /* CategoryScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryScrollView.swift; sourceTree = "<group>"; };
 		BB52396C2ADD6DBB00646494 /* CustomRoundedRectangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomRoundedRectangle.swift; sourceTree = "<group>"; };
-		BBA3E3F12B7CADB50068C891 /* Secrets.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 		BBA3E3F32B80AAC60068C891 /* ScoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreManager.swift; sourceTree = "<group>"; };
 		BBCB1F022B1778DE00D9AE1C /* OutlineLiveActivityExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = OutlineLiveActivityExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBCB1F062B1778DE00D9AE1C /* OutlineLiveActivityBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutlineLiveActivityBundle.swift; sourceTree = "<group>"; };
@@ -907,6 +909,7 @@
 				F035240F2AE35AF800CCD8A6 /* RunningDataManager.swift */,
 				0E42915F2B03CF3100EE75F5 /* LocationManager.swift */,
 				BBA3E3F32B80AAC60068C891 /* ScoreManager.swift */,
+				299DC11C2C3D2BE700567874 /* MotionManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -914,7 +917,7 @@
 		F0AC8A902AD94C1F0061612C = {
 			isa = PBXGroup;
 			children = (
-				BBA3E3F12B7CADB50068C891 /* Secrets.xcconfig */,
+				299DC11A2C3D20C800567874 /* Secrets.xcconfig */,
 				2921B0122B01F3F700533A83 /* GoogleService-Info.plist */,
 				BB52392D2ADAF93D00646494 /* Outline Watch App.entitlements */,
 				BB5239262ADAF70A00646494 /* Shared */,
@@ -1366,7 +1369,7 @@
 				29B39D442B5ECA9F00C84E6A /* DuckRun.kml in Resources */,
 				29B39D382B5E663800C84E6A /* moai.kml in Resources */,
 				954CB2AF2AE5457B005EB2E9 /* seoulCamelRun.kml in Resources */,
-				BBA3E3F22B7CADB50068C891 /* Secrets.xcconfig in Resources */,
+				299DC11B2C3D20C800567874 /* Secrets.xcconfig in Resources */,
 				BB1D531E2ADDBCB90073771F /* Pretendard-Thin.ttf in Resources */,
 				0EB59A3E2B1835E600A18C50 /* alert.mp3 in Resources */,
 				BB1D530C2ADDBC560073771F /* Pretendard-Black.ttf in Resources */,
@@ -1536,6 +1539,7 @@
 				9528EFE92ADE9E870056CCC6 /* UserCoreDataModel.xcdatamodeld in Sources */,
 				F0781D602AE163E00084ADD7 /* GPSArtHomeViewModel.swift in Sources */,
 				299803552ADF5F1000A9A134 /* HealthKitManager.swift in Sources */,
+				299DC11D2C3D2BE700567874 /* MotionManager.swift in Sources */,
 				29D7AD4C2B0E032200AAAAB0 /* MirroringNavigationView.swift in Sources */,
 				95A01E3B2AF2B7250093D9C0 /* LookAroundView.swift in Sources */,
 				2998035E2AE0182100A9A134 /* ConfettiView.swift in Sources */,
@@ -1924,6 +1928,7 @@
 		};
 		F0AC8ABE2AD94C210061612C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 299DC11A2C3D20C800567874 /* Secrets.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1975,6 +1980,7 @@
 		};
 		F0AC8ABF2AD94C210061612C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 299DC11A2C3D20C800567874 /* Secrets.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
