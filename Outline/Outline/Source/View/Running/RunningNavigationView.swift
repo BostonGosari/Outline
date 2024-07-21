@@ -1,5 +1,5 @@
 //
-//  NewRunningNavigationView.swift
+//  RunningNavigationView.swift
 //  Outline
 //
 //  Created by hyunjun on 11/13/23.
@@ -8,7 +8,7 @@
 import AVFoundation
 import SwiftUI
 
-struct NewRunningNavigationView: View {
+struct RunningNavigationView: View {
     @StateObject private var locationManager = LocationManager.shared
     
     @State private var synthesizer = AVSpeechSynthesizer()
@@ -112,5 +112,5 @@ struct NewRunningNavigationView: View {
 }
 
 #Preview {
-    NewRunningNavigationView(courseName: "고래런", showDetailNavigation: false)
+    RunningNavigationView(courseName: "고래런", showDetailNavigation: false)
 }

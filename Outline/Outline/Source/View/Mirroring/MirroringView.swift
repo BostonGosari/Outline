@@ -95,7 +95,7 @@ extension MirroringView {
     }
     
     private var navigation: some View {
-        NewRunningNavigationView(
+        RunningNavigationView(
             courseName: runningManager.startCourse?.courseName ?? "",
             showDetailNavigation: navigationTranslation + navigationSheetHeight > 10
         )

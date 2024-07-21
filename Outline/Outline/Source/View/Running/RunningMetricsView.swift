@@ -1,5 +1,5 @@
 //
-//  NewRunningMetricsView.swift
+//  RunningMetricsView.swift
 //  Outline
 //
 //  Created by hyunjun on 11/13/23.
@@ -8,7 +8,7 @@
 import Combine
 import SwiftUI
 
-struct NewRunningMetricsView: View {
+struct RunningMetricsView: View {
     @StateObject private var runningManager = RunningStartManager.shared
     @StateObject private var runningDataManager = RunningDataManager.shared
 
@@ -101,5 +101,5 @@ struct MetricItem: View {
 }
 
 #Preview {
-    NewRunningMetricsView(showDetail: false, isPaused: true)
+    RunningMetricsView(showDetail: false, isPaused: true)
 }

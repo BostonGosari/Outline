@@ -1,5 +1,5 @@
 //
-//  NewRunningMapView.swift
+//  RunningMapView.swift
 //  Outline
 //
 //  Created by hyunjun on 11/13/23.
@@ -8,7 +8,7 @@
 import MapKit
 import SwiftUI
 
-struct NewRunningMapView: UIViewRepresentable {
+struct RunningMapView: UIViewRepresentable {
     @StateObject private var runningStartManager = RunningStartManager.shared
     @StateObject private var runningDataManager = RunningDataManager.shared
     
@@ -59,9 +59,9 @@ struct NewRunningMapView: UIViewRepresentable {
     }
     
     class Coordinator: NSObject, MKMapViewDelegate {
-        var parent: NewRunningMapView
+        var parent: RunningMapView
         
-        init(_ parent: NewRunningMapView) {
+        init(_ parent: RunningMapView) {
             self.parent = parent
         }
         
@@ -79,5 +79,5 @@ struct NewRunningMapView: UIViewRepresentable {
 }
 
 #Preview {
-    NewRunningMapView(userLocations: [])
+    RunningMapView(userLocations: [])
 }
