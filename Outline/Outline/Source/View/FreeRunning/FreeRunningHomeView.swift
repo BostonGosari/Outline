@@ -38,9 +38,9 @@ struct FreeRunningHomeView: View {
             VStack(spacing: 0) {
                 GPSArtHomeHeader(title: "자유 아트", loading: false, scrollOffset: 20)
                     .padding(.top, 8)
-                Spacer()
                 
                 if authState == .login {
+                    Spacer()
                     cardView
                         .overlay {
                             VStack(alignment: .leading, spacing: 0) {
@@ -72,6 +72,7 @@ struct FreeRunningHomeView: View {
                         }
                         .padding(EdgeInsets(top: 16, leading: 16, bottom: 80, trailing: 20))
                 } else {
+                    Spacer()
                     LookAroundView(type: .running)
                     Spacer()
                 }
