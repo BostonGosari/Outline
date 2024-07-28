@@ -28,7 +28,7 @@ struct CountDownView: View {
                             countdownSeconds -= 1
                             if countdownSeconds == 0 {
                                 timer.invalidate()
-                                workoutManager.selectedWorkout = .running
+                                workoutManager.startWorkout()
                                 connectivityManager.sendRunningState(.start)
                             }
                         }

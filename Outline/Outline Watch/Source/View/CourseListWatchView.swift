@@ -42,7 +42,6 @@ struct CourseListWatchView: View {
                                 Button {
                                     if viewModel.isHealthAuthorized && viewModel.isLocationAuthorized {
                                         if runningManager.checkDistance(course: course.coursePaths) {
-                                            workoutManager.selectedWorkout = .running
                                             runningManager.startCourse = course
                                             runningManager.startGPSArtRun()
                                             
@@ -121,7 +120,6 @@ struct CourseListWatchView: View {
                             text: "자유 코스로 변경할까요?\n현재 루트와 멀리 떨어져 있어요",
                             firstLabel: "자유 코스로 변경",
                             firstAction: {
-                                workoutManager.selectedWorkout = .running
                                 runningManager.startFreeRun()
                                 showFreeRunningGuideSheet = false
                                 
@@ -176,7 +174,6 @@ struct CourseListWatchView: View {
     private var freeArtButton: some View {
         Button {
             if  viewModel.isHealthAuthorized && viewModel.isLocationAuthorized {
-                workoutManager.selectedWorkout = .running
                 runningManager.startFreeRun()
                 
                 sendFreeRunningInfoToPhone()
