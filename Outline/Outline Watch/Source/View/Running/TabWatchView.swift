@@ -14,9 +14,8 @@ struct TabWatchView: View {
     @StateObject private var runningManager = WatchRunningManager.shared
     
     @State private var selection: Tab = .metrics
-    @State private var isMapLoaded = false
-    @State private var count = 0.0
     @State private var timer: Timer?
+    @State private var time = 0.0
     
     enum Tab {
         case controls, map, metrics
@@ -57,7 +56,7 @@ struct TabWatchView: View {
                 } else if newValue == .resume {
                     workoutManager.session?.resume()
                 } else if newValue == .end {
-                    if count > 30 {
+                    if time > 30 {
                         runningManager.userLocations = locationManager.userLocations
                         runningManager.calculateScore()
                         sendDataToPhone()
@@ -76,7 +75,7 @@ struct TabWatchView: View {
         timer?.invalidate()
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
             if workoutManager.running {
-                count += 1
+                time += 1
             }
             
             if connectivityManager.isMirroring {
@@ -85,7 +84,7 @@ struct TabWatchView: View {
                 let runningData =
                 MirroringRunningData(
                     userLocations: userLocations,
-                    time: count,
+                    time: time,
                     distance: workoutManager.distance,
                     kcal: workoutManager.calorie,
                     pace: workoutManager.pace,

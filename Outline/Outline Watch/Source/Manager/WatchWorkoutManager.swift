@@ -77,7 +77,6 @@ class WatchWorkoutManager: NSObject, ObservableObject {
     }
     
     // MARK: - Session State Control
-    
     @Published var running = false
     
     func togglePause() {
