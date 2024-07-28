@@ -262,7 +262,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		297B80F72AE73C0A00AF7219 /* PBXContainerItemProxy */ = {
+		29B736B12C565B620075A569 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = F0AC8A912AD94C1F0061612C /* Project object */;
 			proxyType = 1;
@@ -1239,7 +1239,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				297B80F82AE73C0A00AF7219 /* PBXTargetDependency */,
+				29B736B22C565B620075A569 /* PBXTargetDependency */,
 				BBCB1F122B1778DF00D9AE1C /* PBXTargetDependency */,
 			);
 			name = Outline;
@@ -1633,10 +1633,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		297B80F82AE73C0A00AF7219 /* PBXTargetDependency */ = {
+		29B736B22C565B620075A569 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = F0AC8AA82AD94C200061612C /* Outline Watch App */;
-			targetProxy = 297B80F72AE73C0A00AF7219 /* PBXContainerItemProxy */;
+			targetProxy = 29B736B12C565B620075A569 /* PBXContainerItemProxy */;
 		};
 		BBCB1F122B1778DF00D9AE1C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
