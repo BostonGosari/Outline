@@ -22,35 +22,25 @@ struct FreeRunningHomeView: View {
    
     var body: some View {
         ZStack(alignment: .top) {
+            Color.gray900
+                .ignoresSafeArea()
             if authState == .login {
                 FreeRunningMapView()
                     .ignoresSafeArea()
+                Color.gray900
+                    .ignoresSafeArea()
+                    .opacity(0.85)
             }
-        
-            Rectangle()
-                .foregroundColor(.clear)
-                .frame(maxWidth: .infinity, maxHeight: 358)
-                .background(
-                    LinearGradient(
-                        stops: [
-                            Gradient.Stop(color: Color(red: 0.02, green: 0.01, blue: 0.15).opacity(0.4), location: 0.00),
-                            Gradient.Stop(color: Color(red: 0.09, green: 0.07, blue: 0.39).opacity(0), location: 1.00)
-                        ],
-                        startPoint: UnitPoint(x: 0.5, y: 0),
-                        endPoint: UnitPoint(x: 0.5, y: 1)
-                    )
-                )
-            Rectangle()
-                .foregroundColor(.clear)
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .background(.black.opacity(0.6))
-            BackgroundBlur(color: .customSecondary, padding: 50)
+            
+            BackgroundBlur(color: Color.customSecondary, padding: 50)
+                .opacity(0.5)
+
             VStack(spacing: 0) {
                 GPSArtHomeHeader(title: "자유 아트", loading: false, scrollOffset: 20)
                     .padding(.top, 8)
-                Spacer()
                 
                 if authState == .login {
+                    Spacer()
                     cardView
                         .overlay {
                             VStack(alignment: .leading, spacing: 0) {
@@ -82,6 +72,7 @@ struct FreeRunningHomeView: View {
                         }
                         .padding(EdgeInsets(top: 16, leading: 16, bottom: 80, trailing: 20))
                 } else {
+                    Spacer()
                     LookAroundView(type: .running)
                     Spacer()
                 }
