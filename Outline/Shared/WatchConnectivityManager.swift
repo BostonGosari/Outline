@@ -124,6 +124,7 @@ final class WatchConnectivityManager: NSObject, WCSessionDelegate, ObservableObj
             let data = try encoder.encode(runningData)
             let userInfo = ["runningData": data]
             session.transferUserInfo(userInfo)
+            print("send runningData")
         } catch {
             print("Failed to encode runningData")
         }

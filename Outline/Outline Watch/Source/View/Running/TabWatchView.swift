@@ -71,6 +71,7 @@ struct TabWatchView: View {
     }
     
     private func sendMirroringData() {
+        guard let builder = workoutManager.builder else { return }
         timer?.invalidate()
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
             if connectivityManager.isMirroring {
@@ -79,7 +80,7 @@ struct TabWatchView: View {
                 let runningData =
                 MirroringRunningData(
                     userLocations: userLocations,
-                    time: workoutManager.builder?.elapsedTime ?? 0,
+                    time: builder.elapsedTime,
                     distance: workoutManager.distance,
                     kcal: workoutManager.calorie,
                     pace: workoutManager.pace,
@@ -94,6 +95,7 @@ struct TabWatchView: View {
     private func stopMirring() {
         timer?.invalidate()
         timer = nil
+        connectivityManager.isMirroring = false
     }
     
     private func sendDataToPhone() {

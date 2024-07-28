@@ -107,16 +107,8 @@ class WatchRunningManager: ObservableObject {
     }
     
     func calculateScore() {
-        let scoreManager = ScoreManager(guideCourse: coordinatesToCLLocationCoordiantes(coordinates:startCourse.coursePaths), userCourse: userLocations)
+        let scoreManager = ScoreManager(guideCourse: startCourse.coursePaths.toCLLocationCoordinates(), userCourse: userLocations)
         scoreManager.calculate()
         self.score = Int(scoreManager.score)
-    }
-    
-    private func coordinatesToCLLocationCoordiantes(coordinates: [Coordinate]) -> [CLLocationCoordinate2D] {
-        var clLocations: [CLLocationCoordinate2D] = []
-        for coordinate in coordinates {
-            clLocations.append(CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: coordinate.longitude))
-        }
-        return clLocations
     }
 }
