@@ -68,8 +68,15 @@ class WatchWorkoutManager: NSObject, ObservableObject {
     }
     
     func endWorkout() {
-        session?.end()
-        if let time = builder?.elapsedTime, time >= 30 {
+        guard let elapsedTime = builder?.elapsedTime else { return }
+        
+        if elapsedTime < 30 {
+            print("Workout too short, not saving. Elapsed time: \(elapsedTime)")
+            session?.end()
+            resetWorkout()
+        } else {
+            print("Ending workout. Elapsed time: \(elapsedTime)")
+            session?.end()
             showSummaryView = true
         }
     }
@@ -123,6 +130,7 @@ class WatchWorkoutManager: NSObject, ObservableObject {
     }
     
     func resetWorkout() {
+        builder?.discardWorkout()
         builder = nil
         session = nil
         distance = 0
@@ -143,14 +151,29 @@ extension WatchWorkoutManager: HKWorkoutSessionDelegate {
             self.running = toState == .running
         }
         
+        print("Workout session state changed from \(fromState) to \(toState)")
+        
         if toState == .ended {
             builder?.endCollection(withEnd: Date()) { success, error in
-                self.builder?.finishWorkout { workout, error in }
+                if let error = error {
+                    print("Error ending collection: \(error.localizedDescription)")
+                } else {
+                    print("Collection ended successfully: \(success)")
+                    self.builder?.finishWorkout { workout, error in
+                        if let error = error {
+                            print("Error finishing workout: \(error.localizedDescription)")
+                        } else {
+                            print("Workout finished successfully: \(String(describing: workout))")
+                        }
+                    }
+                }
             }
         }
     }
     
-    func workoutSession(_ workoutSession: HKWorkoutSession, didFailWithError error: Error) { }
+    func workoutSession(_ workoutSession: HKWorkoutSession, didFailWithError error: Error) {
+        print("Workout session failed with error: \(error.localizedDescription)")
+    }
 }
 
 extension WatchWorkoutManager: HKLiveWorkoutBuilderDelegate {

@@ -224,18 +224,9 @@ class RunningDataManager: ObservableObject {
             return
         }
         
-        let scoreManager = ScoreManager(guideCourse: coordinatesToCLLocationCoordiantes(coordinates: course.coursePaths), userCourse: userLocations)
+        let scoreManager = ScoreManager(guideCourse:  course.coursePaths.toCLLocationCoordinates(), userCourse: userLocations)
         scoreManager.calculate()
         self.score = Int(scoreManager.score)
-    }
-    
-    
-    private func coordinatesToCLLocationCoordiantes(coordinates: [Coordinate]) -> [CLLocationCoordinate2D] {
-        var clLocations: [CLLocationCoordinate2D] = []
-        for coordinate in coordinates {
-            clLocations.append(CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: coordinate.longitude))
-        }
-        return clLocations
     }
     
     private func saveRunning() {
