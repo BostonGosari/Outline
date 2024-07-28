@@ -199,7 +199,6 @@
 		BB1D534C2ADEA6F90073771F /* SummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1D534B2ADEA6F90073771F /* SummaryView.swift */; };
 		BB397D092AE6408A00F92A43 /* RecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB397D082AE6408A00F92A43 /* RecordView.swift */; };
 		BB493CF82AE0CA55009D3699 /* ElapsedTimeFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB493CF72AE0CA55009D3699 /* ElapsedTimeFormatter.swift */; };
-		BB5239292ADAF75C00646494 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5239272ADAF72A00646494 /* Logger.swift */; };
 		BB5239372ADBD99F00646494 /* GPSArtHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5239362ADBD99F00646494 /* GPSArtHomeView.swift */; };
 		BB5239582ADC396300646494 /* BackgroundBlur.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5239572ADC396300646494 /* BackgroundBlur.swift */; };
 		BB52396B2ADD385700646494 /* CategoryScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB52396A2ADD385700646494 /* CategoryScrollView.swift */; };
@@ -242,7 +241,6 @@
 		F06298AB2AE1998D007AB2D3 /* MapInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06298AA2AE1998D007AB2D3 /* MapInfoView.swift */; };
 		F06298AF2AE1A2ED007AB2D3 /* CountDown.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06298AE2AE1A2ED007AB2D3 /* CountDown.swift */; };
 		F06B93622ADB847500387DEB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0AC8A9E2AD94C1F0061612C /* ContentView.swift */; };
-		F06B936B2ADC23E100387DEB /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5239272ADAF72A00646494 /* Logger.swift */; };
 		F06B936E2ADC279100387DEB /* SlideToUnlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06B936D2ADC279100387DEB /* SlideToUnlock.swift */; };
 		F0781D602AE163E00084ADD7 /* GPSArtHomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0781D5F2AE163E00084ADD7 /* GPSArtHomeViewModel.swift */; };
 		F09697472ADBCD6000C38AF4 /* Shape.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09697462ADBCD6000C38AF4 /* Shape.swift */; };
@@ -488,7 +486,6 @@
 		BB397D082AE6408A00F92A43 /* RecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordView.swift; sourceTree = "<group>"; };
 		BB493CEB2ADFD592009D3699 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BB493CF72AE0CA55009D3699 /* ElapsedTimeFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElapsedTimeFormatter.swift; sourceTree = "<group>"; };
-		BB5239272ADAF72A00646494 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		BB52392D2ADAF93D00646494 /* Outline Watch App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Outline Watch App.entitlements"; sourceTree = "<group>"; };
 		BB52392E2ADAFB2E00646494 /* Outline.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Outline.entitlements; sourceTree = "<group>"; };
 		BB5239362ADBD99F00646494 /* GPSArtHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPSArtHomeView.swift; sourceTree = "<group>"; };
@@ -842,7 +839,6 @@
 		BB5239262ADAF70A00646494 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				BB5239272ADAF72A00646494 /* Logger.swift */,
 				F06298A82AE18A50007AB2D3 /* ConvertCoordinateManager.swift */,
 				293C97DE2AE6C454007821F5 /* WatchConnectivityManager.swift */,
 			);
@@ -1564,7 +1560,6 @@
 				291A22352AF4CD94004B3D10 /* PermissionSheet.swift in Sources */,
 				95EB1EEC2ADDC66B00B47984 /* UserDataModel.swift in Sources */,
 				0E4D309D2B5FC85600582E37 /* FinishRunningMapView.swift in Sources */,
-				F06B936B2ADC23E100387DEB /* Logger.swift in Sources */,
 				0EE0D4022B0DC30300E75F4C /* Place.swift in Sources */,
 				29AE76E02ADE2BC700A46742 /* DateExtention.swift in Sources */,
 				BBEC68822B0868520026C306 /* RunningFinishPopUp.swift in Sources */,
@@ -1607,7 +1602,6 @@
 				2930EDC02AF3FE3F007FD141 /* CourseListWatchViewModel.swift in Sources */,
 				29111E3F2AE0CD0C009833C7 /* ConfettiWatchView.swift in Sources */,
 				95ACF8D82B09C86C0045AEA8 /* CourseCategoryModelType.swift in Sources */,
-				BB5239292ADAF75C00646494 /* Logger.swift in Sources */,
 				2999C6DB2B0D7CF3009C5585 /* MirroringNavigationWatchView.swift in Sources */,
 				2999C6D32B0D7C37009C5585 /* MirroringMapWatchView.swift in Sources */,
 				2912A91B2B0D20B400D847B0 /* MirroringTabWatchView.swift in Sources */,
