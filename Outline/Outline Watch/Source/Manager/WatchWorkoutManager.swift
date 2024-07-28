@@ -9,9 +9,11 @@ import Foundation
 import HealthKit
 
 class WatchWorkoutManager: NSObject, ObservableObject {
+    @Published var showSummaryView = false
+
     static let shared = WatchWorkoutManager()
-    private let watchRunningManager = WatchRunningManager.shared
-    
+    let healthStore = HKHealthStore()
+
     var selectedWorkout: HKWorkoutActivityType? {
         didSet {
             guard let selectedWorkout = selectedWorkout else { return }
@@ -19,13 +21,7 @@ class WatchWorkoutManager: NSObject, ObservableObject {
         }
     }
     
-    var isHealthKitAuthorized: Bool {
-        return HKHealthStore.isHealthDataAvailable()
-    }
-    
-    @Published var showSummaryView = false
-    
-    let healthStore = HKHealthStore()
+    var isHealthKitAuthorized: Bool { HKHealthStore.isHealthDataAvailable() }
     var session: HKWorkoutSession?
     var builder: HKLiveWorkoutBuilder?
     
@@ -197,15 +193,11 @@ extension WatchWorkoutManager: HKWorkoutSessionDelegate {
         }
     }
     
-    func workoutSession(_ workoutSession: HKWorkoutSession, didFailWithError error: Error) {
-        
-    }
+    func workoutSession(_ workoutSession: HKWorkoutSession, didFailWithError error: Error) { }
 }
 
 extension WatchWorkoutManager: HKLiveWorkoutBuilderDelegate {
-    func workoutBuilderDidCollectEvent(_ workoutBuilder: HKLiveWorkoutBuilder) {
-        
-    }
+    func workoutBuilderDidCollectEvent(_ workoutBuilder: HKLiveWorkoutBuilder) { }
     
     func workoutBuilder(_ workoutBuilder: HKLiveWorkoutBuilder, didCollectDataOf collectedTypes: Set<HKSampleType>) {
         for type in collectedTypes {

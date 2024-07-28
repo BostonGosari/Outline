@@ -22,9 +22,7 @@ struct CourseListWatchView: View {
     @State private var showFreeRunningGuideSheet = false
     @State private var showMirroringSheet = false
     @State private var showMirroringView = false
-    
-    var workoutTypes: [HKWorkoutActivityType] = [.running]
-    
+        
     var body: some View {
         NavigationStack {
             ZStack {
@@ -44,7 +42,7 @@ struct CourseListWatchView: View {
                                 Button {
                                     if viewModel.isHealthAuthorized && viewModel.isLocationAuthorized {
                                         if runningManager.checkDistance(course: course.coursePaths) {
-                                            workoutManager.selectedWorkout = workoutTypes[0]
+                                            workoutManager.selectedWorkout = .running
                                             runningManager.startCourse = course
                                             runningManager.startGPSArtRun()
                                             
@@ -123,7 +121,7 @@ struct CourseListWatchView: View {
                             text: "자유 코스로 변경할까요?\n현재 루트와 멀리 떨어져 있어요",
                             firstLabel: "자유 코스로 변경",
                             firstAction: {
-                                workoutManager.selectedWorkout = workoutTypes[0]
+                                workoutManager.selectedWorkout = .running
                                 runningManager.startFreeRun()
                                 showFreeRunningGuideSheet = false
                                 
@@ -178,7 +176,7 @@ struct CourseListWatchView: View {
     private var freeArtButton: some View {
         Button {
             if  viewModel.isHealthAuthorized && viewModel.isLocationAuthorized {
-                workoutManager.selectedWorkout = workoutTypes[0]
+                workoutManager.selectedWorkout = .running
                 runningManager.startFreeRun()
                 
                 sendFreeRunningInfoToPhone()
