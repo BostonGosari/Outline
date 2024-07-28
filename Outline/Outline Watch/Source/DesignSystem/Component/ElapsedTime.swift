@@ -8,11 +8,10 @@
 import SwiftUI
 
 struct ElapsedTime: View {
-    @State private var timeFormatter = ElapsedTimeFormatter()
     var time: TimeInterval = 0
 
     var body: some View {
-        Text(NSNumber(value: time), formatter: timeFormatter)
+        Text(time.formatMinuteSeconds())
             .font(Font.customHeadline)
             .monospacedDigit()
             .foregroundStyle(.customPrimary)

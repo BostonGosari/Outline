@@ -16,7 +16,6 @@ struct SummaryView: View {
     @StateObject var runningManager = WatchRunningManager.shared
     
     @State private var isShowingFinishView = true
-    @State private var timeFormatter = ElapsedTimeFormatter()
     @State private var progress = 0.0
     
     @Namespace var topID
@@ -78,11 +77,12 @@ struct SummaryView: View {
                                     Text("그림을 완성했어요!")
                                     .padding(.vertical)
                                }
-                           
-                            Text(NSNumber(value: workoutManager.builder?.elapsedTime ?? 0), formatter: timeFormatter)
-                                .id(topID)
-                                .foregroundStyle(.customPrimary)
-                                .font(.customHeadline)
+                            if let builder = workoutManager.builder {
+                                Text(builder.elapsedTime.formatMinuteSeconds())
+                                    .id(topID)
+                                    .foregroundStyle(.customPrimary)
+                                    .font(.customHeadline)
+                            }
                             
                             Text("총시간")
                                 .font(.customBody)
@@ -104,7 +104,6 @@ struct SummaryView: View {
                             Button {
                                 runningManager.startRunning = false
                                 workoutManager.showSummaryView = false
-                                workoutManager.resetWorkout()
                             } label: {
                                 Text("완료")
                                     .frame(height: 48)

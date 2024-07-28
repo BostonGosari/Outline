@@ -78,7 +78,6 @@ struct ControlsView: View {
             EndRunningSheet(text: "30초 이하는 기록되지 않아요.\n종료하시겠어요?") {
                 connectivityManager.sendRunningState(.end)
                 showEndWithoutSavingSheet = false
-                workoutManager.endWorkoutWithoutSummaryView()
                 runningManager.startRunning = false
             }
         }
