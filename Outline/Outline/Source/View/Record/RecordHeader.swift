@@ -17,7 +17,7 @@ struct RecordHeader: View {
                 .scaleEffect(max(min(1.2, 1 + (scrollOffset-47)/500), 1), anchor: .topLeading)
             Spacer()
         }
-        .padding(.horizontal)
+        .padding(.leading, UIScreen.main.bounds.width * 0.08)
         .padding(.top)
         .frame(maxWidth: .infinity, alignment: .leading)
         .opacity(scrollOffset >= 20 ? 1 : 0)

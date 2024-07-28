@@ -15,11 +15,11 @@ enum LookArroundType {
     var subTitle: String {
         switch self {
         case .userInfo:
-            "OUTLINE에 가입하면 나의 러닝\n프로필을 입력할 수 있어요!"
+            "OUTLINE에 가입하면\n나의 러닝 프로필을 입력할 수 있어요!"
         case .running:
-            "OUTLINE에 가입하면 그림을 뛸 수 있어요!"
+            "OUTLINE에 가입하면\n그림을 뛸 수 있어요!"
         case .record:
-            "OUTLINE에 가입하면 내가 그린\n러닝 기록을 확인할 수 있어요!"
+            "OUTLINE에 가입하면\n내가 그린러닝 기록을 확인할 수 있어요!"
         }
     }
 }
