@@ -101,7 +101,6 @@ class WatchWorkoutManager: NSObject, ObservableObject {
     @Published var averagePace: Double = 0
     @Published var stepCount: Double = 0
     @Published var cadence: Double = 0
-    @Published var workout: HKWorkout?
     
     // 평균 페이스 계산
     func calculateAveragePace(distance: Double, duration: TimeInterval) {
@@ -158,7 +157,6 @@ class WatchWorkoutManager: NSObject, ObservableObject {
     func resetWorkout() {
         selectedWorkout = nil
         builder = nil
-        workout = nil
         session = nil
         distance = 0
         averageHeartRate = 0
@@ -176,6 +174,12 @@ extension WatchWorkoutManager: HKWorkoutSessionDelegate {
                         from fromState: HKWorkoutSessionState, date: Date) {
         DispatchQueue.main.async {
             self.running = toState == .running
+        }
+        
+        if toState == .ended {
+            builder?.endCollection(withEnd: Date()) { (success, error) in
+                self.builder?.finishWorkout { (workout, error) in }
+            }
         }
     }
     

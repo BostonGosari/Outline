@@ -27,7 +27,7 @@ struct CourseListWatchView: View {
         NavigationStack {
             ZStack {
                 if connectivityManager.allCourses.isEmpty {
-                    EmptyContentView()
+                    EmptyContent()
                 } else {
                     ScrollView {
                         VStack(spacing: -5) {
