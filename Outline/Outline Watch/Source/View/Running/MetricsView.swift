@@ -19,7 +19,7 @@ struct MetricsView: View {
                 isPaused: workoutManager.session?.state == .paused)
         ) { context in
             VStack(alignment: .center) {
-                ElapsedTimeView(elapsedTime: workoutManager.builder?.elapsedTime(at: context.date) ?? 0)
+                ElapsedTime(time: workoutManager.builder?.elapsedTime(at: context.date) ?? 0)
                 HStack {
                     Spacer()
                     VStack {
