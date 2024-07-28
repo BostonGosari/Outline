@@ -210,5 +210,3 @@ struct CourseListWatchView: View {
         connectivityManager.sendRunningInfo(runningInfo)
     }
 }
-
-

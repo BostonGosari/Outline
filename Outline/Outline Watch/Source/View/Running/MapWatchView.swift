@@ -47,20 +47,9 @@ struct MapWatchView: View {
         .ignoresSafeArea(edges: .top)
         .tint(.customPrimary)
         .onAppear {
-//            if runningManager.runningType == .free {
-                interactionModes = [.zoom]
-                bounds = .init(minimumDistance: 100, maximumDistance: .infinity)
-//            }
+            interactionModes = [.zoom]
+            bounds = .init(minimumDistance: 100, maximumDistance: .infinity)
         }
-//        .overlay {
-//            if !runningManager.startCourse.navigation.isEmpty {
-//                NavigationTabView()
-//                    .onAppear {
-//                        locationManager.navigationDatas = runningManager.startCourse.navigation
-//                        locationManager.initNavigation()
-//                    }
-//            }
-//        }
     }
     
     private var gesture: some Gesture {

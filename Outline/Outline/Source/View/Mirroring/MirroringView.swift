@@ -38,9 +38,6 @@ struct MirroringView: View {
     var body: some View {
         ZStack {
             map
-//            if connectivityManager.runningInfo.runningType == .gpsArt {
-//                navigation
-//            }
             metrics
             
             if connectivityManager.runningInfo.runningType == .gpsArt {

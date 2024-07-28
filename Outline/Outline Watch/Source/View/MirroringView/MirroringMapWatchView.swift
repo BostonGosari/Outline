@@ -10,6 +10,7 @@ import SwiftUI
 
 struct MirroringMapWatchView: View {
     @StateObject private var connectivityManager = WatchConnectivityManager.shared
+    
     @State private var position: MapCameraPosition = .userLocation(followsHeading: true, fallback: .automatic)
     @State private var bounds: MapCameraBounds = .init(minimumDistance: 100, maximumDistance: 100)
     @State private var interactionModes: MapInteractionModes = []
@@ -43,16 +44,9 @@ struct MirroringMapWatchView: View {
         .ignoresSafeArea(edges: .top)
         .tint(.customPrimary)
         .onAppear {
-            //            if connectivityManager.runningInfo.runningType == .free {
             interactionModes = [.zoom]
             bounds = .init(minimumDistance: 100, maximumDistance: .infinity)
-            //            }
         }
-//        .overlay {
-//            if connectivityManager.runningInfo.runningType == .gpsArt {
-//                NavigationTabView()
-//            }
-//        }
     }
     
     private var gesture: some Gesture {
