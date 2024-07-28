@@ -1,5 +1,5 @@
 //
-//  EmptyContentView.swift
+//  EmptyContent.swift
 //  Outline Watch App
 //
 //  Created by hyunjun on 11/20/23.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct EmptyContentView: View {
+struct EmptyContent: View {
     var body: some View {
         HStack {
             Image(systemName: "iphone")
@@ -23,5 +23,5 @@ struct EmptyContentView: View {
 }
 
 #Preview {
-    EmptyContentView()
+    EmptyContent()
 }
