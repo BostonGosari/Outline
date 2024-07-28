@@ -1143,12 +1143,12 @@
 			isa = PBXGroup;
 			children = (
 				F0492E222ADD545200F6EADD /* CourseListWatchView.swift */,
-				29B736B32C565D330075A569 /* Running */,
-				2912A9182B0D1FF900D847B0 /* Mirroring */,
 				2930EDC12AF408EC007FD141 /* CourseDetailView.swift */,
 				2930EDBC2AF3FD97007FD141 /* CountDownView.swift */,
-				BB1D534B2ADEA6F90073771F /* SummaryView.swift */,
+				29B736B32C565D330075A569 /* Running */,
+				2912A9182B0D1FF900D847B0 /* Mirroring */,
 				29111E362AE0C9CA009833C7 /* FinishWatchView.swift */,
+				BB1D534B2ADEA6F90073771F /* SummaryView.swift */,
 				29111E3E2AE0CD0C009833C7 /* ConfettiWatchView.swift */,
 			);
 			path = View;

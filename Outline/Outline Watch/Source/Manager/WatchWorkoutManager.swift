@@ -16,6 +16,25 @@ class WatchWorkoutManager: NSObject, ObservableObject {
     var session: HKWorkoutSession?
     var builder: HKLiveWorkoutBuilder?
     
+    func requestAuthorization() {
+        let quantityTypes: [HKQuantityTypeIdentifier] = [
+            .heartRate,
+            .activeEnergyBurned,
+            .distanceWalkingRunning,
+            .stepCount,
+            .cyclingCadence,
+            .runningSpeed
+        ]
+        let typesToShare = Set(quantityTypes.map { HKQuantityType($0) } + [HKQuantityType.workoutType()])
+        let typesToRead = Set(quantityTypes.map { HKQuantityType($0) } + [HKQuantityType.workoutType(), HKObjectType.activitySummaryType()])
+        
+        healthStore.requestAuthorization(toShare: typesToShare, read: typesToRead) { _, _ in }
+    }
+    
+    // MARK: - Session State Control
+    @Published var showSummaryView = false
+    @Published var running = false
+    
     func startWorkout() {
         resetWorkout()
         let configuration = HKWorkoutConfiguration()
@@ -36,38 +55,9 @@ class WatchWorkoutManager: NSObject, ObservableObject {
         
         let startDate = Date()
         session?.startActivity(with: startDate)
-        builder?.beginCollection(withStart: startDate) { _, _ in
-        }
+        builder?.beginCollection(withStart: startDate) { sucess, error in }
         self.startDate = startDate
     }
-    
-    func requestAuthorization() {
-        let typesToShare: Set = [
-            HKQuantityType(.heartRate),
-            HKQuantityType(.activeEnergyBurned),
-            HKQuantityType(.distanceWalkingRunning),
-            HKQuantityType(.stepCount),
-            HKQuantityType(.cyclingCadence),
-            HKQuantityType(.runningSpeed),
-            HKQuantityType.workoutType()
-        ]
-        
-        let typesToRead: Set = [
-            HKQuantityType(.heartRate),
-            HKQuantityType(.activeEnergyBurned),
-            HKQuantityType(.distanceWalkingRunning),
-            HKQuantityType(.stepCount),
-            HKQuantityType(.cyclingCadence),
-            HKQuantityType(.runningSpeed),
-            HKQuantityType.workoutType(),
-            HKObjectType.activitySummaryType()
-        ]
-        healthStore.requestAuthorization(toShare: typesToShare, read: typesToRead) { _, _ in }
-    }
-    
-    // MARK: - Session State Control
-    @Published var showSummaryView = false
-    @Published var running = false
     
     func togglePause() {
         if running == true {
@@ -95,26 +85,6 @@ class WatchWorkoutManager: NSObject, ObservableObject {
     @Published var stepCount: Double = 0
     @Published var cadence: Double = 0
     
-    // 평균 페이스 계산
-    func calculateAveragePace(distance: Double, duration: TimeInterval) {
-        if distance > 0 && duration > 0 {
-            let averagePace = duration / distance * 1000
-            self.averagePace = averagePace
-        } else {
-            self.averagePace = 0
-        }
-    }
-    
-    // 실시간 페이스 계산
-    func calculatePaceFromSpeed(speed: Double) {
-        if speed > 0 {
-            let pace = 1 / speed * 1000
-            self.pace = pace
-        } else {
-            self.pace = 0
-        }
-    }
-    
     func updateForStatistics(_ statistics: HKStatistics?) {
         guard let statistics = statistics else { return }
         guard let elapsedTime = builder?.elapsedTime else { return }
@@ -130,12 +100,17 @@ class WatchWorkoutManager: NSObject, ObservableObject {
                 self.calorie = statistics.sumQuantity()?.doubleValue(for: energyUnit) ?? 0
             case HKQuantityType.quantityType(forIdentifier: .distanceWalkingRunning):
                 let meterUnit = HKUnit.meter()
-                self.distance = statistics.sumQuantity()?.doubleValue(for: meterUnit) ?? 0
-                self.calculateAveragePace(distance: self.distance, duration: elapsedTime)
+                let distance = statistics.sumQuantity()?.doubleValue(for: meterUnit) ?? 0
+                if distance > 0 {
+                    self.distance = distance
+                    self.averagePace = elapsedTime / distance * 1000
+                }
             case HKQuantityType.quantityType(forIdentifier: .runningSpeed):
                 let meterPerSecondUnit = HKUnit.meter().unitDivided(by: HKUnit.second())
                 let speed = statistics.mostRecentQuantity()?.doubleValue(for: meterPerSecondUnit) ?? 0
-                self.calculatePaceFromSpeed(speed: speed)
+                if speed > 0 {
+                    self.pace = 1 / speed * 1000
+                }
             case HKQuantityType.quantityType(forIdentifier: .stepCount):
                 let stepCountUnit = HKUnit.count()
                 self.stepCount = statistics.averageQuantity()?.doubleValue(for: stepCountUnit) ?? 0
@@ -169,8 +144,8 @@ extension WatchWorkoutManager: HKWorkoutSessionDelegate {
         }
         
         if toState == .ended {
-            builder?.endCollection(withEnd: Date()) { (success, error) in
-                self.builder?.finishWorkout { (workout, error) in }
+            builder?.endCollection(withEnd: Date()) { success, error in
+                self.builder?.finishWorkout { workout, error in }
             }
         }
     }
@@ -183,10 +158,7 @@ extension WatchWorkoutManager: HKLiveWorkoutBuilderDelegate {
     
     func workoutBuilder(_ workoutBuilder: HKLiveWorkoutBuilder, didCollectDataOf collectedTypes: Set<HKSampleType>) {
         for type in collectedTypes {
-            guard let quantityType = type as? HKQuantityType else {
-                return
-            }
-            
+            guard let quantityType = type as? HKQuantityType else { return }
             let statistics = workoutBuilder.statistics(for: quantityType)
             updateForStatistics(statistics)
         }
