@@ -11,22 +11,15 @@ import HealthKit
 class WatchWorkoutManager: NSObject, ObservableObject {
     static let shared = WatchWorkoutManager()
     let healthStore = HKHealthStore()
-
-    var selectedWorkout: HKWorkoutActivityType? {
-        didSet {
-            guard let selectedWorkout = selectedWorkout else { return }
-            startWorkout(workoutType: selectedWorkout)
-        }
-    }
     
     var isHealthKitAuthorized: Bool { HKHealthStore.isHealthDataAvailable() }
     var session: HKWorkoutSession?
     var builder: HKLiveWorkoutBuilder?
     
-    func startWorkout(workoutType: HKWorkoutActivityType) {
+    func startWorkout() {
         resetWorkout()
         let configuration = HKWorkoutConfiguration()
-        configuration.activityType = workoutType
+        configuration.activityType = .running
         configuration.locationType = .outdoor
         
         do {
@@ -155,7 +148,6 @@ class WatchWorkoutManager: NSObject, ObservableObject {
     }
     
     func resetWorkout() {
-        selectedWorkout = nil
         builder = nil
         session = nil
         distance = 0
