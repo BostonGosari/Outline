@@ -38,7 +38,7 @@ class WatchConnectivityManager: NSObject, WCSessionDelegate, ObservableObject {
     @Published var runningData: MirroringRunningData = MirroringRunningData()
     @Published var isMirroring = false
     static let shared = WatchConnectivityManager()
-    
+        
     private let userDataModel = UserDataModel()
     let session = WCSession.default
     
