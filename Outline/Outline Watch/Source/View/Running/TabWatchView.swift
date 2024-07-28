@@ -15,7 +15,6 @@ struct TabWatchView: View {
     
     @State private var selection: Tab = .metrics
     @State private var timer: Timer?
-    @State private var time = 0.0
     
     enum Tab {
         case controls, map, metrics
@@ -56,13 +55,13 @@ struct TabWatchView: View {
                 } else if newValue == .resume {
                     workoutManager.session?.resume()
                 } else if newValue == .end {
-                    if time > 30 {
+                    if workoutManager.builder?.elapsedTime ?? 0 > 30 {
                         runningManager.userLocations = locationManager.userLocations
                         runningManager.calculateScore()
                         sendDataToPhone()
                         workoutManager.endWorkout()
                     } else {
-                        workoutManager.endWorkoutWithoutSummaryView()
+                        workoutManager.endWorkout()
                         runningManager.startRunning = false
                     }
                 }
@@ -74,17 +73,13 @@ struct TabWatchView: View {
     private func sendMirroringData() {
         timer?.invalidate()
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
-            if workoutManager.running {
-                time += 1
-            }
-            
             if connectivityManager.isMirroring {
                 let userLocations = ConvertCoordinateManager.convertToCoordinates(locationManager.userLocations)
                 
                 let runningData =
                 MirroringRunningData(
                     userLocations: userLocations,
-                    time: time,
+                    time: workoutManager.builder?.elapsedTime ?? 0,
                     distance: workoutManager.distance,
                     kcal: workoutManager.calorie,
                     pace: workoutManager.pace,
