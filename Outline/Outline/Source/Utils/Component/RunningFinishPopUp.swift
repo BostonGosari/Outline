@@ -18,6 +18,7 @@ enum ScoreState {
 
 struct RunningFinishPopUp: View {
     @StateObject private var runningStartManager = RunningStartManager.shared
+    @StateObject private var runningDataManager = RunningDataManager.shared
     @State private var counter = 0
     @State private var progress = 0.0
     @Binding var isPresented: Bool
@@ -68,6 +69,10 @@ struct RunningFinishPopUp: View {
                         runningStartManager.complete = true
                         withAnimation {
                             runningStartManager.running = false
+                        }
+                        Task {
+                            print("여기옴")
+                            await runningDataManager.removeActivity()
                         }
                     }
                     UnderlineButton(text: "조금 더 진행하기") {
