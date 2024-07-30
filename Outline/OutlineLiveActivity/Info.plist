@@ -2,10 +2,55 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd"&gt;
+&lt;plist version="1.0"&gt;
+&lt;array&gt;
+	&lt;string&gt;Pretendard-Black.ttf&lt;/string&gt;
+	&lt;string&gt;Pretendard-ExtraBold.ttf&lt;/string&gt;
+	&lt;string&gt;Pretendard-Bold.ttf&lt;/string&gt;
+	&lt;string&gt;Pretendard-SemiBold.ttf&lt;/string&gt;
+	&lt;string&gt;Pretendard-Midium.ttf&lt;/string&gt;
+	&lt;string&gt;Pretendard-Regular.ttf&lt;/string&gt;
+	&lt;string&gt;Pretendard-Thin.ttf&lt;/string&gt;
+	&lt;string&gt;Pretendard-Light.ttf&lt;/string&gt;
+	&lt;string&gt;SFCompactDisplay-Semibold.ttf&lt;/string&gt;
+	&lt;string&gt;StretchPro.ttf&lt;/string&gt;
+&lt;/array&gt;
+&lt;/plist&gt;
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd"&gt;
+&lt;plist version="1.0"&gt;
+&lt;array&gt;
+	&lt;string&gt;Pretendard-Black.ttf&lt;/string&gt;
+	&lt;string&gt;Pretendard-ExtraBold.ttf&lt;/string&gt;
+	&lt;string&gt;Pretendard-Bold.ttf&lt;/string&gt;
+	&lt;string&gt;Pretendard-SemiBold.ttf&lt;/string&gt;
+	&lt;string&gt;Pretendard-Midium.ttf&lt;/string&gt;
+	&lt;string&gt;Pretendard-Regular.ttf&lt;/string&gt;
+	&lt;string&gt;Pretendard-Thin.ttf&lt;/string&gt;
+	&lt;string&gt;Pretendard-Light.ttf&lt;/string&gt;
+	&lt;string&gt;SFCompactDisplay-Semibold.ttf&lt;/string&gt;
+	&lt;string&gt;StretchPro.ttf&lt;/string&gt;
+&lt;/array&gt;
+&lt;/plist&gt;
+</key>
+	<string></string>
 	<key>NSExtension</key>
 	<dict>
 		<key>NSExtensionPointIdentifier</key>
 		<string>com.apple.widgetkit-extension</string>
 	</dict>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Pretendard-Black.ttf</string>
+		<string>Pretendard-ExtraBold.ttf</string>
+		<string>Pretendard-Bold.ttf</string>
+		<string>Pretendard-SemiBold.ttf</string>
+		<string>Pretendard-Midium.ttf</string>
+		<string>Pretendard-Regular.ttf</string>
+		<string>Pretendard-Thin.ttf</string>
+		<string>Pretendard-Light.ttf</string>
+	</array>
 </dict>
 </plist>
