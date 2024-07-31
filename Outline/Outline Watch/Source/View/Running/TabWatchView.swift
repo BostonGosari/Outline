@@ -30,7 +30,7 @@ struct TabWatchView: View {
                 MetricsView()
                     .tag(Tab.metrics)
             }
-            .onChange(of: workoutManager.running) { _, newValue in
+            .onChange(of: workoutManager.isRunning) { _, newValue in
                 withAnimation {
                     if newValue {
                         selection = .metrics
@@ -46,7 +46,7 @@ struct TabWatchView: View {
                 stopMirring()
             }
             .navigationTitle {
-                Text(workoutManager.running ? runningManager.runningTitle : "일시 정지됨")
+                Text(workoutManager.isRunning ? runningManager.runningTitle : "일시 정지됨")
                     .foregroundStyle(.customPrimary)
             }
             .onChange(of: connectivityManager.runningState) { _, newValue in
