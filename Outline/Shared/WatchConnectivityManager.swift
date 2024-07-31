@@ -30,7 +30,7 @@ struct MirroringRunningData: Codable {
     var bpm: Double = 0
 }
 
-class WatchConnectivityManager: NSObject, WCSessionDelegate, ObservableObject {
+final class WatchConnectivityManager: NSObject, WCSessionDelegate, ObservableObject {
     @Published var allCourses: [GPSArtCourse] = []
     @Published var receivedCourse: GPSArtCourse = GPSArtCourse()
     @Published var runningState: RunningState?
@@ -64,7 +64,7 @@ class WatchConnectivityManager: NSObject, WCSessionDelegate, ObservableObject {
         print("error sessionDidBecomeInactive")
     }
     
-    func sessionDidDeactivate(_ session: WCSession) { 
+    func sessionDidDeactivate(_ session: WCSession) {
         print("error sessionDidDeactivate")
     }
 #endif
@@ -124,14 +124,9 @@ class WatchConnectivityManager: NSObject, WCSessionDelegate, ObservableObject {
             let data = try encoder.encode(runningData)
             let userInfo = ["runningData": data]
             session.transferUserInfo(userInfo)
+            print("send runningData")
         } catch {
             print("Failed to encode runningData")
-        }
-    }
-    
-    func session(_ session: WCSession, didReceiveMessage message: [String: Any]) {
-        DispatchQueue.main.async {
-            
         }
     }
     

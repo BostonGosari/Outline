@@ -14,8 +14,6 @@ struct TabWatchView: View {
     @StateObject private var runningManager = WatchRunningManager.shared
     
     @State private var selection: Tab = .metrics
-    @State private var isMapLoaded = false
-    @State private var count = 0.0
     @State private var timer: Timer?
     
     enum Tab {
@@ -32,7 +30,7 @@ struct TabWatchView: View {
                 MetricsView()
                     .tag(Tab.metrics)
             }
-            .onChange(of: workoutManager.running) { _, newValue in
+            .onChange(of: workoutManager.isRunning) { _, newValue in
                 withAnimation {
                     if newValue {
                         selection = .metrics
@@ -48,7 +46,7 @@ struct TabWatchView: View {
                 stopMirring()
             }
             .navigationTitle {
-                Text(workoutManager.running ? runningManager.runningTitle : "일시 정지됨")
+                Text(workoutManager.isRunning ? runningManager.runningTitle : "일시 정지됨")
                     .foregroundStyle(.customPrimary)
             }
             .onChange(of: connectivityManager.runningState) { _, newValue in
@@ -57,13 +55,13 @@ struct TabWatchView: View {
                 } else if newValue == .resume {
                     workoutManager.session?.resume()
                 } else if newValue == .end {
-                    if count > 30 {
+                    if workoutManager.builder?.elapsedTime ?? 0 > 30 {
                         runningManager.userLocations = locationManager.userLocations
                         runningManager.calculateScore()
                         sendDataToPhone()
                         workoutManager.endWorkout()
                     } else {
-                        workoutManager.endWorkoutWithoutSummaryView()
+                        workoutManager.endWorkout()
                         runningManager.startRunning = false
                     }
                 }
@@ -73,19 +71,16 @@ struct TabWatchView: View {
     }
     
     private func sendMirroringData() {
+        guard let builder = workoutManager.builder else { return }
         timer?.invalidate()
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
-            if workoutManager.running {
-                count += 1
-            }
-            
             if connectivityManager.isMirroring {
                 let userLocations = ConvertCoordinateManager.convertToCoordinates(locationManager.userLocations)
                 
                 let runningData =
                 MirroringRunningData(
                     userLocations: userLocations,
-                    time: count,
+                    time: builder.elapsedTime,
                     distance: workoutManager.distance,
                     kcal: workoutManager.calorie,
                     pace: workoutManager.pace,
@@ -100,6 +95,7 @@ struct TabWatchView: View {
     private func stopMirring() {
         timer?.invalidate()
         timer = nil
+        connectivityManager.isMirroring = false
     }
     
     private func sendDataToPhone() {

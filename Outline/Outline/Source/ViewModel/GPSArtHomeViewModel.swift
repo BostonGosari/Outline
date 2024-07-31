@@ -33,7 +33,6 @@ class GPSArtHomeViewModel: NSObject, CLLocationManagerDelegate, ObservableObject
     private let courseScoreModel = CourseScoreModel()
     private let courseModel = CourseModel()
     private let locationManager = CLLocationManager()
-    private let watchConnectivityManager = WatchConnectivityManager.shared
     
     override init() {
         super.init()
@@ -51,7 +50,7 @@ class GPSArtHomeViewModel: NSObject, CLLocationManagerDelegate, ObservableObject
                 self.thirdCourseList.removeAll()
                 self.courses = courseList
                 self.fetchRecommendedCourses()
-                self.watchConnectivityManager.sendGPSArtCoursesToWatch(self.coursesForWatch)
+                self.sendCoursesToWatch()
                 self.readFirstCourseList()
                 self.readSecondCourseList()
                 self.readThirdCourseList()
@@ -59,6 +58,10 @@ class GPSArtHomeViewModel: NSObject, CLLocationManagerDelegate, ObservableObject
                 print(error)
             }
         }
+    }
+    
+    func sendCoursesToWatch() {
+        WatchConnectivityManager.shared.sendGPSArtCoursesToWatch(coursesForWatch)
     }
     
     func fetchRecommendedCourses() {
