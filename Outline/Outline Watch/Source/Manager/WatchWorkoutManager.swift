@@ -33,7 +33,7 @@ class WatchWorkoutManager: NSObject, ObservableObject {
     
     // MARK: - Session State Control
     @Published var showSummaryView = false
-    @Published var running = false
+    @Published var isRunning = false
     
     func startWorkout() {
         resetWorkout()
@@ -60,7 +60,7 @@ class WatchWorkoutManager: NSObject, ObservableObject {
     }
     
     func togglePause() {
-        if running == true {
+        if isRunning == true {
             session?.pause()
         } else {
             session?.resume()
@@ -68,15 +68,14 @@ class WatchWorkoutManager: NSObject, ObservableObject {
     }
     
     func endWorkout() {
+        session?.end()
         guard let elapsedTime = builder?.elapsedTime else { return }
         
         if elapsedTime < 30 {
             print("Workout too short, not saving. Elapsed time: \(elapsedTime)")
-            session?.end()
             resetWorkout()
         } else {
             print("Ending workout. Elapsed time: \(elapsedTime)")
-            session?.end()
             showSummaryView = true
         }
     }
@@ -148,11 +147,9 @@ extension WatchWorkoutManager: HKWorkoutSessionDelegate {
     func workoutSession(_ workoutSession: HKWorkoutSession, didChangeTo toState: HKWorkoutSessionState,
                         from fromState: HKWorkoutSessionState, date: Date) {
         DispatchQueue.main.async {
-            self.running = toState == .running
+            self.isRunning = toState == .running
         }
-        
-        print("Workout session state changed from \(fromState) to \(toState)")
-        
+                
         if toState == .ended {
             builder?.endCollection(withEnd: Date()) { success, error in
                 if let error = error {
@@ -171,9 +168,7 @@ extension WatchWorkoutManager: HKWorkoutSessionDelegate {
         }
     }
     
-    func workoutSession(_ workoutSession: HKWorkoutSession, didFailWithError error: Error) {
-        print("Workout session failed with error: \(error.localizedDescription)")
-    }
+    func workoutSession(_ workoutSession: HKWorkoutSession, didFailWithError error: Error) { }
 }
 
 extension WatchWorkoutManager: HKLiveWorkoutBuilderDelegate {

@@ -33,14 +33,14 @@ struct ControlsView: View {
                     }
                 }
                 
-                ControlButton(systemName: workoutManager.running ? "pause" : "play.fill", foregroundColor: .customPrimary, backgroundColor: .customPrimary) {
+                ControlButton(systemName: workoutManager.isRunning ? "pause" : "play.fill", foregroundColor: .customPrimary, backgroundColor: .customPrimary) {
                     workoutManager.togglePause()
                     withAnimation {
                         buttonAnimation.toggle()
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                             dataAnimation.toggle()
                         }
-                        if workoutManager.running {
+                        if workoutManager.isRunning {
                             connectivityManager.sendRunningState(.pause)
                         } else {
                             connectivityManager.sendRunningState(.resume)
@@ -49,9 +49,9 @@ struct ControlsView: View {
                 }
             }
             .padding(.top, buttonAnimation ? 20 : WKInterfaceDevice.current().screenBounds.height * 0.2)
-            .padding(.bottom, workoutManager.running ? 0 : 30)
+            .padding(.bottom, workoutManager.isRunning ? 0 : 30)
             
-            if !workoutManager.running {
+            if !workoutManager.isRunning {
                 LazyVGrid(columns: Array(repeating: GridItem(), count: 2), spacing: 12) {
                     workoutDataItem(value: "\((workoutManager.distance/1000).formatted(.number.precision(.fractionLength(2))))", label: "킬로미터")
                     workoutDataItem(value: workoutManager.averagePace.formattedAveragePace(),
@@ -63,7 +63,7 @@ struct ControlsView: View {
                 .opacity(dataAnimation ? 1 : 0)
             }
         }
-        .scrollDisabled(workoutManager.running || workoutManager.showSummaryView)
+        .scrollDisabled(workoutManager.isRunning || workoutManager.showSummaryView)
         .sheet(isPresented: $showEndRunningSheet) {
             EndRunningSheet(text: "종료하시겠어요?") {
                 connectivityManager.sendRunningState(.end)
