@@ -28,7 +28,8 @@ struct MirroringMapWatchView: View {
                 }
                 
                 if !connectivityManager.runningData.userLocations.isEmpty {
-                    MapPolyline(coordinates: connectivityManager.runningData.userLocations.toCLLocationCoordinates())
+                    let smoothedLocation = smoothLocations(connectivityManager.runningData.userLocations.toCLLocationCoordinates())
+                    MapPolyline(coordinates: smoothedLocation)
                         .stroke(.customPrimary, style: StrokeStyle(lineWidth: 5, lineCap: .round, lineJoin: .round))
                 }
             }
@@ -101,6 +102,25 @@ struct MirroringMapWatchView: View {
         }
         
         return maxDistance
+    }
+    
+    private func smoothLocations(_ locations: [CLLocationCoordinate2D]) -> [CLLocationCoordinate2D] {
+        guard locations.count > 1 else { return locations }
+       
+        var smoothed: [CLLocationCoordinate2D] = []
+        
+        for i in 0..<locations.count {
+            let start = max(0, i - 2)
+            let end = min(locations.count - 1, i + 2)
+            let subset = Array(locations[start...end])
+            
+            let avgLatitude = subset.map { $0.latitude }.reduce(0, +) / Double(subset.count)
+            let avgLongitude = subset.map { $0.longitude }.reduce(0, +) / Double(subset.count)
+            
+            smoothed.append(CLLocationCoordinate2D(latitude: avgLatitude, longitude: avgLongitude))
+        }
+        
+        return smoothed
     }
 }
 
