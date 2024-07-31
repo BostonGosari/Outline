@@ -13,29 +13,19 @@ struct FinishWatchView: View {
     var body: some View {
         VStack {
             switch score {
-            case 100:
-                finalImage("FinalImage1")
-            case 50..<100:
-                finalImage("FinalImage2")
+            case 80..<100:
+                FinalImage("FinalImage1")
+            case 50..<80:
+                FinalImage("FinalImage2")
             case ..<10:
-                finalImage("FinalImage3")
+                FinalImage("FinalImage3")
             default:
                 Text("\(score, specifier: "%.2f")%")
             }
         }
     }
-    
-    @ViewBuilder
-    private func finalImage(_ imageName: String) -> some View {
-        Image(imageName)
-            .resizable()
-            .scaledToFit()
-            .frame(height: 118)
-            .ignoresSafeArea()
-            .padding(.bottom, 20)
-    }
 }
 
 #Preview {
-    FinishWatchView(score: 100)
+    FinishWatchView(score: 80)
 }

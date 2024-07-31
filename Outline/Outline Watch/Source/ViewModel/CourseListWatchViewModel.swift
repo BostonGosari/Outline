@@ -37,10 +37,12 @@ class CourseListWatchViewModel: NSObject, CLLocationManagerDelegate, ObservableO
         ]
         
         healthStore.requestAuthorization(toShare: quantityTypes, read: quantityTypes) { success, _ in
-            if success {
-                self.isHealthAuthorized = true
-            } else {
-                self.isHealthAuthorized = false
+            DispatchQueue.main.async {
+                if success {
+                    self.isHealthAuthorized = true
+                } else {
+                    self.isHealthAuthorized = false
+                }
             }
         }
     }
@@ -65,16 +67,12 @@ class CourseListWatchViewModel: NSObject, CLLocationManagerDelegate, ObservableO
 }
 
 extension HKWorkoutActivityType: Identifiable {
-    public var id: UInt {
-        rawValue
-    }
+    public var id: UInt { rawValue }
     
     var name: String {
         switch self {
-        case .running:
-            return "Run"
-        default:
-            return ""
+        case .running: "Run"
+        default: ""
         }
     }
 }
