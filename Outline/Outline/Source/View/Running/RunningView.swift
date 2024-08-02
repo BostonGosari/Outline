@@ -443,10 +443,7 @@ extension RunningView {
                         }
                     }
                 }
-                Task {
-                    print("여기옴")
-                    await runningDataManager.removeActivity()
-                }
+              
                 showStopPopup = false
                 stopButtonScale = 1
             }

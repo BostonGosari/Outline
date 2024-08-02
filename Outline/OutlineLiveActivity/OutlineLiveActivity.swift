@@ -1,9 +1,3 @@
-//
-//  OutlineLiveActivity.swift
-//  OutlineLiveActivity
-//
-//  Created by 김하은 on 11/29/23.
-//
 import SwiftUI
 import WidgetKit
 import Intents
@@ -17,9 +11,16 @@ struct OutlineLiveActivity: Widget {
                     .background(Color.customBlack.opacity(0.7))
                     .cornerRadius(25)
                     .overlay(
-                        RoundedRectangle(cornerRadius: 25)
+                        RoundedRectangle(cornerRadius: 24)
                         .inset(by: 0.5)
-                        .stroke(Color.customPrimary, lineWidth: 1.5)
+                        .strokeBorder(
+                            LinearGradient(
+                                gradient: Gradient(colors: [Color.customPrimary, Color.customPrimary.opacity(0)]),
+                                startPoint: .top,
+                                endPoint: .bottom
+                            ),
+                            lineWidth: 1.5
+                        )
                     )
                 VStack(spacing: 0) {
                     HStack {
@@ -44,9 +45,12 @@ struct OutlineLiveActivity: Widget {
                     }
                     .foregroundStyle(.customPrimary)
                     .padding(.top, 15)
-                    .padding(.bottom, 13)
-                    
+                
                     Divider()
+                       .background(Color.gray200)
+                       .frame(height: 1)
+                       .padding(.vertical, 6)
+                    
                     HStack {
                         Text(context.state.totalTime)
                             .font(.customWidgetData)
@@ -63,7 +67,7 @@ struct OutlineLiveActivity: Widget {
                     .fontWeight(.bold)
                     .foregroundStyle(.gray200)
                 }
-                .padding(EdgeInsets(top: 20, leading: 24, bottom: 10, trailing: 24))
+                .padding(EdgeInsets(top: 17.5, leading: 24, bottom: 10, trailing: 24))
             }
             
         } dynamicIsland: { context in
@@ -93,3 +97,5 @@ struct OutlineLiveActivity: Widget {
        
     }
 }
+
+
