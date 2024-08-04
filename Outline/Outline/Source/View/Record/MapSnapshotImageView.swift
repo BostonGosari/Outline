@@ -28,7 +28,6 @@ class MapSnapshotCache {
     }
 }
 
-// 마지막 가까운 거리 연결해주기, 짧은경로 뜨지 않는 문제
 // 랜더링 문제 속도가 조금 늦음, 이미지 자체를 다 저장하고싶은데...(캐싱 최적화)
 struct MapSnapshotImageView: UIViewRepresentable {
     let coordinates: [CLLocationCoordinate2D]
@@ -36,6 +35,7 @@ struct MapSnapshotImageView: UIViewRepresentable {
     let height: CGFloat
     let alpha: CGFloat
     let lineWidth: CGFloat
+    let heading: CLLocationDirection? = nil
     
     func makeUIView(context: Context) -> UIImageView {
         let imageView = UIImageView()
@@ -44,9 +44,7 @@ struct MapSnapshotImageView: UIViewRepresentable {
         return imageView
     }
     
-    func updateUIView(_ uiView: UIImageView, context: Context) {
-
-    }
+    func updateUIView(_ uiView: UIImageView, context: Context) { }
     
     private func updateSnapshot(for imageView: UIImageView) {
         let cacheKey = "\(coordinates)-\(width)-\(height)-\(alpha)-\(lineWidth)"
@@ -77,7 +75,7 @@ struct MapSnapshotImageView: UIViewRepresentable {
         var region = MKCoordinateRegion(polyline.boundingMapRect)
         
         // 경로가 주어지지 않았을 때, 전국 지도를 표시
-        let regionMultiplier: Double = coordinates.isEmpty ? 2.0 : 1.4
+        let regionMultiplier: Double = coordinates.isEmpty ? 2.0 : 1.6
         region.span.latitudeDelta *= regionMultiplier
         region.span.longitudeDelta *= regionMultiplier
         
@@ -90,6 +88,10 @@ struct MapSnapshotImageView: UIViewRepresentable {
         let configuration = MKStandardMapConfiguration(emphasisStyle: .muted)
         configuration.pointOfInterestFilter = .excludingAll
         options.preferredConfiguration = configuration
+    
+        if let heading = heading {
+            options.camera.heading = heading
+        }
         
         let snapshotter = MKMapSnapshotter(options: options)
         snapshotter.start { snapshot, _ in
@@ -125,63 +127,66 @@ struct MapSnapshotImageView: UIViewRepresentable {
         
         let path = UIBezierPath()
         
+        var coordinates = coordinates
+        coordinates = gaussianSmoothing(coordinates: coordinates, size: 3, sigma: 1)
+        coordinates = closePathIfEndpointsMatch(coordinates: coordinates)
+        
         let firstPoint = snapshot.point(for: coordinates[0])
         path.move(to: firstPoint)
         
         for i in 1..<coordinates.count {
-            let previousPoint = snapshot.point(for: coordinates[i-1])
-            let currentPoint = snapshot.point(for: coordinates[i])
-            let midPoint = CGPoint(x: (previousPoint.x + currentPoint.x) / 2, y: (previousPoint.y + currentPoint.y) / 2)
-            
-            path.addQuadCurve(to: midPoint, controlPoint: previousPoint)
-            path.addQuadCurve(to: currentPoint, controlPoint: midPoint)
+            let point = snapshot.point(for: coordinates[i])
+            path.addLine(to: point)
         }
                         
         let uiColor = UIColor(Color.customPrimary)
         context?.setStrokeColor(uiColor.cgColor)
         
+        context?.setLineCap(.round)
+        context?.setLineJoin(.round)
         context?.addPath(path.cgPath)
         context?.setLineWidth(lineWidth)
         context?.strokePath()
     }
     
-    private func filterCoordinates(_ coordinates: [CLLocationCoordinate2D]) -> [CLLocationCoordinate2D] {
-        var filtered: [CLLocationCoordinate2D] = []
+    func closePathIfEndpointsMatch(coordinates: [CLLocationCoordinate2D]) -> [CLLocationCoordinate2D] {
+        guard coordinates.count >= 10 else { return coordinates } // 너무 짧은 경로일 경우 반환
+        guard let first = coordinates.first, let last = coordinates.last else { return coordinates }
+        let firstLocation = CLLocation(from: first)
+        let lastLocation = CLLocation(from: last)
+        var coordinates = coordinates
         
-        for coordinate in coordinates {
-            if let last = filtered.last {
-                let current = CLLocation(from: last)
-                let new = CLLocation(from: coordinate)
-                if current.distance(from: new) >= 10 {
-                    filtered.append(coordinate)
-                }
-            } else {
-                filtered.append(coordinate)
-            }
+        if firstLocation.distance(from: lastLocation) <= 10 { coordinates.append(first) }
+        return coordinates
+    }
+
+    func gaussianSmoothing(coordinates: [CLLocationCoordinate2D], size: Int, sigma: Double) -> [CLLocationCoordinate2D] {
+        // size가 0이거나 coordinates 배열의 크기보다 클 경우 원본 배열 반환
+        guard size > 0, coordinates.count >= size else { return coordinates }
+        let kernel = gaussianKernel(size: size, sigma: sigma)
+        // 러닝 특성상 첫번째 값은 무조건 필요하기 때문에 첫번째 값 추가
+        var smoothedCoordinates: [CLLocationCoordinate2D] = [coordinates[0]]
+        
+        for i in 0..<(coordinates.count - size + 1) {
+            let window = coordinates[i..<i+size]
+            let sumLatitude = zip(window, kernel).map { $0.latitude * $1 }.reduce(0, +)
+            let sumLongitude = zip(window, kernel).map { $0.longitude * $1 }.reduce(0, +)
+            smoothedCoordinates.append(CLLocationCoordinate2D(latitude: sumLatitude, longitude: sumLongitude))
         }
         
-        return filtered.count > 2 ? filtered : coordinates
+        return smoothedCoordinates
     }
     
-    private func smoothLocations(_ locations: [CLLocationCoordinate2D]) -> [CLLocationCoordinate2D] {
-        guard locations.count > 1 else { return locations }
-        
-        var smoothed: [CLLocationCoordinate2D] = []
-        for i in 0..<locations.count {
-            let start = max(0, i - 2)
-            let end = min(locations.count - 1, i + 2)
-            let subset = Array(locations[start...end])
-            
-            let avgLatitude = subset.map { $0.latitude }.reduce(0, +) / Double(subset.count)
-            let avgLongitude = subset.map { $0.longitude }.reduce(0, +) / Double(subset.count)
-            
-            smoothed.append(CLLocationCoordinate2D(latitude: avgLatitude, longitude: avgLongitude))
+    func gaussianKernel(size: Int, sigma: Double) -> [Double] {
+        let mean = Double(size) / 2
+        let kernel = (0..<size).map { i in
+            exp(-0.5 * pow((Double(i) - mean) / sigma, 2))
         }
-        
-        return smoothed
+        let sum = kernel.reduce(0, +)
+        return kernel.map { $0 / sum }
     }
 }
 
 #Preview {
-    MapSnapshotTestView(fileName: "압구정 댕댕런 테스트", lineWidth: 5)
+    MapSnapshotTestView(fileName: "압구정 댕댕런 테스트 촘촘", lineWidth: 4)
 }
