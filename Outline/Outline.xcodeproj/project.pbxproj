@@ -16,11 +16,9 @@
 		0E2B4CBF2AE744E8002A5103 /* RecordDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2B4CBE2AE744E8002A5103 /* RecordDetailViewModel.swift */; };
 		0E4291602B03CF3100EE75F5 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E42915F2B03CF3100EE75F5 /* LocationManager.swift */; };
 		0E4D309D2B5FC85600582E37 /* FinishRunningMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4D309C2B5FC85600582E37 /* FinishRunningMapView.swift */; };
-		0E696E942B60F39A00A4838F /* RecordMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E696E932B60F39A00A4838F /* RecordMapView.swift */; };
 		0E7EE51D2B5E6D24004F6BAF /* FreeRunningMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7EE51C2B5E6D24004F6BAF /* FreeRunningMapView.swift */; };
 		0E7EE51F2B5E761E004F6BAF /* CardDetailInformationMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7EE51E2B5E761E004F6BAF /* CardDetailInformationMapView.swift */; };
 		0E7EE5212B5E7C4B004F6BAF /* CardDetailMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7EE5202B5E7C4B004F6BAF /* CardDetailMapView.swift */; };
-		0E7EE5232B5E83E4004F6BAF /* RecordDetailMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7EE5222B5E83E4004F6BAF /* RecordDetailMapView.swift */; };
 		0E9A5D482AE065A100C19FF3 /* ShareViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9A5D472AE065A100C19FF3 /* ShareViewModel.swift */; };
 		0E9A5D4F2AE0B8C800C19FF3 /* ShareModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9A5D4E2AE0B8C800C19FF3 /* ShareModel.swift */; };
 		0EB59A222B176BA100A18C50 /* test.json in Resources */ = {isa = PBXBuildFile; fileRef = 0EB59A212B176BA100A18C50 /* test.json */; };
@@ -118,8 +116,6 @@
 		29C9D27A2B6124E2002E3F1E /* HealthAuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954CB2B52AE63E79005EB2E9 /* HealthAuthView.swift */; };
 		29CC19A42AE95F2300B79610 /* RunningStartManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29CC19A32AE95F2300B79610 /* RunningStartManager.swift */; };
 		29CC42BD2AF24BCE00578EF1 /* WatchRunningManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29CC42BC2AF24BCE00578EF1 /* WatchRunningManager.swift */; };
-		29D6BAD32B0924D200BD8653 /* SmallCarouselCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D6BAD22B0924D200BD8653 /* SmallCarouselCard.swift */; };
-		29D6BAD52B092CA800BD8653 /* SmallListCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D6BAD42B092CA800BD8653 /* SmallListCard.swift */; };
 		29D6BAD72B09AE5B00BD8653 /* ScoreShimmer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D6BAD62B09AE5B00BD8653 /* ScoreShimmer.swift */; };
 		29D6BAD92B09D4DE00BD8653 /* CardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D6BAD82B09D4DE00BD8653 /* CardModel.swift */; };
 		29D7AD4A2B0E030F00AAAAB0 /* MirroringMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D7AD492B0E030F00AAAAB0 /* MirroringMapView.swift */; };
@@ -335,11 +331,9 @@
 		0E2B4CBE2AE744E8002A5103 /* RecordDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordDetailViewModel.swift; sourceTree = "<group>"; };
 		0E42915F2B03CF3100EE75F5 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		0E4D309C2B5FC85600582E37 /* FinishRunningMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishRunningMapView.swift; sourceTree = "<group>"; };
-		0E696E932B60F39A00A4838F /* RecordMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordMapView.swift; sourceTree = "<group>"; };
 		0E7EE51C2B5E6D24004F6BAF /* FreeRunningMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeRunningMapView.swift; sourceTree = "<group>"; };
 		0E7EE51E2B5E761E004F6BAF /* CardDetailInformationMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetailInformationMapView.swift; sourceTree = "<group>"; };
 		0E7EE5202B5E7C4B004F6BAF /* CardDetailMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetailMapView.swift; sourceTree = "<group>"; };
-		0E7EE5222B5E83E4004F6BAF /* RecordDetailMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordDetailMapView.swift; sourceTree = "<group>"; };
 		0E96BA912AF4E00B000C8FBF /* SFCompactDisplay-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFCompactDisplay-Semibold.ttf"; sourceTree = "<group>"; };
 		0E9A5D472AE065A100C19FF3 /* ShareViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewModel.swift; sourceTree = "<group>"; };
 		0E9A5D4E2AE0B8C800C19FF3 /* ShareModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareModel.swift; sourceTree = "<group>"; };
@@ -425,8 +419,6 @@
 		29BB88312C5F1B8C006B238D /* RecordCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordCardView.swift; sourceTree = "<group>"; };
 		29CC19A32AE95F2300B79610 /* RunningStartManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningStartManager.swift; sourceTree = "<group>"; };
 		29CC42BC2AF24BCE00578EF1 /* WatchRunningManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchRunningManager.swift; sourceTree = "<group>"; };
-		29D6BAD22B0924D200BD8653 /* SmallCarouselCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallCarouselCard.swift; sourceTree = "<group>"; };
-		29D6BAD42B092CA800BD8653 /* SmallListCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallListCard.swift; sourceTree = "<group>"; };
 		29D6BAD62B09AE5B00BD8653 /* ScoreShimmer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreShimmer.swift; sourceTree = "<group>"; };
 		29D6BAD82B09D4DE00BD8653 /* CardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardModel.swift; sourceTree = "<group>"; };
 		29D7AD492B0E030F00AAAAB0 /* MirroringMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MirroringMapView.swift; sourceTree = "<group>"; };
@@ -724,8 +716,6 @@
 				29EBD7832B0883E500B44AA9 /* BigCardFrontside.swift */,
 				29F835CE2B0894DB0052C3C1 /* BigCardBackside.swift */,
 				29D6BAD62B09AE5B00BD8653 /* ScoreShimmer.swift */,
-				29D6BAD22B0924D200BD8653 /* SmallCarouselCard.swift */,
-				29D6BAD42B092CA800BD8653 /* SmallListCard.swift */,
 			);
 			path = Card;
 			sourceTree = "<group>";
@@ -846,8 +836,6 @@
 				292613162AF2BCEF00591E32 /* RecordHeader.swift */,
 				BB02A39B2B0D26EA00250EDD /* RecordGridView.swift */,
 				2925E0BE2B14825A0004BB05 /* RecordDetailView.swift */,
-				0E7EE5222B5E83E4004F6BAF /* RecordDetailMapView.swift */,
-				0E696E932B60F39A00A4838F /* RecordMapView.swift */,
 				29BB88312C5F1B8C006B238D /* RecordCardView.swift */,
 				29BB882F2C5F1B16006B238D /* MapSnapshotImageView.swift */,
 			);
@@ -1483,7 +1471,6 @@
 				95B8F4602AED391300D9F35B /* AppleAuthModel.swift in Sources */,
 				29B39D402B5EC6CC00C84E6A /* CoordinateExtension.swift in Sources */,
 				9528F0002AE042570056CCC6 /* PathManager.swift in Sources */,
-				29D6BAD52B092CA800BD8653 /* SmallListCard.swift in Sources */,
 				9563829E2B95FD2E00D3AD32 /* ShareView+Extension.swift in Sources */,
 				0E7EE51D2B5E6D24004F6BAF /* FreeRunningMapView.swift in Sources */,
 				0E7EE5212B5E7C4B004F6BAF /* CardDetailMapView.swift in Sources */,
@@ -1516,7 +1503,6 @@
 				9528F0062AE0B37B0056CCC6 /* LoginView.swift in Sources */,
 				BBF90BD82B13859100E3FD70 /* RunningAttributes.swift in Sources */,
 				958240752B0AFDF100105FAE /* CourseScoreModelType.swift in Sources */,
-				29D6BAD32B0924D200BD8653 /* SmallCarouselCard.swift in Sources */,
 				0EE92E6E2AE00AE5003192FF /* CompleteButton.swift in Sources */,
 				95C953CD2AF3BF760040B9DA /* ProfileViewModel.swift in Sources */,
 				95A01E332AF143BA0093D9C0 /* ProfileUserInfoView.swift in Sources */,
@@ -1524,7 +1510,6 @@
 				29BB88322C5F1B8C006B238D /* RecordCardView.swift in Sources */,
 				BB02A39C2B0D26EA00250EDD /* RecordGridView.swift in Sources */,
 				0EEFA04F2B0BAC1C00C656AE /* TransparentBlurView.swift in Sources */,
-				0E7EE5232B5E83E4004F6BAF /* RecordDetailMapView.swift in Sources */,
 				2955F7FA2B038084005CE2C0 /* HealthAuthViewModel.swift in Sources */,
 				95E2EF882ADBA5C70083ADEE /* CourseModel.swift in Sources */,
 				BB397D092AE6408A00F92A43 /* RecordView.swift in Sources */,
@@ -1540,7 +1525,6 @@
 				2921B00F2B01301100533A83 /* RunningMetricsView.swift in Sources */,
 				F06298AB2AE1998D007AB2D3 /* MapInfoView.swift in Sources */,
 				95A01E352AF144030093D9C0 /* ProfileHealthInfoView.swift in Sources */,
-				0E696E942B60F39A00A4838F /* RecordMapView.swift in Sources */,
 				0E1D1B292AE95AF2005282A2 /* CourseGuideView.swift in Sources */,
 				293C97DF2AE6C454007821F5 /* WatchConnectivityManager.swift in Sources */,
 				0E29F6532ADF6C3A00F5EF5C /* RunningPopup.swift in Sources */,
