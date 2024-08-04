@@ -81,9 +81,10 @@ struct RecordDetailView: View {
             .sheet(isPresented: $showRenameSheet) {
                 updateNameSheet
             }
-            .sheet(isPresented: $viewModel.navigateToShareMainView) {
+            .sheet(isPresented: $viewModel.navigateToShareMainView, content: {
                 ShareView(runningData: viewModel.shareData)
-            }
+                    .navigationBarBackButtonHidden()
+            })
             .preferredColorScheme(.dark)
             .toolbarBackground(.hidden, for: .navigationBar)
             .toolbar {
@@ -98,7 +99,6 @@ struct RecordDetailView: View {
                 }
             }
         }
-        .navigationBarTitleDisplayMode(.inline)
     }
     
     private var updateNameSheet: some View {
