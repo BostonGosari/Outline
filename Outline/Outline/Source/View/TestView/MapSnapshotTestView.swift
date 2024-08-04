@@ -36,3 +36,24 @@ struct MapSnapshotTestView: View {
 #Preview {
     MapSnapshotTestView(fileName: "건대 오리런", lineWidth: 4.0)
 }
+
+#Preview {
+    BigCard(
+        cardType: .excellent,
+        runName: "댕댕런",
+        date: "2024.8.4",
+        editMode: false,
+        time: "20:00.10",
+        distance: "1000KM",
+        pace: "9'99''",
+        kcal: "100",
+        bpm: "100",
+        score: 100,
+        editAction: {
+            // edit Action here
+        },
+        content: {
+            MapSnapshotTestView(fileName: "압구정 댕댕런", lineWidth: 4.0)
+        }
+    )
+}
