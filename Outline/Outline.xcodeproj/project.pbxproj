@@ -114,6 +114,7 @@
 		29B736B52C5661540075A569 /* FinalImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B736B42C5661540075A569 /* FinalImage.swift */; };
 		29BB882E2C5F1434006B238D /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 29BB882D2C5F1434006B238D /* Secrets.xcconfig */; };
 		29BB88302C5F1B16006B238D /* MapSnapshotImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29BB882F2C5F1B16006B238D /* MapSnapshotImageView.swift */; };
+		29BB88322C5F1B8C006B238D /* RecordCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29BB88312C5F1B8C006B238D /* RecordCardView.swift */; };
 		29C9D27A2B6124E2002E3F1E /* HealthAuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954CB2B52AE63E79005EB2E9 /* HealthAuthView.swift */; };
 		29CC19A42AE95F2300B79610 /* RunningStartManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29CC19A32AE95F2300B79610 /* RunningStartManager.swift */; };
 		29CC42BD2AF24BCE00578EF1 /* WatchRunningManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29CC42BC2AF24BCE00578EF1 /* WatchRunningManager.swift */; };
@@ -421,6 +422,7 @@
 		29B736B42C5661540075A569 /* FinalImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalImage.swift; sourceTree = "<group>"; };
 		29BB882D2C5F1434006B238D /* Secrets.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 		29BB882F2C5F1B16006B238D /* MapSnapshotImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapSnapshotImageView.swift; sourceTree = "<group>"; };
+		29BB88312C5F1B8C006B238D /* RecordCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordCardView.swift; sourceTree = "<group>"; };
 		29CC19A32AE95F2300B79610 /* RunningStartManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningStartManager.swift; sourceTree = "<group>"; };
 		29CC42BC2AF24BCE00578EF1 /* WatchRunningManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchRunningManager.swift; sourceTree = "<group>"; };
 		29D6BAD22B0924D200BD8653 /* SmallCarouselCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallCarouselCard.swift; sourceTree = "<group>"; };
@@ -846,6 +848,7 @@
 				2925E0BE2B14825A0004BB05 /* RecordDetailView.swift */,
 				0E7EE5222B5E83E4004F6BAF /* RecordDetailMapView.swift */,
 				0E696E932B60F39A00A4838F /* RecordMapView.swift */,
+				29BB88312C5F1B8C006B238D /* RecordCardView.swift */,
 				29BB882F2C5F1B16006B238D /* MapSnapshotImageView.swift */,
 			);
 			path = Record;
@@ -1518,6 +1521,7 @@
 				95C953CD2AF3BF760040B9DA /* ProfileViewModel.swift in Sources */,
 				95A01E332AF143BA0093D9C0 /* ProfileUserInfoView.swift in Sources */,
 				29F835CF2B0894DB0052C3C1 /* BigCardBackside.swift in Sources */,
+				29BB88322C5F1B8C006B238D /* RecordCardView.swift in Sources */,
 				BB02A39C2B0D26EA00250EDD /* RecordGridView.swift in Sources */,
 				0EEFA04F2B0BAC1C00C656AE /* TransparentBlurView.swift in Sources */,
 				0E7EE5232B5E83E4004F6BAF /* RecordDetailMapView.swift in Sources */,
