@@ -1,5 +1,5 @@
 //
-//  PathTestView.swift
+//  PathManagerTestView.swift
 //  Outline
 //
 //  Created by Seungui Moon on 11/12/23.
@@ -9,7 +9,8 @@ import CoreLocation
 import MapKit
 import SwiftUI
 
-struct PathTestView: View {
+#if DEBUG
+struct PathManagerTestView: View {
     @State private var coordinates: [CLLocationCoordinate2D] = []
     
     private let parseManager = KMLParserManager()
@@ -41,8 +42,9 @@ struct PathTestView: View {
         }
     }
 }
+#endif
 
-extension PathTestView {
+extension PathManagerTestView {
     private func getGPSArtCourseData() {
         let parsedCoordinates = parseCooridinates(fileName: fileName)
         self.coordinates = parsedCoordinates.toCLLocationCoordinates()
@@ -60,5 +62,5 @@ extension PathTestView {
 }
 
 #Preview {
-    PathTestView()
+    PathManagerTestView()
 }
