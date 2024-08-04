@@ -124,18 +124,15 @@ struct MapSnapshotImageView: UIViewRepresentable {
         guard coordinates.count > 1 else { return }
         
         // 기존 smooth 메서드
-        var smoothedCoordinates = smoothLocations(coordinates)
-        let filteredCoordinates = filterCoordinates(smoothedCoordinates)
-        smoothedCoordinates = smoothLocations(filteredCoordinates)
-        guard smoothedCoordinates.count > 1 else { return }
+        guard coordinates.count > 1 else { return }
         
         let path = UIBezierPath()
         
-        let firstPoint = snapshot.point(for: smoothedCoordinates[0])
+        let firstPoint = snapshot.point(for: coordinates[0])
         path.move(to: firstPoint)
         
-        for i in 1..<smoothedCoordinates.count {
-            let point = snapshot.point(for: smoothedCoordinates[i])
+        for i in 1..<coordinates.count {
+            let point = snapshot.point(for: coordinates[i])
             path.addLine(to: point)
         }
         
@@ -185,4 +182,8 @@ struct MapSnapshotImageView: UIViewRepresentable {
         
         return smoothed
     }
+}
+
+#Preview {
+    MapSnapshotTestView(fileName: "")
 }

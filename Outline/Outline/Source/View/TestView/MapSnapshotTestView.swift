@@ -10,13 +10,13 @@ import SwiftUI
 #if DEBUG
 struct MapSnapshotTestView: View {
     private let parseManager = KMLParserManager()
+    let fileName: String
     
     var body: some View {
-        let coordinates = parseCooridinates(fileName: "AngukPuppyRun").toCLLocationCoordinates()
+        let coordinates = parseCooridinates(fileName: fileName).toCLLocationCoordinates()
         
-        MapSnapshotImageView(coordinates: coordinates, width: 200, height: 400, alpha: 0.6, lineWidth: 4.0)
+        MapSnapshotImageView(coordinates: coordinates, width: 300, height: 500, alpha: 0.6, lineWidth: 4.0)
             .scaledToFit()
-            .frame(height: 300)
         
     }
     
@@ -33,5 +33,5 @@ struct MapSnapshotTestView: View {
 #endif
 
 #Preview {
-    MapSnapshotTestView()
+    MapSnapshotTestView(fileName: "건대 오리런")
 }
