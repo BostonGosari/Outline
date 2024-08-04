@@ -124,6 +124,7 @@
 		29BB88652C5F28DD006B238D /* 석촌호수 썬글라스런.kml in Resources */ = {isa = PBXBuildFile; fileRef = 29BB88542C5F28DD006B238D /* 석촌호수 썬글라스런.kml */; };
 		29BB88662C5F28DD006B238D /* 압구정 댕댕런.kml in Resources */ = {isa = PBXBuildFile; fileRef = 29BB88552C5F28DD006B238D /* 압구정 댕댕런.kml */; };
 		29BB88672C5F28DD006B238D /* 신사 댕댕런.kml in Resources */ = {isa = PBXBuildFile; fileRef = 29BB88562C5F28DD006B238D /* 신사 댕댕런.kml */; };
+		29BB886B2C5F33DE006B238D /* 압구정 댕댕런 테스트.kml in Resources */ = {isa = PBXBuildFile; fileRef = 29BB886A2C5F33DE006B238D /* 압구정 댕댕런 테스트.kml */; };
 		29C9D27A2B6124E2002E3F1E /* HealthAuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954CB2B52AE63E79005EB2E9 /* HealthAuthView.swift */; };
 		29CC19A42AE95F2300B79610 /* RunningStartManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29CC19A32AE95F2300B79610 /* RunningStartManager.swift */; };
 		29CC42BD2AF24BCE00578EF1 /* WatchRunningManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29CC42BC2AF24BCE00578EF1 /* WatchRunningManager.swift */; };
@@ -428,6 +429,7 @@
 		29BB88542C5F28DD006B238D /* 석촌호수 썬글라스런.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "석촌호수 썬글라스런.kml"; sourceTree = "<group>"; };
 		29BB88552C5F28DD006B238D /* 압구정 댕댕런.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "압구정 댕댕런.kml"; sourceTree = "<group>"; };
 		29BB88562C5F28DD006B238D /* 신사 댕댕런.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "신사 댕댕런.kml"; sourceTree = "<group>"; };
+		29BB886A2C5F33DE006B238D /* 압구정 댕댕런 테스트.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "압구정 댕댕런 테스트.kml"; sourceTree = "<group>"; };
 		29CC19A32AE95F2300B79610 /* RunningStartManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningStartManager.swift; sourceTree = "<group>"; };
 		29CC42BC2AF24BCE00578EF1 /* WatchRunningManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchRunningManager.swift; sourceTree = "<group>"; };
 		29D6BAD62B09AE5B00BD8653 /* ScoreShimmer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreShimmer.swift; sourceTree = "<group>"; };
@@ -598,6 +600,7 @@
 				29BB88492C5F28DC006B238D /* 을지로 새런.kml */,
 				29BB88482C5F28DC006B238D /* 이촌 골프런.kml */,
 				29BB88522C5F28DC006B238D /* 충무 고래런.kml */,
+				29BB886A2C5F33DE006B238D /* 압구정 댕댕런 테스트.kml */,
 			);
 			path = KML;
 			sourceTree = "<group>";
@@ -1391,6 +1394,7 @@
 				29BB88632C5F28DD006B238D /* 충무 고래런.kml in Resources */,
 				BB1D53182ADDBCA20073771F /* Pretendard-Medium.ttf in Resources */,
 				29BB885F2C5F28DD006B238D /* 뚝섬 런런.kml in Resources */,
+				29BB886B2C5F33DE006B238D /* 압구정 댕댕런 테스트.kml in Resources */,
 				29BB88642C5F28DD006B238D /* 건대 오리런.kml in Resources */,
 				BB1D53162ADDBC900073771F /* Pretendard-Light.ttf in Resources */,
 				BB1D53102ADDBC690073771F /* Pretendard-ExtraBold.ttf in Resources */,
