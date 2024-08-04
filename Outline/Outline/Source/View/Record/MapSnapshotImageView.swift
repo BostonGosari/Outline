@@ -28,14 +28,13 @@ class MapSnapshotCache {
     }
 }
 
-// 랜더링 문제 속도가 조금 늦음, 이미지 자체를 다 저장하고싶은데...(캐싱 최적화)
 struct MapSnapshotImageView: UIViewRepresentable {
     let coordinates: [CLLocationCoordinate2D]
     let width: CGFloat
     let height: CGFloat
-    let alpha: CGFloat
-    let lineWidth: CGFloat
-    let heading: CLLocationDirection? = nil
+    let alpha: CGFloat // 배경 어둡기
+    let lineWidth: CGFloat // 라인 두께
+    let heading: CLLocationDirection? = nil // 경로 heading
     
     func makeUIView(context: Context) -> UIImageView {
         let imageView = UIImageView()
