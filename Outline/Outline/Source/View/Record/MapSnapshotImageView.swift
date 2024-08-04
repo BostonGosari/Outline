@@ -53,11 +53,13 @@ struct MapSnapshotImageView: UIViewRepresentable {
             return
         }
         
-        createMapSnapshot { image in
-            if let image = image {
-                MapSnapshotCache.shared.setImage(image, forKey: cacheKey)
+        DispatchQueue.main.async {
+            createMapSnapshot { image in
+                if let image = image {
+                    MapSnapshotCache.shared.setImage(image, forKey: cacheKey)
+                }
+                imageView.image = image
             }
-            imageView.image = image
         }
     }
     
