@@ -12,7 +12,7 @@ struct MapSnapshotTestView: View {
     private let parseManager = KMLParserManager()
     
     var body: some View {
-        let coordinates = parseCooridinates(fileName: "SeochoFrogRun").toCLLocationCoordinates()
+        let coordinates = parseCooridinates(fileName: "AngukPuppyRun").toCLLocationCoordinates()
         
         MapSnapshotImageView(coordinates: coordinates, width: 200, height: 400, alpha: 0.6, lineWidth: 4.0)
             .scaledToFit()
