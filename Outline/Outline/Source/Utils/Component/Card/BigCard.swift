@@ -37,28 +37,28 @@ struct BigCard<Content: View>: View {
     
     var body: some View {
         ZStack {
-            BigCardFrontside(
-                cardType: cardType,
-                runName: runName,
-                date: date,
-                content: content
-            )
-            .opacity(isFrontside ? 1 : 0)
-            
-            BigCardBackside(
-                cardType: cardType,
-                runName: runName,
-                date: date,
-                editMode: editMode,
-                time: time,
-                distance: distance,
-                pace: pace,
-                kcal: kcal,
-                bpm: bpm,
-                score: score,
-                editAction: editAction
-            )
-            .opacity(isFrontside ? 0 : 1)
+            if isFrontside {
+                BigCardFrontside(
+                    cardType: cardType,
+                    runName: runName,
+                    date: date,
+                    content: content
+                )
+            } else {
+                BigCardBackside(
+                    cardType: cardType,
+                    runName: runName,
+                    date: date,
+                    editMode: editMode,
+                    time: time,
+                    distance: distance,
+                    pace: pace,
+                    kcal: kcal,
+                    bpm: bpm,
+                    score: score,
+                    editAction: editAction
+                )
+            }
         }
         .overlay {
             hologramOverlay
