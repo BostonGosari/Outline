@@ -16,7 +16,7 @@ struct PathManagerTestView: View {
     private let parseManager = KMLParserManager()
     private var width: Double = 300
     private var height: Double = 300
-    private let fileName = "moai"
+    private let fileName = "신사 댕댕런"
     
     private var canvasData: CanvasData {
         return PathManager.getCanvasData(coordinates: coordinates, width: width, height: height)
