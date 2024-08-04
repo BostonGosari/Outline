@@ -123,22 +123,20 @@ struct MapSnapshotImageView: UIViewRepresentable {
     private func drawPolyline(on snapshot: MKMapSnapshotter.Snapshot, in context: CGContext?) {
         guard coordinates.count > 1 else { return }
         
-        // 기존 smooth 메서드
-        guard coordinates.count > 1 else { return }
-        
         let path = UIBezierPath()
         
         let firstPoint = snapshot.point(for: coordinates[0])
         path.move(to: firstPoint)
         
         for i in 1..<coordinates.count {
-            let point = snapshot.point(for: coordinates[i])
-            path.addLine(to: point)
+            let previousPoint = snapshot.point(for: coordinates[i-1])
+            let currentPoint = snapshot.point(for: coordinates[i])
+            let midPoint = CGPoint(x: (previousPoint.x + currentPoint.x) / 2, y: (previousPoint.y + currentPoint.y) / 2)
+            
+            path.addQuadCurve(to: midPoint, controlPoint: previousPoint)
+            path.addQuadCurve(to: currentPoint, controlPoint: midPoint)
         }
-        
-        path.lineJoinStyle = .round
-        path.lineCapStyle = .round
-        
+                        
         let uiColor = UIColor(Color.customPrimary)
         context?.setStrokeColor(uiColor.cgColor)
         
@@ -185,5 +183,5 @@ struct MapSnapshotImageView: UIViewRepresentable {
 }
 
 #Preview {
-    MapSnapshotTestView(fileName: "")
+    MapSnapshotTestView(fileName: "압구정 댕댕런 테스트", lineWidth: 5)
 }
