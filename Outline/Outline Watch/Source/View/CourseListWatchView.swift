@@ -2,7 +2,7 @@
 //  CourseListWatchView.swift
 //  Outline Watch App
 //
-//  Created by Hyunjun Kim on 10/16/23.
+//  Modified by hyunjun on 8/7/24.
 //
 
 import SwiftUI
@@ -27,7 +27,11 @@ struct CourseListWatchView: View {
         NavigationStack {
             ZStack {
                 if connectivityManager.allCourses.isEmpty {
+                    #if DEBUG
+                    freeArtButton
+                    #else
                     EmptyContentView()
+                    #endif
                 } else {
                     ScrollView {
                         VStack(spacing: -5) {
