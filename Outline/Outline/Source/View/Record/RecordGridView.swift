@@ -2,8 +2,9 @@
 //  RecordGridView.swift
 //  Outline
 //
-//  Created by 김하은 on 11/22/23.
+//  Modified by hyunjun on 8/4/24.
 //
+
 import CoreLocation
 import SwiftUI
 
@@ -73,7 +74,7 @@ struct RecordGridView: View {
                                 NavigationLink {
                                     RecordDetailView(isDeleteData: $isDeleteData, record: record, cardType: cardType)
                                 } label: {
-                                    SmallListCard(cardType: cardType, runName: courseName, date: formatDate(startDate), data: data!)
+                                    RecordCardView(size: .list, type: cardType, name: courseName, date: formatDate(startDate), coordinates: data!)
                                 }
                             }
                         }

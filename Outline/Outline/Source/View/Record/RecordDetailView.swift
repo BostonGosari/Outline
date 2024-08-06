@@ -2,7 +2,7 @@
 //  RecordDetailView.swift
 //  Outline
 //
-//  Created by hyunjun on 11/27/23.
+//  Modified by hyunjun on 8/4/24.
 //
 
 import SwiftUI
@@ -54,7 +54,7 @@ struct RecordDetailView: View {
                         showRenameSheet = true
                     },
                     content: {
-                        RecordDetailMapView(userLocations: viewModel.userLocations)
+                        MapSnapshotImageView(coordinates: viewModel.userLocations, width: 200, height: 400, alpha: 0.7, lineWidth: 4)
                     }
                 )
                 .frame(maxHeight: .infinity, alignment: .center)
@@ -81,9 +81,10 @@ struct RecordDetailView: View {
             .sheet(isPresented: $showRenameSheet) {
                 updateNameSheet
             }
-            .sheet(isPresented: $viewModel.navigateToShareMainView) {
+            .sheet(isPresented: $viewModel.navigateToShareMainView, content: {
                 ShareView(runningData: viewModel.shareData)
-            }
+                    .navigationBarBackButtonHidden()
+            })
             .preferredColorScheme(.dark)
             .toolbarBackground(.hidden, for: .navigationBar)
             .toolbar {
@@ -98,7 +99,6 @@ struct RecordDetailView: View {
                 }
             }
         }
-        .navigationBarTitleDisplayMode(.inline)
     }
     
     private var updateNameSheet: some View {

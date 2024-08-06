@@ -11,8 +11,9 @@ import SwiftUI
 
 class RecordDetailViewModel: ObservableObject {
     @Published var navigateToShareMainView = false
-    @Published var courseRegion: String = ""
-    @Published var runningData = ["킬로미터": "", "시간": "", "평균 페이스": "", "BPM": "", "칼로리": "", "케이던스": "", "점수": ""]
+    var courseRegion: String = ""
+    var runningData = ["킬로미터": "", "시간": "", "평균 페이스": "", "BPM": "", "칼로리": "", "케이던스": "", "점수": ""]
+    var userLocations: [CLLocationCoordinate2D] = []
     
     private var runningDate = Date()
     private let userDataModel = UserDataModel()
@@ -21,7 +22,6 @@ class RecordDetailViewModel: ObservableObject {
     var startTime: String = ""
     var endTime: String = ""
     var date: String = ""
-    var userLocations: [CLLocationCoordinate2D] = []
     var regionDisplayName: String = ""
     var shareData = ShareModel()
     

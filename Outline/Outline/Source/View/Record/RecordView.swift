@@ -2,7 +2,7 @@
 //  RecordView.swift
 //  Outline
 //
-//  Created by 김하은 on 10/23/23.
+//  Modified by hyunjun on 8/4/24.
 //
 
 import CoreLocation
@@ -21,183 +21,163 @@ struct RecordView: View {
     @State private var navigationTitle = "모든 아트"
     
     var body: some View {
-        NavigationView {
-            ZStack(alignment: .top) {
-                Color.gray900
-                    .ignoresSafeArea()
-                BackgroundBlur(color: Color.customSecondary, padding: 50)
-                    .opacity(0.5)
-                
-                if authState == .login {
-                    ScrollView {
-                        Color.clear.frame(height: 0)
-                            .onScrollViewOffsetChanged { offset in
-                                scrollOffset = offset
-                            }
-                        
-                        RecordHeader(scrollOffset: scrollOffset)
-                        
-                            if filteredRecords.isEmpty {
-                                VStack(alignment: .center) {
-                                    Image(systemName: "exclamationmark.circle")
-                                        .foregroundStyle(Color.customPrimary)
-                                        .font(Font.system(size: 36))
-                                        .padding(.top, 150)
-                                    Text("아직 러닝 기록이 없어요")
-                                        .font(.customSubbody)
-                                        .foregroundStyle(Color.gray500)
-                                        .padding(.top, 14)
-                                }
-                                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                            } else {
-                                LazyVStack(alignment: .leading) {
-                                    ScrollView(.horizontal, showsIndicators: false) {
-                                        LazyHStack(spacing: 16) {
-                                            ForEach(filteredRecords.prefix(5), id: \.id) { record in
-                                                if let courseName = record.courseData?.courseName,
-                                                   let coursePaths = record.courseData?.coursePaths,
-                                                   let startDate = record.healthData?.startDate,
-                                                   let score = record.courseData?.score {
-                                                    let data = pathToCoordinate(coursePaths)
-                                                    let cardType = getCardType(forScore: score)
-                                                    NavigationLink {
-                                                        RecordDetailView(isDeleteData: $isDeleteData, record: record, cardType: cardType)
-                                                    } label: {
-                                                        SmallCarouselCard(cardType: cardType, runName: courseName, date: formatDate(startDate), data: data!)
-                                                    }
-                                                    .padding(.bottom, 8)
-                                                } else {
-                                                    // Handle the case where score is nil
-                                                    SmallListEmptyCard()
-                                                        .padding(.bottom, 8)
-                                                }
-                                            }
-                                            
-                                            // Use Group to conditionally include SmallListEmptyCard
-                                            Group {
-                                                ForEach(0 ..< max(0, 5 - filteredRecords.count), id: \.self) { _ in
-                                                    SmallCarouselEmptyCard()
-                                                    
-                                                }
-                                            }
-                                        }
-                                        .padding(.horizontal)
-                                        
-                                    }
-                                    
-                                    VStack(alignment: .leading) {
-                                        HStack {
-                                            Text("GPS 아트")
-                                                .font(.customTitle2)
-                                                .padding(.horizontal)
-                                            Spacer()
+        ZStack(alignment: .top) {
+            Color.gray900
+                .ignoresSafeArea()
+            BackgroundBlur(color: Color.customSecondary, padding: 50)
+                .opacity(0.5)
+            
+            if authState == .login {
+                ScrollView {
+                    Color.clear.frame(height: 0)
+                        .onScrollViewOffsetChanged { offset in
+                            scrollOffset = offset
+                        }
+                    
+                    RecordHeader(scrollOffset: scrollOffset)
+                    
+                    if filteredRecords.isEmpty {
+                        VStack(alignment: .center) {
+                            Image(systemName: "exclamationmark.circle")
+                                .foregroundStyle(Color.customPrimary)
+                                .font(Font.system(size: 36))
+                                .padding(.top, 150)
+                            Text("아직 러닝 기록이 없어요")
+                                .font(.customSubbody)
+                                .foregroundStyle(Color.gray500)
+                                .padding(.top, 14)
+                        }
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    } else {
+                        LazyVStack(alignment: .leading) {
+                            ScrollView(.horizontal, showsIndicators: false) {
+                                LazyHStack(spacing: 16) {
+                                    ForEach(filteredRecords.prefix(5), id: \.id) { record in
+                                        if let courseName = record.courseData?.courseName,
+                                           let coursePaths = record.courseData?.coursePaths,
+                                           let startDate = record.healthData?.startDate,
+                                           let score = record.courseData?.score {
+                                            let data = pathToCoordinate(coursePaths)
+                                            let cardType = getCardType(forScore: score)
                                             NavigationLink {
-                                                RecordGridView(title: "GPS 아트", records: gpsArtRecords)
-                                                    .navigationBarTitleDisplayMode(.inline)
+                                                RecordDetailView(isDeleteData: $isDeleteData, record: record, cardType: cardType)
                                             } label: {
-                                                Text("View All")
-                                                    .font(.customCaption)
-                                                    .foregroundStyle(Color.customPrimary)
-                                                    .padding(.horizontal)
+                                                RecordCardView(size: .carousel, type: cardType, name: courseName, date: formatDate(startDate), coordinates: data!)
                                             }
+                                            .padding(.bottom, 8)
                                         }
-                                        LazyHStack(spacing: 16) {
-                                            ForEach(gpsArtRecords.prefix(3), id: \.id) { record in
-                                                if let courseName = record.courseData?.courseName,
-                                                   let coursePaths = record.courseData?.coursePaths,
-                                                   let startDate = record.healthData?.startDate,
-                                                   let score = record.courseData?.score {
-                                                    let data = pathToCoordinate(coursePaths)
-                                                    let cardType = getCardType(forScore: score)
-                                                    NavigationLink {
-                                                        RecordDetailView(isDeleteData: $isDeleteData, record: record, cardType: cardType)
-                                                    } label: {
-                                                        SmallListCard(cardType: cardType, runName: courseName, date: formatDate(startDate), data: data!)
-                                                    }
-                                                }
-                                            }
-                                            
-                                            // Use Group to conditionally include SmallListEmptyCard
-                                            Group {
-                                                ForEach(0 ..< max(0, 3 - gpsArtRecords.count), id: \.self) { _ in
-                                                    SmallListEmptyCard()
-                                                }
-                                            }
-                                        }
-                                        .padding(.horizontal)
                                     }
-                                    .padding(.top, 48)
                                     
-                                    VStack(alignment: .leading) {
-                                        HStack {
-                                            Text("자유러닝")
-                                                .font(.customTitle2)
-                                                .padding(.horizontal)
-                                            Spacer()
-                                            NavigationLink {
-                                                RecordGridView(title: "자유러닝", records: freeRecords)
-                                                    .navigationBarTitleDisplayMode(.inline)
-                                            } label: {
-                                                Text("View All")
-                                                    .font(.customCaption)
-                                                    .foregroundStyle(Color.customPrimary)
-                                                    .padding(.horizontal)
-                                            }
-                                            
-                                        }
-                                        
-                                        LazyHStack(spacing: 16) {
-                                            ForEach(freeRecords.prefix(3), id: \.id) { record in
-                                                if let courseName = record.courseData?.courseName,
-                                                   let coursePaths = record.courseData?.coursePaths,
-                                                   let startDate = record.healthData?.startDate,
-                                                   let score = record.courseData?.score {
-                                                    let data = pathToCoordinate(coursePaths)
-                                                    let cardType = getCardType(forScore: score)
-                                                    NavigationLink {
-                                                        RecordDetailView(isDeleteData: $isDeleteData, record: record, cardType: cardType)
-                                                    } label: {
-                                                        SmallListCard(cardType: cardType, runName: courseName, date: formatDate(startDate), data: data!)
-                                                    }
-                                                } else {
-                                                    // Handle the case where score is nil
-                                                    SmallListEmptyCard()
-                                                }
-                                            }
-                                            
-                                            // Use Group to conditionally include SmallListEmptyCard
-                                            Group {
-                                                ForEach(0 ..< max(0, 3 - freeRecords.count), id: \.self) { _ in
-                                                    SmallListEmptyCard()
-                                                }
-                                            }
-                                        }
-                                        .padding(.horizontal)
+                                    ForEach(0 ..< max(0, 5 - filteredRecords.count), id: \.self) { _ in
+                                        RecordEmptyCardView(size: .carousel)
                                     }
-                                    .padding(.top, 40)
-                                    
-                                    .padding(.bottom, 100)
                                 }
-                                .padding(.top, 12)
+                                .padding(.horizontal)
+                                
                             }
+                            
+                            VStack(alignment: .leading) {
+                                HStack {
+                                    Text("GPS 아트")
+                                        .font(.customTitle2)
+                                        .padding(.horizontal)
+                                    Spacer()
+                                    NavigationLink {
+                                        RecordGridView(title: "GPS 아트", records: gpsArtRecords)
+                                            .navigationBarTitleDisplayMode(.inline)
+                                    } label: {
+                                        Text("View All")
+                                            .font(.customCaption)
+                                            .foregroundStyle(Color.customPrimary)
+                                            .padding(.horizontal)
+                                    }
+                                }
+                                LazyHStack(spacing: 16) {
+                                    ForEach(gpsArtRecords.prefix(3), id: \.id) { record in
+                                        if let courseName = record.courseData?.courseName,
+                                           let coursePaths = record.courseData?.coursePaths,
+                                           let startDate = record.healthData?.startDate,
+                                           let score = record.courseData?.score {
+                                            let data = pathToCoordinate(coursePaths)
+                                            let cardType = getCardType(forScore: score)
+                                            NavigationLink {
+                                                RecordDetailView(isDeleteData: $isDeleteData, record: record, cardType: cardType)
+                                            } label: {
+                                                RecordCardView(size: .list, type: cardType, name: courseName, date: formatDate(startDate), coordinates: data!)
+                                            }
+                                        }
+                                    }
+                                    
+                                    // Use Group to conditionally include SmallListEmptyCard
+                                    Group {
+                                        ForEach(0 ..< max(0, 3 - gpsArtRecords.count), id: \.self) { _ in
+                                            RecordEmptyCardView(size: .list)
+                                        }
+                                    }
+                                }
+                                .padding(.horizontal)
+                            }
+                            .padding(.top, 48)
+                            
+                            VStack(alignment: .leading) {
+                                HStack {
+                                    Text("자유러닝")
+                                        .font(.customTitle2)
+                                        .padding(.horizontal)
+                                    Spacer()
+                                    NavigationLink {
+                                        RecordGridView(title: "자유러닝", records: freeRecords)
+                                            .navigationBarTitleDisplayMode(.inline)
+                                    } label: {
+                                        Text("View All")
+                                            .font(.customCaption)
+                                            .foregroundStyle(Color.customPrimary)
+                                            .padding(.horizontal)
+                                    }
+                                    
+                                }
+                                
+                                LazyHStack(spacing: 16) {
+                                    ForEach(freeRecords.prefix(3), id: \.id) { record in
+                                        if let courseName = record.courseData?.courseName,
+                                           let coursePaths = record.courseData?.coursePaths,
+                                           let startDate = record.healthData?.startDate,
+                                           let score = record.courseData?.score {
+                                            let data = pathToCoordinate(coursePaths)
+                                            let cardType = getCardType(forScore: score)
+                                            NavigationLink {
+                                                RecordDetailView(isDeleteData: $isDeleteData, record: record, cardType: cardType)
+                                            } label: {
+                                                RecordCardView(size: .list, type: cardType, name: courseName, date: formatDate(startDate), coordinates: data!)                                            }
+                                        }
+                                    }
+                                    
+                                    ForEach(0 ..< max(0, 3 - freeRecords.count), id: \.self) { _ in
+                                        RecordEmptyCardView(size: .list)
+                                    }
+                                }
+                                .padding(.horizontal)
+                            }
+                            .padding(.top, 40)
+                            
+                            .padding(.bottom, 100)
+                        }
+                        .padding(.top, 12)
                     }
-                    .overlay(alignment: .top) {
-                        RecordInlineHeader(scrollOffset: scrollOffset)
-                    }
-                } else {
-                    VStack {
-                        RecordHeader(scrollOffset: 47)
-                            .padding(.top, 8)
-                        Spacer()
-                        LookAroundView(type: .record)
-                        Spacer()
-                    }
+                }
+                .overlay(alignment: .top) {
+                    RecordInlineHeader(scrollOffset: scrollOffset)
+                }
+            } else {
+                VStack {
+                    RecordHeader(scrollOffset: 47)
+                        .padding(.top, 8)
+                    Spacer()
+                    LookAroundView(type: .record)
+                    Spacer()
                 }
             }
         }
-        .navigationBarTitleDisplayMode(.inline)
-        .toolbar(.hidden, for: .automatic)
-//        .toolbar(.hidden, for: .navigationBar)
         .onAppear {
             filteredRecords = Array(runningRecord)
                 .sorted { $0.healthData?.startDate ?? Date() > $1.healthData?.startDate ?? Date() }
