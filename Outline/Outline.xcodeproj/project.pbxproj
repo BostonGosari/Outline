@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		0E1D1B292AE95AF2005282A2 /* CourseGuideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1D1B282AE95AF2005282A2 /* CourseGuideView.swift */; };
-		0E1D1B2B2AE95E1C005282A2 /* test.kml in Resources */ = {isa = PBXBuildFile; fileRef = 0E1D1B2A2AE95E1C005282A2 /* test.kml */; };
 		0E29F64B2ADF653000F5EF5C /* FontExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E29F64A2ADF653000F5EF5C /* FontExtension.swift */; };
 		0E29F6532ADF6C3A00F5EF5C /* RunningPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E29F6522ADF6C3A00F5EF5C /* RunningPopup.swift */; };
 		0E29F6552ADF6C7D00F5EF5C /* KMLParserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E29F6542ADF6C7D00F5EF5C /* KMLParserManager.swift */; };
@@ -16,11 +15,9 @@
 		0E2B4CBF2AE744E8002A5103 /* RecordDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2B4CBE2AE744E8002A5103 /* RecordDetailViewModel.swift */; };
 		0E4291602B03CF3100EE75F5 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E42915F2B03CF3100EE75F5 /* LocationManager.swift */; };
 		0E4D309D2B5FC85600582E37 /* FinishRunningMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4D309C2B5FC85600582E37 /* FinishRunningMapView.swift */; };
-		0E696E942B60F39A00A4838F /* RecordMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E696E932B60F39A00A4838F /* RecordMapView.swift */; };
 		0E7EE51D2B5E6D24004F6BAF /* FreeRunningMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7EE51C2B5E6D24004F6BAF /* FreeRunningMapView.swift */; };
 		0E7EE51F2B5E761E004F6BAF /* CardDetailInformationMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7EE51E2B5E761E004F6BAF /* CardDetailInformationMapView.swift */; };
 		0E7EE5212B5E7C4B004F6BAF /* CardDetailMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7EE5202B5E7C4B004F6BAF /* CardDetailMapView.swift */; };
-		0E7EE5232B5E83E4004F6BAF /* RecordDetailMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7EE5222B5E83E4004F6BAF /* RecordDetailMapView.swift */; };
 		0E9A5D482AE065A100C19FF3 /* ShareViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9A5D472AE065A100C19FF3 /* ShareViewModel.swift */; };
 		0E9A5D4F2AE0B8C800C19FF3 /* ShareModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9A5D4E2AE0B8C800C19FF3 /* ShareModel.swift */; };
 		0EB59A222B176BA100A18C50 /* test.json in Resources */ = {isa = PBXBuildFile; fileRef = 0EB59A212B176BA100A18C50 /* test.json */; };
@@ -100,23 +97,38 @@
 		29AE76E02ADE2BC700A46742 /* DateExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AE76DF2ADE2BC700A46742 /* DateExtention.swift */; };
 		29AE76E12ADE2C1700A46742 /* HomeTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01FDB9D2ADABD3D00BDA633 /* HomeTabView.swift */; };
 		29B205082AEA625100E63F39 /* PathManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9528EFFF2AE042570056CCC6 /* PathManager.swift */; };
-		29B39D382B5E663800C84E6A /* moai.kml in Resources */ = {isa = PBXBuildFile; fileRef = 29B39D372B5E663800C84E6A /* moai.kml */; };
-		29B39D3A2B5E664000C84E6A /* fish.kml in Resources */ = {isa = PBXBuildFile; fileRef = 29B39D392B5E664000C84E6A /* fish.kml */; };
-		29B39D3C2B5E664700C84E6A /* dragon.kml in Resources */ = {isa = PBXBuildFile; fileRef = 29B39D3B2B5E664700C84E6A /* dragon.kml */; };
 		29B39D3E2B5EC66D00C84E6A /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B39D3D2B5EC66D00C84E6A /* ArrayExtension.swift */; };
 		29B39D402B5EC6CC00C84E6A /* CoordinateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B39D3F2B5EC6CC00C84E6A /* CoordinateExtension.swift */; };
 		29B39D412B5EC71700C84E6A /* CoordinateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B39D3F2B5EC6CC00C84E6A /* CoordinateExtension.swift */; };
 		29B39D422B5EC71B00C84E6A /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B39D3D2B5EC66D00C84E6A /* ArrayExtension.swift */; };
-		29B39D442B5ECA9F00C84E6A /* DuckRun.kml in Resources */ = {isa = PBXBuildFile; fileRef = 29B39D432B5ECA9F00C84E6A /* DuckRun.kml */; };
-		29B39D4C2B5ECC6700C84E6A /* dangdang.kml in Resources */ = {isa = PBXBuildFile; fileRef = 29B39D4B2B5ECC6700C84E6A /* dangdang.kml */; };
-		29B39D4E2B5ECC7400C84E6A /* duck.kml in Resources */ = {isa = PBXBuildFile; fileRef = 29B39D4D2B5ECC7400C84E6A /* duck.kml */; };
-		29B39D502B5ECEC900C84E6A /* fishcat.kml in Resources */ = {isa = PBXBuildFile; fileRef = 29B39D4F2B5ECEC900C84E6A /* fishcat.kml */; };
 		29B736B52C5661540075A569 /* FinalImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B736B42C5661540075A569 /* FinalImage.swift */; };
+		29BB882E2C5F1434006B238D /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 29BB882D2C5F1434006B238D /* Secrets.xcconfig */; };
+		29BB88302C5F1B16006B238D /* MapSnapshotImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29BB882F2C5F1B16006B238D /* MapSnapshotImageView.swift */; };
+		29BB88322C5F1B8C006B238D /* RecordCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29BB88312C5F1B8C006B238D /* RecordCardView.swift */; };
+		29BB88362C5F1D9A006B238D /* MapSnapshotTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29BB88332C5F1D9A006B238D /* MapSnapshotTestView.swift */; };
+		29BB88372C5F1D9A006B238D /* PathManagerTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29BB88342C5F1D9A006B238D /* PathManagerTestView.swift */; };
+		29BB88572C5F28DD006B238D /* 서초 개구리런.kml in Resources */ = {isa = PBXBuildFile; fileRef = 29BB88462C5F28DC006B238D /* 서초 개구리런.kml */; };
+		29BB88582C5F28DD006B238D /* 서울과기대 낙타런.kml in Resources */ = {isa = PBXBuildFile; fileRef = 29BB88472C5F28DC006B238D /* 서울과기대 낙타런.kml */; };
+		29BB88592C5F28DD006B238D /* 이촌 골프런.kml in Resources */ = {isa = PBXBuildFile; fileRef = 29BB88482C5F28DC006B238D /* 이촌 골프런.kml */; };
+		29BB885A2C5F28DD006B238D /* 을지로 새런.kml in Resources */ = {isa = PBXBuildFile; fileRef = 29BB88492C5F28DC006B238D /* 을지로 새런.kml */; };
+		29BB885B2C5F28DD006B238D /* 반포 문어런.kml in Resources */ = {isa = PBXBuildFile; fileRef = 29BB884A2C5F28DC006B238D /* 반포 문어런.kml */; };
+		29BB885C2C5F28DD006B238D /* 안국 댕댕런.kml in Resources */ = {isa = PBXBuildFile; fileRef = 29BB884B2C5F28DC006B238D /* 안국 댕댕런.kml */; };
+		29BB885D2C5F28DD006B238D /* 성수 댕댕런.kml in Resources */ = {isa = PBXBuildFile; fileRef = 29BB884C2C5F28DC006B238D /* 성수 댕댕런.kml */; };
+		29BB885E2C5F28DD006B238D /* 난지 거북런.kml in Resources */ = {isa = PBXBuildFile; fileRef = 29BB884D2C5F28DC006B238D /* 난지 거북런.kml */; };
+		29BB885F2C5F28DD006B238D /* 뚝섬 런런.kml in Resources */ = {isa = PBXBuildFile; fileRef = 29BB884E2C5F28DC006B238D /* 뚝섬 런런.kml */; };
+		29BB88602C5F28DD006B238D /* 올림픽 비행기런.kml in Resources */ = {isa = PBXBuildFile; fileRef = 29BB884F2C5F28DC006B238D /* 올림픽 비행기런.kml */; };
+		29BB88612C5F28DD006B238D /* 숙대 왈라비런.kml in Resources */ = {isa = PBXBuildFile; fileRef = 29BB88502C5F28DC006B238D /* 숙대 왈라비런.kml */; };
+		29BB88622C5F28DD006B238D /* 뚝섬 네잎클로버런.kml in Resources */ = {isa = PBXBuildFile; fileRef = 29BB88512C5F28DC006B238D /* 뚝섬 네잎클로버런.kml */; };
+		29BB88632C5F28DD006B238D /* 충무 고래런.kml in Resources */ = {isa = PBXBuildFile; fileRef = 29BB88522C5F28DC006B238D /* 충무 고래런.kml */; };
+		29BB88642C5F28DD006B238D /* 건대 오리런.kml in Resources */ = {isa = PBXBuildFile; fileRef = 29BB88532C5F28DD006B238D /* 건대 오리런.kml */; };
+		29BB88652C5F28DD006B238D /* 석촌호수 썬글라스런.kml in Resources */ = {isa = PBXBuildFile; fileRef = 29BB88542C5F28DD006B238D /* 석촌호수 썬글라스런.kml */; };
+		29BB88662C5F28DD006B238D /* 압구정 댕댕런.kml in Resources */ = {isa = PBXBuildFile; fileRef = 29BB88552C5F28DD006B238D /* 압구정 댕댕런.kml */; };
+		29BB88672C5F28DD006B238D /* 신사 댕댕런.kml in Resources */ = {isa = PBXBuildFile; fileRef = 29BB88562C5F28DD006B238D /* 신사 댕댕런.kml */; };
+		29BB886B2C5F33DE006B238D /* 압구정 댕댕런 테스트.kml in Resources */ = {isa = PBXBuildFile; fileRef = 29BB886A2C5F33DE006B238D /* 압구정 댕댕런 테스트.kml */; };
+		29BB886D2C5F528E006B238D /* 압구정 댕댕런 테스트 촘촘.kml in Resources */ = {isa = PBXBuildFile; fileRef = 29BB886C2C5F528E006B238D /* 압구정 댕댕런 테스트 촘촘.kml */; };
 		29C9D27A2B6124E2002E3F1E /* HealthAuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954CB2B52AE63E79005EB2E9 /* HealthAuthView.swift */; };
 		29CC19A42AE95F2300B79610 /* RunningStartManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29CC19A32AE95F2300B79610 /* RunningStartManager.swift */; };
 		29CC42BD2AF24BCE00578EF1 /* WatchRunningManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29CC42BC2AF24BCE00578EF1 /* WatchRunningManager.swift */; };
-		29D6BAD32B0924D200BD8653 /* SmallCarouselCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D6BAD22B0924D200BD8653 /* SmallCarouselCard.swift */; };
-		29D6BAD52B092CA800BD8653 /* SmallListCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D6BAD42B092CA800BD8653 /* SmallListCard.swift */; };
 		29D6BAD72B09AE5B00BD8653 /* ScoreShimmer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D6BAD62B09AE5B00BD8653 /* ScoreShimmer.swift */; };
 		29D6BAD92B09D4DE00BD8653 /* CardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D6BAD82B09D4DE00BD8653 /* CardModel.swift */; };
 		29D7AD4A2B0E030F00AAAAB0 /* MirroringMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D7AD492B0E030F00AAAAB0 /* MirroringMapView.swift */; };
@@ -132,20 +144,9 @@
 		9528F0002AE042570056CCC6 /* PathManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9528EFFF2AE042570056CCC6 /* PathManager.swift */; };
 		9528F0062AE0B37B0056CCC6 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9528F0052AE0B37B0056CCC6 /* LoginView.swift */; };
 		954B04182AFF725000A8A83E /* ProfileUserInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954B04172AFF725000A8A83E /* ProfileUserInfoViewModel.swift */; };
-		954B04272B00ADE000A8A83E /* PathTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954B04262B00ADE000A8A83E /* PathTestView.swift */; };
 		954CB29C2AE51619005EB2E9 /* PersistentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EB1EE82ADDC43400B47984 /* PersistentController.swift */; };
 		954CB29D2AE5161B005EB2E9 /* UserDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EB1EEB2ADDC66B00B47984 /* UserDataModel.swift */; };
 		954CB29E2AE5161D005EB2E9 /* UserDataModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9528EFEB2ADEC7CF0056CCC6 /* UserDataModelType.swift */; };
-		954CB2A52AE5457B005EB2E9 /* pohangCrocodileRun.kml in Resources */ = {isa = PBXBuildFile; fileRef = 954CB29F2AE5457A005EB2E9 /* pohangCrocodileRun.kml */; };
-		954CB2A62AE5457B005EB2E9 /* pohangCrocodileRun.kml in Resources */ = {isa = PBXBuildFile; fileRef = 954CB29F2AE5457A005EB2E9 /* pohangCrocodileRun.kml */; };
-		954CB2A72AE5457B005EB2E9 /* seoulOctopusRun.kml in Resources */ = {isa = PBXBuildFile; fileRef = 954CB2A02AE5457A005EB2E9 /* seoulOctopusRun.kml */; };
-		954CB2A82AE5457B005EB2E9 /* seoulOctopusRun.kml in Resources */ = {isa = PBXBuildFile; fileRef = 954CB2A02AE5457A005EB2E9 /* seoulOctopusRun.kml */; };
-		954CB2A92AE5457B005EB2E9 /* pohangDangDangRun.kml in Resources */ = {isa = PBXBuildFile; fileRef = 954CB2A12AE5457A005EB2E9 /* pohangDangDangRun.kml */; };
-		954CB2AA2AE5457B005EB2E9 /* pohangDangDangRun.kml in Resources */ = {isa = PBXBuildFile; fileRef = 954CB2A12AE5457A005EB2E9 /* pohangDangDangRun.kml */; };
-		954CB2AB2AE5457B005EB2E9 /* flightRun.kml in Resources */ = {isa = PBXBuildFile; fileRef = 954CB2A22AE5457A005EB2E9 /* flightRun.kml */; };
-		954CB2AC2AE5457B005EB2E9 /* flightRun.kml in Resources */ = {isa = PBXBuildFile; fileRef = 954CB2A22AE5457A005EB2E9 /* flightRun.kml */; };
-		954CB2AF2AE5457B005EB2E9 /* seoulCamelRun.kml in Resources */ = {isa = PBXBuildFile; fileRef = 954CB2A42AE5457B005EB2E9 /* seoulCamelRun.kml */; };
-		954CB2B02AE5457B005EB2E9 /* seoulCamelRun.kml in Resources */ = {isa = PBXBuildFile; fileRef = 954CB2A42AE5457B005EB2E9 /* seoulCamelRun.kml */; };
 		954CB2BA2AE654BA005EB2E9 /* NotificationAuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954CB2B92AE654BA005EB2E9 /* NotificationAuthView.swift */; };
 		954FFF782AE132D100D27537 /* CourseDataUploadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954FFF772AE132D100D27537 /* CourseDataUploadManager.swift */; };
 		9563829E2B95FD2E00D3AD32 /* ShareView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9563829D2B95FD2E00D3AD32 /* ShareView+Extension.swift */; };
@@ -324,7 +325,6 @@
 
 /* Begin PBXFileReference section */
 		0E1D1B282AE95AF2005282A2 /* CourseGuideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseGuideView.swift; sourceTree = "<group>"; };
-		0E1D1B2A2AE95E1C005282A2 /* test.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = test.kml; sourceTree = "<group>"; };
 		0E29F64A2ADF653000F5EF5C /* FontExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontExtension.swift; sourceTree = "<group>"; };
 		0E29F6522ADF6C3A00F5EF5C /* RunningPopup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RunningPopup.swift; sourceTree = "<group>"; };
 		0E29F6542ADF6C7D00F5EF5C /* KMLParserManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KMLParserManager.swift; sourceTree = "<group>"; };
@@ -332,11 +332,9 @@
 		0E2B4CBE2AE744E8002A5103 /* RecordDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordDetailViewModel.swift; sourceTree = "<group>"; };
 		0E42915F2B03CF3100EE75F5 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		0E4D309C2B5FC85600582E37 /* FinishRunningMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishRunningMapView.swift; sourceTree = "<group>"; };
-		0E696E932B60F39A00A4838F /* RecordMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordMapView.swift; sourceTree = "<group>"; };
 		0E7EE51C2B5E6D24004F6BAF /* FreeRunningMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeRunningMapView.swift; sourceTree = "<group>"; };
 		0E7EE51E2B5E761E004F6BAF /* CardDetailInformationMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetailInformationMapView.swift; sourceTree = "<group>"; };
 		0E7EE5202B5E7C4B004F6BAF /* CardDetailMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetailMapView.swift; sourceTree = "<group>"; };
-		0E7EE5222B5E83E4004F6BAF /* RecordDetailMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordDetailMapView.swift; sourceTree = "<group>"; };
 		0E96BA912AF4E00B000C8FBF /* SFCompactDisplay-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFCompactDisplay-Semibold.ttf"; sourceTree = "<group>"; };
 		0E9A5D472AE065A100C19FF3 /* ShareViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewModel.swift; sourceTree = "<group>"; };
 		0E9A5D4E2AE0B8C800C19FF3 /* ShareModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareModel.swift; sourceTree = "<group>"; };
@@ -383,7 +381,6 @@
 		293D1E402B0B42E400AB85BE /* SFProDisplay-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFProDisplay-Regular.otf"; sourceTree = "<group>"; };
 		293D1E412B0B42E400AB85BE /* SFProDisplay-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFProDisplay-Light.otf"; sourceTree = "<group>"; };
 		293D1E492B0B465E00AB85BE /* SFProDisplay-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFProDisplay-Bold.otf"; sourceTree = "<group>"; };
-		293FA0492C53E1D0009D8CF5 /* Secrets.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 		295232F92AEED0630020EAFA /* BigCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigCardView.swift; sourceTree = "<group>"; };
 		295232FB2AEEE74A0020EAFA /* ButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyle.swift; sourceTree = "<group>"; };
 		295346B72B0B5D52004F852E /* EmptyContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyContentView.swift; sourceTree = "<group>"; };
@@ -408,20 +405,35 @@
 		29AE76D92ADE2A5300A46742 /* InputNicknameViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InputNicknameViewModel.swift; path = Outline/Source/ViewModel/InputNicknameViewModel.swift; sourceTree = SOURCE_ROOT; };
 		29AE76DA2ADE2A5300A46742 /* InputUserInfoViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InputUserInfoViewModel.swift; path = Outline/Source/ViewModel/InputUserInfoViewModel.swift; sourceTree = SOURCE_ROOT; };
 		29AE76DF2ADE2BC700A46742 /* DateExtention.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtention.swift; sourceTree = "<group>"; };
-		29B39D372B5E663800C84E6A /* moai.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = moai.kml; sourceTree = "<group>"; };
-		29B39D392B5E664000C84E6A /* fish.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = fish.kml; sourceTree = "<group>"; };
-		29B39D3B2B5E664700C84E6A /* dragon.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = dragon.kml; sourceTree = "<group>"; };
 		29B39D3D2B5EC66D00C84E6A /* ArrayExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtension.swift; sourceTree = "<group>"; };
 		29B39D3F2B5EC6CC00C84E6A /* CoordinateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinateExtension.swift; sourceTree = "<group>"; };
-		29B39D432B5ECA9F00C84E6A /* DuckRun.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = DuckRun.kml; sourceTree = "<group>"; };
-		29B39D4B2B5ECC6700C84E6A /* dangdang.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = dangdang.kml; sourceTree = "<group>"; };
-		29B39D4D2B5ECC7400C84E6A /* duck.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = duck.kml; sourceTree = "<group>"; };
-		29B39D4F2B5ECEC900C84E6A /* fishcat.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = fishcat.kml; sourceTree = "<group>"; };
 		29B736B42C5661540075A569 /* FinalImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalImage.swift; sourceTree = "<group>"; };
+		29BB882D2C5F1434006B238D /* Secrets.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
+		29BB882F2C5F1B16006B238D /* MapSnapshotImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapSnapshotImageView.swift; sourceTree = "<group>"; };
+		29BB88312C5F1B8C006B238D /* RecordCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordCardView.swift; sourceTree = "<group>"; };
+		29BB88332C5F1D9A006B238D /* MapSnapshotTestView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapSnapshotTestView.swift; sourceTree = "<group>"; };
+		29BB88342C5F1D9A006B238D /* PathManagerTestView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PathManagerTestView.swift; sourceTree = "<group>"; };
+		29BB88462C5F28DC006B238D /* 서초 개구리런.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "서초 개구리런.kml"; sourceTree = "<group>"; };
+		29BB88472C5F28DC006B238D /* 서울과기대 낙타런.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "서울과기대 낙타런.kml"; sourceTree = "<group>"; };
+		29BB88482C5F28DC006B238D /* 이촌 골프런.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "이촌 골프런.kml"; sourceTree = "<group>"; };
+		29BB88492C5F28DC006B238D /* 을지로 새런.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "을지로 새런.kml"; sourceTree = "<group>"; };
+		29BB884A2C5F28DC006B238D /* 반포 문어런.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "반포 문어런.kml"; sourceTree = "<group>"; };
+		29BB884B2C5F28DC006B238D /* 안국 댕댕런.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "안국 댕댕런.kml"; sourceTree = "<group>"; };
+		29BB884C2C5F28DC006B238D /* 성수 댕댕런.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "성수 댕댕런.kml"; sourceTree = "<group>"; };
+		29BB884D2C5F28DC006B238D /* 난지 거북런.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "난지 거북런.kml"; sourceTree = "<group>"; };
+		29BB884E2C5F28DC006B238D /* 뚝섬 런런.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "뚝섬 런런.kml"; sourceTree = "<group>"; };
+		29BB884F2C5F28DC006B238D /* 올림픽 비행기런.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "올림픽 비행기런.kml"; sourceTree = "<group>"; };
+		29BB88502C5F28DC006B238D /* 숙대 왈라비런.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "숙대 왈라비런.kml"; sourceTree = "<group>"; };
+		29BB88512C5F28DC006B238D /* 뚝섬 네잎클로버런.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "뚝섬 네잎클로버런.kml"; sourceTree = "<group>"; };
+		29BB88522C5F28DC006B238D /* 충무 고래런.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "충무 고래런.kml"; sourceTree = "<group>"; };
+		29BB88532C5F28DD006B238D /* 건대 오리런.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "건대 오리런.kml"; sourceTree = "<group>"; };
+		29BB88542C5F28DD006B238D /* 석촌호수 썬글라스런.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "석촌호수 썬글라스런.kml"; sourceTree = "<group>"; };
+		29BB88552C5F28DD006B238D /* 압구정 댕댕런.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "압구정 댕댕런.kml"; sourceTree = "<group>"; };
+		29BB88562C5F28DD006B238D /* 신사 댕댕런.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "신사 댕댕런.kml"; sourceTree = "<group>"; };
+		29BB886A2C5F33DE006B238D /* 압구정 댕댕런 테스트.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "압구정 댕댕런 테스트.kml"; sourceTree = "<group>"; };
+		29BB886C2C5F528E006B238D /* 압구정 댕댕런 테스트 촘촘.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "압구정 댕댕런 테스트 촘촘.kml"; sourceTree = "<group>"; };
 		29CC19A32AE95F2300B79610 /* RunningStartManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningStartManager.swift; sourceTree = "<group>"; };
 		29CC42BC2AF24BCE00578EF1 /* WatchRunningManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchRunningManager.swift; sourceTree = "<group>"; };
-		29D6BAD22B0924D200BD8653 /* SmallCarouselCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallCarouselCard.swift; sourceTree = "<group>"; };
-		29D6BAD42B092CA800BD8653 /* SmallListCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallListCard.swift; sourceTree = "<group>"; };
 		29D6BAD62B09AE5B00BD8653 /* ScoreShimmer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreShimmer.swift; sourceTree = "<group>"; };
 		29D6BAD82B09D4DE00BD8653 /* CardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardModel.swift; sourceTree = "<group>"; };
 		29D7AD492B0E030F00AAAAB0 /* MirroringMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MirroringMapView.swift; sourceTree = "<group>"; };
@@ -435,12 +447,6 @@
 		9528EFFF2AE042570056CCC6 /* PathManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathManager.swift; sourceTree = "<group>"; };
 		9528F0052AE0B37B0056CCC6 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		954B04172AFF725000A8A83E /* ProfileUserInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUserInfoViewModel.swift; sourceTree = "<group>"; };
-		954B04262B00ADE000A8A83E /* PathTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathTestView.swift; sourceTree = "<group>"; };
-		954CB29F2AE5457A005EB2E9 /* pohangCrocodileRun.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = pohangCrocodileRun.kml; sourceTree = "<group>"; };
-		954CB2A02AE5457A005EB2E9 /* seoulOctopusRun.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = seoulOctopusRun.kml; sourceTree = "<group>"; };
-		954CB2A12AE5457A005EB2E9 /* pohangDangDangRun.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = pohangDangDangRun.kml; sourceTree = "<group>"; };
-		954CB2A22AE5457A005EB2E9 /* flightRun.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = flightRun.kml; sourceTree = "<group>"; };
-		954CB2A42AE5457B005EB2E9 /* seoulCamelRun.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = seoulCamelRun.kml; sourceTree = "<group>"; };
 		954CB2B52AE63E79005EB2E9 /* HealthAuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthAuthView.swift; sourceTree = "<group>"; };
 		954CB2B92AE654BA005EB2E9 /* NotificationAuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationAuthView.swift; sourceTree = "<group>"; };
 		954FFF772AE132D100D27537 /* CourseDataUploadManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseDataUploadManager.swift; sourceTree = "<group>"; };
@@ -579,19 +585,25 @@
 		0E29F64D2ADF681E00F5EF5C /* KML */ = {
 			isa = PBXGroup;
 			children = (
-				29B39D4F2B5ECEC900C84E6A /* fishcat.kml */,
-				29B39D372B5E663800C84E6A /* moai.kml */,
-				29B39D4B2B5ECC6700C84E6A /* dangdang.kml */,
-				29B39D4D2B5ECC7400C84E6A /* duck.kml */,
-				29B39D3B2B5E664700C84E6A /* dragon.kml */,
-				29B39D392B5E664000C84E6A /* fish.kml */,
-				29B39D432B5ECA9F00C84E6A /* DuckRun.kml */,
-				0E1D1B2A2AE95E1C005282A2 /* test.kml */,
-				954CB2A22AE5457A005EB2E9 /* flightRun.kml */,
-				954CB29F2AE5457A005EB2E9 /* pohangCrocodileRun.kml */,
-				954CB2A12AE5457A005EB2E9 /* pohangDangDangRun.kml */,
-				954CB2A42AE5457B005EB2E9 /* seoulCamelRun.kml */,
-				954CB2A02AE5457A005EB2E9 /* seoulOctopusRun.kml */,
+				29BB88532C5F28DD006B238D /* 건대 오리런.kml */,
+				29BB884D2C5F28DC006B238D /* 난지 거북런.kml */,
+				29BB88512C5F28DC006B238D /* 뚝섬 네잎클로버런.kml */,
+				29BB884E2C5F28DC006B238D /* 뚝섬 런런.kml */,
+				29BB884A2C5F28DC006B238D /* 반포 문어런.kml */,
+				29BB88472C5F28DC006B238D /* 서울과기대 낙타런.kml */,
+				29BB88462C5F28DC006B238D /* 서초 개구리런.kml */,
+				29BB88542C5F28DD006B238D /* 석촌호수 썬글라스런.kml */,
+				29BB884C2C5F28DC006B238D /* 성수 댕댕런.kml */,
+				29BB88502C5F28DC006B238D /* 숙대 왈라비런.kml */,
+				29BB88562C5F28DD006B238D /* 신사 댕댕런.kml */,
+				29BB884B2C5F28DC006B238D /* 안국 댕댕런.kml */,
+				29BB88552C5F28DD006B238D /* 압구정 댕댕런.kml */,
+				29BB884F2C5F28DC006B238D /* 올림픽 비행기런.kml */,
+				29BB88492C5F28DC006B238D /* 을지로 새런.kml */,
+				29BB88482C5F28DC006B238D /* 이촌 골프런.kml */,
+				29BB88522C5F28DC006B238D /* 충무 고래런.kml */,
+				29BB886A2C5F33DE006B238D /* 압구정 댕댕런 테스트.kml */,
+				29BB886C2C5F528E006B238D /* 압구정 댕댕런 테스트 촘촘.kml */,
 			);
 			path = KML;
 			sourceTree = "<group>";
@@ -712,6 +724,15 @@
 			path = Running;
 			sourceTree = "<group>";
 		};
+		29BB88352C5F1D9A006B238D /* TestView */ = {
+			isa = PBXGroup;
+			children = (
+				29BB88332C5F1D9A006B238D /* MapSnapshotTestView.swift */,
+				29BB88342C5F1D9A006B238D /* PathManagerTestView.swift */,
+			);
+			path = TestView;
+			sourceTree = "<group>";
+		};
 		29EBD7812B08837100B44AA9 /* Card */ = {
 			isa = PBXGroup;
 			children = (
@@ -719,18 +740,8 @@
 				29EBD7832B0883E500B44AA9 /* BigCardFrontside.swift */,
 				29F835CE2B0894DB0052C3C1 /* BigCardBackside.swift */,
 				29D6BAD62B09AE5B00BD8653 /* ScoreShimmer.swift */,
-				29D6BAD22B0924D200BD8653 /* SmallCarouselCard.swift */,
-				29D6BAD42B092CA800BD8653 /* SmallListCard.swift */,
 			);
 			path = Card;
-			sourceTree = "<group>";
-		};
-		954B04252B00ADD100A8A83E /* PathTest */ = {
-			isa = PBXGroup;
-			children = (
-				954B04262B00ADE000A8A83E /* PathTestView.swift */,
-			);
-			path = PathTest;
 			sourceTree = "<group>";
 		};
 		958240732B0AFCAC00105FAE /* Score */ = {
@@ -841,8 +852,8 @@
 				292613162AF2BCEF00591E32 /* RecordHeader.swift */,
 				BB02A39B2B0D26EA00250EDD /* RecordGridView.swift */,
 				2925E0BE2B14825A0004BB05 /* RecordDetailView.swift */,
-				0E7EE5222B5E83E4004F6BAF /* RecordDetailMapView.swift */,
-				0E696E932B60F39A00A4838F /* RecordMapView.swift */,
+				29BB88312C5F1B8C006B238D /* RecordCardView.swift */,
+				29BB882F2C5F1B16006B238D /* MapSnapshotImageView.swift */,
 			);
 			path = Record;
 			sourceTree = "<group>";
@@ -924,7 +935,7 @@
 		F0AC8A902AD94C1F0061612C = {
 			isa = PBXGroup;
 			children = (
-				293FA0492C53E1D0009D8CF5 /* Secrets.xcconfig */,
+				29BB882D2C5F1434006B238D /* Secrets.xcconfig */,
 				2921B0122B01F3F700533A83 /* GoogleService-Info.plist */,
 				BB52392D2ADAF93D00646494 /* Outline Watch App.entitlements */,
 				BB5239262ADAF70A00646494 /* Shared */,
@@ -983,7 +994,6 @@
 			isa = PBXGroup;
 			children = (
 				2912A9142B0D174400D847B0 /* Mirroring */,
-				954B04252B00ADD100A8A83E /* PathTest */,
 				2921AFFC2B012DBF00533A83 /* Running */,
 				95A01E392AF2B70F0093D9C0 /* LookAround */,
 				95A01E2F2AF141B90093D9C0 /* Profile */,
@@ -994,6 +1004,7 @@
 				BB5239352ADBD95300646494 /* GPSArtHome */,
 				BB397D072AE6406600F92A43 /* Record */,
 				F01FDB9A2ADABC2C00BDA633 /* Tab */,
+				29BB88352C5F1D9A006B238D /* TestView */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1357,34 +1368,41 @@
 			buildActionMask = 2147483647;
 			files = (
 				2990249C2B10B599005C5BA8 /* StretchPro.ttf in Resources */,
-				954CB2AB2AE5457B005EB2E9 /* flightRun.kml in Resources */,
-				0E1D1B2B2AE95E1C005282A2 /* test.kml in Resources */,
-				954CB2A72AE5457B005EB2E9 /* seoulOctopusRun.kml in Resources */,
-				29B39D3C2B5E664700C84E6A /* dragon.kml in Resources */,
 				F0AC8AA42AD94C200061612C /* Preview Assets.xcassets in Resources */,
+				29BB88672C5F28DD006B238D /* 신사 댕댕런.kml in Resources */,
+				29BB885D2C5F28DD006B238D /* 성수 댕댕런.kml in Resources */,
+				29BB885C2C5F28DD006B238D /* 안국 댕댕런.kml in Resources */,
+				29BB885E2C5F28DD006B238D /* 난지 거북런.kml in Resources */,
 				F0AC8B2C2AD967E30061612C /* Image.xcassets in Resources */,
 				BB1D531A2ADDBCAB0073771F /* Pretendard-Regular.ttf in Resources */,
-				29B39D502B5ECEC900C84E6A /* fishcat.kml in Resources */,
-				954CB2A52AE5457B005EB2E9 /* pohangCrocodileRun.kml in Resources */,
 				F0AC8B2E2AD968A20061612C /* Icon.xcassets in Resources */,
+				29BB886D2C5F528E006B238D /* 압구정 댕댕런 테스트 촘촘.kml in Resources */,
+				29BB88662C5F28DD006B238D /* 압구정 댕댕런.kml in Resources */,
+				29BB88582C5F28DD006B238D /* 서울과기대 낙타런.kml in Resources */,
 				F0AC8AA12AD94C200061612C /* Color.xcassets in Resources */,
+				29BB88572C5F28DD006B238D /* 서초 개구리런.kml in Resources */,
+				29BB885B2C5F28DD006B238D /* 반포 문어런.kml in Resources */,
+				29BB88622C5F28DD006B238D /* 뚝섬 네잎클로버런.kml in Resources */,
 				2990249A2B10B3E8005C5BA8 /* SFCompactDisplay-Semibold.ttf in Resources */,
-				29B39D442B5ECA9F00C84E6A /* DuckRun.kml in Resources */,
-				29B39D382B5E663800C84E6A /* moai.kml in Resources */,
-				954CB2AF2AE5457B005EB2E9 /* seoulCamelRun.kml in Resources */,
+				29BB885A2C5F28DD006B238D /* 을지로 새런.kml in Resources */,
+				29BB88612C5F28DD006B238D /* 숙대 왈라비런.kml in Resources */,
+				29BB88602C5F28DD006B238D /* 올림픽 비행기런.kml in Resources */,
+				29BB882E2C5F1434006B238D /* Secrets.xcconfig in Resources */,
 				BB1D531E2ADDBCB90073771F /* Pretendard-Thin.ttf in Resources */,
 				0EB59A3E2B1835E600A18C50 /* alert.mp3 in Resources */,
 				BB1D530C2ADDBC560073771F /* Pretendard-Black.ttf in Resources */,
 				BB1D530E2ADDBC620073771F /* Pretendard-Bold.ttf in Resources */,
 				0EB59A222B176BA100A18C50 /* test.json in Resources */,
-				29B39D4C2B5ECC6700C84E6A /* dangdang.kml in Resources */,
+				29BB88652C5F28DD006B238D /* 석촌호수 썬글라스런.kml in Resources */,
+				29BB88592C5F28DD006B238D /* 이촌 골프런.kml in Resources */,
+				29BB88632C5F28DD006B238D /* 충무 고래런.kml in Resources */,
 				BB1D53182ADDBCA20073771F /* Pretendard-Medium.ttf in Resources */,
-				29B39D3A2B5E664000C84E6A /* fish.kml in Resources */,
+				29BB885F2C5F28DD006B238D /* 뚝섬 런런.kml in Resources */,
+				29BB886B2C5F33DE006B238D /* 압구정 댕댕런 테스트.kml in Resources */,
+				29BB88642C5F28DD006B238D /* 건대 오리런.kml in Resources */,
 				BB1D53162ADDBC900073771F /* Pretendard-Light.ttf in Resources */,
-				954CB2A92AE5457B005EB2E9 /* pohangDangDangRun.kml in Resources */,
 				BB1D53102ADDBC690073771F /* Pretendard-ExtraBold.ttf in Resources */,
 				BB1D531C2ADDBCB20073771F /* Pretendard-SemiBold.ttf in Resources */,
-				29B39D4E2B5ECC7400C84E6A /* duck.kml in Resources */,
 				2921B0132B01F3F700533A83 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1393,18 +1411,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				954CB2B02AE5457B005EB2E9 /* seoulCamelRun.kml in Resources */,
 				F0AC8AB62AD94C210061612C /* Preview Assets.xcassets in Resources */,
-				954CB2A82AE5457B005EB2E9 /* seoulOctopusRun.kml in Resources */,
 				293D1E422B0B42E400AB85BE /* SFProDisplay-Medium.otf in Resources */,
-				954CB2AC2AE5457B005EB2E9 /* flightRun.kml in Resources */,
 				293D1E4A2B0B465F00AB85BE /* SFProDisplay-Bold.otf in Resources */,
 				293D1E442B0B42E400AB85BE /* SFProDisplay-Thin.otf in Resources */,
 				F0AC8AB32AD94C210061612C /* WatchImage.xcassets in Resources */,
 				F0AC8B362AD96A3D0061612C /* WatchIcon.xcassets in Resources */,
-				954CB2A62AE5457B005EB2E9 /* pohangCrocodileRun.kml in Resources */,
 				293D1E482B0B42E400AB85BE /* SFProDisplay-Light.otf in Resources */,
-				954CB2AA2AE5457B005EB2E9 /* pohangDangDangRun.kml in Resources */,
 				293D1E432B0B42E400AB85BE /* SFProDisplay-Heavy.otf in Resources */,
 				293D1E452B0B42E400AB85BE /* SFProDisplay-Ultralight.otf in Resources */,
 				F0AC8B352AD96A360061612C /* WatchColor.xcassets in Resources */,
@@ -1462,7 +1475,6 @@
 				954FFF782AE132D100D27537 /* CourseDataUploadManager.swift in Sources */,
 				29F835CD2B0894CF0052C3C1 /* BigCard.swift in Sources */,
 				29AE76E12ADE2C1700A46742 /* HomeTabView.swift in Sources */,
-				954B04272B00ADE000A8A83E /* PathTestView.swift in Sources */,
 				0E9A5D482AE065A100C19FF3 /* ShareViewModel.swift in Sources */,
 				F06298AF2AE1A2ED007AB2D3 /* CountDown.swift in Sources */,
 				29AE76AC2ADE0D9100A46742 /* OutlineApp.swift in Sources */,
@@ -1475,7 +1487,6 @@
 				95B8F4602AED391300D9F35B /* AppleAuthModel.swift in Sources */,
 				29B39D402B5EC6CC00C84E6A /* CoordinateExtension.swift in Sources */,
 				9528F0002AE042570056CCC6 /* PathManager.swift in Sources */,
-				29D6BAD52B092CA800BD8653 /* SmallListCard.swift in Sources */,
 				9563829E2B95FD2E00D3AD32 /* ShareView+Extension.swift in Sources */,
 				0E7EE51D2B5E6D24004F6BAF /* FreeRunningMapView.swift in Sources */,
 				0E7EE5212B5E7C4B004F6BAF /* CardDetailMapView.swift in Sources */,
@@ -1497,29 +1508,31 @@
 				F03524102AE35AF800CCD8A6 /* RunningDataManager.swift in Sources */,
 				0E29F6552ADF6C7D00F5EF5C /* KMLParserManager.swift in Sources */,
 				0E2B4CBF2AE744E8002A5103 /* RecordDetailViewModel.swift in Sources */,
+				29BB88302C5F1B16006B238D /* MapSnapshotImageView.swift in Sources */,
 				F0AC8B382AD96AE10061612C /* ViewExtension.swift in Sources */,
 				95B8F45A2AED27C400D9F35B /* AuthModel.swift in Sources */,
 				0EE92E682AE00A11003192FF /* FinishRunningView.swift in Sources */,
 				0EE0D3E22B0C83B200E75F4C /* ShareView.swift in Sources */,
 				29D7AD4A2B0E030F00AAAAB0 /* MirroringMapView.swift in Sources */,
+				29BB88362C5F1D9A006B238D /* MapSnapshotTestView.swift in Sources */,
 				F06B936E2ADC279100387DEB /* SlideToUnlock.swift in Sources */,
 				0E9A5D4F2AE0B8C800C19FF3 /* ShareModel.swift in Sources */,
 				9528F0062AE0B37B0056CCC6 /* LoginView.swift in Sources */,
 				BBF90BD82B13859100E3FD70 /* RunningAttributes.swift in Sources */,
 				958240752B0AFDF100105FAE /* CourseScoreModelType.swift in Sources */,
-				29D6BAD32B0924D200BD8653 /* SmallCarouselCard.swift in Sources */,
 				0EE92E6E2AE00AE5003192FF /* CompleteButton.swift in Sources */,
 				95C953CD2AF3BF760040B9DA /* ProfileViewModel.swift in Sources */,
 				95A01E332AF143BA0093D9C0 /* ProfileUserInfoView.swift in Sources */,
 				29F835CF2B0894DB0052C3C1 /* BigCardBackside.swift in Sources */,
+				29BB88322C5F1B8C006B238D /* RecordCardView.swift in Sources */,
 				BB02A39C2B0D26EA00250EDD /* RecordGridView.swift in Sources */,
 				0EEFA04F2B0BAC1C00C656AE /* TransparentBlurView.swift in Sources */,
-				0E7EE5232B5E83E4004F6BAF /* RecordDetailMapView.swift in Sources */,
 				2955F7FA2B038084005CE2C0 /* HealthAuthViewModel.swift in Sources */,
 				95E2EF882ADBA5C70083ADEE /* CourseModel.swift in Sources */,
 				BB397D092AE6408A00F92A43 /* RecordView.swift in Sources */,
 				2925E0BF2B14825A0004BB05 /* RecordDetailView.swift in Sources */,
 				BBA3E3F42B80AAC60068C891 /* ScoreManager.swift in Sources */,
+				29BB88372C5F1D9A006B238D /* PathManagerTestView.swift in Sources */,
 				958240772B0AFE7900105FAE /* CourseScoreModel.swift in Sources */,
 				2998035B2AE0181900A9A134 /* ConfettiShapes.swift in Sources */,
 				29AE76D82ADE2A2200A46742 /* InputUserInfoView.swift in Sources */,
@@ -1530,7 +1543,6 @@
 				2921B00F2B01301100533A83 /* RunningMetricsView.swift in Sources */,
 				F06298AB2AE1998D007AB2D3 /* MapInfoView.swift in Sources */,
 				95A01E352AF144030093D9C0 /* ProfileHealthInfoView.swift in Sources */,
-				0E696E942B60F39A00A4838F /* RecordMapView.swift in Sources */,
 				0E1D1B292AE95AF2005282A2 /* CourseGuideView.swift in Sources */,
 				293C97DF2AE6C454007821F5 /* WatchConnectivityManager.swift in Sources */,
 				0E29F6532ADF6C3A00F5EF5C /* RunningPopup.swift in Sources */,
@@ -1928,7 +1940,7 @@
 		};
 		F0AC8ABE2AD94C210061612C /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 293FA0492C53E1D0009D8CF5 /* Secrets.xcconfig */;
+			baseConfigurationReference = 29BB882D2C5F1434006B238D /* Secrets.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1980,7 +1992,7 @@
 		};
 		F0AC8ABF2AD94C210061612C /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 293FA0492C53E1D0009D8CF5 /* Secrets.xcconfig */;
+			baseConfigurationReference = 29BB882D2C5F1434006B238D /* Secrets.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
