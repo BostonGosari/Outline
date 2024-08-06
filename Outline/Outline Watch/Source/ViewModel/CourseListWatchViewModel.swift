@@ -65,14 +65,3 @@ class CourseListWatchViewModel: NSObject, CLLocationManagerDelegate, ObservableO
         checkLocationAuthorization()
     }
 }
-
-extension HKWorkoutActivityType: Identifiable {
-    public var id: UInt { rawValue }
-    
-    var name: String {
-        switch self {
-        case .running: "Run"
-        default: ""
-        }
-    }
-}
