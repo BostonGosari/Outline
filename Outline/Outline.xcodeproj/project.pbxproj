@@ -102,7 +102,6 @@
 		29B39D412B5EC71700C84E6A /* CoordinateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B39D3F2B5EC6CC00C84E6A /* CoordinateExtension.swift */; };
 		29B39D422B5EC71B00C84E6A /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B39D3D2B5EC66D00C84E6A /* ArrayExtension.swift */; };
 		29B736B52C5661540075A569 /* FinalImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B736B42C5661540075A569 /* FinalImage.swift */; };
-		29BB882E2C5F1434006B238D /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 29BB882D2C5F1434006B238D /* Secrets.xcconfig */; };
 		29BB88302C5F1B16006B238D /* MapSnapshotImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29BB882F2C5F1B16006B238D /* MapSnapshotImageView.swift */; };
 		29BB88322C5F1B8C006B238D /* RecordCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29BB88312C5F1B8C006B238D /* RecordCardView.swift */; };
 		29BB88362C5F1D9A006B238D /* MapSnapshotTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29BB88332C5F1D9A006B238D /* MapSnapshotTestView.swift */; };
@@ -131,6 +130,7 @@
 		29CC42BD2AF24BCE00578EF1 /* WatchRunningManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29CC42BC2AF24BCE00578EF1 /* WatchRunningManager.swift */; };
 		29D6BAD72B09AE5B00BD8653 /* ScoreShimmer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D6BAD62B09AE5B00BD8653 /* ScoreShimmer.swift */; };
 		29D6BAD92B09D4DE00BD8653 /* CardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D6BAD82B09D4DE00BD8653 /* CardModel.swift */; };
+		29D726952C627B410088DB06 /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 29D726942C627B410088DB06 /* Secrets.xcconfig */; };
 		29D7AD4A2B0E030F00AAAAB0 /* MirroringMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D7AD492B0E030F00AAAAB0 /* MirroringMapView.swift */; };
 		29D7AD4C2B0E032200AAAAB0 /* MirroringNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D7AD4B2B0E032200AAAAB0 /* MirroringNavigationView.swift */; };
 		29D7AD4E2B0E033000AAAAB0 /* MirroringMetricsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D7AD4D2B0E033000AAAAB0 /* MirroringMetricsView.swift */; };
@@ -408,7 +408,6 @@
 		29B39D3D2B5EC66D00C84E6A /* ArrayExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtension.swift; sourceTree = "<group>"; };
 		29B39D3F2B5EC6CC00C84E6A /* CoordinateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinateExtension.swift; sourceTree = "<group>"; };
 		29B736B42C5661540075A569 /* FinalImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalImage.swift; sourceTree = "<group>"; };
-		29BB882D2C5F1434006B238D /* Secrets.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 		29BB882F2C5F1B16006B238D /* MapSnapshotImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapSnapshotImageView.swift; sourceTree = "<group>"; };
 		29BB88312C5F1B8C006B238D /* RecordCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordCardView.swift; sourceTree = "<group>"; };
 		29BB88332C5F1D9A006B238D /* MapSnapshotTestView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapSnapshotTestView.swift; sourceTree = "<group>"; };
@@ -436,6 +435,7 @@
 		29CC42BC2AF24BCE00578EF1 /* WatchRunningManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchRunningManager.swift; sourceTree = "<group>"; };
 		29D6BAD62B09AE5B00BD8653 /* ScoreShimmer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreShimmer.swift; sourceTree = "<group>"; };
 		29D6BAD82B09D4DE00BD8653 /* CardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardModel.swift; sourceTree = "<group>"; };
+		29D726942C627B410088DB06 /* Secrets.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 		29D7AD492B0E030F00AAAAB0 /* MirroringMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MirroringMapView.swift; sourceTree = "<group>"; };
 		29D7AD4B2B0E032200AAAAB0 /* MirroringNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MirroringNavigationView.swift; sourceTree = "<group>"; };
 		29D7AD4D2B0E033000AAAAB0 /* MirroringMetricsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MirroringMetricsView.swift; sourceTree = "<group>"; };
@@ -935,7 +935,7 @@
 		F0AC8A902AD94C1F0061612C = {
 			isa = PBXGroup;
 			children = (
-				29BB882D2C5F1434006B238D /* Secrets.xcconfig */,
+				29D726942C627B410088DB06 /* Secrets.xcconfig */,
 				2921B0122B01F3F700533A83 /* GoogleService-Info.plist */,
 				BB52392D2ADAF93D00646494 /* Outline Watch App.entitlements */,
 				BB5239262ADAF70A00646494 /* Shared */,
@@ -1379,6 +1379,7 @@
 				29BB886D2C5F528E006B238D /* 압구정 댕댕런 테스트 촘촘.kml in Resources */,
 				29BB88662C5F28DD006B238D /* 압구정 댕댕런.kml in Resources */,
 				29BB88582C5F28DD006B238D /* 서울과기대 낙타런.kml in Resources */,
+				29D726952C627B410088DB06 /* Secrets.xcconfig in Resources */,
 				F0AC8AA12AD94C200061612C /* Color.xcassets in Resources */,
 				29BB88572C5F28DD006B238D /* 서초 개구리런.kml in Resources */,
 				29BB885B2C5F28DD006B238D /* 반포 문어런.kml in Resources */,
@@ -1387,7 +1388,6 @@
 				29BB885A2C5F28DD006B238D /* 을지로 새런.kml in Resources */,
 				29BB88612C5F28DD006B238D /* 숙대 왈라비런.kml in Resources */,
 				29BB88602C5F28DD006B238D /* 올림픽 비행기런.kml in Resources */,
-				29BB882E2C5F1434006B238D /* Secrets.xcconfig in Resources */,
 				BB1D531E2ADDBCB90073771F /* Pretendard-Thin.ttf in Resources */,
 				0EB59A3E2B1835E600A18C50 /* alert.mp3 in Resources */,
 				BB1D530C2ADDBC560073771F /* Pretendard-Black.ttf in Resources */,
@@ -1940,7 +1940,7 @@
 		};
 		F0AC8ABE2AD94C210061612C /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 29BB882D2C5F1434006B238D /* Secrets.xcconfig */;
+			baseConfigurationReference = 29D726942C627B410088DB06 /* Secrets.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1992,7 +1992,7 @@
 		};
 		F0AC8ABF2AD94C210061612C /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 29BB882D2C5F1434006B238D /* Secrets.xcconfig */;
+			baseConfigurationReference = 29D726942C627B410088DB06 /* Secrets.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
