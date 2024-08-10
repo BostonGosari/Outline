@@ -45,6 +45,7 @@
 		29130C2A2C6750EA004C0325 /* Confetti.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29130C242C6750A4004C0325 /* Confetti.swift */; };
 		29130C352C675791004C0325 /* CoordinateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29130C342C675791004C0325 /* CoordinateExtension.swift */; };
 		29130C372C675F2B004C0325 /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29130C362C675F2B004C0325 /* ArrayExtension.swift */; };
+		29130C392C675F8D004C0325 /* DoubleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29130C382C675F8D004C0325 /* DoubleExtension.swift */; };
 		291A22352AF4CD94004B3D10 /* PermissionSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291A22342AF4CD94004B3D10 /* PermissionSheet.swift */; };
 		2921AFFE2B012DD100533A83 /* RunningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2921AFFD2B012DD100533A83 /* RunningView.swift */; };
 		2921B0002B012E4400533A83 /* RunningMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2921AFFF2B012E4400533A83 /* RunningMapView.swift */; };
@@ -83,7 +84,6 @@
 		2975F0962AE3E1790046C00B /* CornerRectangleModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2975F0952AE3E1790046C00B /* CornerRectangleModifier.swift */; };
 		2990249A2B10B3E8005C5BA8 /* SFCompactDisplay-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0E96BA912AF4E00B000C8FBF /* SFCompactDisplay-Semibold.ttf */; };
 		2990249C2B10B599005C5BA8 /* StretchPro.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2990249B2B10B599005C5BA8 /* StretchPro.ttf */; };
-		299458072AF3BB6400F7D24C /* DoubleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A01E1D2AF0CCE70093D9C0 /* DoubleExtension.swift */; };
 		299803552ADF5F1000A9A134 /* HealthKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299803542ADF5F1000A9A134 /* HealthKitManager.swift */; };
 		299803572AE00C9B00A9A134 /* HapticManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299803562AE00C9B00A9A134 /* HapticManager.swift */; };
 		2998035B2AE0181900A9A134 /* ConfettiShapes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299803592AE0181900A9A134 /* ConfettiShapes.swift */; };
@@ -356,6 +356,7 @@
 		29130C262C6750D3004C0325 /* ConfettiShapes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfettiShapes.swift; sourceTree = "<group>"; };
 		29130C342C675791004C0325 /* CoordinateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinateExtension.swift; sourceTree = "<group>"; };
 		29130C362C675F2B004C0325 /* ArrayExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtension.swift; sourceTree = "<group>"; };
+		29130C382C675F8D004C0325 /* DoubleExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleExtension.swift; sourceTree = "<group>"; };
 		291A22342AF4CD94004B3D10 /* PermissionSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionSheet.swift; sourceTree = "<group>"; };
 		2921AFFD2B012DD100533A83 /* RunningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningView.swift; sourceTree = "<group>"; };
 		2921AFFF2B012E4400533A83 /* RunningMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningMapView.swift; sourceTree = "<group>"; };
@@ -1230,6 +1231,7 @@
 				293D1E2D2B0B00BC00AB85BE /* FontExtension.swift */,
 				29130C342C675791004C0325 /* CoordinateExtension.swift */,
 				29130C362C675F2B004C0325 /* ArrayExtension.swift */,
+				29130C382C675F8D004C0325 /* DoubleExtension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1633,7 +1635,6 @@
 				29111E952B0B8AA000CEFE00 /* NavigationTabView.swift in Sources */,
 				9528EFEA2ADE9E870056CCC6 /* UserCoreDataModel.xcdatamodeld in Sources */,
 				F0492E232ADD545200F6EADD /* CourseListWatchView.swift in Sources */,
-				299458072AF3BB6400F7D24C /* DoubleExtension.swift in Sources */,
 				2930EDC22AF408EC007FD141 /* CourseDetailView.swift in Sources */,
 				BB1D53462ADE9CFA0073771F /* WatchWorkoutManager.swift in Sources */,
 				29130C1F2C6733DC004C0325 /* ConnectivityManager.swift in Sources */,
@@ -1659,6 +1660,7 @@
 				295346B82B0B5D52004F852E /* EmptyContentView.swift in Sources */,
 				BBA3E3F52B80AC530068C891 /* ScoreManager.swift in Sources */,
 				BB1D53482ADE9D780073771F /* MetricsView.swift in Sources */,
+				29130C392C675F8D004C0325 /* DoubleExtension.swift in Sources */,
 				29B205082AEA625100E63F39 /* PathManager.swift in Sources */,
 				29130C1B2C673349004C0325 /* MirroringModel.swift in Sources */,
 				29CC42BD2AF24BCE00578EF1 /* WatchRunningManager.swift in Sources */,
