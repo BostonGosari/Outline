@@ -26,7 +26,9 @@ struct MapWatchView: View {
                 UserAnnotation()
                 
                 if !runningManager.startCourse.coursePaths.isEmpty {
-                    MapPolyline(coordinates: ConvertCoordinateManager.convertToCLLocationCoordinates(runningManager.startCourse.coursePaths))
+                    let coordinates = runningManager.startCourse.coursePaths.toCLLocationCoordinates()
+                    
+                    MapPolyline(coordinates: coordinates)
                         .stroke(.white.opacity(0.4), style: StrokeStyle(lineWidth: 5, lineCap: .round, lineJoin: .round))
                 }
                 
@@ -59,7 +61,7 @@ struct MapWatchView: View {
             .onEnded { _ in
                 withAnimation(.easeInOut) {
                     if isTapped {
-                        let coordinates = ConvertCoordinateManager.convertToCLLocationCoordinates(runningManager.startCourse.coursePaths)
+                        let coordinates = runningManager.startCourse.coursePaths.toCLLocationCoordinates()
                         let center = calculateCenter(coordinates: coordinates)
                         let distance = calculateMaxDistance(coordinates: coordinates, from: center) * 6
                         

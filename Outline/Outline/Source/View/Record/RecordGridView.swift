@@ -198,7 +198,7 @@ struct RecordGridView: View {
             }
         }
         
-        return ConvertCoordinateManager.convertToCLLocationCoordinates(datas)
+        return datas.toCLLocationCoordinates()
     }
     
     func formatDate(_ date: Date) -> String {

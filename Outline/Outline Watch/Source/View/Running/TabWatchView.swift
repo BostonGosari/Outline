@@ -75,7 +75,7 @@ struct TabWatchView: View {
         timer?.invalidate()
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
             if connectivityManager.isMirroring {
-                let userLocations = ConvertCoordinateManager.convertToCoordinates(locationManager.userLocations)
+                let userLocations = locationManager.userLocations.toCoordinates()
                 
                 let runningData =
                 MirroringRunningData(

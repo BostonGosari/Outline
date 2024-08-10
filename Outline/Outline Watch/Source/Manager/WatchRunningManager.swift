@@ -56,7 +56,7 @@ class WatchRunningManager: ObservableObject {
             return false
         }
         
-        guard let shortestDistance = calculateShortestDistance(from: userLocation, to: ConvertCoordinateManager.convertToCLLocationCoordinates(course)) else {
+        guard let shortestDistance = calculateShortestDistance(from: userLocation, to: course.toCLLocationCoordinates()) else {
             print("error to calculate")
             locationNetworkError = true
             return false

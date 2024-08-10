@@ -69,7 +69,7 @@ class RunningMapViewModel: ObservableObject {
         let runningManager = RunningStartManager.shared
         
         if let course = runningManager.startCourse?.coursePaths {
-            let guideCourse = ConvertCoordinateManager.convertToCLLocationCoordinates(course)
+            let guideCourse = course.toCLLocationCoordinates()
             let scoreManager = ScoreManager(guideCourse: guideCourse, userCourse: userLocations)
             scoreManager.calculate()
             return scoreManager.score

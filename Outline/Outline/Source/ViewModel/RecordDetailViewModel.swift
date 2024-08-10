@@ -65,7 +65,7 @@ class RecordDetailViewModel: ObservableObject {
                         datas.append(Coordinate(longitude: data.longitude, latitude: data.latitude))
                     }
                 }
-                userLocations = ConvertCoordinateManager.convertToCLLocationCoordinates(datas)
+                userLocations = datas.toCLLocationCoordinates()
             }
         }
     }
