@@ -25,7 +25,7 @@ struct Bound {
 }
 
 struct PathManager {
-    static func createPath(width: Double, height: Double, coordinates: [CLLocationCoordinate2D], canvasData: CanvasData? = nil) -> some Shape {
+    static func createPath(width: Double, height: Double, coordinates: [CLLocationCoordinate2D], canvasData: CanvasData? = nil) -> Path {
         let data = canvasData ?? getCanvasData(coordinates: coordinates, width: width, height: height)
         var path = Path()
         

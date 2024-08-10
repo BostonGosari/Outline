@@ -25,17 +25,17 @@ struct PathManagerTestView: View {
     var body: some View {
         ZStack {
             PathManager.createPath(width: width, height: height, coordinates: coordinates)
-            .stroke(.green, style: .init(lineWidth: 4, lineCap: .round, lineJoin: .round) )
-            .frame(width: canvasData.width, height: canvasData.height)
-            .background {
-                Color.white.opacity(0.2)
-            }
-            .overlay {
-                VStack {
-                    Text("\(canvasData.width)")
-                    Text("\(canvasData.height)")
+                .stroke(.green, style: .init(lineWidth: 4, lineCap: .round, lineJoin: .round) )
+                .frame(width: canvasData.width, height: canvasData.height)
+                .background {
+                    Color.white.opacity(0.2)
                 }
-            }
+                .overlay {
+                    VStack {
+                        Text("\(canvasData.width)")
+                        Text("\(canvasData.height)")
+                    }
+                }
         }
         .onAppear {
             getGPSArtCourseData()
