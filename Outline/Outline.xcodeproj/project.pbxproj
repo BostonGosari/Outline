@@ -163,7 +163,6 @@
 		95A01E352AF144030093D9C0 /* ProfileHealthInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A01E342AF144030093D9C0 /* ProfileHealthInfoView.swift */; };
 		95A01E3B2AF2B7250093D9C0 /* LookAroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A01E3A2AF2B7240093D9C0 /* LookAroundView.swift */; };
 		95ACF8D72B09C85D0045AEA8 /* CourseCategoryModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95ACF8D62B09C85D0045AEA8 /* CourseCategoryModelType.swift */; };
-		95ACF8D82B09C86C0045AEA8 /* CourseCategoryModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95ACF8D62B09C85D0045AEA8 /* CourseCategoryModelType.swift */; };
 		95B8F45A2AED27C400D9F35B /* AuthModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B8F4592AED27C400D9F35B /* AuthModel.swift */; };
 		95B8F45C2AED35E100D9F35B /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 95B8F45B2AED35E100D9F35B /* FirebaseAuth */; };
 		95B8F45E2AED35E100D9F35B /* FirebaseAuthCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 95B8F45D2AED35E100D9F35B /* FirebaseAuthCombine-Community */; };
@@ -1619,7 +1618,6 @@
 				95A01E2C2AF0DF860093D9C0 /* ConvertCoordinateManager.swift in Sources */,
 				2930EDC02AF3FE3F007FD141 /* CourseListWatchViewModel.swift in Sources */,
 				29111E3F2AE0CD0C009833C7 /* ConfettiWatchView.swift in Sources */,
-				95ACF8D82B09C86C0045AEA8 /* CourseCategoryModelType.swift in Sources */,
 				29B736B52C5661540075A569 /* FinalImage.swift in Sources */,
 				2999C6DB2B0D7CF3009C5585 /* MirroringNavigationWatchView.swift in Sources */,
 				2999C6D32B0D7C37009C5585 /* MirroringMapWatchView.swift in Sources */,
