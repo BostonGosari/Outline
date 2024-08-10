@@ -61,7 +61,7 @@ class GPSArtHomeViewModel: NSObject, CLLocationManagerDelegate, ObservableObject
     }
     
     func sendCoursesToWatch() {
-        ConnectivityManager.shared.sendGPSArtCoursesToWatch(coursesForWatch)
+        ConnectivityManager.shared.sendGPSArtCourses(coursesForWatch)
     }
     
     func fetchRecommendedCourses() {

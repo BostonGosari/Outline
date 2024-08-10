@@ -87,7 +87,8 @@ extension ConnectivityManager {
 
 // MARK: - 수신
 extension ConnectivityManager {
-    func session(_ session: WCSession, didReceiveUserInfo userInfo: [String : Any]) {
+    func session(_ session: WCSession, didReceiveUserInfo userInfo: [String: Any]) {
+        /// iOS로부터 아트코스를 받는 로직
         if let data = userInfo["gpsArtCourses"] as? Data {
             if let courses = decodeData([GPSArtCourse].self, from: data) {
                 self.allCourses = courses
@@ -95,6 +96,7 @@ extension ConnectivityManager {
             }
         }
         
+        /// 미러링
         if let data = userInfo["runningState"] as? Data {
             if let runningState = decodeData(MirroringRunningState.self, from: data) {
                 self.runningState = runningState
