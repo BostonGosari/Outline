@@ -10,7 +10,7 @@ import SwiftUI
 struct HomeTabView: View {
     @StateObject private var runningManager = RunningStartManager.shared
     @StateObject var runningDataManager = RunningDataManager.shared
-    @StateObject var watchConnectivityManager = WatchConnectivityManager.shared
+    @StateObject var watchConnectivityManager = ConnectivityManager.shared
     @State private var selectedTab: Tab = .GPSArtRunning
     @State private var showDetailView = false
     @State private var showMirroringSheet = false

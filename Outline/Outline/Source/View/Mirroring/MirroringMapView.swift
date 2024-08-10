@@ -9,7 +9,7 @@ import MapKit
 import SwiftUI
 
 struct MirroringMapView: UIViewRepresentable {
-    @StateObject private var connectivityManager = WatchConnectivityManager.shared
+    @StateObject private var connectivityManager = ConnectivityManager.shared
     
     private let mapView = MKMapView()
     

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct MirroringView: View {
-    @StateObject private var connectivityManager = WatchConnectivityManager.shared
+    @StateObject private var connectivityManager = ConnectivityManager.shared
     @StateObject private var runningManager = RunningStartManager.shared
     
     @AppStorage("isFirstRunning") private var isFirstRunning = true

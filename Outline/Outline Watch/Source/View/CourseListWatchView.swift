@@ -11,7 +11,7 @@ import UIKit
 
 struct CourseListWatchView: View {
     @StateObject var workoutManager = WatchWorkoutManager.shared
-    @StateObject var connectivityManager = WatchConnectivityManager.shared
+    @StateObject var connectivityManager = ConnectivityManager.shared
     @StateObject var runningManager = WatchRunningManager.shared
     @StateObject var viewModel = CourseListWatchViewModel()
     

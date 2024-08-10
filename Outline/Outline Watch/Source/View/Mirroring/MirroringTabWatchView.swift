@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct MirroringTabWatchView: View {
-    @StateObject private var connectivityManager = WatchConnectivityManager.shared
+    @StateObject private var connectivityManager = ConnectivityManager.shared
     @State private var selection: Tab = .metrics
     
     enum Tab {

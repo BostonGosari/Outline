@@ -9,7 +9,7 @@ import SwiftUI
 import CoreMotion
 
 struct RunningView: View {
-    @StateObject private var connectivityManger = WatchConnectivityManager.shared
+    @StateObject private var connectivityManger = ConnectivityManager.shared
     @StateObject private var runningStartManager = RunningStartManager.shared
     @StateObject private var runningDataManager = RunningDataManager.shared
     @StateObject private var locationManager = LocationManager.shared

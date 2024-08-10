@@ -8,36 +8,14 @@
 import Foundation
 import WatchConnectivity
 
-enum RunningState: Codable {
-    case start
-    case pause
-    case resume
-    case end
-}
-
-struct MirroringRunningInfo: Codable {
-    var runningType: RunningType = .free
-    var courseName: String = ""
-    var course: [Coordinate] = []
-}
-
-struct MirroringRunningData: Codable {
-    var userLocations: [Coordinate] = []
-    var time: Double = 0
-    var distance: Double = 0
-    var kcal: Double = 0
-    var pace: Double = 0
-    var bpm: Double = 0
-}
-
-final class WatchConnectivityManager: NSObject, WCSessionDelegate, ObservableObject {
+final class ConnectivityManager: NSObject, WCSessionDelegate, ObservableObject {
     @Published var allCourses: [GPSArtCourse] = []
     @Published var receivedCourse: GPSArtCourse = GPSArtCourse()
-    @Published var runningState: RunningState?
+    @Published var runningState: MirroringRunningState?
     @Published var runningInfo: MirroringRunningInfo = MirroringRunningInfo()
     @Published var runningData: MirroringRunningData = MirroringRunningData()
     @Published var isMirroring = false
-    static let shared = WatchConnectivityManager()
+    static let shared = ConnectivityManager()
     
     private let userDataModel = UserDataModel()
     let session = WCSession.default
@@ -59,7 +37,6 @@ final class WatchConnectivityManager: NSObject, WCSessionDelegate, ObservableObj
         }
     }
     
-#if os(iOS)
     func sessionDidBecomeInactive(_ session: WCSession) {
         print("error sessionDidBecomeInactive")
     }
@@ -67,7 +44,6 @@ final class WatchConnectivityManager: NSObject, WCSessionDelegate, ObservableObj
     func sessionDidDeactivate(_ session: WCSession) {
         print("error sessionDidDeactivate")
     }
-#endif
     
     func sendGPSArtCoursesToWatch(_ courses: [GPSArtCourse]) {
         do {
@@ -80,18 +56,8 @@ final class WatchConnectivityManager: NSObject, WCSessionDelegate, ObservableObj
         }
     }
     
-    func sendRunningRecordToPhone(_ record: RunningRecord) {
-        do {
-            let encoder = JSONEncoder()
-            let data = try encoder.encode(record)
-            let userInfo = ["newRunningRecord": data]
-            session.transferUserInfo(userInfo)
-        } catch {
-            print("Failed to encode RunningReecord")
-        }
-    }
     
-    func sendRunningState(_ runningState: RunningState) {
+    func sendRunningState(_ runningState: MirroringRunningState) {
         do {
             let encoder = JSONEncoder()
             let data = try encoder.encode(runningState)
@@ -132,30 +98,6 @@ final class WatchConnectivityManager: NSObject, WCSessionDelegate, ObservableObj
     
     func session(_ session: WCSession, didReceiveUserInfo userInfo: [String: Any]) {
         DispatchQueue.main.async {
-            // watchOS
-            if let data = userInfo["gpsArtCourses"] as? Data {
-                let decoder = JSONDecoder()
-                do {
-                    let courses = try decoder.decode([GPSArtCourse].self, from: data)
-                    self.allCourses = courses
-                    print("received all courses")
-                } catch {
-                    print("Failed to decode GPSArtCourses: \(error)")
-                }
-            }
-            
-            if let data = userInfo["gpsArtCourse"] as? Data {
-                let decoder = JSONDecoder()
-                do {
-                    let course = try decoder.decode(GPSArtCourse.self, from: data)
-                    self.receivedCourse = course
-                    print("received course")
-                } catch {
-                    print("Failed to decode GPSArtCourse: \(error)")
-                }
-            }
-            
-            // iOS
             if let data = userInfo["newRunningRecord"] as? Data {
                 let decoder = JSONDecoder()
                 do {
@@ -177,7 +119,7 @@ final class WatchConnectivityManager: NSObject, WCSessionDelegate, ObservableObj
             if let data = userInfo["runningState"] as? Data {
                 let decoder = JSONDecoder()
                 do {
-                    let runningState = try decoder.decode(RunningState.self, from: data)
+                    let runningState = try decoder.decode(MirroringRunningState.self, from: data)
                     self.runningState = runningState
                     print("received runningState")
                 } catch {
