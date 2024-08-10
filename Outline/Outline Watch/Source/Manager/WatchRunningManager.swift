@@ -109,6 +109,6 @@ class WatchRunningManager: ObservableObject {
     func calculateScore() {
         let scoreManager = ScoreManager(guideCourse: startCourse.coursePaths.toCLLocationCoordinates(), userCourse: userLocations)
         scoreManager.calculate()
-        self.score = Int(scoreManager.score)
+        score = runningType == .free ? -1 : Int(scoreManager.score)
     }
 }
