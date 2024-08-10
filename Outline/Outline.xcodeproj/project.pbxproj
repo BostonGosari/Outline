@@ -43,6 +43,8 @@
 		29130C222C674F7C004C0325 /* RunningRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9528EFEB2ADEC7CF0056CCC6 /* RunningRecord.swift */; };
 		29130C282C6750E5004C0325 /* ConfettiShapes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29130C262C6750D3004C0325 /* ConfettiShapes.swift */; };
 		29130C2A2C6750EA004C0325 /* Confetti.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29130C242C6750A4004C0325 /* Confetti.swift */; };
+		29130C352C675791004C0325 /* CoordinateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29130C342C675791004C0325 /* CoordinateExtension.swift */; };
+		29130C372C675F2B004C0325 /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29130C362C675F2B004C0325 /* ArrayExtension.swift */; };
 		291A22352AF4CD94004B3D10 /* PermissionSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291A22342AF4CD94004B3D10 /* PermissionSheet.swift */; };
 		2921AFFE2B012DD100533A83 /* RunningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2921AFFD2B012DD100533A83 /* RunningView.swift */; };
 		2921B0002B012E4400533A83 /* RunningMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2921AFFF2B012E4400533A83 /* RunningMapView.swift */; };
@@ -102,8 +104,6 @@
 		29B205082AEA625100E63F39 /* PathManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9528EFFF2AE042570056CCC6 /* PathManager.swift */; };
 		29B39D3E2B5EC66D00C84E6A /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B39D3D2B5EC66D00C84E6A /* ArrayExtension.swift */; };
 		29B39D402B5EC6CC00C84E6A /* CoordinateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B39D3F2B5EC6CC00C84E6A /* CoordinateExtension.swift */; };
-		29B39D412B5EC71700C84E6A /* CoordinateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B39D3F2B5EC6CC00C84E6A /* CoordinateExtension.swift */; };
-		29B39D422B5EC71B00C84E6A /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B39D3D2B5EC66D00C84E6A /* ArrayExtension.swift */; };
 		29B736B52C5661540075A569 /* FinalImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B736B42C5661540075A569 /* FinalImage.swift */; };
 		29BB88302C5F1B16006B238D /* MapSnapshotImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29BB882F2C5F1B16006B238D /* MapSnapshotImageView.swift */; };
 		29BB88322C5F1B8C006B238D /* RecordCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29BB88312C5F1B8C006B238D /* RecordCardView.swift */; };
@@ -354,6 +354,8 @@
 		29130C1D2C6733DC004C0325 /* ConnectivityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectivityManager.swift; sourceTree = "<group>"; };
 		29130C242C6750A4004C0325 /* Confetti.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Confetti.swift; sourceTree = "<group>"; };
 		29130C262C6750D3004C0325 /* ConfettiShapes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfettiShapes.swift; sourceTree = "<group>"; };
+		29130C342C675791004C0325 /* CoordinateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinateExtension.swift; sourceTree = "<group>"; };
+		29130C362C675F2B004C0325 /* ArrayExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtension.swift; sourceTree = "<group>"; };
 		291A22342AF4CD94004B3D10 /* PermissionSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionSheet.swift; sourceTree = "<group>"; };
 		2921AFFD2B012DD100533A83 /* RunningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningView.swift; sourceTree = "<group>"; };
 		2921AFFF2B012E4400533A83 /* RunningMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningMapView.swift; sourceTree = "<group>"; };
@@ -689,16 +691,6 @@
 			path = Manager;
 			sourceTree = "<group>";
 		};
-		29130C332C67568D004C0325 /* Extension */ = {
-			isa = PBXGroup;
-			children = (
-				95A01E1D2AF0CCE70093D9C0 /* DoubleExtension.swift */,
-				29B39D3D2B5EC66D00C84E6A /* ArrayExtension.swift */,
-				29B39D3F2B5EC6CC00C84E6A /* CoordinateExtension.swift */,
-			);
-			path = Extension;
-			sourceTree = "<group>";
-		};
 		2921AFFC2B012DBF00533A83 /* Running */ = {
 			isa = PBXGroup;
 			children = (
@@ -899,9 +891,8 @@
 		BB5239262ADAF70A00646494 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				29130C332C67568D004C0325 /* Extension */,
-				29130C322C675646004C0325 /* Manager */,
 				29130C1C2C673369004C0325 /* Model */,
+				29130C322C675646004C0325 /* Manager */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -1172,6 +1163,9 @@
 				0E29F64A2ADF653000F5EF5C /* FontExtension.swift */,
 				29AE76DF2ADE2BC700A46742 /* DateExtention.swift */,
 				F0AC8B372AD96AE10061612C /* ViewExtension.swift */,
+				29B39D3F2B5EC6CC00C84E6A /* CoordinateExtension.swift */,
+				95A01E1D2AF0CCE70093D9C0 /* DoubleExtension.swift */,
+				29B39D3D2B5EC66D00C84E6A /* ArrayExtension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1234,6 +1228,8 @@
 			isa = PBXGroup;
 			children = (
 				293D1E2D2B0B00BC00AB85BE /* FontExtension.swift */,
+				29130C342C675791004C0325 /* CoordinateExtension.swift */,
+				29130C362C675F2B004C0325 /* ArrayExtension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1633,6 +1629,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				29130C352C675791004C0325 /* CoordinateExtension.swift in Sources */,
 				29111E952B0B8AA000CEFE00 /* NavigationTabView.swift in Sources */,
 				9528EFEA2ADE9E870056CCC6 /* UserCoreDataModel.xcdatamodeld in Sources */,
 				F0492E232ADD545200F6EADD /* CourseListWatchView.swift in Sources */,
@@ -1648,8 +1645,6 @@
 				293D1E342B0B01AF00AB85BE /* PermissionSheet.swift in Sources */,
 				29130C212C674EE5004C0325 /* GPSArtCourse.swift in Sources */,
 				29111E372AE0C9CA009833C7 /* FinishWatchView.swift in Sources */,
-				29B39D412B5EC71700C84E6A /* CoordinateExtension.swift in Sources */,
-				29B39D422B5EC71B00C84E6A /* ArrayExtension.swift in Sources */,
 				2930EDC02AF3FE3F007FD141 /* CourseListWatchViewModel.swift in Sources */,
 				29111E3F2AE0CD0C009833C7 /* ConfettiWatchView.swift in Sources */,
 				29B736B52C5661540075A569 /* FinalImage.swift in Sources */,
@@ -1673,6 +1668,7 @@
 				2930EDBB2AF3E59F007FD141 /* ControlButton.swift in Sources */,
 				293D1E2E2B0B00BC00AB85BE /* FontExtension.swift in Sources */,
 				F0492E212ADD52E900F6EADD /* TabWatchView.swift in Sources */,
+				29130C372C675F2B004C0325 /* ArrayExtension.swift in Sources */,
 				2930EDBD2AF3FD97007FD141 /* CountDownView.swift in Sources */,
 				293D1E352B0B3CD800AB85BE /* LocationManager.swift in Sources */,
 			);

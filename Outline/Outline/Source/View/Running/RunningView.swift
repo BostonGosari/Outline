@@ -74,7 +74,7 @@ struct RunningView: View {
         }
         .onChange(of: runningStartManager.counter) { _, newValue in
             if connectivityManger.isMirroring {
-                let userLocations = locationManager.userLocations.toCoordinates()
+                let userLocations = locationManager.userLocations.map { $0.toCoordinate() }
                 
                 let runningData = MirroringRunningData(
                     userLocations: userLocations,

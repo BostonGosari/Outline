@@ -77,10 +77,20 @@ struct GPSArtCourse: Codable, Hashable {
         self.navigation = navigation
         self.hotSpots = hotSpots
     }
+    
     init() {
         self.id = ""
         self.courseName = ""
-        self.locationInfo = Placemark(name: "", isoCountryCode: "", administrativeArea: "", subAdministrativeArea: "", locality: "", subLocality: "", throughfare: "", subThroughfare: "")
+        self.locationInfo = Placemark(
+            name: "",
+            isoCountryCode: "",
+            administrativeArea: "",
+            subAdministrativeArea: "",
+            locality: "",
+            subLocality: "",
+            throughfare: "",
+            subThroughfare: ""
+        )
         self.courseLength = 0
         self.courseDuration = 0
         self.centerLocation = Coordinate(longitude: 0, latitude: 0)

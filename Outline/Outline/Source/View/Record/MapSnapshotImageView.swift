@@ -153,8 +153,8 @@ struct MapSnapshotImageView: UIViewRepresentable {
     func closePathIfEndpointsMatch(coordinates: [CLLocationCoordinate2D]) -> [CLLocationCoordinate2D] {
         guard coordinates.count >= 10 else { return coordinates } // 너무 짧은 경로일 경우 반환
         guard let first = coordinates.first, let last = coordinates.last else { return coordinates }
-        let firstLocation = CLLocation(from: first)
-        let lastLocation = CLLocation(from: last)
+        let firstLocation = first.toCLLocation()
+        let lastLocation = last.toCLLocation()
         var coordinates = coordinates
         
         if firstLocation.distance(from: lastLocation) <= 10 { coordinates.append(first) }
