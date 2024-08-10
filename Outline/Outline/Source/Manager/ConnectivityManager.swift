@@ -2,7 +2,7 @@
 //  WatchConnectivityManager.swift
 //  Outline
 //
-//  Created by hyunjun on 10/24/23.
+//  Modified by hyunjun on 8/10/24.
 //
 
 import Foundation
@@ -15,8 +15,8 @@ final class ConnectivityManager: NSObject, WCSessionDelegate, ObservableObject {
     @Published var runningInfo: MirroringRunningInfo = MirroringRunningInfo()
     @Published var runningData: MirroringRunningData = MirroringRunningData()
     @Published var isMirroring = false
-    static let shared = ConnectivityManager()
     
+    static let shared = ConnectivityManager()
     private let userDataModel = UserDataModel()
     let session = WCSession.default
     
@@ -26,45 +26,37 @@ final class ConnectivityManager: NSObject, WCSessionDelegate, ObservableObject {
             session.delegate = self
             session.activate()
         } else {
-            print("ERROR: Watch session not supported")
+            print("오류: 워치 세션이 지원되지 않습니다")
         }
     }
     
     func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
         if let error = error {
-            print("session activation failed with error: \(error.localizedDescription)")
+            print("세션 활성화에 실패했습니다. 오류: \(error.localizedDescription)")
             return
         }
     }
     
     func sessionDidBecomeInactive(_ session: WCSession) {
-        print("error sessionDidBecomeInactive")
+        print("세션이 비활성화되었습니다.")
     }
     
     func sessionDidDeactivate(_ session: WCSession) {
-        print("error sessionDidDeactivate")
+        print("세션이 비활성화되었습니다.")
     }
     
-    func sendGPSArtCoursesToWatch(_ courses: [GPSArtCourse]) {
-        do {
-            let encoder = JSONEncoder()
-            let data = try encoder.encode(courses)
+    /// MARK: - 송신
+    func sendGPSArtCourses(_ courses: [GPSArtCourse]) {
+        if let data = encodeData(from: courses) {
             let userInfo = ["gpsArtCourses": data]
             session.transferUserInfo(userInfo)
-        } catch {
-            print("Failed to encode GPSArtCourses: \(error)")
         }
     }
     
-    
     func sendRunningState(_ runningState: MirroringRunningState) {
-        do {
-            let encoder = JSONEncoder()
-            let data = try encoder.encode(runningState)
+        if let data = encodeData(from: runningState) {
             let userInfo = ["runningState": data]
             session.transferUserInfo(userInfo)
-        } catch {
-            print("Failed to encode runningState")
         }
     }
     
@@ -74,84 +66,83 @@ final class ConnectivityManager: NSObject, WCSessionDelegate, ObservableObject {
     }
     
     func sendRunningInfo(_ runningInfo: MirroringRunningInfo) {
-        do {
-            let encoder = JSONEncoder()
-            let data = try encoder.encode(runningInfo)
+        if let data = encodeData(from: runningInfo) {
             let userInfo = ["runningInfo": data]
             session.transferUserInfo(userInfo)
-        } catch {
-            print("Failed to encode runningInfo")
         }
     }
     
     func sendRunningData(_ runningData: MirroringRunningData) {
-        do {
-            let encoder = JSONEncoder()
-            let data = try encoder.encode(runningData)
+        if let data = encodeData(from: runningData) {
             let userInfo = ["runningData": data]
             session.transferUserInfo(userInfo)
-            print("send runningData")
-        } catch {
-            print("Failed to encode runningData")
+            print("러닝 데이터를 전송했습니다.")
         }
     }
     
+    /// 입력받은 값을 인코딩해주는 메서드
+    private func encodeData<T: Encodable>(from value: T) -> Data? {
+        do {
+            let encoder = JSONEncoder()
+            let encodedData = try encoder.encode(value)
+            return encodedData
+        } catch {
+            print("\(T.self)을(를) 인코딩하는 데 실패했습니다: \(error)")
+            return nil
+        }
+    }
+    
+    /// MARK: - 수신
     func session(_ session: WCSession, didReceiveUserInfo userInfo: [String: Any]) {
-        DispatchQueue.main.async {
-            if let data = userInfo["newRunningRecord"] as? Data {
-                let decoder = JSONDecoder()
-                do {
-                    let newRunningRecord = try decoder.decode(RunningRecord.self, from: data)
-                    self.userDataModel.createRunningRecord(record: newRunningRecord) { result in
-                        switch result {
-                        case .success:
-                            print("saved")
-                        case .failure:
-                            print("fail to save")
-                        }
+        /// 워치로부터 새로운 러닝 레코드를 받아 저장합니다.
+        if let data = userInfo["newRunningRecord"] as? Data {
+            if let newRunningRecord = decodeData(RunningRecord.self, from: data) {
+                userDataModel.createRunningRecord(record: newRunningRecord) { result in
+                    switch result {
+                    case .success: print("성공적으로 저장되었습니다.")
+                    case .failure: print("저장에 실패했습니다.")
                     }
-                } catch {
-                    
                 }
             }
-            
-            // Mirroring
-            if let data = userInfo["runningState"] as? Data {
-                let decoder = JSONDecoder()
-                do {
-                    let runningState = try decoder.decode(MirroringRunningState.self, from: data)
-                    self.runningState = runningState
-                    print("received runningState")
-                } catch {
-                    print("Failed to decode runningState")
-                }
+        }
+        
+        /// 미러링
+        if let data = userInfo["runningState"] as? Data {
+            if let runningState = decodeData(MirroringRunningState.self, from: data) {
+                self.runningState = runningState
+                print("러닝 상태를 수신했습니다")
             }
-            
-            if let data = userInfo["isMirroring"] as? Bool {
-                self.isMirroring = data
+        }
+        
+        if let data = userInfo["isMirroring"] as? Bool {
+            self.isMirroring = data
+            print("미러링 상태를 수신했습니다: \(data)")
+        }
+        
+        if let data = userInfo["runningInfo"] as? Data {
+            if let runningInfo = decodeData(MirroringRunningInfo.self, from: data) {
+                self.runningInfo = runningInfo
+                print("러닝 정보를 수신했습니다")
             }
-            
-            if let data = userInfo["runningInfo"] as? Data {
-                let decoder = JSONDecoder()
-                do {
-                    let runningInfo = try decoder.decode(MirroringRunningInfo.self, from: data)
-                    self.runningInfo = runningInfo
-                    print("received runningInfo")
-                } catch {
-                    print("Failed to decode runningInfo")
-                }
+        }
+        
+        if let data = userInfo["runningData"] as? Data {
+            if let runningData = decodeData(MirroringRunningData.self, from: data) {
+                self.runningData = runningData
+                print("러닝 데이터를 수신했습니다")
             }
-            
-            if let data = userInfo["runningData"] as? Data {
-                let decoder = JSONDecoder()
-                do {
-                    let runningData = try decoder.decode(MirroringRunningData.self, from: data)
-                    self.runningData = runningData
-                    print("received runningData")
-                } catch {
-                    print("Failed to decode runningData")
-                }
-            }
+        }
+    }
+    
+    /// 입력받은 데이터를 디코딩해주는 메서드
+    private func decodeData<T: Decodable>(_ type: T.Type, from data: Data) -> T? {
+        do {
+            let decoder = JSONDecoder()
+            let decodedData = try decoder.decode(T.self, from: data)
+            return decodedData
+        } catch {
+            print("\(T.self)을(를) 디코딩하는 데 실패했습니다: \(error)")
+            return nil
         }
     }
 }
