@@ -45,7 +45,7 @@ struct RunningMetricsView: View {
             .opacity(!isPaused && !showDetail ? 1 : 0)
         }
         .onReceive(runningManager.$counter) { newCounterValue in
-            if (runningDataManager.activityID != nil) {
+            if runningDataManager.activityID != nil {
                 Task.detached {
                     // 시간이 바뀔 때마다 호출
                     await runningDataManager.updateLiveActivity(

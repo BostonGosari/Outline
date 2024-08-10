@@ -215,7 +215,6 @@ class RunningDataManager: ObservableObject {
         }
     }
 
-    
     func calculateScore() {
         guard let course = runningManger.startCourse else { return }
         // 진행률 계산
@@ -224,7 +223,7 @@ class RunningDataManager: ObservableObject {
             return
         }
         
-        let scoreManager = ScoreManager(guideCourse:  course.coursePaths.toCLLocationCoordinates(), userCourse: userLocations)
+        let scoreManager = ScoreManager(guideCourse: course.coursePaths.toCLLocationCoordinates(), userCourse: userLocations)
         scoreManager.calculate()
         self.score = Int(scoreManager.score)
     }

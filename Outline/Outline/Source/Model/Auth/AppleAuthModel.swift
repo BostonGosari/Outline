@@ -120,7 +120,7 @@ extension AppleAuthModel: ASAuthorizationControllerDelegate {
               rawNonce: nonce)
             
             Auth.auth().signIn(with: credential) { (authResult, error) in
-                if let _ = error {
+                if error != nil {
                     if let completion = self.completion {
                         completion(.failure(.failToMakeNonce))
                     }
