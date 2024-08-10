@@ -231,8 +231,8 @@ extension MirroringView {
     
     private var guideView: some View {
         ZStack {
-            let userLocations = ConvertCoordinateManager.convertToCLLocationCoordinates(connectivityManager.runningData.userLocations)
-            let course = ConvertCoordinateManager.convertToCLLocationCoordinates(connectivityManager.runningInfo.course)
+            let userLocations = connectivityManager.runningData.userLocations.toCLLocationCoordinates()
+            let course = connectivityManager.runningInfo.course.toCLLocationCoordinates()
             
             CourseGuideView(
                 tapGuideView: $tapGuideView,

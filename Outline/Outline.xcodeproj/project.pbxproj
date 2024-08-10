@@ -159,7 +159,6 @@
 		95A01E172AEE3E990093D9C0 /* KakaoAuthModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A01E162AEE3E990093D9C0 /* KakaoAuthModel.swift */; };
 		95A01E1C2AEE7A0A0093D9C0 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A01E1B2AEE7A0A0093D9C0 /* LoginViewModel.swift */; };
 		95A01E1E2AF0CCE70093D9C0 /* DoubleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A01E1D2AF0CCE70093D9C0 /* DoubleExtension.swift */; };
-		95A01E2C2AF0DF860093D9C0 /* ConvertCoordinateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06298A82AE18A50007AB2D3 /* ConvertCoordinateManager.swift */; };
 		95A01E312AF141C30093D9C0 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A01E302AF141C30093D9C0 /* ProfileView.swift */; };
 		95A01E332AF143BA0093D9C0 /* ProfileUserInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A01E322AF143BA0093D9C0 /* ProfileUserInfoView.swift */; };
 		95A01E352AF144030093D9C0 /* ProfileHealthInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A01E342AF144030093D9C0 /* ProfileHealthInfoView.swift */; };
@@ -238,7 +237,6 @@
 		F0492E212ADD52E900F6EADD /* TabWatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0492E202ADD52E900F6EADD /* TabWatchView.swift */; };
 		F0492E232ADD545200F6EADD /* CourseListWatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0492E222ADD545200F6EADD /* CourseListWatchView.swift */; };
 		F05C7D562ADC565E006842DB /* PreferenceKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05C7D552ADC565E006842DB /* PreferenceKey.swift */; };
-		F06298A92AE18A50007AB2D3 /* ConvertCoordinateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06298A82AE18A50007AB2D3 /* ConvertCoordinateManager.swift */; };
 		F06298AB2AE1998D007AB2D3 /* MapInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06298AA2AE1998D007AB2D3 /* MapInfoView.swift */; };
 		F06298AF2AE1A2ED007AB2D3 /* CountDown.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06298AE2AE1A2ED007AB2D3 /* CountDown.swift */; };
 		F06B93622ADB847500387DEB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0AC8A9E2AD94C1F0061612C /* ContentView.swift */; };
@@ -520,7 +518,6 @@
 		F0492E202ADD52E900F6EADD /* TabWatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabWatchView.swift; sourceTree = "<group>"; };
 		F0492E222ADD545200F6EADD /* CourseListWatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseListWatchView.swift; sourceTree = "<group>"; };
 		F05C7D552ADC565E006842DB /* PreferenceKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferenceKey.swift; sourceTree = "<group>"; };
-		F06298A82AE18A50007AB2D3 /* ConvertCoordinateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvertCoordinateManager.swift; sourceTree = "<group>"; };
 		F06298AA2AE1998D007AB2D3 /* MapInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapInfoView.swift; sourceTree = "<group>"; };
 		F06298AE2AE1A2ED007AB2D3 /* CountDown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountDown.swift; sourceTree = "<group>"; };
 		F06B936D2ADC279100387DEB /* SlideToUnlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideToUnlock.swift; sourceTree = "<group>"; };
@@ -874,7 +871,6 @@
 			isa = PBXGroup;
 			children = (
 				29130C1C2C673369004C0325 /* Model */,
-				F06298A82AE18A50007AB2D3 /* ConvertCoordinateManager.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -1511,7 +1507,6 @@
 				2972515C2B0787640048D787 /* GuideToFreeRunningSheet.swift in Sources */,
 				95A01E1C2AEE7A0A0093D9C0 /* LoginViewModel.swift in Sources */,
 				29B39D3E2B5EC66D00C84E6A /* ArrayExtension.swift in Sources */,
-				F06298A92AE18A50007AB2D3 /* ConvertCoordinateManager.swift in Sources */,
 				292613172AF2BCEF00591E32 /* RecordHeader.swift in Sources */,
 				29D6BAD72B09AE5B00BD8653 /* ScoreShimmer.swift in Sources */,
 				954CB2BA2AE654BA005EB2E9 /* NotificationAuthView.swift in Sources */,
@@ -1630,7 +1625,6 @@
 				29111E372AE0C9CA009833C7 /* FinishWatchView.swift in Sources */,
 				29B39D412B5EC71700C84E6A /* CoordinateExtension.swift in Sources */,
 				29B39D422B5EC71B00C84E6A /* ArrayExtension.swift in Sources */,
-				95A01E2C2AF0DF860093D9C0 /* ConvertCoordinateManager.swift in Sources */,
 				2930EDC02AF3FE3F007FD141 /* CourseListWatchViewModel.swift in Sources */,
 				29111E3F2AE0CD0C009833C7 /* ConfettiWatchView.swift in Sources */,
 				29B736B52C5661540075A569 /* FinalImage.swift in Sources */,

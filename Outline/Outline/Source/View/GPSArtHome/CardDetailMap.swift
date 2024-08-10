@@ -29,7 +29,7 @@ struct CardDetailMap: View {
             CardDetailMapView(
                 places: $places,
                 selectedAnnotation: $selectedAnnotation,
-                coursePaths: ConvertCoordinateManager.convertToCLLocationCoordinates(selectedCourse.coursePaths)
+                coursePaths: selectedCourse.coursePaths.toCLLocationCoordinates()
             )
             .ignoresSafeArea()
             

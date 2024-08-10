@@ -30,7 +30,7 @@ struct MirroringMapView: UIViewRepresentable {
         trackingButton.backgroundColor = .black
         trackingButton.tintColor = UIColor(.customPrimary)
         
-        let course = ConvertCoordinateManager.convertToCLLocationCoordinates(connectivityManager.runningInfo.course)
+        let course = connectivityManager.runningInfo.course.toCLLocationCoordinates()
         
         let polyline = MKPolyline(coordinates: course, count: course.count)
         mapView.addOverlay(polyline)
@@ -39,7 +39,7 @@ struct MirroringMapView: UIViewRepresentable {
     }
     
     func updateUIView(_ uiView: MKMapView, context: Context) {
-        let userLocations = ConvertCoordinateManager.convertToCLLocationCoordinates(connectivityManager.runningData.userLocations)
+        let userLocations = connectivityManager.runningData.userLocations.toCLLocationCoordinates()
         let smoothedLocations = smoothLocations(userLocations)
         
         if uiView.overlays.count >= 2,

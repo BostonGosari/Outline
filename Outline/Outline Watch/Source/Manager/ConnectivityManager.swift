@@ -72,7 +72,7 @@ extension ConnectivityManager {
         }
     }
     
-    /// 입력받은 값을 인코딩해주는 메서ㄷ
+    /// 입력받은 값을 인코딩해주는 메서드
     private func encodeData<T: Encodable>(from value: T) -> Data? {
         do {
             let encoder = JSONEncoder()

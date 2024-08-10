@@ -231,7 +231,7 @@ struct RecordView: View {
             }
         }
         
-        return ConvertCoordinateManager.convertToCLLocationCoordinates(datas)
+        return datas.toCLLocationCoordinates()
     }
 }
 

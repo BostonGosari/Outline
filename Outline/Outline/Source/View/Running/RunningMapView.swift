@@ -32,7 +32,8 @@ struct RunningMapView: UIViewRepresentable {
         trackingButton.backgroundColor = .black
         
         if let courseGuide = runningStartManager.startCourse {
-            let polyline = MKPolyline(coordinates: ConvertCoordinateManager.convertToCLLocationCoordinates(courseGuide.coursePaths), count: courseGuide.coursePaths.count)
+            let coordinates = courseGuide.coursePaths.toCLLocationCoordinates()
+            let polyline = MKPolyline(coordinates: coordinates, count: courseGuide.coursePaths.count)
             mapView.addOverlay(polyline)
         }
     
