@@ -1,14 +1,10 @@
 //
-//  CourseModelType.swift
+//  GPSArtCourse.swift
 //  Outline
 //
-//  Created by Seungui Moon on 10/14/23.
+//  Modified by hyunjun on 8/10/24.
 //
 
-#if os(iOS)
-import Firebase
-import FirebaseFirestoreSwift
-#endif
 import SwiftUI
 
 typealias AllGPSArtCourses = [GPSArtCourse]
