@@ -211,7 +211,6 @@
 		BB869B5A2B196F2D0087202A /* Pretendard-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BB1D53152ADDBC900073771F /* Pretendard-Light.ttf */; };
 		BB869B5B2B196F2F0087202A /* SFCompactDisplay-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0E96BA912AF4E00B000C8FBF /* SFCompactDisplay-Semibold.ttf */; };
 		BB869B5C2B196F310087202A /* StretchPro.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2990249B2B10B599005C5BA8 /* StretchPro.ttf */; };
-		BB869B5D2B1970480087202A /* DoubleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A01E1D2AF0CCE70093D9C0 /* DoubleExtension.swift */; };
 		BBA3E3F42B80AAC60068C891 /* ScoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBA3E3F32B80AAC60068C891 /* ScoreManager.swift */; };
 		BBA3E3F52B80AC530068C891 /* ScoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBA3E3F32B80AAC60068C891 /* ScoreManager.swift */; };
 		BBBB27E52B1795360081C93D /* Color.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F0AC8AA02AD94C200061612C /* Color.xcassets */; };
@@ -680,6 +679,26 @@
 			path = Confetti;
 			sourceTree = "<group>";
 		};
+		29130C322C675646004C0325 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				9528EFFF2AE042570056CCC6 /* PathManager.swift */,
+				0E42915F2B03CF3100EE75F5 /* LocationManager.swift */,
+				BBA3E3F32B80AAC60068C891 /* ScoreManager.swift */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
+		29130C332C67568D004C0325 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				95A01E1D2AF0CCE70093D9C0 /* DoubleExtension.swift */,
+				29B39D3D2B5EC66D00C84E6A /* ArrayExtension.swift */,
+				29B39D3F2B5EC6CC00C84E6A /* CoordinateExtension.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		2921AFFC2B012DBF00533A83 /* Running */ = {
 			isa = PBXGroup;
 			children = (
@@ -880,6 +899,8 @@
 		BB5239262ADAF70A00646494 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				29130C332C67568D004C0325 /* Extension */,
+				29130C322C675646004C0325 /* Manager */,
 				29130C1C2C673369004C0325 /* Model */,
 			);
 			path = Shared;
@@ -940,12 +961,9 @@
 				299803542ADF5F1000A9A134 /* HealthKitManager.swift */,
 				0E29F6542ADF6C7D00F5EF5C /* KMLParserManager.swift */,
 				299803562AE00C9B00A9A134 /* HapticManager.swift */,
-				9528EFFF2AE042570056CCC6 /* PathManager.swift */,
 				954FFF772AE132D100D27537 /* CourseDataUploadManager.swift */,
 				29CC19A32AE95F2300B79610 /* RunningStartManager.swift */,
 				F035240F2AE35AF800CCD8A6 /* RunningDataManager.swift */,
-				0E42915F2B03CF3100EE75F5 /* LocationManager.swift */,
-				BBA3E3F32B80AAC60068C891 /* ScoreManager.swift */,
 				299DC11C2C3D2BE700567874 /* MotionManager.swift */,
 			);
 			path = Manager;
@@ -1154,9 +1172,6 @@
 				0E29F64A2ADF653000F5EF5C /* FontExtension.swift */,
 				29AE76DF2ADE2BC700A46742 /* DateExtention.swift */,
 				F0AC8B372AD96AE10061612C /* ViewExtension.swift */,
-				95A01E1D2AF0CCE70093D9C0 /* DoubleExtension.swift */,
-				29B39D3D2B5EC66D00C84E6A /* ArrayExtension.swift */,
-				29B39D3F2B5EC6CC00C84E6A /* CoordinateExtension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1475,7 +1490,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BB869B5D2B1970480087202A /* DoubleExtension.swift in Sources */,
 				BBBB27E62B1796DC0081C93D /* FontExtension.swift in Sources */,
 				BBCB1F0D2B1778DE00D9AE1C /* AppIntent.swift in Sources */,
 				BBCB1F072B1778DE00D9AE1C /* OutlineLiveActivityBundle.swift in Sources */,
