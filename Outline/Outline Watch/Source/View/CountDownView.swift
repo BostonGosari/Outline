@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CountDownView: View {
-    @StateObject var connectivityManager = WatchConnectivityManager.shared
+    @StateObject var connectivityManager = ConnectivityManager.shared
     @StateObject var workoutManager = WatchWorkoutManager.shared
     @State private var countdownSeconds = 3
     

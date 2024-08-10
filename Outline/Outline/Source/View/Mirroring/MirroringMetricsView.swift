@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct MirroringMetricsView: View {
-    @StateObject private var connectivityManager = WatchConnectivityManager.shared
+    @StateObject private var connectivityManager = ConnectivityManager.shared
     private let weight: Double = 60
     
     var showDetail: Bool

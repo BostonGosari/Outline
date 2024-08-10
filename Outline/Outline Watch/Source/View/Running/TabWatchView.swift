@@ -9,7 +9,7 @@ import SwiftUI
 
 struct TabWatchView: View {
     @StateObject private var locationManager = LocationManager.shared
-    @StateObject private var connectivityManager = WatchConnectivityManager.shared
+    @StateObject private var connectivityManager = ConnectivityManager.shared
     @StateObject private var workoutManager = WatchWorkoutManager.shared
     @StateObject private var runningManager = WatchRunningManager.shared
     
@@ -106,6 +106,6 @@ struct TabWatchView: View {
         let courseData = CourseData(courseName: startCourse.courseName, runningLength: startCourse.courseLength, heading: startCourse.heading, distance: startCourse.distance, coursePaths: locationManager.userLocations, runningCourseId: "", regionDisplayName: startCourse.regionDisplayName, score: runningManager.score)
         let healthData = HealthData(totalTime: builder.elapsedTime, averageCadence: workoutManager.cadence, totalRunningDistance: workoutManager.distance, totalEnergy: workoutManager.calorie, averageHeartRate: workoutManager.heartRate, averagePace: workoutManager.averagePace, startDate: workoutManager.session?.startDate ?? Date(), endDate: workoutManager.session?.endDate ?? Date())
         
-        connectivityManager.sendRunningRecordToPhone(RunningRecord(id: UUID().uuidString, runningType: runningManager.runningType, courseData: courseData, healthData: healthData))
+        connectivityManager.sendRunningRecord(RunningRecord(id: UUID().uuidString, runningType: runningManager.runningType, courseData: courseData, healthData: healthData))
     }
 }
