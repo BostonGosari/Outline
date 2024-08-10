@@ -55,7 +55,7 @@ class WatchWorkoutManager: NSObject, ObservableObject {
         
         let startDate = Date()
         session?.startActivity(with: startDate)
-        builder?.beginCollection(withStart: startDate) { sucess, error in }
+        builder?.beginCollection(withStart: startDate) { _, _ in }
         self.startDate = startDate
     }
     

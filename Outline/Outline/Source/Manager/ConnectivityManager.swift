@@ -45,7 +45,7 @@ final class ConnectivityManager: NSObject, WCSessionDelegate, ObservableObject {
         print("세션이 비활성화되었습니다.")
     }
     
-    /// MARK: - 송신
+    // MARK: - 송신
     func sendGPSArtCourses(_ courses: [GPSArtCourse]) {
         if let data = encodeData(from: courses) {
             let userInfo = ["gpsArtCourses": data]
@@ -92,7 +92,7 @@ final class ConnectivityManager: NSObject, WCSessionDelegate, ObservableObject {
         }
     }
     
-    /// MARK: - 수신
+    // MARK: - 수신
     func session(_ session: WCSession, didReceiveUserInfo userInfo: [String: Any]) {
         /// 워치로부터 새로운 러닝 레코드를 받아 저장합니다.
         if let data = userInfo["newRunningRecord"] as? Data {
