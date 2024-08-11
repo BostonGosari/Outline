@@ -1,14 +1,10 @@
 //
-//  CourseModelType.swift
+//  GPSArtCourse.swift
 //  Outline
 //
-//  Created by Seungui Moon on 10/14/23.
+//  Modified by hyunjun on 8/10/24.
 //
 
-#if os(iOS)
-import Firebase
-import FirebaseFirestoreSwift
-#endif
 import SwiftUI
 
 typealias AllGPSArtCourses = [GPSArtCourse]
@@ -81,10 +77,20 @@ struct GPSArtCourse: Codable, Hashable {
         self.navigation = navigation
         self.hotSpots = hotSpots
     }
+    
     init() {
         self.id = ""
         self.courseName = ""
-        self.locationInfo = Placemark(name: "", isoCountryCode: "", administrativeArea: "", subAdministrativeArea: "", locality: "", subLocality: "", throughfare: "", subThroughfare: "")
+        self.locationInfo = Placemark(
+            name: "",
+            isoCountryCode: "",
+            administrativeArea: "",
+            subAdministrativeArea: "",
+            locality: "",
+            subLocality: "",
+            throughfare: "",
+            subThroughfare: ""
+        )
         self.courseLength = 0
         self.courseDuration = 0
         self.centerLocation = Coordinate(longitude: 0, latitude: 0)

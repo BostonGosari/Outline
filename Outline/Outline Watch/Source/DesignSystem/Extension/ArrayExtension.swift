@@ -1,8 +1,8 @@
 //
 //  ArrayExtension.swift
-//  Outline
+//  Outline Watch App
 //
-//  Created by Hyunjun Kim on 1/23/24.
+//  Created by hyunjun on 8/10/24.
 //
 
 import SwiftUI

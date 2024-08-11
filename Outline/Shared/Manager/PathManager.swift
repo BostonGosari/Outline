@@ -17,8 +17,15 @@ struct CanvasData {
     var initY: Double
 }
 
+struct Bound {
+    var minLon: Double
+    var maxLon: Double
+    var minLat: Double
+    var maxLat: Double
+}
+
 struct PathManager {
-    static func createPath(width: Double, height: Double, coordinates: [CLLocationCoordinate2D], canvasData: CanvasData? = nil) -> some Shape {
+    static func createPath(width: Double, height: Double, coordinates: [CLLocationCoordinate2D], canvasData: CanvasData? = nil) -> Path {
         let data = canvasData ?? getCanvasData(coordinates: coordinates, width: width, height: height)
         var path = Path()
         
@@ -39,8 +46,7 @@ struct PathManager {
     
     static func getCanvasData(coordinates: [CLLocationCoordinate2D], width: Double, height: Double) -> CanvasData {
         // longitude 는 넓이(가로), latitude 는 높이(세로)와 관련
-        let bound = coordinates.getBound()
-        
+        let bound = getBound(from: coordinates)
         let longitudeRange = bound.maxLon - bound.minLon
         let latitudeRange = bound.maxLat - bound.minLat
         
@@ -70,8 +76,7 @@ struct PathManager {
     static func getLineWidth(coordinates: [CLLocationCoordinate2D]) -> CGFloat {
         guard !coordinates.isEmpty else { return 1.0 }
         
-        let bound = coordinates.getBound()
-        
+        let bound = getBound(from: coordinates)
         let minCoordinate = CLLocation(latitude: bound.minLat, longitude: bound.minLon)
         let maxCoordinate = CLLocation(latitude: bound.maxLat, longitude: bound.maxLon)
         // 해당 맵의 대각선의 거리를 구합니다. 단위: meter
@@ -85,6 +90,17 @@ struct PathManager {
         let normalizedDistance = min(max(distanceInMeters / maxDistanceThreshold, 0), 1)
 
         return minWidth + (maxWidth - minWidth) * normalizedDistance
+    }
+    
+    static private func getBound(from coordinates: [CLLocationCoordinate2D]) -> Bound {
+        let longitudes = coordinates.map { $0.longitude }
+        let latitudes = coordinates.map { $0.latitude }
+        let minLon = longitudes.min() ?? 180
+        let maxLon = longitudes.max() ?? -180
+        let minLat = latitudes.min() ?? 90
+        let maxLat = latitudes.max() ?? -90
+        
+        return Bound(minLon: minLon, maxLon: maxLon, minLat: minLat, maxLat: maxLat)
     }
     
     static private func getRelativePoint(coordinate: CLLocationCoordinate2D, canvasData: CanvasData) -> CGPoint {

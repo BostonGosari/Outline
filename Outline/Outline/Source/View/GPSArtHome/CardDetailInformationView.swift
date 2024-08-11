@@ -146,7 +146,7 @@ struct CardDetailInformationView: View {
                         .toolbarBackground(.hidden, for: .navigationBar)
                 } label: {
                     CardDetailInformationMapView(
-                        coursePaths: ConvertCoordinateManager.convertToCLLocationCoordinates(selectedCourse.coursePaths)
+                        coursePaths: selectedCourse.coursePaths.toCLLocationCoordinates()
                     )
                     .frame(height: 200)
                 }

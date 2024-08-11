@@ -9,7 +9,7 @@ import SwiftUI
 import CoreMotion
 
 struct RunningView: View {
-    @StateObject private var connectivityManger = WatchConnectivityManager.shared
+    @StateObject private var connectivityManger = ConnectivityManager.shared
     @StateObject private var runningStartManager = RunningStartManager.shared
     @StateObject private var runningDataManager = RunningDataManager.shared
     @StateObject private var locationManager = LocationManager.shared
@@ -74,7 +74,7 @@ struct RunningView: View {
         }
         .onChange(of: runningStartManager.counter) { _, newValue in
             if connectivityManger.isMirroring {
-                let userLocations = ConvertCoordinateManager.convertToCoordinates(locationManager.userLocations)
+                let userLocations = locationManager.userLocations.map { $0.toCoordinate() }
                 
                 let runningData = MirroringRunningData(
                     userLocations: userLocations,
@@ -319,7 +319,7 @@ extension RunningView {
                runningStartManager.runningType == .gpsArt {
                 CourseGuideView(
                     tapGuideView: $tapGuideView,
-                    coursePathCoordinates: ConvertCoordinateManager.convertToCLLocationCoordinates(course.coursePaths),
+                    coursePathCoordinates: course.coursePaths.toCLLocationCoordinates(),
                     courseRotate: course.heading,
                     userLocations: locationManager.userLocations,
                     tapPossible: !(navigationTranslation + navigationSheetHeight > 10)

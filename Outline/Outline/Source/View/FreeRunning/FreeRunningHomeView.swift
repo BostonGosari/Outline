@@ -10,7 +10,7 @@ import SwiftUI
 
 struct FreeRunningHomeView: View {
     @AppStorage("authState") var authState: AuthState = .logout
-    @StateObject private var connectivityManager = WatchConnectivityManager.shared
+    @StateObject private var connectivityManager = ConnectivityManager.shared
     @StateObject var runningStartManager = RunningStartManager.shared
     
     @State private var userLocation = ""

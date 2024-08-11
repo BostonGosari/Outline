@@ -11,6 +11,7 @@ import HealthKit
 class WatchWorkoutManager: NSObject, ObservableObject {
     static let shared = WatchWorkoutManager()
     let healthStore = HKHealthStore()
+    let locationManager = LocationManager.shared
     
     var isHealthKitAuthorized: Bool { HKHealthStore.isHealthDataAvailable() }
     var session: HKWorkoutSession?
@@ -55,8 +56,10 @@ class WatchWorkoutManager: NSObject, ObservableObject {
         
         let startDate = Date()
         session?.startActivity(with: startDate)
-        builder?.beginCollection(withStart: startDate) { sucess, error in }
+        builder?.beginCollection(withStart: startDate) { _, _ in }
         self.startDate = startDate
+        
+        locationManager.startUpdate()
     }
     
     func togglePause() {
@@ -78,6 +81,8 @@ class WatchWorkoutManager: NSObject, ObservableObject {
             print("Ending workout. Elapsed time: \(elapsedTime)")
             showSummaryView = true
         }
+        
+        locationManager.stopUpdate()
     }
     
     // MARK: - Workout Metrics

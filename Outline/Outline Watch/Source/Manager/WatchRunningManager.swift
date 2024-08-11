@@ -56,7 +56,7 @@ class WatchRunningManager: ObservableObject {
             return false
         }
         
-        guard let shortestDistance = calculateShortestDistance(from: userLocation, to: ConvertCoordinateManager.convertToCLLocationCoordinates(course)) else {
+        guard let shortestDistance = calculateShortestDistance(from: userLocation, to: course.toCLLocationCoordinates()) else {
             print("error to calculate")
             locationNetworkError = true
             return false
@@ -109,6 +109,6 @@ class WatchRunningManager: ObservableObject {
     func calculateScore() {
         let scoreManager = ScoreManager(guideCourse: startCourse.coursePaths.toCLLocationCoordinates(), userCourse: userLocations)
         scoreManager.calculate()
-        self.score = Int(scoreManager.score)
+        score = runningType == .free ? -1 : Int(scoreManager.score)
     }
 }

@@ -9,7 +9,7 @@ import MapKit
 import SwiftUI
 
 struct MirroringMapWatchView: View {
-    @StateObject private var connectivityManager = WatchConnectivityManager.shared
+    @StateObject private var connectivityManager = ConnectivityManager.shared
     
     @State private var position: MapCameraPosition = .userLocation(followsHeading: true, fallback: .automatic)
     @State private var bounds: MapCameraBounds = .init(minimumDistance: 100, maximumDistance: 100)
@@ -55,7 +55,7 @@ struct MirroringMapWatchView: View {
             .onEnded { _ in
                 withAnimation(.easeInOut) {
                     if isTapped {
-                        let coordinates = ConvertCoordinateManager.convertToCLLocationCoordinates(connectivityManager.runningInfo.course)
+                        let coordinates = connectivityManager.runningInfo.course.toCLLocationCoordinates()
                         let center = calculateCenter(coordinates: coordinates)
                         let distance = calculateMaxDistance(coordinates: coordinates, from: center) * 6
                         
