@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct MirroringView: View {
-    @StateObject private var connectivityManager = WatchConnectivityManager.shared
+    @StateObject private var connectivityManager = ConnectivityManager.shared
     @StateObject private var runningManager = RunningStartManager.shared
     
     @AppStorage("isFirstRunning") private var isFirstRunning = true
@@ -231,8 +231,8 @@ extension MirroringView {
     
     private var guideView: some View {
         ZStack {
-            let userLocations = ConvertCoordinateManager.convertToCLLocationCoordinates(connectivityManager.runningData.userLocations)
-            let course = ConvertCoordinateManager.convertToCLLocationCoordinates(connectivityManager.runningInfo.course)
+            let userLocations = connectivityManager.runningData.userLocations.toCLLocationCoordinates()
+            let course = connectivityManager.runningInfo.course.toCLLocationCoordinates()
             
             CourseGuideView(
                 tapGuideView: $tapGuideView,

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct MirroringNavigationView: View {
-    @StateObject private var connectivityManager = WatchConnectivityManager.shared
+    @StateObject private var connectivityManager = ConnectivityManager.shared
     var showDetailNavigation: Bool
     
     var body: some View {

@@ -10,7 +10,7 @@ import MapKit
 import Kingfisher
 
 struct CardDetailView: View {
-    @StateObject private var connectivityManager = WatchConnectivityManager.shared
+    @StateObject private var connectivityManager = ConnectivityManager.shared
     @AppStorage("authState") var authState: AuthState = .logout
     
     @State private var isUnlocked = false

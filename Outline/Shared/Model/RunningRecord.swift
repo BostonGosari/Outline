@@ -1,8 +1,8 @@
 //
-//  UserDataModelType.swift
+//  RunningRecord.swift
 //  Outline
 //
-//  Created by Seungui Moon on 10/17/23.
+//  Modified by hyunjun on 8/10/24.
 //
 
 import CoreLocation
@@ -42,6 +42,7 @@ struct HealthData: Codable {
     var endDate: Date
 }
 
+/// RunningRecord Codable 채택을 위한 extension
 extension CLLocationCoordinate2D: Codable {
     enum CodingKeys: String, CodingKey {
         case latitude

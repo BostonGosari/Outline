@@ -9,9 +9,9 @@ import MapKit
 import SwiftUI
 
 struct MirroringControlsView: View {
-    @StateObject private var connectivityManager = WatchConnectivityManager.shared
+    @StateObject private var connectivityManager = ConnectivityManager.shared
     
-    @State private var runningState: RunningState = .start
+    @State private var runningState: MirroringRunningState = .start
     @State private var showEndRunningSheet = false
     @State private var showEndWithoutSavingSheet = false
     
