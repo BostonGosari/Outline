@@ -22,7 +22,7 @@ struct RecordCardView: View {
     var body: some View {
         ZStack(alignment: .topLeading) {
             // 지도, 경로 Snapshot
-            MapSnapshotImageView(coordinates: coordinates, width: size.imageFrame.width, height: size.imageFrame.height, alpha: 0.6, lineWidth: size.pathLineWidth)
+            MapSnapshotImageView(coordinates: coordinates, width: size.imageFrame.width, height: size.imageFrame.height, alpha: 0.7, lineWidth: size.pathLineWidth)
                 .foregroundStyle(.ultraThinMaterial)
                 .frame(width: size.frame.width - size.border * 2, height: size.frame.height - size.border * 2)
                 .mask(size.imageRect)
