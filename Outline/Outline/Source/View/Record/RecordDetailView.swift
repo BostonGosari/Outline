@@ -9,16 +9,9 @@ import SwiftUI
 
 struct RecordDetailView: View {
     @Environment(\.dismiss) private var dismiss
-    @StateObject var viewModel = RecordDetailViewModel()
-        
-    @State private var showRenameSheet = false
-    @State private var newCourseName = ""
-    @State private var completeButtonActive = false
-    @State private var isShowAlert = false
+    @ObservedObject var viewModel: RecordViewModel
     
-    @Binding var isDeleteData: Bool
-    
-    var record: CoreRunningRecord
+    var runningRecord: RunningRecord
     var cardType: CardType
     
     var body: some View {
@@ -39,46 +32,47 @@ struct RecordDetailView: View {
                 .blur(radius: 120)
             
             VStack {
+                let courseData = runningRecord.courseData
+                let healthData = runningRecord.healthData
+                
                 BigCard(
                     cardType: cardType,
-                    runName: viewModel.courseName,
-                    date: viewModel.date,
+                    runName: courseData.courseName,
+                    date: healthData.startDate.dateToString(),
                     editMode: true,
-                    time: viewModel.runningData["시간"] ?? "",
-                    distance: "\(viewModel.runningData["킬로미터"] ?? "")KM",
-                    pace: viewModel.runningData["평균 페이스"] ?? "",
-                    kcal: viewModel.runningData["칼로리"] ?? "",
-                    bpm: viewModel.runningData["BPM"] ?? "",
-                    score: Int(viewModel.runningData["점수"] ?? "") ?? 77,
+                    time: healthData.totalTime.formatMinuteSeconds(),
+                    distance: "\(String(format: "%.2f", healthData.totalRunningDistance/1000))km",
+                    pace: healthData.averagePace.formattedAveragePace(),
+                    kcal: "\(Int(healthData.totalEnergy))",
+                    bpm: "\(Int(healthData.averageHeartRate))",
+                    score: courseData.score ?? 77,
                     editAction: {
-                        showRenameSheet = true
+                        viewModel.showRenameSheet = true
                     },
                     content: {
-                        MapSnapshotImageView(coordinates: viewModel.userLocations, width: 200, height: 400, alpha: 0.7, lineWidth: 4)
+                        MapSnapshotImageView(coordinates: courseData.coursePaths, width: 200, height: 400, alpha: 0.7, lineWidth: 4)
                     }
                 )
                 .frame(maxHeight: .infinity, alignment: .center)
                 
                 CompleteButton(text: "자랑하기", isActive: true) {
-                    viewModel.saveShareData()
+                    viewModel.navigateToShareMainView = true
+                    viewModel.saveShareData(runningRecord)
                 }
                 .padding(.bottom, 16)
             }
-            .alert("기록한 러닝이 사라져요\n정말 삭제하시겠어요?", isPresented: $isShowAlert) {
+            .alert("기록한 러닝이 사라져요\n정말 삭제하시겠어요?", isPresented: $viewModel.isShowAlert) {
                 Button("취소", role: .cancel) {}
                 Button("삭제", role: .destructive) {
-                    viewModel.deleteRunningRecord(record)
-                    isDeleteData = true
+                    viewModel.deleteCoreRunningRecord(runningRecord.id)
+                    viewModel.isDeleteData = true
                     DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                        self.isDeleteData = false
+                        viewModel.isDeleteData = false
                     }
                     dismiss()
                 }
             }
-            .onAppear {
-                viewModel.readData(runningRecord: record)
-            }
-            .sheet(isPresented: $showRenameSheet) {
+            .sheet(isPresented: $viewModel.showRenameSheet) {
                 updateNameSheet
             }
             .sheet(isPresented: $viewModel.navigateToShareMainView, content: {
@@ -90,7 +84,7 @@ struct RecordDetailView: View {
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
-                        isShowAlert = true
+                        viewModel.isShowAlert = true
                     } label: {
                         Image(systemName: "trash")
                             .font(.customSubtitle)
@@ -109,12 +103,12 @@ struct RecordDetailView: View {
                 .padding(.bottom, 48)
                 .padding(.horizontal, 16)
             
-            TextField("코스 이름을 입력하세요.", text: $newCourseName)
-                .onChange(of: newCourseName) {
-                    if !newCourseName.isEmpty {
-                        completeButtonActive = true
+            TextField("코스 이름을 입력하세요.", text: $viewModel.newCourseName)
+                .onChange(of: viewModel.newCourseName) {
+                    if !viewModel.newCourseName.isEmpty {
+                        viewModel.completeButtonActive = true
                     } else {
-                        completeButtonActive = false
+                        viewModel.completeButtonActive = false
                     }
                 }
                 .padding(.bottom, 8)
@@ -126,11 +120,10 @@ struct RecordDetailView: View {
                 .padding(.horizontal, 16)
                 .padding(.bottom, 41)
             
-            CompleteButton(text: "완료", isActive: completeButtonActive) {
-                viewModel.updateRunningRecord(record, courseName: newCourseName)
-                viewModel.courseName = newCourseName
-                completeButtonActive = false
-                showRenameSheet = false
+            CompleteButton(text: "완료", isActive: viewModel.completeButtonActive) {
+                viewModel.updateCoreRunningRecord(runningRecord.id, courseName: viewModel.newCourseName)
+                viewModel.completeButtonActive = false
+                viewModel.showRenameSheet = false
             }
             .padding(.bottom, 30)
         }
