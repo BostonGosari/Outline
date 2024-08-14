@@ -37,28 +37,28 @@ struct BigCard<Content: View>: View {
     
     var body: some View {
         ZStack {
-            if isFrontside {
-                BigCardFrontside(
-                    cardType: cardType,
-                    runName: runName,
-                    date: date,
-                    content: content
-                )
-            } else {
-                BigCardBackside(
-                    cardType: cardType,
-                    runName: runName,
-                    date: date,
-                    editMode: editMode,
-                    time: time,
-                    distance: distance,
-                    pace: pace,
-                    kcal: kcal,
-                    bpm: bpm,
-                    score: score,
-                    editAction: editAction
-                )
-            }
+            BigCardFrontside(
+                cardType: cardType,
+                runName: runName,
+                date: date,
+                content: content
+            )
+            .opacity(isFrontside ? 1 : 0)
+            
+            BigCardBackside(
+                cardType: cardType,
+                runName: runName,
+                date: date,
+                editMode: editMode,
+                time: time,
+                distance: distance,
+                pace: pace,
+                kcal: kcal,
+                bpm: bpm,
+                score: score,
+                editAction: editAction
+            )
+            .opacity(isFrontside ? 0 : 1)
         }
         .overlay {
             hologramOverlay
@@ -156,12 +156,15 @@ struct BigCard<Content: View>: View {
         withAnimation(.bouncy(duration: 6)) {
             rotationAngle += 540
         }
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.64) {
             isFrontside.toggle()
         }
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.34) {
             isFrontside.toggle()
         }
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.14) {
             isFrontside.toggle()
             rotationAngle = 0
@@ -172,11 +175,13 @@ struct BigCard<Content: View>: View {
                 cardFloatingOffset = -5
             }
         }
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
             withAnimation(.bouncy(duration: 1.5, extraBounce: 0.65)) {
                 cardFloatingOffset = 0
             }
         }
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + 5.5) {
             isDragable = true
         }

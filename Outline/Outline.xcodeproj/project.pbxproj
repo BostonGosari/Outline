@@ -46,6 +46,9 @@
 		29130C352C675791004C0325 /* CoordinateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29130C342C675791004C0325 /* CoordinateExtension.swift */; };
 		29130C372C675F2B004C0325 /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29130C362C675F2B004C0325 /* ArrayExtension.swift */; };
 		29130C392C675F8D004C0325 /* DoubleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29130C382C675F8D004C0325 /* DoubleExtension.swift */; };
+		2915FA722C6BB036006890CD /* RecordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2915FA712C6BB036006890CD /* RecordViewModel.swift */; };
+		2915FA742C6BC245006890CD /* RecordLookAroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2915FA732C6BC245006890CD /* RecordLookAroundView.swift */; };
+		2915FA762C6BC2B7006890CD /* RecordEmptyRunningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2915FA752C6BC2B7006890CD /* RecordEmptyRunningView.swift */; };
 		291A22352AF4CD94004B3D10 /* PermissionSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291A22342AF4CD94004B3D10 /* PermissionSheet.swift */; };
 		2921AFFE2B012DD100533A83 /* RunningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2921AFFD2B012DD100533A83 /* RunningView.swift */; };
 		2921B0002B012E4400533A83 /* RunningMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2921AFFF2B012E4400533A83 /* RunningMapView.swift */; };
@@ -357,6 +360,9 @@
 		29130C342C675791004C0325 /* CoordinateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinateExtension.swift; sourceTree = "<group>"; };
 		29130C362C675F2B004C0325 /* ArrayExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtension.swift; sourceTree = "<group>"; };
 		29130C382C675F8D004C0325 /* DoubleExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleExtension.swift; sourceTree = "<group>"; };
+		2915FA712C6BB036006890CD /* RecordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViewModel.swift; sourceTree = "<group>"; };
+		2915FA732C6BC245006890CD /* RecordLookAroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordLookAroundView.swift; sourceTree = "<group>"; };
+		2915FA752C6BC2B7006890CD /* RecordEmptyRunningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordEmptyRunningView.swift; sourceTree = "<group>"; };
 		291A22342AF4CD94004B3D10 /* PermissionSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionSheet.swift; sourceTree = "<group>"; };
 		2921AFFD2B012DD100533A83 /* RunningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningView.swift; sourceTree = "<group>"; };
 		2921AFFF2B012E4400533A83 /* RunningMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningMapView.swift; sourceTree = "<group>"; };
@@ -880,11 +886,14 @@
 			isa = PBXGroup;
 			children = (
 				BB397D082AE6408A00F92A43 /* RecordView.swift */,
+				2915FA752C6BC2B7006890CD /* RecordEmptyRunningView.swift */,
+				2915FA732C6BC245006890CD /* RecordLookAroundView.swift */,
 				292613162AF2BCEF00591E32 /* RecordHeader.swift */,
-				BB02A39B2B0D26EA00250EDD /* RecordGridView.swift */,
-				2925E0BE2B14825A0004BB05 /* RecordDetailView.swift */,
 				29BB88312C5F1B8C006B238D /* RecordCardView.swift */,
+				2925E0BE2B14825A0004BB05 /* RecordDetailView.swift */,
+				BB02A39B2B0D26EA00250EDD /* RecordGridView.swift */,
 				29BB882F2C5F1B16006B238D /* MapSnapshotImageView.swift */,
+				2915FA712C6BB036006890CD /* RecordViewModel.swift */,
 			);
 			path = Record;
 			sourceTree = "<group>";
@@ -1521,10 +1530,12 @@
 				9563829E2B95FD2E00D3AD32 /* ShareView+Extension.swift in Sources */,
 				0E7EE51D2B5E6D24004F6BAF /* FreeRunningMapView.swift in Sources */,
 				0E7EE5212B5E7C4B004F6BAF /* CardDetailMapView.swift in Sources */,
+				2915FA742C6BC245006890CD /* RecordLookAroundView.swift in Sources */,
 				F096974F2ADBEE9F00C38AF4 /* CardDetailInformationView.swift in Sources */,
 				BB5239582ADC396300646494 /* BackgroundBlur.swift in Sources */,
 				BB5239372ADBD99F00646494 /* GPSArtHomeView.swift in Sources */,
 				2975F0962AE3E1790046C00B /* CornerRectangleModifier.swift in Sources */,
+				2915FA762C6BC2B7006890CD /* RecordEmptyRunningView.swift in Sources */,
 				2921B0022B012EC800533A83 /* RunningNavigationView.swift in Sources */,
 				2972515C2B0787640048D787 /* GuideToFreeRunningSheet.swift in Sources */,
 				95A01E1C2AEE7A0A0093D9C0 /* LoginViewModel.swift in Sources */,
@@ -1623,6 +1634,7 @@
 				29AE76DC2ADE2A5300A46742 /* InputUserInfoViewModel.swift in Sources */,
 				F0492E1D2ADD2AE900F6EADD /* GPSArtHomeHeader.swift in Sources */,
 				29AE76D72ADE2A2200A46742 /* InputNicknameView.swift in Sources */,
+				2915FA722C6BB036006890CD /* RecordViewModel.swift in Sources */,
 				F01FDB992ADABB6100BDA633 /* TabModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

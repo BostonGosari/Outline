@@ -159,3 +159,54 @@ struct UserDataModel: UserDataModelProtocol {
         }
     }
 }
+
+/// CoreRunningRecord를 RunningRecord로 변환
+extension UserDataModel {
+    func convertToRunningRecord(coreRecord: CoreRunningRecord) -> RunningRecord? {
+        guard
+            let runningType = coreRecord.runningType,
+            let courseData = coreRecord.courseData,
+            let healthData = coreRecord.healthData,
+            let startDate = healthData.startDate,
+            let endDate = healthData.endDate,
+            let courseName = courseData.courseName else {
+                return nil
+        }
+
+        let runningTypeEnum = RunningType(rawValue: runningType) ?? .free
+        
+        var coursePaths: [CLLocationCoordinate2D] = []
+        if let paths = courseData.coursePaths?.array as? [CoreCoordinate] {
+            coursePaths = paths.map { CLLocationCoordinate2D(latitude: $0.latitude, longitude: $0.longitude) }
+        }
+
+        let courseDataStruct = CourseData(
+            courseName: courseName,
+            runningLength: courseData.runningLength,
+            heading: courseData.heading,
+            distance: courseData.distance,
+            coursePaths: coursePaths,
+            runningCourseId: courseData.parentRecord?.id ?? "",
+            regionDisplayName: courseData.regionDisplayName ?? "",
+            score: Int(courseData.score)
+        )
+        
+        let healthDataStruct = HealthData(
+            totalTime: healthData.totalTime,
+            averageCadence: healthData.averageCadence,
+            totalRunningDistance: healthData.totalRunningDistance,
+            totalEnergy: healthData.totalEnergy,
+            averageHeartRate: healthData.averageHeartRate,
+            averagePace: healthData.averagePace,
+            startDate: startDate,
+            endDate: endDate
+        )
+        
+        return RunningRecord(
+            id: coreRecord.id ?? UUID().uuidString,
+            runningType: runningTypeEnum,
+            courseData: courseDataStruct,
+            healthData: healthDataStruct
+        )
+    }
+}
