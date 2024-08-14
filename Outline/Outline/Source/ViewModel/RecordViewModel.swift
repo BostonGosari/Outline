@@ -8,7 +8,7 @@
 import Foundation
 import CoreData
 
-enum SortOption: String, CaseIterable {
+enum SortOption: String {
     case highscore = "스코어 순"
     case latest = "최신순"
     case oldest = "오래된 순"
@@ -17,7 +17,6 @@ enum SortOption: String, CaseIterable {
 }
 
 class RecordViewModel: ObservableObject {
-    @Published var records: [CoreRunningRecord] = []
     @Published var recentRunningRecords: [RunningRecord] = []
     @Published var gpsArtRunningRecords: [RunningRecord] = []
     @Published var freeRunningRecords: [RunningRecord] = []
@@ -72,6 +71,7 @@ class RecordViewModel: ObservableObject {
             if let recordToDelete = records.first {
                 persistenceController.container.viewContext.delete(recordToDelete)
                 try persistenceController.container.viewContext.save()
+                loadRunningRecords()
                 print("성공적으로 \(recordToDelete.courseData?.courseName ?? "") 데이터를 삭제했습니다.")
             } else {
                 print("해당 ID의 데이터를 찾을 수 없습니다.")
@@ -90,6 +90,7 @@ class RecordViewModel: ObservableObject {
             if let recordToUpdate = records.first {
                 recordToUpdate.courseData?.courseName = courseName
                 try persistenceController.container.viewContext.save()
+                loadRunningRecords()
                 print("성공적으로 데이터를 업데이트했습니다.")
             } else {
                 print("해당 ID의 데이터를 찾을 수 없습니다.")
@@ -118,7 +119,6 @@ class RecordViewModel: ObservableObject {
     
     func getCardType(for score: Int?) -> CardType {
         switch score ?? -1 {
-        case -1: .freeRun
         case 0...50: .nice
         case 51...80: .great
         case 81...100: .excellent
@@ -128,27 +128,22 @@ class RecordViewModel: ObservableObject {
     
     func sortingOptions(for title: String) -> [SortOption] {
         switch title {
-        case "GPS 아트":
-            return [.highscore, .latest, .oldest]
-        case "자유러닝":
-            return [.latest, .oldest, .longestDistance]
-        default:
-            return SortOption.allCases
+        case "GPS 아트": [.highscore, .latest, .oldest]
+        case "자유 러닝": [.latest, .oldest, .longestDistance]
+        default: []
         }
     }
     
     func sortRecords(_ record1: RunningRecord, _ record2: RunningRecord) -> Bool {
+        let healthData1 = record1.healthData
+        let healthData2 = record2.healthData
+        
         switch selectedSortOption {
-        case .highscore: 
-            return record1.courseData.score ?? -1 > record2.courseData.score ?? -1
-        case .latest:
-            return record1.healthData.startDate > record2.healthData.startDate
-        case .oldest:
-            return record1.healthData.startDate < record2.healthData.startDate
-        case .longestDistance:
-            return record1.healthData.totalRunningDistance > record2.healthData.totalRunningDistance
-        case .shortestDistance:
-            return record1.healthData.totalRunningDistance > record2.healthData.totalRunningDistance
+        case .highscore: return record1.courseData.score ?? -1 > record2.courseData.score ?? -1
+        case .latest: return healthData1.startDate > healthData2.startDate
+        case .oldest: return healthData1.startDate < healthData2.startDate
+        case .longestDistance: return healthData1.totalRunningDistance > healthData2.totalRunningDistance
+        case .shortestDistance: return healthData1.totalRunningDistance < healthData2.totalRunningDistance
         }
     }
 }
