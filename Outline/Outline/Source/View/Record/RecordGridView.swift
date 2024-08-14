@@ -23,11 +23,11 @@ struct RecordGridView: View {
                 .blur(radius: 150)
                 .offset(y: 300)
             
-            VStack {
+            VStack(spacing: 0) {
                 HStack {
                     Text(title)
                         .font(.customTitle)
-                        .padding(.horizontal)
+                        .padding(.leading, UIScreen.main.bounds.width * 0.08)
                     Spacer()
                     
                     Button {
@@ -53,18 +53,19 @@ struct RecordGridView: View {
                             let courseData = runningRecord.courseData
                             let healthData = runningRecord.healthData
                             let cardType = viewModel.getCardType(for: courseData.score)
-                                NavigationLink {
-                                    RecordDetailView(viewModel: viewModel, runningRecord: runningRecord, cardType: cardType)
-                                } label: {
-                                    RecordCardView(size: .list, type: cardType, name: courseData.courseName, date: healthData.startDate.dateToShareString(), coordinates: courseData.coursePaths)
-                                }
+                            NavigationLink {
+                                RecordDetailView(viewModel: viewModel, runningRecord: runningRecord, cardType: cardType)
+                            } label: {
+                                RecordCardView(size: .list, type: cardType, name: courseData.courseName, date: healthData.startDate.dateToShareString(), coordinates: courseData.coursePaths)
                             }
                         }
                     }
-                    .padding()
                 }
+                .padding()
             }
+        }
         .navigationTitle("모든 아트")
+        .navigationBarTitleDisplayMode(.inline)
         .sheet(isPresented: $viewModel.isSortingSheetPresented) {
             VStack(alignment: .leading) {
                 Text("정렬")

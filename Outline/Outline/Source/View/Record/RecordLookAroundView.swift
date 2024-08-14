@@ -10,7 +10,7 @@ import SwiftUI
 struct RecordLookAroundView: View {
     var body: some View {
         VStack {
-            RecordHeader(scrollOffset: 47)
+            RecordHeaderView(scrollOffset: 47)
                 .padding(.top, 8)
             Spacer()
             LookAroundView(type: .record)
