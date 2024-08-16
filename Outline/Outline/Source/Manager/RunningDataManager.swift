@@ -93,6 +93,14 @@ class RunningDataManager: ObservableObject {
     func resumeRunning() {
         startPedometerDataUpdates()
         healthKitManager.resumeWorkout()
+        locationManager.resumeUpdate()
+    }
+    
+    func doneRunning() {
+        healthKitManager.endWorkout(steps: totalSteps, distance: totalDistance, energy: kilocalorie)
+        calculateScore()
+        saveRunning()
+        reset()
     }
     
     private func startPedometerUpdates() {
@@ -132,10 +140,6 @@ class RunningDataManager: ObservableObject {
         totalSteps += steps
         totalDistance += distance
         pedometer.stopUpdates()
-        healthKitManager.endWorkout(steps: totalSteps, distance: totalDistance, energy: kilocalorie)
-        calculateScore()
-        saveRunning()
-        reset()
     }
     
     private func reset() {
@@ -148,6 +152,7 @@ class RunningDataManager: ObservableObject {
         avgPace = 0.0
         cadence = 0.0
         time = 0.0
+        kilocalorie = 0
     }
     
     func startLiveActivity() async {
