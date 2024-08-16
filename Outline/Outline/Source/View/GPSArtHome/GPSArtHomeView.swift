@@ -23,6 +23,7 @@ struct GPSArtHomeView: View {
     
     // 받아오는 변수
     @Binding var showDetailView: Bool
+    @Binding var isReloadScore: Bool
     @Namespace private var namespace
     
     let indexWidth: CGFloat = 25
@@ -148,6 +149,12 @@ struct GPSArtHomeView: View {
                 }
                 .refreshable {
                     viewModel.getAllCoursesFromFirebase()
+                }
+                .onChange(of: isReloadScore) { _, newValue in
+                    if newValue {
+                        viewModel.getAllCoursesFromFirebase()
+                        isReloadScore = false
+                    }
                 }
             }
             if let selectedCourse, showDetailView {
