@@ -49,7 +49,7 @@ struct FinishRunningMapView: UIViewRepresentable {
             let renderer = MKGradientPolylineRenderer(overlay: overlay)
             renderer.setColors([.customGradient2, .customGradient3, .customGradient3, .customGradient3, .customGradient2], locations: [])
             renderer.lineCap = .round
-            renderer.lineWidth = 8
+            renderer.lineWidth = 4
             return renderer
         }
     }
