@@ -26,7 +26,7 @@ struct HomeTabView: View {
                             case .freeRunning:
                                 FreeRunningHomeView()
                             case .GPSArtRunning:
-                                GPSArtHomeView(showDetailView: $showDetailView)
+                                GPSArtHomeView(showDetailView: $showDetailView, isReloadScore: $runningDataManager.isSaveNewScore)
                             case .myRecord:
                                 RecordView()
                             }
