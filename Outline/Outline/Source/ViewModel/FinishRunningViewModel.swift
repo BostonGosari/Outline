@@ -20,6 +20,7 @@ class FinishRunningViewModel: ObservableObject {
         }
     }
     @Published var navigateToShareMainView = false
+    @Published var userLocations: [CLLocationCoordinate2D] = []
     
     private var runningDate = Date()
     private let userDataModel = UserDataModel()
@@ -43,7 +44,6 @@ class FinishRunningViewModel: ObservableObject {
     ]
     
     var shareData = ShareModel()
-    var userLocations: [CLLocationCoordinate2D] = []
     
     func readData(runningRecord: FetchedResults<CoreRunningRecord>) {
         if let data = runningRecord.last,

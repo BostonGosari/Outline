@@ -52,7 +52,7 @@ struct FinishRunningView: View {
                             showRenameSheet = true
                         },
                         content: {
-                            FinishRunningMapView(userLocations: viewModel.userLocations)
+                            MapSnapshotImageView(coordinates: viewModel.userLocations, width: 200, height: 400, alpha: 0.7, lineWidth: 4)
                         }
                     )
                     .padding(.top, getSafeArea().bottom == 0 ? 20 : 90)
