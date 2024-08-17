@@ -4,6 +4,7 @@ import Intents
 
 struct OutlineLiveActivity: Widget {
     var body: some WidgetConfiguration {
+        #if !os(watchOS)
         ActivityConfiguration(for: RunningAttributes.self) { context in
             ZStack {
                 Rectangle()
@@ -83,7 +84,7 @@ struct OutlineLiveActivity: Widget {
                    
                 }
                 DynamicIslandExpandedRegion(.bottom) {
-                    Text(context.state.totalTime)
+             
                 }
             } compactLeading: {
           
@@ -94,6 +95,6 @@ struct OutlineLiveActivity: Widget {
             }
            
         }
-       
+        #endif
     }
 }

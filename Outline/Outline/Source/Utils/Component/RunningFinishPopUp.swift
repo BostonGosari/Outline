@@ -21,9 +21,11 @@ struct RunningFinishPopUp: View {
     @StateObject private var runningDataManager = RunningDataManager.shared
     @State private var counter = 0
     @State private var progress = 0.0
+
     @Binding var isPresented: Bool
     @Binding var score: Int
     @Binding var userLocations: [CLLocationCoordinate2D]
+    @Binding var isResumeRunning: Bool
     
     private var canvasData: CanvasData {
         return PathManager.getCanvasData(coordinates: userLocations, width: 200, height: 200)
@@ -67,6 +69,7 @@ struct RunningFinishPopUp: View {
                     CompleteButton(text: "결과 페이지로", isActive: true) {
                         isPresented = false
                         runningStartManager.complete = true
+                        runningDataManager.doneRunning()
                         withAnimation {
                             runningStartManager.running = false
                         }
@@ -76,6 +79,8 @@ struct RunningFinishPopUp: View {
                         }
                     }
                     UnderlineButton(text: "조금 더 진행하기") {
+                        progress = 0
+                        isResumeRunning = true
                         isPresented = false
                     }
                 }
@@ -214,6 +219,5 @@ extension ScoreState {
         CLLocationCoordinate2D(latitude: 37.8325, longitude: -122.4794),
         CLLocationCoordinate2D(latitude: 37.8311, longitude: -122.4839),
         CLLocationCoordinate2D(latitude: 37.8281, longitude: -122.4859)
-        ])
-    )
+    ]), isResumeRunning: .constant(false))
 }
