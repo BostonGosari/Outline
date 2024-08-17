@@ -38,6 +38,12 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         locationManager.allowsBackgroundLocationUpdates = false
     }
     
+    func resumeUpdate() {
+        isRunning = true
+        locationManager.startUpdatingLocation()
+        locationManager.allowsBackgroundLocationUpdates = true
+    }
+    
     func initNavigation() {
         if let navigationDatas = navigationDatas {
             direction = navigationDatas[index].nextDirection
