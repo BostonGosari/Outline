@@ -39,6 +39,8 @@ class RunningDataManager: ObservableObject {
     @Published var score: Int = 0
     @Published var num: Int = 0
     
+    @Published var isSaveNewScore = false
+    
     @MainActor @Published private(set) var activityID: String?
     @MainActor @Published private(set) var activityToken: String?
     
@@ -251,6 +253,7 @@ class RunningDataManager: ObservableObject {
                    CourseScoreModel().createOrUpdateScore(courseId: course.id, score: self.score) { scoreResult in
                        switch scoreResult {
                        case .success:
+                           self.isSaveNewScore = true
                            print("Score updated successfully")
                        case .failure(let error):
                            print("Error updating score: \(error)")
