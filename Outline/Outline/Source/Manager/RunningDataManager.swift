@@ -39,6 +39,8 @@ class RunningDataManager: ObservableObject {
     @Published var score: Int = 0
     @Published var num: Int = 0
     
+    @Published var isSaveNewScore = false
+    
     @MainActor @Published private(set) var activityID: String?
     @MainActor @Published private(set) var activityToken: String?
     
@@ -93,6 +95,14 @@ class RunningDataManager: ObservableObject {
     func resumeRunning() {
         startPedometerDataUpdates()
         healthKitManager.resumeWorkout()
+        locationManager.resumeUpdate()
+    }
+    
+    func doneRunning() {
+        healthKitManager.endWorkout(steps: totalSteps, distance: totalDistance, energy: kilocalorie)
+        calculateScore()
+        saveRunning()
+        reset()
     }
     
     private func startPedometerUpdates() {
@@ -132,10 +142,6 @@ class RunningDataManager: ObservableObject {
         totalSteps += steps
         totalDistance += distance
         pedometer.stopUpdates()
-        healthKitManager.endWorkout(steps: totalSteps, distance: totalDistance, energy: kilocalorie)
-        calculateScore()
-        saveRunning()
-        reset()
     }
     
     private func reset() {
@@ -148,6 +154,7 @@ class RunningDataManager: ObservableObject {
         avgPace = 0.0
         cadence = 0.0
         time = 0.0
+        kilocalorie = 0
     }
     
     func startLiveActivity() async {
@@ -246,6 +253,7 @@ class RunningDataManager: ObservableObject {
                    CourseScoreModel().createOrUpdateScore(courseId: course.id, score: self.score) { scoreResult in
                        switch scoreResult {
                        case .success:
+                           self.isSaveNewScore = true
                            print("Score updated successfully")
                        case .failure(let error):
                            print("Error updating score: \(error)")

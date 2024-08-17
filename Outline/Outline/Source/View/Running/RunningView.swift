@@ -37,6 +37,7 @@ struct RunningView: View {
             }
         }
     }
+    @State private var isResumeRunning = false
     
     var body: some View {
         ZStack {
@@ -48,7 +49,7 @@ struct RunningView: View {
             metrics
             guideView
             
-            RunningFinishPopUp(isPresented: $showCompleteSheet, score: $runningDataManager.score, userLocations: $locationManager.userLocations)
+            RunningFinishPopUp(isPresented: $showCompleteSheet, score: $runningDataManager.score, userLocations: $locationManager.userLocations, isResumeRunning: $isResumeRunning)
         }
         .onAppear {
             locationManager.userLocations = []
@@ -135,6 +136,23 @@ struct RunningView: View {
                         }
                     }
                 }
+            }
+        }
+        .onChange(of: isResumeRunning) { _, newValue in
+            if newValue {
+                withAnimation {
+                    showDetail = false
+                    isPaused = false
+                    if navigationSheetHeight != 0 {
+                        navigationSheetHeight = 0
+                    }
+                }
+                runningDataManager.resumeRunning()
+                runningStartManager.startTimer()
+                if connectivityManger.isMirroring {
+                    connectivityManger.sendRunningState(.resume)
+                }
+                isResumeRunning = false
             }
         }
     }
