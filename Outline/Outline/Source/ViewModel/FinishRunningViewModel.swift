@@ -13,128 +13,85 @@ class FinishRunningViewModel: ObservableObject {
     @Published var isShowPopup = false {
         didSet {
             if isShowPopup {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                    self.isShowPopup = false
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                    withAnimation(.easeInOut(duration: 1)) {
+                        self.isShowPopup = false
+                    }
                 }
             }
         }
     }
     @Published var navigateToShareMainView = false
-    @Published var userLocations: [CLLocationCoordinate2D] = []
+    @Published var runningRecord: RunningRecord?
     
-    private var runningDate = Date()
     private let userDataModel = UserDataModel()
-    
-    var courseName: String = ""
-    var regionDisplayName: String = ""
-    var startTime: String = ""
-    var endTime: String = ""
-    var date: String = ""
-    var cardType: CardType = .great
-    
-    var runningData: [RunningDataItem] = [
-        RunningDataItem(text: "킬로미터", data: ""),
-        RunningDataItem(text: "시간", data: ""),
-        RunningDataItem(text: "평균 페이스", data: ""),
-        RunningDataItem(text: "BPM", data: ""),
-        RunningDataItem(text: "칼로리", data: ""),
-        RunningDataItem(text: "케이던스", data: ""),
-        RunningDataItem(text: "점수", data: ""),
-        RunningDataItem(text: "러닝타입", data: "")
-    ]
-    
+    private let persistenceController = PersistenceController.shared
     var shareData = ShareModel()
     
-    func readData(runningRecord: FetchedResults<CoreRunningRecord>) {
-        if let data = runningRecord.last,
-           let courseData = data.courseData,
-           let healthData = data.healthData {
-            courseName = courseData.courseName ?? ""
-            regionDisplayName = courseData.regionDisplayName ?? ""
-            if let startDate = healthData.startDate {
-                startTime = startDate.timeToString()
-                date = startDate.dateToShareString()
-                runningDate = startDate
-            } else {
-                startTime = ""
-                date = ""
-            }
-            
-            if let endDate = healthData.endDate {
-                endTime = endDate.timeToString()
-            } else {
-                endTime = ""
-            }
-            
-            runningData[0].data = String(format: "%.2f", healthData.totalRunningDistance/1000)
-            runningData[1].data = healthData.totalTime.formatMinuteSeconds()
-            runningData[2].data = healthData.averagePace.formattedAveragePace()
-            runningData[3].data = "\(Int(healthData.averageHeartRate))"
-            runningData[4].data = "\(Int(healthData.totalEnergy))"
-            runningData[6].data = "\(courseData.score)"
-            getCardType(score: Int(courseData.score))
-            if healthData.averageCadence > 0 {
-                runningData[5].data = "\(Int(healthData.averageCadence))"
-            } else {
-                runningData[5].data = "0"
-            }
-            if let paths = courseData.coursePaths {
-                var datas = [Coordinate]()
-                paths.forEach { elem in
-                    if let data = elem as? CoreCoordinate {
-                        datas.append(Coordinate(longitude: data.longitude, latitude: data.latitude))
-                    }
-                }
-                userLocations = datas.toCLLocationCoordinates()
-            }
+    init() {
+        loadLastRunningRecord()
+    }
+    
+    func loadLastRunningRecord() {
+        let fetchRequest: NSFetchRequest<CoreRunningRecord> = CoreRunningRecord.fetchRequest()
+        let sortDescriptor = NSSortDescriptor(keyPath: \CoreRunningRecord.healthData?.startDate, ascending: false)
+        fetchRequest.sortDescriptors = [sortDescriptor]
+        fetchRequest.fetchLimit = 1
+        
+        do {
+            let coreRunningRecord = try persistenceController.container.viewContext.fetch(fetchRequest).first
+            guard let data = coreRunningRecord else { return }
+            runningRecord = userDataModel.convertToRunningRecord(coreRecord: data)
+        } catch {
+            print("코어데이터에서 러닝기록을 가져오는데 실패했습니다: \(error)")
         }
     }
     
     func saveShareData() {
+        guard let runningRecord = runningRecord else { return }
+        let courseData = runningRecord.courseData
+        let healthData = runningRecord.healthData
+        
         shareData = ShareModel(
-            courseName: courseName,
-            runningDate: runningDate.dateToShareString(),
-            regionDisplayName: regionDisplayName,
-            distance: "\(runningData[0].data)km",
-            cal: "\(runningData[4].data)Kcal",
-            pace: "\(runningData[2].data)",
-            bpm: "\(runningData[3].data)BPM",
-            time: "\(runningData[1].data)",
-            userLocations: userLocations
+            courseName: courseData.courseName,
+            runningDate: healthData.startDate.dateToShareString(),
+            regionDisplayName: courseData.regionDisplayName,
+            distance: "\(String(format: "%.2f", healthData.totalRunningDistance/1000))km",
+            cal: "\(Int(healthData.totalEnergy))Kcal",
+            pace: healthData.averagePace.formattedAveragePace(),
+            bpm: "\(Int(healthData.averageHeartRate))BPM",
+            time: healthData.totalTime.formatMinuteSeconds(),
+            userLocations: runningRecord.courseData.coursePaths
         )
         
         navigateToShareMainView = true
     }
     
-    func updateRunningRecord(_ record: NSManagedObject, courseName: String) {
-        userDataModel.updateRunningRecordCourseName(record, newCourseName: courseName) { result in
-            switch result {
-            case .success(let isSaved):
-                print(isSaved)
-            case .failure(let error):
-                print(error)
+    func updateCoreRunningRecord(courseName: String) {
+        guard let runningRecord = runningRecord else { return }
+        let fetchRequest: NSFetchRequest<CoreRunningRecord> = CoreRunningRecord.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "id == %@", runningRecord.id)
+
+        do {
+            let records = try persistenceController.container.viewContext.fetch(fetchRequest)
+            if let recordToUpdate = records.first {
+                recordToUpdate.courseData?.courseName = courseName
+                try persistenceController.container.viewContext.save()
+                print("성공적으로 데이터를 업데이트했습니다.")
+            } else {
+                print("해당 ID의 데이터를 찾을 수 없습니다.")
             }
+        } catch {
+            print("데이터 업데이트에 실패했습니다: \(error)")
         }
     }
     
-    func getCardType(score: Int) {
-        switch score {
-        case -1:
-            cardType = .freeRun
-        case 0...50:
-            cardType = .nice
-        case 51...80:
-            cardType = .great
-        case 81...100:
-            cardType = .excellent
-        default:
-            cardType = .freeRun // Add a default case or handle as needed
+    func getCardType(for score: Int?) -> CardType {
+        switch score ?? -1 {
+        case 0...50: .nice
+        case 51...80: .great
+        case 81...100: .excellent
+        default: .freeRun
         }
     }
-}
-
-struct RunningDataItem: Hashable {
-    var id = UUID()
-    var text: String
-    var data: String
 }
