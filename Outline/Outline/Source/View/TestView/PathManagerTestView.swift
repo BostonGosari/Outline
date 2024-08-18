@@ -9,7 +9,6 @@ import CoreLocation
 import MapKit
 import SwiftUI
 
-#if DEBUG
 struct PathManagerTestView: View {
     @State private var coordinates: [CLLocationCoordinate2D] = []
     
@@ -42,7 +41,6 @@ struct PathManagerTestView: View {
         }
     }
 }
-#endif
 
 extension PathManagerTestView {
     private func getGPSArtCourseData() {

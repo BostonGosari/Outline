@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-#if DEBUG
 struct MapSnapshotTestView: View {
     private let parseManager = KMLParserManager()
     let fileName: String
@@ -31,7 +30,6 @@ struct MapSnapshotTestView: View {
         return []
     }
 }
-#endif
 
 #Preview {
     MapSnapshotTestView(fileName: "건대 오리런", lineWidth: 4.0)
