@@ -10,14 +10,11 @@ import SwiftUI
 struct FinishRunningView: View {
     @StateObject private var runningManager = RunningStartManager.shared
     @StateObject private var viewModel = FinishRunningViewModel()
-    @FetchRequest (entity: CoreRunningRecord.entity(), sortDescriptors: []) var runningRecord: FetchedResults<CoreRunningRecord>
     
     @State private var showRenameSheet = false
     @State private var newCourseName = ""
     @State private var completeButtonActive = false
-    
-    @State private var save = false
-    
+        
     var body: some View {
         NavigationStack {
             ZStack {
@@ -37,25 +34,30 @@ struct FinishRunningView: View {
                     .blur(radius: 120)
                 
                 VStack {
-                    BigCard(
-                        cardType: viewModel.cardType,
-                        runName: viewModel.courseName,
-                        date: viewModel.date,
-                        editMode: runningManager.runningType == .free,
-                        time: viewModel.runningData[1].data,
-                        distance: "\(viewModel.runningData[0].data)KM",
-                        pace: viewModel.runningData[2].data,
-                        kcal: viewModel.runningData[4].data,
-                        bpm: viewModel.runningData[3].data,
-                        score: Int(viewModel.runningData[6].data) ?? 77,
-                        editAction: {
-                            showRenameSheet = true
-                        },
-                        content: {
-                            MapSnapshotImageView(coordinates: viewModel.userLocations, width: 200, height: 400, alpha: 0.7, lineWidth: 4)
-                        }
-                    )
-                    .padding(.top, getSafeArea().bottom == 0 ? 20 : 90)
+                    if let runningRecord = viewModel.runningRecord {
+                        let courseData = runningRecord.courseData
+                        let healthData = runningRecord.healthData
+                        
+                        BigCard(
+                            cardType: viewModel.getCardType(for: courseData.score),
+                            runName: courseData.courseName,
+                            date: healthData.startDate.dateToString(),
+                            editMode: runningManager.runningType == .free,
+                            time: healthData.totalTime.formatMinuteSeconds(),
+                            distance: "\(String(format: "%.2f", healthData.totalRunningDistance/1000))km",
+                            pace: healthData.averagePace.formattedAveragePace(),
+                            kcal: "\(Int(healthData.totalEnergy))",
+                            bpm: "\(Int(healthData.averageHeartRate))",
+                            score: courseData.score ?? 77,
+                            editAction: {
+                                showRenameSheet = true
+                            },
+                            content: {
+                                MapSnapshotImageView(coordinates: runningRecord.courseData.coursePaths, width: 200, height: 400, alpha: 0.7, lineWidth: 4)
+                            }
+                        )
+                        .padding(.top, getSafeArea().bottom == 0 ? 20 : 90)
+                    }
                     Spacer()
                     CompleteButton(text: "자랑하기", isActive: true) {
                         viewModel.saveShareData()
@@ -89,10 +91,8 @@ struct FinishRunningView: View {
                         .navigationBarBackButtonHidden()
                 })
                 .onAppear {
-                    if !save {
+                    withAnimation(.easeInOut(duration: 1)) {
                         viewModel.isShowPopup = true
-                        viewModel.readData(runningRecord: runningRecord)
-                        save = true
                     }
                 }
             }
@@ -127,10 +127,8 @@ extension FinishRunningView {
                 .padding(.bottom, 41)
             
             CompleteButton(text: "완료", isActive: completeButtonActive) {
-                if let record = runningRecord.last {
-                    viewModel.updateRunningRecord(record, courseName: newCourseName)
-                    viewModel.courseName = newCourseName
-                }
+                viewModel.updateCoreRunningRecord(courseName: newCourseName)
+                viewModel.runningRecord?.courseData.courseName = newCourseName
                 completeButtonActive = false
                 showRenameSheet = false
             }
