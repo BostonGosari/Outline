@@ -8,25 +8,10 @@
 import CoreLocation
 import SwiftUI
 
-enum SortOption: String, CaseIterable {
-    case highscore = "스코어 순"
-    case latest = "최신순"
-    case oldest = "오래된 순"
-    case longestDistance = "최장 거리"
-    case shortestDistance = "최단 거리"
-    
-    var buttonLabel: String {
-        return rawValue
-    }
-}
-
 struct RecordGridView: View {
-    @State private var isDeleteData = false
-    @State private var selectedSortOption: SortOption = .latest
-    @State private var isSortingSheetPresented = false
-    
+    @ObservedObject var viewModel: RecordViewModel
     var title: String
-    var records: [CoreRunningRecord]
+    var runningRecords: [RunningRecord]
     
     var body: some View {
         ZStack {
@@ -38,18 +23,18 @@ struct RecordGridView: View {
                 .blur(radius: 150)
                 .offset(y: 300)
             
-            VStack {
+            VStack(spacing: 0) {
                 HStack {
                     Text(title)
                         .font(.customTitle)
-                        .padding(.horizontal)
+                        .padding(.leading, UIScreen.main.bounds.width * 0.08)
                     Spacer()
-                    // Dropdown button for sorting
+                    
                     Button {
-                        isSortingSheetPresented.toggle()
+                        viewModel.isSortingSheetPresented.toggle()
                     } label: {
                         HStack(spacing: 0) {
-                            Text(selectedSortOption.buttonLabel)
+                            Text(viewModel.selectedSortOption.rawValue)
                                 .font(.customSubbody)
                                 .foregroundStyle(Color.customPrimary)
                             
@@ -64,30 +49,25 @@ struct RecordGridView: View {
                 
                 ScrollView {
                     LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())], spacing: 16) {
-                        ForEach(records.sorted(by: sortRecords), id: \.id) { record in
-                            if let courseName = record.courseData?.courseName,
-                               let coursePaths = record.courseData?.coursePaths,
-                               let startDate = record.healthData?.startDate,
-                               let score = record.courseData?.score {
-                                let data = pathToCoordinate(coursePaths)
-                                let cardType = getCardType(forScore: score)
-                                NavigationLink {
-                                    RecordDetailView(isDeleteData: $isDeleteData, record: record, cardType: cardType)
-                                } label: {
-                                    RecordCardView(size: .list, type: cardType, name: courseName, date: formatDate(startDate), coordinates: data!)
-                                }
+                        ForEach(runningRecords.sorted(by: viewModel.sortRecords), id: \.id) { runningRecord in
+                            let courseData = runningRecord.courseData
+                            let healthData = runningRecord.healthData
+                            let cardType = viewModel.getCardType(for: courseData.score)
+                            NavigationLink {
+                                RecordDetailView(viewModel: viewModel, runningRecord: runningRecord, cardType: cardType)
+                            } label: {
+                                RecordCardView(size: .list, type: cardType, name: courseData.courseName, date: healthData.startDate.dateToShareString(), coordinates: courseData.coursePaths)
                             }
                         }
                     }
-                    .padding()
                 }
+                .padding()
             }
         }
         .navigationTitle("모든 아트")
-        .sheet(isPresented: $isSortingSheetPresented) {
+        .navigationBarTitleDisplayMode(.inline)
+        .sheet(isPresented: $viewModel.isSortingSheetPresented) {
             VStack(alignment: .leading) {
-                // Existing code for sheet header
-                
                 Text("정렬")
                     .font(.customSubtitle)
                     .padding(.top, 22)
@@ -95,18 +75,17 @@ struct RecordGridView: View {
                     .foregroundStyle(Color.gray600)
                     .padding(.top, 8)
                 
-                // Sorting options based on the selected sort option
-                ForEach(sortingOptions(for: title), id: \.self) { option in
+                ForEach(viewModel.sortingOptions(for: title), id: \.self) { option in
                     Button {
-                        selectedSortOption = option
-                        isSortingSheetPresented.toggle()
+                        viewModel.selectedSortOption = option
+                        viewModel.isSortingSheetPresented.toggle()
                     } label: {
                         HStack {
-                            Text(option.buttonLabel)
+                            Text(option.rawValue)
                                 .font(.customSubbody)
-                                .foregroundStyle(selectedSortOption.buttonLabel == option.rawValue ? Color.customPrimary : Color.gray500)
+                                .foregroundStyle(viewModel.selectedSortOption.rawValue == option.rawValue ? Color.customPrimary : Color.gray500)
                             Spacer()
-                            if selectedSortOption.buttonLabel == option.rawValue {
+                            if viewModel.selectedSortOption.rawValue == option.rawValue {
                                 Image(systemName: "checkmark")
                                     .font(.customSubbody)
                                     .foregroundStyle(Color.customPrimary)
@@ -118,9 +97,8 @@ struct RecordGridView: View {
                     }
                 }
                 
-                // Button to dismiss the sheet
                 Button {
-                    isSortingSheetPresented.toggle()
+                    viewModel.isSortingSheetPresented.toggle()
                 } label: {
                     Text("취소")
                         .font(.customButton)
@@ -138,73 +116,13 @@ struct RecordGridView: View {
             .presentationCornerRadius(35)
         }
         .onAppear {
-            selectedSortOption = self.title == "GPS 아트" ? .highscore : .latest
+            viewModel.selectedSortOption = (title == "GPS 아트") ? .highscore : .latest
         }
         .overlay {
-            if isDeleteData {
+            if viewModel.isDeleteData {
                 RunningPopup(text: "기록을 삭제했어요")
                     .frame(maxHeight: .infinity, alignment: .top)
             }
         }
     }
-    
-    // Helper method to get sorting options based on the title
-    func sortingOptions(for title: String) -> [SortOption] {
-        switch title {
-        case "GPS 아트":
-            return [.highscore, .latest, .oldest]
-        case "자유러닝":
-            return [.latest, .oldest, .longestDistance]
-        default:
-            return SortOption.allCases
-        }
-    }
-    
-    func getCardType(forScore score: Int32) -> CardType {
-        switch Int(score) {
-        case -1:
-            return .freeRun
-        case 0...50:
-            return .nice
-        case 51...80:
-            return .great
-        case 81...100:
-            return .excellent
-        default:
-            return .freeRun // Add a default case or handle as needed
-        }
-    }
-    
-    private func sortRecords(record1: CoreRunningRecord, record2: CoreRunningRecord) -> Bool {
-        switch selectedSortOption {
-        case .latest:
-            return record1.healthData?.startDate ?? Date() > record2.healthData?.startDate ?? Date()
-        case .oldest:
-            return record1.healthData?.startDate ?? Date() < record2.healthData?.startDate ?? Date()
-        case .longestDistance:
-            return record1.healthData?.totalRunningDistance ?? 0 > record2.healthData?.totalRunningDistance ?? 0
-        case .shortestDistance:
-            return record1.healthData?.totalRunningDistance ?? 0 < record2.healthData?.totalRunningDistance ?? 0
-        case .highscore:
-            return record1.courseData?.score ?? -1 > record2.courseData?.score ?? -1
-        }
-    }
-    
-    func pathToCoordinate(_ paths: NSOrderedSet) -> [CLLocationCoordinate2D]? {
-        var datas = [Coordinate]()
-        paths.forEach { elem in
-            if let data = elem as? CoreCoordinate {
-                datas.append(Coordinate(longitude: data.longitude, latitude: data.latitude))
-            }
-        }
-        
-        return datas.toCLLocationCoordinates()
-    }
-    
-    func formatDate(_ date: Date) -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .short
-        return dateFormatter.string(from: date)
-    }
-    
 }

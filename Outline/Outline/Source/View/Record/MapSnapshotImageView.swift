@@ -83,7 +83,6 @@ struct MapSnapshotImageView: UIViewRepresentable {
         let options = MKMapSnapshotter.Options()
         options.region = region
         options.size = CGSize(width: width, height: height)
-        options.scale = 1.0
         
         // 맵 설정
         let configuration = MKStandardMapConfiguration(emphasisStyle: .muted)

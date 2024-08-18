@@ -1,5 +1,5 @@
 //
-//  RecordHeader.swift
+//  RecordHeaderView.swift
 //  Outline
 //
 //  Created by hyunjun on 11/2/23.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct RecordHeader: View {
+struct RecordHeaderView: View {
     var scrollOffset: CGFloat
     
     var body: some View {
@@ -24,7 +24,7 @@ struct RecordHeader: View {
     }
 }
 
-struct RecordInlineHeader: View {
+struct RecordInlineHeaderView: View {
     var scrollOffset: CGFloat
     
     var body: some View {
