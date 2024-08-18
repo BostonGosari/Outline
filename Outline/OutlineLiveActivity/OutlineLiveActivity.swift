@@ -71,7 +71,7 @@ struct OutlineLiveActivity: Widget {
                 .padding(EdgeInsets(top: 17.5, leading: 24, bottom: 10, trailing: 24))
             }
             
-        } dynamicIsland: { context in
+        } dynamicIsland: { _ in
             DynamicIsland {
               
                 DynamicIslandExpandedRegion(.leading) {
