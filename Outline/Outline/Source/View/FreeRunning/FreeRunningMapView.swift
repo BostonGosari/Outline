@@ -21,6 +21,9 @@ struct FreeRunningMapView: UIViewRepresentable {
         mapView.isScrollEnabled = false
         mapView.isUserInteractionEnabled = false
         
+        let configuration = MKStandardMapConfiguration(emphasisStyle: .muted)
+        mapView.preferredConfiguration = configuration
+        
         return mapView
     }
     
