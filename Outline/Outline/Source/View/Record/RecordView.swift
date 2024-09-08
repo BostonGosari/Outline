@@ -16,8 +16,6 @@ struct RecordView: View {
         ZStack(alignment: .top) {
             Color.gray900
                 .ignoresSafeArea()
-            BackgroundBlur(color: Color.customSecondary, padding: 50)
-                .opacity(0.5)
                         
             if authState == .login {
                 ScrollView {

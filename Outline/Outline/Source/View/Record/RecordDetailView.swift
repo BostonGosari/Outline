@@ -18,18 +18,6 @@ struct RecordDetailView: View {
         ZStack {
             Color.gray900
                 .ignoresSafeArea()
-            Circle()
-                .frame(width: 350)
-                .foregroundStyle(.customPrimary.opacity(0.35))
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-                .offset(x: -175, y: -100)
-                .blur(radius: 120)
-            Circle()
-                .frame(width: 350)
-                .foregroundStyle(.customPrimary.opacity(0.35))
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
-                .offset(x: 100, y: 100)
-                .blur(radius: 120)
             
             VStack {
                 let courseData = runningRecord.courseData

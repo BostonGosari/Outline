@@ -202,7 +202,6 @@
 		BB1D534C2ADEA6F90073771F /* SummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1D534B2ADEA6F90073771F /* SummaryView.swift */; };
 		BB397D092AE6408A00F92A43 /* RecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB397D082AE6408A00F92A43 /* RecordView.swift */; };
 		BB5239372ADBD99F00646494 /* GPSArtHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5239362ADBD99F00646494 /* GPSArtHomeView.swift */; };
-		BB5239582ADC396300646494 /* BackgroundBlur.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5239572ADC396300646494 /* BackgroundBlur.swift */; };
 		BB52396B2ADD385700646494 /* CategoryScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB52396A2ADD385700646494 /* CategoryScrollView.swift */; };
 		BB52396D2ADD6DBB00646494 /* CustomRoundedRectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB52396C2ADD6DBB00646494 /* CustomRoundedRectangle.swift */; };
 		BB869B532B196F1A0087202A /* Pretendard-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BB1D530B2ADDBC560073771F /* Pretendard-Black.ttf */; };
@@ -505,7 +504,6 @@
 		BB52392D2ADAF93D00646494 /* Outline Watch App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Outline Watch App.entitlements"; sourceTree = "<group>"; };
 		BB52392E2ADAFB2E00646494 /* Outline.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Outline.entitlements; sourceTree = "<group>"; };
 		BB5239362ADBD99F00646494 /* GPSArtHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPSArtHomeView.swift; sourceTree = "<group>"; };
-		BB5239572ADC396300646494 /* BackgroundBlur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundBlur.swift; sourceTree = "<group>"; };
 		BB52396A2ADD385700646494 /* CategoryScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryScrollView.swift; sourceTree = "<group>"; };
 		BB52396C2ADD6DBB00646494 /* CustomRoundedRectangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomRoundedRectangle.swift; sourceTree = "<group>"; };
 		BBA3E3F32B80AAC60068C891 /* ScoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreManager.swift; sourceTree = "<group>"; };
@@ -1153,7 +1151,6 @@
 				F06B936D2ADC279100387DEB /* SlideToUnlock.swift */,
 				F09697462ADBCD6000C38AF4 /* Shape.swift */,
 				F05C7D552ADC565E006842DB /* PreferenceKey.swift */,
-				BB5239572ADC396300646494 /* BackgroundBlur.swift */,
 				BB52396C2ADD6DBB00646494 /* CustomRoundedRectangle.swift */,
 				0E29F6522ADF6C3A00F5EF5C /* RunningPopup.swift */,
 				0EE92E6D2AE00AE5003192FF /* CompleteButton.swift */,
@@ -1536,7 +1533,6 @@
 				0E7EE5212B5E7C4B004F6BAF /* CardDetailMapView.swift in Sources */,
 				2915FA742C6BC245006890CD /* RecordLookAroundView.swift in Sources */,
 				F096974F2ADBEE9F00C38AF4 /* CardDetailInformationView.swift in Sources */,
-				BB5239582ADC396300646494 /* BackgroundBlur.swift in Sources */,
 				BB5239372ADBD99F00646494 /* GPSArtHomeView.swift in Sources */,
 				2975F0962AE3E1790046C00B /* CornerRectangleModifier.swift in Sources */,
 				2915FA762C6BC2B7006890CD /* RecordEmptyRunningView.swift in Sources */,
