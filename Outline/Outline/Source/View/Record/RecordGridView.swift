@@ -17,12 +17,6 @@ struct RecordGridView: View {
         ZStack {
             Color.gray900.ignoresSafeArea()
             
-            Circle()
-                .frame(maxHeight: .infinity, alignment: .bottom)
-                .foregroundStyle(.customPrimary.opacity(0.5))
-                .blur(radius: 150)
-                .offset(y: 300)
-            
             VStack(spacing: 0) {
                 HStack {
                     Text(title)

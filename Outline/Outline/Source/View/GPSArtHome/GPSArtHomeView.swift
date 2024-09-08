@@ -170,12 +170,6 @@ struct GPSArtHomeView: View {
                     )
             }
         }
-        .background(
-            BackgroundBlur(color: Color.customThird, padding: 0)
-        )
-        .background(
-            BackgroundBlur(color: Color.customPrimary, padding: 500)
-        )
     }
     
     private var getCurrentOffsetView: some View {
