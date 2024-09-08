@@ -55,7 +55,7 @@ struct CategoryScrollView: View {
                                                         loading = false
                                                     }
                                                     .mask {
-                                                        UnevenRoundedRectangle(topLeadingRadius: 5, bottomLeadingRadius: 30, bottomTrailingRadius: 30, topTrailingRadius: 30, style: .circular)
+                                                        UnevenRoundedRectangle(topLeadingRadius: 5, bottomLeadingRadius: 15, bottomTrailingRadius: 15, topTrailingRadius: 30, style: .circular)
                                                     }
                                             }
                                             .matchedGeometryEffect(id: currentCourse.id, in: namespace)
@@ -92,7 +92,7 @@ struct CategoryScrollView: View {
                                     .frame(maxWidth: .infinity, alignment: .leading)
                                 }
                                 .mask {
-                                    UnevenRoundedRectangle(topLeadingRadius: 5, bottomLeadingRadius: 30, bottomTrailingRadius: 30, topTrailingRadius: 30)
+                                    UnevenRoundedRectangle(topLeadingRadius: 5, bottomLeadingRadius: 15, bottomTrailingRadius: 15, topTrailingRadius: 30)
                                 }
                                 .shadow(color: .white, radius: 0.5, y: -0.5)
                             }
