@@ -62,7 +62,7 @@ struct BigCardView: View {
                                 .opacity(index == currentIndex ? 1 : 0)
                                 .offset(y: index == currentIndex ? 0 : 10)
                                 .background(alignment: .bottom) {
-                                    Rectangle()
+                                    UnevenRoundedRectangle(bottomLeadingRadius: 45, bottomTrailingRadius: 45)
                                         .foregroundStyle(
                                             LinearGradient(
                                                 stops: [
@@ -74,7 +74,6 @@ struct BigCardView: View {
                                                 endPoint: UnitPoint(x: 0.5, y: 1)
                                             )
                                         )
-                                        .roundedCorners(45, corners: [.bottomLeft, .bottomRight])
                                         .opacity(index == currentIndex ? 1 : 0)
                                 }
                         }
