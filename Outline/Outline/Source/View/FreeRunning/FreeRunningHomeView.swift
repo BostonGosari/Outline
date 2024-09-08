@@ -22,14 +22,12 @@ struct FreeRunningHomeView: View {
    
     var body: some View {
         ZStack(alignment: .top) {
-            Color.gray900
-                .ignoresSafeArea()
             if authState == .login {
                 FreeRunningMapView()
                     .ignoresSafeArea()
-                Color.gray900
+                Color.gray800.opacity(0.8)
                     .ignoresSafeArea()
-                    .opacity(0.85)
+                    .blendMode(.multiply)
             }
 
             VStack(spacing: 0) {
@@ -101,15 +99,9 @@ struct FreeRunningHomeView: View {
 
 extension FreeRunningHomeView {
     private var cardView: some View {
-        Rectangle()
-            .fill(.white7)
-            .roundedCorners(10, corners: [.topLeft])
-            .roundedCorners(70, corners: [.topRight])
-            .roundedCorners(45, corners: [.bottomLeft, .bottomRight])
-            .overlay(
-                CustomRoundedRectangle(cornerRadiusTopLeft: 10, cornerRadiusTopRight: 79, cornerRadiusBottomLeft: 45, cornerRadiusBottomRight: 45)
-                   
-            )
+        UnevenRoundedRectangle(topLeadingRadius: 10, bottomLeadingRadius: 45, bottomTrailingRadius: 45, topTrailingRadius: 70)
+            .fill(.white5)
+            .stroke(.white30)
     }
     
     private func userLocationToString() {

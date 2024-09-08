@@ -91,7 +91,7 @@ struct RecordEmptyCardView: View {
     
     var body: some View {
         size.frameRect
-            .fill(.white7)
+            .fill(.white5)
             .stroke(.white30, lineWidth: 1.0)
             .frame(width: size.frame.width, height: size.frame.height)
     }
