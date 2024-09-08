@@ -77,14 +77,11 @@ struct GPSArtHomeView: View {
                         
                         if viewModel.courses.isEmpty {
                             VStack {
-                                Rectangle()
+                                UnevenRoundedRectangle(topLeadingRadius: 10, bottomLeadingRadius: 70, bottomTrailingRadius: 45, topTrailingRadius: 45)
                                     .frame(
                                         width: UIScreen.main.bounds.width * 0.84,
                                         height: UIScreen.main.bounds.width * 0.84 * 1.5
                                     )
-                                    .roundedCorners(10, corners: [.topLeft])
-                                    .roundedCorners(70, corners: [.topRight])
-                                    .roundedCorners(45, corners: [.bottomLeft, .bottomRight])
                                     .foregroundColor(.gray700)
                                     .padding(.top, -20)
                                     .padding(.bottom, 13)

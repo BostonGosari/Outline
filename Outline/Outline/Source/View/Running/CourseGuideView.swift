@@ -28,10 +28,8 @@ struct CourseGuideView: View {
             TransparentBlurView(removeAllFilters: true)
                 .blur(radius: 3, opaque: true)
                 .overlay(
-                    Rectangle()
+                    UnevenRoundedRectangle(topLeadingRadius: 7, bottomLeadingRadius: 7, bottomTrailingRadius: 20, topTrailingRadius: 7)
                         .fill(Color.white30)
-                        .roundedCorners(20, corners: [.bottomRight])
-                        .roundedCorners(7, corners: [.topLeft, .topRight, .bottomLeft])
                 )
             ZStack {
                 coursePath

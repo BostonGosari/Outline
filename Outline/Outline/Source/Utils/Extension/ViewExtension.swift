@@ -8,10 +8,6 @@
 import SwiftUI
 
 extension View {
-    func roundedCorners(_ radius: CGFloat, corners: UIRectCorner) -> some View {
-        clipShape(RoundedCornersShape(radius: radius, corners: corners))
-    }
-    
     func onScrollViewOffsetChanged(action: @escaping (_ offset: CGFloat) -> Void) -> some View {
         self
             .background(
