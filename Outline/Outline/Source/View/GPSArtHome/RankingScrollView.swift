@@ -56,7 +56,7 @@ struct RankingScrollView: View {
                                                         loading = false
                                                     }
                                                     .mask {
-                                                        UnevenRoundedRectangle(topLeadingRadius: 5, bottomLeadingRadius: 30, bottomTrailingRadius: 30, topTrailingRadius: 30)
+                                                        UnevenRoundedRectangle(topLeadingRadius: 5, bottomLeadingRadius: 15, bottomTrailingRadius: 15, topTrailingRadius: 30)
                                                     }
                                             }
                                             .matchedGeometryEffect(id: currentCourse.id, in: namespace)
@@ -89,7 +89,7 @@ struct RankingScrollView: View {
                                     .frame(maxWidth: .infinity, alignment: .leading)
                                 }
                                 .mask {
-                                    UnevenRoundedRectangle(topLeadingRadius: 5, bottomLeadingRadius: 30, bottomTrailingRadius: 30, topTrailingRadius: 30, style: .circular)
+                                    UnevenRoundedRectangle(topLeadingRadius: 5, bottomLeadingRadius: 15, bottomTrailingRadius: 15, topTrailingRadius: 30, style: .circular)
                                 }
                                 .shadow(color: .white, radius: 0.5, y: -0.5)
                                 

@@ -89,9 +89,8 @@ extension CardDetailMap {
             TransparentBlurView(removeAllFilters: true)
                 .blur(radius: 8, opaque: true)
                 .overlay(
-                    Rectangle()
+                    UnevenRoundedRectangle(topLeadingRadius: 15, topTrailingRadius: 15)
                         .fill(.black50)
-                        .roundedCorners(15, corners: [.topLeft, .topRight])
                 )
                 .ignoresSafeArea()
             

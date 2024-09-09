@@ -180,16 +180,14 @@ extension RunningView {
         )
             .frame(height: 70 + navigationTranslation + navigationSheetHeight, alignment: .top)
             .mask {
-                Rectangle()
-                    .roundedCorners(50, corners: .bottomRight)
+                UnevenRoundedRectangle(bottomTrailingRadius: 50)
             }
             .background {
                 TransparentBlurView(removeAllFilters: true)
                     .blur(radius: 6, opaque: true)
                     .ignoresSafeArea()
                     .overlay {
-                        Rectangle()
-                            .roundedCorners(50, corners: .bottomRight)
+                        UnevenRoundedRectangle(bottomTrailingRadius: 50)
                             .foregroundStyle(.black50)
                             .ignoresSafeArea()
                             .overlay(alignment: .bottom) {

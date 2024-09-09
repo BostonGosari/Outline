@@ -11,9 +11,9 @@ import MapKit
 struct BigCard<Content: View>: View {
     @StateObject private var manager = MotionManager()
     @State private var isDragging = false
-    @State private var snapShotAngle: Double = 0
-    @State private var rotationAngle: Double = -180
-    @State private var isFrontside = false
+    @State private var snapShotAngle = 0.0
+    @State private var rotationAngle = 0.0
+    @State private var isFrontside = true
     @State private var isFliped = false
     @State private var isDragable = false
     @State private var cardFloatingOffset: CGFloat = 0
@@ -58,7 +58,7 @@ struct BigCard<Content: View>: View {
                 score: score,
                 editAction: editAction
             )
-            .opacity(isFrontside ? 0 : 1)
+            .opacity(isFrontside ? 0 : 1)            
         }
         .overlay {
             hologramOverlay
@@ -153,36 +153,31 @@ struct BigCard<Content: View>: View {
     }
     
     private func onAppearCardAnimation() {
-        withAnimation(.bouncy(duration: 6)) {
-            rotationAngle += 540
+        withAnimation(.bouncy(duration: 5)) {
+            rotationAngle += 360
         }
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.64) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
             isFrontside.toggle()
         }
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.34) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.6) {
             isFrontside.toggle()
         }
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.14) {
-            isFrontside.toggle()
-            rotationAngle = 0
-        }
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             withAnimation(.easeIn(duration: 0.5)) {
                 cardFloatingOffset = -5
             }
         }
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
-            withAnimation(.bouncy(duration: 1.5, extraBounce: 0.65)) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            withAnimation(.bouncy(duration: 1.0, extraBounce: 0.65)) {
                 cardFloatingOffset = 0
             }
         }
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5.5) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             isDragable = true
         }
     }
