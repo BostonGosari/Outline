@@ -77,7 +77,7 @@ struct GPSArtHomeView: View {
                         
                         if viewModel.courses.isEmpty {
                             VStack {
-                                UnevenRoundedRectangle(topLeadingRadius: 10, bottomLeadingRadius: 70, bottomTrailingRadius: 45, topTrailingRadius: 45)
+                                UnevenRoundedRectangle(topLeadingRadius: 10, bottomLeadingRadius: 45, bottomTrailingRadius: 45, topTrailingRadius: 70)
                                     .frame(
                                         width: UIScreen.main.bounds.width * 0.84,
                                         height: UIScreen.main.bounds.width * 0.84 * 1.5
