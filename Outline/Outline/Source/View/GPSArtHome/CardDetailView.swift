@@ -174,11 +174,13 @@ struct CardDetailView: View {
             .padding(.top, getSafeArea().bottom == 0 ? 30 : 60)
             .opacity(appear[0] ? 1 : 0)
             .offset(y: appear[0] ? 0 : fadeInOffset)
-            
-            Spacer()
         }
         .padding(40)
+        .padding(.bottom, 80)
         .frame(maxWidth: .infinity, alignment: .leading)
+        .background(alignment: .bottom) {
+            LinearGradient(colors: [.black20, .black70, .black70, .black20, .black10], startPoint: .top, endPoint: .bottom)
+        }
     }
     
     private var slideToUnlock: some View {

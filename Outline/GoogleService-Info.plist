@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>API_KEY</key>
-	<string>$(FIRESTORE_API_KEY)</string>
+	<string>AIzaSyDGZ63nh_G_vy0Y6RLH_3CxMjIpMOhdscQ</string>
 	<key>GCM_SENDER_ID</key>
 	<string>336682413328</string>
 	<key>PLIST_VERSION</key>
