@@ -9,6 +9,7 @@ import Combine
 import CoreLocation
 import HealthKit
 import SwiftUI
+import FirebaseAnalytics
 
 class RunningStartManager: ObservableObject {
     @Published var counter = 0
@@ -100,10 +101,21 @@ class RunningStartManager: ObservableObject {
         startCourse = GPSArtCourse()
         runningType = .free
         getFreeRunName()
+        
+        // 자유러닝 
+        Analytics.logEvent("started_free_running", parameters: [
+            "card_name": "자유러닝"
+        ])
     }
     
     func startGPSArtRun() {
         runningType = .gpsArt
+        
+        // GPS 러닝
+        guard let startCourse = startCourse else { return }
+        Analytics.logEvent("started_gps_art_running", parameters: [
+            "card_name": startCourse.courseName
+        ])
     }
     
     private func getFreeRunName() {
