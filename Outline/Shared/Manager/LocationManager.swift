@@ -34,6 +34,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     }
     
     func stopUpdate() {
+        isRunning = false
         locationManager.stopUpdatingLocation()
         locationManager.allowsBackgroundLocationUpdates = false
     }
@@ -105,8 +106,6 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
                 let horizontalAccuracy = location.horizontalAccuracy
                 let verticalAccuracy = location.verticalAccuracy
                 let speed = location.speed
-                
-                print(horizontalAccuracy, verticalAccuracy, speed)
                 
                 if speed > 0.5 && horizontalAccuracy < 20 && verticalAccuracy < 20 {
                     userLocations.append(currentLocation)

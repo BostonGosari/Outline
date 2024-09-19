@@ -8,6 +8,7 @@
 import SwiftUI
 import MapKit
 import Kingfisher
+import FirebaseAnalytics
 
 struct CardDetailView: View {
     @StateObject private var connectivityManager = ConnectivityManager.shared
@@ -128,6 +129,12 @@ struct CardDetailView: View {
             if authState == .lookAround {
                 showNeedLoginSheet = true
             }
+            
+            // 코스별 클릭수
+            Analytics.logEvent("clicked_course", parameters: [
+                "card_name": selectedCourse.course.courseName,
+                "card_distance": String(format: "%.0f", selectedCourse.distance/1000)
+            ])
         }
     }
     
