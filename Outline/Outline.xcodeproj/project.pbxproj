@@ -20,6 +20,7 @@
 		0E9A5D482AE065A100C19FF3 /* ShareViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9A5D472AE065A100C19FF3 /* ShareViewModel.swift */; };
 		0E9A5D4F2AE0B8C800C19FF3 /* ShareModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9A5D4E2AE0B8C800C19FF3 /* ShareModel.swift */; };
 		0EB1AA8F2C9C3EA800B51578 /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 0EB1AA8E2C9C3EA800B51578 /* Secrets.xcconfig */; };
+		0EB1AA922C9C3FF100B51578 /* ShareMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB1AA912C9C3FF100B51578 /* ShareMapView.swift */; };
 		0EB59A222B176BA100A18C50 /* test.json in Resources */ = {isa = PBXBuildFile; fileRef = 0EB59A212B176BA100A18C50 /* test.json */; };
 		0EB59A3E2B1835E600A18C50 /* alert.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0EB59A3D2B1835E600A18C50 /* alert.mp3 */; };
 		0EE0D3E22B0C83B200E75F4C /* ShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE0D3E12B0C83B200E75F4C /* ShareView.swift */; };
@@ -334,6 +335,7 @@
 		0E9A5D472AE065A100C19FF3 /* ShareViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewModel.swift; sourceTree = "<group>"; };
 		0E9A5D4E2AE0B8C800C19FF3 /* ShareModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareModel.swift; sourceTree = "<group>"; };
 		0EB1AA8E2C9C3EA800B51578 /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
+		0EB1AA912C9C3FF100B51578 /* ShareMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareMapView.swift; sourceTree = "<group>"; };
 		0EB59A212B176BA100A18C50 /* test.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = test.json; sourceTree = "<group>"; };
 		0EB59A3D2B1835E600A18C50 /* alert.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = alert.mp3; sourceTree = "<group>"; };
 		0EE0D3E12B0C83B200E75F4C /* ShareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareView.swift; sourceTree = "<group>"; };
@@ -616,6 +618,7 @@
 				0EE0D3E12B0C83B200E75F4C /* ShareView.swift */,
 				9563829D2B95FD2E00D3AD32 /* ShareView+Extension.swift */,
 				956382EB2B9D48DD00D3AD32 /* ShareView+Camera.swift */,
+				0EB1AA912C9C3FF100B51578 /* ShareMapView.swift */,
 			);
 			path = Share;
 			sourceTree = "<group>";
@@ -1575,6 +1578,7 @@
 				9528EFE92ADE9E870056CCC6 /* UserCoreDataModel.xcdatamodeld in Sources */,
 				F0781D602AE163E00084ADD7 /* GPSArtHomeViewModel.swift in Sources */,
 				299803552ADF5F1000A9A134 /* HealthKitManager.swift in Sources */,
+				0EB1AA922C9C3FF100B51578 /* ShareMapView.swift in Sources */,
 				299DC11D2C3D2BE700567874 /* MotionManager.swift in Sources */,
 				29D7AD4C2B0E032200AAAAB0 /* MirroringNavigationView.swift in Sources */,
 				95A01E3B2AF2B7250093D9C0 /* LookAroundView.swift in Sources */,
