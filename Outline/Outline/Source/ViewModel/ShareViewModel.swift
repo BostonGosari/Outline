@@ -25,9 +25,10 @@ class ShareViewModel: ObservableObject {
     @Published var angle: Angle = .degrees(0)
     @Published var lastAngle: Angle = .degrees(0)
     @Published var renderedImage: UIImage?
-    @Published var uploadedImage: UIImage?    
+    @Published var uploadedImage: UIImage?
     @Published var selectedItem: PhotosPickerItem?
     @Published var isSizeFixed = false
+    @Published var currentCourseName = ""
     
     @Published var isShowPopup = false {
         didSet {
@@ -79,8 +80,8 @@ class ShareViewModel: ObservableObject {
     }
     
     @MainActor
-    func onTapSaveImageButton(shareImageCombined: some View, isSave: Bool = true) {
-        renderShareView(shareImageCombined, isSave)
+    func onTapSaveImageButton(shareTabViews: some View, isSave: Bool = true) {
+        renderShareView(shareTabViews, isSave)
         if let img = renderedImage {
             DispatchQueue.main.async {
                 self.saveImage(image: img)
@@ -89,23 +90,24 @@ class ShareViewModel: ObservableObject {
     }
     
     @MainActor
-    func onTapUploadImageButton(shareImageCombined: some View, isSave: Bool = true) {
-        renderShareView(shareImageCombined, isSave)
+    func onTapUploadImageButton(shareTabViews: some View, isSave: Bool = true) {
+        renderShareView(shareTabViews, isSave)
         if let img = renderedImage {
             shareToInstagram(image: img)
         }
     }
     
-    @MainActor 
+    @MainActor
     func renderShareView(_ shareImageCombined: some View, _ isSave: Bool = true) {
         renderedImage = shareImageCombined
-            .background(isSave ? .gray900 : .clear)
+            .frame(width: size.width, height: size.height)
+            .background(isSave ? .black : .clear)
             .render(scale: 3)
     }
     
     @MainActor
     func onAppearSharedImageCombined(size: CGSize) {
-        self.size = CGSize(width: size.width, height: size.height)
+        self.size = size
     }
 }
 

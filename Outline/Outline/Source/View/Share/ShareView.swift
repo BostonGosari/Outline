@@ -12,25 +12,37 @@ import PhotosUI
 struct ShareView: View {
     @Environment(\.dismiss) var dismiss
     @StateObject var viewModel = ShareViewModel()
+    @FocusState var isFocused: Bool
+    
+    @State var currentShareView = 0
    
     let runningData: ShareModel
+    let indexWidth: CGFloat = 24
+    let indexHeight: CGFloat = 4
     
     var canvasData: CanvasData {
-        return PathManager.getCanvasData(coordinates: runningData.userLocations, width: 200, height: 200)
+        return PathManager.getCanvasData(coordinates: runningData.userLocations, width: 150, height: 150)
     }
     
     var body: some View {
         NavigationView {
             ZStack {
                 Color.gray900
-                    .ignoresSafeArea()
+                    .edgesIgnoringSafeArea(.all)
                 
-                VStack(spacing: 0) {
-                    shareImageCombined
-                    buttons
+                ScrollView {
+                    VStack(spacing: 0) {
+                        shareTabViews
+                        
+                        tabButtons
+                        
+                        Spacer(minLength: 32)
+                        
+                        buttons
+                    }
                 }
-                .padding(.top, 36)
-                            
+                .ignoresSafeArea(.keyboard, edges: .bottom)
+                .scrollDisabled(true)
             }
             .navigationTitle("공유 이미지 편집")
             .navigationBarTitleDisplayMode(.inline)
@@ -45,7 +57,7 @@ struct ShareView: View {
                 }
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
-                        viewModel.onTapUploadImageButton(shareImageCombined: shareImageCombined)
+                        viewModel.onTapUploadImageButton(shareTabViews: firstShareView)
                     } label: {
                         Text("공유")
                             .foregroundStyle(Color.customPrimary)
@@ -78,6 +90,9 @@ struct ShareView: View {
             AccessCameraView(selectedImage: $viewModel.uploadedImage)
                 .ignoresSafeArea()
         }
+        .onAppear {
+            viewModel.currentCourseName = runningData.courseName
+        }
         .onChange(of: viewModel.selectedItem) {
             Task {
                 if let data = try? await viewModel.selectedItem?.loadTransferable(type: Data.self) {
@@ -94,4 +109,27 @@ struct ShareView: View {
             }
         }
     }
+    
+    var shareTabViews: some View {
+        TabView(selection: $currentShareView) {
+            firstShareView
+                .tag(0)
+            
+            secondShareView
+                .tag(1)
+            
+            thirdShareView
+                .tag(2)
+            
+            fourthShareView
+                .tag(3)
+        }
+        .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+        .frame(height: UIScreen.main.bounds.height * 0.7)
+        .gesture(DragGesture().onChanged { _ in })
+    }
+}
+
+#Preview {
+    ShareView(runningData: ShareModel())
 }

@@ -38,4 +38,11 @@ extension Font {
     
     static let customWidgetTitle = Font.custom("Pretendard-Black", size: 48)
     static let customWidgetData = Font.custom("Pretendard-Bold", size: 24)
+    
+    static let customShareFirstTitle = Font.custom("Pretendard-SemiBold", size: 10)
+    static let customShareFirstInfo = Font.custom("Pretendard-SemiBold", size: 14)
+    static let customShareSecondTitle = Font.custom("Pretendard-ExtraBold", size: 36)
+    static let customShareSecondInfo = Font.custom("Pretendard-Bold", size: 12)
+    static let customShareSecondTime = Font.custom("Pretendard-Bold", size: 16)
+    static let customShareFourth = Font.custom("Pretendard-SemiBold", size: 12)
 }

@@ -77,6 +77,7 @@ struct FinishRunningView: View {
                 .sheet(isPresented: $viewModel.navigateToShareMainView, content: {
                     ShareView(runningData: viewModel.shareData)
                         .navigationBarBackButtonHidden()
+                        .edgesIgnoringSafeArea(.all)
                 })
                 .onAppear {
                     withAnimation(.easeInOut(duration: 1)) {
