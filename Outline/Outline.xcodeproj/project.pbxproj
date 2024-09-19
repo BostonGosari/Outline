@@ -19,6 +19,7 @@
 		0E7EE5212B5E7C4B004F6BAF /* CardDetailMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7EE5202B5E7C4B004F6BAF /* CardDetailMapView.swift */; };
 		0E9A5D482AE065A100C19FF3 /* ShareViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9A5D472AE065A100C19FF3 /* ShareViewModel.swift */; };
 		0E9A5D4F2AE0B8C800C19FF3 /* ShareModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9A5D4E2AE0B8C800C19FF3 /* ShareModel.swift */; };
+		0EB1AA8F2C9C3EA800B51578 /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 0EB1AA8E2C9C3EA800B51578 /* Secrets.xcconfig */; };
 		0EB59A222B176BA100A18C50 /* test.json in Resources */ = {isa = PBXBuildFile; fileRef = 0EB59A212B176BA100A18C50 /* test.json */; };
 		0EB59A3E2B1835E600A18C50 /* alert.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0EB59A3D2B1835E600A18C50 /* alert.mp3 */; };
 		0EE0D3E22B0C83B200E75F4C /* ShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE0D3E12B0C83B200E75F4C /* ShareView.swift */; };
@@ -96,7 +97,6 @@
 		2999C6D52B0D7C4A009C5585 /* MirroringControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2999C6D42B0D7C4A009C5585 /* MirroringControlsView.swift */; };
 		2999C6D72B0D7C56009C5585 /* MirroringMetricsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2999C6D62B0D7C56009C5585 /* MirroringMetricsView.swift */; };
 		2999C6DB2B0D7CF3009C5585 /* MirroringNavigationWatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2999C6DA2B0D7CF3009C5585 /* MirroringNavigationWatchView.swift */; };
-		299A06052C8DE07D00184465 /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 299A06042C8DE07D00184465 /* Secrets.xcconfig */; };
 		299DC11D2C3D2BE700567874 /* MotionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299DC11C2C3D2BE700567874 /* MotionManager.swift */; };
 		29AE76AC2ADE0D9100A46742 /* OutlineApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0AC8A9C2AD94C1F0061612C /* OutlineApp.swift */; };
 		29AE76D72ADE2A2200A46742 /* InputNicknameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AE76D52ADE2A2200A46742 /* InputNicknameView.swift */; };
@@ -333,6 +333,7 @@
 		0E96BA912AF4E00B000C8FBF /* SFCompactDisplay-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFCompactDisplay-Semibold.ttf"; sourceTree = "<group>"; };
 		0E9A5D472AE065A100C19FF3 /* ShareViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewModel.swift; sourceTree = "<group>"; };
 		0E9A5D4E2AE0B8C800C19FF3 /* ShareModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareModel.swift; sourceTree = "<group>"; };
+		0EB1AA8E2C9C3EA800B51578 /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 		0EB59A212B176BA100A18C50 /* test.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = test.json; sourceTree = "<group>"; };
 		0EB59A3D2B1835E600A18C50 /* alert.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = alert.mp3; sourceTree = "<group>"; };
 		0EE0D3E12B0C83B200E75F4C /* ShareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareView.swift; sourceTree = "<group>"; };
@@ -405,7 +406,6 @@
 		2999C6D42B0D7C4A009C5585 /* MirroringControlsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MirroringControlsView.swift; sourceTree = "<group>"; };
 		2999C6D62B0D7C56009C5585 /* MirroringMetricsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MirroringMetricsView.swift; sourceTree = "<group>"; };
 		2999C6DA2B0D7CF3009C5585 /* MirroringNavigationWatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MirroringNavigationWatchView.swift; sourceTree = "<group>"; };
-		299A06042C8DE07D00184465 /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 		299DC11C2C3D2BE700567874 /* MotionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionManager.swift; sourceTree = "<group>"; };
 		29AE76D52ADE2A2200A46742 /* InputNicknameView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputNicknameView.swift; sourceTree = "<group>"; };
 		29AE76D62ADE2A2200A46742 /* InputUserInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputUserInfoView.swift; sourceTree = "<group>"; };
@@ -968,7 +968,7 @@
 		F0AC8A902AD94C1F0061612C = {
 			isa = PBXGroup;
 			children = (
-				299A06042C8DE07D00184465 /* Secrets.xcconfig */,
+				0EB1AA8E2C9C3EA800B51578 /* Secrets.xcconfig */,
 				2921B0122B01F3F700533A83 /* GoogleService-Info.plist */,
 				BB52392D2ADAF93D00646494 /* Outline Watch App.entitlements */,
 				BB5239262ADAF70A00646494 /* Shared */,
@@ -1403,7 +1403,7 @@
 				29BB886D2C5F528E006B238D /* 압구정 댕댕런 테스트 촘촘.kml in Resources */,
 				29BB88662C5F28DD006B238D /* 압구정 댕댕런.kml in Resources */,
 				29BB88582C5F28DD006B238D /* 서울과기대 낙타런.kml in Resources */,
-				299A06052C8DE07D00184465 /* Secrets.xcconfig in Resources */,
+				0EB1AA8F2C9C3EA800B51578 /* Secrets.xcconfig in Resources */,
 				F0AC8AA12AD94C200061612C /* Color.xcassets in Resources */,
 				29BB88572C5F28DD006B238D /* 서초 개구리런.kml in Resources */,
 				29BB885B2C5F28DD006B238D /* 반포 문어런.kml in Resources */,
@@ -1960,7 +1960,6 @@
 		};
 		F0AC8ABE2AD94C210061612C /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 299A06042C8DE07D00184465 /* Secrets.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -2012,7 +2011,6 @@
 		};
 		F0AC8ABF2AD94C210061612C /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 299A06042C8DE07D00184465 /* Secrets.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
