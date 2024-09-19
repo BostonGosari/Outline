@@ -90,7 +90,7 @@ class ShareViewModel: ObservableObject {
     }
     
     @MainActor
-    func onTapUploadImageButton(shareTabViews: some View, isSave: Bool = true) {
+    func onTapUploadImageButton(shareTabViews: some View, isSave: Bool = false) {
         renderShareView(shareTabViews, isSave)
         if let img = renderedImage {
             shareToInstagram(image: img)

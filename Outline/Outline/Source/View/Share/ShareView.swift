@@ -57,7 +57,7 @@ struct ShareView: View {
                 }
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
-                        viewModel.onTapUploadImageButton(shareTabViews: firstShareView)
+                        selecteRenderView(isSave: false)
                     } label: {
                         Text("공유")
                             .foregroundStyle(Color.customPrimary)
@@ -130,6 +130,43 @@ struct ShareView: View {
     }
 }
 
-#Preview {
-    ShareView(runningData: ShareModel())
+extension ShareView {
+    func selecteRenderView(isSave: Bool) {
+        switch currentShareView {
+        case 0:
+            if isSave {
+                viewModel.onTapSaveImageButton(shareTabViews: firstShareView)
+            } else {
+                viewModel.onTapUploadImageButton(shareTabViews: firstShareView)
+            }
+        case 1:
+            ShareMapView(userLocations: runningData.userLocations)
+                .captureMapSnapshot(size: viewModel.size) { img in
+                    if isSave {
+                        viewModel.onTapSaveImageButton(shareTabViews: renderSecondShareView(img))
+                    } else {
+                        viewModel.onTapUploadImageButton(shareTabViews: renderSecondShareView(img))
+                    }
+                }
+        case 2:
+            if isSave {
+                viewModel.onTapSaveImageButton(shareTabViews: renderThirdShareView())
+            } else {
+                viewModel.onTapUploadImageButton(shareTabViews: renderThirdShareView())
+            }
+        case 3:
+            ShareMapView(userLocations: runningData.userLocations)
+                .captureMapSnapshot(
+                    size: CGSize(width: UIScreen.main.bounds.width / 2, height: UIScreen.main.bounds.width / 2)
+                ) { img in
+                    if isSave {
+                        viewModel.onTapSaveImageButton(shareTabViews: renderFourthShareView(img))
+                    } else {
+                        viewModel.onTapUploadImageButton(shareTabViews: renderFourthShareView(img))
+                    }
+                }
+        default:
+            return
+        }
+    }
 }

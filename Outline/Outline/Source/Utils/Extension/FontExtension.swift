@@ -45,6 +45,6 @@ extension Font {
     static let customShareSecondInfo = Font.custom("Pretendard-Bold", size: 12)
     static let customShareSecondTime = Font.custom("Pretendard-Bold", size: 16)
     static let customShareFourth = Font.custom("Pretendard-SemiBold", size: 12)
-    static let customShareOutlineTop = Font.custom("Helvetica Neue LT Std 83 Heavy Extended", size: 13)
-    static let customShareOutlineBottom = Font.custom("Helvetica Neue LT Std 83 Heavy Extended", size: 10)
+    static let customShareOutlineTop = Font.custom("Helvetica_Neue_LT_Std_83_Heavy_Extended", size: 13)
+    static let customShareOutlineBottom = Font.custom("Helvetica_Neue_LT_Std_83_Heavy_Extended", size: 10)
 }

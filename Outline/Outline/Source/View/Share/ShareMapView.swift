@@ -58,10 +58,12 @@ struct ShareMapView: UIViewRepresentable {
         
         var boundingMapRect = polyline.boundingMapRect
         
-        let offsetRatio: CGFloat = 0.2
-        let centerOffset = boundingMapRect.height * offsetRatio
-        boundingMapRect = boundingMapRect.offsetBy(dx: 0, dy: -centerOffset)
-        
+        if size.width != size.height {
+            let offsetRatio: CGFloat = 0.2
+            let centerOffset = boundingMapRect.height * offsetRatio
+            boundingMapRect = boundingMapRect.offsetBy(dx: 0, dy: -centerOffset)
+        }
+            
         let padding: CGFloat = -800
         boundingMapRect = boundingMapRect.insetBy(dx: padding, dy: padding)
         
