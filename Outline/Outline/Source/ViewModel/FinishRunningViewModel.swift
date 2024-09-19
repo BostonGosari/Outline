@@ -55,11 +55,7 @@ class FinishRunningViewModel: ObservableObject {
         shareData = ShareModel(
             courseName: courseData.courseName,
             runningDate: healthData.startDate.dateToShareString(),
-            regionDisplayName: courseData.regionDisplayName,
             distance: "\(String(format: "%.2f", healthData.totalRunningDistance/1000))km",
-            cal: "\(Int(healthData.totalEnergy))Kcal",
-            pace: healthData.averagePace.formattedAveragePace(),
-            bpm: "\(Int(healthData.averageHeartRate))BPM",
             time: healthData.totalTime.formatMinuteSeconds(),
             userLocations: runningRecord.courseData.coursePaths
         )
