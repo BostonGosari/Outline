@@ -19,6 +19,10 @@
 		0E7EE5212B5E7C4B004F6BAF /* CardDetailMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7EE5202B5E7C4B004F6BAF /* CardDetailMapView.swift */; };
 		0E9A5D482AE065A100C19FF3 /* ShareViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9A5D472AE065A100C19FF3 /* ShareViewModel.swift */; };
 		0E9A5D4F2AE0B8C800C19FF3 /* ShareModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9A5D4E2AE0B8C800C19FF3 /* ShareModel.swift */; };
+		0EB1AA8F2C9C3EA800B51578 /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 0EB1AA8E2C9C3EA800B51578 /* Secrets.xcconfig */; };
+		0EB1AA922C9C3FF100B51578 /* ShareMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB1AA912C9C3FF100B51578 /* ShareMapView.swift */; };
+		0EB1AA972C9C55A800B51578 /* Helvetica_Neue_LT_Std_83_Heavy_Extended.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0EB1AA962C9C55A800B51578 /* Helvetica_Neue_LT_Std_83_Heavy_Extended.otf */; };
+		0EB1AA982C9C55A800B51578 /* Helvetica_Neue_LT_Std_83_Heavy_Extended.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0EB1AA962C9C55A800B51578 /* Helvetica_Neue_LT_Std_83_Heavy_Extended.otf */; };
 		0EB59A222B176BA100A18C50 /* test.json in Resources */ = {isa = PBXBuildFile; fileRef = 0EB59A212B176BA100A18C50 /* test.json */; };
 		0EB59A3E2B1835E600A18C50 /* alert.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0EB59A3D2B1835E600A18C50 /* alert.mp3 */; };
 		0EE0D3E22B0C83B200E75F4C /* ShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE0D3E12B0C83B200E75F4C /* ShareView.swift */; };
@@ -335,6 +339,9 @@
 		0E96BA912AF4E00B000C8FBF /* SFCompactDisplay-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFCompactDisplay-Semibold.ttf"; sourceTree = "<group>"; };
 		0E9A5D472AE065A100C19FF3 /* ShareViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewModel.swift; sourceTree = "<group>"; };
 		0E9A5D4E2AE0B8C800C19FF3 /* ShareModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareModel.swift; sourceTree = "<group>"; };
+		0EB1AA8E2C9C3EA800B51578 /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
+		0EB1AA912C9C3FF100B51578 /* ShareMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareMapView.swift; sourceTree = "<group>"; };
+		0EB1AA962C9C55A800B51578 /* Helvetica_Neue_LT_Std_83_Heavy_Extended.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Helvetica_Neue_LT_Std_83_Heavy_Extended.otf; sourceTree = "<group>"; };
 		0EB59A212B176BA100A18C50 /* test.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = test.json; sourceTree = "<group>"; };
 		0EB59A3D2B1835E600A18C50 /* alert.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = alert.mp3; sourceTree = "<group>"; };
 		0EE0D3E12B0C83B200E75F4C /* ShareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareView.swift; sourceTree = "<group>"; };
@@ -620,6 +627,7 @@
 				0EE0D3E12B0C83B200E75F4C /* ShareView.swift */,
 				9563829D2B95FD2E00D3AD32 /* ShareView+Extension.swift */,
 				956382EB2B9D48DD00D3AD32 /* ShareView+Camera.swift */,
+				0EB1AA912C9C3FF100B51578 /* ShareMapView.swift */,
 			);
 			path = Share;
 			sourceTree = "<group>";
@@ -856,6 +864,7 @@
 		BB1D530A2ADDBC430073771F /* Font */ = {
 			isa = PBXGroup;
 			children = (
+				0EB1AA962C9C55A800B51578 /* Helvetica_Neue_LT_Std_83_Heavy_Extended.otf */,
 				BB1D530B2ADDBC560073771F /* Pretendard-Black.ttf */,
 				BB1D530F2ADDBC690073771F /* Pretendard-ExtraBold.ttf */,
 				BB1D530D2ADDBC620073771F /* Pretendard-Bold.ttf */,
@@ -1383,6 +1392,7 @@
 				BB869B592B196F2A0087202A /* Pretendard-Thin.ttf in Resources */,
 				BB869B562B196F220087202A /* Pretendard-SemiBold.ttf in Resources */,
 				BBCB1F0F2B1778DF00D9AE1C /* Assets.xcassets in Resources */,
+				0EB1AA972C9C55A800B51578 /* Helvetica_Neue_LT_Std_83_Heavy_Extended.otf in Resources */,
 				BB869B582B196F280087202A /* Pretendard-Regular.ttf in Resources */,
 				BB869B552B196F1F0087202A /* Pretendard-Bold.ttf in Resources */,
 				BBBB27E52B1795360081C93D /* Color.xcassets in Resources */,
@@ -1427,6 +1437,7 @@
 				29BB88592C5F28DD006B238D /* 이촌 골프런.kml in Resources */,
 				29BB88632C5F28DD006B238D /* 충무 고래런.kml in Resources */,
 				BB1D53182ADDBCA20073771F /* Pretendard-Medium.ttf in Resources */,
+				0EB1AA982C9C55A800B51578 /* Helvetica_Neue_LT_Std_83_Heavy_Extended.otf in Resources */,
 				29BB885F2C5F28DD006B238D /* 뚝섬 런런.kml in Resources */,
 				29BB886B2C5F33DE006B238D /* 압구정 댕댕런 테스트.kml in Resources */,
 				29BB88642C5F28DD006B238D /* 건대 오리런.kml in Resources */,
@@ -1581,6 +1592,7 @@
 				9528EFE92ADE9E870056CCC6 /* UserCoreDataModel.xcdatamodeld in Sources */,
 				F0781D602AE163E00084ADD7 /* GPSArtHomeViewModel.swift in Sources */,
 				299803552ADF5F1000A9A134 /* HealthKitManager.swift in Sources */,
+				0EB1AA922C9C3FF100B51578 /* ShareMapView.swift in Sources */,
 				299DC11D2C3D2BE700567874 /* MotionManager.swift in Sources */,
 				29D7AD4C2B0E032200AAAAB0 /* MirroringNavigationView.swift in Sources */,
 				95A01E3B2AF2B7250093D9C0 /* LookAroundView.swift in Sources */,

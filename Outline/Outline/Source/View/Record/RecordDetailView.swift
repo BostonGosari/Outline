@@ -66,6 +66,7 @@ struct RecordDetailView: View {
             .sheet(isPresented: $viewModel.navigateToShareMainView, content: {
                 ShareView(runningData: viewModel.shareData)
                     .navigationBarBackButtonHidden()
+                    .edgesIgnoringSafeArea(.all)
             })
             .preferredColorScheme(.dark)
             .toolbarBackground(.hidden, for: .navigationBar)

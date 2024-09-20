@@ -9,68 +9,119 @@ import CoreLocation
 import SwiftUI
 
 extension ShareView {
-    var shareImageCombined: some View {
+    var firstShareView: some View {
         ZStack {
-            if let uploadedImage = viewModel.uploadedImage {
-                Image(uiImage: uploadedImage)
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: viewModel.size.width, height: viewModel.size.height)
-            }
             backgroundImage
-            runningInfo
-            userPath
-            GeometryReader { proxy in
-                Color.clear
-                    .onAppear {
-                        if !viewModel.isSizeFixed {
-                            viewModel.onAppearSharedImageCombined(size: proxy.size)
-                            viewModel.isSizeFixed = true
+            
+            Image("ShareCardImage")
+                .overlay(alignment: .bottom) {
+                    HStack {
+                        Spacer()
+                        
+                        VStack(alignment: .leading) {
+                            Text("TIME")
+                                .font(.caption)
+                                .foregroundColor(.gray300)
+                            Text(runningData.time)
+                                .font(.customSubbody)
+                                .foregroundColor(.white)
                         }
+                        
+                        Spacer()
+                        
+                        VStack(alignment: .leading) {
+                            Text("DISTANCE")
+                                .font(.caption)
+                                .foregroundColor(.gray300)
+                            Text(runningData.distance)
+                                .font(.customSubbody)
+                                .foregroundColor(.white)
+                        }
+                        Spacer()
                     }
+                    .padding(.bottom, 16)
+                }
+                .overlay {
+                    userPath
+                }
+            
+            Text("OUTLINE")
+                .font(.customShareOutlineBottom)
+                .foregroundStyle(.white)
+                .frame(maxHeight: .infinity, alignment: .bottom)
+                .padding(.bottom, 20)
+        }
+        .background {
+            renderSizeView
+        }
+        .padding(.horizontal, 40)
+        .padding(.vertical, 16)
+    }
+
+    var secondShareView: some View {
+        ShareMapView(userLocations: runningData.userLocations)
+            .overlay {
+                runningInfo
             }
-        }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .padding(.horizontal, 40)
+            .padding(.vertical, 16)
     }
     
-    var backgroundImage: some View {
+    var thirdShareView: some View {
         ZStack {
-            Image("ShareFirstLayer")
-            Image("ShareSecondLayer")
-                .background(
-                    Rectangle()
-                        .fill(.white30)
-                        .blur(radius: 3)
-                        .mask(UnevenRoundedRectangle(topLeadingRadius: 10, bottomLeadingRadius: 45, bottomTrailingRadius: 45, topTrailingRadius: 70))
-                )
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
-            Image("ShareThirdLayer")
+            backgroundImage
+            
+            userPath
+                .overlay {
+                    runningInfo
+                }
         }
-        .padding(.top, 16)
-        .padding(.bottom, 46)
+        .background {
+            renderSizeView
+        }
+        .padding(.horizontal, 40)
+        .padding(.vertical, 16)
     }
     
-    var runningInfo: some View {
+    var fourthShareView: some View {
         ZStack {
-            VStack(alignment: .trailing, spacing: -4) {
-                Text("Time \(runningData.time)")
-                Text("Pace \(runningData.pace)")
-                Text("Distance \(runningData.distance)")
-                Text("Kcal \(runningData.cal)")
+            backgroundImage
+            
+            VStack(spacing: 8) {
+                ShareMapView(userLocations: runningData.userLocations)
+                    .frame(width: UIScreen.main.bounds.width / 2, height: UIScreen.main.bounds.width / 2)
+                    .aspectRatio(contentMode: .fit)
+                    .overlay(alignment: .topLeading) {
+                        Text("OUTLINE")
+                            .font(.customShareOutlineTop)
+                            .padding(8)
+                    }
+                
+                HStack(spacing: 24) {
+                    Text("TIME \(runningData.time)")
+                        .font(.customShareFourth)
+                    
+                    Text("DISTANCE \(runningData.distance)")
+                        .font(.customShareFourth)
+                }
             }
-            .font(.customSubbody)
-            .foregroundStyle(.white)
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
+            .frame(maxHeight: .infinity, alignment: .top)
+            .padding(.top, 100)
         }
-        .padding(.trailing, 32)
-        .padding(.bottom, 55)
+        .background {
+            renderSizeView
+        }
+        .padding(.horizontal, 40)
+        .padding(.vertical, 16)
     }
-    
+}
+
+extension ShareView {
     var userPath: some View {
         ZStack {
             Color.black.opacity(0.001)
             PathManager
-                .createPath(width: 200, height: 200, coordinates: runningData.userLocations)
+                .createPath(width: 150, height: 150, coordinates: runningData.userLocations)
                 .stroke(.customPrimary, style: .init(lineWidth: 5, lineCap: .round, lineJoin: .round))
                 .frame(width: canvasData.width, height: canvasData.height)
         }
@@ -82,10 +133,222 @@ extension ShareView {
         .simultaneousGesture(magnificationGesture)
     }
     
+    var backgroundImage: some View {
+        ZStack {
+            if let image = viewModel.uploadedImage {
+                Rectangle()
+                    .fill(.clear)
+                    .overlay {
+                        Image(uiImage: image)
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: viewModel.size.width, height: viewModel.size.height)
+                    }
+            } else {
+                Rectangle()
+                    .fill(Color.black)
+                    .aspectRatio(9/16, contentMode: .fill)
+            }
+        }
+    }
+    
+    @ViewBuilder
+    func mapImage(image: UIImage?) -> some View {
+        ZStack {
+            if let img = image {
+                Image(uiImage: img)
+            } else {
+                Rectangle()
+                    .fill(.black)
+            }
+        }
+    }
+    
+    var renderSizeView: some View {
+        GeometryReader { proxy in
+            Color.clear
+                .onAppear {
+                    if !viewModel.isSizeFixed {
+                        viewModel.onAppearSharedImageCombined(size: proxy.size)
+                        viewModel.isSizeFixed = true
+                    }
+                }
+                .onChange(of: viewModel.uploadedImage) {
+                    let adjustedSize = CGSize(width: proxy.size.width + 80, height: proxy.size.height + 32)
+                    
+                    viewModel.onAppearSharedImageCombined(size: adjustedSize)
+                }
+        }
+    }
+    
+    var runningInfo: some View {
+        VStack {
+            HStack(alignment: .top) {
+                VStack(alignment: .leading) {
+                    TextField("", text: $viewModel.currentCourseName, axis: .vertical)
+                        .font(.customShareSecondTitle)
+                        .lineLimit(2)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .onChange(of: viewModel.currentCourseName) { _, newValue in
+                            if newValue.contains("\n") {
+                                viewModel.currentCourseName = newValue.replacingOccurrences(of: "\n", with: "")
+                                isFocused = false
+                            } else if newValue.count > 10 {
+                                viewModel.currentCourseName = String(newValue.prefix(10))
+                            } else {
+                                viewModel.currentCourseName = newValue
+                            }
+                        }
+                        .focused($isFocused)
+                    
+                    Text(runningData.runningDate)
+                        .font(.customShareSecondTime)
+                }
+                
+                Spacer(minLength: 16)
+                
+                VStack(alignment: .trailing) {
+                    Text("DISTANCE")
+                    Text(runningData.distance)
+                    Text("TIME")
+                    Text(runningData.time)
+                }
+                .font(.customShareSecondInfo)
+            }
+            .padding(.top, 75)
+            
+            Text("OUTLINE")
+                .font(.customShareOutlineBottom)
+                .frame(maxHeight: .infinity, alignment: .bottom)
+                .padding(.bottom, 20)
+        }
+        .padding(.horizontal, 36)
+        .foregroundStyle(.white)
+    }
+    
+    var renderRunningInfo: some View {
+        VStack {
+            HStack(alignment: .top) {
+                Spacer()
+                VStack(alignment: .leading) {
+                    Text(viewModel.currentCourseName)
+                        .font(.customShareSecondTitle)
+                        .lineLimit(2)
+                    
+                    Text(runningData.runningDate)
+                        .font(.customShareSecondTime)
+                }
+                
+                Spacer(minLength: 40)
+                
+                VStack(alignment: .trailing) {
+                    Text("DISTANCE")
+                    Text(runningData.distance)
+                    Text("TIME")
+                    Text(runningData.time)
+                }
+                .font(.customShareSecondInfo)
+                
+                Spacer()
+            }
+            .padding(.top, 75)
+            
+            Text("OUTLINE")
+                .font(.customShareOutlineBottom)
+                .frame(maxHeight: .infinity, alignment: .bottom)
+                .padding(.bottom, 20)
+        }
+        .foregroundStyle(.white)
+    }
+}
+
+extension ShareView {
+    @ViewBuilder
+    func renderSecondShareView(_ image: UIImage?) -> some View {
+        mapImage(image: image)
+            .overlay {
+                renderRunningInfo
+                    .padding(.horizontal, 16)
+            }
+            .padding(.horizontal, 40)
+            .padding(.vertical, 16)
+    }
+    
+    @ViewBuilder
+    func renderThirdShareView() -> some View {
+        ZStack {
+            backgroundImage
+            
+            userPath
+                .overlay {
+                    renderRunningInfo
+                        .padding(.horizontal, 8)
+                }
+        }
+        .background {
+            renderSizeView
+        }
+        .padding(.horizontal, 40)
+        .padding(.vertical, 16)
+    }
+    
+    @ViewBuilder
+    func renderFourthShareView(_ image: UIImage?) -> some View {
+        ZStack {
+            backgroundImage
+            
+            VStack(spacing: 8) {
+                mapImage(image: image)
+                    .aspectRatio(contentMode: .fit)
+                    .overlay(alignment: .topLeading) {
+                        Text("OUTLINE")
+                            .font(.customShareOutlineTop)
+                            .padding(8)
+                    }
+                
+                HStack(spacing: 24) {
+                    Text("TIME \(runningData.time)")
+                        .font(.customShareFourth)
+                    
+                    Text("DISTANCE \(runningData.distance)")
+                        .font(.customShareFourth)
+                }
+            }
+            .frame(maxHeight: .infinity, alignment: .top)
+            .foregroundStyle(.white)
+            .padding(.top, 100)
+        }
+        .background {
+            renderSizeView
+        }
+        .padding(.horizontal, 40)
+        .padding(.vertical, 16)
+    }
+}
+
+extension ShareView {
+    var tabButtons: some View {
+        HStack {
+            ForEach(0..<4) { index in
+                Button {
+                    withAnimation {
+                        currentShareView = index
+                    }
+                } label: {
+                    Rectangle()
+                        .frame(width: indexWidth, height: indexHeight)
+                        .foregroundStyle(currentShareView == index ? .customPrimary : .white)
+                        .padding(.vertical, 10)
+                        .background(Color.clear)
+                }
+            }
+        }
+    }
+    
     var buttons: some View {
         HStack(spacing: 0) {
             Button {
-                viewModel.onTapSaveImageButton(shareImageCombined: shareImageCombined)
+                selecteRenderView(isSave: true)
             } label: {
                 Image(systemName: "square.and.arrow.down")
                     .foregroundStyle(Color.black)
@@ -99,13 +362,13 @@ extension ShareView {
             }
             .padding(.leading, 16)
             
-            CompleteButton(text: "사진 업로드하기", isActive: true) {
+            CompleteButton(text: "사진 업로드하기", isActive: currentShareView != 1) {
                 viewModel.isShowUploadImageSheet = true
             }
             .padding(.leading, -8)
         }
         .frame(maxHeight: .infinity, alignment: .bottom)
-        .padding(.bottom, 70)
+        .padding(.bottom, 72)
     }
     
     var instaSheet: some View {
@@ -209,4 +472,8 @@ extension View {
         renderer.scale = scale
         return renderer.uiImage
     }
+}
+
+#Preview {
+    ShareView(runningData: ShareModel(courseName: "Whale Run.", runningDate: "2023.11.12", distance: "1.2km", time: "00:20", userLocations: []))
 }
