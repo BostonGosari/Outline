@@ -91,6 +91,9 @@
 		2973991B2B19829A00318321 /* Outline Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 297B80FA2AE73C4500AF7219 /* Outline Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		2990249A2B10B3E8005C5BA8 /* SFCompactDisplay-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0E96BA912AF4E00B000C8FBF /* SFCompactDisplay-Semibold.ttf */; };
 		2990249C2B10B599005C5BA8 /* StretchPro.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2990249B2B10B599005C5BA8 /* StretchPro.ttf */; };
+		2991B7ED2C957A88001B70AB /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 2991B7EC2C957A88001B70AB /* Secrets.xcconfig */; };
+		2991B7EF2C958C0C001B70AB /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 2991B7EE2C958C0C001B70AB /* FirebaseAnalytics */; };
+		2991B7F12C958C0C001B70AB /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 2991B7F02C958C0C001B70AB /* FirebaseAnalyticsSwift */; };
 		299803552ADF5F1000A9A134 /* HealthKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299803542ADF5F1000A9A134 /* HealthKitManager.swift */; };
 		299803572AE00C9B00A9A134 /* HapticManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299803562AE00C9B00A9A134 /* HapticManager.swift */; };
 		2998035B2AE0181900A9A134 /* ConfettiShapes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299803592AE0181900A9A134 /* ConfettiShapes.swift */; };
@@ -402,6 +405,7 @@
 		297B80F92AE73C4500AF7219 /* Outline.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Outline.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		297B80FA2AE73C4500AF7219 /* Outline Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Outline Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2990249B2B10B599005C5BA8 /* StretchPro.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = StretchPro.ttf; sourceTree = "<group>"; };
+		2991B7EC2C957A88001B70AB /* Secrets.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 		299803542ADF5F1000A9A134 /* HealthKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitManager.swift; sourceTree = "<group>"; };
 		299803562AE00C9B00A9A134 /* HapticManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticManager.swift; sourceTree = "<group>"; };
 		299803592AE0181900A9A134 /* ConfettiShapes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfettiShapes.swift; sourceTree = "<group>"; };
@@ -567,12 +571,14 @@
 			files = (
 				BB02A3962B0CCCF300250EDD /* KakaoSDKUser in Frameworks */,
 				BB02A3952B0CCCF300250EDD /* KakaoSDKAuth in Frameworks */,
+				2991B7EF2C958C0C001B70AB /* FirebaseAnalytics in Frameworks */,
 				BB02A3942B0CCCF300250EDD /* KakaoSDKCommon in Frameworks */,
 				BB02A3932B0CCCF300250EDD /* FirebaseFirestoreSwift in Frameworks */,
 				BB02A3922B0CCCF300250EDD /* FirebaseFirestoreCombine-Community in Frameworks */,
 				BB02A3912B0CCCF300250EDD /* FirebaseFirestore in Frameworks */,
 				BB02A3902B0CCCF300250EDD /* FirebaseAuthCombine-Community in Frameworks */,
 				BB02A38F2B0CCCF300250EDD /* FirebaseAuth in Frameworks */,
+				2991B7F12C958C0C001B70AB /* FirebaseAnalyticsSwift in Frameworks */,
 				BBBB27E92B186F910081C93D /* Kingfisher in Frameworks */,
 				95B8F45C2AED35E100D9F35B /* FirebaseAuth in Frameworks */,
 				95B8F45E2AED35E100D9F35B /* FirebaseAuthCombine-Community in Frameworks */,
@@ -975,7 +981,7 @@
 		F0AC8A902AD94C1F0061612C = {
 			isa = PBXGroup;
 			children = (
-				0EB1AA8E2C9C3EA800B51578 /* Secrets.xcconfig */,
+				2991B7EC2C957A88001B70AB /* Secrets.xcconfig */,
 				2921B0122B01F3F700533A83 /* GoogleService-Info.plist */,
 				BB52392D2ADAF93D00646494 /* Outline Watch App.entitlements */,
 				BB5239262ADAF70A00646494 /* Shared */,
@@ -1304,6 +1310,8 @@
 				9582406F2B0A826D00105FAE /* KakaoSDKAuth */,
 				958240712B0A82A400105FAE /* KakaoSDKUser */,
 				BBBB27E82B186F910081C93D /* Kingfisher */,
+				2991B7EE2C958C0C001B70AB /* FirebaseAnalytics */,
+				2991B7F02C958C0C001B70AB /* FirebaseAnalyticsSwift */,
 			);
 			productName = Outline;
 			productReference = 297B80F92AE73C4500AF7219 /* Outline.app */;
@@ -1411,7 +1419,7 @@
 				29BB886D2C5F528E006B238D /* 압구정 댕댕런 테스트 촘촘.kml in Resources */,
 				29BB88662C5F28DD006B238D /* 압구정 댕댕런.kml in Resources */,
 				29BB88582C5F28DD006B238D /* 서울과기대 낙타런.kml in Resources */,
-				0EB1AA8F2C9C3EA800B51578 /* Secrets.xcconfig in Resources */,
+				2991B7ED2C957A88001B70AB /* Secrets.xcconfig in Resources */,
 				F0AC8AA12AD94C200061612C /* Color.xcassets in Resources */,
 				29BB88572C5F28DD006B238D /* 서초 개구리런.kml in Resources */,
 				29BB885B2C5F28DD006B238D /* 반포 문어런.kml in Resources */,
@@ -1970,6 +1978,7 @@
 		};
 		F0AC8ABE2AD94C210061612C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2991B7EC2C957A88001B70AB /* Secrets.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -2021,6 +2030,7 @@
 		};
 		F0AC8ABF2AD94C210061612C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2991B7EC2C957A88001B70AB /* Secrets.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -2140,6 +2150,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		2991B7EE2C958C0C001B70AB /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 958240612B0A81B500105FAE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		2991B7F02C958C0C001B70AB /* FirebaseAnalyticsSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 958240612B0A81B500105FAE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsSwift;
+		};
 		958240622B0A81B500105FAE /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 958240612B0A81B500105FAE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;

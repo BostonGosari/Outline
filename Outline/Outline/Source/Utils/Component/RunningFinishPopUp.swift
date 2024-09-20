@@ -73,10 +73,6 @@ struct RunningFinishPopUp: View {
                         withAnimation {
                             runningStartManager.running = false
                         }
-                        Task {
-                            print("여기옴")
-                            await runningDataManager.removeActivity()
-                        }
                     }
                     UnderlineButton(text: "조금 더 진행하기") {
                         progress = 0

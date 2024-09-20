@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import FirebaseAnalytics
 
 struct FinishRunningView: View {
     @StateObject private var runningManager = RunningStartManager.shared
@@ -83,6 +84,16 @@ struct FinishRunningView: View {
                     withAnimation(.easeInOut(duration: 1)) {
                         viewModel.isShowPopup = true
                     }
+                    
+                    guard let healthData = viewModel.runningRecord?.healthData else { return }
+                    
+                    // 러닝 완료 시
+                    Analytics.logEvent("finished_running", parameters: [
+                        "card_name": runningManager.startCourse?.courseName ?? "자유러닝",
+                        "finished_time": healthData.totalTime.formatMinuteSeconds(),
+                        "finished_distance": String(format: "%.0fkm", healthData.totalRunningDistance/1000),
+                        "finished_pace": healthData.averagePace.formattedAveragePace()
+                    ])
                 }
             }
         }

@@ -73,12 +73,20 @@ class RunningDataManager: ObservableObject {
         Timer.scheduledTimer(withTimeInterval: 2.0, repeats: false) {_ in
             self.endWithoutSaving = false
         }
+        
+        Task {
+            await removeActivity()
+        }
     }
     
     func stopRunning() {
         RunningEndDate = Date()
         stopPedometerUpdates()
         locationManager.stopUpdate()
+        
+        Task {
+            await removeActivity()
+        }
     }
     
     func pauseRunning() {
