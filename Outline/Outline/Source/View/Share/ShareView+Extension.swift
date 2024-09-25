@@ -136,20 +136,17 @@ extension ShareView {
     var backgroundImage: some View {
         ZStack {
             if let image = viewModel.uploadedImage {
-                Rectangle()
-                    .fill(.clear)
-                    .overlay {
-                        Image(uiImage: image)
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(width: viewModel.size.width, height: viewModel.size.height)
-                    }
+                Image(uiImage: image)
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: viewModel.size.width, height: viewModel.size.height)
+                    .clipped()
             } else {
                 Rectangle()
                     .fill(Color.black)
-                    .aspectRatio(9/16, contentMode: .fill)
             }
         }
+        .aspectRatio(9/16, contentMode: .fill)
     }
     
     @ViewBuilder
@@ -169,14 +166,9 @@ extension ShareView {
             Color.clear
                 .onAppear {
                     if !viewModel.isSizeFixed {
-                        viewModel.onAppearSharedImageCombined(size: proxy.size)
+                        viewModel.onAppearSharedImageCombined(size: CGSize(width: proxy.size.width, height: proxy.size.width * 16/9))
                         viewModel.isSizeFixed = true
                     }
-                }
-                .onChange(of: viewModel.uploadedImage) {
-                    let adjustedSize = CGSize(width: proxy.size.width + 80, height: proxy.size.height + 32)
-                    
-                    viewModel.onAppearSharedImageCombined(size: adjustedSize)
                 }
         }
     }
