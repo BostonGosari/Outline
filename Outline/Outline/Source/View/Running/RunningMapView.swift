@@ -96,6 +96,13 @@ struct RunningMapView: UIViewRepresentable {
             }
             return MKOverlayRenderer(overlay: overlay)
         }
+        
+        func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+            if view.annotation is MKUserLocation {
+                mapView.deselectAnnotation(view.annotation, animated: false)
+                return
+            }
+        }
     }
 }
 

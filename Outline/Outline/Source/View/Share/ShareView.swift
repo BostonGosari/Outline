@@ -21,7 +21,11 @@ struct ShareView: View {
     let indexHeight: CGFloat = 4
     
     var canvasData: CanvasData {
-        return PathManager.getCanvasData(coordinates: runningData.userLocations, width: 150, height: 150)
+        if currentShareView == 0 {
+            return PathManager.getCanvasData(coordinates: runningData.userLocations, width: 150, height: 150)
+        } else {
+            return PathManager.getCanvasData(coordinates: runningData.userLocations, width: 200, height: 200)
+        }
     }
     
     var body: some View {
@@ -114,19 +118,22 @@ struct ShareView: View {
         TabView(selection: $currentShareView) {
             firstShareView
                 .tag(0)
+                .gesture(DragGesture().onChanged { _ in }.onEnded { _ in })
             
             secondShareView
                 .tag(1)
+                .gesture(DragGesture().onChanged { _ in }.onEnded { _ in })
             
             thirdShareView
                 .tag(2)
+                .gesture(DragGesture().onChanged { _ in }.onEnded { _ in })
             
             fourthShareView
                 .tag(3)
+                .gesture(DragGesture().onChanged { _ in }.onEnded { _ in })
         }
         .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
         .frame(height: UIScreen.main.bounds.height * 0.7)
-        .gesture(DragGesture().onChanged { _ in })
     }
 }
 
@@ -140,7 +147,7 @@ extension ShareView {
                 viewModel.onTapUploadImageButton(shareTabViews: firstShareView)
             }
         case 1:
-            ShareMapView(userLocations: runningData.userLocations)
+            ShareMapView(userLocations: runningData.userLocations, isSquare: false)
                 .captureMapSnapshot(size: viewModel.size) { img in
                     if isSave {
                         viewModel.onTapSaveImageButton(shareTabViews: renderSecondShareView(img))
@@ -155,7 +162,7 @@ extension ShareView {
                 viewModel.onTapUploadImageButton(shareTabViews: renderThirdShareView())
             }
         case 3:
-            ShareMapView(userLocations: runningData.userLocations)
+            ShareMapView(userLocations: runningData.userLocations, isSquare: true)
                 .captureMapSnapshot(
                     size: CGSize(width: UIScreen.main.bounds.width / 2, height: UIScreen.main.bounds.width / 2)
                 ) { img in

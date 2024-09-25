@@ -40,6 +40,15 @@ class ShareViewModel: ObservableObject {
         }
     }
     
+    func initUserPath() {
+        scale = 1
+        lastScale = 0
+        offset = .zero
+        lastStoredOffset = .zero
+        angle = .degrees(0)
+        lastAngle = .degrees(0)
+    }
+    
     func shareToInstagram(image: UIImage) {
         guard let url = URL(string: "instagram-stories://share?source_application=Outline"),
               let imageData = image.pngData() else { return }
