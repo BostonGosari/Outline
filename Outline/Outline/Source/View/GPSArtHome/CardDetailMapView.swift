@@ -64,9 +64,7 @@ struct CardDetailMapView: UIViewRepresentable {
             if let spotAnnotation = view.annotation as? SpotAnnotation {
                 parent.selectedAnnotation = spotAnnotation
             }
-        }
-        
-        func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+            
             if view.annotation is MKUserLocation {
                 mapView.deselectAnnotation(view.annotation, animated: false)
                 return
