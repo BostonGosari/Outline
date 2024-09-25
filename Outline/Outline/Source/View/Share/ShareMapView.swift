@@ -11,16 +11,27 @@ import SwiftUI
 struct ShareMapView: UIViewRepresentable {
     private let mapView = MKMapView()
     var userLocations: [CLLocationCoordinate2D]
+    var isSquare: Bool
     
     func makeUIView(context: Context) -> MKMapView {
         mapView.delegate = context.coordinator
+        mapView.isZoomEnabled = false
+        mapView.isScrollEnabled = false
+        mapView.isUserInteractionEnabled = false
         mapView.showsCompass = false
         
         let polyline = MKPolyline(coordinates: userLocations, count: userLocations.count)
         mapView.addOverlay(polyline)
         
         let rect = polyline.boundingMapRect
-        let edgePadding = UIEdgeInsets(top: 50, left: 50, bottom: 50, right: 50)
+        var edgePadding: UIEdgeInsets
+        
+        if isSquare {
+            edgePadding = UIEdgeInsets(top: 30, left: 30, bottom: 30, right: 30)
+        } else {
+            edgePadding = UIEdgeInsets(top: 160, left: 50, bottom: 50, right: 50)
+        }
+        
         mapView.setVisibleMapRect(rect, edgePadding: edgePadding, animated: false)
         
         return mapView

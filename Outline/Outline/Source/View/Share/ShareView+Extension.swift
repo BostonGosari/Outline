@@ -59,7 +59,7 @@ extension ShareView {
     }
 
     var secondShareView: some View {
-        ShareMapView(userLocations: runningData.userLocations)
+        ShareMapView(userLocations: runningData.userLocations, isSquare: false)
             .overlay {
                 runningInfo
             }
@@ -88,7 +88,7 @@ extension ShareView {
             backgroundImage
             
             VStack(spacing: 8) {
-                ShareMapView(userLocations: runningData.userLocations)
+                ShareMapView(userLocations: runningData.userLocations, isSquare: true)
                     .frame(width: UIScreen.main.bounds.width / 2, height: UIScreen.main.bounds.width / 2)
                     .aspectRatio(contentMode: .fit)
                     .overlay(alignment: .topLeading) {

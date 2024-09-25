@@ -140,7 +140,7 @@ extension ShareView {
                 viewModel.onTapUploadImageButton(shareTabViews: firstShareView)
             }
         case 1:
-            ShareMapView(userLocations: runningData.userLocations)
+            ShareMapView(userLocations: runningData.userLocations, isSquare: false)
                 .captureMapSnapshot(size: viewModel.size) { img in
                     if isSave {
                         viewModel.onTapSaveImageButton(shareTabViews: renderSecondShareView(img))
@@ -155,7 +155,7 @@ extension ShareView {
                 viewModel.onTapUploadImageButton(shareTabViews: renderThirdShareView())
             }
         case 3:
-            ShareMapView(userLocations: runningData.userLocations)
+            ShareMapView(userLocations: runningData.userLocations, isSquare: true)
                 .captureMapSnapshot(
                     size: CGSize(width: UIScreen.main.bounds.width / 2, height: UIScreen.main.bounds.width / 2)
                 ) { img in
