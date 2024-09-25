@@ -57,7 +57,8 @@ class FinishRunningViewModel: ObservableObject {
             runningDate: healthData.startDate.dateToShareString(),
             distance: "\(String(format: "%.2f", healthData.totalRunningDistance/1000))km",
             time: healthData.totalTime.formatMinuteSeconds(),
-            userLocations: runningRecord.courseData.coursePaths
+            userLocations: runningRecord.courseData.coursePaths,
+            heading: courseData.heading
         )
         
         navigateToShareMainView = true
