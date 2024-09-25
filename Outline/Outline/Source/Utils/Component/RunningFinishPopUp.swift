@@ -150,6 +150,7 @@ struct RunningFinishPopUp: View {
                         progress = 1.0
                     }
                 }
+                .rotationEffect(.degrees(runningStartManager.startCourse?.heading ?? 0))
             Spacer()
         }
     }

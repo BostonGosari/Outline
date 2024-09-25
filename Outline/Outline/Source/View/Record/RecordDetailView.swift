@@ -38,7 +38,7 @@ struct RecordDetailView: View {
                         viewModel.showRenameSheet = true
                     },
                     content: {
-                        MapSnapshotImageView(coordinates: courseData.coursePaths, width: 200, height: 400, alpha: 0.7, lineWidth: 4)
+                        MapSnapshotImageView(coordinates: courseData.coursePaths, width: 200, height: 400, alpha: 0.7, lineWidth: 4, heading: courseData.heading)
                     }
                 )
                 .frame(maxHeight: .infinity, alignment: .center)

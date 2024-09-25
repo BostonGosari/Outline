@@ -42,7 +42,7 @@ struct FinishRunningView: View {
                                 showRenameSheet = true
                             },
                             content: {
-                                MapSnapshotImageView(coordinates: runningRecord.courseData.coursePaths, width: 200, height: 400, alpha: 0.7, lineWidth: 4)
+                                MapSnapshotImageView(coordinates: runningRecord.courseData.coursePaths, width: 200, height: 400, alpha: 0.7, lineWidth: 4, heading: runningRecord.courseData.heading)
                             }
                         )
                         .padding(.top, getSafeArea().bottom == 0 ? 20 : 90)

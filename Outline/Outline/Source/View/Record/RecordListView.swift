@@ -46,7 +46,7 @@ struct RecordListView: View {
                     NavigationLink {
                         RecordDetailView(viewModel: viewModel, runningRecord: record, cardType: cardType)
                     } label: {
-                        RecordCardView(size: size, type: cardType, name: courseData.courseName, date: healthData.startDate.dateToShareString(), coordinates: courseData.coursePaths)
+                        RecordCardView(size: size, type: cardType, name: courseData.courseName, date: healthData.startDate.dateToShareString(), coordinates: courseData.coursePaths, heading: courseData.heading)
                     }
                     .padding(.bottom, 8)
             }
