@@ -42,7 +42,7 @@ extension ShareView {
                     .padding(.bottom, 16)
                 }
                 .overlay {
-                    userPath
+                    userPath(size: 150)
                 }
             
             Text("OUTLINE")
@@ -59,9 +59,13 @@ extension ShareView {
     }
 
     var secondShareView: some View {
-        ShareMapView(userLocations: runningData.userLocations, isSquare: false)
+        Rectangle()
+            .aspectRatio(9/16, contentMode: .fill)
             .overlay {
-                runningInfo
+                ShareMapView(userLocations: runningData.userLocations, isSquare: false)
+                    .overlay {
+                        runningInfo
+                    }
             }
             .padding(.horizontal, 40)
             .padding(.vertical, 16)
@@ -71,7 +75,8 @@ extension ShareView {
         ZStack {
             backgroundImage
             
-            userPath
+            userPath(size: 200)
+                .padding(.top, 32)
                 .overlay {
                     runningInfo
                 }
@@ -117,11 +122,12 @@ extension ShareView {
 }
 
 extension ShareView {
-    var userPath: some View {
+    @ViewBuilder
+    func userPath(size: CGFloat) -> some View {
         ZStack {
             Color.black.opacity(0.001)
             PathManager
-                .createPath(width: 150, height: 150, coordinates: runningData.userLocations)
+                .createPath(width: size, height: size, coordinates: runningData.userLocations)
                 .stroke(.customPrimary, style: .init(lineWidth: 5, lineCap: .round, lineJoin: .round))
                 .frame(width: canvasData.width, height: canvasData.height)
         }
@@ -131,6 +137,11 @@ extension ShareView {
         .gesture(dragGesture)
         .gesture(rotationGesture)
         .simultaneousGesture(magnificationGesture)
+        .onDisappear {
+            withAnimation(.easeOut) {
+                viewModel.initUserPath()
+            }
+        }
     }
     
     var backgroundImage: some View {
@@ -271,7 +282,7 @@ extension ShareView {
         ZStack {
             backgroundImage
             
-            userPath
+            userPath(size: 200)
                 .overlay {
                     renderRunningInfo
                         .padding(.horizontal, 8)

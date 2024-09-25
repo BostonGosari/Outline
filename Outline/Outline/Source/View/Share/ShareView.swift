@@ -21,7 +21,11 @@ struct ShareView: View {
     let indexHeight: CGFloat = 4
     
     var canvasData: CanvasData {
-        return PathManager.getCanvasData(coordinates: runningData.userLocations, width: 150, height: 150)
+        if currentShareView == 0 {
+            return PathManager.getCanvasData(coordinates: runningData.userLocations, width: 150, height: 150)
+        } else {
+            return PathManager.getCanvasData(coordinates: runningData.userLocations, width: 200, height: 200)
+        }
     }
     
     var body: some View {
@@ -114,19 +118,22 @@ struct ShareView: View {
         TabView(selection: $currentShareView) {
             firstShareView
                 .tag(0)
+                .gesture(DragGesture().onChanged { _ in }.onEnded { _ in })
             
             secondShareView
                 .tag(1)
+                .gesture(DragGesture().onChanged { _ in }.onEnded { _ in })
             
             thirdShareView
                 .tag(2)
+                .gesture(DragGesture().onChanged { _ in }.onEnded { _ in })
             
             fourthShareView
                 .tag(3)
+                .gesture(DragGesture().onChanged { _ in }.onEnded { _ in })
         }
         .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
         .frame(height: UIScreen.main.bounds.height * 0.7)
-        .gesture(DragGesture().onChanged { _ in })
     }
 }
 
