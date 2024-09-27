@@ -195,10 +195,10 @@ struct CardDetailView: View {
             .onChange(of: isUnlocked) { _, newValue in
                 if newValue {
                     if runningStartManager.checkAuthorization() {
-                        let course = selectedCourse.course.coursePaths
-                        let runningInfo = MirroringRunningInfo(runningType: .gpsArt, courseName: selectedCourse.course.courseName, course: course)
+                        let course = selectedCourse.course
+                        let runningInfo = MirroringRunningInfo(runningType: .gpsArt, courseName: course.courseName, course: course.coursePaths, heading: course.heading)
                         
-                        if runningStartManager.checkDistance(course: course) {
+                        if runningStartManager.checkDistance(course: course.coursePaths) {
                             runningStartManager.startCourse = selectedCourse.course
                             runningStartManager.startGPSArtRun()
                             connectivityManager.sendRunningInfo(runningInfo)

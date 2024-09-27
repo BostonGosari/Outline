@@ -34,7 +34,7 @@ struct MapSnapshotImageView: UIViewRepresentable {
     let height: CGFloat
     let alpha: CGFloat // 배경 어둡기
     let lineWidth: CGFloat // 라인 두께
-    let heading: CLLocationDirection? = nil // 경로 heading
+    let heading: CLLocationDirection? // 경로 heading
     
     func makeUIView(context: Context) -> UIImageView {
         let imageView = UIImageView()

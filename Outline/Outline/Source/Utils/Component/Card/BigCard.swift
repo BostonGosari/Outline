@@ -191,7 +191,7 @@ struct BigCard<Content: View>: View {
 
 #Preview {
     BigCard(
-        cardType: .excellent,
+        cardType: .freeRun,
         runName: "오리런",
         date: "2023.11.19",
         editMode: false,

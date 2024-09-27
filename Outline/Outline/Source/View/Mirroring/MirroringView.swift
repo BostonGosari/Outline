@@ -230,12 +230,12 @@ extension MirroringView {
     private var guideView: some View {
         ZStack {
             let userLocations = connectivityManager.runningData.userLocations.toCLLocationCoordinates()
-            let course = connectivityManager.runningInfo.course.toCLLocationCoordinates()
+            let runningInfo = connectivityManager.runningInfo
             
             CourseGuideView(
                 tapGuideView: $tapGuideView,
-                coursePathCoordinates: course,
-                courseRotate: 0.0,
+                coursePathCoordinates: runningInfo.course.toCLLocationCoordinates(),
+                courseRotate: runningInfo.heading,
                 userLocations: userLocations,
                 tapPossible: !(navigationTranslation + navigationSheetHeight > 10)
             )

@@ -20,7 +20,7 @@ struct RunningMapView: UIViewRepresentable {
         mapView.showsUserLocation = true
         mapView.userTrackingMode = .follow
         mapView.showsCompass = false
-        
+                
         // tracking Button custom
         let trackingButton = MKUserTrackingButton(mapView: mapView)
         mapView.addSubview(trackingButton)

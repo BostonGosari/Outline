@@ -50,7 +50,7 @@ struct RecordGridView: View {
                             NavigationLink {
                                 RecordDetailView(viewModel: viewModel, runningRecord: runningRecord, cardType: cardType)
                             } label: {
-                                RecordCardView(size: .list, type: cardType, name: courseData.courseName, date: healthData.startDate.dateToShareString(), coordinates: courseData.coursePaths)
+                                RecordCardView(size: .list, type: cardType, name: courseData.courseName, date: healthData.startDate.dateToShareString(), coordinates: courseData.coursePaths, heading: courseData.heading)
                             }
                         }
                     }

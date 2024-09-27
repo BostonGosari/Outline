@@ -130,6 +130,7 @@ extension ShareView {
                 .createPath(width: size, height: size, coordinates: runningData.userLocations)
                 .stroke(.customPrimary, style: .init(lineWidth: 5, lineCap: .round, lineJoin: .round))
                 .frame(width: canvasData.width, height: canvasData.height)
+                .rotationEffect(.degrees(runningData.heading))
         }
         .scaleEffect(viewModel.scale)
         .offset(viewModel.offset)
@@ -478,5 +479,5 @@ extension View {
 }
 
 #Preview {
-    ShareView(runningData: ShareModel(courseName: "Whale Run.", runningDate: "2023.11.12", distance: "1.2km", time: "00:20", userLocations: []))
+    ShareView(runningData: ShareModel(courseName: "Whale Run.", runningDate: "2023.11.12", distance: "1.2km", time: "00:20", userLocations: [], heading: 0))
 }

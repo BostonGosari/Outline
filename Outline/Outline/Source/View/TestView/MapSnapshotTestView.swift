@@ -15,7 +15,7 @@ struct MapSnapshotTestView: View {
     var body: some View {
         let coordinates = parseCooridinates(fileName: fileName).toCLLocationCoordinates()
         
-        MapSnapshotImageView(coordinates: coordinates, width: 300, height: 500, alpha: 0.6, lineWidth: lineWidth)
+        MapSnapshotImageView(coordinates: coordinates, width: 300, height: 500, alpha: 0.6, lineWidth: lineWidth, heading: 180)
             .scaledToFit()
         
     }
@@ -32,7 +32,7 @@ struct MapSnapshotTestView: View {
 }
 
 #Preview {
-    MapSnapshotTestView(fileName: "건대 오리런", lineWidth: 4.0)
+    MapSnapshotTestView(fileName: "신사 댕댕런", lineWidth: 4.0)
 }
 
 #Preview {
