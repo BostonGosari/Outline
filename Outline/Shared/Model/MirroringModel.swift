@@ -18,6 +18,7 @@ struct MirroringRunningInfo: Codable {
     var runningType: RunningType = .free
     var courseName: String = ""
     var course: [Coordinate] = []
+    var heading: Double = 0
 }
 
 struct MirroringRunningData: Codable {
