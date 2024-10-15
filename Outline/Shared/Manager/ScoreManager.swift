@@ -50,18 +50,22 @@ class ScoreManager {
     // 정확도를 계산하는 메서드
     private func calculateScore(_ guideCourse: [CLLocationCoordinate2D], _ userCourse: [CLLocationCoordinate2D]) -> Double {
         let totalPoints = guideCourse.count
-        var matchedPoints = 0
+        var matchedPoints : Double = 0
 
         for i in 0..<totalPoints {
             // 각 점 사이의 거리가 10미터 이내인 경우를 찾아 일치하는 점 개수 증가
             let distance = calculateDistance(guideCourse[i], userCourse[i])
-            if distance <= 20 {
+            if distance <= 20 { // 완전일치
                 matchedPoints += 1
             }
+            else if distance <= 50 { // 부분 일치
+                matchedPoints += 0.5
+            }
+            
         }
 
         // 전체 점 중 일치하는 점의 비율을 계산하여 진행률 반환
-        return Double(matchedPoints) / Double(totalPoints)
+        return (Double(matchedPoints) / Double(totalPoints)) * 100
     }
 
     // 두 점 사이의 거리를 계산하는 메서드
