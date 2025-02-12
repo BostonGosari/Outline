@@ -28,8 +28,9 @@ final class LoginViewModel: ObservableObject {
     @Published var moveToHeathAuthenticationView = false
     @Published  var isKeyboardVisible = false
 
-    private var userNameSet: [String] = []
     private var healthStore = HKHealthStore()
+    private var userNameSet: [String] = []
+
 
     var keyboardWillShowPublisher: AnyPublisher<Bool, Never> {
         NotificationCenter.default.publisher(for: UIResponder.keyboardWillShowNotification)
@@ -144,9 +145,7 @@ extension LoginViewModel {
         ]
 
         healthStore.requestAuthorization(toShare: quantityTypes, read: quantityTypes) {_, _ in
-            DispatchQueue.main.async {
-                self.push(screen: .inputUserInfo)
-            }
+            self.push(screen: .inputUserInfo)
         }
     }
 }
