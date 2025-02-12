@@ -23,9 +23,9 @@ struct ContentView: View {
         Group {
             switch authState {
             case .onboarding:
-                InputNicknameView()
-            case .logout:
                 LoginView()
+            case .logout:
+                IntroView()
             case .lookAround:
                 HomeTabView()
             case .login:

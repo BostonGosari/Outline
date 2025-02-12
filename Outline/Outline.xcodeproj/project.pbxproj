@@ -73,7 +73,6 @@
 		295232FC2AEEE74A0020EAFA /* ButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295232FB2AEEE74A0020EAFA /* ButtonStyle.swift */; };
 		295324852AE038EE00085120 /* UserInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0AC8B062AD965390061612C /* UserInfoModel.swift */; };
 		295346B82B0B5D52004F852E /* EmptyContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295346B72B0B5D52004F852E /* EmptyContentView.swift */; };
-		2955F7FA2B038084005CE2C0 /* HealthAuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2955F7F92B038084005CE2C0 /* HealthAuthViewModel.swift */; };
 		2972515C2B0787640048D787 /* GuideToFreeRunningSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2972515B2B0787640048D787 /* GuideToFreeRunningSheet.swift */; };
 		2973991B2B19829A00318321 /* Outline Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 297B80FA2AE73C4500AF7219 /* Outline Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		2975F0962AE3E1790046C00B /* CornerRectangleModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2975F0952AE3E1790046C00B /* CornerRectangleModifier.swift */; };
@@ -96,7 +95,6 @@
 		29AE76AC2ADE0D9100A46742 /* OutlineApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0AC8A9C2AD94C1F0061612C /* OutlineApp.swift */; };
 		29AE76D72ADE2A2200A46742 /* InputNicknameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AE76D52ADE2A2200A46742 /* InputNicknameView.swift */; };
 		29AE76D82ADE2A2200A46742 /* InputUserInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AE76D62ADE2A2200A46742 /* InputUserInfoView.swift */; };
-		29AE76DB2ADE2A5300A46742 /* InputNicknameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AE76D92ADE2A5300A46742 /* InputNicknameViewModel.swift */; };
 		29AE76DC2ADE2A5300A46742 /* InputUserInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AE76DA2ADE2A5300A46742 /* InputUserInfoViewModel.swift */; };
 		29AE76E02ADE2BC700A46742 /* DateExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AE76DF2ADE2BC700A46742 /* DateExtention.swift */; };
 		29AE76E12ADE2C1700A46742 /* HomeTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01FDB9D2ADABD3D00BDA633 /* HomeTabView.swift */; };
@@ -126,11 +124,13 @@
 		29F835CD2B0894CF0052C3C1 /* BigCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F835CC2B0894CF0052C3C1 /* BigCard.swift */; };
 		29F835CF2B0894DB0052C3C1 /* BigCardBackside.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F835CE2B0894DB0052C3C1 /* BigCardBackside.swift */; };
 		29FEDC5E2AED81A800C1F80B /* Shimmer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FEDC5D2AED81A800C1F80B /* Shimmer.swift */; };
+		3AABD2522D5C653200A8EEB8 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AABD2512D5C653200A8EEB8 /* LoginView.swift */; };
+		3AABD2552D5C659E00A8EEB8 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AABD2542D5C659E00A8EEB8 /* LoginViewModel.swift */; };
 		9528EFE92ADE9E870056CCC6 /* UserCoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 95EB1EF62ADE251100B47984 /* UserCoreDataModel.xcdatamodeld */; };
 		9528EFEA2ADE9E870056CCC6 /* UserCoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 95EB1EF62ADE251100B47984 /* UserCoreDataModel.xcdatamodeld */; };
 		9528EFEC2ADEC7CF0056CCC6 /* UserDataModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9528EFEB2ADEC7CF0056CCC6 /* UserDataModelType.swift */; };
 		9528F0002AE042570056CCC6 /* PathManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9528EFFF2AE042570056CCC6 /* PathManager.swift */; };
-		9528F0062AE0B37B0056CCC6 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9528F0052AE0B37B0056CCC6 /* LoginView.swift */; };
+		9528F0062AE0B37B0056CCC6 /* IntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9528F0052AE0B37B0056CCC6 /* IntroView.swift */; };
 		954B04182AFF725000A8A83E /* ProfileUserInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954B04172AFF725000A8A83E /* ProfileUserInfoViewModel.swift */; };
 		954B04272B00ADE000A8A83E /* PathTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954B04262B00ADE000A8A83E /* PathTestView.swift */; };
 		954CB29C2AE51619005EB2E9 /* PersistentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EB1EE82ADDC43400B47984 /* PersistentController.swift */; };
@@ -154,7 +154,7 @@
 		958240752B0AFDF100105FAE /* CourseScoreModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958240742B0AFDF100105FAE /* CourseScoreModelType.swift */; };
 		958240772B0AFE7900105FAE /* CourseScoreModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958240762B0AFE7900105FAE /* CourseScoreModel.swift */; };
 		95A01E172AEE3E990093D9C0 /* KakaoAuthModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A01E162AEE3E990093D9C0 /* KakaoAuthModel.swift */; };
-		95A01E1C2AEE7A0A0093D9C0 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A01E1B2AEE7A0A0093D9C0 /* LoginViewModel.swift */; };
+		95A01E1C2AEE7A0A0093D9C0 /* IntroViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A01E1B2AEE7A0A0093D9C0 /* IntroViewModel.swift */; };
 		95A01E1E2AF0CCE70093D9C0 /* DoubleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A01E1D2AF0CCE70093D9C0 /* DoubleExtension.swift */; };
 		95A01E2C2AF0DF860093D9C0 /* ConvertCoordinateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06298A82AE18A50007AB2D3 /* ConvertCoordinateManager.swift */; };
 		95A01E312AF141C30093D9C0 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A01E302AF141C30093D9C0 /* ProfileView.swift */; };
@@ -390,7 +390,6 @@
 		295232F92AEED0630020EAFA /* BigCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigCardView.swift; sourceTree = "<group>"; };
 		295232FB2AEEE74A0020EAFA /* ButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyle.swift; sourceTree = "<group>"; };
 		295346B72B0B5D52004F852E /* EmptyContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyContentView.swift; sourceTree = "<group>"; };
-		2955F7F92B038084005CE2C0 /* HealthAuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthAuthViewModel.swift; sourceTree = "<group>"; };
 		2972515B2B0787640048D787 /* GuideToFreeRunningSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuideToFreeRunningSheet.swift; sourceTree = "<group>"; };
 		2975F0952AE3E1790046C00B /* CornerRectangleModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CornerRectangleModifier.swift; sourceTree = "<group>"; };
 		297B80F92AE73C4500AF7219 /* Outline.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Outline.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -408,7 +407,6 @@
 		299DC11C2C3D2BE700567874 /* MotionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionManager.swift; sourceTree = "<group>"; };
 		29AE76D52ADE2A2200A46742 /* InputNicknameView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputNicknameView.swift; sourceTree = "<group>"; };
 		29AE76D62ADE2A2200A46742 /* InputUserInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputUserInfoView.swift; sourceTree = "<group>"; };
-		29AE76D92ADE2A5300A46742 /* InputNicknameViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InputNicknameViewModel.swift; path = Outline/Source/ViewModel/InputNicknameViewModel.swift; sourceTree = SOURCE_ROOT; };
 		29AE76DA2ADE2A5300A46742 /* InputUserInfoViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InputUserInfoViewModel.swift; path = Outline/Source/ViewModel/InputUserInfoViewModel.swift; sourceTree = SOURCE_ROOT; };
 		29AE76DF2ADE2BC700A46742 /* DateExtention.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtention.swift; sourceTree = "<group>"; };
 		29B39D372B5E663800C84E6A /* moai.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = moai.kml; sourceTree = "<group>"; };
@@ -433,9 +431,11 @@
 		29F835CC2B0894CF0052C3C1 /* BigCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigCard.swift; sourceTree = "<group>"; };
 		29F835CE2B0894DB0052C3C1 /* BigCardBackside.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigCardBackside.swift; sourceTree = "<group>"; };
 		29FEDC5D2AED81A800C1F80B /* Shimmer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shimmer.swift; sourceTree = "<group>"; };
+		3AABD2512D5C653200A8EEB8 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		3AABD2542D5C659E00A8EEB8 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		9528EFEB2ADEC7CF0056CCC6 /* UserDataModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataModelType.swift; sourceTree = "<group>"; };
 		9528EFFF2AE042570056CCC6 /* PathManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathManager.swift; sourceTree = "<group>"; };
-		9528F0052AE0B37B0056CCC6 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		9528F0052AE0B37B0056CCC6 /* IntroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroView.swift; sourceTree = "<group>"; };
 		954B04172AFF725000A8A83E /* ProfileUserInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUserInfoViewModel.swift; sourceTree = "<group>"; };
 		954B04262B00ADE000A8A83E /* PathTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathTestView.swift; sourceTree = "<group>"; };
 		954CB29F2AE5457A005EB2E9 /* pohangCrocodileRun.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = pohangCrocodileRun.kml; sourceTree = "<group>"; };
@@ -453,7 +453,7 @@
 		958240762B0AFE7900105FAE /* CourseScoreModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseScoreModel.swift; sourceTree = "<group>"; };
 		959D90602ADA3A1000748BFB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		95A01E162AEE3E990093D9C0 /* KakaoAuthModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoAuthModel.swift; sourceTree = "<group>"; };
-		95A01E1B2AEE7A0A0093D9C0 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		95A01E1B2AEE7A0A0093D9C0 /* IntroViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroViewModel.swift; sourceTree = "<group>"; };
 		95A01E1D2AF0CCE70093D9C0 /* DoubleExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleExtension.swift; sourceTree = "<group>"; };
 		95A01E302AF141C30093D9C0 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		95A01E322AF143BA0093D9C0 /* ProfileUserInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUserInfoView.swift; sourceTree = "<group>"; };
@@ -695,7 +695,7 @@
 		29AE76D42ADE2A2200A46742 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
-				9528F0052AE0B37B0056CCC6 /* LoginView.swift */,
+				3AABD2512D5C653200A8EEB8 /* LoginView.swift */,
 				29AE76D52ADE2A2200A46742 /* InputNicknameView.swift */,
 				954CB2B52AE63E79005EB2E9 /* HealthAuthView.swift */,
 				29AE76D62ADE2A2200A46742 /* InputUserInfoView.swift */,
@@ -715,6 +715,22 @@
 				29D6BAD42B092CA800BD8653 /* SmallListCard.swift */,
 			);
 			path = Card;
+			sourceTree = "<group>";
+		};
+		3AABD2502D5C64D300A8EEB8 /* Intro */ = {
+			isa = PBXGroup;
+			children = (
+				9528F0052AE0B37B0056CCC6 /* IntroView.swift */,
+			);
+			path = Intro;
+			sourceTree = "<group>";
+		};
+		3AABD2532D5C658500A8EEB8 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				3AABD2542D5C659E00A8EEB8 /* LoginViewModel.swift */,
+			);
+			path = Login;
 			sourceTree = "<group>";
 		};
 		954B04252B00ADD100A8A83E /* PathTest */ = {
@@ -763,12 +779,12 @@
 			path = LookAround;
 			sourceTree = "<group>";
 		};
-		95B8F4582AED27B200D9F35B /* Login */ = {
+		95B8F4582AED27B200D9F35B /* Intro */ = {
 			isa = PBXGroup;
 			children = (
-				95A01E1B2AEE7A0A0093D9C0 /* LoginViewModel.swift */,
+				95A01E1B2AEE7A0A0093D9C0 /* IntroViewModel.swift */,
 			);
-			path = Login;
+			path = Intro;
 			sourceTree = "<group>";
 		};
 		95EB1EF32ADE229200B47984 /* UserInfo */ = {
@@ -975,6 +991,8 @@
 		F0AC8AFA2AD963600061612C /* View */ = {
 			isa = PBXGroup;
 			children = (
+				3AABD2502D5C64D300A8EEB8 /* Intro */,
+				29AE76D42ADE2A2200A46742 /* Onboarding */,
 				2912A9142B0D174400D847B0 /* Mirroring */,
 				954B04252B00ADD100A8A83E /* PathTest */,
 				2921AFFC2B012DBF00533A83 /* Running */,
@@ -983,7 +1001,6 @@
 				0E9A5D402AE058D900C19FF3 /* Share */,
 				0EE92E7B2AE02DCB003192FF /* FreeRunning */,
 				0EE92E662AE00A02003192FF /* FininshRunning */,
-				29AE76D42ADE2A2200A46742 /* Onboarding */,
 				BB5239352ADBD95300646494 /* GPSArtHome */,
 				BB397D072AE6406600F92A43 /* Record */,
 				F01FDB9A2ADABC2C00BDA633 /* Tab */,
@@ -994,8 +1011,8 @@
 		F0AC8AFB2AD963690061612C /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				95B8F4582AED27B200D9F35B /* Login */,
-				29AE76D92ADE2A5300A46742 /* InputNicknameViewModel.swift */,
+				95B8F4582AED27B200D9F35B /* Intro */,
+				3AABD2532D5C658500A8EEB8 /* Login */,
 				29AE76DA2ADE2A5300A46742 /* InputUserInfoViewModel.swift */,
 				0E29F65E2ADF6CDD00F5EF5C /* RunningMapViewModel.swift */,
 				0EE92E6B2AE00A33003192FF /* FinishRunningViewModel.swift */,
@@ -1004,7 +1021,6 @@
 				0E2B4CBE2AE744E8002A5103 /* RecordDetailViewModel.swift */,
 				95C953CC2AF3BF760040B9DA /* ProfileViewModel.swift */,
 				954B04172AFF725000A8A83E /* ProfileUserInfoViewModel.swift */,
-				2955F7F92B038084005CE2C0 /* HealthAuthViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1483,7 +1499,7 @@
 				2975F0962AE3E1790046C00B /* CornerRectangleModifier.swift in Sources */,
 				2921B0022B012EC800533A83 /* RunningNavigationView.swift in Sources */,
 				2972515C2B0787640048D787 /* GuideToFreeRunningSheet.swift in Sources */,
-				95A01E1C2AEE7A0A0093D9C0 /* LoginViewModel.swift in Sources */,
+				95A01E1C2AEE7A0A0093D9C0 /* IntroViewModel.swift in Sources */,
 				29B39D3E2B5EC66D00C84E6A /* ArrayExtension.swift in Sources */,
 				F06298A92AE18A50007AB2D3 /* ConvertCoordinateManager.swift in Sources */,
 				292613172AF2BCEF00591E32 /* RecordHeader.swift in Sources */,
@@ -1502,7 +1518,7 @@
 				29D7AD4A2B0E030F00AAAAB0 /* MirroringMapView.swift in Sources */,
 				F06B936E2ADC279100387DEB /* SlideToUnlock.swift in Sources */,
 				0E9A5D4F2AE0B8C800C19FF3 /* ShareModel.swift in Sources */,
-				9528F0062AE0B37B0056CCC6 /* LoginView.swift in Sources */,
+				9528F0062AE0B37B0056CCC6 /* IntroView.swift in Sources */,
 				BBF90BD82B13859100E3FD70 /* RunningAttributes.swift in Sources */,
 				958240752B0AFDF100105FAE /* CourseScoreModelType.swift in Sources */,
 				29D6BAD32B0924D200BD8653 /* SmallCarouselCard.swift in Sources */,
@@ -1513,7 +1529,6 @@
 				BB02A39C2B0D26EA00250EDD /* RecordGridView.swift in Sources */,
 				0EEFA04F2B0BAC1C00C656AE /* TransparentBlurView.swift in Sources */,
 				0E7EE5232B5E83E4004F6BAF /* RecordDetailMapView.swift in Sources */,
-				2955F7FA2B038084005CE2C0 /* HealthAuthViewModel.swift in Sources */,
 				95E2EF882ADBA5C70083ADEE /* CourseModel.swift in Sources */,
 				BB397D092AE6408A00F92A43 /* RecordView.swift in Sources */,
 				2925E0BF2B14825A0004BB05 /* RecordDetailView.swift in Sources */,
@@ -1555,11 +1570,12 @@
 				29CC19A42AE95F2300B79610 /* RunningStartManager.swift in Sources */,
 				F05C7D562ADC565E006842DB /* PreferenceKey.swift in Sources */,
 				0E4291602B03CF3100EE75F5 /* LocationManager.swift in Sources */,
+				3AABD2552D5C659E00A8EEB8 /* LoginViewModel.swift in Sources */,
 				9528EFEC2ADEC7CF0056CCC6 /* UserDataModelType.swift in Sources */,
 				95A01E312AF141C30093D9C0 /* ProfileView.swift in Sources */,
-				29AE76DB2ADE2A5300A46742 /* InputNicknameViewModel.swift in Sources */,
 				BBEC68842B087B020026C306 /* UnderlineButton.swift in Sources */,
 				0EE92E6C2AE00A33003192FF /* FinishRunningViewModel.swift in Sources */,
+				3AABD2522D5C653200A8EEB8 /* LoginView.swift in Sources */,
 				F01FDB9C2ADABC4600BDA633 /* TabBar.swift in Sources */,
 				291A22352AF4CD94004B3D10 /* PermissionSheet.swift in Sources */,
 				95EB1EEC2ADDC66B00B47984 /* UserDataModel.swift in Sources */,

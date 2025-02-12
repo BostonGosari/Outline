@@ -8,10 +8,9 @@
 import SwiftUI
 
 struct HealthAuthView: View {
-    @StateObject private var viewModel = HealthAuthViewModel()
-    @StateObject var inputNickNameViewModel = InputNicknameViewModel.shared
-    @State private var showHealthAuthentication = true
-    
+    @EnvironmentObject var viewModel: LoginViewModel
+    @State private var showHealthAuthentication = false
+
     var body: some View {
         ZStack {
             VStack {
@@ -36,14 +35,14 @@ struct HealthAuthView: View {
                 title: Text("알림"),
                 message: Text("APPLE 건강앱을 동기화하면,\n앱 이외의 활동 및 건강을\n추적할 수 있습니다."),
                 primaryButton: .default(Text("취소"), action: {
-                    viewModel.moveToInputUserInfoView = true
+                    viewModel.push(screen: .inputUserInfo)
                 }), secondaryButton: .default(Text("확인"), action: {
                     viewModel.requestHealthAuthorization()
                 }))
         }
         .preferredColorScheme(.dark)
-        .navigationDestination(isPresented: $viewModel.moveToInputUserInfoView) {
-            InputUserInfoView(userNickName: inputNickNameViewModel.nickname)
+        .onAppear {
+            showHealthAuthentication = true
         }
     }
 }

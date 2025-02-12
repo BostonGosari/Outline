@@ -1,90 +1,151 @@
 //
-//  LoginViewModel.swift
+//  File.swift
 //  Outline
 //
-//  Created by Seungui Moon on 10/29/23.
+//  Created by Austin's Macbook Pro M3 on 2/12/25.
 //
 
+import Combine
+import HealthKit
 import SwiftUI
 
-class LoginViewModel: ObservableObject {
-    @AppStorage("userId") var userId: String?
-    @AppStorage("authState") var authState: AuthState = .logout
-    
-    private let authModel = AuthModel()
-    private let userDataModel = UserDataModel()
-    private let userInfoModel = UserInfoModel()
-    
-    func loginWithApple(window: UIWindow?) {
-        // if newUser => make firestore data
-        authModel.handleAppleLogin(window: window) { res in
-            switch res {
-            case .success(let uid):
-                self.userId = uid
-                self.checkLoginOrSignIn(uid: uid)
-                print("success to login on Apple")
-            case .failure(let error):
-                self.authState = .logout
-                print(error)
-                print("fail to login on kakao")
-            }
-        }
+enum LoginRoute: Hashable {
+    case inputName
+    case healthAuth
+    case inputUserInfo
+}
+
+final class LoginViewModel: ObservableObject {
+    /// route 처리
+    @Published var routes: [LoginRoute] = []
+
+    @Published var nickname = ""
+    @Published var checkInputCount = false
+    @Published var checkInputWord = false
+    @Published var checkNicnameDuplication = false
+    @Published var isSuccess = false
+    @Published var moveToInputUserInfoView = false
+    @Published var moveToHeathAuthenticationView = false
+    @Published  var isKeyboardVisible = false
+
+    private var userNameSet: [String] = []
+    private var healthStore = HKHealthStore()
+
+    var keyboardWillShowPublisher: AnyPublisher<Bool, Never> {
+        NotificationCenter.default.publisher(for: UIResponder.keyboardWillShowNotification)
+            .map { _ in true }
+            .eraseToAnyPublisher()
     }
-    
-    func loginWithKakao() {
-        // if newUser => make firestore data
-        authModel.handleKakaoSignUp { res in
-            switch res {
-            case .success(let uid):
-                self.userId = uid
-                self.checkLoginOrSignIn(uid: uid)
-                print("success to login on kakao")
-            case .failure(let error):
-                self.authState = .logout
-                print(error)
-                print("fail to login on kakao")
-            }
-        }
+
+    var keyboardWillHidePublisher: AnyPublisher<Bool, Never> {
+        NotificationCenter.default.publisher(for: UIResponder.keyboardWillHideNotification)
+            .map { _ in false }
+            .eraseToAnyPublisher()
     }
-    
-    func checkLoginOrSignIn(uid: String) {
-        userInfoModel.readUserInfo(uid: uid) { res in
-            switch res {
-            case .success(let userInfo):
-                print(userInfo)
-                print("user already exist")
-                self.authState = .login
-            case .failure:
-                print("newUser")
-                self.authState = .onboarding
-                self.setNewUser(uid: uid)
-            }
-        }
-    }
-    
-    func setNewUser(uid: String) {
-        userInfoModel.createUser(uid: uid, nickname: "default") { res in
-            switch res {
-            case .success(let isSuccess):
-                print("success to create user \(isSuccess)")
+
+    init() {
+        let userInfoModel = UserInfoModel()
+        userInfoModel.readUserNameSet { result in
+            switch result {
+            case .success(let userList):
+                self.userNameSet = userList
             case .failure(let error):
-                print("fail to create user")
                 print(error)
             }
         }
     }
-    
-    func setLoginState() {
-        authModel.handleCheckLoginState { res in
+
+    func checkNicname() {
+        checkDuplication()
+        checkCount()
+        checkSymbol()
+
+        isSuccess = checkInputCount && checkInputWord && checkNicnameDuplication
+    }
+
+    func doneButtonTapped() {
+        if isSuccess {
+            moveToInputUserInfoView = true
+        }
+    }
+
+    func createUserName() {
+        let userInfoModel = UserInfoModel()
+        if nickname.isEmpty {
+            return
+        }
+        userInfoModel.createUserNameSet(userName: nickname) { res in
             switch res {
-            case .success(let uid):
-                self.userId = uid
-                self.authState = .login
-                
-            case .failure(let error):
-                print("user not found")
-                self.authState = .logout
-                print(error)
+            case .success(let success):
+                print("success to create userName \(success)")
+            case .failure(let failure):
+                print("fail to create userName \(failure)")
+            }
+        }
+    }
+}
+
+extension LoginViewModel {
+    private func checkDuplication() {
+        if userNameSet.contains(nickname) {
+            checkNicnameDuplication = false
+        } else {
+            checkNicnameDuplication = true
+        }
+    }
+
+    private func checkCount() {
+        checkInputCount = nickname.count >= 2 && nickname.count <= 16
+    }
+
+    private func checkSymbol() {
+        let pattern = "^[a-zA-Z0-9가-힣ㄱ-ㅎㅏ-ㅣ\\s]+$"
+        checkInputWord = nickname.range(of: pattern, options: .regularExpression) != nil
+    }
+}
+
+/// router 기능
+extension LoginViewModel {
+    @MainActor
+    func push(screen: LoginRoute) {
+        routes.append(screen)
+    }
+
+    @MainActor
+    private func pop() {
+        routes.removeLast()
+    }
+
+    @ViewBuilder
+    func loginView(type: LoginRoute) -> some View {
+        switch type {
+        case .inputName:
+            InputNicknameView()
+        case .healthAuth:
+            HealthAuthView()
+        case .inputUserInfo:
+            InputUserInfoView()
+        }
+    }
+}
+
+/// HealthKit 기능
+extension LoginViewModel {
+
+    func requestHealthAuthorization() {
+        let quantityTypes: Set = [
+            HKQuantityType(.heartRate),
+            HKQuantityType(.activeEnergyBurned),
+            HKQuantityType(.distanceWalkingRunning),
+            HKQuantityType(.stepCount),
+            HKQuantityType(.cyclingCadence),
+            HKQuantityType(.runningSpeed),
+            HKQuantityType.workoutType()
+        ]
+
+        healthStore.requestAuthorization(toShare: quantityTypes, read: quantityTypes) {_, _ in
+            DispatchQueue.main.async {
+                self.push(screen: .inputUserInfo)
             }
         }
     }
