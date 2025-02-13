@@ -46,7 +46,6 @@ struct GPSArtHomeView: View {
                         ScrollView(.horizontal, showsIndicators: false) {
                             
                             getCurrentOffsetView
-                            
                             HStack(spacing: 0) {
                                 ForEach(viewModel.recommendedCoures.indices, id: \.self) { index in
                                     Button {

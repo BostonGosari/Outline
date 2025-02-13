@@ -9,7 +9,6 @@ import SwiftUI
 
 struct HealthAuthView: View {
     @EnvironmentObject var viewModel: LoginViewModel
-    @State private var showHealthAuthentication = false
 
     var body: some View {
         ZStack {
@@ -30,7 +29,7 @@ struct HealthAuthView: View {
             .navigationBarBackButtonHidden(true)
             .frame(maxHeight: .infinity, alignment: .top)
         }
-        .alert(isPresented: $showHealthAuthentication) {
+        .alert(isPresented: $viewModel.showHealthAuthentication) {
             Alert(
                 title: Text("알림"),
                 message: Text("APPLE 건강앱을 동기화하면,\n앱 이외의 활동 및 건강을\n추적할 수 있습니다."),
@@ -42,7 +41,7 @@ struct HealthAuthView: View {
         }
         .preferredColorScheme(.dark)
         .onAppear {
-            showHealthAuthentication = true
+            viewModel.showHealthAuthentication = true
         }
     }
 }

@@ -12,11 +12,9 @@ struct InputNicknameView: View {
     @EnvironmentObject var viewModel: LoginViewModel
 
     var body: some View {
-
         ZStack(alignment: .top) {
             Color.gray900
                 .ignoresSafeArea()
-
             VStack(alignment: .leading, spacing: 0) {
                 Text("안녕하세요!\n어떻게 불러드릴까요?")
                     .font(.customTitle)
@@ -36,9 +34,6 @@ struct InputNicknameView: View {
                     .padding(.horizontal, 16)
                     .background(Color.gray700)
                     .clipShape(RoundedRectangle(cornerRadius: 10), style: FillStyle())
-                    .onChange(of: viewModel.nickname) {
-                        viewModel.checkNicname()
-                    }
                     .padding(.top, 8)
                     .padding(.bottom, 16)
                     .padding(.horizontal, 16)
@@ -72,18 +67,6 @@ struct InputNicknameView: View {
             }
         }
     }
-
-    var keyboardWillShowPublisher: AnyPublisher<Bool, Never> {
-        NotificationCenter.default.publisher(for: UIResponder.keyboardWillShowNotification)
-            .map { _ in true }
-            .eraseToAnyPublisher()
-    }
-
-    var keyboardWillHidePublisher: AnyPublisher<Bool, Never> {
-        NotificationCenter.default.publisher(for: UIResponder.keyboardWillHideNotification)
-            .map { _ in false }
-            .eraseToAnyPublisher()
-    }
 }
 
 extension InputNicknameView {
@@ -107,6 +90,18 @@ extension InputNicknameView {
     
     private func dismissKeyboard() {
         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
+
+    var keyboardWillShowPublisher: AnyPublisher<Bool, Never> {
+        NotificationCenter.default.publisher(for: UIResponder.keyboardWillShowNotification)
+            .map { _ in true }
+            .eraseToAnyPublisher()
+    }
+
+    var keyboardWillHidePublisher: AnyPublisher<Bool, Never> {
+        NotificationCenter.default.publisher(for: UIResponder.keyboardWillHideNotification)
+            .map { _ in false }
+            .eraseToAnyPublisher()
     }
 }
 

@@ -13,7 +13,6 @@ struct InputUserInfoView: View {
     @EnvironmentObject var viewModel: LoginViewModel
 
     var body: some View {
-
         ZStack {
             Color.gray900
                 .ignoresSafeArea()
@@ -57,7 +56,7 @@ struct InputUserInfoView: View {
                     .frame(maxHeight: .infinity)
 
                 CompleteButton(text: "완료", isActive: true) {
-                    viewModel.saveUserInfo(nickname: viewModel.nickname)
+                    viewModel.saveUserInfo()
                     viewModel.authState = .login
                 }
 
@@ -89,9 +88,6 @@ extension InputUserInfoView {
                     .onTapGesture {
                         viewModel.currentPicker = .date
                         viewModel.showSheet = true
-                        if viewModel.isDefault {
-                            viewModel.defaultButtonTapped()
-                        }
                     }
                 
             }
@@ -107,9 +103,6 @@ extension InputUserInfoView {
                     .onTapGesture {
                         viewModel.currentPicker = .gender
                         viewModel.showSheet = true
-                        if viewModel.isDefault {
-                            viewModel.defaultButtonTapped()
-                        }
                     }
             }
             .listRowBackground(Color.gray750)
@@ -124,9 +117,6 @@ extension InputUserInfoView {
                     .onTapGesture {
                         viewModel.currentPicker = .height
                         viewModel.showSheet = true
-                        if viewModel.isDefault {
-                            viewModel.defaultButtonTapped()
-                        }
                     }
             }
             .listRowBackground(Color.gray750)
@@ -141,9 +131,6 @@ extension InputUserInfoView {
                     .onTapGesture {
                         viewModel.currentPicker = .weight
                         viewModel.showSheet = true
-                        if viewModel.isDefault {
-                            viewModel.defaultButtonTapped()
-                        }
                     }
             }
             .listRowBackground(Color.gray750)

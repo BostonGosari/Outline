@@ -37,12 +37,13 @@ final class LoginViewModel: ObservableObject {
     @Published var moveToInputUserInfoView = false
     @Published var moveToHeathAuthenticationView = false
     @Published  var isKeyboardVisible = false
-
+    private var cancellable: Set<AnyCancellable> = Set()
     private let userInfoModel = UserInfoModel()
     private var userNameSet: [String] = []
 
     // Health
     @AppStorage("authState") var authState: AuthState = .logout
+    @Published var showHealthAuthentication = false
     private var healthStore = HKHealthStore()
 
 
@@ -54,18 +55,21 @@ final class LoginViewModel: ObservableObject {
         return dateFormatter.date(from: "2000.01.01")!
     }()
     @Published var defaultButtonImage: String =  "square"
-    @Published var gender = "설정 안 됨"
+    @Published var gender = Gender.notSetted.rawValue
     @Published var height = 160
     @Published var weight = 50
     @Published var currentPicker: PickerType = .none
-    @Published var isDefault = false
-    @Published var isButtonActive = false
-    @Published var moveToLocationAuthView = false
     @State var showSheet = false
-    let genderList = ["설정 안 됨", "여성", "남성", "기타"]
+    let genderList = Gender.allCases.map{ $0.rawValue }
 
     init() {
         readAllNicknames()
+        $nickname
+            .debounce(for: 1, scheduler: RunLoop.main)
+            .sink { value in
+                self.checkNicname()
+            }
+            .store(in: &cancellable)
     }
 }
 
@@ -122,7 +126,7 @@ extension LoginViewModel {
     }
 }
 
-/// router 기능
+/// Router
 extension LoginViewModel {
     @MainActor
     func push(screen: LoginRoute) {
@@ -147,7 +151,7 @@ extension LoginViewModel {
     }
 }
 
-/// HealthKit 기능
+/// HealthKit
 extension LoginViewModel {
     @MainActor
     func requestHealthAuthorization() {
@@ -167,7 +171,7 @@ extension LoginViewModel {
     }
 }
 
-/// userInfo
+/// UserInfo
 extension LoginViewModel {
     func listTextColor(_ pickerType: PickerType) -> Color {
         if currentPicker == pickerType {
@@ -178,29 +182,25 @@ extension LoginViewModel {
     }
 
     func defaultButtonTapped() {
-        isDefault.toggle()
-
-        if isDefault {
-            gender = "설정 안됨"
-            height = 183
-            weight = 73
-            defaultButtonImage = "checkmark.square"
-        } else {
-            gender = "설정 안됨"
-            height = 160
-            weight = 50
-            defaultButtonImage = "square"
-        }
+        gender = "설정 안됨"
+        height = 160
+        weight = 50
+        defaultButtonImage = "square"
     }
 
-    func saveUserInfo(nickname: String) {
+    func saveUserInfo() {
         guard let userId = userId else {
             print("userId is not find when update userInfo")
             return
         }
-        let userInfoModel = UserInfoModel()
+        createUserName()
         let updatedUserInfo = UserInfo(
-            nickname: nickname, birthday: birthday, height: height, weight: weight)
+            nickname: nickname,
+            birthday: birthday,
+            height: height,
+            weight: weight,
+            gender: Gender(rawValue: gender) ?? .notSetted
+        )
         userInfoModel.updateUserInfo(uid: userId, userInfo: updatedUserInfo) { res in
             switch res {
             case .success(let success):

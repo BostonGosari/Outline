@@ -23,7 +23,6 @@ struct IntroView: View {
                     .scaledToFill()
                 VStack(spacing: 16) {
                     Spacer()
-                        
                     Button {
                         introViewModel.loginWithApple(window: window)
                     } label: {
