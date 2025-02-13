@@ -145,7 +145,6 @@
 		954CB2AC2AE5457B005EB2E9 /* flightRun.kml in Resources */ = {isa = PBXBuildFile; fileRef = 954CB2A22AE5457A005EB2E9 /* flightRun.kml */; };
 		954CB2AF2AE5457B005EB2E9 /* seoulCamelRun.kml in Resources */ = {isa = PBXBuildFile; fileRef = 954CB2A42AE5457B005EB2E9 /* seoulCamelRun.kml */; };
 		954CB2B02AE5457B005EB2E9 /* seoulCamelRun.kml in Resources */ = {isa = PBXBuildFile; fileRef = 954CB2A42AE5457B005EB2E9 /* seoulCamelRun.kml */; };
-		954CB2BA2AE654BA005EB2E9 /* NotificationAuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954CB2B92AE654BA005EB2E9 /* NotificationAuthView.swift */; };
 		954FFF782AE132D100D27537 /* CourseDataUploadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954FFF772AE132D100D27537 /* CourseDataUploadManager.swift */; };
 		9563829E2B95FD2E00D3AD32 /* ShareView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9563829D2B95FD2E00D3AD32 /* ShareView+Extension.swift */; };
 		956382EC2B9D48DD00D3AD32 /* ShareView+Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956382EB2B9D48DD00D3AD32 /* ShareView+Camera.swift */; };
@@ -442,7 +441,6 @@
 		954CB2A22AE5457A005EB2E9 /* flightRun.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = flightRun.kml; sourceTree = "<group>"; };
 		954CB2A42AE5457B005EB2E9 /* seoulCamelRun.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = seoulCamelRun.kml; sourceTree = "<group>"; };
 		954CB2B52AE63E79005EB2E9 /* HealthAuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthAuthView.swift; sourceTree = "<group>"; };
-		954CB2B92AE654BA005EB2E9 /* NotificationAuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationAuthView.swift; sourceTree = "<group>"; };
 		954FFF772AE132D100D27537 /* CourseDataUploadManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseDataUploadManager.swift; sourceTree = "<group>"; };
 		9563829D2B95FD2E00D3AD32 /* ShareView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ShareView+Extension.swift"; sourceTree = "<group>"; };
 		956382EB2B9D48DD00D3AD32 /* ShareView+Camera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ShareView+Camera.swift"; sourceTree = "<group>"; };
@@ -697,7 +695,6 @@
 				29AE76D52ADE2A2200A46742 /* InputNicknameView.swift */,
 				954CB2B52AE63E79005EB2E9 /* HealthAuthView.swift */,
 				29AE76D62ADE2A2200A46742 /* InputUserInfoView.swift */,
-				954CB2B92AE654BA005EB2E9 /* NotificationAuthView.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -1501,7 +1498,6 @@
 				F06298A92AE18A50007AB2D3 /* ConvertCoordinateManager.swift in Sources */,
 				292613172AF2BCEF00591E32 /* RecordHeader.swift in Sources */,
 				29D6BAD72B09AE5B00BD8653 /* ScoreShimmer.swift in Sources */,
-				954CB2BA2AE654BA005EB2E9 /* NotificationAuthView.swift in Sources */,
 				0E7EE51F2B5E761E004F6BAF /* CardDetailInformationMapView.swift in Sources */,
 				F06B93622ADB847500387DEB /* ContentView.swift in Sources */,
 				F09697472ADBCD6000C38AF4 /* Shape.swift in Sources */,
