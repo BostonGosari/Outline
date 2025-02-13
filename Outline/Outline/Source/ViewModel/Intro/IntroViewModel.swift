@@ -53,6 +53,7 @@ class IntroViewModel: ObservableObject {
             case .success(let userInfo):
                 print(userInfo)
                 print("user already exist")
+                // TODO: call createUserName()
                 self.authState = .login
             case .failure:
                 print("newUser")

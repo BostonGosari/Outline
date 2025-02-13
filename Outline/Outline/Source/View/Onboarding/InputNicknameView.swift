@@ -54,11 +54,8 @@ struct InputNicknameView: View {
                 checkView("닉네임 중복 제외", viewModel.checkNicnameDuplication)
                     .padding(.horizontal, 16)
 
-                CompleteButton(text: "다음", isActive: viewModel.isSuccess) {
-                    if viewModel.isSuccess {
-                        viewModel.createUserName()
-                        viewModel.push(screen: .healthAuth)
-                    }
+                CompleteButton(text: "다음", isActive: viewModel.isPossibleNickName) {
+                    viewModel.push(screen: .healthAuth)
                 }
                 .frame(maxHeight: .infinity, alignment: .bottom)
                 .padding(.bottom, 16)
@@ -66,7 +63,7 @@ struct InputNicknameView: View {
 
         }
         .ignoresSafeArea(.keyboard)
-        .onReceive(Publishers.Merge(viewModel.keyboardWillShowPublisher, viewModel.keyboardWillHidePublisher)) { isVisible in
+        .onReceive(Publishers.Merge(keyboardWillShowPublisher, keyboardWillHidePublisher)) { isVisible in
             viewModel.isKeyboardVisible = isVisible
         }
         .toolbar {
@@ -74,6 +71,18 @@ struct InputNicknameView: View {
                 doneButton
             }
         }
+    }
+
+    var keyboardWillShowPublisher: AnyPublisher<Bool, Never> {
+        NotificationCenter.default.publisher(for: UIResponder.keyboardWillShowNotification)
+            .map { _ in true }
+            .eraseToAnyPublisher()
+    }
+
+    var keyboardWillHidePublisher: AnyPublisher<Bool, Never> {
+        NotificationCenter.default.publisher(for: UIResponder.keyboardWillHideNotification)
+            .map { _ in false }
+            .eraseToAnyPublisher()
     }
 }
 

@@ -10,15 +10,8 @@ import HealthKit
 import HealthKitUI
 
 struct InputUserInfoView: View {
-    @AppStorage("authState") var authState: AuthState = .logout
-    @StateObject var viewModel = InputUserInfoViewModel()
-    @StateObject var healthKitManager = HealthKitManager()
-    
-    @State private var showSheet = false
-    
-    var userNickName = "default"
-    private let genderList = ["설정 안 됨", "여성", "남성", "기타"]
-    
+    @EnvironmentObject var viewModel: LoginViewModel
+
     var body: some View {
 
         ZStack {
@@ -26,7 +19,7 @@ struct InputUserInfoView: View {
                 .ignoresSafeArea()
                 .onTapGesture {
                     viewModel.currentPicker = .none
-                    showSheet = false
+                    viewModel.showSheet = false
                 }
 
             VStack(alignment: .leading, spacing: 0) {
@@ -47,7 +40,7 @@ struct InputUserInfoView: View {
                 Button(action: {
                     viewModel.defaultButtonTapped()
                     viewModel.currentPicker = .none
-                    showSheet = false
+                    viewModel.showSheet = false
                 }, label: {
                     HStack(spacing: 0) {
                         Image(systemName: viewModel.defaultButtonImage)
@@ -64,8 +57,8 @@ struct InputUserInfoView: View {
                     .frame(maxHeight: .infinity)
 
                 CompleteButton(text: "완료", isActive: true) {
-                    viewModel.saveUserInfo(nickname: userNickName)
-                    authState = .login
+                    viewModel.saveUserInfo(nickname: viewModel.nickname)
+                    viewModel.authState = .login
                 }
 
                 .frame(alignment: .bottom)
@@ -77,7 +70,7 @@ struct InputUserInfoView: View {
         .overlay {
             pickerView
                 .transition(.move(edge: .bottom))
-                .animation(.spring, value: showSheet)
+                .animation(.spring, value: viewModel.showSheet)
                 .frame(maxHeight: .infinity, alignment: .bottom)
         }
 
@@ -95,7 +88,7 @@ extension InputUserInfoView {
                     .foregroundStyle(viewModel.listTextColor(.date))
                     .onTapGesture {
                         viewModel.currentPicker = .date
-                        showSheet = true
+                        viewModel.showSheet = true
                         if viewModel.isDefault {
                             viewModel.defaultButtonTapped()
                         }
@@ -113,7 +106,7 @@ extension InputUserInfoView {
                     .foregroundStyle(viewModel.listTextColor(.gender))
                     .onTapGesture {
                         viewModel.currentPicker = .gender
-                        showSheet = true
+                        viewModel.showSheet = true
                         if viewModel.isDefault {
                             viewModel.defaultButtonTapped()
                         }
@@ -130,7 +123,7 @@ extension InputUserInfoView {
                     .foregroundStyle(viewModel.listTextColor(.height))
                     .onTapGesture {
                         viewModel.currentPicker = .height
-                        showSheet = true
+                        viewModel.showSheet = true
                         if viewModel.isDefault {
                             viewModel.defaultButtonTapped()
                         }
@@ -147,7 +140,7 @@ extension InputUserInfoView {
                     .foregroundStyle(viewModel.listTextColor(.weight))
                     .onTapGesture {
                         viewModel.currentPicker = .weight
-                        showSheet = true
+                        viewModel.showSheet = true
                         if viewModel.isDefault {
                             viewModel.defaultButtonTapped()
                         }
@@ -174,7 +167,7 @@ extension InputUserInfoView {
                 
             case .gender:
                 Picker("", selection: $viewModel.gender) {
-                    ForEach(genderList, id: \.self) {
+                    ForEach(viewModel.genderList, id: \.self) {
                         Text("\($0)")
                     }
                 }
