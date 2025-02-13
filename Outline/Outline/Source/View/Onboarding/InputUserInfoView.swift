@@ -57,7 +57,6 @@ struct InputUserInfoView: View {
 
                 CompleteButton(text: "완료", isActive: true) {
                     viewModel.saveUserInfo()
-                    viewModel.authState = .login
                 }
 
                 .frame(alignment: .bottom)

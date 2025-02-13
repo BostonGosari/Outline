@@ -34,8 +34,6 @@ final class LoginViewModel: ObservableObject {
     @Published var checkInputWord = false
     @Published var checkNicnameDuplication = false
     @Published var isPossibleNickName = false
-    @Published var moveToInputUserInfoView = false
-    @Published var moveToHeathAuthenticationView = false
     @Published  var isKeyboardVisible = false
     private var cancellable: Set<AnyCancellable> = Set()
     private let userInfoModel = UserInfoModel()
@@ -45,7 +43,6 @@ final class LoginViewModel: ObservableObject {
     @AppStorage("authState") var authState: AuthState = .logout
     @Published var showHealthAuthentication = false
     private var healthStore = HKHealthStore()
-
 
     // UserInfo
     @AppStorage("userId") var userId: String?
@@ -209,5 +206,6 @@ extension LoginViewModel {
                 print("fail to updated userInfo \(failure)")
             }
         }
+        authState = .login
     }
 }
