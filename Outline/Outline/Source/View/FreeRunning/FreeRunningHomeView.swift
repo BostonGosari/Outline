@@ -9,20 +9,11 @@ import MapKit
 import SwiftUI
 
 struct FreeRunningHomeView: View {
-    @AppStorage("authState") var authState: AuthState = .logout
-    @StateObject private var connectivityManager = ConnectivityManager.shared
-    @StateObject var runningStartManager = RunningStartManager.shared
-    
-    @State private var userLocation = ""
-    @State private var progress: Double = 0.0
-    @State private var showPermissionSheet = false
-    @State private var isUnlocked = false
-    @State private var permissionType: PermissionType = .health
-    @State private var freeRunCount: Int = 0
+    @StateObject private var viewModel = FreeRunningViewModel()
    
     var body: some View {
         ZStack(alignment: .top) {
-            if authState == .login {
+            if viewModel.authState == .login {
                 FreeRunningMapView()
                     .ignoresSafeArea()
                 Color.gray800.opacity(0.8)
@@ -34,31 +25,31 @@ struct FreeRunningHomeView: View {
                 Header(title: "자유 아트", loading: false, scrollOffset: 20)
                     .padding(.top, 8)
                 
-                if authState == .login {
+                if viewModel.authState == .login {
                     Spacer()
                     cardView
                         .overlay {
                             VStack(alignment: .leading, spacing: 0) {
-                                Text("새로운 러닝 \(freeRunCount == 0 ? "" : String(freeRunCount + 1))")
+                                Text("새로운 러닝 \(viewModel.freeRunCount == 0 ? "" : String(viewModel.freeRunCount + 1))")
                                     .font(.customHeadline)
                                     .padding(.bottom, 8)
                                 HStack {
                                     Image(systemName: "mappin")
-                                    Text(userLocation)
+                                    Text(viewModel.userLocation)
                                 }
                                 .font(.customCaption)
                                 .frame(height: 16)
-                                SlideToUnlock(isUnlocked: $isUnlocked, progress: $progress)
-                                    .onChange(of: isUnlocked) { _, newValue in
+                                SlideToUnlock(isUnlocked: $viewModel.isUnlocked, progress: $viewModel.progress)
+                                    .onChange(of: viewModel.isUnlocked) { _, newValue in
                                         if newValue {
-                                            if runningStartManager.checkAuthorization() {
-                                                runningStartManager.start = true
-                                                runningStartManager.startFreeRun()
-                                                
+                                            if viewModel.runningStartManager.checkAuthorization() {
+                                                viewModel.runningStartManager.start = true
+                                                viewModel.runningStartManager.startFreeRun()
+
                                                 let runningInfo = MirroringRunningInfo(runningType: .free, courseName: "자유아트", course: [])
-                                                connectivityManager.sendRunningInfo(runningInfo)
+                                                viewModel.connectivityManager.sendRunningInfo(runningInfo)
                                             }
-                                            isUnlocked = false
+                                            viewModel.isUnlocked = false
                                         }
                                     }
                                     .frame(maxHeight: .infinity, alignment: .bottom)
@@ -75,20 +66,20 @@ struct FreeRunningHomeView: View {
         }
         .onAppear {
             userLocationToString()
-            runningStartManager.getFreeRunNumber { result in
+            viewModel.runningStartManager.getFreeRunNumber { result in
                 switch result {
                 case .success(let freeRunCount):
-                    self.freeRunCount = freeRunCount
+                    self.viewModel.freeRunCount = freeRunCount
                 case .failure(let failure):
                     print("fail to load freeRunCount \(failure)")
                 }
             }
         }
-        .onChange(of: runningStartManager.complete) { _, _ in
-            runningStartManager.getFreeRunNumber { result in
+        .onChange(of: viewModel.runningStartManager.complete) { _, _ in
+            viewModel.runningStartManager.getFreeRunNumber { result in
                 switch result {
                 case .success(let freeRunCount):
-                    self.freeRunCount = freeRunCount
+                    self.viewModel.freeRunCount = freeRunCount
                 case .failure(let failure):
                     print("fail to load freeRunCount \(failure)")
                 }
@@ -115,7 +106,7 @@ extension FreeRunningHomeView {
                     let city = placemark.locality ?? ""
                     let town = placemark.subLocality ?? ""
                     
-                    self.userLocation = "\(area) \(city) \(town)"
+                    self.viewModel.userLocation = "\(area) \(city) \(town)"
                 }
             }
         }
