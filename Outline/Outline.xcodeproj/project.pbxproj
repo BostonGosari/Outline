@@ -106,8 +106,6 @@
 		29AE76AC2ADE0D9100A46742 /* OutlineApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0AC8A9C2AD94C1F0061612C /* OutlineApp.swift */; };
 		29AE76D72ADE2A2200A46742 /* InputNicknameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AE76D52ADE2A2200A46742 /* InputNicknameView.swift */; };
 		29AE76D82ADE2A2200A46742 /* InputUserInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AE76D62ADE2A2200A46742 /* InputUserInfoView.swift */; };
-		29AE76DB2ADE2A5300A46742 /* InputNicknameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AE76D92ADE2A5300A46742 /* InputNicknameViewModel.swift */; };
-		29AE76DC2ADE2A5300A46742 /* InputUserInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AE76DA2ADE2A5300A46742 /* InputUserInfoViewModel.swift */; };
 		29AE76E02ADE2BC700A46742 /* DateExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AE76DF2ADE2BC700A46742 /* DateExtention.swift */; };
 		29AE76E12ADE2C1700A46742 /* HomeTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01FDB9D2ADABD3D00BDA633 /* HomeTabView.swift */; };
 		29B205082AEA625100E63F39 /* PathManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9528EFFF2AE042570056CCC6 /* PathManager.swift */; };
@@ -417,8 +415,6 @@
 		29ADA4C02CA46616009E805C /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		29AE76D52ADE2A2200A46742 /* InputNicknameView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputNicknameView.swift; sourceTree = "<group>"; };
 		29AE76D62ADE2A2200A46742 /* InputUserInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputUserInfoView.swift; sourceTree = "<group>"; };
-		29AE76D92ADE2A5300A46742 /* InputNicknameViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InputNicknameViewModel.swift; path = Outline/Source/ViewModel/InputNicknameViewModel.swift; sourceTree = SOURCE_ROOT; };
-		29AE76DA2ADE2A5300A46742 /* InputUserInfoViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InputUserInfoViewModel.swift; path = Outline/Source/ViewModel/InputUserInfoViewModel.swift; sourceTree = SOURCE_ROOT; };
 		29AE76DF2ADE2BC700A46742 /* DateExtention.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtention.swift; sourceTree = "<group>"; };
 		29B39D3D2B5EC66D00C84E6A /* ArrayExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtension.swift; sourceTree = "<group>"; };
 		29B39D3F2B5EC6CC00C84E6A /* CoordinateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinateExtension.swift; sourceTree = "<group>"; };
@@ -1068,8 +1064,6 @@
 			isa = PBXGroup;
 			children = (
 				95B8F4582AED27B200D9F35B /* Login */,
-				29AE76D92ADE2A5300A46742 /* InputNicknameViewModel.swift */,
-				29AE76DA2ADE2A5300A46742 /* InputUserInfoViewModel.swift */,
 				0E29F65E2ADF6CDD00F5EF5C /* RunningMapViewModel.swift */,
 				0EE92E6B2AE00A33003192FF /* FinishRunningViewModel.swift */,
 				2915FA712C6BB036006890CD /* RecordViewModel.swift */,
@@ -1620,7 +1614,6 @@
 				0E4291602B03CF3100EE75F5 /* LocationManager.swift in Sources */,
 				9528EFEC2ADEC7CF0056CCC6 /* RunningRecord.swift in Sources */,
 				95A01E312AF141C30093D9C0 /* ProfileView.swift in Sources */,
-				29AE76DB2ADE2A5300A46742 /* InputNicknameViewModel.swift in Sources */,
 				BBEC68842B087B020026C306 /* UnderlineButton.swift in Sources */,
 				0EE92E6C2AE00A33003192FF /* FinishRunningViewModel.swift in Sources */,
 				F01FDB9C2ADABC4600BDA633 /* TabBar.swift in Sources */,
@@ -1639,7 +1632,6 @@
 				2998035C2AE0181900A9A134 /* Confetti.swift in Sources */,
 				0EE0D4042B0DC34000E75F4C /* CardDetailMap.swift in Sources */,
 				3A0740462D5F049600984303 /* LoginView.swift in Sources */,
-				29AE76DC2ADE2A5300A46742 /* InputUserInfoViewModel.swift in Sources */,
 				F0492E1D2ADD2AE900F6EADD /* GPSArtHomeHeader.swift in Sources */,
 				29AE76D72ADE2A2200A46742 /* InputNicknameView.swift in Sources */,
 				2915FA722C6BB036006890CD /* RecordViewModel.swift in Sources */,
