@@ -149,6 +149,7 @@
 		29F835CD2B0894CF0052C3C1 /* BigCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F835CC2B0894CF0052C3C1 /* BigCard.swift */; };
 		29F835CF2B0894DB0052C3C1 /* BigCardBackside.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F835CE2B0894DB0052C3C1 /* BigCardBackside.swift */; };
 		29FEDC5E2AED81A800C1F80B /* Shimmer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FEDC5D2AED81A800C1F80B /* Shimmer.swift */; };
+		3A0740462D5F049600984303 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0740452D5F049600984303 /* LoginView.swift */; };
 		9528EFE92ADE9E870056CCC6 /* UserCoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 95EB1EF62ADE251100B47984 /* UserCoreDataModel.xcdatamodeld */; };
 		9528EFEA2ADE9E870056CCC6 /* UserCoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 95EB1EF62ADE251100B47984 /* UserCoreDataModel.xcdatamodeld */; };
 		9528EFEC2ADEC7CF0056CCC6 /* RunningRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9528EFEB2ADEC7CF0056CCC6 /* RunningRecord.swift */; };
@@ -456,6 +457,7 @@
 		29F835CC2B0894CF0052C3C1 /* BigCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigCard.swift; sourceTree = "<group>"; };
 		29F835CE2B0894DB0052C3C1 /* BigCardBackside.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigCardBackside.swift; sourceTree = "<group>"; };
 		29FEDC5D2AED81A800C1F80B /* Shimmer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shimmer.swift; sourceTree = "<group>"; };
+		3A0740452D5F049600984303 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		9528EFEB2ADEC7CF0056CCC6 /* RunningRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningRecord.swift; sourceTree = "<group>"; };
 		9528EFFF2AE042570056CCC6 /* PathManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathManager.swift; sourceTree = "<group>"; };
 		9528F0052AE0B37B0056CCC6 /* IntroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroView.swift; sourceTree = "<group>"; };
@@ -745,6 +747,7 @@
 		29AE76D42ADE2A2200A46742 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
+				3A0740452D5F049600984303 /* LoginView.swift */,
 				29AE76D52ADE2A2200A46742 /* InputNicknameView.swift */,
 				954CB2B52AE63E79005EB2E9 /* HealthAuthView.swift */,
 				29AE76D62ADE2A2200A46742 /* InputUserInfoView.swift */,
@@ -1635,6 +1638,7 @@
 				BB02A3982B0CCFBE00250EDD /* ScoreStar.swift in Sources */,
 				2998035C2AE0181900A9A134 /* Confetti.swift in Sources */,
 				0EE0D4042B0DC34000E75F4C /* CardDetailMap.swift in Sources */,
+				3A0740462D5F049600984303 /* LoginView.swift in Sources */,
 				29AE76DC2ADE2A5300A46742 /* InputUserInfoViewModel.swift in Sources */,
 				F0492E1D2ADD2AE900F6EADD /* GPSArtHomeHeader.swift in Sources */,
 				29AE76D72ADE2A2200A46742 /* InputNicknameView.swift in Sources */,

@@ -22,7 +22,7 @@ struct ContentView: View {
         Group {
             switch authState {
             case .onboarding:
-                InputNicknameView()
+                LoginView()
             case .logout:
                 IntroView()
             case .lookAround:
