@@ -8,8 +8,6 @@
 import SwiftUI
 
 struct IntroView: View {
-    @AppStorage("authState") var authState: AuthState = .logout
-    @AppStorage("userId") var userId: String?
     @Environment(\.window) var window: UIWindow?
     @StateObject private var viewModel = IntroViewModel()
 
@@ -85,7 +83,7 @@ struct IntroView: View {
                     }
                     .padding(.vertical, 5)
                     Button {
-                        authState = .lookAround
+                        viewModel.authState = .lookAround
                     } label: {
                         Text("둘러보기")
                             .foregroundStyle(.white)
