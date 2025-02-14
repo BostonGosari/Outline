@@ -17,14 +17,15 @@ enum AuthState: String {
 struct ContentView: View {
     @AppStorage("userId") var userId: String?
     @AppStorage("authState") var authState: AuthState = .logout
-    
+    private let authModel = AuthModel()
+
     var body: some View {
         Group {
             switch authState {
             case .onboarding:
-                InputNicknameView()
-            case .logout:
                 LoginView()
+            case .logout:
+                IntroView()
             case .lookAround:
                 HomeTabView()
             case .login:
@@ -32,26 +33,30 @@ struct ContentView: View {
             }
         }
         .onAppear {
-            AuthModel().handleCheckLoginState { res in
-                switch res {
-                case .success(let userId):
-                    if let userId = userId {
-                        self.userId = userId
-                        self.authState = .login
-                    } else {
-                        if self.authState != .lookAround {
-                            self.authState = .logout
-                        }
-                    }
-                case .failure(let failure):
+            checkAuthChanged()
+        }
+        .tint(.customPrimary)
+    }
+
+    private func checkAuthChanged() {
+        authModel.handleCheckLoginState { res in
+            switch res {
+            case .success(let userId):
+                if let userId = userId {
+                    self.userId = userId
+                    self.authState = .login
+                } else {
                     if self.authState != .lookAround {
                         self.authState = .logout
                     }
-                    print("fail to find userInfo \(failure)")
                 }
+            case .failure(let failure):
+                if self.authState != .lookAround {
+                    self.authState = .logout
+                }
+                print("fail to find userInfo \(failure)")
             }
         }
-        .tint(.customPrimary)
     }
 }
 
