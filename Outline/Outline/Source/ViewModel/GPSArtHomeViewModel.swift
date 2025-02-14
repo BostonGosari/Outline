@@ -30,14 +30,38 @@ class GPSArtHomeViewModel: NSObject, CLLocationManagerDelegate, ObservableObject
     @Published var firstCourseList: [CourseWithDistanceAndScore] = []
     @Published var secondCourseList: [CourseWithDistanceAndScore] = []
     @Published var thirdCourseList: [CourseWithDistanceAndScore] = []
+
+    @Published var scrollOffset: CGFloat = 0
+    @Published var scrollXOffset: CGFloat = 0
+
+    @Published var currentIndex: Int = 1
+    @Published var loading = true
+    @Published var selectedCourse: CourseWithDistanceAndScore?
+    @Published var showNetworkErrorView = false
+    @Published var matched = false
+    let maxLoadingTime: TimeInterval = 5
+
     private let courseScoreModel = CourseScoreModel()
     private let courseModel = CourseModel()
     private let locationManager = CLLocationManager()
     
     override init() {
         super.init()
-        locationManager.delegate = self    }
-    
+        locationManager.delegate = self
+    }
+
+    func onAppear() {
+        checkLocationAuthorization()
+        if courses.isEmpty {
+            getAllCoursesFromFirebase()
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + maxLoadingTime) { [weak self] in
+            if let loading = self?.loading, loading{
+                self?.showNetworkErrorView = true
+            }
+        }
+    }
+
     func getAllCoursesFromFirebase() {
         courseModel.readAllCourses { result in
             switch result {

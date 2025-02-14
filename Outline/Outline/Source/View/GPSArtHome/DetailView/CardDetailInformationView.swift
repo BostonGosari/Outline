@@ -141,16 +141,10 @@ struct CardDetailInformationView: View {
                 .font(.customSubtitle)
                 .fontWeight(.semibold)
             VStack(alignment: .leading, spacing: 8) {
-                NavigationLink {
-                    CardDetailMap(selectedCourse: selectedCourse)
-                        .toolbarBackground(.hidden, for: .navigationBar)
-                } label: {
-                    CardDetailInformationMapView(
-                        coursePaths: selectedCourse.coursePaths.toCLLocationCoordinates()
-                    )
-                    .frame(height: 200)
-                }
-                .buttonStyle(.plain)
+                CardDetailInformationMapView(
+                    coursePaths: selectedCourse.coursePaths.toCLLocationCoordinates()
+                )
+                .frame(height: 200)
                 Text("경로 제작 \(selectedCourse.producer)님")
                     .font(.customSubbody)
                     .foregroundStyle(.gray600)
