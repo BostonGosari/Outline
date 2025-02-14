@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -547,6 +547,10 @@
 		F0ECB3AC2AF28540003FA2B4 /* FirstRunningGuideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstRunningGuideView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		3A0740472D5F068400984303 /* Intro */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Intro; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
+
 /* Begin PBXFrameworksBuildPhase section */
 		BBCB1EFF2B1778DE00D9AE1C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
@@ -1058,6 +1062,7 @@
 		F0AC8AFB2AD963690061612C /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				3A0740472D5F068400984303 /* Intro */,
 				95B8F4582AED27B200D9F35B /* Login */,
 				0E29F65E2ADF6CDD00F5EF5C /* RunningMapViewModel.swift */,
 				0EE92E6B2AE00A33003192FF /* FinishRunningViewModel.swift */,
@@ -1293,6 +1298,9 @@
 			dependencies = (
 				29B736B22C565B620075A569 /* PBXTargetDependency */,
 				BBCB1F122B1778DF00D9AE1C /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				3A0740472D5F068400984303 /* Intro */,
 			);
 			name = Outline;
 			packageProductDependencies = (

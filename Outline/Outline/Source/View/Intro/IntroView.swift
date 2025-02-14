@@ -11,8 +11,8 @@ struct IntroView: View {
     @AppStorage("authState") var authState: AuthState = .logout
     @AppStorage("userId") var userId: String?
     @Environment(\.window) var window: UIWindow?
-    @StateObject private var loginViewModel = LoginViewModel()
-    
+    @StateObject private var viewModel = IntroViewModel()
+
     var body: some View {
         NavigationStack {
             ZStack {
@@ -25,7 +25,7 @@ struct IntroView: View {
                     Spacer()
                         
                     Button {
-                        loginViewModel.loginWithApple(window: window)
+                        viewModel.loginWithApple(window: window)
                     } label: {
                         HStack {
                             Spacer()
@@ -48,7 +48,7 @@ struct IntroView: View {
                         }
                     }
                     Button {
-                        loginViewModel.loginWithKakao()
+                        viewModel.loginWithKakao()
                     } label: {
                         HStack {
                             Spacer()
