@@ -9,13 +9,6 @@ import CoreMotion
 import HealthKit
 import SwiftUI
 
-enum PickerType {
-    case date
-    case gender
-    case height
-    case weight
-    case none
-}
 
 class InputUserInfoViewModel: ObservableObject {
     @AppStorage("userId") var userId: String?
