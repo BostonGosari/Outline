@@ -24,7 +24,7 @@ struct ContentView: View {
             case .onboarding:
                 InputNicknameView()
             case .logout:
-                LoginView()
+                IntroView()
             case .lookAround:
                 HomeTabView()
             case .login:

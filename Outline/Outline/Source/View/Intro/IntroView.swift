@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct LoginView: View {
+struct IntroView: View {
     @AppStorage("authState") var authState: AuthState = .logout
     @AppStorage("userId") var userId: String?
     @Environment(\.window) var window: UIWindow?
@@ -100,7 +100,7 @@ struct LoginView: View {
     }
 }
 
-extension LoginView {
+extension IntroView {
     private var borderRectangle: some View {
         RoundedRectangle(cornerRadius: 60)
             .stroke(LinearGradient(colors: [Color.white, .black.opacity(0.5)], startPoint: .top, endPoint: .bottom), lineWidth: 1)
@@ -111,5 +111,5 @@ extension LoginView {
 }
 
 #Preview {
-    LoginView()
+    IntroView()
 }
