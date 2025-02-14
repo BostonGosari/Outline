@@ -11,7 +11,7 @@ import FirebaseFirestoreSwift
 import SwiftUI
 
 protocol CourseModelProtocol {
-    func readAllCourses(completion: @escaping (Result<AllGPSArtCourses, GPSArtError>) -> Void)
+    func readAllCourses(completion: @escaping (Result<[GPSArtCourse], GPSArtError>) -> Void)
     func readCourse(id: String, completion: @escaping (Result<GPSArtCourse, GPSArtError>) -> Void)
 }
 
@@ -24,7 +24,7 @@ struct CourseModel: CourseModelProtocol {
     private let courseListRef = Firestore.firestore().collection("allGPSArtCourses")
     private let courseCategoryRef = Firestore.firestore().collection("artCategories")
     
-    func readAllCourses(completion: @escaping (Result<AllGPSArtCourses, GPSArtError>) -> Void) {
+    func readAllCourses(completion: @escaping (Result<[GPSArtCourse], GPSArtError>) -> Void) {
         courseListRef.getDocuments { (snapshot, error) in
             guard let snapshot = snapshot, error == nil else {
                 completion(.failure(.dataNotFound))

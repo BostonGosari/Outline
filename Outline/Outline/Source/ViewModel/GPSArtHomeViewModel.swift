@@ -18,7 +18,7 @@ struct CourseWithDistanceAndScore: Identifiable, Hashable {
 }
 
 class GPSArtHomeViewModel: NSObject, CLLocationManagerDelegate, ObservableObject {
-    @Published var courses: AllGPSArtCourses = []
+    @Published var courses: [GPSArtCourse] = []
     @Published var coursesForWatch: [GPSArtCourse] = []
 
     @Published var coursesWithDistance: [CourseWithDistanceAndScore] = []
