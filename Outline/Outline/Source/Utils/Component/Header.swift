@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct GPSArtHomeHeader: View {
+struct Header: View {
     var title: String
     var loading: Bool
     var scrollOffset: CGFloat
@@ -46,7 +46,7 @@ struct GPSArtHomeHeader: View {
     }
 }
 
-struct GPSArtHomeInlineHeader: View {
+struct InlineHeader: View {
     var loading: Bool
     var scrollOffset: CGFloat
     
@@ -76,5 +76,5 @@ struct GPSArtHomeInlineHeader: View {
 }
 
 #Preview {
-    GPSArtHomeInlineHeader(loading: false, scrollOffset: 0)
+    InlineHeader(loading: false, scrollOffset: 0)
 }

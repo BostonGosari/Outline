@@ -8,8 +8,6 @@
 import SwiftUI
 
 struct GPSArtHomeView: View {
-    @AppStorage("authState") var authState: AuthState = .logout
-    private let courseScoreModel = CourseScoreModel()
     @StateObject private var viewModel = GPSArtHomeViewModel()
     
     @State private var scrollOffset: CGFloat = 0
@@ -40,7 +38,7 @@ struct GPSArtHomeView: View {
                         .onScrollViewOffsetChanged { offset in
                             scrollOffset = offset
                         }
-                     GPSArtHomeHeader(title: "근처에서\n달려볼까요?", loading: loading, scrollOffset: scrollOffset)
+                     Header(title: "근처에서\n달려볼까요?", loading: loading, scrollOffset: scrollOffset)
                          .padding(.bottom, -10)
                     
                     VStack(spacing: 0) {
@@ -131,7 +129,7 @@ struct GPSArtHomeView: View {
                     }
                 }
                 .overlay(alignment: .top) {
-                    GPSArtHomeInlineHeader(loading: loading, scrollOffset: scrollOffset)
+                    InlineHeader(loading: loading, scrollOffset: scrollOffset)
                 }
                 .onAppear {
                     viewModel.checkLocationAuthorization()

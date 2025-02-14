@@ -31,7 +31,7 @@ struct FreeRunningHomeView: View {
             }
 
             VStack(spacing: 0) {
-                GPSArtHomeHeader(title: "자유 아트", loading: false, scrollOffset: 20)
+                Header(title: "자유 아트", loading: false, scrollOffset: 20)
                     .padding(.top, 8)
                 
                 if authState == .login {
