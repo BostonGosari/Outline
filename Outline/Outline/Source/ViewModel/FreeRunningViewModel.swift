@@ -13,14 +13,13 @@ final class FreeRunningViewModel: ObservableObject {
     @AppStorage("authState") var authState: AuthState = .logout
     @Published var userLocation = ""
     @Published var progress: Double = 0.0
-    @Published var showPermissionSheet = false
     @Published var isUnlocked = false
-    @Published var permissionType: PermissionType = .health
     @Published var freeRunCount: Int = 0
 
-    let connectivityManager = ConnectivityManager.shared
-    let runningStartManager = RunningStartManager.shared
-    var cancellable: Set<AnyCancellable> = Set()
+    private let connectivityManager = ConnectivityManager.shared
+    private let locationManger = CLLocationManager()
+    private let runningStartManager = RunningStartManager.shared
+    private var cancellable: Set<AnyCancellable> = Set()
 
     init() {
         $isUnlocked
@@ -53,7 +52,6 @@ final class FreeRunningViewModel: ObservableObject {
     }
 
     private func userLocationToString() {
-        let locationManger = CLLocationManager()
         if let location = locationManger.location {
             CLGeocoder().reverseGeocodeLocation(location) { placemarks, error in
                 if let error = error {
