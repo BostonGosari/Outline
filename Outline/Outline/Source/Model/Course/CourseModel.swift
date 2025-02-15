@@ -148,6 +148,24 @@ extension CourseModel {
         }
     }
 
+    func readCourse(id: String) async throws -> GPSArtCourse {
+        return try await withCheckedThrowingContinuation { continuation in
+            courseListRef.document(id).getDocument { (snapshot, error) in
+                guard let snapshot = snapshot, snapshot.exists, error == nil else {
+                    continuation.resume(throwing: GPSArtError.dataNotFound)
+                    return
+                }
+
+                do {
+                    let courseInfo = try snapshot.data(as: GPSArtCourse.self)
+                    continuation.resume(returning: courseInfo)
+                } catch {
+                    continuation.resume(throwing: GPSArtError.typeError)
+                }
+            }
+        }
+    }
+
     func readCategoryCourse(categoryType: CourseCategoryType) async throws -> CourseCategory {
         return try await withCheckedThrowingContinuation { continuation in
             var categoryId: String = ""
