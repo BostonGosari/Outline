@@ -122,7 +122,7 @@ private extension GPSArtHomeView {
                             viewModel.matched = true
                         }
                     } label: {
-                        BigCardView(course: viewModel.recommendedCoures[index], loading: $viewModel.loading, index: index, currentIndex: viewModel.currentIndex, namespace: namespace, showDetailView: showDetailView)
+                        BigCardView(loading: $viewModel.loading, course: viewModel.recommendedCoures[index],  index: index, currentIndex: viewModel.currentIndex, namespace: namespace, showDetailView: showDetailView)
                             .scaleEffect(viewModel.selectedCourse?.id == viewModel.recommendedCoures[index].id ? 0.96 : 1)
                     }
                     .buttonStyle(CardButton())

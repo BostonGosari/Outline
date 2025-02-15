@@ -15,7 +15,6 @@ struct RankingScrollView: View {
     @Binding var showDetailView: Bool
     @Binding var category: String
     var namespace: Namespace.ID
-    var zstackIndex: Int = 0
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
