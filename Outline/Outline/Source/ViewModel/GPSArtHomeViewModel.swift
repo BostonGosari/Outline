@@ -5,6 +5,7 @@
 //  Created by Hyunjun Kim on 10/19/23.
 //
 
+import Combine
 import CoreData
 import CoreLocation
 import CoreMotion
@@ -50,10 +51,20 @@ class GPSArtHomeViewModel: NSObject, CLLocationManagerDelegate, ObservableObject
     private let courseScoreModel = CourseScoreModel()
     private let courseModel = CourseModel()
     private let locationManager = CLLocationManager()
-    
+    private let environmentStateManager = EnvironmentStateManager.shared
+    private var cancellable = Set<AnyCancellable>()
+
+    @Published var showDetailView = false
+
     override init() {
         super.init()
         locationManager.delegate = self
+        environmentStateManager.$showDetail.sink { newValue in
+            if !newValue {
+                self.showDetailView = false
+            }
+        }
+        .store(in: &cancellable)
     }
 
     func onAppear() {
@@ -62,6 +73,13 @@ class GPSArtHomeViewModel: NSObject, CLLocationManagerDelegate, ObservableObject
             getAllCoursesFromFirebase()
         }
         checkNetworkError()
+    }
+
+    func selectCourse(_ course: CourseWithDistanceAndScore) {
+        showDetailView = true
+        matched = true
+        environmentStateManager.showDetail = true
+        environmentStateManager.selectedCourse = course
     }
 
     func getAllCoursesFromFirebase() {
@@ -129,7 +147,7 @@ private extension GPSArtHomeViewModel {
 
     /// course 정보를 받아서 현재 위치에서 course까지의 거리를 리턴합니다.
     func getLocationDistance(_ course: GPSArtCourse) -> CLLocationDistance {
-        var distance: Double = 0
+        var distance: Double = 100_000
         let userLocation = locationManager.location?.coordinate
         guard let firstCoordinate = course.coursePaths.first else {
             return CLLocationDistance(distance)

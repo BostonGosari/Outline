@@ -8,37 +8,11 @@
 import SwiftUI
 import MapKit
 import Kingfisher
-import FirebaseAnalytics
 
 struct CardDetailView: View {
-    @StateObject private var connectivityManager = ConnectivityManager.shared
-    @AppStorage("authState") var authState: AuthState = .logout
-    
-    @State private var isUnlocked = false
-    @State private var showAlert = false
-    @State private var showNeedLoginSheet = false
-    @StateObject var runningStartManager = RunningStartManager.shared
-    private let locationManager = CLLocationManager()
     @Environment(\.dismiss) var dismiss
-    
-    @Binding var showDetailView: Bool
-    var selectedCourse: CourseWithDistanceAndScore
-    var currentIndex: Int
+    @ObservedObject private var viewModel = CardDetailViewModel()
     var namespace: Namespace.ID
-    
-    @State private var appear = [false, false, false]
-    @State private var viewSize = 0.0
-    @State private var scrollViewOffset: CGFloat = 0
-    @State private var dragState: CGSize = .zero
-    @State private var isDraggable = true
-    @State private var progress: Double = 0.0
-    @State private var showCopyLocationPopup = false
-    
-    private let fadeInOffset: CGFloat = 10
-    private let dragStartRange: CGFloat = 60
-    private let scrollStartRange: CGFloat = 10
-    private let dragLimit: CGFloat = 60
-    private let scrollLimit: CGFloat = 40
     
     var body: some View {
         ZStack {
@@ -46,12 +20,12 @@ struct CardDetailView: View {
                 ZStack(alignment: .top) {
                     Color.gray900
                         .onScrollViewOffsetChanged { value in
-                            handleScrollViewOffset(value)
+                            viewModel.handleScrollViewOffset(value)
                         }
                     
                     VStack {
                         ZStack(alignment: .top) {
-                            if showDetailView {
+                            if viewModel.showDetailView {
                                 courseImage
                                 courseInformation
                             } else {
@@ -65,17 +39,18 @@ struct CardDetailView: View {
                         }
                         
                         CardDetailInformationView(
-                            showCopyLocationPopup: $showCopyLocationPopup, selectedCourse: selectedCourse.course
+                            showCopyLocationPopup: $viewModel.showCopyLocationPopup,
+                            selectedCourse: viewModel.selectedCourse?.course
                         )
-                        .opacity(appear[2] ? 1 : 0)
-                        .offset(y: appear[2] ? 0 : fadeInOffset)
+                        .opacity(viewModel.appear[2] ? 1 : 0)
+                        .offset(y: viewModel.appear[2] ? 0 : viewModel.fadeInOffset)
                     }
                     .mask(
-                        RoundedRectangle(cornerRadius: viewSize / 2, style: .continuous)
+                        RoundedRectangle(cornerRadius: viewModel.viewSize / 2, style: .continuous)
                     )
-                    .scaleEffect(showDetailView ? max(viewSize / -600 + 1, 0.9) : 0.9)
-                    .gesture(isDraggable ? drag : nil)
-                    
+                    .scaleEffect(viewModel.showDetailView ? max(viewModel.viewSize / -600 + 1, 0.9) : 0.9)
+                    .gesture(viewModel.isDraggable ? drag : nil)
+
                     slideToUnlock
                         .padding(.top, UIScreen.main.bounds.height * 0.68 - 95)
                         .frame(maxHeight: .infinity, alignment: .top)
@@ -84,23 +59,23 @@ struct CardDetailView: View {
                     closeButton
                     
                     Color.black
-                        .opacity(progress * 0.8)
-                        .animation(.easeInOut, value: progress)
+                        .opacity(viewModel.progress * 0.8)
+                        .animation(.easeInOut, value: viewModel.progress)
                 }
-                .onChange(of: showDetailView) { _, _ in
-                    fadeOut()
+                .onChange(of: viewModel.showDetailView) { _, _ in
+                    viewModel.fadeOut()
                 }
                 .onAppear {
-                    fadeIn()
+                    viewModel.fadeIn()
                 }
             }
-            .scrollIndicators(scrollViewOffset > scrollStartRange ? .hidden : .automatic)
-            .scrollDisabled(!showDetailView)
+            .scrollIndicators(viewModel.scrollViewOffset > viewModel.scrollStartRange ? .hidden : .automatic)
+            .scrollDisabled(!viewModel.showDetailView)
             .ignoresSafeArea(edges: .top)
             .statusBarHidden()
         }
         .overlay {
-            if showCopyLocationPopup {
+            if viewModel.showCopyLocationPopup {
                 RunningPopup(text: "시작 위치 도로명이 복사되었어요.")
                     .frame(maxHeight: .infinity, alignment: .top)
                     .padding(.top, 52)
@@ -108,70 +83,61 @@ struct CardDetailView: View {
                 EmptyView()
             }
         }
-        .sheet(isPresented: $showAlert) {
-            progress = 0.0
+        .sheet(isPresented: $viewModel.showAlert) {
+            viewModel.progress = 0.0
         } content: {
             GuideToFreeRunningSheet {
-                showDetailView = false
-                runningStartManager.start = true
-                runningStartManager.startFreeRun()
-                
-                let runningInfo = MirroringRunningInfo(runningType: .free, courseName: "자유아트", course: [])
-                connectivityManager.sendRunningInfo(runningInfo)
+                viewModel.changeToFreeRunning()
             }
         }
-        .sheet(isPresented: $showNeedLoginSheet) {
+        .sheet(isPresented: $viewModel.showNeedLoginSheet) {
             NeedLoginSheet(type: .running) {
-                showDetailView = false
+                viewModel.showDetailView = false
             }
         }
         .onAppear {
-            if authState == .lookAround {
-                showNeedLoginSheet = true
-            }
-            
-            // 코스별 클릭수
-            Analytics.logEvent("clicked_course", parameters: [
-                "card_name": selectedCourse.course.courseName,
-                "card_distance": String(format: "%.0f", selectedCourse.distance/1000)
-            ])
+            viewModel.onAppear()
         }
     }
     
     // MARK: - View Components
-    
+
+    @ViewBuilder
     private var courseImage: some View {
-        KFImage(URL(string: selectedCourse.course.thumbnail))
-            .resizable()
-            .placeholder {
-                Rectangle()
-                    .foregroundColor(.clear)
-            }
-            .mask {
-                UnevenRoundedRectangle(bottomTrailingRadius: 45, style: .circular)
-            }
-            .overlay {
-                UnevenRoundedRectangle(bottomTrailingRadius: 45, style: .circular)
-                    .stroke(LinearGradient(colors: [.gray600, .clear, .clear, .clear], startPoint: .bottomTrailing, endPoint: .top), lineWidth: 1)
-            }
-            .matchedGeometryEffect(id: selectedCourse.id, in: namespace)
-            .frame(
-                //                width: UIScreen.main.bounds.width + 2,
-                height: UIScreen.main.bounds.height * 0.68
-            )
-            .offset(y: -1)
+        if let selectedCourse = viewModel.selectedCourse {
+            KFImage(URL(string: selectedCourse.course.thumbnail))
+                .resizable()
+                .placeholder {
+                    Rectangle()
+                        .foregroundColor(.clear)
+                }
+                .mask {
+                    UnevenRoundedRectangle(bottomTrailingRadius: 45, style: .circular)
+                }
+                .overlay {
+                    UnevenRoundedRectangle(bottomTrailingRadius: 45, style: .circular)
+                        .stroke(LinearGradient(colors: [.gray600, .clear, .clear, .clear], startPoint: .bottomTrailing, endPoint: .top), lineWidth: 1)
+                }
+                .matchedGeometryEffect(id: selectedCourse.id, in: namespace)
+                .frame(
+                    //                width: UIScreen.main.bounds.width + 2,
+                    height: UIScreen.main.bounds.height * 0.68
+                )
+                .offset(y: -1)
+        }
+
     }
     
     private var courseInformation: some View {
         VStack(alignment: .leading) {
             VStack(alignment: .leading, spacing: 0) {
-                Text("\(selectedCourse.course.courseName)")
+                Text("\(viewModel.selectedCourse?.course.courseName ?? "")")
                     .font(.customHeadline)
                     .fontWeight(.semibold)
                     .padding(.bottom, 8)
                 HStack {
                     Image(systemName: "mappin")
-                    Text("\(selectedCourse.course.locationInfo.locality) \(selectedCourse.course.locationInfo.subLocality) • 내 위치에서 \(selectedCourse.distance/1000, specifier: "%.1f")km")
+                    Text("\(viewModel.selectedCourse?.course.locationInfo.locality ?? "") \(viewModel.selectedCourse?.course.locationInfo.subLocality ?? "") • 내 위치에서 \((viewModel.selectedCourse?.distance ?? 0)/1000, specifier: "%.1f")km")
                 }
                 .font(.customSubbody)
                 .fontWeight(.regular)
@@ -179,8 +145,8 @@ struct CardDetailView: View {
                 .padding(.bottom, 16)
             }
             .padding(.top, getSafeArea().bottom == 0 ? 30 : 60)
-            .opacity(appear[0] ? 1 : 0)
-            .offset(y: appear[0] ? 0 : fadeInOffset)
+            .opacity(viewModel.appear[0] ? 1 : 0)
+            .offset(y: viewModel.appear[0] ? 0 : viewModel.fadeInOffset)
         }
         .padding(40)
         .padding(.bottom, 80)
@@ -191,48 +157,27 @@ struct CardDetailView: View {
     }
     
     private var slideToUnlock: some View {
-        SlideToUnlock(isUnlocked: $isUnlocked, progress: $progress)
-            .onChange(of: isUnlocked) { _, newValue in
-                if newValue {
-                    if runningStartManager.checkAuthorization() {
-                        let course = selectedCourse.course
-                        let runningInfo = MirroringRunningInfo(runningType: .gpsArt, courseName: course.courseName, course: course.coursePaths, heading: course.heading)
-                        
-                        if runningStartManager.checkDistance(course: course.coursePaths) {
-                            runningStartManager.startCourse = selectedCourse.course
-                            runningStartManager.startGPSArtRun()
-                            connectivityManager.sendRunningInfo(runningInfo)
-                            showDetailView = false
-                            runningStartManager.start = true
-                        } else {
-                            withAnimation {
-                                showAlert = true
-                            }
-                        }
-                    }
-                    isUnlocked = false
-                }
-            }
-            .opacity(appear[1] ? 1 : 0)
-            .offset(y: appear[1] ? 0 : fadeInOffset)
+        SlideToUnlock(isUnlocked: $viewModel.isUnlocked, progress: $viewModel.progress)
+            .opacity(viewModel.appear[1] ? 1 : 0)
+            .offset(y: viewModel.appear[1] ? 0 : viewModel.fadeInOffset)
             .padding(-10)
     }
     
     private var closeButton: some View {
         Button {
             withAnimation(.easeInOut) {
-                showDetailView = false
+                viewModel.showDetailView = false
             }
         } label: {
             Image(systemName: "xmark.circle.fill")
                 .font(.system(size: 30))
-                .foregroundColor(viewSize > 15 ? .clear : .customPrimary)
+                .foregroundColor(viewModel.viewSize > 15 ? .clear : .customPrimary)
         }
-        .animation(.easeInOut, value: viewSize)
+        .animation(.easeInOut, value: viewModel.viewSize)
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
         .padding(20)
-        .opacity(appear[1] ? 1 : 0)
-        .offset(y: appear[1] ? 0 : fadeInOffset)
+        .opacity(viewModel.appear[1] ? 1 : 0)
+        .offset(y: viewModel.appear[1] ? 0 : viewModel.fadeInOffset)
     }
 }
 
@@ -242,93 +187,14 @@ extension CardDetailView {
     var drag: some Gesture {
         DragGesture(minimumDistance: 20, coordinateSpace: .local)
             .onChanged { value in
-                if value.translation.width > 0 {
-                    if value.startLocation.x < dragStartRange {
-                        withAnimation {
-                            dragState = value.translation
-                            viewSize = dragState.width
-                        }
-                        if viewSize > dragLimit {
-                            withAnimation(.easeInOut) {
-                                showDetailView = false
-                                dragState = .zero
-                            }
-                        }
-                    }
-                } else {
-                    if value.startLocation.x > UIScreen.main.bounds.width - dragStartRange {
-                        withAnimation {
-                            dragState = value.translation
-                            viewSize = -dragState.width
-                        }
-                        
-                        if viewSize > dragLimit {
-                            withAnimation(.easeInOut) {
-                                showDetailView = false
-                                dragState = .zero
-                                viewSize = 0.0
-                            }
-                        }
-                    }
-                }
+                viewModel.onDrag(value)
             }
             .onEnded { _ in
-                if viewSize >= dragLimit {
-                    withAnimation(.easeInOut) {
-                        showDetailView = false
-                        viewSize = 0.0
-                    }
-                } else {
-                    withAnimation {
-                        dragState = .zero
-                        viewSize = 0.0
-                    }
-                }
+                viewModel.dragEnded()
             }
     }
 }
 
-// MARK: - View Functions
-
-extension CardDetailView {
-    private func fadeIn() {
-        withAnimation(.easeOut.delay(0.3)) {
-            appear[0] = true
-        }
-        withAnimation(.easeOut.delay(0.45)) {
-            appear[1] = true
-        }
-        withAnimation(.easeOut.delay(0.6)) {
-            appear[2] = true
-        }
-    }
-    
-    private func fadeOut() {
-        withAnimation(.easeIn(duration: 0.1)) {
-            appear[0] = false
-            appear[1] = false
-            appear[2] = false
-        }
-    }
-    
-    private func handleScrollViewOffset(_ value: CGFloat) {
-        if dragState.width == 0 {
-            scrollViewOffset = value
-            
-            if scrollViewOffset > scrollStartRange {
-                viewSize = scrollViewOffset - scrollStartRange
-                
-                if scrollViewOffset > scrollLimit {
-                    withAnimation(.easeInOut) {
-                        showDetailView = false
-                    }
-                }
-            } else {
-                viewSize = 0
-            }
-        }
-    }
-}
 
 #Preview {
     HomeTabView()

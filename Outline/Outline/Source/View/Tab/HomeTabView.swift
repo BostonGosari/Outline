@@ -11,8 +11,8 @@ struct HomeTabView: View {
     @StateObject private var runningManager = RunningStartManager.shared
     @StateObject var runningDataManager = RunningDataManager.shared
     @StateObject var watchConnectivityManager = ConnectivityManager.shared
+    @StateObject private var environmentStateManager = EnvironmentStateManager.shared
     @State private var selectedTab: Tab = .GPSArtRunning
-    @State private var showDetailView = false
     @State private var showMirroringSheet = false
     
     var body: some View {
@@ -26,7 +26,7 @@ struct HomeTabView: View {
                             case .freeRunning:
                                 FreeRunningHomeView()
                             case .GPSArtRunning:
-                                GPSArtHomeView(showDetailView: $showDetailView)
+                                GPSArtHomeView()
                             case .myRecord:
                                 RecordView()
                             }
@@ -34,7 +34,7 @@ struct HomeTabView: View {
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                         TabBar(selectedTab: $selectedTab)
                             .frame(maxHeight: .infinity, alignment: .bottom)
-                            .opacity(showDetailView ? 0 : 1)
+                            .opacity(environmentStateManager.showDetail ? 0 : 1)
                             .ignoresSafeArea()
                             .offset(y: getSafeArea().bottom == 0 ? 25 : 0)
                     }

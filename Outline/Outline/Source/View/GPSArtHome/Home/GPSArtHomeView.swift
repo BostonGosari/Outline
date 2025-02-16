@@ -8,9 +8,7 @@
 import SwiftUI
 
 struct GPSArtHomeView: View {
-    @Binding var showDetailView: Bool
     @StateObject private var viewModel = GPSArtHomeViewModel()
-
     @Namespace private var namespace
 
     private let indicatorWidth: CGFloat = 25
@@ -39,24 +37,19 @@ struct GPSArtHomeView: View {
                         bigCardIndexIndicator
 
                         CategoryScrollView(
-                            selectedCourse: $viewModel.selectedCourse,
                             courseList: $viewModel.firstCourseList,
-                            showDetailView: $showDetailView,
                             category: $viewModel.firstCategoryTitle,
                             namespace: namespace
                         )
                         RankingScrollView(
-                            selectedCourse: $viewModel.selectedCourse,
                             courseList: $viewModel.secondCourseList,
-                            showDetailView: $showDetailView,
                             category: $viewModel.secondCategoryTitle,
                             namespace: namespace
                         )
                         CategoryScrollView(
-                            selectedCourse: $viewModel.selectedCourse,
                             courseList: $viewModel.thirdCourseList,
-                            showDetailView: $showDetailView,
-                            category: $viewModel.thirdCategoryTitle, namespace: namespace
+                            category: $viewModel.thirdCategoryTitle,
+                            namespace: namespace
                         )
                         .padding(.bottom, 120)
                     }
@@ -71,9 +64,9 @@ struct GPSArtHomeView: View {
                     viewModel.getAllCoursesFromFirebase()
                 }
             }
-            if let selectedCourse = viewModel.selectedCourse, showDetailView {
+            if viewModel.showDetailView {
                 Color.gray900.ignoresSafeArea()
-                CardDetailView(showDetailView: $showDetailView, selectedCourse: selectedCourse, currentIndex: viewModel.currentIndex, namespace: namespace)
+                CardDetailView(namespace: namespace)
                     .zIndex(1)
                     .ignoresSafeArea()
                     .transition(
@@ -84,6 +77,7 @@ struct GPSArtHomeView: View {
                     )
             }
         }
+        .environmentObject(viewModel)
     }
 }
 
@@ -117,16 +111,14 @@ private extension GPSArtHomeView {
                 ForEach(viewModel.recommendedCoures.indices, id: \.self) { index in
                     Button {
                         withAnimation(.bouncy(duration: 0.7)) {
-                            viewModel.selectedCourse = viewModel.recommendedCoures[index]
-                            showDetailView = true
-                            viewModel.matched = true
+                            viewModel.selectCourse(viewModel.recommendedCoures[index])
                         }
                     } label: {
                         BigCardView(
                             loading: $viewModel.loading,
                             course: viewModel.recommendedCoures[index],
                             index: index, currentIndex: viewModel.currentIndex,
-                            namespace: namespace, showDetailView: showDetailView
+                            namespace: namespace, showDetailView: viewModel.showDetailView
                         )
                         .scaleEffect(viewModel.selectedCourse?.id == viewModel.recommendedCoures[index].id ? 0.96 : 1)
                     }

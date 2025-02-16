@@ -11,12 +11,11 @@ struct SlideToUnlock: View {
     
     @Binding var isUnlocked: Bool
     @Binding var progress: Double
-    
+    @State private var width: CGFloat = 70
+    @State private var isReached = false
+
     private let maxWidth: CGFloat = 320
     private let minWidth: CGFloat = 70
-    @State private var width: CGFloat = 70
-    
-    @State private var isReached = false
     
     var body: some View {
         ZStack(alignment: .leading) {
