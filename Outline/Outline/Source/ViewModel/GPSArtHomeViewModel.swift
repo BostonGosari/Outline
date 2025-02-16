@@ -5,6 +5,7 @@
 //  Created by Hyunjun Kim on 10/19/23.
 //
 
+import Combine
 import CoreData
 import CoreLocation
 import CoreMotion
@@ -18,246 +19,84 @@ struct CourseWithDistanceAndScore: Identifiable, Hashable {
 }
 
 class GPSArtHomeViewModel: NSObject, CLLocationManagerDelegate, ObservableObject {
-    @Published var courses: AllGPSArtCourses = []
+    /// 전체 코스 정보
+    @Published var courses: [GPSArtCourse] = []
     @Published var coursesForWatch: [GPSArtCourse] = []
 
+    /// 코스 관련 정보
     @Published var coursesWithDistance: [CourseWithDistanceAndScore] = []
     @Published var recommendedCoures: [CourseWithDistanceAndScore] = []
-    
     @Published var firstCategoryTitle: String = ""
     @Published var secondCategoryTitle: String = ""
     @Published var thirdCategoryTitle: String = ""
     @Published var firstCourseList: [CourseWithDistanceAndScore] = []
     @Published var secondCourseList: [CourseWithDistanceAndScore] = []
     @Published var thirdCourseList: [CourseWithDistanceAndScore] = []
+
+    @Published var selectedCourse: CourseWithDistanceAndScore?
+    @Published var matched = false
+
+    /// 스크롤 대응을 위한 프로퍼티
+    @Published var scrollOffset: CGFloat = 0
+    @Published var scrollXOffset: CGFloat = 0
+
+    /// BigCard 설정을 위한 index
+    @Published var currentIndex: Int = 1
+
+    /// 네트워크 에러 핸들링을 위한 프로퍼티
+    @Published var loading = true
+    @Published var showNetworkErrorView = false
+    let maxLoadingTime: TimeInterval = 5
+
     private let courseScoreModel = CourseScoreModel()
     private let courseModel = CourseModel()
     private let locationManager = CLLocationManager()
-    
+    private let environmentStateManager = EnvironmentStateManager.shared
+    private var cancellable = Set<AnyCancellable>()
+
+    @Published var showDetailView = false
+
     override init() {
         super.init()
-        locationManager.delegate = self    }
-    
+        locationManager.delegate = self
+        environmentStateManager.$showDetail.sink { newValue in
+            if !newValue {
+                self.showDetailView = false
+            }
+        }
+        .store(in: &cancellable)
+    }
+
+    func onAppear() {
+        checkLocationAuthorization()
+        if courses.isEmpty {
+            getAllCoursesFromFirebase()
+        }
+        checkNetworkError()
+    }
+
+    func selectCourse(_ course: CourseWithDistanceAndScore) {
+        showDetailView = true
+        matched = true
+        environmentStateManager.showDetail = true
+        environmentStateManager.selectedCourse = course
+    }
+
     func getAllCoursesFromFirebase() {
         courseModel.readAllCourses { result in
             switch result {
             case .success(let courseList):
-                self.courses.removeAll()
-                self.recommendedCoures.removeAll()
-                self.coursesWithDistance.removeAll()
-                self.firstCourseList.removeAll()
-                self.secondCourseList.removeAll()
-                self.thirdCourseList.removeAll()
                 self.courses = courseList
-                self.fetchRecommendedCourses()
+                self.setCourseWithDistance()
+                self.setRecommendedCourses()
                 self.sendCoursesToWatch()
-                self.readFirstCourseList()
-                self.readSecondCourseList()
-                self.readThirdCourseList()
+                self.setDetailCourses()
             case .failure(let error):
                 print(error)
             }
         }
     }
-    
-    func sendCoursesToWatch() {
-        ConnectivityManager.shared.sendGPSArtCourses(coursesForWatch)
-    }
-    
-    func fetchRecommendedCourses() {
-        let userLocation = locationManager.location?.coordinate
 
-        for course in self.courses {
-            guard let firstCoordinate = course.coursePaths.first else { continue }
-            let courseLocation = CLLocation(latitude: firstCoordinate.latitude, longitude: firstCoordinate.longitude)
-            var distance: Double = 0
-
-            if let location = userLocation {
-                let currentCLLocation = CLLocation(latitude: location.latitude, longitude: location.longitude)
-                distance = currentCLLocation.distance(from: courseLocation)
-            }
-
-            // Fetch the score for the course
-            courseScoreModel.getScore(id: course.id) { result in
-                switch result {
-                case .success(let score):
-                    let courseWithScore = CourseWithDistanceAndScore(course: course, distance: distance, score: score)
-                    self.coursesWithDistance.append(courseWithScore)
-                case .failure(let failure):
-                    print("Failed to get score for course \(course.id): \(failure)")
-                }
-            }
-        }
-
-        // Sort the courses by distance
-        coursesWithDistance.sort { $0.distance < $1.distance }
-
-        // Update the recommended courses
-        self.recommendedCoures = Array(coursesWithDistance.prefix(3))
-        coursesForWatch = coursesWithDistance.map { $0.course }
-    }
-
-    func readFirstCourseList() {
-       
-        courseModel.readCategoryCourse(categoryType: .category1) { result in
-            switch result {
-            case .success(let courseCategory):
-                self.firstCategoryTitle = courseCategory.title
-                for courseId in courseCategory.courseIdList {
-                    self.courseModel.readCourse(id: courseId) { resultOfReadingCourse in
-                        switch resultOfReadingCourse {
-                        case .success(let gpsArtCourseList):
-                            // Fetch the score for the course
-                            self.courseScoreModel.getScore(id: courseId) { result in
-                                switch result {
-                                case .success(let score):
-                                    // Get user location
-                                    let userLocation = self.locationManager.location?.coordinate
-                                    let courseWithScore: CourseWithDistanceAndScore
-
-                                    if let firstCoordinate = gpsArtCourseList.coursePaths.first, let location = userLocation {
-                                        let courseLocation = CLLocation(latitude: firstCoordinate.latitude, longitude: firstCoordinate.longitude)
-                                        let currentCLLocation = CLLocation(latitude: location.latitude, longitude: location.longitude)
-                                        let distance = currentCLLocation.distance(from: courseLocation)
-                                        courseWithScore = CourseWithDistanceAndScore(course: gpsArtCourseList, distance: distance, score: score)
-                                    } else {
-                                        // If location is not available, set distance to 0
-                                        courseWithScore = CourseWithDistanceAndScore(course: gpsArtCourseList, distance: 0, score: score)
-                                    }
-
-                                    self.firstCourseList.append(courseWithScore)
-                                    if self.firstCourseList.count == 5 {
-                                        let sortedCourseWithScores = self.firstCourseList.sorted(by: { (course1, course2) -> Bool in
-                                            guard let index1 = courseCategory.courseIdList.firstIndex(of: course1.course.id),
-                                                  let index2 = courseCategory.courseIdList.firstIndex(of: course2.course.id) else {
-                                                return false
-                                            }
-                                            return index1 < index2
-                                        })
-                                        self.firstCourseList = sortedCourseWithScores
-                                    }
-                                case .failure(let failure):
-                                    print("Failed to get score for course \(courseId): \(failure)")
-                                }
-                            }
-                        case .failure(let failure):
-                            print("fail to read fire courseList \(failure)")
-                        }
-                    }
-                }
-             
-            case .failure(let failure):
-                print("fail to read category \(failure)")
-            }
-        }
-    }
-
-    func readSecondCourseList() {
-        courseModel.readCategoryCourse(categoryType: .category2) { result in
-            switch result {
-            case .success(let courseCategory):
-                self.secondCategoryTitle = courseCategory.title
-                for courseId in courseCategory.courseIdList {
-                    self.courseModel.readCourse(id: courseId) { resultOfReadingCourse in
-                        switch resultOfReadingCourse {
-                        case .success(let gpsArtCourseList):
-                            // Fetch the score for the course
-                            self.courseScoreModel.getScore(id: courseId) { result in
-                                switch result {
-                                case .success(let score):
-                                    // Get user location
-                                    let userLocation = self.locationManager.location?.coordinate
-                                    let courseWithScore: CourseWithDistanceAndScore
-
-                                    if let firstCoordinate = gpsArtCourseList.coursePaths.first, let location = userLocation {
-                                        let courseLocation = CLLocation(latitude: firstCoordinate.latitude, longitude: firstCoordinate.longitude)
-                                        let currentCLLocation = CLLocation(latitude: location.latitude, longitude: location.longitude)
-                                        let distance = currentCLLocation.distance(from: courseLocation)
-                                        courseWithScore = CourseWithDistanceAndScore(course: gpsArtCourseList, distance: distance, score: score)
-                                    } else {
-                                        // If location is not available, set distance to 0
-                                        courseWithScore = CourseWithDistanceAndScore(course: gpsArtCourseList, distance: 0, score: score)
-                                    }
-
-                                    self.secondCourseList.append(courseWithScore)
-                                    if self.secondCourseList.count == 5 {
-                                        let sortedCourseWithScores = self.secondCourseList.sorted(by: { (course1, course2) -> Bool in
-                                            guard let index1 = courseCategory.courseIdList.firstIndex(of: course1.course.id),
-                                                  let index2 = courseCategory.courseIdList.firstIndex(of: course2.course.id) else {
-                                                return false
-                                            }
-                                            return index1 < index2
-                                        })
-                                        self.secondCourseList = sortedCourseWithScores
-                                    }
-                                case .failure(let failure):
-                                    print("Failed to get score for course \(courseId): \(failure)")
-                                }
-                            }
-                        case .failure(let failure):
-                            print("fail to read fire courseList \(failure)")
-                        }
-                    }
-                }
-            case .failure(let failure):
-                print("fail to read category \(failure)")
-            }
-        }
-    }
-
-    func readThirdCourseList() {
-        courseModel.readCategoryCourse(categoryType: .category3) { result in
-            switch result {
-            case .success(let courseCategory):
-                self.thirdCategoryTitle = courseCategory.title
-                for courseId in courseCategory.courseIdList {
-                    self.courseModel.readCourse(id: courseId) { resultOfReadingCourse in
-                        switch resultOfReadingCourse {
-                        case .success(let gpsArtCourseList):
-                            // Fetch the score for the course
-                            self.courseScoreModel.getScore(id: courseId) { result in
-                                switch result {
-                                case .success(let score):
-                                    // Get user location
-                                    let userLocation = self.locationManager.location?.coordinate
-                                    let courseWithScore: CourseWithDistanceAndScore
-
-                                    if let firstCoordinate = gpsArtCourseList.coursePaths.first, let location = userLocation {
-                                        let courseLocation = CLLocation(latitude: firstCoordinate.latitude, longitude: firstCoordinate.longitude)
-                                        let currentCLLocation = CLLocation(latitude: location.latitude, longitude: location.longitude)
-                                        let distance = currentCLLocation.distance(from: courseLocation)
-                                        courseWithScore = CourseWithDistanceAndScore(course: gpsArtCourseList, distance: distance, score: score)
-                                    } else {
-                                        // If location is not available, set distance to 0
-                                        courseWithScore = CourseWithDistanceAndScore(course: gpsArtCourseList, distance: 0, score: score)
-                                    }
-
-                                    self.thirdCourseList.append(courseWithScore)
-                                    if self.thirdCourseList.count == 5 {
-                                        let sortedCourseWithScores = self.thirdCourseList.sorted(by: { (course1, course2) -> Bool in
-                                            guard let index1 = courseCategory.courseIdList.firstIndex(of: course1.course.id),
-                                                  let index2 = courseCategory.courseIdList.firstIndex(of: course2.course.id) else {
-                                                return false
-                                            }
-                                            return index1 < index2
-                                        })
-                                        self.thirdCourseList = sortedCourseWithScores
-                                    }
-                                case .failure(let failure):
-                                    print("Failed to get score for course \(courseId): \(failure)")
-                                }
-                            }
-                        case .failure(let failure):
-                            print("fail to read fire courseList \(failure)")
-                        }
-                    }
-                }
-            case .failure(let failure):
-                print("fail to read category \(failure)")
-            }
-        }
-    }
-    
     func checkLocationAuthorization() {
         switch locationManager.authorizationStatus {
         case .notDetermined:
@@ -270,14 +109,117 @@ class GPSArtHomeViewModel: NSObject, CLLocationManagerDelegate, ObservableObject
             break
         }
     }
-    
+
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         checkLocationAuthorization()
     }
-    
+}
+
+private extension GPSArtHomeViewModel {
+    func checkNetworkError() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + maxLoadingTime) { [weak self] in
+            if let loading = self?.loading, loading{
+                self?.showNetworkErrorView = true
+            }
+        }
+    }
+
+    func sendCoursesToWatch() {
+        coursesForWatch = coursesWithDistance.map { $0.course }
+        ConnectivityManager.shared.sendGPSArtCourses(coursesForWatch)
+    }
+
+    /// 코스들을 모두 거리순으로 정렬하여 courseWithDistance를 설정합니다.
+    func setCourseWithDistance() {
+        var newCoursesWithDistance = [CourseWithDistanceAndScore]()
+        for course in courses {
+            let distance = getLocationDistance(course)
+            let courseWithScore = CourseWithDistanceAndScore(course: course, distance: distance, score: 0)
+            newCoursesWithDistance.append(courseWithScore)
+        }
+        self.coursesWithDistance = newCoursesWithDistance.sorted { $0.distance < $1.distance }
+    }
+
+    /// Update the recommended courses
+    func setRecommendedCourses() {
+        self.recommendedCoures = Array(coursesWithDistance.prefix(3))
+    }
+
+    /// course 정보를 받아서 현재 위치에서 course까지의 거리를 리턴합니다.
+    func getLocationDistance(_ course: GPSArtCourse) -> CLLocationDistance {
+        var distance: Double = 100_000
+        let userLocation = locationManager.location?.coordinate
+        guard let firstCoordinate = course.coursePaths.first else {
+            return CLLocationDistance(distance)
+        }
+        let courseLocation = CLLocation(latitude: firstCoordinate.latitude, longitude: firstCoordinate.longitude)
+
+        if let location = userLocation {
+            let currentCLLocation = CLLocation(latitude: location.latitude, longitude: location.longitude)
+            distance = currentCLLocation.distance(from: courseLocation)
+            return CLLocationDistance(distance)
+        } else {
+            return CLLocationDistance(distance)
+        }
+    }
+
+
+    /// 각 카테고리에 맞는 코스를 설정합니다.
+    func setDetailCourses() {
+        Task {
+            do {
+                if let first = try await getCourseList(category: .category1) {
+                    DispatchQueue.main.sync {
+                        self.firstCategoryTitle = first.0
+                        self.firstCourseList = first.1
+                    }
+                }
+                if let second = try await getCourseList(category: .category2) {
+                    DispatchQueue.main.sync {
+                        self.secondCategoryTitle = second.0
+                        self.secondCourseList = second.1
+                    }
+                }
+                if let third = try await getCourseList(category: .category3) {
+                    DispatchQueue.main.sync {
+                        self.thirdCategoryTitle = third.0
+                        self.thirdCourseList = third.1
+                    }
+                }
+            } catch {
+
+            }
+        }
+    }
+
+    /// 카테고리에 맞는 코스를 모두 가져와서 리턴합니다.
+    func getCourseList(category: CourseCategoryType) async throws -> (String, [CourseWithDistanceAndScore])? {
+        let course = try await courseModel.readCategoryCourse(categoryType: category)
+        var courseList = [CourseWithDistanceAndScore]()
+        for courseId in course.courseIdList {
+            guard let courseInfo = try? await courseModel.readCourse(id: courseId) else {
+                // 카테고리에는 있지만, 전체 코스에는 없는 데이터가 있으면 종료되는 것을 방지
+                continue
+            }
+            let distance = getLocationDistance(courseInfo)
+            let courseWithScore = CourseWithDistanceAndScore(course: courseInfo, distance: distance, score: 0)
+            courseList.append(courseWithScore)
+        }
+        if courseList.count >= 5 {
+            courseList = courseList.sorted(by: { (course1, course2) -> Bool in
+                guard let index1 = course.courseIdList.firstIndex(of: course1.course.id),
+                      let index2 = course.courseIdList.firstIndex(of: course2.course.id) else {
+                    return false
+                }
+                return index1 < index2
+            })
+        }
+        return (course.title, courseList)
+    }
+
     private func requestMotionAccess() {
         let motionManager = CMMotionActivityManager()
-        
+
         if CMMotionActivityManager.isActivityAvailable() {
             motionManager.queryActivityStarting(from: Date(), to: Date(), to: .main) { _, _ in }
         }

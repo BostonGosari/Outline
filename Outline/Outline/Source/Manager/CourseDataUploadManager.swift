@@ -160,7 +160,7 @@ final class CourseDataUploadManager {
         }
     }
     
-    func readAllCourses(completion: @escaping (Result<AllGPSArtCourses, GPSArtError>) -> Void) {
+    func readAllCourses(completion: @escaping (Result<[GPSArtCourse], GPSArtError>) -> Void) {
         courseListRef.getDocuments { (snapshot, error) in
             guard let snapshot = snapshot, error == nil else {
                 completion(.failure(.dataNotFound))

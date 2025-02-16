@@ -7,8 +7,6 @@
 
 import SwiftUI
 
-typealias AllGPSArtCourses = [GPSArtCourse]
-
 struct GPSArtCourse: Codable, Hashable {
     var id: String
     var courseName: String

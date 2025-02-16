@@ -147,6 +147,9 @@
 		29F835CF2B0894DB0052C3C1 /* BigCardBackside.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F835CE2B0894DB0052C3C1 /* BigCardBackside.swift */; };
 		29FEDC5E2AED81A800C1F80B /* Shimmer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FEDC5D2AED81A800C1F80B /* Shimmer.swift */; };
 		3A0740462D5F049600984303 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0740452D5F049600984303 /* LoginView.swift */; };
+		3A0740502D5F1D9F00984303 /* FreeRunningViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A07404F2D5F1D9E00984303 /* FreeRunningViewModel.swift */; };
+		3A5BBA762D61BD54008F4915 /* CardDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5BBA752D61BD54008F4915 /* CardDetailViewModel.swift */; };
+		3A5BBA782D61C557008F4915 /* EnvironmentStateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5BBA772D61C557008F4915 /* EnvironmentStateManager.swift */; };
 		9528EFE92ADE9E870056CCC6 /* UserCoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 95EB1EF62ADE251100B47984 /* UserCoreDataModel.xcdatamodeld */; };
 		9528EFEA2ADE9E870056CCC6 /* UserCoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 95EB1EF62ADE251100B47984 /* UserCoreDataModel.xcdatamodeld */; };
 		9528EFEC2ADEC7CF0056CCC6 /* RunningRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9528EFEB2ADEC7CF0056CCC6 /* RunningRecord.swift */; };
@@ -233,7 +236,7 @@
 		F01FDB992ADABB6100BDA633 /* TabModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01FDB982ADABB6100BDA633 /* TabModel.swift */; };
 		F01FDB9C2ADABC4600BDA633 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01FDB9B2ADABC4600BDA633 /* TabBar.swift */; };
 		F03524102AE35AF800CCD8A6 /* RunningDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F035240F2AE35AF800CCD8A6 /* RunningDataManager.swift */; };
-		F0492E1D2ADD2AE900F6EADD /* GPSArtHomeHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0492E1C2ADD2AE900F6EADD /* GPSArtHomeHeader.swift */; };
+		F0492E1D2ADD2AE900F6EADD /* Header.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0492E1C2ADD2AE900F6EADD /* Header.swift */; };
 		F0492E212ADD52E900F6EADD /* TabWatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0492E202ADD52E900F6EADD /* TabWatchView.swift */; };
 		F0492E232ADD545200F6EADD /* CourseListWatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0492E222ADD545200F6EADD /* CourseListWatchView.swift */; };
 		F05C7D562ADC565E006842DB /* PreferenceKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05C7D552ADC565E006842DB /* PreferenceKey.swift */; };
@@ -451,6 +454,9 @@
 		29F835CE2B0894DB0052C3C1 /* BigCardBackside.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigCardBackside.swift; sourceTree = "<group>"; };
 		29FEDC5D2AED81A800C1F80B /* Shimmer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shimmer.swift; sourceTree = "<group>"; };
 		3A0740452D5F049600984303 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		3A07404F2D5F1D9E00984303 /* FreeRunningViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeRunningViewModel.swift; sourceTree = "<group>"; };
+		3A5BBA752D61BD54008F4915 /* CardDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetailViewModel.swift; sourceTree = "<group>"; };
+		3A5BBA772D61C557008F4915 /* EnvironmentStateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentStateManager.swift; sourceTree = "<group>"; };
 		9528EFEB2ADEC7CF0056CCC6 /* RunningRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningRecord.swift; sourceTree = "<group>"; };
 		9528EFFF2AE042570056CCC6 /* PathManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathManager.swift; sourceTree = "<group>"; };
 		9528F0052AE0B37B0056CCC6 /* IntroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroView.swift; sourceTree = "<group>"; };
@@ -518,7 +524,7 @@
 		F01FDB9B2ADABC4600BDA633 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 		F01FDB9D2ADABD3D00BDA633 /* HomeTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabView.swift; sourceTree = "<group>"; };
 		F035240F2AE35AF800CCD8A6 /* RunningDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningDataManager.swift; sourceTree = "<group>"; };
-		F0492E1C2ADD2AE900F6EADD /* GPSArtHomeHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPSArtHomeHeader.swift; sourceTree = "<group>"; };
+		F0492E1C2ADD2AE900F6EADD /* Header.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Header.swift; sourceTree = "<group>"; };
 		F0492E202ADD52E900F6EADD /* TabWatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabWatchView.swift; sourceTree = "<group>"; };
 		F0492E222ADD545200F6EADD /* CourseListWatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseListWatchView.swift; sourceTree = "<group>"; };
 		F05C7D552ADC565E006842DB /* PreferenceKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferenceKey.swift; sourceTree = "<group>"; };
@@ -791,6 +797,37 @@
 			path = Intro;
 			sourceTree = "<group>";
 		};
+		3A07404C2D5F0FFD00984303 /* DetailView */ = {
+			isa = PBXGroup;
+			children = (
+				F096974C2ADBDBB000C38AF4 /* CardDetailView.swift */,
+				F096974E2ADBEE9F00C38AF4 /* CardDetailInformationView.swift */,
+				0E7EE51E2B5E761E004F6BAF /* CardDetailInformationMapView.swift */,
+			);
+			path = DetailView;
+			sourceTree = "<group>";
+		};
+		3A07404D2D5F101500984303 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				BB5239362ADBD99F00646494 /* GPSArtHomeView.swift */,
+				295232F92AEED0630020EAFA /* BigCardView.swift */,
+				BB52396A2ADD385700646494 /* CategoryScrollView.swift */,
+				BB1C49E42B0B766D009625AC /* RankingScrollView.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		3A07404E2D5F109500984303 /* Legacy */ = {
+			isa = PBXGroup;
+			children = (
+				0E7EE5202B5E7C4B004F6BAF /* CardDetailMapView.swift */,
+				0EE0D4032B0DC34000E75F4C /* CardDetailMap.swift */,
+				F06298AA2AE1998D007AB2D3 /* MapInfoView.swift */,
+			);
+			path = Legacy;
+			sourceTree = "<group>";
+		};
 		958240732B0AFCAC00105FAE /* Score */ = {
 			isa = PBXGroup;
 			children = (
@@ -921,17 +958,8 @@
 		BB5239352ADBD95300646494 /* GPSArtHome */ = {
 			isa = PBXGroup;
 			children = (
-				BB5239362ADBD99F00646494 /* GPSArtHomeView.swift */,
-				295232F92AEED0630020EAFA /* BigCardView.swift */,
-				F0492E1C2ADD2AE900F6EADD /* GPSArtHomeHeader.swift */,
-				F096974C2ADBDBB000C38AF4 /* CardDetailView.swift */,
-				F096974E2ADBEE9F00C38AF4 /* CardDetailInformationView.swift */,
-				BB52396A2ADD385700646494 /* CategoryScrollView.swift */,
-				BB1C49E42B0B766D009625AC /* RankingScrollView.swift */,
-				F06298AA2AE1998D007AB2D3 /* MapInfoView.swift */,
-				0EE0D4032B0DC34000E75F4C /* CardDetailMap.swift */,
-				0E7EE51E2B5E761E004F6BAF /* CardDetailInformationMapView.swift */,
-				0E7EE5202B5E7C4B004F6BAF /* CardDetailMapView.swift */,
+				3A07404D2D5F101500984303 /* Home */,
+				3A07404C2D5F0FFD00984303 /* DetailView */,
 			);
 			path = GPSArtHome;
 			sourceTree = "<group>";
@@ -1055,6 +1083,7 @@
 				BB397D072AE6406600F92A43 /* Record */,
 				F01FDB9A2ADABC2C00BDA633 /* Tab */,
 				29BB88352C5F1D9A006B238D /* TestView */,
+				3A07404E2D5F109500984303 /* Legacy */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1065,10 +1094,13 @@
 				3A0740472D5F068400984303 /* Intro */,
 				95B8F4582AED27B200D9F35B /* Login */,
 				0E29F65E2ADF6CDD00F5EF5C /* RunningMapViewModel.swift */,
+				3A07404F2D5F1D9E00984303 /* FreeRunningViewModel.swift */,
 				0EE92E6B2AE00A33003192FF /* FinishRunningViewModel.swift */,
 				2915FA712C6BB036006890CD /* RecordViewModel.swift */,
 				0E9A5D472AE065A100C19FF3 /* ShareViewModel.swift */,
 				F0781D5F2AE163E00084ADD7 /* GPSArtHomeViewModel.swift */,
+				3A5BBA752D61BD54008F4915 /* CardDetailViewModel.swift */,
+				3A5BBA772D61C557008F4915 /* EnvironmentStateManager.swift */,
 				95C953CC2AF3BF760040B9DA /* ProfileViewModel.swift */,
 				954B04172AFF725000A8A83E /* ProfileUserInfoViewModel.swift */,
 			);
@@ -1169,6 +1201,7 @@
 				293C86C52B0778FD00640329 /* NeedLoginSheet.swift */,
 				2972515B2B0787640048D787 /* GuideToFreeRunningSheet.swift */,
 				BB02A3972B0CCFBE00250EDD /* ScoreStar.swift */,
+				F0492E1C2ADD2AE900F6EADD /* Header.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -1522,6 +1555,7 @@
 				2915FA7A2C6C57E4006890CD /* RecordListView.swift in Sources */,
 				29AE76E12ADE2C1700A46742 /* HomeTabView.swift in Sources */,
 				0E9A5D482AE065A100C19FF3 /* ShareViewModel.swift in Sources */,
+				3A5BBA762D61BD54008F4915 /* CardDetailViewModel.swift in Sources */,
 				F06298AF2AE1A2ED007AB2D3 /* CountDown.swift in Sources */,
 				29AE76AC2ADE0D9100A46742 /* OutlineApp.swift in Sources */,
 				29D6BAD92B09D4DE00BD8653 /* CardModel.swift in Sources */,
@@ -1592,6 +1626,7 @@
 				95EB1EF12ADE228A00B47984 /* UserInfoModelType.swift in Sources */,
 				29D7AD4E2B0E033000AAAAB0 /* MirroringMetricsView.swift in Sources */,
 				95A01E172AEE3E990093D9C0 /* KakaoAuthModel.swift in Sources */,
+				3A5BBA782D61C557008F4915 /* EnvironmentStateManager.swift in Sources */,
 				9528EFE92ADE9E870056CCC6 /* UserCoreDataModel.xcdatamodeld in Sources */,
 				F0781D602AE163E00084ADD7 /* GPSArtHomeViewModel.swift in Sources */,
 				299803552ADF5F1000A9A134 /* HealthKitManager.swift in Sources */,
@@ -1617,6 +1652,7 @@
 				BBEC68842B087B020026C306 /* UnderlineButton.swift in Sources */,
 				0EE92E6C2AE00A33003192FF /* FinishRunningViewModel.swift in Sources */,
 				F01FDB9C2ADABC4600BDA633 /* TabBar.swift in Sources */,
+				3A0740502D5F1D9F00984303 /* FreeRunningViewModel.swift in Sources */,
 				291A22352AF4CD94004B3D10 /* PermissionSheet.swift in Sources */,
 				95EB1EEC2ADDC66B00B47984 /* UserDataModel.swift in Sources */,
 				0E4D309D2B5FC85600582E37 /* FinishRunningMapView.swift in Sources */,
@@ -1632,7 +1668,7 @@
 				2998035C2AE0181900A9A134 /* Confetti.swift in Sources */,
 				0EE0D4042B0DC34000E75F4C /* CardDetailMap.swift in Sources */,
 				3A0740462D5F049600984303 /* LoginView.swift in Sources */,
-				F0492E1D2ADD2AE900F6EADD /* GPSArtHomeHeader.swift in Sources */,
+				F0492E1D2ADD2AE900F6EADD /* Header.swift in Sources */,
 				29AE76D72ADE2A2200A46742 /* InputNicknameView.swift in Sources */,
 				2915FA722C6BB036006890CD /* RecordViewModel.swift in Sources */,
 				F01FDB992ADABB6100BDA633 /* TabModel.swift in Sources */,

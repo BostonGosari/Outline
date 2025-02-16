@@ -160,6 +160,125 @@ struct UserDataModel: UserDataModelProtocol {
     }
 }
 
+/// async-await 지원
+extension UserDataModel {
+    func getFreeRunCount() async throws -> Int {
+        return try await withCheckedThrowingContinuation { continuation in
+            let request = CoreRunningRecord.fetchRequest()
+            do {
+                let runningRecords = try persistenceController.container.viewContext.fetch(request)
+                var freeRunCount: Int = 0
+                for record in runningRecords {
+                    if let runningType = record.runningType, runningType == "free" {
+                        freeRunCount += 1
+                    }
+                }
+                continuation.resume(returning: freeRunCount)
+            } catch {
+                print("fetch Person error: \(error)")
+                continuation.resume(throwing: CoreDataError.dataNotFound)
+            }
+        }
+    }
+
+    func createRunningRecord(record: RunningRecord) async throws {
+        return try await withCheckedThrowingContinuation { continuation in
+            let newRunningRecord = CoreRunningRecord(context: persistenceController.container.viewContext)
+            newRunningRecord.runningType = record.runningType.rawValue
+            newRunningRecord.id = UUID().uuidString
+
+            let context = persistenceController.container.viewContext
+            let newCourseData = CoreCourseData(context: context)
+            newCourseData.setValue(record.courseData.courseName, forKey: "courseName")
+            newCourseData.setValue(record.courseData.runningLength, forKey: "runningLength")
+            newCourseData.setValue(record.courseData.heading, forKey: "heading")
+            newCourseData.setValue(record.courseData.distance, forKey: "distance")
+            newCourseData.setValue(record.courseData.heading, forKey: "heading")
+            newCourseData.setValue(record.courseData.regionDisplayName, forKey: "regionDisplayName")
+            newCourseData.setValue(record.courseData.score, forKey: "score")
+
+            var pathList: [CoreCoordinate] = []
+            for path in record.courseData.coursePaths {
+                let newPath = CoreCoordinate(entity: CoreCoordinate.entity(), insertInto: persistenceController.container.viewContext)
+                newPath.latitude = path.latitude
+                newPath.longitude = path.longitude
+                pathList.append(newPath)
+            }
+
+            newCourseData.coursePaths = NSOrderedSet(array: pathList)
+            newCourseData.parentRecord = newRunningRecord
+
+            let newHealthData = CoreHealthData(context: persistenceController.container.viewContext)
+            newHealthData.setValue(record.healthData.totalTime, forKey: "totalTime")
+            newHealthData.setValue(record.healthData.averageCadence, forKey: "averageCadence")
+            newHealthData.setValue(record.healthData.totalRunningDistance, forKey: "totalRunningDistance")
+            newHealthData.setValue(record.healthData.totalEnergy, forKey: "totalEnergy")
+            newHealthData.setValue(record.healthData.averageHeartRate, forKey: "averageHeartRate")
+            newHealthData.setValue(record.healthData.averagePace, forKey: "averagePace")
+            newHealthData.setValue(record.healthData.startDate, forKey: "startDate")
+            newHealthData.setValue(record.healthData.endDate, forKey: "endDate")
+
+            newHealthData.recordHeathData = newRunningRecord
+
+            do {
+                try saveContext()
+                continuation.resume(returning: ())
+            } catch {
+                continuation.resume(throwing: CoreDataError.saveFailed)
+            }
+        }
+    }
+
+
+    func updateRunningRecordCourseName(
+        _ record: NSManagedObject,
+        newCourseName: String
+    ) async throws  {
+        return try await withCheckedThrowingContinuation { continuation in
+            guard let record = record as? CoreRunningRecord else {
+                continuation.resume(throwing: CoreDataError.dataNotFound)
+                return
+            }
+
+            record.courseData?.setValue(newCourseName, forKey: "courseName")
+
+            do {
+                try saveContext()
+                continuation.resume(returning: ())
+            } catch {
+                continuation.resume(throwing: CoreDataError.saveFailed)
+            }
+        }
+    }
+
+    func deleteRunningRecord(_ object: NSManagedObject) async throws {
+        return try await withCheckedThrowingContinuation { continuation in
+            persistenceController.container.viewContext.delete(object)
+
+            do {
+                try saveContext()
+                continuation.resume()
+            } catch {
+                continuation.resume(throwing: CoreDataError.deleteFail)
+            }
+        }
+    }
+
+    func deleteAllRunningRecord() async throws {
+        return try await withCheckedThrowingContinuation { continuation in
+            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "CoreRunningRecord")
+            let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+
+            do {
+                try persistenceController.container.viewContext.execute(batchDeleteRequest)
+                continuation.resume()
+            } catch {
+                continuation.resume(throwing: CoreDataError.deleteFail)
+            }
+        }
+    }
+}
+
 /// CoreRunningRecord를 RunningRecord로 변환
 extension UserDataModel {
     func convertToRunningRecord(coreRecord: CoreRunningRecord) -> RunningRecord? {

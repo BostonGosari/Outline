@@ -9,17 +9,12 @@ import SwiftUI
 import Kingfisher
 
 struct BigCardView: View {
-    
-    var course: CourseWithDistanceAndScore
     @Binding var loading: Bool
+    var course: CourseWithDistanceAndScore
     var index: Int
     var currentIndex: Int
     var namespace: Namespace.ID
     var showDetailView: Bool
-    
-    private let courseScoreModel = CourseScoreModel()
-    private let capsuleWidth: CGFloat = 70
-    private let capsuleHeight: CGFloat = 25
     
     var body: some View {
         if showDetailView {
