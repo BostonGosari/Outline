@@ -18,9 +18,11 @@ struct CourseWithDistanceAndScore: Identifiable, Hashable {
 }
 
 class GPSArtHomeViewModel: NSObject, CLLocationManagerDelegate, ObservableObject {
+    /// 전체 코스 정보
     @Published var courses: [GPSArtCourse] = []
     @Published var coursesForWatch: [GPSArtCourse] = []
 
+    /// 코스 관련 정보
     @Published var coursesWithDistance: [CourseWithDistanceAndScore] = []
     @Published var recommendedCoures: [CourseWithDistanceAndScore] = []
     @Published var firstCategoryTitle: String = ""
@@ -30,14 +32,19 @@ class GPSArtHomeViewModel: NSObject, CLLocationManagerDelegate, ObservableObject
     @Published var secondCourseList: [CourseWithDistanceAndScore] = []
     @Published var thirdCourseList: [CourseWithDistanceAndScore] = []
 
+    @Published var selectedCourse: CourseWithDistanceAndScore?
+    @Published var matched = false
+
+    /// 스크롤 대응을 위한 프로퍼티
     @Published var scrollOffset: CGFloat = 0
     @Published var scrollXOffset: CGFloat = 0
 
+    /// BigCard 설정을 위한 index
     @Published var currentIndex: Int = 1
+
+    /// 네트워크 에러 핸들링을 위한 프로퍼티
     @Published var loading = true
-    @Published var selectedCourse: CourseWithDistanceAndScore?
     @Published var showNetworkErrorView = false
-    @Published var matched = false
     let maxLoadingTime: TimeInterval = 5
 
     private let courseScoreModel = CourseScoreModel()
@@ -57,6 +64,40 @@ class GPSArtHomeViewModel: NSObject, CLLocationManagerDelegate, ObservableObject
         checkNetworkError()
     }
 
+    func getAllCoursesFromFirebase() {
+        courseModel.readAllCourses { result in
+            switch result {
+            case .success(let courseList):
+                self.courses = courseList
+                self.setCourseWithDistance()
+                self.setRecommendedCourses()
+                self.sendCoursesToWatch()
+                self.setDetailCourses()
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+
+    func checkLocationAuthorization() {
+        switch locationManager.authorizationStatus {
+        case .notDetermined:
+            locationManager.requestWhenInUseAuthorization()
+        case .restricted, .denied:
+            requestMotionAccess()
+        case .authorizedAlways, .authorizedWhenInUse:
+            requestMotionAccess()
+        @unknown default:
+            break
+        }
+    }
+
+    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        checkLocationAuthorization()
+    }
+}
+
+private extension GPSArtHomeViewModel {
     func checkNetworkError() {
         DispatchQueue.main.asyncAfter(deadline: .now() + maxLoadingTime) { [weak self] in
             if let loading = self?.loading, loading{
@@ -65,55 +106,47 @@ class GPSArtHomeViewModel: NSObject, CLLocationManagerDelegate, ObservableObject
         }
     }
 
-    func getAllCoursesFromFirebase() {
-        courseModel.readAllCourses { result in
-            switch result {
-            case .success(let courseList):
-                self.courses.removeAll()
-                self.recommendedCoures.removeAll()
-                self.coursesWithDistance.removeAll()
-                self.firstCourseList.removeAll()
-                self.secondCourseList.removeAll()
-                self.thirdCourseList.removeAll()
-                self.courses = courseList
-                self.fetchRecommendedCourses()
-                self.sendCoursesToWatch()
-                self.setDetailCourses()
-            case .failure(let error):
-                print(error)
-            }
-        }
-    }
-    
     func sendCoursesToWatch() {
+        coursesForWatch = coursesWithDistance.map { $0.course }
         ConnectivityManager.shared.sendGPSArtCourses(coursesForWatch)
     }
-    
-    func fetchRecommendedCourses() {
-        let userLocation = locationManager.location?.coordinate
 
+    /// 코스들을 모두 거리순으로 정렬하여 courseWithDistance를 설정합니다.
+    func setCourseWithDistance() {
+        var newCoursesWithDistance = [CourseWithDistanceAndScore]()
         for course in courses {
-            guard let firstCoordinate = course.coursePaths.first else { continue }
-            let courseLocation = CLLocation(latitude: firstCoordinate.latitude, longitude: firstCoordinate.longitude)
-            var distance: Double = 0
-
-            if let location = userLocation {
-                let currentCLLocation = CLLocation(latitude: location.latitude, longitude: location.longitude)
-                distance = currentCLLocation.distance(from: courseLocation)
-            }
-
+            let distance = getLocationDistance(course)
             let courseWithScore = CourseWithDistanceAndScore(course: course, distance: distance, score: 0)
-            self.coursesWithDistance.append(courseWithScore)
+            newCoursesWithDistance.append(courseWithScore)
         }
-
-        // Sort the courses by distance
-        coursesWithDistance.sort { $0.distance < $1.distance }
-
-        // Update the recommended courses
-        self.recommendedCoures = Array(coursesWithDistance.prefix(3))
-        coursesForWatch = coursesWithDistance.map { $0.course }
+        self.coursesWithDistance = newCoursesWithDistance.sorted { $0.distance < $1.distance }
     }
 
+    /// Update the recommended courses
+    func setRecommendedCourses() {
+        self.recommendedCoures = Array(coursesWithDistance.prefix(3))
+    }
+
+    /// course 정보를 받아서 현재 위치에서 course까지의 거리를 리턴합니다.
+    func getLocationDistance(_ course: GPSArtCourse) -> CLLocationDistance {
+        var distance: Double = 0
+        let userLocation = locationManager.location?.coordinate
+        guard let firstCoordinate = course.coursePaths.first else {
+            return CLLocationDistance(distance)
+        }
+        let courseLocation = CLLocation(latitude: firstCoordinate.latitude, longitude: firstCoordinate.longitude)
+
+        if let location = userLocation {
+            let currentCLLocation = CLLocation(latitude: location.latitude, longitude: location.longitude)
+            distance = currentCLLocation.distance(from: courseLocation)
+            return CLLocationDistance(distance)
+        } else {
+            return CLLocationDistance(distance)
+        }
+    }
+
+
+    /// 각 카테고리에 맞는 코스를 설정합니다.
     func setDetailCourses() {
         Task {
             do {
@@ -141,6 +174,7 @@ class GPSArtHomeViewModel: NSObject, CLLocationManagerDelegate, ObservableObject
         }
     }
 
+    /// 카테고리에 맞는 코스를 모두 가져와서 리턴합니다.
     func getCourseList(category: CourseCategoryType) async throws -> (String, [CourseWithDistanceAndScore])? {
         let course = try await courseModel.readCategoryCourse(categoryType: category)
         var courseList = [CourseWithDistanceAndScore]()
@@ -149,54 +183,25 @@ class GPSArtHomeViewModel: NSObject, CLLocationManagerDelegate, ObservableObject
                 // 카테고리에는 있지만, 전체 코스에는 없는 데이터가 있으면 종료되는 것을 방지
                 continue
             }
-
-            let userLocation = self.locationManager.location?.coordinate
-            let courseWithScore: CourseWithDistanceAndScore
-
-            if let firstCoordinate = courseInfo.coursePaths.first, let location = userLocation {
-                let courseLocation = CLLocation(latitude: firstCoordinate.latitude, longitude: firstCoordinate.longitude)
-                let currentCLLocation = CLLocation(latitude: location.latitude, longitude: location.longitude)
-                let distance = currentCLLocation.distance(from: courseLocation)
-                courseWithScore = CourseWithDistanceAndScore(course: courseInfo, distance: distance, score: 0)
-            } else {
-                // If location is not available, set distance to 0
-                courseWithScore = CourseWithDistanceAndScore(course: courseInfo, distance: 0, score: 0)
-            }
+            let distance = getLocationDistance(courseInfo)
+            let courseWithScore = CourseWithDistanceAndScore(course: courseInfo, distance: distance, score: 0)
             courseList.append(courseWithScore)
-            if courseList.count == 5 {
-                let sortedCourseWithScores = courseList.sorted(by: { (course1, course2) -> Bool in
-                    guard let index1 = course.courseIdList.firstIndex(of: course1.course.id),
-                          let index2 = course.courseIdList.firstIndex(of: course2.course.id) else {
-                        return false
-                    }
-                    return index1 < index2
-                })
-                courseList = sortedCourseWithScores
-            }
+        }
+        if courseList.count >= 5 {
+            courseList = courseList.sorted(by: { (course1, course2) -> Bool in
+                guard let index1 = course.courseIdList.firstIndex(of: course1.course.id),
+                      let index2 = course.courseIdList.firstIndex(of: course2.course.id) else {
+                    return false
+                }
+                return index1 < index2
+            })
         }
         return (course.title, courseList)
     }
 
-    func checkLocationAuthorization() {
-        switch locationManager.authorizationStatus {
-        case .notDetermined:
-            locationManager.requestWhenInUseAuthorization()
-        case .restricted, .denied:
-            requestMotionAccess()
-        case .authorizedAlways, .authorizedWhenInUse:
-            requestMotionAccess()
-        @unknown default:
-            break
-        }
-    }
-    
-    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-        checkLocationAuthorization()
-    }
-    
     private func requestMotionAccess() {
         let motionManager = CMMotionActivityManager()
-        
+
         if CMMotionActivityManager.isActivityAvailable() {
             motionManager.queryActivityStarting(from: Date(), to: Date(), to: .main) { _, _ in }
         }
