@@ -20,7 +20,7 @@ class RunningStartManager: ObservableObject {
     @Published var complete = false // TODO: EnvironmentState로 이동
 
     @Published var isHealthAuthorized = false // 삭제 가능
-    @Published var isLocationAuthorized = false
+    @Published var isLocationAuthorized = false // 삭제 가능
     @Published var showPermissionSheet = false
     @Published var permissionType: PermissionType = .health
     
@@ -96,7 +96,8 @@ class RunningStartManager: ObservableObject {
             self.isHealthAuthorized = false
         }
     }
-    
+
+    /// Todo: EnvironmentObject에 추가
     func startFreeRun() {
         startCourse = GPSArtCourse()
         runningType = .free
@@ -107,7 +108,8 @@ class RunningStartManager: ObservableObject {
             "card_name": "자유러닝"
         ])
     }
-    
+
+    // TODO: EnvironmentObject에 추가
     func startGPSArtRun() {
         runningType = .gpsArt
         
@@ -118,25 +120,25 @@ class RunningStartManager: ObservableObject {
         ])
     }
     
-    private func getFreeRunName() {
-        let geocoder = CLGeocoder()
-        
-        if let userLocation = locationManager.location?.coordinate {
-            let start = CLLocation(latitude: userLocation.latitude, longitude: userLocation.longitude)
-            geocoder.reverseGeocodeLocation(start) { placemarks, error in
-                if let error = error {
-                    print("Reverse geocoding error: \(error.localizedDescription)")
-                } else if let placemark = placemarks?.first {
-                    let area = placemark.administrativeArea ?? ""
-                    let city = placemark.locality ?? ""
-                    let town = placemark.subLocality ?? ""
-                    
-                    self.startCourse?.courseName = "\(city) \(town)런"
-                    self.startCourse?.regionDisplayName =  "\(area) \(city) \(town)"
+        private func getFreeRunName() {
+            let geocoder = CLGeocoder()
+
+            if let userLocation = locationManager.location?.coordinate {
+                let start = CLLocation(latitude: userLocation.latitude, longitude: userLocation.longitude)
+                geocoder.reverseGeocodeLocation(start) { placemarks, error in
+                    if let error = error {
+                        print("Reverse geocoding error: \(error.localizedDescription)")
+                    } else if let placemark = placemarks?.first {
+                        let area = placemark.administrativeArea ?? ""
+                        let city = placemark.locality ?? ""
+                        let town = placemark.subLocality ?? ""
+
+                        self.startCourse?.courseName = "\(city) \(town)런"
+                        self.startCourse?.regionDisplayName =  "\(area) \(city) \(town)"
+                    }
                 }
             }
         }
-    }
     
     func trackingDistance() {
         if let startCourse {

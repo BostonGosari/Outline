@@ -6,6 +6,7 @@
 //
 
 import CoreLocation
+import Combine
 import SwiftUI
 
 
@@ -13,13 +14,33 @@ import SwiftUI
 final class RunningViewModel: ObservableObject {
     /// 러닝 타임
     @Published var time = 0
+    private var timer: AnyCancellable?
 
     /// Authorization
     @Published var permissionType: PermissionType?
     @Published var showPermissionSheet = false
+    @Published var runningType: RunningType = .gpsArt
+
     private let distanceManager = DistanceManager()
     private let healthKitManager = HealthKitManager()
+    private let locationManager = LocationManager()
 
+    private let userDataModel = UserDataModel()
+
+    func checkAuthorization() {
+        Task {
+            if await healthKitManager.checkAuthorization() == false {
+                showPermissionSheet = true
+                permissionType = .health
+                return
+            }
+            if locationManager.checkLocationAuthorization() == false {
+                showPermissionSheet = true
+                permissionType = .location
+                return
+            }
+        }
+    }
 
 }
 

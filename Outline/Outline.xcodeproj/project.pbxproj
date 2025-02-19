@@ -152,6 +152,7 @@
 		3A5BBA782D61C557008F4915 /* EnvironmentStateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5BBA772D61C557008F4915 /* EnvironmentStateManager.swift */; };
 		3AE8C73A2D65728400325496 /* IntroViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE8C7392D65728400325496 /* IntroViewModel.swift */; };
 		3AE8C7462D657ECF00325496 /* RunningViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE8C7452D657ECF00325496 /* RunningViewModel.swift */; };
+		3AE8C7482D658C7B00325496 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE8C7472D658C7B00325496 /* LocationManager.swift */; };
 		9528EFE92ADE9E870056CCC6 /* UserCoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 95EB1EF62ADE251100B47984 /* UserCoreDataModel.xcdatamodeld */; };
 		9528EFEA2ADE9E870056CCC6 /* UserCoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 95EB1EF62ADE251100B47984 /* UserCoreDataModel.xcdatamodeld */; };
 		9528EFEC2ADEC7CF0056CCC6 /* RunningRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9528EFEB2ADEC7CF0056CCC6 /* RunningRecord.swift */; };
@@ -461,6 +462,7 @@
 		3A5BBA772D61C557008F4915 /* EnvironmentStateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentStateManager.swift; sourceTree = "<group>"; };
 		3AE8C7392D65728400325496 /* IntroViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroViewModel.swift; sourceTree = "<group>"; };
 		3AE8C7452D657ECF00325496 /* RunningViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningViewModel.swift; sourceTree = "<group>"; };
+		3AE8C7472D658C7B00325496 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		9528EFEB2ADEC7CF0056CCC6 /* RunningRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningRecord.swift; sourceTree = "<group>"; };
 		9528EFFF2AE042570056CCC6 /* PathManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathManager.swift; sourceTree = "<group>"; };
 		9528F0052AE0B37B0056CCC6 /* IntroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroView.swift; sourceTree = "<group>"; };
@@ -1078,6 +1080,7 @@
 				299803562AE00C9B00A9A134 /* HapticManager.swift */,
 				954FFF772AE132D100D27537 /* CourseDataUploadManager.swift */,
 				29CC19A32AE95F2300B79610 /* RunningStartManager.swift */,
+				3AE8C7472D658C7B00325496 /* LocationManager.swift */,
 				F035240F2AE35AF800CCD8A6 /* RunningDataManager.swift */,
 				299DC11C2C3D2BE700567874 /* MotionManager.swift */,
 			);
@@ -1717,6 +1720,7 @@
 				29CC19A42AE95F2300B79610 /* RunningStartManager.swift in Sources */,
 				29130C1A2C673349004C0325 /* MirroringModel.swift in Sources */,
 				F05C7D562ADC565E006842DB /* PreferenceKey.swift in Sources */,
+				3AE8C7482D658C7B00325496 /* LocationManager.swift in Sources */,
 				0E4291602B03CF3100EE75F5 /* LocationManager.swift in Sources */,
 				9528EFEC2ADEC7CF0056CCC6 /* RunningRecord.swift in Sources */,
 				95A01E312AF141C30093D9C0 /* ProfileView.swift in Sources */,
