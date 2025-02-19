@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 70;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -150,6 +150,7 @@
 		3A0740502D5F1D9F00984303 /* FreeRunningViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A07404F2D5F1D9E00984303 /* FreeRunningViewModel.swift */; };
 		3A5BBA762D61BD54008F4915 /* CardDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5BBA752D61BD54008F4915 /* CardDetailViewModel.swift */; };
 		3A5BBA782D61C557008F4915 /* EnvironmentStateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5BBA772D61C557008F4915 /* EnvironmentStateManager.swift */; };
+		3AE8C73A2D65728400325496 /* IntroViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE8C7392D65728400325496 /* IntroViewModel.swift */; };
 		9528EFE92ADE9E870056CCC6 /* UserCoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 95EB1EF62ADE251100B47984 /* UserCoreDataModel.xcdatamodeld */; };
 		9528EFEA2ADE9E870056CCC6 /* UserCoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 95EB1EF62ADE251100B47984 /* UserCoreDataModel.xcdatamodeld */; };
 		9528EFEC2ADEC7CF0056CCC6 /* RunningRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9528EFEB2ADEC7CF0056CCC6 /* RunningRecord.swift */; };
@@ -457,6 +458,7 @@
 		3A07404F2D5F1D9E00984303 /* FreeRunningViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeRunningViewModel.swift; sourceTree = "<group>"; };
 		3A5BBA752D61BD54008F4915 /* CardDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetailViewModel.swift; sourceTree = "<group>"; };
 		3A5BBA772D61C557008F4915 /* EnvironmentStateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentStateManager.swift; sourceTree = "<group>"; };
+		3AE8C7392D65728400325496 /* IntroViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroViewModel.swift; sourceTree = "<group>"; };
 		9528EFEB2ADEC7CF0056CCC6 /* RunningRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningRecord.swift; sourceTree = "<group>"; };
 		9528EFFF2AE042570056CCC6 /* PathManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathManager.swift; sourceTree = "<group>"; };
 		9528F0052AE0B37B0056CCC6 /* IntroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroView.swift; sourceTree = "<group>"; };
@@ -552,10 +554,6 @@
 		F0AC8B372AD96AE10061612C /* ViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtension.swift; sourceTree = "<group>"; };
 		F0ECB3AC2AF28540003FA2B4 /* FirstRunningGuideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstRunningGuideView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
-
-/* Begin PBXFileSystemSynchronizedRootGroup section */
-		3A0740472D5F068400984303 /* Intro */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Intro; sourceTree = "<group>"; };
-/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		BBCB1EFF2B1778DE00D9AE1C /* Frameworks */ = {
@@ -824,8 +822,75 @@
 				0E7EE5202B5E7C4B004F6BAF /* CardDetailMapView.swift */,
 				0EE0D4032B0DC34000E75F4C /* CardDetailMap.swift */,
 				F06298AA2AE1998D007AB2D3 /* MapInfoView.swift */,
+				0E29F65E2ADF6CDD00F5EF5C /* RunningMapViewModel.swift */,
 			);
 			path = Legacy;
+			sourceTree = "<group>";
+		};
+		3AE8C73B2D6579A800325496 /* GPSArtHomeTab */ = {
+			isa = PBXGroup;
+			children = (
+				F0781D5F2AE163E00084ADD7 /* GPSArtHomeViewModel.swift */,
+				3A5BBA752D61BD54008F4915 /* CardDetailViewModel.swift */,
+			);
+			path = GPSArtHomeTab;
+			sourceTree = "<group>";
+		};
+		3AE8C73D2D6579E800325496 /* EnvironmentState */ = {
+			isa = PBXGroup;
+			children = (
+				3A5BBA772D61C557008F4915 /* EnvironmentStateManager.swift */,
+			);
+			path = EnvironmentState;
+			sourceTree = "<group>";
+		};
+		3AE8C73E2D6579FE00325496 /* ProfileTab */ = {
+			isa = PBXGroup;
+			children = (
+				954B04172AFF725000A8A83E /* ProfileUserInfoViewModel.swift */,
+				95C953CC2AF3BF760040B9DA /* ProfileViewModel.swift */,
+			);
+			path = ProfileTab;
+			sourceTree = "<group>";
+		};
+		3AE8C73F2D657A0500325496 /* FreeRunningTab */ = {
+			isa = PBXGroup;
+			children = (
+				3A07404F2D5F1D9E00984303 /* FreeRunningViewModel.swift */,
+			);
+			path = FreeRunningTab;
+			sourceTree = "<group>";
+		};
+		3AE8C7402D657A1400325496 /* Intro */ = {
+			isa = PBXGroup;
+			children = (
+				3AE8C7392D65728400325496 /* IntroViewModel.swift */,
+			);
+			path = Intro;
+			sourceTree = "<group>";
+		};
+		3AE8C7412D657BEE00325496 /* Share */ = {
+			isa = PBXGroup;
+			children = (
+				0E9A5D472AE065A100C19FF3 /* ShareViewModel.swift */,
+			);
+			path = Share;
+			sourceTree = "<group>";
+		};
+		3AE8C7422D657BF800325496 /* FinishRunning */ = {
+			isa = PBXGroup;
+			children = (
+				0EE92E6B2AE00A33003192FF /* FinishRunningViewModel.swift */,
+			);
+			path = FinishRunning;
+			sourceTree = "<group>";
+		};
+		3AE8C7432D657C1300325496 /* RecordTab */ = {
+			isa = PBXGroup;
+			children = (
+				2915FA712C6BB036006890CD /* RecordViewModel.swift */,
+			);
+			path = RecordTab;
 			sourceTree = "<group>";
 		};
 		958240732B0AFCAC00105FAE /* Score */ = {
@@ -1083,7 +1148,6 @@
 				BB397D072AE6406600F92A43 /* Record */,
 				F01FDB9A2ADABC2C00BDA633 /* Tab */,
 				29BB88352C5F1D9A006B238D /* TestView */,
-				3A07404E2D5F109500984303 /* Legacy */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1091,18 +1155,15 @@
 		F0AC8AFB2AD963690061612C /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				3A0740472D5F068400984303 /* Intro */,
+				3AE8C7432D657C1300325496 /* RecordTab */,
+				3AE8C7422D657BF800325496 /* FinishRunning */,
+				3AE8C7412D657BEE00325496 /* Share */,
+				3AE8C7402D657A1400325496 /* Intro */,
 				95B8F4582AED27B200D9F35B /* Login */,
-				0E29F65E2ADF6CDD00F5EF5C /* RunningMapViewModel.swift */,
-				3A07404F2D5F1D9E00984303 /* FreeRunningViewModel.swift */,
-				0EE92E6B2AE00A33003192FF /* FinishRunningViewModel.swift */,
-				2915FA712C6BB036006890CD /* RecordViewModel.swift */,
-				0E9A5D472AE065A100C19FF3 /* ShareViewModel.swift */,
-				F0781D5F2AE163E00084ADD7 /* GPSArtHomeViewModel.swift */,
-				3A5BBA752D61BD54008F4915 /* CardDetailViewModel.swift */,
-				3A5BBA772D61C557008F4915 /* EnvironmentStateManager.swift */,
-				95C953CC2AF3BF760040B9DA /* ProfileViewModel.swift */,
-				954B04172AFF725000A8A83E /* ProfileUserInfoViewModel.swift */,
+				3AE8C73F2D657A0500325496 /* FreeRunningTab */,
+				3AE8C73E2D6579FE00325496 /* ProfileTab */,
+				3AE8C73D2D6579E800325496 /* EnvironmentState */,
+				3AE8C73B2D6579A800325496 /* GPSArtHomeTab */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1113,6 +1174,7 @@
 				F0AC8A9C2AD94C1F0061612C /* OutlineApp.swift */,
 				F0AC8A9E2AD94C1F0061612C /* ContentView.swift */,
 				F0AC8AFA2AD963600061612C /* View */,
+				3A07404E2D5F109500984303 /* Legacy */,
 				F0AC8AFB2AD963690061612C /* ViewModel */,
 				F0AC8B052AD965290061612C /* Model */,
 				F05C97152ADA877A00D5D959 /* Manager */,
@@ -1331,9 +1393,6 @@
 			dependencies = (
 				29B736B22C565B620075A569 /* PBXTargetDependency */,
 				BBCB1F122B1778DF00D9AE1C /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				3A0740472D5F068400984303 /* Intro */,
 			);
 			name = Outline;
 			packageProductDependencies = (
@@ -1662,6 +1721,7 @@
 				9580D4942B0C7985006CE42F /* ProfileVoiceView.swift in Sources */,
 				29EBD7842B0883E500B44AA9 /* BigCardFrontside.swift in Sources */,
 				95EB1EE92ADDC43400B47984 /* PersistentController.swift in Sources */,
+				3AE8C73A2D65728400325496 /* IntroViewModel.swift in Sources */,
 				293C86C62B0778FD00640329 /* NeedLoginSheet.swift in Sources */,
 				956382EC2B9D48DD00D3AD32 /* ShareView+Camera.swift in Sources */,
 				BB02A3982B0CCFBE00250EDD /* ScoreStar.swift in Sources */,
