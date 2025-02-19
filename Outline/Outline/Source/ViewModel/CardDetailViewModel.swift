@@ -61,8 +61,8 @@ final class CardDetailViewModel: ObservableObject {
             .sink { [weak self] value in
                 guard
                     let self,
-                    !value,
-                    !runningStartManager.checkAuthorization(),
+                    value,
+                    runningStartManager.checkAuthorization(),
                     let selectedCourse = environmentStateManager.selectedCourse
                 else { return }
 
