@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// 앱 전역의 상태관리
 final class EnvironmentStateManager: ObservableObject {
     private init() { }
     static let shared = EnvironmentStateManager()

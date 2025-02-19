@@ -13,13 +13,13 @@ import FirebaseAnalytics
 
 class RunningStartManager: ObservableObject {
     @Published var counter = 0
-    @Published var start = false
-    @Published var running = false
-    @Published var mirroring = false
-    @Published var changeRunningType = false
-    @Published var complete = false
-    
-    @Published var isHealthAuthorized = false
+    @Published var start = false // TODO: EnvironmentState로 이동
+    @Published var running = false // TODO: EnvironmentState로 이동
+    @Published var mirroring = false // TODO: EnvironmentState로 이동
+    @Published var changeRunningType = false // 안쓰고있음.. -> 원래 코스에서 넘어가면 Alert이 떠야하는데..
+    @Published var complete = false // TODO: EnvironmentState로 이동
+
+    @Published var isHealthAuthorized = false // 삭제 가능
     @Published var isLocationAuthorized = false
     @Published var showPermissionSheet = false
     @Published var permissionType: PermissionType = .health
