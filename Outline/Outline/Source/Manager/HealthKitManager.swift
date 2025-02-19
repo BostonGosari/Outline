@@ -16,7 +16,17 @@ class HealthKitManager: ObservableObject {
     
     private var workoutStartDate: Date?
     private var workoutEndDate: Date?
-    
+
+    private let quantityTypes: Set = [
+        HKQuantityType(.heartRate),
+        HKQuantityType(.activeEnergyBurned),
+        HKQuantityType(.distanceWalkingRunning),
+        HKQuantityType(.stepCount),
+        HKQuantityType(.cyclingCadence),
+        HKQuantityType(.runningSpeed),
+        HKQuantityType.workoutType()
+    ]
+
     // HKHealthStore나 HKWorkoutConfiguration 등이 생성될 필요가 없는 경우에는 불필요하게 리소스를 소모하는 것을 방지합니다.
     // HKHealthStore.isHealthDataAvailable()와 같은 조건을 사용하여 특정 조건에 따라 초기화를 수행합니다.
     init() {
@@ -26,7 +36,35 @@ class HealthKitManager: ObservableObject {
             workoutConfiguration?.activityType = .running
         }
     }
-    
+
+    func checkAuthorization() async -> Bool {
+        guard let healthStore else { return false }
+        for quantityType in quantityTypes {
+            let status = healthStore.authorizationStatus(for: quantityType)
+            switch status {
+            case .notDetermined:
+                return await requestHealthAuthorization()
+            case .sharingDenied:
+                return false
+            case .sharingAuthorized:
+                return false
+            @unknown default:
+                return false
+            }
+        }
+        return false
+    }
+
+    private func requestHealthAuthorization() async -> Bool {
+        guard let healthStore else { return false }
+        do {
+            try await healthStore.requestAuthorization(toShare: quantityTypes, read: quantityTypes)
+            return true
+        } catch {
+            return false
+        }
+    }
+
     func startWorkout() {
         workoutStartDate = Date()
         
