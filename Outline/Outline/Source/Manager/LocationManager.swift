@@ -7,9 +7,38 @@
 
 import CoreLocation
 
-final class LocationManager {
+final class LocationManager: NSObject, CLLocationManagerDelegate {
     private let locationManager = CLLocationManager()
     private let geocoder = CLGeocoder()
+    var userLocations: [CLLocationCoordinate2D] = []
+
+    override init() {
+        locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
+    }
+
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+
+        guard let currentLocation = locations.last?.coordinate else { return }
+
+        if let location = manager.location {
+            let horizontalAccuracy = location.horizontalAccuracy
+            let verticalAccuracy = location.verticalAccuracy
+            let speed = location.speed
+
+            if speed > 0.5 && horizontalAccuracy < 20 && verticalAccuracy < 20 {
+                userLocations.append(currentLocation)
+            }
+        }
+    }
+
+    func startUpdateLocation() {
+        locationManager.startUpdatingLocation()
+        locationManager.allowsBackgroundLocationUpdates = true
+    }
+    func stopUpdateLocation() {
+        locationManager.stopUpdatingLocation()
+        locationManager.allowsBackgroundLocationUpdates = false
+    }
 
     func checkLocationAuthorization() -> Bool {
         switch locationManager.authorizationStatus {
@@ -23,7 +52,7 @@ final class LocationManager {
             return false
         }
     }
-    
+
     func getLocationName() async -> (courseName: String?, regionDisplayName: String?) {
         guard let userLocation = locationManager.location?.coordinate else {
             return (courseName: nil, regionDisplayName: nil)

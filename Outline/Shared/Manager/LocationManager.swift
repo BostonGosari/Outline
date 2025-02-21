@@ -1,13 +1,13 @@
+////
+////  LocationManager.swift
+////  Outline
+////
+////  Created by hyebin on 11/15/23.
+////
 //
-//  LocationManager.swift
-//  Outline
+//import CoreLocation
+//import SwiftUI
 //
-//  Created by hyebin on 11/15/23.
-//
-
-import CoreLocation
-import SwiftUI
-
 //class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
 //    @Published var userLocations: [CLLocationCoordinate2D] = []
 //    @Published var isRunning: Bool = false

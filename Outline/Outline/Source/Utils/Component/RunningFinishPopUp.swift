@@ -17,73 +17,70 @@ enum ScoreState {
 }
 
 struct RunningFinishPopUp: View {
-    @StateObject private var runningStartManager = RunningStartManager.shared
-    @StateObject private var runningDataManager = RunningDataManager.shared
+    @EnvironmentObject private var viewModel: RunningViewModel
     @State private var counter = 0
     @State private var progress = 0.0
 
-    @Binding var isPresented: Bool
-    @Binding var score: Int
-    @Binding var userLocations: [CLLocationCoordinate2D]
-    @Binding var isResumeRunning: Bool
     
     private var canvasData: CanvasData {
-        return PathManager.getCanvasData(coordinates: userLocations, width: 200, height: 200)
+        return PathManager.getCanvasData(coordinates: viewModel.userLocations, width: 200, height: 200)
     }
-   
+
     var scoreState: ScoreState {
-        if score == -1 {
-            return .freerun
-        } else if score == 0 {
-            return .notyet
-        } else if score < 50 {
-            return .nice
-        } else if score < 90 {
-            return .great
-        } else {
-            return .excellent
-        }
+        return .excellent
+//        if score == -1 {
+//            return .freerun
+//        } else if score == 0 {
+//            return .notyet
+//        } else if score < 50 {
+//            return .nice
+//        } else if score < 90 {
+//            return .great
+//        } else {
+//            return .excellent
+//        }
     }
 
     var body: some View {
-        if isPresented {
+        if viewModel.showCompleteSheet {
             ZStack {
                 Color.black50
                     .ignoresSafeArea()
                     .onTapGesture {
                         withAnimation {
-                            isPresented = false
+                            viewModel.showCompleteSheet = false
                         }
                     }
                 
                 VStack(spacing: 0) {
-                    switch scoreState {
-                    case .freerun:
-                        freerunContent()
-                    case .notyet, .nice, .great, .excellent:
-                        gpsrunContent()
-                    }
-                    
+//                    switch scoreState {
+//                    case .freerun:
+//                        freerunContent()
+//                    case .notyet, .nice, .great, .excellent:
+//                        gpsrunContent()
+//                    }
+//                    
                     Spacer()
                     
                     CompleteButton(text: "결과 페이지로", isActive: true) {
-                        isPresented = false
-                        runningStartManager.complete = true
-                        runningDataManager.doneRunning()
-                        withAnimation {
-                            runningStartManager.running = false
-                        }
+                        viewModel.showCompleteSheet = false
+                        // TODO: 전역 수정
+//                        runningStartManager.complete = true
+//                        runningDataManager.doneRunning()
+//                        withAnimation {
+//                            runningStartManager.running = false
+//                        }
                     }
                     UnderlineButton(text: "조금 더 진행하기") {
                         progress = 0
-                        isResumeRunning = true
-                        isPresented = false
+//                        isResumeRunning = true
+                        viewModel.showCompleteSheet = false
                     }
                 }
                 .padding(EdgeInsets(top: 42, leading: 16, bottom: 32, trailing: 16))
                 .background(.black70)
                 .cornerRadius(25)
-                .frame(maxWidth: .infinity, maxHeight: scoreState == .freerun ? 505 : 600)
+//                .frame(maxWidth: .infinity, maxHeight: scoreState == .freerun ? 505 : 600)
                 .padding(.horizontal, 16)
                 .foregroundColor(.clear)
               
@@ -94,27 +91,27 @@ struct RunningFinishPopUp: View {
                         .padding(.horizontal, 16)
                 )
                 
-                if score > 50 {
-                    Confetti(counter: $counter,
-                             num: 80,
-                             confettis: [
-                                .shape(.circle),
-                                .shape(.smallCircle),
-                                .shape(.triangle),
-                                .shape(.square),
-                                .shape(.smallSquare),
-                                .shape(.slimRectangle),
-                                .shape(.hexagon),
-                                .shape(.star),
-                                .shape(.starPop),
-                                .shape(.blink)
-                             ],
-                             colors: [.blue, .yellow],
-                             confettiSize: 8,
-                             rainHeight: UIScreen.main.bounds.height,
-                             radius: UIScreen.main.bounds.width
-                    )
-                }
+//                if score > 50 {
+//                    Confetti(counter: $counter,
+//                             num: 80,
+//                             confettis: [
+//                                .shape(.circle),
+//                                .shape(.smallCircle),
+//                                .shape(.triangle),
+//                                .shape(.square),
+//                                .shape(.smallSquare),
+//                                .shape(.slimRectangle),
+//                                .shape(.hexagon),
+//                                .shape(.star),
+//                                .shape(.starPop),
+//                                .shape(.blink)
+//                             ],
+//                             colors: [.blue, .yellow],
+//                             confettiSize: 8,
+//                             rainHeight: UIScreen.main.bounds.height,
+//                             radius: UIScreen.main.bounds.width
+//                    )
+//                }
             }
             .onAppear {
                 counter += 1
@@ -139,7 +136,7 @@ struct RunningFinishPopUp: View {
                 .foregroundStyle(.gray300)
                 .padding(.top, 8)
             Spacer()
-            PathManager.createPath(width: 200, height: 200, coordinates: userLocations)
+            PathManager.createPath(width: 200, height: 200, coordinates: viewModel.userLocations)
                 .trim(from: 0, to: progress)
                 .stroke(style: StrokeStyle(lineWidth: 4, lineCap: .round, lineJoin: .round))
                 .foregroundStyle(.customPrimary)
@@ -150,7 +147,7 @@ struct RunningFinishPopUp: View {
                         progress = 1.0
                     }
                 }
-                .rotationEffect(.degrees(runningStartManager.startCourse?.heading ?? 0))
+//                .rotationEffect(.degrees(runningStartManager.startCourse?.heading ?? 0))
             Spacer()
         }
     }
@@ -212,9 +209,6 @@ extension ScoreState {
 }
 
 #Preview {
-    RunningFinishPopUp(isPresented: .constant(true), score: .constant(60), userLocations: .constant([
-        CLLocationCoordinate2D(latitude: 37.8325, longitude: -122.4794),
-        CLLocationCoordinate2D(latitude: 37.8311, longitude: -122.4839),
-        CLLocationCoordinate2D(latitude: 37.8281, longitude: -122.4859)
-    ]), isResumeRunning: .constant(false))
+    RunningFinishPopUp()
+        .environmentObject(RunningViewModel())
 }

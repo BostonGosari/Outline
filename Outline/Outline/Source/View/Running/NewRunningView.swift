@@ -1,23 +1,23 @@
 //
-//  RunningView.swift
+//  NewRunningView.swift
 //  Outline
 //
-//  Created by hyunjun on 11/13/23.
+//  Created by Austin's Macbook Pro M3 on 2/21/25.
 //
 
 import SwiftUI
 import CoreMotion
 
-struct RunningView: View {
+struct NewRunningView: View {
     @StateObject private var viewModel = RunningViewModel()
-    
+
 //    @GestureState private var press = false
-//    
+//
 //    @State private var showDetail = false
 //    @State private var isPaused = false
 //    @State private var showCompleteSheet = false
 //    @State private var tapGuideView = false
-//    
+//
 //    @State private var navigationTranslation: CGFloat = 0.0
 //    @State private var navigationSheetHeight: CGFloat = 0.0
 //    @State private var metricsTranslation: CGFloat = 0.0
@@ -33,7 +33,7 @@ struct RunningView: View {
 //        }
 //    }
 //    @State private var isResumeRunning = false
-    
+
     var body: some View {
         ZStack {
             map
@@ -43,13 +43,10 @@ struct RunningView: View {
 //            }
             metrics
             guideView
-            
-            RunningFinishPopUp(
-                isPresented: $viewModel.showCompleteSheet,
-                userLocations: $viewModel.locationManager.userLocations,
-                isResumeRunning: $isResumeRunning
-            )
+
+            RunningFinishPopUp()
         }
+        .environmentObject(viewModel)
         .onAppear {
             viewModel.onAppear()
         }
@@ -136,7 +133,7 @@ struct RunningView: View {
     }
 }
 
-extension RunningView {
+extension NewRunningView {
     private var map: some View {
         RunningMapView(userLocations: locationManager.userLocations)
             .ignoresSafeArea()
@@ -150,7 +147,7 @@ extension RunningView {
                 }
             }
     }
-    
+
     private var navigation: some View {
         RunningNavigationView(
             courseName: runningStartManager.startCourse?.courseName ?? "",
@@ -174,7 +171,7 @@ extension RunningView {
                                     .padding(.bottom, 9)
                                     .foregroundStyle(.gray600)
                             }
-                        
+
                     }
             }
             .zIndex(1)
@@ -185,7 +182,7 @@ extension RunningView {
                 locationManager.initNavigation()
             }
     }
-    
+
     private var metrics: some View {
         RunningMetricsView(showDetail: showDetail, isPaused: isPaused)
             .overlay(alignment: .topTrailing) {
@@ -193,10 +190,10 @@ extension RunningView {
             }
             .padding(.top, 26)
             .frame(height: showDetail ? 360 + metricsTranslation : getSafeArea().bottom == 0 ? 110 : 80, alignment: .top)
-           
+
             .mask {
                 RoundedRectangle(cornerRadius: 20)
-                    
+
             }
             .background {
                 TransparentBlurView(removeAllFilters: true)
@@ -217,7 +214,7 @@ extension RunningView {
             .zIndex(1)
             .frame(maxHeight: .infinity, alignment: .bottom)
     }
-    
+
     private var showDetailButton: some View {
         Button {
             withAnimation {
@@ -235,7 +232,7 @@ extension RunningView {
         }
         .offset(y: getSafeArea().bottom == 0 ? 20 : 0)
     }
-    
+
     private var controlButton: some View {
         ZStack {
             Button {
@@ -249,7 +246,7 @@ extension RunningView {
             }
             .animation(.easeInOut, value: press)
             .frame(maxWidth: .infinity, alignment: isPaused ? .leading : .center)
-            
+
             Button {
                 withAnimation {
                     showDetail = false
@@ -274,7 +271,7 @@ extension RunningView {
                     .foregroundStyle(.black, .customPrimary)
             }
             .frame(maxWidth: .infinity, alignment: isPaused ? .trailing : .center)
-            
+
             Button {
                 withAnimation {
                     showDetail = true
@@ -306,7 +303,7 @@ extension RunningView {
         .padding(.horizontal, 90)
         .offset(y: getSafeArea().bottom == 0 ? -10 : 0)
     }
-    
+
     private var guideView: some View {
         ZStack {
             if let course = runningStartManager.startCourse,
@@ -337,7 +334,7 @@ extension RunningView {
     }
 }
 
-extension RunningView {
+extension NewRunningView {
     private var navigationGesture: some Gesture {
         DragGesture()
             .onChanged { value in
@@ -380,7 +377,7 @@ extension RunningView {
                 }
             )
     }
-    
+
     private var metricsGesture: some Gesture {
         DragGesture()
             .onChanged { value in
@@ -409,7 +406,7 @@ extension RunningView {
                 }
             }
     }
-    
+
     private var stopButtonGesture: some Gesture {
         LongPressGesture(minimumDuration: 1.5)
             .updating($press) { (currentState, gestureState, _) in
@@ -437,7 +434,7 @@ extension RunningView {
                         }
                     }
                 }
-              
+
                 showStopPopup = false
                 stopButtonScale = 1
             }
@@ -453,5 +450,5 @@ extension RunningView {
 }
 
 #Preview {
-    RunningView()
+    NewRunningView()
 }
