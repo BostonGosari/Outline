@@ -9,20 +9,13 @@ import Combine
 import SwiftUI
 
 struct RunningMetricsView: View {
-    @StateObject private var runningManager = RunningStartManager.shared
-    @StateObject private var runningDataManager = RunningDataManager.shared
-
-    // TODO: 사용자 데이터에서 가져오기
-    private let weight: Double = 60
-    
-    var showDetail: Bool
-    var isPaused: Bool
+    @EnvironmentObject private var viewModel: RunningViewModel
     
     var body: some View {
         VStack {
-            if showDetail {
+            if viewModel.showDetailMetrics {
                 VStack(spacing: 25) {
-                    Text(runningManager.formattedTime(runningManager.counter))
+                    Text(viewModel.formattedTimeText)
                         .font(.customTimeTitle)
                         .foregroundStyle(.customPrimary)
                     metricGrid
@@ -32,7 +25,7 @@ struct RunningMetricsView: View {
             }
             HStack {
                 VStack(alignment: .center) {
-                    Text(runningManager.formattedTime(runningManager.counter))
+                    Text(viewModel.formattedTimeText)
                         .font(.customTitle)
                     Text("진행시간")
                         .font(.customCaption)
@@ -42,35 +35,19 @@ struct RunningMetricsView: View {
                 Spacer()
             }
             .offset(y: getSafeArea().bottom == 0 ? 15 : 0)
-            .opacity(!isPaused && !showDetail ? 1 : 0)
-        }
-        .onReceive(runningManager.$counter) { newCounterValue in
-            if runningDataManager.activityID != nil {
-                Task.detached {
-                    // 시간이 바뀔 때마다 호출
-                    await runningDataManager.updateLiveActivity(
-                        newTotalDistance: String(format: "%.2f", (runningDataManager.totalDistance + runningDataManager.distance)/1000),
-                        newTotalTime: runningManager.formattedTime(newCounterValue),
-                        newPace: String(runningDataManager.pace.formattedCurrentPace()),
-                        newHeartrate: "--"
-                    )
-                }
-            }
-            
-        }
-        .onChange(of: runningDataManager.distance) { _, _ in
-            runningDataManager.kilocalorie = weight * (runningDataManager.totalDistance + runningDataManager.distance) / 1000 * 1.036
+            .opacity(!viewModel.isPaused && !viewModel.showDetailMetrics ? 1 : 0)
         }
     }
     
     private var metricGrid: some View {
         VStack(spacing: 25) {
-            let totalDistance = runningDataManager.totalDistance + runningDataManager.distance
-            let currentPace = runningDataManager.pace
-            
+            let totalRunningInfo = viewModel.totalRunningInfo
+            let totalDistance = totalRunningInfo.totalDistance
+            let currentPace = viewModel.pedometerInfo.pace
+
             let distanceKM = totalDistance / 1000
-            let kilocalorie = runningDataManager.kilocalorie
-            
+            let kilocalorie = totalRunningInfo.kilocalorie
+
             HStack {
                 MetricItem(value: String(format: "%.2f", distanceKM), label: "킬로미터")
                 MetricItem(value: "--", label: "BPM")
@@ -101,5 +78,6 @@ struct MetricItem: View {
 }
 
 #Preview {
-    RunningMetricsView(showDetail: false, isPaused: true)
+    RunningMetricsView()
+        .environmentObject(RunningViewModel())
 }

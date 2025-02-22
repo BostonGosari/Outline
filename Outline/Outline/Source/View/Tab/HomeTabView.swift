@@ -9,7 +9,6 @@ import SwiftUI
 
 struct HomeTabView: View {
     @StateObject private var runningManager = RunningStartManager.shared
-    @StateObject var runningDataManager = RunningDataManager.shared
     @StateObject var watchConnectivityManager = ConnectivityManager.shared
     @StateObject private var environmentStateManager = EnvironmentStateManager.shared
     @State private var selectedTab: Tab = .GPSArtRunning
@@ -42,12 +41,12 @@ struct HomeTabView: View {
                 .sheet(isPresented: $runningManager.showPermissionSheet) {
                     PermissionSheet(permissionType: runningManager.permissionType)
                 }
-                .overlay {
-                    if runningDataManager.endWithoutSaving {
-                        RunningPopup(text: "30초 이하의 러닝은 저장되지 않아요")
-                            .frame(maxHeight: .infinity, alignment: .top)
-                    }
-                }
+//                .overlay {
+//                    if runningDataManager.endWithoutSaving {
+//                        RunningPopup(text: "30초 이하의 러닝은 저장되지 않아요")
+//                            .frame(maxHeight: .infinity, alignment: .top)
+//                    }
+//                }
             }
             if runningManager.start {
                 CountDown(running: $runningManager.running, start: $runningManager.start)
@@ -56,15 +55,15 @@ struct HomeTabView: View {
                 FinishRunningView()
             }
             if runningManager.running {
-                RunningView()
+                NewRunningView()
                     .onAppear {
                         watchConnectivityManager.sendRunningState(.start)
                     }
             }
-            if runningManager.mirroring {
-                MirroringView()
-                    .transition(.move(edge: .bottom))
-            }
+//            if runningManager.mirroring {
+//                MirroringView()
+//                    .transition(.move(edge: .bottom))
+//            }
         }
         .sheet(isPresented: $showMirroringSheet) {
             Mirroringsheet {

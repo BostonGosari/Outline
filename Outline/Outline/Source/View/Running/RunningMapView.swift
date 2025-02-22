@@ -10,7 +10,6 @@ import SwiftUI
 
 struct RunningMapView: UIViewRepresentable {
     @StateObject private var runningStartManager = RunningStartManager.shared
-    @StateObject private var runningDataManager = RunningDataManager.shared
     
     private let mapView = MKMapView()
     var userLocations: [CLLocationCoordinate2D]

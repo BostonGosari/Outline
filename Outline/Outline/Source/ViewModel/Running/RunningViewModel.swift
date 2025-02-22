@@ -36,6 +36,9 @@ final class RunningViewModel: ObservableObject {
     /// 러닝 타임
     @Published var time = 0
     private var timer: AnyCancellable?
+    var formattedTimeText: String {
+        formattedTime(time)
+    }
 
     /// Authorization
     @Published var permissionType: PermissionType?
@@ -48,13 +51,30 @@ final class RunningViewModel: ObservableObject {
     @Published var userLocations: [CLLocationCoordinate2D] = []
 
     // LiveActivity
-    @MainActor @Published private(set) var activityID: String?
-    @MainActor @Published private(set) var activityToken: String?
+    @Published private(set) var activityID: String?
+    @Published private(set) var activityToken: String?
 
     // View
     @Published var showCompleteSheet = false
-    @Published var showStopPopup = false
-    @Published var toggleMiniGuide = false
+    @Published var isToggleMiniGuide = false
+    @Published var isPaused = false
+    @Published var showDetailMetrics = false
+    @Published var stopButtonScale: CGFloat = 1
+    @GestureState var onPressStopButton = false
+    @Published var showStopPopup = false {
+        didSet {
+//            if showStopPopup {
+//                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+//                    self.showStopPopup = false
+//                }
+//            }
+        }
+    }
+    @Published var metricsTranslation: CGFloat = 0.0
+    @Published var metricsSheetHeight: CGFloat = 0.0
+
+    // 유저 정보
+    private let weight: Double = 60
 
     private let distanceManager = DistanceManager()
     private let healthKitManager = HealthKitManager()
@@ -70,9 +90,10 @@ final class RunningViewModel: ObservableObject {
         self.totalRunningInfo = TotalRunningInfo()
         self.pedometerInfo = PedometerInfo()
     }
+
     func setupSink() {
         $time
-            .sink { newValue in
+            .sink { [weak self] newValue in
 //                if connectivityManger.isMirroring {
 //                    let userLocations = locationManager.userLocations.map { $0.toCoordinate() }
 //
@@ -87,12 +108,161 @@ final class RunningViewModel: ObservableObject {
 //
 //                    connectivityManger.sendRunningData(runningData)
 //                }
+                guard let self else { return }
+                userLocations = locationManager.userLocations
+                if activityID != nil {
+                    // 시간이 바뀔 때마다 호출
+                    updateLiveActivity(
+                        newTotalDistance: String(format: "%.2f", (totalRunningInfo.totalDistance + pedometerInfo.distance)/1000),
+                        newTotalTime: formattedTime(newValue),
+                        newPace: String(pedometerInfo.pace.formattedCurrentPace()),
+                        newHeartrate: "--"
+                    )
+                }
             }
             .store(in: &cancellable)
+        connectivityManger.$runningState
+            .sink { newValue in
+//                if newValue == .pause {
+//                    withAnimation {
+//                        showDetail = true
+//                        isPaused = true
+//                        if navigationSheetHeight != 0 {
+//                            navigationSheetHeight = 0
+//                        }
+//                    }
+//                    runningDataManager.pauseRunning()
+//                    runningStartManager.stopTimer()
+//                    locationManager.isRunning = false
+//                } else if newValue == .resume {
+//                    withAnimation {
+//                        showDetail = false
+//                        isPaused = false
+//                        if navigationSheetHeight != 0 {
+//                            navigationSheetHeight = 0
+//                        }
+//                    }
+//                    runningDataManager.resumeRunning()
+//                    runningStartManager.startTimer()
+//                    locationManager.isRunning = true
+//                } else if newValue == .end {
+//                    DispatchQueue.main.async {
+//                        if runningStartManager.counter < 30 {
+//                            runningDataManager.stopRunningWithoutRecord()
+//                            runningStartManager.stopTimer()
+//                            runningStartManager.running = false
+//                            locationManager.isRunning = false
+//                            if connectivityManger.isMirroring {
+//                                connectivityManger.sendRunningState(.end)
+//                            }
+//                        } else {
+//                            runningDataManager.userLocations = locationManager.userLocations
+//                            runningDataManager.saveTime = Double(runningStartManager.counter)
+//                            runningStartManager.stopTimer()
+//                            locationManager.isRunning = false
+//                            withAnimation {
+//                                showCompleteSheet = true
+//                            }
+//                            runningDataManager.stopRunning()
+//                            if connectivityManger.isMirroring {
+//                                connectivityManger.sendRunningState(.end)
+//                            }
+//                        }
+//                    }
+//                }
+            }
+            .store(in: &cancellable)
+        $isPaused
+            .sink { [weak self] newValue in
+                guard !newValue, let self else { return }
+                withAnimation {
+                    self.showDetailMetrics = false
+                }
+                startTimer()
+                if connectivityManger.isMirroring {
+                    connectivityManger.sendRunningState(.resume)
+                }
+            }
+            .store(in: &cancellable)
+        $pedometerInfo
+            .sink { [weak self] newValue in
+                guard let self else { return }
+                self.totalRunningInfo.kilocalorie = self.weight * (self.totalRunningInfo.totalDistance + newValue.distance) / 1000 * 1.036
+            }
+            .store(in: &cancellable)
+
     }
 
     func onAppear() {
-//        locationManager.userLocations = []
+        locationManager.userLocations = []
+        startTimer()
+        Task {
+            await startLiveActivity()
+        }
+    }
+
+    func toggleShowDetailButton() {
+        withAnimation {
+            showDetailMetrics.toggle()
+        }
+    }
+
+    func tapStopRunningButton() {
+
+    }
+
+    func tapResumeRunningButton() {
+        withAnimation {
+            showDetailMetrics = false
+            isPaused = false
+        }
+        resumeRunning()
+//        if connectivityManger.isMirroring {
+//            connectivityManger.sendRunningState(.resume)
+//        }
+    }
+    func tapPauseRunningButton() {
+        withAnimation {
+            showDetailMetrics = true
+            isPaused = true
+        }
+        stopRunnning()
+//        if connectivityManger.isMirroring {
+//            connectivityManger.sendRunningState(.pause)
+//        }
+    }
+    func onEndedLongpreseGesture() {
+//        DispatchQueue.main.async {
+//            if runningStartManager.counter < 30 {
+//                runningDataManager.stopRunningWithoutRecord()
+//                runningStartManager.stopTimer()
+//                runningStartManager.running = false
+//                if connectivityManger.isMirroring {
+//                    connectivityManger.sendRunningState(.end)
+//                }
+//            } else {
+//                runningDataManager.userLocations = locationManager.userLocations
+//                runningDataManager.saveTime = Double(runningStartManager.counter)
+//                runningStartManager.stopTimer()
+//                withAnimation {
+//                    showCompleteSheet = true
+//                }
+//                runningDataManager.stopRunning()
+//                if connectivityManger.isMirroring {
+//                    connectivityManger.sendRunningState(.end)
+//                }
+//            }
+//        }
+//
+//        showStopPopup = false
+//        stopButtonScale = 1
+    }
+
+    func onEndedTapGesture() {
+//        withAnimation {
+//            stopButtonScale = 1
+//            showStopPopup = true
+//        }
     }
 
     func onDisappear() {
@@ -138,7 +308,6 @@ final class RunningViewModel: ObservableObject {
     }
 
     func finishRunning() {
-        healthKitManager.endWorkout(steps: <#T##Double#>, distance: <#T##Double#>, energy: <#T##Double#>)
         saveRecord()
         reset()
     }
@@ -185,7 +354,7 @@ private extension RunningViewModel {
 // UserDataModel
 private extension RunningViewModel {
     func saveRecord() {
-
+        // TODO: save record
     }
 }
 
@@ -219,18 +388,20 @@ private extension RunningViewModel {
         }
     }
 
-    func updateLiveActivity(newTotalDistance: String, newTotalTime: String, newPace: String, newHeartrate: String) async {
-        guard let activityID = await activityID,
-              let runningActivity = Activity<RunningAttributes>.activities.first(where: { $0.id == activityID }) else {
-            return
-        }
-        if #available(iOS 16.2, *) {
-            Task.detached {
-                print("update \(activityID)")
-                let newState = RunningAttributes.ContentState(totalDistance: newTotalDistance, totalTime: newTotalTime, pace: newPace, heartrate: newHeartrate)
-                print("newState \(newState)")
-                await
-                runningActivity.update( using: newState)
+    func updateLiveActivity(newTotalDistance: String, newTotalTime: String, newPace: String, newHeartrate: String) {
+        Task {
+            guard let activityID = await activityID,
+                  let runningActivity = Activity<RunningAttributes>.activities.first(where: { $0.id == activityID }) else {
+                return
+            }
+            if #available(iOS 16.2, *) {
+                Task.detached {
+                    print("update \(activityID)")
+                    let newState = RunningAttributes.ContentState(totalDistance: newTotalDistance, totalTime: newTotalTime, pace: newPace, heartrate: newHeartrate)
+                    print("newState \(newState)")
+                    await
+                    runningActivity.update( using: newState)
+                }
             }
         }
     }

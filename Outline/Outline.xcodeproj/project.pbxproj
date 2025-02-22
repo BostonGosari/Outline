@@ -14,7 +14,6 @@
 		0E29F6532ADF6C3A00F5EF5C /* RunningPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E29F6522ADF6C3A00F5EF5C /* RunningPopup.swift */; };
 		0E29F6552ADF6C7D00F5EF5C /* KMLParserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E29F6542ADF6C7D00F5EF5C /* KMLParserManager.swift */; };
 		0E29F65F2ADF6CDD00F5EF5C /* RunningMapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E29F65E2ADF6CDD00F5EF5C /* RunningMapViewModel.swift */; };
-		0E4291602B03CF3100EE75F5 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E42915F2B03CF3100EE75F5 /* LocationManager.swift */; };
 		0E4D309D2B5FC85600582E37 /* FinishRunningMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4D309C2B5FC85600582E37 /* FinishRunningMapView.swift */; };
 		0E7EE51D2B5E6D24004F6BAF /* FreeRunningMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7EE51C2B5E6D24004F6BAF /* FreeRunningMapView.swift */; };
 		0E7EE51F2B5E761E004F6BAF /* CardDetailInformationMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7EE51E2B5E761E004F6BAF /* CardDetailInformationMapView.swift */; };
@@ -70,7 +69,6 @@
 		293D1E302B0B016D00AB85BE /* TwoButtonSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 293D1E2F2B0B016D00AB85BE /* TwoButtonSheet.swift */; };
 		293D1E322B0B019300AB85BE /* EndRunningSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 293D1E312B0B019300AB85BE /* EndRunningSheet.swift */; };
 		293D1E342B0B01AF00AB85BE /* PermissionSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 293D1E332B0B01AF00AB85BE /* PermissionSheet.swift */; };
-		293D1E352B0B3CD800AB85BE /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E42915F2B03CF3100EE75F5 /* LocationManager.swift */; };
 		293D1E3A2B0B42B600AB85BE /* SFProDisplay-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 293D1E392B0B42B600AB85BE /* SFProDisplay-Black.otf */; };
 		293D1E422B0B42E400AB85BE /* SFProDisplay-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 293D1E3B2B0B42E300AB85BE /* SFProDisplay-Medium.otf */; };
 		293D1E432B0B42E400AB85BE /* SFProDisplay-Heavy.otf in Resources */ = {isa = PBXBuildFile; fileRef = 293D1E3C2B0B42E300AB85BE /* SFProDisplay-Heavy.otf */; };
@@ -149,6 +147,8 @@
 		3A0740462D5F049600984303 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0740452D5F049600984303 /* LoginView.swift */; };
 		3A0740502D5F1D9F00984303 /* FreeRunningViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A07404F2D5F1D9E00984303 /* FreeRunningViewModel.swift */; };
 		3A4830812D68BBE7007A2DE9 /* NewRunningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4830802D68BBE7007A2DE9 /* NewRunningView.swift */; };
+		3A4830822D696CB4007A2DE9 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE8C7472D658C7B00325496 /* LocationManager.swift */; };
+		3A4830832D696CB4007A2DE9 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE8C7472D658C7B00325496 /* LocationManager.swift */; };
 		3A5BBA762D61BD54008F4915 /* CardDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5BBA752D61BD54008F4915 /* CardDetailViewModel.swift */; };
 		3A5BBA782D61C557008F4915 /* EnvironmentStateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5BBA772D61C557008F4915 /* EnvironmentStateManager.swift */; };
 		3AE8C73A2D65728400325496 /* IntroViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE8C7392D65728400325496 /* IntroViewModel.swift */; };
@@ -336,7 +336,6 @@
 		0E29F6522ADF6C3A00F5EF5C /* RunningPopup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RunningPopup.swift; sourceTree = "<group>"; };
 		0E29F6542ADF6C7D00F5EF5C /* KMLParserManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KMLParserManager.swift; sourceTree = "<group>"; };
 		0E29F65E2ADF6CDD00F5EF5C /* RunningMapViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RunningMapViewModel.swift; sourceTree = "<group>"; };
-		0E42915F2B03CF3100EE75F5 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		0E4D309C2B5FC85600582E37 /* FinishRunningMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishRunningMapView.swift; sourceTree = "<group>"; };
 		0E7EE51C2B5E6D24004F6BAF /* FreeRunningMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeRunningMapView.swift; sourceTree = "<group>"; };
 		0E7EE51E2B5E761E004F6BAF /* CardDetailInformationMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetailInformationMapView.swift; sourceTree = "<group>"; };
@@ -705,8 +704,8 @@
 		29130C322C675646004C0325 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
+				3AE8C7472D658C7B00325496 /* LocationManager.swift */,
 				9528EFFF2AE042570056CCC6 /* PathManager.swift */,
-				0E42915F2B03CF3100EE75F5 /* LocationManager.swift */,
 				BBA3E3F32B80AAC60068C891 /* ScoreManager.swift */,
 			);
 			path = Manager;
@@ -1086,7 +1085,6 @@
 				954FFF772AE132D100D27537 /* CourseDataUploadManager.swift */,
 				29CC19A32AE95F2300B79610 /* RunningStartManager.swift */,
 				3AE8C7492D65988C00325496 /* DistanceManager.swift */,
-				3AE8C7472D658C7B00325496 /* LocationManager.swift */,
 				F035240F2AE35AF800CCD8A6 /* RunningDataManager.swift */,
 				299DC11C2C3D2BE700567874 /* MotionManager.swift */,
 			);
@@ -1616,6 +1614,7 @@
 			files = (
 				BBBB27E62B1796DC0081C93D /* FontExtension.swift in Sources */,
 				BBCB1F0D2B1778DE00D9AE1C /* AppIntent.swift in Sources */,
+				3A4830832D696CB4007A2DE9 /* LocationManager.swift in Sources */,
 				BBCB1F072B1778DE00D9AE1C /* OutlineLiveActivityBundle.swift in Sources */,
 				BBCB1F172B1778EF00D9AE1C /* RunningAttributes.swift in Sources */,
 				BBCB1F0B2B1778DE00D9AE1C /* OutlineLiveActivity.swift in Sources */,
@@ -1729,7 +1728,6 @@
 				29130C1A2C673349004C0325 /* MirroringModel.swift in Sources */,
 				F05C7D562ADC565E006842DB /* PreferenceKey.swift in Sources */,
 				3AE8C7482D658C7B00325496 /* LocationManager.swift in Sources */,
-				0E4291602B03CF3100EE75F5 /* LocationManager.swift in Sources */,
 				9528EFEC2ADEC7CF0056CCC6 /* RunningRecord.swift in Sources */,
 				95A01E312AF141C30093D9C0 /* ProfileView.swift in Sources */,
 				BBEC68842B087B020026C306 /* UnderlineButton.swift in Sources */,
@@ -1801,10 +1799,10 @@
 				2999C6D72B0D7C56009C5585 /* MirroringMetricsView.swift in Sources */,
 				2930EDBB2AF3E59F007FD141 /* ControlButton.swift in Sources */,
 				293D1E2E2B0B00BC00AB85BE /* FontExtension.swift in Sources */,
+				3A4830822D696CB4007A2DE9 /* LocationManager.swift in Sources */,
 				F0492E212ADD52E900F6EADD /* TabWatchView.swift in Sources */,
 				29130C372C675F2B004C0325 /* ArrayExtension.swift in Sources */,
 				2930EDBD2AF3FD97007FD141 /* CountDownView.swift in Sources */,
-				293D1E352B0B3CD800AB85BE /* LocationManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

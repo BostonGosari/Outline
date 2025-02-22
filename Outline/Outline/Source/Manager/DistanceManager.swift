@@ -5,7 +5,7 @@
 //  Created by Austin's Macbook Pro M3 on 2/19/25.
 //
 
-import Foundation
+import CoreLocation
 
 final class DistanceManager {
     private let locationManager = CLLocationManager()
