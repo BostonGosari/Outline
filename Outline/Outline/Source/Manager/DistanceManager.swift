@@ -9,6 +9,8 @@ import CoreLocation
 
 final class DistanceManager {
     private let locationManager = CLLocationManager()
+    // TODO: change course
+    private let minDistance: CLLocationDistance = 50
 
     func checkDistance(course: [Coordinate]) -> Bool {
 
@@ -16,7 +18,7 @@ final class DistanceManager {
 
         guard let shortestDistance = calculateShortestDistance(from: userLocation, to: course.toCLLocationCoordinates()) else { return false }
 
-        return shortestDistance <= 50
+        return shortestDistance <= minDistance
     }
 
     /// 전체 코스에서 가장 짧은 거리를 계산하는 함수

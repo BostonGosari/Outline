@@ -228,7 +228,7 @@ final class RunningViewModel: ObservableObject {
     }
 
     func onEndedLongpreseGesture() {
-        DispatchQueue.main.async {
+
             if self.time < 30 {
                 self.stopTimer()
                 self.environmentStateManager.goToHome()
@@ -245,7 +245,7 @@ final class RunningViewModel: ObservableObject {
 //                    connectivityManger.sendRunningState(.end)
 //                }
             }
-        }
+        
 
         stopButtonScale = 1
     }

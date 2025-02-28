@@ -13,7 +13,7 @@ import SwiftUI
 final class CardDetailViewModel: ObservableObject {
     @AppStorage("authState") var authState: AuthState = .logout
     @Published var isUnlocked = false
-    @Published var showAlert = false
+    @Published var showDistanceAlert = false
     @Published var showNeedLoginSheet = false
     @Published var appear = [false, false, false]
     @Published var viewSize = 0.0
@@ -65,9 +65,18 @@ final class CardDetailViewModel: ObservableObject {
                     guard
                         let self,
                         value,
-                        await self.checkAuthorization(),
                         let selectedCourse = self.environmentStateManager.selectedCourse
                     else { return }
+                    if await !self.healthKitManager.checkAuthorization() {
+                        self.environmentStateManager.permissionType = .health
+                        self.environmentStateManager.showPermissionSheet = true
+                        return
+                    }
+                    if !self.locationManager.checkLocationAuthorization() {
+                        self.environmentStateManager.permissionType = .location
+                        self.environmentStateManager.showPermissionSheet = true
+                        return
+                    }
                     let course = selectedCourse.course
                     let runningInfo = MirroringRunningInfo(runningType: .gpsArt, courseName: course.courseName, course: course.coursePaths, heading: course.heading)
 
@@ -77,7 +86,7 @@ final class CardDetailViewModel: ObservableObject {
     //                    connectivityManager.sendRunningInfo(runningInfo)
                     } else {
                         withAnimation {
-                            self.showAlert = true
+                            self.showDistanceAlert = true
                         }
                     }
 
