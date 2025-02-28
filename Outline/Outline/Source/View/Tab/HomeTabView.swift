@@ -37,9 +37,9 @@ struct HomeTabView: View {
                             .offset(y: getSafeArea().bottom == 0 ? 25 : 0)
                     }
                 }
-//                .sheet(isPresented: $runningManager.showPermissionSheet) {
-//                    PermissionSheet(permissionType: runningManager.permissionType)
-//                }
+                .sheet(isPresented: $environmentStateManager.showPermissionSheet) {
+                    PermissionSheet(permissionType: environmentStateManager.permissionType)
+                }
 //                .overlay {
 //                    if runningDataManager.endWithoutSaving {
 //                        RunningPopup(text: "30초 이하의 러닝은 저장되지 않아요")
@@ -66,6 +66,7 @@ struct HomeTabView: View {
 //                    .transition(.move(edge: .bottom))
 //            }
         }
+        .environmentObject(environmentStateManager)
         .sheet(isPresented: $showMirroringSheet) {
             Mirroringsheet {
 //                runningManager.mirroring = true

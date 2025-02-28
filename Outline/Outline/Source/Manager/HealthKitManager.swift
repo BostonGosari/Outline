@@ -38,7 +38,9 @@ class HealthKitManager: ObservableObject {
     }
 
     func checkAuthorization() async -> Bool {
-        guard let healthStore else { return false }
+        guard let healthStore else {
+            return false
+        }
         for quantityType in quantityTypes {
             let status = healthStore.authorizationStatus(for: quantityType)
             switch status {
@@ -47,7 +49,7 @@ class HealthKitManager: ObservableObject {
             case .sharingDenied:
                 return false
             case .sharingAuthorized:
-                return false
+                return true
             @unknown default:
                 return false
             }

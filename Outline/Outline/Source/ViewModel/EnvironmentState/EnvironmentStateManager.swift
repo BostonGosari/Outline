@@ -22,6 +22,8 @@ final class EnvironmentStateManager: ObservableObject {
     @Published var showDetail = false
     @Published var selectedCourse: CourseWithDistanceAndScore?
     @Published var process: Process = .notRunning
+    @Published var showPermissionSheet = false
+    @Published var permissionType: PermissionType = .health
 
     func startRunning() {
         process = .preparing
@@ -36,5 +38,14 @@ final class EnvironmentStateManager: ObservableObject {
 
     func goToHome() {
         process = .notRunning
+    }
+
+    func showPermissionSheet(_ permissionType: PermissionType) {
+        self.permissionType = permissionType
+        showPermissionSheet = true
+    }
+
+    func closePermissionSheet() {
+        showPermissionSheet = false
     }
 }
