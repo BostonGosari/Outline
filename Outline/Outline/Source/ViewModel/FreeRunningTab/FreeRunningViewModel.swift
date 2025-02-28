@@ -18,22 +18,27 @@ final class FreeRunningViewModel: ObservableObject {
 
     private let connectivityManager = ConnectivityManager.shared
     private let locationManger = CLLocationManager()
-    private let runningStartManager = RunningStartManager.shared
     private var cancellable: Set<AnyCancellable> = Set()
+    private let healthKitManager = HealthKitManager()
+    private let locationManager = LocationManager()
+    private let environmentStateManager = EnvironmentStateManager.shared
+    private let userDataModel = UserDataModel()
 
     init() {
         $isUnlocked
             .sink { [weak self] newValue in
                 guard let self else { return }
                 if newValue {
-                    if runningStartManager.checkAuthorization() {
-                        runningStartManager.start = true
-                        runningStartManager.startFreeRun()
+                    Task {
+                        if await self.checkAuthorization() {
+                            self.environmentStateManager.startRunning()
 
-                        let runningInfo = MirroringRunningInfo(runningType: .free, courseName: "자유아트", course: [])
-                        connectivityManager.sendRunningInfo(runningInfo)
+                            let runningInfo = MirroringRunningInfo(runningType: .free, courseName: "자유아트", course: [])
+                            self.connectivityManager.sendRunningInfo(runningInfo)
+                        } else {
+                            self.isUnlocked = false
+                        }
                     }
-                    isUnlocked = false
                 }
             }
             .store(in: &cancellable)
@@ -41,7 +46,7 @@ final class FreeRunningViewModel: ObservableObject {
 
     func onAppear() {
         userLocationToString()
-        runningStartManager.getFreeRunNumber { result in
+        getFreeRunNumber { result in
             switch result {
             case .success(let freeRunCount):
                 self.freeRunCount = freeRunCount
@@ -67,4 +72,25 @@ final class FreeRunningViewModel: ObservableObject {
         }
     }
 
+    private func checkAuthorization() async -> Bool {
+        if await healthKitManager.checkAuthorization() == false {
+            return false
+        }
+        if locationManager.checkLocationAuthorization() == false {
+            return false
+        }
+        return true
+    }
+
+    private func getFreeRunNumber(completion: @escaping (Result<Int, CoreDataError>) -> Void) {
+        userDataModel.getFreeRunCount { result in
+            switch result {
+            case .success(let freeRunCount):
+                completion(.success(freeRunCount))
+            case .failure(let failure):
+                print("fail to read free run count \(failure)")
+                completion(.failure(.dataNotFound))
+            }
+        }
+    }
 }

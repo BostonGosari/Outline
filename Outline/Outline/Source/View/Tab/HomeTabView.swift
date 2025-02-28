@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct HomeTabView: View {
-    @StateObject private var runningManager = RunningStartManager.shared
     @StateObject var watchConnectivityManager = ConnectivityManager.shared
     @StateObject private var environmentStateManager = EnvironmentStateManager.shared
     @State private var selectedTab: Tab = .GPSArtRunning
@@ -38,9 +37,9 @@ struct HomeTabView: View {
                             .offset(y: getSafeArea().bottom == 0 ? 25 : 0)
                     }
                 }
-                .sheet(isPresented: $runningManager.showPermissionSheet) {
-                    PermissionSheet(permissionType: runningManager.permissionType)
-                }
+//                .sheet(isPresented: $runningManager.showPermissionSheet) {
+//                    PermissionSheet(permissionType: runningManager.permissionType)
+//                }
 //                .overlay {
 //                    if runningDataManager.endWithoutSaving {
 //                        RunningPopup(text: "30초 이하의 러닝은 저장되지 않아요")
@@ -48,18 +47,20 @@ struct HomeTabView: View {
 //                    }
 //                }
             }
-            if runningManager.start {
-                CountDown(running: $runningManager.running, start: $runningManager.start)
-            }
-            if runningManager.complete {
-                FinishRunningView()
-            }
-            if runningManager.running {
+            switch environmentStateManager.process {
+            case .notRunning:
+                EmptyView()
+            case .preparing:
+                CountDown()
+            case .running:
                 NewRunningView()
                     .onAppear {
                         watchConnectivityManager.sendRunningState(.start)
                     }
+            case .finished:
+                FinishRunningView()
             }
+
 //            if runningManager.mirroring {
 //                MirroringView()
 //                    .transition(.move(edge: .bottom))
@@ -67,7 +68,7 @@ struct HomeTabView: View {
         }
         .sheet(isPresented: $showMirroringSheet) {
             Mirroringsheet {
-                runningManager.mirroring = true
+//                runningManager.mirroring = true
                 watchConnectivityManager.sendIsMirroring(true)
             }
         }
@@ -76,7 +77,7 @@ struct HomeTabView: View {
                 showMirroringSheet = true
             } else if newValue == .end {
                 showMirroringSheet = false
-                runningManager.mirroring = false
+//                runningManager.mirroring = false
             }
         }
     }

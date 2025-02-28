@@ -12,10 +12,29 @@ final class EnvironmentStateManager: ObservableObject {
     private init() { }
     static let shared = EnvironmentStateManager()
 
+    enum Process {
+        case notRunning
+        case preparing
+        case running
+        case finished
+    }
+
     @Published var showDetail = false
     @Published var selectedCourse: CourseWithDistanceAndScore?
+    @Published var process: Process = .notRunning
 
     func startRunning() {
-        showDetail = false
+        process = .preparing
+        DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
+            self.process = .running
+        }
+    }
+
+    func finishRunning() {
+        process = .finished
+    }
+
+    func goToHome() {
+        process = .notRunning
     }
 }

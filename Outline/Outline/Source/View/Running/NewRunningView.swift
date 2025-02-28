@@ -46,8 +46,9 @@ struct NewRunningView: View {
 
 extension NewRunningView {
     private var map: some View {
-        RunningMapView(userLocations: viewModel.userLocations)
+        RunningMapView(viewModel: viewModel)
             .ignoresSafeArea()
+            .environmentObject(viewModel)
     }
     private var metrics: some View {
         RunningMetricsView()
@@ -97,7 +98,7 @@ extension NewRunningView {
     private var controlButton: some View {
         ZStack {
             Button {
-                viewModel.tapStopRunningButton()
+//                viewModel.tapStopRunningButton()
             } label: {
                 Image(systemName: "stop.circle.fill")
                     .font(.system(size: 60))

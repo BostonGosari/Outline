@@ -714,7 +714,6 @@
 		2921AFFC2B012DBF00533A83 /* Running */ = {
 			isa = PBXGroup;
 			children = (
-				2921AFFD2B012DD100533A83 /* RunningView.swift */,
 				3A4830802D68BBE7007A2DE9 /* NewRunningView.swift */,
 				2921AFFF2B012E4400533A83 /* RunningMapView.swift */,
 				2921B0012B012EC800533A83 /* RunningNavigationView.swift */,
@@ -831,6 +830,7 @@
 				0EE0D4032B0DC34000E75F4C /* CardDetailMap.swift */,
 				F06298AA2AE1998D007AB2D3 /* MapInfoView.swift */,
 				0E29F65E2ADF6CDD00F5EF5C /* RunningMapViewModel.swift */,
+				2921AFFD2B012DD100533A83 /* RunningView.swift */,
 			);
 			path = Legacy;
 			sourceTree = "<group>";

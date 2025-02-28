@@ -49,6 +49,9 @@ final class RunningViewModel: ObservableObject {
     @Published var totalRunningInfo: TotalRunningInfo
     @Published var pedometerInfo: PedometerInfo
     @Published var userLocations: [CLLocationCoordinate2D] = []
+    var selectedCourse: GPSArtCourse? {
+        environmentStateManager.selectedCourse?.course
+    }
 
     // LiveActivity
     @Published private(set) var activityID: String?
@@ -57,19 +60,11 @@ final class RunningViewModel: ObservableObject {
     // View
     @Published var showCompleteSheet = false
     @Published var isToggleMiniGuide = false
-    @Published var isPaused = false
     @Published var showDetailMetrics = false
     @Published var stopButtonScale: CGFloat = 1
     @GestureState var onPressStopButton = false
-    @Published var showStopPopup = false {
-        didSet {
-//            if showStopPopup {
-//                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-//                    self.showStopPopup = false
-//                }
-//            }
-        }
-    }
+    @Published var isPaused = false
+    @Published var showStopPopup = false
     @Published var metricsTranslation: CGFloat = 0.0
     @Published var metricsSheetHeight: CGFloat = 0.0
 
@@ -121,8 +116,8 @@ final class RunningViewModel: ObservableObject {
                 }
             }
             .store(in: &cancellable)
-        connectivityManger.$runningState
-            .sink { newValue in
+//        connectivityManger.$runningState
+//            .sink { newValue in
 //                if newValue == .pause {
 //                    withAnimation {
 //                        showDetail = true
@@ -170,8 +165,8 @@ final class RunningViewModel: ObservableObject {
 //                        }
 //                    }
 //                }
-            }
-            .store(in: &cancellable)
+//            }
+//            .store(in: &cancellable)
         $isPaused
             .sink { [weak self] newValue in
                 guard !newValue, let self else { return }
@@ -207,10 +202,6 @@ final class RunningViewModel: ObservableObject {
         }
     }
 
-    func tapStopRunningButton() {
-
-    }
-
     func tapResumeRunningButton() {
         withAnimation {
             showDetailMetrics = false
@@ -221,6 +212,7 @@ final class RunningViewModel: ObservableObject {
 //            connectivityManger.sendRunningState(.resume)
 //        }
     }
+
     func tapPauseRunningButton() {
         withAnimation {
             showDetailMetrics = true
@@ -231,38 +223,42 @@ final class RunningViewModel: ObservableObject {
 //            connectivityManger.sendRunningState(.pause)
 //        }
     }
+
     func onEndedLongpreseGesture() {
-//        DispatchQueue.main.async {
-//            if runningStartManager.counter < 30 {
-//                runningDataManager.stopRunningWithoutRecord()
-//                runningStartManager.stopTimer()
+        DispatchQueue.main.async {
+            if self.time < 30 {
+                self.stopTimer()
+                self.environmentStateManager.goToHome()
+//               runningDataManager.stopRunningWithoutRecord()
 //                runningStartManager.running = false
 //                if connectivityManger.isMirroring {
 //                    connectivityManger.sendRunningState(.end)
 //                }
-//            } else {
+            } else {
 //                runningDataManager.userLocations = locationManager.userLocations
 //                runningDataManager.saveTime = Double(runningStartManager.counter)
-//                runningStartManager.stopTimer()
-//                withAnimation {
-//                    showCompleteSheet = true
-//                }
-//                runningDataManager.stopRunning()
+                self.stopTimer()
+                self.environmentStateManager.finishRunning()
+                withAnimation {
+                    self.showCompleteSheet = true
+                }
 //                if connectivityManger.isMirroring {
 //                    connectivityManger.sendRunningState(.end)
 //                }
-//            }
-//        }
-//
-//        showStopPopup = false
-//        stopButtonScale = 1
+            }
+        }
+
+        stopButtonScale = 1
     }
 
     func onEndedTapGesture() {
-//        withAnimation {
-//            stopButtonScale = 1
-//            showStopPopup = true
-//        }
+        withAnimation {
+            stopButtonScale = 1
+            showStopPopup = true
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+            self.showStopPopup = false
+        }
     }
 
     func onDisappear() {

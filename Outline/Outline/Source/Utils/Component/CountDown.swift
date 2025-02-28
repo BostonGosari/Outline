@@ -8,9 +8,7 @@
 import SwiftUI
 
 struct CountDown: View {
-    
-    @Binding var running: Bool
-    @Binding var start: Bool
+    @EnvironmentObject private var environmentStateManager: EnvironmentStateManager
     @State var count = 3
     
     var body: some View {
@@ -42,8 +40,7 @@ struct CountDown: View {
                 count = 1
             }
             DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                running = true
-                start.toggle()
+                environmentStateManager.startRunning()
             }
         }
     }

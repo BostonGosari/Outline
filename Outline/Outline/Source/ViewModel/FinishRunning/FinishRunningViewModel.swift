@@ -23,7 +23,8 @@ class FinishRunningViewModel: ObservableObject {
     }
     @Published var navigateToShareMainView = false
     @Published var runningRecord: RunningRecord?
-    
+
+    private let environmentStateManger = EnvironmentStateManager.shared
     private let userDataModel = UserDataModel()
     private let persistenceController = PersistenceController.shared
     var shareData = ShareModel()
@@ -90,5 +91,9 @@ class FinishRunningViewModel: ObservableObject {
         case 81...100: .excellent
         default: .freeRun
         }
+    }
+
+    func goToHome() {
+        environmentStateManger.goToHome()
     }
 }

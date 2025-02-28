@@ -24,10 +24,11 @@ final class CardDetailViewModel: ObservableObject {
     @Published var showCopyLocationPopup = false
 
     let connectivityManager = ConnectivityManager.shared
-    let locationManager = CLLocationManager()
-    let runningStartManager = RunningStartManager.shared
     private let environmentStateManager = EnvironmentStateManager.shared
     private var cancellable = Set<AnyCancellable>()
+    private let distanceManager = DistanceManager()
+    private let healthKitManager = HealthKitManager()
+    private let locationManager = LocationManager()
 
     let fadeInOffset: CGFloat = 10
     let dragStartRange: CGFloat = 60
@@ -59,29 +60,29 @@ final class CardDetailViewModel: ObservableObject {
     private func setSink() {
         $isUnlocked
             .sink { [weak self] value in
-                guard
-                    let self,
-                    value,
-                    runningStartManager.checkAuthorization(),
-                    let selectedCourse = environmentStateManager.selectedCourse
-                else { return }
 
-                let course = selectedCourse.course
-                let runningInfo = MirroringRunningInfo(runningType: .gpsArt, courseName: course.courseName, course: course.coursePaths, heading: course.heading)
+                Task {
+                    guard
+                        let self,
+                        value,
+                        await self.checkAuthorization(),
+                        let selectedCourse = self.environmentStateManager.selectedCourse
+                    else { return }
+                    let course = selectedCourse.course
+                    let runningInfo = MirroringRunningInfo(runningType: .gpsArt, courseName: course.courseName, course: course.coursePaths, heading: course.heading)
 
-                if runningStartManager.checkDistance(course: course.coursePaths) {
-                    runningStartManager.startCourse = selectedCourse.course
-                    runningStartManager.startGPSArtRun()
-                    connectivityManager.sendRunningInfo(runningInfo)
-                    environmentStateManager.startRunning()
-                    runningStartManager.start = true
-                } else {
-                    withAnimation {
-                        self.showAlert = true
+                    if self.distanceManager.checkDistance(course: course.coursePaths) {
+                        self.environmentStateManager.selectedCourse = selectedCourse
+                        self.environmentStateManager.startRunning()
+    //                    connectivityManager.sendRunningInfo(runningInfo)
+                    } else {
+                        withAnimation {
+                            self.showAlert = true
+                        }
                     }
-                }
 
-                isUnlocked = false
+                    self.isUnlocked = false
+                }
             }
             .store(in: &cancellable)
     }
@@ -100,8 +101,6 @@ final class CardDetailViewModel: ObservableObject {
 
     func changeToFreeRunning() {
         showDetailView = false
-        runningStartManager.start = true
-        runningStartManager.startFreeRun()
 
         let runningInfo = MirroringRunningInfo(runningType: .free, courseName: "자유아트", course: [])
         connectivityManager.sendRunningInfo(runningInfo)
@@ -123,6 +122,15 @@ final class CardDetailViewModel: ObservableObject {
                 viewSize = 0
             }
         }
+    }
+    private func checkAuthorization() async -> Bool {
+        if await healthKitManager.checkAuthorization() == false {
+            return false
+        }
+        if locationManager.checkLocationAuthorization() == false {
+            return false
+        }
+        return true
     }
 }
 

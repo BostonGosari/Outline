@@ -6,12 +6,12 @@
 //
 
 import ActivityKit
-import CoreMotion
-import Combine
-import Foundation
-import SwiftUI
-import WidgetKit
-
+//import CoreMotion
+//import Combine
+//import Foundation
+//import SwiftUI
+//import WidgetKit
+//
 //class RunningDataManager: ObservableObject {
 //    // 전송용 데이터
 //    @Published var totalTime = 0.0
@@ -53,7 +53,8 @@ import WidgetKit
 //    
 //    private var RunningStartDate = Date()
 //    private var RunningEndDate = Date()
-//    
+//    private let locationManager = LocationManager()
+//
 ////    private let runningManger = RunningStartManager.shared
 ////    private let locationManager = LocationManager.shared
 //    
@@ -64,7 +65,7 @@ import WidgetKit
 //    func startRunning() {
 //        RunningStartDate = Date()
 //        startPedometerUpdates()
-//        locationManager.startUpdate()
+//        locationManager.startUpdateLocation()
 //    }
 //    
 //    func stopRunningWithoutRecord() {
@@ -82,8 +83,8 @@ import WidgetKit
 //    func stopRunning() {
 //        RunningEndDate = Date()
 //        stopPedometerUpdates()
-//        locationManager.stopUpdate()
-//        
+//        locationManager.stopUpdateLocation()
+//
 //        Task {
 //            await removeActivity()
 //        }
@@ -103,7 +104,7 @@ import WidgetKit
 //    func resumeRunning() {
 //        startPedometerDataUpdates()
 //        healthKitManager.resumeWorkout()
-//        locationManager.resumeUpdate()
+//        locationManager.startUpdateLocation()
 //    }
 //    
 //    func doneRunning() {
