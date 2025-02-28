@@ -39,6 +39,8 @@ final class RunningViewModel: ObservableObject {
     var formattedTimeText: String {
         formattedTime(time)
     }
+    var runningStartTime = Date()
+    var runningEndTime = Date()
 
     /// Authorization
     @Published var permissionType: PermissionType?
@@ -194,6 +196,7 @@ final class RunningViewModel: ObservableObject {
         Task {
             await startLiveActivity()
         }
+        runningStartTime = Date()
     }
 
     func toggleShowDetailButton() {
@@ -237,11 +240,7 @@ final class RunningViewModel: ObservableObject {
             } else {
 //                runningDataManager.userLocations = locationManager.userLocations
 //                runningDataManager.saveTime = Double(runningStartManager.counter)
-                self.stopTimer()
-                self.environmentStateManager.finishRunning()
-                withAnimation {
-                    self.showCompleteSheet = true
-                }
+                self.finishRunning()
 //                if connectivityManger.isMirroring {
 //                    connectivityManger.sendRunningState(.end)
 //                }
@@ -304,8 +303,15 @@ final class RunningViewModel: ObservableObject {
     }
 
     func finishRunning() {
-        saveRecord()
-        reset()
+        Task {
+            runningEndTime = Date()
+            self.stopTimer()
+            self.healthKitManager.endWorkout(steps: totalRunningInfo.totalStep, distance: totalRunningInfo.totalDistance, energy: totalRunningInfo.kilocalorie)
+
+            self.environmentStateManager.finishRunning()
+            await saveRecord()
+            reset()
+        }
     }
 }
 
@@ -349,8 +355,57 @@ private extension RunningViewModel {
 
 // UserDataModel
 private extension RunningViewModel {
-    func saveRecord() {
-        // TODO: save record
+    private func saveRecord() async {
+        await withCheckedContinuation { continuation in
+            let course: GPSArtCourse
+            if let courseWithDistanceAndScore = environmentStateManager.selectedCourse {
+                course = courseWithDistanceAndScore.course
+            } else {
+                course = GPSArtCourse()
+            }
+
+            let courseData = CourseData(
+                courseName: course.courseName,
+                runningLength: course.courseLength,
+                heading: course.heading,
+                distance: course.distance,
+                coursePaths: userLocations,
+                runningCourseId: "",
+                regionDisplayName: course.regionDisplayName,
+                score: 0
+            )
+
+            let healthData = HealthData(
+                totalTime: totalRunningInfo.totalTime,
+                averageCadence: totalRunningInfo.totalStep / totalRunningInfo.totalTime * 60,
+                totalRunningDistance: totalRunningInfo.totalDistance,
+                totalEnergy: totalRunningInfo.kilocalorie,
+                averageHeartRate: 0.0,
+                averagePace: totalRunningInfo.totalTime / totalRunningInfo.totalDistance * 1000,
+                startDate: runningStartTime,
+                endDate: runningEndTime
+            )
+
+            let newRunningRecord = RunningRecord(
+                id: UUID().uuidString,
+                runningType: environmentStateManager.runningType,
+                courseData: courseData,
+                healthData: healthData
+            )
+
+            self.userDataModel.createRunningRecord(record: newRunningRecord) { result in
+                   switch result {
+                   case .success:
+                       self.userLocations = []
+                       self.showCompleteSheet = true
+                       continuation.resume()
+                   case .failure(let error):
+                       print("Error saving running record: \(error)")
+                       self.showCompleteSheet = true
+                       continuation.resume()
+                   }
+               }
+        }
     }
 }
 

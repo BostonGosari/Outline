@@ -73,7 +73,7 @@ final class CardDetailViewModel: ObservableObject {
 
                     if self.distanceManager.checkDistance(course: course.coursePaths) {
                         self.environmentStateManager.selectedCourse = selectedCourse
-                        self.environmentStateManager.startRunning()
+                        self.environmentStateManager.startRunning(.gpsArt)
     //                    connectivityManager.sendRunningInfo(runningInfo)
                     } else {
                         withAnimation {

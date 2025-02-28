@@ -1,16 +1,16 @@
+////
+////  RunningStartManager.swift
+////  Outline
+////
+////  Created by hyunjun on 10/25/23.
+////
 //
-//  RunningStartManager.swift
-//  Outline
+//import Combine
+//import CoreLocation
+//import HealthKit
+//import SwiftUI
+//import FirebaseAnalytics
 //
-//  Created by hyunjun on 10/25/23.
-//
-
-import Combine
-import CoreLocation
-import HealthKit
-import SwiftUI
-import FirebaseAnalytics
-
 //class RunningStartManager: ObservableObject {
 //    @Published var counter = 0
 //    @Published var start = false // TODO: EnvironmentState로 이동

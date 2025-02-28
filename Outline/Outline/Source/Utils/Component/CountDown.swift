@@ -39,9 +39,6 @@ struct CountDown: View {
             DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                 count = 1
             }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                environmentStateManager.startRunning()
-            }
         }
     }
 }

@@ -24,10 +24,12 @@ final class EnvironmentStateManager: ObservableObject {
     @Published var process: Process = .notRunning
     @Published var showPermissionSheet = false
     @Published var permissionType: PermissionType = .health
+    var runningType: RunningType = .free
 
-    func startRunning() {
+    func startRunning(_ runningType: RunningType) {
         process = .preparing
-        DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
+        self.runningType = runningType
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
             self.process = .running
         }
     }

@@ -42,7 +42,7 @@ final class FreeRunningViewModel: ObservableObject {
             } else if !locationManager.checkLocationAuthorization() {
                 environmentStateManager.showPermissionSheet(.location)
             } else {
-                self.environmentStateManager.startRunning()
+                self.environmentStateManager.startRunning(.free)
 
                 let runningInfo = MirroringRunningInfo(runningType: .free, courseName: "자유아트", course: [])
                 self.connectivityManager.sendRunningInfo(runningInfo)

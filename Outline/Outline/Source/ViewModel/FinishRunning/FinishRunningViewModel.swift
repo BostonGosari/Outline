@@ -41,7 +41,9 @@ class FinishRunningViewModel: ObservableObject {
         
         do {
             let coreRunningRecord = try persistenceController.container.viewContext.fetch(fetchRequest).first
-            guard let data = coreRunningRecord else { return }
+            guard let data = coreRunningRecord else {
+                return
+            }
             runningRecord = userDataModel.convertToRunningRecord(coreRecord: data)
         } catch {
             print("코어데이터에서 러닝기록을 가져오는데 실패했습니다: \(error)")
@@ -49,7 +51,9 @@ class FinishRunningViewModel: ObservableObject {
     }
     
     func saveShareData() {
-        guard let runningRecord = runningRecord else { return }
+        guard let runningRecord = runningRecord else {
+            return
+        }
         let courseData = runningRecord.courseData
         let healthData = runningRecord.healthData
         
