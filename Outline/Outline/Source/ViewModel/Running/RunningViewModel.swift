@@ -31,6 +31,7 @@ struct TotalRunningInfo {
 }
 
 /// GPSArt, FreeRun 모두를 담당하는 Running을 관리하는 ViewModel
+@MainActor
 final class RunningViewModel: ObservableObject {
     @AppStorage("isFirstRunning") var isFirstRunning = true
     /// 러닝 타임
@@ -227,6 +228,7 @@ final class RunningViewModel: ObservableObject {
 //        }
     }
 
+    @MainActor
     func onEndedLongpreseGesture() {
 
             if self.time < 30 {
