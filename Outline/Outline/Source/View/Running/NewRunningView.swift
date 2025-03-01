@@ -147,31 +147,30 @@ extension NewRunningView {
 
     private var guideView: some View {
         ZStack {
-            //            if let course = runningStartManager.startCourse,
-            //               runningStartManager.runningType == .gpsArt {
-            //                CourseGuideView(
-            //                    tapGuideView: $tapGuideView,
-            //                    coursePathCoordinates: course.coursePaths.toCLLocationCoordinates(),
-            //                    courseRotate: course.heading,
-            //                    userLocations: locationManager.userLocations,
-            //                    tapPossible: !(navigationTranslation + navigationSheetHeight > 10)
-            //                )
-            //                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: tapGuideView ? .top : .topTrailing)
-            //                .padding(.top, 80)
-            //                .padding(.trailing, tapGuideView ? 0 : 16)
-            //            }
-            //        }
-            //        .zIndex(tapGuideView ? 2 : 0)
-            //        .background {
-            //            if tapGuideView {
-            //                Color.black50.ignoresSafeArea()
-            //                    .onTapGesture {
-            //                        withAnimation {
-            //                            tapGuideView = false
-            //                        }
-            //                    }
-            //            }
-            //        }
+            if let course = viewModel.course,
+               viewModel.runningType == .gpsArt {
+                CourseGuideView(
+                    tapGuideView: $viewModel.isToggleMiniGuide,
+                    coursePathCoordinates: course.coursePaths.toCLLocationCoordinates(),
+                    courseRotate: course.heading,
+                    userLocations: viewModel.userLocations,
+                    tapPossible: true
+                )
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: viewModel.isToggleMiniGuide ? .top : .topTrailing)
+                .padding(.top, 80)
+                .padding(.trailing, viewModel.isToggleMiniGuide ? 0 : 16)
+                }
+            }
+        .zIndex(viewModel.isToggleMiniGuide ? 2 : 0)
+        .background {
+            if viewModel.isToggleMiniGuide {
+                Color.black50.ignoresSafeArea()
+                    .onTapGesture {
+                        withAnimation {
+                            viewModel.isToggleMiniGuide = false
+                        }
+                    }
+            }
         }
     }
 }

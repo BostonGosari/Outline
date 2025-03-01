@@ -46,7 +46,6 @@ final class RunningViewModel: ObservableObject {
     /// Authorization
     @Published var permissionType: PermissionType?
     @Published var showPermissionSheet = false
-    @Published var runningType: RunningType = .gpsArt
 
     /// 러닝 정보
     @Published var totalRunningInfo: TotalRunningInfo
@@ -81,6 +80,13 @@ final class RunningViewModel: ObservableObject {
     private let pedometer = CMPedometer()
     private let connectivityManger = ConnectivityManager.shared
     private let environmentStateManager = EnvironmentStateManager.shared
+
+    var course: GPSArtCourse? {
+        environmentStateManager.selectedCourse?.course
+    }
+    var runningType: RunningType {
+        environmentStateManager.runningType
+    }
 
     private var cancellable: Set<AnyCancellable> = Set()
 
