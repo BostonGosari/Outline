@@ -61,10 +61,10 @@ struct HomeTabView: View {
                 FinishRunningView()
             }
 
-//            if runningManager.mirroring {
-//                MirroringView()
-//                    .transition(.move(edge: .bottom))
-//            }
+            if watchConnectivityManager.isMirroring {
+                MirroringView()
+                    .transition(.move(edge: .bottom))
+            }
         }
         .environmentObject(environmentStateManager)
         .sheet(isPresented: $showMirroringSheet) {
