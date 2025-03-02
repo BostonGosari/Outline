@@ -98,7 +98,6 @@ extension NewRunningView {
     private var controlButton: some View {
         ZStack {
             Button {
-//                viewModel.tapStopRunningButton()
             } label: {
                 Image(systemName: "stop.circle.fill")
                     .font(.system(size: 60))
@@ -175,78 +174,6 @@ extension NewRunningView {
     }
 }
 extension NewRunningView {
-//    private var navigationGesture: some Gesture {
-//        DragGesture()
-//            .onChanged { value in
-//                withAnimation {
-//                    showDetail = false
-//                }
-//                let translationY = value.translation.height
-//                if navigationSheetHeight == 0 {
-//                    navigationTranslation = min(max(translationY, -5), 150)
-//                } else {
-//                    navigationTranslation = max(min(translationY, 40), -160)
-//                }
-//            }
-//            .onEnded { value in
-//                withAnimation {
-//                    showDetail = false
-//                }
-//                let translationY = value.translation.height
-//                withAnimation(.bouncy) {
-//                    if translationY > 0 {
-//                        navigationSheetHeight = 150
-//                    } else {
-//                        navigationSheetHeight = 0
-//                    }
-//                    navigationTranslation = 0.0
-//                }
-//            }
-//            .simultaneously(with: TapGesture()
-//                .onEnded { _ in
-//                    withAnimation {
-//                        showDetail = false
-//                    }
-//                    withAnimation {
-//                        if navigationSheetHeight == 0 {
-//                            navigationSheetHeight = 150
-//                        } else {
-//                            navigationSheetHeight = 0
-//                        }
-//                    }
-//                }
-//            )
-//    }
-
-//    private var metricsGesture: some Gesture {
-//        DragGesture()
-//            .onChanged { value in
-//                if !isPaused {
-//                    let translationY = value.translation.height
-//                    if showDetail {
-//                        withAnimation {
-//                            metricsTranslation = min(-translationY, 30)
-//                            navigationTranslation = 0
-//                        }
-//                    }
-//                }
-//            }
-//            .onEnded { value in
-//                if !isPaused {
-//                    let translationY = value.translation.height
-//                    if showDetail {
-//                        withAnimation(.bouncy) {
-//                            if translationY > 0 {
-//                                showDetail = false
-//                            }
-//                            metricsTranslation = 0.0
-//                            navigationTranslation = 0
-//                        }
-//                    }
-//                }
-//            }
-//    }
-
     private var stopButtonGesture: some Gesture {
         LongPressGesture(minimumDuration: 1.5)
             .updating(viewModel.$onPressStopButton) { (currentState, gestureState, _) in

@@ -40,8 +40,6 @@ final class RunningViewModel: ObservableObject {
     var formattedTimeText: String {
         formattedTime(time)
     }
-    var runningStartTime = Date()
-    var runningEndTime = Date()
 
     /// Authorization
     @Published var permissionType: PermissionType?
@@ -54,6 +52,8 @@ final class RunningViewModel: ObservableObject {
     var selectedCourse: GPSArtCourse? {
         environmentStateManager.selectedCourse?.course
     }
+    var runningStartTime = Date()
+    var runningEndTime = Date()
 
     // LiveActivity
     @Published private(set) var activityID: String?
@@ -63,7 +63,6 @@ final class RunningViewModel: ObservableObject {
     @Published var showCompleteSheet = false
     @Published var isToggleMiniGuide = false
     @Published var showDetailMetrics = false
-    @Published var stopButtonScale: CGFloat = 1
     @GestureState var onPressStopButton = false
     @Published var isPaused = false
     @Published var showStopPopup = false
@@ -73,6 +72,7 @@ final class RunningViewModel: ObservableObject {
     // 유저 정보
     private let weight: Double = 60
 
+    // Implementations
     private let distanceManager = DistanceManager()
     private let healthKitManager = HealthKitManager()
     private let locationManager = LocationManager()
@@ -98,21 +98,21 @@ final class RunningViewModel: ObservableObject {
     func setupSink() {
         $time
             .sink { [weak self] newValue in
-//                if connectivityManger.isMirroring {
-//                    let userLocations = locationManager.userLocations.map { $0.toCoordinate() }
-//
-//                    let runningData = MirroringRunningData(
-//                        userLocations: userLocations,
-//                        time: Double(newValue),
-//                        distance: runningDataManager.distance,
-//                        kcal: runningDataManager.kilocalorie,
-//                        pace: runningDataManager.pace,
-//                        bpm: 0
-//                    )
-//
-//                    connectivityManger.sendRunningData(runningData)
-//                }
                 guard let self else { return }
+                if connectivityManger.isMirroring {
+                    let userLocations = locationManager.userLocations.map { $0.toCoordinate() }
+
+                    let runningData = MirroringRunningData(
+                        userLocations: userLocations,
+                        time: Double(newValue),
+                        distance: totalRunningInfo.totalDistance,
+                        kcal: totalRunningInfo.kilocalorie,
+                        pace: pedometerInfo.pace,
+                        bpm: 0
+                    )
+
+                    connectivityManger.sendRunningData(runningData)
+                }
                 userLocations = locationManager.userLocations
                 if activityID != nil {
                     // 시간이 바뀔 때마다 호출
@@ -125,57 +125,19 @@ final class RunningViewModel: ObservableObject {
                 }
             }
             .store(in: &cancellable)
-//        connectivityManger.$runningState
-//            .sink { newValue in
-//                if newValue == .pause {
-//                    withAnimation {
-//                        showDetail = true
-//                        isPaused = true
-//                        if navigationSheetHeight != 0 {
-//                            navigationSheetHeight = 0
-//                        }
-//                    }
-//                    runningDataManager.pauseRunning()
-//                    runningStartManager.stopTimer()
-//                    locationManager.isRunning = false
-//                } else if newValue == .resume {
-//                    withAnimation {
-//                        showDetail = false
-//                        isPaused = false
-//                        if navigationSheetHeight != 0 {
-//                            navigationSheetHeight = 0
-//                        }
-//                    }
-//                    runningDataManager.resumeRunning()
-//                    runningStartManager.startTimer()
-//                    locationManager.isRunning = true
-//                } else if newValue == .end {
-//                    DispatchQueue.main.async {
-//                        if runningStartManager.counter < 30 {
-//                            runningDataManager.stopRunningWithoutRecord()
-//                            runningStartManager.stopTimer()
-//                            runningStartManager.running = false
-//                            locationManager.isRunning = false
-//                            if connectivityManger.isMirroring {
-//                                connectivityManger.sendRunningState(.end)
-//                            }
-//                        } else {
-//                            runningDataManager.userLocations = locationManager.userLocations
-//                            runningDataManager.saveTime = Double(runningStartManager.counter)
-//                            runningStartManager.stopTimer()
-//                            locationManager.isRunning = false
-//                            withAnimation {
-//                                showCompleteSheet = true
-//                            }
-//                            runningDataManager.stopRunning()
-//                            if connectivityManger.isMirroring {
-//                                connectivityManger.sendRunningState(.end)
-//                            }
-//                        }
-//                    }
-//                }
-//            }
-//            .store(in: &cancellable)
+        connectivityManger.$runningState
+            .sink { [weak self] newValue in
+                guard let self else { return }
+                if newValue == .pause {
+                    tapPauseRunningButton()
+                } else if newValue == .resume {
+                    tapResumeRunningButton()
+                } else if newValue == .end {
+                    onEndedLongpreseGesture()
+                    connectivityManger.sendRunningState(.end)
+                }
+            }
+            .store(in: &cancellable)
         $isPaused
             .sink { [weak self] newValue in
                 guard !newValue, let self else { return }
@@ -199,7 +161,7 @@ final class RunningViewModel: ObservableObject {
 
     func onAppear() {
         locationManager.userLocations = []
-        startTimer()
+        startRunning()
         Task {
             await startLiveActivity()
         }
@@ -218,9 +180,9 @@ final class RunningViewModel: ObservableObject {
             isPaused = false
         }
         resumeRunning()
-//        if connectivityManger.isMirroring {
-//            connectivityManger.sendRunningState(.resume)
-//        }
+        if connectivityManger.isMirroring {
+            connectivityManger.sendRunningState(.resume)
+        }
     }
 
     func tapPauseRunningButton() {
@@ -229,9 +191,9 @@ final class RunningViewModel: ObservableObject {
             isPaused = true
         }
         stopRunnning()
-//        if connectivityManger.isMirroring {
-//            connectivityManger.sendRunningState(.pause)
-//        }
+        if connectivityManger.isMirroring {
+            connectivityManger.sendRunningState(.pause)
+        }
     }
 
     @MainActor
@@ -240,27 +202,20 @@ final class RunningViewModel: ObservableObject {
             if self.time < 30 {
                 self.stopTimer()
                 self.environmentStateManager.goToHome()
-//               runningDataManager.stopRunningWithoutRecord()
-//                runningStartManager.running = false
-//                if connectivityManger.isMirroring {
-//                    connectivityManger.sendRunningState(.end)
-//                }
+                if connectivityManger.isMirroring {
+                    connectivityManger.sendRunningState(.end)
+                }
             } else {
-//                runningDataManager.userLocations = locationManager.userLocations
-//                runningDataManager.saveTime = Double(runningStartManager.counter)
                 self.finishRunning()
-//                if connectivityManger.isMirroring {
-//                    connectivityManger.sendRunningState(.end)
-//                }
+                if connectivityManger.isMirroring {
+                    connectivityManger.sendRunningState(.end)
+                }
             }
-        
 
-        stopButtonScale = 1
     }
 
     func onEndedTapGesture() {
         withAnimation {
-            stopButtonScale = 1
             showStopPopup = true
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
@@ -449,7 +404,7 @@ private extension RunningViewModel {
 
     func updateLiveActivity(newTotalDistance: String, newTotalTime: String, newPace: String, newHeartrate: String) {
         Task {
-            guard let activityID = await activityID,
+            guard let activityID = activityID,
                   let runningActivity = Activity<RunningAttributes>.activities.first(where: { $0.id == activityID }) else {
                 return
             }
@@ -458,15 +413,14 @@ private extension RunningViewModel {
                     print("update \(activityID)")
                     let newState = RunningAttributes.ContentState(totalDistance: newTotalDistance, totalTime: newTotalTime, pace: newPace, heartrate: newHeartrate)
                     print("newState \(newState)")
-                    await
-                    runningActivity.update( using: newState)
+                    await runningActivity.update(.init(state: newState, staleDate: nil))
                 }
             }
         }
     }
 
     func removeActivity() async {
-        guard let activityID = await activityID,
+        guard let activityID = activityID,
               let runningActivity = Activity<RunningAttributes>.activities.first(where: { $0.id == activityID }) else {
             return
         }
