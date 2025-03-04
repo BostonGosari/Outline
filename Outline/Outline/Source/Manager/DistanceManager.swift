@@ -9,8 +9,7 @@ import CoreLocation
 
 final class DistanceManager {
     private let locationManager = CLLocationManager()
-    // TODO: change course
-    private let minDistance: CLLocationDistance = 1000000
+    private let minDistance: CLLocationDistance = 50
 
     func checkDistance(course: [Coordinate]) -> Bool {
 

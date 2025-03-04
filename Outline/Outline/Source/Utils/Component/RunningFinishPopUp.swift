@@ -53,27 +53,13 @@ struct RunningFinishPopUp: View {
                     }
                 
                 VStack(spacing: 0) {
-//                    switch scoreState {
-//                    case .freerun:
-//                        freerunContent()
-//                    case .notyet, .nice, .great, .excellent:
-//                        gpsrunContent()
-//                    }
-//                    
                     Spacer()
                     
                     CompleteButton(text: "결과 페이지로", isActive: true) {
                         viewModel.showCompleteSheet = false
-                        // TODO: 전역 수정
-//                        runningStartManager.complete = true
-//                        runningDataManager.doneRunning()
-//                        withAnimation {
-//                            runningStartManager.running = false
-//                        }
                     }
                     UnderlineButton(text: "조금 더 진행하기") {
                         progress = 0
-//                        isResumeRunning = true
                         viewModel.showCompleteSheet = false
                     }
                 }
@@ -90,28 +76,6 @@ struct RunningFinishPopUp: View {
                         .stroke(.customPrimary)
                         .padding(.horizontal, 16)
                 )
-                
-//                if score > 50 {
-//                    Confetti(counter: $counter,
-//                             num: 80,
-//                             confettis: [
-//                                .shape(.circle),
-//                                .shape(.smallCircle),
-//                                .shape(.triangle),
-//                                .shape(.square),
-//                                .shape(.smallSquare),
-//                                .shape(.slimRectangle),
-//                                .shape(.hexagon),
-//                                .shape(.star),
-//                                .shape(.starPop),
-//                                .shape(.blink)
-//                             ],
-//                             colors: [.blue, .yellow],
-//                             confettiSize: 8,
-//                             rainHeight: UIScreen.main.bounds.height,
-//                             radius: UIScreen.main.bounds.width
-//                    )
-//                }
             }
             .onAppear {
                 counter += 1

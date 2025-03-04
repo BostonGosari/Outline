@@ -69,7 +69,6 @@ struct HomeTabView: View {
         .environmentObject(environmentStateManager)
         .sheet(isPresented: $showMirroringSheet) {
             Mirroringsheet {
-//                runningManager.mirroring = true
                 watchConnectivityManager.sendIsMirroring(true)
             }
         }
