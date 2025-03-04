@@ -76,7 +76,7 @@ struct ControlsView: View {
         }
         .sheet(isPresented: $showEndWithoutSavingSheet) {
             EndRunningSheet(text: "30초 이하는 기록되지 않아요.\n종료하시겠어요?") {
-                connectivityManager.sendRunningState(.end)
+//                connectivityManager.sendRunningState(.end)showEndWithoutSavingSheet
                 showEndWithoutSavingSheet = false
                 runningManager.startRunning = false
             }

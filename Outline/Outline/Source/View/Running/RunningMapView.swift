@@ -9,11 +9,9 @@ import MapKit
 import SwiftUI
 
 struct RunningMapView: UIViewRepresentable {
-    @StateObject private var runningStartManager = RunningStartManager.shared
-    @StateObject private var runningDataManager = RunningDataManager.shared
+    @ObservedObject var viewModel: RunningViewModel
     
     private let mapView = MKMapView()
-    var userLocations: [CLLocationCoordinate2D]
     
     func makeUIView(context: Context) -> MKMapView {
         mapView.delegate = context.coordinator
@@ -31,7 +29,7 @@ struct RunningMapView: UIViewRepresentable {
         
         trackingButton.backgroundColor = .black
         
-        if let courseGuide = runningStartManager.startCourse {
+        if let courseGuide = viewModel.selectedCourse {
             let coordinates = courseGuide.coursePaths.toCLLocationCoordinates()
             let polyline = MKPolyline(coordinates: coordinates, count: courseGuide.coursePaths.count)
             mapView.addOverlay(polyline)
@@ -41,7 +39,7 @@ struct RunningMapView: UIViewRepresentable {
     }
     
     func updateUIView(_ uiView: MKMapView, context: Context) {
-        let smoothedLocations = smoothLocations(userLocations)
+        let smoothedLocations = smoothLocations(viewModel.userLocations)
         
         if uiView.overlays.count >= 2,
            let overlay = uiView.overlays.last {
@@ -104,8 +102,4 @@ struct RunningMapView: UIViewRepresentable {
             }
         }
     }
-}
-
-#Preview {
-    RunningMapView(userLocations: [])
 }

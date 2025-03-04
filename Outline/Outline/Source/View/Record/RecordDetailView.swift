@@ -27,7 +27,6 @@ struct RecordDetailView: View {
                     cardType: cardType,
                     runName: courseData.courseName,
                     date: healthData.startDate.dateToString(),
-                    editMode: true,
                     time: healthData.totalTime.formatMinuteSeconds(),
                     distance: "\(String(format: "%.2f", healthData.totalRunningDistance/1000))km",
                     pace: healthData.averagePace.formattedAveragePace(),

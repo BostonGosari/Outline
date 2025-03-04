@@ -9,7 +9,6 @@ import SwiftUI
 
 struct MirroringView: View {
     @StateObject private var connectivityManager = ConnectivityManager.shared
-    @StateObject private var runningManager = RunningStartManager.shared
     
     @AppStorage("isFirstRunning") private var isFirstRunning = true
     
@@ -89,37 +88,6 @@ extension MirroringView {
     private var map: some View {
         MirroringMapView()
             .ignoresSafeArea()
-    }
-    
-    private var navigation: some View {
-        RunningNavigationView(
-            courseName: runningManager.startCourse?.courseName ?? "",
-            showDetailNavigation: navigationTranslation + navigationSheetHeight > 10
-        )
-            .frame(height: 70 + navigationTranslation + navigationSheetHeight, alignment: .top)
-            .mask {
-                UnevenRoundedRectangle(bottomTrailingRadius: 50)
-            }
-            .background {
-                TransparentBlurView(removeAllFilters: true)
-                    .blur(radius: 6, opaque: true)
-                    .ignoresSafeArea()
-                    .overlay {
-                        UnevenRoundedRectangle(bottomTrailingRadius: 50)
-                            .foregroundStyle(.black50)
-                            .ignoresSafeArea()
-                            .overlay(alignment: .bottom) {
-                                Capsule()
-                                    .frame(width: 40, height: 3)
-                                    .padding(.bottom, 9)
-                                    .foregroundStyle(.gray600)
-                            }
-                        
-                    }
-            }
-            .zIndex(1)
-            .gesture(navigationGesture)
-            .frame(maxHeight: .infinity, alignment: .top)
     }
     
     private var metrics: some View {
@@ -337,7 +305,7 @@ extension MirroringView {
             }
             .onEnded { _ in
                 connectivityManager.sendRunningState(.end)
-                runningManager.mirroring = false
+                connectivityManager.isMirroring = false
             }
             .simultaneously(with: TapGesture()
                 .onEnded { _ in

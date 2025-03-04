@@ -83,7 +83,7 @@ struct CardDetailView: View {
                 EmptyView()
             }
         }
-        .sheet(isPresented: $viewModel.showAlert) {
+        .sheet(isPresented: $viewModel.showDistanceAlert) {
             viewModel.progress = 0.0
         } content: {
             GuideToFreeRunningSheet {

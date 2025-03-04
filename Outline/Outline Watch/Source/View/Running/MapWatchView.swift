@@ -9,8 +9,8 @@ import SwiftUI
 import MapKit
 
 struct MapWatchView: View {
-    @StateObject private var runningManager = WatchRunningManager.shared
-    @StateObject private var locationManager = LocationManager.shared
+    private var runningManager = WatchRunningManager.shared
+    private var locationManager = LocationManager()
     
     @State private var position: MapCameraPosition = .userLocation(followsHeading: true, fallback: .automatic)
     @State private var bounds: MapCameraBounds = .init(minimumDistance: 100, maximumDistance: 100)
@@ -18,7 +18,7 @@ struct MapWatchView: View {
     @State private var isTapped = false
     @Namespace private var mapScope
     
-    var userLocations: [CLLocationCoordinate2D]
+    var userLocations: [CLLocationCoordinate2D] = []
     
     var body: some View {
         ZStack {

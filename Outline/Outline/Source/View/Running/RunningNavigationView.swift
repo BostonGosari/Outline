@@ -9,8 +9,8 @@ import AVFoundation
 import SwiftUI
 
 struct RunningNavigationView: View {
-    @StateObject private var locationManager = LocationManager.shared
-    
+    private var locationManager = LocationManager()
+
     @State private var synthesizer = AVSpeechSynthesizer()
     @State private var audioPlayer: AVAudioPlayer?
     
@@ -20,16 +20,16 @@ struct RunningNavigationView: View {
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
-                Image(systemName: getDirectionImage(locationManager.direction))
-                    .font(.system(size: 36))
-                    .padding(.leading)
-                    .padding(.trailing, 5)
+//                Image(systemName: getDirectionImage(locationManager.direction))
+//                    .font(.system(size: 36))
+//                    .padding(.leading)
+//                    .padding(.trailing, 5)
                 VStack(alignment: .leading) {
-                    Text("\(Int(locationManager.distance))m")
-                        .font(.customTitle2)
-                    Text("\(locationManager.direction) 방면")
-                        .font(.customSubtitle)
-                        .foregroundStyle(.gray500)
+//                    Text("\(Int(locationManager.distance))m")
+//                        .font(.customTitle2)
+//                    Text("\(locationManager.direction) 방면")
+//                        .font(.customSubtitle)
+//                        .foregroundStyle(.gray500)
                 }
             }
             .frame(maxWidth: .infinity, alignment: .leading)
@@ -41,43 +41,43 @@ struct RunningNavigationView: View {
                     .frame(maxWidth: .infinity, alignment: .trailing)
                     .foregroundStyle(.gray600)
                 
-                if let nextDirection = locationManager.nextDirection {
-                    HStack {
-                        Image(systemName: getDirectionImage(nextDirection.direction))
-                            .font(.system(size: 36))
-                            .padding(.leading)
-                            .padding(.trailing, 5)
-                    
-                        VStack(alignment: .leading) {
-                            Text("\(nextDirection.distance)m")
-                                .font(.customTitle2)
-                            Text("\(nextDirection.direction) 방면")
-                                .font(.customSubtitle)
-                                .foregroundStyle(.gray500)
-                        }
-                    }
-                }
+//                if let nextDirection = locationManager.nextDirection {
+//                    HStack {
+//                        Image(systemName: getDirectionImage(nextDirection.direction))
+//                            .font(.system(size: 36))
+//                            .padding(.leading)
+//                            .padding(.trailing, 5)
+//                    
+//                        VStack(alignment: .leading) {
+//                            Text("\(nextDirection.distance)m")
+//                                .font(.customTitle2)
+//                            Text("\(nextDirection.direction) 방면")
+//                                .font(.customSubtitle)
+//                                .foregroundStyle(.gray500)
+//                        }
+//                    }
+//                }
             }
         }
         .onAppear {
             playAlertSound()
             textToSpeech("\(courseName) 안내를 시작합니다.")
         }
-        .onChange(of: locationManager.distance) {
-            if locationManager.distance <= 20 {
-                textToSpeech("\(Int(locationManager.distance))미터 후 \(locationManager.direction)하세요)")
-            }
-        }
-        .onChange(of: locationManager.nearHotSpot) {
-            if locationManager.nearHotSpot {
-                if let hotSpot = locationManager.hotSpot {
-                    playAlertSound()
-                    textToSpeech(hotSpot.description)
-                    locationManager.nearHotSpot = false
-                    locationManager.hotSpot = nil
-                }
-            }
-        }
+//        .onChange(of: locationManager.distance) {
+//            if locationManager.distance <= 20 {
+//                textToSpeech("\(Int(locationManager.distance))미터 후 \(locationManager.direction)하세요)")
+//            }
+//        }
+//        .onChange(of: locationManager.nearHotSpot) {
+//            if locationManager.nearHotSpot {
+//                if let hotSpot = locationManager.hotSpot {
+//                    playAlertSound()
+//                    textToSpeech(hotSpot.description)
+//                    locationManager.nearHotSpot = false
+//                    locationManager.hotSpot = nil
+//                }
+//            }
+//        }
     }
     
     private func getDirectionImage(_ direction: String) -> String {
@@ -109,8 +109,4 @@ struct RunningNavigationView: View {
             print("Error playing sound: \(error.localizedDescription)")
         }
     }
-}
-
-#Preview {
-    RunningNavigationView(courseName: "고래런", showDetailNavigation: false)
 }

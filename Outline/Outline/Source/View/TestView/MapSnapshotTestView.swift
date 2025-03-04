@@ -40,7 +40,6 @@ struct MapSnapshotTestView: View {
         cardType: .excellent,
         runName: "댕댕런",
         date: "2024.8.4",
-        editMode: false,
         time: "20:00.10",
         distance: "1000KM",
         pace: "9'99''",

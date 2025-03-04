@@ -22,7 +22,6 @@ struct BigCard<Content: View>: View {
     var cardType: CardType = .nice
     var runName: String = "돌고래런"
     var date: String = "2023.11.19"
-    var editMode: Bool = false
     
     // BacksideCard data
     var time: String = "00:00.00"
@@ -49,7 +48,6 @@ struct BigCard<Content: View>: View {
                 cardType: cardType,
                 runName: runName,
                 date: date,
-                editMode: editMode,
                 time: time,
                 distance: distance,
                 pace: pace,
@@ -194,7 +192,6 @@ struct BigCard<Content: View>: View {
         cardType: .freeRun,
         runName: "오리런",
         date: "2023.11.19",
-        editMode: false,
         time: "20:00.10",
         distance: "1000KM",
         pace: "9'99''",
