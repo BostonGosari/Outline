@@ -24,6 +24,14 @@ struct HealthAuthView: View {
                 Text("건강앱의 기록으로\n정확한 러닝 정보를 얻을 수 있어요!")
                     .font(.customSubbody)
                     .multilineTextAlignment(.center)
+                Spacer()
+                Button {
+                    viewModel.push(screen: .inputUserInfo)
+                } label: {
+                    Text("다음에 설정하기")
+                        .font(.customSubbody)
+                        .foregroundStyle(.gray300)
+                }
             }
             .padding(.top, getSafeArea().bottom == 0 ? 50 : 100)
             .navigationBarBackButtonHidden(true)
