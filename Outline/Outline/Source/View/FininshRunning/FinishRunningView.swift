@@ -9,7 +9,7 @@ import SwiftUI
 import FirebaseAnalytics
 
 struct FinishRunningView: View {
-    @StateObject private var runningManager = RunningStartManager.shared
+//    @StateObject private var runningManager = RunningStartManager.shared
     @StateObject private var viewModel = FinishRunningViewModel()
     
     @State private var showRenameSheet = false
@@ -31,7 +31,6 @@ struct FinishRunningView: View {
                             cardType: viewModel.getCardType(for: courseData.score),
                             runName: courseData.courseName,
                             date: healthData.startDate.dateToString(),
-                            editMode: runningManager.runningType == .free,
                             time: healthData.totalTime.formatMinuteSeconds(),
                             distance: "\(String(format: "%.2f", healthData.totalRunningDistance/1000))km",
                             pace: healthData.averagePace.formattedAveragePace(),
@@ -55,7 +54,7 @@ struct FinishRunningView: View {
                     
                     Button(action: {
                         withAnimation {
-                            runningManager.complete = false
+                            viewModel.goToHome()
                         }
                     }, label: {
                         Text("홈으로 돌아가기")
@@ -88,12 +87,12 @@ struct FinishRunningView: View {
                     guard let healthData = viewModel.runningRecord?.healthData else { return }
                     
                     // 러닝 완료 시
-                    Analytics.logEvent("finished_running", parameters: [
-                        "card_name": runningManager.startCourse?.courseName ?? "자유러닝",
-                        "finished_time": healthData.totalTime.formatMinuteSeconds(),
-                        "finished_distance": String(format: "%.0fkm", healthData.totalRunningDistance/1000),
-                        "finished_pace": healthData.averagePace.formattedAveragePace()
-                    ])
+//                    Analytics.logEvent("finished_running", parameters: [
+//                        "card_name": runningManager.startCourse?.courseName ?? "자유러닝",
+//                        "finished_time": healthData.totalTime.formatMinuteSeconds(),
+//                        "finished_distance": String(format: "%.0fkm", healthData.totalRunningDistance/1000),
+//                        "finished_pace": healthData.averagePace.formattedAveragePace()
+//                    ])
                 }
             }
         }

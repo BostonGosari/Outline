@@ -142,3 +142,136 @@ struct UserInfoModel: UserInfoModelProtocol {
         }
     }
 }
+
+extension UserInfoModel {
+    func readUserInfo(uid: String) async throws -> UserInfo {
+        return try await withCheckedThrowingContinuation { continuation in
+            userListRef.document(uid).getDocument { (snapshot, error) in
+                guard let snapshot = snapshot, snapshot.exists, error == nil else {
+                    continuation.resume(throwing: ReadDataError.dataNotFound)
+                    return
+                }
+
+                do {
+                    let userInfo = try snapshot.data(as: UserInfo.self)
+                    continuation.resume(returning: userInfo)
+                } catch {
+                    continuation.resume(throwing: ReadDataError.typeError)
+                }
+            }
+        }
+    }
+
+    func updateUserInfo(uid: String, userInfo: UserInfo) async throws {
+        return try await withCheckedThrowingContinuation { continuation in
+            do {
+                try userListRef.document(uid).setData(from: userInfo)
+                continuation.resume()
+            } catch {
+                continuation.resume(throwing: ReadDataError.typeError)
+            }
+        }
+    }
+
+    func createUser(uid: String = UUID().uuidString, nickname: String?) async throws {
+        return try await withCheckedThrowingContinuation { continuation in
+            let newUserInfo = UserInfo(nickname: nickname ?? "default", birthday: Date(), height: 175, weight: 70)
+            let uid = uid
+
+            do {
+                try userListRef.document(uid).setData(from: newUserInfo)
+                continuation.resume()
+            } catch {
+                continuation.resume(throwing: ReadDataError.typeError)
+            }
+        }
+    }
+
+    func deleteUser(uid: String) async throws {
+        return try await withCheckedThrowingContinuation { continuation in
+            userListRef.document(uid).delete()
+            continuation.resume()
+        }
+    }
+
+    func readUserNameSet() async throws -> [String] {
+        return try await withCheckedThrowingContinuation { continuation in
+            userUtilRef.document("userNameSet").getDocument { (snapshot, error) in
+                guard let snapshot = snapshot, error == nil else {
+                    continuation.resume(throwing: ReadDataError.dataNotFound)
+                    return
+                }
+                do {
+                    let userNameSet = try snapshot.data(as: UserNameSet.self)
+                    continuation.resume(returning: userNameSet.userNames)
+                } catch {
+                    continuation.resume(throwing: ReadDataError.typeError)
+                }
+            }
+        }
+    }
+
+    func updateUserNameSet(oldUserName: String, newUserName: String) async throws {
+        return try await withCheckedThrowingContinuation { continuation in
+            readUserNameSet { readUserNameResult in
+                switch readUserNameResult {
+                case .success(let userNameList):
+                    do {
+                        let newUserNameList = userNameList.map { userName in
+                            if userName == oldUserName {
+                                return newUserName
+                            }
+                            return userName
+                        }
+                        try userUtilRef.document("userNameSet").setData(from: UserNameSet(userNames: newUserNameList))
+                        continuation.resume()
+                    } catch {
+                        continuation.resume(throwing: ReadDataError.typeError)
+                    }
+                case .failure:
+                    continuation.resume(throwing: ReadDataError.dataNotFound)
+                }
+            }
+        }
+    }
+
+    func createUserNameSet(userName: String) async throws {
+        return try await withCheckedThrowingContinuation { continuation in
+            readUserNameSet { readUserNameResult in
+                switch readUserNameResult {
+                case .success(let userNameList):
+                    do {
+                        var newUserNameList = userNameList
+                        newUserNameList.append(userName)
+                        try userUtilRef.document("userNameSet").setData(from: UserNameSet(userNames: newUserNameList))
+                        continuation.resume()
+                    } catch {
+                        continuation.resume(throwing: ReadDataError.typeError)
+                    }
+                case .failure:
+                    continuation.resume(throwing: ReadDataError.dataNotFound)
+                }
+            }
+        }
+    }
+
+    func deleteUserNameSet(userName: String) async throws {
+        return try await withCheckedThrowingContinuation { continuation in
+            readUserNameSet { readUserNameResult in
+                switch readUserNameResult {
+                case .success(let userNameList):
+                    do {
+                        try userUtilRef
+                            .document("userNameSet")
+                            .setData(from: UserNameSet(userNames: userNameList.filter({ $0 != userName })))
+                        continuation.resume()
+                    } catch {
+                        continuation.resume(throwing: ReadDataError.typeError)
+                    }
+                case .failure:
+                    continuation.resume(throwing: ReadDataError.dataNotFound)
+                }
+            }
+        }
+    }
+}

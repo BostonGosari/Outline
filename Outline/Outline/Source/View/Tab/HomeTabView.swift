@@ -8,11 +8,9 @@
 import SwiftUI
 
 struct HomeTabView: View {
-    @StateObject private var runningManager = RunningStartManager.shared
-    @StateObject var runningDataManager = RunningDataManager.shared
     @StateObject var watchConnectivityManager = ConnectivityManager.shared
+    @StateObject private var environmentStateManager = EnvironmentStateManager.shared
     @State private var selectedTab: Tab = .GPSArtRunning
-    @State private var showDetailView = false
     @State private var showMirroringSheet = false
     
     var body: some View {
@@ -26,7 +24,7 @@ struct HomeTabView: View {
                             case .freeRunning:
                                 FreeRunningHomeView()
                             case .GPSArtRunning:
-                                GPSArtHomeView(showDetailView: $showDetailView, isReloadScore: $runningDataManager.isSaveNewScore)
+                                GPSArtHomeView()
                             case .myRecord:
                                 RecordView()
                             }
@@ -34,41 +32,43 @@ struct HomeTabView: View {
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                         TabBar(selectedTab: $selectedTab)
                             .frame(maxHeight: .infinity, alignment: .bottom)
-                            .opacity(showDetailView ? 0 : 1)
+                            .opacity(environmentStateManager.showDetail ? 0 : 1)
                             .ignoresSafeArea()
                             .offset(y: getSafeArea().bottom == 0 ? 25 : 0)
                     }
                 }
-                .sheet(isPresented: $runningManager.showPermissionSheet) {
-                    PermissionSheet(permissionType: runningManager.permissionType)
+                .sheet(isPresented: $environmentStateManager.showPermissionSheet) {
+                    PermissionSheet(permissionType: environmentStateManager.permissionType)
                 }
-                .overlay {
-                    if runningDataManager.endWithoutSaving {
-                        RunningPopup(text: "30초 이하의 러닝은 저장되지 않아요")
-                            .frame(maxHeight: .infinity, alignment: .top)
-                    }
-                }
+//                .overlay {
+//                    if runningDataManager.endWithoutSaving {
+//                        RunningPopup(text: "30초 이하의 러닝은 저장되지 않아요")
+//                            .frame(maxHeight: .infinity, alignment: .top)
+//                    }
+//                }
             }
-            if runningManager.start {
-                CountDown(running: $runningManager.running, start: $runningManager.start)
-            }
-            if runningManager.complete {
-                FinishRunningView()
-            }
-            if runningManager.running {
-                RunningView()
+            switch environmentStateManager.process {
+            case .notRunning:
+                EmptyView()
+            case .preparing:
+                CountDown()
+            case .running:
+                NewRunningView()
                     .onAppear {
                         watchConnectivityManager.sendRunningState(.start)
                     }
+            case .finished:
+                FinishRunningView()
             }
-            if runningManager.mirroring {
+
+            if watchConnectivityManager.isMirroring {
                 MirroringView()
                     .transition(.move(edge: .bottom))
             }
         }
+        .environmentObject(environmentStateManager)
         .sheet(isPresented: $showMirroringSheet) {
             Mirroringsheet {
-                runningManager.mirroring = true
                 watchConnectivityManager.sendIsMirroring(true)
             }
         }
@@ -77,7 +77,7 @@ struct HomeTabView: View {
                 showMirroringSheet = true
             } else if newValue == .end {
                 showMirroringSheet = false
-                runningManager.mirroring = false
+//                runningManager.mirroring = false
             }
         }
     }

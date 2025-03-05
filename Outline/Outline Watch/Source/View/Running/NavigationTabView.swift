@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct NavigationTabView: View {
-    @StateObject private var locationManager = LocationManager.shared
+    private var locationManager = LocationManager()
     
     @State private var selection = 0
     
@@ -24,10 +24,10 @@ struct NavigationTabView: View {
     
     var smallNavigation: some View {
         HStack {
-            Image(systemName: getDirectionImage(locationManager.direction))
-                .font(.system(size: 24))
-            Text("\(Int(locationManager.distance))m \(locationManager.direction)")
-                .font(.customSubTitle)
+//            Image(systemName: getDirectionImage(locationManager.direction))
+//                .font(.system(size: 24))
+//            Text("\(Int(locationManager.distance))m \(locationManager.direction)")
+//                .font(.customSubTitle)
         }
         .padding(.horizontal, 16)
         .padding(.top, 16)
@@ -49,12 +49,12 @@ struct NavigationTabView: View {
                     .ignoresSafeArea()
                 VStack(alignment: .leading, spacing: 18) {
                     HStack {
-                        Image(systemName: getDirectionImage(locationManager.direction))
-                            .font(.system(size: 26))
-                            .padding(.trailing)
+//                        Image(systemName: getDirectionImage(locationManager.direction))
+//                            .font(.system(size: 26))
+//                            .padding(.trailing)
                         VStack(alignment: .leading) {
-                            Text("\(Int(locationManager.distance))m")
-                                .font(.customSubTitle)
+//                            Text("\(Int(locationManager.distance))m")
+//                                .font(.customSubTitle)
                             Text("locationManager.direction")
                                 .font(.customBody)
                                 .foregroundStyle(.gray500)
@@ -65,20 +65,20 @@ struct NavigationTabView: View {
                         .padding(.leading, 36)
                         .foregroundStyle(.gray600)
                     
-                    if let nextDirection = locationManager.nextDirection {
-                        HStack {
-                            Image(systemName: getDirectionImage(nextDirection.direction))
-                                .font(.system(size: 26))
-                                .padding(.trailing)
-                            VStack(alignment: .leading) {
-                                Text("\(nextDirection.distance)m")
-                                    .font(.customSubTitle)
-                                Text(nextDirection.direction)
-                                    .font(.customBody)
-                                    .foregroundStyle(.gray500)
-                            }
-                        }
-                    }
+//                    if let nextDirection = locationManager.nextDirection {
+//                        HStack {
+//                            Image(systemName: getDirectionImage(nextDirection.direction))
+//                                .font(.system(size: 26))
+//                                .padding(.trailing)
+//                            VStack(alignment: .leading) {
+//                                Text("\(nextDirection.distance)m")
+//                                    .font(.customSubTitle)
+//                                Text(nextDirection.direction)
+//                                    .font(.customBody)
+//                                    .foregroundStyle(.gray500)
+//                            }
+//                        }
+//                    }
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(12)

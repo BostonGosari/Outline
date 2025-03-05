@@ -19,7 +19,6 @@ struct BigCardBackside: View {
     var cardType: CardType
     var runName: String
     var date: String
-    var editMode: Bool
     var time: String
     var distance: String
     var pace: String
@@ -40,7 +39,7 @@ struct BigCardBackside: View {
                         HStack {
                             Text(runName)
                                 .font(.customHeadline)
-                            if cardType == .freeRun || editMode {
+                            if cardType == .freeRun {
                                 Button {
                                     editAction?()
                                 } label: {
@@ -51,7 +50,7 @@ struct BigCardBackside: View {
                                 }
                             }
                         }
-                        .padding(.leading, cardType == .freeRun || editMode ? 24 : 0)
+                        .padding(.leading, cardType == .freeRun ? 24 : 0)
                         Text(date)
                             .font(.customSubbody)
                     }
@@ -166,7 +165,6 @@ struct BigCardBackside: View {
         cardType: .great,
         runName: "오리런",
         date: "2023.11.19",
-        editMode: true,
         time: "00:00.00",
         distance: "1.2KM",
         pace: "9'99''",

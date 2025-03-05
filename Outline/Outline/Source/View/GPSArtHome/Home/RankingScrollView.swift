@@ -9,13 +9,11 @@ import SwiftUI
 import Kingfisher
 
 struct RankingScrollView: View {
+    @EnvironmentObject private var viewModel: GPSArtHomeViewModel
     @State private var loading = true
-    @Binding var selectedCourse: CourseWithDistanceAndScore?
     @Binding var courseList: [CourseWithDistanceAndScore]
-    @Binding var showDetailView: Bool
     @Binding var category: String
     var namespace: Namespace.ID
-    var zstackIndex: Int = 0
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
@@ -38,12 +36,11 @@ struct RankingScrollView: View {
                         ZStack {
                             Button {
                                 withAnimation(.bouncy(duration: 0.7)) {
-                                    selectedCourse = currentCourse
-                                    showDetailView = true
+                                    viewModel.selectCourse(currentCourse)
                                 }
                             } label: {
                                 ZStack {
-                                    if showDetailView {
+                                    if viewModel.showDetailView {
                                         Rectangle()
                                             .foregroundStyle(.clear)
                                     } else {
