@@ -10,8 +10,8 @@ import SwiftUI
 struct HealthAuthView: View {
     @StateObject private var viewModel = HealthAuthViewModel()
     @StateObject var inputNickNameViewModel = InputNicknameViewModel.shared
-    @State private var showHealthAuthentication = true
-    
+    @State private var showHealthAuthentication = false
+
     var body: some View {
         ZStack {
             VStack {
@@ -26,6 +26,14 @@ struct HealthAuthView: View {
                 Text("건강앱의 기록으로\n정확한 러닝 정보를 얻을 수 있어요!")
                     .font(.customSubbody)
                     .multilineTextAlignment(.center)
+                Spacer()
+                Button {
+                    viewModel.moveToInputUserInfoView = true
+                } label: {
+                    Text("다음에 설정하기")
+                        .font(.customSubbody)
+                        .foregroundStyle(.gray300)
+                }
             }
             .padding(.top, getSafeArea().bottom == 0 ? 50 : 100)
             .navigationBarBackButtonHidden(true)
@@ -44,6 +52,9 @@ struct HealthAuthView: View {
         .preferredColorScheme(.dark)
         .navigationDestination(isPresented: $viewModel.moveToInputUserInfoView) {
             InputUserInfoView(userNickName: inputNickNameViewModel.nickname)
+        }
+        .onAppear {
+            showHealthAuthentication = true
         }
     }
 }
